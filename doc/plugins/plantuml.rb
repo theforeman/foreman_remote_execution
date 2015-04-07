@@ -36,8 +36,7 @@ module Jekyll
 
       site.static_files << Jekyll::StaticFile.new(site, tmproot, folder, filename)
 
-      # source = "<img class=\"img-thumbnail\" src='" + folder + filename + "'>"
-      source = "<img src='" + folder + filename + "'>"
+      "<img src='" + "#{ site.baseurl }/" + folder + filename + "'>"
     end
 
     private
