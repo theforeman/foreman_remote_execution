@@ -1,0 +1,38 @@
+require 'rubygems'
+require 'rake'
+
+root = File.dirname __FILE__
+
+task :default => :publish
+
+def system(cmd)
+  puts ">> #{cmd}"
+  super cmd
+end
+
+task :plantuml_install do
+  unless File.exist?('.bin/plantuml.jar')
+    sh 'wget https://downloads.sourceforge.net/project/plantuml/plantuml.jar -O .bin/plantuml.jar'
+  end
+end
+
+desc 'push to Github'
+task :publish => :plantuml_install do
+  Dir.chdir(root) do
+    unless File.exist?('public/.git')
+      FileUtils.rm_rf('public')
+      sh 'git clone git@github.com:iNecas/foreman-rex.git public'
+    end
+    Dir.chdir('public') do
+      sh 'git fetch --all'
+      sh 'git checkout gh-pages'
+      sh 'git reset --hard origin/gh-pages'
+    end
+    sh 'jekyll build'
+    Dir.chdir(root + '/public') do
+      sh 'git add -A .'
+      sh 'git commit -m Update'
+      sh 'git push'
+    end
+  end
+end

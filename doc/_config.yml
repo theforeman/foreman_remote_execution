@@ -1,0 +1,33 @@
+---
+name: Formean Remote Execution
+title: Foreman rEx
+url: http://inecas.github.io
+baseurl: /foreman-rex
+markdown: redcarpet
+highlighter: pygments
+
+source:       ./source
+destination:  ./public
+plugins:      ./plugins
+include:
+- .nojekyll
+
+tag_page_layout: tag_page
+tag_page_dir: tag
+
+permalink: /blog/:year/:month/:day/:title/
+
+sass:
+  sass_dir: _sass
+
+redcarpet:
+  extensions:
+    - with_toc_data
+    - html_toc
+    - strikethrough
+
+plantuml:
+  plantuml_jar: .bin/plantuml.jar   # path to plantuml jar
+  tmp_folder: tmp                   # tmp folder to put generated image files
+  background_color: transparent     # [optional] UML image background color
+#  dot_exe: /usr/local/bin/dot      # [optional] path to Graphviz dot execution
