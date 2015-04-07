@@ -16,23 +16,26 @@ task :plantuml_install do
   end
 end
 
-desc 'push to Github'
-task :publish => :plantuml_install do
-  Dir.chdir(root) do
-    unless File.exist?('public/.git')
-      FileUtils.rm_rf('public')
-      sh 'git clone git@github.com:iNecas/foreman-rex.git public'
-    end
-    Dir.chdir('public') do
-      sh 'git fetch --all'
-      sh 'git checkout gh-pages'
-      sh 'git reset --hard origin/gh-pages'
-    end
-    sh 'jekyll build'
-    Dir.chdir(root + '/public') do
-      sh 'git add -A .'
-      sh 'git commit -m Update'
-      sh 'git push'
-    end
+task :fetch do
+  unless File.exist?('public/.git')
+    FileUtils.rm_rf('public')
+    sh 'git clone git@github.com:iNecas/foreman-rex.git public'
+  end
+  Dir.chdir('public') do
+    sh 'git fetch --all'
+    sh 'git checkout gh-pages'
+    sh 'git reset --hard origin/gh-pages'
+  end
+end
+
+task :build => :plantuml_install do
+  sh 'jekyll build'
+end
+
+task :publish => [:fetch, :build] do
+  Dir.chdir('public') do
+    sh 'git add -A .'
+    sh 'git commit -m Update'
+    sh 'git push'
   end
 end
