@@ -381,6 +381,7 @@ class Command {
 
   plan(target, input) - creates CommandExecution
 }
+note top of Command: InstallPackage, Exec, Restart service\nare just example names of instances\nwill be covered in CommandPreparation design
 
 class Host {
   get_proxy_with_feature(type)
