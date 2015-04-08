@@ -333,8 +333,127 @@ Command Execution
 User Stories
 ------------
 
+- ?As a user I want to be able to specify default number of tries per command. # Command preparation?
+
+- ?As a user I want to be able to specify default retry interval per command. # Command preparation?
+
+- ?As a user I want to be able to specify default splay time per command. # Command preparation?
+
+- As a user I want to be able to override default values like (number of tries, retry interval, splay time, ...) when I plan an execution of command.
+
+- As a user I want to be able to specify infinite number of tries (until success/cancel) when I plan an execution of command.
+
+
+
+- As a user I want to be able to cancel command which hasn't been started yet.
+
+- As a user I want to be able to cancel command which is in progress. # some providers might not support this? therefore next user stories
+
+- As a developer I want to specify whether cancellation of running commands is possible.
+
+- As a user I want to see if I'm able to cancel the command.
+
+
+
+- As a user I want to set timeout when I plan an execution of a command.
+
+- ?As a user I want to setup default timeout per command. # Command preparation?
+
+- As a user I want to override default timeout when I plan an execution of command.
+
+- ?As a developer I want dynflow to support timeouts # unless it already supports it
+
 Design
 ------
+
+Class diagram of Foreman classes
+
+{% plantuml %}
+
+class Command {
+  InstallPackage, Exec, RestartService
+
+  // default values for command
+  retry: integer
+  retry_interval: integer
+  timeout: integer
+  splay: integer
+
+  plan(target, input) - creates CommandExecution
+}
+
+class Host {
+  get_proxy_with_feature(type)
+}
+
+class CommandExecution {
+  command_id: integer
+  target: n:m to host_groups/bookmarks/hosts
+  input: $input_abstraction values clone
+
+  state: $CommandState
+  started_at: datetime
+  canceled_at datetime
+  provider: SSH | MCollective
+
+  retry: integer
+  retry_interval: integer
+  timeout: integer
+  splay: integer
+
+  cancel()
+}
+
+abstract class ProxyCommand {
+  command_execution_id: integer
+  host_id: integer
+  type: string
+  state: $CommandState
+  started_at: datetime
+  canceled_at datetime
+  timeout_at datetime
+  tried_count: integer
+  cancel()
+  {abstract} support_cancel?()
+  {abstract} proxy_endpoint()
+  plan()
+}
+
+class SSHProxyCommand {
+  {static} support_cancel?()
+  proxy_endpoint():string
+}
+
+class MCollectiveProxyCommand {
+  {static} support_cancel?()
+  proxy_endpoint():string
+}
+
+enum CommandState {
+PLANNED
+STARTED
+FINISHED
+}
+
+Command <- CommandExecution
+CommandExecution <-- ProxyCommand
+Host <-- ProxyCommand
+
+ProxyCommand <|-- SSHProxyCommand
+ProxyCommand <|-- MCollectiveProxyCommand
+
+{% endplantuml %}
+
+CommandExecution will be probably later replaced by Scheduler that
+will schedule ProxyCommands (could be responsible for batch jobs,
+retrying on failure, timeouts)
+
+Open questions
+--------------
+
+Do we need anything extra to fulfill using system facts story? MCollective e.g. can use facter on every run or use
+values stored on server (equals to facts we have in Foreman). I think we should take facts from Foreman rather
+than runtime (different result than expected when planning, performance)
 
 Reporting
 =========
