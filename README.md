@@ -7,6 +7,10 @@ details.
 Generating the docs
 -------------------
 
+0. ``cd doc``
+
+0. ``mkdir .bin`` # only first time
+
 1. ``bundle install``
 
 2. ``bundle exec rake plantuml_install`` to install prerequisites
