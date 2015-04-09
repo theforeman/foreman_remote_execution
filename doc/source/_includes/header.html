@@ -1,0 +1,59 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/Organization" lang="en">
+  <head>
+    <base href="{{ site.baseurl }}">
+    {% if page.sitename != nil %}
+    {% assign sitename = page.sitename %}
+    {% else %}
+    {% assign sitename = site.sitename %}
+    {% endif %}
+
+    {% if page.pagename != nil %}
+    {% assign pagename = true %}
+    {% endif %}
+  <title>{{ sitename }}{% if pagename %} :: {{ page.pagename }}{% endif %}</title>
+
+  <script type="text/javascript" src="{{ site.baseurl }}static/js/jquery.js"></script>
+  <script type="text/javascript" src="{{ site.baseurl }}static/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="{{ site.baseurl }}static/js/jquery-ui-1.9.2.custom.min.js"></script>
+  <script type="text/javascript" src="{{ site.baseurl }}static/js/jquery.tocify.min.js"></script>
+  <script type="text/javascript" src="{{ site.baseurl }}static/js/scroll.js"></script>
+
+  <link rel="stylesheet" media="all" href="{{ site.baseurl }}static/css/bootstrap.min.css"/>
+  <link rel="stylesheet" media="all" href="{{ site.baseurl }}static/css/bootstrap-responsive.min.css"/>
+  <link rel="stylesheet" media="all" href="{{ site.baseurl }}static/css/jquery.tocify.css"/>
+  <link rel="stylesheet" media="all" href="{{ site.baseurl }}static/css/syntax.css" />
+  <link rel="stylesheet" media="all" href="{{ site.baseurl }}static/css/style.css"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0;" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+  <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+          <div class="container">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <img alt="Foreman" class="logo" src="{{ site.baseurl }}static/images/foreman.png" />
+              <div class="brand">
+                <a  href="{{ site.baseurl }}">Foreman</a>
+                <a class="subtitle" href="{{ site.baseurl }}">Remote Execution</a>
+              </div>
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li><a href="{{ site.baseurl }}">About</a></li>
+                  <li><a href="{{ site.baseurl }}design/">Design</a></li>
+                </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+<script>
+$(function(){
+  $('.nav > li a[href="'+window.location.pathname+'"]').parents('.nav > li').addClass('active')
+})
+</script>

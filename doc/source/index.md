@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: About
 skip-title: true
 sharing: true

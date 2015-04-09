@@ -2,7 +2,7 @@
 name: Formean Remote Execution
 title: Foreman rEx
 url: http://inecas.github.io
-baseurl: /foreman-rex
+baseurl: /foreman-rex/
 markdown: redcarpet
 highlighter: pygments
 
