@@ -315,6 +315,15 @@ Command Preparation
 User Stories
 ------------
 
+- ?As a user I want to be able to specify default number of tries per command. # Command preparation?
+
+- ?As a user I want to be able to specify default retry interval per command. # Command preparation?
+
+- ?As a user I want to be able to specify default splay time per command. # Command preparation?
+
+- ?As a user I want to setup default timeout per command. # Command preparation?
+
+
 Design
 ------
 
@@ -324,44 +333,47 @@ Command Invocation
 User Stories
 ------------
 
-Design
-------
+- As a user when I plan a new CommandExecution I want to use an existing bookmark for specifying target hosts
 
-Command Execution
-=================
+- As a user when I plan a new CommandExecution I want to use custom scoped search syntax for specifying target hosts
 
-User Stories
-------------
+- As a user when I plan a new CommandExecution I want to target single host
 
-- ?As a user I want to be able to specify default number of tries per command. # Command preparation?
+- As a user when I plan a new CommandExecution I want to be able to evaluate a search query to target host immediately and store this list of targets even if command is planed in future
 
-- ?As a user I want to be able to specify default retry interval per command. # Command preparation?
+- As a user when I plan a new CommandExecution I want to be able to evaluate a search query just before execution starts, if it's recurring I want new evaluation before every start
 
-- ?As a user I want to be able to specify default splay time per command. # Command preparation?
+- As a user when I plan a new CommandExecution I want planning functionality exposed by API and available in hammer
+
+- As a user I want to reuse targets of existing CommandExecution
+
+- As a user I want to have UI to add specific hosts to bookmarks so I don't have to specify scoped search for it (like fqdn = a or id = 1) [low priority]
+
+- As a user when I plan a new CommandExecution I want to see a warning based on status of targeted hosts (unavailable/not checking in)
 
 - As a user I want to be able to override default values like (number of tries, retry interval, splay time, ...) when I plan an execution of command.
 
 - As a user I want to be able to specify infinite number of tries (until success/cancel) when I plan an execution of command.
 
-
-
-- As a user I want to be able to cancel command which hasn't been started yet.
-
-- As a user I want to be able to cancel command which is in progress. # some providers might not support this? therefore next user stories
-
-- As a developer I want to specify whether cancellation of running commands is possible.
-
-- As a user I want to see if I'm able to cancel the command.
-
-
-
 - As a user I want to set timeout when I plan an execution of a command.
-
-- ?As a user I want to setup default timeout per command. # Command preparation?
 
 - As a user I want to override default timeout when I plan an execution of command.
 
-- ?As a developer I want dynflow to support timeouts # unless it already supports it
+Scenarios
+---------
+
+[ convert this to text descriptions ]
+
+- As a user to plan a command I want to: 
+  input a job name
+  select targets (based on bookmarks, explicit host selection, custom query)
+  select job templates that can be used for this job name and targets (host is responsible to pick the one from the list)
+  fill in inputs for the selected job templates
+
+- As a user I want a link in host detail page to execute a job on displayed host which pre-fills the target in command invocation form
+
+- As a user I want a link in host list page that redirects me to command invocation page where I can plan job execution for targets I saw on host list page
+
 
 Design
 ------
@@ -370,29 +382,35 @@ Class diagram of Foreman classes
 
 {% plantuml %}
 
-class Command {
-  InstallPackage, Exec, RestartService
-
-  // default values for command
-  retry: integer
-  retry_interval: integer
-  timeout: integer
-  splay: integer
-
-  plan(target, input) - creates CommandExecution
-}
-note top of Command: InstallPackage, Exec, Restart service\nare just example names of instances\nwill be covered in CommandPreparation design
-
-class Host {
-  get_provider(type)
+class Bookmark {
+  name:string
+  query:string
+  controller:string
+  public:bool
+  owner_id:integer
+  owner_type:string
 }
 
-class CommandExecution {
-  command_id: integer
+note top of Targeting: author id changes every time\n when Targeting is touched
+class Targeting {
+  bookmark_id: integer
+  query: string
+  dynamic: bool
+  author_id: integer
+  ==
+  has_many :targets
+  has_one :command_execution
+}
+
+class Host
+class User
+
+class JobExecution {
+  job_template_id: integer
   target: n:m to host_groups/bookmarks/hosts
   input: $input_abstraction values clone
 
-  state: $CommandState
+  state: $JobState
   started_at: datetime
   canceled_at datetime
   provider: SSH | MCollective
@@ -402,14 +420,92 @@ class CommandExecution {
   timeout: integer
   splay: integer
 
+  targeting_id: integer
+
+  cancel()
+}
+
+Bookmark <- Targeting
+Targeting <-> Host : polymorphic
+Targeting --> User
+JobExecution --> Targeting
+
+{% endplantuml %}
+
+Query is copied to Target, we don't want to propagate any later
+changes to Bookmark to already planned job executions.
+
+We can store link to original bookmark to be able to
+compare changes later.
+
+For JobExecution we forbid later editing of Targeting.
+
+
+Command Execution
+=================
+
+User Stories
+------------
+
+- As a user I want to be able to cancel command which hasn't been started yet.
+
+- As a user I want to be able to cancel command which is in progress. # some providers might not support this? therefore next user stories
+
+- As a developer I want to specify whether cancellation of running commands is possible.
+
+- As a user I want to see if I'm able to cancel the command.
+
+- As a user I want job execution to fail after timeout limit.
+
+Design
+------
+
+Class diagram of Foreman classes
+
+{% plantuml %}
+
+class JobTemplate {
+  InstallPackage, Exec, RestartService
+
+  // default values for job template
+  retry: integer
+  retry_interval: integer
+  timeout: integer
+  splay: integer
+
+  plan(target, input) - creates JobExecution
+}
+note top of JobTemplate: InstallPackage, Exec, Restart service\nare just example names of instances\nwill be covered in JobPreparation design
+
+class Host {
+  get_provider(type)
+}
+
+class JobExecution {
+  job_template_id: integer
+  target: n:m to host_groups/bookmarks/hosts
+  input: $input_abstraction values clone
+
+  state: $JobState
+  started_at: datetime
+  canceled_at datetime
+  provider: SSH | MCollective
+
+  retry: integer
+  retry_interval: integer
+  timeout: integer
+  splay: integer
+
+  targeting_id: integer
+
   cancel()
 }
 
 abstract class ProxyCommand {
-  command_execution_id: integer
+  job_execution_id: integer
   host_id: integer
   type: string
-  state: $CommandState
+  state: $JobState
   started_at: datetime
   canceled_at datetime
   timeout_at datetime
@@ -430,14 +526,14 @@ class MCollectiveProxyCommand {
   proxy_endpoint():string
 }
 
-enum CommandState {
+enum JobState {
 PLANNED
 STARTED
 FINISHED
 }
 
-Command <- CommandExecution
-CommandExecution <-- ProxyCommand
+JobTemplate <- JobExecution
+JobExecution <-- ProxyCommand
 Host <-- ProxyCommand
 
 ProxyCommand <|-- SSHProxyCommand
@@ -445,16 +541,15 @@ ProxyCommand <|-- MCollectiveProxyCommand
 
 {% endplantuml %}
 
-CommandExecution will be probably later replaced by Scheduler that
+JobExecution will be probably later replaced by Scheduler that
 will schedule ProxyCommands (could be responsible for batch jobs,
 retrying on failure, timeouts)
+
+We should take facts from Foreman rather gather them during runtime (different result than expected when planning, performance)
 
 Open questions
 --------------
 
-Do we need anything extra to fulfill using system facts story? MCollective e.g. can use facter on every run or use
-values stored on server (equals to facts we have in Foreman). I think we should take facts from Foreman rather
-than runtime (different result than expected when planning, performance)
 
 Reporting
 =========
