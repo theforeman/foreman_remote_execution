@@ -406,7 +406,6 @@ class Host
 class User
 
 class JobExecution {
-  job_template_id: integer
   target: n:m to host_groups/bookmarks/hosts
   input: $input_abstraction values clone
 
@@ -482,7 +481,6 @@ class Host {
 }
 
 class JobExecution {
-  job_template_id: integer
   target: n:m to host_groups/bookmarks/hosts
   input: $input_abstraction values clone
 
@@ -532,7 +530,7 @@ STARTED
 FINISHED
 }
 
-JobTemplate <- JobExecution
+JobTemplate - JobExecution : n:m
 JobExecution <-- ProxyCommand
 Host <-- ProxyCommand
 
