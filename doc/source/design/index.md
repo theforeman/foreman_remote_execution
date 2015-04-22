@@ -315,19 +315,34 @@ Command Preparation
 User Stories
 ------------
 
-- ?As a user I want to be able to specify default number of tries per command. # Command preparation?
+- As a user I want to be able to create a template to run some command for a given remote execution provider for a specific job
 
-- ?As a user I want to be able to specify default retry interval per command. # Command preparation?
+- As a user these command templates should be audited and versioned
 
-- ?As a user I want to be able to specify default splay time per command. # Command preparation?
+- As a user I want to be able to define inputs into the template that consist of user input at execution time.  I should be able to use these inputs within my template.
 
-- ?As a user I want to setup default timeout per command. # Command preparation?
+- As a user I want to be able to define an input for a template that uses a particular fact about the host being executed on at execution time.
+
+- As a user I want to be able to define an input for a template that uses a particular smart variable that is resolved at execution time.
+
+- As a user I want to be able to define a description of each input in order to help describe the format and meaning of an input.
+
+- As a user I want to be able to specify default number of tries per command template.
+
+- As a user I want to be able to specify default retry interval per command template.
+
+- As a user I want to be able to specify default splay time per command template.
+
+- As a user I want to setup default timeout per command template.
+
+- As a user I want to preview a rendered command template for a host (providing needed inputs)
 
 
 Design
 ------
 
 {% plantuml %}
+
 
 class ConfigTemplate {
   name:string
@@ -349,30 +364,46 @@ class ConfigTemplateInput {
   input_type: USER_INPUT | FACT | SMART_VARIABLE
   fact_name: string
   smart_variable_name: string
+  description: string
   ==
   has_one :command_template
 }
 
 
-class ProxyCommand {
-  rendered_template: string
-  ==
-  has_one :config_template
-  has_one :audit
-  has_one :host
-}
-
-
-ConfigTemplate -* Taxonomy
-ConfigTemplate -* ConfigTemplateInput
-ConfigTemplate -* Audit
-ProxyCommand -> ConfigTemplate
-ProxyCommand -> Audit
+ConfigTemplate "1" --> "N" Taxonomy
+ConfigTemplate "1" --> "N" ConfigTemplateInput
+ConfigTemplate "1" --> "N" Audit
 
 class Taxonomy
 class Audit
 
 {% endplantuml %}
+
+
+Scenarios
+---------
+**Creating a command template**
+
+1. given I'm on new template form
+1. I select from a list of existing job names or fill in a new job name
+1. I select some option to add an input
+  1. Give the input a name
+  1. Select the type 'user input'
+  1. Give the input a description (space separated package list)
+1. I select from a list of known providers (ssh, mco, salt, ansible)
+1. I am shown an example of how to use the input in the template
+1. I am able to see some simple example for the selected provider??
+1. I fill in the template
+1. I select one or more organizations and locations (if enabled)
+1. I click save
+
+
+**Creating a smart variable based input**
+
+1. given i am creating or editing a command template
+1. I select to add a new input
+  1. Give the input a name
+  1. Define a smart variable name
 
 
 Command Invocation
@@ -404,6 +435,9 @@ User Stories
 
 - As a user I want to be able to override default values like (number
   of tries, retry interval, splay time, timeout, remote user...) when I plan an execution of command.
+
+- As a user I expect to see a the description of an input whenever i am being requested to
+  provide the value for the input.
 
 Scenarios
 ---------
@@ -447,7 +481,7 @@ and specified input (something like "Package install: zsh")
   interval, splay time, timeout, remote user...
 1. the overrides are common for all the templates
 
-**Set the exeuction time into future** (see [scheduling](design#scheduling)
+**Set the execution time into future** (see [scheduling](design#scheduling)
   for more scenarios)
 
 1. when I'm on a job invocation form
@@ -460,7 +494,7 @@ postponed to the execution time
 
 1. given I'm on a host details page
 1. when I click "Run remote command"
-1. then a user dialog opens with job invocation form, with prefiled
+1. then a user dialog opens with job invocation form, with pre-filled
 targeting pointing to this particular host
 
 **Run a job from host index**
@@ -679,7 +713,10 @@ We should take facts from Foreman rather gather them during runtime (different r
 
 Open questions
 --------------
-
+1. Splay Time versus Splay Count
+  * Count would allow for better adjustments for performance tolerance
+  * Time would fit into maintenance windows better
+  * How would either of these be implemented?
 
 Reporting
 =========
