@@ -381,47 +381,115 @@ Command Invocation
 User Stories
 ------------
 
-- As a user when I plan a new CommandExecution I want to use an existing bookmark for specifying target hosts
+- As a user I would like to invoke a job on a single host
 
-- As a user when I plan a new CommandExecution I want to use custom scoped search syntax for specifying target hosts
+- As a user I would like to invoke a job on a set of hosts, based on
+  search filter
 
-- As a user when I plan a new CommandExecution I want to target single host
+- As a user I want to be able to reuse existing bookmarks for job
+  invocation
 
-- As a user when I plan a new CommandExecution I want to be able to evaluate a search query to target host immediately and store this list of targets even if command is planed in future
+- As a user, when setting a job in future, I want to decide if the
+  search criteria should be evaluated now or on the execution time
 
-- As a user when I plan a new CommandExecution I want to be able to evaluate a search query just before execution starts, if it's recurring I want new evaluation before every start
+- As a user I want to reuse the target of previous jobs for next execution
 
-- As a user when I plan a new CommandExecution I want planning functionality exposed by API and available in hammer
+- As a CLI user I want to be able to invoke a job via hammer CLI
 
-- As a user I want to reuse targets of existing CommandExecution
+- As a user, I want to be able to invoke the job on a specific set of hosts
+  (by using checkboxes in the hosts table)
 
-- As a user I want to have UI to add specific hosts to bookmarks so I don't have to specify scoped search for it (like fqdn = a or id = 1) [low priority]
+- As a user, when planning future job execution, I want to see a
+  warning with the info about unreachable hosts
 
-- As a user when I plan a new CommandExecution I want to see a warning based on status of targeted hosts (unavailable/not checking in)
-
-- As a user I want to be able to override default values like (number of tries, retry interval, splay time, ...) when I plan an execution of command.
-
-- As a user I want to be able to specify infinite number of tries (until success/cancel) when I plan an execution of command.
-
-- As a user I want to set timeout when I plan an execution of a command.
-
-- As a user I want to override default timeout when I plan an execution of command.
+- As a user I want to be able to override default values like (number
+  of tries, retry interval, splay time, timeout, remote user...) when I plan an execution of command.
 
 Scenarios
 ---------
 
-[ convert this to text descriptions ]
+**Fill in template inputs for a job**
 
-- As a user to plan a command I want to: 
-  input a job name
-  select targets (based on bookmarks, explicit host selection, custom query)
-  select job templates that can be used for this job name and targets (host is responsible to pick the one from the list)
-  fill in inputs for the selected job templates
+1. given I'm on job invocation form
+1. when I choose the job to execute
+1. then I'm given a list of providers that I have enabled and has a
+template available for the job
+1. and each provider allows to choose which template to use for this
+invocation (if more templates for the job and provider are available)
+1. and every template has input fields generated based on the input
+defined on the template (such as list of packages for install package job)
 
-- As a user I want a link in host detail page to execute a job on displayed host which pre-fills the target in command invocation form
+**Fill in target for a job**
 
-- As a user I want a link in host list page that redirects me to command invocation page where I can plan job execution for targets I saw on host list page
+1. when I'm on job invocation form
+1. then I can specify the target of the job using the scoped search
+syntax
 
+**Fill in execution properties of the job**
+
+1. when I'm on job invocation form
+1. I can override the default values for number of tries, retry
+  interval, splay time, timeout, remote user... on per-template basis
+
+**Set the exeuction time into future** (see [scheduling](design#scheduling)
+  for more scenarios)
+
+1. when I'm on a job invocation form
+1. then I can specify the time to start the execution at (now by
+default)
+1. and I can specify if the targeting should be calculated now or
+postponed to the execution time
+
+**Run a job from host detail**
+
+1. given I'm on a host details page
+1. when I click "Run remote command"
+1. then a user dialog opens with job invocation form, with prefiled
+targeting pointing to this particular host
+
+**Run a job from host index**
+
+1. given I'm on a host index page
+1. when I click "Run remote command"
+1. then a user dialog opens with job invocation form, with prefiled
+targeting using the same search that was used in the host index page
+
+**Invoke a job with single remote execution provider**
+
+1. given I have only one provider available in my installation
+1. and I'm on job invocation form
+1. when I choose the job to execute
+1. then only the template for this provider is available to run and
+asking for user inputs
+
+**Invoke a job with hammer**
+
+1. given I'm using CLI
+1. then I can run a job with ability to specify:
+  - targeting with scoped search
+  - job name to run
+  - templates to use for the job
+  - inputs on per-template basis
+  - execution properties on per-template basis
+  - ``start_at`` value for execution in future
+  - whether to wait for the job or exit after invocation (--async option)
+
+**Re-invoke a job**
+
+1. given I'm in job details page
+1. when I choose re-run
+1. then a user dialog opens with job invocation form, with prefiled
+targeting parameters from the previous execution
+1 and I can override all the values (including targeting, job,
+templates and inputs)
+
+**Edit a bookmark referenced by pending job invocation**
+
+1. given I have a pending execution task which targeting was created
+from a bookmark
+2. when I edit the bookmark
+3. then I should be notified about the existence of the pending tasks
+with ability to update the targeting (or cancel and recreate the invocation)
 
 Design
 ------
@@ -439,12 +507,9 @@ class Bookmark {
   owner_type:string
 }
 
-note top of Targeting: author id changes every time\n when Targeting is touched
 class Targeting {
-  bookmark_id: integer
   query: string
   dynamic: bool
-  author_id: integer
   ==
   has_many :targets
   has_one :command_execution
@@ -453,39 +518,38 @@ class Targeting {
 class Host
 class User
 
-class JobExecution {
-  target: n:m to host_groups/bookmarks/hosts
-  input: $input_abstraction values clone
-
-  state: $JobState
-  started_at: datetime
-  canceled_at datetime
-  provider: SSH | MCollective
-
-  retry: integer
-  retry_interval: integer
-  timeout: integer
-  splay: integer
-
-  targeting_id: integer
-
-  cancel()
+class TemplateInvocation {
+  inputs
+  tries
+  retry_interval
+  splay
+  remote_user
 }
 
-Bookmark <- Targeting
-Targeting <-> Host : polymorphic
-Targeting --> User
-JobExecution --> Targeting
+class JobInvocation {
+} 
+
+class ExecutionTask {
+  start_at: datetime
+}
+
+Bookmark "1" <- "N" Targeting
+Targeting "M" <-> "N" Host : (polymorphic)
+Targeting "N" --> "1" User
+JobInvocation "1" --> "1" Targeting
+JobInvocation "1" <-- "N" TemplateInvocation
+TemplateInvocation "N" --> "1" JobTemplate
+JobInvocation "1" <-- "N" ExecutionTask
 
 {% endplantuml %}
 
-Query is copied to Target, we don't want to propagate any later
+Query is copied to Targeting, we don't want to propagate any later
 changes to Bookmark to already planned job executions.
 
 We can store link to original bookmark to be able to
 compare changes later.
 
-For JobExecution we forbid later editing of Targeting.
+For JobInvocation we forbid later editing of Targeting.
 
 
 Command Execution
