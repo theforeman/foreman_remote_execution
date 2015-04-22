@@ -327,6 +327,54 @@ User Stories
 Design
 ------
 
+{% plantuml %}
+
+class ConfigTemplate {
+  name:string
+  template: string
+  job_name: string
+  retry_count: integer
+  retry_interval: integer
+  splay: integer
+  provider_type: string
+  ==
+  has_many :taxonomies
+  has_many :inputs
+  has_many :audits
+}
+
+class ConfigTemplateInput {
+  name: string
+  required: bool
+  input_type: USER_INPUT | FACT | SMART_VARIABLE
+  fact_name: string
+  smart_variable_name: string
+  ==
+  has_one :command_template
+}
+
+
+class ProxyCommand {
+  rendered_template: string
+  ==
+  has_one :config_template
+  has_one :audit
+  has_one :host
+}
+
+
+ConfigTemplate -* Taxonomy
+ConfigTemplate -* ConfigTemplateInput
+ConfigTemplate -* Audit
+ProxyCommand -> ConfigTemplate
+ProxyCommand -> Audit
+
+class Taxonomy
+class Audit
+
+{% endplantuml %}
+
+
 Command Invocation
 ===================
 
