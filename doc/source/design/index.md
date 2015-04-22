@@ -533,9 +533,6 @@ class Bookmark {
 class Targeting {
   query: string
   dynamic: bool
-  ==
-  has_many :targets
-  has_one :command_execution
 }
 
 class Host
