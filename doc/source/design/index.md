@@ -408,6 +408,16 @@ User Stories
 Scenarios
 ---------
 
+**Fill in target for a job**
+
+1. when I'm on job invocation form
+1. then I can specify the target of the job using the scoped search
+syntax
+1. the target might influence the list of providers available for the
+invocation: although, in delayed execution and dynamic targeting the
+current list of providers based on the hosts might not be final and
+we should count on that.
+
 **Fill in template inputs for a job**
 
 1. given I'm on job invocation form
@@ -417,19 +427,25 @@ template available for the job
 1. and each provider allows to choose which template to use for this
 invocation (if more templates for the job and provider are available)
 1. and every template has input fields generated based on the input
-defined on the template (such as list of packages for install package job)
+defined on the template (such as list of packages for install package
+job)
+*OPEN QUESTION*: should we unify the common inputs in all templates to
+specify them only once?
 
-**Fill in target for a job**
+**Fill in job description for the execution**
 
-1. when I'm on job invocation form
-1. then I can specify the target of the job using the scoped search
-syntax
+1. given I'm on job invocation form
+1. there should be a field for task description, that will be used for
+listing the jobs
+1. the description value should be pregenerated based on the job name
+and specified input (something like "Package install: zsh")
 
 **Fill in execution properties of the job**
 
 1. when I'm on job invocation form
 1. I can override the default values for number of tries, retry
-  interval, splay time, timeout, remote user... on per-template basis
+  interval, splay time, timeout, remote user...
+1. the overrides are common for all the templates
 
 **Set the exeuction time into future** (see [scheduling](design#scheduling)
   for more scenarios)
@@ -466,13 +482,20 @@ asking for user inputs
 
 1. given I'm using CLI
 1. then I can run a job with ability to specify:
-  - targeting with scoped search
+  - targeting with scoped search or bookmark_id
   - job name to run
   - templates to use for the job
   - inputs on per-template basis
-  - execution properties on per-template basis
+  - execution properties as overrides for the defaults coming from the template
   - ``start_at`` value for execution in future
-  - whether to wait for the job or exit after invocation (--async option)
+  - in case of the start_at value, if the targeting should be static
+    vs. dynamic
+  - whether to wait for the job or exit after invocation (--async
+    option)
+*OPEN QUESTION*: should we unify the common inputs in all templates to
+specify them only once: not scoping  the input by template? Maybe an
+    inputs catalog (with both defined name and semantic) might help.
+
 
 **Re-invoke a job**
 
@@ -520,14 +543,14 @@ class User
 
 class TemplateInvocation {
   inputs
+}
+
+class JobInvocation {
   tries
   retry_interval
   splay
   remote_user
 }
-
-class JobInvocation {
-} 
 
 class ExecutionTask {
   start_at: datetime
