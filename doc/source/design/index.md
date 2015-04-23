@@ -439,6 +439,9 @@ User Stories
 - As a user I expect to see a the description of an input whenever i am being requested to
   provide the value for the input.
 
+- As a user I want to be able to re-invoke the jobs based on
+  success/failure of previous task
+
 Scenarios
 ---------
 
@@ -530,7 +533,6 @@ asking for user inputs
 specify them only once: not scoping  the input by template? Maybe an
     inputs catalog (with both defined name and semantic) might help.
 
-
 **Re-invoke a job**
 
 1. given I'm in job details page
@@ -540,13 +542,25 @@ targeting parameters from the previous execution
 1 and I can override all the values (including targeting, job,
 templates and inputs)
 
+**Re-invoke a job for failed hosts**
+
+1. given I'm in job details page
+1. when I choose re-run
+1. then a user dialog opens with job invocation form, with prefiled
+targeting parameters from the previous execution
+1 and I can override all the values (including targeting, job,
+templates and inputs)
+1. I can choose in the targeting to only run on hosts that failed with
+the job previously
+
 **Edit a bookmark referenced by pending job invocation**
 
 1. given I have a pending execution task which targeting was created
 from a bookmark
 2. when I edit the bookmark
 3. then I should be notified about the existence of the pending tasks
-with ability to update the targeting (or cancel and recreate the invocation)
+with ability to update the targeting (or cancel and recreate the
+invocation)
 
 Design
 ------
@@ -614,70 +628,93 @@ User Stories
 
 - As a user I want to be able to cancel command which hasn't been started yet.
 
-- As a user I want to be able to cancel command which is in progress. # some providers might not support this? therefore next user stories
-
-- As a developer I want to specify whether cancellation of running commands is possible.
-
-- As a user I want to see if I'm able to cancel the command.
+- As a user I want to be able to cancel command which is in progress
+  (if supported by specific provider…)
 
 - As a user I want job execution to fail after timeout limit.
+
+- As a user I want to job execution to be re-tried
+  based on the tries and retry interval values given in the invocation
+
+- As a user I want to job execution on multiple hosts to be spread
+  using the splay value
+
+- As a user I want the job execution to be performed as a user that
+  was specified on the job invocation
+
+- As a user I want an ability to retry the job execution when the host
+  checks in (support of hosts that are offline by the time the
+  execution).
+
+Scenarios
+---------
+
+**Cancel pending bulk task: all at once**
+
+1. given I've set a job to run in future on multiple hosts
+1. when I click 'cancel' on the corresponding bulk task
+1. then the whole task should be canceled (including all the sub-tasks
+on all the hosts)
+
+**Cancel pending bulk task: task on specific host**
+
+1. given I've set a job to run in future on multiple hosts
+1. when I show the task representation on a host details page
+1. when I click 'cancel' on the task
+1. then I should be offered whether I should cancel just this
+instance or the whole bulk task on all hosts
+
+**Fail after timeout**
+
+1. given I've invoked a job
+1. when the job fails to start in given specified timeout
+1. then the job should be marked as failed due to timeout
+
+**Retried task**
+
+1. given I've invoked a job
+1. when the job fails to start at first attemt
+1. then the executor should wait for retry_timeout period
+1. and it should reiterate with the attempt based on the tries number
+1. and I should see the information about the number of retries
 
 Design
 ------
 
-Class diagram of Foreman classes
+Class diagram for jobs running on multiple hosts
 
 {% plantuml %}
 
-class JobTemplate {
-  InstallPackage, Exec, RestartService
-
-  // default values for job template
-  retry: integer
-  retry_interval: integer
-  timeout: integer
-  splay: integer
-
-  plan(target, input) - creates JobExecution
-}
-note top of JobTemplate: InstallPackage, Exec, Restart service\nare just example names of instances\nwill be covered in JobPreparation design
 
 class Host {
   get_provider(type)
 }
 
-class JobExecution {
-  target: n:m to host_groups/bookmarks/hosts
-  input: $input_abstraction values clone
-
-  state: $JobState
+class BulkExecutionTask {
+  state: $TaskState
+  start_at: datetime
   started_at: datetime
-  canceled_at datetime
-  provider: SSH | MCollective
+  ended_at datetime
+  cancel()
+}
 
+class ExecutionTask {
   retry: integer
   retry_interval: integer
   timeout: integer
   splay: integer
-
-  targeting_id: integer
-
+  type: string
+  state: $TaskState
+  started_at: datetime
+  start_at: datetime
+  tried_count: integer
+  ended_at datetime
+  {abstract} support_cancel?()
+  {abstract} proxy_endpoint()
   cancel()
 }
 
 abstract class ProxyCommand {
-  job_execution_id: integer
-  host_id: integer
-  type: string
-  state: $JobState
-  started_at: datetime
-  canceled_at datetime
-  timeout_at datetime
-  tried_count: integer
-  cancel()
-  {abstract} support_cancel?()
-  {abstract} proxy_endpoint()
-  plan()
 }
 
 class SSHProxyCommand {
@@ -690,24 +727,53 @@ class MCollectiveProxyCommand {
   proxy_endpoint():string
 }
 
-enum JobState {
-PLANNED
-STARTED
-FINISHED
-}
-
-JobTemplate - JobExecution : n:m
-JobExecution <-- ProxyCommand
-Host <-- ProxyCommand
+BulkExecutionTask "N" -> "1" JobInvocation
+BulkExecutionTask "1" <-- "N" ExecutionTask
+TemplateInvocation "N" -> "1" JobInvocation
+TemplateInvocation "1" <--- "N" ExecutionTask
+ExecutionTask "1" -- "1" ProxyCommand
+ExecutionTask "1" -- "1" Host
 
 ProxyCommand <|-- SSHProxyCommand
 ProxyCommand <|-- MCollectiveProxyCommand
 
 {% endplantuml %}
 
-JobExecution will be probably later replaced by Scheduler that
-will schedule ProxyCommands (could be responsible for batch jobs,
-retrying on failure, timeouts)
+Class diagram for jobs running a single host
+
+{% plantuml %}
+
+class Host {
+  get_provider(type)
+}
+
+class ExecutionTask {
+  retry: integer
+  retry_interval: integer
+  timeout: integer
+  splay: integer
+  type: string
+  state: $TaskState
+  started_at: datetime
+  start_at: datetime
+  tried_count: integer
+  ended_at datetime
+  cancel()
+  {abstract} support_cancel?()
+  {abstract} proxy_endpoint()
+  plan()
+  cancel()
+}
+
+class ProxyCommand {
+}
+
+ExecutionTask "N" -> "1" JobInvocation
+TemplateInvocation "N" -> "1" JobInvocation
+TemplateInvocation "1" <- "N" ExecutionTask
+ExecutionTask "1" -- "1" ProxyCommand
+ExecutionTask "1" -- "1" Host
+{% endplantuml %}
 
 We should take facts from Foreman rather gather them during runtime (different result than expected when planning, performance)
 
