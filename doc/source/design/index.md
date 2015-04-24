@@ -555,6 +555,18 @@ from a bookmark
 with ability to update the targeting (or cancel and recreate the
 invocation)
 
+**Email notification: opt in**
+
+1. given I haven't configured to send email notifications about my executions
+1. then the job invocation should have the 'send email notification'
+turned off by default
+
+**Email notification: opt out**
+
+1. given I haven't configured to send email notifications about my executions
+1. then the job invocation should have the 'send email notification'
+turned off by default
+
 Design
 ------
 
@@ -588,6 +600,7 @@ class JobInvocation {
   retry_interval
   splay
   remote_user
+  email_notification: bool
 }
 
 class ExecutionTask {
@@ -707,8 +720,8 @@ class ExecutionTask {
   splay: integer
   type: string
   state: $TaskState
-  started_at: datetime
   start_at: datetime
+  started_at: datetime
   tried_count: integer
   ended_at datetime
   {abstract} support_cancel?()
@@ -792,8 +805,99 @@ Reporting
 User Stories
 ------------
 
+- As a user I would like to monitor the current state of the command
+  running against a single host, including the output and exit status
+
+- As a user I would like to monitor the status of bulk command,
+  including the number of successful, failed and pending tasks
+
+- As a user I would like to see the history of all commands run on a
+  host
+
+- As a user I would like to see the history of all tasks that I've
+  invoked
+
+- As a user I would like to be able to  get an email notification with
+  execution report
+
+Scenarios
+---------
+
+**Track the job running on a set of hosts**
+
+1. given I've set a job to run in future on multiple hosts
+1. then I can watch the progress of the job (number of
+successful/failed/pending tasks)
+1. and I can get to the list of jobs per host
+1. and I'm able to filter on the host that it was run against and
+state
+
+**Track the job running on a single host**
+
+1. given I've set a job to run on a specific host
+1. when I show the task representation page
+1. then I can watch the progress of the job (updated log), status
+
+**History of jobs run on a host**
+
+1. given I'm on host jobs page
+1. when I can see all the jobs run against the host
+1. and I'm able to filter on the host that it was run against and
+state, owner etc.
+
+**History of invoked jobs**
+
+1. given I'm on jobs history page
+1. when I can see all the jobs invoked in the system
+1. scoped by a taxonomy
+1. and I'm able to filter on the host that it was run against and
+state, owner etc.
+
+**Email notification: send after finish**
+
+1. given I've invoked a job with email notification turned on
+1. when the job finishes
+1. then I should get the email with report from the job after it finishes
+
 Design
 ------
+
+Class diagram for jobs running on multiple hosts
+
+{% plantuml %}
+
+
+class Host {
+}
+
+class JobInvocation {
+  email_notification: bool
+}
+
+class BulkExecutionTask {
+  state: $TaskState
+  start_at: datetime
+  started_at: datetime
+  ended_at datetime
+}
+
+class ExecutionTask {
+  type: string
+  state: $TaskState
+  start_at: datetime
+  started_at: datetime
+  ended_at datetime
+  tried_count: integer
+  command: string
+  output: string
+  exit_code: string
+}
+
+BulkExecutionTask "N" -> "1" JobInvocation
+BulkExecutionTask "1" <-- "N" ExecutionTask
+ExecutionTask "1" -- "1" Host
+
+{% endplantuml %}
 
 Scheduling
 ==========
