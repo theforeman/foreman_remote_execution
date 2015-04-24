@@ -466,8 +466,6 @@ invocation (if more templates for the job and provider are available)
 1. and every template has input fields generated based on the input
 defined on the template (such as list of packages for install package
 job)
-*OPEN QUESTION*: should we unify the common inputs in all templates to
-specify them only once?
 
 **Fill in job description for the execution**
 
@@ -529,9 +527,6 @@ asking for user inputs
     vs. dynamic
   - whether to wait for the job or exit after invocation (--async
     option)
-*OPEN QUESTION*: should we unify the common inputs in all templates to
-specify them only once: not scoping  the input by template? Maybe an
-    inputs catalog (with both defined name and semantic) might help.
 
 **Re-invoke a job**
 
@@ -618,6 +613,15 @@ We can store link to original bookmark to be able to
 compare changes later.
 
 For JobInvocation we forbid later editing of Targeting.
+
+Open questions
+--------------
+
+* should we unify the common inputs in all templates to specify them
+only once or scoping the input by template?
+
+* Maybe an inputs catalog (with both defined name and semantic) might
+help with keeping the inputs consistent across templates/providers
 
 
 Command Execution
