@@ -337,6 +337,30 @@ User Stories
 
 - As a user I want to preview a rendered command template for a host (providing needed inputs)
 
+Scenarios
+---------
+**Creating a command template**
+
+1. given I'm on new template form
+1. I select from a list of existing job names or fill in a new job name
+1. I select some option to add an input
+  1. Give the input a name
+  1. Select the type 'user input'
+  1. Give the input a description (space separated package list)
+1. I select from a list of known providers (ssh, mco, salt, ansible)
+1. I am shown an example of how to use the input in the template
+1. I am able to see some simple example for the selected provider??
+1. I fill in the template
+1. I select one or more organizations and locations (if enabled)
+1. I click save
+
+
+**Creating a smart variable based input**
+
+1. given i am creating or editing a command template
+1. I select to add a new input
+  1. Give the input a name
+  1. Define a smart variable name
 
 Design
 ------
@@ -378,32 +402,6 @@ class Taxonomy
 class Audit
 
 {% endplantuml %}
-
-
-Scenarios
----------
-**Creating a command template**
-
-1. given I'm on new template form
-1. I select from a list of existing job names or fill in a new job name
-1. I select some option to add an input
-  1. Give the input a name
-  1. Select the type 'user input'
-  1. Give the input a description (space separated package list)
-1. I select from a list of known providers (ssh, mco, salt, ansible)
-1. I am shown an example of how to use the input in the template
-1. I am able to see some simple example for the selected provider??
-1. I fill in the template
-1. I select one or more organizations and locations (if enabled)
-1. I click save
-
-
-**Creating a smart variable based input**
-
-1. given i am creating or editing a command template
-1. I select to add a new input
-  1. Give the input a name
-  1. Define a smart variable name
 
 
 Command Invocation
