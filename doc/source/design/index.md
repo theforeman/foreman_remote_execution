@@ -905,8 +905,56 @@ Scheduling
 User Stories
 ------------
 
+- As a user I want to be able go execute a job at future time
+
+- As a user I want to set the job to reoccur with specified
+  frequency
+
+Scenarios
+---------
+
+**Job set for the future**
+
+1. given I've invoked a job at future time
+1. when the time comes
+1. the job gets executed
+
+**Creating reoccurring job**
+
+1. given I'm in job invocation form
+1. when I check 'reoccurring job'
+1. then I can set the frequency and valid until date
+
+**Showing the tasks with reoccurring logic**
+
+1. when I list the jobs
+1. I can see the information about the reoccurring logic at every job
+1. and I can filter the jobs for those with the reoccurring logic
+
+**Canceling the reoccurring job**
+
+1. given I have reoccurring job configured
+1. when I cancel the next instance of the job
+1. then I'm offered to cancel the reoccurring of the job in the future
+
 Design
 ------
+
+{% plantuml %}
+
+class Schedule {
+  start_at: datetime
+  end_at: datetime
+  cronline: string
+}
+
+class ExecutionTask {
+}
+
+ExecutionTask "N" -- "1" JobInvocation
+JobInvocation "1" -- "1" Schedule
+
+{% endplantuml %}
 
 Katello Workflow Integration
 ============================
