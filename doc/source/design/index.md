@@ -956,11 +956,18 @@ JobInvocation "1" -- "1" Schedule
 
 {% endplantuml %}
 
-Katello Workflow Integration
-============================
+Foreman Integration
+===================
 
 User Stories
 ------------
+
+- As a user, I want to be able to use for:
+  - puppet run
+  - grubby reprovision
+  - content actions (package install/update/remove/downgrade, group
+    install/uninstall, package profile refresh)
+  - subscription actions (refresh)
 
 Design
 ------
