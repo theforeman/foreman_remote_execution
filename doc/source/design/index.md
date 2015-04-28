@@ -981,6 +981,24 @@ User Stories
 Design
 ------
 
+
+Katello Client Utilities
+========================
+
+Design
+------
+
+katello-agent provides three main functions aside from remote management:
+
+* package profile yum plugin - pushes a new package profile after any yum transaction
+  * Split out into its own package (yum-plugin-katello-profile)
+* enabled repository monitoring
+  * monitors /etc/yum.repos.d/redhat.repo file for changes and sends newly enabled repos whenever it does change
+  * Split out into its own package (katello-errata-profile) with a service to do the same
+* On the capsule, goferd runs to recieve commands to sync repositories, possible solutions:
+  * katello-agent can remain (but possibly renamed), with a lot of the existing functionality removed
+  * pulp changes to a rest api method for initiating capsule syncs, katello needs to store some auth credentials per capsule
+
 Orchestration
 =============
 
