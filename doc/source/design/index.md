@@ -978,9 +978,86 @@ Security
 User Stories
 ------------
 
+- As a user I want to be able to plan job invocation for any host that I
+  can view (view_host permission).
+
+- As a user I want to be able to plan a job invocation of job that I can 
+  view (view_job permission)
+
+- As a user I want to restrict other users which combination of host and job 
+  name they can execute (execute permission on job_task resource).
+ 
+- As a user I want to be warned if I planned job invocation on hosts on
+  which the execution of this job is not allowed to me.
+
+- As a user I want to see refused job invocations (based on permissions) as
+  failed when they are executed.
+
+- As a user I want to set limit filter with execute permission by host attributes
+  such as hostgroup, environment, fqdn, id, lifecycle environment (if applicable), 
+  content view (if applicable).
+  
+- As a user I want to specify remote_user for JobInvocation if at least one
+  provider supports it.
+
+- As a user I want to restrict other users to execute job under specific user
+  as a part of filter condition. If the provider does not allow this, execution
+  should be refused.
+
+- As a job template provider I want to be able to specify default effective user
+  
+Scenarios
+---------
+
+**Allow user A to invoke package installation on host B**
+
+1. given  user A can view all hosts and job templates
+1. when he invoke package installation job on host B
+1. then his job task fails because he does not have execution 
+   permission for such job task
+
+**Allow user A to run package installation on host B**
+
+1. given I've permissions to assign other user permissions
+1. and user A can view all hosts and job templates
+1. when I grant user A execution permission on resource JobTask
+1. and I set related filter condition to "host_name = B and job_name = package_install"
+1. and user A invokes package install execution
+1. then the job gets executed successfully
+
+**User can set effective user**
+
+1. given the provider of job template supports changing effective user
+1. when user invokes a job
+1. then he can set effective user under which command is executed on target host 
+
+New permissions introduced
+--------------------------
+
+- JobInvocation
+  - Create
+  - View
+  - Cancel
+  - Edit (Schedule, never can change targetting)
+- JobTask
+  - Execute
+  - (filter can be: remote_user = 'joe' and host_id = 1 or host_id = 2 and script_name = 'foobar')
+
+
 Design
 ------
 
+{% plantuml %}
+
+class JobTemplate {
+  remote_user: string
+}
+
+class JobInvocation {
+  remote_user: string
+}
+
+{% endplantuml %}
 
 Katello Client Utilities
 ========================
