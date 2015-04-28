@@ -12,10 +12,10 @@ Remote Execution Technology
 User Stories
 ------------
 
-- As a user I want to run commands in parallel across large number of
+- As a user I want to run jobs in parallel across large number of
 hosts
 
-- As a user I want to run commands on a host in a different network
+- As a user I want to run jobs on a host in a different network
   segment (the host doesn't see the Foreman server/the Foreman server
   doesn't see the host directly)
 
@@ -41,9 +41,9 @@ participant "Foreman Proxy" as Proxy
 participant "Host" as Host
 
 autonumber
-User -> Foreman : UserCommand
+User -> Foreman : JobInvocation
 Foreman -> Proxy : ProxyCommand
-Proxy -> Host : SshCommand
+Proxy -> Host : SshScript
 Activate Host
 Host --> Proxy : ProgressReport[1, Running]
 Host --> Proxy : ProgressReport[2, Running]
@@ -54,11 +54,7 @@ Deactivate Host
 Proxy --> Foreman : AccumulatedProgressReport[2, Finished]
 {% endplantuml %}
 
-UserCommand:
-
-  * hosts: [host.example.com]
-  * template: install-packages-ssh
-  * input: { packages: ['vim-X11'] }
+JobInvocation: see see [scheduling](design#job-invocation)
 
 ProxyCommand:
 
@@ -66,7 +62,7 @@ ProxyCommand:
   * provider: ssh
   * input: "yum install -y vim-X11"
 
-SshCommand:
+SSHScript:
 
   * host: host.example.com
   * input: "yum install -y vim-X11"
@@ -112,66 +108,12 @@ participant "Foreman Proxy" as Proxy
 participant "Host" as Host
 
 autonumber
-User -> Foreman : UserCommand
-group Optional
-  Foreman -> Proxy : EnforceCheckIn
-  Proxy -> Host : EnforceCheckIn
-end
+User -> Foreman : JobInvocation
 Host -> Proxy : CheckIn
 Proxy -> Foreman : CheckIn
-Foreman --> Proxy : ProxyCommand
-Proxy --> Host : Script
-Activate Host
-Host -> Proxy : ProgressReport[1, Running]
-Host -> Proxy : ProgressReport[2, Running]
-Proxy -> Foreman : AccumulatedProgressReport[1, Running]
-Host -> Proxy : ProgressReport[3, Running]
-Host -> Proxy : ProgressReport[4, Finished]
-Deactivate Host
-Proxy -> Foreman : AccumulatedProgressReport[2, Finished]
+Foreman -> Proxy : ProxyCommand
+Proxy -> Host : SshScript
 {% endplantuml %}
-
-UserCommand:
-
-  * hosts: [host.example.com]
-  * template: install-packages-ssh
-  * input: { packages: ['vim-X11'] }
-
-ProxyCommand:
-
-  * host: host.example.com
-  * provider: ssh
-  * input: "yum install -y vim-X11"
-
-Script:
-
-  * input: "yum install -y vim-X11"
-
-ProgressReport[1, Running]:
-
-  * output: "Resolving depednencies"
-
-ProgressReport[2, Running]:
-
-  * output: "installing libXt"
-
-AccumulatedProgressReport[1, Running]:
-
-  * output: { stdout: "Resolving depednencies\ninstalling libXt" }
-
-ProgressReport[3, Running]:
-
-  * output: "installing vim-X11"
-
-ProgressReport[4, Finished]:
-
-  * output: "operation finished successfully"
-  * exit_code: 0
-
-AccumulatedProgressReport[2, Finished]:
-
-  * output: { stdout: "Resolving depednencies\ninstalling libXt", exit_code: 0 }
-  * success: true
 
 ### Ssh Multi Host
 
@@ -183,18 +125,12 @@ participant "Host 1" as Host1
 participant "Host 2" as Host2
 
 autonumber
-User -> Foreman : UserCommand
+User -> Foreman : JobInvocation
 Foreman -> Proxy : ProxyCommand[host1]
 Foreman -> Proxy : ProxyCommand[host2]
-Proxy -> Host1 : SshCommand
-Proxy -> Host2 : SshCommand
+Proxy -> Host1 : SSHScript
+Proxy -> Host2 : SSHScript
 {% endplantuml %}
-
-UserCommand:
-
-  * hosts: *.example.com
-  * template: install-packages-ssh
-  * input: { packages: ['vim-X11'] }
 
 ProxyCommand[host1]:
 
@@ -229,7 +165,7 @@ participant "AMQP" as AMQP
 participant "Host" as Host
 
 autonumber
-User -> Foreman : UserCommand
+User -> Foreman : JobInvocation
 Foreman -> Proxy : ProxyCommand
 Proxy -> AMQP : MCOCommand
 AMQP -> Host : MCOCommand
@@ -240,7 +176,7 @@ AMQP --> Proxy : ProgressReport[Finished]
 Proxy --> Foreman : AccumulatedProgressReport[Finished]
 {% endplantuml %}
 
-UserCommand:
+JobInvocation:
 
   * hosts: [host.example.com]
   * template: install-packages-mco
@@ -277,7 +213,7 @@ participant "Foreman Proxy" as Proxy
 participant "Host" as Host
 
 autonumber
-User -> Foreman : UserCommand
+User -> Foreman : JobInvocation
 Foreman -> Proxy : ProxyCommand
 Proxy -> Host : AnsibleCommand
 Activate Host
@@ -287,7 +223,7 @@ Proxy --> Foreman : AccumulatedProgressReport[Finished]
 
 {% endplantuml %}
 
-UserCommand:
+JobInvocation:
 
   * hosts: [host.example.com]
   * template: install-packages-ansible
@@ -319,15 +255,15 @@ AccumulatedProgressReport[Finished]:
   * success: true
 
 
-Command Preparation
-===================
+Job Preparation
+===============
 
 User Stories
 ------------
 
 - As a user I want to be able to create a template to run some command for a given remote execution provider for a specific job
 
-- As a user these command templates should be audited and versioned
+- As a user these job templates should be audited and versioned
 
 - As a user I want to be able to define inputs into the template that consist of user input at execution time.  I should be able to use these inputs within my template.
 
@@ -337,19 +273,19 @@ User Stories
 
 - As a user I want to be able to define a description of each input in order to help describe the format and meaning of an input.
 
-- As a user I want to be able to specify default number of tries per command template.
+- As a user I want to be able to specify default number of tries per job template.
 
-- As a user I want to be able to specify default retry interval per command template.
+- As a user I want to be able to specify default retry interval per job template.
 
-- As a user I want to be able to specify default splay time per command template.
+- As a user I want to be able to specify default splay time per job template.
 
-- As a user I want to setup default timeout per command template.
+- As a user I want to setup default timeout per job template.
 
-- As a user I want to preview a rendered command template for a host (providing needed inputs)
+- As a user I want to preview a rendered job template for a host (providing needed inputs)
 
 Scenarios
 ---------
-**Creating a command template**
+**Creating a job template**
 
 1. given I'm on new template form
 1. I select from a list of existing job names or fill in a new job name
@@ -367,7 +303,7 @@ Scenarios
 
 **Creating a smart variable based input**
 
-1. given i am creating or editing a command template
+1. given i am creating or editing a job template
 1. I select to add a new input
   1. Give the input a name
   1. Define a smart variable name
@@ -400,7 +336,7 @@ class ConfigTemplateInput {
   smart_variable_name: string
   description: string
   ==
-  has_one :command_template
+  has_one :job_template
 }
 
 
@@ -414,8 +350,8 @@ class Audit
 {% endplantuml %}
 
 
-Command Invocation
-===================
+Job Invocation
+==============
 
 User Stories
 ------------
@@ -502,14 +438,14 @@ postponed to the execution time
 **Run a job from host detail**
 
 1. given I'm on a host details page
-1. when I click "Run remote command"
+1. when I click "Run job"
 1. then a user dialog opens with job invocation form, with pre-filled
 targeting pointing to this particular host
 
 **Run a job from host index**
 
 1. given I'm on a host index page
-1. when I click "Run remote command"
+1. when I click "Run job"
 1. then a user dialog opens with job invocation form, with prefiled
 targeting using the same search that was used in the host index page
 
@@ -613,7 +549,7 @@ class JobInvocation {
   email_notification: bool
 }
 
-class ExecutionTask {
+class JobTask {
   start_at: datetime
 }
 
@@ -623,7 +559,7 @@ Targeting "N" --> "1" User
 JobInvocation "1" --> "1" Targeting
 JobInvocation "1" <-- "N" TemplateInvocation
 TemplateInvocation "N" --> "1" JobTemplate
-JobInvocation "1" <-- "N" ExecutionTask
+JobInvocation "1" <-- "N" JobTask
 
 {% endplantuml %}
 
@@ -645,15 +581,15 @@ only once or scoping the input by template?
 help with keeping the inputs consistent across templates/providers
 
 
-Command Execution
-=================
+Job Execution
+=============
 
 User Stories
 ------------
 
-- As a user I want to be able to cancel command which hasn't been started yet.
+- As a user I want to be able to cancel job which hasn't been started yet.
 
-- As a user I want to be able to cancel command which is in progress
+- As a user I want to be able to cancel job which is in progress
   (if supported by specific provider…)
 
 - As a user I want job execution to fail after timeout limit.
@@ -715,7 +651,7 @@ class Host {
   get_provider(type)
 }
 
-class BulkExecutionTask {
+class BulkJobTask {
   state: $TaskState
   start_at: datetime
   started_at: datetime
@@ -723,7 +659,7 @@ class BulkExecutionTask {
   cancel()
 }
 
-class ExecutionTask {
+class JobTask {
   retry: integer
   retry_interval: integer
   timeout: integer
@@ -752,12 +688,12 @@ class MCollectiveProxyCommand {
   proxy_endpoint():string
 }
 
-BulkExecutionTask "N" -> "1" JobInvocation
-BulkExecutionTask "1" <-- "N" ExecutionTask
+BulkJobTask "N" -> "1" JobInvocation
+BulkJobTask "1" <-- "N" JobTask
 TemplateInvocation "N" -> "1" JobInvocation
-TemplateInvocation "1" <--- "N" ExecutionTask
-ExecutionTask "1" -- "1" ProxyCommand
-ExecutionTask "1" -- "1" Host
+TemplateInvocation "1" <--- "N" JobTask
+JobTask "1" -- "1" ProxyCommand
+JobTask "1" -- "1" Host
 
 ProxyCommand <|-- SSHProxyCommand
 ProxyCommand <|-- MCollectiveProxyCommand
@@ -772,7 +708,7 @@ class Host {
   get_provider(type)
 }
 
-class ExecutionTask {
+class JobTask {
   retry: integer
   retry_interval: integer
   timeout: integer
@@ -793,11 +729,11 @@ class ExecutionTask {
 class ProxyCommand {
 }
 
-ExecutionTask "N" -> "1" JobInvocation
+JobTask "N" -> "1" JobInvocation
 TemplateInvocation "N" -> "1" JobInvocation
-TemplateInvocation "1" <- "N" ExecutionTask
-ExecutionTask "1" -- "1" ProxyCommand
-ExecutionTask "1" -- "1" Host
+TemplateInvocation "1" <- "N" JobTask
+JobTask "1" -- "1" ProxyCommand
+JobTask "1" -- "1" Host
 {% endplantuml %}
 
 We should take facts from Foreman rather gather them during runtime (different result than expected when planning, performance)
@@ -815,13 +751,13 @@ Reporting
 User Stories
 ------------
 
-- As a user I would like to monitor the current state of the command
+- As a user I would like to monitor the current state of the job
   running against a single host, including the output and exit status
 
-- As a user I would like to monitor the status of bulk command,
+- As a user I would like to monitor the status of bulk job,
   including the number of successful, failed and pending tasks
 
-- As a user I would like to see the history of all commands run on a
+- As a user I would like to see the history of all job run on a
   host
 
 - As a user I would like to see the history of all tasks that I've
@@ -884,14 +820,14 @@ class JobInvocation {
   email_notification: bool
 }
 
-class BulkExecutionTask {
+class BulkJobTask {
   state: $TaskState
   start_at: datetime
   started_at: datetime
   ended_at datetime
 }
 
-class ExecutionTask {
+class JobTask {
   type: string
   state: $TaskState
   start_at: datetime
@@ -903,9 +839,9 @@ class ExecutionTask {
   exit_code: string
 }
 
-BulkExecutionTask "N" -> "1" JobInvocation
-BulkExecutionTask "1" <-- "N" ExecutionTask
-ExecutionTask "1" -- "1" Host
+BulkJobTask "N" -> "1" JobInvocation
+BulkJobTask "1" <-- "N" JobTask
+JobTask "1" -- "1" Host
 
 {% endplantuml %}
 
@@ -958,10 +894,10 @@ class Schedule {
   cronline: string
 }
 
-class ExecutionTask {
+class JobTask {
 }
 
-ExecutionTask "N" -- "1" JobInvocation
+JobTask "N" -- "1" JobInvocation
 JobInvocation "1" -- "1" Schedule
 
 {% endplantuml %}
@@ -1131,9 +1067,9 @@ Scenarios
 
 1. given the provider of job template supports changing effective user
 1. when user invokes a job
-1. then he can set effective user under which command is executed on target host
+1. then he can set effective user under which job is executed on target host
  
-**User can disallow running command as different effective user**
+**User can disallow running job as different effective user**
 
 1. given I've permissions to assign other user permissions
 1. and user A can view all hosts and job templates
