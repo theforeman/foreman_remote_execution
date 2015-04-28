@@ -1184,5 +1184,26 @@ Orchestration
 User Stories
 ------------
 
+- As a user I want to group a number of jobs together and treat them
+as an executable unit. (i.e. run this script to stop the app, install
+these errata, reboot the system)
+
+- As a user I want to run a set of jobs in a rolling fashion.
+  (i.e.,patch server 1, reboot it, if it succeeds, proceed to server 2
+  & repeat. Otherwise raise exception)
+
+- As a user I want to define a rollback job in case the execution
+  fails
+
+- As a sysadmin I would like to orchestrate several actions across a
+  collection of machines. (e.g. install a DB on this machine, and pass
+  the ip address into an install of a web server on another machine)
+
 Design
 ------
+
+- TBD after the simple support is implemented, possible cooperation with
+multi-host deployments feature
+
+- Some of the features might be solved by advanced remote execution
+  technology integration (such as ansible playbook)
