@@ -411,6 +411,16 @@ invocation (if more templates for the job and provider are available)
 defined on the template (such as list of packages for install package
 job)
 
+**See the calculated template inputs for a job**
+
+1. given I'm on job invocation form
+1. when I choose the job to execute
+1. and I'm using a template with inputs calculated base on fact  data
+template available for the job
+1. then the preview of the current value for this input should be displayed
+1. but for the execution the value that the fact has by the time of
+execution will be used.
+
 **Fill in job description for the execution**
 
 1. given I'm on job invocation form
@@ -545,6 +555,7 @@ class JobInvocation {
   tries
   retry_interval
   splay
+  concurrency
   effective_user
   email_notification: bool
 }
@@ -598,7 +609,12 @@ User Stories
   based on the tries and retry interval values given in the invocation
 
 - As a user I want to job execution on multiple hosts to be spread
-  using the splay value
+  using the splay time value: the execution of the jobs will be spread
+  randomly across the time interval
+
+- As a user I want to job execution on multiple hosts to be limited
+  by a concurrency level: the number of concurrently running jobs will
+  not exceed the limit.
 
 - As a user I want the job execution to be performed as a user that
   was specified on the job invocation
@@ -664,6 +680,7 @@ class JobTask {
   retry_interval: integer
   timeout: integer
   splay: integer
+  concurrency: integer
   type: string
   state: $TaskState
   start_at: datetime
@@ -713,6 +730,7 @@ class JobTask {
   retry_interval: integer
   timeout: integer
   splay: integer
+  concurrency: integer
   type: string
   state: $TaskState
   started_at: datetime
@@ -735,15 +753,6 @@ TemplateInvocation "1" <- "N" JobTask
 JobTask "1" -- "1" ProxyCommand
 JobTask "1" -- "1" Host
 {% endplantuml %}
-
-We should take facts from Foreman rather gather them during runtime (different result than expected when planning, performance)
-
-Open questions
---------------
-1. Splay Time versus Splay Count
-  * Count would allow for better adjustments for performance tolerance
-  * Time would fit into maintenance windows better
-  * How would either of these be implemented?
 
 Reporting
 =========
