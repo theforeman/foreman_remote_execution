@@ -802,9 +802,9 @@ state, owner etc.
 
 **History of invoked jobs**
 
-1. given I'm on jobs history page
+1. given I'm on job invocation history page
 1. when I can see all the jobs invoked in the system
-1. scoped by a taxonomy
+1. scoped by a taxonomy (based on the hosts the jobs were run against)
 1. and I'm able to filter on the host that it was run against and
 state, owner etc.
 
