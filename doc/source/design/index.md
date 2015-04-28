@@ -28,6 +28,10 @@ hosts
 Design
 ------
 
+Although specific providers are mentioned in the design, it's used
+mainly for distinguishing different approaches to the remote execution
+than to choose specific technologies
+
 ### Ssh Single Host Push
 
 {% plantuml %}
@@ -93,7 +97,13 @@ AccumulatedProgressReport[2, Finished]:
   * output: { stdout: "installing vim-X11\noperation finished successfully", exit_code: 0 }
   * success: true
 
-### Ssh Single Host Pull
+### Ssh Single Host Check-in
+
+This case allows to handle the case, when the host is offline by the
+time of job invocation: the list of jobs for the host is stored on the
+Foreman server side for running once the host is online.
+
+This approach is not limited to the ssh provider only.
 
 {% plantuml %}
 actor User
