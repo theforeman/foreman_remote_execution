@@ -956,21 +956,111 @@ JobInvocation "1" -- "1" Schedule
 
 {% endplantuml %}
 
-Foreman Integration
-===================
+Developer API
+=============
 
 User Stories
 ------------
 
-- As a user, I want to be able to use for:
+- As a Foreman developer, I want to be able to use remote execution
+  plugin to help with other Foreman features such as:
   - puppet run
   - grubby reprovision
   - content actions (package install/update/remove/downgrade, group
     install/uninstall, package profile refresh)
   - subscription actions (refresh)
+  - OpenSCAP content update
+
+Scenarios
+---------
+
+**Defining a predefined job without provided inputs**
+
+1. given I'm a Foreman developer
+1. and I want to expose 'puppet run' feature to the user
+1. then define the 'Puppet Run' as predefined job in the code
+1. and specify the default job name to be used for the mapping
+
+**Defining a predefined job with provided inputs**
+
+1. given I'm a Katello developer
+1. and I want to expose 'package install' feature to the user
+1. then I define the 'Package Install' predefined job with list of
+packages as provided input in the code
+1. and I specify default job name to be used for the mapping
+1. and I specify default mapping of the provided inputs to template
+inputs
+
+**Preseeding the predefined jobs**
+
+1. given I've defined the 'Package Install' predefined job
+1. when the seed script is run as part of the Foreman installation
+1. the systems tries to create the default mapping from the predefined job to
+the existing templates based on the developer-provided defaults
+
+**Configuring the predefined jobs mapping**
+
+1. given I'm the administrator of the Foreman instance
+1. then I can see all the predefined jobs mapping
+1. when I edit existing mapping
+1. then I can choose job name, template and provided input -> template
+inputs mapping
+
+**Configuring the predefined jobs mapping with organizations**
+
+1. given I'm the administrator of the Foreman instance
+1. then I can scope the mapping of the predefined job to a specific
+organization
+1. and the system doesn't let me to create two mappings for the same
+ predefined job and provider visible in one organization
+
+**Using the predefined jobs without provided inputs**
+
+1. given I'm a Foreman user
+1. when I'm on host details page
+1. and I press 'Puppet Run'
+1. the job is invoked on the host based on the predefined mapping
+
+**Using the predefined jobs with provided inputs**
+
+1. given I'm a Katello user
+1. when I'm on host applicable errata list
+1. and I select a set of errata to install on the host
+1. and I click 'Install errata'
+1. the job will be invoked to install the packages belonging to this
+errata
+
+**Using the predefined jobs with customization**
+
+1. given I'm a Katello user
+1. when I'm on host applicable errata list
+1. and I select a set of errata to install on the host
+1. and I click 'Install errata (customize)'
+1. then the job invocation form will be opened with pre-filled values
+ based on the mapping
+1. and I can update the values, including setting the start_at time or
+ reoccurring logic
 
 Design
 ------
+
+{% plantuml %}
+
+class PredefinedJob {
+  predefined_job_name: string
+}
+
+class PredefinedJobInputMapping {
+  provided_input_name: string
+}
+
+PredefinedJob "1" -- "N" PredefinedJobInputMapping
+PredefinedJobInputMapping "1" -- "N" TemplateInput
+PredefinedJob "M" -- "N" JobTemplate
+note on link #red: 1:1 per organization and provider
+
+{% endplantuml %}
+
 
 Security
 ========
