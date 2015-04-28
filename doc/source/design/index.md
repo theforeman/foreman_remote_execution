@@ -432,7 +432,7 @@ User Stories
   warning with the info about unreachable hosts
 
 - As a user I want to be able to override default values like (number
-  of tries, retry interval, splay time, timeout, remote user...) when I plan an execution of command.
+  of tries, retry interval, splay time, timeout, effective user...) when I plan an execution of command.
 
 - As a user I expect to see a the description of an input whenever i am being requested to
   provide the value for the input.
@@ -477,7 +477,7 @@ and specified input (something like "Package install: zsh")
 
 1. when I'm on job invocation form
 1. I can override the default values for number of tries, retry
-  interval, splay time, timeout, remote user...
+  interval, splay time, timeout, effective user...
 1. the overrides are common for all the templates
 
 **Set the execution time into future** (see [scheduling](design#scheduling)
@@ -599,7 +599,7 @@ class JobInvocation {
   tries
   retry_interval
   splay
-  remote_user
+  effective_user
   email_notification: bool
 }
 
@@ -997,7 +997,7 @@ User Stories
   such as hostgroup, environment, fqdn, id, lifecycle environment (if applicable), 
   content view (if applicable).
   
-- As a user I want to specify remote_user for JobInvocation if at least one
+- As a user I want to specify effective_user for JobInvocation if at least one
   provider supports it.
 
 - As a user I want to restrict other users to execute job under specific user
@@ -1020,16 +1020,28 @@ Scenarios
 
 1. given I've permissions to assign other user permissions
 1. and user A can view all hosts and job templates
+1. and user A can create job invocations
 1. when I grant user A execution permission on resource JobTask
 1. and I set related filter condition to "host_name = B and job_name = package_install"
-1. and user A invokes package install execution
-1. then the job gets executed successfully
+1. and user A invokes package install execution on hosts B and C
+1. then the job gets executed successfully on host B
+1. and job execution will fail on host C
 
 **User can set effective user**
 
 1. given the provider of job template supports changing effective user
 1. when user invokes a job
-1. then he can set effective user under which command is executed on target host 
+1. then he can set effective user under which command is executed on target host
+ 
+**User can disallow running command as different effective user**
+
+1. given I've permissions to assign other user permissions
+1. and user A can view all hosts and job templates
+1. and user A can create job invocations
+1. when I grant user A execution permission on resource JobTask
+1. and I set related filter condition to "effective_user = user_a"
+1. and user A invokes job execution with effective user set to different user (e.g. root)
+1. then the job execution fails
 
 New permissions introduced
 --------------------------
@@ -1041,7 +1053,7 @@ New permissions introduced
   - Edit (Schedule, never can change targetting)
 - JobTask
   - Execute
-  - (filter can be: remote_user = 'joe' and host_id = 1 or host_id = 2 and script_name = 'foobar')
+  - (filter can be: effective_user = 'joe' and host_id = 1 or host_id = 2 and script_name = 'foobar')
 
 
 Design
@@ -1050,11 +1062,11 @@ Design
 {% plantuml %}
 
 class JobTemplate {
-  remote_user: string
+  effective_user: string
 }
 
 class JobInvocation {
-  remote_user: string
+  effective_user: string
 }
 
 {% endplantuml %}
