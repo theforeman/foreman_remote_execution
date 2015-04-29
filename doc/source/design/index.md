@@ -338,11 +338,6 @@ class ConfigTemplateInput {
 }
 
 ConfigTemplate "1" -- "N" ConfigTemplateInput
-ConfigTemplate "1" -- "N" Audit
-
-class Taxonomy
-class Audit
-
 {% endplantuml %}
 
 
@@ -1197,9 +1192,6 @@ package "Job Preparation" {
   }
 
   JobTemplate "1" -- "N" ConfigTemplateInput
-  JobTemplate "1" -- "N" Audit
-
-  class Audit
 }
 
 package "Job Invocation" {
