@@ -19,7 +19,7 @@ end
 task :fetch do
   unless File.exist?('public/.git')
     FileUtils.rm_rf('public')
-    sh 'git clone git@github.com:iNecas/foreman-rex.git public'
+    sh 'git clone git@github.com:theforeman/foreman_remote_execution.git public'
   end
   Dir.chdir('public') do
     sh 'git fetch --all'
