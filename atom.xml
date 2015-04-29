@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Foreman Remote Execution]]></title>
+  <link href="http://theforeman.github.io/atom.xml" rel="self"/>
+  <link href="http://theforeman.github.io/"/>
+  <updated>2015-04-29T17:29:29+02:00</updated>
+  <id>http://theforeman.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+
+  
+</feed>

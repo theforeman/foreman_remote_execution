@@ -1,0 +1,1034 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/Organization" lang="en">
+  <head>
+    <base href="/foreman_remote_execution/">
+    
+    
+    
+
+    
+    
+    
+  <title> :: Plugin Manuals</title>
+
+  <script type="text/javascript" src="/foreman_remote_execution/static/js/jquery.js"></script>
+  <script type="text/javascript" src="/foreman_remote_execution/static/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/foreman_remote_execution/static/js/jquery-ui-1.9.2.custom.min.js"></script>
+  <script type="text/javascript" src="/foreman_remote_execution/static/js/jquery.tocify.min.js"></script>
+  <script type="text/javascript" src="/foreman_remote_execution/static/js/scroll.js"></script>
+
+  <link rel="stylesheet" media="all" href="/foreman_remote_execution/static/css/bootstrap.min.css"/>
+  <link rel="stylesheet" media="all" href="/foreman_remote_execution/static/css/bootstrap-responsive.min.css"/>
+  <link rel="stylesheet" media="all" href="/foreman_remote_execution/static/css/jquery.tocify.css"/>
+  <link rel="stylesheet" media="all" href="/foreman_remote_execution/static/css/syntax.css" />
+  <link rel="stylesheet" media="all" href="/foreman_remote_execution/static/css/style.css"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0;" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+  <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+          <div class="container">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <img alt="Foreman" class="logo" src="/foreman_remote_execution/static/images/foreman.png" />
+              <div class="brand">
+                <a  href="/foreman_remote_execution/">Foreman</a>
+                <a class="subtitle" href="/foreman_remote_execution/">Remote Execution</a>
+              </div>
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li><a href="/foreman_remote_execution/">About</a></li>
+                  <li><a href="/foreman_remote_execution/design/">Design</a></li>
+                </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+<script>
+$(function(){
+  $('.nav > li a[href="'+window.location.pathname+'"]').parents('.nav > li').addClass('active')
+})
+</script>
+
+
+  <div id="main">
+    <div id="content" class="container">
+      <div class="row">
+        <div id="toc" class="span3">
+        </div>
+        <div id="doc" class="offset3 span9">
+          <h1 id="remote-execution-technology">Remote Execution Technology</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li><p>As a user I want to run jobs in parallel across large number of
+hosts</p></li>
+<li><p>As a user I want to run jobs on a host in a different network
+segment (the host doesn&#39;t see the Foreman server/the Foreman server
+doesn&#39;t see the host directly)</p></li>
+<li><p>As a user I want to manage a host without installing an agent on it
+(just plain old ssh)</p></li>
+<li><p>As a community user I want to already existing remote execution
+technologies in combination with the Foreman</p></li>
+</ul>
+
+<h2 id="design">Design</h2>
+
+<p>Although specific providers are mentioned in the design, it&#39;s used
+mainly for distinguishing different approaches to the remote execution
+than to choose specific technologies</p>
+
+<h3 id="ssh-single-host-push">Ssh Single Host Push</h3>
+
+<p><img src='/foreman_remote_execution///images/plantuml/1b3aebc565b29cbfc24e17bb82e1755f.png'></p>
+
+<p>JobInvocation: see see <a href="design#job-invocation">scheduling</a></p>
+
+<p>ProxyCommand:</p>
+
+<ul>
+<li>host: host.example.com</li>
+<li>provider: ssh</li>
+<li>input: &quot;yum install -y vim-X11&quot;</li>
+</ul>
+
+<p>SSHScript:</p>
+
+<ul>
+<li>host: host.example.com</li>
+<li>input: &quot;yum install -y vim-X11&quot;</li>
+</ul>
+
+<p>ProgressReport[1, Running]:</p>
+
+<ul>
+<li>output: &quot;Resolving depednencies&quot;</li>
+</ul>
+
+<p>ProgressReport[2, Running]:</p>
+
+<ul>
+<li>output: &quot;installing libXt&quot;</li>
+</ul>
+
+<p>AccumulatedProgressReport[1, Running]:</p>
+
+<ul>
+<li>output: { stdout: &quot;Resolving depednencies\ninstalling libXt&quot; }</li>
+</ul>
+
+<p>ProgressReport[3, Running]:</p>
+
+<ul>
+<li>output: &quot;installing vim-X11&quot;</li>
+</ul>
+
+<p>ProgressReport[4, Finished]:</p>
+
+<ul>
+<li>output: &quot;operation finished successfully&quot;</li>
+<li>exit_code: 0</li>
+</ul>
+
+<p>AccumulatedProgressReport[2, Finished]:</p>
+
+<ul>
+<li>output: { stdout: &quot;installing vim-X11\noperation finished successfully&quot;, exit_code: 0 }</li>
+<li>success: true</li>
+</ul>
+
+<h3 id="ssh-single-host-check-in">Ssh Single Host Check-in</h3>
+
+<p>This case allows to handle the case, when the host is offline by the
+time of job invocation: the list of jobs for the host is stored on the
+Foreman server side for running once the host is online.</p>
+
+<p>This approach is not limited to the ssh provider only.</p>
+
+<p><img src='/foreman_remote_execution///images/plantuml/f658ac705f379599a491287b25604faa.png'></p>
+
+<h3 id="ssh-multi-host">Ssh Multi Host</h3>
+
+<p><img src='/foreman_remote_execution///images/plantuml/c3f94a3f18228ce7b36d0660912c120a.png'></p>
+
+<p>ProxyCommand[host1]:</p>
+
+<ul>
+<li>host: host-1.example.com</li>
+<li>provider: ssh</li>
+<li>input: &quot;yum install -y vim-X11&quot;</li>
+</ul>
+
+<p>ProxyCommand[host2]:</p>
+
+<ul>
+<li>host: host-2.example.com</li>
+<li>provider: ssh</li>
+<li>input: &quot;yum install -y vim-X11&quot;</li>
+</ul>
+
+<div class=" alert alert-info">
+  <p><strong>Note</strong> </p>
+
+<p>we might want to optimize the communication between server and
+the proxy (sending collection of ProxyCommands in bulk, as well as
+the AccumulatedProgerssReports). That would could also be utilized
+by the Ansible implementation, where there might be optimization
+on the invoking the ansible commands at once (the same might apply
+to mcollective). On the other hand, this is more an optimization,
+not required to be implemented from the day one: but it&#39;s good to have
+this in mind</p>
+
+</div>
+
+<h3 id="mcollective-single-host">MCollective Single Host</h3>
+
+<p><img src='/foreman_remote_execution///images/plantuml/f1836392f5e62d2b20c7e4ba87865dfd.png'></p>
+
+<p>JobInvocation:</p>
+
+<ul>
+<li>hosts: [host.example.com]</li>
+<li>template: install-packages-mco</li>
+<li>input: { packages: [&#39;vim-X11&#39;] }</li>
+</ul>
+
+<p>ProxyCommand:</p>
+
+<ul>
+<li>host: host.example.com</li>
+<li>provider: mcollective</li>
+<li>input: { agent: package, args: { package =&gt; &#39;vim-X11&#39; } }</li>
+</ul>
+
+<p>MCOCommand:</p>
+
+<ul>
+<li>host: host.example.com</li>
+<li>input: { agent: package, args: { package =&gt; &#39;vim-X11&#39; } }</li>
+</ul>
+
+<p>ProgressReport[Finished]:</p>
+
+<ul>
+<li>output: [ {&quot;name&quot;:&quot;vim-X11&quot;,&quot;tries&quot;:1,&quot;version&quot;:&quot;7.4.160-1&quot;,&quot;status&quot;:0,&quot;release&quot;:&quot;1.el7&quot;},
+          {&quot;name&quot;:&quot;libXt&quot;,&quot;tries&quot;:1,&quot;version&quot;:&quot;1.1.4-6&quot;,&quot;status&quot;:0,&quot;release&quot;:&quot;1.el7&quot;} ]</li>
+</ul>
+
+<p>AccumulatedProgressReport[Finished]:</p>
+
+<ul>
+<li>output: [ {&quot;name&quot;:&quot;vim-X11&quot;,&quot;tries&quot;:1,&quot;version&quot;:&quot;7.4.160-1&quot;,&quot;status&quot;:0,&quot;release&quot;:&quot;1.el7&quot;},
+          {&quot;name&quot;:&quot;libXt&quot;,&quot;tries&quot;:1,&quot;version&quot;:&quot;1.1.4-6&quot;,&quot;status&quot;:0,&quot;release&quot;:&quot;1.el7&quot;} ]</li>
+<li>success: true</li>
+</ul>
+
+<h3 id="ansible-single-host">Ansible Single Host</h3>
+
+<p><img src='/foreman_remote_execution///images/plantuml/c06658361624b9745f8c30b3adab8d55.png'></p>
+
+<p>JobInvocation:</p>
+
+<ul>
+<li>hosts: [host.example.com]</li>
+<li>template: install-packages-ansible</li>
+<li>input: { packages: [&#39;vim-X11&#39;] }</li>
+</ul>
+
+<p>ProxyCommand:</p>
+
+<ul>
+<li>host: host.example.com</li>
+<li>provider: ansible</li>
+<li>input: { module: yum, args: { name: &#39;vim-X11&#39;, state: installed } }</li>
+</ul>
+
+<p>AnsibleCommand:</p>
+
+<ul>
+<li>host: host.example.com</li>
+<li>provider: ansible</li>
+<li>input: { module: yum, args: { name: &#39;vim-X11&#39;, state: installed } }</li>
+</ul>
+
+<p>ProgressReport[Finished]:</p>
+
+<ul>
+<li>output: { changed: true,
+          rc: 0,
+          results: [&quot;Resolving depednencies\ninstalling libXt\ninstalling vim-X11\noperation finished successfully&quot;] }</li>
+</ul>
+
+<p>AccumulatedProgressReport[Finished]:</p>
+
+<ul>
+<li>output: { changed: true,
+          rc: 0,
+          results: [&quot;Resolving depednencies\ninstalling libXt\ninstalling vim-X11\noperation finished successfully&quot;] }</li>
+<li>success: true</li>
+</ul>
+
+<h1 id="job-preparation">Job Preparation</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li><p>As a user I want to be able to create a template to run some command for a given remote execution provider for a specific job</p></li>
+<li><p>As a user these job templates should be audited and versioned</p></li>
+<li><p>As a user I want to be able to define inputs into the template that consist of user input at execution time.  I should be able to use these inputs within my template.</p></li>
+<li><p>As a user I want to be able to define an input for a template that uses a particular fact about the host being executed on at execution time.</p></li>
+<li><p>As a user I want to be able to define an input for a template that uses a particular smart variable that is resolved at execution time.</p></li>
+<li><p>As a user I want to be able to define a description of each input in order to help describe the format and meaning of an input.</p></li>
+<li><p>As a user I want to be able to specify default number of tries per job template.</p></li>
+<li><p>As a user I want to be able to specify default retry interval per job template.</p></li>
+<li><p>As a user I want to be able to specify default splay time per job template.</p></li>
+<li><p>As a user I want to setup default timeout per job template.</p></li>
+<li><p>As a user I want to preview a rendered job template for a host (providing needed inputs)</p></li>
+</ul>
+
+<h2 id="scenarios">Scenarios</h2>
+
+<p><strong>Creating a job template</strong></p>
+
+<ol>
+<li>given I&#39;m on new template form</li>
+<li>I select from a list of existing job names or fill in a new job name</li>
+<li>I select some option to add an input
+
+<ol>
+<li>Give the input a name</li>
+<li>Select the type &#39;user input&#39;</li>
+<li>Give the input a description (space separated package list)</li>
+</ol></li>
+<li>I select from a list of known providers (ssh, mco, salt, ansible)</li>
+<li>I am shown an example of how to use the input in the template</li>
+<li>I am able to see some simple example for the selected provider??</li>
+<li>I fill in the template</li>
+<li>I select one or more organizations and locations (if enabled)</li>
+<li>I click save</li>
+</ol>
+
+<p><strong>Creating a smart variable based input</strong></p>
+
+<ol>
+<li>given i am creating or editing a job template</li>
+<li>I select to add a new input
+
+<ol>
+<li>Give the input a name</li>
+<li>Define a smart variable name</li>
+</ol></li>
+</ol>
+
+<h2 id="design">Design</h2>
+
+<p><img src='/foreman_remote_execution///images/plantuml/37a3d54b72b5fb424c66f20823096b45.png'></p>
+
+<h1 id="job-invocation">Job Invocation</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li><p>As a user I would like to invoke a job on a single host</p></li>
+<li><p>As a user I would like to invoke a job on a set of hosts, based on
+search filter</p></li>
+<li><p>As a user I want to be able to reuse existing bookmarks for job
+invocation</p></li>
+<li><p>As a user, when setting a job in future, I want to decide if the
+search criteria should be evaluated now or on the execution time</p></li>
+<li><p>As a user I want to reuse the target of previous jobs for next execution</p></li>
+<li><p>As a CLI user I want to be able to invoke a job via hammer CLI</p></li>
+<li><p>As a user, I want to be able to invoke the job on a specific set of hosts
+(by using checkboxes in the hosts table)</p></li>
+<li><p>As a user, when planning future job execution, I want to see a
+warning with the info about unreachable hosts</p></li>
+<li><p>As a user I want to be able to override default values like (number
+of tries, retry interval, splay time, timeout, effective user...) when I plan an execution of command.</p></li>
+<li><p>As a user I expect to see a the description of an input whenever i am being requested to
+provide the value for the input.</p></li>
+<li><p>As a user I want to be able to re-invoke the jobs based on
+success/failure of previous task</p></li>
+</ul>
+
+<h2 id="scenarios">Scenarios</h2>
+
+<p><strong>Fill in target for a job</strong></p>
+
+<ol>
+<li>when I&#39;m on job invocation form</li>
+<li>then I can specify the target of the job using the scoped search
+syntax</li>
+<li>the target might influence the list of providers available for the
+invocation: although, in delayed execution and dynamic targeting the
+current list of providers based on the hosts might not be final and
+we should count on that.</li>
+</ol>
+
+<p><strong>Fill in template inputs for a job</strong></p>
+
+<ol>
+<li>given I&#39;m on job invocation form</li>
+<li>when I choose the job to execute</li>
+<li>then I&#39;m given a list of providers that I have enabled and has a
+template available for the job</li>
+<li>and each provider allows to choose which template to use for this
+invocation (if more templates for the job and provider are available)</li>
+<li>and every template has input fields generated based on the input
+defined on the template (such as list of packages for install package
+job)</li>
+</ol>
+
+<p><strong>See the calculated template inputs for a job</strong></p>
+
+<ol>
+<li>given I&#39;m on job invocation form</li>
+<li>when I choose the job to execute</li>
+<li>and I&#39;m using a template with inputs calculated base on fact  data
+template available for the job</li>
+<li>then the preview of the current value for this input should be displayed</li>
+<li>but for the execution the value that the fact has by the time of
+execution will be used.</li>
+</ol>
+
+<p><strong>Fill in job description for the execution</strong></p>
+
+<ol>
+<li>given I&#39;m on job invocation form</li>
+<li>there should be a field for task description, that will be used for
+listing the jobs</li>
+<li>the description value should be pregenerated based on the job name
+and specified input (something like &quot;Package install: zsh&quot;)</li>
+</ol>
+
+<p><strong>Fill in execution properties of the job</strong></p>
+
+<ol>
+<li>when I&#39;m on job invocation form</li>
+<li>I can override the default values for number of tries, retry
+interval, splay time, timeout, effective user...</li>
+<li>the overrides are common for all the templates</li>
+</ol>
+
+<p><strong>Set the execution time into future</strong> (see <a href="design#scheduling">scheduling</a>
+  for more scenarios)</p>
+
+<ol>
+<li>when I&#39;m on a job invocation form</li>
+<li>then I can specify the time to start the execution at (now by
+default)</li>
+<li>and I can specify if the targeting should be calculated now or
+postponed to the execution time</li>
+</ol>
+
+<p><strong>Run a job from host detail</strong></p>
+
+<ol>
+<li>given I&#39;m on a host details page</li>
+<li>when I click &quot;Run job&quot;</li>
+<li>then a user dialog opens with job invocation form, with pre-filled
+targeting pointing to this particular host</li>
+</ol>
+
+<p><strong>Run a job from host index</strong></p>
+
+<ol>
+<li>given I&#39;m on a host index page</li>
+<li>when I click &quot;Run job&quot;</li>
+<li>then a user dialog opens with job invocation form, with prefiled
+targeting using the same search that was used in the host index page</li>
+</ol>
+
+<p><strong>Invoke a job with single remote execution provider</strong></p>
+
+<ol>
+<li>given I have only one provider available in my installation</li>
+<li>and I&#39;m on job invocation form</li>
+<li>when I choose the job to execute</li>
+<li>then only the template for this provider is available to run and
+asking for user inputs</li>
+</ol>
+
+<p><strong>Invoke a job with hammer</strong></p>
+
+<ol>
+<li>given I&#39;m using CLI</li>
+<li>then I can run a job with ability to specify:
+
+<ul>
+<li>targeting with scoped search or bookmark_id</li>
+<li>job name to run</li>
+<li>templates to use for the job</li>
+<li>inputs on per-template basis</li>
+<li>execution properties as overrides for the defaults coming from the template</li>
+<li><code>start_at</code> value for execution in future</li>
+<li>in case of the start_at value, if the targeting should be static
+vs. dynamic</li>
+<li>whether to wait for the job or exit after invocation (--async
+option)</li>
+</ul></li>
+</ol>
+
+<p><strong>Re-invoke a job</strong></p>
+
+<ol>
+<li>given I&#39;m in job details page</li>
+<li>when I choose re-run</li>
+<li>then a user dialog opens with job invocation form, with prefiled
+targeting parameters from the previous execution
+1 and I can override all the values (including targeting, job,
+templates and inputs)</li>
+</ol>
+
+<p><strong>Re-invoke a job for failed hosts</strong></p>
+
+<ol>
+<li>given I&#39;m in job details page</li>
+<li>when I choose re-run</li>
+<li>then a user dialog opens with job invocation form, with prefiled
+targeting parameters from the previous execution
+1 and I can override all the values (including targeting, job,
+templates and inputs)</li>
+<li>I can choose in the targeting to only run on hosts that failed with
+the job previously</li>
+</ol>
+
+<p><strong>Edit a bookmark referenced by pending job invocation</strong></p>
+
+<ol>
+<li>given I have a pending execution task which targeting was created
+from a bookmark</li>
+<li>when I edit the bookmark</li>
+<li>then I should be notified about the existence of the pending tasks
+with ability to update the targeting (or cancel and recreate the
+invocation)</li>
+</ol>
+
+<p><strong>Email notification: opt in</strong></p>
+
+<ol>
+<li>given I haven&#39;t configured to send email notifications about my executions</li>
+<li>then the job invocation should have the &#39;send email notification&#39;
+turned off by default</li>
+</ol>
+
+<p><strong>Email notification: opt out</strong></p>
+
+<ol>
+<li>given I haven&#39;t configured to send email notifications about my executions</li>
+<li>then the job invocation should have the &#39;send email notification&#39;
+turned off by default</li>
+</ol>
+
+<h2 id="design">Design</h2>
+
+<p>Class diagram of Foreman classes</p>
+
+<p><img src='/foreman_remote_execution///images/plantuml/3d5233cf81d5b4e7ff1a0cb83ff8dd3c.png'></p>
+
+<p>Query is copied to Targeting, we don&#39;t want to propagate any later
+changes to Bookmark to already planned job executions.</p>
+
+<p>We can store link to original bookmark to be able to
+compare changes later.</p>
+
+<p>For JobInvocation we forbid later editing of Targeting.</p>
+
+<h2 id="open-questions">Open questions</h2>
+
+<ul>
+<li><p>should we unify the common inputs in all templates to specify them
+only once or scoping the input by template?</p></li>
+<li><p>Maybe an inputs catalog (with both defined name and semantic) might
+help with keeping the inputs consistent across templates/providers</p></li>
+</ul>
+
+<h1 id="job-execution">Job Execution</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li><p>As a user I want to be able to cancel job which hasn&#39;t been started yet.</p></li>
+<li><p>As a user I want to be able to cancel job which is in progress
+(if supported by specific provider…)</p></li>
+<li><p>As a user I want job execution to fail after timeout limit.</p></li>
+<li><p>As a user I want to job execution to be re-tried
+based on the tries and retry interval values given in the invocation</p></li>
+<li><p>As a user I want to job execution on multiple hosts to be spread
+using the splay time value: the execution of the jobs will be spread
+randomly across the time interval</p></li>
+<li><p>As a user I want to job execution on multiple hosts to be limited
+by a concurrency level: the number of concurrently running jobs will
+not exceed the limit.</p></li>
+<li><p>As a user I want the job execution to be performed as a user that
+was specified on the job invocation</p></li>
+<li><p>As a user I want an ability to retry the job execution when the host
+checks in (support of hosts that are offline by the time the
+execution).</p></li>
+</ul>
+
+<h2 id="scenarios">Scenarios</h2>
+
+<p><strong>Cancel pending bulk task: all at once</strong></p>
+
+<ol>
+<li>given I&#39;ve set a job to run in future on multiple hosts</li>
+<li>when I click &#39;cancel&#39; on the corresponding bulk task</li>
+<li>then the whole task should be canceled (including all the sub-tasks
+on all the hosts)</li>
+</ol>
+
+<p><strong>Cancel pending bulk task: task on specific host</strong></p>
+
+<ol>
+<li>given I&#39;ve set a job to run in future on multiple hosts</li>
+<li>when I show the task representation on a host details page</li>
+<li>when I click &#39;cancel&#39; on the task</li>
+<li>then I should be offered whether I should cancel just this
+instance or the whole bulk task on all hosts</li>
+</ol>
+
+<p><strong>Fail after timeout</strong></p>
+
+<ol>
+<li>given I&#39;ve invoked a job</li>
+<li>when the job fails to start in given specified timeout</li>
+<li>then the job should be marked as failed due to timeout</li>
+</ol>
+
+<p><strong>Retried task</strong></p>
+
+<ol>
+<li>given I&#39;ve invoked a job</li>
+<li>when the job fails to start at first attemt</li>
+<li>then the executor should wait for retry_timeout period</li>
+<li>and it should reiterate with the attempt based on the tries number</li>
+<li>and I should see the information about the number of retries</li>
+</ol>
+
+<h2 id="design">Design</h2>
+
+<p>Class diagram for jobs running on multiple hosts</p>
+
+<p><img src='/foreman_remote_execution///images/plantuml/85afad842176d44784ab10b21523523a.png'></p>
+
+<p>Class diagram for jobs running a single host</p>
+
+<p><img src='/foreman_remote_execution///images/plantuml/f4af9732163057c0b67bdc611f22c8c0.png'></p>
+
+<h1 id="reporting">Reporting</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li><p>As a user I would like to monitor the current state of the job
+running against a single host, including the output and exit status</p></li>
+<li><p>As a user I would like to monitor the status of bulk job,
+including the number of successful, failed and pending tasks</p></li>
+<li><p>As a user I would like to see the history of all job run on a
+host</p></li>
+<li><p>As a user I would like to see the history of all tasks that I&#39;ve
+invoked</p></li>
+<li><p>As a user I would like to be able to  get an email notification with
+execution report</p></li>
+</ul>
+
+<h2 id="scenarios">Scenarios</h2>
+
+<p><strong>Track the job running on a set of hosts</strong></p>
+
+<ol>
+<li>given I&#39;ve set a job to run in future on multiple hosts</li>
+<li>then I can watch the progress of the job (number of
+successful/failed/pending tasks)</li>
+<li>and I can get to the list of jobs per host</li>
+<li>and I&#39;m able to filter on the host that it was run against and
+state</li>
+</ol>
+
+<p><strong>Track the job running on a single host</strong></p>
+
+<ol>
+<li>given I&#39;ve set a job to run on a specific host</li>
+<li>when I show the task representation page</li>
+<li>then I can watch the progress of the job (updated log), status</li>
+</ol>
+
+<p><strong>History of jobs run on a host</strong></p>
+
+<ol>
+<li>given I&#39;m on host jobs page</li>
+<li>when I can see all the jobs run against the host</li>
+<li>and I&#39;m able to filter on the host that it was run against and
+state, owner etc.</li>
+</ol>
+
+<p><strong>History of invoked jobs</strong></p>
+
+<ol>
+<li>given I&#39;m on job invocation history page</li>
+<li>when I can see all the jobs invoked in the system</li>
+<li>scoped by a taxonomy (based on the hosts the jobs were run against)</li>
+<li>and I&#39;m able to filter on the host that it was run against and
+state, owner etc.</li>
+</ol>
+
+<p><strong>Email notification: send after finish</strong></p>
+
+<ol>
+<li>given I&#39;ve invoked a job with email notification turned on</li>
+<li>when the job finishes</li>
+<li>then I should get the email with report from the job after it finishes</li>
+</ol>
+
+<h2 id="design">Design</h2>
+
+<p>Class diagram for jobs running on multiple hosts</p>
+
+<p><img src='/foreman_remote_execution///images/plantuml/ea3d02987c95f57c24dbdcae663f3d04.png'></p>
+
+<h1 id="scheduling">Scheduling</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li><p>As a user I want to be able go execute a job at future time</p></li>
+<li><p>As a user I want to set the job to reoccur with specified
+frequency</p></li>
+</ul>
+
+<h2 id="scenarios">Scenarios</h2>
+
+<p><strong>Job set for the future</strong></p>
+
+<ol>
+<li>given I&#39;ve invoked a job at future time</li>
+<li>when the time comes</li>
+<li>the job gets executed</li>
+</ol>
+
+<p><strong>Creating reoccurring job</strong></p>
+
+<ol>
+<li>given I&#39;m in job invocation form</li>
+<li>when I check &#39;reoccurring job&#39;</li>
+<li>then I can set the frequency and valid until date</li>
+</ol>
+
+<p><strong>Showing the tasks with reoccurring logic</strong></p>
+
+<ol>
+<li>when I list the jobs</li>
+<li>I can see the information about the reoccurring logic at every job</li>
+<li>and I can filter the jobs for those with the reoccurring logic</li>
+</ol>
+
+<p><strong>Canceling the reoccurring job</strong></p>
+
+<ol>
+<li>given I have reoccurring job configured</li>
+<li>when I cancel the next instance of the job</li>
+<li>then I&#39;m offered to cancel the reoccurring of the job in the future</li>
+</ol>
+
+<h2 id="design">Design</h2>
+
+<p><img src='/foreman_remote_execution///images/plantuml/cafad29b096c88cfd52b039c721138e8.png'></p>
+
+<h1 id="developer-api">Developer API</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li>As a Foreman developer, I want to be able to use remote execution
+plugin to help with other Foreman features such as:
+
+<ul>
+<li>puppet run</li>
+<li>grubby reprovision</li>
+<li>content actions (package install/update/remove/downgrade, group
+install/uninstall, package profile refresh)</li>
+<li>subscription actions (refresh)</li>
+<li>OpenSCAP content update</li>
+</ul></li>
+</ul>
+
+<h2 id="scenarios">Scenarios</h2>
+
+<p><strong>Defining a predefined job without provided inputs</strong></p>
+
+<ol>
+<li>given I&#39;m a Foreman developer</li>
+<li>and I want to expose &#39;puppet run&#39; feature to the user</li>
+<li>then define the &#39;Puppet Run&#39; as predefined job in the code</li>
+<li>and specify the default job name to be used for the mapping</li>
+</ol>
+
+<p><strong>Defining a predefined job with provided inputs</strong></p>
+
+<ol>
+<li>given I&#39;m a Katello developer</li>
+<li>and I want to expose &#39;package install&#39; feature to the user</li>
+<li>then I define the &#39;Package Install&#39; predefined job with list of
+packages as provided input in the code</li>
+<li>and I specify default job name to be used for the mapping</li>
+<li>and I specify default mapping of the provided inputs to template
+inputs</li>
+</ol>
+
+<p><strong>Preseeding the predefined jobs</strong></p>
+
+<ol>
+<li>given I&#39;ve defined the &#39;Package Install&#39; predefined job</li>
+<li>when the seed script is run as part of the Foreman installation</li>
+<li>the systems tries to create the default mapping from the predefined job to
+the existing templates based on the developer-provided defaults</li>
+</ol>
+
+<p><strong>Configuring the predefined jobs mapping</strong></p>
+
+<ol>
+<li>given I&#39;m the administrator of the Foreman instance</li>
+<li>then I can see all the predefined jobs mapping</li>
+<li>when I edit existing mapping</li>
+<li>then I can choose job name, template and provided input -&gt; template
+inputs mapping</li>
+</ol>
+
+<p><strong>Configuring the predefined jobs mapping with organizations</strong></p>
+
+<ol>
+<li>given I&#39;m the administrator of the Foreman instance</li>
+<li>then I can scope the mapping of the predefined job to a specific
+organization</li>
+<li>and the system doesn&#39;t let me to create two mappings for the same
+predefined job and provider visible in one organization</li>
+</ol>
+
+<p><strong>Using the predefined jobs without provided inputs</strong></p>
+
+<ol>
+<li>given I&#39;m a Foreman user</li>
+<li>when I&#39;m on host details page</li>
+<li>and I press &#39;Puppet Run&#39;</li>
+<li>the job is invoked on the host based on the predefined mapping</li>
+</ol>
+
+<p><strong>Using the predefined jobs with provided inputs</strong></p>
+
+<ol>
+<li>given I&#39;m a Katello user</li>
+<li>when I&#39;m on host applicable errata list</li>
+<li>and I select a set of errata to install on the host</li>
+<li>and I click &#39;Install errata&#39;</li>
+<li>the job will be invoked to install the packages belonging to this
+errata</li>
+</ol>
+
+<p><strong>Using the predefined jobs with customization</strong></p>
+
+<ol>
+<li>given I&#39;m a Katello user</li>
+<li>when I&#39;m on host applicable errata list</li>
+<li>and I select a set of errata to install on the host</li>
+<li>and I click &#39;Install errata (customize)&#39;</li>
+<li>then the job invocation form will be opened with pre-filled values
+based on the mapping</li>
+<li>and I can update the values, including setting the start_at time or
+reoccurring logic</li>
+</ol>
+
+<h2 id="design">Design</h2>
+
+<p><img src='/foreman_remote_execution///images/plantuml/0afe1cad9989f8eeb83d64ddd8ad966b.png'></p>
+
+<h1 id="security">Security</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li><p>As a user I want to be able to plan job invocation for any host that I
+can view (view_host permission).</p></li>
+<li><p>As a user I want to be able to plan a job invocation of job that I can 
+view (view_job permission)</p></li>
+<li><p>As a user I want to restrict other users which combination of host and job 
+name they can execute (execute permission on job_task resource).</p></li>
+<li><p>As a user I want to be warned if I planned job invocation on hosts on
+which the execution of this job is not allowed to me.</p></li>
+<li><p>As a user I want to see refused job invocations (based on permissions) as
+failed when they are executed.</p></li>
+<li><p>As a user I want to set limit filter with execute permission by host attributes
+such as hostgroup, environment, fqdn, id, lifecycle environment (if applicable), 
+content view (if applicable).</p></li>
+<li><p>As a user I want to specify effective_user for JobInvocation if at least one
+provider supports it.</p></li>
+<li><p>As a user I want to restrict other users to execute job under specific user
+as a part of filter condition. If the provider does not allow this, execution
+should be refused.</p></li>
+<li><p>As a job template provider I want to be able to specify default effective user</p></li>
+</ul>
+
+<h2 id="scenarios">Scenarios</h2>
+
+<p><strong>Allow user A to invoke package installation on host B</strong></p>
+
+<ol>
+<li>given  user A can view all hosts and job templates</li>
+<li>when he invoke package installation job on host B</li>
+<li>then his job task fails because he does not have execution 
+permission for such job task</li>
+</ol>
+
+<p><strong>Allow user A to run package installation on host B</strong></p>
+
+<ol>
+<li>given I&#39;ve permissions to assign other user permissions</li>
+<li>and user A can view all hosts and job templates</li>
+<li>and user A can create job invocations</li>
+<li>when I grant user A execution permission on resource JobTask</li>
+<li>and I set related filter condition to &quot;host<em>name = B and job</em>name = package_install&quot;</li>
+<li>and user A invokes package install execution on hosts B and C</li>
+<li>then the job gets executed successfully on host B</li>
+<li>and job execution will fail on host C</li>
+</ol>
+
+<p><strong>User can set effective user</strong></p>
+
+<ol>
+<li>given the provider of job template supports changing effective user</li>
+<li>when user invokes a job</li>
+<li>then he can set effective user under which job is executed on target host</li>
+</ol>
+
+<p><strong>User can disallow running job as different effective user</strong></p>
+
+<ol>
+<li>given I&#39;ve permissions to assign other user permissions</li>
+<li>and user A can view all hosts and job templates</li>
+<li>and user A can create job invocations</li>
+<li>when I grant user A execution permission on resource JobTask</li>
+<li>and I set related filter condition to &quot;effective<em>user = user</em>a&quot;</li>
+<li>and user A invokes job execution with effective user set to different user (e.g. root)</li>
+<li>then the job execution fails</li>
+</ol>
+
+<h2 id="new-permissions-introduced">New permissions introduced</h2>
+
+<ul>
+<li>JobInvocation
+
+<ul>
+<li>Create</li>
+<li>View</li>
+<li>Cancel</li>
+<li>Edit (Schedule, never can change targetting)</li>
+</ul></li>
+<li>JobTask
+
+<ul>
+<li>Execute</li>
+<li>(filter can be: effective<em>user = &#39;joe&#39; and host</em>id = 1 or host<em>id = 2 and script</em>name = &#39;foobar&#39;)</li>
+</ul></li>
+</ul>
+
+<h2 id="design">Design</h2>
+
+<p><img src='/foreman_remote_execution///images/plantuml/c3f37e9cedeb193116d385903ac5f4ec.png'></p>
+
+<h1 id="katello-client-utilities">Katello Client Utilities</h1>
+
+<h2 id="design">Design</h2>
+
+<p>katello-agent provides three main functions aside from remote management:</p>
+
+<ul>
+<li>package profile yum plugin - pushes a new package profile after any yum transaction
+
+<ul>
+<li>Split out into its own package (yum-plugin-katello-profile)</li>
+</ul></li>
+<li>enabled repository monitoring
+
+<ul>
+<li>monitors /etc/yum.repos.d/redhat.repo file for changes and sends newly enabled repos whenever it does change</li>
+<li>Split out into its own package (katello-errata-profile) with a service to do the same</li>
+</ul></li>
+<li>On the capsule, goferd runs to recieve commands to sync repositories, possible solutions:
+
+<ul>
+<li>katello-agent can remain (but possibly renamed), with a lot of the existing functionality removed</li>
+<li>pulp changes to a rest api method for initiating capsule syncs, katello needs to store some auth credentials per capsule</li>
+</ul></li>
+</ul>
+
+<h1 id="orchestration">Orchestration</h1>
+
+<h2 id="user-stories">User Stories</h2>
+
+<ul>
+<li><p>As a user I want to group a number of jobs together and treat them
+as an executable unit. (i.e. run this script to stop the app, install
+these errata, reboot the system)</p></li>
+<li><p>As a user I want to run a set of jobs in a rolling fashion.
+(i.e.,patch server 1, reboot it, if it succeeds, proceed to server 2
+&amp; repeat. Otherwise raise exception)</p></li>
+<li><p>As a user I want to define a rollback job in case the execution
+fails</p></li>
+<li><p>As a sysadmin I would like to orchestrate several actions across a
+collection of machines. (e.g. install a DB on this machine, and pass
+the ip address into an install of a web server on another machine)</p></li>
+</ul>
+
+<h2 id="design">Design</h2>
+
+<ul>
+<li><p>TBD after the simple support is implemented, possible cooperation with
+multi-host deployments feature</p></li>
+<li><p>Some of the features might be solved by advanced remote execution
+technology integration (such as ansible playbook)</p></li>
+</ul>
+
+<h1 id="design:-the-whole-picture">Design: the whole picture</h1>
+
+<p><img src='/foreman_remote_execution///images/plantuml/22d999e1bab9125ee2bee01061a0613d.png'></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  $(function() {
+    //Calls the tocify method on your HTML div.
+    $("#toc").tocify({context: '#doc', scrollTo: '60', selectors: "h1,h2,h3"});
+  });
+</script>
+
+<div class="footer">
+  <div class="container">
+    <p>This web site is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_GB">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.  Source available: <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/theforeman/theforeman.org" rel="dct:source">github/theforeman/theforeman.org</a>.</p>
+		<a href="https://plus.google.com/102496134326414788199" rel="publisher">Google+ community</a>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2134730-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</body>
+</html>
+
