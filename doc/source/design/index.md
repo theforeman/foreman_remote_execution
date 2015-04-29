@@ -321,7 +321,7 @@ class JobTemplate {
   splay: integer
   provider_type: string
   ==
-  has_many :taxonomies
+  has_and_belongs_to_many :taxonomies
   has_many :inputs
   has_many :audits
 }
@@ -337,10 +337,8 @@ class ConfigTemplateInput {
   has_one :job_template
 }
 
-
-ConfigTemplate "1" --> "N" Taxonomy
-ConfigTemplate "1" --> "N" ConfigTemplateInput
-ConfigTemplate "1" --> "N" Audit
+ConfigTemplate "1" -- "N" ConfigTemplateInput
+ConfigTemplate "1" -- "N" Audit
 
 class Taxonomy
 class Audit
@@ -562,13 +560,13 @@ class JobTask {
   start_at: datetime
 }
 
-Bookmark "1" <- "N" Targeting
-Targeting "M" <-> "N" Host : (polymorphic)
-Targeting "N" --> "1" User
-JobInvocation "1" --> "1" Targeting
-JobInvocation "1" <-- "N" TemplateInvocation
-TemplateInvocation "N" --> "1" JobTemplate
-JobInvocation "1" <-- "N" JobTask
+Bookmark "1" - "N" Targeting
+Targeting "M" - "N" Host : (polymorphic)
+Targeting "N" -- "1" User
+JobInvocation "1" -- "1" Targeting
+JobInvocation "1" -- "N" TemplateInvocation
+TemplateInvocation "N" -- "1" JobTemplate
+JobInvocation "1" -- "N" JobTask
 
 {% endplantuml %}
 
@@ -703,10 +701,10 @@ class MCollectiveProxyCommand {
   proxy_endpoint():string
 }
 
-BulkJobTask "N" -> "1" JobInvocation
-BulkJobTask "1" <-- "N" JobTask
-TemplateInvocation "N" -> "1" JobInvocation
-TemplateInvocation "1" <--- "N" JobTask
+BulkJobTask "N" - "1" JobInvocation
+BulkJobTask "1" -- "N" JobTask
+TemplateInvocation "N" - "1" JobInvocation
+TemplateInvocation "1" --- "N" JobTask
 JobTask "1" -- "1" ProxyCommand
 JobTask "N" -- "1" Host
 
@@ -745,9 +743,9 @@ class JobTask {
 class ProxyCommand {
 }
 
-JobTask "N" -> "1" JobInvocation
-TemplateInvocation "N" -> "1" JobInvocation
-TemplateInvocation "1" <- "N" JobTask
+JobTask "N" - "1" JobInvocation
+TemplateInvocation "N" - "1" JobInvocation
+TemplateInvocation "1" - "N" JobTask
 JobTask "1" -- "1" ProxyCommand
 JobTask "1" -- "1" Host
 {% endplantuml %}
@@ -846,8 +844,8 @@ class JobTask {
   exit_code: string
 }
 
-BulkJobTask "N" -> "1" JobInvocation
-BulkJobTask "1" <-- "N" JobTask
+BulkJobTask "N" - "1" JobInvocation
+BulkJobTask "1" -- "N" JobTask
 JobTask "1" -- "1" Host
 
 {% endplantuml %}
@@ -1001,6 +999,8 @@ Design
 
 class PredefinedJob {
   predefined_job_name: string
+  ==
+  has_and_belongs_to_many :taxonomies
 }
 
 class PredefinedJobInputMapping {
@@ -1008,7 +1008,7 @@ class PredefinedJobInputMapping {
 }
 
 PredefinedJob "1" -- "N" PredefinedJobInputMapping
-PredefinedJobInputMapping "1" -- "N" ConfigTemplateInput
+PredefinedJobInputMapping "N" -- "1" ConfigTemplateInput
 PredefinedJob "M" -- "N" JobTemplate
 note on link #red: 1:1 per organization and provider
 
@@ -1180,7 +1180,7 @@ package "Job Preparation" {
     provider_type: string
     effective_user: string
     ==
-    has_many :taxonomies
+    has_and_belongs_to_many :taxonomies
     has_many :inputs
     has_many :audits
   }
@@ -1196,11 +1196,9 @@ package "Job Preparation" {
     has_one :job_template
   }
 
-  JobTemplate "1" --> "N" Taxonomy
-  JobTemplate "1" --> "N" ConfigTemplateInput
-  JobTemplate "1" --> "N" Audit
+  JobTemplate "1" -- "N" ConfigTemplateInput
+  JobTemplate "1" -- "N" Audit
 
-  class Taxonomy
   class Audit
 }
 
@@ -1234,12 +1232,12 @@ package "Job Invocation" {
 
   class User
 
-  Bookmark "1" <-UP- "N" Targeting
+  Bookmark "1" -DOWN- "N" Targeting
   Targeting "M" -DOWN- "N" Host
-  Targeting "N" -UP-> "1" User
-  JobInvocation "1" -LEFT-> "1" Targeting
-  JobInvocation "1" <-UP- "N" TemplateInvocation
-  TemplateInvocation "N" -LEFT-> "1" JobTemplate
+  Targeting "N" -UP- "1" User
+  JobInvocation "1" -LEFT- "1" Targeting
+  JobInvocation "1" -DOWN- "N" TemplateInvocation
+  TemplateInvocation "N" -LEFT- "1" JobTemplate
 
 }
 
@@ -1297,9 +1295,9 @@ package "Execution" {
     proxy_endpoint():string
   }
 
-  BulkJobTask "N" -RIGHT-> "1" JobInvocation
-  BulkJobTask "1" <-- "N" JobTask
-  TemplateInvocation "1" <-- "N" JobTask
+  BulkJobTask "N" -LEFT- "1" JobInvocation
+  BulkJobTask "1" -- "N" JobTask
+  TemplateInvocation "1" -- "N" JobTask
   JobTask "1" -RIGHT- "1" ProxyCommand
   JobTask "N" -UP- "1" Host
 }
@@ -1311,6 +1309,8 @@ ProxyCommand <|-- MCollectiveProxyCommand
 package "Developer API" {
   class PredefinedJob {
     predefined_job_name: string
+    ==
+    has_and_belongs_to_many :taxonomies
   }
 
   class PredefinedJobInputMapping {
@@ -1318,7 +1318,7 @@ package "Developer API" {
   }
 
   PredefinedJob "1" -- "N" PredefinedJobInputMapping
-  PredefinedJobInputMapping "1" -RIGHT- "N" ConfigTemplateInput
+  PredefinedJobInputMapping "N" -RIGHT- "1" ConfigTemplateInput
   PredefinedJob "M" -RIGHT- "N" JobTemplate
 }
 
