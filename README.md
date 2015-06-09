@@ -1,8 +1,14 @@
 Foreman Remote Execution
 ========================
 
-See [the project page](https://inecas.github.io/foreman-rex) for more
-details.
+A plugin bringing remote execution to the Foreman, completing the config
+management functionality with remote management functionality.
+
+Links
+-----
+
+* [the project page](http://theforeman.github.io/foreman_remote_execution/)
+* [the issue tracker](http://projects.theforeman.org/projects/foreman_remote_execution)
 
 Generating the docs
 -------------------
