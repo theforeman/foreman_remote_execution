@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       get 'revision'
       get 'auto_complete_search'
+      get 'auto_complete_job_name'
     end
   end
 end

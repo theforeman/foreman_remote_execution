@@ -1,6 +1,17 @@
-<div class="tab-pane" id="template_type">
-  <%= checkbox_f f, :snippet, :onchange => "snippet_changed(this)", :label=>_('Snippet'), :disabled => @template.locked? %>
+<div class="tab-pane" id="template_job">
+
+  <%= field(f, :job_name) do %>
+    <%= auto_complete_search(:job_name,
+                             f.object.job_name,
+                             :placeholder => _("Job name") + ' ...',
+                             :name => 'job_template[job_name]',
+                             :id => 'search') %>
+  <% end %>
+
+  <%= select_f f, :provider_type, providers_options, :first, :last %>
 </div>
 
-<div class="tab-pane" id="template_associations">
+
+<div class="tab-pane" id="template_type">
+  <%= checkbox_f f, :snippet, :onchange => "snippet_changed(this)", :label=>_('Snippet'), :disabled => @template.locked? %>
 </div>
