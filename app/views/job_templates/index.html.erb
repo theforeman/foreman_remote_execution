@@ -1,0 +1,31 @@
+<%= include_javascript %>
+
+<% title _("Job Templates") %>
+<% title_actions display_link_if_authorized(_("New Job Template"), hash_for_new_job_template_path) %>
+
+<table class="table table-bordered table-striped table-two-pane">
+  <thead>
+    <tr>
+      <th><%= sort :name, :as => s_("JobTemplate|Name") %></th>
+      <th><%= sort :snippet, :as => s_("JobTemplate|Snippet") %></th>
+      <th><%= sort :locked, :as => s_("JobTemplate|Locked"), :default => "DESC" %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for job_template in @templates %>
+      <tr>
+        <td class="display-two-pane"><%= link_to_if_authorized trunc_with_tooltip(job_template),
+                                                               hash_for_edit_job_template_path(:id => job_template).merge(:auth_object => job_template, :authorizer => authorizer) %></td>
+        <td align='center'><%= checked_icon job_template.snippet %></td>
+        <td align='center'>
+          <%= locked_icon job_template.locked?, _("This template is locked for editing.") %>
+        </td>
+        <td>
+          <%= action_buttons(*permitted_actions(job_template)) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate_with_info @templates %>
