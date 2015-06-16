@@ -10,4 +10,8 @@ class ExecutionProvider
   def self.register(key, klass)
     providers[key.to_sym] = klass
   end
+
+  def self.provider_names
+    providers.keys.map(&:to_s)
+  end
 end
