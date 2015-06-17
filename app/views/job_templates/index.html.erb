@@ -1,4 +1,6 @@
 <%= include_javascript %>
+<%= javascript 'lookup_keys' %>
+<%= javascript 'template_input' %>
 
 <% title _("Job Templates") %>
 <% title_actions display_link_if_authorized(_("New Job Template"), hash_for_new_job_template_path) %>

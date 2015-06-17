@@ -11,6 +11,19 @@ module ForemanRemoteExecution
       app.config.paths['db/migrate'] += ForemanRemoteExecution::Engine.paths['db/migrate'].existent
     end
 
+    initializer 'foreman_remote_execution.assets.precompile' do |app|
+      app.config.assets.precompile += %w(
+        'template_input.js',
+      )
+    end
+
+    initializer 'foreman_remote_execution.configure_assets', :group => :assets do
+      SETTINGS[:foreman_remote_execution] =
+        {:assets => {:precompile => [
+          'template_input.js',
+        ]}}
+    end
+
     initializer 'foreman_remote_execution.register_plugin', after: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
         requires_foreman '>= 1.9'
@@ -59,6 +72,7 @@ module ForemanRemoteExecution
     config.to_prepare do
       begin
         # Host::Managed.send(:include, ForemanRemoteExecution::HostExtensions)
+        Template.send(:include, ForemanRemoteExecution::TemplateExtensions)
       rescue => e
         Rails.logger.warn "ForemanRemoteExecution: skipping engine hook (#{e})"
       end

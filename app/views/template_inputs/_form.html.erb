@@ -1,0 +1,22 @@
+<div class="fields">
+  <div class="form-group">
+    <%= field_set_tag _("Template input").html_safe +
+                              ' ' +
+                              remove_child_link('x', f, {:rel => 'twipsy', "data-title" => _('remove template input'), :'data-placement' => 'left', :class => 'fr badge badge-danger'}).html_safe do %>
+      <%= text_f f, :name %>
+      <%= checkbox_f f, :required %>
+      <%= selectable_f f, :input_type, template_input_types_options, {}, :class => 'input_type_selector' %>
+      <div class="fact_input_type custom_input_type_fields" style="<%= f.object.fact_template_input? ? '' : 'display:none' %>">
+        <%= text_f f, :fact_name, :class => 'fact_input_type', :required => true %>
+      </div>
+      <div class="variable_input_type custom_input_type_fields" style="<%= f.object.variable_template_input? ? '' : 'display:none' %>">
+        <%= text_f f, :variable_name, :class => 'variable_input_type', :required => true %>
+      </div>
+      <div class="puppet_parameter_input_type custom_input_type_fields" style="<%= f.object.puppet_parameter_template_input? ? '' : 'display:none' %>">
+        <%= text_f f, :puppet_class_name, :class => 'puppet_parameter_input_type', :required => true %>
+        <%= text_f f, :puppet_parameter_name, :class => 'puppet_parameter_input_type', :required => true %>
+      </div>
+      <%= textarea_f f, :description, :rows => 3 %>
+    <% end %>
+  </div>
+</div>
