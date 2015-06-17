@@ -1,0 +1,2 @@
+class SSHExecutionProvider < RemoteExecutionProvider
+end
