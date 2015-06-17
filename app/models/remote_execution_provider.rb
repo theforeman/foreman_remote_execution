@@ -1,4 +1,4 @@
-class ExecutionProvider
+class RemoteExecutionProvider
   def self.provider_for(type)
     providers[type.to_s] || providers[:ssh]
   end
