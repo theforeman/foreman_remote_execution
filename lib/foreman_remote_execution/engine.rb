@@ -84,12 +84,18 @@ module ForemanRemoteExecution
 
     # Include concerns in this config.to_prepare block
     config.to_prepare do
-      begin
-        # Host::Managed.send(:include, ForemanRemoteExecution::HostExtensions)
-        Template.send(:include, ForemanRemoteExecution::TemplateExtensions)
-      rescue => e
-        Rails.logger.warn "ForemanRemoteExecution: skipping engine hook (#{e})"
-      end
+      # we have to define associations in Template and all descendants because
+      # reflect_on_association does not work when we add association after parent and child class
+      # are already loaded, causing issues when you try to destroy any child which iterates
+      # over all associations because of :dependant => :destroy
+      #
+      # e.g. having ProvisioningTemplate < Template, adding has_many :template_inputs to Template from concern
+      #   Template.reflect_on_association :template_inputs # => <#Association...
+      #   ProvisioningTemplate.reflect_on_association :template_inputs # => nil
+      require_dependency 'job_template'
+      (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateRelations) }
+
+      Template.send(:include, ForemanRemoteExecution::TemplateExtensions)
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|

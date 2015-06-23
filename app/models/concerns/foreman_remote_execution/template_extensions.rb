@@ -3,7 +3,6 @@ module ForemanRemoteExecution
     extend ActiveSupport::Concern
 
     included do
-      has_many :template_inputs
       accepts_nested_attributes_for :template_inputs, :allow_destroy => true
       attr_accessible :template_inputs_attributes
     end

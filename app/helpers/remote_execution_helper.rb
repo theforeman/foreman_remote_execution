@@ -4,8 +4,6 @@ module RemoteExecutionHelper
   end
 
   def template_input_types_options
-    TemplateInput::TYPES.map { |key, name|
-      [ _(name), key ]
-    }
+    TemplateInput::TYPES.map { |key, name| [ _(name), key ] }
   end
 end
