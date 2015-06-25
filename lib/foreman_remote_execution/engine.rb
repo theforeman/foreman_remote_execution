@@ -96,6 +96,8 @@ module ForemanRemoteExecution
       (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateRelations) }
 
       Template.send(:include, ForemanRemoteExecution::TemplateExtensions)
+      User.send(:include, ForemanRemoteExecution::UserExtensions)
+      Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
