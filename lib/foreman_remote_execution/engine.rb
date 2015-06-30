@@ -17,8 +17,8 @@ module ForemanRemoteExecution
 
         # Add permissions
         security_block :foreman_remote_execution do
-          permission :view_job_templates, { :job_templates => [:index] }, :resource_type => 'JobTemplate'
-          permission :create_job_templates, { :job_templates => [:new, :create] }, :resource_type => 'JobTemplate'
+          permission :view_job_templates, { :job_templates => [:index, :show, :revision, :auto_complete_search, :auto_complete_job_name] }, :resource_type => 'JobTemplate'
+          permission :create_job_templates, { :job_templates => [:new, :create, :clone_template] }, :resource_type => 'JobTemplate'
           permission :edit_job_templates, { :job_templates => [:edit, :update] }, :resource_type => 'JobTemplate'
           permission :destroy_job_templates, { :job_templates => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
