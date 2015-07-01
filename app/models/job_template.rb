@@ -27,6 +27,8 @@ class JobTemplate < ::Template
                   end
                 }
 
+  validates :provider_type, :inclusion => RemoteExecutionProvider.provider_names, :presence => true
+
   # we have to override the base_class because polymorphic associations does not detect it correctly, more details at
   # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_many#1010-Polymorphic-has-many-within-inherited-class-gotcha
   def self.base_class
