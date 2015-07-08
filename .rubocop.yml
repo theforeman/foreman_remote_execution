@@ -14,3 +14,6 @@ Rails/ActionFilter:
 
 Metrics/MethodLength:
   Max: 20
+
+Style/TrailingComma:
+  Enabled: false
