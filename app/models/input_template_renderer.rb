@@ -2,7 +2,7 @@ class InputTemplateRenderer
   class UndefinedInput < ::Foreman::Exception
   end
 
-  include Foreman::Renderer
+  include UnattendedHelper
 
   attr_accessor :template, :host, :invocation, :error_message
 

@@ -36,18 +36,14 @@ module ForemanRemoteExecution
 
         # Add permissions
         security_block :foreman_remote_execution do
-          permission :view_job_templates, { :job_templates => [:index, :show, :revision, :auto_complete_search, :auto_complete_job_name],
-                                            :'api/v2/job_templates' => [:index, :show, :revision]}, :resource_type => 'JobTemplate'
-
+          permission :view_job_templates, { :job_templates => [:index, :show, :revision, :auto_complete_search, :auto_complete_job_name, :preview],
+                                            :'api/v2/job_templates' => [:index, :show, :revision] }, :resource_type => 'JobTemplate'
           permission :create_job_templates, { :job_templates => [:new, :create, :clone_template],
-                                              :'api/v2/job_templates' => [:create, :clone]}, :resource_type => 'JobTemplate'
-
+                                              :'api/v2/job_templates' => [:create, :clone] }, :resource_type => 'JobTemplate'
           permission :edit_job_templates, { :job_templates => [:edit, :update],
-                                            :'api/v2/job_templates' => [:update]}, :resource_type => 'JobTemplate'
-
+                                            :'api/v2/job_templates' => [:update] }, :resource_type => 'JobTemplate'
           permission :destroy_job_templates, { :job_templates => [:destroy],
-                                               :'api/v2/job_templates' => [:destroy]}, :resource_type => 'JobTemplate'
-
+                                               :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
         end
 
