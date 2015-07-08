@@ -15,18 +15,18 @@ class TemplateInput < ActiveRecord::Base
   validates :puppet_parameter_name, :puppet_class_name, :presence => { :if => :puppet_parameter_template_input? }
 
   def user_template_input?
-    self.input_type == 'user'
+    input_type == 'user'
   end
 
   def fact_template_input?
-    self.input_type == 'fact'
+    input_type == 'fact'
   end
 
   def variable_template_input?
-    self.input_type == 'variable'
+    input_type == 'variable'
   end
 
   def puppet_parameter_template_input?
-    self.input_type == 'puppet_parameter'
+    input_type == 'puppet_parameter'
   end
 end
