@@ -50,18 +50,30 @@ describe InputTemplateRenderer do
       before do
         template.template_inputs << FactoryGirl.build(:template_input, :name => 'service_name', :input_type => 'user')
         job_invocation.template_invocations << template_invocation
-        renderer.invocation = template_invocation
       end
 
       describe 'rendering' do
-        it 'can\'t render the content without job invocation since we don\'t have values' do
+        it 'cannot render the content without job invocation' do
           refute result
-        end
-
-        it 'registers an error' do
-          result # let is lazy
           renderer.error_message.wont_be_nil
           renderer.error_message.wont_be_empty
+        end
+
+        it 'can preview' do
+          renderer.preview.must_equal 'service restart $USER_INPUT[service_name]'
+        end
+
+        context 'with invocation specified and a required input' do
+          before do
+            template.template_inputs.first.update_attributes(:required => true)
+            renderer.invocation = template_invocation
+          end
+
+          it 'cannot render the content' do
+            refute result
+            renderer.error_message.wont_be_nil
+            renderer.error_message.wont_be_empty
+          end
         end
 
         context 'with invocation specified' do
@@ -70,17 +82,18 @@ describe InputTemplateRenderer do
                                :template_invocation => template_invocation,
                                :template_input => template.template_inputs.first,
                                :value => 'foreman')
+            renderer.invocation = template_invocation
+            renderer.invocation.reload
           end
 
           it 'can render with job invocation with corresponding value' do
             renderer.render.must_equal 'service restart foreman'
           end
         end
-      end
 
-      describe 'preview' do
-        it 'should render preview' do
-          renderer.preview.must_equal 'service restart $USER_INPUT[service_name]'
+        it 'renders even without an input value' do
+          renderer.invocation = template_invocation
+          renderer.render.must_equal 'service restart '
         end
       end
     end
@@ -104,6 +117,7 @@ describe InputTemplateRenderer do
                              :template_invocation => template_invocation,
                              :template_input => template.template_inputs.first,
                              :value => 'foreman')
+          renderer.invocation.reload
         end
 
         it 'can render with job invocation with corresponding value' do

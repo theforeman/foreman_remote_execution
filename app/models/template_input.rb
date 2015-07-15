@@ -1,6 +1,8 @@
 class TemplateInput < ActiveRecord::Base
   class ValueNotReady < ::Foreman::Exception
   end
+  class UnsatisfiedRequiredInput < ::Foreman::Exception
+  end
 
   TYPES = { :user => N_('User input'), :fact => N_('Fact value'), :variable => N_('Variable'),
             :puppet_parameter => N_('Puppet parameter') }.with_indifferent_access
@@ -95,15 +97,25 @@ class TemplateInput < ActiveRecord::Base
   end
 
   class UserInputResolver < InputResolver
+
+    def value
+      raise(UnsatisfiedRequiredInput, _("Value for required input '%s' was not specified") % @input.name) if required_value_needed?
+      super
+    end
+
     def ready?
-      !input_value.nil?
+      @renderer.invocation
     end
 
     def resolved_value
-      input_value.value
+      input_value.try(:value)
     end
 
     private
+
+    def required_value_needed?
+      @input.required? && input_value.try(:value).blank?
+    end
 
     def input_value
       return unless @renderer.invocation

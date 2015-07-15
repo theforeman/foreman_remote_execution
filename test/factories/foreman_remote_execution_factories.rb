@@ -1,6 +1,8 @@
 FactoryGirl.define do
+
   factory :job_template do |f|
     f.sequence(:name) { |n| "Job template #{n}" }
+    sequence(:job_name) { |n| "job name #{n}" }
     f.template 'id'
     f.provider_type 'Ssh'
 
@@ -13,7 +15,7 @@ FactoryGirl.define do
 
   factory :template_input do |f|
     f.sequence(:name) { |n| "Template input #{n}" }
-    f.input_type TemplateInput::TYPES.keys.first
+    f.input_type 'user'
   end
 
   factory :targeting do |f|

@@ -6,6 +6,9 @@ class JobInvocation < ActiveRecord::Base
 
   validates :targeting, :presence => true
   validates :job_name, :presence => true
+  validates_associated :targeting, :template_invocations
+
+  scoped_search :on => :job_name
 
   delegate :bookmark, :to => :targeting, :allow_nil => true
 
