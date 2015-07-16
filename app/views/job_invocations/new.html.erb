@@ -1,0 +1,10 @@
+<%= form_for :job_invocation do |f| %>
+  <ul>
+    <% job_invocation.hosts.each do |host| %>
+      <%= f.hidden_field :'host_ids[]', host.id %>
+      <li><%= host.name %></li>
+    <% end %>
+  </ul>
+
+  <%= submit_or_cancel f %>
+<% end %>

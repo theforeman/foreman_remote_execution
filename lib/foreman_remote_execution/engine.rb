@@ -96,6 +96,7 @@ module ForemanRemoteExecution
       User.send(:include, ForemanRemoteExecution::UserExtensions)
       Host.send(:include, ForemanRemoteExecution::HostExtensions)
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
+      HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
