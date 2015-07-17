@@ -17,3 +17,9 @@ Metrics/MethodLength:
 
 Style/TrailingComma:
   Enabled: false
+
+Style/AccessorMethodName:
+  Enabled: false
+
+Rails/FindBy:
+  Enabled: false

@@ -1,0 +1,39 @@
+class InputTemplateRenderer
+  class UndefinedInput < ::Foreman::Exception
+  end
+
+  include Foreman::Renderer
+
+  attr_accessor :template, :host, :invocation, :error_message
+
+  def initialize(template, host = nil, invocation = nil)
+    @host = host
+    @invocation = invocation
+    @template = template
+  end
+
+  def render
+    render_safe(@template.template, [ :input ])
+  rescue => e
+    self.error_message ||= _('error during rendering: %s') % e.message
+    Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")
+    return false
+  end
+
+  def preview
+    @preview = true
+    output = render
+    @preview = false
+    output
+  end
+
+  def input(name)
+    input = @template.template_inputs.where(:name => name.to_s).first || @template.template_inputs.detect { |i| i.name == name.to_s }
+    if input
+      @preview ? input.preview(self) : input.value(self)
+    else
+      self.error_message = _('input macro with name \'%s\' used, but no input with such name defined for this template') % name
+      raise UndefinedInput, "Rendering failed, no input with name #{name} for input macro found"
+    end
+  end
+end
