@@ -9,6 +9,7 @@ class TemplateInput < ActiveRecord::Base
                   :puppet_class_name, :puppet_parameter_name, :description, :job_template_id
 
   belongs_to :template
+  has_many :template_invocation_input_values, :dependent => :destroy
 
   validates :name, :presence => true, :uniqueness => { :scope => 'template_id' }
   validates :input_type, :presence => true, :inclusion => TemplateInput::TYPES.keys
