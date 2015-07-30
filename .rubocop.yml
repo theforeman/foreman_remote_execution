@@ -32,3 +32,6 @@ Metrics/ClassLength:
 
 Style/WordArray:
   Enabled: false
+
+Style/BracesAroundHashParameters:
+  Enabled: false
