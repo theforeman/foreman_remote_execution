@@ -99,7 +99,7 @@ class JobInvocationsController < ApplicationController
       elsif host_ids.present?
         targeting.build_query_from_hosts(host_ids)
       elsif targeting.bookmark_id
-        if (bookmark = Bookmark.authorized(:view_bookmarks).find(targeting.bookmark_id))
+        if (bookmark = available_bookmarks.find(targeting.bookmark_id))
           bookmark.query
         else
           ''
@@ -107,6 +107,10 @@ class JobInvocationsController < ApplicationController
       else
         ''
       end
+    end
+
+    def available_bookmarks
+      Bookmark.authorized(:view_bookmarks)
     end
 
     def targeted_hosts_count
@@ -171,10 +175,25 @@ class JobInvocationsController < ApplicationController
     end
 
     def build_targeting
+      # if bookmark was used we compare it to search query,
+      # when it's the same, we delete the query since it is used from bookmark
+      # when no bookmark is set we store the query
+      if (bookmark_id = targeting_base[:bookmark_id].present?)
+        if (bookmark = available_bookmarks.where(:id => bookmark_id).first)
+          query = targeting_base[:search_query].strip
+          query == bookmark.query.strip ? query : bookmark.query
+        else
+          query = nil
+        end
+      else
+        query = targeting_base[:search_query]
+      end
+
       Targeting.new(
         :user => User.current,
         :bookmark_id => targeting_base[:bookmark_id],
-        :targeting_type => targeting_base[:targeting_type]
+        :targeting_type => targeting_base[:targeting_type],
+        :search_query => query
       )
     end
 

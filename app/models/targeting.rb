@@ -1,8 +1,8 @@
 class Targeting < ActiveRecord::Base
 
   STATIC_TYPE = 'static_query'
-  DYNAMIC_TYPE = 'dynamic_bookmark'
-  TYPES = {STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Bookmark')}
+  DYNAMIC_TYPE = 'dynamic_query'
+  TYPES = {STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query')}
 
   belongs_to :user
   belongs_to :bookmark
@@ -12,9 +12,10 @@ class Targeting < ActiveRecord::Base
   has_many :template_invocations, :dependent => :destroy
 
   validates :targeting_type, :presence => true, :inclusion => Targeting::TYPES.keys
-  validates :bookmark, :presence => true, :if => "dynamic?"
 
-  attr_accessible :targeting_type, :bookmark_id, :user
+  attr_accessible :targeting_type, :bookmark_id, :user, :search_query
+
+  before_create :assign_search_query, :if => :static?
 
   def resolve_hosts!
     raise ::Foreman::Exception, _('Cannot resolve hosts without a user') if user.nil?
