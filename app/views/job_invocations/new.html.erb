@@ -1,10 +1,4 @@
-<%= form_for :job_invocation do |f| %>
-  <ul>
-    <% job_invocation.hosts.each do |host| %>
-      <%= f.hidden_field :'host_ids[]', host.id %>
-      <li><%= host.name %></li>
-    <% end %>
-  </ul>
+<% javascript 'template_invocation' %>
+<% stylesheet 'template_invocation' %>
 
-  <%= submit_or_cancel f %>
-<% end %>
+<%= render :partial => 'form' %>

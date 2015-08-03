@@ -14,7 +14,7 @@ class Targeting < ActiveRecord::Base
   validates :targeting_type, :presence => true, :inclusion => Targeting::TYPES.keys
   validates :bookmark, :presence => true, :if => "dynamic?"
 
-  before_create :assign_search_query, :if => :static?
+  attr_accessible :targeting_type, :bookmark_id, :user
 
   def resolve_hosts!
     raise ::Foreman::Exception, _('Cannot resolve hosts without a user') if user.nil?
@@ -31,6 +31,11 @@ class Targeting < ActiveRecord::Base
 
   def static?
     targeting_type == STATIC_TYPE
+  end
+
+  def build_query_from_hosts(ids)
+    hosts = Host.where(:id => ids).all.group_by(&:id)
+    ids.map { |id| "name = #{hosts[id].first.name}" }.join(' or ')
   end
 
   private

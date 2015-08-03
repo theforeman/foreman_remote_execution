@@ -14,6 +14,8 @@ module ForemanRemoteExecution
     initializer 'foreman_remote_execution.assets.precompile' do |app|
       app.config.assets.precompile += %w(
         'template_input.js',
+        'template_invocation.js',
+        'template_invocation.scss.css',
       )
     end
 
@@ -21,6 +23,8 @@ module ForemanRemoteExecution
       SETTINGS[:foreman_remote_execution] =
         {:assets => {:precompile => [
           'template_input.js',
+          'template_invocation.js',
+          'template_invocation.scss.css',
         ]}}
     end
 
