@@ -41,20 +41,6 @@ describe Targeting do
     it { targeting.hosts.must_include(host) }
   end
 
-  context 'setting static with bookmark does not resolve dynamically' do
-    before do
-      @old_query = bookmark.query
-      targeting.search_query = nil
-      targeting.user = users(:admin)
-      targeting.bookmark = bookmark
-      targeting.save!
-      targeting.bookmark.query = "someotherquery"
-      targeting.resolve_hosts!
-    end
-
-    it { assert_equal @old_query, targeting.search_query  }
-  end
-
   context 'can delete a user' do
     before do
       targeting.user = users(:one)

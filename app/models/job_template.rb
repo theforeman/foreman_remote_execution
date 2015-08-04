@@ -13,7 +13,7 @@ class JobTemplate < ::Template
   # tested with scoped_search 3.2.0
   include Taxonomix
   scoped_search :on => :name, :complete_value => true, :default_order => true
-  scoped_search :on => :job_name,:complete_value => true
+  scoped_search :on => :job_name, :complete_value => true
   scoped_search :on => :locked, :complete_value => {:true => true, :false => false}
   scoped_search :on => :snippet, :complete_value => {:true => true, :false => false}
   scoped_search :on => :provider_type, :complete_value => true
@@ -27,7 +27,8 @@ class JobTemplate < ::Template
                   end
                 }
 
-  validates :provider_type, :inclusion => RemoteExecutionProvider.provider_names, :presence => true
+  validates :provider_type, :presence => true
+  validate :provider_type_whitelist
 
   # we have to override the base_class because polymorphic associations does not detect it correctly, more details at
   # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_many#1010-Polymorphic-has-many-within-inherited-class-gotcha
@@ -40,5 +41,12 @@ class JobTemplate < ::Template
   # and matching a Host does not prevent removing a template from its taxonomy.
   def used_taxonomy_ids(type)
     []
+  end
+
+  private
+
+  # we can't use standard validator, .provider_names output can change but the validator does not reflect it
+  def provider_type_whitelist
+    errors.add :provider_name, :uniq unless RemoteExecutionProvider.provider_names.include?(self.provider_type)
   end
 end
