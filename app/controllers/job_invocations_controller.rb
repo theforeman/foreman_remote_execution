@@ -9,7 +9,18 @@ class JobInvocationsController < ApplicationController
   end
 
   def create
-    binding.pry
+    @composer = JobInvocationComposer.new(JobInvocation.new, params)
+    if @composer.save
+      notice _('Job has been scheduled')
+      redirect_to @composer.job_invocation
+    else
+      render :action => 'new'
+    end
+  end
+
+  def show
+    # TODO authorization
+    @job_invocation = JobInvocation.find(params[:id])
   end
 
   # refreshes the form
@@ -18,8 +29,8 @@ class JobInvocationsController < ApplicationController
   end
 
   class JobInvocationComposer
-    attr_accessor :params, :job_name, :job_template_ids, :job_invocation,
-                  :targeting, :host_ids, :search_query
+    attr_accessor :params, :job_invocation, :host_ids, :search_query
+    attr_reader :job_template_ids
 
     # TODO aka initialize_from_params
     def initialize(job_invocation, params)
@@ -28,11 +39,27 @@ class JobInvocationsController < ApplicationController
 
       @host_ids = validate_host_ids(params[:host_ids])
       @search_query = targeting_base[:search_query]
-      @targeting = build_targeting
 
-      @job_name = validate_job_name(job_invocation_base[:job_name]) || available_job_names.first
+      job_invocation.job_name = validate_job_name(job_invocation_base[:job_name]) || available_job_names.first
+      job_invocation.targeting = build_targeting
 
       @job_template_ids = validate_job_template_ids(job_templates_base.keys)
+    end
+
+    def valid?
+      targeting.valid? & job_invocation.valid? & !template_invocations.map(&:valid?).include?(false)
+    end
+
+    def save
+      valid? && job_invocation.save
+    end
+
+    def job_name
+      job_invocation.job_name
+    end
+
+    def targeting
+      job_invocation.targeting
     end
 
     def available_templates
@@ -82,11 +109,7 @@ class JobInvocationsController < ApplicationController
 
     def template_invocations
       if job_invocation.new_record?
-        job_template_ids.map do |job_template_id|
-          template_invocation = job_invocation.template_invocations.build(:template_id => job_template_id)
-          template_invocation.input_values = build_input_values_for(job_template_id)
-          template_invocation
-        end
+        @template_invocations ||= build_template_invocations
       else
         job_invocation.template_invocations
         # TODO update if base present? that would solve updating
@@ -178,23 +201,35 @@ class JobInvocationsController < ApplicationController
       # if bookmark was used we compare it to search query,
       # when it's the same, we delete the query since it is used from bookmark
       # when no bookmark is set we store the query
-      if (bookmark_id = targeting_base[:bookmark_id].present?)
+      bookmark_id = targeting_base[:bookmark_id]
+      query = targeting_base[:search_query]
+      if bookmark_id.present? && query.present?
         if (bookmark = available_bookmarks.where(:id => bookmark_id).first)
-          query = targeting_base[:search_query].strip
-          query == bookmark.query.strip ? query : bookmark.query
+          if query.strip == bookmark.query.strip
+            query = nil
+          else
+            bookmark_id = nil
+          end
         else
-          query = nil
+          query = targeting_base[:search_query]
+          bookmark_id = nil
         end
-      else
-        query = targeting_base[:search_query]
       end
 
       Targeting.new(
         :user => User.current,
-        :bookmark_id => targeting_base[:bookmark_id],
+        :bookmark_id => bookmark_id,
         :targeting_type => targeting_base[:targeting_type],
         :search_query => query
       )
+    end
+
+    def build_template_invocations
+      job_template_ids.map do |job_template_id|
+        template_invocation = job_invocation.template_invocations.build(:template_id => job_template_id)
+        template_invocation.input_values = build_input_values_for(job_template_id)
+        template_invocation
+      end
     end
 
     # returns nil if user can't see any job template with such name
