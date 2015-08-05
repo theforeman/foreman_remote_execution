@@ -94,8 +94,9 @@ module ForemanRemoteExecution
       #   ProvisioningTemplate.reflect_on_association :template_inputs # => nil
       require_dependency 'job_template'
       (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateRelations) }
+      # similarly, attr_accessible :template_inputs_attributes does not work with STI
+      (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateExtensions) }
 
-      Template.send(:include, ForemanRemoteExecution::TemplateExtensions)
       User.send(:include, ForemanRemoteExecution::UserExtensions)
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
     end
