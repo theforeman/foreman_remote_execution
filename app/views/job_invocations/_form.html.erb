@@ -4,11 +4,11 @@
   <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Refresh"), :id => 'refresh_execution_form') do %>
     <%= icon_text('refresh') %>
   <% end %>
-  <%= fields_for @composer.targeting do |t| %>
-    <%= t.hidden_field :bookmark_id, :value => params[:bookmark_id] %>
-    <%= textarea_f t, :search_query, :value => @composer.displayed_search_query, :rows => 5 %>
-    <%= radio_button_f t, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
-    <%= radio_button_f t, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
+  <%= fields_for @composer.targeting do |targeting_fields| %>
+    <%= targeting_fields.hidden_field :bookmark_id, :value => params[:bookmark_id] %>
+    <%= textarea_f targeting_fields, :search_query, :value => @composer.displayed_search_query, :rows => 5 %>
+    <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
+    <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
   <% end %>
 
   <hr >
@@ -20,27 +20,27 @@
       <% if @composer.needs_provider_type_selection? %>
         <legend><%= _('Provider') + ': ' + provider_type %></legend>
       <% end %>
-      <%= f.fields_for 'providers' do |p| %>
-        <%= p.fields_for provider_type do |pt| %>
-          <%= pt.fields_for :job_templates do |jt| %>
+      <%= f.fields_for 'providers' do |providers_fields| %>
+        <%= providers_fields.fields_for provider_type do |provider_type_fields| %>
+          <%= provider_type_fields.fields_for :job_templates do |job_templates_fields| %>
             <% if @composer.needs_provider_type_selection? %>
-              <%= radio_button_f pt, 'job_template_id', :value => '', :text => _('Disable this provider'),
+              <%= radio_button_f provider_type_fields, 'job_template_id', :value => '', :text => _('Disable this provider'),
                                  :class => 'job_template_selector', :checked => @composer.preselect_disabled_for_provider(provider_type) %>
               <span />
             <% end %>
             <% @composer.templates_for_provider(provider_type).each do |job_template| %>
-              <%= radio_button_f pt, 'job_template_id',
+              <%= radio_button_f provider_type_fields, 'job_template_id',
                                  :value => job_template.id,
                                  :text => job_template.name,
                                  :class => 'job_template_selector',
                                  :checked => @composer.job_template_ids.include?(job_template.id) || @composer.only_one_template_available? %>
 
               <fieldset id="job_template_<%= job_template.id %>" class="job_template_form <%= 'hidden' if !@composer.job_template_ids.include?(job_template.id) && !@composer.only_one_template_available? %>">
-                <%= jt.fields_for job_template.id.to_s do |j| %>
-                  <%= j.fields_for :input_values do |iv| %>
+                <%= job_templates_fields.fields_for job_template.id.to_s do |job_template_fields| %>
+                  <%= job_template_fields.fields_for :input_values do |input_values_fields| %>
                     <% job_template.template_inputs.where(:input_type => 'user').each do |input| %>
-                      <%= iv.fields_for input.id.to_s, @composer.template_invocation_input_value_for(input) do |i| %>
-                        <%= text_f i, :value, :label => input.name, :help_inline => input.description, :required => input.required %>
+                      <%= input_values_fields.fields_for input.id.to_s, @composer.template_invocation_input_value_for(input) do |input_fields| %>
+                        <%= text_f input_fields, :value, :label => input.name, :help_inline => input.description, :required => input.required %>
                       <% end %>
                     <% end %>
                   <% end %>
