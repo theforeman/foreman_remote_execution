@@ -35,7 +35,7 @@
                                  :class => 'job_template_selector',
                                  :checked => @composer.job_template_ids.include?(job_template.id) || @composer.only_one_template_available? %>
 
-              <fieldset id="job_template_<%= job_template.id %>" class="job_template_form <%= 'hidden' unless @composer.job_template_ids.include?(job_template.id) %>">
+              <fieldset id="job_template_<%= job_template.id %>" class="job_template_form <%= 'hidden' if !@composer.job_template_ids.include?(job_template.id) && !@composer.only_one_template_available? %>">
                 <%= jt.fields_for job_template.id.to_s do |j| %>
                   <%= j.fields_for :input_values do |iv| %>
                     <% job_template.template_inputs.where(:input_type => 'user').each do |input| %>
