@@ -1,9 +1,9 @@
-module ForemanRemoteExtensions
+module ForemanRemoteExecution
   module HostExtensions
     extend ActiveSupport::Concern
 
     included do
-      # execute callbacks
+      has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
     end
 
     # create or overwrite instance methods...
