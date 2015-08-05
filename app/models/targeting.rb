@@ -2,7 +2,7 @@ class Targeting < ActiveRecord::Base
 
   STATIC_TYPE = 'static_query'
   DYNAMIC_TYPE = 'dynamic_query'
-  TYPES = {STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query')}
+  TYPES = { STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query') }
 
   belongs_to :user
   belongs_to :bookmark

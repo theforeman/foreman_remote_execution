@@ -92,7 +92,7 @@ class JobInvocationComposer
     elsif host_ids.present?
       targeting.build_query_from_hosts(host_ids)
     elsif targeting.bookmark_id
-      if (bookmark = available_bookmarks.find(targeting.bookmark_id))
+      if (bookmark = available_bookmarks.where(:id => targeting.bookmark_id).first)
         bookmark.query
       else
         ''
@@ -103,11 +103,11 @@ class JobInvocationComposer
   end
 
   def available_bookmarks
-    Bookmark.authorized(:view_bookmarks)
+    Bookmark.authorized(:view_bookmarks).my_bookmarks
   end
 
   def targeted_hosts_count
-    Host.authorized(:view_hosts).search_for(displayed_search_query).count
+    Host.authorized(:view_hosts, Host).search_for(displayed_search_query).count
   rescue
     0
   end
@@ -172,18 +172,17 @@ class JobInvocationComposer
     # when it's the same, we delete the query since it is used from bookmark
     # when no bookmark is set we store the query
     bookmark_id = targeting_base[:bookmark_id]
+    bookmark = available_bookmarks.where(:id => bookmark_id).first
     query = targeting_base[:search_query]
-    if bookmark_id.present? && query.present?
-      if (bookmark = available_bookmarks.where(:id => bookmark_id).first)
-        if query.strip == bookmark.query.strip
-          query = nil
-        else
-          bookmark_id = nil
-        end
+    if bookmark.present? && query.present?
+      if query.strip == bookmark.query.strip
+        query = nil
       else
-        query = targeting_base[:search_query]
         bookmark_id = nil
       end
+    elsif query.present?
+      query = targeting_base[:search_query]
+      bookmark_id = nil
     end
 
     Targeting.new(
@@ -213,6 +212,6 @@ class JobInvocationComposer
   end
 
   def validate_host_ids(ids)
-    Host.authorized(:view_hosts).where(:id => ids).pluck(:id)
+    Host.authorized(:view_hosts, Host).where(:id => ids).pluck(:id)
   end
 end

@@ -49,6 +49,10 @@ module ForemanRemoteExecution
           permission :destroy_job_templates, { :job_templates => [:destroy],
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
+
+          permission :view_job_invocations, { :job_invocations => [:show] }, :resource_type => 'JobInvocation'
+
+          permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh] }, :resource_type => 'JobInvocation'
         end
 
         # Add a new role called 'ForemanRemoteExecution' if it doesn't exist

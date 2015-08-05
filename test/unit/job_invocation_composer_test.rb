@@ -4,11 +4,17 @@ RemoteExecutionProvider.register(:mcollective, OpenStruct)
 
 describe JobInvocationComposer do
   before do
-    permission = FactoryGirl.create(:permission, :name => 'view_job_templates', :resource_type => 'JobTemplate')
-    filter = FactoryGirl.build(:filter, :permissions => [permission], :search => 'name ~ testing*')
-    filter.save
+    permission1 = FactoryGirl.create(:permission, :name => 'view_job_templates', :resource_type => 'JobTemplate')
+    permission2 = Permission.find_by_name('view_bookmarks')
+    permission3 = Permission.find_by_name('view_hosts')
+    filter1 = FactoryGirl.build(:filter, :permissions => [permission1], :search => 'name ~ testing*')
+    filter2 = FactoryGirl.build(:filter, :permissions => [permission2])
+    filter3 = FactoryGirl.build(:filter, :permissions => [permission3])
+    filter1.save
+    filter2.save
+    filter3.save
     role = FactoryGirl.build(:role)
-    role.filters<< filter
+    role.filters = filter1, filter2, filter3
     role.save
     User.current = FactoryGirl.build(:user)
     User.current.roles<< role
@@ -32,7 +38,8 @@ describe JobInvocationComposer do
 
   context 'with general new invocation and empty params' do
     let(:params) { {} }
-    let(:composer) { JobInvocationComposer.new(JobInvocation.new, params) }
+    let(:job_invocation) { JobInvocation.new }
+    let(:composer) { JobInvocationComposer.new(job_invocation, params) }
 
     describe '#available_templates' do
       it 'obeys authorization' do
@@ -220,9 +227,13 @@ describe JobInvocationComposer do
       end
 
       describe '#template_invocations' do
-        let(:ssh_params) { { :job_template_id => testing_job_template_1.id.to_s, :job_templates => { testing_job_template_1.id.to_s => {
-          :input_values => { input1.id.to_s => { :value => 'value1' },  unauthorized_input1.id.to_s => { :value => 'dropped' } }
-        } } } }
+        let(:ssh_params) do
+          { :job_template_id => testing_job_template_1.id.to_s,
+            :job_templates => {
+              testing_job_template_1.id.to_s => {
+                :input_values => { input1.id.to_s => { :value => 'value1' },  unauthorized_input1.id.to_s => { :value => 'dropped' } }
+          } } }
+        end
         let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
         let(:invocations) { composer.template_invocations }
 
@@ -234,21 +245,167 @@ describe JobInvocationComposer do
       end
 
       describe '#displayed_search_query' do
+        it 'is empty by default' do
+          composer.displayed_search_query.must_be_empty
+        end
+
+        let(:host) { FactoryGirl.create(:host) }
+        let(:bookmark) { Bookmark.create!(:query => 'b', :name => 'bookmark', :public => true, :controller => 'hosts') }
+
+        context 'all targetings parameters are present' do
+          let(:params) { { :targeting => { :search_query => 'a', :bookmark_id => bookmark.id }, :host_ids => [ host.id ] }.with_indifferent_access }
+
+          it 'explicit search query has highest priority' do
+            composer.displayed_search_query.must_equal 'a'
+          end
+        end
+
+        context 'host ids and bookmark are present' do
+          let(:params) { { :targeting => { :bookmark_id => bookmark.id }, :host_ids => [ host.id ] }.with_indifferent_access }
+
+          it 'hosts will be used instead of a bookmark' do
+            composer.displayed_search_query.must_include host.name
+          end
+        end
+
+        context 'bookmark is present' do
+          let(:params) { { :targeting => { :bookmark_id => bookmark.id } }.with_indifferent_access }
+
+          it 'bookmark query is used if it is available for the user' do
+            bookmark.update_attribute :public, false
+            composer.displayed_search_query.must_equal bookmark.query
+          end
+
+          it 'bookmark query is used if the bookmark is public' do
+            bookmark.owner = nil
+            bookmark.save(:validate => false) # skip validations so owner remains nil
+            composer.displayed_search_query.must_equal bookmark.query
+          end
+
+          it 'empty search is returned if bookmark is not owned by the user and is not public' do
+            bookmark.public = false
+            bookmark.owner = nil
+            bookmark.save(:validate => false) # skip validations so owner remains nil
+            composer.displayed_search_query.must_be_empty
+          end
+        end
       end
 
       describe '#available_bookmarks' do
+        it 'obeys authorization' do
+          composer
+          Bookmark.expects(:authorized).with(:view_bookmarks).returns(Bookmark.scoped)
+          composer.available_bookmarks
+        end
       end
+
       describe '#targeted_hosts_count' do
+        it 'obeys authorization' do
+          composer
+          Host.expects(:authorized).with(:view_hosts, Host).returns(Host.scoped)
+          composer.targeted_hosts_count
+        end
+
+        let(:host) { FactoryGirl.create(:host) }
+
+        it 'searches hosts based on displayed_search_query' do
+          composer.stubs(:displayed_search_query => "name = #{host.name}")
+          composer.targeted_hosts_count.must_equal 1
+        end
+
+        it 'returns 0 for queries with syntax errors' do
+          composer.stubs(:displayed_search_query => "name = ")
+          composer.targeted_hosts_count.must_equal 0
+        end
       end
+
       describe '#template_invocation_input_value_for(input)' do
+        let(:value1) { composer.template_invocation_input_value_for(input1) }
+        it 'returns new empty input value if there is no invocation' do
+          assert value1.new_record?
+          value1.value.must_be_empty
+        end
+
+        context 'there are invocations without input values for a given input' do
+          let(:ssh_params) do
+            { :job_template_id => testing_job_template_1.id.to_s,
+              :job_templates => {
+                testing_job_template_1.id.to_s => {
+                  :input_values => { }
+                } } }
+          end
+          let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
+
+          it 'returns new empty input value' do
+            assert value1.new_record?
+            value1.value.must_be_empty
+          end
+        end
+
+        context 'there are invocations with input values for a given input' do
+          let(:ssh_params) do
+            { :job_template_id => testing_job_template_1.id.to_s,
+              :job_templates => {
+                testing_job_template_1.id.to_s => {
+                  :input_values => { input1.id.to_s => { :value => 'value1' } }
+                } } }
+          end
+          let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
+
+          it 'finds the value among template invocations' do
+            value1.value.must_equal 'value1'
+          end
+        end
       end
+
       describe '#valid?' do
+        let(:host) { FactoryGirl.create(:host) }
+        let(:ssh_params) do
+          { :job_template_id => testing_job_template_1.id.to_s,
+            :job_templates => {
+              testing_job_template_1.id.to_s => {
+                :input_values => { input1.id.to_s => { :value => 'value1' } }
+              } } }
+        end
+        let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } }, :targeting => { :search_query => "name = #{host.name}" } }.with_indifferent_access }
+
+        it 'validates all associated objects even if some of the is invalid' do
+          composer
+          job_invocation.expects(:valid?).returns(false)
+          composer.targeting.expects(:valid?).returns(false)
+          composer.template_invocations.each { |invocation| invocation.expects(:valid?).returns(false) }
+          refute composer.valid?
+        end
       end
+
       describe '#save' do
+        it 'triggers save on job_invocation if it is valid' do
+          composer.stubs(:valid? => true)
+          job_invocation.expects(:save)
+          composer.save
+        end
+
+        it 'does not trigger save on job_invocation if it is invalid' do
+          composer.stubs(:valid? => false)
+          job_invocation.expects(:save).never
+          composer.save
+        end
       end
+
       describe '#job_name' do
+        it 'triggers job_name on job_invocation' do
+          composer
+          job_invocation.expects(:job_name)
+          composer.job_name
+        end
       end
+
       describe '#targeting' do
+        it 'triggers targeting on job_invocation' do
+          composer
+          job_invocation.expects(:targeting)
+          composer.targeting
+        end
       end
 
     end
