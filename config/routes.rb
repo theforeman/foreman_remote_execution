@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :job_invocations, :only => [:new, :create, :show] do
+    member do
+      post 'apply'
+    end
     collection do
       post 'refresh'
     end

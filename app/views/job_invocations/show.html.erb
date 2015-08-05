@@ -9,3 +9,8 @@ Template invocations:
 
 Targeting:
 <%= @job_invocation.targeting.inspect %>
+
+<%= form_for @job_invocation, :url => apply_job_invocation_path(@job_invocation), :html => { :method => 'post' } do |f| %>
+  <%= f.submit('Apply', :class => "btn btn-primary") %>
+<% end %>
+

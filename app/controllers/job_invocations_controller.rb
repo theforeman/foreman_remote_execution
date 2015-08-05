@@ -23,6 +23,12 @@ class JobInvocationsController < ApplicationController
     @job_invocation = JobInvocation.find(params[:id])
   end
 
+  def apply
+    @job_invocation = JobInvocation.find(params[:id])
+    notice 'Hello'
+    redirect_to @job_invocation
+  end
+
   # refreshes the form
   def refresh
     @composer = JobInvocationComposer.new(JobInvocation.new, params)
