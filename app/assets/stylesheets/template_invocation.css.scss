@@ -1,3 +1,16 @@
-fieldset.provider_form label.radio-inline {
+fieldset.provider_form {
+  margin-bottom: 10px;
+
+  legend {
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 80px;
+    width: 80%
+  }
+
+  label.radio-inline {
     display: block;
+    margin-left: 90px;
+  }
 }

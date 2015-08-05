@@ -1,25 +1,34 @@
 <%= form_for @composer.job_invocation, :html => { 'data-refresh-url' => refresh_job_invocations_path, :id => 'job_invocation_form' } do |f| %>
-  Assign host:
-  <%= @composer.targeted_hosts_count %>
-  <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Refresh"), :id => 'refresh_execution_form') do %>
-    <%= icon_text('refresh') %>
-  <% end %>
+  <%= selectable_f f, :job_name, @composer.available_job_names %>
+
   <%= fields_for @composer.targeting do |targeting_fields| %>
     <%= targeting_fields.hidden_field :bookmark_id, :value => params[:bookmark_id] %>
     <%= textarea_f targeting_fields, :search_query, :value => @composer.displayed_search_query, :rows => 5 %>
-    <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
-    <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
+
+    <div class="form-group ">
+      <label class="col-md-2 control-label"><%= _('Resolves to') %></label>
+      <div class="col-md-4">
+        <%= @composer.targeted_hosts_count %> <%= _('hosts') %>
+        <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Refresh"), :id => 'refresh_execution_form') do %>
+          <%= icon_text('refresh') %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <label class="col-md-2 control-label"><%= _('Type of query') %></label>
+      <div class="col-md-4">
+        <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
+        <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
+      </div>
+      <span class="help-inline"><%= popover(_('Explanation'),
+                                            _("Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>")) %></span>
+    </div>
   <% end %>
-
-  <hr >
-
-  <%= selectable_f f, :job_name, @composer.available_job_names %>
 
   <% @composer.displayed_provider_types.each do |provider_type| %>
     <fieldset id="provider_<%= provider_type %>" class="provider_form">
-      <% if @composer.needs_provider_type_selection? %>
-        <legend><%= _('Provider') + ': ' + provider_type %></legend>
-      <% end %>
+      <legend><%= _('Provider') + ': ' + provider_type %></legend>
       <%= f.fields_for 'providers' do |providers_fields| %>
         <%= providers_fields.fields_for provider_type do |provider_type_fields| %>
           <%= provider_type_fields.fields_for :job_templates do |job_templates_fields| %>
