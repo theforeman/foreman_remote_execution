@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get 'clone_template'
       get 'lock'
       get 'unlock'
+      post 'preview'
     end
     collection do
       get 'revision'
