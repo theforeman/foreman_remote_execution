@@ -13,6 +13,7 @@ class Targeting < ActiveRecord::Base
   has_many :template_invocations, :through => :job_invocation
 
   validates :targeting_type, :presence => true, :inclusion => Targeting::TYPES.keys
+  validate :bookmark_or_query_is_present
 
   attr_accessible :targeting_type, :bookmark_id, :user, :search_query
 
@@ -41,6 +42,12 @@ class Targeting < ActiveRecord::Base
   end
 
   private
+
+  def bookmark_or_query_is_present
+    if bookmark.nil? && search_query.nil?
+      errors.add :base, _('Bookmark or search query can\'t be nil')
+    end
+  end
 
   def assign_search_query
     self.search_query = bookmark.query if static? && bookmark
