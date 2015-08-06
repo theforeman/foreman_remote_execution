@@ -13,8 +13,8 @@ module Actions
         'Proxy::RemoteExecution::Ssh::CommandAction'
       end
 
-      def on_event(event)
-        super(event)
+      def on_data(data)
+        super(data)
         error! _("Script execution failed") if failed_run?
       end
 

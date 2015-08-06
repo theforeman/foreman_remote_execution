@@ -1,6 +1,6 @@
 module Actions
   module RemoteExecution
-    class JobRunHost < Actions::Base
+    class JobRunHost < Actions::EntryAction
 
       include ::Dynflow::Action::Cancellable
 
@@ -11,7 +11,7 @@ module Actions
               { :hostname => host.name, :job_invocation_id => job_invocation.id }
         end
 
-        interface = available_interfaces(template_invocation, host)
+        interface = available_interfaces(template_invocation, host).first
         unless interface
           raise _("Couldn't not use any interface for host %{host_name} and job invocation %{job_invocation_id} (provider %{provider_type})") %\
               { :hostname => host.name, :job_invocation_id => job_invocation.id, :provider_type => template_invocation.template.provider_type }
@@ -27,11 +27,22 @@ module Actions
 
         script = renderer.render
 
+        action_subject(host, :job_name => job_invocation.job_name)
+
         hostname = interface.ip
         hostname = interface.name unless hostname.present?
         hostname = host.name unless hostname.present?
 
         plan_action(HostRun, proxy, hostname, script)
+      end
+
+      def humanized_output
+        host_run_action = planned_actions(HostRun).first
+        proxy_output = host_run_action && host_run_action.output[:proxy_output]
+        return unless proxy_output
+        if proxy_output[:result]
+          proxy_output[:result].map { |o| o[:output] }.join("")
+        end
       end
 
       def find_template_invocation_for_host(job_invocation, host)
@@ -58,7 +69,7 @@ module Actions
 
       def proxy_for_interface(interface)
         # TODO: move to proxy as a concern and make proper calculation
-        SmartProxies.all.find { |proxy| proxy.features.any? { |f| f.name.downcase == 'ssh' } }
+        SmartProxy.all.find { |proxy| proxy.features.any? { |f| f.name.downcase == 'ssh' } }
       end
     end
   end

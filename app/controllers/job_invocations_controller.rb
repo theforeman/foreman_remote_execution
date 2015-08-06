@@ -11,8 +11,8 @@ class JobInvocationsController < ApplicationController
   def create
     @composer = JobInvocationComposer.new(JobInvocation.new, params)
     if @composer.save
-      notice _('Job has been scheduled')
-      redirect_to @composer.job_invocation
+      @task = ForemanTasks.async_task(::Actions::RemoteExecution::JobRun, @composer.job_invocation)
+      redirect_to foreman_tasks_task_path(@task)
     else
       render :action => 'new'
     end
@@ -25,8 +25,8 @@ class JobInvocationsController < ApplicationController
 
   def apply
     @job_invocation = JobInvocation.find(params[:id])
-    notice 'Hello'
-    redirect_to @job_invocation
+    @task = ForemanTasks.async_task(::Actions::RemoteExecution::JobRun, @job_invocation)
+    redirect_to foreman_tasks_task_path(@task)
   end
 
   # refreshes the form
