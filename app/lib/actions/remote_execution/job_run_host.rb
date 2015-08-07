@@ -2,6 +2,10 @@ module Actions
   module RemoteExecution
     class JobRunHost < Actions::EntryAction
 
+      def resources_lock
+        :link
+      end
+
       include ::Dynflow::Action::Cancellable
 
       def plan(job_invocation, host)
@@ -40,9 +44,12 @@ module Actions
         host_run_action = planned_actions(HostRun).first
         proxy_output = host_run_action && host_run_action.output[:proxy_output]
         return unless proxy_output
+        output = []
         if proxy_output[:result]
-          proxy_output[:result].map { |o| o[:output] }.join("")
+          output << proxy_output[:result].map { |o| o[:output] }.join("")
         end
+        output << "Exit status: #{host_run_action.exit_status}" if host_run_action.exit_status
+        return output.join("\n")
       end
 
       def find_template_invocation_for_host(job_invocation, host)

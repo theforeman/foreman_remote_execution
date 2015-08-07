@@ -23,7 +23,11 @@ module Actions
       end
 
       def failed_run?
-        proxy_output.nil? || proxy_output[:exit_status] != 0
+        exit_status && proxy_output[:exit_status] != 0
+      end
+
+      def exit_status
+        proxy_output &&  proxy_output[:exit_status]
       end
     end
   end
