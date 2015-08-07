@@ -42,8 +42,16 @@ describe InputTemplateRenderer do
     end
 
     context 'with matching input defined' do
-      before { renderer.template.template_inputs<< FactoryGirl.build(:template_input, :name => 'service_name', :input_type => 'user') }
+
+      let(:job_invocation) { FactoryGirl.create(:job_invocation) }
+      let(:template_invocation) { FactoryGirl.build(:template_invocation, :template => template) }
       let(:result) { renderer.render }
+
+      before do
+        template.template_inputs << FactoryGirl.build(:template_input, :name => 'service_name', :input_type => 'user')
+        job_invocation.template_invocations << template_invocation
+        renderer.invocation = template_invocation
+      end
 
       describe 'rendering' do
         it 'can\'t render the content without job invocation since we don\'t have values' do
@@ -57,13 +65,15 @@ describe InputTemplateRenderer do
         end
 
         context 'with invocation specified' do
-          let(:result) do
-            renderer.invocation = nil # TODO
-            renderer.render
+          before do
+            FactoryGirl.create(:template_invocation_input_value,
+                               :template_invocation => template_invocation,
+                               :template_input => template.template_inputs.first,
+                               :value => 'foreman')
           end
 
           it 'can render with job invocation with corresponding value' do
-            skip 'no invocation yet'
+            renderer.render.must_equal 'service restart foreman'
           end
         end
       end
@@ -71,17 +81,6 @@ describe InputTemplateRenderer do
       describe 'preview' do
         it 'should render preview' do
           renderer.preview.must_equal 'service restart $USER_INPUT[service_name]'
-        end
-
-        context 'with invocation specified' do
-          let(:result) do
-            renderer.invocation = nil # TODO
-            renderer.render
-          end
-
-          it 'uses the value even in preview' do
-            skip 'no invocation yet'
-          end
         end
       end
     end
