@@ -1,6 +1,7 @@
 class JobInvocationComposer
   attr_accessor :params, :job_invocation, :host_ids, :search_query
   attr_reader :job_template_ids
+  delegate :job_name, :targeting, :to => :job_invocation
 
   def initialize(job_invocation, params)
     @job_invocation = job_invocation
@@ -22,14 +23,6 @@ class JobInvocationComposer
 
   def save
     valid? && job_invocation.save
-  end
-
-  def job_name
-    job_invocation.job_name
-  end
-
-  def targeting
-    job_invocation.targeting
   end
 
   def available_templates

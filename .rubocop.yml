@@ -23,3 +23,12 @@ Style/AccessorMethodName:
 
 Rails/FindBy:
   Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 200
+
+Style/WordArray:
+  Enabled: false
