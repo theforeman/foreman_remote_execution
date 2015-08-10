@@ -47,6 +47,6 @@ class JobTemplate < ::Template
 
   # we can't use standard validator, .provider_names output can change but the validator does not reflect it
   def provider_type_whitelist
-    errors.add :provider_name, :uniq unless RemoteExecutionProvider.provider_names.include?(self.provider_type)
+    errors.add :provider_type, :uniq unless RemoteExecutionProvider.provider_names.include?(self.provider_type)
   end
 end
