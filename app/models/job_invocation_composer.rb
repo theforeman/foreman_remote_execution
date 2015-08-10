@@ -2,7 +2,6 @@ class JobInvocationComposer
   attr_accessor :params, :job_invocation, :host_ids, :search_query
   attr_reader :job_template_ids
 
-  # TODO aka initialize_from_params
   def initialize(job_invocation, params)
     @job_invocation = job_invocation
     @params = params
@@ -10,7 +9,8 @@ class JobInvocationComposer
     @host_ids = validate_host_ids(params[:host_ids])
     @search_query = targeting_base[:search_query]
 
-    job_invocation.job_name = validate_job_name(job_invocation_base[:job_name]) || available_job_names.first
+    job_invocation.job_name = validate_job_name(job_invocation_base[:job_name])
+    job_invocation.job_name ||= available_job_names.first if job_invocation.new_record?
     job_invocation.targeting = build_targeting
 
     @job_template_ids = validate_job_template_ids(job_templates_base.keys.compact)
