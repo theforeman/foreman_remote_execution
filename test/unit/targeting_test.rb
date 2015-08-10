@@ -67,4 +67,14 @@ describe Targeting do
       -> { targeting.resolve_hosts! }.must_raise(Foreman::Exception)
     end
   end
+
+  context 'can delete a host' do
+    before do
+      targeting.hosts << host
+      targeting.save!
+      host.destroy
+    end
+
+    it { targeting.reload.hosts.must_be_empty }
+  end
 end
