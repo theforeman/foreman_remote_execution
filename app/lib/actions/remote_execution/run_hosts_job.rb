@@ -1,6 +1,6 @@
 module Actions
   module RemoteExecution
-    class JobRun < Actions::ActionWithSubPlans
+    class RunHostsJob < Actions::ActionWithSubPlans
       def plan(job_invocation)
         job_invocation.targeting.resolve_hosts!
         input.update(:job_name => job_invocation.job_name)
@@ -10,7 +10,7 @@ module Actions
       def create_sub_plans
         job_invocation = JobInvocation.find(input[:job_invocation_id])
         job_invocation.targeting.hosts.map do |host|
-          trigger(JobRunHost, job_invocation, host)
+          trigger(RunHostJob, job_invocation, host)
         end
       end
 

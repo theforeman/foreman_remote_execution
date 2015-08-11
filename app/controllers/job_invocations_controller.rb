@@ -11,7 +11,7 @@ class JobInvocationsController < ApplicationController
   def create
     @composer = JobInvocationComposer.new(JobInvocation.new, params)
     if @composer.save
-      @task = ForemanTasks.async_task(::Actions::RemoteExecution::JobRun, @composer.job_invocation)
+      @task = ForemanTasks.async_task(::Actions::RemoteExecution::RunHostsJob, @composer.job_invocation)
       redirect_to foreman_tasks_task_path(@task)
     else
       render :action => 'new'

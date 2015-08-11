@@ -1,14 +1,14 @@
 require "test_plugin_helper"
 
 module ForemanRemoteExecution
-  class HostRunTest <  ActiveSupport::TestCase
+  class RunProxyCommandTest <  ActiveSupport::TestCase
     include Dynflow::Testing
 
     let(:proxy) { FactoryGirl.build(:smart_proxy) }
     let(:hostname) { 'myhost.example.com' }
     let(:script) { 'ping -c 5 redhat.com' }
     let(:action) do
-      create_and_plan_action(Actions::RemoteExecution::HostRun, proxy, hostname, script)
+      create_and_plan_action(Actions::RemoteExecution::RunProxyCommand, proxy, hostname, script)
     end
 
     it 'plans for running the command action on server' do

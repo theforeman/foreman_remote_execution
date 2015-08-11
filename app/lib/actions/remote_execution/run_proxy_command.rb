@@ -1,6 +1,6 @@
 module Actions
   module RemoteExecution
-    class HostRun < Actions::ProxyAction
+    class RunProxyCommand < Actions::ProxyAction
 
       include ::Dynflow::Action::Cancellable
 
