@@ -14,6 +14,8 @@ module ForemanRemoteExecution
     initializer 'foreman_remote_execution.assets.precompile' do |app|
       app.config.assets.precompile += %w(
         'template_input.js',
+        'template_invocation.js',
+        'template_invocation.scss.css',
       )
     end
 
@@ -21,6 +23,8 @@ module ForemanRemoteExecution
       SETTINGS[:foreman_remote_execution] =
         {:assets => {:precompile => [
           'template_input.js',
+          'template_invocation.js',
+          'template_invocation.scss.css',
         ]}}
     end
 
@@ -45,6 +49,10 @@ module ForemanRemoteExecution
           permission :destroy_job_templates, { :job_templates => [:destroy],
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
+
+          permission :view_job_invocations, { :job_invocations => [:show] }, :resource_type => 'JobInvocation'
+
+          permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh] }, :resource_type => 'JobInvocation'
         end
 
         # Add a new role called 'ForemanRemoteExecution' if it doesn't exist
@@ -96,6 +104,7 @@ module ForemanRemoteExecution
       User.send(:include, ForemanRemoteExecution::UserExtensions)
       Host.send(:include, ForemanRemoteExecution::HostExtensions)
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
+      HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|

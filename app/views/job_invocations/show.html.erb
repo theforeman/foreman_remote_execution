@@ -1,0 +1,11 @@
+<h2><%= @job_invocation.job_name %></h2>
+
+Template invocations:
+<ul>
+  <% @job_invocation.template_invocations.each do |ti| %>
+    <li><%= ti.template.name %> <%= ti.template.provider_type %> with <%= ti.input_values.inspect %></li>
+  <% end %>
+</ul>
+
+Targeting:
+<%= @job_invocation.targeting.inspect %>

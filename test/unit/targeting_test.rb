@@ -9,7 +9,7 @@ describe Targeting do
     bookmark.query = "name = bar"
   end
 
-  context 'Able to be created with search term' do
+  context 'able to be created with search term' do
     before { targeting.search_query = "name = foo" }
     it { assert targeting.save }
   end
@@ -41,20 +41,6 @@ describe Targeting do
     it { targeting.hosts.must_include(host) }
   end
 
-  context 'setting static with bookmark does not resolve dynamically' do
-    before do
-      @old_query = bookmark.query
-      targeting.search_query = nil
-      targeting.user = users(:admin)
-      targeting.bookmark = bookmark
-      targeting.save!
-      targeting.bookmark.query = "someotherquery"
-      targeting.resolve_hosts!
-    end
-
-    it { assert_equal @old_query, targeting.search_query  }
-  end
-
   context 'can delete a user' do
     before do
       targeting.user = users(:one)
@@ -76,5 +62,46 @@ describe Targeting do
     end
 
     it { targeting.reload.hosts.must_be_empty }
+  end
+
+  describe '#build_query_from_hosts(ids)' do
+    let(:second_host) { FactoryGirl.create(:host) }
+
+    before do
+      host
+      second_host
+    end
+
+    context 'for two hosts' do
+      let(:query) { targeting.build_query_from_hosts([ host.id, second_host.id ]) }
+
+      it 'builds query using host names joining with or' do
+        query.must_include "name = #{host.name}"
+        query.must_include "name = #{second_host.name}"
+        query.must_include ' or '
+
+        Host.search_for(query).must_include host
+        Host.search_for(query).must_include second_host
+      end
+    end
+
+    context 'for one host' do
+      let(:query) { targeting.build_query_from_hosts([ host.id ]) }
+
+      it 'builds query using host name' do
+        query.must_equal "name = #{host.name}"
+        Host.search_for(query).must_include host
+        Host.search_for(query).wont_include second_host
+      end
+    end
+
+    context 'for no id' do
+      let(:query) { targeting.build_query_from_hosts([]) }
+
+      it 'builds query to find all hosts' do
+        Host.search_for(query).must_include host
+        Host.search_for(query).must_include second_host
+      end
+    end
   end
 end

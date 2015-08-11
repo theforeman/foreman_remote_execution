@@ -46,9 +46,6 @@ describe RemoteExecutionProvider do
 
       it { provider_names.must_include 'ssh' }
       it { provider_names.must_include 'custom' }
-      it 'returns all registered providers' do
-        provider_names.size.must_equal 2
-      end
     end
   end
 end
