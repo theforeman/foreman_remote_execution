@@ -31,6 +31,10 @@ module Actions
 
         script = renderer.render
 
+        unless script
+          raise _("Failed rendering template: %s") % renderer.error_message
+        end
+
         action_subject(host, :job_name => job_invocation.job_name)
 
         hostname = interface.ip
