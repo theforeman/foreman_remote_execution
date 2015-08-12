@@ -2,7 +2,7 @@ module Actions
   module RemoteExecution
     class RunHostJob < Actions::EntryAction
 
-      def resources_lock
+      def resource_locks
         :link
       end
 
@@ -17,6 +17,8 @@ module Actions
         script = renderer.render
         raise _("Failed rendering template: %s") % renderer.error_message unless script
 
+        link!(job_invocation)
+        link!(template_invocation)
         action_subject(host, :job_name => job_invocation.job_name)
 
         plan_action(RunProxyCommand, proxy, hostname, script)

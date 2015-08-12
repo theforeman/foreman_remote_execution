@@ -16,23 +16,6 @@ module ForemanRemoteExecution
       app.config.paths['db/migrate'] += ForemanRemoteExecution::Engine.paths['db/migrate'].existent
     end
 
-    initializer 'foreman_remote_execution.assets.precompile' do |app|
-      app.config.assets.precompile += %w(
-        'template_input.js',
-        'template_invocation.js',
-        'template_invocation.scss.css',
-      )
-    end
-
-    initializer 'foreman_remote_execution.configure_assets', :group => :assets do
-      SETTINGS[:foreman_remote_execution] =
-        {:assets => {:precompile => [
-          'template_input.js',
-          'template_invocation.js',
-          'template_invocation.scss.css',
-        ]}}
-    end
-
     initializer "foreman_remote_execution.apipie" do
       Apipie.configuration.checksum_path += ['/api/']
     end
@@ -118,6 +101,7 @@ module ForemanRemoteExecution
       end
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
       HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
+      ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|

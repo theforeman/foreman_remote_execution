@@ -6,6 +6,9 @@ class InputTemplateRenderer
 
   attr_accessor :template, :host, :invocation, :error_message
 
+  # takes template object that should be rendered
+  # host and template invocation arguments are optional
+  # so we can render values based on parameters, facts or user inputs
   def initialize(template, host = nil, invocation = nil)
     @host = host
     @invocation = invocation

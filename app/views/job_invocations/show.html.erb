@@ -1,16 +1,57 @@
-<h2><%= @job_invocation.job_name %></h2>
+<% title @job_invocation.job_name %>
+<% stylesheet 'job_invocations' %>
 
-Template invocations:
-<ul>
-  <% @job_invocation.template_invocations.each do |ti| %>
-    <li><%= ti.template.name %> <%= ti.template.provider_type %> with <%= ti.input_values.inspect %></li>
-  <% end %>
-</ul>
+<% # TODO path to cancel %>
+<% title_actions button_group(link_to_if_authorized(_("Cancel Job"), hash_for_hosts_path,
+                              :class => "btn btn-danger",
+                              :title => _('Try to cancel the job'),
+                              :disabled => !@job_invocation.last_task.try(:pending),
+                              :method => :post)) %>
 
-Targeting:
-<%= @job_invocation.targeting.inspect %>
+<div class="col-md-12">
+  <div id="status_chart">
+    <% if @job_invocation.last_task.try(:output).present? %>
+      <%= job_invocation_chart(@job_invocation.last_task) %>
+    <% else %>
+      <h4><%= 'Job not started yet 0%' %></h4>
+    <% end %>
+  </div>
 
-<%= form_for @job_invocation, :url => apply_job_invocation_path(@job_invocation), :html => { :method => 'post' } do |f| %>
-  <%= f.submit('Apply', :class => "btn btn-primary") %>
-<% end %>
+  <div class="col-md-6 infoblock">
+    <h4><%= _('Target hosts') %></h4>
+    <% if @job_invocation.bookmark.present? %>
+      <%= _('Bookmark') %> <%= @job_invocation.bookmark.name %><br>
+    <% else %>
+      <%= _('Manual selection') %>
+    <% end %>
+    <%= 'using ' + _(Targeting::TYPES[@job_invocation.targeting.targeting_type]) %>
+    <pre><%= @job_invocation.targeting.search_query %></pre>
+
+    <%= _('Evaluated at:') %> <%= @job_invocation.targeting.resolved_at %><br>
+    <% if @job_invocation.template_invocations.size > 1 %>
+      <% @job_invocation.template_invocations.each do |template_invocation| %>
+        <%= host_counter _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)), ForemanTasks::Task::DynflowTask.for_action(Actions::RemoteExecution::RunHostJob).for_resource(template_invocation).uniq.size %>
+      <% end %>
+    <% end %>
+    <%= host_counter(_('Total hosts'), @job_invocation.last_task.output['total_count']) if @job_invocation.last_task %>
+
+  </div>
+
+  <div class="col-md-6 infoblock">
+    <h4><%= _('Providers and templates') %></h4>
+    <% @job_invocation.template_invocations.each do |template_invocation| %>
+      <h5><b><%= template_invocation.template.name %></b> <%= 'through' %> <%= _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)) %></h5>
+      <pre><%= InputTemplateRenderer.new(template_invocation.template, nil, template_invocation).preview %></pre>
+
+      <% if template_invocation.input_values.present? %>
+        <%= _('following user inputs were provided') %>
+        <ul>
+          <% template_invocation.input_values.joins(:template_input).each do |input_value| %>
+            <li><b><%= input_value.template_input.name %></b>: <%= input_value.value %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 

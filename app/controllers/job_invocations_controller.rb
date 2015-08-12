@@ -12,7 +12,7 @@ class JobInvocationsController < ApplicationController
     @composer = JobInvocationComposer.new(JobInvocation.new, params)
     if @composer.save
       @task = ForemanTasks.async_task(::Actions::RemoteExecution::RunHostsJob, @composer.job_invocation)
-      redirect_to foreman_tasks_task_path(@task)
+      redirect_to job_invocation_path(@composer.job_invocation)
     else
       render :action => 'new'
     end
@@ -21,12 +21,6 @@ class JobInvocationsController < ApplicationController
   def show
     # TODO authorization
     @job_invocation = JobInvocation.find(params[:id])
-  end
-
-  def apply
-    @job_invocation = JobInvocation.find(params[:id])
-    @task = ForemanTasks.async_task(::Actions::RemoteExecution::JobRun, @job_invocation)
-    redirect_to foreman_tasks_task_path(@task)
   end
 
   # refreshes the form

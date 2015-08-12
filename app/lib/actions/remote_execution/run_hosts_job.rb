@@ -3,8 +3,11 @@ module Actions
     class RunHostsJob < Actions::ActionWithSubPlans
       def plan(job_invocation)
         job_invocation.targeting.resolve_hosts!
+        job_invocation.update_attribute :last_task_id, task.id
         input.update(:job_name => job_invocation.job_name)
         plan_self(job_invocation_id: job_invocation.id)
+
+        action_subject(job_invocation)
       end
 
       def create_sub_plans
