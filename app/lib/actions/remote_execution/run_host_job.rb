@@ -37,6 +37,10 @@ module Actions
         return output.join("\n")
       end
 
+      def humanized_name
+        _('Run ') + input[:job_name] + _(' on ') + input[:host][:name]
+      end
+
       def find_template_invocation(job_invocation, host)
         providers = available_providers(job_invocation, host)
         providers.each do |provider|
