@@ -15,8 +15,8 @@ module RemoteExecutionHelper
     pending = bulk_task.output['total_count'] - failed - success
 
     flot_pie_chart("status", job_invocation_status(@job_invocation) + ' ' + (@job_invocation.last_task.progress * 100).to_i.to_s + '%',
-                   [{:label => _('Success'), :data => success, :color => '#18AC05'},
-                    {:label => _('Failed'), :data => failed, :color => '#AF0011'},
+                   [{:label => _('Success'), :data => success, :color => '#5CB85C'},
+                    {:label => _('Failed'), :data => failed, :color => '#D9534F'},
                     {:label => _('Pending'), :data => pending, :color => '#DEDEDE'}],
                    options)
   end
@@ -28,6 +28,17 @@ module RemoteExecutionHelper
   def host_counter(label, count)
     content_tag(:div, :class => 'host_counter') do
       content_tag(:div, label, :class => 'header') + content_tag(:div, count.to_s, :class => 'count')
+    end
+  end
+
+  def template_invocation_status(task)
+    case task.result
+      when 'warning', 'error'
+        content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-exclamation-sign') + content_tag(:span, _('failed'), :class => 'status-error')
+      when 'success'
+        content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-ok-sign') + content_tag(:span, _('success'), :class => 'status-ok')
+      else
+        task.result
     end
   end
 

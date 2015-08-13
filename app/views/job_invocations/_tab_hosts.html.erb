@@ -1,0 +1,27 @@
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+  <tr>
+    <th><%= _('Host') %></th>
+    <th><%= _('Provider') %></th>
+    <th><%= _('Status') %></th>
+    <th><%= _('Actions') %></th>
+  </tr>
+  </thead>
+
+  <% job_invocation.last_task.sub_tasks.for_action_types('Actions::RemoteExecution::RunHostJob').each do |task| %>
+    <tr>
+      <% template_invocation = task.locks.where(:resource_type => 'TemplateInvocation').first.try(:resource) %>
+      <% if (host = task.locks.where(:resource_type => 'Host::Managed').first.try(:resource)) %>
+        <td><%= link_to host.name, host_path(host) %></td>
+      <% else %>
+        <td><%= _('host not locked') %></td>
+      <% end %>
+
+      <td><%= template_invocation.nil? ? _('N/A') : _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)) %></td>
+      <td><%= template_invocation_status(task) %></td>
+      <td><%= action_buttons(
+                      display_link_if_authorized(_("Details"), hash_for_foreman_tasks_task_path(:id => task).merge(:auth_object => host, :permission => :view_foreman_tasks))
+              ) %></td>
+    </tr>
+  <% end %>
+</table>
