@@ -14,11 +14,11 @@ module RemoteExecutionHelper
     failed = bulk_task.output['failed_count']
     pending = bulk_task.output['total_count'] - failed - success
 
-    flot_pie_chart("status", job_invocation_status(@job_invocation) + ' ' + (@job_invocation.last_task.progress * 100).to_i.to_s + '%', [
-                             {:label => _('Success'), :data => success, :color => '#18AC05'},
-                             {:label => _('Failed'), :data => failed, :color => '#AF0011'},
-                             {:label => _('Pending'), :data => pending, :color => '#DEDEDE'},
-                           ], options)
+    flot_pie_chart("status", job_invocation_status(@job_invocation) + ' ' + (@job_invocation.last_task.progress * 100).to_i.to_s + '%',
+                   [{:label => _('Success'), :data => success, :color => '#18AC05'},
+                    {:label => _('Failed'), :data => failed, :color => '#AF0011'},
+                    {:label => _('Pending'), :data => pending, :color => '#DEDEDE'}],
+                   options)
   end
 
   def job_invocation_status(invocation)

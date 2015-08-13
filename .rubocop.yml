@@ -35,3 +35,9 @@ Style/WordArray:
 
 Style/BracesAroundHashParameters:
   Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
