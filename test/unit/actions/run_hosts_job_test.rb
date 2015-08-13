@@ -1,3 +1,4 @@
+
 require "test_plugin_helper"
 
 module ForemanRemoteExecution
@@ -16,7 +17,10 @@ module ForemanRemoteExecution
     end
     let(:host) { FactoryGirl.create(:host) }
     let(:action) do
-      create_and_plan_action(Actions::RemoteExecution::RunHostsJob, job_invocation)
+      action = create_action(Actions::RemoteExecution::RunHostsJob)
+      action.expects(:action_subject).with(job_invocation)
+      action.expects(:task).returns(OpenStruct.new(:id => '123'))
+      plan_action(action, job_invocation)
     end
 
     before do
