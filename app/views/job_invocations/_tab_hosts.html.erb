@@ -14,7 +14,7 @@
       <% if (host = task.locks.where(:resource_type => 'Host::Managed').first.try(:resource)) %>
         <td><%= link_to host.name, host_path(host) %></td>
       <% else %>
-        <td><%= _('host not locked') %></td>
+        <td><%= _('host not linked') %></td>
       <% end %>
 
       <td><%= template_invocation.nil? ? _('N/A') : _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)) %></td>

@@ -2,7 +2,7 @@
   <% if job_invocation.last_task.try(:output).present? %>
     <%= job_invocation_chart(job_invocation.last_task) %>
   <% else %>
-    <h4><%= 'Job not started yet 0%' %></h4>
+    <h4><%= _('Job not started yet 0%') %></h4>
   <% end %>
 </div>
 

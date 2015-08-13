@@ -38,7 +38,7 @@ module Actions
       end
 
       def humanized_name
-        _('Run ') + input[:job_name] + _(' on ') + input[:host][:name]
+        _('Run %{job_name} on %{host}') % { :job_name => input[:job_name], :host => input[:host][:name] }
       end
 
       def find_template_invocation(job_invocation, host)
