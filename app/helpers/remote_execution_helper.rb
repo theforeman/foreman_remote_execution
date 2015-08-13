@@ -44,6 +44,7 @@ module RemoteExecutionHelper
 
   def job_invocation_task_buttons(task)
     buttons = []
+    buttons << link_to(_('Refresh'), {}, :class => 'btn btn-default', :title => _('Refresh this page'))
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
       buttons << link_to(_("Last Job Task"), foreman_tasks_task_path(task),
                          :class => "btn btn-default",
