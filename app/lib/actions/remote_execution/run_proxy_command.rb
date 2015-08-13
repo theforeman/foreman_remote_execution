@@ -27,7 +27,7 @@ module Actions
       end
 
       def exit_status
-        proxy_output &&  proxy_output[:exit_status]
+        proxy_output && proxy_output[:exit_status]
       end
     end
   end

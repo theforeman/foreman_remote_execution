@@ -9,6 +9,8 @@ module Actions
       include ::Dynflow::Action::Cancellable
 
       def plan(job_invocation, host)
+        action_subject(host, :job_name => job_invocation.job_name)
+
         template_invocation = find_template_invocation(job_invocation, host)
         hostname = find_ip_or_hostname(host)
         proxy = find_proxy(template_invocation, host)
@@ -19,7 +21,6 @@ module Actions
 
         link!(job_invocation)
         link!(template_invocation)
-        action_subject(host, :job_name => job_invocation.job_name)
 
         plan_action(RunProxyCommand, proxy, hostname, script)
       end
