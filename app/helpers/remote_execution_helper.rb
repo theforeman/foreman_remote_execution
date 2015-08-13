@@ -8,7 +8,7 @@ module RemoteExecutionHelper
   end
 
   def job_invocation_chart(bulk_task)
-    options = { :class => "statistics-pie small", :expandable => true, :'border' => 0, :show_title => true }
+    options = { :class => "statistics-pie small", :expandable => true, :border => 0, :show_title => true }
 
     success = bulk_task.output['success_count']
     failed = bulk_task.output['failed_count']
