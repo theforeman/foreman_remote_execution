@@ -2,7 +2,7 @@
 require "test_plugin_helper"
 
 module ForemanRemoteExecution
-  class RunHostsJobTest <  ActiveSupport::TestCase
+  class RunHostsJobTest < ActiveSupport::TestCase
     include Dynflow::Testing
 
     let(:proxy) { FactoryGirl.build(:smart_proxy) }
@@ -33,7 +33,7 @@ module ForemanRemoteExecution
     end
 
     it 'triggers the RunHostJob actions on the resolved hosts in run phase' do
-      action.expects(:trigger).with(Actions::RemoteExecution::RunHostJob, job_invocation, host)
+      action.expects(:trigger).with(Actions::RemoteExecution::RunHostJob, job_invocation, host, {})
       action.create_sub_plans
     end
   end

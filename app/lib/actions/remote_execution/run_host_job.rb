@@ -8,7 +8,7 @@ module Actions
 
       include ::Dynflow::Action::Cancellable
 
-      def plan(job_invocation, host)
+      def plan(job_invocation, host, connection_options = {})
         action_subject(host, :job_name => job_invocation.job_name)
 
         template_invocation = find_template_invocation(job_invocation, host)
@@ -22,7 +22,7 @@ module Actions
         link!(job_invocation)
         link!(template_invocation)
 
-        plan_action(RunProxyCommand, proxy, hostname, script)
+        plan_action(RunProxyCommand, proxy, hostname, script, { :connection_options => connection_options })
       end
 
       def output
