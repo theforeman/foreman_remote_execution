@@ -30,4 +30,21 @@ module RemoteExecutionHelper
       content_tag(:div, label, :class => 'header') + content_tag(:div, count.to_s, :class => 'count')
     end
   end
+
+  def job_invocation_task_buttons(task)
+    buttons = []
+    if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
+      buttons << link_to(_("Last Job Task"), foreman_tasks_task_path(task),
+                         :class => "btn btn-default",
+                         :title => _('See the last task details'))
+    end
+    if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task)
+      buttons << link_to(_("Cancel Job"), cancel_foreman_tasks_task_path(task),
+                         :class => "btn btn-danger",
+                         :title => _('Try to cancel the job'),
+                         :disabled => !task.cancellable?,
+                         :method => :post)
+    end
+    return button_group(*buttons)
+  end
 end

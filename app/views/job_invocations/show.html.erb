@@ -1,13 +1,8 @@
 <% title @job_invocation.job_name %>
 <% stylesheet 'job_invocations' %>
 
-<% if @job_invocation.last_task &&
-      authorized_for(:permission => :edit_foreman_tasks, :auth_object => @job_invocation.last_task) %>
-<% title_actions button_group(link_to(_("Cancel Job"), cancel_foreman_tasks_task_path(@job_invocation.last_task),
-                              :class => "btn btn-danger",
-                              :title => _('Try to cancel the job'),
-                              :disabled => !@job_invocation.last_task.cancellable?,
-                              :method => :post)) %>
+<% if @job_invocation.last_task %>
+  <% title_actions(job_invocation_task_buttons(@job_invocation.last_task)) %>
 <% end %>
 
 <div class="col-md-12">
