@@ -1,0 +1,30 @@
+<% title _('Job invocations') %>
+
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+    <tr>
+      <th><%= _('Job name') %></th>
+      <th><%= _('Status') %></th>
+      <th><%= _('Succeeded') %></th>
+      <th><%= _('Failed') %></th>
+      <th><%= _('Pending') %></th>
+      <th><%= _('Total hosts') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @job_invocations.each do |invocation| %>
+      <tr>
+        <td><%= link_to_if_authorized invocation.job_name, hash_for_job_invocation_path(invocation).merge(:auth_object => invocation, :permission => :view_job_invocation) %></td>
+        <td><%= link_to_invocation_task_if_authorized(invocation) %></td>
+        <td><%= invocation_count(invocation, :output_key => :success_count) %></td>
+        <td><%= invocation_count(invocation, :output_key => :failed_count) %></td>
+        <td><%= invocation_count(invocation, :output_key => :pending_count) %></td>
+        <td><%= invocation_count(invocation, :output_key => :total_count) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<%= will_paginate_with_info @job_invocations %>

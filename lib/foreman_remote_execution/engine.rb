@@ -6,30 +6,23 @@ module ForemanRemoteExecution
     config.autoload_paths += Dir["#{config.root}/app/helpers/concerns"]
     config.autoload_paths += Dir["#{config.root}/app/models/concerns"]
 
+
+    initializer 'foreman_remote_execution.load_default_settings', :before => :load_config_initializers do
+      require_dependency File.expand_path('../../../app/models/setting/remote_execution.rb', __FILE__) if (Setting.table_exists? rescue(false))
+    end
+
     # Add any db migrations
     initializer 'foreman_remote_execution.load_app_instance_data' do |app|
       app.config.paths['db/migrate'] += ForemanRemoteExecution::Engine.paths['db/migrate'].existent
     end
 
-    initializer 'foreman_remote_execution.assets.precompile' do |app|
-      app.config.assets.precompile += %w(
-        'template_input.js',
-        'template_invocation.js',
-        'template_invocation.scss.css',
-      )
-    end
-
-    initializer 'foreman_remote_execution.configure_assets', :group => :assets do
-      SETTINGS[:foreman_remote_execution] =
-        {:assets => {:precompile => [
-          'template_input.js',
-          'template_invocation.js',
-          'template_invocation.scss.css',
-        ]}}
-    end
-
     initializer "foreman_remote_execution.apipie" do
       Apipie.configuration.checksum_path += ['/api/']
+    end
+
+    initializer "foreman_remote_execution.require_dynflow", :before => "foreman_tasks.initialize_dynflow" do |app|
+      ForemanTasks.dynflow.require!
+      ForemanTasks.dynflow.config.eager_load_paths << File.join(ForemanRemoteExecution::Engine.root, 'app/lib/actions')
     end
 
     initializer 'foreman_remote_execution.register_plugin', after: :finisher_hook do |_app|
@@ -50,7 +43,7 @@ module ForemanRemoteExecution
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
 
-          permission :view_job_invocations, { :job_invocations => [:show] }, :resource_type => 'JobInvocation'
+          permission :view_job_invocations, { :job_invocations => [:index, :show, :auto_complete_search] }, :resource_type => 'JobInvocation'
 
           permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh] }, :resource_type => 'JobInvocation'
         end
@@ -64,6 +57,12 @@ module ForemanRemoteExecution
              caption: N_('Job templates'),
              parent: :hosts_menu,
              after: :provisioning_templates
+
+        menu :top_menu, :job_invocations,
+             url_hash: { controller: :job_invocations, action: :index },
+             caption: N_('Jobs'),
+             parent: :monitor_menu,
+             after: :audits
 
         # add dashboard widget
         # widget 'foreman_remote_execution_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
@@ -102,9 +101,13 @@ module ForemanRemoteExecution
       (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateExtensions) }
 
       User.send(:include, ForemanRemoteExecution::UserExtensions)
-      Host.send(:include, ForemanRemoteExecution::HostExtensions)
+      (Host::Base.descendants + [Host::Base]).each do |klass|
+        klass.send(:include, ForemanRemoteExecution::HostExtensions)
+        klass.send(:include, ForemanTasks::Concerns::HostActionSubject)
+      end
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
       HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
+      ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|

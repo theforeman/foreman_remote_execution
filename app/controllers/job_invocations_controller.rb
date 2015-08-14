@@ -1,4 +1,6 @@
 class JobInvocationsController < ApplicationController
+  include Foreman::Controller::AutoCompleteSearch
+
   def new
     @composer = JobInvocationComposer.new(JobInvocation.new,
                                           :host_ids => params[:host_ids],
@@ -11,16 +13,19 @@ class JobInvocationsController < ApplicationController
   def create
     @composer = JobInvocationComposer.new(JobInvocation.new, params)
     if @composer.save
-      notice _('Job has been scheduled')
-      redirect_to @composer.job_invocation
+      @task = ForemanTasks.async_task(::Actions::RemoteExecution::RunHostsJob, @composer.job_invocation)
+      redirect_to job_invocation_path(@composer.job_invocation)
     else
       render :action => 'new'
     end
   end
 
   def show
-    # TODO authorization
-    @job_invocation = JobInvocation.find(params[:id])
+    @job_invocation = resource_base.find(params[:id])
+  end
+
+  def index
+    @job_invocations = resource_base.search_for(params[:search]).paginate(:page => params[:page]).order('id DESC')
   end
 
   # refreshes the form

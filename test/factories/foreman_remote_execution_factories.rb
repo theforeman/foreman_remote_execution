@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :job_template do |f|
     f.sequence(:name) { |n| "Job template #{n}" }
     f.template 'id'
-    f.provider_type 'ssh'
+    f.provider_type 'Ssh'
 
     trait :with_input do
       after(:build) do |template, evaluator|

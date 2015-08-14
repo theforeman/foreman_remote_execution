@@ -1,10 +1,10 @@
 class RemoteExecutionProvider
   def self.provider_for(type)
-    providers[type.to_s] || providers[:ssh]
+    providers[type.to_s] || providers[:Ssh]
   end
 
   def self.providers
-    @providers ||= { :ssh => N_(SSHExecutionProvider) }.with_indifferent_access
+    @providers ||= { :Ssh => N_(SSHExecutionProvider) }.with_indifferent_access
   end
 
   def self.register(key, klass)

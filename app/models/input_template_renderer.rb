@@ -6,6 +6,9 @@ class InputTemplateRenderer
 
   attr_accessor :template, :host, :invocation, :error_message
 
+  # takes template object that should be rendered
+  # host and template invocation arguments are optional
+  # so we can render values based on parameters, facts or user inputs
   def initialize(template, host = nil, invocation = nil)
     @host = host
     @invocation = invocation
@@ -13,7 +16,7 @@ class InputTemplateRenderer
   end
 
   def render
-    render_safe(@template.template, [ :input ])
+    render_safe(@template.template, [ :input ], :host => @host)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
     Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")

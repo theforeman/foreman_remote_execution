@@ -5,4 +5,9 @@ class TemplateInvocation < ActiveRecord::Base
   has_many :input_values, :class_name => 'TemplateInvocationInputValue', :dependent => :destroy
   has_one :targeting, :through => :job_invocation
 
+  include ForemanTasks::Concerns::ActionSubject
+
+  def to_action_input
+    { :id => id, :name => template.name }
+  end
 end

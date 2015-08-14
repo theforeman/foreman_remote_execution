@@ -1,11 +1,21 @@
-<h2><%= @job_invocation.job_name %></h2>
+<% title @job_invocation.job_name %>
+<% stylesheet 'job_invocations' %>
 
-Template invocations:
-<ul>
-  <% @job_invocation.template_invocations.each do |ti| %>
-    <li><%= ti.template.name %> <%= ti.template.provider_type %> with <%= ti.input_values.inspect %></li>
-  <% end %>
+<% if @job_invocation.last_task %>
+  <% title_actions(job_invocation_task_buttons(@job_invocation.last_task)) %>
+<% end %>
+
+<ul class="nav nav-tabs" data-tabs="tabs">
+  <li class="active"><a href="#primary" data-toggle="tab"><%= _('Overview') %></a></li>
+  <li><a href="#hosts" data-toggle="tab"><%= _('Hosts') %></a></li>
 </ul>
 
-Targeting:
-<%= @job_invocation.targeting.inspect %>
+<div class="tab-content">
+  <div class="tab-pane active" id="primary">
+    <%= render 'tab_overview', :job_invocation => @job_invocation %>
+  </div>
+
+  <div class="tab-pane" id="hosts">
+    <%= render 'tab_hosts', :job_invocation => @job_invocation %>
+  </div>
+</div>

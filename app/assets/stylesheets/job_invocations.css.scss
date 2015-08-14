@@ -1,0 +1,35 @@
+div#status_chart {
+  float: right;
+}
+
+div.infoblock {
+  margin-bottom: 20px;
+  line-height: 2;
+
+  pre {
+    margin-top: 5px;
+  }
+
+  div.host_counter {
+    float: left;
+    min-width: 100px;
+    text-align: center;
+
+    .count {
+      font-size: 20px;
+    }
+  }
+}
+
+// chances are that these will be present in Foreman 1.10
+.status-ok {
+  color: #5CB85C;
+}
+
+.status-error {
+  color: #D9534F
+}
+
+.status-warn, .status-question {
+  color: #DB843D;
+}
