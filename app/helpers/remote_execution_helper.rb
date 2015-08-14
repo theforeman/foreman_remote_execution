@@ -47,6 +47,8 @@ module RemoteExecutionHelper
         content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-exclamation-sign') + content_tag(:span, _('failed'), :class => 'status-error')
       when 'success'
         content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-ok-sign') + content_tag(:span, _('success'), :class => 'status-ok')
+      when 'pending'
+        content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-question-sign') + content_tag(:span, _('pending'))
       else
         task.result
     end
