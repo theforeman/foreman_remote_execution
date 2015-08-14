@@ -16,7 +16,7 @@ class InputTemplateRenderer
   end
 
   def render
-    render_safe(@template.template, [ :input ])
+    render_safe(@template.template, [ :input ], :host => @host)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
     Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")
