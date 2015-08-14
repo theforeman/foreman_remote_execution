@@ -7,22 +7,32 @@ module RemoteExecutionHelper
     TemplateInput::TYPES.map { |key, name| [ _(name), key ] }
   end
 
-  def job_invocation_chart(bulk_task)
-    options = { :class => "statistics-pie small", :expandable => true, :border => 0, :show_title => true }
+  def job_invocation_chart(invocation)
+    options = { :class => 'statistics-pie small', :expandable => true, :border => 0, :show_title => true }
 
-    success = bulk_task.output['success_count']
-    failed = bulk_task.output['failed_count']
-    pending = bulk_task.output['total_count'] - failed - success
+    if (bulk_task = invocation.last_task)
+      success = bulk_task.output['success_count'] || 0
+      failed = bulk_task.output['failed_count'] || 0
+      pending = (bulk_task.output['pending_count'] || 0)
 
-    flot_pie_chart("status", job_invocation_status(@job_invocation) + ' ' + (@job_invocation.last_task.progress * 100).to_i.to_s + '%',
-                   [{:label => _('Success'), :data => success, :color => '#5CB85C'},
-                    {:label => _('Failed'), :data => failed, :color => '#D9534F'},
-                    {:label => _('Pending'), :data => pending, :color => '#DEDEDE'}],
-                   options)
+      flot_pie_chart('status', job_invocation_status(invocation),
+                     [{:label => _('Success'), :data => success, :color => '#5CB85C'},
+                      {:label => _('Failed'), :data => failed, :color => '#D9534F'},
+                      {:label => _('Pending'), :data => pending, :color => '#DEDEDE'}],
+                     options)
+    else
+      content_tag(:h4, job_invocation_status(invocation))
+    end
   end
 
   def job_invocation_status(invocation)
-    invocation.last_task.pending ? _('Running') : _('Finished')
+    if invocation.last_task.blank?
+      _('Job not started yet 0%')
+    else
+      label = invocation.last_task.pending ? _('Running') : _('Finished')
+      label + ' ' + (invocation.last_task.progress * 100).to_i.to_s + '%'
+    end
+
   end
 
   def host_counter(label, count)
@@ -58,5 +68,19 @@ module RemoteExecutionHelper
                          :method => :post)
     end
     return button_group(*buttons)
+  end
+
+  def link_to_invocation_task_if_authorized(invocation)
+    if invocation.last_task.present?
+      link_to_if_authorized job_invocation_status(invocation),
+                            hash_for_foreman_tasks_task_path(invocation.last_task).merge(:auth_object => invocation.last_task, :permission => :view_foreman_tasks)
+    else
+      job_invocation_status(invocation)
+    end
+  end
+
+  def invocation_count(invocation, options = {})
+    options = { :unknown_string => 'N/A' }.merge(options)
+    (invocation.last_task.try(:output) || {}).fetch(options[:output_key], options[:unknown_string])
   end
 end

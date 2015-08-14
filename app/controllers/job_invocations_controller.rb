@@ -1,4 +1,6 @@
 class JobInvocationsController < ApplicationController
+  include Foreman::Controller::AutoCompleteSearch
+
   def new
     @composer = JobInvocationComposer.new(JobInvocation.new,
                                           :host_ids => params[:host_ids],
@@ -19,8 +21,11 @@ class JobInvocationsController < ApplicationController
   end
 
   def show
-    # TODO authorization
-    @job_invocation = JobInvocation.find(params[:id])
+    @job_invocation = resource_base.find(params[:id])
+  end
+
+  def index
+    @job_invocations = resource_base.search_for(params[:search]).paginate(:page => params[:page]).order('id DESC')
   end
 
   # refreshes the form

@@ -43,7 +43,7 @@ module ForemanRemoteExecution
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
 
-          permission :view_job_invocations, { :job_invocations => [:show] }, :resource_type => 'JobInvocation'
+          permission :view_job_invocations, { :job_invocations => [:index, :show] }, :resource_type => 'JobInvocation'
 
           permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh] }, :resource_type => 'JobInvocation'
         end
@@ -57,6 +57,12 @@ module ForemanRemoteExecution
              caption: N_('Job templates'),
              parent: :hosts_menu,
              after: :provisioning_templates
+
+        menu :top_menu, :job_invocations,
+             url_hash: { controller: :job_invocations, action: :index },
+             caption: N_('Jobs'),
+             parent: :monitor_menu,
+             after: :audits
 
         # add dashboard widget
         # widget 'foreman_remote_execution_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1

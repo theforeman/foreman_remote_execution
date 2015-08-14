@@ -13,9 +13,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :job_invocations, :only => [:new, :create, :show] do
+  resources :job_invocations, :only => [:new, :create, :show, :index] do
     collection do
       post 'refresh'
+      get 'auto_complete_search'
     end
   end
 
