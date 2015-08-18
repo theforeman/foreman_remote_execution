@@ -14,11 +14,13 @@ Gem::Specification.new do |s|
   s.description = 'A plugin bringing remote execution to the Foreman, completing the config ' +
                   'management functionality with remote management functionality.'
 
-  s.files = Dir['{app,config,db,lib,locale}/**/*'] + ['LICENSE', 'Rakefile', 'README.md']
-  s.test_files = Dir['test/**/*']
+  s.files =            Dir['{app,config,doc,db,lib,locale}/**/*', 'LICENSE', 'Rakefile', 'README.md']
+  s.test_files =       Dir['test/**/*']
+  s.extra_rdoc_files = Dir['doc/**/*', 'README*', 'LICENSE']
 
   s.add_dependency "rails", "~> 3.2.8"
   s.add_dependency "foreman-tasks", "~> 0.7.3"
+
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rdoc'
 end
