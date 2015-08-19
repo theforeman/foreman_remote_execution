@@ -16,6 +16,9 @@ class JobInvocationComposer
     job_invocation.job_name = validate_job_name(job_invocation_base[:job_name])
     job_invocation.job_name ||= available_job_names.first if job_invocation.new_record?
     job_invocation.targeting = build_targeting
+    job_invocation.trigger_mode = job_invocation_base[:trigger_mode]
+    job_invocation.start_at = job_invocation_base[:start_at]
+    job_invocation.start_before = job_invocation_base[:start_before]
 
     @job_template_ids = validate_job_template_ids(job_templates_base.keys.compact)
     self

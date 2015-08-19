@@ -28,4 +28,41 @@ describe JobInvocation do
     it { refute job_invocation.reload.template_invocations.empty? }
     it { refute job_invocation.template_invocations.first.input_values.empty? }
   end
+
+  context 'future execution' do
+
+    it 'can report host count' do
+      job_invocation.total_hosts_count.must_equal 'N/A'
+      job_invocation.targeting.expects(:resolved_at).returns(Time.now)
+      job_invocation.total_hosts_count.must_equal 0
+    end
+
+    it 'has default trigger mode' do
+      job_invocation.trigger_mode.must_equal :immediate
+    end
+
+    it 'cannot set trigger mode to anything other than :immediate or :future' do
+      proc { job_invocation.trigger_mode = 'test' }.must_raise ::Foreman::Exception
+      job_invocation.trigger_mode.must_equal :immediate
+    end
+
+    it 'cannot change trigger mode once set' do
+      job_invocation.trigger_mode = 'future'
+      job_invocation.trigger_mode = 'immediate'
+      job_invocation.trigger_mode.must_equal :future
+    end
+
+    it 'parses times' do
+      time = Time.new(2015, 9, 16, 13, 56)
+      time_string = time.strftime(job_invocation.time_format)
+      job_invocation.start_at_parsed.must_equal false
+      job_invocation.start_at = time_string
+      job_invocation.start_at_parsed.must_equal time
+      job_invocation.start_before.must_be_nil
+      job_invocation.start_before_parsed.must_be_nil
+      job_invocation.start_before = time_string
+      job_invocation.start_before_parsed.must_equal time
+    end
+
+  end
 end

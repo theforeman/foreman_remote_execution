@@ -31,6 +31,11 @@ function job_invocation_form_binds() {
     $('#job_template_' + $(this).val()).show();
   });
 
+  $('input.trigger_mode_selector').on('click', function () {
+     $("#trigger_mode_future").hide();
+     $('#trigger_mode_' + $(this).val()).show();
+   });
+
   $('select#job_invocation_job_name').on('change', refresh_execution_form);
 
   $('button#refresh_execution_form').on('click', refresh_execution_form);

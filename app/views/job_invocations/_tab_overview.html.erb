@@ -18,7 +18,7 @@
       <%= host_counter _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)), ForemanTasks::Task::DynflowTask.for_action(Actions::RemoteExecution::RunHostJob).for_resource(template_invocation).uniq.size %>
     <% end %>
   <% end %>
-  <%= host_counter(_('Total hosts'), job_invocation.last_task.output['total_count']) if job_invocation.last_task %>
+  <%= host_counter(_('Total hosts'), job_invocation.total_hosts_count) %>
 </div>
 
 <div class="col-md-6 infoblock">

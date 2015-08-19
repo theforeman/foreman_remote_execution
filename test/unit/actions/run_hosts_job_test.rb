@@ -19,7 +19,7 @@ module ForemanRemoteExecution
     let(:action) do
       action = create_action(Actions::RemoteExecution::RunHostsJob)
       action.expects(:action_subject).with(job_invocation)
-      action.expects(:task).returns(OpenStruct.new(:id => '123'))
+      ForemanTasks::Task::DynflowTask.stubs(:find_by_external_id!).returns(OpenStruct.new(:id => '123'))
       plan_action(action, job_invocation)
     end
 
@@ -35,6 +35,11 @@ module ForemanRemoteExecution
     it 'triggers the RunHostJob actions on the resolved hosts in run phase' do
       action.expects(:trigger).with(Actions::RemoteExecution::RunHostJob, job_invocation, host, {})
       action.create_sub_plans
+    end
+
+    it 'uses the BindJobInvocation middleware' do
+      action
+      job_invocation.last_task_id.must_equal '123'
     end
   end
 end

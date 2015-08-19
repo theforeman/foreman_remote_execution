@@ -13,10 +13,10 @@ module ForemanRemoteExecution
     end
 
     it 'plans for running the command action on server' do
-      assert_run_phase action, { :hostname           => hostname,
-                                 :script             => script,
-                                 :proxy_url          => proxy.url,
-                                 :effective_user     => nil,
+      assert_run_phase action, { :hostname       => hostname,
+                                 :script         => script,
+                                 :proxy_url      => proxy.url,
+                                 :effective_user => nil,
                                  :connection_options => connection_options }
     end
 
