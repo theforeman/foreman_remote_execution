@@ -27,7 +27,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', after: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
-        requires_foreman '>= 1.9'
+        requires_foreman '>= 1.10'
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
 
@@ -64,6 +64,7 @@ module ForemanRemoteExecution
              parent: :monitor_menu,
              after: :audits
 
+        register_custom_status HostStatus::ExecutionStatus
         # add dashboard widget
         # widget 'foreman_remote_execution_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
       end
