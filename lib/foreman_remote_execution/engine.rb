@@ -21,6 +21,7 @@ module ForemanRemoteExecution
     end
 
     initializer "foreman_remote_execution.require_dynflow", :before => "foreman_tasks.initialize_dynflow" do |app|
+      ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
       ForemanTasks.dynflow.require!
       ForemanTasks.dynflow.config.eager_load_paths << File.join(ForemanRemoteExecution::Engine.root, 'app/lib/actions')
     end
@@ -107,7 +108,6 @@ module ForemanRemoteExecution
       end
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
       HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
-      ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
