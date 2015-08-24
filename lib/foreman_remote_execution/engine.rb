@@ -107,6 +107,10 @@ module ForemanRemoteExecution
       end
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
       HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
+
+      # We need to explicitly force to load the Task model due to Rails loader
+      # having issues with resolving it to Rake::Task otherwise
+      require_dependency 'foreman_tasks/task'
       ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
     end
 
