@@ -1,3 +1,8 @@
+[![Build Status](https://img.shields.io/jenkins/s/http/ci.theforeman.org/test_plugin_foreman_remote_execution_master.svg)](http://ci.theforeman.org/job/test_plugin_foreman_remote_execution_master)
+[![Gem Version](https://img.shields.io/gem/v/foreman_remote_execution.svg)](https://rubygems.org/gems/foreman_remote_execution)
+[![Code Climate](https://codeclimate.com/github/theforeman/foreman_remote_execution/badges/gpa.svg)](https://codeclimate.com/github/theforeman/foreman_remote_execution)
+[![GPL License](https://img.shields.io/github/license/theforeman/foreman_remote_execution.svg)](https://github.com/theforeman/foreman_remote_execution/blob/master/LICENSE)
+
 # Foreman Remote Execution
 
 A plugin bringing remote execution to the Foreman, completing the config 
