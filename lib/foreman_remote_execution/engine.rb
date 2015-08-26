@@ -75,7 +75,7 @@ module ForemanRemoteExecution
     assets_to_precompile =
       Dir.chdir(root) do
         Dir['app/assets/javascripts/**/*', 'app/assets/stylesheets/**/*'].map do |f|
-          f.split(File::SEPARATOR, 4).last
+          f.split(File::SEPARATOR, 4).last.gsub(/\.scss\Z/, '')
         end
       end
     initializer 'foreman_remote_execution.assets.precompile' do |app|
