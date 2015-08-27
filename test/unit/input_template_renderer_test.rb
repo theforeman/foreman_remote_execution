@@ -84,6 +84,33 @@ describe InputTemplateRenderer do
         end
       end
     end
+
+    context 'with options specified' do
+
+      let(:job_invocation) { FactoryGirl.create(:job_invocation) }
+      let(:template_invocation) { FactoryGirl.build(:template_invocation, :template => template) }
+      let(:result) { renderer.render }
+
+      before do
+        template.template_inputs << FactoryGirl.build(:template_input, :name => 'service_name', :input_type => 'user', :options => "httpd\nforeman")
+      end
+
+      context 'with a valid input defined' do
+        before do
+          job_invocation.template_invocations << template_invocation
+          renderer.invocation = template_invocation
+
+          FactoryGirl.create(:template_invocation_input_value,
+                             :template_invocation => template_invocation,
+                             :template_input => template.template_inputs.first,
+                             :value => 'foreman')
+        end
+
+        it 'can render with job invocation with corresponding value' do
+          renderer.render.must_equal 'service restart foreman'
+        end
+      end
+    end
   end
 
   context "renderer for template with fact input used" do

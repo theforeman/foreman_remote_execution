@@ -1,0 +1,52 @@
+<%#
+kind: job_template
+name: Package Action - SSH Default
+job_name: Package Action
+provider_type: Ssh
+template_inputs:
+- name: pre_script
+  description: A script to run prior to the package action
+  input_type: user
+  required: false
+- name: action
+  description: 'The package action: install, update, or remove'
+  input_type: user
+  required: true
+  options: "install\nupdate\nremove"
+- name: package
+  description: The name of the package, if any
+  input_type: user
+  required: false
+- name: post_script
+  description: A script to run after the package action
+  input_type: user
+  required: false
+%>
+
+die() {
+  echo "${1}, exiting..."
+  exit $2
+}
+
+<% unless input("pre_script").blank? -%>
+  # Pre Script
+  <%= input("pre_script") %>
+  RETVAL=$?
+  [ $RETVAL -eq 0 ] || die "Pre script failed" $RETVAL
+<% end -%>
+
+# Action
+<% if @host.operatingsystem.family == 'Redhat' -%>
+  yum -y <%= input("action") %> <%= input("package") %>
+<% elsif @host.operatingsystem.family == 'Debian' -%>
+  apt-get -y <%= input("action") %> <%= input("package") %>
+<% end -%>
+RETVAL=$?
+[ $RETVAL -eq 0 ] || die "Package action failed" $RETVAL
+
+<% unless input("post_script").blank? -%>
+  # Post Script
+  <%= input("post_script") %>
+  RETVAL=$?
+  [ $RETVAL -eq 0 ] || die "Post script failed" $RETVAL
+<% end -%>

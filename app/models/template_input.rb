@@ -6,7 +6,8 @@ class TemplateInput < ActiveRecord::Base
             :puppet_parameter => N_('Puppet parameter') }.with_indifferent_access
 
   attr_accessible :name, :required, :input_type, :fact_name, :variable_name,
-                  :puppet_class_name, :puppet_parameter_name, :description, :job_template_id
+                  :puppet_class_name, :puppet_parameter_name, :description, :job_template_id,
+                  :options
 
   belongs_to :template
   has_many :template_invocation_input_values, :dependent => :destroy
@@ -40,6 +41,10 @@ class TemplateInput < ActiveRecord::Base
 
   def value(renderer)
     get_resolver(renderer).value
+  end
+
+  def options_array
+    self.options.blank? ? [] : self.options.split(/\r?\n/).map(&:strip)
   end
 
   private
