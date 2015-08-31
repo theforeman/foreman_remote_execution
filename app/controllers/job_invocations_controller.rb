@@ -13,6 +13,12 @@ class JobInvocationsController < ApplicationController
   def rerun
     job_invocation = resource_base.find(params[:id])
     @composer = JobInvocationComposer.new.compose_from_invocation(job_invocation)
+
+    if params[:failed_only]
+      host_ids = job_invocation.failed_host_ids
+      @composer.search_query = @composer.targeting.build_query_from_hosts(host_ids)
+    end
+
     render :action => 'new'
   end
 
@@ -36,7 +42,7 @@ class JobInvocationsController < ApplicationController
 
   # refreshes the form
   def refresh
-    @composer = JobInvocationComposer.new.composer_from_params(params)
+    @composer = JobInvocationComposer.new.compose_from_params(params)
   end
 
   private

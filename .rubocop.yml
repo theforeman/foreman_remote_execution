@@ -13,7 +13,7 @@ Rails/ActionFilter:
   EnforcedStyle: filter
 
 Metrics/MethodLength:
-  Max: 20
+  Max: 40
 
 Style/TrailingComma:
   Enabled: false
