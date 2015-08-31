@@ -369,7 +369,9 @@ describe JobInvocationComposer do
                 :input_values => { input1.id.to_s => { :value => 'value1' } }
               } } }
         end
-        let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } }, :targeting => { :search_query => "name = #{host.name}" } }.with_indifferent_access }
+        let(:params) do
+          { :job_invocation => { :providers => { :ssh => ssh_params } }, :targeting => { :search_query => "name = #{host.name}" } }.with_indifferent_access
+        end
 
         it 'validates all associated objects even if some of the is invalid' do
           composer
