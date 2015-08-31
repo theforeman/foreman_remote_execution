@@ -27,7 +27,17 @@
     <h5>
       <b><%= template_invocation.template.name %></b> <%= 'through' %> <%= _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)) %>
     </h5>
-    <pre><%= InputTemplateRenderer.new(template_invocation.template, nil, template_invocation).preview %></pre>
+    <% target = template_invocation.targeting.hosts.with_os.first || template_invocation.targeting.hosts.first %>
+    <%= _('Preview for target %s') % target.try(:name) || 'N/A' %>
+
+    <% renderer = InputTemplateRenderer.new(template_invocation.template, target, template_invocation) %>
+    <% if (preview = renderer.preview) %>
+      <pre><%= preview %></pre>
+    <% else %>
+      <%= alert :class => "alert-block alert-danger base in fade has-error",
+                :text => renderer.error_message.html_safe %>
+    <% end %>
+
 
     <% if template_invocation.input_values.present? %>
       <%= _('following user inputs were provided') %>
