@@ -39,7 +39,7 @@ describe JobInvocationComposer do
   context 'with general new invocation and empty params' do
     let(:params) { {} }
     let(:job_invocation) { JobInvocation.new }
-    let(:composer) { JobInvocationComposer.new(job_invocation, params) }
+    let(:composer) { JobInvocationComposer.new(job_invocation).compose_from_params(params) }
 
     describe '#available_templates' do
       it 'obeys authorization' do
@@ -410,6 +410,42 @@ describe JobInvocationComposer do
         end
       end
 
+      describe '#compose_from_invocation(existing_invocation)' do
+        let(:host) { FactoryGirl.create(:host) }
+        let(:ssh_params) do
+          { :job_template_id => testing_job_template_1.id.to_s,
+            :job_templates => {
+              testing_job_template_1.id.to_s => {
+                :input_values => { input1.id.to_s => { :value => 'value1' } }
+              } } }
+        end
+        let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } }, :targeting => { :search_query => "name = #{host.name}", :targeting_type => Targeting::STATIC_TYPE } }.with_indifferent_access }
+        let(:existing) { job_invocation.reload }
+        let(:new_job_invocation) { JobInvocation.new }
+        let(:new_composer) { JobInvocationComposer.new(new_job_invocation).compose_from_invocation(job_invocation) }
+
+        before do
+          composer.save
+        end
+
+        it 'sets the same job name' do
+          new_composer.job_name.must_equal existing.job_name
+        end
+
+        it 'builds new targeting object which keeps search query' do
+          new_composer.targeting.wont_equal existing.targeting
+          new_composer.search_query.must_equal existing.targeting.search_query
+        end
+
+        it 'keeps job template ids' do
+          new_composer.job_template_ids.must_equal existing.template_invocations.map(&:template_id)
+        end
+
+        it 'keeps template invocations and their values' do
+          new_composer.template_invocations.size.must_equal existing.template_invocations.size
+        end
+
+      end
     end
   end
 end
