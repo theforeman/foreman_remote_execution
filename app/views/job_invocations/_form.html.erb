@@ -2,7 +2,12 @@
   <%= selectable_f f, :job_name, @composer.available_job_names %>
 
   <%= fields_for @composer.targeting do |targeting_fields| %>
-    <%= targeting_fields.hidden_field :bookmark_id, :value => params[:bookmark_id] %>
+    <span id="bookmark_query_map" >
+      <% @composer.available_bookmarks.each do |bookmark| %>
+        <span id="bookmark-<%= bookmark.id %>" data-query="<%= bookmark.query %>"></span>
+      <% end %>
+    </span>
+    <%= selectable_f targeting_fields, :bookmark_id, @composer.available_bookmarks.map {|b| [ b.name, b.id ] }, :selected => @composer.targeting.bookmark_id, :include_blank => true %>
     <%= textarea_f targeting_fields, :search_query, :value => @composer.displayed_search_query, :rows => 5 %>
 
     <div class="form-group ">

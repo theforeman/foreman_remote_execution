@@ -26,7 +26,7 @@ class JobInvocationComposer
 
     job_invocation.job_name = validate_job_name(invocation.job_name)
     job_invocation.targeting = invocation.targeting.dup
-    @search_query = targeting.search_query
+    @search_query = targeting.search_query unless targeting.bookmark_id.present?
 
     @job_template_ids = invocation.template_invocations.map(&:template_id)
     @template_invocations = dup_template_invocations(invocation)
