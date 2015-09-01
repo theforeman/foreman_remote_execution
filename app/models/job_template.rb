@@ -43,6 +43,14 @@ class JobTemplate < ::Template
     []
   end
 
+  def dup
+    dup = super
+    self.template_inputs.each do |input|
+      dup.template_inputs.build input.attributes.except('template_id', 'id', 'created_at', 'updated_at')
+    end
+    dup
+  end
+
   private
 
   # we can't use standard validator, .provider_names output can change but the validator does not reflect it
