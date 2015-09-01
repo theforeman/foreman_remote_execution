@@ -45,7 +45,7 @@ module ForemanRemoteExecution
 
           permission :view_job_invocations, { :job_invocations => [:index, :show, :auto_complete_search] }, :resource_type => 'JobInvocation'
 
-          permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh] }, :resource_type => 'JobInvocation'
+          permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh, :rerun] }, :resource_type => 'JobInvocation'
         end
 
         # Add a new role called 'ForemanRemoteExecution' if it doesn't exist

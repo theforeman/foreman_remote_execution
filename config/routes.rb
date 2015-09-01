@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       post 'refresh'
       get 'auto_complete_search'
     end
+    member do
+      get 'rerun'
+    end
   end
 
   namespace :api, :defaults => {:format => 'json'} do
