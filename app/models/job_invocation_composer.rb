@@ -3,8 +3,11 @@ class JobInvocationComposer
   attr_reader :job_template_ids
   delegate :job_name, :targeting, :to => :job_invocation
 
-  def initialize(job_invocation, params)
+  def initialize(job_invocation = JobInvocation.new)
     @job_invocation = job_invocation
+  end
+
+  def compose_from_params(params)
     @params = params
 
     @host_ids = validate_host_ids(params[:host_ids])
@@ -15,6 +18,19 @@ class JobInvocationComposer
     job_invocation.targeting = build_targeting
 
     @job_template_ids = validate_job_template_ids(job_templates_base.keys.compact)
+    self
+  end
+
+  def compose_from_invocation(invocation)
+    @params = {}
+
+    job_invocation.job_name = validate_job_name(invocation.job_name)
+    job_invocation.targeting = invocation.targeting.dup
+    @search_query = targeting.search_query
+
+    @job_template_ids = invocation.template_invocations.map(&:template_id)
+    @template_invocations = dup_template_invocations(invocation)
+    self
   end
 
   def valid?
@@ -116,6 +132,14 @@ class JobInvocationComposer
   end
 
   private
+
+  def dup_template_invocations(job_invocation)
+    job_invocation.template_invocations.map do |template_invocation|
+      duplicate = template_invocation.dup
+      template_invocation.input_values.map { |value| duplicate.input_values.build :value => value.value, :template_input_id => value.template_input_id }
+      duplicate
+    end
+  end
 
   def targeting_base
     @params.fetch(:targeting, {})

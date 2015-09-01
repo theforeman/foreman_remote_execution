@@ -18,4 +18,28 @@ class JobInvocation < ActiveRecord::Base
   def to_action_input
     { :id => id, :name => job_name }
   end
+
+  def template_invocations_tasks
+    if last_task.present?
+      last_task.sub_tasks.for_action_types('Actions::RemoteExecution::RunHostJob')
+    else
+      ForemanTasks::Task.for_action_types('Actions::RemoteExecution::RunHostJob').where('1=0')
+    end
+  end
+
+  def failed_template_invocation_tasks
+    template_invocations_tasks.where(:result => 'warning')
+  end
+
+  def failed_host_ids
+    locks_for_resource(failed_template_invocation_tasks, 'Host::Managed').map(&:resource_id)
+  end
+
+  def failed_hosts
+    locks_for_resource(failed_template_invocation_tasks, 'Host::Managed').map(&:resource)
+  end
+
+  def locks_for_resource(tasks, resource_type)
+    tasks.map { |task| task.locks.where(:resource_type => resource_type).first }.compact
+  end
 end
