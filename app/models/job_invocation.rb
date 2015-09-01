@@ -93,4 +93,20 @@ class JobInvocation < ActiveRecord::Base
   def time_format
     '%Y-%m-%d %H:%M'
   end
+
+  def template_invocation_for_host(host)
+    providers = available_providers(host)
+    providers.each do |provider|
+      template_invocations.each do |template_invocation|
+        if template_invocation.template.provider_type == provider
+          return template_invocation
+        end
+      end
+    end
+  end
+
+  # TODO: determine from the host and job_invocation details
+  def available_providers(host)
+    return RemoteExecutionProvider.provider_names
+  end
 end

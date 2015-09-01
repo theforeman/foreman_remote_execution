@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.test_files =       Dir['test/**/*']
   s.extra_rdoc_files = Dir['doc/**/*', 'README*', 'LICENSE']
 
+  s.add_dependency "deface"
   s.add_dependency "rails", "~> 3.2.8"
   s.add_dependency "foreman-tasks", "~> 0.7.5"
 

@@ -4,16 +4,17 @@ module ForemanRemoteExecution
   class RunProxyCommandTest < ActiveSupport::TestCase
     include Dynflow::Testing
 
-    let(:proxy) { FactoryGirl.build(:smart_proxy) }
+    let(:host) { FactoryGirl.build(:host, :with_execution) }
+    let(:proxy) { host.remote_execution_proxies('Ssh')[:subnet].first }
     let(:hostname) { 'myhost.example.com' }
     let(:script) { 'ping -c 5 redhat.com' }
     let(:connection_options) { { 'retry_interval' => 15, 'retry_count' => 4, 'timeout' => 60 } }
     let(:action) do
-      create_and_plan_action(Actions::RemoteExecution::RunProxyCommand, proxy, hostname, script)
+      create_and_plan_action(Actions::RemoteExecution::RunProxyCommand, proxy, host.name, script)
     end
 
     it 'plans for running the command action on server' do
-      assert_run_phase action, { :hostname       => hostname,
+      assert_run_phase action, { :hostname       => host.name,
                                  :script         => script,
                                  :proxy_url      => proxy.url,
                                  :effective_user => nil,

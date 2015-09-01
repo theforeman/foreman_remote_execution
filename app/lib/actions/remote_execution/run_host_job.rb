@@ -8,12 +8,17 @@ module Actions
 
       include ::Dynflow::Action::Cancellable
 
-      def plan(job_invocation, host, connection_options = {})
+      def plan(job_invocation, host, template_invocation, proxy, connection_options = {})
         action_subject(host, :job_name => job_invocation.job_name)
-
-        template_invocation = find_template_invocation(job_invocation, host)
         hostname = find_ip_or_hostname(host)
-        proxy = find_proxy(template_invocation, host)
+
+        raise _("Could not use any template used in the job invocation") if template_invocation.blank?
+
+        settings =  { :global_proxy   => 'remote_execution_global_proxy',
+                      :fallback_proxy => 'remote_execution_fallback_proxy' }
+
+        raise _("Could not use any proxy. Consider configuring %{global_proxy} " +
+                "or %{fallback_proxy} in settings") % settings if proxy.blank?
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render
@@ -45,52 +50,18 @@ module Actions
         _('Run %{job_name} on %{host}') % { :job_name => input[:job_name], :host => input[:host][:name] }
       end
 
-      def find_template_invocation(job_invocation, host)
-        providers = available_providers(job_invocation, host)
-        providers.each do |provider|
-          job_invocation.template_invocations.each do |template_invocation|
-            if template_invocation.template.provider_type == provider
-              return template_invocation
-            end
+      def find_ip_or_hostname(host)
+        %w(execution primary provision).each do |flag|
+          if host.send("#{flag}_interface") && host.send("#{flag}_interface").ip.present?
+            return host.execution_interface.ip
           end
         end
 
-        raise _("Could not use any template used in the job invocation")
-      end
-
-      def find_ip_or_hostname(host)
         host.interfaces.each do |interface|
           return interface.ip unless interface.ip.blank?
         end
-        return host.name
-      end
 
-      def available_providers(job_invocation, host)
-        # TODO: determine from the host and job_invocation details
-        return ['Ssh']
-      end
-
-      def find_proxy(template_invocation, host)
-        provider = template_invocation.template.provider_type.to_s
-        all_host_proxies(host).each do |proxies|
-          if proxy = proxies.joins(:features).where("features.name = ?", provider).first
-            return proxy
-          end
-        end
-        raise _("Could not use any proxy: assign a proxy with provider '%{provider}' to the host or set '%{global_proxy_setting}' in settings") %\
-            { :provider => provider, :global_proxy_setting => 'remote_execution_global_proxy' }
-      end
-
-      def all_host_proxies(host)
-        Enumerator.new do |e|
-          host.interfaces.each do |interface|
-            if interface.subnet
-              e << ::SmartProxy.where(:id => interface.subnet.proxies.map(&:id))
-            end
-          end
-          e << host.smart_proxies
-          e << ::SmartProxy.authorized if Setting[:remote_execution_global_proxy]
-        end
+        return host.fqdn
       end
     end
   end

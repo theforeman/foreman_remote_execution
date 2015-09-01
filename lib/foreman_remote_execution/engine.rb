@@ -108,8 +108,15 @@ module ForemanRemoteExecution
         klass.send(:include, ForemanRemoteExecution::HostExtensions)
         klass.send(:include, ForemanTasks::Concerns::HostActionSubject)
       end
+
+      (Nic::Base.descendants + [Nic::Base]).each do |klass|
+        klass.send(:include, ForemanRemoteExecution::NicExtensions)
+      end
+
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
       HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
+
+      Subnet.send(:include, ForemanRemoteExecution::SubnetExtensions)
 
       # We need to explicitly force to load the Task model due to Rails loader
       # having issues with resolving it to Rake::Task otherwise
