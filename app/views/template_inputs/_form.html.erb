@@ -16,6 +16,9 @@
         <%= text_f f, :puppet_class_name, :class => 'puppet_parameter_input_type', :required => true %>
         <%= text_f f, :puppet_parameter_name, :class => 'puppet_parameter_input_type', :required => true %>
       </div>
+      <div class="user_input_type custom_input_type_fields" style="<%= (f.object.user_template_input? || f.object.new_record?) ? '' : 'display:none' %>">
+        <%= textarea_f f, :options, :rows => 3, :class => 'user_input_type', :help_inline => _("A list of options the user can select from. If not provided, the user will be given a free-form field") %>
+      </div>
       <%= textarea_f f, :description, :rows => 3 %>
     <% end %>
   </div>

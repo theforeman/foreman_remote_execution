@@ -1,0 +1,12 @@
+<%#
+kind: job_template
+name: Puppet Run Once - SSH Default
+job_name: Puppet Run Once
+provider_type: Ssh
+template_inputs:
+- name: puppet_options
+  description: Additional options to pass to puppet
+  input_type: user
+  required: false
+%>
+puppet agent --onetime --no-usecacheonfailure <%= input("puppet_options") %>
