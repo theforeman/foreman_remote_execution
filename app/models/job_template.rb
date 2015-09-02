@@ -8,6 +8,7 @@ class JobTemplate < ::Template
 
   audited :allow_mass_assignment => true
   has_many :audits, :as => :auditable, :class_name => Audited.audit_class.name
+  has_many :template_invocations, :dependent => :destroy, :foreign_key => 'template_id'
 
   # these can't be shared in parent class, scoped search can't handle STI properly
   # tested with scoped_search 3.2.0
