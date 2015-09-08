@@ -5,7 +5,7 @@
                               remove_child_link('x', f, {:rel => 'twipsy', "data-title" => _('remove template input'), :'data-placement' => 'left', :class => 'fr badge badge-danger'}).html_safe do %>
       <%= text_f f, :name %>
       <%= checkbox_f f, :required %>
-      <%= selectable_f f, :input_type, template_input_types_options, {}, :class => 'input_type_selector' %>
+      <%= selectable_f f, :input_type, template_input_types_options, {}, :class => 'input_type_selector without_select2' %>
       <div class="fact_input_type custom_input_type_fields" style="<%= f.object.fact_template_input? ? '' : 'display:none' %>">
         <%= text_f f, :fact_name, :class => 'fact_input_type', :required => true %>
       </div>
