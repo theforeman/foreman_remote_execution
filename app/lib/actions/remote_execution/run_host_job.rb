@@ -25,6 +25,10 @@ module Actions
         plan_action(RunProxyCommand, proxy, hostname, script)
       end
 
+      def output
+        planned_actions(RunProxyCommand).first.live_output
+      end
+
       def humanized_output
         host_run_action = planned_actions(RunProxyCommand).first
         proxy_output = host_run_action && host_run_action.output[:proxy_output]

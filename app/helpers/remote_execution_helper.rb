@@ -13,7 +13,7 @@ module RemoteExecutionHelper
     if (bulk_task = invocation.last_task)
       success = bulk_task.output['success_count'] || 0
       failed = bulk_task.output['failed_count'] || 0
-      pending = (bulk_task.output['pending_count'] || 0)
+      pending = bulk_task.output['pending_count'] || bulk_task.sub_tasks.count
 
       flot_pie_chart('status', job_invocation_status(invocation),
                      [{:label => _('Success'), :data => success, :color => '#5CB85C'},
@@ -94,5 +94,15 @@ module RemoteExecutionHelper
   def invocation_count(invocation, options = {})
     options = { :unknown_string => 'N/A' }.merge(options)
     (invocation.last_task.try(:output) || {}).fetch(options[:output_key], options[:unknown_string])
+  end
+
+  def preview_box(template_invocation, target)
+    renderer = InputTemplateRenderer.new(template_invocation.template, target, template_invocation)
+    if (preview = renderer.preview)
+      content_tag :pre, preview
+    else
+      alert :class => "alert-block alert-danger base in fade has-error",
+            :text => renderer.error_message.html_safe
+    end
   end
 end

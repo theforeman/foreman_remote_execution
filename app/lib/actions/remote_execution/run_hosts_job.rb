@@ -24,12 +24,6 @@ module Actions
       def run(event = nil)
         super unless event == Dynflow::Action::Skip
       end
-
-      def output
-        result = super
-        result[:pending_count] = (result[:total_count] || 0) - (result[:failed_count] || 0) - (result[:success_count] || 0)
-        result
-      end
     end
   end
 end

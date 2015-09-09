@@ -1,5 +1,6 @@
 <% title @job_invocation.job_name %>
 <% stylesheet 'job_invocations' %>
+<% javascript 'template_invocation' %>
 
 <% if @job_invocation.last_task %>
   <% title_actions(job_invocation_task_buttons(@job_invocation.last_task)) %>
@@ -19,3 +20,9 @@
     <%= render 'tab_hosts', :job_invocation => @job_invocation %>
   </div>
 </div>
+
+<script id="job_invocation_refresh" data-refresh-url="<%= job_invocation_path(@job_invocation) %>">
+<% if @job_invocation.last_task.pending? %>
+  delayed_refresh($('script#job_invocation_refresh').data('refresh-url'));
+<% end %>
+</script>
