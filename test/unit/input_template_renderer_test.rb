@@ -276,7 +276,8 @@ describe InputTemplateRenderer do
           context 'with existing variable implemented as smart variable' do
             let(:puppet_class) { FactoryGirl.create(:puppetclass, :environments => [environment], :hosts => [renderer.host]) }
             let(:lookup_key) do
-              FactoryGirl.create(:lookup_key,
+              lookup_key_factory = SETTINGS[:version].short == '1.9' ? :lookup_key : :variable_lookup_key
+              FactoryGirl.create(lookup_key_factory,
                                  :key => 'client_key',
                                  :puppetclass => puppet_class,
                                  :overrides => {"fqdn=#{renderer.host.fqdn}" => "RSA KEY"})
@@ -359,10 +360,12 @@ describe InputTemplateRenderer do
               FactoryGirl.create(:puppetclass, :environments => [environment], :hosts => [renderer.host], :name => 'nginx')
             end
             let(:lookup_key) do
-              FactoryGirl.create(:lookup_key, :as_smart_class_param, :with_override,
+              lookup_key_factory = SETTINGS[:version].short == '1.9' ? :lookup_key : :puppetclass_lookup_key
+              FactoryGirl.create(lookup_key_factory, :as_smart_class_param,
                                  :key => 'version',
                                  :puppetclass => puppet_class,
                                  :path => 'fqdn',
+                                 :override => true,
                                  :overrides => {"fqdn=#{renderer.host.fqdn}" => "1.4.7"})
             end
 
