@@ -100,6 +100,8 @@ module ForemanRemoteExecution
       # similarly, attr_accessible :template_inputs_attributes does not work with STI
       (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateExtensions) }
 
+      (Taxonomy.descendants + [Taxonomy]).each { |klass| klass.send(:include, ForemanRemoteExecution::TaxonomyExtensions) }
+
       User.send(:include, ForemanRemoteExecution::UserExtensions)
       (Host::Base.descendants + [Host::Base]).each do |klass|
         klass.send(:include, ForemanRemoteExecution::HostExtensions)
