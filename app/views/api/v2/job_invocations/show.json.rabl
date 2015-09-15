@@ -6,7 +6,7 @@ child :targeting do
   attributes :bookmark_id, :search_query, :targeting_type, :user_id
 end
 
-child :last_task do
+child :task do
   attributes :id, :state
 end
 

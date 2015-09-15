@@ -15,12 +15,18 @@ class JobInvocation < ActiveRecord::Base
 
   scoped_search :on => :job_name
 
+  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id', :auto_complete => true
+
   delegate :bookmark, :resolved?, :to => :targeting, :allow_nil => true
 
   include ForemanTasks::Concerns::ActionSubject
 
-  belongs_to :last_task, :class_name => 'ForemanTasks::Task'
-  has_many :sub_tasks, :through => :last_task
+  belongs_to :task, :class_name => 'ForemanTasks::Task'
+  has_many :sub_tasks, :through => :task
+
+  belongs_to :task_group, :class_name => 'JobInvocationTaskGroup'
+
+  has_many :tasks, :through => :task_group
 
   scoped_search :on => [:job_name], :complete_value => true
 
@@ -28,14 +34,20 @@ class JobInvocation < ActiveRecord::Base
   scoped_search :in => :last_task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
 
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
+  has_one :recurring_logic, :through => :triggering, :class_name => 'ForemanTasks::RecurringLogic'
 
   scope :with_last_task, -> { joins('LEFT JOIN "foreman_tasks_tasks" ON "foreman_tasks_tasks"."id" = "job_invocations"."last_task_id"') }
 
   attr_accessor :start_before
   attr_writer :start_at
 
-  def self.allowed_trigger_modes
-    %w(immediate future)
+  def deep_clone
+    JobInvocationComposer.new.compose_from_invocation(self).job_invocation.tap do |invocation|
+      invocation.task_group = JobInvocationTaskGroup.new.tap(&:save!)
+      invocation.triggering = self.triggering
+      invocation.template_invocations = self.template_invocations.map(&:deep_clone)
+      invocation.save!
+    end
   end
 
   def to_action_input
@@ -68,42 +80,6 @@ class JobInvocation < ActiveRecord::Base
     else
       _('N/A')
     end
-  end
-
-  def delay_options
-    {
-      :start_at => start_at_parsed,
-      :start_before => start_before_parsed
-    }
-  end
-
-  def trigger_mode
-    @trigger_mode || :immediate
-  end
-
-  def trigger_mode=(value)
-    return trigger_mode if @trigger_mode || value.nil?
-    if JobInvocation.allowed_trigger_modes.include?(value)
-      @trigger_mode = value.to_sym
-    else
-      raise ::Foreman::Exception, _("Job Invocation trigger mode must be one of [#{JobInvocation.allowed_trigger_modes.join(', ')}]")
-    end
-  end
-
-  def start_at_parsed
-    @start_at.present? && Time.strptime(@start_at, time_format)
-  end
-
-  def start_at
-    @start_at ||= Time.now.strftime(time_format)
-  end
-
-  def start_before_parsed
-    @start_before.present? && Time.strptime(@start_before, time_format) || nil
-  end
-
-  def time_format
-    '%Y-%m-%d %H:%M'
   end
 
   def template_invocation_for_host(host)

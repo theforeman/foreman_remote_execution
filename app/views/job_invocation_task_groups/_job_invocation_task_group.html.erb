@@ -1,0 +1,31 @@
+<% job_invocation = task_group.job_invocation %>
+<table class='table table-condensed'>
+  <tr>
+    <th>ID</th>
+    <td><%= link_to(job_invocation.id, job_invocation) %></td>
+  </tr>
+  <tr>
+    <th>Job Name</th>
+    <td><%= job_invocation.job_name %></td>
+  </tr>
+  <tr>
+    <th>Status</th>
+    <td><%= link_to_invocation_task_if_authorized(job_invocation) %></td>
+  </tr>
+  <tr>
+    <th>Succeeded</th>
+    <td><%= invocation_count(job_invocation, :output_key => :success_count) %></td>
+  </tr>
+  <tr>
+    <th>Failed</th>
+    <td><%= invocation_count(job_invocation, :output_key => :failed_count) %></td>
+  </tr>
+  <tr>
+    <th>Pending</th>
+    <td><%= invocation_count(job_invocation, :output_key => :pending_count) %></td>
+  </tr>
+  <tr>
+    <th>Total hosts</th>
+    <td><%= invocation_count(job_invocation, :output_key => :total_count) %></td>
+  </tr>
+</table>

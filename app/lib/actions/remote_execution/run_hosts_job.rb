@@ -3,14 +3,17 @@ module Actions
     class RunHostsJob < Actions::ActionWithSubPlans
 
       middleware.use Actions::Middleware::BindJobInvocation
+      middleware.use Actions::Middleware::RecurringLogic
 
-      def delay(delay_options, job_invocation)
+      def delay(delay_options, job_invocation, locked = false)
+        task.add_missing_task_groups(job_invocation.task_group)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.static?
-        action_subject(job_invocation)
-        super(delay_options, job_invocation, true)
+        super delay_options, job_invocation, locked
       end
 
       def plan(job_invocation, locked = false, connection_options = {})
+        job_invocation.task_group.save! if job_invocation.task_group.try(:new_record?)
+        task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
         action_subject(job_invocation) unless locked
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !locked
         input.update(:job_name => job_invocation.job_name)

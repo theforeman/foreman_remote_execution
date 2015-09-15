@@ -19,6 +19,13 @@ class TemplateInvocation < ActiveRecord::Base
     { :id => id, :name => template.name }
   end
 
+  def deep_clone
+    self.dup.tap do |invocation|
+      invocation.input_values = self.input_values.map(&:dup)
+      invocation.input_values.each(&:save!)
+    end
+  end
+
   private
 
   def provides_required_input_values
