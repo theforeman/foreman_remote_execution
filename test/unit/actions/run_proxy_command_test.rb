@@ -15,7 +15,8 @@ module ForemanRemoteExecution
       assert_run_phase action, { :hostname       => hostname,
                                  :script         => script,
                                  :proxy_url      => proxy.url,
-                                 :effective_user => nil }
+                                 :effective_user => nil,
+                                 :connection_options => { "retry_interval" => 15, "retry_count" => 4, "timeout" => 60} }
     end
 
     it 'sends to command to ssh provider' do
