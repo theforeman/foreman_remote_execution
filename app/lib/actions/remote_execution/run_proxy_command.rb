@@ -29,6 +29,21 @@ module Actions
       def exit_status
         proxy_output && proxy_output[:exit_status]
       end
+
+      def live_output
+        output = self.output[:proxy_output].present? ? self.output[:proxy_output] : fetch_output['output']
+        output_records(output)
+      end
+
+      private
+
+      def output_records(base_output)
+        base_output['result']
+      end
+
+      def fetch_output
+        proxy.status_of_task(output[:proxy_task_id])['actions'].detect { |action| action['class'] == proxy_action_name }
+      end
     end
   end
 end

@@ -1,0 +1,21 @@
+var scrolledToBottom = ($(window).scrollTop() + $(window).height() == $(document).height());
+
+var lines = '<%=j render :partial => 'output_line', :collection => @lines, :locals => { :line_counter => params[:line_counter].to_i } %>';
+var target = $("div.terminal div.printable");
+
+<% if params[:since] %>
+  target.append(lines);
+<% else %>
+  target.html(lines);
+<% end %>
+
+<% if @template_invocation_task.pending? %>
+  $(function() {
+    delayed_refresh($("div.terminal").data('refresh-url'),
+            {"since": "<%= @lines.last.try(:[], 'timestamp') || params[:since] %>", "line_counter": $("div.terminal div.line").size()});
+  });
+<% end %>
+
+if (scrolledToBottom) {
+  $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+}

@@ -14,3 +14,56 @@ fieldset.provider_form {
     margin-left: 90px;
   }
 }
+
+div.terminal {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #B2B2B2;
+  background-color: #000000;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  div.printable {
+    min-height: 50px;
+  }
+
+  div.line.error {
+    color: #a9302a;
+  }
+
+  div.line.stderr {
+    background-color: rgba(205, 209, 207, 0.21);
+    color: #FFFFFF;
+  }
+
+  div.line span.counter {
+    float: left;
+    clear: left;
+  }
+
+  div.line div.content {
+    position: relative;
+    margin-left: 50px;
+  }
+
+  a {
+    color: #FFFFFF;
+  }
+
+  a.scroll-link-top {
+    position: relative;
+    bottom: 10px;
+  }
+
+  a.scroll-link-bottom {
+    position: relative;
+    z-index: 5;
+  }
+
+}

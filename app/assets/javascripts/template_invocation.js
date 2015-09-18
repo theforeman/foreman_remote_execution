@@ -39,3 +39,16 @@ function job_invocation_form_binds() {
 
   $('select#targeting_bookmark_id').on('change', refresh_search_query);
 }
+
+function delayed_refresh(url, data){
+  setTimeout(function () {
+    $.ajax(
+      {
+        url: url,
+        data: data,
+        dataType: "script",
+        error: function() { $("div.terminal div.printable").append(__('<div class="line error">There was an error while updating the status, try <a href="javascript:window.location.href=window.location.href">refreshing</a> the page</div>')) }
+      }
+    )
+  }, 1000);
+}

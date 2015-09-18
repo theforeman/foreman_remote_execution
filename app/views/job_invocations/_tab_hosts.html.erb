@@ -22,7 +22,7 @@
           <td><%= template_invocation.nil? ? _('N/A') : _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)) %></td>
           <td><%= template_invocation_status(task) %></td>
           <td><%= action_buttons(
-                          display_link_if_authorized(_("Details"), hash_for_foreman_tasks_task_path(:id => task).merge(:auth_object => host, :permission => :view_foreman_tasks))
+                          display_link_if_authorized(_("Details"), hash_for_template_invocation_path(:id => task).merge(:auth_object => host, :permission => :view_foreman_tasks))
                   ) %></td>
         </tr>
       <% end %>
