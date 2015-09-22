@@ -1,22 +1,23 @@
 require "test_plugin_helper"
 
 module ForemanRemoteExecution
-  class RunProxyCommandTest <  ActiveSupport::TestCase
+  class RunProxyCommandTest < ActiveSupport::TestCase
     include Dynflow::Testing
 
     let(:proxy) { FactoryGirl.build(:smart_proxy) }
     let(:hostname) { 'myhost.example.com' }
     let(:script) { 'ping -c 5 redhat.com' }
+    let(:connection_options) { { 'retry_interval' => 15, 'retry_count' => 4, 'timeout' => 60 } }
     let(:action) do
       create_and_plan_action(Actions::RemoteExecution::RunProxyCommand, proxy, hostname, script)
     end
 
     it 'plans for running the command action on server' do
-      assert_run_phase action, { :hostname       => hostname,
-                                 :script         => script,
-                                 :proxy_url      => proxy.url,
-                                 :effective_user => nil,
-                                 :connection_options => { "retry_interval" => 15, "retry_count" => 4, "timeout" => 60} }
+      assert_run_phase action, { :hostname           => hostname,
+                                 :script             => script,
+                                 :proxy_url          => proxy.url,
+                                 :effective_user     => nil,
+                                 :connection_options => connection_options }
     end
 
     it 'sends to command to ssh provider' do

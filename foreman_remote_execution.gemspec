@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = Dir['doc/**/*', 'README*', 'LICENSE']
 
   s.add_dependency "rails", "~> 3.2.8"
-  s.add_dependency "foreman-tasks", "~> 0.7.4"
+  s.add_dependency "foreman-tasks", "~> 0.7.5"
 
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rdoc'
