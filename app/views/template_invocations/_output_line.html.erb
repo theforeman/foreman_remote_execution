@@ -1,8 +1,0 @@
-<% @_line_counter ||= local_assigns[:line_counter] || 0 %>
-
-<%= content_tag :div, :class => 'line ' + output_line['output_type'], :data => { :timestamp => output_line['timestamp'] } do %>
-  <% output_line['output'].strip.split("\n").each do |output| %>
-    <%= content_tag(:span, (@_line_counter += 1).to_s.rjust(4).gsub(' ', '&nbsp;').html_safe + ':', :class => 'counter', :title => Time.at(output_line['timestamp'])) %>
-    <%= content_tag(:div, (output.empty? ? '&nbsp;' : output).html_safe, :class => 'content') %>
-  <% end %>
-<% end %>

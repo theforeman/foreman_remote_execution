@@ -3,7 +3,7 @@
 <% javascript 'template_invocation' %>
 
 <% if @job_invocation.last_task %>
-  <% title_actions(job_invocation_task_buttons(@job_invocation.last_task)) %>
+  <% title_actions(button_group(job_invocation_task_buttons(@job_invocation.last_task))) %>
 <% end %>
 
 <ul class="nav nav-tabs" data-tabs="tabs">
@@ -22,7 +22,7 @@
 </div>
 
 <script id="job_invocation_refresh" data-refresh-url="<%= job_invocation_path(@job_invocation) %>">
-<% if @job_invocation.last_task.pending? %>
+<% if @auto_refresh %>
   delayed_refresh($('script#job_invocation_refresh').data('refresh-url'));
 <% end %>
 </script>

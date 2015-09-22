@@ -30,20 +30,12 @@ module Actions
         plan_action(RunProxyCommand, proxy, hostname, script, { :connection_options => connection_options })
       end
 
-      def output
-        planned_actions(RunProxyCommand).first.live_output
+      def humanized_output
+        live_output.map { |line| line['output'].chomp }.join("\n")
       end
 
-      def humanized_output
-        host_run_action = planned_actions(RunProxyCommand).first
-        proxy_output = host_run_action && host_run_action.output[:proxy_output]
-        return unless proxy_output
-        output = []
-        if proxy_output[:result]
-          output << proxy_output[:result].map { |o| o[:output] }.join("")
-        end
-        output << "Exit status: #{host_run_action.exit_status}" if host_run_action.exit_status
-        return output.join("\n")
+      def live_output
+        planned_actions(RunProxyCommand).first.live_output
       end
 
       def humanized_name

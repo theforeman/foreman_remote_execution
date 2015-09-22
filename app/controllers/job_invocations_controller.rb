@@ -42,6 +42,7 @@ class JobInvocationsController < ApplicationController
 
   def show
     @job_invocation = resource_base.find(params[:id])
+    @auto_refresh = @job_invocation.last_task.try(:pending?)
   end
 
   def index

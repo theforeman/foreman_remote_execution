@@ -1,6 +1,6 @@
 $('div#status_chart').html('<%=j job_invocation_chart(@job_invocation) %>');
 $('div#status').flot_pie();
 
-<% if @job_invocation.last_task.pending? %>
+<% if @auto_refresh %>
   delayed_refresh($('script#job_invocation_refresh').data('refresh-url'));
 <% end %>
