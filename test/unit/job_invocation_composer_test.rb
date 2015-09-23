@@ -38,7 +38,7 @@ describe JobInvocationComposer do
 
   context 'with general new invocation and empty params' do
     let(:params) { {} }
-    let(:job_invocation) { JobInvocation.new }
+    let(:job_invocation) { JobInvocation.new.tap { |job_invocation| job_invocation.stubs(:trigger_mode=) } }
     let(:composer) { JobInvocationComposer.new(job_invocation).compose_from_params(params) }
 
     describe '#available_templates' do

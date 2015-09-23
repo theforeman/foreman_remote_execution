@@ -1,4 +1,4 @@
-<% if job_invocation.last_task.present? %>
+<% if job_invocation.targeting.resolved_at %>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
     <tr>
@@ -10,16 +10,12 @@
     </thead>
 
     <tbody>
-      <% job_invocation.last_task.sub_tasks.for_action_types('Actions::RemoteExecution::RunHostJob').each do |task| %>
+      <% job_invocation.targeting.hosts.each do |host| %>
         <tr>
-          <% template_invocation = task.locks.where(:resource_type => 'TemplateInvocation').first.try(:resource) %>
-          <% if (host = task.locks.where(:resource_type => 'Host::Managed').first.try(:resource)) %>
-            <td><%= link_to_if_authorized host.name, hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts) %></td>
-          <% else %>
-            <td><%= _('host not linked') %></td>
-          <% end %>
+          <% task = job_invocation.last_task.sub_tasks.select { |task| task.locks.where(:resource_type => 'Host::Managed', :resource_id => host.id).any? }.first %>
+          <td><%= link_to_if_authorized host.name, hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts) %></td>
 
-          <td><%= template_invocation.nil? ? _('N/A') : _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)) %></td>
+          <td><%= remote_execution_provider_for(task) %></td>
           <td><%= template_invocation_status(task) %></td>
           <td><%= action_buttons(
                           display_link_if_authorized(_("Details"), hash_for_template_invocation_path(:id => task).merge(:auth_object => host, :permission => :view_foreman_tasks))
@@ -29,5 +25,8 @@
     </tbody>
   </table>
 <% else %>
-  <%= _('No host could be found, this can happen if the action was not executed yet. Try visiting this page later.') %>
+  <div class="alert alert-warning">
+    <%= _("The dynamic query '#{job_invocation.targeting.search_query}' was not resolved yet. The list of hosts to which it would resolve now can be seen") %>
+    <%= link_to('here.', hosts_url(:search => job_invocation.targeting.search_query)) %>
+  </div>
 <% end %>
