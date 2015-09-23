@@ -1315,3 +1315,8 @@ package "Developer API" {
 }
 
 {% endplantuml %}
+
+Wireframes
+===========
+
+Here are [wireframes PDF](/foreman_remote_execution/design/wireframes.pdf) from 2015-08-14 which we follow where underlaying backends allow us.
