@@ -40,7 +40,6 @@ module RemoteExecutionHelper
       label = invocation.last_task.pending ? _('Running') : _('Finished')
       label + ' ' + (invocation.last_task.progress * 100).to_i.to_s + '%'
     end
-
   end
 
   def task_cancelled?(task)
@@ -71,6 +70,14 @@ module RemoteExecutionHelper
         else
           task.result
       end
+    end
+  end
+
+  def template_invocation_actions(task, host)
+    if task.nil?
+      []
+    else
+      [display_link_if_authorized(_("Details"), hash_for_template_invocation_path(:id => task).merge(:auth_object => host, :permission => :view_foreman_tasks))]
     end
   end
 
