@@ -38,16 +38,14 @@ class JobTemplate < ::Template
   end
   self.table_name = 'templates'
 
-  # Import a template ERB, with metadata in the first YAML comment
+  # Import a template from ERB, with YAML metadata in the first comment
   def self.import(template, options = {})
     metadata = parse_metadata(template)
     return if metadata.blank? || metadata.delete('kind') != 'job_template' || self.find_by_name(metadata['name'])
 
     inputs = metadata.delete('template_inputs')
 
-    # This awkward dance is because you can't instantiate a new template with :locked => true
-    template = self.create(metadata.merge(:template => template.gsub(/<%\#.+?.-?%>\n?/m, '')))
-    template.update_attributes(options)
+    template = self.create(metadata.merge(:template => template.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options))
     template.assign_taxonomies
 
     inputs.each do |input|
