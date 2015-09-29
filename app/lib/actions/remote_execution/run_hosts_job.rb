@@ -19,8 +19,12 @@ module Actions
 
       def create_sub_plans
         job_invocation = JobInvocation.find(input[:job_invocation_id])
+        load_balancer = ProxyLoadBalancer.new
+
         job_invocation.targeting.hosts.map do |host|
-          trigger(RunHostJob, job_invocation, host, input[:connection_options])
+          template_invocation = job_invocation.template_invocation_for_host(host)
+          proxy = determine_proxy(template_invocation, host, load_balancer)
+          trigger(RunHostJob, job_invocation, host, template_invocation, proxy, input[:connection_options])
         end
       end
 
@@ -30,6 +34,22 @@ module Actions
 
       def run(event = nil)
         super unless event == Dynflow::Action::Skip
+      end
+
+      private
+
+      def determine_proxy(template_invocation, host, load_balancer)
+        provider = template_invocation.template.provider_type.to_s
+        host_proxies = host.remote_execution_proxies(provider)
+        strategies = [:subnet, :fallback, :global]
+        proxy = nil
+
+        strategies.each do |strategy|
+          proxy = load_balancer.next(host_proxies[strategy]) if host_proxies[strategy].present?
+          break if proxy
+        end
+
+        proxy
       end
     end
   end

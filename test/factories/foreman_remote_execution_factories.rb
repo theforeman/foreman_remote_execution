@@ -48,3 +48,46 @@ FactoryGirl.define do
     f.sequence(:value) { |n| "Input Value #{n}" }
   end
 end
+
+FactoryGirl.modify do
+  factory :feature do
+    trait :ssh do
+      name 'Ssh'
+    end
+  end
+
+  factory :smart_proxy do
+    trait :ssh do
+      features { [FactoryGirl.build(:feature, :ssh)] }
+    end
+  end
+
+  factory :subnet do
+    trait :execution do
+      remote_execution_proxies { [FactoryGirl.build(:smart_proxy, :ssh)] }
+    end
+  end
+
+  factory :host do
+    trait :with_execution do
+      managed
+      domain
+      subnet do
+        overrides = {
+          :remote_execution_proxies => [FactoryGirl.create(:smart_proxy, :ssh)]
+        }
+
+        overrides[:locations] = [location] unless location.nil?
+        overrides[:organizations] = [organization] unless organization.nil?
+
+        FactoryGirl.create(
+          :subnet,
+          overrides
+        )
+      end
+      interfaces do
+        [FactoryGirl.build(:nic_primary_and_provision, :ip => subnet.network.sub(/0\Z/, '1'), :execution => true)]
+      end
+    end
+  end
+end
