@@ -13,7 +13,6 @@ class Setting::RemoteExecution < Setting
     end
 
     true
-
   end
 
 end
