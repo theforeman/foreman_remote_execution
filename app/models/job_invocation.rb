@@ -12,6 +12,7 @@ class JobInvocation < ActiveRecord::Base
   include ForemanTasks::Concerns::ActionSubject
 
   belongs_to :last_task, :class_name => 'ForemanTasks::Task'
+  has_many :sub_tasks, :through => :last_task
 
   scoped_search :on => [:job_name], :complete_value => true
 
@@ -26,16 +27,12 @@ class JobInvocation < ActiveRecord::Base
     { :id => id, :name => job_name }
   end
 
-  def template_invocations_tasks
-    if last_task.present?
-      last_task.sub_tasks.for_action_types('Actions::RemoteExecution::RunHostJob')
-    else
-      ForemanTasks::Task.for_action_types('Actions::RemoteExecution::RunHostJob').where('1=0')
-    end
+  def template_invocation_tasks
+    sub_tasks.for_action_types('Actions::RemoteExecution::RunHostJob')
   end
 
   def failed_template_invocation_tasks
-    template_invocations_tasks.where(:result => 'warning')
+    template_invocation_tasks.where(:result => 'warning')
   end
 
   def failed_host_ids

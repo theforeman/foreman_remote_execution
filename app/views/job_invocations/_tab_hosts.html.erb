@@ -12,7 +12,11 @@
     <tbody>
       <% job_invocation.targeting.hosts.each do |host| %>
         <tr>
-          <% task = job_invocation.last_task.sub_tasks.select { |task| task.locks.where(:resource_type => 'Host::Managed', :resource_id => host.id).any? }.first %>
+          <% task = job_invocation.sub_tasks.joins(:locks).where("#{ForemanTasks::Lock.table_name}.resource_type" => 'Host::Managed', "#{ForemanTasks::Lock.table_name}.resource_id" => host.id).first %>
+           <td><%= link_to_if_authorized host.name, hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts) %></td>
+
+           <td><%= remote_execution_provider_for(task) %></td>
+
           <td><%= link_to_if_authorized host.name, hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts) %></td>
           <td><%= remote_execution_provider_for(task) %></td>
           <td><%= template_invocation_status(task) %></td>
