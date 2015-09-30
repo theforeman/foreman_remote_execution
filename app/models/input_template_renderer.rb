@@ -16,7 +16,7 @@ class InputTemplateRenderer
   end
 
   def render
-    render_safe(@template.template, [ :input ], :host => @host)
+    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input ], :host => @host)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
     Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")
@@ -38,5 +38,9 @@ class InputTemplateRenderer
       self.error_message = _('input macro with name \'%s\' used, but no input with such name defined for this template') % name
       raise UndefinedInput, "Rendering failed, no input with name #{name} for input macro found"
     end
+  end
+
+  def logger
+    Rails.logger
   end
 end
