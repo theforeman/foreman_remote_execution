@@ -299,6 +299,21 @@ describe JobInvocationComposer do
           Bookmark.expects(:authorized).with(:view_bookmarks).returns(Bookmark.scoped)
           composer.available_bookmarks
         end
+
+        context 'there are hostgroups and hosts bookmark' do
+          let(:hostgroups) { Bookmark.create(:name => 'hostgroups', :query => 'name = x', :controller => 'hostgroups') }
+          let(:hosts) { Bookmark.create(:name => 'hosts', :query => 'name = x', :controller => 'hosts') }
+          let(:dashboard) { Bookmark.create(:name => 'dashboard', :query => 'name = x', :controller => 'dashboard') }
+
+          it 'finds only host related bookmarks' do
+            hosts
+            dashboard
+            hostgroups
+            composer.available_bookmarks.must_include hosts
+            composer.available_bookmarks.must_include dashboard
+            composer.available_bookmarks.wont_include hostgroups
+          end
+        end
       end
 
       describe '#targeted_hosts_count' do
