@@ -18,4 +18,8 @@ describe ProxyLoadBalancer do
 
     not_yet_seen.must_be_empty
   end
+
+  it 'returns nil for if no proxy is available' do
+    load_balancer.next([]).must_be_nil
+  end
 end
