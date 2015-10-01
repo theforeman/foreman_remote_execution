@@ -111,7 +111,24 @@ module RemoteExecutionHelper
                          :disabled => !task.cancellable?,
                          :method => :post)
     end
-    return button_group(*buttons)
+    return buttons
+  end
+
+  def template_invocation_task_buttons(task)
+    buttons = []
+    if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
+      buttons << link_to(_("Task Details"), foreman_tasks_task_path(task),
+                         :class => "btn btn-default",
+                         :title => _('See the task details'))
+    end
+    if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task)
+      buttons << link_to(_("Cancel Job"), cancel_foreman_tasks_task_path(task),
+                         :class => "btn btn-danger",
+                         :title => _('Try to cancel the job on a host'),
+                         :disabled => !task.cancellable?,
+                         :method => :post)
+    end
+    return buttons
   end
 
   def link_to_invocation_task_if_authorized(invocation)

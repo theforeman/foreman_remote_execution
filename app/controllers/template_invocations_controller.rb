@@ -7,15 +7,10 @@ class TemplateInvocationsController < ApplicationController
     @template_invocation_task = ForemanTasks::Task.find(params[:id])
     @template_invocation = @template_invocation_task.locks.where(:resource_type => 'TemplateInvocation').first.try(:resource)
     @host = @template_invocation_task.locks.where(:resource_type => 'Host::Managed').first.try(:resource)
-
-    respond_to do |format|
-      format.html
-      format.js do
-        @lines = @template_invocation_task.main_action.output
-        if params[:since]
-          @lines = @lines.select { |o| o['timestamp'].to_f > params[:since].to_f }
-        end
-      end
-    end
+    @auto_refresh = @template_invocation_task.pending?
+    @since = params[:since].to_f if params[:since].present?
+    @line_sets = @template_invocation_task.main_action.live_output
+    @line_sets = @line_sets.drop_while { |o| o['timestamp'].to_f <= @since } if @since
+    @line_counter = params[:line_counter].to_i
   end
 end

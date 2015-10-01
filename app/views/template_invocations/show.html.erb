@@ -5,9 +5,11 @@
 <div id="title_action">
   <div class="btn-toolbar pull-right">
     <%= link_to(_('Back to Job'), job_invocation_path(@template_invocation.job_invocation)) %>
-    <%= link_to_function(_('Toggle command'), '$("div.preview").toggle()') %>
-    <%= link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()') %>
-    <%= link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()') %>
+    <%= button_group(link_to_function(_('Toggle command'), '$("div.preview").toggle()'),
+                     link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()'),
+                     link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()'),
+                     link_to_function(_('Toggle DEBUG'), '$("div.line.debug").toggle()')) %>
+    <%= button_group(template_invocation_task_buttons(@template_invocation_task)) %>
   </div>
 </div>
 
@@ -18,22 +20,19 @@
 </div>
 
 <div class="terminal" data-refresh-url="<%= template_invocation_path(@template_invocation_task) %>">
+  <% if @error %>
+    <div class="line error"><%= @error %></div>
+  <% else %>
     <%= link_to_function(_('Scroll to bottom'), '$("html, body").animate({ scrollTop: $(document).height() }, "slow");', :class => 'pull-right scroll-link-bottom') %>
 
-  <div class="printable">
-    <%= render :partial => 'output_line', :collection => @template_invocation_task.main_action.output %>
-  </div>
+    <div class="printable">
+      <%= render :partial => 'output_line_set', :collection => @line_sets %>
+    </div>
 
     <%= link_to_function(_('Scroll to top'), '$("html, body").animate({ scrollTop: 0 }, "slow");', :class => 'pull-right scroll-link-top') %>
+  <% end %>
 </div>
 
-
-
 <script>
-  <% if @template_invocation_task.pending? %>
-    $(function() {
-      delayed_refresh($("div.terminal").data('refresh-url'),
-              {"since": "<%= @template_invocation_task.main_action.output.last.try(:[], 'timestamp') %>", "line_counter": $("div.terminal div.line").size()});
-    });
-  <% end %>
+  <%= render :partial => 'refresh.js' %>
 </script>

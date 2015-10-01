@@ -33,7 +33,7 @@ div.terminal {
     min-height: 50px;
   }
 
-  div.line.error {
+  div.line.error, div.line.debug {
     color: #a9302a;
   }
 
