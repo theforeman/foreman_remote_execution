@@ -1,8 +1,24 @@
 <% if job_invocation.resolved? %>
+  <%= form_tag job_invocation_path(job_invocation), :method => "get",:id =>"search-form" do %>
+    <div class="row">
+      <div class="title_filter col-md-6">
+        <div class="input-group">
+            <%= auto_complete_search(:search, params[:search].try(:squeeze, " "), :placeholder => _("Filter") + ' ...', :path => hosts_path) %>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <%= icon_text("search", content_tag(:span, _("Search"), :class => "hidden-xs")) %>
+              </button>
+            </span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <br>
+
   <table class="table table-bordered table-striped table-condensed">
     <thead>
     <tr>
-      <th><%= _('Host') %></th>
+      <th><%= sort :name, :as => _('Host') %></th>
       <th><%= _('Provider') %></th>
       <th><%= _('Status') %></th>
       <th><%= _('Actions') %></th>
