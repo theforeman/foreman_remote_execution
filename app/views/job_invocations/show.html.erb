@@ -7,22 +7,22 @@
 <% end %>
 
 <ul class="nav nav-tabs" data-tabs="tabs">
-  <li class="active"><a href="#primary" data-toggle="tab"><%= _('Overview') %></a></li>
-  <li><a href="#hosts" data-toggle="tab"><%= _('Hosts') %></a></li>
+  <li class="<%= job_invocation_active_tab(:overview, params) %>"><a href="#primary" data-toggle="tab"><%= _('Overview') %></a></li>
+  <li class="<%= job_invocation_active_tab(:hosts, params) %>"><a href="#hosts" data-toggle="tab"><%= _('Hosts') %></a></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="primary">
+  <div class="tab-pane <%= job_invocation_active_tab(:overview, params) %>" id="primary">
     <%= render 'tab_overview', :job_invocation => @job_invocation %>
   </div>
 
-  <div class="tab-pane" id="hosts">
-    <%= render 'tab_hosts', :job_invocation => @job_invocation %>
+  <div class="tab-pane <%= job_invocation_active_tab(:hosts, params) %>" id="hosts" data-refresh_required="<%= @job_invocation.resolved? ? '' : 'true' %>">
+    <%= render 'tab_hosts', :job_invocation => @job_invocation, :hosts => @hosts %>
   </div>
 </div>
 
 <script id="job_invocation_refresh" data-refresh-url="<%= job_invocation_path(@job_invocation) %>">
 <% if @auto_refresh %>
-  delayed_refresh($('script#job_invocation_refresh').data('refresh-url'));
+  delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), job_invocation_refresh_data());
 <% end %>
 </script>

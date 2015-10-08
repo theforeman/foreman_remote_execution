@@ -1,0 +1,1 @@
+<td class="host_status" id="<%= dom_id(host) %>-status" data-refresh_required="<%= task.nil? || task.pending? ? 'true' : '' %>" data-id="<%= host.id %>"><%= template_invocation_status(task) %></td>

@@ -1,0 +1,3 @@
+<td class="host_provider" id="<%= dom_id(host) %>-provider" data-refresh_required="<%= task.nil? ? 'true' : '' %>" data-id="<%= host.id %>">
+  <%= remote_execution_provider_for(task) %>
+</td>

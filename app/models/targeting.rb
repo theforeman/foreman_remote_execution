@@ -42,6 +42,10 @@ class Targeting < ActiveRecord::Base
     ids.map { |id| "name = #{hosts[id].first.name}" }.join(' or ')
   end
 
+  def resolved?
+    self.resolved_at.present?
+  end
+
   private
 
   def bookmark_or_query_is_present

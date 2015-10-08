@@ -10,7 +10,7 @@ class JobInvocation < ActiveRecord::Base
 
   scoped_search :on => :job_name
 
-  delegate :bookmark, :to => :targeting, :allow_nil => true
+  delegate :bookmark, :resolved?, :to => :targeting, :allow_nil => true
 
   include ForemanTasks::Concerns::ActionSubject
 
@@ -51,10 +51,10 @@ class JobInvocation < ActiveRecord::Base
   end
 
   def total_hosts_count
-    if targeting.resolved_at.nil?
-      _('N/A')
-    else
+    if targeting.resolved?
       targeting.hosts.count
+    else
+      _('N/A')
     end
   end
 
@@ -108,5 +108,9 @@ class JobInvocation < ActiveRecord::Base
   # TODO: determine from the host and job_invocation details
   def available_providers(host)
     return RemoteExecutionProvider.provider_names
+  end
+
+  def sub_task_for_host(host)
+    sub_tasks.joins(:locks).where("#{ForemanTasks::Lock.table_name}.resource_type" => 'Host::Managed', "#{ForemanTasks::Lock.table_name}.resource_id" => host.id).first
   end
 end

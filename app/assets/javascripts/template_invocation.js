@@ -57,3 +57,16 @@ function delayed_refresh(url, data){
     )
   }, 1000);
 }
+
+function job_invocation_refresh_data(){
+  return {
+    hosts_needs_refresh: $("div#hosts").data('refresh_required'),
+    host_ids_needing_status_update: fetch_ids_of_hosts('status'),
+    host_ids_needing_provider_update: fetch_ids_of_hosts('provider'),
+    host_ids_needing_actions_update: fetch_ids_of_hosts('actions')
+  }
+}
+
+function fetch_ids_of_hosts(attribute){
+  return _.map($('div#hosts td.host_' + attribute + '[data-refresh_required="true"]'), function(elem) { return $(elem).data('id') });
+}
