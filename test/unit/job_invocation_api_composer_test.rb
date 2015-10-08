@@ -20,14 +20,9 @@ describe JobInvocationApiComposer do
   end
 
   let(:testing_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'testing_job_template_1', :name => 'testing1', :provider_type => 'Ssh') }
-  let(:testing_job_template_2) { FactoryGirl.create(:job_template, :job_name => 'testing_job_template_2', :name => 'testing2', :provider_type => 'Mcollective') }
-  let(:testing_job_template_3) { FactoryGirl.create(:job_template, :job_name => 'testing_job_template_1', :name => 'testing3', :provider_type => 'Ssh') }
-  let(:unauthorized_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'testing_job_template_1', :name => 'unauth1', :provider_type => 'Ssh') }
-  let(:unauthorized_job_template_2) { FactoryGirl.create(:job_template, :job_name => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
 
-  let(:input1) { FactoryGirl.create(:template_input, :template => testing_job_template_1, :input_type => 'user') }
-  let(:input2) { FactoryGirl.create(:template_input, :template => testing_job_template_3, :input_type => 'user') }
-  let(:unauthorized_input1) { FactoryGirl.create(:template_input, :template => unauthorized_job_template_1, :input_type => 'user') }
+  let(:input1) { FactoryGirl.create(:template_input, :template => testing_job_template_1, :input_type => 'user', :required => true) }
+  let(:input2) { FactoryGirl.create(:template_input, :template => testing_job_template_1, :input_type => 'user') }
 
   let(:bookmark) { bookmarks(:one) }
   let(:providers_params) { { :providers => { :ansible => ansible_params, :ssh => ssh_params, :mcollective => mcollective_params } } }
@@ -81,7 +76,7 @@ describe JobInvocationApiComposer do
       ji = JobInvocation.new
 
       composer = JobInvocationApiComposer.new(ji, User.current, params)
-      assert_raises(ActiveRecord::RecordInvalid) do
+      assert_raises(ActiveRecord::RecordNotSaved) do
         composer.save!
       end
     end
@@ -105,13 +100,44 @@ describe JobInvocationApiComposer do
                 :template_id => testing_job_template_1.id,
                 :targeting_type => "static_query",
                 :search_query => "some hosts",
-                :inputs => [{:name => input1.name}]}
+                :inputs => [{:name => input1.name, :value => "some_value"}, {:name => input2.name}]}
       ji = JobInvocation.new
-
       composer = JobInvocationApiComposer.new(ji, User.current, params)
-      assert_raises(ActiveRecord::RecordInvalid) do
+
+      error = assert_raises(ActiveRecord::RecordNotSaved) do
         composer.save!
       end
+      error.message.must_include "Template #{testing_job_template_1.name}: Input #{input2.name.downcase}: Value can't be blank"
+    end
+
+    it "accepts empty values for non-required inputs" do
+      params = {:job_name => testing_job_template_1.job_name,
+                :template_id => testing_job_template_1.id,
+                :targeting_type => "static_query",
+                :search_query => "some hosts",
+                :inputs => [{:name => input1.name, :value => "some_value"}, {:name => input2.name, :value => ""}]}
+      ji = JobInvocation.new
+      composer = JobInvocationApiComposer.new(ji, User.current, params)
+
+      composer.save!
+      assert !ji.new_record?
+    end
+
+    it "handles errors on missing required inputs" do
+      input1.must_be :required
+      params = {:job_name => testing_job_template_1.job_name,
+                :template_id => testing_job_template_1.id,
+                :targeting_type => "static_query",
+                :search_query => "some hosts",
+                :inputs => [{:name => input2.name, :value => "some_value"}]}
+      ji = JobInvocation.new
+      composer = JobInvocationApiComposer.new(ji, User.current, params)
+
+      error = assert_raises(ActiveRecord::RecordNotSaved) do
+        composer.save!
+      end
+
+      error.message.must_include "Template #{testing_job_template_1.name}: Not all required inputs have values. Missing inputs: #{input1.name}"
     end
   end
 end
