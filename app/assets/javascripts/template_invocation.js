@@ -68,5 +68,5 @@ function job_invocation_refresh_data(){
 }
 
 function fetch_ids_of_hosts(attribute){
-  return _.map($('div#hosts td.host_' + attribute + '[data-refresh_required="true"]'), function(elem) { return $(elem).data('id') });
+  return $('div#hosts td.host_' + attribute + '[data-refresh_required="true"]').map(function() { return $(this).data('id') }).get();
 }
