@@ -158,4 +158,15 @@ module RemoteExecutionHelper
             :text => renderer.error_message.html_safe
     end
   end
+
+  def job_invocation_active_tab(tab, params)
+    active = 'active'
+    inactive = ''
+    hosts_tab_active = params[:page].present? || params[:search].present? || params[:order].present?
+    if hosts_tab_active
+      tab == :hosts ? active : inactive
+    else
+      tab == :overview ? active : inactive
+    end
+  end
 end

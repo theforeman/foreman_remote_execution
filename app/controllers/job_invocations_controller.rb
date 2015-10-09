@@ -43,6 +43,8 @@ class JobInvocationsController < ApplicationController
   def show
     @job_invocation = resource_base.find(params[:id])
     @auto_refresh = @job_invocation.last_task.try(:pending?)
+    hosts_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+    @hosts = hosts_base.search_for(params[:search], :order => params[:order] || 'name ASC').paginate(:page => params[:page])
   end
 
   def index

@@ -9,6 +9,19 @@ describe Targeting do
     bookmark.query = "name = bar"
   end
 
+  describe '#resolved?' do
+    context 'resolved_at is nil' do
+      before { targeting.resolved_at = nil }
+      it { refute targeting.resolved? }
+    end
+
+    context 'resolved_at is set' do
+      before { targeting.resolved_at = Time.now }
+      it { assert targeting.resolved? }
+    end
+
+  end
+
   context 'able to be created with search term' do
     before { targeting.search_query = "name = foo" }
     it { assert targeting.save }

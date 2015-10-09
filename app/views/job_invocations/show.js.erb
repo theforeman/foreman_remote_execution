@@ -1,6 +1,22 @@
 $('div#status_chart').html('<%=j job_invocation_chart(@job_invocation) %>');
 $('div#status').flot_pie();
 
+<% if params[:hosts_needs_refresh] == 'true' && @job_invocation.resolved? %>
+  var hosts_tab = $('div#hosts');
+  hosts_tab.html('<%=j render('tab_hosts', :job_invocation => @job_invocation, :hosts => @hosts) %>');
+  hosts_tab.data('refresh_required', '');
+<% end %>
+
+<% ['status', 'actions', 'provider'].each do |attribute| %>
+  <% if params["host_ids_needing_#{attribute}_update"].present? %>
+    var td_element;
+    <% Host.authorized(:view_hosts, Host).where(:id => params["host_ids_needing_#{attribute}_update"]).each do |host| %>
+      td_element= $('#<%= dom_id(host) %>-<%= attribute %>');
+      td_element.replaceWith('<%=j render("host_#{attribute}_td", :host => host, :task => @job_invocation.sub_task_for_host(host)) %>');
+    <% end %>
+  <% end %>
+<% end %>
+
 <% if @auto_refresh %>
-  delayed_refresh($('script#job_invocation_refresh').data('refresh-url'));
+  delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), job_invocation_refresh_data());
 <% end %>
