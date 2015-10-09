@@ -4,7 +4,6 @@ class JobInvocationApiComposer
   delegate :job_name, :to => :job_invocation
   delegate :targeting, :to => :job_invocation
   delegate :template_invocations, :to => :job_invocation
-  delegate :save!, :to => :job_invocation
 
   def initialize(job_invocation, user, params)
     @job_invocation = job_invocation
@@ -54,6 +53,14 @@ class JobInvocationApiComposer
 
   def valid?
     targeting.valid? & job_invocation.valid? & template_invocations.all?(&:valid?)
+  end
+
+  def save!
+    if valid?
+      job_invocation.save!
+    else
+      raise job_invocation.flattened_validation_exception
+    end
   end
 
   def available_bookmarks
