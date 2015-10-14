@@ -29,7 +29,7 @@ module Api
 
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal attrs[:job_name], invocation['job_name']
-        assert_response 200
+        assert_response :success
       end
 
       test "should create valid with template_id" do
@@ -38,7 +38,7 @@ module Api
 
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal attrs[:job_name], invocation['job_name']
-        assert_response 200
+        assert_response :success
       end
     end
   end
