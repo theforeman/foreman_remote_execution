@@ -1,6 +1,19 @@
 require 'test_plugin_helper'
 
 describe JobTemplate do
+  context 'when creating a template' do
+    let(:job_template) { FactoryGirl.build(:job_template, :job_name => '') }
+
+    it 'needs a job_name' do
+      refute job_template.valid?
+    end
+
+    it 'does not need a job_name if it is a snippet' do
+      job_template.snippet = true
+      assert job_template.valid?
+    end
+  end
+
   context 'cloning' do
     let(:job_template) { FactoryGirl.build(:job_template, :with_input) }
 
