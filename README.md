@@ -5,36 +5,29 @@
 
 # Foreman Remote Execution
 
-A plugin bringing remote execution to the Foreman, completing the config 
+A plugin bringing remote execution to the Foreman, completing the config
 management functionality with remote management functionality.
 
-## Installation
+* Website: [theforeman.org](http://theforeman.org)
+* Support: [Foreman support](http://theforeman.org/support.html)
 
-See [How_to_Install_a_Plugin](http://projects.theforeman.org/projects/foreman/wiki/How_to_Install_a_Plugin)
-for how to install Foreman plugins
+## Features
 
-## Usage
+* Visualize remote execution job process live
+![job detail](http://theforeman.org/plugins/foreman_remote_execution/0.0/job_detail_1.png)
+* Schedule or run jobs on hosts
+![invocation form](http://theforeman.org/plugins/foreman_remote_execution/0.0/invocation_form.png)
+* Create templates to customize your jobs
+![job templates](http://theforeman.org/plugins/foreman_remote_execution/0.0/job_template_form.png)
 
-*Usage here*
+## Installation and usage
 
-## Generating the docs
-
-0. ``cd doc``
-
-0. ``mkdir .bin`` # only first time
-
-1. ``bundle install``
-
-2. ``bundle exec rake plantuml_install`` to install prerequisites
-
-3. ``bundle exec jekyll serve`` to see the rendered changes locally
-
-4. ``bundle exec rake publish`` to publish the changes to Github pages
+Check the Foreman manual [remote execution section](http://theforeman.org/plugins/foreman_remote_execution/)
 
 ## Links
 
-* [the project page](http://theforeman.github.io/foreman_remote_execution/)
-* [the issue tracker](http://projects.theforeman.org/projects/foreman_remote_execution)
+* [Design document](http://theforeman.github.io/foreman_remote_execution/design/)
+* [Issue tracker](http://projects.theforeman.org/projects/foreman_remote_execution)
 
 ## Contributing
 
