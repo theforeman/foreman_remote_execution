@@ -38,7 +38,7 @@ module ForemanRemoteExecution
 
     def becomes_with_remote_execution(*args)
       became = becomes_without_remote_execution(*args)
-      became.drop_execution_interface_cache
+      became.drop_execution_interface_cache if became.respond_to? :drop_execution_interface_cache
       became
     end
 
