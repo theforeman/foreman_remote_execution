@@ -89,12 +89,12 @@ module RemoteExecutionHelper
   def job_invocation_task_buttons(task)
     buttons = []
     buttons << link_to(_('Refresh'), {}, :class => 'btn btn-default', :title => _('Refresh this page'))
-    if authorized_for(:permission => :create_job_invocations)
+    if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_("Rerun"), rerun_job_invocation_path(:id => task.locks.where(:resource_type => 'JobInvocation').first.resource),
                          :class => "btn btn-default",
                          :title => _('Rerun the job'))
     end
-    if authorized_for(:permission => :create_job_invocations)
+    if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_("Rerun failed"), rerun_job_invocation_path(:id => task.locks.where(:resource_type => 'JobInvocation').first.resource, :failed_only => 1),
                          :class => "btn btn-default",
                          :title => _('Rerun on failed hosts'))
