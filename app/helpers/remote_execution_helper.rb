@@ -77,7 +77,7 @@ module RemoteExecutionHelper
     if task.nil?
       []
     else
-      [display_link_if_authorized(_("Details"), hash_for_template_invocation_path(:id => task).merge(:auth_object => host, :permission => :view_foreman_tasks))]
+      [display_link_if_authorized(_("Details"), hash_for_template_invocation_path(:id => task).merge(:auth_object => host, :permission => :view_hosts))]
     end
   end
 
