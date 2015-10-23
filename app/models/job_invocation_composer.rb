@@ -119,7 +119,7 @@ class JobInvocationComposer
   end
 
   def targeted_hosts_count
-    Host.authorized(:view_hosts, Host).search_for(displayed_search_query).count
+    Host.authorized(Targeting::RESOLVE_PERMISSION, Host).search_for(displayed_search_query).count
   rescue
     0
   end
@@ -232,6 +232,6 @@ class JobInvocationComposer
   end
 
   def validate_host_ids(ids)
-    Host.authorized(:view_hosts, Host).where(:id => ids).pluck(:id)
+    Host.authorized(Targeting::RESOLVE_PERMISSION, Host).where(:id => ids).pluck(:id)
   end
 end

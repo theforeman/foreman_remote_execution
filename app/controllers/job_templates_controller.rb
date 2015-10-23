@@ -11,7 +11,7 @@ class JobTemplatesController < ::TemplatesController
   end
 
   def preview
-    base = Host.authorized(:view_hosts)
+    base = Host.authorized(:view_hosts, Host)
     host = params[:preview_host_id].present? ? base.find(params[:preview_host_id]) : base.first
     @template.template = params[:template]
     renderer = InputTemplateRenderer.new(@template, host)
