@@ -28,6 +28,7 @@ class JobTemplate < ::Template
                   end
                 }
 
+  validates :job_name, :presence => true, :unless => ->(job_template) { job_template.snippet }
   validates :provider_type, :presence => true
   validate :provider_type_whitelist
 
