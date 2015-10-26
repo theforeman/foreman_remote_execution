@@ -24,6 +24,33 @@ function refresh_search_query(value){
   $('textarea#targeting_search_query').val($('span#bookmark_query_map span#bookmark-' + id).data('query'));
 }
 
+function show_preview_hosts_modal() {
+  var modal_window = $('#previewHostsModal');
+
+  var form = $('form#job_invocation_form');
+  var data = form.serializeArray();
+
+  request = $.ajax({
+    data: data,
+    type: 'GET',
+    url: modal_window.attr('data-url'),
+    success: function(request) {
+      modal_window.find('.modal-body').html(request);
+    },
+    complete: function() {
+      modal_window.modal({'show': true});
+      modal_window.find('a[rel="popover-modal"]').popover();
+    }
+  });
+}
+
+function close_preview_hosts_modal() {
+  var modal_window = $('#previewHostsModal');
+  modal_window.modal('hide');
+  modal_window.removeData();
+  modal_window.find('.modal-body').html('');
+}
+
 function job_invocation_form_binds() {
   $('input.job_template_selector').on('click', function () {
     parent_fieldset = $(this).closest('fieldset');
@@ -39,6 +66,8 @@ function job_invocation_form_binds() {
   $('select#job_invocation_job_name').on('change', refresh_execution_form);
 
   $('button#refresh_execution_form').on('click', refresh_execution_form);
+
+  $('button#preview_hosts').on('click', show_preview_hosts_modal);
 
   $('textarea#targeting_search_query').on('change', refresh_execution_form);
 

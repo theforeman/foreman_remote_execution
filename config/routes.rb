@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :job_invocations, :only => [:new, :create, :show, :index] do
     collection do
       post 'refresh'
+      get 'preview_hosts'
       get 'auto_complete_search'
     end
     member do

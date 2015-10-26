@@ -1,0 +1,19 @@
+<% if @dynamic -%>
+<div class="alert alert-info alert-dismissable">
+    <p><%= _("The final host list may change because the selected query is dynamic.  It will be rerun during execution.") %></p>
+</div>
+<% end -%>
+
+<% if @hosts.any? -%>
+  <ul>
+    <% @hosts.each do |host| -%>
+        <li><%= link_to h(host.name), host_path(host), :target => '_blank' %></li>
+    <% end -%>
+
+    <% if @additional > 0 -%>
+        <li><%= link_to(_("...and %{count} more" % {:count => @additional}), hosts_path(:search => @query, :page => 2), :target => '_blank') %></li>
+    <% end -%>
+  </ul>
+<% else -%>
+  <h3><%= _("No hosts found.") %></h3>
+<% end -%>

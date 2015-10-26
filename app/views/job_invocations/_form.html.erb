@@ -17,6 +17,9 @@
         <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Refresh"), :id => 'refresh_execution_form') do %>
           <%= icon_text('refresh') %>
         <% end %>
+        <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Preview"), :id => 'preview_hosts') do %>
+          <%= icon_text('eye-open') %>
+        <% end %>
       </div>
     </div>
 
@@ -80,6 +83,6 @@
       <%= text_f f, :start_before, :label => _('Start before') %>
     </fieldset>
   </div>
-
+  <%= render :partial => 'preview_hosts_modal' %>
   <%= submit_or_cancel f %>
 <% end %>
