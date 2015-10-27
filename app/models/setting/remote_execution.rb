@@ -13,7 +13,7 @@ class Setting::RemoteExecution < Setting
                  N_("Search for remote execution proxy outside of the proxies assigned to the host. " +
                  "If locations or organizations are enabled, the search will be limited to the host's " +
                  "organization or location."),
-                 false),
+                 true),
       ].each { |s| self.create! s.update(:category => "Setting::RemoteExecution") }
     end
 
