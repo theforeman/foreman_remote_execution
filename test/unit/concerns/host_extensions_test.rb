@@ -9,6 +9,16 @@ describe ForemanRemoteExecution::HostExtensions do
 
   after { User.current = nil }
 
+  context 'ssh keys' do
+    let(:host) { FactoryGirl.build(:host, :with_execution) }
+
+    it 'has ssh keys in the parameters' do
+      sshkey = 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQ foo@example.com'
+      SmartProxy.any_instance.stubs(:pubkey).returns(sshkey)
+      host.remote_execution_ssh_keys.must_include sshkey
+    end
+  end
+
   context 'host has multiple nics' do
     let(:host) { FactoryGirl.build(:host, :with_execution) }
 

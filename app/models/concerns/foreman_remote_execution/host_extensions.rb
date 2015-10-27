@@ -6,8 +6,16 @@ module ForemanRemoteExecution
       alias_method_chain :build_required_interfaces, :remote_execution
       alias_method_chain :reload, :remote_execution
       alias_method_chain :becomes, :remote_execution
+      alias_method_chain :params, :remote_execution
 
       has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
+    end
+
+    def params_with_remote_execution
+      params = params_without_remote_execution
+      keys = remote_execution_ssh_keys
+      params['remote_execution_ssh_keys'] = keys unless keys.blank?
+      params
     end
 
     def execution_interface
@@ -30,6 +38,10 @@ module ForemanRemoteExecution
       end
 
       proxies
+    end
+
+    def remote_execution_ssh_keys
+      remote_execution_proxies('Ssh').values.flatten.uniq.map { |proxy| proxy.pubkey }.compact.uniq
     end
 
     def drop_execution_interface_cache
