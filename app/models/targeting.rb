@@ -3,6 +3,7 @@ class Targeting < ActiveRecord::Base
   STATIC_TYPE = 'static_query'
   DYNAMIC_TYPE = 'dynamic_query'
   TYPES = { STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query') }
+  RESOLVE_PERMISSION = :view_hosts
 
   belongs_to :user
   belongs_to :bookmark
@@ -26,7 +27,7 @@ class Targeting < ActiveRecord::Base
     self.search_query = bookmark.query if dynamic? && bookmark.present?
     self.touch(:resolved_at)
     self.save!
-    self.hosts = User.as(user.login) { Host.authorized('edit_hosts', Host).search_for(search_query) }
+    self.hosts = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query) }
   end
 
   def dynamic?
