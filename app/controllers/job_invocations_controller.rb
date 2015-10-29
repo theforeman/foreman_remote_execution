@@ -56,11 +56,24 @@ class JobInvocationsController < ApplicationController
     @composer = JobInvocationComposer.new.compose_from_params(params)
   end
 
+  def preview_hosts
+    composer = JobInvocationComposer.new.compose_from_params(params)
+
+    @hosts = composer.targeted_hosts.limit(Setting[:entries_per_page])
+    @additional = composer.targeted_hosts.count - Setting[:entries_per_page]
+    @dynamic = composer.targeting.dynamic?
+    @query = composer.displayed_search_query
+
+    render :partial => 'job_invocations/preview_hosts_list'
+  end
+
   private
 
   def action_permission
     case params[:action]
       when 'rerun'
+        'create'
+      when 'preview_hosts'
         'create'
       else
         super

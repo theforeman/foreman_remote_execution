@@ -118,8 +118,12 @@ class JobInvocationComposer
     Bookmark.authorized(:view_bookmarks).my_bookmarks.where(:controller => ['hosts', 'dashboard'])
   end
 
+  def targeted_hosts
+    Host.authorized(Targeting::RESOLVE_PERMISSION, Host).search_for(displayed_search_query)
+  end
+
   def targeted_hosts_count
-    Host.authorized(Targeting::RESOLVE_PERMISSION, Host).search_for(displayed_search_query).count
+    targeted_hosts.count
   rescue
     0
   end
