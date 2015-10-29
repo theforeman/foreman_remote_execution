@@ -1,3 +1,4 @@
+$('div.btn-group').html('<%= button_group(job_invocation_task_buttons(@job_invocation.last_task)).html_safe %>');
 $('div#status_chart').html('<%=j job_invocation_chart(@job_invocation) %>');
 $('div#status').flot_pie();
 
