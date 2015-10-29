@@ -6,8 +6,6 @@ module Actions
         :link
       end
 
-      include ::Dynflow::Action::Cancellable
-
       def plan(job_invocation, host, template_invocation, proxy, connection_options = {})
         action_subject(host, :job_name => job_invocation.job_name)
         hostname = find_ip_or_hostname(host)
@@ -28,6 +26,14 @@ module Actions
         link!(template_invocation)
 
         plan_action(RunProxyCommand, proxy, hostname, script, { :connection_options => connection_options })
+        plan_self
+      end
+
+      def finalize(*args)
+        host = Host.find(input[:host][:id])
+        host.refresh_statuses
+      rescue => e
+        Foreman::Logging.exception "Could not update execution status for #{input[:host][:name]}", e
       end
 
       def humanized_output

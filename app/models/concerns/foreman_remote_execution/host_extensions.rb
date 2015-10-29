@@ -9,6 +9,19 @@ module ForemanRemoteExecution
       alias_method_chain :params, :remote_execution
 
       has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
+
+      has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
+
+      scoped_search :in => :execution_status_object, :on => :status, :rename => :'execution_status',
+                    :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
+    end
+
+    def execution_status(options = {})
+      @execution_status ||= get_status(HostStatus::ExecutionStatus).to_status(options)
+    end
+
+    def execution_status_label(options = {})
+      @execution_status_label ||= get_status(HostStatus::ExecutionStatus).to_label(options)
     end
 
     def params_with_remote_execution
