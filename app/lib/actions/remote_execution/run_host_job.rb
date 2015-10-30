@@ -11,15 +11,18 @@ module Actions
 
       def plan(job_invocation, host, template_invocation, proxy)
         action_subject(host, :job_name => job_invocation.job_name, :description => job_invocation.description)
+
+        template_invocation.update_attribute :host_id, host.id
         link!(job_invocation)
         link!(template_invocation)
 
+        verify_permissions(host, template_invocation)
         hostname = find_ip_or_hostname(host)
 
         raise _("Could not use any template used in the job invocation") if template_invocation.blank?
 
-        settings =  { :global_proxy   => 'remote_execution_global_proxy',
-                      :fallback_proxy => 'remote_execution_fallback_proxy' }
+        settings = { :global_proxy   => 'remote_execution_global_proxy',
+                     :fallback_proxy => 'remote_execution_fallback_proxy' }
 
         raise _("Could not use any proxy. Consider configuring %{global_proxy} " +
                 "or %{fallback_proxy} in settings") % settings if proxy.blank?
@@ -71,6 +74,20 @@ module Actions
         end
 
         return host.fqdn
+      end
+
+      private
+
+      def verify_permissions(host, template_invocation)
+        raise _('User can not execute job on host %s') % host.name unless User.current.can?(:view_hosts, host)
+        raise _('User can not execute this job template') unless User.current.can?(:view_job_templates, template_invocation.template)
+
+        # we don't want to load all template_invocations to verify so we construct Authorizer object manually and set
+        # the base collection to current template
+        authorizer = Authorizer.new(User.current, :collection => [ template_invocation.id ])
+        raise _('User can not execute this job template on %s') % host.name unless authorizer.can?(:execute_template_invocation, template_invocation)
+
+        true
       end
     end
   end

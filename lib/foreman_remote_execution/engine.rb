@@ -48,10 +48,32 @@ module ForemanRemoteExecution
                                                 'api/v2/job_invocations' => [:create] }, :resource_type => 'JobInvocation'
           permission :view_job_invocations, { :job_invocations => [:index, :show, :auto_complete_search], :template_invocations => [:show],
                                               'api/v2/job_invocations' => [:index, :show, :output] }, :resource_type => 'JobInvocation'
+          permission :execute_template_invocation, {}, :resource_type => 'TemplateInvocation'
+          # this permissions grants user to get auto completion hints when setting up filters
+          permission :filter_autocompletion_for_template_invocation, { :template_invocations => [ :auto_complete_search, :index ] },
+                     :resource_type => 'TemplateInvocation'
         end
 
-        # Add a new role called 'ForemanRemoteExecution' if it doesn't exist
-        # role 'ForemanRemoteExecution', [:view_foreman_remote_execution]
+        USER_PERMISSIONS = [
+          :view_job_templates,
+          :view_job_invocations,
+          :create_job_invocations,
+          :execute_template_invocation,
+          :view_hosts,
+          :view_smart_proxies
+        ]
+        MANAGER_PERMISSIONS = USER_PERMISSIONS + [
+          :destroy_job_templates,
+          :edit_job_templates,
+          :create_job_templates,
+          :lock_job_templates,
+          :view_audit_logs,
+          :filter_autocompletion_for_template_invocation
+        ]
+
+        # Add a new role called 'Remote Execution User ' if it doesn't exist
+        role 'Remote Execution User', USER_PERMISSIONS
+        role 'Remote Execution Manager', MANAGER_PERMISSIONS
 
         # add menu entry
         menu :top_menu, :job_templates,
