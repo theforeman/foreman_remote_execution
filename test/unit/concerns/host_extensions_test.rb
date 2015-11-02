@@ -9,11 +9,30 @@ describe ForemanRemoteExecution::HostExtensions do
 
   after { User.current = nil }
 
+  context 'ssh user' do
+    let(:host) { FactoryGirl.build(:host, :with_execution) }
+    let(:sshkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQ foo@example.com' }
+
+    before do
+      SmartProxy.any_instance.stubs(:pubkey).returns(sshkey)
+      Setting[:remote_execution_ssh_user] = 'root'
+    end
+
+    it 'has ssh user in the parameters' do
+      host.params['remote_execution_ssh_user'].must_equal Setting[:remote_execution_ssh_user]
+    end
+
+    it 'can override ssh user' do
+      host.host_parameters << FactoryGirl.build(:host_parameter, :name => 'remote_execution_ssh_user', :value => 'amy')
+      host.params['remote_execution_ssh_user'].must_equal 'amy'
+    end
+  end
+
   context 'ssh keys' do
     let(:host) { FactoryGirl.build(:host, :with_execution) }
+    let(:sshkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQ foo@example.com' }
 
     it 'has ssh keys in the parameters' do
-      sshkey = 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQ foo@example.com'
       SmartProxy.any_instance.stubs(:pubkey).returns(sshkey)
       host.remote_execution_ssh_keys.must_include sshkey
     end
