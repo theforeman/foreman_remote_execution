@@ -119,7 +119,11 @@ class JobInvocationComposer
   end
 
   def targeted_hosts
-    Host.authorized(Targeting::RESOLVE_PERMISSION, Host).search_for(displayed_search_query)
+    if displayed_search_query.blank?
+      Host.where('1 = 0')
+    else
+      Host.authorized(Targeting::RESOLVE_PERMISSION, Host).search_for(displayed_search_query)
+    end
   end
 
   def targeted_hosts_count

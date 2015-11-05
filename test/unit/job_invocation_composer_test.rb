@@ -317,13 +317,13 @@ describe JobInvocationComposer do
       end
 
       describe '#targeted_hosts_count' do
+        let(:host) { FactoryGirl.create(:host) }
+
         it 'obeys authorization' do
-          composer
+          composer.stubs(:displayed_search_query => "name = #{host.name}")
           Host.expects(:authorized).with(:view_hosts, Host).returns(Host.scoped)
           composer.targeted_hosts_count
         end
-
-        let(:host) { FactoryGirl.create(:host) }
 
         it 'searches hosts based on displayed_search_query' do
           composer.stubs(:displayed_search_query => "name = #{host.name}")
@@ -332,6 +332,11 @@ describe JobInvocationComposer do
 
         it 'returns 0 for queries with syntax errors' do
           composer.stubs(:displayed_search_query => "name = ")
+          composer.targeted_hosts_count.must_equal 0
+        end
+
+        it 'returns 0 when no query is present' do
+          composer.stubs(:displayed_search_query => '')
           composer.targeted_hosts_count.must_equal 0
         end
       end
