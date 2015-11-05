@@ -50,8 +50,9 @@ class Targeting < ActiveRecord::Base
   private
 
   def bookmark_or_query_is_present
-    if bookmark.nil? && search_query.nil?
-      errors.add :base, _('Bookmark or search query can\'t be nil')
+    if bookmark.blank? && search_query.blank?
+      errors.add :bookmark_id, _('Must select a bookmark or enter a search query')
+      errors.add :search_query, _('Must select a bookmark or enter a search query')
     end
   end
 
