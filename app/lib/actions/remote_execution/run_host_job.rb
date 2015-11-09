@@ -25,7 +25,8 @@ module Actions
         link!(job_invocation)
         link!(template_invocation)
 
-        plan_action(RunProxyCommand, proxy, hostname, script, { :connection_options => connection_options })
+        provider = template_invocation.template.provider_type.to_s
+        plan_action(RunProxyCommand, proxy, hostname, script, { :connection_options => connection_options }.merge(provider_settings(provider, host)))
         plan_self
       end
 
@@ -60,6 +61,15 @@ module Actions
         end
 
         return host.fqdn
+      end
+
+      def provider_settings(provider, host)
+        case provider
+        when 'Ssh'
+          { :ssh_user => host.params['remote_execution_ssh_user'] || Setting[:remote_execution_ssh_user] }
+        else
+          {}
+        end
       end
     end
   end
