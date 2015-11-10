@@ -38,7 +38,7 @@ describe Targeting do
   context 'cannot create without search term or bookmark' do
     before do
       targeting.targeting_type = Targeting::DYNAMIC_TYPE
-      targeting.search_query = nil
+      targeting.search_query = ''
       targeting.bookmark = nil
     end
     it { refute_valid targeting }
