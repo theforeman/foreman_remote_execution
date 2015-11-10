@@ -11,7 +11,7 @@ module RemoteExecutionHelper
     options = { :class => 'statistics-pie small', :expandable => true, :border => 0, :show_title => true }
 
     if (bulk_task = invocation.last_task)
-      failed_tasks = bulk_task.sub_tasks.select { |sub_task| %w(warning error).include? sub_task.result }
+      failed_tasks = bulk_task.sub_tasks.select { |sub_task| task_failed? sub_task }
       cancelled_tasks, failed_tasks = failed_tasks.partition { |task| task_cancelled? task }
       success = bulk_task.output['success_count'] || 0
       cancelled = cancelled_tasks.length
@@ -40,6 +40,10 @@ module RemoteExecutionHelper
       label = invocation.last_task.pending ? _('Running') : _('Finished')
       label + ' ' + (invocation.last_task.progress * 100).to_i.to_s + '%'
     end
+  end
+
+  def task_failed?(task)
+    %w(warning error).include? task.result
   end
 
   def task_cancelled?(task)
@@ -86,6 +90,7 @@ module RemoteExecutionHelper
     template_invocation.nil? ? _('N/A') : _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type))
   end
 
+  # rubocop:disable Metrics/AbcSize
   def job_invocation_task_buttons(task)
     buttons = []
     buttons << link_to(_('Refresh'), {}, :class => 'btn btn-default', :title => _('Refresh this page'))
@@ -97,6 +102,7 @@ module RemoteExecutionHelper
     if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_("Rerun failed"), rerun_job_invocation_path(:id => task.locks.where(:resource_type => 'JobInvocation').first.resource, :failed_only => 1),
                          :class => "btn btn-default",
+                         :disabled => !task.sub_tasks.any? { |sub_task| task_failed?(sub_task) },
                          :title => _('Rerun on failed hosts'))
     end
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
@@ -113,6 +119,7 @@ module RemoteExecutionHelper
     end
     return buttons
   end
+  # rubocop:enable Metrics/AbcSize
 
   def template_invocation_task_buttons(task)
     buttons = []
