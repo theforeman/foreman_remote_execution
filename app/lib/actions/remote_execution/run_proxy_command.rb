@@ -68,8 +68,9 @@ module Actions
 
       def finalized_output
         records = []
-        if self.output[:proxy_output].present?
-          records.concat(self.output[:proxy_output].fetch(:result, []))
+
+        if proxy_result.present?
+          records.concat(proxy_result)
         else
           records << format_output(_('No output'))
         end
@@ -80,6 +81,10 @@ module Actions
           records << format_output(_("Job finished with error") + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', task.ended_at)
         end
         return records
+      end
+
+      def proxy_result
+        self.output.fetch(:proxy_output, {}).fetch(:result, []) || []
       end
     end
   end
