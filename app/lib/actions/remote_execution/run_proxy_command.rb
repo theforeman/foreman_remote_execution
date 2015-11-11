@@ -3,6 +3,7 @@ module Actions
     class RunProxyCommand < Actions::ProxyAction
 
       include ::Dynflow::Action::Cancellable
+      include Actions::RemoteExecution::Helpers::LiveOutput
 
       def plan(proxy, hostname, script, options = {})
         options = { :effective_user => nil }.merge(options)
@@ -79,16 +80,6 @@ module Actions
           records << format_output(_("Job finished with error") + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', task.ended_at)
         end
         return records
-      end
-
-      def exception_to_output(context, exception, timestamp = Time.now)
-        format_output(context + ": #{exception.class} - #{exception.message}", 'debug', timestamp)
-      end
-
-      def format_output(message, type = 'debug', timestamp = Time.now)
-        { 'output_type' => type,
-          'output' => message,
-          'timestamp' => timestamp.to_f }
       end
     end
   end
