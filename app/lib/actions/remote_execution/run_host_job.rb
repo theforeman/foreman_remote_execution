@@ -2,6 +2,7 @@ module Actions
   module RemoteExecution
     class RunHostJob < Actions::EntryAction
 
+      middleware.do_not_use Dynflow::Middleware::Common::Transaction
       include Actions::RemoteExecution::Helpers::LiveOutput
 
       def resource_locks
@@ -10,6 +11,9 @@ module Actions
 
       def plan(job_invocation, host, template_invocation, proxy, connection_options = {})
         action_subject(host, :job_name => job_invocation.job_name)
+        link!(job_invocation)
+        link!(template_invocation)
+
         hostname = find_ip_or_hostname(host)
 
         raise _("Could not use any template used in the job invocation") if template_invocation.blank?
@@ -23,9 +27,6 @@ module Actions
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render
         raise _("Failed rendering template: %s") % renderer.error_message unless script
-
-        link!(job_invocation)
-        link!(template_invocation)
 
         provider = template_invocation.template.provider_type.to_s
         plan_action(RunProxyCommand, proxy, hostname, script, { :connection_options => connection_options }.merge(provider_settings(provider, host)))
