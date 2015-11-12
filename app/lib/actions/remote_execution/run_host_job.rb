@@ -2,6 +2,8 @@ module Actions
   module RemoteExecution
     class RunHostJob < Actions::EntryAction
 
+      include Actions::RemoteExecution::Helpers::LiveOutput
+
       def resource_locks
         :link
       end
@@ -42,7 +44,12 @@ module Actions
       end
 
       def live_output
-        planned_actions(RunProxyCommand).first.live_output
+        proxy_command_action = planned_actions(RunProxyCommand).first
+        if proxy_command_action
+          proxy_command_action.live_output
+        else
+          execution_plan.errors.map { |e| exception_to_output(_('Failed to initialize command'), e) }
+        end
       end
 
       def humanized_name

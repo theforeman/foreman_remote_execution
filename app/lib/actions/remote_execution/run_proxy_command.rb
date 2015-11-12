@@ -3,6 +3,7 @@ module Actions
     class RunProxyCommand < Actions::ProxyAction
 
       include ::Dynflow::Action::Cancellable
+      include Actions::RemoteExecution::Helpers::LiveOutput
 
       def plan(proxy, hostname, script, options = {})
         options = { :effective_user => nil }.merge(options)
@@ -67,8 +68,9 @@ module Actions
 
       def finalized_output
         records = []
-        if self.output[:proxy_output].present?
-          records.concat(self.output[:proxy_output].fetch(:result, []))
+
+        if proxy_result.present?
+          records.concat(proxy_result)
         else
           records << format_output(_('No output'))
         end
@@ -81,14 +83,8 @@ module Actions
         return records
       end
 
-      def exception_to_output(context, exception, timestamp = Time.now)
-        format_output(context + ": #{exception.class} - #{exception.message}", 'debug', timestamp)
-      end
-
-      def format_output(message, type = 'debug', timestamp = Time.now)
-        { 'output_type' => type,
-          'output' => message,
-          'timestamp' => timestamp.to_f }
+      def proxy_result
+        self.output.fetch(:proxy_output, {}).fetch(:result, []) || []
       end
     end
   end
