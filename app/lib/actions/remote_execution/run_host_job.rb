@@ -14,8 +14,8 @@ module Actions
 
         raise _("Could not use any template used in the job invocation") if template_invocation.blank?
 
-        settings =  { :global_proxy   => 'remote_execution_global_proxy',
-                      :fallback_proxy => 'remote_execution_fallback_proxy' }
+        settings = { :global_proxy   => 'remote_execution_global_proxy',
+                     :fallback_proxy => 'remote_execution_fallback_proxy' }
 
         raise _("Could not use any proxy. Consider configuring %{global_proxy} " +
                 "or %{fallback_proxy} in settings") % settings if proxy.blank?

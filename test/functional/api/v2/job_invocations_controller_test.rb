@@ -16,7 +16,7 @@ module Api
       end
 
       test "should get invocation detail" do
-        get :show,  :id => @invocation.id
+        get :show, :id => @invocation.id
         assert_response :success
         template = ActiveSupport::JSON.decode(@response.body)
         refute_empty template
@@ -25,7 +25,7 @@ module Api
 
       test "should create valid without template_id" do
         attrs = { :job_name => @template.job_name, :name => 'RandomName', :targeting_type => 'static_query', :search_query => "foobar"}
-        post :create,  :job_invocation => attrs
+        post :create, :job_invocation => attrs
 
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal attrs[:job_name], invocation['job_name']
@@ -34,7 +34,7 @@ module Api
 
       test "should create valid with template_id" do
         attrs = { :job_name => @template.job_name, :name => 'RandomName', :template_id => @template.id,:targeting_type => 'static_query', :search_query => "foobar"}
-        post :create,  :job_invocation => attrs
+        post :create, :job_invocation => attrs
 
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal attrs[:job_name], invocation['job_name']

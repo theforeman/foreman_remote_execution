@@ -54,11 +54,6 @@ Style/AndOr:
 Style/BarePercentLiterals:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/Blocks:
-  Enabled: false
-
 # Offense count: 1
 # Configuration parameters: IndentWhenRelativeTo, SupportedStyles, IndentOneStep.
 Style/CaseIndentation:
@@ -206,3 +201,19 @@ Style/StringLiterals:
 # Configuration parameters: IgnoredMethods.
 Style/SymbolProc:
   Enabled: false
+
+# TODO: uncomment when on rubocop 0.35.1
+#Rails/FindBy:
+  #Enabled: false # rails 4
+
+# TODO: uncomment when on rubocop 0.35.1
+#Style/UnneededPercentQ:
+  #Enabled: false
+
+# TODO: uncomment when on rubocop 0.35.1
+#Lint/EndAlignment:
+  #Enabled: false
+
+# TODO: uncomment when on rubocop 0.35.1
+#Metrics/ModuleLength:
+  #Enabled: false
