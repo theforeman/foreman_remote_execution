@@ -176,4 +176,13 @@ module RemoteExecutionHelper
       tab == :overview ? active : inactive
     end
   end
+
+  def time_ago(time)
+    if time.nil?
+      _('-')
+    else
+      content_tag :span, _("%s ago") % time_ago_in_words(time),
+                  { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
+    end
+  end
 end
