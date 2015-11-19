@@ -12,7 +12,7 @@ module ForemanRemoteExecution
 
       has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
 
-      scoped_search :in => :execution_status_object, :on => :status, :rename => :'execution_status',
+      scoped_search :in => :execution_status_object, :on => :status, :rename => :execution_status,
                     :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
     end
 
