@@ -62,7 +62,7 @@ module Actions
         proxy_data = proxy.status_of_task(output[:proxy_task_id])['actions'].detect { |action| action['class'] == proxy_action_name }
         proxy_data.fetch('output', {}).fetch('result', [])
       rescue => e
-        ::Foreman::Logging.exception("Failed to load data for task #{task.id} from proxy #{ input[:proxy_url] }", e)
+        ::Foreman::Logging.exception("Failed to load data for task #{task.id} from proxy #{input[:proxy_url]}", e)
         [exception_to_output(_('Error loading data from proxy'), e)]
       end
 
