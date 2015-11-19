@@ -79,8 +79,9 @@
     <%= radio_button_f f, :trigger_mode, :value => 'immediate', :text => _("Run Job Now"), :class => 'trigger_mode_selector' %>
     <%= radio_button_f f, :trigger_mode, :value => 'future', :text => _("Schedule Future Job"), :class => 'trigger_mode_selector' %>
     <fieldset id="trigger_mode_future" class="trigger_mode_form <%= 'hidden' if @composer.job_invocation.trigger_mode != :future %>">
-      <%= text_f f, :start_at, :label => _('Start at') %>
-      <%= text_f f, :start_before, :label => _('Start before') %>
+      <%= text_f f, :start_at, :label => _('Start at'), :placeholder => 'YYYY-mm-dd HH:MM' %>
+      <%= text_f f, :start_before, :label => _('Start before'), :placeholder => 'YYYY-mm-dd HH:MM',
+                    :help_inline => popover(_('Explanation'), _('Indicates that the action should be cancelled if it cannot be started before this time.')) %>
     </fieldset>
   </div>
   <%= render :partial => 'preview_hosts_modal' %>
