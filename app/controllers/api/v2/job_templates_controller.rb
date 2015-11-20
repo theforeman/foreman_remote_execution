@@ -30,7 +30,7 @@ module Api
           param :name, String, :required => true, :desc => N_("Template name")
           param :job_name, String, :required => true, :desc => N_("Job name")
           param :template, String, :required => true
-          param :provider_type, String, :required => true, :desc => N_("Provider type")
+          param :provider_type, RemoteExecutionProvider.provider_names, :required => true, :desc => N_("Provider type")
           param :snippet, :bool, :allow_nil => true
           param :audit_comment, String, :allow_nil => true
           param :locked, :bool, :desc => N_("Whether or not the template is locked for editing")

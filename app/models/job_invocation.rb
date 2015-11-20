@@ -38,6 +38,8 @@ class JobInvocation < ActiveRecord::Base
 
   scope :with_task, -> { joins('LEFT JOIN "foreman_tasks_tasks" ON "foreman_tasks_tasks"."id" = "job_invocations"."task_id"') }
 
+  default_scope -> { order('job_invocations.id DESC') }
+
   attr_accessor :start_before
   attr_writer :start_at
 
@@ -100,5 +102,10 @@ class JobInvocation < ActiveRecord::Base
 
   def sub_task_for_host(host)
     sub_tasks.joins(:locks).where("#{ForemanTasks::Lock.table_name}.resource_type" => 'Host::Managed', "#{ForemanTasks::Lock.table_name}.resource_id" => host.id).first
+  end
+
+  def output(host)
+    return unless (task = sub_task_for_host(host)) && task.main_action && task.main_action.live_output.any?
+    task.main_action.live_output.first['output']
   end
 end

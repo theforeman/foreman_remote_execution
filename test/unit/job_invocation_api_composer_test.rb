@@ -30,7 +30,7 @@ describe JobInvocationApiComposer do
   context 'composer' do
     it "creates invocation with a bookmark" do
       params = {:job_name => testing_job_template_1.job_name,
-                :template_id => testing_job_template_1.id,
+                :job_template_id => testing_job_template_1.id,
                 :targeting_type => "static_query",
                 :bookmark_id => bookmark.id}
       ji = JobInvocation.new
@@ -44,7 +44,7 @@ describe JobInvocationApiComposer do
 
     it "creates invocation with a search query" do
       params = {:job_name => testing_job_template_1.job_name,
-                :template_id => testing_job_template_1.id,
+                :job_template_id => testing_job_template_1.id,
                 :targeting_type => "static_query",
                 :search_query => "some hosts"}
       ji = JobInvocation.new
@@ -57,10 +57,10 @@ describe JobInvocationApiComposer do
 
     it "creates invocation with inputs" do
       params = {:job_name => testing_job_template_1.job_name,
-                :template_id => testing_job_template_1.id,
+                :job_template_id => testing_job_template_1.id,
                 :targeting_type => "static_query",
                 :search_query => "some hosts",
-                :inputs => [{:name => input1.name, :value => "some_value"}]}
+                :inputs => {input1.name => "some_value"}}
       ji = JobInvocation.new
 
       composer = JobInvocationApiComposer.new(ji, User.current, params)
@@ -70,9 +70,9 @@ describe JobInvocationApiComposer do
 
     it "handles errors on invalid targeting" do
       params = {:job_name => testing_job_template_1.job_name,
-                :template_id => testing_job_template_1.id,
+                :job_template_id => testing_job_template_1.id,
                 :search_query => "some hosts",
-                :inputs => [{:name => input1.name, :value => "some_value"}]}
+                :inputs => {input1.name => "some_value"}}
       ji = JobInvocation.new
 
       composer = JobInvocationApiComposer.new(ji, User.current, params)
@@ -83,11 +83,11 @@ describe JobInvocationApiComposer do
 
     it "handles errors with both bookmark and search_query" do
       params = {:job_name => testing_job_template_1.job_name,
-                :template_id => testing_job_template_1.id,
+                :job_template_id => testing_job_template_1.id,
                 :targeting_type => "static_query",
                 :search_query => "some hosts",
                 :bookmark_id => bookmark.id,
-                :inputs => [{:name => input1.name, :value => "some_value"}]}
+                :inputs => {input1.name => "some_value"}}
       ji = JobInvocation.new
 
       assert_raises(Foreman::Exception) do
@@ -97,10 +97,10 @@ describe JobInvocationApiComposer do
 
     it "handles errors on invalid inputs" do
       params = {:job_name => testing_job_template_1.job_name,
-                :template_id => testing_job_template_1.id,
+                :job_template_id => testing_job_template_1.id,
                 :targeting_type => "static_query",
                 :search_query => "some hosts",
-                :inputs => [{:name => input1.name, :value => "some_value"}, {:name => input2.name}]}
+                :inputs => { input1.name => "some_value", input2.name => nil }}
       ji = JobInvocation.new
       composer = JobInvocationApiComposer.new(ji, User.current, params)
 
@@ -112,10 +112,10 @@ describe JobInvocationApiComposer do
 
     it "accepts empty values for non-required inputs" do
       params = {:job_name => testing_job_template_1.job_name,
-                :template_id => testing_job_template_1.id,
+                :job_template_id => testing_job_template_1.id,
                 :targeting_type => "static_query",
                 :search_query => "some hosts",
-                :inputs => [{:name => input1.name, :value => "some_value"}, {:name => input2.name, :value => ""}]}
+                :inputs => {input1.name => "some_value", input2.name => ''}}
       ji = JobInvocation.new
       composer = JobInvocationApiComposer.new(ji, User.current, params)
 
@@ -126,10 +126,10 @@ describe JobInvocationApiComposer do
     it "handles errors on missing required inputs" do
       input1.must_be :required
       params = {:job_name => testing_job_template_1.job_name,
-                :template_id => testing_job_template_1.id,
+                :job_template_id => testing_job_template_1.id,
                 :targeting_type => "static_query",
                 :search_query => "some hosts",
-                :inputs => [{:name => input2.name, :value => "some_value"}]}
+                :inputs => {input2.name => "some_value"}}
       ji = JobInvocation.new
       composer = JobInvocationApiComposer.new(ji, User.current, params)
 

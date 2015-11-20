@@ -33,15 +33,15 @@ class JobInvocationApiComposer
 
   def find_job_template
     templates = JobTemplate.authorized(:view_job_templates).where(:job_name => job_name)
-    template = templates.find(params[:template_id]) if params[:template_id]
+    template = templates.find(params[:job_template_id]) if params[:job_template_id]
     template = templates.first if templates.count == 1
     template
   end
 
   def build_input_values(invocation)
-    input_values = params.fetch(:inputs, []).map do |input_hash|
-      if (input = template_input(invocation.template, input_hash[:name]))
-        invocation.input_values.build(:template_input => input, :value => input_hash[:value])
+    input_values = params.fetch(:inputs, {}).map do |input_name, input_value|
+      if (input = template_input(invocation.template, input_name))
+        invocation.input_values.build(:template_input => input, :value => input_value)
       end
     end
     input_values.compact

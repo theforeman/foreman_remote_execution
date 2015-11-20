@@ -34,18 +34,20 @@ module ForemanRemoteExecution
         # Add permissions
         security_block :foreman_remote_execution do
           permission :view_job_templates, { :job_templates => [:index, :show, :revision, :auto_complete_search, :auto_complete_job_name, :preview],
-                                            :'api/v2/job_templates' => [:index, :show, :revision] }, :resource_type => 'JobTemplate'
+                                            :'api/v2/job_templates' => [:index, :show, :revision],
+                                            :'api/v2/template_inputs' => [:index, :show]}, :resource_type => 'JobTemplate'
           permission :create_job_templates, { :job_templates => [:new, :create, :clone_template],
                                               :'api/v2/job_templates' => [:create, :clone] }, :resource_type => 'JobTemplate'
           permission :edit_job_templates, { :job_templates => [:edit, :update],
-                                            :'api/v2/job_templates' => [:update] }, :resource_type => 'JobTemplate'
+                                            :'api/v2/job_templates' => [:update],
+                                            :'api/v2/template_inputs' => [:update, :new, :create, :destroy]}, :resource_type => 'JobTemplate'
           permission :destroy_job_templates, { :job_templates => [:destroy],
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
           permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh, :rerun, :preview_hosts],
                                                 'api/v2/job_invocations' => [:create] }, :resource_type => 'JobInvocation'
           permission :view_job_invocations, { :job_invocations => [:index, :show, :auto_complete_search], :template_invocations => [:show],
-                                              'api/v2/job_invocations' => [:index, :show] }, :resource_type => 'JobInvocation'
+                                              'api/v2/job_invocations' => [:index, :show, :output] }, :resource_type => 'JobInvocation'
         end
 
         # Add a new role called 'ForemanRemoteExecution' if it doesn't exist
