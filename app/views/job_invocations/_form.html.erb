@@ -53,7 +53,7 @@
                                  :checked => @composer.job_template_ids.include?(job_template.id) || @composer.only_one_template_available? %>
 
               <fieldset id="job_template_<%= job_template.id %>" class="job_template_form <%= 'hidden' if !@composer.job_template_ids.include?(job_template.id) && !@composer.only_one_template_available? %>">
-                <%= job_templates_fields.fields_for job_template.id.to_s do |job_template_fields| %>
+                <%= job_templates_fields.fields_for job_template.id.to_s, @composer.template_invocation(job_template) do |job_template_fields| %>
                   <%= job_template_fields.fields_for :input_values do |input_values_fields| %>
                     <% job_template.template_inputs.where(:input_type => 'user').each do |input| %>
                       <%= input_values_fields.fields_for input.id.to_s, @composer.template_invocation_input_value_for(input) do |input_fields| %>
@@ -64,6 +64,9 @@
                         <% end %>
                       <% end %>
                     <% end %>
+                  <% end %>
+                  <% if job_template.effective_user.overridable? %>
+                    <%= text_f job_template_fields, :effective_user, :label => _('Effective user'), :help_inline => N_("A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.") %>
                   <% end %>
                 <% end %>
               </fieldset>

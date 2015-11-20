@@ -9,7 +9,7 @@ module Actions
         :link
       end
 
-      def plan(job_invocation, host, template_invocation, proxy, connection_options = {})
+      def plan(job_invocation, host, template_invocation, proxy)
         action_subject(host, :job_name => job_invocation.job_name)
         link!(job_invocation)
         link!(template_invocation)
@@ -28,8 +28,8 @@ module Actions
         script = renderer.render
         raise _("Failed rendering template: %s") % renderer.error_message unless script
 
-        provider = template_invocation.template.provider_type.to_s
-        plan_action(RunProxyCommand, proxy, hostname, script, { :connection_options => connection_options }.merge(provider_settings(provider, host)))
+        provider = template_invocation.template.provider
+        plan_action(RunProxyCommand, proxy, hostname, script, provider.proxy_command_options(template_invocation, host))
         plan_self
       end
 
@@ -69,15 +69,6 @@ module Actions
         end
 
         return host.fqdn
-      end
-
-      def provider_settings(provider, host)
-        case provider
-        when 'Ssh'
-          { :ssh_user => host.params['remote_execution_ssh_user'] || Setting[:remote_execution_ssh_user] }
-        else
-          {}
-        end
       end
     end
   end

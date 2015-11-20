@@ -27,8 +27,10 @@ describe JobInvocationComposer do
   let(:unauthorized_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'testing_job_template_1', :name => 'unauth1', :provider_type => 'Ssh') }
   let(:unauthorized_job_template_2) { FactoryGirl.create(:job_template, :job_name => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
 
+
   let(:input1) { FactoryGirl.create(:template_input, :template => testing_job_template_1, :input_type => 'user') }
   let(:input2) { FactoryGirl.create(:template_input, :template => testing_job_template_3, :input_type => 'user') }
+  let(:input3) { FactoryGirl.create(:template_input, :template => testing_job_template_1, :input_type => 'user', :required => true) }
   let(:unauthorized_input1) { FactoryGirl.create(:template_input, :template => unauthorized_job_template_1, :input_type => 'user') }
 
   let(:ansible_params) { { } }
@@ -38,8 +40,7 @@ describe JobInvocationComposer do
 
   context 'with general new invocation and empty params' do
     let(:params) { {} }
-    let(:job_invocation) { JobInvocation.new.tap { |job_invocation| job_invocation.stubs(:trigger_mode=) } }
-    let(:composer) { JobInvocationComposer.new(job_invocation).compose_from_params(params) }
+    let(:composer) { JobInvocationComposer.from_ui_params(params) }
 
     describe '#available_templates' do
       it 'obeys authorization' do
@@ -108,7 +109,9 @@ describe JobInvocationComposer do
         end
 
         it 'returns only authorized inputs based on templates' do
-          composer.available_template_inputs.must_be_empty
+          composer.available_template_inputs.must_include(input1)
+          composer.available_template_inputs.must_include(input2)
+          composer.available_template_inputs.wont_include(unauthorized_input1)
         end
 
         context 'params contains job template ids' do
@@ -243,6 +246,54 @@ describe JobInvocationComposer do
           invocations.size.must_equal 1
           invocations.first.input_values.size.must_equal 1
           invocations.first.input_values.first.value.must_equal 'value1'
+        end
+      end
+
+      describe '#effective_user' do
+        let(:ssh_params) do
+          { :job_template_id => testing_job_template_1.id.to_s,
+            :job_templates => {
+              testing_job_template_1.id.to_s => {
+                :effective_user => invocation_effective_user
+              }
+            }
+          }
+        end
+        let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
+        let(:template_invocation) do
+          testing_job_template_1.effective_user.update_attributes(:overridable => overridable, :value => 'template user')
+          composer.template_invocations.first
+        end
+
+        before do
+          Setting::RemoteExecution.load_defaults
+        end
+
+        context 'when overridable and provided' do
+          let(:overridable) { true }
+          let(:invocation_effective_user) { 'invocation user' }
+
+          it 'takes the value from the template invocation' do
+            template_invocation.effective_user.must_equal 'invocation user'
+          end
+        end
+
+        context 'when overridable and not provided' do
+          let(:overridable) { true }
+          let(:invocation_effective_user) { "" }
+
+          it 'takes the value from the job template' do
+            template_invocation.effective_user.must_equal 'template user'
+          end
+        end
+
+        context 'when not overridable and provided' do
+          let(:overridable) { false }
+          let(:invocation_effective_user) { "invocation user" }
+
+          it 'takes the value from the job template' do
+            template_invocation.effective_user.must_equal 'template user'
+          end
         end
       end
 
@@ -395,7 +446,7 @@ describe JobInvocationComposer do
 
         it 'validates all associated objects even if some of the is invalid' do
           composer
-          job_invocation.expects(:valid?).returns(false)
+          composer.job_invocation.expects(:valid?).returns(false)
           composer.targeting.expects(:valid?).returns(false)
           composer.template_invocations.each { |invocation| invocation.expects(:valid?).returns(false) }
           refute composer.valid?
@@ -405,13 +456,13 @@ describe JobInvocationComposer do
       describe '#save' do
         it 'triggers save on job_invocation if it is valid' do
           composer.stubs(:valid? => true)
-          job_invocation.expects(:save)
+          composer.job_invocation.expects(:save)
           composer.save
         end
 
         it 'does not trigger save on job_invocation if it is invalid' do
           composer.stubs(:valid? => false)
-          job_invocation.expects(:save).never
+          composer.job_invocation.expects(:save).never
           composer.save
         end
       end
@@ -419,7 +470,7 @@ describe JobInvocationComposer do
       describe '#job_name' do
         it 'triggers job_name on job_invocation' do
           composer
-          job_invocation.expects(:job_name)
+          composer.job_invocation.expects(:job_name)
           composer.job_name
         end
       end
@@ -427,7 +478,7 @@ describe JobInvocationComposer do
       describe '#targeting' do
         it 'triggers targeting on job_invocation' do
           composer
-          job_invocation.expects(:targeting)
+          composer.job_invocation.expects(:targeting)
           composer.targeting
         end
       end
@@ -452,9 +503,9 @@ describe JobInvocationComposer do
             }
           }.with_indifferent_access
         end
-        let(:existing) { job_invocation.reload }
+        let(:existing) { composer.job_invocation.reload }
         let(:new_job_invocation) { JobInvocation.new }
-        let(:new_composer) { JobInvocationComposer.new(new_job_invocation).compose_from_invocation(job_invocation) }
+        let(:new_composer) { JobInvocationComposer.from_job_invocation(composer.job_invocation) }
 
         before do
           composer.save
@@ -477,6 +528,164 @@ describe JobInvocationComposer do
           new_composer.template_invocations.size.must_equal existing.template_invocations.size
         end
 
+      end
+    end
+  end
+
+  describe '#from_api_params' do
+    let(:composer) { JobInvocationComposer.from_api_params(params) }
+    let(:bookmark) { bookmarks(:one) }
+
+    context 'with targeting from bookmark' do
+
+      before do
+        [testing_job_template_1, testing_job_template_3] # mentioning templates we want to have initialized in the test
+      end
+
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :targeting_type => "static_query",
+          :bookmark_id => bookmark.id }
+      end
+
+      it "creates invocation with a bookmark" do
+        assert composer.save!
+        assert_equal bookmark, composer.job_invocation.targeting.bookmark
+        assert_equal composer.job_invocation.targeting.user, User.current
+        refute_empty composer.job_invocation.template_invocations
+      end
+    end
+
+    context "with targeting from search query" do
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :targeting_type => "static_query",
+          :search_query => "some hosts" }
+      end
+
+      it "creates invocation with a search query" do
+        assert composer.save!
+        assert_equal "some hosts", composer.job_invocation.targeting.search_query
+        refute_empty composer.job_invocation.template_invocations
+      end
+    end
+
+    context "with with inputs" do
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :targeting_type => "static_query",
+          :search_query => "some hosts",
+          :inputs => {input1.name => "some_value"}}
+      end
+
+      it "finds the inputs by name" do
+        assert composer.save!
+        assert_equal 1, composer.template_invocations.first.input_values.count
+      end
+    end
+
+    context "with effective user" do
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :effective_user => 'invocation user',
+          :targeting_type => "static_query",
+          :search_query => "some hosts",
+          :inputs => {input1.name => "some_value"}}
+      end
+
+      let(:template_invocation) { composer.job_invocation.template_invocations.first }
+
+      it "sets the effective user based on the input" do
+        assert composer.save!
+        template_invocation.effective_user.must_equal 'invocation user'
+      end
+    end
+
+    context "with invalid targeting" do
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :search_query => "some hosts",
+          :inputs => {input1.name => "some_value"}}
+      end
+
+      it "handles errors" do
+        assert_raises(ActiveRecord::RecordNotSaved) do
+          composer.save!
+        end
+      end
+    end
+
+    context "with invalid bookmark and search query" do
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :targeting_type => "static_query",
+          :search_query => "some hosts",
+          :bookmark_id => bookmark.id,
+          :inputs => {input1.name => "some_value"}}
+      end
+
+      it "handles errors" do
+        assert_raises(Foreman::Exception) do
+          JobInvocationComposer.from_api_params(params)
+        end
+      end
+    end
+
+    context "with invalid inputs" do
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :targeting_type => "static_query",
+          :search_query => "some hosts",
+          :inputs => {input3.name => nil}}
+      end
+
+      it "handles errors" do
+        error = assert_raises(ActiveRecord::RecordNotSaved) do
+          composer.save!
+        end
+        error.message.must_include "Template #{testing_job_template_1.name}: Input #{input3.name.downcase}: Value can't be blank"
+      end
+    end
+
+    context "with empty values for non-required inputs" do
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :targeting_type => "static_query",
+          :search_query => "some hosts",
+          :inputs => {input3.name => "some value"}}
+      end
+
+      it "accepts the params" do
+        composer.save!
+        refute composer.job_invocation.new_record?
+      end
+    end
+
+    context "with missing required inputs" do
+      let(:params) do
+        { :job_name => testing_job_template_1.job_name,
+          :job_template_id => testing_job_template_1.id,
+          :targeting_type => "static_query",
+          :search_query => "some hosts",
+          :inputs => {input1.name => "some_value"}}
+      end
+
+      it "handles errors" do
+        input3.must_be :required
+
+        error = assert_raises(ActiveRecord::RecordNotSaved) do
+          composer.save!
+        end
+
+        error.message.must_include "Template #{testing_job_template_1.name}: Not all required inputs have values. Missing inputs: #{input3.name}"
       end
     end
   end

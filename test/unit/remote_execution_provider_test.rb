@@ -48,4 +48,43 @@ describe RemoteExecutionProvider do
       it { provider_names.must_include 'Custom' }
     end
   end
+
+  describe SSHExecutionProvider do
+    before do
+      Setting::RemoteExecution.load_defaults
+    end
+
+    let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
+    let(:template_invocation) { job_invocation.template_invocations.first }
+    let(:host) { FactoryGirl.create(:host) }
+    let(:proxy_options) { SSHExecutionProvider.proxy_command_options(template_invocation, host) }
+
+    describe 'effective user' do
+      it 'takes the effective user from value from the template invocation' do
+        template_invocation.effective_user = 'my user'
+        proxy_options[:effective_user].must_equal 'my user'
+      end
+    end
+
+    describe 'ssh user' do
+      it 'uses the remote_execution_ssh_user on the host param' do
+        host.params['remote_execution_ssh_user'] = 'my user'
+        host.host_parameters << FactoryGirl.build(:host_parameter, :name => 'remote_execution_ssh_user', :value => 'my user')
+        proxy_options[:ssh_user].must_equal 'my user'
+      end
+    end
+
+    describe 'sudo' do
+      it 'uses the remote_execution_ssh_user on the host param' do
+        host.params['remote_execution_effective_user_method'] = 'sudo'
+        method_param = FactoryGirl.build(:host_parameter, :name => 'remote_execution_effective_user_method', :value => 'sudo')
+        host.host_parameters << method_param
+        proxy_options[:effective_user_method].must_equal 'sudo'
+        method_param.update_attributes!(:value => 'su')
+        host.clear_host_parameters_cache!
+        proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
+        proxy_options[:effective_user_method].must_equal 'su'
+      end
+    end
+  end
 end

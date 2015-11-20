@@ -10,6 +10,8 @@ module Api
       before_filter :find_resource, :only => %w{show update destroy clone}
       before_filter :validate_templates, :only => :create
 
+      wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
+
       api :GET, "/job_invocations/", N_("List job invocations")
       param_group :search_and_pagination, ::Api::V2::BaseController
       def index
@@ -27,6 +29,11 @@ module Api
           param :job_template_id, String, :required => false, :desc => N_("If using a specific template, the id of that template.")
           param :targeting_type, String, :required => true, :desc => N_("Invocation type, one of %s") % Targeting::TYPES
           param :inputs, Hash, :required => false, :desc => N_("Inputs to use")
+          param :ssh, Hash, :desc => N_("Ssh provider specific options") do
+            param :effective_user, String,
+                  :required => false,
+                  :desc => N_("What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting.")
+          end
           param :bookmark_id, Integer, :required => false
           param :search_query, Integer, :required => false
         end
@@ -35,7 +42,7 @@ module Api
       api :POST, "/job_invocations/", N_("Create a job invocation")
       param_group :job_invocation, :as => :create
       def create
-        composer = JobInvocationApiComposer.new(JobInvocation.new, User.current, params[:job_invocation])
+        composer = JobInvocationComposer.from_api_params(job_invocation_params)
         composer.save!
         ForemanTasks.async_task(::Actions::RemoteExecution::RunHostsJob, composer.job_invocation)
         @job_invocation = composer.job_invocation
@@ -80,16 +87,22 @@ module Api
 
       def validate_templates
         templates = []
-        if params[:job_invocation][:job_template_id]
-          templates << JobTemplate.find(params[:job_invocation][:job_template_id])
+        if job_invocation_params[:job_template_id]
+          templates << JobTemplate.find(job_invocation_params[:job_template_id])
         else
-          templates = JobTemplate.where(:job_name => params[:job_invocation][:job_name])
+          templates = JobTemplate.where(:job_name => job_invocation_params[:job_name])
           if templates.pluck(:provider_type).uniq.length != templates.length
             raise Foreman::Exception, _("Duplicate remote execution providers found for specified Job, please specify a single job_template_id.")
           end
         end
 
         raise Foreman::Exception, _("No templates associated with specified Job Name") if templates.empty?
+      end
+
+      def job_invocation_params
+        job_invocation_params = params.fetch(:job_invocation, {}).dup
+        job_invocation_params.merge!(job_invocation_params.delete(:ssh)) if job_invocation_params.key?(:ssh)
+        job_invocation_params
       end
     end
   end

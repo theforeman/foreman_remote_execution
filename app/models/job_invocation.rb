@@ -44,7 +44,7 @@ class JobInvocation < ActiveRecord::Base
   attr_writer :start_at
 
   def deep_clone
-    JobInvocationComposer.new.compose_from_invocation(self).job_invocation.tap do |invocation|
+    JobInvocationComposer.from_job_invocation(self).job_invocation.tap do |invocation|
       invocation.task_group = JobInvocationTaskGroup.new.tap(&:save!)
       invocation.triggering = self.triggering
       invocation.template_invocations = self.template_invocations.map(&:deep_clone)

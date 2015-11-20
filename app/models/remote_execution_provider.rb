@@ -1,17 +1,31 @@
 class RemoteExecutionProvider
-  def self.provider_for(type)
-    providers[type.to_s] || providers[:Ssh]
-  end
+  class << self
+    def provider_for(type)
+      providers[type.to_s] || providers[:Ssh]
+    end
 
-  def self.providers
-    @providers ||= { :Ssh => N_(SSHExecutionProvider) }.with_indifferent_access
-  end
+    def providers
+      @providers ||= { }.with_indifferent_access
+    end
 
-  def self.register(key, klass)
-    providers[key.to_sym] = klass
-  end
+    def register(key, klass)
+      providers[key.to_sym] = klass
+    end
 
-  def self.provider_names
-    providers.keys.map(&:to_s)
+    def provider_names
+      providers.keys.map(&:to_s)
+    end
+
+    def proxy_command_options(template_invocation, host)
+      {}
+    end
+
+    def humanized_name
+      self.name
+    end
+
+    def supports_effective_user?
+      false
+    end
   end
 end

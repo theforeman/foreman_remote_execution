@@ -4,7 +4,7 @@ class JobInvocationsController < ApplicationController
   before_filter :find_or_create_triggering, :only => [:create, :refresh]
 
   def new
-    @composer = JobInvocationComposer.new.compose_from_params(
+    @composer = JobInvocationComposer.from_ui_params(
       :host_ids => params[:host_ids],
       :job_invocation => {
       },
@@ -16,7 +16,7 @@ class JobInvocationsController < ApplicationController
 
   def rerun
     job_invocation = resource_base.find(params[:id])
-    @composer = JobInvocationComposer.new.compose_from_invocation(job_invocation)
+    @composer = JobInvocationComposer.from_job_invocation(job_invocation)
 
     if params[:failed_only]
       host_ids = job_invocation.failed_host_ids
@@ -27,7 +27,7 @@ class JobInvocationsController < ApplicationController
   end
 
   def create
-    @composer = JobInvocationComposer.new.compose_from_params(params)
+    @composer = JobInvocationComposer.from_ui_params(params)
     if @composer.save
       job_invocation = @composer.job_invocation
       @composer.triggering.trigger(::Actions::RemoteExecution::RunHostsJob, job_invocation)
@@ -50,11 +50,11 @@ class JobInvocationsController < ApplicationController
 
   # refreshes the form
   def refresh
-    @composer = JobInvocationComposer.new.compose_from_params(params)
+    @composer = JobInvocationComposer.from_ui_params(params)
   end
 
   def preview_hosts
-    composer = JobInvocationComposer.new.compose_from_params(params)
+    composer = JobInvocationComposer.from_ui_params(params)
 
     @hosts = composer.targeted_hosts.limit(Setting[:entries_per_page])
     @additional = composer.targeted_hosts.count - Setting[:entries_per_page]

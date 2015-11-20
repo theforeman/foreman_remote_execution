@@ -17,6 +17,12 @@ class Setting::RemoteExecution < Setting
         self.set('remote_execution_ssh_user',
                  N_("Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."),
                  'root'),
+        self.set('remote_execution_effective_user',
+                 N_("Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user."),
+                 'root'),
+        self.set('remote_execution_effective_user_method',
+                 N_("What command should be used to switch to the effective user. One of %s") % SSHExecutionProvider::EFFECTIVE_USER_METHODS.inspect,
+                 'sudo')
       ].each { |s| self.create! s.update(:category => "Setting::RemoteExecution") }
     end
 

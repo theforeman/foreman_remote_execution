@@ -87,7 +87,7 @@ module RemoteExecutionHelper
 
   def remote_execution_provider_for(task)
     template_invocation = task.locks.where(:resource_type => 'TemplateInvocation').first.try(:resource) unless task.nil?
-    template_invocation.nil? ? _('N/A') : _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type))
+    template_invocation.nil? ? _('N/A') : template_invocation.template.provider.humanized_name
   end
 
   # rubocop:disable Metrics/AbcSize
