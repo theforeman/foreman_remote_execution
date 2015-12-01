@@ -3,12 +3,13 @@
 <table class="table table-bordered table-striped table-condensed">
   <thead>
     <tr>
-      <th><%= _('Job name') %></th>
+      <th><%= sort :job_name, :as => _('Job name') %></th>
       <th><%= _('Status') %></th>
       <th><%= _('Succeeded') %></th>
       <th><%= _('Failed') %></th>
       <th><%= _('Pending') %></th>
       <th><%= _('Total hosts') %></th>
+      <th><%= sort :started_at, :as => _('Started') %></th>
     </tr>
   </thead>
 
@@ -21,10 +22,9 @@
         <td><%= invocation_count(invocation, :output_key => :failed_count) %></td>
         <td><%= invocation_count(invocation, :output_key => :pending_count) %></td>
         <td><%= invocation_count(invocation, :output_key => :total_count) %></td>
+	<td><%= time_ago(invocation.last_task.try(:started_at)) %></td>
       </tr>
     <% end %>
   </tbody>
-
 </table>
-
 <%= will_paginate_with_info @job_invocations %>

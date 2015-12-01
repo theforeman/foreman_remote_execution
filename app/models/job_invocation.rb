@@ -24,6 +24,13 @@ class JobInvocation < ActiveRecord::Base
 
   scoped_search :on => [:job_name], :complete_value => true
 
+  scoped_search :in => :last_task, :on => :started_at, :rename => 'started_at', :complete_value => true
+  scoped_search :in => :last_task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
+
+  belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
+
+  scope :with_last_task, -> { joins('LEFT JOIN "foreman_tasks_tasks" ON "foreman_tasks_tasks"."id" = "job_invocations"."last_task_id"') }
+
   attr_accessor :start_before
   attr_writer :start_at
 

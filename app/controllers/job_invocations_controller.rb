@@ -48,7 +48,7 @@ class JobInvocationsController < ApplicationController
   end
 
   def index
-    @job_invocations = resource_base.search_for(params[:search]).paginate(:page => params[:page]).order('id DESC')
+    @job_invocations = resource_base.search_for(params[:search]).paginate(:page => params[:page]).with_last_task.order(params[:order] || 'id DESC')
   end
 
   # refreshes the form
