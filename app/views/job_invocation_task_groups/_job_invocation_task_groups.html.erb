@@ -1,0 +1,3 @@
+<li>
+  <%= link_to("#{task_groups.first.resource_name}: #{task_groups.count}x", job_invocations_path(:search => task_groups.first.class.search_query_for(source))) %>
+</li>

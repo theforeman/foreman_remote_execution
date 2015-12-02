@@ -20,6 +20,19 @@ class Targeting < ActiveRecord::Base
 
   before_create :assign_search_query, :if => :static?
 
+  def clone
+    if static?
+      self.dup
+    else
+      Targeting.new(
+        :user => self.user,
+        :bookmark_id => self.bookmark.try(:id),
+        :targeting_type => self.targeting_type,
+        :search_query => self.search_query
+      )
+    end.tap(&:save)
+  end
+
   def resolve_hosts!
     raise ::Foreman::Exception, _('Cannot resolve hosts without a user') if user.nil?
     raise ::Foreman::Exception, _('Cannot resolve hosts without a bookmark or search query') if bookmark.nil? && search_query.blank?

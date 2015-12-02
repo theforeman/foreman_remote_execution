@@ -2,13 +2,14 @@
 <% stylesheet 'job_invocations' %>
 <% javascript 'template_invocation' %>
 
-<% if @job_invocation.last_task %>
-  <% title_actions(button_group(job_invocation_task_buttons(@job_invocation.last_task))) %>
+<% if @job_invocation.task %>
+  <% title_actions(button_group(job_invocation_task_buttons(@job_invocation.task))) %>
 <% end %>
 
 <ul class="nav nav-tabs" data-tabs="tabs">
   <li class="<%= job_invocation_active_tab(:overview, params) %>"><a href="#primary" data-toggle="tab"><%= _('Overview') %></a></li>
   <li class="<%= job_invocation_active_tab(:hosts, params) %>"><a href="#hosts" data-toggle="tab"><%= _('Hosts') %></a></li>
+  <% unless @job_invocation.recurring_logic.nil? %><li><a href="#recurring_logic" data-toggle="tab"><%= _('Recurring logic') %></a></li><% end %>
 </ul>
 
 <div class="tab-content">
@@ -19,6 +20,16 @@
   <div class="tab-pane <%= job_invocation_active_tab(:hosts, params) %>" id="hosts" data-refresh_required="<%= @job_invocation.resolved? ? '' : 'true' %>">
     <%= render 'tab_hosts', :job_invocation => @job_invocation, :hosts => @hosts %>
   </div>
+
+  <% unless @job_invocation.recurring_logic.nil? %>
+  <div class="tab-pane" id="recurring_logic">
+    <div class='col-md-6'>
+      <% if @job_invocation.recurring_logic.try(:task_group) %>
+      <%= render @job_invocation.recurring_logic.task_group, :task_group => @job_invocation.recurring_logic.try(:task_group) %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
 </div>
 
 <script id="job_invocation_refresh" data-refresh-url="<%= job_invocation_path(@job_invocation) %>">

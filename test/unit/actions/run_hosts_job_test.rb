@@ -14,10 +14,17 @@ module ForemanRemoteExecution
         invocation.save
       end
     end
+
+    let(:task) do
+      OpenStruct.new(:id => '123').tap do |o|
+        o.stubs(:add_missing_task_groups)
+        o.stubs(:task_groups).returns([])
+      end
+    end
     let(:action) do
       action = create_action(Actions::RemoteExecution::RunHostsJob)
       action.expects(:action_subject).with(job_invocation)
-      ForemanTasks::Task::DynflowTask.stubs(:find_by_external_id!).returns(OpenStruct.new(:id => '123'))
+      ForemanTasks::Task::DynflowTask.stubs(:find_by_external_id!).returns(task)
       plan_action(action, job_invocation)
     end
 
@@ -39,7 +46,7 @@ module ForemanRemoteExecution
 
     it 'uses the BindJobInvocation middleware' do
       action
-      job_invocation.last_task_id.must_equal '123'
+      job_invocation.task_id.must_equal '123'
     end
   end
 end

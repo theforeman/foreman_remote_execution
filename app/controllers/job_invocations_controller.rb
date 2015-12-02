@@ -1,9 +1,13 @@
 class JobInvocationsController < ApplicationController
   include Foreman::Controller::AutoCompleteSearch
 
+  before_filter :find_or_create_triggering, :only => [:create, :refresh]
+
   def new
     @composer = JobInvocationComposer.new.compose_from_params(
       :host_ids => params[:host_ids],
+      :job_invocation => {
+      },
       :targeting => {
         :targeting_type => Targeting::STATIC_TYPE,
         :bookmark_id => params[:bookmark_id]
@@ -24,16 +28,9 @@ class JobInvocationsController < ApplicationController
 
   def create
     @composer = JobInvocationComposer.new.compose_from_params(params)
-    action = ::Actions::RemoteExecution::RunHostsJob
     if @composer.save
       job_invocation = @composer.job_invocation
-      if job_invocation.trigger_mode == :future
-        ForemanTasks.delay action,
-                           job_invocation.delay_options,
-                           job_invocation
-      else
-        ForemanTasks.async_task(action, job_invocation)
-      end
+      @composer.triggering.trigger(::Actions::RemoteExecution::RunHostsJob, job_invocation)
       redirect_to job_invocation_path(job_invocation)
     else
       render :action => 'new'
@@ -42,13 +39,13 @@ class JobInvocationsController < ApplicationController
 
   def show
     @job_invocation = resource_base.find(params[:id])
-    @auto_refresh = @job_invocation.last_task.try(:pending?)
+    @auto_refresh = @job_invocation.task.try(:pending?)
     hosts_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
     @hosts = hosts_base.search_for(params[:search], :order => params[:order] || 'name ASC').paginate(:page => params[:page])
   end
 
   def index
-    @job_invocations = resource_base.search_for(params[:search]).paginate(:page => params[:page]).with_last_task.order(params[:order] || 'id DESC')
+    @job_invocations = resource_base.search_for(params[:search]).paginate(:page => params[:page]).with_last_task.order(params[:order] || '"job_invocations"."id" DESC')
   end
 
   # refreshes the form
@@ -68,6 +65,10 @@ class JobInvocationsController < ApplicationController
   end
 
   private
+
+  def find_or_create_triggering
+    @triggering ||= ::ForemanTasks::Triggering.new_from_params(params[:triggering])
+  end
 
   def action_permission
     case params[:action]

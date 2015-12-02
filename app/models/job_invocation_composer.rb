@@ -1,5 +1,5 @@
 class JobInvocationComposer
-  attr_accessor :params, :job_invocation, :host_ids, :search_query
+  attr_accessor :params, :job_invocation, :host_ids, :search_query, :triggering
   attr_reader :job_template_ids
   delegate :job_name, :targeting, :to => :job_invocation
 
@@ -13,12 +13,13 @@ class JobInvocationComposer
     @host_ids = validate_host_ids(params[:host_ids])
     @search_query = targeting_base[:search_query]
 
+    @triggering = ::ForemanTasks::Triggering.new_from_params triggering_base
+
     job_invocation.job_name = validate_job_name(job_invocation_base[:job_name])
     job_invocation.job_name ||= available_job_names.first if job_invocation.new_record?
     job_invocation.targeting = build_targeting
-    job_invocation.trigger_mode = job_invocation_base[:trigger_mode]
-    job_invocation.start_at = job_invocation_base[:start_at]
-    job_invocation.start_before = job_invocation_base[:start_before]
+    job_invocation.task_group = JobInvocationTaskGroup.new
+    job_invocation.triggering = @triggering
 
     @job_template_ids = validate_job_template_ids(job_templates_base.keys.compact)
     self
@@ -29,6 +30,7 @@ class JobInvocationComposer
 
     job_invocation.job_name = validate_job_name(invocation.job_name)
     job_invocation.targeting = invocation.targeting.dup
+    @triggering = job_invocation.triggering = ::ForemanTasks::Triggering.new_from_params(@params)
     @search_query = targeting.search_query unless targeting.bookmark_id.present?
 
     @job_template_ids = invocation.template_invocations.map(&:template_id)
@@ -37,11 +39,11 @@ class JobInvocationComposer
   end
 
   def valid?
-    targeting.valid? & job_invocation.valid? & !template_invocations.map(&:valid?).include?(false)
+    triggering.valid? & targeting.valid? & job_invocation.valid? & !template_invocations.map(&:valid?).include?(false)
   end
 
   def save
-    valid? && job_invocation.save
+    valid? && triggering.save && job_invocation.save
   end
 
   def available_templates
@@ -158,6 +160,10 @@ class JobInvocationComposer
 
   def job_invocation_base
     @params.fetch(:job_invocation, {})
+  end
+
+  def triggering_base
+    @params.fetch(:triggering, {})
   end
 
   def input_values_base
