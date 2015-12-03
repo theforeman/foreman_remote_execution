@@ -35,6 +35,22 @@ describe JobInvocation do
       @input_value.destroy
       refute job_invocation.reload.valid?
     end
+
+    describe 'descriptions' do
+      it 'generates description from input values' do
+        job_invocation.expects(:save!)
+        job_invocation.description_format = '%{job_name} - %{foo}'
+        job_invocation.generate_description!
+        job_invocation.description.must_equal "#{job_invocation.job_name} - #{@input_value.value}"
+      end
+
+      it 'handles missing keys correctly' do
+        job_invocation.expects(:save!)
+        job_invocation.description_format = '%{job_name} - %{missing_key}'
+        job_invocation.generate_description!
+        job_invocation.description.must_equal "#{job_invocation.job_name} - %{missing_key}"
+      end
+    end
   end
 
   context 'future execution' do

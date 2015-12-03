@@ -2,6 +2,7 @@
 kind: job_template
 name: Run Command - SSH Default
 job_name: Run Command
+description_format: "%{job_name} %{command}"
 provider_type: Ssh
 template_inputs:
 - name: command

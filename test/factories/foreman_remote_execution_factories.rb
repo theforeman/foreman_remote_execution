@@ -11,6 +11,10 @@ FactoryGirl.define do
         template.template_inputs << FactoryGirl.build(:template_input)
       end
     end
+
+    trait :with_description_format do
+      description_format "Factory-built %{job_name}"
+    end
   end
 
   factory :template_input do |f|
@@ -27,6 +31,7 @@ FactoryGirl.define do
   factory :job_invocation do |f|
     targeting
     f.sequence(:job_name) { |n| "Job name #{n}" }
+    f.description_format '%{job_name}'
     trait :with_template do
       after(:build) do |invocation, evaluator|
         invocation.template_invocations << FactoryGirl.build(:template_invocation)

@@ -10,7 +10,7 @@ module Actions
       end
 
       def plan(job_invocation, host, template_invocation, proxy)
-        action_subject(host, :job_name => job_invocation.job_name)
+        action_subject(host, :job_name => job_invocation.job_name, :description => job_invocation.description)
         link!(job_invocation)
         link!(template_invocation)
 
@@ -54,7 +54,9 @@ module Actions
       end
 
       def humanized_name
-        _('Run %{job_name} on %{host}') % { :job_name => input[:job_name], :host => input[:host][:name] }
+        _('%{description} on %{host}') % { :job_name => input[:job_name],
+                                           :host => input[:host][:name],
+                                           :description => input[:description].try(:capitalize) || input[:job_name] }
       end
 
       def find_ip_or_hostname(host)
