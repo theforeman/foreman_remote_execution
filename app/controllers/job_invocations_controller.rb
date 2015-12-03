@@ -30,6 +30,7 @@ class JobInvocationsController < ApplicationController
     @composer = JobInvocationComposer.from_ui_params(params)
     if @composer.save
       job_invocation = @composer.job_invocation
+      job_invocation.generate_description! if job_invocation.description.blank?
       @composer.triggering.trigger(::Actions::RemoteExecution::RunHostsJob, job_invocation)
       redirect_to job_invocation_path(job_invocation)
     else

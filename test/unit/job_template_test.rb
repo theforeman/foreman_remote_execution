@@ -14,6 +14,30 @@ describe JobTemplate do
     end
   end
 
+  context 'description format' do
+    let(:template_with_description) { FactoryGirl.build(:job_template, :with_description_format, :job_name => 'test job') }
+    let(:template) { FactoryGirl.build(:job_template, :with_input, :job_name => 'test job') }
+    let(:minimal_template) { FactoryGirl.build(:job_template) }
+
+    it 'uses the description_format attribute if set' do
+      template_with_description.generate_description_format.must_equal template_with_description.description_format
+    end
+
+    it 'uses the job name as description_format if not set or blank and has no inputs' do
+      minimal_template.generate_description_format.must_equal '%{job_name}'
+      minimal_template.description_format = ''
+      minimal_template.generate_description_format.must_equal '%{job_name}'
+    end
+
+    it 'generates the description_format if not set or blank and has inputs' do
+      input_name = template.template_inputs.first.name
+      expected_result = %Q(%{job_name} with inputs #{input_name}="%{#{input_name}}")
+      template.generate_description_format.must_equal expected_result
+      template.description_format = ''
+      template.generate_description_format.must_equal expected_result
+    end
+  end
+
   context 'cloning' do
     let(:job_template) { FactoryGirl.build(:job_template, :with_input) }
 

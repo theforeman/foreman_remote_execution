@@ -94,3 +94,51 @@ function job_invocation_refresh_data(){
 function fetch_ids_of_hosts(attribute){
   return $('div#hosts td.host_' + attribute + '[data-refresh_required="true"]').map(function() { return $(this).data('id') }).get();
 }
+
+function regenerate_description(thing) {
+  var fieldset = $(thing).closest('fieldset');
+  var dict = load_keys(fieldset);
+  var format = fieldset.find('#description_format').val();
+  fieldset.find('#description').val(String.format(format, dict));
+}
+
+function load_keys(parent) {
+  var dict = {};
+  var pattern = $(parent).find("#description_format").val();
+  var re = new RegExp("%\\{([^\\}]+)\\}", "gm");
+  var match = re.exec(pattern);
+  while(match != null) {
+    dict[match[1]] = $(parent).find("#" + match[1]).val();
+    match = re.exec(pattern);
+  }
+  dict['job_name'] = $('#job_invocation_job_name').val();
+  return dict;
+}
+
+function description_override(source) {
+    var description_format_container = $(source).closest('fieldset').find('#description_format_container');
+    var description_format = $(description_format_container).find('#description_format');
+    var old_value = $(source).val();
+    if($(source).is(':checked')) {
+	$(description_format_container).hide();
+    } else {
+	$(description_format_container).show();
+    }
+    $(source).val($(description_format).val());
+    $(description_format).val(old_value);
+    regenerate_description(description_format);
+}
+
+String.format = function (pattern, dict) {
+  if(pattern == undefined) {
+    return "";
+  }
+  for (var key in dict) {
+    var regEx = new RegExp("%\\{" + key + "\\}", "gm");
+    if(dict[key] == undefined) {
+      dict[key] = "%{" + key + "}"
+    }
+    pattern = pattern.replace(regEx, dict[key]);
+  }
+  return pattern;
+};
