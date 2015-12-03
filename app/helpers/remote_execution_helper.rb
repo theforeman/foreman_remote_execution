@@ -107,7 +107,7 @@ module RemoteExecutionHelper
                          :title => _('Rerun on failed hosts'))
     end
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
-      buttons << link_to(_("Last Job Task"), foreman_tasks_task_path(task),
+      buttons << link_to(_("Job Task"), foreman_tasks_task_path(task),
                          :class => "btn btn-default",
                          :title => _('See the last task details'))
     end

@@ -22,7 +22,7 @@
         <td><%= invocation_count(invocation, :output_key => :failed_count) %></td>
         <td><%= invocation_count(invocation, :output_key => :pending_count) %></td>
         <td><%= invocation_count(invocation, :output_key => :total_count) %></td>
-	<td><%= time_ago(invocation.last_task.try(:started_at)) %></td>
+	<td><%= time_ago(invocation.task.try(:started_at)) %></td>
       </tr>
     <% end %>
   </tbody>
