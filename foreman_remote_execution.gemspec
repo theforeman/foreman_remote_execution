@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "deface"
   s.add_dependency "rails", "~> 3.2.8"
+  s.add_dependency "dynflow", "~> 0.8.8"
   s.add_dependency "foreman-tasks", "~> 0.7.6"
 
   s.add_development_dependency 'rubocop'
