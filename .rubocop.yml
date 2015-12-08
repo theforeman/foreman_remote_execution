@@ -3,6 +3,13 @@ inherit_from:
 
 AllCops:
   RunRailsCops: true # always run the rails cops
+  Exclude:
+    - 'doc/plugins/**'
+
+# TODO: uncomment when on rubocop 0.35.1
+#Rails/Date:
+  #Exclude:
+    #- foreman_remote_execution.gemspec
 
 # Don't enforce documentation
 Style/Documentation:

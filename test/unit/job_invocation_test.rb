@@ -41,7 +41,7 @@ describe JobInvocation do
 
     it 'can report host count' do
       job_invocation.total_hosts_count.must_equal 'N/A'
-      job_invocation.targeting.expects(:resolved_at).returns(Time.now)
+      job_invocation.targeting.expects(:resolved_at).returns(Time.now.getlocal)
       job_invocation.total_hosts_count.must_equal 0
     end
 

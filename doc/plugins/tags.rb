@@ -30,7 +30,7 @@ module Jekyll
     end
 
     def new_tag(tag, posts)
-      self.class.types.each { |type|
+      self.class.types.each do |type|
         if layout = site.config["tag_#{type}_layout"]
           data = { 'layout' => layout, 'posts' => posts.sort.reverse!, 'tag' => tag, 'title' => tag }
 
@@ -43,10 +43,10 @@ module Jekyll
           page_name = "#{pretty? ? 'index' : name}#{site.layouts[data['layout']].ext}"
 
           site.pages << TagPage.new(
-              site, site.source, tag_dir, page_name, data
+            site, site.source, tag_dir, page_name, data
           )
         end
-      }
+      end
     end
 
     def add_tag_cloud(num = 5, name = 'tag_data')
@@ -61,10 +61,9 @@ module Jekyll
     def calculate_tag_cloud(num = 5)
       range = 0
 
-      tags = active_tags.map { |tag, posts|
+      tags = active_tags.map do |tag, posts|
         [tag.to_s, range < (size = posts.size) ? range = size : size]
-      }
-
+      end
 
       range = 1..range
 
@@ -100,9 +99,9 @@ module Jekyll
   module Filters
 
     def tag_cloud(site)
-      active_tag_data.map { |tag, set|
+      active_tag_data.map do |tag, set|
         tag_link(tag, tag_url(tag), :class => "set-#{set} label label-default")
-      }.join(' ')
+      end.join(' ')
     end
 
     def tag_link(tag, url = tag_url(tag), html_opts = nil)

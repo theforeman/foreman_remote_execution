@@ -16,7 +16,7 @@ describe Targeting do
     end
 
     context 'resolved_at is set' do
-      before { targeting.resolved_at = Time.now }
+      before { targeting.resolved_at = Time.now.getlocal }
       it { assert targeting.resolved? }
     end
 

@@ -231,7 +231,7 @@ describe JobInvocationComposer do
           { :job_template_id => testing_job_template_1.id.to_s,
             :job_templates => {
               testing_job_template_1.id.to_s => {
-                :input_values => { input1.id.to_s => { :value => 'value1' },  unauthorized_input1.id.to_s => { :value => 'dropped' } }
+                :input_values => { input1.id.to_s => { :value => 'value1' }, unauthorized_input1.id.to_s => { :value => 'dropped' } }
               }
             }
           }
