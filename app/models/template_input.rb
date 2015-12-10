@@ -8,11 +8,14 @@ class TemplateInput < ActiveRecord::Base
             :puppet_parameter => N_('Puppet parameter') }.with_indifferent_access
 
   attr_accessible :name, :required, :input_type, :fact_name, :variable_name,
-                  :puppet_class_name, :puppet_parameter_name, :description, :job_template_id,
+                  :puppet_class_name, :puppet_parameter_name, :description, :template_id,
                   :options
 
   belongs_to :template
   has_many :template_invocation_input_values, :dependent => :destroy
+
+  scoped_search :on => :name, :complete_value => true
+  scoped_search :on => :input_type, :complete_value => true
 
   validates :name, :presence => true, :uniqueness => { :scope => 'template_id' }
   validates :input_type, :presence => true, :inclusion => TemplateInput::TYPES.keys

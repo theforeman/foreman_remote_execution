@@ -23,7 +23,7 @@ module Api
         assert_equal template["job_name"], @invocation.job_name
       end
 
-      test "should create valid without template_id" do
+      test "should create valid without job_template_id" do
         attrs = { :job_name => @template.job_name, :name => 'RandomName', :targeting_type => 'static_query', :search_query => "foobar"}
         post :create,  :job_invocation => attrs
 
@@ -32,8 +32,8 @@ module Api
         assert_response :success
       end
 
-      test "should create valid with template_id" do
-        attrs = { :job_name => @template.job_name, :name => 'RandomName', :template_id => @template.id,:targeting_type => 'static_query', :search_query => "foobar"}
+      test "should create valid with job_template_id" do
+        attrs = { :job_name => @template.job_name, :name => 'RandomName', :job_template_id => @template.id,:targeting_type => 'static_query', :search_query => "foobar"}
         post :create,  :job_invocation => attrs
 
         invocation = ActiveSupport::JSON.decode(@response.body)

@@ -28,7 +28,11 @@ Rails.application.routes.draw do
 
   namespace :api, :defaults => {:format => 'json'} do
     scope "(:apiv)", :module => :v2, :defaults => {:apiv => 'v2'}, :apiv => /v1|v2/, :constraints => ApiConstraints.new(:version => 2, :default => true) do
-      resources :job_invocations, :except => [:new, :edit, :update, :destroy]
+      resources :job_invocations, :except => [:new, :edit, :update, :destroy] do
+        resources :hosts, :only => :none do
+          get '/', :to => 'job_invocations#output'
+        end
+      end
 
       resources :job_templates, :except => [:new, :edit] do
         (resources :locations, :only => [:index, :show]) if SETTINGS[:locations_enabled]
@@ -37,6 +41,10 @@ Rails.application.routes.draw do
         collection do
           get 'revision'
         end
+      end
+
+      resources :templates, :only => :none do
+        resources :template_inputs, :only => [:index, :show, :create, :new, :destroy, :update]
       end
     end
   end
