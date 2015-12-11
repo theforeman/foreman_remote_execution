@@ -369,7 +369,7 @@ describe JobInvocationComposer do
       end
 
       describe '#template_invocation_input_value_for(input)' do
-        let(:value1) { composer.template_invocation_input_value_for(input1) }
+        let(:value1) { composer.template_invocation_input_value_for(trying_job_template_1, input1) }
         it 'returns new empty input value if there is no invocation' do
           assert value1.new_record?
           value1.value.must_be_empty

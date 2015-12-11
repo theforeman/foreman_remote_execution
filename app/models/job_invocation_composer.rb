@@ -79,7 +79,7 @@ class JobInvocationComposer
       template = template_with_default
       template_invocation_params = { :template_id => template.id, :effective_user => api_params[:effective_user] }
       template_invocation_params[:input_values] = api_params.fetch(:inputs, {}).map do |name, value|
-        input = template.template_inputs.find_by_name(name)
+        input = template.template_inputs_with_foreign.find { |i| i.name == name }
         unless input
           raise ::Foreman::Exception, _('Unknown input %{input_name} for template %{template_name}') %
               { :input_name => name, :template_name => template.name }
@@ -267,10 +267,10 @@ class JobInvocationComposer
     pattern_template_invocations.find { |invocation| invocation.template == job_template }
   end
 
-  def template_invocation_input_value_for(input)
+  def template_invocation_input_value_for(job_template, input)
     invocations = pattern_template_invocations
     default = TemplateInvocationInputValue.new
-    if (invocation = invocations.detect { |i| i.template_id == input.template_id })
+    if (invocation = invocations.detect { |i| i.template_id == job_template.id })
       invocation.input_values.detect { |iv| iv.template_input_id == input.id } || default
     else
       default
@@ -285,9 +285,9 @@ class JobInvocationComposer
 
   # builds input values for a given templates id based on params
   # omits inputs that belongs to unavailable templates
-  def build_input_values_for(job_template_base)
-    job_template_base.fetch('input_values', {}).map do |attributes|
-      input = available_template_inputs.find_by_id(attributes[:template_input_id])
+  def build_input_values_for(template_invocation, job_template_base)
+    template_invocation.input_values = job_template_base.fetch('input_values', {}).map do |attributes|
+      input = template_invocation.template.template_inputs_with_foreign.find { |i| i.id.to_s == attributes[:template_input_id].to_s }
       input ? input.template_invocation_input_values.build(attributes) : nil
     end.compact
   end
@@ -327,7 +327,7 @@ class JobInvocationComposer
     params[:template_invocations].select { |t| valid_template_ids.include?(t[:template_id].to_i) }.map do |template_invocation_params|
       template_invocation = job_invocation.pattern_template_invocations.build(:template_id => template_invocation_params[:template_id],
                                                                               :effective_user => build_effective_user(template_invocation_params))
-      template_invocation.input_values = build_input_values_for(template_invocation_params)
+      build_input_values_for(template_invocation, template_invocation_params)
       template_invocation
     end
   end

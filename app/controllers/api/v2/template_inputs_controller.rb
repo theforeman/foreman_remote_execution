@@ -5,7 +5,7 @@ module Api
       include ::Foreman::Renderer
 
       before_filter :find_required_nested_object
-      before_filter :find_resource, :only => %w{show update destroy clone}
+      before_filter :find_resource, :only => %w{show update destroy}
       before_filter :normalize_options, :only => %w{create update}
 
       api :GET, '/templates/:template_id/template_inputs', N_('List template inputs')
@@ -39,7 +39,7 @@ module Api
       param :template_id, :identifier, :required => true
       param_group :template_input, :as => :create
       def create
-        @template_input = TemplateInput.new(params[:template_input].merge(:template_id => @nested_obj.id))
+        @template_input = resource_class.new(params[:template_input].merge(:template_id => @nested_obj.id))
         process_response @template_input.save
       end
 

@@ -1,5 +1,8 @@
 class JobTemplate < ::Template
 
+  class NonUniqueInputsError < Foreman::Exception
+  end
+
   attr_accessible :job_category, :provider_type, :description_format, :effective_user_attributes
 
   include Authorizable
@@ -40,6 +43,15 @@ class JobTemplate < ::Template
   validates :provider_type, :presence => true
   validate :provider_type_whitelist
   validate :inputs_unchanged_when_locked, :if => ->(template) { (template.locked? || template.locked_changed?) && template.persisted? && !Foreman.in_rake? }
+
+  validate do
+    begin
+      validate_unique_inputs!
+    rescue Foreman::Exception => e
+      errors.add :base, e.message
+    end
+  end
+  validates_associated :foreign_input_sets
 
   has_one :effective_user, :class_name => 'JobTemplateEffectiveUser', :foreign_key => 'job_template_id', :dependent => :destroy
   accepts_nested_attributes_for :effective_user, :update_only => true
@@ -100,13 +112,20 @@ class JobTemplate < ::Template
   def generate_description_format
     if description_format.blank?
       generated_description = '%{job_category}'
-      unless template_inputs.empty?
-        inputs = template_inputs.map(&:name).map { |name| %Q(#{name}="%{#{name}}") }.join(' ')
+      unless template_inputs_with_foreign.empty?
+        inputs = template_inputs_with_foreign.map(&:name).map { |name| %Q(#{name}="%{#{name}}") }.join(' ')
         generated_description << " with inputs #{inputs}"
       end
       generated_description
     else
       description_format
+    end
+  end
+
+  def validate_unique_inputs!
+    duplicated_inputs = template_inputs_with_foreign.group_by(&:name).values.select { |values| values.size > 1 }.map(&:first)
+    unless duplicated_inputs.empty?
+      raise NonUniqueInputsError.new(N_('Duplicated inputs detected: %{duplicated_inputs}'), :duplicated_inputs => duplicated_inputs.map(&:name))
     end
   end
 
@@ -124,6 +143,9 @@ class JobTemplate < ::Template
 
   def inputs_unchanged_when_locked
     inputs_changed = template_inputs.any? { |input| input.changed? || input.new_record? }
-    errors.add(:base, _('This template is locked. Please clone it to a new template to customize.')) if inputs_changed
+    foreign_input_sets_changed = foreign_input_sets.any? { |input_set| input_set.changed? || input_set.new_record? }
+    if inputs_changed || foreign_input_sets_changed
+      errors.add(:base, _('This template is locked. Please clone it to a new template to customize.'))
+    end
   end
 end

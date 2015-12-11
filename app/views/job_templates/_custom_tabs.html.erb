@@ -26,6 +26,13 @@
       </div>
     <% end %>
     <%= add_child_link '+ ' + _("Add Input"), :template_inputs, { :title => _('add a input for this template')} unless @template.locked? %>
+    <%= new_child_fields_template(f, :foreign_input_sets, { :partial => "template_inputs/foreign_input_set_form" }) %>
+    <%= f.fields_for :foreign_input_sets do |ff| %>
+      <div class="template_input_form fields">
+        <%= render 'template_inputs/foreign_input_set_form', :f => ff %>
+      </div>
+    <% end %>
+    <%= add_child_link '+ ' + _("Add Foreign Input Set"), :foreign_input_sets, { :title => _('add an input set for this template to reference a different template inputs') } unless @template.locked? %>
   </div>
 
   <div class="children_fields">

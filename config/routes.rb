@@ -50,7 +50,8 @@ Rails.application.routes.draw do
       end
 
       resources :templates, :only => :none do
-        resources :template_inputs, :only => [:index, :show, :create, :new, :destroy, :update]
+        resources :template_inputs, :only => [:index, :show, :create, :destroy, :update]
+        resources :foreign_input_sets, :only => [:index, :show, :create, :destroy, :update]
       end
     end
   end

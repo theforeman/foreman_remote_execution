@@ -162,9 +162,8 @@ class JobInvocation < ActiveRecord::Base
 
   def generate_description!
     key_re = /%\{([^\}]+)\}/
-    # works fine only with invocation with one provider
     template_invocation = pattern_template_invocations.first
-    input_names = template_invocation.template.template_input_names
+    input_names = template_invocation.template.template_inputs_with_foreign(&:name)
     hash_base = Hash.new { |hash, key| hash[key] = "%{#{key}}" }
     input_hash = hash_base.merge Hash[input_names.zip(template_invocation.input_values.pluck(:value))]
     input_hash.update(:job_category => job_category)

@@ -37,12 +37,14 @@ module ForemanRemoteExecution
         security_block :foreman_remote_execution do
           permission :view_job_templates, { :job_templates => [:index, :show, :revision, :auto_complete_search, :auto_complete_job_category, :preview],
                                             :'api/v2/job_templates' => [:index, :show, :revision],
-                                            :'api/v2/template_inputs' => [:index, :show]}, :resource_type => 'JobTemplate'
+                                            :'api/v2/template_inputs' => [:index, :show],
+                                            :'api/v2/foreign_input_sets' => [:index, :show]}, :resource_type => 'JobTemplate'
           permission :create_job_templates, { :job_templates => [:new, :create, :clone_template],
                                               :'api/v2/job_templates' => [:create, :clone] }, :resource_type => 'JobTemplate'
           permission :edit_job_templates, { :job_templates => [:edit, :update],
                                             :'api/v2/job_templates' => [:update],
-                                            :'api/v2/template_inputs' => [:update, :new, :create, :destroy]}, :resource_type => 'JobTemplate'
+                                            :'api/v2/template_inputs' => [:create, :update, :destroy],
+                                            :'api/v2/foreign_input_sets' => [:create, :update, :destroy]}, :resource_type => 'JobTemplate'
           permission :destroy_job_templates, { :job_templates => [:destroy],
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
@@ -123,8 +125,6 @@ module ForemanRemoteExecution
       #   Template.reflect_on_association :template_inputs # => <#Association...
       #   ProvisioningTemplate.reflect_on_association :template_inputs # => nil
       require_dependency 'job_template'
-      (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateRelations) }
-      # similarly, attr_accessible :template_inputs_attributes does not work with STI
       (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateExtensions) }
 
       (Taxonomy.descendants + [Taxonomy]).each { |klass| klass.send(:include, ForemanRemoteExecution::TaxonomyExtensions) }
