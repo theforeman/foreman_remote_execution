@@ -1,5 +1,5 @@
 class JobTemplate < ::Template
-  attr_accessible :job_name, :provider_type
+  attr_accessible :job_name, :provider_type, :effective_user_attributes
 
   include Authorizable
   extend FriendlyId
@@ -31,6 +31,8 @@ class JobTemplate < ::Template
   validates :job_name, :presence => true, :unless => ->(job_template) { job_template.snippet }
   validates :provider_type, :presence => true
   validate :provider_type_whitelist
+  has_one :effective_user, :class_name => 'JobTemplateEffectiveUser', :foreign_key => 'job_template_id', :dependent => :destroy
+  accepts_nested_attributes_for :effective_user, :update_only => true
 
   # we have to override the base_class because polymorphic associations does not detect it correctly, more details at
   # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_many#1010-Polymorphic-has-many-within-inherited-class-gotcha
@@ -75,6 +77,14 @@ class JobTemplate < ::Template
       organizations << Organization.all if SETTINGS[:organizations_enabled]
       locations << Location.all if SETTINGS[:locations_enabled]
     end
+  end
+
+  def provider
+    RemoteExecutionProvider.provider_for(provider_type)
+  end
+
+  def effective_user
+    super || (build_effective_user.tap(&:set_defaults))
   end
 
   private

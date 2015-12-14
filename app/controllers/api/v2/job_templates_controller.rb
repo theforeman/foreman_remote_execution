@@ -11,6 +11,8 @@ module Api
 
       before_filter :handle_template_upload, :only => [:create, :update]
 
+      wrap_parameters JobTemplate, :include => (JobTemplate.attribute_names + [:ssh])
+
       api :GET, "/job_templates/", N_("List job templates")
       api :GET, "/locations/:location_id/job_templates/", N_("List job templates per location")
       api :GET, "/organizations/:organization_id/job_templates/", N_("List job templates per organization")
@@ -34,6 +36,13 @@ module Api
           param :snippet, :bool, :allow_nil => true
           param :audit_comment, String, :allow_nil => true
           param :locked, :bool, :desc => N_("Whether or not the template is locked for editing")
+          param :ssh, Hash, :desc => N_("Ssh provider specific options") do
+            param :effective_user, Hash, :desc => N_("Effective user options") do
+              param :value, String, :desc => N_("What user should be used to run the script (using sudo-like mechanisms)"), :allowed_nil => true
+              param :overridable, :bool, :desc => N_("Whether it should be allowed to override the effective user from the invocation form.")
+              param :current_user, :bool, :desc => N_("Whether the current user login should be used as the effective user")
+            end
+          end
           param_group :taxonomies, ::Api::V2::BaseController
         end
       end
@@ -41,7 +50,7 @@ module Api
       api :POST, "/job_templates/", N_("Create a job template")
       param_group :job_template, :as => :create
       def create
-        @job_template = JobTemplate.new(params[:job_template])
+        @job_template = JobTemplate.new(job_template_params)
         process_response @job_template.save
       end
 
@@ -49,7 +58,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :job_template
       def update
-        process_response @job_template.update_attributes(params[:job_template])
+        process_response @job_template.update_attributes(job_template_params)
       end
 
       api :GET, "/job_templates/revision"
@@ -77,7 +86,7 @@ module Api
       def clone
         @job_template = @job_template.clone
         load_vars_from_template
-        @job_template.name = params[:job_template][:name]
+        @job_template.name = job_template_params[:name]
         process_response @job_template.save
       end
 
@@ -86,6 +95,12 @@ module Api
       end
 
       private
+
+      def job_template_params
+        job_template_params = params[:job_template].dup
+        effective_user_attributes = (job_template_params.delete(:ssh) || {}).fetch(:effective_user, {})
+        job_template_params.merge(:effective_user_attributes => effective_user_attributes)
+      end
 
       def action_permission
         case params[:action]

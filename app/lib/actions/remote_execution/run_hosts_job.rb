@@ -11,13 +11,13 @@ module Actions
         super delay_options, job_invocation, locked
       end
 
-      def plan(job_invocation, locked = false, connection_options = {})
+      def plan(job_invocation, locked = false)
         job_invocation.task_group.save! if job_invocation.task_group.try(:new_record?)
         task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
         action_subject(job_invocation) unless locked
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !locked
         input.update(:job_name => job_invocation.job_name)
-        plan_self(:job_invocation_id => job_invocation.id, :connection_options => connection_options)
+        plan_self(:job_invocation_id => job_invocation.id)
       end
 
       def create_sub_plans
@@ -27,7 +27,7 @@ module Actions
         job_invocation.targeting.hosts.map do |host|
           template_invocation = job_invocation.template_invocation_for_host(host)
           proxy = determine_proxy(template_invocation, host, load_balancer)
-          trigger(RunHostJob, job_invocation, host, template_invocation, proxy, input[:connection_options])
+          trigger(RunHostJob, job_invocation, host, template_invocation, proxy)
         end
       end
 

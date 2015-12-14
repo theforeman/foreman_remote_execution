@@ -15,7 +15,7 @@
   <%= _('Evaluated at:') %> <%= job_invocation.targeting.resolved_at %><br>
   <% if job_invocation.template_invocations.size > 1 %>
     <% job_invocation.template_invocations.each do |template_invocation| %>
-      <%= host_counter _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)), ForemanTasks::Task::DynflowTask.for_action(Actions::RemoteExecution::RunHostJob).for_resource(template_invocation).uniq.size %>
+      <%= host_counter template_invocation.template.provider.humanized_name, ForemanTasks::Task::DynflowTask.for_action(Actions::RemoteExecution::RunHostJob).for_resource(template_invocation).uniq.size %>
     <% end %>
   <% end %>
   <%= host_counter(_('Total hosts'), job_invocation.total_hosts_count) %>
@@ -25,7 +25,7 @@
   <h4><%= _('Providers and templates') %></h4>
   <% job_invocation.template_invocations.each do |template_invocation| %>
     <h5>
-      <b><%= template_invocation.template.name %></b> <%= 'through' %> <%= _(RemoteExecutionProvider.provider_for(template_invocation.template.provider_type)) %>
+      <b><%= template_invocation.template.name %></b> <%= 'through' %> <%= template_invocation.template.provider.humanized_name %>
     </h5>
     <% target = template_invocation.targeting.hosts.with_os.first || template_invocation.targeting.hosts.first %>
     <%= _('Preview for target %s') % target.try(:name) || 'N/A' %>
@@ -39,6 +39,9 @@
           <li><b><%= input_value.template_input.name %></b>: <%= input_value.value %></li>
         <% end %>
       </ul>
+    <% end %>
+    <% if template_invocation.effective_user %>
+      <b><%= _("Effective user") %></b>: <%= template_invocation.effective_user %>
     <% end %>
   <% end %>
 </div>

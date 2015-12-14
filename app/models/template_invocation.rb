@@ -14,6 +14,7 @@ class TemplateInvocation < ActiveRecord::Base
 
   validates_associated :input_values
   validate :provides_required_input_values
+  before_validation :set_effective_user
 
   def to_action_input
     { :id => id, :name => template.name }
@@ -33,6 +34,14 @@ class TemplateInvocation < ActiveRecord::Base
     missing_inputs = required_inputs.reject { |input| self.input_values.map(&:template_input_id).include?(input.id) }
     unless missing_inputs.empty?
       errors.add(:base, _("Not all required inputs have values. Missing inputs: %s") % missing_inputs.map(&:name).join(', '))
+    end
+  end
+
+  def set_effective_user
+    if template.provider.supports_effective_user?
+      self.effective_user = Setting[:remote_execution_effective_user] if self.effective_user.blank?
+    else
+      self.effective_user = nil
     end
   end
 end

@@ -20,6 +20,18 @@
     <%= add_child_link '+ ' + _("Add Input"), :template_inputs, { :title => _('add a input for this template')} %>
   </div>
 
+  <div class="children_fields">
+    <%= field_set_tag _("Effective user") do %>
+      <%= f.fields_for :effective_user, @template.effective_user do |ff| %>
+        <div class="effective_user_form fields">
+          <%= text_f ff, :value %>
+          <%= checkbox_f ff, :current_user %>
+          <%= checkbox_f ff, :overridable %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
 </div>
 
 
