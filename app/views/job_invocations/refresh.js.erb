@@ -1,1 +1,2 @@
-$('form#job_invocation_form').html("<%=j render :partial => 'form' %>");
+$('form#job_invocation_form').replaceWith("<%=j render :partial => 'form' %>");
+$('#job_invocation_form').find('a[rel="popover"]').popover();
