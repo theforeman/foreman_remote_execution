@@ -9,7 +9,7 @@ class JobInvocationComposer
     def params
       { :job_name => job_invocation_base[:job_name],
         :targeting => ui_params.fetch(:targeting, {}).merge(:user_id => User.current.id),
-        :triggering => job_invocation_base.fetch(:triggering, {}),
+        :triggering => ui_params.fetch(:triggering, {}),
         :host_ids => ui_params[:host_ids],
         :template_invocations => template_invocations_params }.with_indifferent_access
     end

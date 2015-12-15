@@ -453,6 +453,16 @@ describe JobInvocationComposer do
         end
       end
 
+      describe 'triggering' do
+        let(:params) do
+          { :job_invocation => { :providers => { :ssh => ssh_params } }, :triggering => { :mode => 'future' }}.with_indifferent_access
+        end
+
+        it 'accepts the triggering params' do
+          composer.job_invocation.triggering.mode.must_equal :future
+        end
+      end
+
       describe '#save' do
         it 'triggers save on job_invocation if it is valid' do
           composer.stubs(:valid? => true)
