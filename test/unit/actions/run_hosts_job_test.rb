@@ -24,7 +24,7 @@ module ForemanRemoteExecution
     let(:action) do
       action = create_action(Actions::RemoteExecution::RunHostsJob)
       action.expects(:action_subject).with(job_invocation)
-      ForemanTasks::Task::DynflowTask.stubs(:find_by_external_id!).returns(task)
+      ForemanTasks::Task::DynflowTask.stubs(:where).returns(mock.tap { |m| m.stubs(:first! => task) })
       plan_action(action, job_invocation)
     end
 
