@@ -26,7 +26,7 @@ class JobInvocation < ActiveRecord::Base
 
   belongs_to :task_group, :class_name => 'JobInvocationTaskGroup'
 
-  has_many :tasks, :through => :task_group
+  has_many :tasks, :through => :task_group, :class_name => 'ForemanTasks::Task'
 
   scoped_search :on => [:job_name], :complete_value => true
 
