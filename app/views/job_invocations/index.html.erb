@@ -16,7 +16,7 @@
   <tbody>
     <% @job_invocations.each do |invocation| %>
       <tr>
-        <td><%= link_to_if_authorized invocation.job_name, hash_for_job_invocation_path(invocation).merge(:auth_object => invocation, :permission => :view_job_invocation) %></td>
+        <td><%= link_to_if_authorized "#{invocation.description.try(:capitalize) || invocation.job_name}", hash_for_job_invocation_path(invocation).merge(:auth_object => invocation, :permission => :view_job_invocation) %></td>
         <td><%= link_to_invocation_task_if_authorized(invocation) %></td>
         <td><%= invocation_count(invocation, :output_key => :success_count) %></td>
         <td><%= invocation_count(invocation, :output_key => :failed_count) %></td>

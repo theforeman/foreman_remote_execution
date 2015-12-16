@@ -1,5 +1,6 @@
 class JobTemplate < ::Template
-  attr_accessible :job_name, :provider_type, :effective_user_attributes
+
+  attr_accessible :job_name, :provider_type, :description_format, :effective_user_attributes
 
   include Authorizable
   extend FriendlyId
@@ -85,6 +86,19 @@ class JobTemplate < ::Template
 
   def effective_user
     super || (build_effective_user.tap(&:set_defaults))
+  end
+
+  def generate_description_format
+    if description_format.blank?
+      generated_description = '%{job_name}'
+      unless template_inputs.empty?
+        inputs = template_inputs.map(&:name).map { |name| %Q(#{name}="%{#{name}}") }.join(' ')
+        generated_description << " with inputs #{inputs}"
+      end
+      generated_description
+    else
+      description_format
+    end
   end
 
   private

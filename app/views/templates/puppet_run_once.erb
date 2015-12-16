@@ -2,6 +2,7 @@
 kind: job_template
 name: Puppet Run Once - SSH Default
 job_name: Puppet Run Once
+description_format: '%{job_name} with "%{puppet_options}"'
 provider_type: Ssh
 template_inputs:
 - name: puppet_options

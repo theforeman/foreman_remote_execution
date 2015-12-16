@@ -40,13 +40,15 @@ class JobInvocation < ActiveRecord::Base
 
   default_scope -> { order('job_invocations.id DESC') }
 
-  attr_accessor :start_before
+  attr_accessor :start_before, :description_format
   attr_writer :start_at
 
   def deep_clone
     JobInvocationComposer.from_job_invocation(self).job_invocation.tap do |invocation|
       invocation.task_group = JobInvocationTaskGroup.new.tap(&:save!)
       invocation.triggering = self.triggering
+      invocation.description_format = self.description_format
+      invocation.description = self.description
       invocation.template_invocations = self.template_invocations.map(&:deep_clone)
       invocation.save!
     end
@@ -107,5 +109,20 @@ class JobInvocation < ActiveRecord::Base
   def output(host)
     return unless (task = sub_task_for_host(host)) && task.main_action && task.main_action.live_output.any?
     task.main_action.live_output.first['output']
+  end
+
+  def generate_description!
+    key_re = /%\{([^\}]+)\}/
+    template_invocation = template_invocations.first
+    input_names = template_invocation.template.template_input_names
+    hash_base = Hash.new { |hash, key| hash[key] = "%{#{key}}" }
+    input_hash = hash_base.merge Hash[input_names.zip(template_invocation.input_values.pluck(:value))]
+    input_hash.update(:job_name => job_name)
+    description_format.scan(key_re) { |key| input_hash[key.first] }
+    self.description = description_format
+    input_hash.each do |k, v|
+      self.description.gsub!(Regexp.new("%\{#{k}\}"), v)
+    end
+    save!
   end
 end

@@ -8,6 +8,10 @@
                              :id => 'search') %>
   <% end %>
 
+  <%= text_f f, :description_format,
+             :help_inline => popover(_('Explanation'), _('Description template determines the job name once it is submitted. Input values can become part of the name
+                         if they are specified using interpolation syntax, e.g. %{fqdn} where fqdn is the name of interpolated input.')) %>
+
   <%= select_f f, :provider_type, providers_options, :first, :last %>
 
   <div class="children_fields">
