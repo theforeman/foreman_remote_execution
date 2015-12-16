@@ -5,6 +5,17 @@ describe JobInvocation do
   let(:job_invocation) { FactoryGirl.build(:job_invocation) }
   let(:template) { FactoryGirl.create(:job_template, :with_input) }
 
+  context 'Search for job invocations' do
+    before do
+      job_invocation.save
+    end
+
+    it 'is able to perform search through job invocations' do
+      found_jobs = JobInvocation.search_for(%{job_name = "#{job_invocation.job_name}"}).paginate(:page => 1).with_task.order('job_invocations.id DESC')
+      found_jobs.must_equal [job_invocation]
+    end
+  end
+
   context 'Able to be created' do
     it { assert job_invocation.save }
   end
