@@ -1,8 +1,10 @@
 <script type="text/javascript">
-  $(function() { regenerate_description($('#description'), true) });
+  $(function () {
+    regenerate_description($('#description'), true)
+  });
 </script>
 
-<%= form_for @composer.job_invocation, :html => { 'data-refresh-url' => refresh_job_invocations_path, :id => 'job_invocation_form' } do |f| %>
+<%= form_for @composer.job_invocation, :html => {'data-refresh-url' => refresh_job_invocations_path, :id => 'job_invocation_form'} do |f| %>
 
   <ul class="nav nav-tabs" data-tabs="tabs">
     <li class="active"><a href="#primary" data-toggle="tab"><%= _('Job') %></a></li>
@@ -14,17 +16,18 @@
       <%= selectable_f f, :job_name, @composer.available_job_names %>
 
       <%= fields_for @composer.targeting do |targeting_fields| %>
-        <span id="bookmark_query_map" >
+        <span id="bookmark_query_map">
           <% @composer.available_bookmarks.each do |bookmark| %>
             <span id="bookmark-<%= bookmark.id %>" data-query="<%= bookmark.query %>"></span>
           <% end %>
         </span>
-   	<%= selectable_f targeting_fields, :bookmark_id, @composer.available_bookmarks.map {|b| [ b.name, b.id ] }, :selected => @composer.targeting.bookmark_id, :include_blank => true %>
-	<%= textarea_f targeting_fields, :search_query, :value => @composer.displayed_search_query, :rows => 5 %>
+        <%= selectable_f targeting_fields, :bookmark_id, @composer.available_bookmarks.map { |b| [b.name, b.id] }, :selected => @composer.targeting.bookmark_id, :include_blank => true %>
+        <%= textarea_f targeting_fields, :search_query, :value => @composer.displayed_search_query, :rows => 5 %>
 
-	<div class="form-group ">
-	  <label class="col-md-2 control-label"><%= _('Resolves to') %></label>
-	  <div class="col-md-4">
+        <div class="form-group ">
+          <label class="col-md-2 control-label"><%= _('Resolves to') %></label>
+
+          <div class="col-md-4">
             <%= @composer.targeted_hosts_count %> <%= _('hosts') %>
             <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Refresh"), :id => 'refresh_execution_form') do %>
               <%= icon_text('refresh') %>
@@ -32,30 +35,31 @@
             <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Preview"), :id => 'preview_hosts') do %>
               <%= icon_text('eye-open') %>
             <% end %>
-	  </div>
-	</div>
+          </div>
+        </div>
 
-	<div class="form-group ">
-	  <label class="col-md-2 control-label"><%= _('Type of query') %></label>
-	  <div class="col-md-4">
+        <div class="form-group ">
+          <label class="col-md-2 control-label"><%= _('Type of query') %></label>
+
+          <div class="col-md-4">
             <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
             <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
-	  </div>
+          </div>
 	  <span class="help-inline"><%= popover(_('Explanation'),
-                                                _("Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>")) %></span>
-	</div>
+                                          _("Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>")) %></span>
+        </div>
       <% end %>
 
       <% @composer.displayed_provider_types.each do |provider_type| %>
         <fieldset id="provider_<%= provider_type %>" class="provider_form">
-	  <legend><%= _('Provider') + ': ' + provider_type %></legend>
-	  <%= f.fields_for 'providers' do |providers_fields| %>
+          <legend><%= _('Provider') + ': ' + provider_type %></legend>
+          <%= f.fields_for 'providers' do |providers_fields| %>
             <%= providers_fields.fields_for provider_type do |provider_type_fields| %>
               <%= provider_type_fields.fields_for :job_templates do |job_templates_fields| %>
                 <% if @composer.needs_provider_type_selection? %>
-		  <%= radio_button_f provider_type_fields, 'job_template_id', :value => '', :text => _('Disable this provider'),
+                  <%= radio_button_f provider_type_fields, 'job_template_id', :value => '', :text => _('Disable this provider'),
                                      :class => 'job_template_selector', :checked => @composer.preselect_disabled_for_provider(provider_type) %>
-		  <span />
+                  <span/>
                 <% end %>
                 <% @composer.templates_for_provider(provider_type).each do |job_template| %>
                   <%= radio_button_f provider_type_fields, 'job_template_id',
@@ -65,14 +69,14 @@
                                      :class => 'job_template_selector',
                                      :checked => @composer.job_template_ids.include?(job_template.id) || @composer.only_one_template_available? %>
 
-		  <fieldset id="job_template_<%= job_template.id %>" class="job_template_form <%= 'hidden' if !@composer.job_template_ids.include?(job_template.id) && !@composer.only_one_template_available? %>">
+                  <fieldset id="job_template_<%= job_template.id %>" class="job_template_form <%= 'hidden' if !@composer.job_template_ids.include?(job_template.id) && !@composer.only_one_template_available? %>">
                     <%= job_templates_fields.fields_for job_template.id.to_s do |job_template_fields| %>
 
                       <%= job_template_fields.fields_for :input_values do |input_values_fields| %>
                         <% job_template.template_inputs.where(:input_type => 'user').each do |input| %>
                           <%= input_values_fields.fields_for input.id.to_s, @composer.template_invocation_input_value_for(input) do |input_fields| %>
                             <% unless input.options.blank? %>
-                              <%= selectable_f input_fields, :value, input.options_array, {:include_blank => !input.required }, :require => input.required, :label => input.name, :help_inline => input.description, :id => input.name, :onchange => "regenerate_description(this);" %>
+                              <%= selectable_f input_fields, :value, input.options_array, {:include_blank => !input.required}, :require => input.required, :label => input.name, :help_inline => input.description, :id => input.name, :onchange => "regenerate_description(this);" %>
                             <% else %>
                               <%= textarea_f input_fields, :value, :label => input.name, :help_inline => input.description, :required => input.required, :rows => 2, :onchange => "regenerate_description(this);", :id => input.name %>
                             <% end %>
@@ -84,10 +88,17 @@
                       <% end %>
 
                     <% end %>
-		    <%= textarea_f f, :description, :label => _("Description"), :readonly => "true", :id => "description", :rows => 2, :help_inline => content_tag(:span, check_box_tag('description_format_override', job_template.generate_description_format, true, :onchange => "description_override(this);") + _("Use default description template")) %>
-		    <div id="description_format_container" class="hidden">
-		      <%= textarea_f f, :description_format, :label => _("Description template"), :value => job_template.generate_description_format, :rows => 2, :onchange => "regenerate_description(this);", :id => "description_format" %>
-		    </div>
+                    <%= textarea_f f, :description, :label => _("Description"), :readonly => "true", :id => "description", :rows => 2, :help_inline => content_tag(:span, check_box_tag('description_format_override', job_template.generate_description_format, true, :onchange => "description_override(this);") + ' ' + _("Use default description template")) %>
+                    <div id="description_format_container" class="hidden">
+                      <%= textarea_f f, :description_format,
+                                     :label => _("Description template"),
+                                     :value => job_template.generate_description_format,
+                                     :rows => 2,
+                                     :onchange => "regenerate_description(this);",
+                                     :id => "description_format",
+                                     :help_inline => popover(_('Explanation'), _('Description template determines the job name once it is submitted. Input values can become part of the name
+                         if they are specified using interpolation syntax, e.g. %{fqdn} where fqdn is the name of interpolated input.')) %>
+                    </div>
                   </fieldset>
                 <% end %>
               <% end %>
