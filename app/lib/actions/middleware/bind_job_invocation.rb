@@ -20,7 +20,7 @@ module Actions
       private
 
       def task
-        @task ||= ForemanTasks::Task::DynflowTask.find_by_external_id!(action.execution_plan_id)
+        @task ||= ForemanTasks::Task::DynflowTask.where(:external_id => action.execution_plan_id).first!
       end
 
       def bind(job_invocation)
