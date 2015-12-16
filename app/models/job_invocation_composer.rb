@@ -11,6 +11,7 @@ class JobInvocationComposer
         :targeting => ui_params.fetch(:targeting, {}).merge(:user_id => User.current.id),
         :triggering => ui_params.fetch(:triggering, {}),
         :host_ids => ui_params[:host_ids],
+        :description_format => job_invocation_base[:description_format],
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -61,6 +62,7 @@ class JobInvocationComposer
       { :job_name => job_name,
         :targeting => targeting_params,
         :triggering => {},
+        :description_format => api_params[:description_format] || template_with_default.generate_description_format,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -109,6 +111,7 @@ class JobInvocationComposer
       { :job_name => job_invocation.job_name,
         :targeting => targeting_params,
         :triggering => triggering_params,
+        :description_format => job_invocation.description_format,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -164,6 +167,8 @@ class JobInvocationComposer
     job_invocation.targeting = build_targeting
     job_invocation.triggering = build_triggering
     job_invocation.template_invocations = build_template_invocations
+    job_invocation.description_format = params[:description_format]
+
     self
   end
 
