@@ -36,7 +36,7 @@ class JobInvocation < ActiveRecord::Base
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
   has_one :recurring_logic, :through => :triggering, :class_name => 'ForemanTasks::RecurringLogic'
 
-  scope :with_task, -> { joins('LEFT JOIN "foreman_tasks_tasks" ON "foreman_tasks_tasks"."id" = "job_invocations"."task_id"') }
+  scope :with_task, -> { joins('LEFT JOIN foreman_tasks_tasks ON foreman_tasks_tasks.id = job_invocations.task_id') }
 
   default_scope -> { order('job_invocations.id DESC') }
 
