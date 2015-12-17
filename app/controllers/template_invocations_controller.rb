@@ -1,4 +1,6 @@
 class TemplateInvocationsController < ApplicationController
+  include Foreman::Controller::AutoCompleteSearch
+
   def controller_permission
     'job_invocations'
   end

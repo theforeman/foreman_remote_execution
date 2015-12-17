@@ -1,4 +1,5 @@
 class TemplateInvocation < ActiveRecord::Base
+  include Authorizable
   include ForemanTasks::Concerns::ActionSubject
 
   include ForemanRemoteExecution::ErrorsFlattener
@@ -11,10 +12,16 @@ class TemplateInvocation < ActiveRecord::Base
   belongs_to :job_invocation, :inverse_of => :template_invocations
   has_many :input_values, :class_name => 'TemplateInvocationInputValue', :dependent => :destroy
   has_one :targeting, :through => :job_invocation
+  belongs_to :host, :class_name => 'Host::Managed', :foreign_key => :host_id
+  has_one :host_group, :through => :host, :source => :hostgroup
 
   validates_associated :input_values
   validate :provides_required_input_values
   before_validation :set_effective_user
+
+  scoped_search :in => :host, :on => :name, :rename => 'host.name', :complete_value => true
+  scoped_search :in => :host_group, :on => :name, :rename => 'host_group.name', :complete_value => true
+  scoped_search :in => :template, :on => :job_name, :complete_value => true
 
   def to_action_input
     { :id => id, :name => template.name }
