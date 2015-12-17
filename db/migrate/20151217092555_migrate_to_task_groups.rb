@@ -5,10 +5,9 @@ class MigrateToTaskGroups < ActiveRecord::Migration
 
   def up
     say 'Migrating from locks to task groups'
-    FakeJobInvocation.where('task_group_id IS NULL').each do |job_invocation|
-      next if job_invocation.task_id.nil?
+    FakeJobInvocation.where('task_group_id IS NULL AND task_id IS NOT NULL').each do |job_invocation|
       task_group = JobInvocationTaskGroup.new
-      task_group.tasks << ForemanTasks::Task.find(job_invocation.task_id)
+      task_group.task_ids = [job_invocation.task_id]
       task_group.save!
       job_invocation.task_group_id = task_group.id
       job_invocation.save!
