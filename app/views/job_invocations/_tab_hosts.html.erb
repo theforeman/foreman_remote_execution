@@ -29,7 +29,7 @@
     <% hosts.each do |host| %>
       <% task = job_invocation.sub_task_for_host(host) %>
       <tr>
-        <td><%= link_to_if_authorized host.name, hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts) %></td>
+        <%= render('host_name_td', :host => host, :task => task) %>
         <%= render('host_provider_td', :host => host, :task => task) %>
         <%= render('host_status_td', :host => host, :task => task) %>
         <%= render('host_actions_td', :host => host, :task => task) %>

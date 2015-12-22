@@ -78,11 +78,9 @@ module RemoteExecutionHelper
   end
 
   def template_invocation_actions(task, host)
-    if task.nil?
-      []
-    else
-      [display_link_if_authorized(_("Details"), hash_for_template_invocation_path(:id => task).merge(:auth_object => host, :permission => :view_hosts))]
-    end
+    [
+      display_link_if_authorized(_('View host'),  hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts))
+    ]
   end
 
   def remote_execution_provider_for(task)
