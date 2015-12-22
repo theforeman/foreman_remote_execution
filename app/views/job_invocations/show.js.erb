@@ -1,4 +1,4 @@
-$('div.btn-group').html('<%= button_group(job_invocation_task_buttons(@job_invocation.task)).html_safe %>');
+$('div#title_action div.btn-group').html('<%= button_group(job_invocation_task_buttons(@job_invocation.task)).html_safe %>');
 $('div#status_chart').html('<%=j job_invocation_chart(@job_invocation) %>');
 $('div#status').flot_pie();
 
@@ -13,7 +13,7 @@ $('div#status').flot_pie();
     var td_element;
     <% Host.authorized(:view_hosts, Host).where(:id => params["host_ids_needing_#{attribute}_update"]).each do |host| %>
       td_element= $('#<%= dom_id(host) %>-<%= attribute %>');
-      td_element.replaceWith('<%=j render("host_#{attribute}_td", :host => host, :task => @job_invocation.sub_task_for_host(host)) %>');
+      td_element.replaceWith('<%=j render("host_#{attribute}_td", :host => host, :task => @job_invocation.sub_task_for_host(host), :job_invocation => @job_invocation) %>');
     <% end %>
   <% end %>
 <% end %>
