@@ -88,6 +88,14 @@ module RemoteExecutionHelper
     template_invocation.nil? ? _('N/A') : template_invocation.template.provider.humanized_name
   end
 
+  def job_invocations_buttons
+    if authorized_for(hash_for_new_job_invocation_path)
+      link_to(_("Run Job"), new_job_invocation_path,
+              :class => "btn btn-default",
+              :title => _('Run Job'))
+    end
+  end
+
   # rubocop:disable Metrics/AbcSize
   def job_invocation_task_buttons(task)
     job_invocation = task.task_groups.find { |group| group.class == JobInvocationTaskGroup }.job_invocation
