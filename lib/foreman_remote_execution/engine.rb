@@ -138,6 +138,7 @@ module ForemanRemoteExecution
 
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
       HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
+      ProvisioningTemplatesHelper.send(:include, ForemanRemoteExecution::JobTemplatesExtensions)
 
       SmartProxy.send(:include, ForemanRemoteExecution::SmartProxyExtensions)
       Subnet.send(:include, ForemanRemoteExecution::SubnetExtensions)

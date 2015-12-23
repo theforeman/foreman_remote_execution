@@ -4,14 +4,24 @@ class JobInvocationsController < ApplicationController
   before_filter :find_or_create_triggering, :only => [:create, :refresh]
 
   def new
-    @composer = JobInvocationComposer.from_ui_params(
+    ui_params = {
       :host_ids => params[:host_ids],
-      :job_invocation => {
-      },
       :targeting => {
         :targeting_type => Targeting::STATIC_TYPE,
         :bookmark_id => params[:bookmark_id]
-      })
+      }
+    }
+
+    if (template = JobTemplate.find_by_id(params[:template_id]))
+      ui_params[:job_invocation] = {
+        :job_name => template.job_name,
+        :providers => {
+          template.provider_type => {:job_template_id => template.id}
+        }
+      }
+    end
+
+    @composer = JobInvocationComposer.from_ui_params(ui_params)
   end
 
   def rerun
