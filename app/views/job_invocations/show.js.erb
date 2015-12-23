@@ -8,7 +8,7 @@ $('div#status').flot_pie();
   hosts_tab.data('refresh_required', '');
 <% end %>
 
-<% ['status', 'actions', 'provider'].each do |attribute| %>
+<% ['name', 'status', 'actions', 'provider'].each do |attribute| %>
   <% if params["host_ids_needing_#{attribute}_update"].present? %>
     var td_element;
     <% Host.authorized(:view_hosts, Host).where(:id => params["host_ids_needing_#{attribute}_update"]).each do |host| %>
