@@ -61,6 +61,7 @@ class JobInvocationsController < ApplicationController
 
   # refreshes the form
   def refresh
+    params.fetch(:job_invocation, {}).delete :description_format
     @composer = JobInvocationComposer.from_ui_params(params)
   end
 

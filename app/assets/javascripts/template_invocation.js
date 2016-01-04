@@ -130,6 +130,12 @@ function description_override(source) {
     regenerate_description(description_format);
 }
 
+function template_change(source) {
+    var id = $(source).val();
+    var template_fieldset = $(source).closest('form').find('fieldset#job_template_' + id);
+    regenerate_description(template_fieldset.find('#description'));
+}
+
 String.format = function (pattern, dict) {
   if(pattern == undefined) {
     return "";
