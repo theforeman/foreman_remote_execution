@@ -29,10 +29,11 @@
     <% hosts.each do |host| %>
       <% task = job_invocation.sub_task_for_host(host) %>
       <tr>
-        <%= render('host_name_td', :host => host, :task => task) %>
-        <%= render('host_provider_td', :host => host, :task => task) %>
-        <%= render('host_status_td', :host => host, :task => task) %>
-        <%= render('host_actions_td', :host => host, :task => task) %>
+        <% options = { :host => host, :task => task, :job_invocation => job_invocation } %>
+        <%= render 'host_name_td', options %>
+        <%= render 'host_provider_td', options %>
+        <%= render 'host_status_td', options %>
+        <%= render 'host_actions_td', options %>
       </tr>
     <% end %>
     </tbody>
