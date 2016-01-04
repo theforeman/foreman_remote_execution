@@ -1,6 +1,6 @@
 class AddHostIdToTemplateInvocation < ActiveRecord::Migration
   class FakeTemplateInvocation < ActiveRecord::Base
-    set_table_name 'template_invocations'
+    self.table_name = 'template_invocations'
   end
 
   def up

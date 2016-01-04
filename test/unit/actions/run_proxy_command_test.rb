@@ -50,7 +50,7 @@ module ForemanRemoteExecution
       describe 'when the task is finished' do
         before do
           task.state = 'stopped'
-          task.ended_at = timestamp + 1
+          task.ended_at = Time.at(timestamp + 1)
         end
 
         describe 'the task finished sucessfully' do

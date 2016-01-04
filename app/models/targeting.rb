@@ -38,8 +38,8 @@ class Targeting < ActiveRecord::Base
     raise ::Foreman::Exception, _('Cannot resolve hosts without a bookmark or search query') if bookmark.nil? && search_query.blank?
 
     self.search_query = bookmark.query if dynamic? && bookmark.present?
-    self.touch(:resolved_at)
     self.save!
+    self.touch(:resolved_at)
     self.hosts = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query) }
   end
 
