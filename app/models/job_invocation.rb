@@ -31,6 +31,7 @@ class JobInvocation < ActiveRecord::Base
   scoped_search :on => [:job_name], :complete_value => true
 
   scoped_search :in => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
+  scoped_search :in => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
   scoped_search :in => :task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
 
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
@@ -42,6 +43,8 @@ class JobInvocation < ActiveRecord::Base
 
   attr_accessor :start_before, :description_format
   attr_writer :start_at
+
+  delegate :start_at, :to => :task, :allow_nil => true
 
   def deep_clone
     JobInvocationComposer.from_job_invocation(self).job_invocation.tap do |invocation|
