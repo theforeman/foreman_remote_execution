@@ -31,6 +31,9 @@ module Api
         param :job_template, Hash, :required => true, :action_aware => true do
           param :name, String, :required => true, :desc => N_("Template name")
           param :job_name, String, :required => true, :desc => N_("Job name")
+          param :description_format, String, :required => false, :desc => N_('This template is used to generate the description. Input values ' +
+                                                                             'can be used using the syntax %{fqdn}. You may also include the ' +
+                                                                             'job name using %{job_name}.')
           param :template, String, :required => true
           param :provider_type, RemoteExecutionProvider.provider_names, :required => true, :desc => N_("Provider type")
           param :snippet, :bool, :allow_nil => true

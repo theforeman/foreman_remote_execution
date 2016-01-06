@@ -132,7 +132,7 @@ class JobInvocation < ActiveRecord::Base
     description_format.scan(key_re) { |key| input_hash[key.first] }
     self.description = description_format
     input_hash.each do |k, v|
-      self.description.gsub!(Regexp.new("%\{#{k}\}"), v)
+      self.description.gsub!(Regexp.new("%\{#{k}\}"), v || '')
     end
     self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
     save!
