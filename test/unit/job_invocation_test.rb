@@ -5,7 +5,7 @@ describe JobInvocation do
   let(:job_invocation) { FactoryGirl.build(:job_invocation) }
   let(:template) { FactoryGirl.create(:job_template, :with_input) }
 
-  context 'Search for job invocations' do
+  context 'search for job invocations' do
     before do
       job_invocation.save
     end
@@ -16,11 +16,11 @@ describe JobInvocation do
     end
   end
 
-  context 'Able to be created' do
+  context 'able to be created' do
     it { assert job_invocation.save }
   end
 
-  context 'Requires targeting' do
+  context 'requires targeting' do
     before { job_invocation.targeting = nil }
 
     it { refute_valid job_invocation }
@@ -76,12 +76,39 @@ describe JobInvocation do
   end
 
   context 'future execution' do
-
     it 'can report host count' do
       job_invocation.total_hosts_count.must_equal 'N/A'
       job_invocation.targeting.expects(:resolved_at).returns(Time.now)
       job_invocation.total_hosts_count.must_equal 0
     end
 
+    # task does not exist
+    specify { job_invocation.status.must_equal HostStatus::ExecutionStatus::QUEUED }
+    specify { job_invocation.status_label.must_equal HostStatus::ExecutionStatus::STATUS_NAMES[HostStatus::ExecutionStatus::QUEUED] }
+    specify { job_invocation.progress.must_equal 0 }
+  end
+
+  context 'with task' do
+    let(:task) { ForemanTasks::Task.new }
+    before { job_invocation.task = task }
+
+    context 'which is scheduled' do
+      before { task.state = 'scheduled' }
+
+      specify { job_invocation.status.must_equal HostStatus::ExecutionStatus::QUEUED }
+      specify { job_invocation.queued?.must_equal true }
+      specify { job_invocation.progress.must_equal 0 }
+    end
+
+    context 'with succeeded task' do
+      before do
+        task.state = 'stopped'
+        task.result = 'success'
+      end
+
+      specify { job_invocation.status.must_equal HostStatus::ExecutionStatus::OK }
+      specify { job_invocation.queued?.must_equal false }
+      specify { job_invocation.progress.must_equal 100 }
+    end
   end
 end
