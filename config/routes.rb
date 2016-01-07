@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post 'preview'
     end
     collection do
+      post 'preview'
       get 'revision'
       get 'auto_complete_search'
       get 'auto_complete_job_name'

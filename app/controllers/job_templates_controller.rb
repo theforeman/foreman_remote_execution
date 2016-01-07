@@ -11,6 +11,7 @@ class JobTemplatesController < ::TemplatesController
   end
 
   def preview
+    find_resource unless @template.present?
     base = Host.authorized(:view_hosts, Host)
     host = params[:preview_host_id].present? ? base.find(params[:preview_host_id]) : base.first
     @template.template = params[:template]
@@ -18,11 +19,19 @@ class JobTemplatesController < ::TemplatesController
     if (output = renderer.preview)
       render :text => output
     else
-      render :status => 406, :text => renderer.error_message
+      render :status => 406, :text => renderer.error_message + _(', note that you must save template input changes before you try to preview it.')
     end
   end
 
   private
+
+  def find_resource
+    if params[:id]
+      super
+    else
+      @template = resource_class.new(params[type_name_plural])
+    end
+  end
 
   def action_permission
     case params[:action]
