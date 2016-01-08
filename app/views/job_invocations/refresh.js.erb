@@ -1,2 +1,3 @@
 $('form#job_invocation_form').replaceWith("<%=j render :partial => 'form' %>");
 $('#job_invocation_form').find('a[rel="popover"]').popover();
+$('#job_invocation_form select:not(.without_select2)').select2({ allowClear: true });
