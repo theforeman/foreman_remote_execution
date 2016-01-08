@@ -3,7 +3,7 @@
   name: remote_execution_ssh_keys
 %>
 
-<% if @host.params['remote_execution_ssh_keys'].present? %>
+<% if !@host.params['remote_execution_ssh_keys'].blank? %>
 <% ssh_user = @host.params['remote_execution_ssh_user'] || 'root' %>
 <% ssh_path = "~#{ssh_user}/.ssh" %>
 
