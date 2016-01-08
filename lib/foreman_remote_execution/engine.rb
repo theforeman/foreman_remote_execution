@@ -13,7 +13,9 @@ module ForemanRemoteExecution
 
     # Add any db migrations
     initializer 'foreman_remote_execution.load_app_instance_data' do |app|
-      app.config.paths['db/migrate'] += ForemanRemoteExecution::Engine.paths['db/migrate'].existent
+      ForemanRemoteExecution::Engine.paths['db/migrate'].existent.each do |path|
+        app.config.paths['db/migrate'] << path
+      end
     end
 
     initializer "foreman_remote_execution.apipie" do

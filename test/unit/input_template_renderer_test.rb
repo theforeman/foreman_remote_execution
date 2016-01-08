@@ -288,7 +288,11 @@ describe InputTemplateRenderer do
           end
 
           context 'with existing variable implemented as smart variable' do
-            let(:puppet_class) { FactoryGirl.create(:puppetclass, :environments => [environment], :hosts => [renderer.host]) }
+            let(:puppet_class) do
+              puppetclass = FactoryGirl.create(:puppetclass, :environments => [environment])
+              puppetclass.update_attribute(:hosts, [renderer.host])
+              puppetclass
+            end
             let(:lookup_key) do
               lookup_key_factory = SETTINGS[:version].short == '1.9' ? :lookup_key : :variable_lookup_key
               FactoryGirl.create(lookup_key_factory,
@@ -371,7 +375,9 @@ describe InputTemplateRenderer do
 
           context 'with existing puppet parameter with matching override' do
             let(:puppet_class) do
-              FactoryGirl.create(:puppetclass, :environments => [environment], :hosts => [renderer.host], :name => 'nginx')
+              puppetclass = FactoryGirl.create(:puppetclass, :environments => [environment], :name => 'nginx')
+              puppetclass.update_attribute(:hosts, [renderer.host])
+              puppetclass
             end
             let(:lookup_key) do
               lookup_key_factory = SETTINGS[:version].short == '1.9' ? :lookup_key : :puppetclass_lookup_key

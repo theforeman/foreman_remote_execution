@@ -25,7 +25,7 @@ module ForemanRemoteExecution
     def invalid_objects_for_attribute(attribute)
       if self.respond_to?(attribute)
         invalid_object = self.public_send(attribute)
-        if invalid_object.is_a? Enumerable
+        if invalid_object.respond_to? :each_with_index
           invalid_object.select { |o| o.respond_to?(:invalid?) && o.invalid? }
         else
           [invalid_object]

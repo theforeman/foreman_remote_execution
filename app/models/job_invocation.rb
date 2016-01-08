@@ -2,9 +2,11 @@ class JobInvocation < ActiveRecord::Base
   include Authorizable
 
   include ForemanRemoteExecution::ErrorsFlattener
-  FLATTENED_ERRORS_MAPPING = { :template_invocations => lambda do |template_invocation|
-                                                          _("template") + " #{template_invocation.template.name}"
-                                                        end }
+  FLATTENED_ERRORS_MAPPING = {
+    :template_invocations => lambda do |template_invocation|
+      _("template") + " #{template_invocation.template.name}"
+    end
+  }
 
   belongs_to :targeting, :dependent => :destroy
   has_many :template_invocations, :inverse_of => :job_invocation, :dependent => :destroy
