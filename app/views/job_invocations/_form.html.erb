@@ -13,7 +13,23 @@
 
   <div class="tab-content">
     <div class="tab-pane active" id="primary">
-      <%= selectable_f f, :job_name, @composer.available_job_names %>
+      <%= selectable_f f, :job_category, @composer.available_job_categories, {}, :label => _('Job category') %>
+
+      <% selected_templates_per_provider = {} %>
+      <% @composer.displayed_provider_types.each do |provider_type| %>
+        <%= f.fields_for 'providers' do |providers_fields| %>
+          <%= providers_fields.fields_for provider_type do |provider_type_fields| %>
+            <% templates_for_provider = @composer.templates_for_provider(provider_type) %>
+            <% selected_templates_per_provider[provider_type] = @composer.preselected_template_for_provider(provider_type) || templates_for_provider.first %>
+
+            <%= selectable_f provider_type_fields, 'job_template_id', templates_for_provider.map { |t| [t.name, t.id] },
+                             { :selected => selected_templates_per_provider[provider_type].try(:id) },
+                             { :class => 'job_template_selector', :label => _('Job template'),
+                               :data => { :provider_type => provider_type }, :required => true }%>
+          <% end %>
+        <% end %>
+      <% end %>
+
 
       <%= fields_for @composer.targeting do |targeting_fields| %>
         <span id="bookmark_query_map">
@@ -45,31 +61,20 @@
             <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
             <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
           </div>
-	  <span class="help-inline"><%= popover(_('Explanation'),
-                                          _("Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>")) %></span>
+
+          <span class="help-inline"><%= popover(_('Explanation'),
+                                        _("Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>")) %>
+          </span>
         </div>
       <% end %>
 
       <% @composer.displayed_provider_types.each do |provider_type| %>
         <fieldset id="provider_<%= provider_type %>" class="provider_form">
-          <legend><%= _('Provider') + ': ' + provider_type %></legend>
           <%= f.fields_for 'providers' do |providers_fields| %>
             <%= providers_fields.fields_for provider_type do |provider_type_fields| %>
               <%= provider_type_fields.fields_for :job_templates do |job_templates_fields| %>
-                <% if @composer.needs_provider_type_selection? %>
-                  <%= radio_button_f provider_type_fields, 'job_template_id', :value => '', :text => _('Disable this provider'),
-                                     :class => 'job_template_selector', :checked => @composer.preselect_disabled_for_provider(provider_type) %>
-                  <span/>
-                <% end %>
                 <% @composer.templates_for_provider(provider_type).each do |job_template| %>
-                  <%= radio_button_f provider_type_fields, 'job_template_id',
-                                     :value => job_template.id,
-                                     :text => job_template.name,
-                                     :onchange => "regenerate_description($(this).parent().next('fieldset'));",
-                                     :class => 'job_template_selector',
-                                     :checked => @composer.job_template_ids.include?(job_template.id) || @composer.only_one_template_available? %>
-
-                  <fieldset id="job_template_<%= job_template.id %>" class="job_template_form <%= 'hidden' if !@composer.job_template_ids.include?(job_template.id) && !@composer.only_one_template_available? %>">
+                  <fieldset id="job_template_<%= job_template.id %>" class="job_template_form <%= 'hidden' if job_template != selected_templates_per_provider[provider_type] %>">
                     <%= job_templates_fields.fields_for job_template.id.to_s do |job_template_fields| %>
 
                       <%= job_template_fields.fields_for :input_values do |input_values_fields| %>
@@ -96,8 +101,11 @@
                                      :rows => 2,
                                      :onchange => "regenerate_description(this);",
                                      :id => "description_format",
-                                     :help_inline => popover(_('Explanation'), _('Description template determines the job name once it is submitted. Input values can become part of the name
-                         if they are specified using interpolation syntax, e.g. %{fqdn} where fqdn is the name of interpolated input.')) %>
+                                     :help_inline => popover(_('Explanation'),
+                                                             _('This template is used to generate the description.
+                                                               Input values can be used using the syntax %{package}.
+                                                               You may also include the job category and template
+                                                               name using %{job_category} and %{template_name}.')) %>
                     </div>
                   </fieldset>
                 <% end %>

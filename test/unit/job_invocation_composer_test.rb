@@ -21,11 +21,11 @@ describe JobInvocationComposer do
     User.current.save
   end
 
-  let(:trying_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
-  let(:trying_job_template_2) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_2', :name => 'trying2', :provider_type => 'Mcollective') }
-  let(:trying_job_template_3) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying3', :provider_type => 'SSH') }
-  let(:unauthorized_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'unauth1', :provider_type => 'SSH') }
-  let(:unauthorized_job_template_2) { FactoryGirl.create(:job_template, :job_name => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
+  let(:trying_job_template_1) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
+  let(:trying_job_template_2) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_2', :name => 'trying2', :provider_type => 'Mcollective') }
+  let(:trying_job_template_3) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying3', :provider_type => 'SSH') }
+  let(:unauthorized_job_template_1) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'unauth1', :provider_type => 'SSH') }
+  let(:unauthorized_job_template_2) { FactoryGirl.create(:job_template, :job_category => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
 
 
   let(:input1) { FactoryGirl.create(:template_input, :template => trying_job_template_1, :input_type => 'user') }
@@ -59,30 +59,30 @@ describe JobInvocationComposer do
         unauthorized_job_template_2
       end
 
-      describe '#available_templates_for(job_name)' do
+      describe '#available_templates_for(job_category)' do
         it 'find the templates only for a given job name' do
-          results = composer.available_templates_for(trying_job_template_1.job_name)
+          results = composer.available_templates_for(trying_job_template_1.job_category)
           results.must_include trying_job_template_1
           results.wont_include trying_job_template_2
         end
 
         it 'it respects view permissions' do
-          results = composer.available_templates_for(trying_job_template_1.job_name)
+          results = composer.available_templates_for(trying_job_template_1.job_category)
           results.wont_include unauthorized_job_template_1
         end
       end
 
-      describe '#available_job_names' do
-        let(:job_names) { composer.available_job_names }
+      describe '#available_job_categories' do
+        let(:job_categories) { composer.available_job_categories }
 
         it 'find only job names that user is granted to view' do
-          job_names.must_include trying_job_template_1.job_name
-          job_names.must_include trying_job_template_2.job_name
-          job_names.wont_include unauthorized_job_template_2.job_name
+          job_categories.must_include trying_job_template_1.job_category
+          job_categories.must_include trying_job_template_2.job_category
+          job_categories.wont_include unauthorized_job_template_2.job_category
         end
 
         it 'every job name is listed just once' do
-          job_names.uniq.must_equal job_names
+          job_categories.uniq.must_equal job_categories
         end
       end
 
@@ -90,7 +90,7 @@ describe JobInvocationComposer do
         let(:provider_types) { composer.available_provider_types }
 
         it 'finds only providers which user is granted to view' do
-          composer.job_invocation.job_name = 'trying_job_template_1'
+          composer.job_invocation.job_category = 'trying_job_template_1'
           provider_types.must_include 'SSH'
           provider_types.wont_include 'Mcollective'
           provider_types.wont_include 'Ansible'
@@ -140,37 +140,13 @@ describe JobInvocationComposer do
         end
       end
 
-      describe '#only_one_template_available?' do
-        context 'composer needs provider type selection' do
-          before { composer.stubs(:needs_provider_type_selection? => true) }
-
-          it 'returns false because it means we have at least two providers so we need to be able to disable it per provider' do
-            refute composer.only_one_template_available?
-          end
-        end
-
-        context 'composer does not need provider type selection' do
-          before { composer.stubs(:needs_provider_type_selection? => false) }
-
-          it 'returns true if there is only one template for the provider' do
-            composer.stubs(:templates_for_provider => [ trying_job_template_1 ])
-            assert composer.only_one_template_available?
-          end
-
-          it 'returns false if there is more than one template for the provider' do
-            composer.stubs(:templates_for_provider => [ trying_job_template_1, trying_job_template_3 ])
-            refute composer.only_one_template_available?
-          end
-        end
-      end
-
       describe '#displayed_provider_types' do
         # nothing to test yet
       end
 
       describe '#templates_for_provider(provider_type)' do
         it 'returns all templates for a given provider respecting template permissions' do
-          trying_job_template_4 = FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Ansible')
+          trying_job_template_4 = FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Ansible')
           result = composer.templates_for_provider('SSH')
           result.must_include trying_job_template_1
           result.must_include trying_job_template_3
@@ -191,8 +167,8 @@ describe JobInvocationComposer do
         end
 
         context 'extra unavailable templates id were selected' do
-          let(:unauthorized) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'unauth3', :provider_type => 'Ansible') }
-          let(:mcollective_authorized) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Mcollective') }
+          let(:unauthorized) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'unauth3', :provider_type => 'Ansible') }
+          let(:mcollective_authorized) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Mcollective') }
           let(:ssh_params) { { :job_template_id => trying_job_template_1.id.to_s } }
           let(:ansible_params) { { :job_template_id => unauthorized.id.to_s } }
           let(:mcollective_params) { { :job_template_id => mcollective_authorized.id.to_s } }
@@ -212,10 +188,10 @@ describe JobInvocationComposer do
         end
       end
 
-      describe '#preselect_disabled_for_provider(provider_type)' do
+      describe '#preselected_template_for_provider(provider_type)' do
         context 'none template was selected through params' do
-          it 'returns true since nothing was selected and disabled is default' do
-            assert composer.preselect_disabled_for_provider('SSH')
+          it 'returns nil' do
+            composer.preselected_template_for_provider('SSH').must_be_nil
           end
         end
 
@@ -223,8 +199,8 @@ describe JobInvocationComposer do
           let(:ssh_params) { { :job_template_id => trying_job_template_1.id.to_s } }
           let(:params) { { :job_invocation => providers_params }.with_indifferent_access }
 
-          it 'returns false because available template was selected' do
-            refute composer.preselect_disabled_for_provider('SSH')
+          it 'returns the selected template because it is available for provider' do
+            composer.preselected_template_for_provider('SSH').must_equal trying_job_template_1
           end
         end
       end
@@ -477,11 +453,11 @@ describe JobInvocationComposer do
         end
       end
 
-      describe '#job_name' do
-        it 'triggers job_name on job_invocation' do
+      describe '#job_category' do
+        it 'triggers job_category on job_invocation' do
           composer
-          composer.job_invocation.expects(:job_name)
-          composer.job_name
+          composer.job_invocation.expects(:job_category)
+          composer.job_category
         end
       end
 
@@ -522,7 +498,7 @@ describe JobInvocationComposer do
         end
 
         it 'sets the same job name' do
-          new_composer.job_name.must_equal existing.job_name
+          new_composer.job_category.must_equal existing.job_category
         end
 
         it 'builds new targeting object which keeps search query' do
@@ -553,7 +529,7 @@ describe JobInvocationComposer do
       end
 
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :targeting_type => 'static_query',
           :bookmark_id => bookmark.id }
@@ -569,7 +545,7 @@ describe JobInvocationComposer do
 
     context 'with targeting from search query' do
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :targeting_type => 'static_query',
           :search_query => 'some hosts' }
@@ -584,7 +560,7 @@ describe JobInvocationComposer do
 
     context 'with with inputs' do
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :targeting_type => 'static_query',
           :search_query => 'some hosts',
@@ -599,7 +575,7 @@ describe JobInvocationComposer do
 
     context 'with effective user' do
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :effective_user => 'invocation user',
           :targeting_type => 'static_query',
@@ -617,7 +593,7 @@ describe JobInvocationComposer do
 
     context 'with invalid targeting' do
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :search_query => 'some hosts',
           :inputs => {input1.name => 'some_value'}}
@@ -632,7 +608,7 @@ describe JobInvocationComposer do
 
     context 'with invalid bookmark and search query' do
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :targeting_type => 'static_query',
           :search_query => 'some hosts',
@@ -649,7 +625,7 @@ describe JobInvocationComposer do
 
     context 'with invalid inputs' do
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :targeting_type => 'static_query',
           :search_query => 'some hosts',
@@ -666,7 +642,7 @@ describe JobInvocationComposer do
 
     context 'with empty values for non-required inputs' do
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :targeting_type => 'static_query',
           :search_query => 'some hosts',
@@ -681,7 +657,7 @@ describe JobInvocationComposer do
 
     context 'with missing required inputs' do
       let(:params) do
-        { :job_name => trying_job_template_1.job_name,
+        { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :targeting_type => 'static_query',
           :search_query => 'some hosts',

@@ -10,7 +10,7 @@ module Actions
       end
 
       def plan(job_invocation, host, template_invocation, proxy)
-        action_subject(host, :job_name => job_invocation.job_name, :description => job_invocation.description)
+        action_subject(host, :job_category => job_invocation.job_category, :description => job_invocation.description)
 
         template_invocation.update_attribute :host_id, host.id
         link!(job_invocation)
@@ -57,9 +57,9 @@ module Actions
       end
 
       def humanized_name
-        _('%{description} on %{host}') % { :job_name => input[:job_name],
+        _('%{description} on %{host}') % { :job_category => input[:job_category],
                                            :host => input[:host][:name],
-                                           :description => input[:description].try(:capitalize) || input[:job_name] }
+                                           :description => input[:description].try(:capitalize) || input[:job_category] }
       end
 
       def find_ip_or_hostname(host)

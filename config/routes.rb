@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       post 'preview'
       get 'revision'
       get 'auto_complete_search'
-      get 'auto_complete_job_name'
+      get 'auto_complete_job_category'
     end
   end
 

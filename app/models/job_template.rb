@@ -1,6 +1,6 @@
 class JobTemplate < ::Template
 
-  attr_accessible :job_name, :provider_type, :description_format, :effective_user_attributes
+  attr_accessible :job_category, :provider_type, :description_format, :effective_user_attributes
 
   include Authorizable
   extend FriendlyId
@@ -15,7 +15,7 @@ class JobTemplate < ::Template
   # tested with scoped_search 3.2.0
   include Taxonomix
   scoped_search :on => :name, :complete_value => true, :default_order => true
-  scoped_search :on => :job_name, :complete_value => true
+  scoped_search :on => :job_category, :complete_value => true
   scoped_search :on => :locked, :complete_value => {:true => true, :false => false}
   scoped_search :on => :snippet, :complete_value => {:true => true, :false => false}
   scoped_search :on => :provider_type, :complete_value => true
@@ -29,7 +29,7 @@ class JobTemplate < ::Template
                   end
                 }
 
-  validates :job_name, :presence => true, :unless => ->(job_template) { job_template.snippet }
+  validates :job_category, :presence => true, :unless => ->(job_template) { job_template.snippet }
   validates :provider_type, :presence => true
   validate :provider_type_whitelist
   has_one :effective_user, :class_name => 'JobTemplateEffectiveUser', :foreign_key => 'job_template_id', :dependent => :destroy
@@ -90,7 +90,7 @@ class JobTemplate < ::Template
 
   def generate_description_format
     if description_format.blank?
-      generated_description = '%{job_name}'
+      generated_description = '%{job_category}'
       unless template_inputs.empty?
         inputs = template_inputs.map(&:name).map { |name| %Q(#{name}="%{#{name}}") }.join(' ')
         generated_description << " with inputs #{inputs}"

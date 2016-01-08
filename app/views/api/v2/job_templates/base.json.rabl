@@ -1,3 +1,3 @@
 object @job_template
 
-attributes :id, :name, :job_name, :provider_type, :snippet, :description_format
+attributes :id, :name, :job_category, :provider_type, :snippet, :description_format

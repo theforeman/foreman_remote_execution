@@ -11,7 +11,7 @@ describe JobInvocation do
     end
 
     it 'is able to perform search through job invocations' do
-      found_jobs = JobInvocation.search_for(%{job_name = "#{job_invocation.job_name}"}).paginate(:page => 1).with_task.order('job_invocations.id DESC')
+      found_jobs = JobInvocation.search_for(%{job_category = "#{job_invocation.job_category}"}).paginate(:page => 1).with_task.order('job_invocations.id DESC')
       found_jobs.must_equal [job_invocation]
     end
   end
@@ -50,16 +50,16 @@ describe JobInvocation do
     describe 'descriptions' do
       it 'generates description from input values' do
         job_invocation.expects(:save!)
-        job_invocation.description_format = '%{job_name} - %{foo}'
+        job_invocation.description_format = '%{job_category} - %{foo}'
         job_invocation.generate_description!
-        job_invocation.description.must_equal "#{job_invocation.job_name} - #{@input_value.value}"
+        job_invocation.description.must_equal "#{job_invocation.job_category} - #{@input_value.value}"
       end
 
       it 'handles missing keys correctly' do
         job_invocation.expects(:save!)
-        job_invocation.description_format = '%{job_name} - %{missing_key}'
+        job_invocation.description_format = '%{job_category} - %{missing_key}'
         job_invocation.generate_description!
-        job_invocation.description.must_equal "#{job_invocation.job_name} - %{missing_key}"
+        job_invocation.description.must_equal "#{job_invocation.job_category} - %{missing_key}"
       end
 
       it 'truncates generated description to 255 characters' do
@@ -67,8 +67,8 @@ describe JobInvocation do
         expected_result = 'a' * column_limit
         JobInvocation.columns_hash['description'].expects(:limit).returns(column_limit)
         job_invocation.expects(:save!)
-        job_invocation.description_format = '%{job_name}'
-        job_invocation.job_name = 'a' * 1000
+        job_invocation.description_format = '%{job_category}'
+        job_invocation.job_category = 'a' * 1000
         job_invocation.generate_description!
         job_invocation.description.must_equal expected_result
       end

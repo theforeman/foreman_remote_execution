@@ -16,7 +16,7 @@ module Actions
         task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
         action_subject(job_invocation) unless locked
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !locked
-        input.update(:job_name => job_invocation.job_name)
+        input.update(:job_category => job_invocation.job_category)
         plan_self(:job_invocation_id => job_invocation.id)
       end
 

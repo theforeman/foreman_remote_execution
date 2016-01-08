@@ -7,7 +7,7 @@ class JobInvocationComposer
     end
 
     def params
-      { :job_name => job_invocation_base[:job_name],
+      { :job_category => job_invocation_base[:job_category],
         :targeting => ui_params.fetch(:targeting, {}).merge(:user_id => User.current.id),
         :triggering => ui_params.fetch(:triggering, {}),
         :host_ids => ui_params[:host_ids],
@@ -59,15 +59,15 @@ class JobInvocationComposer
     end
 
     def params
-      { :job_name => job_name,
+      { :job_category => job_category,
         :targeting => targeting_params,
         :triggering => {},
         :description_format => api_params[:description_format] || template_with_default.generate_description_format,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
-    def job_name
-      api_params[:job_name]
+    def job_category
+      api_params[:job_category]
     end
 
     def targeting_params
@@ -91,10 +91,10 @@ class JobInvocationComposer
 
     def template_with_default
       template = nil
-      templates = JobTemplate.authorized(:view_job_templates).where(:job_name => job_name)
+      templates = JobTemplate.authorized(:view_job_templates).where(:job_category => job_category)
       template = templates.find(api_params[:job_template_id]) if api_params[:job_template_id]
       template ||= templates.first if templates.count == 1
-      raise ::Foreman::Exception, _('Cannot determine the template to be used of job %s') % job_name unless template
+      raise ::Foreman::Exception, _('Cannot determine the template to be used of job %s') % job_category unless template
       return template
     end
 
@@ -108,7 +108,7 @@ class JobInvocationComposer
     end
 
     def params
-      { :job_name => job_invocation.job_name,
+      { :job_category => job_invocation.job_category,
         :targeting => targeting_params,
         :triggering => triggering_params,
         :description_format => job_invocation.description_format,
@@ -136,7 +136,7 @@ class JobInvocationComposer
   end
 
   attr_accessor :params, :job_invocation, :host_ids, :search_query
-  delegate :job_name, :template_invocations, :targeting, :triggering, :to => :job_invocation
+  delegate :job_category, :template_invocations, :targeting, :triggering, :to => :job_invocation
 
   def initialize(params, set_defaults = false)
     @params = params
@@ -162,8 +162,8 @@ class JobInvocationComposer
   end
 
   def compose
-    job_invocation.job_name = validate_job_name(params[:job_name])
-    job_invocation.job_name ||= available_job_names.first if @set_defaults
+    job_invocation.job_category = validate_job_category(params[:job_category])
+    job_invocation.job_category ||= available_job_categories.first if @set_defaults
     job_invocation.targeting = build_targeting
     job_invocation.triggering = build_triggering
     job_invocation.template_invocations = build_template_invocations
@@ -189,31 +189,27 @@ class JobInvocationComposer
   end
 
   def available_templates
-    JobTemplate.authorized(:view_job_templates)
+    JobTemplate.authorized(:view_job_templates).where(:snippet => false)
   end
 
-  def available_templates_for(job_name)
-    available_templates.where(:job_name => job_name)
+  def available_templates_for(job_category)
+    available_templates.where(:job_category => job_category)
   end
 
-  def available_job_names
-    available_templates.reorder(:job_name).group(:job_name).pluck(:job_name)
+  def available_job_categories
+    available_templates.reorder(:job_category).group(:job_category).pluck(:job_category)
   end
 
   def available_provider_types
-    available_templates_for(job_name).reorder(:provider_type).group(:provider_type).pluck(:provider_type)
+    available_templates_for(job_category).reorder(:provider_type).group(:provider_type).pluck(:provider_type)
   end
 
   def available_template_inputs
-    TemplateInput.where(:template_id => job_template_ids.empty? ? available_templates_for(job_name).map(&:id) : job_template_ids)
+    TemplateInput.where(:template_id => job_template_ids.empty? ? available_templates_for(job_category).map(&:id) : job_template_ids)
   end
 
   def needs_provider_type_selection?
     available_provider_types.size > 1
-  end
-
-  def only_one_template_available?
-    !needs_provider_type_selection? && templates_for_provider(available_provider_types.first).size == 1
   end
 
   def displayed_provider_types
@@ -222,15 +218,15 @@ class JobInvocationComposer
   end
 
   def templates_for_provider(provider_type)
-    available_templates_for(job_name).select { |t| t.provider_type == provider_type }
+    available_templates_for(job_category).select { |t| t.provider_type == provider_type }
   end
 
   def selected_job_templates
-    available_templates_for(job_name).where(:id => job_template_ids)
+    available_templates_for(job_category).where(:id => job_template_ids)
   end
 
-  def preselect_disabled_for_provider(provider_type)
-    (templates_for_provider(provider_type) & selected_job_templates).empty?
+  def preselected_template_for_provider(provider_type)
+    (templates_for_provider(provider_type) & selected_job_templates).first
   end
 
   def displayed_search_query
@@ -355,13 +351,13 @@ class JobInvocationComposer
   end
 
   # returns nil if user can't see any job template with such name
-  # existing job_name string otherwise
-  def validate_job_name(name)
-    available_job_names.include?(name) ? name : nil
+  # existing job_category string otherwise
+  def validate_job_category(name)
+    available_job_categories.include?(name) ? name : nil
   end
 
   def validate_job_template_ids(ids)
-    available_templates_for(job_name).where(:id => ids).pluck(:id)
+    available_templates_for(job_category).where(:id => ids).pluck(:id)
   end
 
   def validate_host_ids(ids)
