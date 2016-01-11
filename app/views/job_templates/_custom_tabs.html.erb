@@ -9,8 +9,9 @@
   <% end %>
 
   <%= text_f f, :description_format,
-             :help_inline => popover(_('Explanation'), _('Description template determines the job name once it is submitted. Input values can become part of the name
-                         if they are specified using interpolation syntax, e.g. %{fqdn} where fqdn is the name of interpolated input.')) %>
+             :help_inline => popover(_('Explanation'), _('This template is used to generate the description.
+                                                          Input values can be used using the syntax %{fqdn}.
+                                                          You may also include the job name using %{job_name}.')) %>
 
   <%= select_f f, :provider_type, providers_options, :first, :last %>
 
@@ -37,7 +38,6 @@
   </div>
 
 </div>
-
 
 <div class="tab-pane" id="template_type">
   <%= checkbox_f f, :snippet, :onchange => "snippet_changed(this)", :label=>_('Snippet'), :disabled => @template.locked? %>
