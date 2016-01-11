@@ -31,13 +31,13 @@ module RemoteExecutionHelper
 
   def job_invocation_status(invocation)
     if invocation.task.blank?
-      _('Job not started yet 0%')
+      _('not started yet')
     elsif invocation.task.state == 'scheduled'
-      _('Job set to execute at %s') % invocation.task.start_at
+      _('scheduled in future')
     elsif invocation.task.state == 'stopped' && invocation.task.result == 'error'
       invocation.task.execution_plan.errors.map(&:message).join("\n")
     else
-      label = invocation.task.pending ? _('Running') : _('Finished')
+      label = invocation.task.pending ? _('running') : _('finished')
       label + ' ' + (invocation.task.progress * 100).to_i.to_s + '%'
     end
   end
@@ -185,11 +185,11 @@ module RemoteExecutionHelper
     end
   end
 
-  def time_ago(time)
+  def time_in_words_span(time)
     if time.nil?
-      _('-')
+      _('N/A')
     else
-      content_tag :span, _("%s ago") % time_ago_in_words(time),
+      content_tag :span, (time > Time.now ? _('in %s') : _("%s ago")) % time_ago_in_words(time),
                   { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
     end
   end
