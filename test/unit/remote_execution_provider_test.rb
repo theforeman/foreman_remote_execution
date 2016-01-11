@@ -5,10 +5,10 @@ describe RemoteExecutionProvider do
     let(:providers) { RemoteExecutionProvider.providers }
     it { providers.must_be_kind_of HashWithIndifferentAccess }
     it 'makes providers accessible using symbol' do
-      providers[:Ssh].must_equal SSHExecutionProvider
+      providers[:SSH].must_equal SSHExecutionProvider
     end
     it 'makes providers accessible using string' do
-      providers['Ssh'].must_equal SSHExecutionProvider
+      providers['SSH'].must_equal SSHExecutionProvider
     end
   end
 
@@ -24,11 +24,11 @@ describe RemoteExecutionProvider do
 
   describe '.provider_for' do
     it 'accepts symbols' do
-      RemoteExecutionProvider.provider_for(:Ssh).must_equal SSHExecutionProvider
+      RemoteExecutionProvider.provider_for(:SSH).must_equal SSHExecutionProvider
     end
 
     it 'accepts strings' do
-      RemoteExecutionProvider.provider_for('Ssh').must_equal SSHExecutionProvider
+      RemoteExecutionProvider.provider_for('SSH').must_equal SSHExecutionProvider
     end
   end
 
@@ -44,7 +44,7 @@ describe RemoteExecutionProvider do
     context 'provider is registetered under :custom symbol' do
       before { RemoteExecutionProvider.register(:Custom, String) }
 
-      it { provider_names.must_include 'Ssh' }
+      it { provider_names.must_include 'SSH' }
       it { provider_names.must_include 'Custom' }
     end
   end

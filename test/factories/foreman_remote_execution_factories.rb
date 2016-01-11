@@ -4,7 +4,7 @@ FactoryGirl.define do
     f.sequence(:name) { |n| "Job template #{n}" }
     sequence(:job_name) { |n| "job name #{n}" }
     f.template 'id'
-    f.provider_type 'Ssh'
+    f.provider_type 'SSH'
 
     trait :with_input do
       after(:build) do |template, evaluator|
@@ -57,7 +57,7 @@ end
 FactoryGirl.modify do
   factory :feature do
     trait :ssh do
-      name 'Ssh'
+      name 'SSH'
     end
   end
 

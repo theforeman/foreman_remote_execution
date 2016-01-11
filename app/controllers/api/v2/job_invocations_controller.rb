@@ -29,7 +29,7 @@ module Api
           param :job_template_id, String, :required => false, :desc => N_("If using a specific template, the id of that template.")
           param :targeting_type, String, :required => true, :desc => N_("Invocation type, one of %s") % Targeting::TYPES
           param :inputs, Hash, :required => false, :desc => N_("Inputs to use")
-          param :ssh, Hash, :desc => N_("Ssh provider specific options") do
+          param :ssh, Hash, :desc => N_("SSH provider specific options") do
             param :effective_user, String,
                   :required => false,
                   :desc => N_("What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting.")

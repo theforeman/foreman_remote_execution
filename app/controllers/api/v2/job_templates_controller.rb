@@ -36,7 +36,7 @@ module Api
           param :snippet, :bool, :allow_nil => true
           param :audit_comment, String, :allow_nil => true
           param :locked, :bool, :desc => N_("Whether or not the template is locked for editing")
-          param :ssh, Hash, :desc => N_("Ssh provider specific options") do
+          param :ssh, Hash, :desc => N_("SSH provider specific options") do
             param :effective_user, Hash, :desc => N_("Effective user options") do
               param :value, String, :desc => N_("What user should be used to run the script (using sudo-like mechanisms)"), :allowed_nil => true
               param :overridable, :bool, :desc => N_("Whether it should be allowed to override the effective user from the invocation form.")

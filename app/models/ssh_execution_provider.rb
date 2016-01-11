@@ -10,7 +10,7 @@ class SSHExecutionProvider < RemoteExecutionProvider
     end
 
     def humanized_name
-      _("Ssh")
+      _("SSH")
     end
 
     def supports_effective_user?

@@ -11,7 +11,7 @@ module ForemanRemoteExecution
     end
 
     def update_pubkey
-      return unless has_feature?('Ssh')
+      return unless has_feature?('SSH')
       key = ::ProxyAPI::RemoteExecutionSSH.new(:url => url).pubkey
       self.update_attribute(:pubkey, key) if key
       key

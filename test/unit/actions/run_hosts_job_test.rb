@@ -6,7 +6,7 @@ module ForemanRemoteExecution
     include Dynflow::Testing
 
     let(:host) { FactoryGirl.create(:host, :with_execution) }
-    let(:proxy) { host.remote_execution_proxies('Ssh')[:subnet].first }
+    let(:proxy) { host.remote_execution_proxies('SSH')[:subnet].first }
     let(:targeting) { FactoryGirl.create(:targeting, :search_query => "name = #{host.name}", :user => User.current) }
     let(:job_invocation) do
       FactoryGirl.build(:job_invocation, :with_template).tap do |invocation|

@@ -5,7 +5,7 @@ module ForemanRemoteExecution
     include Dynflow::Testing
 
     let(:host) { FactoryGirl.build(:host, :with_execution) }
-    let(:proxy) { host.remote_execution_proxies('Ssh')[:subnet].first }
+    let(:proxy) { host.remote_execution_proxies('SSH')[:subnet].first }
     let(:hostname) { 'myhost.example.com' }
     let(:script) { 'ping -c 5 redhat.com' }
     let(:connection_options) { { 'retry_interval' => 15, 'retry_count' => 4, 'timeout' => 60 } }
