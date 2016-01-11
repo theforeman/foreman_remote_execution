@@ -49,6 +49,27 @@ module Api
 
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal attrs[:description_format], invocation['description']
+      end
+
+      test 'should create with recurrence' do
+        attrs = { :job_category => @template.job_category, :name => 'RandomName',
+                  :job_template_id => @template.id,:targeting_type => 'static_query',
+                  :search_query => 'foobar', :recurrence => {:cron_line => '5 * * * *'}}
+
+        post :create, :job_invocation => attrs
+        invocation = ActiveSupport::JSON.decode(@response.body)
+        assert_equal invocation['mode'], 'recurring'
+        assert_response :success
+      end
+
+      test 'should create with schedule' do
+        attrs = { :job_category => @template.job_category, :name => 'RandomName',
+                  :job_template_id => @template.id,:targeting_type => 'static_query',
+                  :search_query => 'foobar', :scheduling => {:start_at => DateTime.now.to_s}}
+
+        post :create, :job_invocation => attrs
+        invocation = ActiveSupport::JSON.decode(@response.body)
+        assert_equal invocation['mode'], 'future'
         assert_response :success
       end
     end

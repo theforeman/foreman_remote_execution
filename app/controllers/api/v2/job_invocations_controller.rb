@@ -34,6 +34,18 @@ module Api
                   :required => false,
                   :desc => N_('What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting.')
           end
+
+          param :recurrence, Hash, :desc => N_('Create a recurring job') do
+            param :cron_line, String, :required => false, :desc => N_('How often the job should occur, in the cron format')
+            param :max_iteration, :number, :required => false, :desc => N_('Repeat a maximum of N times')
+            param :end_time, DateTime, :required => false, :desc => N_('Perform no more executions after this time')
+          end
+
+          param :scheduling, Hash, :desc => N_('Schedule the job to start at a later time') do
+            param :start_at, DateTime, :required => false, :desc => N_('Schedule the job for a future time')
+            param :start_before, DateTime, :required => false, :desc => N_('Indicates that the action should be cancelled if it cannot be started before this time.')
+          end
+
           param :bookmark_id, Integer, :required => false
           param :search_query, Integer, :required => false
           param :description_format, String, :required => false, :desc => N_('Override the description format from the template for this invocation only')
