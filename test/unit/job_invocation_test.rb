@@ -61,6 +61,17 @@ describe JobInvocation do
         job_invocation.generate_description!
         job_invocation.description.must_equal "#{job_invocation.job_name} - %{missing_key}"
       end
+
+      it 'truncates generated description to 255 characters' do
+        column_limit = 255
+        expected_result = 'a' * column_limit
+        JobInvocation.columns_hash['description'].expects(:limit).returns(column_limit)
+        job_invocation.expects(:save!)
+        job_invocation.description_format = '%{job_name}'
+        job_invocation.job_name = 'a' * 1000
+        job_invocation.generate_description!
+        job_invocation.description.must_equal expected_result
+      end
     end
   end
 

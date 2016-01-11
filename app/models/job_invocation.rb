@@ -46,6 +46,8 @@ class JobInvocation < ActiveRecord::Base
 
   default_scope -> { order('job_invocations.id DESC') }
 
+  validates_lengths_from_database :only => [:description]
+
   attr_accessor :start_before, :description_format
   attr_writer :start_at
 
@@ -129,6 +131,7 @@ class JobInvocation < ActiveRecord::Base
     input_hash.each do |k, v|
       self.description.gsub!(Regexp.new("%\{#{k}\}"), v)
     end
+    self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
     save!
   end
 end
