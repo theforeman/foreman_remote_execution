@@ -36,6 +36,7 @@ module Api
           end
           param :bookmark_id, Integer, :required => false
           param :search_query, Integer, :required => false
+          param :description_format, String, :required => false, :desc => N_("Override the description format from the template for this invocation only")
         end
       end
 
@@ -44,8 +45,9 @@ module Api
       def create
         composer = JobInvocationComposer.from_api_params(job_invocation_params)
         composer.save!
-        ForemanTasks.async_task(::Actions::RemoteExecution::RunHostsJob, composer.job_invocation)
         @job_invocation = composer.job_invocation
+        @job_invocation.generate_description! if @job_invocation.description.blank?
+        composer.triggering.trigger(::Actions::RemoteExecution::RunHostsJob, @job_invocation)
         process_response @job_invocation
       end
 
