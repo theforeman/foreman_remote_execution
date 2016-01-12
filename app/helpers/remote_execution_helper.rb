@@ -79,7 +79,7 @@ module RemoteExecutionHelper
 
   def template_invocation_actions(task, host, job_invocation)
     [
-      display_link_if_authorized(_('View host'), hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts)),
+      display_link_if_authorized(_('Host detail'), hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts)),
       display_link_if_authorized(_('Rerun on %s') % host.name, hash_for_rerun_job_invocation_path(:id => job_invocation, :host_ids => [ host.id ])),
     ]
   end
