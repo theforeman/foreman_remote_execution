@@ -59,7 +59,7 @@ describe JobTemplate do
       kind: job_template
       name: Service Restart
       job_name: Service Restart
-      provider_type: Ssh
+      provider_type: SSH
       template_inputs:
       - name: service_name
         input_type: user

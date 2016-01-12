@@ -21,10 +21,10 @@ describe JobInvocationComposer do
     User.current.save
   end
 
-  let(:trying_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying1', :provider_type => 'Ssh') }
+  let(:trying_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
   let(:trying_job_template_2) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_2', :name => 'trying2', :provider_type => 'Mcollective') }
-  let(:trying_job_template_3) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying3', :provider_type => 'Ssh') }
-  let(:unauthorized_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'unauth1', :provider_type => 'Ssh') }
+  let(:trying_job_template_3) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying3', :provider_type => 'SSH') }
+  let(:unauthorized_job_template_1) { FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'unauth1', :provider_type => 'SSH') }
   let(:unauthorized_job_template_2) { FactoryGirl.create(:job_template, :job_name => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
 
 
@@ -91,7 +91,7 @@ describe JobInvocationComposer do
 
         it 'finds only providers which user is granted to view' do
           composer.job_invocation.job_name = 'trying_job_template_1'
-          provider_types.must_include 'Ssh'
+          provider_types.must_include 'SSH'
           provider_types.wont_include 'Mcollective'
           provider_types.wont_include 'Ansible'
         end
@@ -130,12 +130,12 @@ describe JobInvocationComposer do
 
       describe '#needs_provider_type_selection?' do
         it 'returns true if there are more than one providers respecting authorization' do
-          composer.stubs(:available_provider_types => [ 'Ssh', 'Ansible' ])
+          composer.stubs(:available_provider_types => [ 'SSH', 'Ansible' ])
           assert composer.needs_provider_type_selection?
         end
 
         it 'returns false if there is one provider' do
-          composer.stubs(:available_provider_types => [ 'Ssh' ])
+          composer.stubs(:available_provider_types => [ 'SSH' ])
           refute composer.needs_provider_type_selection?
         end
       end
@@ -171,7 +171,7 @@ describe JobInvocationComposer do
       describe '#templates_for_provider(provider_type)' do
         it 'returns all templates for a given provider respecting template permissions' do
           trying_job_template_4 = FactoryGirl.create(:job_template, :job_name => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Ansible')
-          result = composer.templates_for_provider('Ssh')
+          result = composer.templates_for_provider('SSH')
           result.must_include trying_job_template_1
           result.must_include trying_job_template_3
           result.wont_include unauthorized_job_template_1
@@ -215,7 +215,7 @@ describe JobInvocationComposer do
       describe '#preselect_disabled_for_provider(provider_type)' do
         context 'none template was selected through params' do
           it 'returns true since nothing was selected and disabled is default' do
-            assert composer.preselect_disabled_for_provider('Ssh')
+            assert composer.preselect_disabled_for_provider('SSH')
           end
         end
 
@@ -224,7 +224,7 @@ describe JobInvocationComposer do
           let(:params) { { :job_invocation => providers_params }.with_indifferent_access }
 
           it 'returns false because available template was selected' do
-            refute composer.preselect_disabled_for_provider('Ssh')
+            refute composer.preselect_disabled_for_provider('SSH')
           end
         end
       end
