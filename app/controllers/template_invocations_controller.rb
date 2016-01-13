@@ -6,9 +6,9 @@ class TemplateInvocationsController < ApplicationController
   end
 
   def show
-    @template_invocation_task = ForemanTasks::Task.find(params[:id])
-    @template_invocation = @template_invocation_task.locks.where(:resource_type => 'TemplateInvocation').first.try(:resource)
-    @host = @template_invocation_task.locks.where(:resource_type => 'Host::Managed').first.try(:resource)
+    @template_invocation = TemplateInvocation.find(params[:id])
+    @template_invocation_task = @template_invocation.run_host_job_task
+    @host = @template_invocation.host
     @auto_refresh = @template_invocation_task.pending?
     @since = params[:since].to_f if params[:since].present?
     @line_sets = @template_invocation_task.main_action.live_output

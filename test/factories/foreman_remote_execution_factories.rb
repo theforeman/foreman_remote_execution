@@ -34,7 +34,7 @@ FactoryGirl.define do
     f.description_format '%{job_category}'
     trait :with_template do
       after(:build) do |invocation, evaluator|
-        invocation.template_invocations << FactoryGirl.build(:template_invocation)
+        invocation.pattern_template_invocations << FactoryGirl.build(:template_invocation)
       end
 
     end

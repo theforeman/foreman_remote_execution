@@ -19,7 +19,7 @@
   <%= preview_box(@template_invocation, @host) %>
 </div>
 
-<div class="terminal" data-refresh-url="<%= template_invocation_path(@template_invocation_task) %>">
+<div class="terminal" data-refresh-url="<%= template_invocation_path(@template_invocation) %>">
   <% if @error %>
     <div class="line error"><%= @error %></div>
   <% else %>

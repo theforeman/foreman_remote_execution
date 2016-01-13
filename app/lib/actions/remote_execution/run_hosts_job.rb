@@ -24,8 +24,11 @@ module Actions
         job_invocation = JobInvocation.find(input[:job_invocation_id])
         load_balancer = ProxyLoadBalancer.new
 
+        # composer creates just "pattern" for template_invocations because target is evaluated
+        # during actual run (here) so we build template invocations from these patterns
         job_invocation.targeting.hosts.map do |host|
-          template_invocation = job_invocation.template_invocation_for_host(host)
+          template_invocation = job_invocation.pattern_template_invocation_for_host(host).deep_clone
+          template_invocation.host_id = host.id
           proxy = determine_proxy(template_invocation, host, load_balancer)
           trigger(RunHostJob, job_invocation, host, template_invocation, proxy)
         end

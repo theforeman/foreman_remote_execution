@@ -9,7 +9,14 @@ class JobTemplate < ::Template
 
   audited :allow_mass_assignment => true
   has_many :audits, :as => :auditable, :class_name => Audited.audit_class.name
-  has_many :template_invocations, :dependent => :destroy, :foreign_key => 'template_id'
+  has_many :all_template_invocations, :dependent => :destroy, :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
+  if Rails::VERSION::MAJOR >= 4
+    has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :foreign_key => 'template_id'
+    has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
+  else
+    has_many :template_invocations, :conditions => 'host_id IS NOT NULL', :foreign_key => 'template_id'
+    has_many :pattern_template_invocations, :conditions => 'host_id IS NULL', :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
+  end
 
   # these can't be shared in parent class, scoped search can't handle STI properly
   # tested with scoped_search 3.2.0

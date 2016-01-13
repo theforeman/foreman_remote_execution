@@ -14,6 +14,7 @@ class TemplateInvocation < ActiveRecord::Base
   has_one :targeting, :through => :job_invocation
   belongs_to :host, :class_name => 'Host::Managed', :foreign_key => :host_id
   has_one :host_group, :through => :host, :source => :hostgroup
+  belongs_to :run_host_job_task, :class_name => 'ForemanTasks::Task'
 
   validates_associated :input_values
   validate :provides_required_input_values
@@ -30,8 +31,11 @@ class TemplateInvocation < ActiveRecord::Base
   def deep_clone
     self.dup.tap do |invocation|
       invocation.input_values = self.input_values.map(&:dup)
-      invocation.input_values.each(&:save!)
     end
+  end
+
+  def deep_clone!
+    deep_clone.tap { |clone| clone.input_values.each(&:save!) }
   end
 
   private
