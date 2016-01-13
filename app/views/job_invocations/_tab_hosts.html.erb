@@ -19,7 +19,6 @@
     <thead>
     <tr>
       <th><%= sort :name, :as => _('Host') %></th>
-      <th><%= _('Provider') %></th>
       <th><%= _('Status') %></th>
       <th><%= _('Actions') %></th>
     </tr>
@@ -31,7 +30,6 @@
       <tr>
         <% options = { :host => host, :task => task, :job_invocation => job_invocation } %>
         <%= render 'host_name_td', options %>
-        <%= render 'host_provider_td', options %>
         <%= render 'host_status_td', options %>
         <%= render 'host_actions_td', options %>
       </tr>

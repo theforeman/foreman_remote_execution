@@ -87,7 +87,6 @@ function job_invocation_refresh_data(){
     hosts_needs_refresh: $("div#hosts").data('refresh_required'),
     host_ids_needing_name_update: fetch_ids_of_hosts('name'),
     host_ids_needing_status_update: fetch_ids_of_hosts('status'),
-    host_ids_needing_provider_update: fetch_ids_of_hosts('provider'),
     host_ids_needing_actions_update: fetch_ids_of_hosts('actions')
   }
 }
