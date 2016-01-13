@@ -6,7 +6,7 @@ describe Targeting do
   let(:host) { FactoryGirl.create(:host) }
 
   before do
-    bookmark.query = "name = bar"
+    bookmark.query = 'name = bar'
   end
 
   describe '#resolved?' do
@@ -23,7 +23,7 @@ describe Targeting do
   end
 
   context 'able to be created with search term' do
-    before { targeting.search_query = "name = foo" }
+    before { targeting.search_query = 'name = foo' }
     it { assert targeting.save }
   end
 

@@ -5,7 +5,7 @@ class AddHostIdToTemplateInvocation < ActiveRecord::Migration
 
   def up
     add_column :template_invocations, :host_id, :integer
-    add_foreign_key "template_invocations", "hosts", :name => "template_invocations_hosts_id_fk", :column => 'host_id'
+    add_foreign_key 'template_invocations', 'hosts', :name => 'template_invocations_hosts_id_fk', :column => 'host_id'
     FakeTemplateInvocation.reset_column_information
 
     say 'Migrating existing execution locks to explicit relations, this may take a while'
@@ -23,7 +23,7 @@ class AddHostIdToTemplateInvocation < ActiveRecord::Migration
   end
 
   def down
-    remove_foreign_key "template_invocations", :name => "template_invocations_hosts_id_fk"
+    remove_foreign_key 'template_invocations', :name => 'template_invocations_hosts_id_fk'
     remove_column :template_invocations, :host_id
   end
 end

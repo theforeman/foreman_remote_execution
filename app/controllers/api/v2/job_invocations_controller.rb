@@ -12,35 +12,35 @@ module Api
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
-      api :GET, "/job_invocations/", N_("List job invocations")
+      api :GET, '/job_invocations/', N_('List job invocations')
       param_group :search_and_pagination, ::Api::V2::BaseController
       def index
         @job_invocations = resource_scope_for_index
       end
 
-      api :GET, "/job_invocations/:id", N_("Show job invocation")
+      api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
       def show
       end
 
       def_param_group :job_invocation do
         param :job_invocation, Hash, :required => true, :action_aware => true do
-          param :job_name, String, :required => true, :desc => N_("Job name")
-          param :job_template_id, String, :required => false, :desc => N_("If using a specific template, the id of that template.")
-          param :targeting_type, String, :required => true, :desc => N_("Invocation type, one of %s") % Targeting::TYPES
-          param :inputs, Hash, :required => false, :desc => N_("Inputs to use")
-          param :ssh, Hash, :desc => N_("SSH provider specific options") do
+          param :job_name, String, :required => true, :desc => N_('Job name')
+          param :job_template_id, String, :required => false, :desc => N_('If using a specific template, the id of that template.')
+          param :targeting_type, String, :required => true, :desc => N_('Invocation type, one of %s') % Targeting::TYPES
+          param :inputs, Hash, :required => false, :desc => N_('Inputs to use')
+          param :ssh, Hash, :desc => N_('SSH provider specific options') do
             param :effective_user, String,
                   :required => false,
-                  :desc => N_("What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting.")
+                  :desc => N_('What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting.')
           end
           param :bookmark_id, Integer, :required => false
           param :search_query, Integer, :required => false
-          param :description_format, String, :required => false, :desc => N_("Override the description format from the template for this invocation only")
+          param :description_format, String, :required => false, :desc => N_('Override the description format from the template for this invocation only')
         end
       end
 
-      api :POST, "/job_invocations/", N_("Create a job invocation")
+      api :POST, '/job_invocations/', N_('Create a job invocation')
       param_group :job_invocation, :as => :create
       def create
         composer = JobInvocationComposer.from_api_params(job_invocation_params)
@@ -51,7 +51,7 @@ module Api
         process_response @job_invocation
       end
 
-      api :GET, "/job_invocations/:id/hosts/:host_id", N_("Get output for a host")
+      api :GET, '/job_invocations/:id/hosts/:host_id', N_('Get output for a host')
       param :id, :identifier, :required => true
       param :host_id, :identifier, :required => true
       param :since, String, :required => false
@@ -94,11 +94,11 @@ module Api
         else
           templates = JobTemplate.where(:job_name => job_invocation_params[:job_name])
           if templates.pluck(:provider_type).uniq.length != templates.length
-            raise Foreman::Exception, _("Duplicate remote execution providers found for specified Job, please specify a single job_template_id.")
+            raise Foreman::Exception, _('Duplicate remote execution providers found for specified Job, please specify a single job_template_id.')
           end
         end
 
-        raise Foreman::Exception, _("No templates associated with specified Job Name") if templates.empty?
+        raise Foreman::Exception, _('No templates associated with specified Job Name') if templates.empty?
       end
 
       def job_invocation_params

@@ -280,7 +280,7 @@ describe JobInvocationComposer do
 
         context 'when overridable and not provided' do
           let(:overridable) { true }
-          let(:invocation_effective_user) { "" }
+          let(:invocation_effective_user) { '' }
 
           it 'takes the value from the job template' do
             template_invocation.effective_user.must_equal 'template user'
@@ -289,7 +289,7 @@ describe JobInvocationComposer do
 
         context 'when not overridable and provided' do
           let(:overridable) { false }
-          let(:invocation_effective_user) { "invocation user" }
+          let(:invocation_effective_user) { 'invocation user' }
 
           it 'takes the value from the job template' do
             template_invocation.effective_user.must_equal 'template user'
@@ -382,7 +382,7 @@ describe JobInvocationComposer do
         end
 
         it 'returns 0 for queries with syntax errors' do
-          composer.stubs(:displayed_search_query => "name = ")
+          composer.stubs(:displayed_search_query => 'name = ')
           composer.targeted_hosts_count.must_equal 0
         end
 
@@ -555,11 +555,11 @@ describe JobInvocationComposer do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
-          :targeting_type => "static_query",
+          :targeting_type => 'static_query',
           :bookmark_id => bookmark.id }
       end
 
-      it "creates invocation with a bookmark" do
+      it 'creates invocation with a bookmark' do
         assert composer.save!
         assert_equal bookmark, composer.job_invocation.targeting.bookmark
         assert_equal composer.job_invocation.targeting.user, User.current
@@ -567,96 +567,96 @@ describe JobInvocationComposer do
       end
     end
 
-    context "with targeting from search query" do
+    context 'with targeting from search query' do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
-          :targeting_type => "static_query",
-          :search_query => "some hosts" }
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts' }
       end
 
-      it "creates invocation with a search query" do
+      it 'creates invocation with a search query' do
         assert composer.save!
-        assert_equal "some hosts", composer.job_invocation.targeting.search_query
+        assert_equal 'some hosts', composer.job_invocation.targeting.search_query
         refute_empty composer.job_invocation.template_invocations
       end
     end
 
-    context "with with inputs" do
+    context 'with with inputs' do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
-          :targeting_type => "static_query",
-          :search_query => "some hosts",
-          :inputs => {input1.name => "some_value"}}
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
+          :inputs => {input1.name => 'some_value'}}
       end
 
-      it "finds the inputs by name" do
+      it 'finds the inputs by name' do
         assert composer.save!
         assert_equal 1, composer.template_invocations.first.input_values.count
       end
     end
 
-    context "with effective user" do
+    context 'with effective user' do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
           :effective_user => 'invocation user',
-          :targeting_type => "static_query",
-          :search_query => "some hosts",
-          :inputs => {input1.name => "some_value"}}
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
+          :inputs => {input1.name => 'some_value'}}
       end
 
       let(:template_invocation) { composer.job_invocation.template_invocations.first }
 
-      it "sets the effective user based on the input" do
+      it 'sets the effective user based on the input' do
         assert composer.save!
         template_invocation.effective_user.must_equal 'invocation user'
       end
     end
 
-    context "with invalid targeting" do
+    context 'with invalid targeting' do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
-          :search_query => "some hosts",
-          :inputs => {input1.name => "some_value"}}
+          :search_query => 'some hosts',
+          :inputs => {input1.name => 'some_value'}}
       end
 
-      it "handles errors" do
+      it 'handles errors' do
         assert_raises(ActiveRecord::RecordNotSaved) do
           composer.save!
         end
       end
     end
 
-    context "with invalid bookmark and search query" do
+    context 'with invalid bookmark and search query' do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
-          :targeting_type => "static_query",
-          :search_query => "some hosts",
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
           :bookmark_id => bookmark.id,
-          :inputs => {input1.name => "some_value"}}
+          :inputs => {input1.name => 'some_value'}}
       end
 
-      it "handles errors" do
+      it 'handles errors' do
         assert_raises(Foreman::Exception) do
           JobInvocationComposer.from_api_params(params)
         end
       end
     end
 
-    context "with invalid inputs" do
+    context 'with invalid inputs' do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
-          :targeting_type => "static_query",
-          :search_query => "some hosts",
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
           :inputs => {input3.name => nil}}
       end
 
-      it "handles errors" do
+      it 'handles errors' do
         error = assert_raises(ActiveRecord::RecordNotSaved) do
           composer.save!
         end
@@ -664,31 +664,31 @@ describe JobInvocationComposer do
       end
     end
 
-    context "with empty values for non-required inputs" do
+    context 'with empty values for non-required inputs' do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
-          :targeting_type => "static_query",
-          :search_query => "some hosts",
-          :inputs => {input3.name => "some value"}}
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
+          :inputs => {input3.name => 'some value'}}
       end
 
-      it "accepts the params" do
+      it 'accepts the params' do
         composer.save!
         refute composer.job_invocation.new_record?
       end
     end
 
-    context "with missing required inputs" do
+    context 'with missing required inputs' do
       let(:params) do
         { :job_name => trying_job_template_1.job_name,
           :job_template_id => trying_job_template_1.id,
-          :targeting_type => "static_query",
-          :search_query => "some hosts",
-          :inputs => {input1.name => "some_value"}}
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
+          :inputs => {input1.name => 'some_value'}}
       end
 
-      it "handles errors" do
+      it 'handles errors' do
         input3.must_be :required
 
         error = assert_raises(ActiveRecord::RecordNotSaved) do

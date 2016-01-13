@@ -4,7 +4,7 @@ class TemplateInvocation < ActiveRecord::Base
 
   include ForemanRemoteExecution::ErrorsFlattener
   FLATTENED_ERRORS_MAPPING = { :input_values => lambda do |input_value|
-                                                 _("Input") + " #{input_value.template_input.name}"
+                                                 _('Input') + " #{input_value.template_input.name}"
                                                 end }
 
 
@@ -40,7 +40,7 @@ class TemplateInvocation < ActiveRecord::Base
     required_inputs = self.template.template_inputs.where(:required => true)
     missing_inputs = required_inputs.reject { |input| self.input_values.map(&:template_input_id).include?(input.id) }
     unless missing_inputs.empty?
-      errors.add(:base, _("Not all required inputs have values. Missing inputs: %s") % missing_inputs.map(&:name).join(', '))
+      errors.add(:base, _('Not all required inputs have values. Missing inputs: %s') % missing_inputs.map(&:name).join(', '))
     end
   end
 

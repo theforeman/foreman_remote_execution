@@ -21,7 +21,7 @@ module Actions
                                        .new(data[:metadata][:exception_message]))
         else
           super(data)
-          error! _("Script execution failed") if failed_run?
+          error! _('Script execution failed') if failed_run?
         end
       end
 
@@ -63,7 +63,7 @@ module Actions
         proxy_data.fetch('output', {}).fetch('result', [])
       rescue => e
         ::Foreman::Logging.exception("Failed to load data for task #{task.id} from proxy #{ input[:proxy_url] }", e)
-        [exception_to_output(_("Error loading data from proxy"), e)]
+        [exception_to_output(_('Error loading data from proxy'), e)]
       end
 
       def finalized_output
@@ -76,9 +76,9 @@ module Actions
         end
 
         if exit_status
-          records << format_output(_("Exit status: %s") % exit_status, 'stdout', final_timestamp(records))
+          records << format_output(_('Exit status: %s') % exit_status, 'stdout', final_timestamp(records))
         elsif run_step && run_step.error
-          records << format_output(_("Job finished with error") + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', final_timestamp(records))
+          records << format_output(_('Job finished with error') + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', final_timestamp(records))
         end
         return records
       end

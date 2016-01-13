@@ -1,4 +1,4 @@
-require "test_plugin_helper"
+require 'test_plugin_helper'
 
 module ForemanRemoteExecution
   class RunProxyCommandTest < ActiveSupport::TestCase
@@ -88,10 +88,10 @@ module ForemanRemoteExecution
 
       describe 'when something went wrong while fetching the data' do
         before do
-          action.proxy.expects(:status_of_task).raises("Something went wrong")
+          action.proxy.expects(:status_of_task).raises('Something went wrong')
         end
 
-        it "reports the failure as part of the live output" do
+        it 'reports the failure as part of the live output' do
           live_output.size.must_equal 1
           live_output.first['output_type'].must_equal 'debug'
           live_output.first['output'].must_equal 'Error loading data from proxy: RuntimeError - Something went wrong'
@@ -105,7 +105,7 @@ module ForemanRemoteExecution
                                :metadata => { :failed_proxy_tasks => [action.send(:format_exception, RuntimeError.new('Connection error'))]})
         end
 
-        it "reports the failure as part of the live output" do
+        it 'reports the failure as part of the live output' do
           live_output.size.must_equal 1
           live_output.first['output_type'].must_equal 'debug'
           live_output.first['output'].must_equal 'Initialization error: RuntimeError - Connection error'
@@ -122,7 +122,7 @@ module ForemanRemoteExecution
                                                                                          'timestamp' => timestamp }]}}])
         end
 
-        it "reports the failure as part of the live output" do
+        it 'reports the failure as part of the live output' do
           live_output.size.must_equal 1
           live_output.first['output_type'].must_equal 'stdout'
           live_output.first['output'].must_equal 'Hello'
