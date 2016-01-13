@@ -3,7 +3,9 @@
 <%= javascript 'template_input' %>
 
 <% title _("Job Templates") %>
-<% title_actions display_link_if_authorized(_("New Job Template"), hash_for_new_job_template_path) %>
+<% title_actions(documentation_button_rex('3.1JobTemplates'),
+                 display_link_if_authorized(_("New Job Template"),
+                                            hash_for_new_job_template_path)) %>
 
 <table class="table table-bordered table-striped table-two-pane">
   <thead>
