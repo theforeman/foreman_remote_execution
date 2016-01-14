@@ -17,8 +17,6 @@ class JobInvocation < ActiveRecord::Base
 
   scoped_search :on => :job_name
 
-  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id', :auto_complete => true
-
   delegate :bookmark, :resolved?, :to => :targeting, :allow_nil => true
 
   include ForemanTasks::Concerns::ActionSubject
@@ -47,6 +45,12 @@ class JobInvocation < ActiveRecord::Base
     scope :with_task, -> { joins('LEFT JOIN foreman_tasks_tasks ON foreman_tasks_tasks.id = job_invocations.task_id') }
   end
 
+  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id', :auto_complete => true
+
+  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring',
+                :ext_method => :search_by_recurring_logic, :only_explicit => true,
+                :complete_value => { :true => true, :false => false }
+
   default_scope -> { order('job_invocations.id DESC') }
 
   validates_lengths_from_database :only => [:description]
@@ -60,6 +64,14 @@ class JobInvocation < ActiveRecord::Base
     conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)
     conditions[0] = "NOT (#{conditions[0]})" if operator == '<>'
     { :conditions => sanitize_sql_for_conditions(conditions), :include => :task }
+  end
+
+  def self.search_by_recurring_logic(key, operator, value)
+    reucurring = value == 'true'
+    reucurring = !reucurring if operator == '<>'
+    not_operator = reucurring ? 'NOT' : ''
+
+    { :conditions => sanitize_sql_for_conditions(["foreman_tasks_recurring_logics.id IS #{not_operator} NULL"]), :joins => :recurring_logic }
   end
 
   def status
