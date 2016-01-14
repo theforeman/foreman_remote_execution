@@ -92,11 +92,10 @@ module RemoteExecutionHelper
   end
 
   def job_invocations_buttons
-    if authorized_for(hash_for_new_job_invocation_path)
-      link_to(_("Run Job"), new_job_invocation_path,
-              :class => "btn btn-default",
-              :title => _('Run Job'))
-    end
+    [
+      documentation_button_rex('3.2ExecutingaJob'),
+      display_link_if_authorized(_("Run Job"), hash_for_new_job_invocation_path)
+    ]
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -196,4 +195,14 @@ module RemoteExecutionHelper
     end
   end
 
+  def documentation_button_rex(section = '')
+    url = 'http://theforeman.org/plugins/foreman_remote_execution/' +
+      "#{ForemanRemoteExecution::VERSION.split('.').take(2).join('.')}/index.html#" +
+      section
+    link_to(
+      icon_text('help', _('Documentation'),
+                :class => 'icon-white', :kind => 'pficon'),
+      url,
+      :rel => 'external', :class => 'btn btn-info', :target => '_blank')
+  end
 end
