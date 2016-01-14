@@ -35,6 +35,8 @@ class JobInvocation < ActiveRecord::Base
   scoped_search :in => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
   scoped_search :in => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
   scoped_search :in => :task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
+  scoped_search :in => :task, :on => :state, :rename => 'status', :ext_method => :search_by_status,
+                :only_explicit => true, :complete_value => Hash[HostStatus::ExecutionStatus::STATUS_NAMES.values.map { |v| [v, v] }]
 
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
   has_one :recurring_logic, :through => :triggering, :class_name => 'ForemanTasks::RecurringLogic'
@@ -53,6 +55,29 @@ class JobInvocation < ActiveRecord::Base
   attr_writer :start_at
 
   delegate :start_at, :to => :task, :allow_nil => true
+
+  def self.search_by_status(key, operator, value)
+    conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)
+    conditions[0] = "NOT (#{conditions[0]})" if operator == '<>'
+    { :conditions => sanitize_sql_for_conditions(conditions), :include => :task }
+  end
+
+  def status
+    HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.new(task).status
+  end
+
+  def status_label
+    HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.new(task).status_label
+  end
+
+  # returns progress in percents
+  def progress
+    queued? ? 0 : (task.progress * 100).to_i
+  end
+
+  def queued?
+    status == HostStatus::ExecutionStatus::QUEUED
+  end
 
   def deep_clone
     JobInvocationComposer.from_job_invocation(self).job_invocation.tap do |invocation|

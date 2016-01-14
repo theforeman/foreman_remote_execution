@@ -3,7 +3,7 @@ object @job_invocation
 extends "api/v2/job_invocations/base"
 
 child :targeting do
-  attributes :bookmark_id, :search_query, :targeting_type, :user_id
+  attributes :bookmark_id, :search_query, :targeting_type, :user_id, :status, :status_label
 
   child :hosts do
     extends "api/v2/hosts/base"

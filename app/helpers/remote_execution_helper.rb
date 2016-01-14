@@ -30,15 +30,17 @@ module RemoteExecutionHelper
   end
 
   def job_invocation_status(invocation)
-    if invocation.task.blank?
-      _('not started yet')
-    elsif invocation.task.state == 'scheduled'
-      _('scheduled in future')
-    elsif invocation.task.state == 'stopped' && invocation.task.result == 'error'
-      invocation.task.execution_plan.errors.map(&:message).join("\n")
-    else
-      label = invocation.task.pending ? _('running') : _('finished')
-      label + ' ' + (invocation.task.progress * 100).to_i.to_s + '%'
+    case invocation.status
+      when HostStatus::ExecutionStatus::QUEUED
+        _('queued')
+      when HostStatus::ExecutionStatus::RUNNING
+        _('running %s%') % invocation.progress
+      when HostStatus::ExecutionStatus::OK
+        _('succeeded')
+      when HostStatus::ExecutionStatus::ERROR
+        _('failed')
+      else
+        _('unknown status')
     end
   end
 
@@ -147,20 +149,20 @@ module RemoteExecutionHelper
   end
 
   def link_to_invocation_task_if_authorized(invocation)
-    if invocation.task.present? && invocation.task.state != 'scheduled'
+    if invocation.queued?
+      job_invocation_status(invocation)
+    else
       link_to_if_authorized job_invocation_status(invocation),
                             hash_for_foreman_tasks_task_path(invocation.task).merge(:auth_object => invocation.task, :permission => :view_foreman_tasks)
-    else
-      job_invocation_status(invocation)
     end
   end
 
   def invocation_count(invocation, options = {})
     options = { :unknown_string => 'N/A' }.merge(options)
-    if invocation.task.nil? || invocation.task.state != 'scheduled'
-      (invocation.task.try(:output) || {}).fetch(options[:output_key], options[:unknown_string])
-    else
+    if invocation.queued?
       options[:unknown_string]
+    else
+      (invocation.task.try(:output) || {}).fetch(options[:output_key], options[:unknown_string])
     end
   end
 
