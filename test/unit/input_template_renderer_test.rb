@@ -1,7 +1,7 @@
 require 'test_plugin_helper'
 
 describe InputTemplateRenderer do
-  context "renderer for simple template without inputs" do
+  context 'renderer for simple template without inputs' do
     let(:renderer) { InputTemplateRenderer.new(FactoryGirl.build(:job_template, :template => 'id')) }
 
     it 'should render the content' do
@@ -13,7 +13,7 @@ describe InputTemplateRenderer do
     end
   end
 
-  context "renderer for template with user input used" do
+  context 'renderer for template with user input used' do
     let(:template) { FactoryGirl.build(:job_template, :template => 'service restart <%= input("service_name") -%>') }
     let(:renderer) { InputTemplateRenderer.new(template) }
 
@@ -127,7 +127,7 @@ describe InputTemplateRenderer do
     end
   end
 
-  context "renderer for template with fact input used" do
+  context 'renderer for template with fact input used' do
     let(:template) { FactoryGirl.build(:job_template, :template => 'echo <%= input("issue") -%> > /etc/issue') }
     let(:renderer) { InputTemplateRenderer.new(template) }
 
@@ -225,7 +225,7 @@ describe InputTemplateRenderer do
     end
   end
 
-  context "renderer for template with variable input used" do
+  context 'renderer for template with variable input used' do
     let(:template) { FactoryGirl.build(:job_template, :template => 'echo <%= input("client_key") -%> > /etc/chef/client.pem') }
     let(:renderer) { InputTemplateRenderer.new(template) }
 
@@ -298,7 +298,7 @@ describe InputTemplateRenderer do
               FactoryGirl.create(lookup_key_factory,
                                  :key => 'client_key',
                                  :puppetclass => puppet_class,
-                                 :overrides => {"fqdn=#{renderer.host.fqdn}" => "RSA KEY"})
+                                 :overrides => {"fqdn=#{renderer.host.fqdn}" => 'RSA KEY'})
             end
 
             describe 'rendering' do
@@ -326,7 +326,7 @@ describe InputTemplateRenderer do
     end
   end
 
-  context "renderer for template with puppet parameter input used" do
+  context 'renderer for template with puppet parameter input used' do
     let(:template) { FactoryGirl.build(:job_template, :template => 'echo "This is WebServer with nginx <%= input("nginx_version") -%>" > /etc/motd') }
     let(:renderer) { InputTemplateRenderer.new(template) }
 
@@ -386,7 +386,7 @@ describe InputTemplateRenderer do
                                  :puppetclass => puppet_class,
                                  :path => 'fqdn',
                                  :override => true,
-                                 :overrides => {"fqdn=#{renderer.host.fqdn}" => "1.4.7"})
+                                 :overrides => {"fqdn=#{renderer.host.fqdn}" => '1.4.7'})
             end
 
             describe 'rendering' do

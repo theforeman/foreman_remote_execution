@@ -1,7 +1,7 @@
 module ForemanRemoteExecution
   module ErrorsFlattener
     def flattened_validation_exception
-      ActiveRecord::RecordNotSaved.new(I18n.t("activerecord.errors.messages.record_invalid", :errors => flattened_errors.join(', ')))
+      ActiveRecord::RecordNotSaved.new(I18n.t('activerecord.errors.messages.record_invalid', :errors => flattened_errors.join(', ')))
     end
 
     def flattened_errors

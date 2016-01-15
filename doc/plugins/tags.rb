@@ -72,8 +72,8 @@ module Jekyll
     end
 
     def active_tags
-      return site.tags unless site.config["ignored_tags"]
-      site.tags.reject { |t| site.config["ignored_tags"].include? t[0] }
+      return site.tags unless site.config['ignored_tags']
+      site.tags.reject { |t| site.config['ignored_tags'].include? t[0] }
     end
 
     def pretty?
@@ -130,8 +130,8 @@ module Jekyll
     end
 
     def active_tag_data(site = Tagger.site)
-      return site.config['tag_data'] unless site.config["ignored_tags"]
-      site.config["tag_data"].reject { |tag, set| site.config["ignored_tags"].include? tag }
+      return site.config['tag_data'] unless site.config['ignored_tags']
+      site.config['tag_data'].reject { |tag, set| site.config['ignored_tags'].include? tag }
     end
   end
 

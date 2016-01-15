@@ -10,7 +10,7 @@ module Api
       test 'should get index' do
         get :index
         templates = ActiveSupport::JSON.decode(@response.body)
-        assert !templates.empty?, "Should response with template"
+        assert !templates.empty?, 'Should response with template'
         assert_response :success
       end
 
@@ -19,15 +19,15 @@ module Api
         assert_response :success
         template = ActiveSupport::JSON.decode(@response.body)
         assert !template.empty?
-        assert_equal template["name"], @template.name
+        assert_equal template['name'], @template.name
       end
 
       test 'should create valid' do
         JobTemplate.any_instance.stubs(:valid?).returns(true)
-        valid_attrs = { :template => "This is a test template", :name => "RandomName", :provider_type => 'ssh' }
+        valid_attrs = { :template => 'This is a test template', :name => 'RandomName', :provider_type => 'ssh' }
         post :create,  :job_template => valid_attrs
         template = ActiveSupport::JSON.decode(@response.body)
-        assert template["name"] == "RandomName"
+        assert template['name'] == 'RandomName'
         assert_response :success
       end
 
@@ -39,13 +39,13 @@ module Api
       test 'should update valid' do
         JobTemplate.any_instance.stubs(:valid?).returns(true)
         put :update,  :id => @template.to_param,
-                      :job_template => { :template => "blah" }
+                      :job_template => { :template => 'blah' }
         assert_response :ok
       end
 
       test 'should not update invalid' do
         put :update,  :id => @template.to_param,
-                      :job_template => { :name => "" }
+                      :job_template => { :name => '' }
         assert_response :unprocessable_entity
       end
 

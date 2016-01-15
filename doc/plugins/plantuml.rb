@@ -21,15 +21,15 @@ module Jekyll
       self.config = site.config['plantuml']
 
       tmproot = File.expand_path(tmp_folder)
-      folder = "/images/plantuml/"
+      folder = '/images/plantuml/'
       create_tmp_folder(tmproot, folder)
 
       code = @nodelist.join + background_color
-      filename = Digest::MD5.hexdigest(code) + ".png"
+      filename = Digest::MD5.hexdigest(code) + '.png'
       filepath = tmproot + folder + filename
       if !File.exist?(filepath)
         plantuml_jar = File.expand_path(plantuml_jar_path)
-        cmd = "java -Djava.awt.headless=true -jar " + plantuml_jar + dot_cmd + " -pipe > " + filepath
+        cmd = 'java -Djava.awt.headless=true -jar ' + plantuml_jar + dot_cmd + ' -pipe > ' + filepath
         result, status = Open3.capture2e(cmd, :stdin_data=>code)
         Jekyll.logger.debug(filepath + " -->\t" + status.inspect() + "\t" + result)
       end
@@ -46,7 +46,7 @@ module Jekyll
     end
 
     def background_color
-      config['background_color'].nil? ? '' : " skinparam backgroundColor " + config['background_color']
+      config['background_color'].nil? ? '' : ' skinparam backgroundColor ' + config['background_color']
     end
 
     def plantuml_jar_path
@@ -62,7 +62,7 @@ module Jekyll
         dotpath = File.expand_path(config['dot_exe'] || '__NULL__')
         if File.exist?(dotpath)
           # Jekyll.logger.info("PlantUML: Use graphviz dot: " + dotpath)
-          " -graphvizdot " + dotpath
+          ' -graphvizdot ' + dotpath
         else
           # Jekyll.logger.info("PlantUML: Assume graphviz dot is in PATH.")
           ''
@@ -74,7 +74,7 @@ module Jekyll
       folderpath = tmproot + folder
       if !File.exist?(folderpath)
         FileUtils::mkdir_p folderpath
-        Jekyll.logger.info("Create PlantUML image folder: " + folderpath)
+        Jekyll.logger.info('Create PlantUML image folder: ' + folderpath)
       end
     end
 

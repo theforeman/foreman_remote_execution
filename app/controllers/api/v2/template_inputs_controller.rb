@@ -8,14 +8,14 @@ module Api
       before_filter :find_resource, :only => %w{show update destroy clone}
       before_filter :normalize_options, :only => %w{create update}
 
-      api :GET, "/templates/:template_id/template_inputs", N_("List template inputs")
+      api :GET, '/templates/:template_id/template_inputs', N_('List template inputs')
       param :template_id, :identifier, :required => true
       param_group :search_and_pagination, ::Api::V2::BaseController
       def index
         @template_inputs = nested_obj.template_inputs.search_for(*search_options).paginate(paginate_options)
       end
 
-      api :GET, "/templates/:template_id/template_inputs/:id", N_("Show template input details")
+      api :GET, '/templates/:template_id/template_inputs/:id', N_('Show template input details')
       param :template_id, :identifier, :required => true
       param :id, :identifier, :required => true
       def show
@@ -32,7 +32,7 @@ module Api
         end
       end
 
-      api :POST, "/templates/:template_id/template_inputs/", N_("Create a template input")
+      api :POST, '/templates/:template_id/template_inputs/', N_('Create a template input')
       param :template_id, :identifier, :required => true
       param_group :template_input, :as => :create
       def create
@@ -40,14 +40,14 @@ module Api
         process_response @template_input.save
       end
 
-      api :DELETE, "/templates/:template_id/template_inputs/:id", N_("Delete a template input")
+      api :DELETE, '/templates/:template_id/template_inputs/:id', N_('Delete a template input')
       param :template_id, :identifier, :required => true
       param :id, :identifier, :required => true
       def destroy
         process_response @template_input.destroy
       end
 
-      api :PUT, "/templates/:template_id/template_inputs/:id", N_("Update a template input")
+      api :PUT, '/templates/:template_id/template_inputs/:id', N_('Update a template input')
       param :template_id, :identifier, :required => true
       param :id, :identifier, :required => true
       param_group :template_input

@@ -9,7 +9,7 @@ module Jekyll
     DEFAULT_GRAPH_NAME = 'Graphviz'
     DOT_OPTS           = '-Tsvg'
     DOT_EXEC           = 'dot'
-    DOT_EXTS           = (ENV['PATHEXT'] || '.exe;.bat;.com').split(";")
+    DOT_EXTS           = (ENV['PATHEXT'] || '.exe;.bat;.com').split(';')
     DOT_EXTS.unshift ''
     DOT_PATH = ENV['PATH'].split(File::PATH_SEPARATOR)
                    .map { |a| File.join a, DOT_EXEC }
@@ -22,10 +22,10 @@ module Jekyll
       super
       @tag_name = tag_name
 
-      @title = markup or ""
+      @title = markup or ''
       @title.strip!
 
-      @src = ""
+      @src = ''
     end
 
     def render(context)
@@ -92,8 +92,8 @@ module Jekyll
     end
 
     def add_desc_attrs(svg)
-      svg.sub!("<svg", %[<svg aria-label="#{CGI::escapeHTML @title}"])
-      svg.sub!("<svg", %[<svg role="img"])
+      svg.sub!('<svg', %[<svg aria-label="#{CGI::escapeHTML @title}"])
+      svg.sub!('<svg', %[<svg role="img"])
 
       return svg
     end

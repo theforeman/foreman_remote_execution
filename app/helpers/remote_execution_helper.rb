@@ -94,7 +94,7 @@ module RemoteExecutionHelper
   def job_invocations_buttons
     [
       documentation_button_rex('3.2ExecutingaJob'),
-      display_link_if_authorized(_("Run Job"), hash_for_new_job_invocation_path)
+      display_link_if_authorized(_('Run Job'), hash_for_new_job_invocation_path)
     ]
   end
 
@@ -104,24 +104,24 @@ module RemoteExecutionHelper
     buttons = []
     buttons << link_to(_('Refresh'), {}, :class => 'btn btn-default', :title => _('Refresh this page'))
     if authorized_for(hash_for_new_job_invocation_path)
-      buttons << link_to(_("Rerun"), rerun_job_invocation_path(:id => job_invocation.id),
-                         :class => "btn btn-default",
+      buttons << link_to(_('Rerun'), rerun_job_invocation_path(:id => job_invocation.id),
+                         :class => 'btn btn-default',
                          :title => _('Rerun the job'))
     end
     if authorized_for(hash_for_new_job_invocation_path)
-      buttons << link_to(_("Rerun failed"), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
-                         :class => "btn btn-default",
+      buttons << link_to(_('Rerun failed'), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
+                         :class => 'btn btn-default',
                          :disabled => !task.sub_tasks.any? { |sub_task| task_failed?(sub_task) },
                          :title => _('Rerun on failed hosts'))
     end
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
-      buttons << link_to(_("Job Task"), foreman_tasks_task_path(task),
-                         :class => "btn btn-default",
+      buttons << link_to(_('Job Task'), foreman_tasks_task_path(task),
+                         :class => 'btn btn-default',
                          :title => _('See the last task details'))
     end
     if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task)
-      buttons << link_to(_("Cancel Job"), cancel_foreman_tasks_task_path(task),
-                         :class => "btn btn-danger",
+      buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
+                         :class => 'btn btn-danger',
                          :title => _('Try to cancel the job'),
                          :disabled => !task.cancellable?,
                          :method => :post)
@@ -133,13 +133,13 @@ module RemoteExecutionHelper
   def template_invocation_task_buttons(task)
     buttons = []
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
-      buttons << link_to(_("Task Details"), foreman_tasks_task_path(task),
-                         :class => "btn btn-default",
+      buttons << link_to(_('Task Details'), foreman_tasks_task_path(task),
+                         :class => 'btn btn-default',
                          :title => _('See the task details'))
     end
     if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task)
-      buttons << link_to(_("Cancel Job"), cancel_foreman_tasks_task_path(task),
-                         :class => "btn btn-danger",
+      buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
+                         :class => 'btn btn-danger',
                          :title => _('Try to cancel the job on a host'),
                          :disabled => !task.cancellable?,
                          :method => :post)
@@ -170,7 +170,7 @@ module RemoteExecutionHelper
     if (preview = renderer.preview)
       content_tag :pre, preview
     else
-      alert :class => "alert-block alert-danger base in fade has-error",
+      alert :class => 'alert-block alert-danger base in fade has-error',
             :text => renderer.error_message.html_safe
     end
   end
@@ -190,7 +190,7 @@ module RemoteExecutionHelper
     if time.nil?
       _('N/A')
     else
-      content_tag :span, (time > Time.now ? _('in %s') : _("%s ago")) % time_ago_in_words(time),
+      content_tag :span, (time > Time.now ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
                   { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
     end
   end

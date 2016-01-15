@@ -13,7 +13,7 @@ FactoryGirl.define do
     end
 
     trait :with_description_format do
-      description_format "Factory-built %{job_name}"
+      description_format 'Factory-built %{job_name}'
     end
   end
 
@@ -23,8 +23,8 @@ FactoryGirl.define do
   end
 
   factory :targeting do |f|
-    search_query "name = foo"
-    targeting_type "static_query"
+    search_query 'name = foo'
+    targeting_type 'static_query'
     user
   end
 

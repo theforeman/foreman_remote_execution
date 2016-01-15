@@ -4,7 +4,7 @@ class JobInvocation < ActiveRecord::Base
   include ForemanRemoteExecution::ErrorsFlattener
   FLATTENED_ERRORS_MAPPING = {
     :template_invocations => lambda do |template_invocation|
-      _("template") + " #{template_invocation.template.name}"
+      _('template') + " #{template_invocation.template.name}"
     end
   }
 

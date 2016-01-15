@@ -1,6 +1,6 @@
 Bookmark.without_auditing do
   [
-    { :name => 'failed', :query => "status = failed", :controller => 'job_invocations' },
+    { :name => 'failed', :query => 'status = failed', :controller => 'job_invocations' },
     { :name => 'succeeded', :query => 'status = succeeded', :controller => 'job_invocations'},
     { :name => 'running', :query => 'status = running', :controller => 'job_invocations'},
     { :name => 'pending', :query => 'status = queued or status = running', :controller => 'job_invocations'},

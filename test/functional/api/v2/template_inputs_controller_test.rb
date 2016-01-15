@@ -11,7 +11,7 @@ module Api
       test 'should get index' do
         get :index, :template_id => @template.id
         inputs = ActiveSupport::JSON.decode(@response.body)
-        assert !inputs.empty?, "Should respond with inputs"
+        assert !inputs.empty?, 'Should respond with inputs'
         assert_response :success
       end
 
@@ -20,7 +20,7 @@ module Api
         assert_response :success
         input = ActiveSupport::JSON.decode(@response.body)
         assert !input.empty?
-        assert_equal input["name"], @input.name
+        assert_equal input['name'], @input.name
       end
 
       test 'should create valid' do
@@ -39,7 +39,7 @@ module Api
       test 'should update valid' do
         put :update,  :template_id => @template.to_param,
                       :id => @input.to_param,
-                      :template_input => { :name => "blah" }
+                      :template_input => { :name => 'blah' }
         assert_response :ok
       end
 

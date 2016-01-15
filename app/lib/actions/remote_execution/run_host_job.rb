@@ -19,17 +19,17 @@ module Actions
         verify_permissions(host, template_invocation)
         hostname = find_ip_or_hostname(host)
 
-        raise _("Could not use any template used in the job invocation") if template_invocation.blank?
+        raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
         settings = { :global_proxy   => 'remote_execution_global_proxy',
                      :fallback_proxy => 'remote_execution_fallback_proxy' }
 
-        raise _("Could not use any proxy. Consider configuring %{global_proxy} " +
-                "or %{fallback_proxy} in settings") % settings if proxy.blank?
+        raise _('Could not use any proxy. Consider configuring %{global_proxy} ' +
+                'or %{fallback_proxy} in settings') % settings if proxy.blank?
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render
-        raise _("Failed rendering template: %s") % renderer.error_message unless script
+        raise _('Failed rendering template: %s') % renderer.error_message unless script
 
         provider = template_invocation.template.provider
         plan_action(RunProxyCommand, proxy, hostname, script, provider.proxy_command_options(template_invocation, host))

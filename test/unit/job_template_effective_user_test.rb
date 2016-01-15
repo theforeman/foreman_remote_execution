@@ -33,7 +33,7 @@ describe JobTemplateEffectiveUser do
     end
 
     it 'returns a default value when no value is specified for the user' do
-      effective_user.value = ""
+      effective_user.value = ''
       Setting[:remote_execution_effective_user] = 'myuser'
       effective_user.compute_value.must_equal 'myuser'
     end

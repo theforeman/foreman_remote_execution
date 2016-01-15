@@ -1,5 +1,5 @@
 
-require "test_plugin_helper"
+require 'test_plugin_helper'
 
 module ForemanRemoteExecution
   class RunHostsJobTest < ActiveSupport::TestCase

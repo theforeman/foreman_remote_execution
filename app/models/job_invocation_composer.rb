@@ -131,7 +131,7 @@ class JobInvocationComposer
     end
 
     def triggering_params
-      ForemanTasks::Triggering.new_from_params.attributes.slice("mode", "start_at", "start_before")
+      ForemanTasks::Triggering.new_from_params.attributes.slice('mode', 'start_at', 'start_before')
     end
   end
 

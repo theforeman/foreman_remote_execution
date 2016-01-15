@@ -14,6 +14,6 @@ class CreateTemplateInput < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_foreign_key :template_inputs, :templates, :name => "templates_template_id_fk", :column => 'template_id'
+    add_foreign_key :template_inputs, :templates, :name => 'templates_template_id_fk', :column => 'template_id'
   end
 end
