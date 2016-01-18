@@ -15,6 +15,7 @@ class JobTemplate < ::Template
   has_many :all_template_invocations, :dependent => :destroy, :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
   has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :foreign_key => 'template_id'
   has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
+  has_many :remote_execution_features, :dependent => :nullify
 
   # these can't be shared in parent class, scoped search can't handle STI properly
   # tested with scoped_search 3.2.0
@@ -74,6 +75,7 @@ class JobTemplate < ::Template
       template.sync_inputs(metadata.delete('template_inputs'))
       template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options))
       template.assign_taxonomies if template.new_record?
+      template.sync_feature(metadata.delete('feature'))
 
       template
     end
@@ -152,6 +154,13 @@ class JobTemplate < ::Template
 
     # Create new inputs
     inputs.each { |_name, new_input| template_inputs.build(new_input) }
+  end
+
+  def sync_feature(feature_name)
+    if feature_name && (feature = RemoteExecutionFeature.feature(feature_name))
+      feature.job_template ||= self
+      feature.save!
+    end
   end
 
   def self.parse_metadata(template)

@@ -29,7 +29,7 @@ class JobInvocationsController < ApplicationController
     @composer = JobInvocationComposer.from_job_invocation(job_invocation)
     if params[:failed_only]
       host_ids = job_invocation.failed_host_ids
-      @composer.search_query = @composer.targeting.build_query_from_hosts(host_ids)
+      @composer.search_query = Targeting.build_query_from_hosts(host_ids)
     end
 
     render :action => 'new'
@@ -37,11 +37,8 @@ class JobInvocationsController < ApplicationController
 
   def create
     @composer = JobInvocationComposer.from_ui_params(params)
-    if @composer.save
-      job_invocation = @composer.job_invocation
-      job_invocation.generate_description! if job_invocation.description.blank?
-      @composer.triggering.trigger(::Actions::RemoteExecution::RunHostsJob, job_invocation)
-      redirect_to job_invocation_path(job_invocation)
+    if @composer.trigger
+      redirect_to job_invocation_path(@composer.job_invocation)
     else
       @composer.job_invocation.description_format = nil if params[:job_invocation].key?(:description_override)
       render :action => 'new'
