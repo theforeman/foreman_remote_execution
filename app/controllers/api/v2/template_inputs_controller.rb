@@ -24,9 +24,12 @@ module Api
       def_param_group :template_input do
         param :template_input, Hash, :required => true, :action_aware => true do
           param :name, String, :required => true, :desc => N_('Input name')
+          param :description, String, :required => false, :desc => N_('Input description')
+          param :required, :bool, :allow_nil => true, :desc => N_('Input is required')
           param :input_type, TemplateInput::TYPES.keys.map(&:to_s), :required => true, :desc => N_('Input type')
           param :fact_name, String, :required => false, :desc => N_('Fact name, used when input type is fact')
           param :variable_name, String, :required => false, :desc => N_('Variable name, used when input type is variable')
+          param :puppet_parameter_class, String, :required => false, :desc => N_('Puppet class name, used when input type is puppet_parameter')
           param :puppet_parameter_name, String, :required => false, :desc => N_('Puppet parameter name, used when input type is puppet_parameter')
           param :options, Array, :required => false, :desc => N_('Selectable values for user inputs')
         end
