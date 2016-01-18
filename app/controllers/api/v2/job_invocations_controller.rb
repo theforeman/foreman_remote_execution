@@ -57,10 +57,8 @@ module Api
       def create
         composer = JobInvocationComposer.from_api_params(job_invocation_params)
         composer.save!
-        @job_invocation = composer.job_invocation
-        @job_invocation.generate_description! if @job_invocation.description.blank?
-        composer.triggering.trigger(::Actions::RemoteExecution::RunHostsJob, @job_invocation)
-        process_response @job_invocation
+        composer.trigger
+        process_response composer.job_invocation
       end
 
       api :GET, '/job_invocations/:id/hosts/:host_id', N_('Get output for a host')

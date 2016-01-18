@@ -51,9 +51,9 @@ class Targeting < ActiveRecord::Base
     targeting_type == STATIC_TYPE
   end
 
-  def build_query_from_hosts(ids)
+  def self.build_query_from_hosts(ids)
     hosts = Host.where(:id => ids).all.group_by(&:id)
-    ids.map { |id| "name = #{hosts[id].first.name}" }.join(' or ')
+    hosts.map { |id, h| "name = #{h.first.name}" }.join(' or ')
   end
 
   def resolved?
