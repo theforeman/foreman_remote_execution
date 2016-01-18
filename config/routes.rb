@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :remote_execution_features, :only => [:show, :index, :update]
+
   # index is needed so the auto_complete_search can be constructed, otherwise autocompletion in filter does not work
   resources :template_invocations, :only => [:show, :index] do
     collection do

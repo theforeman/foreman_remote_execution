@@ -45,6 +45,8 @@ module ForemanRemoteExecution
                                             :'api/v2/job_templates' => [:update],
                                             :'api/v2/template_inputs' => [:create, :update, :destroy],
                                             :'api/v2/foreign_input_sets' => [:create, :update, :destroy]}, :resource_type => 'JobTemplate'
+          permission :edit_remote_execution_features, { :remote_execution_features => [:index, :show, :update],
+                                            :'api/v2/remote_execution_features' => [:index, :show, :update]}, :resource_type => 'RemoteExecutionFeature'
           permission :destroy_job_templates, { :job_templates => [:destroy],
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
@@ -72,7 +74,8 @@ module ForemanRemoteExecution
           :create_job_templates,
           :lock_job_templates,
           :view_audit_logs,
-          :filter_autocompletion_for_template_invocation
+          :filter_autocompletion_for_template_invocation,
+          :edit_remote_execution_features
         ]
 
         # Add a new role called 'Remote Execution User ' if it doesn't exist
@@ -85,6 +88,11 @@ module ForemanRemoteExecution
              caption: N_('Job templates'),
              parent: :hosts_menu,
              after: :provisioning_templates
+        menu :admin_menu, :remote_execution_features,
+             url_hash: { controller: :remote_execution_features, action: :index },
+             caption: N_('Remote Execution Features'),
+             parent: :administer_menu,
+             after: :bookmarks
 
         menu :top_menu, :job_invocations,
              url_hash: { controller: :job_invocations, action: :index },

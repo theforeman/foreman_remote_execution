@@ -154,6 +154,66 @@ class JobInvocationComposer
     end
   end
 
+  class ParamsForFeature
+    attr_reader :feature_label, :feature, :provided_inputs
+
+    def initialize(feature_label, hosts, provided_inputs = {})
+      @feature = RemoteExecutionFeature.feature(feature_label)
+      @provided_inputs = provided_inputs
+      if hosts.is_a? Bookmark
+        @host_bookmark = hosts
+      elsif hosts.is_a? Host::Base
+        @host_objects = [hosts]
+      elsif hosts.is_a? String
+        @host_scoped_search = hosts
+      else
+        @host_objects = hosts
+      end
+    end
+
+    def params
+      { :job_category => template.job_category,
+        :targeting => targeting_params,
+        :triggering => {},
+        :template_invocations => template_invocations_params,
+        :description_format => template.generate_description_format }.with_indifferent_access
+    end
+
+    private
+
+    def targeting_params
+      ret = {}
+      ret['targeting_type'] = Targeting::STATIC_TYPE
+      ret['search_query'] = @host_scoped_search if @host_scoped_search
+      ret['search_query'] = Targeting.build_query_from_hosts(@host_objects) if @host_objects
+      ret['bookmark_id'] = @host_bookmark.id if @host_bookmark
+      ret['user_id'] = User.current.id
+      ret
+    end
+
+    def template_invocations_params
+      [ { 'template_id' => template.id,
+          'input_values' => input_values_params } ]
+    end
+
+    def input_values_params
+      @provided_inputs.map do |key, value|
+        input = template.template_inputs.find_by_name!(key)
+        { 'template_input_id' => input.id, 'value' => value }
+      end
+    end
+
+    def template
+      template = JobTemplate.authorized(:view_job_templates).find_by_id(feature.template_id)
+      unless template
+        raise Foreman::Exception.new(N_('The template %{template_name} mapped to feature %{feature_name} is not accessible by the user'),
+                                     :template_name => mapping.template.name,
+                                     :feature_name => feature.name)
+      end
+      template
+    end
+  end
+
   attr_accessor :params, :job_invocation, :host_ids, :search_query
   delegate :job_category, :pattern_template_invocations, :template_invocations, :targeting, :triggering, :to => :job_invocation
 
@@ -180,6 +240,10 @@ class JobInvocationComposer
     self.new(ApiParams.new(api_params).params)
   end
 
+  def self.for_feature(feature_label, hosts, provided_inputs = {})
+    self.new(ParamsForFeature.new(feature_label, hosts, provided_inputs).params)
+  end
+
   def compose
     job_invocation.job_category = validate_job_category(params[:job_category])
     job_invocation.job_category ||= available_job_categories.first if @set_defaults
@@ -189,6 +253,11 @@ class JobInvocationComposer
     job_invocation.description_format = params[:description_format]
 
     self
+  end
+
+  def trigger
+    job_invocation.generate_description! if job_invocation.description.blank?
+    triggering.trigger(::Actions::RemoteExecution::RunHostsJob, job_invocation)
   end
 
   def valid?
@@ -252,7 +321,7 @@ class JobInvocationComposer
     if @search_query.present?
       @search_query
     elsif host_ids.present?
-      targeting.build_query_from_hosts(host_ids)
+      Targeting.build_query_from_hosts(host_ids)
     elsif targeting.bookmark_id
       if (bookmark = available_bookmarks.find_by(:id => targeting.bookmark_id))
         bookmark.query
