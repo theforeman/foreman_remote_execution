@@ -25,7 +25,7 @@ module Api
 
       def_param_group :job_invocation do
         param :job_invocation, Hash, :required => true, :action_aware => true do
-          param :job_name, String, :required => true, :desc => N_('Job name')
+          param :job_category, String, :required => true, :desc => N_('Job category')
           param :job_template_id, String, :required => false, :desc => N_('If using a specific template, the id of that template.')
           param :targeting_type, String, :required => true, :desc => N_('Invocation type, one of %s') % Targeting::TYPES
           param :inputs, Hash, :required => false, :desc => N_('Inputs to use')
@@ -92,7 +92,7 @@ module Api
         if job_invocation_params[:job_template_id]
           templates << JobTemplate.find(job_invocation_params[:job_template_id])
         else
-          templates = JobTemplate.where(:job_name => job_invocation_params[:job_name])
+          templates = JobTemplate.where(:job_category => job_invocation_params[:job_category])
           if templates.pluck(:provider_type).uniq.length != templates.length
             raise Foreman::Exception, _('Duplicate remote execution providers found for specified Job, please specify a single job_template_id.')
           end

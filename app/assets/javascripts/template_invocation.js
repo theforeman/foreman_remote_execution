@@ -52,13 +52,13 @@ function close_preview_hosts_modal() {
 }
 
 function job_invocation_form_binds() {
-  $('input.job_template_selector').on('click', function () {
-    parent_fieldset = $(this).closest('fieldset');
-    $(parent_fieldset).find('fieldset.job_template_form').hide();
+  $('select.job_template_selector').on('click', function () {
+    provider_fieldset = $('#provider_' + $(this).data('providerType'));
+    $(provider_fieldset).find('fieldset.job_template_form').hide();
     $('#job_template_' + $(this).val()).show();
   });
 
-  $('select#job_invocation_job_name').on('change', refresh_execution_form);
+  $('select#job_invocation_job_category').on('change', refresh_execution_form);
 
   $('button#refresh_execution_form').on('click', refresh_execution_form);
 
@@ -111,7 +111,8 @@ function load_keys(parent) {
     dict[match[1]] = $(parent).find("#" + match[1]).val();
     match = re.exec(pattern);
   }
-  dict['job_name'] = $('#job_invocation_job_name').val();
+  dict['job_category'] = $('#job_invocation_job_category').val();
+  dict['template_name'] = $('.job_template_selector:visible span.select2-chosen').html();
   return dict;
 }
 

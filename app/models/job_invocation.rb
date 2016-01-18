@@ -12,10 +12,10 @@ class JobInvocation < ActiveRecord::Base
   has_many :template_invocations, :inverse_of => :job_invocation, :dependent => :destroy
 
   validates :targeting, :presence => true
-  validates :job_name, :presence => true
+  validates :job_category, :presence => true
   validates_associated :targeting, :template_invocations
 
-  scoped_search :on => :job_name, :complete_value => true
+  scoped_search :on => :job_category, :complete_value => true
   scoped_search :on => :description # FIXME No auto complete because of https://github.com/wvanbergen/scoped_search/issues/138
 
   delegate :bookmark, :resolved?, :to => :targeting, :allow_nil => true
@@ -28,8 +28,6 @@ class JobInvocation < ActiveRecord::Base
   belongs_to :task_group, :class_name => 'JobInvocationTaskGroup'
 
   has_many :tasks, :through => :task_group, :class_name => 'ForemanTasks::Task'
-
-  scoped_search :on => [:job_name], :complete_value => true
 
   scoped_search :in => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
   scoped_search :in => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
@@ -104,7 +102,7 @@ class JobInvocation < ActiveRecord::Base
   end
 
   def to_action_input
-    { :id => id, :name => job_name }
+    { :id => id, :name => job_category }
   end
 
   def template_invocation_tasks
@@ -166,7 +164,8 @@ class JobInvocation < ActiveRecord::Base
     input_names = template_invocation.template.template_input_names
     hash_base = Hash.new { |hash, key| hash[key] = "%{#{key}}" }
     input_hash = hash_base.merge Hash[input_names.zip(template_invocation.input_values.pluck(:value))]
-    input_hash.update(:job_name => job_name)
+    input_hash.update(:job_category => job_category)
+    input_hash.update(:template_name => template_invocation.template.name)
     description_format.scan(key_re) { |key| input_hash[key.first] }
     self.description = description_format
     input_hash.each do |k, v|

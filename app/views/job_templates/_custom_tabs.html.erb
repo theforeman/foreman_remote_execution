@@ -1,17 +1,18 @@
 <div class="tab-pane" id="template_job">
 
-  <%= field(f, :job_name) do %>
-    <%= auto_complete_search(:job_name,
-                             f.object.job_name,
-                             :placeholder => _("Job name") + ' ...',
-                             :name => 'job_template[job_name]',
+  <%= field(f, :job_category, :label => _('Job category')) do %>
+    <%= auto_complete_search(:job_category,
+                             f.object.job_category,
+                             :placeholder => _("Job category") + ' ...',
+                             :name => 'job_template[job_category]',
                              :id => 'search') %>
   <% end %>
 
   <%= text_f f, :description_format,
              :help_inline => popover(_('Explanation'), _('This template is used to generate the description.
-                                                          Input values can be used using the syntax %{fqdn}.
-                                                          You may also include the job name using %{job_name}.')) %>
+                                                          Input values can be used using the syntax %{package}.
+                                                          You may also include the job category and template
+                                                          name using %{job_category} and %{template_name}.')) %>
 
   <%= select_f f, :provider_type, providers_options, :first, :last %>
 

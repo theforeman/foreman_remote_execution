@@ -2,7 +2,7 @@ FactoryGirl.define do
 
   factory :job_template do |f|
     f.sequence(:name) { |n| "Job template #{n}" }
-    sequence(:job_name) { |n| "job name #{n}" }
+    sequence(:job_category) { |n| "job name #{n}" }
     f.template 'id'
     f.provider_type 'SSH'
 
@@ -13,7 +13,7 @@ FactoryGirl.define do
     end
 
     trait :with_description_format do
-      description_format 'Factory-built %{job_name}'
+      description_format 'Factory-built %{job_category}'
     end
   end
 
@@ -30,8 +30,8 @@ FactoryGirl.define do
 
   factory :job_invocation do |f|
     targeting
-    f.sequence(:job_name) { |n| "Job name #{n}" }
-    f.description_format '%{job_name}'
+    f.sequence(:job_category) { |n| "Job name #{n}" }
+    f.description_format '%{job_category}'
     trait :with_template do
       after(:build) do |invocation, evaluator|
         invocation.template_invocations << FactoryGirl.build(:template_invocation)

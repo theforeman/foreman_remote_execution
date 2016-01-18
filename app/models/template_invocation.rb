@@ -21,7 +21,7 @@ class TemplateInvocation < ActiveRecord::Base
 
   scoped_search :in => :host, :on => :name, :rename => 'host.name', :complete_value => true
   scoped_search :in => :host_group, :on => :name, :rename => 'host_group.name', :complete_value => true
-  scoped_search :in => :template, :on => :job_name, :complete_value => true
+  scoped_search :in => :template, :on => :job_category, :complete_value => true
 
   def to_action_input
     { :id => id, :name => template.name }

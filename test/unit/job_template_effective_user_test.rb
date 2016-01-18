@@ -1,7 +1,7 @@
 require 'test_plugin_helper'
 
 describe JobTemplateEffectiveUser do
-  let(:job_template) { FactoryGirl.build(:job_template, :job_name => '') }
+  let(:job_template) { FactoryGirl.build(:job_template, :job_category => '') }
   let(:effective_user) { job_template.effective_user }
 
   before do

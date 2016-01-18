@@ -6,8 +6,9 @@ class JobTemplatesController < ::TemplatesController
     @organizations    = @template.organizations
   end
 
-  def auto_complete_job_name
-    @job_names = resource_base.where(['job_name LIKE ?', "%#{params[:search]}%"]).pluck(:job_name).uniq
+  def auto_complete_job_category
+    @job_categories = resource_base.where(['job_category LIKE ?', "%#{params[:search]}%"]).pluck(:job_category).uniq
+    render :json => @job_categories.map { |name| { 'completed' => '', 'part' => name, 'label' => name, 'category' => '' } }.to_json
   end
 
   def preview
@@ -35,7 +36,7 @@ class JobTemplatesController < ::TemplatesController
 
   def action_permission
     case params[:action]
-      when 'auto_complete_job_name'
+      when 'auto_complete_job_category'
         :view_job_templates
       else
         super

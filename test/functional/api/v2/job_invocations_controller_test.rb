@@ -20,30 +20,30 @@ module Api
         assert_response :success
         template = ActiveSupport::JSON.decode(@response.body)
         refute_empty template
-        assert_equal template['job_name'], @invocation.job_name
+        assert_equal template['job_category'], @invocation.job_category
       end
 
       test 'should create valid without job_template_id' do
-        attrs = { :job_name => @template.job_name, :name => 'RandomName', :targeting_type => 'static_query', :search_query => 'foobar'}
+        attrs = { :job_category => @template.job_category, :name => 'RandomName', :targeting_type => 'static_query', :search_query => 'foobar'}
         post :create, :job_invocation => attrs
 
         invocation = ActiveSupport::JSON.decode(@response.body)
-        assert_equal attrs[:job_name], invocation['job_name']
+        assert_equal attrs[:job_category], invocation['job_category']
         assert_response :success
       end
 
       test 'should create valid with job_template_id' do
-        attrs = { :job_name => @template.job_name, :name => 'RandomName', :job_template_id => @template.id,
+        attrs = { :job_category => @template.job_category, :name => 'RandomName', :job_template_id => @template.id,
                   :targeting_type => 'static_query', :search_query => 'foobar'}
         post :create, :job_invocation => attrs
 
         invocation = ActiveSupport::JSON.decode(@response.body)
-        assert_equal attrs[:job_name], invocation['job_name']
+        assert_equal attrs[:job_category], invocation['job_category']
         assert_response :success
       end
 
       test 'should create with description format overridden' do
-        attrs = { :job_name => @template.job_name, :name => 'RandomName', :job_template_id => @template.id,
+        attrs = { :job_category => @template.job_category, :name => 'RandomName', :job_template_id => @template.id,
                   :targeting_type => 'static_query', :search_query => 'foobar', :description_format => 'format' }
         post :create, :job_invocation => attrs
 
