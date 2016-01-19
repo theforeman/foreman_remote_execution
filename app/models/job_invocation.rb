@@ -3,17 +3,24 @@ class JobInvocation < ActiveRecord::Base
 
   include ForemanRemoteExecution::ErrorsFlattener
   FLATTENED_ERRORS_MAPPING = {
-    :template_invocations => lambda do |template_invocation|
+    :pattern_template_invocations => lambda do |template_invocation|
       _('template') + " #{template_invocation.template.name}"
     end
   }
 
   belongs_to :targeting, :dependent => :destroy
-  has_many :template_invocations, :inverse_of => :job_invocation, :dependent => :destroy
+  has_many :all_template_invocations, :inverse_of => :job_invocation, :dependent => :destroy, :class_name => 'TemplateInvocation'
+  if Rails::VERSION::MAJOR >= 4
+    has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :inverse_of => :job_invocation
+    has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :inverse_of => :job_invocation, :class_name => 'TemplateInvocation'
+  else
+    has_many :template_invocations, :conditions => 'host_id IS NOT NULL', :inverse_of => :job_invocation
+    has_many :pattern_template_invocations, :conditions => 'host_id IS NULL', :inverse_of => :job_invocation, :class_name => 'TemplateInvocation'
+  end
 
   validates :targeting, :presence => true
   validates :job_category, :presence => true
-  validates_associated :targeting, :template_invocations
+  validates_associated :targeting, :all_template_invocations
 
   scoped_search :on => :job_category, :complete_value => true
   scoped_search :on => :description # FIXME No auto complete because of https://github.com/wvanbergen/scoped_search/issues/138
@@ -28,6 +35,9 @@ class JobInvocation < ActiveRecord::Base
   belongs_to :task_group, :class_name => 'JobInvocationTaskGroup'
 
   has_many :tasks, :through => :task_group, :class_name => 'ForemanTasks::Task'
+  has_many :template_invocation_tasks, :through => :template_invocations,
+                                       :class_name => 'ForemanTasks::Task',
+                                       :source => 'run_host_job_task'
 
   scoped_search :in => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
   scoped_search :in => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
@@ -96,7 +106,7 @@ class JobInvocation < ActiveRecord::Base
       invocation.triggering = self.triggering
       invocation.description_format = self.description_format
       invocation.description = self.description
-      invocation.template_invocations = self.template_invocations.map(&:deep_clone)
+      invocation.pattern_template_invocations = self.pattern_template_invocations.map(&:deep_clone)
       invocation.save!
     end
   end
@@ -105,24 +115,16 @@ class JobInvocation < ActiveRecord::Base
     { :id => id, :name => job_category }
   end
 
-  def template_invocation_tasks
-    sub_tasks.for_action_types('Actions::RemoteExecution::RunHostJob')
-  end
-
   def failed_template_invocation_tasks
-    template_invocation_tasks.where(:result => 'warning')
+    template_invocation_tasks.where(:result => [ 'error', 'warning' ])
   end
 
   def failed_host_ids
-    locks_for_resource(failed_template_invocation_tasks, 'Host::Managed').map(&:resource_id)
+    failed_template_invocations.map(&:host_id)
   end
 
   def failed_hosts
-    locks_for_resource(failed_template_invocation_tasks, 'Host::Managed').map(&:resource)
-  end
-
-  def locks_for_resource(tasks, resource_type)
-    tasks.map { |task| task.locks.where(:resource_type => resource_type).first }.compact
+    failed_template_invocations.includes(:host).map(&:host)
   end
 
   def total_hosts_count
@@ -133,10 +135,10 @@ class JobInvocation < ActiveRecord::Base
     end
   end
 
-  def template_invocation_for_host(host)
+  def pattern_template_invocation_for_host(host)
     providers = available_providers(host)
     providers.each do |provider|
-      template_invocations.each do |template_invocation|
+      pattern_template_invocations.each do |template_invocation|
         if template_invocation.template.provider_type == provider
           return template_invocation
         end
@@ -150,7 +152,7 @@ class JobInvocation < ActiveRecord::Base
   end
 
   def sub_task_for_host(host)
-    sub_tasks.joins(:locks).where("#{ForemanTasks::Lock.table_name}.resource_type" => 'Host::Managed', "#{ForemanTasks::Lock.table_name}.resource_id" => host.id).first
+    template_invocations.where(:host => host.id).first.try(:run_host_job_task)
   end
 
   def output(host)
@@ -160,7 +162,8 @@ class JobInvocation < ActiveRecord::Base
 
   def generate_description!
     key_re = /%\{([^\}]+)\}/
-    template_invocation = template_invocations.first
+    # works fine only with invocation with one provider
+    template_invocation = pattern_template_invocations.first
     input_names = template_invocation.template.template_input_names
     hash_base = Hash.new { |hash, key| hash[key] = "%{#{key}}" }
     input_hash = hash_base.merge Hash[input_names.zip(template_invocation.input_values.pluck(:value))]
@@ -173,5 +176,11 @@ class JobInvocation < ActiveRecord::Base
     end
     self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
     save!
+  end
+
+  private
+
+  def failed_template_invocations
+    template_invocations.joins(:run_host_job_task).where("#{ForemanTasks::Task.table_name}.result" => ['error', 'warning'])
   end
 end

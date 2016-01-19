@@ -123,7 +123,7 @@ class JobInvocationComposer
     end
 
     def template_invocations_params
-      job_invocation.template_invocations.map do |template_invocation|
+      job_invocation.pattern_template_invocations.map do |template_invocation|
         params = template_invocation.attributes.slice('template_id', 'effective_user')
         params['input_values'] = template_invocation.input_values.map { |v| v.attributes.slice('template_input_id', 'value') }
         params
@@ -136,7 +136,7 @@ class JobInvocationComposer
   end
 
   attr_accessor :params, :job_invocation, :host_ids, :search_query
-  delegate :job_category, :template_invocations, :targeting, :triggering, :to => :job_invocation
+  delegate :job_category, :pattern_template_invocations, :template_invocations, :targeting, :triggering, :to => :job_invocation
 
   def initialize(params, set_defaults = false)
     @params = params
@@ -166,14 +166,14 @@ class JobInvocationComposer
     job_invocation.job_category ||= available_job_categories.first if @set_defaults
     job_invocation.targeting = build_targeting
     job_invocation.triggering = build_triggering
-    job_invocation.template_invocations = build_template_invocations
+    job_invocation.pattern_template_invocations = build_template_invocations
     job_invocation.description_format = params[:description_format]
 
     self
   end
 
   def valid?
-    targeting.valid? & job_invocation.valid? & !template_invocations.map(&:valid?).include?(false)
+    targeting.valid? & job_invocation.valid? & !pattern_template_invocations.map(&:valid?).include?(false)
   end
 
   def save
@@ -264,11 +264,11 @@ class JobInvocationComposer
   end
 
   def template_invocation(job_template)
-    template_invocations.find { |invocation| invocation.template == job_template }
+    pattern_template_invocations.find { |invocation| invocation.template == job_template }
   end
 
   def template_invocation_input_value_for(input)
-    invocations = template_invocations
+    invocations = pattern_template_invocations
     default = TemplateInvocationInputValue.new
     if (invocation = invocations.detect { |i| i.template_id == input.template_id })
       invocation.input_values.detect { |iv| iv.template_input_id == input.id } || default
@@ -278,19 +278,10 @@ class JobInvocationComposer
   end
 
   def job_template_ids
-    job_invocation.template_invocations.map(&:template_id)
+    job_invocation.pattern_template_invocations.map(&:template_id)
   end
 
   private
-
-  def dup_template_invocations(job_invocation)
-    job_invocation.template_invocations.map do |template_invocation|
-      duplicate = template_invocation.dup
-      template_invocation.input_values.map { |value| duplicate.input_values.build :value => value.value, :template_input_id => value.template_input_id }
-      duplicate.effective_user = template_invocation.effective_user
-      duplicate
-    end
-  end
 
   # builds input values for a given templates id based on params
   # omits inputs that belongs to unavailable templates
@@ -334,8 +325,8 @@ class JobInvocationComposer
     valid_template_ids = validate_job_template_ids(params[:template_invocations].map { |t| t[:template_id] })
 
     params[:template_invocations].select { |t| valid_template_ids.include?(t[:template_id].to_i) }.map do |template_invocation_params|
-      template_invocation = job_invocation.template_invocations.build(:template_id => template_invocation_params[:template_id],
-                                                                      :effective_user => build_effective_user(template_invocation_params))
+      template_invocation = job_invocation.pattern_template_invocations.build(:template_id => template_invocation_params[:template_id],
+                                                                              :effective_user => build_effective_user(template_invocation_params))
       template_invocation.input_values = build_input_values_for(template_invocation_params)
       template_invocation
     end

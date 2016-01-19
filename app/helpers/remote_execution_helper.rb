@@ -79,15 +79,14 @@ module RemoteExecutionHelper
     end
   end
 
-  def template_invocation_actions(task, host, job_invocation)
+  def template_invocation_actions(task, host, job_invocation, template_invocation)
     [
       display_link_if_authorized(_('Host detail'), hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts)),
       display_link_if_authorized(_('Rerun on %s') % host.name, hash_for_rerun_job_invocation_path(:id => job_invocation, :host_ids => [ host.id ])),
     ]
   end
 
-  def remote_execution_provider_for(task)
-    template_invocation = task.locks.where(:resource_type => 'TemplateInvocation').first.try(:resource) unless task.nil?
+  def remote_execution_provider_for(template_invocation)
     template_invocation.nil? ? _('N/A') : template_invocation.template.provider.humanized_name
   end
 

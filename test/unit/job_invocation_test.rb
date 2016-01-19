@@ -30,16 +30,16 @@ describe JobInvocation do
     let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
 
     before do
-      input = job_invocation.template_invocations.first.template.template_inputs.create!(:name => 'foo', :required => true, :input_type => 'user')
+      input = job_invocation.pattern_template_invocations.first.template.template_inputs.create!(:name => 'foo', :required => true, :input_type => 'user')
       @input_value = FactoryGirl.create(:template_invocation_input_value,
-                                        :template_invocation =>  job_invocation.template_invocations.first,
-                                        :template_input      => input)
+                                        :template_invocation => job_invocation.pattern_template_invocations.first,
+                                        :template_input => input)
       job_invocation.reload
-      job_invocation.template_invocations.first.reload
+      job_invocation.pattern_template_invocations.first.reload
     end
 
-    it { refute job_invocation.reload.template_invocations.empty? }
-    it { refute job_invocation.reload.template_invocations.first.input_values.empty? }
+    it { refute job_invocation.reload.pattern_template_invocations.empty? }
+    it { refute job_invocation.reload.pattern_template_invocations.first.input_values.empty? }
 
     it 'validates required inputs have values' do
       assert job_invocation.valid?

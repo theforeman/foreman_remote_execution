@@ -205,7 +205,7 @@ describe JobInvocationComposer do
         end
       end
 
-      describe '#template_invocations' do
+      describe '#pattern template_invocations' do
         let(:ssh_params) do
           { :job_template_id => trying_job_template_1.id.to_s,
             :job_templates => {
@@ -216,9 +216,9 @@ describe JobInvocationComposer do
           }
         end
         let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
-        let(:invocations) { composer.template_invocations }
+        let(:invocations) { composer.pattern_template_invocations }
 
-        it 'builds template invocations based on passed params and it filters out wrong inputs' do
+        it 'builds pattern template invocations based on passed params and it filters out wrong inputs' do
           invocations.size.must_equal 1
           invocations.first.input_values.size.must_equal 1
           invocations.first.input_values.first.value.must_equal 'value1'
@@ -238,7 +238,7 @@ describe JobInvocationComposer do
         let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
         let(:template_invocation) do
           trying_job_template_1.effective_user.update_attributes(:overridable => overridable, :value => 'template user')
-          composer.template_invocations.first
+          composer.pattern_template_invocations.first
         end
 
         before do
@@ -424,7 +424,7 @@ describe JobInvocationComposer do
           composer
           composer.job_invocation.expects(:valid?).returns(false)
           composer.targeting.expects(:valid?).returns(false)
-          composer.template_invocations.each { |invocation| invocation.expects(:valid?).returns(false) }
+          composer.pattern_template_invocations.each { |invocation| invocation.expects(:valid?).returns(false) }
           refute composer.valid?
         end
       end
@@ -507,11 +507,11 @@ describe JobInvocationComposer do
         end
 
         it 'keeps job template ids' do
-          new_composer.job_template_ids.must_equal existing.template_invocations.map(&:template_id)
+          new_composer.job_template_ids.must_equal existing.pattern_template_invocations.map(&:template_id)
         end
 
         it 'keeps template invocations and their values' do
-          new_composer.template_invocations.size.must_equal existing.template_invocations.size
+          new_composer.pattern_template_invocations.size.must_equal existing.pattern_template_invocations.size
         end
 
       end
@@ -539,7 +539,7 @@ describe JobInvocationComposer do
         assert composer.save!
         assert_equal bookmark, composer.job_invocation.targeting.bookmark
         assert_equal composer.job_invocation.targeting.user, User.current
-        refute_empty composer.job_invocation.template_invocations
+        refute_empty composer.job_invocation.pattern_template_invocations
       end
     end
 
@@ -554,7 +554,7 @@ describe JobInvocationComposer do
       it 'creates invocation with a search query' do
         assert composer.save!
         assert_equal 'some hosts', composer.job_invocation.targeting.search_query
-        refute_empty composer.job_invocation.template_invocations
+        refute_empty composer.job_invocation.pattern_template_invocations
       end
     end
 
@@ -569,7 +569,7 @@ describe JobInvocationComposer do
 
       it 'finds the inputs by name' do
         assert composer.save!
-        assert_equal 1, composer.template_invocations.first.input_values.count
+        assert_equal 1, composer.pattern_template_invocations.first.input_values.count
       end
     end
 
@@ -583,7 +583,7 @@ describe JobInvocationComposer do
           :inputs => {input1.name => 'some_value'}}
       end
 
-      let(:template_invocation) { composer.job_invocation.template_invocations.first }
+      let(:template_invocation) { composer.job_invocation.pattern_template_invocations.first }
 
       it 'sets the effective user based on the input' do
         assert composer.save!

@@ -39,8 +39,7 @@ module ForemanRemoteExecution
     end
 
     it 'triggers the RunHostJob actions on the resolved hosts in run phase' do
-      template_invocation = job_invocation.template_invocation_for_host(host)
-      action.expects(:trigger).with(Actions::RemoteExecution::RunHostJob, job_invocation, host, template_invocation, proxy)
+      action.expects(:trigger).with() { |*args| args[0] == Actions::RemoteExecution::RunHostJob }
       action.create_sub_plans
     end
 

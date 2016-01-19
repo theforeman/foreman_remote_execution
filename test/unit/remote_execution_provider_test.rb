@@ -55,7 +55,7 @@ describe RemoteExecutionProvider do
     end
 
     let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
-    let(:template_invocation) { job_invocation.template_invocations.first }
+    let(:template_invocation) { job_invocation.pattern_template_invocations.first }
     let(:host) { FactoryGirl.create(:host) }
     let(:proxy_options) { SSHExecutionProvider.proxy_command_options(template_invocation, host) }
 

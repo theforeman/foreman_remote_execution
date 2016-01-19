@@ -91,11 +91,11 @@ describe JobTemplate do
 
   context 'there is existing template invocation of a job template' do
     let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
-    let(:job_template) { job_invocation.template_invocations.first.template }
+    let(:job_template) { job_invocation.pattern_template_invocations.first.template }
 
     describe 'job template deletion' do
       it 'succeeds' do
-        job_template.template_invocations.wont_be_empty
+        job_template.pattern_template_invocations.wont_be_empty
         assert job_template.destroy
       end
     end
