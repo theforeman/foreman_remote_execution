@@ -205,4 +205,11 @@ module RemoteExecutionHelper
       url,
       :rel => 'external', :class => 'btn btn-info', :target => '_blank')
   end
+
+  def template_input_header(f, template)
+    header = _('Template input')
+    header += ' ' + remove_child_link('x', f, {:rel => 'twipsy', :'data-title' => _('remove template input'), :'data-placement' => 'left',
+                                               :class => 'fr badge badge-danger'}) unless template.locked?
+    header.html_safe
+  end
 end

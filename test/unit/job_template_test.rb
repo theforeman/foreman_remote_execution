@@ -100,4 +100,14 @@ describe JobTemplate do
       end
     end
   end
+
+  context 'template locked' do
+    it 'inputs cannot be changed' do
+      job_template = FactoryGirl.create(:job_template, :with_input, :locked => true)
+      Foreman.expects(:in_rake?).returns(false).at_least_once
+      assert_valid job_template
+      job_template.template_inputs.first.name = 'something else'
+      refute_valid job_template
+    end
+  end
 end
