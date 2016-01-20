@@ -51,7 +51,7 @@ class InputTemplateRenderer
   def render_template(template_name, input_values = {}, options = {})
     options.assert_valid_keys(:with_foreign_input_set)
     with_foreign_input_set = options.fetch(:with_foreign_input_set, true)
-    template = JobTemplate.authorized(:view_job_templates).where(:name => template_name).first
+    template = JobTemplate.authorized(:view_job_templates).find_by(:name => template_name)
     unless template
       self.error_message = _('included template \'%s\' not found') % template_name
       raise error_message
@@ -70,7 +70,7 @@ class InputTemplateRenderer
   end
 
   def foreign_input_set_values(target_template, overrides = {})
-    input_set = @template.foreign_input_sets.where(:target_template_id => target_template).first
+    input_set = @template.foreign_input_sets.find_by(:target_template_id => target_template)
     return overrides if input_set.nil?
 
     inputs_to_generate = input_set.inputs.map(&:name) - overrides.keys.map(&:to_s)

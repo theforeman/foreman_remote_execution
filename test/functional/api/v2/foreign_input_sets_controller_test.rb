@@ -18,7 +18,7 @@ module Api
       end
 
       test 'should get input set detail' do
-        get :show,  :template_id => @template.to_param, :id => @input_set.to_param
+        get :show, :template_id => @template.to_param, :id => @input_set.to_param
         assert_response :success
         input_set = ActiveSupport::JSON.decode(@response.body)
         assert !input_set.empty?

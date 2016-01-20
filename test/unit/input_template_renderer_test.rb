@@ -147,7 +147,7 @@ describe InputTemplateRenderer do
       end
 
       let(:package_template) do
-        FactoryGirl.build(:job_template, :name => 'package action', :template => <<TEMPLATE)  do |template|
+        FactoryGirl.build(:job_template, :name => 'package action', :template => <<TEMPLATE) do |template|
 <%= render_template("command action", "command" => "yum -y \#{ input("action") } \#{ input('package') }") -%>
 TEMPLATE
           template.template_inputs << FactoryGirl.build(:template_input, :name => 'package', :input_type => 'user')
