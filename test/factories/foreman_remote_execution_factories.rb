@@ -22,6 +22,8 @@ FactoryGirl.define do
     f.input_type 'user'
   end
 
+  factory :foreign_input_set
+
   factory :targeting do |f|
     search_query 'name = foo'
     targeting_type 'static_query'

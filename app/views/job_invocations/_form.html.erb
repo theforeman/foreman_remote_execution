@@ -78,8 +78,8 @@
                     <%= job_templates_fields.fields_for job_template.id.to_s do |job_template_fields| %>
 
                       <%= job_template_fields.fields_for :input_values do |input_values_fields| %>
-                        <% job_template.template_inputs.where(:input_type => 'user').each do |input| %>
-                          <%= input_values_fields.fields_for input.id.to_s, @composer.template_invocation_input_value_for(input) do |input_fields| %>
+                        <% job_template.template_inputs_with_foreign.select { |input| input.input_type == 'user' }.each do |input| %>
+                          <%= input_values_fields.fields_for input.id.to_s, @composer.template_invocation_input_value_for(job_template, input) do |input_fields| %>
                             <% unless input.options.blank? %>
                               <%= selectable_f input_fields, :value, input.options_array, {:include_blank => !input.required}, :require => input.required, :label => input.name, :help_inline => input.description, :id => input.name, :onchange => "regenerate_description(this);" %>
                             <% else %>

@@ -3,6 +3,12 @@ require 'test_plugin_helper'
 describe JobTemplate do
   context 'when creating a template' do
     let(:job_template) { FactoryGirl.build(:job_template, :job_category => '') }
+    let(:template_with_inputs) do
+      FactoryGirl.build(:job_template, :template => 'test').tap do |template|
+        template.template_inputs << FactoryGirl.build(:template_input, :name => 'command', :input_type => 'user')
+        template.save!
+      end
+    end
 
     it 'needs a job_category' do
       refute job_template.valid?
@@ -11,6 +17,14 @@ describe JobTemplate do
     it 'does not need a job_category if it is a snippet' do
       job_template.snippet = true
       assert job_template.valid?
+    end
+
+    it 'validates the inputs are uniq in the template' do
+      job_template.job_category = 'Miscellaneous'
+      job_template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => template_with_inputs)
+      job_template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => template_with_inputs)
+      refute job_template.valid?
+      job_template.errors.full_messages.first.must_include 'Duplicated inputs detected: ["command"]'
     end
   end
 

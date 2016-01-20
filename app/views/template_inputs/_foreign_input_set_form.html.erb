@@ -1,0 +1,12 @@
+<div class="fields">
+  <div class="form-group">
+    <%= field_set_tag _("Foreign input set").html_safe +
+                          ' ' +
+                          remove_child_link('x', f, {:rel => 'twipsy', "data-title" => _('remove template input set'), :'data-placement' => 'left', :class => 'fr badge badge-danger'}).html_safe do %>
+      <%= selectable_f f, :target_template_id, JobTemplate.all.map { |t| [ t.name, t.id ] }, {}, :class => 'input_type_selector without_select2' %>
+      <%= checkbox_f f, :include_all, :disabled => @template.locked?, :onchange => 'update_foreign_input_set_include(this)' %>
+      <%= text_f f, :include, :class => 'foreign_input_set_include', :disabled => (@template.locked? || f.object.include_all?), :help_inline => _("A comma separated list of input names to be included from the foreign template.") %>
+      <%= text_f f, :exclude, :disabled => @template.locked?, :help_inline => _("A comma separated list of input names to be excluded from the foreign template.") %>
+    <% end %>
+  </div>
+</div>

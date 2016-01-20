@@ -95,6 +95,173 @@ describe InputTemplateRenderer do
           renderer.invocation = template_invocation
           renderer.render.must_equal 'service restart '
         end
+
+        describe 'with circular reference' do
+          let(:recursive_template_with_inputs) do
+            FactoryGirl.create(:job_template, :name => 'test', :template => 'test')
+          end
+
+          let(:template_with_inputs) do
+            FactoryGirl.create(:job_template, :template => 'test').tap do |template|
+              template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => recursive_template_with_inputs)
+            end
+          end
+
+          let(:recursive_template_without_inputs) do
+            FactoryGirl.create(:job_template, :name => 'recursive template', :template => '<%= render_template("template with inputs", "action" => "install") %>')
+          end
+
+          let(:template_without_inputs) do
+            FactoryGirl.create(:job_template, :name => 'template with inputs', :template => "<%= render_template('#{recursive_template_without_inputs.name}') %>")
+          end
+
+          before do
+            User.current = users :admin
+          end
+
+          it 'handles circular references in templates' do
+            renderer.invocation = FactoryGirl.build(:template_invocation, :template => template_without_inputs)
+            renderer.template = template_without_inputs
+            refute renderer.render
+            renderer.error_message.must_include 'Recursive rendering of templates detected'
+          end
+
+          it 'handles circular references in inputs' do
+            assert_raises(ActiveRecord::RecordInvalid) do
+              input_set = FactoryGirl.build(:foreign_input_set, :target_template => template_with_inputs, :include_all => false,
+                                                                :include => 'package, debug', :exclude => 'action,debug')
+              recursive_template_with_inputs.foreign_input_sets << input_set
+              recursive_template_with_inputs.save!
+            end
+          end
+        end
+      end
+    end
+
+    context 'renderer for template with input set and render_template' do
+      let(:command_template) do
+        FactoryGirl.build(:job_template, :name => 'command action', :template => '<%= input("command") -%>').tap do |template|
+          template.template_inputs << FactoryGirl.build(:template_input, :name => 'command', :input_type => 'user')
+          template.template_inputs << FactoryGirl.build(:template_input, :name => 'debug', :input_type => 'user')
+        end
+      end
+
+      let(:package_template) do
+        FactoryGirl.build(:job_template, :name => 'package action', :template => <<TEMPLATE)  do |template|
+<%= render_template("command action", "command" => "yum -y \#{ input("action") } \#{ input('package') }") -%>
+TEMPLATE
+          template.template_inputs << FactoryGirl.build(:template_input, :name => 'package', :input_type => 'user')
+          template.template_inputs << FactoryGirl.build(:template_input, :name => 'action', :input_type => 'user')
+          template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => command_template, :include_all => true, :exclude => 'command')
+        end
+      end
+
+      let(:template) do
+        FactoryGirl.create(:job_template,
+                           :template => '<%= render_template("package action", { :action => "install" }, { :with_foreign_input_set => true }) %>').tap do |template|
+          template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => package_template, :include_all => true, :exclude => 'action')
+        end
+      end
+
+      let(:job_invocation) { FactoryGirl.create(:job_invocation) }
+      let(:template_invocation) { FactoryGirl.build(:template_invocation, :template => template) }
+      let(:renderer) { InputTemplateRenderer.new(template) }
+      let(:result) { renderer.render }
+
+      before do
+        User.current = users :admin
+        command_template.save!
+        package_template.save!
+        job_invocation.template_invocations << template_invocation
+      end
+
+      describe 'foreign input set' do
+        describe 'with include_all' do
+          let(:template) do
+            FactoryGirl.create(:job_template, :template => '<%= render_template("package action", "action" => "install") %>').tap do |template|
+              template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => package_template, :include_all => true)
+            end
+          end
+
+          let(:template_2) do
+            FactoryGirl.create(:job_template, :template => '<%= render_template("package action", "action" => "install") %>').tap do |template|
+              template.foreign_input_sets << FactoryGirl.build(:foreign_input_set,
+                                                               :target_template => package_template, :include_all => true, :include => '', :exclude => '')
+            end
+          end
+
+          it 'includes all inputs from the imported template' do
+            template.template_inputs_with_foreign.map(&:name).sort.must_equal ['action', 'debug', 'package']
+            template_2.template_inputs_with_foreign.map(&:name).sort.must_equal ['action', 'debug', 'package']
+          end
+        end
+
+        describe 'with include_all and some excludes' do
+          let(:template) do
+            FactoryGirl.create(:job_template, :template => '<%= render_template("package action", "action" => "install") %>').tap do |template|
+              template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => package_template, :include_all => true, :exclude => 'action,debug')
+            end
+          end
+
+          it 'includes all inputs from the imported template except the listed once' do
+            template.template_inputs_with_foreign.map(&:name).sort.must_equal ['package']
+          end
+        end
+
+        describe 'with some includes and some excludes' do
+          let(:template) do
+            FactoryGirl.create(:job_template, :template => '<%= render_template("package action", "action" => "install") %>').tap do |template|
+              template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => package_template, :include_all => false,
+                                                                                   :include => 'package, debug', :exclude => 'action,debug')
+            end
+          end
+
+          it 'includes all inputs from the imported template' do
+            template.template_inputs_with_foreign.map(&:name).sort.must_equal ['package']
+          end
+        end
+      end
+
+      context 'with invocation specified' do
+        before do
+          FactoryGirl.create(:template_invocation_input_value,
+                             :template_invocation => template_invocation,
+                             :template_input => template.template_inputs_with_foreign.find { |input| input.name == 'package' },
+                             :value => 'zsh')
+          renderer.invocation = template_invocation
+          renderer.invocation.reload
+        end
+
+        it 'can render with job invocation with corresponding value' do
+          rendered = renderer.render
+          renderer.error_message.must_be_nil
+          rendered.must_equal 'yum -y install zsh'
+        end
+      end
+
+      context 'with explicitly specifying inputs' do
+        let(:template) do
+          FactoryGirl.create(:job_template,
+                             :template => '<%= render_template("package action", {"action" => "install", :package => "zsh"}) %>')
+        end
+
+        before do
+          renderer.invocation = template_invocation
+          renderer.invocation.reload
+        end
+
+        it 'can render with job invocation with corresponding value' do
+          rendered = renderer.render
+          renderer.error_message.must_be_nil
+          rendered.must_equal 'yum -y install zsh'
+        end
+      end
+
+      it 'renders even without an input value' do
+        renderer.invocation = template_invocation
+        rendered = renderer.render
+        renderer.error_message.must_be_nil
+        rendered.must_equal 'yum -y install '
       end
     end
 

@@ -45,3 +45,6 @@ Style/ClassAndModuleChildren:
 
 Style/EachWithObject:
   Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
