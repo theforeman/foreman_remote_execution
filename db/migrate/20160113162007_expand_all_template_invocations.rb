@@ -18,7 +18,7 @@ class ExpandAllTemplateInvocations < ActiveRecord::Migration
       job_invocation.pattern_template_invocations.each do |pattern_template_invocation|
         job_invocation.targeting.hosts.each do |host|
           task = job_invocation.sub_tasks.find do |sub_task|
-            sub_task.locks.find { |lock| lock.resource_type == 'Host::Managed' && lock.resource_id == host.id && lock.name == 'link_resource'}.present?
+            sub_task.locks.find { |lock| lock.resource_type == 'Host::Managed' && lock.resource_id == host.id && lock.name == 'link_resource' }.present?
           end
           next if task.nil? # job invocations with static targeting that failed too early
 

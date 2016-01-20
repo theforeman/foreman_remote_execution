@@ -45,7 +45,7 @@ describe JobTemplate do
 
     it 'generates the description_format if not set or blank and has inputs' do
       input_name = template.template_inputs.first.name
-      expected_result = %Q(%{job_category} with inputs #{input_name}="%{#{input_name}}")
+      expected_result = %(%{job_category} with inputs #{input_name}="%{#{input_name}}")
       template.generate_description_format.must_equal expected_result
       template.description_format = ''
       template.generate_description_format.must_equal expected_result
