@@ -5,16 +5,18 @@
                              f.object.job_category,
                              :placeholder => _("Job category") + ' ...',
                              :name => 'job_template[job_category]',
-                             :id => 'search') %>
+                             :id => 'search',
+                             :disabled => @template.locked?) %>
   <% end %>
 
   <%= text_f f, :description_format,
+             :disabled => @template.locked?,
              :help_inline => popover(_('Explanation'), _('This template is used to generate the description.
                                                           Input values can be used using the syntax %{package}.
                                                           You may also include the job category and template
                                                           name using %{job_category} and %{template_name}.')) %>
 
-  <%= select_f f, :provider_type, providers_options, :first, :last %>
+  <%= select_f f, :provider_type, providers_options, :first, :last, :disabled => @template.locked? %>
 
   <div class="children_fields">
     <%= new_child_fields_template(f, :template_inputs, { :partial => "template_inputs/form" }) %>
@@ -23,16 +25,16 @@
         <%= render 'template_inputs/form', :f => ff %>
       </div>
     <% end %>
-    <%= add_child_link '+ ' + _("Add Input"), :template_inputs, { :title => _('add a input for this template')} %>
+    <%= add_child_link '+ ' + _("Add Input"), :template_inputs, { :title => _('add a input for this template')} unless @template.locked? %>
   </div>
 
   <div class="children_fields">
     <%= field_set_tag _("Effective user") do %>
       <%= f.fields_for :effective_user, @template.effective_user do |ff| %>
         <div class="effective_user_form fields">
-          <%= text_f ff, :value %>
-          <%= checkbox_f ff, :current_user %>
-          <%= checkbox_f ff, :overridable %>
+          <%= text_f ff, :value, :disabled => @template.locked? %>
+          <%= checkbox_f ff, :current_user, :disabled => @template.locked? %>
+          <%= checkbox_f ff, :overridable, :disabled => @template.locked? %>
         </div>
       <% end %>
     <% end %>

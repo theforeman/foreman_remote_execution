@@ -39,6 +39,8 @@ class JobTemplate < ::Template
   validates :job_category, :presence => true, :unless => ->(job_template) { job_template.snippet }
   validates :provider_type, :presence => true
   validate :provider_type_whitelist
+  validate :inputs_unchanged_when_locked, :if => ->(template) { (template.locked? || template.locked_changed?) && template.persisted? && !Foreman.in_rake? }
+
   has_one :effective_user, :class_name => 'JobTemplateEffectiveUser', :foreign_key => 'job_template_id', :dependent => :destroy
   accepts_nested_attributes_for :effective_user, :update_only => true
 
@@ -118,5 +120,10 @@ class JobTemplate < ::Template
   # we can't use standard validator, .provider_names output can change but the validator does not reflect it
   def provider_type_whitelist
     errors.add :provider_type, :uniq unless RemoteExecutionProvider.provider_names.include?(self.provider_type)
+  end
+
+  def inputs_unchanged_when_locked
+    inputs_changed = template_inputs.any? { |input| input.changed? || input.new_record? }
+    errors.add(:base, _('This template is locked. Please clone it to a new template to customize.')) if inputs_changed
   end
 end
