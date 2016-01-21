@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(function () {
-    regenerate_description($('#description'), true)
+    regenerate_description($('.description'))
   });
 </script>
 
@@ -83,7 +83,7 @@
                   <% if job_template.effective_user.overridable? %>
                     <%= text_f job_template_fields, :effective_user, :label => _('Effective user'), :help_inline => N_("A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.") %>
                   <% end %>
-                  <%= render :partial => 'description_fields', :locals => { :f => f, :job_template => job_template } %>
+                  <%= render :partial => 'description_fields', :locals => { :f => f, :job_template => job_template, :disabled => job_template != selected_templates_per_provider[provider_type] } %>
                 <% end %>
               </fieldset>
             <% end %>

@@ -44,6 +44,7 @@ class JobInvocationsController < ApplicationController
       @composer.triggering.trigger(::Actions::RemoteExecution::RunHostsJob, job_invocation)
       redirect_to job_invocation_path(job_invocation)
     else
+      @composer.job_invocation.description_format = nil if params[:job_invocation].key?(:description_override)
       render :action => 'new'
     end
   end
@@ -61,7 +62,7 @@ class JobInvocationsController < ApplicationController
 
   # refreshes the form
   def refresh
-    params.fetch(:job_invocation, {}).delete :description_format
+    params[:job_invocation].delete :description_format
     @composer = JobInvocationComposer.from_ui_params(params)
   end
 
