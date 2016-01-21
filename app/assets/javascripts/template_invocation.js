@@ -104,7 +104,7 @@ function regenerate_description(thing) {
 
 function load_keys(parent) {
   var dict = {};
-  var pattern = $(parent).find("#description_format").val();
+  var pattern = $(parent).find(".description_format").val();
   var re = new RegExp("%\\{([^\\}]+)\\}", "gm");
   var match = re.exec(pattern);
   while(match != null) {
