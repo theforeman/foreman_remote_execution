@@ -62,7 +62,7 @@ class JobInvocationsController < ApplicationController
 
   # refreshes the form
   def refresh
-    params[:job_invocation].delete :description_format
+    params[:job_invocation].delete :description_format if params[:job_invocation].key?(:description_override)
     @composer = JobInvocationComposer.from_ui_params(params)
   end
 

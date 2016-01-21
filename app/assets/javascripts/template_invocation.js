@@ -1,6 +1,6 @@
 $(function() { job_invocation_form_binds() });
 
-function refresh_execution_form() {
+function refresh_execution_form(perform_description_reset) {
   var form = $('form#job_invocation_form');
   var data = form.serializeArray();
 
@@ -15,6 +15,11 @@ function refresh_execution_form() {
     password_caps_lock_hint();
     form.find('a[rel="popover-modal"]').popover({html: true});
     form.find('select').select2({allowClear: true});
+    if(perform_description_reset == true) {
+        var fieldset = $('fieldset#job_template_' + $('select.job_template_selector').val());
+        reset_description(fieldset);
+    }
+    template_change($('select.job_template_selector'));
     job_invocation_form_binds();
   });
 }
@@ -58,7 +63,9 @@ function job_invocation_form_binds() {
     $('#job_template_' + $(this).val()).show();
   });
 
-  $('select#job_invocation_job_category').on('change', refresh_execution_form);
+  $('select#job_invocation_job_category').on('change', function() {
+        refresh_execution_form(true);
+  });
 
   $('button#refresh_execution_form').on('click', refresh_execution_form);
 
@@ -145,6 +152,13 @@ function set_description_disable(thing, value) {
     $(thing).find('.description').prop('disabled', value);
     $(thing).find('.description_format').prop('disabled', value);
     $(thing).find('.description_format_override').prop('disabled', value);
+}
+
+function reset_description(fieldset) {
+    var checkbox = $(fieldset).find('.description_format_override');
+    $(fieldset).find('.description_format').val($(checkbox).val());
+    $(checkbox).prop('checked', true);
+    $(fieldset).find('.description_format_container').hide();
 }
 
 String.format = function (pattern, dict) {
