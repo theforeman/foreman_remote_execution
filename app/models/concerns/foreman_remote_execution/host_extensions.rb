@@ -9,7 +9,7 @@ module ForemanRemoteExecution
       alias_method_chain :params, :remote_execution
 
       has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
-
+      has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
       has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
 
       scoped_search :in => :execution_status_object, :on => :status, :rename => :'execution_status',

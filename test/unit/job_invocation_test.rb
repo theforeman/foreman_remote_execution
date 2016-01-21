@@ -26,6 +26,20 @@ describe JobInvocation do
     it { refute_valid job_invocation }
   end
 
+  context 'can delete a host' do
+    let(:host) do
+      FactoryGirl.create(:host)
+    end
+
+    it 'can remove a host' do
+      job_invocation.template_invocations.build(:host_id => host.id, :template_id => template.id)
+      job_invocation.save!
+      host.destroy
+      job_invocation.reload
+      job_invocation.template_invocations.must_be_empty
+    end
+  end
+
   context 'has template invocations with input values' do
     let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
 
