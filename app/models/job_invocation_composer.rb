@@ -61,7 +61,7 @@ class JobInvocationComposer
     def params
       { :job_category => job_category,
         :targeting => targeting_params,
-        :triggering => {},
+        :triggering => triggering_params,
         :description_format => api_params[:description_format] || template_with_default.generate_description_format,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
@@ -73,6 +73,29 @@ class JobInvocationComposer
     def targeting_params
       raise ::Foreman::Exception, _('Cannot specify both bookmark_id and search_query') if api_params[:bookmark_id] && api_params[:search_query]
       api_params.slice(:targeting_type, :bookmark_id, :search_query).merge(:user_id => User.current.id)
+    end
+
+    def triggering_params
+      raise ::Foreman::Exception, _('Cannot specify both recurrence and scheduling') if api_params[:recurrence].present? && api_params[:scheduling].present?
+
+      if api_params[:recurrence].present?
+        {
+          :mode => :recurring,
+          :cronline => api_params[:recurrence][:cron_line],
+          :end_time => format_datetime(api_params[:recurrence][:end_time]),
+          :input_type => :cronline,
+          :max_iteration => api_params[:recurrence][:max_iteration]
+        }
+      elsif api_params[:scheduling].present?
+        {
+          :mode => :future,
+          :start_at_raw => format_datetime(api_params[:scheduling][:start_at]),
+          :start_before_raw => format_datetime(api_params[:scheduling][:start_before]),
+          :end_time_limited => api_params[:scheduling][:start_before] ? true : false
+        }
+      else
+        {}
+      end
     end
 
     def template_invocations_params
@@ -98,6 +121,12 @@ class JobInvocationComposer
       return template
     end
 
+    private
+
+    def format_datetime(datetime)
+      return datetime if datetime.blank?
+      DateTime.parse(datetime).strftime('%Y-%m-%d %H:%M')
+    end
   end
 
   class ParamsFromJobInvocation
