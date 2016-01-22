@@ -10,13 +10,8 @@ class JobInvocation < ActiveRecord::Base
 
   belongs_to :targeting, :dependent => :destroy
   has_many :all_template_invocations, :inverse_of => :job_invocation, :dependent => :destroy, :class_name => 'TemplateInvocation'
-  if Rails::VERSION::MAJOR >= 4
-    has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :inverse_of => :job_invocation
-    has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :inverse_of => :job_invocation, :class_name => 'TemplateInvocation'
-  else
-    has_many :template_invocations, :conditions => 'host_id IS NOT NULL', :inverse_of => :job_invocation
-    has_many :pattern_template_invocations, :conditions => 'host_id IS NULL', :inverse_of => :job_invocation, :class_name => 'TemplateInvocation'
-  end
+  has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :inverse_of => :job_invocation
+  has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :inverse_of => :job_invocation, :class_name => 'TemplateInvocation'
 
   validates :targeting, :presence => true
   validates :job_category, :presence => true
@@ -48,11 +43,7 @@ class JobInvocation < ActiveRecord::Base
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
   has_one :recurring_logic, :through => :triggering, :class_name => 'ForemanTasks::RecurringLogic'
 
-  if Rails::VERSION::MAJOR >= 4
-    scope :with_task, -> { references(:task) }
-  else
-    scope :with_task, -> { joins('LEFT JOIN foreman_tasks_tasks ON foreman_tasks_tasks.id = job_invocations.task_id') }
-  end
+  scope :with_task, -> { references(:task) }
 
   scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id', :auto_complete => true
 
