@@ -173,4 +173,19 @@ class JobInvocationTest < ActiveSupport::TestCase
     end
   end
 
+  describe '#finished?' do
+    let(:task) { ForemanTasks::Task.new }
+    before { job_invocation.task = task }
+
+    it 'returns false if task state is pending' do
+      job_invocation.task.expects(:pending?).returns(true)
+      refute job_invocation.finished?
+    end
+
+    it 'returns true if task is not pending' do
+      job_invocation.task.expects(:pending?).returns(false)
+      assert job_invocation.finished?
+    end
+  end
+
 end
