@@ -1,0 +1,4 @@
+<%= textarea_f(f, :description, :label => _('Description'), :readonly => 'true', :disabled => disabled, :class => 'description', :rows => 2, :help_inline => description_checkbox_f(f, job_template, disabled)) %>
+<div class="description_format_container <%= 'hidden' if f.object.description_format.nil? %>">
+  <%= description_format_textarea_f(f, job_template, disabled) %>
+</div>

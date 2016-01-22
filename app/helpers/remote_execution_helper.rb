@@ -211,4 +211,29 @@ module RemoteExecutionHelper
                                                :class => 'fr badge badge-danger'}) unless template.locked?
     header.html_safe
   end
+
+  def description_checkbox_f(f, job_template, disabled)
+    check_box_tag('description_format_override',
+                  job_template.generate_description_format,
+                  f.object.description_format.nil?,
+                  :class => 'description_format_override',
+                  :name => f.object_name + '[description_override]',
+                  :disabled => disabled,
+                  :onchange => 'description_override(this);') + ' ' + _('Use default description template')
+  end
+
+  def description_format_textarea_f(f, job_template, disabled)
+    textarea_f f, 'description_format',
+               :label => _('Description template'),
+               :value => f.object.description_format || job_template.generate_description_format,
+               :rows => 2,
+               :onchange => 'regenerate_description(this);',
+               :class => 'description_format',
+               :disabled => disabled,
+               :help_inline => popover(_('Explanation'),
+                                       _('This template is used to generate the description.
+                                          Input values can be used using the syntax %{package}.
+                                          You may also include the job category and template
+                                          name using %{job_category} and %{template_name}.'))
+  end
 end

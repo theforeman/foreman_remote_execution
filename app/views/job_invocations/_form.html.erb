@@ -1,10 +1,11 @@
 <script type="text/javascript">
   $(function () {
-    regenerate_description($('#description'), true)
+    regenerate_description($('.description'))
   });
 </script>
 
 <%= form_for @composer.job_invocation, :html => {'data-refresh-url' => refresh_job_invocations_path, :id => 'job_invocation_form'} do |f| %>
+
   <%= selectable_f f, :job_category, @composer.available_job_categories, {}, :label => _('Job category') %>
 
   <% selected_templates_per_provider = {} %>
@@ -17,11 +18,10 @@
         <%= selectable_f provider_type_fields, 'job_template_id', templates_for_provider.map { |t| [t.name, t.id] },
                          { :selected => selected_templates_per_provider[provider_type].try(:id) },
                          { :class => 'job_template_selector', :label => _('Job template'),
-                           :data => { :provider_type => provider_type }, :required => true }%>
+                           :data => { :provider_type => provider_type }, :required => true, :onchange => "template_change(this);" }%>
       <% end %>
     <% end %>
   <% end %>
-
 
   <%= fields_for @composer.targeting do |targeting_fields| %>
     <span id="bookmark_query_map">
@@ -83,22 +83,8 @@
                   <% if job_template.effective_user.overridable? %>
                     <%= text_f job_template_fields, :effective_user, :label => _('Effective user'), :help_inline => N_("A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.") %>
                   <% end %>
-
+                  <%= render :partial => 'description_fields', :locals => { :f => f, :job_template => job_template, :disabled => job_template != selected_templates_per_provider[provider_type] } %>
                 <% end %>
-                <%= textarea_f f, :description, :label => _("Description"), :readonly => "true", :id => "description", :rows => 2, :help_inline => content_tag(:span, check_box_tag('description_format_override', job_template.generate_description_format, true, :onchange => "description_override(this);") + ' ' + _("Use default description template")) %>
-                <div id="description_format_container" class="hidden">
-                  <%= textarea_f f, :description_format,
-                                 :label => _("Description template"),
-                                 :value => job_template.generate_description_format,
-                                 :rows => 2,
-                                 :onchange => "regenerate_description(this);",
-                                 :id => "description_format",
-                                 :help_inline => popover(_('Explanation'),
-                                                         _('This template is used to generate the description.
-                                                           Input values can be used using the syntax %{package}.
-                                                           You may also include the job category and template
-                                                           name using %{job_category} and %{template_name}.')) %>
-                </div>
               </fieldset>
             <% end %>
           <% end %>

@@ -1,6 +1,6 @@
 $(function() { job_invocation_form_binds() });
 
-function refresh_execution_form() {
+function refresh_execution_form(perform_description_reset) {
   var form = $('form#job_invocation_form');
   var data = form.serializeArray();
 
@@ -15,6 +15,11 @@ function refresh_execution_form() {
     password_caps_lock_hint();
     form.find('a[rel="popover-modal"]').popover({html: true});
     form.find('select').select2({allowClear: true});
+    if(perform_description_reset == true) {
+        var fieldset = $('fieldset#job_template_' + $('select.job_template_selector').val());
+        reset_description(fieldset);
+    }
+    template_change($('select.job_template_selector'));
     job_invocation_form_binds();
   });
 }
@@ -58,7 +63,9 @@ function job_invocation_form_binds() {
     $('#job_template_' + $(this).val()).show();
   });
 
-  $('select#job_invocation_job_category').on('change', refresh_execution_form);
+  $('select#job_invocation_job_category').on('change', function() {
+        refresh_execution_form(true);
+  });
 
   $('button#refresh_execution_form').on('click', refresh_execution_form);
 
@@ -98,13 +105,13 @@ function fetch_ids_of_hosts(attribute){
 function regenerate_description(thing) {
   var fieldset = $(thing).closest('fieldset');
   var dict = load_keys(fieldset);
-  var format = fieldset.find('#description_format').val();
-  fieldset.find('#description').val(String.format(format, dict));
+  var format = fieldset.find('.description_format').val();
+  fieldset.find('.description').val(String.format(format, dict));
 }
 
 function load_keys(parent) {
   var dict = {};
-  var pattern = $(parent).find("#description_format").val();
+  var pattern = $(parent).find(".description_format").val();
   var re = new RegExp("%\\{([^\\}]+)\\}", "gm");
   var match = re.exec(pattern);
   while(match != null) {
@@ -117,8 +124,8 @@ function load_keys(parent) {
 }
 
 function description_override(source) {
-    var description_format_container = $(source).closest('fieldset').find('#description_format_container');
-    var description_format = $(description_format_container).find('#description_format');
+    var description_format_container = $(source).closest('fieldset').find('.description_format_container');
+    var description_format = $(description_format_container).find('.description_format');
     var old_value = $(source).val();
     if($(source).is(':checked')) {
 	$(description_format_container).hide();
@@ -128,6 +135,30 @@ function description_override(source) {
     $(source).val($(description_format).val());
     $(description_format).val(old_value);
     regenerate_description(description_format);
+}
+
+function template_change(source) {
+    var template_forms = $('fieldset.job_template_form');
+    for(i = 0; i < template_forms.length; i++) {
+        set_description_disable(template_forms[i], true);
+    }
+    var id = $(source).val();
+    var template_fieldset = $(source).closest('form').find('fieldset#job_template_' + id);
+    set_description_disable(template_fieldset, false);
+    regenerate_description(template_fieldset.find('.description'));
+}
+
+function set_description_disable(thing, value) {
+    $(thing).find('.description').prop('disabled', value);
+    $(thing).find('.description_format').prop('disabled', value);
+    $(thing).find('.description_format_override').prop('disabled', value);
+}
+
+function reset_description(fieldset) {
+    var checkbox = $(fieldset).find('.description_format_override');
+    $(fieldset).find('.description_format').val($(checkbox).val());
+    $(checkbox).prop('checked', true);
+    $(fieldset).find('.description_format_container').hide();
 }
 
 String.format = function (pattern, dict) {
