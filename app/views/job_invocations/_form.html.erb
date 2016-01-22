@@ -38,10 +38,10 @@
       <div class="col-md-4">
         <%= @composer.targeted_hosts_count %> <%= _('hosts') %>
         <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Refresh"), :id => 'refresh_execution_form') do %>
-          <%= icon_text('refresh') %>
+          <%= icon_text('refresh', '', :kind => 'fa') %>
         <% end %>
         <%= button_tag(:type => 'button', :class => 'btn btn-default btn-sm', :title => _("Preview"), :id => 'preview_hosts') do %>
-          <%= icon_text('eye-open') %>
+          <%= icon_text('eye', '', :kind => 'fa') %>
         <% end %>
       </div>
     </div>

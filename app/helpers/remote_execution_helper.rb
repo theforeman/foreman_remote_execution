@@ -61,19 +61,19 @@ module RemoteExecutionHelper
 
   def template_invocation_status(task)
     if task.nil?
-      content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-question-sign') + content_tag(:span, _('N/A'))
+      icon_text('question', 'N/A', :kind => 'fa')
     else
       case task.result
         when 'warning', 'error'
           if task_cancelled?(task)
-            content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-warning-sign') + content_tag(:span, _('cancelled'), :class => 'status-error')
+            icon_text('warning-triangle-o', _('cancelled'), :kind => 'pficon')
           else
-            content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-exclamation-sign') + content_tag(:span, _('failed'), :class => 'status-error')
+            icon_text('error-circle-o', _('failed'), :kind => 'pficon')
           end
         when 'success'
-          content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-ok-sign') + content_tag(:span, _('success'), :class => 'status-ok')
+          icon_text('ok', _('success'), :kind => 'pficon')
         when 'pending'
-          content_tag(:i, '&nbsp'.html_safe, :class => 'glyphicon glyphicon-question-sign') + content_tag(:span, _('pending'))
+          icon_text('question', _('pending'), :kind => 'fa')
         else
           task.result
       end
