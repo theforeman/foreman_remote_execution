@@ -8,45 +8,8 @@ module RemoteExecutionHelper
     TemplateInput::TYPES.map { |key, name| [ _(name), key ] }
   end
 
-  def job_invocation_chart(invocation)
-    options = { :class => 'statistics-pie small', :expandable => true, :border => 0, :show_title => true }
-
-    if invocation.task
-      # Request precise subtask counts only if the task is stopped
-      report = invocation.progress_report
-      flot_pie_chart('status', job_invocation_status(invocation, report[:progress]),
-                     [{:label => _('Success'),   :data => report[:success],   :color => '#5CB85C'},
-                      {:label => _('Failed'),    :data => report[:failed],    :color => '#D9534F'},
-                      {:label => _('Pending'),   :data => report[:pending],   :color => '#DEDEDE'},
-                      {:label => _('Cancelled'), :data => report[:cancelled], :color => '#B7312D'}],
-                     options)
-    else
-      content_tag(:h4, job_invocation_status(invocation))
-    end
-  end
-
   def job_hosts_authorizer
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
-  end
-
-  def job_invocation_status(invocation, percent = nil, verbose = true)
-    case invocation.status
-      when HostStatus::ExecutionStatus::QUEUED
-        if verbose && invocation.task
-          _('queued to start executing in %{time}') % {:time => time_ago_in_words(invocation.task.start_at) }
-        else
-          _('queued')
-        end
-      when HostStatus::ExecutionStatus::RUNNING
-        percent ||= invocation.progress_report[:progress]
-        _('running %{percent}%%') % {:percent => percent}
-      when HostStatus::ExecutionStatus::OK
-        _('succeeded')
-      when HostStatus::ExecutionStatus::ERROR
-        _('failed')
-      else
-        _('unknown status')
-    end
   end
 
   def host_counter(label, count)
@@ -77,9 +40,17 @@ module RemoteExecutionHelper
   end
 
   def template_invocation_actions(task, host, job_invocation, template_invocation)
+    host_task = template_invocation.try(:run_host_job_task)
     [
       display_link_if_authorized(_('Host detail'), hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts, :authorizer => job_hosts_authorizer)),
       display_link_if_authorized(_('Rerun on %s') % host.name, hash_for_rerun_job_invocation_path(:id => job_invocation, :host_ids => [ host.id ], :authorizer => job_hosts_authorizer)),
+      if host_task.present?
+        display_link_if_authorized(
+          _('Host task'),
+          hash_for_foreman_tasks_task_path(host_task)
+          .merge(:auth_object => host_task, :permission => :view_foreman_tasks)
+        )
+      end
     ]
   end
 
@@ -99,7 +70,6 @@ module RemoteExecutionHelper
     job_invocation = task.task_groups.find { |group| group.class == JobInvocationTaskGroup }.job_invocation
     task_authorizer = Authorizer.new(User.current, :collection => [task])
     buttons = []
-    buttons << link_to(_('Refresh'), {}, :class => 'btn btn-default', :title => _('Refresh this page'))
     if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_('Rerun'), rerun_job_invocation_path(:id => job_invocation.id),
                          :class => 'btn btn-default',
@@ -130,6 +100,7 @@ module RemoteExecutionHelper
     end
     return buttons
   end
+
   # rubocop:enable Metrics/AbcSize
 
   def template_invocation_task_buttons(task, invocation)
@@ -151,7 +122,7 @@ module RemoteExecutionHelper
                          :disabled => !task.cancellable?,
                          :method => :post)
     end
-    return buttons
+    buttons
   end
 
   def link_to_invocation_task_if_authorized(invocation)
@@ -197,17 +168,6 @@ module RemoteExecutionHelper
     else
       alert :class => 'alert-block alert-danger base in fade has-error',
             :text => renderer.error_message.html_safe # rubocop:disable Rails/OutputSafety
-    end
-  end
-
-  def job_invocation_active_tab(tab, params)
-    active = 'active'
-    inactive = ''
-    hosts_tab_active = params[:page].present? || params[:search].present? || params[:order].present?
-    if hosts_tab_active
-      tab == :hosts ? active : inactive
-    else
-      tab == :overview ? active : inactive
     end
   end
 

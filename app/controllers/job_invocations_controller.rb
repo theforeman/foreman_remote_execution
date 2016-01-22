@@ -1,6 +1,8 @@
 class JobInvocationsController < ApplicationController
   include ::Foreman::Controller::AutoCompleteSearch
   include ::ForemanTasks::Concerns::Parameters::Triggering
+  include ::JobInvocationsChartHelper
+
 
   def new
     return @composer = prepare_composer if params[:feature].present?
@@ -62,6 +64,20 @@ class JobInvocationsController < ApplicationController
     @composer = prepare_composer
   end
 
+  def chart
+    find_resource
+    render :json => {
+      :finished => @job_invocation.finished?,
+      :job_invocations => job_invocation_data(@job_invocation)[:columns],
+      :statuses => {
+        :success => @job_invocation.progress_report[:success],
+        :cancelled => @job_invocation.progress_report[:cancelled],
+        :failed => @job_invocation.progress_report[:error],
+        :pending => @job_invocation.progress_report[:pending]
+      },
+    }
+  end
+
   def preview_hosts
     composer = prepare_composer
 
@@ -103,6 +119,8 @@ class JobInvocationsController < ApplicationController
         'create'
       when 'cancel'
         'cancel'
+      when 'chart'
+        'view'
       else
         super
     end

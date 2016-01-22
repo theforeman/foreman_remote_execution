@@ -1,0 +1,21 @@
+<div id='preview_<%= target.id %>' class='collapse out'>
+  <%= preview_box(template_invocation, target) %>
+  <% if template_invocation.input_values.present? %>
+    <table class='<%= table_css_classes %>'>
+      <thead>
+        <tr>
+          <th><%= _('User input') %></th>
+          <th><%= _('Value') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% template_invocation.input_values.joins(:template_input).each do |input_value| %>
+        <tr>
+          <td><b><%= input_value.template_input.name %></b></td>
+          <td><%= input_value.value %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

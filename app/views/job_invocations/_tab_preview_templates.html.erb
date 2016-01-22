@@ -1,0 +1,20 @@
+<div class='row'>
+  <div class="col-xs-6 col-sm-12 col-md-12">
+    <div class="card-pf">
+      <div class="card-pf-heading">
+        <h2 style="height: 18px;" class="card-pf-title">
+          <%= _('Providers and templates') %>
+        </h2>
+      </div>
+      <div class="card-pf-body">
+        <p>
+        <% template_invocation = job_invocation.pattern_template_invocations.first %>
+        <h5>
+          <%= template_name_and_provider_link(template_invocation.template) %>
+        </h5>
+        <%= preview_hosts(template_invocation) %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

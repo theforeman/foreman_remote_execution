@@ -31,7 +31,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', before: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
-        requires_foreman '>= 1.17'
+        requires_foreman '>= 1.18'
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
 
@@ -54,7 +54,7 @@ module ForemanRemoteExecution
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
           permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh, :rerun, :preview_hosts],
                                                 'api/v2/job_invocations' => [:create, :rerun] }, :resource_type => 'JobInvocation'
-          permission :view_job_invocations, { :job_invocations => [:index, :show, :auto_complete_search], :template_invocations => [:show],
+          permission :view_job_invocations, { :job_invocations => [:index, :chart, :show, :auto_complete_search], :template_invocations => [:show],
                                               'api/v2/job_invocations' => [:index, :show, :output] }, :resource_type => 'JobInvocation'
           permission :create_template_invocations, {}, :resource_type => 'TemplateInvocation'
           permission :cancel_job_invocations, { :job_invocations => [:cancel], 'api/v2/job_invocations' => [:cancel] }, :resource_type => 'JobInvocation'

@@ -230,6 +230,10 @@ class JobInvocation < ApplicationRecord
     task.send(method)
   end
 
+  def finished?
+    !task.pending?
+  end
+
   private
 
   def failed_template_invocations
