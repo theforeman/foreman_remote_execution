@@ -264,7 +264,7 @@ class JobInvocationComposer
     elsif host_ids.present?
       targeting.build_query_from_hosts(host_ids)
     elsif targeting.bookmark_id
-      if (bookmark = available_bookmarks.where(:id => targeting.bookmark_id).first)
+      if (bookmark = available_bookmarks.find_by(:id => targeting.bookmark_id))
         bookmark.query
       else
         ''
@@ -326,7 +326,7 @@ class JobInvocationComposer
     # when it's the same, we delete the query since it is used from bookmark
     # when no bookmark is set we store the query
     bookmark_id = params[:targeting][:bookmark_id]
-    bookmark = available_bookmarks.where(:id => bookmark_id).first
+    bookmark = available_bookmarks.find_by(:id => bookmark_id)
     query = params[:targeting][:search_query]
     if bookmark.present? && query.present?
       if query.strip == bookmark.query.strip
@@ -340,10 +340,10 @@ class JobInvocationComposer
     end
 
     Targeting.new(
-        :bookmark_id => bookmark_id,
-        :targeting_type => params[:targeting][:targeting_type],
-        :search_query => query
-    ) { |t| t.user_id =  params[:targeting][:user_id] }
+      :bookmark_id => bookmark_id,
+      :targeting_type => params[:targeting][:targeting_type],
+      :search_query => query
+    ) { |t| t.user_id = params[:targeting][:user_id] }
   end
 
   def build_triggering

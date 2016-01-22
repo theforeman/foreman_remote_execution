@@ -56,17 +56,17 @@ class TemplateInput < ActiveRecord::Base
 
   def get_resolver(renderer)
     resolver_class = case input_type
-      when 'user'
-        UserInputResolver
-      when 'fact'
-        FactInputResolver
-      when 'variable'
-        VariableInputResolver
-      when 'puppet_parameter'
-        PuppetParameterInputResolver
-      else
-        raise "unknown template input type #{input_type.inspect}"
-      end
+                     when 'user'
+                       UserInputResolver
+                     when 'fact'
+                       FactInputResolver
+                     when 'variable'
+                       VariableInputResolver
+                     when 'puppet_parameter'
+                       PuppetParameterInputResolver
+                     else
+                       raise "unknown template input type #{input_type.inspect}"
+                     end
     resolver_class.new(self, renderer)
   end
 
@@ -139,7 +139,7 @@ class TemplateInput < ActiveRecord::Base
     private
 
     def get_fact
-      @fact ||= @renderer.host.fact_values.includes(:fact_name).where(:'fact_names.name' => @input.fact_name).first
+      @fact ||= @renderer.host.fact_values.includes(:fact_name).find_by(:'fact_names.name' => @input.fact_name)
     end
   end
 

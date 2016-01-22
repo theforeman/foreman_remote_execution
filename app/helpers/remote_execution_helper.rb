@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ModuleLength
 module RemoteExecutionHelper
   def providers_options
     RemoteExecutionProvider.providers.map { |key, provider| [ key, _(provider) ] }
@@ -189,7 +190,7 @@ module RemoteExecutionHelper
     if time.nil?
       _('N/A')
     else
-      content_tag :span, (time > Time.now ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
+      content_tag :span, (time > Time.now.utc ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
                   { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
     end
   end
