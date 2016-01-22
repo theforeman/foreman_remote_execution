@@ -19,27 +19,21 @@ div.terminal {
   display: block;
   padding: 9.5px;
   margin: 0 0 10px;
-  font-size: 13px;
-  line-height: 1.428571429;
+  font-size: 12px;
   word-break: break-all;
   word-wrap: break-word;
-  color: #B2B2B2;
-  background-color: #000000;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(47, 47, 47, 1);
   border: 1px solid #000000;
-  border-radius: 4px;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  border-radius: 0px;
+  font-family: Menlo, Monaco, Consolas, monospace;
 
   div.printable {
     min-height: 50px;
   }
 
-  div.line.error, div.line.debug {
-    color: #a9302a;
-  }
-
-  div.line.stderr {
-    background-color: rgba(205, 209, 207, 0.21);
-    color: #FFFFFF;
+  div.line.stderr, div.line.error, div.line.debug {
+    color: red;
   }
 
   div.line span.counter {
