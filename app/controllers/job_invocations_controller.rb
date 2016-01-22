@@ -1,6 +1,8 @@
 class JobInvocationsController < ApplicationController
   include ::Foreman::Controller::AutoCompleteSearch
   include ::ForemanTasks::Concerns::Parameters::Triggering
+  include ::JobInvocationsChartHelper
+
 
   def new
     ui_params = {
@@ -61,6 +63,19 @@ class JobInvocationsController < ApplicationController
     @composer = prepare_composer
   end
 
+  def chart
+    find_resource
+    render :json => {
+      :job_invocations => job_invocation_data(@job_invocation)[:columns],
+      :statuses => {
+        :success => job_invocation_success_count(@job_invocation),
+        :cancelled => job_invocation_cancelled_count(@job_invocation),
+        :failed => job_invocation_failed_count(@job_invocation),
+        :pending => job_invocation_pending_count(@job_invocation)
+      },
+    }
+  end
+
   def preview_hosts
     composer = prepare_composer
 
@@ -80,6 +95,8 @@ class JobInvocationsController < ApplicationController
         'create'
       when 'preview_hosts'
         'create'
+      when 'chart'
+        'view'
       else
         super
     end

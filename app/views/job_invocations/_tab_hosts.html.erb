@@ -38,7 +38,7 @@
     </tbody>
   </table>
 
-  <%= will_paginate_with_info @hosts %>
+  <%= will_paginate_with_info @hosts, :'data-no-turbolink' => 'true', :container => true %>
 <% else %>
   <div class="alert alert-warning">
     <%=

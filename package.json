@@ -1,0 +1,61 @@
+{
+  "name": "foreman_remote_execution",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint -c .eslintrc webpack/ script/ || exit 0",
+    "test": "node node_modules/.bin/jest webpack",
+    "test:watch": "node node_modules/.bin/jest webpack --watchAll",
+    "test:current": "node node_modules/.bin/jest webpack --watch"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleDirectories": [
+      "node_modules",
+      "webpack"
+    ],
+    "setupFiles": [
+      "raf/polyfill",
+      "./webpack/test_setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/foreman/"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foreman_remote_execution/foreman_remote_execution.git"
+  },
+  "bugs": {
+    "url": "http://projects.theforeman.org/projects/foreman_remote_execution/issues"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-plugin-lodash": "^3.3.2",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
+    "enzyme-to-json": "^3.1.2",
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb": "^16.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.2.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "seamless-immutable": "^7.1.3",
+    "urijs": "^1.19.0"
+  }
+}
