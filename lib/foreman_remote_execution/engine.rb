@@ -27,7 +27,7 @@ module ForemanRemoteExecution
       ForemanTasks.dynflow.config.eager_load_paths << File.join(ForemanRemoteExecution::Engine.root, 'app/lib/actions')
     end
 
-    initializer 'foreman_remote_execution.register_plugin', after: :finisher_hook do |_app|
+    initializer 'foreman_remote_execution.register_plugin', :before => :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
         requires_foreman '>= 1.11'
 
