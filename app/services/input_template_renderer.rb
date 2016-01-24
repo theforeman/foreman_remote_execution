@@ -12,20 +12,22 @@ class InputTemplateRenderer
   # takes template object that should be rendered
   # host and template invocation arguments are optional
   # so we can render values based on parameters, facts or user inputs
-  def initialize(template, host = nil, invocation = nil, input_values = nil, preview = false, templates_stack = [])
-    raise Foreman::Exception, N_('Recursive rendering of templates detected') if templates_stack.include?(template)
+  def initialize(job_template, host = nil, invocation = nil, input_values = nil, preview = false, templates_stack = [])
+    raise Foreman::Exception, N_('Recursive rendering of templates detected') if templates_stack.include?(job_template)
 
     @host = host
     @invocation = invocation
-    @template = template
+    @job_template = job_template
     @input_values = input_values
     @preview = preview
-    @templates_stack = templates_stack + [template]
+    @templates_stack = templates_stack + [job_template]
   end
 
   def render
-    @template.validate_unique_inputs!
-    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template, :preview?, :render_error ], :host => @host)
+    @job_template.validate_unique_inputs!
+    render_safe(@job_template.template,
+                ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template, :preview?, :render_error ],
+                :host => @host)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
     Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")
@@ -42,7 +44,7 @@ class InputTemplateRenderer
 
   def input(name)
     return @input_values[name.to_s] if @input_values
-    input = find_by_name(@template.template_inputs_with_foreign, name)
+    input = find_by_name(@job_template.template_inputs_with_foreign, name)
     if input
       @preview ? input.preview(self) : input.value(self)
     else
@@ -81,7 +83,7 @@ class InputTemplateRenderer
   end
 
   def foreign_input_set_values(target_template, overrides = {})
-    input_set = @template.foreign_input_sets.find_by(:target_template_id => target_template)
+    input_set = @job_template.foreign_input_sets.find_by(:target_template_id => target_template)
     return overrides if input_set.nil?
 
     inputs_to_generate = input_set.inputs.map(&:name) - overrides.keys.map(&:to_s)
