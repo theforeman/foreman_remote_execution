@@ -1,0 +1,2 @@
+class AnsibleProvider < RemoteExecutionProvider
+end
