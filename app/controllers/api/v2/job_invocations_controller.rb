@@ -8,7 +8,7 @@ module Api
       before_filter :find_optional_nested_object
       before_filter :find_host, :only => %w{output}
       before_filter :find_resource, :only => %w{show update destroy clone}
-      before_filter :validate_templates, :only => :create
+      before_filter :validate_template, :only => :create
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -25,8 +25,7 @@ module Api
 
       def_param_group :job_invocation do
         param :job_invocation, Hash, :required => true, :action_aware => true do
-          param :job_category, String, :required => true, :desc => N_('Job category')
-          param :job_template_id, String, :required => false, :desc => N_('If using a specific template, the id of that template.')
+          param :job_template_id, String, :required => true, :desc => N_('The job template to use')
           param :targeting_type, String, :required => true, :desc => N_('Invocation type, one of %s') % Targeting::TYPES
           param :inputs, Hash, :required => false, :desc => N_('Inputs to use')
           param :ssh, Hash, :desc => N_('SSH provider specific options') do
@@ -99,18 +98,10 @@ module Api
         not_found({ :error => { :message => (_("Host with id '%{id}' was not found") % { :id => params['host_id'] }) } })
       end
 
-      def validate_templates
-        templates = []
-        if job_invocation_params[:job_template_id]
-          templates << JobTemplate.find(job_invocation_params[:job_template_id])
-        else
-          templates = JobTemplate.where(:job_category => job_invocation_params[:job_category])
-          if templates.pluck(:provider_type).uniq.length != templates.length
-            raise Foreman::Exception, _('Duplicate remote execution providers found for specified Job, please specify a single job_template_id.')
-          end
-        end
-
-        raise Foreman::Exception, _('No templates associated with specified Job Name') if templates.empty?
+      def validate_template
+        JobTemplate.authorized(:view_job_templates).find(job_invocation_params['job_template_id'])
+      rescue ActiveRecord::RecordNotFound
+        not_found({ :error => { :message => (_("Template with id '%{id}' was not found") % { :id => job_invocation_params['job_template_id'] }) } })
       end
 
       def job_invocation_params
