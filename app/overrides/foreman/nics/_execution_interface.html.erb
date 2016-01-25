@@ -1,1 +1,9 @@
-<%= checkbox_f f, :execution, :help_inline => _("The execution interface is used for remote execution"), :class => :interface_execution %>
+<%= checkbox_f(
+  f,
+  :execution,
+  :help_inline => popover(
+    '', _("The execution interface is used for remote execution"),
+    :rel => 'popover-modal'),
+  :label_size => 'col-md-3',
+  :label => _('Remote execution'),
+  :class => :interface_execution) %>
