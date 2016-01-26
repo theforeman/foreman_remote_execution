@@ -1,6 +1,6 @@
 module Actions
   module RemoteExecution
-    class RunProxyAnsibleCommand < Actions::ProxyAction
+    class RunProxyAnsibleCommand < RunProxyCommand
       def plan(proxy, inventory, playbook, options = {})
         options = { :effective_user => nil }.merge(options)
         options.merge!(:inventory => inventory, :playbook => playbook)
