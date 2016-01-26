@@ -58,11 +58,7 @@ class AnsibleTemplateRenderer < InputTemplateRenderer
 
   def build_parameters_hash(model, collection)
     collection.inject({}) do |model_parameters, model|
-      if model.parameters.present?
-        model_parameters.merge(model => model.parameters)
-      else
-        model_parameters
-      end
+      model_parameters.merge(model => model.parameters)
     end
   end
 
@@ -72,15 +68,5 @@ class AnsibleTemplateRenderer < InputTemplateRenderer
 
   def target_hostgroups
     target_hosts.map(&:hostgroup).compact
-  end
-
-  def ansible_input_hosts(name)
-    if @preview
-      "ansible_input_hosts(:#{name})"
-    elsif input = input_by_name(name)
-      search = input.value(self)
-      hosts = @invocation.job_invocation.targeting.targeting_scope.search_for(search)
-      "[#{ hosts.map(&:hostname).join(', ') }]"
-    end
   end
 end

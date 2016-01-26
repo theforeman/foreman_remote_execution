@@ -6,7 +6,7 @@ module Actions
 
         ansible_template = AnsibleTemplateRenderer.new(
           template_invocation.template,
-          nil,
+          host,
           template_invocation)
 
         provider = template_invocation.template.provider

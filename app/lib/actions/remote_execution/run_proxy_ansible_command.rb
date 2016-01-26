@@ -1,6 +1,8 @@
 module Actions
   module RemoteExecution
     class RunProxyAnsibleCommand < RunProxyCommand
+      include Actions::RemoteExecution::Helpers::AnsibleOutput
+
       def plan(proxy, inventory, playbook, options = {})
         options = { :effective_user => nil }.merge(options)
         options.merge!(:inventory => inventory, :playbook => playbook)
@@ -20,6 +22,17 @@ module Actions
           end
         end
         super(data)
+      end
+
+      def live_output
+        proxy_output = super
+        proxy_output.map do |output_part|
+          if (output_data = output_part['output']['data']).present?
+            parse_output_with_data(output_part)
+          else
+            output_part
+          end
+        end
       end
 
       def host_step(host_name)
