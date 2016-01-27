@@ -2,16 +2,16 @@
 
 <% title_actions(job_invocations_buttons) %>
 
-<table class="table table-bordered table-striped table-condensed">
+<table class="table table-bordered table-striped table-condensed table-fixed">
   <thead>
     <tr>
       <th><%= sort :description, :as => _('Description') %></th>
-      <th><%= _('Status') %></th>
-      <th><%= _('Succeeded') %></th>
-      <th><%= _('Failed') %></th>
-      <th><%= _('Pending') %></th>
-      <th><%= _('Total hosts') %></th>
-      <th><%= sort :start_at, :as => _('Start') %></th>
+      <th class="col-md-1"><%= _('Status') %></th>
+      <th class="col-md-1"><%= _('Succeeded') %></th>
+      <th class="col-md-1"><%= _('Failed') %></th>
+      <th class="col-md-1"><%= _('Pending') %></th>
+      <th class="col-md-1"><%= _('Total hosts') %></th>
+      <th class="col-md-2"><%= sort :start_at, :as => _('Start') %></th>
     </tr>
   </thead>
 

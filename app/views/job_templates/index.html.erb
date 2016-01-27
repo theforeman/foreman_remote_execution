@@ -7,13 +7,13 @@
                  display_link_if_authorized(_("New Job Template"),
                                             hash_for_new_job_template_path)) %>
 
-<table class="table table-bordered table-striped table-two-pane">
+<table class="table table-bordered table-striped table-two-pane table-fixed">
   <thead>
     <tr>
-      <th><%= sort :name, :as => s_("JobTemplate|Name") %></th>
-      <th><%= sort :snippet, :as => s_("JobTemplate|Snippet") %></th>
-      <th><%= sort :locked, :as => s_("JobTemplate|Locked"), :default => "DESC" %></th>
-      <th></th>
+      <th class="col-md-6"><%= sort :name, :as => s_("JobTemplate|Name") %></th>
+      <th class="col-md-1"><%= sort :snippet, :as => s_("JobTemplate|Snippet") %></th>
+      <th class="col-md-1"><%= sort :locked, :as => s_("JobTemplate|Locked"), :default => "DESC" %></th>
+      <th class="col-md-1"><%= _('Actions') %></th>
     </tr>
   </thead>
   <tbody>
