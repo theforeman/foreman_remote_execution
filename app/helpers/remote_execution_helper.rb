@@ -165,6 +165,13 @@ module RemoteExecutionHelper
     end
   end
 
+  def invocation_result(invocation, key)
+    unknown = '&mdash;'
+    result = invocation_count(invocation, :output_key => key, :unknown_string => unknown.html_safe )
+    label = key == :failed_count ? 'danger' : 'info'
+    result == unknown ? result : report_event_column(result, "label-#{label}")
+  end
+
   def preview_box(template_invocation, target)
     renderer = InputTemplateRenderer.new(template_invocation.template, target, template_invocation)
     if (preview = renderer.preview)
