@@ -26,6 +26,7 @@ module Api
           param :name, String, :required => true, :desc => N_('Input name')
           param :description, String, :required => false, :desc => N_('Input description')
           param :required, :bool, :allow_nil => true, :desc => N_('Input is required')
+          param :advanced, :bool, :allow_nil => true, :desc => N_('Input is advanced')
           param :input_type, TemplateInput::TYPES.keys.map(&:to_s), :required => true, :desc => N_('Input type')
           param :fact_name, String, :required => false, :desc => N_('Fact name, used when input type is fact')
           param :variable_name, String, :required => false, :desc => N_('Variable name, used when input type is variable')

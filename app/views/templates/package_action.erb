@@ -9,6 +9,7 @@ template_inputs:
   description: A script to run prior to the package action
   input_type: user
   required: false
+  advanced: true
 - name: action
   description: 'The package action: install, update, or remove'
   input_type: user
@@ -22,6 +23,7 @@ template_inputs:
   description: A script to run after the package action
   input_type: user
   required: false
+  advanced: true
 %>
 
 die() {
