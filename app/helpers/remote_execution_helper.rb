@@ -229,12 +229,22 @@ module RemoteExecutionHelper
                :value => f.object.description_format || job_template.generate_description_format,
                :rows => 2,
                :onchange => 'regenerate_description(this);',
-               :class => 'description_format',
+               :class => 'description_format advanced',
                :disabled => disabled,
                :help_inline => popover(_('Explanation'),
                                        _('This template is used to generate the description.
                                           Input values can be used using the syntax %{package}.
                                           You may also include the job category and template
                                           name using %{job_category} and %{template_name}.'))
+  end
+
+  def advanced_switch_f(default_text, switch_text)
+    content_tag :div, :class => 'form-group' do
+      content_tag(:div, '', :class => 'col-md-2 control-label') +
+      content_tag(:div, :class => 'col-md-4') do
+        content_tag(:i, '', :class => 'fa fa-angle-right') + ' ' +
+        link_to(default_text, '#', :class => 'advanced_fields_switch', :'data-alternative-label' => switch_text)
+      end
+    end
   end
 end

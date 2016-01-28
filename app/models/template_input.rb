@@ -9,7 +9,7 @@ class TemplateInput < ActiveRecord::Base
 
   attr_accessible :name, :required, :input_type, :fact_name, :variable_name,
                   :puppet_class_name, :puppet_parameter_name, :description, :template_id,
-                  :options
+                  :options, :advanced
 
   belongs_to :template
   has_many :template_invocation_input_values, :dependent => :destroy
@@ -50,6 +50,10 @@ class TemplateInput < ActiveRecord::Base
 
   def options_array
     self.options.blank? ? [] : self.options.split(/\r?\n/).map(&:strip)
+  end
+
+  def basic?
+    !advanced
   end
 
   private
