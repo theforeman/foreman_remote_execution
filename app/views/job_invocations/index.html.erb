@@ -20,10 +20,10 @@
       <tr>
         <td><%= link_to_if_authorized "#{invocation.description.try(:capitalize) || invocation.job_category}", hash_for_job_invocation_path(invocation).merge(:auth_object => invocation, :permission => :view_job_invocations) %></td>
         <td><%= link_to_invocation_task_if_authorized(invocation) %></td>
-        <td><%= invocation_count(invocation, :output_key => :success_count) %></td>
-        <td><%= invocation_count(invocation, :output_key => :failed_count) %></td>
-        <td><%= invocation_count(invocation, :output_key => :pending_count) %></td>
-        <td><%= invocation_count(invocation, :output_key => :total_count) %></td>
+        <td><%= invocation_result(invocation, :success_count) %></td>
+        <td><%= invocation_result(invocation, :failed_count) %></td>
+        <td><%= invocation_result(invocation, :pending_count) %></td>
+        <td><%= invocation_result(invocation, :total_count) %></td>
         <td><%= time_in_words_span(invocation.start_at) %></td>
       </tr>
     <% end %>
