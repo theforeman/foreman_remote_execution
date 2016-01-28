@@ -36,6 +36,7 @@ class JobTemplate < ::Template
 
   validates :job_category, :presence => true, :unless => ->(job_template) { job_template.snippet }
   validates :provider_type, :presence => true
+  validates :name, :uniqueness => true
   validate :provider_type_whitelist
   validate :inputs_unchanged_when_locked, :if => ->(template) { (template.locked? || template.locked_changed?) && template.persisted? && !Foreman.in_rake? }
 

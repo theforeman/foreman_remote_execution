@@ -10,6 +10,12 @@ describe JobTemplate do
       end
     end
 
+    it 'has a unique name' do
+      template1 = FactoryGirl.create(:job_template)
+      template2 = FactoryGirl.build(:job_template, :name => template1.name)
+      refute template2.valid?
+    end
+
     it 'needs a job_category' do
       refute job_template.valid?
     end

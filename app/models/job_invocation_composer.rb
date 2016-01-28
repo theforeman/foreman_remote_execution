@@ -59,15 +59,11 @@ class JobInvocationComposer
     end
 
     def params
-      { :job_category => job_category,
+      { :job_category => template.job_category,
         :targeting => targeting_params,
         :triggering => triggering_params,
-        :description_format => api_params[:description_format] || template_with_default.generate_description_format,
+        :description_format => api_params[:description_format] || template.generate_description_format,
         :template_invocations => template_invocations_params }.with_indifferent_access
-    end
-
-    def job_category
-      api_params[:job_category]
     end
 
     def targeting_params
@@ -99,7 +95,6 @@ class JobInvocationComposer
     end
 
     def template_invocations_params
-      template = template_with_default
       template_invocation_params = { :template_id => template.id, :effective_user => api_params[:effective_user] }
       template_invocation_params[:input_values] = api_params.fetch(:inputs, {}).map do |name, value|
         input = template.template_inputs_with_foreign.find { |i| i.name == name }
@@ -112,13 +107,8 @@ class JobInvocationComposer
       [template_invocation_params]
     end
 
-    def template_with_default
-      template = nil
-      templates = JobTemplate.authorized(:view_job_templates).where(:job_category => job_category)
-      template = templates.find(api_params[:job_template_id]) if api_params[:job_template_id]
-      template ||= templates.first if templates.count == 1
-      raise ::Foreman::Exception, _('Cannot determine the template to be used of job %s') % job_category unless template
-      return template
+    def template
+      @template ||= JobTemplate.authorized(:view_job_templates).find(api_params[:job_template_id])
     end
 
     private

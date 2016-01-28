@@ -23,15 +23,6 @@ module Api
         assert_equal template['job_category'], @invocation.job_category
       end
 
-      test 'should create valid without job_template_id' do
-        attrs = { :job_category => @template.job_category, :name => 'RandomName', :targeting_type => 'static_query', :search_query => 'foobar'}
-        post :create, :job_invocation => attrs
-
-        invocation = ActiveSupport::JSON.decode(@response.body)
-        assert_equal attrs[:job_category], invocation['job_category']
-        assert_response :success
-      end
-
       test 'should create valid with job_template_id' do
         attrs = { :job_category => @template.job_category, :name => 'RandomName', :job_template_id => @template.id,
                   :targeting_type => 'static_query', :search_query => 'foobar'}
