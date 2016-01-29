@@ -46,9 +46,13 @@ class AnsibleTemplateRenderer < InputTemplateRenderer
 
     variables = ''
     group_parameters.each do |group, parameters|
+      variables += "[#{group.title}]\n"
+      target_hosts.each do |host|
+        variables += "#{host.name}\n"
+      end
       variables += "[#{group.title}:vars]\n"
       parameters.each do |parameter|
-        variables += "#{parameter.name}=#{parameter.value} \n"
+        variables += "#{parameter.first}=#{parameter.last} \n"
       end
       variables += "\n"
     end
