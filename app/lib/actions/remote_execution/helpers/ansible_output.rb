@@ -4,7 +4,10 @@ module Actions
       module AnsibleOutput
         def parse_output_with_data(output_part)
           output_data = output_part['output']['data']
-          result = invocation_data_output(output_data)
+
+          result = if output_data != 'data'
+                     invocation_data_output(output_data)
+                   end
           output_part.merge('output' => "#{output_part['output']['category']}: \
 #{invocation_data(output_data)['module_name']} \
 #{invocation_data(output_data)['module_args']}: #{result}")
