@@ -105,7 +105,8 @@ module ForemanRemoteExecution
         # widget 'foreman_remote_execution_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
 
         RemoteExecutionFeature.register(:reprovision, N_("Reprovision"),
-                                        :description => "Reprovision the host via a script")
+                                        :description => "Reprovision the host via a script",
+                                        :provided_inputs => ['script'])
       end
     end
 
@@ -136,6 +137,9 @@ module ForemanRemoteExecution
       #   Template.reflect_on_association :template_inputs # => <#Association...
       #   ProvisioningTemplate.reflect_on_association :template_inputs # => nil
       require_dependency 'job_template'
+
+      HostsController.send(:include, ForemanRemoteExecution::HostsControllerExtensions)
+
       (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateExtensions) }
 
       (Taxonomy.descendants + [Taxonomy]).each { |klass| klass.send(:include, ForemanRemoteExecution::TaxonomyExtensions) }

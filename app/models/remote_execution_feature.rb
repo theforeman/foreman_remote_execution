@@ -3,6 +3,8 @@ class RemoteExecutionFeature < ActiveRecord::Base
 
   validate :label, :name, :presence => true, :unique => true
 
+  belongs_to :template
+
   extend FriendlyId
   friendly_id :label
 
