@@ -41,7 +41,10 @@
   <%= will_paginate_with_info @hosts %>
 <% else %>
   <div class="alert alert-warning">
-    <%= _("The dynamic query '#{job_invocation.targeting.search_query}' was not resolved yet. The list of hosts to which it would resolve now can be seen") %>
-    <%= link_to('here.', hosts_url(:search => job_invocation.targeting.search_query)) %>
+    <%=
+        _("The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}." %
+            { :query => job_invocation.targeting.search_query,
+              :here => link_to(_('here'), hosts_url(:search => job_invocation.targeting.search_query))})
+     %>
   </div>
 <% end %>

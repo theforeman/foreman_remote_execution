@@ -35,7 +35,7 @@ module RemoteExecutionHelper
       when HostStatus::ExecutionStatus::QUEUED
         _('queued')
       when HostStatus::ExecutionStatus::RUNNING
-        _('running %s%') % invocation.progress
+        _('running %{percent}%') % {:percent => invocation.progress}
       when HostStatus::ExecutionStatus::OK
         _('succeeded')
       when HostStatus::ExecutionStatus::ERROR
@@ -239,10 +239,10 @@ module RemoteExecutionHelper
                :class => 'description_format advanced',
                :disabled => disabled,
                :help_inline => popover(_('Explanation'),
-                                       _('This template is used to generate the description.
-                                          Input values can be used using the syntax %{package}.
-                                          You may also include the job category and template
-                                          name using %{job_category} and %{template_name}.'))
+                                       _('This template is used to generate the description ' +
+                                         'Input values can be used using the syntax %{package}. ' +
+                                         'You may also include the job category and template ' +
+                                         'name using %{job_category} and %{template_name}.'))
   end
 
   def advanced_switch_f(default_text, switch_text)

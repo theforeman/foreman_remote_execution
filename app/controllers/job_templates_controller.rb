@@ -20,7 +20,7 @@ class JobTemplatesController < ::TemplatesController
     if (output = renderer.preview)
       render :text => output
     else
-      render :status => 406, :text => renderer.error_message + _(', note that you must save template input changes before you try to preview it.')
+      render :status => 406, :text => _('Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it.' % {:error => renderer.error_message})
     end
   end
 

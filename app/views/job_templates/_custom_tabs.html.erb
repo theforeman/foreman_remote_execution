@@ -11,10 +11,10 @@
 
   <%= text_f f, :description_format,
              :disabled => @template.locked?,
-             :help_inline => popover(_('Explanation'), _('This template is used to generate the description.
-                                                          Input values can be used using the syntax %{package}.
-                                                          You may also include the job category and template
-                                                          name using %{job_category} and %{template_name}.')) %>
+             :help_inline => popover(_('Explanation'), _('This template is used to generate the description. ' +
+                                                         'Input values can be used using the syntax %{package}. ' +
+                                                         'You may also include the job category and template ' +
+                                                         'name using %{job_category} and %{template_name}.')) %>
 
   <%= select_f f, :provider_type, providers_options, :first, :last, :disabled => @template.locked? %>
 
