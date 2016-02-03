@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = `git ls-files doc`.split("\n") + Dir['README*', 'LICENSE']
 
   s.add_dependency 'deface'
-  s.add_dependency 'dynflow', '~> 0.8.8'
+  s.add_dependency 'dynflow', '~> 0.8.10'
   s.add_dependency 'foreman-tasks', '~> 0.7.11'
 
   s.add_development_dependency 'rubocop'

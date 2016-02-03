@@ -45,6 +45,11 @@ module Api
             param :start_before, DateTime, :required => false, :desc => N_('Indicates that the action should be cancelled if it cannot be started before this time.')
           end
 
+          param :concurrency_control, Hash, :desc => N_('Control concurrency level and distribution over time') do
+            param :time_span, Integer, :desc => N_('Distribute tasks over N seconds')
+            param :concurrency_level, Integer, :desc => N_('Run at most N tasks at a time')
+          end
+
           param :bookmark_id, Integer, :required => false
           param :search_query, Integer, :required => false
           param :description_format, String, :required => false, :desc => N_('Override the description format from the template for this invocation only')

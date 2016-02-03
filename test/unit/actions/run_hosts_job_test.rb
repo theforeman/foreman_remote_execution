@@ -22,10 +22,13 @@ module ForemanRemoteExecution
       end
     end
     let(:action) do
-      action = create_action(Actions::RemoteExecution::RunHostsJob)
-      action.expects(:action_subject).with(job_invocation)
-      ForemanTasks::Task::DynflowTask.stubs(:where).returns(mock.tap { |m| m.stubs(:first! => task) })
-      plan_action(action, job_invocation)
+      create_action(Actions::RemoteExecution::RunHostsJob).tap do |action|
+        action.expects(:action_subject).with(job_invocation)
+        ForemanTasks::Task::DynflowTask.stubs(:where).returns(mock.tap { |m| m.stubs(:first! => task) })
+      end
+    end
+    let(:planned) do
+      plan_action action, job_invocation
     end
 
     before do
@@ -35,17 +38,55 @@ module ForemanRemoteExecution
     end
 
     it 'resolves the hosts on targeting in plan phase' do
+      planned
       targeting.hosts.must_include(host)
     end
 
     it 'triggers the RunHostJob actions on the resolved hosts in run phase' do
-      action.expects(:trigger).with() { |*args| args[0] == Actions::RemoteExecution::RunHostJob }
-      action.create_sub_plans
+      planned.expects(:trigger).with() { |*args| args[0] == Actions::RemoteExecution::RunHostJob }
+      planned.create_sub_plans
     end
 
     it 'uses the BindJobInvocation middleware' do
-      action
+      planned
       job_invocation.task_id.must_equal '123'
+    end
+
+    describe 'concurrency control' do
+      let(:level) { 5 }
+      let(:span) { 60 }
+
+      it 'can be disabled' do
+        job_invocation.expects(:concurrency_level)
+        job_invocation.expects(:time_span)
+        action.expects(:limit_concurrency_level).never
+        action.expects(:distribute_over_time).never
+        planned
+      end
+
+      it 'can limit concurrency level' do
+        job_invocation.expects(:concurrency_level).returns(level).twice
+        job_invocation.expects(:time_span)
+        action.expects(:limit_concurrency_level).with(level)
+        action.expects(:distribute_over_time).never
+        planned
+      end
+
+      it 'can distribute tasks over time' do
+        job_invocation.expects(:time_span).returns(span).twice
+        job_invocation.expects(:concurrency_level)
+        action.expects(:distribute_over_time).with(span)
+        action.expects(:distribute_over_time).never
+        planned
+      end
+
+      it 'can use both' do
+        job_invocation.expects(:time_span).returns(span).twice
+        action.expects(:distribute_over_time).with(span)
+        job_invocation.expects(:concurrency_level).returns(level).twice
+        action.expects(:limit_concurrency_level).with(level)
+        planned
+      end
     end
   end
 end
