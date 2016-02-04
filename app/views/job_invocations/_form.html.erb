@@ -108,5 +108,5 @@
 
   <%= render :partial => 'preview_hosts_modal' %>
 
-  <%= submit_or_cancel f %>
+  <%= submit_or_cancel f, false, :cancel_path => job_invocations_path %>
 <% end %>

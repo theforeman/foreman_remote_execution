@@ -73,7 +73,8 @@ class JobTemplate < ::Template
 
       template = existing || self.new
       template.sync_inputs(metadata.delete('template_inputs'))
-      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options))
+      template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
+      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options).except('feature'))
       template.assign_taxonomies if template.new_record?
       template.sync_feature(metadata.delete('feature'))
 
@@ -137,11 +138,9 @@ class JobTemplate < ::Template
   end
 
   def sync_inputs(inputs)
+    inputs ||= []
     # Build a hash where keys are input names
-    inputs = inputs.inject({}) do |memo, input|
-      memo[input['name']] = input
-      memo
-    end
+    inputs = inputs.inject({}) { |h, input| h.update(input['name'] => input ) }
 
     # Sync existing inputs
     template_inputs.each do |existing_input|
@@ -153,7 +152,29 @@ class JobTemplate < ::Template
     end
 
     # Create new inputs
-    inputs.each { |_name, new_input| template_inputs.build(new_input) }
+    inputs.values.each { |new_input| template_inputs.build(new_input) }
+  end
+
+  def sync_foreign_input_sets(input_sets)
+    input_sets ||= []
+
+    input_sets = input_sets.inject({}) do |h, input_set|
+      target_template = JobTemplate.find_by!(:name => input_set.delete('template'))
+      input_set['target_template_id'] = target_template.id
+      h.update(target_template.id => input_set)
+    end
+
+    # Sync existing input sets
+    foreign_input_sets.each do |existing_input_set|
+      if input_sets.include?(existing_input_set.target_template_id)
+        existing_input_set.assign_attributes(input_sets.delete(existing_input_set.target_template_id))
+      else
+        existing_input_set.mark_for_destruction
+      end
+    end
+
+    # Create new input_sets
+    input_sets.values.each { |input_set| self.foreign_input_sets.build(input_set) }
   end
 
   def sync_feature(feature_name)

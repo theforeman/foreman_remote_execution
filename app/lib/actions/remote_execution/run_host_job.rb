@@ -43,7 +43,7 @@ module Actions
         host = Host.find(input[:host][:id])
         host.refresh_statuses
       rescue => e
-        Foreman::Logging.exception "Could not update execution status for #{input[:host][:name]}", e
+        ::Foreman::Logging.exception "Could not update execution status for #{input[:host][:name]}", e
       end
 
       def humanized_output

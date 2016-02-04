@@ -12,7 +12,13 @@
     <%= field(f, :provided_inputs) { @remote_execution_feature.provided_inputs } %>
   </div>
   <div class="row">
-    <%= selectable_f f, :job_template_id, JobTemplate.all.map { |t| [ t.name, t.id ] }, { :include_blank => true }, :class => 'input_type_selector' %>
+    <% job_templates = JobTemplate.authorized(:view_job_templates) %>
+    <% if @remote_execution_feature.job_template_id.present? && job_templates.where(:id => @remote_execution_feature.job_template_id).empty? %>
+      <div class="alert alert-warning" role="alert">
+        <%= _("You are not allowed to see the currently assigned template. Saving the form now would unassign the template.") %>
+      </div>
+    <% end %>
+    <%= selectable_f f, :job_template_id, job_templates.map { |t| [ t.name, t.id ] }, { :include_blank => true }, :class => 'input_type_selector' %>
   </div>
 <%= submit_or_cancel f %>
 <% end %>

@@ -1,8 +1,6 @@
 class JobInvocationsController < ApplicationController
   include Foreman::Controller::AutoCompleteSearch
 
-  before_filter :find_or_create_triggering, :only => [:create, :refresh]
-
   def new
     ui_params = {
       :host_ids => params[:host_ids],
@@ -74,10 +72,6 @@ class JobInvocationsController < ApplicationController
   end
 
   private
-
-  def find_or_create_triggering
-    @triggering ||= ::ForemanTasks::Triggering.new_from_params(params[:triggering])
-  end
 
   def action_permission
     case params[:action]

@@ -7,7 +7,7 @@ module Api
 
       api :GET, '/remote_execution_features/', N_('List remote execution features')
       def index
-        @remote_execution_features = RemoteExecutionFeature.all
+        @remote_execution_features = resource_scope
       end
 
       api :GET, '/remote_execution_features/:id', N_('Show remote execution feature')
@@ -17,7 +17,7 @@ module Api
 
       def_param_group :remote_execution_feature do
         param :remote_execution_feature, Hash, :required => true, :action_aware => true do
-          param :job_template_id, :identifier, :required => true, :desc => N_('Job template id to be used for the feature')
+          param :job_template_id, :identifier, :required => true, :desc => N_('Job template ID to be used for the feature')
         end
       end
 

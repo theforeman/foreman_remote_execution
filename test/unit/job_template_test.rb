@@ -84,12 +84,32 @@ describe JobTemplate do
       - name: service_name
         input_type: user
         required: true
+      - name: verbose
+        input_type: user
       %>
 
       service <%= input("service_name") %> restart
       END_TEMPLATE
 
-      JobTemplate.import(template, :default => true)
+      JobTemplate.import!(template, :default => true)
+    end
+
+    let(:template_with_input_sets) do
+      template_with_input_sets = <<-END_TEMPLATE
+      <%#
+      kind: job_template
+      name: Service Restart - Custom
+      job_category: Service Restart
+      provider_type: SSH
+      foreign_input_sets:
+      - template: #{template.name}
+        exclude: verbose
+      %>
+
+      service <%= input("service_name") %> restart
+      END_TEMPLATE
+
+      JobTemplate.import!(template_with_input_sets, :default => true)
     end
 
     it 'sets the name' do
@@ -104,12 +124,36 @@ describe JobTemplate do
       template.template_inputs.first.name.must_equal 'service_name'
     end
 
+    it 'imports input sets' do
+      template_with_input_sets.foreign_input_sets.first.target_template.must_equal template
+      template_with_input_sets.template_inputs_with_foreign.map(&:name).must_equal ['service_name']
+    end
+
     it 'sets additional options' do
       template.default.must_equal true
     end
   end
 
   context 'importing an existing template' do
+    let(:included) do
+      template = <<-END_TEMPLATE
+      <%#
+      kind: job_template
+      name: Banner
+      job_category: Commands
+      provider_type: SSH
+      template_inputs:
+      - name: banner_message
+        input_type: user
+        required: true
+      %>
+
+      echo input(:banner_message)
+      END_TEMPLATE
+
+      JobTemplate.import!(template, :default => true)
+    end
+
     let(:existing) do
       template = <<-END_TEMPLATE
       <%#
@@ -122,6 +166,8 @@ describe JobTemplate do
         input_type: user
         options: "www.google.com"
         required: true
+      foreign_input_sets:
+        - template: #{included.name}
       %>
 
       ping -c 5 <%= input("hostname") %>
@@ -145,6 +191,9 @@ describe JobTemplate do
       - name: count
         input_type: user
         required: true
+      foreign_input_sets:
+        - template: #{included.name}
+          exclude: banner_message
       %>
 
       ping -c <%= input('count') %> <%= input('hostname') %>
@@ -169,6 +218,11 @@ describe JobTemplate do
 
     it 'syncs content' do
       synced_template.template.must_match(/\s+ping -c <%= input\('count'\) %> <%= input\('hostname'\) %>\s+/m)
+    end
+
+    it 'syncs input sets' do
+      synced_template.foreign_input_sets.first.target_template.must_equal included
+      synced_template.template_inputs_with_foreign.map(&:name).must_equal ["hostname", "count"]
     end
   end
 
