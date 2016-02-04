@@ -85,7 +85,7 @@ module Actions
 
       def final_timestamp(records)
         return task.ended_at if records.blank?
-        records.last.fetch('timestamp', task.ended_at) + 1
+        records.last.fetch('timestamp', task.ended_at).to_f + 1
       end
 
       def proxy_result
