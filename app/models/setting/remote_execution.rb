@@ -22,7 +22,10 @@ class Setting::RemoteExecution < Setting
                  'root'),
         self.set('remote_execution_effective_user_method',
                  N_('What command should be used to switch to the effective user. One of %s') % SSHExecutionProvider::EFFECTIVE_USER_METHODS.inspect,
-                 'sudo')
+                 'sudo'),
+        self.set('remote_execution_sync_templates',
+                 N_('Whether we should sync templates from disk when running db:seed.'),
+                 true)
       ].each { |s| self.create! s.update(:category => 'Setting::RemoteExecution') }
     end
 
