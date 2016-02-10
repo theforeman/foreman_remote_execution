@@ -42,6 +42,14 @@ module Actions
         super unless event == Dynflow::Action::Skip
       end
 
+      def humanized_input
+        input[:job_invocation][:description]
+      end
+
+      def humanized_name
+        '%s:' % _(super)
+      end
+
       private
 
       def determine_proxy(template_invocation, host, load_balancer)
