@@ -103,7 +103,7 @@ class JobInvocation < ActiveRecord::Base
   end
 
   def to_action_input
-    { :id => id, :name => job_category }
+    { :id => id, :name => job_category, :description => description }
   end
 
   def failed_template_invocation_tasks

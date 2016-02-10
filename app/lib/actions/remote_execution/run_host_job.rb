@@ -59,10 +59,13 @@ module Actions
         end
       end
 
+      def humanized_input
+        N_('%{description} on %{host}') % { :host => input[:host].try(:[], :name),
+                                            :description => input[:description].try(:capitalize) || input[:job_category] }
+      end
+
       def humanized_name
-        _('%{description} on %{host}') % { :job_category => input[:job_category],
-                                           :host => input[:host][:name],
-                                           :description => input[:description].try(:capitalize) || input[:job_category] }
+        N_('Remote action:')
       end
 
       def find_ip_or_hostname(host)
