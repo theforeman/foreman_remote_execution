@@ -2,14 +2,14 @@ require 'test_plugin_helper'
 
 describe InputTemplateRenderer do
   context 'renderer for simple template without inputs' do
-    let(:renderer) { InputTemplateRenderer.new(FactoryGirl.build(:job_template, :template => 'id')) }
+    let(:renderer) { InputTemplateRenderer.new(FactoryGirl.build(:job_template, :template => 'id <%= preview? %>')) }
 
     it 'should render the content' do
-      renderer.render.must_equal 'id'
+      renderer.render.must_equal 'id false'
     end
 
     it 'should render preview' do
-      renderer.preview.must_equal 'id'
+      renderer.preview.must_equal 'id true'
     end
   end
 

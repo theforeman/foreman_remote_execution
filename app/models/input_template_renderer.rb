@@ -22,7 +22,7 @@ class InputTemplateRenderer
 
   def render
     @template.validate_unique_inputs!
-    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template ], :host => @host)
+    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template, :preview? ], :host => @host)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
     Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")
@@ -67,6 +67,10 @@ class InputTemplateRenderer
     else
       out
     end
+  end
+
+  def preview?
+    !!@preview
   end
 
   def foreign_input_set_values(target_template, overrides = {})
