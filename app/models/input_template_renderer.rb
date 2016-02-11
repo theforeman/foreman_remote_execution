@@ -2,6 +2,7 @@ class InputTemplateRenderer
   class UndefinedInput < ::Foreman::Exception
   end
 
+  include Rails.application.routes.url_helpers
   include UnattendedHelper
 
   attr_accessor :template, :host, :invocation, :input_values, :error_message

@@ -50,7 +50,7 @@ module ForemanRemoteExecution
                         proxy_scope = ::SmartProxy
                       end
 
-        proxies[:global] = proxy_scope.authorized.with_features(provider)
+        proxies[:global] = proxy_scope.with_features(provider)
       end
 
       proxies

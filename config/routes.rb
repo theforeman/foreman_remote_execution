@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :hosts, :only => [] do
+    member do
+      post 'reprovision', :method => :post
+    end
+  end
+
   resources :job_templates, :except => [:show] do
     member do
       get 'clone_template'
@@ -24,6 +30,8 @@ Rails.application.routes.draw do
       get 'rerun'
     end
   end
+
+  resources :remote_execution_features, :only => [:show, :index, :update]
 
   # index is needed so the auto_complete_search can be constructed, otherwise autocompletion in filter does not work
   resources :template_invocations, :only => [:show, :index] do
