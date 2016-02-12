@@ -38,8 +38,7 @@ class JobInvocationsController < ApplicationController
 
   def create
     @composer = JobInvocationComposer.from_ui_params(params)
-    if @composer.save
-      @composer.trigger
+    if @composer.trigger
       redirect_to job_invocation_path(@composer.job_invocation)
     else
       @composer.job_invocation.description_format = nil if params[:job_invocation].key?(:description_override)

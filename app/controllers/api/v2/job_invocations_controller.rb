@@ -55,8 +55,7 @@ module Api
       param_group :job_invocation, :as => :create
       def create
         composer = JobInvocationComposer.from_api_params(job_invocation_params)
-        composer.save!
-        composer.trigger
+        composer.trigger!
         @job_invocation = composer.job_invocation
         process_response @job_invocation
       end

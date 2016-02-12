@@ -255,9 +255,18 @@ class JobInvocationComposer
     self
   end
 
-  def trigger
+  def trigger(raise_on_error = false)
+    if raise_on_error
+      save!
+    else
+      return false unless save
+    end
     job_invocation.generate_description! if job_invocation.description.blank?
     triggering.trigger(::Actions::RemoteExecution::RunHostsJob, job_invocation)
+  end
+
+  def trigger!
+    trigger(true)
   end
 
   def valid?
