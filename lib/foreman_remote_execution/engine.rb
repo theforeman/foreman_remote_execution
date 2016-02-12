@@ -46,7 +46,7 @@ module ForemanRemoteExecution
                                             :'api/v2/template_inputs' => [:create, :update, :destroy],
                                             :'api/v2/foreign_input_sets' => [:create, :update, :destroy]}, :resource_type => 'JobTemplate'
           permission :edit_remote_execution_features, { :remote_execution_features => [:index, :show, :update],
-                                            :'api/v2/remote_execution_features' => [:index, :show, :update]}, :resource_type => 'RemoteExecutionFeature'
+                                                        :'api/v2/remote_execution_features' => [:index, :show, :update]}, :resource_type => 'RemoteExecutionFeature'
           permission :destroy_job_templates, { :job_templates => [:destroy],
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'

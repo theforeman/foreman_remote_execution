@@ -18,7 +18,7 @@ class RemoteExecutionFeature < ActiveRecord::Base
 
   class << self
     def feature(label)
-      self.find_by_label(label) || raise(::Foreman::Exception.new(N_("Unknown remote execution feature %s"), label))
+      self.find_by_label(label) || raise(::Foreman::Exception.new(N_('Unknown remote execution feature %s'), label))
     end
 
     def register(label, name, options = {})
