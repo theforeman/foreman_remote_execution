@@ -55,6 +55,8 @@ Rails.application.routes.draw do
         resources :template_inputs, :only => [:index, :show, :create, :destroy, :update]
         resources :foreign_input_sets, :only => [:index, :show, :create, :destroy, :update]
       end
+
+      resources :remote_execution_features, :only => [:show, :index, :update]
     end
   end
 end
