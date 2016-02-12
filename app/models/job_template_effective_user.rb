@@ -4,8 +4,6 @@ class JobTemplateEffectiveUser < ActiveRecord::Base
 
   before_validation :set_defaults
 
-  belongs_to :job_template
-
   def set_defaults
     self.overridable = true if self.overridable.nil?
     self.current_user = false if self.current_user.nil?

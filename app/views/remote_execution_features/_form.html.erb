@@ -12,7 +12,7 @@
     <%= field(f, :provided_inputs) { @remote_execution_feature.provided_inputs } %>
   </div>
   <div class="row">
-    <%= selectable_f f, :template_id, JobTemplate.all.map { |t| [ t.name, t.id ] }, { :include_blank => true }, :class => 'input_type_selector' %>
+    <%= selectable_f f, :job_template_id, JobTemplate.all.map { |t| [ t.name, t.id ] }, { :include_blank => true }, :class => 'input_type_selector' %>
   </div>
 <%= submit_or_cancel f %>
 <% end %>

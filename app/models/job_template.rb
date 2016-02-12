@@ -16,7 +16,7 @@ class JobTemplate < ::Template
   has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :foreign_key => 'template_id'
   has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
 
-  has_many :remote_execution_features, :dependent => :nullify, :foreign_key => 'template_id'
+  has_many :remote_execution_features, :dependent => :nullify
 
   # these can't be shared in parent class, scoped search can't handle STI properly
   # tested with scoped_search 3.2.0
@@ -76,7 +76,7 @@ class JobTemplate < ::Template
     end
 
     if metadata['feature'] && (feature = RemoteExecutionFeature.feature(metadata['feature']))
-      feature.template_id ||= template.id
+      feature.job_template_id ||= template.id
       feature.save!
     end
 

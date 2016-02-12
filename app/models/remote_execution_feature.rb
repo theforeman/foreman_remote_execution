@@ -1,9 +1,9 @@
 class RemoteExecutionFeature < ActiveRecord::Base
-  attr_accessible :label, :name, :provided_input_names, :description, :template_id
+  attr_accessible :label, :name, :provided_input_names, :description, :job_template_id
 
   validate :label, :name, :presence => true, :unique => true
 
-  belongs_to :template
+  belongs_to :job_template
 
   extend FriendlyId
   friendly_id :label

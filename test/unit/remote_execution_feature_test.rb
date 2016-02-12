@@ -20,7 +20,7 @@ describe RemoteExecutionFeature do
 
   before do
     User.current = users :admin
-    install_feature.update_attributes!(:template_id => package_template.id)
+    install_feature.update_attributes!(:job_template_id => package_template.id)
   end
 
   describe 'composer' do

@@ -172,11 +172,11 @@ class JobInvocationComposer
     end
 
     def params
-      { :job_category => template.job_category,
+      { :job_category => job_template.job_category,
         :targeting => targeting_params,
         :triggering => {},
         :template_invocations => template_invocations_params,
-        :description_format => template.generate_description_format }.with_indifferent_access
+        :description_format => job_template.generate_description_format }.with_indifferent_access
     end
 
     private
@@ -192,19 +192,19 @@ class JobInvocationComposer
     end
 
     def template_invocations_params
-      [ { 'template_id' => template.id,
+      [ { 'template_id' => job_template.id,
           'input_values' => input_values_params } ]
     end
 
     def input_values_params
       @provided_inputs.map do |key, value|
-        input = template.template_inputs.find_by_name!(key)
+        input = job_template.template_inputs.find_by_name!(key)
         { 'template_input_id' => input.id, 'value' => value }
       end
     end
 
-    def template
-      template = JobTemplate.authorized(:view_job_templates).find_by_id(feature.template_id)
+    def job_template
+      template = JobTemplate.authorized(:view_job_templates).find_by_id(feature.job_template_id)
       unless template
         raise Foreman::Exception.new(N_('The template %{template_name} mapped to feature %{feature_name} is not accessible by the user'),
                                      :template_name => mapping.template.name,
