@@ -2,6 +2,9 @@ class InputTemplateRenderer
   class UndefinedInput < ::Foreman::Exception
   end
 
+  class RenderError < ::Foreman::Exception
+  end
+
   include UnattendedHelper
 
   attr_accessor :template, :host, :invocation, :input_values, :error_message
@@ -22,7 +25,7 @@ class InputTemplateRenderer
 
   def render
     @template.validate_unique_inputs!
-    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template, :preview? ], :host => @host)
+    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template, :preview?, :render_error ], :host => @host)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
     Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")
@@ -46,6 +49,10 @@ class InputTemplateRenderer
       self.error_message = _('input macro with name \'%s\' used, but no input with such name defined for this template') % name
       raise UndefinedInput, "Rendering failed, no input with name #{name} for input macro found"
     end
+  end
+
+  def render_error(message)
+    raise RenderError.new(message)
   end
 
   def render_template(template_name, input_values = {}, options = {})
