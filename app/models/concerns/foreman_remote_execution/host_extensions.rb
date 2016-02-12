@@ -38,7 +38,7 @@ module ForemanRemoteExecution
       get_interface_by_flag(:execution)
     end
 
-    def remote_execution_proxies(provider)
+    def remote_execution_proxies(provider, authorized = true)
       proxies = {}
       proxies[:subnet]   = execution_interface.subnet.remote_execution_proxies.with_features(provider) if execution_interface && execution_interface.subnet
       proxies[:fallback] = smart_proxies.with_features(provider) if Setting[:remote_execution_fallback_proxy]
@@ -50,14 +50,15 @@ module ForemanRemoteExecution
                         proxy_scope = ::SmartProxy
                       end
 
-        proxies[:global] = proxy_scope.authorized.with_features(provider)
+        proxy_scope = proxy_scope.authorized if authorized
+        proxies[:global] = proxy_scope.with_features(provider)
       end
 
       proxies
     end
 
     def remote_execution_ssh_keys
-      remote_execution_proxies('SSH').values.flatten.uniq.map { |proxy| proxy.pubkey }.compact.uniq
+      remote_execution_proxies('SSH', false).values.flatten.uniq.map { |proxy| proxy.pubkey }.compact.uniq
     end
 
     def drop_execution_interface_cache
