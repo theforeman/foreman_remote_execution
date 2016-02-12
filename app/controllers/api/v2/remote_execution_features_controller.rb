@@ -27,6 +27,12 @@ module Api
       def update
         process_response @remote_execution_feature.update_attributes(params[:remote_execution_feature])
       end
+
+      private
+
+      def parent_scope
+        resource_class.where(nil)
+      end
     end
   end
 end
