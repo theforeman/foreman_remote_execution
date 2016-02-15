@@ -11,7 +11,7 @@
     <% end -%>
 
     <% if @additional > 0 -%>
-        <li><%= link_to(_("...and %{count} more" % {:count => @additional}), hosts_path(:search => @query, :page => 2), :target => '_blank') %></li>
+        <li><%= link_to(n_('...and %{count} more', '...and %{count} more', @additional) % {:count => @additional}, hosts_path(:search => @query, :page => 2), :target => '_blank') %></li>
     <% end -%>
   </ul>
 <% else -%>
