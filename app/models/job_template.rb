@@ -16,6 +16,8 @@ class JobTemplate < ::Template
   has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :foreign_key => 'template_id'
   has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
 
+  has_many :remote_execution_features, :dependent => :nullify
+
   # these can't be shared in parent class, scoped search can't handle STI properly
   # tested with scoped_search 3.2.0
   include Taxonomix
@@ -66,11 +68,16 @@ class JobTemplate < ::Template
 
     inputs = metadata.delete('template_inputs')
 
-    template = self.create(metadata.merge(:template => template.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options))
+    template = self.create(metadata.merge(:template => template.gsub(/<%\#.+?.-?%>\n?/m, '')).except('feature').merge(options))
     template.assign_taxonomies
 
     inputs.each do |input|
       template.template_inputs << TemplateInput.create(input)
+    end
+
+    if metadata['feature'] && (feature = RemoteExecutionFeature.feature(metadata['feature']))
+      feature.job_template_id ||= template.id
+      feature.save!
     end
 
     template
