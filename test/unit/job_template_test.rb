@@ -72,7 +72,7 @@ describe JobTemplate do
     end
   end
 
-  context 'importing a template' do
+  context 'importing a new template' do
     let(:template) do
       template = <<-END_TEMPLATE
       <%#
@@ -106,6 +106,69 @@ describe JobTemplate do
 
     it 'sets additional options' do
       template.default.must_equal true
+    end
+  end
+
+  context 'importing an existing template' do
+    let(:existing) do
+      template = <<-END_TEMPLATE
+      <%#
+      kind: job_template
+      name: Ping a Thing
+      job_category: Commands
+      provider_type: SSH
+      template_inputs:
+      - name: hostname
+        input_type: user
+        options: "www.google.com"
+        required: true
+      %>
+
+      ping -c 5 <%= input("hostname") %>
+      END_TEMPLATE
+
+      JobTemplate.import!(template, :default => true)
+    end
+
+    let(:updated) do
+      <<-END_TEMPLATE
+      <%#
+      kind: job_template
+      name: Ping a Thing
+      job_category: Commands
+      provider_type: SSH
+      template_inputs:
+      - name: hostname
+        input_type: user
+        options: 'www.redhat.com'
+        required: true
+      - name: count
+        input_type: user
+        required: true
+      %>
+
+      ping -c <%= input('count') %> <%= input('hostname') %>
+      END_TEMPLATE
+    end
+
+    it 'will not overwrite by default' do
+      existing
+      refute JobTemplate.import!(updated)
+    end
+
+    let(:synced_template) do
+      existing
+      JobTemplate.import!(updated, :update => true)
+      existing.reload
+    end
+
+    it 'syncs inputs' do
+      hostname = synced_template.template_inputs.find { |input| input.name == 'hostname' }
+      hostname.options.must_equal 'www.redhat.com'
+    end
+
+    it 'syncs content' do
+      synced_template.template.must_match(/\s+ping -c <%= input\('count'\) %> <%= input\('hostname'\) %>\s+/m)
     end
   end
 

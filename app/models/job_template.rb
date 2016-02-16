@@ -59,20 +59,29 @@ class JobTemplate < ::Template
   end
   self.table_name = 'templates'
 
-  # Import a template from ERB, with YAML metadata in the first comment
-  def self.import(template, options = {})
-    metadata = parse_metadata(template)
-    return if metadata.blank? || metadata.delete('kind') != 'job_template' || self.find_by_name(metadata['name'])
+  # Import a template from ERB, with YAML metadata in the first comment.  It
+  # will overwrite (sync) an existing template if options[:update] is true.
+  def self.import(contents, options = {})
+    transaction do
+      metadata = parse_metadata(contents)
+      return if metadata.blank? || metadata.delete('kind') != 'job_template'
 
-    inputs = metadata.delete('template_inputs')
+      # Don't update if the template already exists, unless we're told to
+      existing = self.find_by_name(metadata['name'])
+      return if !options.delete(:update) && existing
 
-    template = self.create(metadata.merge(:template => template.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options))
-    template.assign_taxonomies
+      template = existing || self.new
+      template.sync_inputs(metadata.delete('template_inputs'))
+      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options))
+      template.assign_taxonomies if template.new_record?
 
-    inputs.each do |input|
-      template.template_inputs << TemplateInput.create(input)
+      template
     end
+  end
 
+  def self.import!(template, options = {})
+    template = import(template, options)
+    template.save! if template
     template
   end
 
@@ -125,12 +134,32 @@ class JobTemplate < ::Template
     end
   end
 
-  private
+  def sync_inputs(inputs)
+    # Build a hash where keys are input names
+    inputs = inputs.inject({}) do |memo, input|
+      memo[input['name']] = input
+      memo
+    end
+
+    # Sync existing inputs
+    template_inputs.each do |existing_input|
+      if inputs.include?(existing_input.name)
+        existing_input.assign_attributes(inputs.delete(existing_input.name))
+      else
+        existing_input.mark_for_destruction
+      end
+    end
+
+    # Create new inputs
+    inputs.each { |_name, new_input| template_inputs.build(new_input) }
+  end
 
   def self.parse_metadata(template)
     match = template.match(/<%\#(.+?).-?%>/m)
     match.nil? ? {} : YAML.load(match[1])
   end
+
+  private
 
   # we can't use standard validator, .provider_names output can change but the validator does not reflect it
   def provider_type_whitelist
