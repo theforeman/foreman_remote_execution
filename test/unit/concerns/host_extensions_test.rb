@@ -40,6 +40,17 @@ describe ForemanRemoteExecution::HostExtensions do
     it 'has ssh keys in the parameters' do
       host.remote_execution_ssh_keys.must_include sshkey
     end
+
+    it 'has ssh keys in the parameters even when no user specified' do
+      # this is a case, when using the helper in provisioning templates
+      FactoryGirl.create(:smart_proxy, :ssh) do |proxy|
+        proxy.organizations << host.organization
+        proxy.locations << host.location
+      end
+      host.interfaces.first.subnet.remote_execution_proxies.clear
+      User.current = nil
+      host.remote_execution_ssh_keys.must_include sshkey
+    end
   end
 
   context 'host has multiple nics' do
