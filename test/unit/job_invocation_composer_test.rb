@@ -429,6 +429,25 @@ describe JobInvocationComposer do
         end
       end
 
+      describe 'concurrency control' do
+
+        describe 'with concurrency control set' do
+          let(:params) do
+            { :job_invocation => { :providers => { :ssh => ssh_params }, :concurrency_level => "5", :time_span => "60" } }.with_indifferent_access
+          end
+
+          it 'accepts the concurrency options' do
+            composer.job_invocation.concurrency_level.must_equal 5
+            composer.job_invocation.time_span.must_equal 60
+          end
+        end
+
+        it 'can be disabled' do
+          composer.job_invocation.concurrency_level.must_be_nil
+          composer.job_invocation.time_span.must_be_nil
+        end
+      end
+
       describe 'triggering' do
         let(:params) do
           { :job_invocation => { :providers => { :ssh => ssh_params } }, :triggering => { :mode => 'future' }}.with_indifferent_access
@@ -481,7 +500,11 @@ describe JobInvocationComposer do
         let(:params) do
           {
             :job_invocation => {
-              :providers => { :ssh => ssh_params }
+              :providers => { :ssh => ssh_params },
+              :concurrency_control => {
+                :level => 5,
+                :time_span => 60
+              }
             },
             :targeting => {
               :search_query => "name = #{host.name}",
@@ -512,6 +535,11 @@ describe JobInvocationComposer do
 
         it 'keeps template invocations and their values' do
           new_composer.pattern_template_invocations.size.must_equal existing.pattern_template_invocations.size
+        end
+
+        it 'sets the same concurrency control options' do
+          new_composer.job_invocation.concurrency_level.must_equal existing.concurrency_level
+          new_composer.job_invocation.time_span.must_equal existing.time_span
         end
 
       end
@@ -588,6 +616,28 @@ describe JobInvocationComposer do
       it 'sets the effective user based on the input' do
         assert composer.save!
         template_invocation.effective_user.must_equal 'invocation user'
+      end
+    end
+
+    context 'with concurrency_control' do
+      let(:level) { 5 }
+      let(:time_span) { 60 }
+      let(:params) do
+        { :job_category => trying_job_template_1.job_category,
+          :job_template_id => trying_job_template_1.id,
+          :concurrency_control => {
+            :concurrency_level => level,
+            :time_span => time_span
+          },
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
+          :inputs => {input1.name => 'some_value'}}
+      end
+
+      it 'sets the concurrency level and time span based on the input' do
+        assert composer.save!
+        composer.job_invocation.time_span.must_equal time_span
+        composer.job_invocation.concurrency_level.must_equal level
       end
     end
 

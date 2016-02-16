@@ -12,6 +12,7 @@ class JobInvocationComposer
         :triggering => ui_params.fetch(:triggering, {}),
         :host_ids => ui_params[:host_ids],
         :description_format => job_invocation_base[:description_format],
+        :concurrency_control => concurrency_control_params,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -49,6 +50,13 @@ class JobInvocationComposer
         template_base
       end
     end
+
+    def concurrency_control_params
+      {
+        :time_span => job_invocation_base[:time_span],
+        :level => job_invocation_base[:concurrency_level]
+      }
+    end
   end
 
   class ApiParams
@@ -63,6 +71,7 @@ class JobInvocationComposer
         :targeting => targeting_params,
         :triggering => triggering_params,
         :description_format => api_params[:description_format] || template.generate_description_format,
+        :concurrency_control => concurrency_control_params,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -92,6 +101,13 @@ class JobInvocationComposer
       else
         {}
       end
+    end
+
+    def concurrency_control_params
+      {
+        :level => api_params.fetch(:concurrency_control, {})[:concurrency_level],
+        :time_span => api_params.fetch(:concurrency_control, {})[:time_span]
+      }
     end
 
     def template_invocations_params
@@ -131,11 +147,18 @@ class JobInvocationComposer
         :targeting => targeting_params,
         :triggering => triggering_params,
         :description_format => job_invocation.description_format,
+        :concurrency_control => concurrency_control_params,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
     private
 
+    def concurrency_control_params
+      {
+        :level => job_invocation.concurrency_level,
+        :time_span => job_invocation.time_span
+      }
+    end
 
     def targeting_params
       job_invocation.targeting.attributes.slice('search_query', 'bookmark_id', 'user_id', 'targeting_type')
@@ -187,6 +210,8 @@ class JobInvocationComposer
     job_invocation.triggering = build_triggering
     job_invocation.pattern_template_invocations = build_template_invocations
     job_invocation.description_format = params[:description_format]
+    job_invocation.time_span = params[:concurrency_control][:time_span].to_i unless params[:concurrency_control][:time_span].blank?
+    job_invocation.concurrency_level = params[:concurrency_control][:level].to_i unless params[:concurrency_control][:level].blank?
 
     self
   end

@@ -12,6 +12,7 @@ module Actions
       end
 
       def plan(job_invocation, locked = false)
+        set_up_concurrency_control job_invocation
         job_invocation.task_group.save! if job_invocation.task_group.try(:new_record?)
         task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
         action_subject(job_invocation) unless locked
@@ -32,6 +33,11 @@ module Actions
           proxy = determine_proxy(template_invocation, host, load_balancer)
           trigger(RunHostJob, job_invocation, host, template_invocation, proxy)
         end
+      end
+
+      def set_up_concurrency_control(invocation)
+        limit_concurrency_level invocation.concurrency_level unless invocation.concurrency_level.nil?
+        distribute_over_time invocation.time_span unless invocation.time_span.nil?
       end
 
       def rescue_strategy
