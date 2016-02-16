@@ -167,7 +167,7 @@ module RemoteExecutionHelper
 
   def invocation_result(invocation, key)
     unknown = '&mdash;'
-    result = invocation_count(invocation, :output_key => key, :unknown_string => unknown.html_safe )
+    result = invocation_count(invocation, :output_key => key, :unknown_string => unknown.html_safe)
     label = key == :failed_count ? 'danger' : 'info'
     result == unknown ? result : report_event_column(result, "label-#{label}")
   end
