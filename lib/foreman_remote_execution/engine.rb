@@ -158,7 +158,6 @@ module ForemanRemoteExecution
       require_dependency 'foreman_tasks/task'
       ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
       RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
-      RemoteExecutionProvider.register(:Ansible, AnsibleProvider)
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
