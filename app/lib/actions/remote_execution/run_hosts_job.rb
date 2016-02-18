@@ -31,7 +31,13 @@ module Actions
           template_invocation = job_invocation.pattern_template_invocation_for_host(host).deep_clone
           template_invocation.host_id = host.id
           proxy = determine_proxy(template_invocation, host, load_balancer)
-          trigger(RunHostJob, job_invocation, host, template_invocation, proxy)
+          template_provider = template_invocation.template.provider_type
+
+          trigger(provider_job_class(template_provider),
+                  job_invocation,
+                  host,
+                  template_invocation,
+                  proxy)
         end
       end
 
@@ -70,6 +76,18 @@ module Actions
         end
 
         proxy
+      end
+
+      def provider_job_class(provider)
+        case provider
+        when 'SSH'
+          RunSSHJob
+        when 'Ansible'
+          RunAnsibleJob
+        else
+          raise ::Foreman::Exception,
+            N_('No provider job class available for %s'), provider
+        end
       end
     end
   end
