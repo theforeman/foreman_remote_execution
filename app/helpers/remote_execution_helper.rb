@@ -62,6 +62,10 @@ module RemoteExecutionHelper
   def template_invocation_status(task)
     if task.nil?
       icon_text('question', 'N/A', :kind => 'fa')
+    elsif task.state == 'running'
+      icon_text('running', _('running'), :kind => 'pficon')
+    elsif task.state == 'planned'
+      icon_text('build', _('planned'), :kind => 'pficon')
     else
       case task.result
         when 'warning', 'error'
@@ -72,8 +76,6 @@ module RemoteExecutionHelper
           end
         when 'success'
           icon_text('ok', _('success'), :kind => 'pficon')
-        when 'pending'
-          icon_text('question', _('pending'), :kind => 'fa')
         else
           task.result
       end
