@@ -93,13 +93,16 @@ class JobInvocation < ActiveRecord::Base
 
   def deep_clone
     JobInvocationComposer.from_job_invocation(self).job_invocation.tap do |invocation|
-      invocation.task_group = JobInvocationTaskGroup.new.tap(&:save!)
+      invocation.task_group = JobInvocationTaskGroup.new
       invocation.triggering = self.triggering
       invocation.description_format = self.description_format
       invocation.description = self.description
       invocation.pattern_template_invocations = self.pattern_template_invocations.map(&:deep_clone)
-      invocation.save!
     end
+  end
+
+  def deep_clone!
+    deep_clone.tap(&:save!)
   end
 
   def to_action_input
