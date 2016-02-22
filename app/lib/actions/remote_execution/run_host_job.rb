@@ -9,7 +9,7 @@ module Actions
         :link
       end
 
-      def plan(job_invocation, host, template_invocation, proxy)
+      def plan(job_invocation, host, template_invocation, proxy, options = {})
         action_subject(host, :job_category => job_invocation.job_category, :description => job_invocation.description)
 
         template_invocation.host_id = host.id
@@ -24,11 +24,18 @@ module Actions
 
         raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
-        settings = { :global_proxy   => 'remote_execution_global_proxy',
-                     :fallback_proxy => 'remote_execution_fallback_proxy' }
+        if proxy.blank?
+          offline_count = options[:offline_count] || 0
+          raise n_('The only usable proxy is down',
+                   'All %{number} usable proxies are down.',
+                   offline_count) % { :number => offline_count } if offline_count > 0
 
-        raise _('Could not use any proxy. Consider configuring %{global_proxy} ' +
-                'or %{fallback_proxy} in settings') % settings if proxy.blank?
+          settings = { :global_proxy   => 'remote_execution_global_proxy',
+                       :fallback_proxy => 'remote_execution_fallback_proxy' }
+
+          raise _('Could not use any proxy. Consider configuring %{global_proxy} ' +
+                  'or %{fallback_proxy} in settings') % settings
+        end
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render

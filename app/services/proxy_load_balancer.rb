@@ -1,4 +1,7 @@
 class ProxyLoadBalancer
+
+  attr_reader :offline
+
   def initialize
     @tasks   = {}
     @offline = []
