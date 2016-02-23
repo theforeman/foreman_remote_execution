@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/ModuleLength
 module RemoteExecutionHelper
   def providers_options
-    RemoteExecutionProvider.providers.map { |key, provider| [ key, _(provider) ] }
+    RemoteExecutionProvider.providers.map { |key, provider| [ key, _(provider.humanized_name) ] }
   end
 
   def template_input_types_options
