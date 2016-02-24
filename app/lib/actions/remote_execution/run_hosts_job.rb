@@ -32,7 +32,7 @@ module Actions
           template_invocation.host_id = host.id
           proxy = determine_proxy(template_invocation, host, load_balancer)
           trigger(RunHostJob, job_invocation, host, template_invocation, proxy,
-                  :offline_count => load_balancer.offline.count )
+                  :offline_proxies => load_balancer.offline)
         end
       end
 
