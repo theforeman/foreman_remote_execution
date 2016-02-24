@@ -25,10 +25,11 @@ module Actions
         raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
         if proxy.blank?
-          offline_count = options[:offline_count] || 0
-          raise n_('The only usable proxy is down',
-                   'All %{number} usable proxies are down.',
-                   offline_count) % { :number => offline_count } if offline_count > 0
+          offline_proxies = options.fetch(:offline_proxies, [])
+          settings = { :count => offline_proxies.count, :proxy_names => offline_proxies.map(&:name).join(', ') }
+          raise n_('The only applicable proxy %{proxy_names} is down',
+                   'All %{count} applicable proxies are down. Tried %{proxy_names}',
+                   offline_proxies.count) % settings unless offline_proxies.empty?
 
           settings = { :global_proxy   => 'remote_execution_global_proxy',
                        :fallback_proxy => 'remote_execution_fallback_proxy' }
