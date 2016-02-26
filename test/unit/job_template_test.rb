@@ -226,6 +226,38 @@ describe JobTemplate do
     end
   end
 
+  context 'template export' do
+    let(:exportable_template) do
+      FactoryGirl.create(:job_template, :with_input)
+    end
+
+    let(:erb) do
+      exportable_template.to_erb
+    end
+
+    it 'exports name' do
+      erb.must_match(/^name: #{exportable_template.name}$/)
+    end
+
+    it 'includes template inputs' do
+      erb.must_match(/^template_inputs:$/)
+    end
+
+    it 'includes template contents' do
+      erb.must_include exportable_template.template
+    end
+
+    it 'is importable' do
+      erb
+      old_name = exportable_template.name
+      exportable_template.update_attributes(:name => "#{old_name}_renamed")
+
+      imported = JobTemplate.import!(erb)
+      imported.name.must_equal old_name
+      imported.template_inputs.first.to_export.must_equal exportable_template.template_inputs.first.to_export
+    end
+  end
+
   context 'there is existing template invocation of a job template' do
     let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
     let(:job_template) { job_invocation.pattern_template_invocations.first.template }

@@ -1,11 +1,12 @@
 <%= include_javascript if SETTINGS[:version].short == '1.9' %>
+<%= javascript 'job_templates' %>
 <%= javascript 'lookup_keys' %>
 <%= javascript 'template_input' %>
 
 <% title _("Job Templates") %>
 <% title_actions(documentation_button_rex('3.1JobTemplates'),
-                 display_link_if_authorized(_("New Job Template"),
-                                            hash_for_new_job_template_path)) %>
+                 link_to_function(_('Import'), 'show_import_job_template_modal();'),
+                 display_link_if_authorized(_('New Job Template'), hash_for_new_job_template_path)) %>
 
 <table class="table table-bordered table-striped table-two-pane table-fixed">
   <thead>
@@ -33,3 +34,5 @@
   </tbody>
 </table>
 <%= will_paginate_with_info @templates %>
+
+<%= render :partial => 'import_job_template_modal' %>

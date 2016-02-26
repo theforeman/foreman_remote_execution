@@ -1,9 +1,12 @@
 class JobTemplate < ::Template
+  include ForemanRemoteExecution::Exportable
 
   class NonUniqueInputsError < Foreman::Exception
   end
 
   attr_accessible :job_category, :provider_type, :description_format, :effective_user_attributes
+  attr_exportable :name, :job_category, :description_format, :snippet, :template_inputs,
+    :foreign_input_sets, :provider_type
 
   include Authorizable
   extend FriendlyId
@@ -67,16 +70,17 @@ class JobTemplate < ::Template
       metadata = parse_metadata(contents)
       return if metadata.blank? || metadata.delete('kind') != 'job_template'
 
+      # Don't look for existing if we should always create a new template
+      existing = self.find_by_name(metadata['name']) unless options.delete(:build_new)
       # Don't update if the template already exists, unless we're told to
-      existing = self.find_by_name(metadata['name'])
       return if !options.delete(:update) && existing
 
       template = existing || self.new
       template.sync_inputs(metadata.delete('template_inputs'))
       template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
-      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options).except('feature'))
-      template.assign_taxonomies if template.new_record?
       template.sync_feature(metadata.delete('feature'))
+      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options))
+      template.assign_taxonomies if template.new_record?
 
       template
     end
@@ -86,6 +90,20 @@ class JobTemplate < ::Template
     template = import(template, options)
     template.save! if template
     template
+  end
+
+  def metadata
+    metadata = to_export.merge('kind' => 'job_template')
+    "<%#\n#{metadata.to_yaml.gsub(/\A---$/, '').strip}\n%>\n\n"
+  end
+
+  # 'Package Action - SSH Default' => 'package_action_ssh_default.erb'
+  def filename
+    name.downcase.gsub(/-/, '').gsub(/\s+/, '_') + '.erb'
+  end
+
+  def to_erb
+    metadata + template
   end
 
   # Override method in Taxonomix as Template is not used attached to a Host,
@@ -180,7 +198,6 @@ class JobTemplate < ::Template
   def sync_feature(feature_name)
     if feature_name && (feature = RemoteExecutionFeature.feature(feature_name))
       feature.job_template ||= self
-      feature.save!
     end
   end
 

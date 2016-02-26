@@ -35,12 +35,12 @@ module ForemanRemoteExecution
 
         # Add permissions
         security_block :foreman_remote_execution do
-          permission :view_job_templates, { :job_templates => [:index, :show, :revision, :auto_complete_search, :auto_complete_job_category, :preview],
-                                            :'api/v2/job_templates' => [:index, :show, :revision],
+          permission :view_job_templates, { :job_templates => [:index, :show, :revision, :auto_complete_search, :auto_complete_job_category, :preview, :export],
+                                            :'api/v2/job_templates' => [:index, :show, :revision, :export],
                                             :'api/v2/template_inputs' => [:index, :show],
                                             :'api/v2/foreign_input_sets' => [:index, :show]}, :resource_type => 'JobTemplate'
-          permission :create_job_templates, { :job_templates => [:new, :create, :clone_template],
-                                              :'api/v2/job_templates' => [:create, :clone] }, :resource_type => 'JobTemplate'
+          permission :create_job_templates, { :job_templates => [:new, :create, :clone_template, :import],
+                                              :'api/v2/job_templates' => [:create, :clone, :import] }, :resource_type => 'JobTemplate'
           permission :edit_job_templates, { :job_templates => [:edit, :update],
                                             :'api/v2/job_templates' => [:update],
                                             :'api/v2/template_inputs' => [:create, :update, :destroy],
