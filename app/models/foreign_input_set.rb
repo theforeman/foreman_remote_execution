@@ -5,7 +5,7 @@ class ForeignInputSet < ActiveRecord::Base
   end
 
   attr_accessible :template_id, :target_template_id, :include_all, :include, :exclude
-  attr_exportable :template_name, :exclude, :include, :include_all
+  attr_exportable :exclude, :include, :include_all, :template => ->(input_set) { input_set.template.name }
 
   belongs_to :template
   belongs_to :target_template, :class_name => 'Template'
@@ -14,11 +14,6 @@ class ForeignInputSet < ActiveRecord::Base
 
   validates :target_template, :presence => true
   validate :check_circular_dependency
-
-  def to_export
-    hash = super
-    hash.update('template' => hash.delete('template_name'))
-  end
 
   def inputs(templates_stack = [])
     return [] unless target_template
