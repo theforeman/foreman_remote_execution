@@ -6,7 +6,7 @@ class JobTemplate < ::Template
 
   attr_accessible :job_category, :provider_type, :description_format, :effective_user_attributes
   attr_exportable :name, :job_category, :description_format, :snippet, :template_inputs,
-    :foreign_input_sets, :provider_type
+    :foreign_input_sets, :provider_type, :kind => ->(template) { template.class.name.underscore }
 
   include Authorizable
   extend FriendlyId
@@ -79,7 +79,7 @@ class JobTemplate < ::Template
       template.sync_inputs(metadata.delete('template_inputs'))
       template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
       template.sync_feature(metadata.delete('feature'))
-      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '')).merge(options))
+      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '').strip).merge(options))
       template.assign_taxonomies if template.new_record?
 
       template
@@ -93,8 +93,7 @@ class JobTemplate < ::Template
   end
 
   def metadata
-    metadata = to_export.merge('kind' => 'job_template')
-    "<%#\n#{metadata.to_yaml.gsub(/\A---$/, '').strip}\n%>\n\n"
+    "<%#\n#{to_export.to_yaml.sub(/\A---$/, '').strip}\n%>\n\n"
   end
 
   # 'Package Action - SSH Default' => 'package_action_ssh_default.erb'

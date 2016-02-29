@@ -217,7 +217,7 @@ describe JobTemplate do
     end
 
     it 'syncs content' do
-      synced_template.template.must_match(/\s+ping -c <%= input\('count'\) %> <%= input\('hostname'\) %>\s+/m)
+      synced_template.template.must_match(/ping -c <%= input\('count'\) %> <%= input\('hostname'\) %>/m)
     end
 
     it 'syncs input sets' do
