@@ -8,15 +8,17 @@ describe ProxyLoadBalancer do
   end
 
   it 'load balances' do
-    proxies = FactoryGirl.create_list(:smart_proxy, 3, :ssh)
-    not_yet_seen = proxies.dup
+    count = 3
+    ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.expects(:tasks_count).raises.then.times(count - 1).returns(0)
+    proxies = FactoryGirl.create_list(:smart_proxy, count, :ssh)
 
-    3.times do
-      found = load_balancer.next(proxies)
-      not_yet_seen.delete(found)
+    available = proxies.reduce([]) do |found, _|
+      found << load_balancer.next(proxies)
     end
 
-    not_yet_seen.must_be_empty
+    available.count.must_equal count
+    available.uniq.count.must_equal count - 1
+    load_balancer.offline.count.must_equal 1
   end
 
   it 'returns nil for if no proxy is available' do
