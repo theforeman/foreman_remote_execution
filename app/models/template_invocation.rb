@@ -36,7 +36,7 @@ class TemplateInvocation < ActiveRecord::Base
   end
 
   def deep_clone!
-    deep_clone.tap { |clone| clone.input_values.each(&:save!) }
+    deep_clone.tap(&:save!)
   end
 
   private
