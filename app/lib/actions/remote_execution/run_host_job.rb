@@ -78,8 +78,9 @@ module Actions
 
       def find_ip_or_hostname(host)
         %w(execution primary provision).each do |flag|
-          if host.send("#{flag}_interface") && host.send("#{flag}_interface").ip.present?
-            return host.execution_interface.ip
+          interface = host.send(flag + '_interface')
+          if interface && interface.ip.present?
+            return interface.ip
           end
         end
 
