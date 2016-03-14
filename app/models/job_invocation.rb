@@ -154,7 +154,7 @@ class JobInvocation < ActiveRecord::Base
     task.main_action.live_output.first['output']
   end
 
-  def generate_description!
+  def generate_description
     key_re = /%\{([^\}]+)\}/
     template_invocation = pattern_template_invocations.first
     input_names = template_invocation.template.template_inputs_with_foreign(&:name)
@@ -168,7 +168,6 @@ class JobInvocation < ActiveRecord::Base
       self.description.gsub!(Regexp.new("%\{#{k}\}"), v || '')
     end
     self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
-    save!
   end
 
   private
