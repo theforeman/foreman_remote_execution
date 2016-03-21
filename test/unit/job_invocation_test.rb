@@ -63,16 +63,14 @@ describe JobInvocation do
 
     describe 'descriptions' do
       it 'generates description from input values' do
-        job_invocation.expects(:save!)
         job_invocation.description_format = '%{job_category} - %{foo}'
-        job_invocation.generate_description!
+        job_invocation.generate_description
         job_invocation.description.must_equal "#{job_invocation.job_category} - #{@input_value.value}"
       end
 
       it 'handles missing keys correctly' do
-        job_invocation.expects(:save!)
         job_invocation.description_format = '%{job_category} - %{missing_key}'
-        job_invocation.generate_description!
+        job_invocation.generate_description
         job_invocation.description.must_equal "#{job_invocation.job_category} - %{missing_key}"
       end
 
@@ -80,10 +78,9 @@ describe JobInvocation do
         column_limit = 255
         expected_result = 'a' * column_limit
         JobInvocation.columns_hash['description'].expects(:limit).returns(column_limit)
-        job_invocation.expects(:save!)
         job_invocation.description_format = '%{job_category}'
         job_invocation.job_category = 'a' * 1000
-        job_invocation.generate_description!
+        job_invocation.generate_description
         job_invocation.description.must_equal expected_result
       end
     end

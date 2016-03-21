@@ -468,7 +468,7 @@ class JobInvocationComposer
       template = job_invocation.pattern_template_invocations.first.try(:template)
       job_invocation.description_format = template.generate_description_format if template
     end
-    job_invocation.generate_description! if job_invocation.description.blank?
+    job_invocation.generate_description if job_invocation.description.blank?
   end
 
   def build_effective_user(template_invocation_params)
