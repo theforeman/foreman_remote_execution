@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-12 10:25-0500\n"
-"PO-Revision-Date: 2016-02-12 10:25-0500\n"
+"POT-Creation-Date: 2016-03-23 14:32-0400\n"
+"PO-Revision-Date: 2016-03-23 14:32-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -129,23 +129,36 @@ msgid ""
 "his time."
 msgstr ""
 
+#: ../app/controllers/api/v2/job_invocations_controller.rb:48
+msgid "Control concurrency level and distribution over time"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:49
+msgid "Distribute tasks over N seconds"
+msgstr ""
+
 #: ../app/controllers/api/v2/job_invocations_controller.rb:50
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Run at most N tasks at a time"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:55
 msgid "Override the description format from the template for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:54
+#: ../app/controllers/api/v2/job_invocations_controller.rb:59
 msgid "Create a job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:65
+#: ../app/controllers/api/v2/job_invocations_controller.rb:68
 msgid "Get output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:98
+#: ../app/controllers/api/v2/job_invocations_controller.rb:101
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:104
+#: ../app/controllers/api/v2/job_invocations_controller.rb:107
 msgid "Template with id '%{id}' was not found"
 msgstr ""
 
@@ -216,6 +229,7 @@ msgid "Create a job template"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
 msgid "Update a job template"
 msgstr ""
 
@@ -229,6 +243,18 @@ msgstr ""
 
 #: ../app/controllers/api/v2/job_templates_controller.rb:87
 msgid "Clone a provision template"
+msgstr ""
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:8
+msgid "List remote execution features"
+msgstr ""
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:13
+msgid "Show remote execution feature"
+msgstr ""
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:20
+msgid "Job template ID to be used for the feature"
 msgstr ""
 
 #: ../app/controllers/api/v2/template_inputs_controller.rb:11
@@ -429,11 +455,11 @@ msgid "Try to cancel the job on a host"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:200
-msgid "in %s"
+msgid "%s ago"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:200
-msgid "%s ago"
+msgid "in %s"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:210
@@ -457,7 +483,7 @@ msgid "Description template"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:241
-#: ../app/views/job_invocations/_form.html.erb:96
+#: ../app/views/job_invocations/_form.html.erb:101
 #: ../app/views/job_templates/_custom_tabs.html.erb:14
 msgid "Explanation"
 msgstr ""
@@ -474,36 +500,42 @@ msgid "Could not use any template used in the job invocation"
 msgstr ""
 
 #: ../app/lib/actions/remote_execution/run_host_job.rb:30
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:37
 msgid ""
 "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_pr"
 "oxy} in settings"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:35
+#: ../app/lib/actions/remote_execution/run_host_job.rb:43
 msgid "Failed rendering template: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:58
+#: ../app/lib/actions/remote_execution/run_host_job.rb:66
 msgid "Failed to initialize command"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:63
+#: ../app/lib/actions/remote_execution/run_host_job.rb:71
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:68 action_names.rb:8
+#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:8
 msgid "Remote action:"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:88
+#: ../app/lib/actions/remote_execution/run_host_job.rb:96
 msgid "User can not execute job on host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:89
+#: ../app/lib/actions/remote_execution/run_host_job.rb:97
 msgid "User can not execute this job template"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:94
+#: ../app/lib/actions/remote_execution/run_host_job.rb:102
 msgid "User can not execute this job template on %s"
 msgstr ""
 
@@ -550,11 +582,11 @@ msgid "Execution"
 msgstr ""
 
 #: ../app/models/host_status/execution_status.rb:36
-msgid "No execution finished yet"
+msgid "Last execution succeeded"
 msgstr ""
 
 #: ../app/models/host_status/execution_status.rb:36
-msgid "Last execution succeeded"
+msgid "No execution finished yet"
 msgstr ""
 
 #: ../app/models/host_status/execution_status.rb:38
@@ -565,21 +597,21 @@ msgstr ""
 msgid "Unknown execution status"
 msgstr ""
 
-#: ../app/models/input_template_renderer.rb:13
+#: ../app/models/input_template_renderer.rb:16
 msgid "Recursive rendering of templates detected"
 msgstr ""
 
-#: ../app/models/input_template_renderer.rb:27
+#: ../app/models/input_template_renderer.rb:30
 msgid "error during rendering: %s"
 msgstr ""
 
-#: ../app/models/input_template_renderer.rb:46
+#: ../app/models/input_template_renderer.rb:49
 msgid ""
 "input macro with name '%s' used, but no input with such name defined for this "
 "template"
 msgstr ""
 
-#: ../app/models/input_template_renderer.rb:56
+#: ../app/models/input_template_renderer.rb:63
 msgid "included template '%s' not found"
 msgstr ""
 
@@ -587,28 +619,46 @@ msgstr ""
 msgid "template"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:70
+#: ../app/models/job_invocation_composer.rb:79
 msgid "Cannot specify both bookmark_id and search_query"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:75
+#: ../app/models/job_invocation_composer.rb:84
 msgid "Cannot specify both recurrence and scheduling"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:102
+#: ../app/models/job_invocation_composer.rb:118
 msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr ""
+
+#: ../app/models/job_invocation_composer.rb:226
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr ""
+
+#: ../app/models/job_invocation_composer.rb:235
+msgid "No template mapped to feature %{feature_name}"
+msgstr ""
+
+#: ../app/models/job_invocation_composer.rb:241
+msgid ""
+"The template %{template_name} mapped to feature %{feature_name} is not accessi"
+"ble by the user"
 msgstr ""
 
 #: ../app/models/job_invocation_task_group.rb:8
 msgid "Job Invocation"
 msgstr ""
 
-#: ../app/models/job_template.rb:124
+#: ../app/models/job_template.rb:136
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr ""
 
-#: ../app/models/job_template.rb:144
+#: ../app/models/job_template.rb:203
 msgid "This template is locked. Please clone it to a new template to customize."
+msgstr ""
+
+#: ../app/models/remote_execution_feature.rb:20
+msgid "Unknown remote execution feature %s"
 msgstr ""
 
 #: ../app/models/setting/remote_execution.rb:10
@@ -640,6 +690,10 @@ msgstr ""
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr ""
 
+#: ../app/models/setting/remote_execution.rb:27
+msgid "Whether we should sync templates from disk when running db:seed."
+msgstr ""
+
 #: ../app/models/ssh_execution_provider.rb:13
 msgid "SSH"
 msgstr ""
@@ -649,11 +703,11 @@ msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-msgid "Static Query"
+msgid "Dynamic Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-msgid "Dynamic Query"
+msgid "Static Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:37
@@ -696,31 +750,9 @@ msgstr ""
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr ""
 
-#: ../app/overrides/foreman/nics/_execution_interface.html.erb:5
-msgid "The execution interface is used for remote execution"
-msgstr ""
-
-#: ../app/overrides/foreman/nics/_execution_interface.html.erb:8
-msgid "Remote execution"
-msgstr ""
-
-#: ../app/overrides/foreman/subnets/_rex_tab.html.erb:1
-msgid "Remote Execution"
-msgstr ""
-
-#: ../app/overrides/foreman/subnets/_rex_tab_pane.html.erb:3
-msgid "Proxies"
-msgstr ""
-
-#: ../app/overrides/foreman/subnets/_rex_tab_pane.html.erb:3
-msgid ""
-"Select as many remote execution proxies as applicable for this subnet.  When m"
-"ultiple proxies with the same provider are added, actions will be load balance"
-"d among them."
-msgstr ""
-
 #: ../app/views/job_invocations/_description_fields.html.erb:1
 #: ../app/views/job_invocations/index.html.erb:8
+#: ../app/views/remote_execution_features/index.html.erb:8
 msgid "Description"
 msgstr ""
 
@@ -749,22 +781,34 @@ msgid "Display advanced fields"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:75
-#: ../app/views/job_invocations/_tab_overview.html.erb:44
-#: ../app/views/job_templates/_custom_tabs.html.erb:39
-msgid "Effective user"
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:75
 msgid ""
 "A user to be used for executing the script. If it differs from the SSH user, s"
 "u or sudo is used to switch the accounts."
 msgstr ""
 
+#: ../app/views/job_invocations/_form.html.erb:75
+#: ../app/views/job_invocations/_tab_overview.html.erb:44
+#: ../app/views/job_templates/_custom_tabs.html.erb:39
+msgid "Effective user"
+msgstr ""
+
 #: ../app/views/job_invocations/_form.html.erb:89
+msgid "Concurrency level"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Distribute execution over N seconds"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Time span"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:94
 msgid "Type of query"
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:97
+#: ../app/views/job_invocations/_form.html.erb:102
 msgid ""
 "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static<"
 "/b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evalu"
@@ -894,11 +938,11 @@ msgid "Type"
 msgstr ""
 
 #: ../app/views/job_templates/_custom_tabs.html.erb:28
-msgid "add a input for this template"
+msgid "Add Input"
 msgstr ""
 
 #: ../app/views/job_templates/_custom_tabs.html.erb:28
-msgid "Add Input"
+msgid "add a input for this template"
 msgstr ""
 
 #: ../app/views/job_templates/_custom_tabs.html.erb:35
@@ -940,6 +984,52 @@ msgstr ""
 
 #: ../app/views/job_templates/index.html.erb:26
 msgid "This template is locked for editing."
+msgstr ""
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:5
+msgid "The execution interface is used for remote execution"
+msgstr ""
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:8
+msgid "Remote execution"
+msgstr ""
+
+#: ../app/views/overrides/subnets/_rex_tab.html.erb:1
+msgid "Remote Execution"
+msgstr ""
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid "Proxies"
+msgstr ""
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid ""
+"Select as many remote execution proxies as applicable for this subnet.  When m"
+"ultiple proxies with the same provider are added, actions will be load balance"
+"d among them."
+msgstr ""
+
+#: ../app/views/remote_execution_features/_form.html.erb:18
+msgid ""
+"You are not allowed to see the currently assigned template. Saving the form no"
+"w would unassign the template."
+msgstr ""
+
+#: ../app/views/remote_execution_features/index.html.erb:1
+#: ../lib/foreman_remote_execution/engine.rb:93
+msgid "Remote Execution Features"
+msgstr ""
+
+#: ../app/views/remote_execution_features/index.html.erb:6
+msgid "Label"
+msgstr ""
+
+#: ../app/views/remote_execution_features/index.html.erb:7
+msgid "Name"
+msgstr ""
+
+#: ../app/views/remote_execution_features/show.html.erb:1
+msgid "Edit Remote Execution Feature"
 msgstr ""
 
 #: ../app/views/template_inputs/_foreign_input_set_form.html.erb:3
@@ -998,11 +1088,15 @@ msgstr ""
 msgid "Scroll to top"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:85
+#: ../app/views/templates/package_action.erb:5
+msgid "Unsupported or no operating system found for this host."
+msgstr ""
+
+#: ../lib/foreman_remote_execution/engine.rb:88
 msgid "Job templates"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:91
+#: ../lib/foreman_remote_execution/engine.rb:99
 msgid "Jobs"
 msgstr ""
 
@@ -1019,15 +1113,15 @@ msgid "Update architecture"
 msgstr ""
 
 #: action_names.rb:5
-msgid "Import facts"
+msgid "Action with sub plans"
 msgstr ""
 
 #: action_names.rb:6
-msgid "Import puppetclasses"
+msgid "Import facts"
 msgstr ""
 
 #: action_names.rb:7
-msgid "Action with sub plans"
+msgid "Import Puppet classes"
 msgstr ""
 
 #: gemspec.rb:2
