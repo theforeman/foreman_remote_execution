@@ -96,7 +96,7 @@ module RemoteExecutionHelper
   def job_invocations_buttons
     [
       documentation_button_rex('3.2ExecutingaJob'),
-      display_link_if_authorized(_('Run Job'), hash_for_new_job_invocation_path)
+      new_link(_('Run Job'))
     ]
   end
 
