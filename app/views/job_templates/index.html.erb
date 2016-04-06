@@ -19,7 +19,7 @@
   <tbody>
     <% for job_template in @templates %>
       <tr>
-        <td class="display-two-pane"><%= link_to_if_authorized trunc_with_tooltip(job_template),
+        <td class="display-two-pane ellipsis"><%= link_to_if_authorized job_template,
                                                                hash_for_edit_job_template_path(:id => job_template).merge(:auth_object => job_template, :authorizer => authorizer) %></td>
         <td align='center'><%= checked_icon job_template.snippet %></td>
         <td align='center'>
