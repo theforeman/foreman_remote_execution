@@ -25,7 +25,7 @@ class JobTemplatesController < ::TemplatesController
   end
 
   def import
-    contents = params[:imported_template][:template].respond_to?(:read) ? params[:imported_template][:template].read : nil
+    contents = params.fetch(:imported_template, {}).fetch(:template, nil).try(:read)
 
     @template = JobTemplate.import(contents, :update => Foreman::Cast.to_bool(params[:imported_template][:overwrite]))
     if @template && @template.save
@@ -56,9 +56,7 @@ class JobTemplatesController < ::TemplatesController
 
   def action_permission
     case params[:action]
-      when 'auto_complete_job_category'
-        :view_job_templates
-      when 'export'
+      when 'auto_complete_job_category', 'export'
         :view_job_templates
       else
         super
