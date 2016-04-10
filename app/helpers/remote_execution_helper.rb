@@ -206,13 +206,8 @@ module RemoteExecutionHelper
 
   def documentation_button_rex(section = '')
     url = 'http://theforeman.org/plugins/foreman_remote_execution/' +
-      "#{ForemanRemoteExecution::VERSION.split('.').take(2).join('.')}/index.html#" +
-      section
-    link_to(
-      icon_text('help', _('Documentation'),
-                :class => 'icon-white', :kind => 'pficon'),
-      url,
-      :rel => 'external', :class => 'btn btn-info', :target => '_blank')
+      "#{ForemanRemoteExecution::VERSION.split('.').take(2).join('.')}/index.html#"
+    documentation_button section, :root_url => url
   end
 
   def template_input_header(f, template)
