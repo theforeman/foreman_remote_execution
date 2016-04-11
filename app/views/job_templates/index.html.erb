@@ -6,7 +6,8 @@
 <% title _("Job Templates") %>
 <% title_actions(documentation_button_rex('3.1JobTemplates'),
                  link_to_function(_('Import'), 'show_import_job_template_modal();', :class => 'btn btn-default'),
-                 new_link(_('New Job Template'), hash_for_new_job_template_path)) %>
+                 display_link_if_authorized(_("New Job Template"),
+                                            hash_for_new_job_template_path)) %>
 
 <table class="table table-bordered table-striped table-two-pane table-fixed">
   <thead>
