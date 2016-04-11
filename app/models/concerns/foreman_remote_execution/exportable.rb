@@ -1,7 +1,9 @@
 # This concern makes it easy to export an ActiveRecord object with specified
-# attributes and associations only.  If a specified assocation also includes
-# this concern, then it will likewise be exported. Custom attributes can be
-# specified as an options hast consisting of a custom export lambda.
+# attributes and associations in a particular format.  If a specified
+# assocation also includes this concern, then it will likewise be exported.
+#
+# Custom attributes can be specified with a custom export lambda in an options
+# hash.
 #
 # Example:
 #   attr_exportable :name, :address, :company => ->(user) { user.company.name }
@@ -13,10 +15,16 @@ module ForemanRemoteExecution
     def to_export
       self.class.exportable_attributes.keys.inject({}) do |hash, attribute|
         value = export_attr(attribute, self.class.exportable_attributes[attribute])
-        value.blank? ? hash : hash.update(attribute => value)
+
+        # Rails considers false blank, but if a boolean value is explicitly set false, we want to ensure we export it.
+        (value.blank? && value != false) ? hash : hash.update(attribute => value)
       end.stringify_keys
     end
 
+    # Export a particular attribute or association.
+    #   - If our exportable_attributes value is callable, we call it with self as an argument
+    #   - If our object is iterable, then we export each item
+    #   - If the attribute or association also includes this concern, call to_export on it
     def export_attr(attribute, exporter)
       value = if exporter.respond_to?(:call)
                 exporter.call(self)
@@ -24,18 +32,25 @@ module ForemanRemoteExecution
                 self.send(exporter)
               end
 
-      value.respond_to?(:map) ? export_iterable(value) : value
+      value = value.respond_to?(:map) ? export_iterable(value) : value
+      value.respond_to?(:to_export) ? value.to_export : value
     end
 
+    # Exports each item in an iterable.  If it's a hash, then export each value.
     def export_iterable(items)
-      items.map { |item| item.respond_to?(:to_export) ? item.to_export : item }
+      if items.is_a?(Hash)
+        items.each { |key, value| items[key] = value.respond_to?(:to_export) ? value.to_export : value }
+        items.to_hash.stringify_keys
+      else
+        items.map { |item| item.respond_to?(:to_export) ? item.to_export : item }
+      end
     end
 
     module ClassMethods
       attr_reader :exportable_attributes
 
-      # Takes an array of exportable attributes, or a custom exports hash.  The
-      # custom exports hash should be a key/proc pair used to export the
+      # Takes an array of exportable attributes, and a custom exports hash.  The
+      # custom exports hash should be a key/lambda pair used to export the
       # particular attribute.
       def attr_exportable(*args)
         @exportable_attributes ||= {}
@@ -48,6 +63,5 @@ module ForemanRemoteExecution
         end
       end
     end
-
   end
 end
