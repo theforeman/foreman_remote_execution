@@ -93,7 +93,7 @@ class JobTemplate < ::Template
   end
 
   def metadata
-    "<%#\n#{to_export.to_yaml.sub(/\A---$/, '').strip}\n%>\n\n"
+    "<%#\n#{to_export(false).to_yaml.sub(/\A---$/, '').strip}\n%>\n\n"
   end
 
   # 'Package Action - SSH Default' => 'package_action_ssh_default.erb'

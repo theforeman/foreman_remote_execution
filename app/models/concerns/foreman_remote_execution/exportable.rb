@@ -12,12 +12,17 @@ module ForemanRemoteExecution
   module Exportable
     extend ActiveSupport::Concern
 
-    def to_export
+    def to_export(include_blank = true)
       self.class.exportable_attributes.keys.inject({}) do |hash, attribute|
-        value = export_attr(attribute, self.class.exportable_attributes[attribute])
+        value = export_attr(attribute, self.class.exportable_attributes[attribute], include_blank)
 
-        # Rails considers false blank, but if a boolean value is explicitly set false, we want to ensure we export it.
-        (value.blank? && value != false) ? hash : hash.update(attribute => value)
+        if include_blank
+          hash.update(attribute => value)
+        else
+          # Rails considers false blank, but if a boolean value is explicitly
+          # set false, we want to ensure we export it.
+          (value.blank? && value != false) ? hash : hash.update(attribute => value)
+        end
       end.stringify_keys
     end
 
@@ -25,24 +30,24 @@ module ForemanRemoteExecution
     #   - If our exportable_attributes value is callable, we call it with self as an argument
     #   - If our object is iterable, then we export each item
     #   - If the attribute or association also includes this concern, call to_export on it
-    def export_attr(attribute, exporter)
+    def export_attr(attribute, exporter, include_blank)
       value = if exporter.respond_to?(:call)
                 exporter.call(self)
               elsif self.respond_to?(exporter)
                 self.send(exporter)
               end
 
-      value = value.respond_to?(:map) ? export_iterable(value) : value
-      value.respond_to?(:to_export) ? value.to_export : value
+      value = value.respond_to?(:map) ? export_iterable(value, include_blank) : value
+      value.respond_to?(:to_export) ? value.to_export(include_blank) : value
     end
 
     # Exports each item in an iterable.  If it's a hash, then export each value.
-    def export_iterable(items)
+    def export_iterable(items, include_blank)
       if items.is_a?(Hash)
-        items.each { |key, value| items[key] = value.respond_to?(:to_export) ? value.to_export : value }
+        items.each { |key, value| items[key] = value.respond_to?(:to_export) ? value.to_export(include_blank) : value }
         items.to_hash.stringify_keys
       else
-        items.map { |item| item.respond_to?(:to_export) ? item.to_export : item }
+        items.map { |item| item.respond_to?(:to_export) ? item.to_export(include_blank) : item }
       end
     end
 
