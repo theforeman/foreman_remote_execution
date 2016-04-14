@@ -3,11 +3,13 @@ Rails.application.routes.draw do
     member do
       get 'clone_template'
       get 'lock'
+      get 'export'
       get 'unlock'
       post 'preview'
     end
     collection do
       post 'preview'
+      post 'import'
       get 'revision'
       get 'auto_complete_search'
       get 'auto_complete_job_category'
@@ -45,9 +47,11 @@ Rails.application.routes.draw do
       resources :job_templates, :except => [:new, :edit] do
         (resources :locations, :only => [:index, :show]) if SETTINGS[:locations_enabled]
         (resources :organizations, :only => [:index, :show]) if SETTINGS[:organizations_enabled]
+        get :export, :on => :member
         post :clone, :on => :member
         collection do
           get 'revision'
+          post 'import'
         end
       end
 
