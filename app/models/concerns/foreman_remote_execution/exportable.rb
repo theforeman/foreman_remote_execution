@@ -16,12 +16,11 @@ module ForemanRemoteExecution
       self.class.exportable_attributes.keys.inject({}) do |hash, attribute|
         value = export_attr(attribute, self.class.exportable_attributes[attribute], include_blank)
 
-        if include_blank
+        # Rails considers false blank, but if a boolean value is explicitly set false, we want to ensure we export it.
+        if include_blank || value.present? || value == false
           hash.update(attribute => value)
         else
-          # Rails considers false blank, but if a boolean value is explicitly
-          # set false, we want to ensure we export it.
-          (value.blank? && value != false) ? hash : hash.update(attribute => value)
+          hash
         end
       end.stringify_keys
     end
