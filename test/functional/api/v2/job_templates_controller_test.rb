@@ -69,6 +69,21 @@ module Api
                      :job_template => {:name => ''}
         assert_response :unprocessable_entity
       end
+
+      test 'should export template' do
+        get :export, :id => @template.to_param
+        assert_equal @response.body, @template.to_erb
+        assert_response :success
+      end
+
+      test 'should import template' do
+        new_name = @template.name = "#{@template.name}_renamed"
+        erb_data = @template.to_erb
+        post :import, :template => erb_data
+        assert_response :success
+        assert JobTemplate.find_by_name(new_name)
+      end
     end
+
   end
 end

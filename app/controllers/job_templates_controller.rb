@@ -24,6 +24,26 @@ class JobTemplatesController < ::TemplatesController
     end
   end
 
+  def import
+    contents = params.fetch(:imported_template, {}).fetch(:template, nil).try(:read)
+
+    @template = JobTemplate.import(contents, :update => Foreman::Cast.to_bool(params[:imported_template][:overwrite]))
+    if @template && @template.save
+      flash[:notice] = _('Job template imported successfully.')
+      redirect_to job_templates_path(:search => "name = \"#{@template.name}\"")
+    else
+      @template ||= JobTemplate.import(contents, :build_new => true)
+      @template.valid?
+      flash[:warning] = _('Unable to save template. Correct highlighted errors')
+      render :action => 'new'
+    end
+  end
+
+  def export
+    find_resource unless @template.present?
+    send_data @template.to_erb, :type => 'text/plain', :disposition => 'attachment', :filename => @template.filename
+  end
+
   private
 
   def find_resource
@@ -36,7 +56,7 @@ class JobTemplatesController < ::TemplatesController
 
   def action_permission
     case params[:action]
-      when 'auto_complete_job_category'
+      when 'auto_complete_job_category', 'export'
         :view_job_templates
       else
         super

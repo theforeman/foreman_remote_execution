@@ -3,6 +3,21 @@ require 'test_plugin_helper'
 describe TemplateInput do
   let(:template_input) { FactoryGirl.build(:template_input) }
 
+  context 'export' do
+    before do
+      template_input.input_type = 'user'
+      template_input.options = "foo\nbar\nbaz"
+    end
+
+    it 'exports type' do
+      template_input.to_export['input_type'].must_equal template_input.input_type
+    end
+
+    it 'exports options' do
+      template_input.to_export['options'].must_equal template_input.options
+    end
+  end
+
   context 'user input' do
     before { template_input.input_type = 'user' }
     it { assert template_input.user_template_input? }
