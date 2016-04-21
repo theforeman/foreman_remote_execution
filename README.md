@@ -33,6 +33,17 @@ Check the Foreman manual [remote execution section](http://theforeman.org/plugin
 
 Fork and send a Pull Request. Thanks!
 
+## Release Process
+
+### Pull Translations from Transifex
+
+As part of the release process, localization must be synced from Transifex. See the [wiki](http://projects.theforeman.org/projects/foreman/wiki/How_to_Create_a_Plugin#Pulling-translations-from-Transifex) for more information.
+
+### Sync Job Templates from Community Templates
+
+The [community-templates](https://github.com/theforeman/community-templates.git) repo is the source for our job templates.  Prior to release, use the script/sync_templates.sh script to pull in any changes.
+
+
 ## Copyright
 
 Copyright (c) 2015 The Foreman developers
