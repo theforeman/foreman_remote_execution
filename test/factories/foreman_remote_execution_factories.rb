@@ -89,7 +89,7 @@ FactoryGirl.modify do
         overrides[:organizations] = [organization] unless organization.nil?
 
         FactoryGirl.create(
-          :subnet_ipv4,
+          :subnet,
           overrides
         )
       end
