@@ -1,9 +1,9 @@
 class CreateRemoteExecutionFeatures < ActiveRecord::Migration
   def change
     create_table :remote_execution_features do |t|
-      t.string :label, :index => true, :null => false
-      t.string :name, :null => false
-      t.string :description
+      t.string :label, :index => true, :null => false, :limit => 255
+      t.string :name, :null => false, :limit => 255
+      t.string :description, :limit => 255
       t.text :provided_inputs
       t.integer :job_template_id
     end

@@ -2,7 +2,7 @@ class AddInvocation< ActiveRecord::Migration
   def change
     create_table :job_invocations do |t|
       t.references :targeting, :null => false
-      t.string :job_name, :null => false
+      t.string :job_name, :null => false, :limit => 255
     end
 
     add_index :job_invocations, [:targeting_id], :name => 'job_invocations_targeting_id'
