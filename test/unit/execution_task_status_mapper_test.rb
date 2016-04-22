@@ -3,7 +3,7 @@ require 'test_plugin_helper'
 describe HostStatus::ExecutionStatus::ExecutionTaskStatusMapper do
 
   describe '.sql_conditions_for(status)' do
-    subject { HostStatus::ExecutionStatus::ExecutionTaskStatusMapper }
+    let(:subject) { HostStatus::ExecutionStatus::ExecutionTaskStatusMapper }
 
     it 'accepts status number as well as string representation' do
       subject.sql_conditions_for(HostStatus::ExecutionStatus::ERROR).must_equal subject.sql_conditions_for('failed')
@@ -18,7 +18,7 @@ describe HostStatus::ExecutionStatus::ExecutionTaskStatusMapper do
   let(:mapper) { HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.new(task) }
 
   describe '#status' do
-    subject { mapper }
+    let(:subject) { mapper }
 
     describe 'is queued' do
       context 'when there is no task' do
@@ -65,7 +65,7 @@ describe HostStatus::ExecutionStatus::ExecutionTaskStatusMapper do
   end
 
   describe '#status_label' do
-    subject { mapper.status_label }
+    let(:subject) { mapper.status_label }
 
     context 'status is OK' do
       before do
