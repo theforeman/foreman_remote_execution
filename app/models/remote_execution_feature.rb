@@ -1,7 +1,7 @@
 class RemoteExecutionFeature < ActiveRecord::Base
   attr_accessible :label, :name, :provided_input_names, :description, :job_template_id
 
-  validate :label, :name, :presence => true, :unique => true
+  validates :label, :name, :presence => true, :uniqueness => true
 
   belongs_to :job_template
 
