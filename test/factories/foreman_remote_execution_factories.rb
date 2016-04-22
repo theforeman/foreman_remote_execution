@@ -66,6 +66,7 @@ FactoryGirl.modify do
   factory :smart_proxy do
     trait :ssh do
       features { [FactoryGirl.build(:feature, :ssh)] }
+      pubkey 'ssh-rsa AAAAB3N...'
     end
   end
 
@@ -88,7 +89,7 @@ FactoryGirl.modify do
         overrides[:organizations] = [organization] unless organization.nil?
 
         FactoryGirl.create(
-          :subnet,
+          :subnet_ipv4,
           overrides
         )
       end
