@@ -433,7 +433,7 @@ describe JobInvocationComposer do
 
         describe 'with concurrency control set' do
           let(:params) do
-            { :job_invocation => { :providers => { :ssh => ssh_params }, :concurrency_level => "5", :time_span => "60" } }.with_indifferent_access
+            { :job_invocation => { :providers => { :ssh => ssh_params }, :concurrency_level => '5', :time_span => '60' } }.with_indifferent_access
           end
 
           it 'accepts the concurrency options' do

@@ -7,7 +7,7 @@ module ForemanRemoteExecution
 
       attr_accessor :name, :attrs, :subnet, :mac, :password, :subnet
       attr_exportable :name, :attrs, :mac, :subnet, :mac => ->(m) { m.mac.upcase if m.mac },
-        :custom_attr => ->(m) { "hello world" }
+                                                    :custom_attr => ->(m) { 'hello world' }
 
       def attributes
         {
@@ -55,10 +55,10 @@ module ForemanRemoteExecution
       assert_not_include @sample.to_export.keys, 'password'
     end
 
-    test "#to_export calls the lambda" do
+    test '#to_export calls the lambda' do
       export = @sample.to_export
       assert_equal('AA:BB:CC:DD:EE:FF', export['mac'])
-      assert_equal(export['custom_attr'], "hello world")
+      assert_equal(export['custom_attr'], 'hello world')
     end
 
     test '#to_export values are exported recursively' do

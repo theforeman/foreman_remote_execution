@@ -222,7 +222,7 @@ describe JobTemplate do
 
     it 'syncs input sets' do
       synced_template.foreign_input_sets.first.target_template.must_equal included
-      synced_template.template_inputs_with_foreign.map(&:name).must_equal ["hostname", "count"]
+      synced_template.template_inputs_with_foreign.map(&:name).must_equal ['hostname', 'count']
     end
   end
 

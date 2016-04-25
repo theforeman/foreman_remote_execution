@@ -6,10 +6,8 @@ AllCops:
   Exclude:
     - 'doc/plugins/**'
 
-# TODO: uncomment when on rubocop 0.35.1
-#Rails/Date:
-  #Exclude:
-    #- foreman_remote_execution.gemspec
+Rails/Date:
+  Enabled: false
 
 # Don't enforce documentation
 Style/Documentation:
@@ -32,7 +30,7 @@ Style/RedundantSelf:
   Enabled: false
 
 Metrics/ClassLength:
-  Max: 200
+  Max: 500
 
 Style/FileName:
   Exclude:

@@ -6,7 +6,7 @@ class JobTemplate < ::Template
 
   attr_accessible :job_category, :provider_type, :description_format, :effective_user_attributes
   attr_exportable :name, :job_category, :description_format, :snippet, :template_inputs,
-    :foreign_input_sets, :provider_type, :kind => ->(template) { template.class.name.underscore }
+                  :foreign_input_sets, :provider_type, :kind => ->(template) { template.class.name.underscore }
 
   include Authorizable
   extend FriendlyId
@@ -98,7 +98,7 @@ class JobTemplate < ::Template
 
   # 'Package Action - SSH Default' => 'package_action_ssh_default.erb'
   def filename
-    name.downcase.gsub(/-/, '').gsub(/\s+/, '_') + '.erb'
+    name.downcase.delete('-').gsub(/\s+/, '_') + '.erb'
   end
 
   def to_erb
@@ -157,7 +157,7 @@ class JobTemplate < ::Template
   def sync_inputs(inputs)
     inputs ||= []
     # Build a hash where keys are input names
-    inputs = inputs.inject({}) { |h, input| h.update(input['name'] => input ) }
+    inputs = inputs.inject({}) { |h, input| h.update(input['name'] => input) }
 
     # Sync existing inputs
     template_inputs.each do |existing_input|
