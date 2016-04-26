@@ -30,7 +30,7 @@ module ForemanRemoteExecution
         unflagged_interface = FactoryGirl.build(:nic_managed, flags)
         host.interfaces = [unflagged_interface]
         action.send(:find_ip_or_hostname, host).must_equal unflagged_interface.ip
-        
+
         provision_interface = FactoryGirl.build(:nic_managed, flags.merge(:provision => true))
         host.interfaces << provision_interface
         action.send(:find_ip_or_hostname, host).must_equal provision_interface.ip
@@ -38,7 +38,7 @@ module ForemanRemoteExecution
         primary_interface = FactoryGirl.build(:nic_managed, flags.merge(:primary => true))
         host.interfaces << primary_interface
         # Workaround, execution flag got enabled when adding the interface to the host
-        host.interfaces.last.execution = false 
+        host.interfaces.last.execution = false
         action.send(:find_ip_or_hostname, host).must_equal primary_interface.ip
 
         execution_interface = FactoryGirl.build(:nic_managed, flags.merge(:execution => true))
