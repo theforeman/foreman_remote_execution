@@ -1,29 +1,29 @@
-# English translations for foreman_remote_execution package.
-# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the foreman_remote_execution package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
+# Translators:
+# Dominic Cleal <dominic@cleal.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 0.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-02-03 04:48-0500\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: English\n"
-"Language: en\n"
+"PO-Revision-Date: 2016-03-16 10:45+0000\n"
+"Last-Translator: Dominic Cleal <dominic@cleal.org>\n"
+"Language-Team: English (United Kingdom) (http://www.transifex.com/foreman/fore"
+"man/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"\n"
+"Language: en_GB\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s ago"
-msgstr ""
+msgstr "%s ago"
 
 msgid "%{description} on %{host}"
 msgstr ""
 
-#, fuzzy
 msgid "...and %{count} more"
 msgid_plural "...and %{count} more"
 msgstr[0] ""
@@ -141,7 +141,7 @@ msgid "Delete architecture"
 msgstr ""
 
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 msgid "Description template"
 msgstr ""
@@ -216,7 +216,7 @@ msgid "Failed rendering template: %s"
 msgstr ""
 
 msgid "Failed to initialize command"
-msgstr ""
+msgstr "Failed to initialise command"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
@@ -234,7 +234,7 @@ msgid "Hide advanced fields"
 msgstr ""
 
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 msgid "Host detail"
 msgstr ""
@@ -243,7 +243,7 @@ msgid "Host with id '%{id}' was not found"
 msgstr ""
 
 msgid "Hosts"
-msgstr ""
+msgstr "Hosts"
 
 msgid "How often the job should occur, in the cron format"
 msgstr ""
@@ -267,7 +267,7 @@ msgid "Indicates that the action should be cancelled if it cannot be started bef
 msgstr ""
 
 msgid "Initialization error: %s"
-msgstr ""
+msgstr "Initialisation error: %s"
 
 msgid "Input"
 msgstr ""
@@ -366,7 +366,7 @@ msgid "List job templates per location"
 msgstr ""
 
 msgid "List job templates per organization"
-msgstr ""
+msgstr "List job templates per organisation"
 
 msgid "List remote execution features"
 msgstr ""
@@ -381,7 +381,7 @@ msgid "Must select a bookmark or enter a search query"
 msgstr ""
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 msgid "Name"
 msgstr ""
@@ -525,10 +525,10 @@ msgid "Scroll to top"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
-msgstr ""
+msgstr "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organisations are enabled, the search will be limited to the host's organisation or location."
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr ""
@@ -635,7 +635,7 @@ msgid "This template is locked for editing."
 msgstr ""
 
 msgid "This template is locked. Please clone it to a new template to customize."
-msgstr ""
+msgstr "This template is locked. Please clone it to a new template to customise."
 
 msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr ""
@@ -668,7 +668,7 @@ msgid "Try to cancel the job on a host"
 msgstr ""
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 msgid "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
 msgstr ""
