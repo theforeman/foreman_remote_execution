@@ -1,0 +1,823 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_remote_execution package.
+#
+# Translators:
+# Claer <transiblu@claer.hammock.fr>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: foreman_remote_execution 0.3.1\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2016-03-14 10:51+0000\n"
+"Last-Translator: Claer <transiblu@claer.hammock.fr>\n"
+"Language-Team: French (http://www.transifex.com/foreman/foreman/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "%s ago"
+msgstr "Il y a %s"
+
+msgid "%{description} on %{host}"
+msgstr "%{description} sur %{host}"
+
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] "... et %{count} de plus"
+msgstr[1] "... et %{count} de plus"
+
+msgid "A comma separated list of input names to be excluded from the foreign template."
+msgstr "Une liste des noms d'entrée du modèle externe à exclure, séparées par des virgules."
+
+msgid "A comma separated list of input names to be included from the foreign template."
+msgstr "Une liste des entrées du modèle externe à inclure, séparées par des virgules."
+
+msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
+msgstr "Une liste d'options que l'utilisateur peut choisir. Si non fournie, l'utilisateur aura un champ de saisie à structure libre"
+
+msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
+msgstr "Un greffon qui apporte l'exécution distante à Foreman, complétant la fonction de gestion de configuration avec la fonction d'exécution distante."
+
+msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
+msgstr "L'utilisateur choisi pour l'exécution du script. Si l'utilisateur est différent de celui utilisé pour SSH, su ou sudo sera mis en œuvre pour changer d'utilisateur."
+
+msgid "Action with sub plans"
+msgstr "Action avec des sous-plans"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Add Foreign Input Set"
+msgstr "Ajout d'un jeu de données en entrée externes"
+
+msgid "Add Input"
+msgstr "Ajout d'entrée"
+
+msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
+msgstr "Une autre interface est déjà définie pour l'exécution distante. Êtes-vous sûrs de vouloir utiliser celle-ci à la place ?"
+
+msgid "Back to Job"
+msgstr "Retour aux job"
+
+msgid "Bookmark"
+msgstr "Marque-pages"
+
+msgid "Cancel Job"
+msgstr "Annuler la tâche"
+
+msgid "Cancelled"
+msgstr "Annulé"
+
+msgid "Cannot resolve hosts without a bookmark or search query"
+msgstr "Impossible de résoudre les hôtes sans un marque page ou une recherche"
+
+msgid "Cannot resolve hosts without a user"
+msgstr "Impossible de résoudre les hôtes sans un utilisateur"
+
+msgid "Cannot specify both bookmark_id and search_query"
+msgstr "Impossible de spécifier simultanément bookmark_id et search_query"
+
+msgid "Cannot specify both recurrence and scheduling"
+msgstr "Impossible de spécifier et la récurrence et la planification"
+
+msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
+msgstr "Dépendance circulaire détectée dans le jeu de données d'entrée '%{template}' -> '%{target_template}'. Pile des modèles : %{templates_stack}"
+
+msgid "Clone a provision template"
+msgstr "Cloner un modèle de job"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Concurrency level"
+msgstr ""
+
+msgid "Control concurrency level and distribution over time"
+msgstr ""
+
+msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
+msgstr "Impossible d'utiliser aucun des proxies. Veuillez considérer définir %{global_proxy} ou %{fallback_proxy} dans les paramètres"
+
+msgid "Could not use any template used in the job invocation"
+msgstr "Impossible d'utiliser un modèle qui est utilisé pour un lancement de job"
+
+msgid "Create a foreign input set"
+msgstr "Créer un jeu de données en entrée externe"
+
+msgid "Create a job invocation"
+msgstr "Créer un lancement de job"
+
+msgid "Create a job template"
+msgstr "Créer un modèle de job"
+
+msgid "Create a recurring job"
+msgstr "Créer un job récurrent"
+
+msgid "Create a template input"
+msgstr "Créer un modèle d'entrée"
+
+msgid "Create architecture"
+msgstr "Créer une architecture"
+
+msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
+msgstr "L'utilisateur par défaut pour SSH. Vous pouvez remplacer cette valeur par hôte, en définissant un paramètre nommé remote_execution_ssh_user."
+
+msgid "Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user."
+msgstr "L'utilisateur par défaut pour l'exécution du script. Si l'utilisateur est différent de celui utilisé pour SSH, su ou sudo sera mis en œuvre pour changer d'utilisateur."
+
+msgid "Delete a foreign input set"
+msgstr "Supprimer un jeu de données en entrée externe"
+
+msgid "Delete a job template"
+msgstr "Supprimer un modèle de job"
+
+msgid "Delete a template input"
+msgstr "Supprimer un modèle d'entrée"
+
+msgid "Delete architecture"
+msgstr "Supprimer une architecture"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Description template"
+msgstr "Modèle de description"
+
+msgid "Detail of %s run"
+msgstr "Détails de l'exécution %s"
+
+msgid "Display advanced fields"
+msgstr "Afficher les champs avancés"
+
+msgid "Distribute execution over N seconds"
+msgstr ""
+
+msgid "Distribute tasks over N seconds"
+msgstr ""
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Duplicated inputs detected: %{duplicated_inputs}"
+msgstr "Entrées dupliquées détectés : %{duplicated_inputs}"
+
+msgid "Dynamic Query"
+msgstr "Requête dynamique"
+
+msgid "Edit Job Template"
+msgstr "Éditer le modèle de job"
+
+msgid "Edit Remote Execution Feature"
+msgstr ""
+
+msgid "Effective user"
+msgstr "Utilisateur effectif"
+
+msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
+msgstr "La méthode pour changer vers l'utilisateur effectif ne fait pas partie de la liste %{valid_methods}"
+
+msgid "Effective user options"
+msgstr "Options pour l'utilisateur effectif"
+
+msgid "Error loading data from proxy"
+msgstr "Erreur de chargement des données depuis le proxy"
+
+msgid "Evaluated at:"
+msgstr "Évalue le :"
+
+msgid "Execution"
+msgstr "Exécution"
+
+msgid "Exit status: %s"
+msgstr "Statut de sortie : %s"
+
+msgid "Explanation"
+msgstr "Explications"
+
+msgid "Export"
+msgstr ""
+
+msgid "Export a job template to ERB"
+msgstr ""
+
+msgid "Fact name, used when input type is fact"
+msgstr "Nom du fact, utilisé quand le type d'entrée est un fact"
+
+msgid "Fact value"
+msgstr "Valeur du Fact"
+
+msgid "Failed"
+msgstr "Échoué"
+
+msgid "Failed rendering template: %s"
+msgstr "Echec de rendu du modèle : %s"
+
+msgid "Failed to initialize command"
+msgstr "Echec d'initialisation de la commande"
+
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr ""
+
+msgid "Filter"
+msgstr "Filtre"
+
+msgid "Foreign input set"
+msgstr "Jeux de données en entrée externes"
+
+msgid "Get output for a host"
+msgstr "Récupérer la sortie standard d'un hôte"
+
+msgid "Hide advanced fields"
+msgstr "Cacher les champs avancés"
+
+msgid "Host"
+msgstr "Hôte"
+
+msgid "Host detail"
+msgstr "Détails de l'hôte"
+
+msgid "Host with id '%{id}' was not found"
+msgstr "L'ID d'hôte '%{id}' n'a pas été trouvé"
+
+msgid "Hosts"
+msgstr "Hôtes"
+
+msgid "How often the job should occur, in the cron format"
+msgstr "La fréquence d'exécution du job, au format cron"
+
+msgid "Import"
+msgstr ""
+
+msgid "Import Puppet classes"
+msgstr ""
+
+msgid "Import a job template from ERB"
+msgstr ""
+
+msgid "Import facts"
+msgstr "Import des facts"
+
+msgid "Include all inputs form the foreign template"
+msgstr "Inclure toutes les entrées du modèle externe"
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr "Indique que l'action doit pouvoir être annulée si elle ne peut pas être démarrée avant cette heure."
+
+msgid "Initialization error: %s"
+msgstr "Erreur d'initialisation : %s"
+
+msgid "Input"
+msgstr "Entrée"
+
+msgid "Input description"
+msgstr "Description de l'entrée"
+
+msgid "Input is advanced"
+msgstr "L'entrée est de type avancé"
+
+msgid "Input is required"
+msgstr "Entrée requise"
+
+msgid "Input name"
+msgstr "Nom de l'entrée"
+
+msgid "Input set description"
+msgstr "Description du jeu de données en entrée"
+
+msgid "Input type"
+msgstr "Type de l'entrée"
+
+msgid "Inputs to use"
+msgstr "Les entrées à utiliser"
+
+msgid "Invocation type, one of %s"
+msgstr "Type de lancement, parmi les types suivants %s"
+
+msgid "Job"
+msgstr "Travail"
+
+msgid "Job Invocation"
+msgstr "Lancement de job"
+
+msgid "Job Task"
+msgstr "Tâche de job"
+
+msgid "Job Templates"
+msgstr "Modèles de job"
+
+msgid "Job category"
+msgstr "Catégorie du job"
+
+msgid "Job finished with error"
+msgstr "Job terminé avec erreur"
+
+msgid "Job invocation"
+msgstr "Lancement de job"
+
+msgid "Job invocations"
+msgstr "Lancement de jobs"
+
+msgid "Job template"
+msgstr "Modèle de job"
+
+msgid "Job template ID to be used for the feature"
+msgstr ""
+
+msgid "Job template imported successfully."
+msgstr ""
+
+msgid "Job templates"
+msgstr "Modèles de job"
+
+msgid "JobTemplate|Locked"
+msgstr "Verrouillé"
+
+msgid "JobTemplate|Name"
+msgstr "Nom"
+
+msgid "JobTemplate|Snippet"
+msgstr "Snippet"
+
+msgid "Jobs"
+msgstr "Tâches"
+
+msgid "Label"
+msgstr ""
+
+msgid "Last execution failed"
+msgstr "La dernière exécution a échoué"
+
+msgid "Last execution succeeded"
+msgstr "La dernière exécution a réussi"
+
+msgid "List foreign input sets"
+msgstr "Afficher les jeux de données en entrée externes"
+
+msgid "List job invocations"
+msgstr "Affiche les jobs lancés"
+
+msgid "List job templates"
+msgstr "Afficher les modèles de job"
+
+msgid "List job templates per location"
+msgstr "Afficher les modèles de job par emplacement"
+
+msgid "List job templates per organization"
+msgstr "Afficher les modèles de job par organisation"
+
+msgid "List remote execution features"
+msgstr ""
+
+msgid "List template inputs"
+msgstr "Afficher les modèles de jeux de données en entrée"
+
+msgid "Manual selection"
+msgstr "Sélection manuelle"
+
+msgid "Must select a bookmark or enter a search query"
+msgstr "Vous devez choisir un marque page ou saisir une recherche"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name"
+msgstr ""
+
+msgid "New Job Template"
+msgstr "Nouveau modèle de job"
+
+msgid "No execution finished yet"
+msgstr "Aucune exécution n'est encore terminée"
+
+msgid "No hosts found."
+msgstr "Aucun hôte trouvé."
+
+msgid "No output"
+msgstr "Aucune sortie"
+
+msgid "No template mapped to feature %{feature_name}"
+msgstr ""
+
+msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr "Les entrées n'ont pas toutes des valeurs associées. Les entrées demandant de l'attention : %s"
+
+msgid "Override the description format from the template for this invocation only"
+msgstr "Remplacer le format de description du modèle pour ce lancement uniquement"
+
+msgid "Overview"
+msgstr "Vue globale"
+
+msgid "Overwrite"
+msgstr ""
+
+msgid "Overwrite template if it already exists"
+msgstr ""
+
+msgid "Pending"
+msgstr "En cours"
+
+msgid "Perform no more executions after this time"
+msgstr "Ne pas lancer d'autres exécutions après cette date."
+
+msgid "Preview"
+msgstr "Prévisualisation"
+
+msgid "Preview for target %s"
+msgstr "Prévisualisation pour la cible %s"
+
+msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
+msgstr "Problème de prévisualisation du modèle : %{error}. Remarquez que vous devez avoir sauvé les changements du modèle d'entrée avant de pouvoir le prévisualiser."
+
+msgid "Provider type"
+msgstr "Type de fournisseur"
+
+msgid "Providers and templates"
+msgstr "Modèles et fournisseurs"
+
+msgid "Proxies"
+msgstr "Proxies"
+
+msgid "Puppet class name, used when input type is puppet_parameter"
+msgstr "Nom de la classe Puppet, utilisé quand le type d'entrée est puppet_parameter"
+
+msgid "Puppet parameter"
+msgstr "Paramètre Puppet"
+
+msgid "Puppet parameter name, used when input type is puppet_parameter"
+msgstr "Nom du paramètre Puppet, utilisé quand le type d'entrée est puppet_parameter"
+
+msgid "Recurring logic"
+msgstr "Logique récurrente"
+
+msgid "Recursive rendering of templates detected"
+msgstr "Détection de récurtion dans le rendu des modèles"
+
+msgid "Refresh"
+msgstr "Actualiser"
+
+msgid "Refresh this page"
+msgstr "Actualiser cette page"
+
+msgid "Remote Execution"
+msgstr "Exécution distante"
+
+msgid "Remote Execution Features"
+msgstr ""
+
+msgid "Remote action:"
+msgstr "Action distante :"
+
+msgid "Remote execution"
+msgstr "Exécution distante"
+
+msgid "Repeat a maximum of N times"
+msgstr "Répéter un maximum de N fois"
+
+msgid "Rerun"
+msgstr "Relancer"
+
+msgid "Rerun failed"
+msgstr "Échec du relancement"
+
+msgid "Rerun on %s"
+msgstr "Relancement le %s"
+
+msgid "Rerun on failed hosts"
+msgstr "Relancer sur les hôtes où le job a échoué"
+
+msgid "Rerun the job"
+msgstr "Relancer le job"
+
+msgid "Resolves to"
+msgstr "Résoud en"
+
+msgid "Run"
+msgstr "Exécuter"
+
+msgid "Run Job"
+msgstr "Lancer le job"
+
+msgid "Run at most N tasks at a time"
+msgstr ""
+
+msgid "SSH"
+msgstr "SSH"
+
+msgid "SSH provider specific options"
+msgstr "Options spécifiques au fournisseur SSH"
+
+msgid "Schedule the job for a future time"
+msgstr "Planifier le job à une date ultérieure"
+
+msgid "Schedule the job to start at a later time"
+msgstr "Planifier le démarrage du job à une date ultérieure"
+
+msgid "Script execution failed"
+msgstr "L'exécution du script a échoué"
+
+msgid "Scroll to bottom"
+msgstr "Faire défiler en bas de page"
+
+msgid "Scroll to top"
+msgstr "Faire défiler en haut de page"
+
+msgid "Search"
+msgstr "Rechercher"
+
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
+msgstr "La recherche pour un proxy d'exécution en dehors des proxies assignés à l'hôte. Si les organisations et emplacements sont activés, la recherche sera cantonnée à l'organisation ou à l'emplacement de l'hôte."
+
+msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
+msgstr "Recherche d'un proxy avec exécution distante sur l'hôte, utile quand l'hôte n'a pas de sous-réseau ou que le sous-réseau n'a pas de proxy avec exécution distante."
+
+msgid "See the last task details"
+msgstr "Voir les détails de la dernière tâche"
+
+msgid "See the task details"
+msgstr "Voir les détails de la tâche"
+
+msgid "Select an ERB file to upload in order to import a job template.  The template must contain metadata in the first ERB comment."
+msgstr ""
+
+msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
+msgstr "Choisir tous les proxies d'exécution distante applicables pour ce sous-réseau. Quand plusieurs proxies avec un même fournisseur sont ajoutés, les actions seront réparties sur chacun d'entre eux."
+
+msgid "Selectable values for user inputs"
+msgstr "Valeurs sélectionnables pour les entrées utilisateur"
+
+msgid "Show foreign input set details"
+msgstr "Afficher les détails du jeu de données en entrée externe"
+
+msgid "Show job invocation"
+msgstr "Voir le lancement du job"
+
+msgid "Show job template details"
+msgstr "Voir les détails d'un modèle de job"
+
+msgid "Show remote execution feature"
+msgstr ""
+
+msgid "Show template input details"
+msgstr "Afficher les détails du modèle de jeu de données en entrée"
+
+msgid "Snippet"
+msgstr "Snippet"
+
+msgid "Start"
+msgstr "Démarrer"
+
+msgid "Static Query"
+msgstr "Requête statique"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Succeeded"
+msgstr "Réussie"
+
+msgid "Success"
+msgstr "Réussi"
+
+msgid "Target hosts"
+msgstr "Hôtes cibles"
+
+msgid "Target template ID"
+msgstr "ID du modèle cible"
+
+msgid "Target: "
+msgstr "Cible :"
+
+msgid "Task Details"
+msgstr "Détails de la tâche"
+
+msgid "Template ERB"
+msgstr ""
+
+msgid "Template input"
+msgstr "Modèles des données en entrée"
+
+msgid "Template name"
+msgstr "Nom de modèle"
+
+msgid "Template version"
+msgstr "Version de modèle"
+
+msgid "Template with id '%{id}' was not found"
+msgstr "Le modèle avec l'ID '%{id}' n'a pas été trouvé"
+
+msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
+msgstr "La requête dynamique '%{query}' n'a pas encore été résolue. La liste des hôtes actuelle peut être affichée ici %{here}."
+
+msgid "The execution interface is used for remote execution"
+msgstr "L'interface d'exécution est celle utilisée pour l'exécution distante"
+
+msgid "The final host list may change because the selected query is dynamic.  It will be rerun during execution."
+msgstr "La liste définitive des hôtes peut changer car le type de requête est dynamique. Elle sera relancée pendant l'exécution."
+
+msgid "The job template to use"
+msgstr "Le modèle de job à utiliser"
+
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
+msgstr ""
+
+msgid "There was an error while updating the status, try refreshing the page."
+msgstr "Il y a eu une erreur lors de la mise à jour du statut, essayez de recharger la page."
+
+msgid "This template is locked for editing."
+msgstr "Ce modèle est verrouillé contre les modifications."
+
+msgid "This template is locked. Please clone it to a new template to customize."
+msgstr "Ce modèle est verrouillé. Veuillez le cloner vers un nouveau modèle pour personnaliser ce dernier."
+
+msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
+msgstr "Ce modèle est utilisé pour générer la description des valeurs d'entrée qui peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %{job_category} et %{template_name}."
+
+msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
+msgstr "Ce modèle est utilisé pour générer la description. Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %{job_category} et %{template_name}."
+
+msgid "Time span"
+msgstr ""
+
+msgid "Toggle DEBUG"
+msgstr "Afficher STDOUT"
+
+msgid "Toggle STDERR"
+msgstr "Afficher STDERR"
+
+msgid "Toggle STDOUT"
+msgstr "Afficher STDOUT"
+
+msgid "Toggle command"
+msgstr "Afficher les commandes"
+
+msgid "Total hosts"
+msgstr "Total des hôtes"
+
+msgid "Try to cancel the job"
+msgstr "Essai d'annulation du job"
+
+msgid "Try to cancel the job on a host"
+msgstr "Essai d'annulation du job sur un hôte"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
+msgstr "Le type est important lors de l'évaluation de la requête en hôtes. <br><ul><li><b>Statique</b> -  évalué juste après la validation de ce formulaire</li><li><b>Dynamique</b> - évalué juste avant le début de l'exécution, donc si l'action est planifiée ultérieurement, la liste des systèmes cibles peut changer avant l'exécution</li></ul>"
+
+msgid "Type of query"
+msgstr "Type de requête"
+
+msgid "Unable to fetch public key"
+msgstr "Impossible de récupérer la clef publique"
+
+msgid "Unable to save template. Correct highlighted errors"
+msgstr ""
+
+msgid "Unknown execution status"
+msgstr "État d'exécution inconnu"
+
+msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr "Entrée inconnue %{input_name} pour le modèle %{template_name}"
+
+msgid "Unknown remote execution feature %s"
+msgstr ""
+
+msgid "Unsupported or no operating system found for this host."
+msgstr ""
+
+msgid "Update a foreign input set"
+msgstr "Mettre à jour un jeu de données en entrée externe"
+
+msgid "Update a job template"
+msgstr "Mise à jour d'un modèle de job"
+
+msgid "Update a template input"
+msgstr "Mise à jour d'un modèle d'entrée"
+
+msgid "Update architecture"
+msgstr "Mise à jour d'une architecture"
+
+msgid "Use default description template"
+msgstr "Utiliser le modèle de description par défaut"
+
+msgid "User can not execute job on host %s"
+msgstr "L'utilisateur ne peut pas exécuter le job sur l'hôte %s"
+
+msgid "User can not execute this job template"
+msgstr "L'utilisateur ne peut pas exécuter ce modèle de job"
+
+msgid "User can not execute this job template on %s"
+msgstr "L'utilisateur ne peut pas exécuter ce modèle de job sur %s"
+
+msgid "User input"
+msgstr "Entrée utilisateur"
+
+msgid "Value for required input '%s' was not specified"
+msgstr "La valeur requise pour l'entrée '%s' n'a pas été donnée"
+
+msgid "Variable"
+msgstr "Variable"
+
+msgid "Variable name, used when input type is variable"
+msgstr "Nom de variable, utilisé quand le type d'entrée est une variable"
+
+msgid "What command should be used to switch to the effective user. One of %s"
+msgstr "La commande qui doit être utilisée pour changer l'utilisateur effectif. Choisir parmi %s"
+
+msgid "What user should be used to run the script (using sudo-like mechanisms)"
+msgstr "Ce que l'utilisateur devrait utiliser pour lancer le script (comme des mécanismes sudo)"
+
+msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
+msgstr "Ce que l'utilisateur devrait utiliser pour lancer le script (comme des mécanismes sudo). La valeur par défaut est un paramètre de modèle ou un paramètre global."
+
+msgid "Whether it should be allowed to override the effective user from the invocation form."
+msgstr "Défini s'il est permis de remplacer l'utilisateur effectif depuis formulaire de lancement."
+
+msgid "Whether or not the template is locked for editing"
+msgstr "Indique si le modèle peut être modifié"
+
+msgid "Whether the current user login should be used as the effective user"
+msgstr "indique si l'utilisateur actuel doit être utilisé comme utilisateur effectif"
+
+msgid "Whether to overwrite the template if it already exists"
+msgstr ""
+
+msgid "Whether we should sync templates from disk when running db:seed."
+msgstr ""
+
+msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
+msgstr ""
+
+msgid "add a input for this template"
+msgstr "Ajout d'une entrée pour ce modèle"
+
+msgid "add an input set for this template to reference a different template inputs"
+msgstr "Ajout d'un jeu d'entrées pour ce modèle pour faire référence à des entrées sur un modèle différent"
+
+msgid "cancelled"
+msgstr "annulé"
+
+msgid "error during rendering: %s"
+msgstr "Erreurs pendant le rendu : %s"
+
+msgid "failed"
+msgstr "Échec"
+
+msgid "following user inputs were provided"
+msgstr "les entrées utilisateur suivantes ont été fournies"
+
+msgid "here"
+msgstr "ici"
+
+msgid "host already has an execution interface"
+msgstr "L'hôte possède déjà une interface d'exécution"
+
+msgid "hosts"
+msgstr "hôtes"
+
+msgid "in %s"
+msgstr "Dans %s"
+
+msgid "included template '%s' not found"
+msgstr "Le modèle inclus %s est introuvable"
+
+msgid "input macro with name '%s' used, but no input with such name defined for this template"
+msgstr "La macro d'entrée au nom '%s' a été utilisée, mais aucune entrée avec ce nom n'est définie pour ce modèle"
+
+msgid "planned"
+msgstr ""
+
+msgid "queued"
+msgstr "ajouté en file d'attente"
+
+msgid "remove template input"
+msgstr "supprimer un modèles des données en entrée"
+
+msgid "remove template input set"
+msgstr "supprimer un modèles des données en entrée"
+
+msgid "running"
+msgstr ""
+
+msgid "running %{percent}%"
+msgstr "en cours d’exécution %{percent}%"
+
+msgid "succeeded"
+msgstr "réussi"
+
+msgid "success"
+msgstr "succès"
+
+msgid "template"
+msgstr "template"
+
+msgid "unknown status"
+msgstr "état inconnu"
