@@ -1,33 +1,32 @@
-# English translations for foreman_remote_execution package.
-# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the foreman_remote_execution package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
+# Translators:
+# Ettore Atalan <atalanttore@googlemail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 0.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-02-03 04:48-0500\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: English\n"
-"Language: en\n"
+"PO-Revision-Date: 2016-04-15 18:27+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German (http://www.transifex.com/foreman/foreman/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s ago"
-msgstr ""
+msgstr "vor %s"
 
 msgid "%{description} on %{host}"
 msgstr ""
 
-#, fuzzy
 msgid "...and %{count} more"
 msgid_plural "...and %{count} more"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "...und %{count} weiteren"
+msgstr[1] "...und %{count} weiteren"
 
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr ""
@@ -48,13 +47,13 @@ msgid "Action with sub plans"
 msgstr ""
 
 msgid "Actions"
-msgstr ""
+msgstr "Aktionen"
 
 msgid "Add Foreign Input Set"
 msgstr ""
 
 msgid "Add Input"
-msgstr ""
+msgstr "Eingabe hinzufügen"
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr ""
@@ -63,13 +62,13 @@ msgid "Back to Job"
 msgstr ""
 
 msgid "Bookmark"
-msgstr ""
+msgstr "Lesezeichen"
 
 msgid "Cancel Job"
-msgstr ""
+msgstr "Aufgabe abbrechen"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Abgebrochen"
 
 msgid "Cannot resolve hosts without a bookmark or search query"
 msgstr ""
@@ -87,10 +86,10 @@ msgid "Circular dependency detected in foreign input set '%{template}' -> '%{tar
 msgstr ""
 
 msgid "Clone a provision template"
-msgstr ""
+msgstr "Bereitstellungsvorlage klonen"
 
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 msgid "Concurrency level"
 msgstr ""
@@ -105,13 +104,13 @@ msgid "Could not use any template used in the job invocation"
 msgstr ""
 
 msgid "Create a foreign input set"
-msgstr ""
+msgstr "Fremden Eingabesatz erstellen"
 
 msgid "Create a job invocation"
 msgstr ""
 
 msgid "Create a job template"
-msgstr ""
+msgstr "Aufgabenvorlage erstellen"
 
 msgid "Create a recurring job"
 msgstr ""
@@ -120,7 +119,7 @@ msgid "Create a template input"
 msgstr ""
 
 msgid "Create architecture"
-msgstr ""
+msgstr "Architektur erstellen"
 
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr ""
@@ -129,28 +128,28 @@ msgid "Default user to use for executing the script. If the user differs from th
 msgstr ""
 
 msgid "Delete a foreign input set"
-msgstr ""
+msgstr "Fremden Eingabesatz löschen"
 
 msgid "Delete a job template"
-msgstr ""
+msgstr "Aufgabenvorlage löschen"
 
 msgid "Delete a template input"
 msgstr ""
 
 msgid "Delete architecture"
-msgstr ""
+msgstr "Architektur löschen"
 
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 msgid "Description template"
-msgstr ""
+msgstr "Beschreibungsvorlage"
 
 msgid "Detail of %s run"
 msgstr ""
 
 msgid "Display advanced fields"
-msgstr ""
+msgstr "Erweiterte Fehler anzeigen"
 
 msgid "Distribute execution over N seconds"
 msgstr ""
@@ -159,13 +158,13 @@ msgid "Distribute tasks over N seconds"
 msgstr ""
 
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentation"
 
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr ""
 
 msgid "Dynamic Query"
-msgstr ""
+msgstr "Dynamische Anfrage"
 
 msgid "Edit Job Template"
 msgstr ""
@@ -189,13 +188,13 @@ msgid "Evaluated at:"
 msgstr ""
 
 msgid "Execution"
-msgstr ""
+msgstr "Ausführung"
 
 msgid "Exit status: %s"
 msgstr ""
 
 msgid "Explanation"
-msgstr ""
+msgstr "Erklärung"
 
 msgid "Export"
 msgstr ""
@@ -207,10 +206,10 @@ msgid "Fact name, used when input type is fact"
 msgstr ""
 
 msgid "Fact value"
-msgstr ""
+msgstr "Faktwert"
 
 msgid "Failed"
-msgstr ""
+msgstr "Fehlgeschlagen"
 
 msgid "Failed rendering template: %s"
 msgstr ""
@@ -222,7 +221,7 @@ msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "Foreign input set"
 msgstr ""
@@ -231,19 +230,19 @@ msgid "Get output for a host"
 msgstr ""
 
 msgid "Hide advanced fields"
-msgstr ""
+msgstr "Erweiterte Fehler ausblenden"
 
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 msgid "Host detail"
 msgstr ""
 
 msgid "Host with id '%{id}' was not found"
-msgstr ""
+msgstr "Host mit der Kennung \"%{id}\" nicht gefunden"
 
 msgid "Hosts"
-msgstr ""
+msgstr "Hosts"
 
 msgid "How often the job should occur, in the cron format"
 msgstr ""
@@ -267,10 +266,10 @@ msgid "Indicates that the action should be cancelled if it cannot be started bef
 msgstr ""
 
 msgid "Initialization error: %s"
-msgstr ""
+msgstr "Initialisierungsfehler: %s"
 
 msgid "Input"
-msgstr ""
+msgstr "Eingabe"
 
 msgid "Input description"
 msgstr ""
@@ -279,16 +278,16 @@ msgid "Input is advanced"
 msgstr ""
 
 msgid "Input is required"
-msgstr ""
+msgstr "Eingabe ist erforderlich"
 
 msgid "Input name"
 msgstr ""
 
 msgid "Input set description"
-msgstr ""
+msgstr "Eingabesatzbeschreibung"
 
 msgid "Input type"
-msgstr ""
+msgstr "Eingabetyp"
 
 msgid "Inputs to use"
 msgstr ""
@@ -306,10 +305,10 @@ msgid "Job Task"
 msgstr ""
 
 msgid "Job Templates"
-msgstr ""
+msgstr "Aufgabenvorlagen"
 
 msgid "Job category"
-msgstr ""
+msgstr "Aufgabenkategorie"
 
 msgid "Job finished with error"
 msgstr ""
@@ -321,7 +320,7 @@ msgid "Job invocations"
 msgstr ""
 
 msgid "Job template"
-msgstr ""
+msgstr "Aufgabenvorlage"
 
 msgid "Job template ID to be used for the feature"
 msgstr ""
@@ -330,37 +329,37 @@ msgid "Job template imported successfully."
 msgstr ""
 
 msgid "Job templates"
-msgstr ""
+msgstr "Aufgabenvorlagen"
 
 msgid "JobTemplate|Locked"
-msgstr ""
+msgstr "Aufgabenvorlage|Gesperrt"
 
 msgid "JobTemplate|Name"
-msgstr ""
+msgstr "Aufgabenvorlage|Name"
 
 msgid "JobTemplate|Snippet"
-msgstr ""
+msgstr "Aufgabenvorlage|Schnipsel"
 
 msgid "Jobs"
-msgstr ""
+msgstr "Aufgaben"
 
 msgid "Label"
 msgstr ""
 
 msgid "Last execution failed"
-msgstr ""
+msgstr "Letzte Ausführung fehlgeschlagen"
 
 msgid "Last execution succeeded"
-msgstr ""
+msgstr "Letzte Ausführung erfolgreich"
 
 msgid "List foreign input sets"
-msgstr ""
+msgstr "Fremde Eingabesätze auflisten"
 
 msgid "List job invocations"
 msgstr ""
 
 msgid "List job templates"
-msgstr ""
+msgstr "Aufgabenvorlagen auflisten"
 
 msgid "List job templates per location"
 msgstr ""
@@ -375,28 +374,28 @@ msgid "List template inputs"
 msgstr ""
 
 msgid "Manual selection"
-msgstr ""
+msgstr "Manuelle Auswahl"
 
 msgid "Must select a bookmark or enter a search query"
 msgstr ""
 
 msgid "N/A"
-msgstr ""
+msgstr "Nicht verfügbar"
 
 msgid "Name"
 msgstr ""
 
 msgid "New Job Template"
-msgstr ""
+msgstr "Neue Aufgabenvorlage"
 
 msgid "No execution finished yet"
-msgstr ""
+msgstr "Noch keine Ausführung abgeschlossen"
 
 msgid "No hosts found."
-msgstr ""
+msgstr "Keine Hosts gefunden."
 
 msgid "No output"
-msgstr ""
+msgstr "Keine Ausgabe"
 
 msgid "No template mapped to feature %{feature_name}"
 msgstr ""
@@ -408,7 +407,7 @@ msgid "Override the description format from the template for this invocation onl
 msgstr ""
 
 msgid "Overview"
-msgstr ""
+msgstr "Übersicht"
 
 msgid "Overwrite"
 msgstr ""
@@ -417,34 +416,34 @@ msgid "Overwrite template if it already exists"
 msgstr ""
 
 msgid "Pending"
-msgstr ""
+msgstr "Ausstehend"
 
 msgid "Perform no more executions after this time"
 msgstr ""
 
 msgid "Preview"
-msgstr ""
+msgstr "Vorschau"
 
 msgid "Preview for target %s"
-msgstr ""
+msgstr "Vorschau für Ziel %s"
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr ""
 
 msgid "Provider type"
-msgstr ""
+msgstr "Anbietertyp"
 
 msgid "Providers and templates"
-msgstr ""
+msgstr "Anbieter und Vorlagen"
 
 msgid "Proxies"
-msgstr ""
+msgstr "Proxys"
 
 msgid "Puppet class name, used when input type is puppet_parameter"
 msgstr ""
 
 msgid "Puppet parameter"
-msgstr ""
+msgstr "Puppet-Parameter"
 
 msgid "Puppet parameter name, used when input type is puppet_parameter"
 msgstr ""
@@ -456,13 +455,13 @@ msgid "Recursive rendering of templates detected"
 msgstr ""
 
 msgid "Refresh"
-msgstr ""
+msgstr "Aktualisieren"
 
 msgid "Refresh this page"
-msgstr ""
+msgstr "Diese Seite aktualisieren"
 
 msgid "Remote Execution"
-msgstr ""
+msgstr "Fernausführung"
 
 msgid "Remote Execution Features"
 msgstr ""
@@ -471,19 +470,19 @@ msgid "Remote action:"
 msgstr ""
 
 msgid "Remote execution"
-msgstr ""
+msgstr "Fernausführung"
 
 msgid "Repeat a maximum of N times"
 msgstr ""
 
 msgid "Rerun"
-msgstr ""
+msgstr "Erneut ausführen"
 
 msgid "Rerun failed"
-msgstr ""
+msgstr "Erneutes Ausführen fehlgeschlagen"
 
 msgid "Rerun on %s"
-msgstr ""
+msgstr "Auf %s erneut ausführen"
 
 msgid "Rerun on failed hosts"
 msgstr ""
@@ -492,19 +491,19 @@ msgid "Rerun the job"
 msgstr ""
 
 msgid "Resolves to"
-msgstr ""
+msgstr "Löst auf zu"
 
 msgid "Run"
-msgstr ""
+msgstr "Ausführen"
 
 msgid "Run Job"
-msgstr ""
+msgstr "Aufgabe ausführen"
 
 msgid "Run at most N tasks at a time"
 msgstr ""
 
 msgid "SSH"
-msgstr ""
+msgstr "SSH"
 
 msgid "SSH provider specific options"
 msgstr ""
@@ -516,7 +515,7 @@ msgid "Schedule the job to start at a later time"
 msgstr ""
 
 msgid "Script execution failed"
-msgstr ""
+msgstr "Skriptausführung fehlgeschlagen"
 
 msgid "Scroll to bottom"
 msgstr ""
@@ -525,7 +524,7 @@ msgid "Scroll to top"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
 msgstr ""
@@ -549,7 +548,7 @@ msgid "Selectable values for user inputs"
 msgstr ""
 
 msgid "Show foreign input set details"
-msgstr ""
+msgstr "Details fremder Eingabesätze anzeigen"
 
 msgid "Show job invocation"
 msgstr ""
@@ -564,31 +563,31 @@ msgid "Show template input details"
 msgstr ""
 
 msgid "Snippet"
-msgstr ""
+msgstr "Schnipsel"
 
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 msgid "Static Query"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Succeeded"
 msgstr ""
 
 msgid "Success"
-msgstr ""
+msgstr "Erfolg"
 
 msgid "Target hosts"
 msgstr ""
 
 msgid "Target template ID"
-msgstr ""
+msgstr "Zielvorlagenkennung"
 
 msgid "Target: "
-msgstr ""
+msgstr "Ziel: "
 
 msgid "Task Details"
 msgstr ""
@@ -600,10 +599,10 @@ msgid "Template input"
 msgstr ""
 
 msgid "Template name"
-msgstr ""
+msgstr "Vorlagenname"
 
 msgid "Template version"
-msgstr ""
+msgstr "Vorlagenversion"
 
 msgid "Template with id '%{id}' was not found"
 msgstr ""
@@ -632,10 +631,10 @@ msgid "There was an error while updating the status, try refreshing the page."
 msgstr ""
 
 msgid "This template is locked for editing."
-msgstr ""
+msgstr "Diese Vorlage ist für die Bearbeitung gesperrt ist."
 
 msgid "This template is locked. Please clone it to a new template to customize."
-msgstr ""
+msgstr "Diese Vorlage ist gesperrt. Bitte klonen Sie diese zu einer neuen Vorlage, um sie bearbeiten zu können."
 
 msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr ""
@@ -647,19 +646,19 @@ msgid "Time span"
 msgstr ""
 
 msgid "Toggle DEBUG"
-msgstr ""
+msgstr "DEBUG umschalten"
 
 msgid "Toggle STDERR"
-msgstr ""
+msgstr "STDERR umschalten"
 
 msgid "Toggle STDOUT"
-msgstr ""
+msgstr "STDOUT umschalten"
 
 msgid "Toggle command"
-msgstr ""
+msgstr "Befehl umschalten"
 
 msgid "Total hosts"
-msgstr ""
+msgstr "Hosts gesamt"
 
 msgid "Try to cancel the job"
 msgstr ""
@@ -668,13 +667,13 @@ msgid "Try to cancel the job on a host"
 msgstr ""
 
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 msgid "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
 msgstr ""
 
 msgid "Type of query"
-msgstr ""
+msgstr "Art der Anfrage"
 
 msgid "Unable to fetch public key"
 msgstr ""
@@ -683,7 +682,7 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr ""
 
 msgid "Unknown execution status"
-msgstr ""
+msgstr "Unbekannter Ausführungsstatus"
 
 msgid "Unknown input %{input_name} for template %{template_name}"
 msgstr ""
@@ -695,16 +694,16 @@ msgid "Unsupported or no operating system found for this host."
 msgstr ""
 
 msgid "Update a foreign input set"
-msgstr ""
+msgstr "Fremden Eingabesatz aktualisieren"
 
 msgid "Update a job template"
-msgstr ""
+msgstr "Aufgabenvorlage hochladen"
 
 msgid "Update a template input"
 msgstr ""
 
 msgid "Update architecture"
-msgstr ""
+msgstr "Architektur aktualisieren"
 
 msgid "Use default description template"
 msgstr ""
@@ -719,13 +718,13 @@ msgid "User can not execute this job template on %s"
 msgstr ""
 
 msgid "User input"
-msgstr ""
+msgstr "Benutzereingabe"
 
 msgid "Value for required input '%s' was not specified"
 msgstr ""
 
 msgid "Variable"
-msgstr ""
+msgstr "Variable"
 
 msgid "Variable name, used when input type is variable"
 msgstr ""
@@ -743,7 +742,7 @@ msgid "Whether it should be allowed to override the effective user from the invo
 msgstr ""
 
 msgid "Whether or not the template is locked for editing"
-msgstr ""
+msgstr "Ob die Vorlage für die Bearbeitung gesperrt ist oder nicht"
 
 msgid "Whether the current user login should be used as the effective user"
 msgstr ""
@@ -764,28 +763,28 @@ msgid "add an input set for this template to reference a different template inpu
 msgstr ""
 
 msgid "cancelled"
-msgstr ""
+msgstr "abgebrochen"
 
 msgid "error during rendering: %s"
 msgstr ""
 
 msgid "failed"
-msgstr ""
+msgstr "fehlgeschlagen"
 
 msgid "following user inputs were provided"
 msgstr ""
 
 msgid "here"
-msgstr ""
+msgstr "hier"
 
 msgid "host already has an execution interface"
 msgstr ""
 
 msgid "hosts"
-msgstr ""
+msgstr "Hosts"
 
 msgid "in %s"
-msgstr ""
+msgstr "in %s"
 
 msgid "included template '%s' not found"
 msgstr ""
@@ -797,7 +796,7 @@ msgid "planned"
 msgstr ""
 
 msgid "queued"
-msgstr ""
+msgstr "Warteschlange"
 
 msgid "remove template input"
 msgstr ""
@@ -809,16 +808,16 @@ msgid "running"
 msgstr ""
 
 msgid "running %{percent}%"
-msgstr ""
+msgstr "%{percent}% wird ausgeführt"
 
 msgid "succeeded"
 msgstr ""
 
 msgid "success"
-msgstr ""
+msgstr "Erfolg"
 
 msgid "template"
-msgstr ""
+msgstr "Vorlage"
 
 msgid "unknown status"
-msgstr ""
+msgstr "unbekannter Status"
