@@ -12,7 +12,7 @@ class AddTemplateInvocation < ActiveRecord::Migration
     create_table :template_invocation_input_values do |t|
       t.references :template_invocation, :null => false
       t.references :template_input, :null => false
-      t.string :value, :null => false
+      t.string :value, :null => false, :limit => 255
     end
 
     add_index :template_invocation_input_values, [:template_invocation_id, :template_input_id], :name => 'template_invocation_input_values_ti_ti_ids'

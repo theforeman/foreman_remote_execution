@@ -1,10 +1,10 @@
 class AddTargeting < ActiveRecord::Migration
   def change
     create_table :targetings do |t|
-      t.string :search_query
+      t.string :search_query, :limit => 255
       t.references :bookmark
       t.references :user
-      t.string :targeting_type, :null => false
+      t.string :targeting_type, :null => false, :limit => 255
       t.timestamps
     end
 

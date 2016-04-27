@@ -3,7 +3,7 @@ class CreateTargetRemoteExecutionProxies < ActiveRecord::Migration
     create_table :target_remote_execution_proxies do |t|
       t.integer :remote_execution_proxy_id
       t.integer :target_id
-      t.string :target_type
+      t.string :target_type, :limit => 255
 
       t.timestamps
     end
