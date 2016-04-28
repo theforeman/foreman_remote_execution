@@ -2,7 +2,7 @@ class CreateJobTemplateEffectiveUsers < ActiveRecord::Migration
   def change
     create_table :job_template_effective_users do |t|
       t.integer :job_template_id
-      t.string :value
+      t.string :value, :limit => 255
       t.boolean :overridable
       t.boolean :current_user
     end

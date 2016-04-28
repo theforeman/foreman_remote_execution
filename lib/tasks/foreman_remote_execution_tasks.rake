@@ -36,14 +36,9 @@ namespace :foreman_remote_execution do
   end
 end
 
-Rake::Task[:test].enhance do
-  Rake::Task['test:foreman_remote_execution'].invoke
-end
+Rake::Task[:test].enhance ['test:foreman_remote_execution']
 
 load 'tasks/jenkins.rake'
 if Rake::Task.task_defined?(:'jenkins:unit')
-  Rake::Task['jenkins:unit'].enhance do
-    Rake::Task['test:foreman_remote_execution'].invoke
-    Rake::Task['foreman_remote_execution:rubocop'].invoke
-  end
+  Rake::Task['jenkins:unit'].enhance ['test:foreman_remote_execution', 'foreman_remote_execution:rubocop']
 end

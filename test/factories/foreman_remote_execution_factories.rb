@@ -66,6 +66,7 @@ FactoryGirl.modify do
   factory :smart_proxy do
     trait :ssh do
       features { [FactoryGirl.build(:feature, :ssh)] }
+      pubkey 'ssh-rsa AAAAB3N...'
     end
   end
 
