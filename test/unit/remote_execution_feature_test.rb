@@ -1,6 +1,10 @@
 require 'test_plugin_helper'
 
 describe RemoteExecutionFeature do
+  should validate_presence_of(:name)
+  should validate_presence_of(:label)
+  should validate_uniqueness_of(:name)
+  should validate_uniqueness_of(:label)
 
   let(:install_feature) do
     RemoteExecutionFeature.register(:katello_install_package, N_('Katello: Install package'),
