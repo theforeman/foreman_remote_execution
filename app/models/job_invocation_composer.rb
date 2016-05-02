@@ -62,6 +62,7 @@ class JobInvocationComposer
       return {} unless ui_params.key?(:triggering)
       trig = ui_params[:triggering]
       keys = (1..5).map { |i| "end_time(#{i}i)" }
+      return trig unless trig.key?(:end_time) && trig[:end_time].keys == keys
       trig.merge(:end_time => Time.local(*trig[:end_time].values_at(*keys)))
     end
   end
