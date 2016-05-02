@@ -1,4 +1,6 @@
 class TemplateInput < ActiveRecord::Base
+  include ForemanRemoteExecution::Exportable
+
   class ValueNotReady < ::Foreman::Exception
   end
   class UnsatisfiedRequiredInput < ::Foreman::Exception
@@ -10,6 +12,8 @@ class TemplateInput < ActiveRecord::Base
   attr_accessible :name, :required, :input_type, :fact_name, :variable_name,
                   :puppet_class_name, :puppet_parameter_name, :description, :template_id,
                   :options, :advanced
+
+  attr_exportable(*self.accessible_attributes - %w(template_id))
 
   belongs_to :template
   has_many :template_invocation_input_values, :dependent => :destroy

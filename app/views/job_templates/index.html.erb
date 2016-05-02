@@ -1,9 +1,11 @@
 <%= include_javascript if SETTINGS[:version].short == '1.9' %>
+<%= javascript 'job_templates' %>
 <%= javascript 'lookup_keys' %>
 <%= javascript 'template_input' %>
 
 <% title _("Job Templates") %>
 <% title_actions(documentation_button_rex('3.1JobTemplates'),
+                 link_to_function(_('Import'), 'show_import_job_template_modal();', :class => 'btn btn-default'),
                  display_link_if_authorized(_("New Job Template"),
                                             hash_for_new_job_template_path)) %>
 
@@ -19,7 +21,7 @@
   <tbody>
     <% for job_template in @templates %>
       <tr>
-        <td class="display-two-pane"><%= link_to_if_authorized trunc_with_tooltip(job_template),
+        <td class="display-two-pane ellipsis"><%= link_to_if_authorized job_template,
                                                                hash_for_edit_job_template_path(:id => job_template).merge(:auth_object => job_template, :authorizer => authorizer) %></td>
         <td align='center'><%= checked_icon job_template.snippet %></td>
         <td align='center'>
@@ -33,3 +35,5 @@
   </tbody>
 </table>
 <%= will_paginate_with_info @templates %>
+
+<%= render :partial => 'import_job_template_modal' %>

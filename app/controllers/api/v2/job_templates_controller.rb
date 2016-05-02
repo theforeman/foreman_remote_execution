@@ -7,7 +7,7 @@ module Api
       include ::Foreman::Controller::ProvisioningTemplates
 
       before_filter :find_optional_nested_object
-      before_filter :find_resource, :only => %w{show update destroy clone}
+      before_filter :find_resource, :only => %w{show update destroy clone export}
 
       before_filter :handle_template_upload, :only => [:create, :update]
 
@@ -20,6 +20,23 @@ module Api
       param_group :search_and_pagination, ::Api::V2::BaseController
       def index
         @job_templates = resource_scope_for_index
+      end
+
+      api :POST, '/job_templates/import', N_('Import a job template from ERB')
+      param :template, String, :required => true, :desc => N_('Template ERB')
+      param :overwrite, :bool, :required => false, :desc => N_('Overwrite template if it already exists')
+      def import
+        options = params[:overwrite] ? { :update => true } : { :build_new => true }
+
+        @job_template = JobTemplate.import(params[:template], options)
+        @job_template ||= JobTemplate.new
+        process_response @job_template.save
+      end
+
+      api :GET, '/job_templates/:id/export', N_('Export a job template to ERB')
+      param :id, :identifier, :required => true
+      def export
+        send_data @job_template.to_erb, :type => 'text/plain', :disposition => 'attachment', :filename => @job_template.filename
       end
 
       api :GET, '/job_templates/:id', N_('Show job template details')
@@ -110,6 +127,10 @@ module Api
         case params[:action]
         when 'clone'
           :create
+        when 'import'
+          :create
+        when 'export'
+          :view
         else
           super
         end
