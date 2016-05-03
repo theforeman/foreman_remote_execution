@@ -1,0 +1,16 @@
+<%#
+kind: job_template
+name: Reprovision - SSH Default
+job_category: Power
+description_format: 'Reprovision host'
+feature: reprovision
+provider_type: SSH
+template_inputs:
+- name: script
+  description: script to configure the bootloader to provision on next boot
+  input_type: user
+  required: true
+%>
+
+<%= input('script') %>
+<%= render_template("Power Action - SSH Default", :action => "restart") %>

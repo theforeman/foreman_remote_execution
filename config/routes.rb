@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :hosts, :only => [] do
+    member do
+      post 'reprovision', :method => :post
+    end
+  end
+
   resources :job_templates, :except => [:show] do
     member do
       get 'clone_template'
