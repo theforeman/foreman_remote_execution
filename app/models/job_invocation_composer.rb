@@ -9,7 +9,7 @@ class JobInvocationComposer
     def params
       { :job_category => job_invocation_base[:job_category],
         :targeting => ui_params.fetch(:targeting, {}).merge(:user_id => User.current.id),
-        :triggering => ui_params.fetch(:triggering, {}),
+        :triggering => triggering,
         :host_ids => ui_params[:host_ids],
         :description_format => job_invocation_base[:description_format],
         :concurrency_control => concurrency_control_params,
@@ -56,6 +56,14 @@ class JobInvocationComposer
         :time_span => job_invocation_base[:time_span],
         :level => job_invocation_base[:concurrency_level]
       }
+    end
+
+    def triggering
+      return {} unless ui_params.key?(:triggering)
+      trig = ui_params[:triggering]
+      keys = (1..5).map { |i| "end_time(#{i}i)" }
+      return trig unless trig.key?(:end_time) && trig[:end_time].keys == keys
+      trig.merge(:end_time => Time.local(*trig[:end_time].values_at(*keys)))
     end
   end
 
@@ -304,7 +312,8 @@ class JobInvocationComposer
   end
 
   def valid?
-    targeting.valid? & job_invocation.valid? & !pattern_template_invocations.map(&:valid?).include?(false)
+    targeting.valid? & job_invocation.valid? & !pattern_template_invocations.map(&:valid?).include?(false) &
+      triggering.valid?
   end
 
   def save
