@@ -4,11 +4,11 @@
 
 <div id="title_action">
   <div class="btn-toolbar pull-right">
-    <%= link_to(_('Back to Job'), job_invocation_path(@template_invocation.job_invocation)) %>
-    <%= button_group(link_to_function(_('Toggle command'), '$("div.preview").toggle()'),
-                     link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()'),
-                     link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()'),
-                     link_to_function(_('Toggle DEBUG'), '$("div.line.debug").toggle()')) %>
+    <%= link_to(_('Back to Job'), job_invocation_path(@template_invocation.job_invocation), :class => 'btn btn-default') %>
+    <%= button_group(link_to_function(_('Toggle command'), '$("div.preview").toggle()', :class => 'btn btn-default'),
+                     link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()', :class => 'btn btn-default'),
+                     link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()', :class => 'btn btn-default'),
+                     link_to_function(_('Toggle DEBUG'), '$("div.line.debug").toggle()', :class => 'btn btn-default')) %>
     <%= button_group(template_invocation_task_buttons(@template_invocation_task)) %>
   </div>
 </div>
