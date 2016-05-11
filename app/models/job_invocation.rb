@@ -20,6 +20,9 @@ class JobInvocation < ActiveRecord::Base
   scoped_search :on => :job_category, :complete_value => true
   scoped_search :on => :description # FIXME No auto complete because of https://github.com/wvanbergen/scoped_search/issues/138
 
+  has_many :template_invocations_hosts, :through => :template_invocations, :source => :host
+  scoped_search :in => :template_invocations_hosts, :on => :name, :rename => 'host', :complete_value => true
+
   delegate :bookmark, :resolved?, :to => :targeting, :allow_nil => true
 
   include ForemanTasks::Concerns::ActionSubject
