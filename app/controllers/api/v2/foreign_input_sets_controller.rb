@@ -23,7 +23,7 @@ module Api
       def_param_group :foreign_input_set do
         param :foreign_input_set, Hash, :required => true, :action_aware => true do
           param :target_template_id, :identifier, :required => true, :desc => N_('Target template ID')
-          param :include_all, :bool, :desc => N_('Include all inputs form the foreign template')
+          param :include_all, :bool, :desc => N_('Include all inputs from the foreign template')
           param :include, String, :desc => N_('A comma separated list of input names to be included from the foreign template.')
           param :exclude, String, :desc => N_('A comma separated list of input names to be included from the foreign template.')
           param :description, String, :required => false, :desc => N_('Input set description')
