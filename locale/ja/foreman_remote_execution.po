@@ -1,0 +1,1168 @@
+# myamamot <myamamot@redhat.com>, 2013. #zanata
+# asasaki <asasaki@redhat.com>, 2014. #zanata
+# jito <jito@redhat.com>, 2014. #zanata
+# asasaki <asasaki@redhat.com>, 2015. #zanata
+# myamamot <myamamot@redhat.com>, 2015. #zanata
+# Ykatabam <ykatabam@redhat.com>, 2016. #zanata
+# asasaki <asasaki@redhat.com>, 2016. #zanata
+# bkearney <bkearney@redhat.com>, 2016. #zanata
+# dcbw <dcbw@redhat.com>, 2016. #zanata
+# myamamot <myamamot@redhat.com>, 2016. #zanata
+# noriko <noriko@redhat.com>, 2016. #zanata
+# pnemade <pnemade@redhat.com>, 2016. #zanata
+# tnagamot <tnagamot@redhat.com>, 2016. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: foreman_remote_execution 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-12 12:31-0400\n"
+"PO-Revision-Date: 2016-05-13 04:35+0000\n"
+"Last-Translator: tnagamot <tnagamot@redhat.com>\n"
+"Language-Team: Japanese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Zanata 3.8.4\n"
+
+#: ../app/assets/javascripts/execution_interface.js:2
+msgid ""
+"Another interface is already set as execution. Are you sure you want to use "
+"this one instead?"
+msgstr "別のインターフェースがすでに実行として設定されています。本当にこのインターフェースを代わりに使用しますか?"
+
+#: ../app/assets/javascripts/template_invocation.js:99
+msgid "There was an error while updating the status, try refreshing the page."
+msgstr "ステータスを更新する際にエラーが発生しました。ページの更新を試行してください。"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:10
+msgid "List foreign input sets"
+msgstr "外部入力セットを一覧表示"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:17
+msgid "Show foreign input set details"
+msgstr "外部入力セット詳細を表示"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:25
+msgid "Target template ID"
+msgstr "ターゲットテンプレート ID"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:26
+msgid "Include all inputs form the foreign template"
+msgstr "外部テンプレートからのすべての入力を含める"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:27
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:28
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:8
+msgid ""
+"A comma separated list of input names to be included from the foreign "
+"template."
+msgstr "外部テンプレートから含める入力名のコンマ区切り一覧。"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:29
+msgid "Input set description"
+msgstr "入力セットの説明"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:33
+msgid "Create a foreign input set"
+msgstr "外部入力セットを作成"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:41
+msgid "Delete a foreign input set"
+msgstr "外部入力セットを削除"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:48
+msgid "Update a foreign input set"
+msgstr "外部入力セットを更新"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:15
+msgid "List job invocations"
+msgstr "ジョブ呼び出しを一覧表示"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:21
+msgid "Show job invocation"
+msgstr "ジョブ呼び出しを表示"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:28
+msgid "The job template to use"
+msgstr "使用するジョブテンプレート"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:29
+msgid "Invocation type, one of %s"
+msgstr "呼び出しタイプ、%s のいずれか"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:30
+msgid "Inputs to use"
+msgstr "使用する入力"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:31
+#: ../app/controllers/api/v2/job_templates_controller.rb:43
+msgid "SSH provider specific options"
+msgstr "SSH プロバイダー固有オプション"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:34
+msgid ""
+"What user should be used to run the script (using sudo-like mechanisms). "
+"Defaults to a template parameter or global setting."
+msgstr ""
+"スクリプトを実行するために使用するユーザー (sudo と同様のメカニズムを使用)。デフォルト値は、テンプレートパラメーターまたはグローバル設定です。"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:37
+msgid "Create a recurring job"
+msgstr "繰り返しジョブを作成"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:38
+msgid "How often the job should occur, in the cron format"
+msgstr "ジョブを実行する頻度 (cron 形式)"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:39
+msgid "Repeat a maximum of N times"
+msgstr "最大 N 回繰り返す"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:40
+msgid "Perform no more executions after this time"
+msgstr "これ以降実行しない"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:43
+msgid "Schedule the job to start at a later time"
+msgstr "後で開始するジョブをスケジュール"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:44
+msgid "Schedule the job for a future time"
+msgstr "将来のジョブをスケジュール"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:45
+msgid ""
+"Indicates that the action should be cancelled if it cannot be started before"
+" this time."
+msgstr "アクションはこの時刻よりも前に開始できない場合にキャンセルされることを示しています。"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:48
+msgid "Control concurrency level and distribution over time"
+msgstr "同時実行レベルと分散を制御"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:49
+msgid "Distribute tasks over N seconds"
+msgstr "N 秒間にわたってタスクを分散"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:50
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Run at most N tasks at a time"
+msgstr "一度に最大 N タスクを実行"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:55
+msgid ""
+"Override the description format from the template for this invocation only"
+msgstr "この呼び出しに対してのみテンプレートから説明形式を上書き"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:59
+msgid "Create a job invocation"
+msgstr "ジョブ呼び出しを作成"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:68
+msgid "Get output for a host"
+msgstr "ホストの出力を取得"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:101
+msgid "Host with id '%{id}' was not found"
+msgstr "id '%{id}' のホストが見つかりませんでした"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:107
+msgid "Template with id '%{id}' was not found"
+msgstr "id '%{id}' のテンプレートが見つかりませんでした"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:16
+msgid "List job templates"
+msgstr "ジョブテンプレートを一覧表示"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:17
+msgid "List job templates per location"
+msgstr "ロケーションごとのジョブテンプレートを一覧表示"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:18
+msgid "List job templates per organization"
+msgstr "組織ごとのジョブテンプレートを一覧表示"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:25
+msgid "Show job template details"
+msgstr "ジョブテンプレートの詳細を表示"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:32
+#: ../app/controllers/api/v2/job_templates_controller.rb:83
+msgid "Template name"
+msgstr "テンプレート名"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:33
+#: ../app/views/job_invocations/_form.html.erb:9
+#: ../app/views/job_templates/_custom_tabs.html.erb:3
+#: ../app/views/job_templates/_custom_tabs.html.erb:6
+msgid "Job category"
+msgstr "ジョブカテゴリー"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:34
+#: ../app/views/job_templates/_custom_tabs.html.erb:14
+msgid ""
+"This template is used to generate the description. Input values can be used "
+"using the syntax %{package}. You may also include the job category and "
+"template name using %{job_category} and %{template_name}."
+msgstr ""
+"このテンプレートは説明を生成するために使用されます。入力値は構文 %{package} を使用して使用できます。また、%{job_category} と"
+" %{template_name} を使用してジョブカテゴリーおよびテンプレート名を含めることもできます。"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:39
+msgid "Provider type"
+msgstr "プロバイダータイプ"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:42
+msgid "Whether or not the template is locked for editing"
+msgstr "テンプレートを編集用にロックするかどうか"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:44
+msgid "Effective user options"
+msgstr "実効ユーザーオプション"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:45
+msgid ""
+"What user should be used to run the script (using sudo-like mechanisms)"
+msgstr "スクリプトを実行するために使用するユーザー (sudo と同様のメカニズムを使用)"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:46
+msgid ""
+"Whether it should be allowed to override the effective user from the "
+"invocation form."
+msgstr "呼び出し形式から実効ユーザを上書きするのを許可するかどうか。"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:47
+msgid "Whether the current user login should be used as the effective user"
+msgstr "現在のユーザーログインを実行ユーザーとして使用するかどうか"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:54
+msgid "Create a job template"
+msgstr "ジョブテンプレートを作成"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
+msgid "Update a job template"
+msgstr "ジョブテンプレートを更新"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:69
+msgid "Template version"
+msgstr "テンプレートのバージョン"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:75
+msgid "Delete a job template"
+msgstr "ジョブテンプレートを削除"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:87
+msgid "Clone a provision template"
+msgstr "プロビジョンテンプレートをクローン"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:8
+msgid "List remote execution features"
+msgstr "リモート実行機能を一覧表示"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:13
+msgid "Show remote execution feature"
+msgstr "リモート実行機能を表示"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:20
+msgid "Job template ID to be used for the feature"
+msgstr "機能に使用するジョブテンプレート ID"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:11
+msgid "List template inputs"
+msgstr "テンプレート入力を一覧表示"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:18
+msgid "Show template input details"
+msgstr "テンプレート入力詳細を表示"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:26
+msgid "Input name"
+msgstr "入力名"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:27
+msgid "Input description"
+msgstr "入力の説明"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:28
+msgid "Input is required"
+msgstr "入力が必要"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:29
+msgid "Input is advanced"
+msgstr "入力が高度"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:30
+msgid "Input type"
+msgstr "入力タイプ"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:31
+msgid "Fact name, used when input type is fact"
+msgstr "ファクト名。入力タイプがファクトの場合に使用されます"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:32
+msgid "Variable name, used when input type is variable"
+msgstr "変数名。入力タイプが変数の場合に使用されます"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:33
+msgid "Puppet class name, used when input type is puppet_parameter"
+msgstr "Puppet クラス名。入力タイプが puppet_parameter の場合に使用されます"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:34
+msgid "Puppet parameter name, used when input type is puppet_parameter"
+msgstr "Puppet パラメーター名。入力タイプが puppet_parameter の場合に使用されます"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:35
+msgid "Selectable values for user inputs"
+msgstr "ユーザー入力に選択できる値"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:39
+msgid "Create a template input"
+msgstr "テンプレート入力を作成"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:47
+msgid "Delete a template input"
+msgstr "テンプレート入力を削除"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:54
+msgid "Update a template input"
+msgstr "テンプレート入力を更新"
+
+#: ../app/controllers/job_templates_controller.rb:23
+msgid ""
+"Problem with previewing the template: %{error}. Note that you must save "
+"template input changes before you try to preview it."
+msgstr ""
+"テンプレートのプレビューでの問題: %{error}。プレビューを行う前に、テンプレート入力の変更を保存する必要があることに注意してください。"
+
+#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:11
+#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:15
+#: ../app/helpers/remote_execution_helper.rb:97
+msgid "Run Job"
+msgstr "ジョブを実行"
+
+#: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:13
+msgid "Run"
+msgstr "実行"
+
+#: ../app/helpers/remote_execution_helper.rb:23
+msgid "Success"
+msgstr "成功しました"
+
+#: ../app/helpers/remote_execution_helper.rb:24
+#: ../app/views/job_invocations/index.html.erb:11
+msgid "Failed"
+msgstr "失敗しました"
+
+#: ../app/helpers/remote_execution_helper.rb:25
+#: ../app/views/job_invocations/index.html.erb:12
+msgid "Pending"
+msgstr "保留"
+
+#: ../app/helpers/remote_execution_helper.rb:26
+msgid "Cancelled"
+msgstr "キャンセルされた"
+
+#: ../app/helpers/remote_execution_helper.rb:36
+msgid "queued"
+msgstr "キューに登録済み"
+
+#: ../app/helpers/remote_execution_helper.rb:38
+msgid "running %{percent}%"
+msgstr "%{percent}% の実行"
+
+#: ../app/helpers/remote_execution_helper.rb:40
+msgid "succeeded"
+msgstr "成功"
+
+#: ../app/helpers/remote_execution_helper.rb:42
+#: ../app/helpers/remote_execution_helper.rb:71
+msgid "failed"
+msgstr "失敗"
+
+#: ../app/helpers/remote_execution_helper.rb:44
+msgid "unknown status"
+msgstr "不明なステータス"
+
+#: ../app/helpers/remote_execution_helper.rb:69
+msgid "cancelled"
+msgstr "キャンセル"
+
+#: ../app/helpers/remote_execution_helper.rb:74
+msgid "success"
+msgstr "success"
+
+#: ../app/helpers/remote_execution_helper.rb:76
+msgid "pending"
+msgstr "保留"
+
+#: ../app/helpers/remote_execution_helper.rb:85
+msgid "Host detail"
+msgstr "ホストの詳細"
+
+#: ../app/helpers/remote_execution_helper.rb:86
+msgid "Rerun on %s"
+msgstr "%s での再実行"
+
+#: ../app/helpers/remote_execution_helper.rb:91
+#: ../app/helpers/remote_execution_helper.rb:198
+#: ../app/models/job_invocation.rb:125
+msgid "N/A"
+msgstr "なし"
+
+#: ../app/helpers/remote_execution_helper.rb:105
+msgid "Refresh this page"
+msgstr "このページを更新"
+
+#: ../app/helpers/remote_execution_helper.rb:105
+#: ../app/views/job_invocations/_form.html.erb:40
+msgid "Refresh"
+msgstr "更新"
+
+#: ../app/helpers/remote_execution_helper.rb:107
+msgid "Rerun"
+msgstr "再実行"
+
+#: ../app/helpers/remote_execution_helper.rb:109
+msgid "Rerun the job"
+msgstr "ジョブを再実行"
+
+#: ../app/helpers/remote_execution_helper.rb:112
+msgid "Rerun failed"
+msgstr "再実行が失敗しました"
+
+#: ../app/helpers/remote_execution_helper.rb:115
+msgid "Rerun on failed hosts"
+msgstr "失敗したホストでの再実行"
+
+#: ../app/helpers/remote_execution_helper.rb:118
+msgid "Job Task"
+msgstr "ジョブタスク"
+
+#: ../app/helpers/remote_execution_helper.rb:120
+msgid "See the last task details"
+msgstr "最後のタスク詳細を確認"
+
+#: ../app/helpers/remote_execution_helper.rb:123
+#: ../app/helpers/remote_execution_helper.rb:141
+msgid "Cancel Job"
+msgstr "ジョブをキャンセル"
+
+#: ../app/helpers/remote_execution_helper.rb:125
+msgid "Try to cancel the job"
+msgstr "ジョブのキャンセルを試行"
+
+#: ../app/helpers/remote_execution_helper.rb:136
+msgid "Task Details"
+msgstr "タスクの詳細"
+
+#: ../app/helpers/remote_execution_helper.rb:138
+msgid "See the task details"
+msgstr "タスク詳細を確認"
+
+#: ../app/helpers/remote_execution_helper.rb:143
+msgid "Try to cancel the job on a host"
+msgstr "ホストでのジョブのキャンセルを試行"
+
+#: ../app/helpers/remote_execution_helper.rb:200
+msgid "%s ago"
+msgstr "%s前"
+
+#: ../app/helpers/remote_execution_helper.rb:200
+msgid "in %s"
+msgstr "(%s)"
+
+#: ../app/helpers/remote_execution_helper.rb:210
+msgid "Documentation"
+msgstr "Documentation"
+
+#: ../app/helpers/remote_execution_helper.rb:217
+msgid "Template input"
+msgstr "テンプレート入力"
+
+#: ../app/helpers/remote_execution_helper.rb:218
+msgid "remove template input"
+msgstr "テンプレート入力を削除"
+
+#: ../app/helpers/remote_execution_helper.rb:230
+msgid "Use default description template"
+msgstr "デフォルトの説明テンプレートを使用"
+
+#: ../app/helpers/remote_execution_helper.rb:235
+msgid "Description template"
+msgstr "説明テンプレート"
+
+#: ../app/helpers/remote_execution_helper.rb:241
+#: ../app/views/job_invocations/_form.html.erb:101
+#: ../app/views/job_templates/_custom_tabs.html.erb:14
+msgid "Explanation"
+msgstr "説明"
+
+#: ../app/helpers/remote_execution_helper.rb:242
+msgid ""
+"This template is used to generate the description Input values can be used "
+"using the syntax %{package}. You may also include the job category and "
+"template name using %{job_category} and %{template_name}."
+msgstr ""
+"このテンプレートは説明を生成するために使用されます。入力値は構文 %{package} を使用して使用できます。また、%{job_category} と"
+" %{template_name} を使用してジョブカテゴリーおよびテンプレート名を含めることもできます。"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:25
+msgid "Could not use any template used in the job invocation"
+msgstr "ジョブ呼び出しで使用されるテンプレートを使用できませんでした"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:30
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] "すべての %{count} 適用可能なプロキシーがダウンしています。%{proxy_names} を試行しました"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:37
+msgid ""
+"Could not use any proxy. Consider configuring %{global_proxy} or "
+"%{fallback_proxy} in settings"
+msgstr ""
+"プロキシーを使用できませんでした。設定で %{global_proxy} または %{fallback_proxy} を指定することを検討してください"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:43
+msgid "Failed rendering template: %s"
+msgstr "テンプレートのレンダリングに失敗しました: %s"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:66
+msgid "Failed to initialize command"
+msgstr "コマンドの初期化に失敗しました"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:71
+msgid "%{description} on %{host}"
+msgstr "%{host} の %{description}"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:2
+msgid "Remote action:"
+msgstr "リモートアクション:"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:96
+msgid "User can not execute job on host %s"
+msgstr "ユーザーはホスト %s でジョブを実行できません"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:97
+msgid "User can not execute this job template"
+msgstr "ユーザーはこのジョブテンプレートを実行できません"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:102
+msgid "User can not execute this job template on %s"
+msgstr "ユーザーは %s でこのジョブテンプレートを実行できません"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:24
+msgid "Script execution failed"
+msgstr "スクリプトの実行に失敗しました"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:56
+msgid "Initialization error: %s"
+msgstr "初期化エラー: %s"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:66
+msgid "Error loading data from proxy"
+msgstr "プロキシーからデータをロードするときにエラーが発生しました"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:75
+msgid "No output"
+msgstr "出力なし"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:79
+msgid "Exit status: %s"
+msgstr "終了ステータス: %s"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:81
+msgid "Job finished with error"
+msgstr "エラーでジョブが終了しました"
+
+#: ../app/lib/proxy_api/remote_execution_ssh.rb:11
+msgid "Unable to fetch public key"
+msgstr "公開鍵を取得できません"
+
+#: ../app/models/concerns/foreman_remote_execution/nic_extensions.rb:21
+msgid "host already has an execution interface"
+msgstr "ホストにはすでに実行インターフェースがあります"
+
+#: ../app/models/foreign_input_set.rb:18
+msgid ""
+"Circular dependency detected in foreign input set '%{template}' -> "
+"'%{target_template}'. Templates stack: %{templates_stack}"
+msgstr ""
+"外部入力セット '%{template}' -> '%{target_template}' で循環依存が検出されました。テンプレートスタック: "
+"%{templates_stack}"
+
+# translation auto-copied from project Skynet topics, version
+# BRMS_5.2.0_JBoss_Rules_5_Reference_Guide, document Chapter-Examples/Section-
+# HelloWorldExample
+#: ../app/models/host_status/execution_status.rb:30
+msgid "Execution"
+msgstr "Execution"
+
+#: ../app/models/host_status/execution_status.rb:36
+msgid "Last execution succeeded"
+msgstr "成功した最後の実行"
+
+#: ../app/models/host_status/execution_status.rb:36
+msgid "No execution finished yet"
+msgstr "未完了の実行なし"
+
+#: ../app/models/host_status/execution_status.rb:38
+msgid "Last execution failed"
+msgstr "失敗した最後の実行"
+
+#: ../app/models/host_status/execution_status.rb:40
+msgid "Unknown execution status"
+msgstr "不明な実行ステータス"
+
+#: ../app/models/input_template_renderer.rb:16
+msgid "Recursive rendering of templates detected"
+msgstr "検出されたテンプレートの再帰的なレンダリング"
+
+#: ../app/models/input_template_renderer.rb:30
+msgid "error during rendering: %s"
+msgstr "レンダリング中のエラー: %s"
+
+#: ../app/models/input_template_renderer.rb:49
+msgid ""
+"input macro with name '%s' used, but no input with such name defined for "
+"this template"
+msgstr "名前が '%s' の入力マクロが使用されていますが、このテンプレートにはこのような名前の入力は定義されていません"
+
+#: ../app/models/input_template_renderer.rb:63
+msgid "included template '%s' not found"
+msgstr "含まれるテンプレート '%s' が見つかりません"
+
+#: ../app/models/job_invocation.rb:7
+msgid "template"
+msgstr "template"
+
+#: ../app/models/job_invocation_composer.rb:79
+msgid "Cannot specify both bookmark_id and search_query"
+msgstr "bookmark_id と search_query を指定できません"
+
+#: ../app/models/job_invocation_composer.rb:84
+msgid "Cannot specify both recurrence and scheduling"
+msgstr "繰り返しとスケジューリングの両方を指定できません"
+
+#: ../app/models/job_invocation_composer.rb:118
+msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr "テンプレート %{template_name} の不明な入力 %{input_name}"
+
+#: ../app/models/job_invocation_composer.rb:226
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr "機能入力 %{input_name} はテンプレート %{template_name} で定義されていません"
+
+#: ../app/models/job_invocation_composer.rb:235
+msgid "No template mapped to feature %{feature_name}"
+msgstr "機能 %{feature_name} にマッピングされたテンプレートがありません"
+
+#: ../app/models/job_invocation_composer.rb:241
+msgid ""
+"The template %{template_name} mapped to feature %{feature_name} is not "
+"accessible by the user"
+msgstr "ユーザーは機能 %{feature_name} にマッピングされたテンプレート %{template_name} にアクセスできません"
+
+#: ../app/models/job_invocation_task_group.rb:8
+msgid "Job Invocation"
+msgstr "ジョブ呼び出し"
+
+#: ../app/models/job_template.rb:136
+msgid "Duplicated inputs detected: %{duplicated_inputs}"
+msgstr "重複した入力が検出されました: %{duplicated_inputs}"
+
+#: ../app/models/job_template.rb:203
+msgid ""
+"This template is locked. Please clone it to a new template to customize."
+msgstr "このテンプレートはロックされています。カスタマイズするには、このクローンを新規テンプレートに作成してください。"
+
+#: ../app/models/remote_execution_feature.rb:20
+msgid "Unknown remote execution feature %s"
+msgstr "不明なリモート実行機能 %s"
+
+#: ../app/models/setting/remote_execution.rb:10
+msgid ""
+"Search the host for any proxy with Remote Execution, useful when the host "
+"has no subnet or the subnet does not have an execution proxy"
+msgstr "リモート実行があるプロキシーをホストで検索します。ホストにサブネットがない場合、またはサブネットに実行プロキシーがない場合に役に立ちます"
+
+#: ../app/models/setting/remote_execution.rb:13
+msgid ""
+"Search for remote execution proxy outside of the proxies assigned to the "
+"host. If locations or organizations are enabled, the search will be limited "
+"to the host's organization or location."
+msgstr ""
+"ホストに割り当てられたプロキシー以外のリモート実行プロキシーを検索します。場所または組織が有効な場合、検索はホストの組織または場所に制限されます。"
+
+#: ../app/models/setting/remote_execution.rb:18
+msgid ""
+"Default user to use for SSH.  You may override per host by setting a "
+"parameter called remote_execution_ssh_user."
+msgstr ""
+"SSH に使用するデフォルトユーザー。remote_execution_ssh_user "
+"という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
+
+#: ../app/models/setting/remote_execution.rb:21
+msgid ""
+"Default user to use for executing the script. If the user differs from the "
+"SSH user, su or sudo is used to switch the user."
+msgstr ""
+"スクリプトを実行するために使用するデフォルトユーザー。ユーザーが SSH ユーザーと異なる場合は、su または sudo "
+"を使用してユーザーを切り替えます。"
+
+#: ../app/models/setting/remote_execution.rb:24
+msgid "What command should be used to switch to the effective user. One of %s"
+msgstr "実効ユーザーに切り替えるために使用するコマンド。%s のいずれか"
+
+#: ../app/models/setting/remote_execution.rb:27
+msgid "Whether we should sync templates from disk when running db:seed."
+msgstr "db:seed を実行するときにディスクからテンプレートを同期するかどうか。"
+
+#: ../app/models/ssh_execution_provider.rb:13
+msgid "SSH"
+msgstr "SSH"
+
+#: ../app/models/ssh_execution_provider.rb:33
+msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
+msgstr "実効ユーザーメソッド \"%{current_value}\" は %{valid_methods} のいずれかではありません"
+
+#: ../app/models/targeting.rb:5
+msgid "Dynamic Query"
+msgstr "動的クエリー"
+
+#: ../app/models/targeting.rb:5
+msgid "Static Query"
+msgstr "静的クエリー"
+
+#: ../app/models/targeting.rb:37
+msgid "Cannot resolve hosts without a user"
+msgstr "ユーザーなしでホストを解決できません"
+
+#: ../app/models/targeting.rb:38
+msgid "Cannot resolve hosts without a bookmark or search query"
+msgstr "ブックマークまたは検索クエリーなしでホストを解決できません"
+
+#: ../app/models/targeting.rb:67 ../app/models/targeting.rb:68
+msgid "Must select a bookmark or enter a search query"
+msgstr "ブックマークを選択するか、検索クエリーを入力する必要があります"
+
+#: ../app/models/template_input.rb:7
+msgid "User input"
+msgstr "ユーザー入力"
+
+#: ../app/models/template_input.rb:7
+msgid "Variable"
+msgstr "変数"
+
+#: ../app/models/template_input.rb:7
+msgid "Fact value"
+msgstr "ファクト値"
+
+#: ../app/models/template_input.rb:8
+msgid "Puppet parameter"
+msgstr "Puppet パラメーター"
+
+#: ../app/models/template_input.rb:109
+msgid "Value for required input '%s' was not specified"
+msgstr "必要な入力 '%s' の値が指定されていませんでした"
+
+#: ../app/models/template_invocation.rb:7
+msgid "Input"
+msgstr "入力"
+
+#: ../app/models/template_invocation.rb:48
+msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr "必要なすべての入力に値があるとは限りません。値がない入力: %s"
+
+#: ../app/views/job_invocations/_description_fields.html.erb:1
+#: ../app/views/job_invocations/index.html.erb:8
+#: ../app/views/remote_execution_features/index.html.erb:8
+msgid "Description"
+msgstr "説明"
+
+#: ../app/views/job_invocations/_form.html.erb:20
+msgid "Job template"
+msgstr "ジョブテンプレート"
+
+#: ../app/views/job_invocations/_form.html.erb:36
+msgid "Resolves to"
+msgstr "解決"
+
+#: ../app/views/job_invocations/_form.html.erb:39
+msgid "hosts"
+msgstr "hosts"
+
+#: ../app/views/job_invocations/_form.html.erb:43
+msgid "Preview"
+msgstr "プレビュー"
+
+#: ../app/views/job_invocations/_form.html.erb:64
+msgid "Hide advanced fields"
+msgstr "詳細フィールドを非表示"
+
+#: ../app/views/job_invocations/_form.html.erb:64
+msgid "Display advanced fields"
+msgstr "詳細フィールドを表示"
+
+#: ../app/views/job_invocations/_form.html.erb:75
+msgid ""
+"A user to be used for executing the script. If it differs from the SSH user,"
+" su or sudo is used to switch the accounts."
+msgstr ""
+"スクリプトを実行するために使用するユーザー。ユーザーが SSH ユーザーと異なる場合は、su または sudo を使用してアカウントを切り替えます。"
+
+#: ../app/views/job_invocations/_form.html.erb:75
+#: ../app/views/job_invocations/_tab_overview.html.erb:44
+#: ../app/views/job_templates/_custom_tabs.html.erb:39
+msgid "Effective user"
+msgstr "実効ユーザー"
+
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Concurrency level"
+msgstr "同時実行レベル"
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Distribute execution over N seconds"
+msgstr "N 秒間にわたって実行を分散"
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Time span"
+msgstr "タイムスパン"
+
+#: ../app/views/job_invocations/_form.html.erb:94
+msgid "Type of query"
+msgstr "クエリーのタイプ"
+
+#: ../app/views/job_invocations/_form.html.erb:102
+msgid ""
+"Type has impact on when is the query evaulated to "
+"hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this "
+"form</li><li><b>Dynamic</b> - evaluates just before the execution is "
+"started, so if it's planed in future, targeted hosts set may change before "
+"it</li></ul>"
+msgstr ""
+"タイプはクエリーがホストに対して評価されるタイミングに影響を与えます。<br><ul><li><b>静的</b> - "
+"このフォームを送信した直後に評価します</li><li><b>動的</b> - "
+"実行が開始される直前に評価します。したがって、将来に計画された場合は、対象となるホストセットがそれよりも前に変更されることがあります</li></ul>"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
+msgid ""
+"The final host list may change because the selected query is dynamic.  It "
+"will be rerun during execution."
+msgstr "選択されたクエリーが動的であるため、最終ホスト一覧は変更されることがあります。実行中に再実行されます。"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:14
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] "...およびさらに %{count} "
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:18
+msgid "No hosts found."
+msgstr "ホストが見つかりません。"
+
+#: ../app/views/job_invocations/_preview_hosts_modal.html.erb:6
+msgid "Close"
+msgstr "クローズ"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:6
+msgid "Filter"
+msgstr "フィルター"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:9
+msgid "Search"
+msgstr "検索"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:21
+msgid "Host"
+msgstr "ホスト"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:22
+#: ../app/views/job_invocations/index.html.erb:9
+msgid "Status"
+msgstr "状態:"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:23
+#: ../app/views/job_templates/index.html.erb:16
+msgid "Actions"
+msgstr "アクション"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:45
+msgid ""
+"The dynamic query '%{query}' was not resolved yet. The list of hosts to "
+"which it would resolve now can be seen %{here}."
+msgstr "動的クエリー '%{query}' が解決されませんでした。解決するホストの一覧は %{here} に表示されます。"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1,
+# document foreman
+#: ../app/views/job_invocations/_tab_hosts.html.erb:47
+msgid "here"
+msgstr "こちら"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:6
+msgid "Target hosts"
+msgstr "ターゲットホスト"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:8
+msgid "Bookmark"
+msgstr "ブックマーク"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:10
+msgid "Manual selection"
+msgstr "手動選択"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:15
+msgid "Evaluated at:"
+msgstr "評価済み:"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:21
+#: ../app/views/job_invocations/index.html.erb:13
+msgid "Total hosts"
+msgstr "ホストの合計数"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:25
+msgid "Providers and templates"
+msgstr "プロバイダーおよびテンプレート"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:31
+msgid "Preview for target %s"
+msgstr "ターゲット %s のプレビュー"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:36
+msgid "following user inputs were provided"
+msgstr "次のユーザー入力が提供されました"
+
+#: ../app/views/job_invocations/index.html.erb:1
+msgid "Job invocations"
+msgstr "ジョブ呼び出し"
+
+# translation auto-copied from project RHN Satellite UI, version 5.5, document
+# java/code/src/com/redhat/rhn/frontend/strings/jsp/StringResource
+#: ../app/views/job_invocations/index.html.erb:10
+msgid "Succeeded"
+msgstr "成功"
+
+#: ../app/views/job_invocations/index.html.erb:14
+msgid "Start"
+msgstr "開始"
+
+#: ../app/views/job_invocations/new.html.erb:3
+msgid "Job invocation"
+msgstr "ジョブ呼び出し"
+
+#: ../app/views/job_invocations/show.html.erb:10
+msgid "Overview"
+msgstr "概要"
+
+#: ../app/views/job_invocations/show.html.erb:11
+msgid "Hosts"
+msgstr "ホスト"
+
+#: ../app/views/job_invocations/show.html.erb:12
+msgid "Recurring logic"
+msgstr "再帰論理"
+
+#: ../app/views/job_templates/_custom_tab_headers.html.erb:1
+msgid "Job"
+msgstr "仕事"
+
+#: ../app/views/job_templates/_custom_tab_headers.html.erb:2
+msgid "Type"
+msgstr "種類"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:28
+msgid "Add Input"
+msgstr "入力を追加"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:28
+msgid "add a input for this template"
+msgstr "このテンプレートの入力を追加"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:35
+msgid "Add Foreign Input Set"
+msgstr "外部入力セットを追加"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:35
+msgid ""
+"add an input set for this template to reference a different template inputs"
+msgstr "異なるテンプレート入力を参照するためにこのテンプレートの入力セットを追加"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:53
+msgid "Snippet"
+msgstr "スニペット"
+
+#: ../app/views/job_templates/edit.html.erb:4
+msgid "Edit Job Template"
+msgstr "ジョブテンプレートを編集"
+
+#: ../app/views/job_templates/index.html.erb:5
+msgid "Job Templates"
+msgstr "ジョブテンプレート"
+
+#: ../app/views/job_templates/index.html.erb:7
+#: ../app/views/job_templates/new.html.erb:4
+msgid "New Job Template"
+msgstr "新規ジョブテンプレート"
+
+#: ../app/views/job_templates/index.html.erb:13
+msgid "JobTemplate|Name"
+msgstr "JobTemplate|Name"
+
+#: ../app/views/job_templates/index.html.erb:14
+msgid "JobTemplate|Snippet"
+msgstr "JobTemplate|Snippet"
+
+#: ../app/views/job_templates/index.html.erb:15
+msgid "JobTemplate|Locked"
+msgstr "JobTemplate|Locked"
+
+#: ../app/views/job_templates/index.html.erb:26
+msgid "This template is locked for editing."
+msgstr "このテンプレートは編集用にロックされています。"
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:5
+msgid "The execution interface is used for remote execution"
+msgstr "リモート実行には実行インターフェースが使用されます"
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:8
+msgid "Remote execution"
+msgstr "リモート実行"
+
+#: ../app/views/overrides/subnets/_rex_tab.html.erb:1
+msgid "Remote Execution"
+msgstr "リモート実行"
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid "Proxies"
+msgstr "プロキシー"
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid ""
+"Select as many remote execution proxies as applicable for this subnet.  When"
+" multiple proxies with the same provider are added, actions will be load "
+"balanced among them."
+msgstr ""
+"このサブネットに適用可能なすべてのリモート実行プロキシーを選択します。同じプロバイダーがある複数のプロキシーが追加された場合は、それらのプロキシー間で負荷が分散されます。"
+
+#: ../app/views/remote_execution_features/_form.html.erb:18
+msgid ""
+"You are not allowed to see the currently assigned template. Saving the form "
+"now would unassign the template."
+msgstr "現在割り当てられているテンプレートを参照することは許可されていません。フォームを保存すると、テンプレートの割り当てが解除されます。"
+
+#: ../app/views/remote_execution_features/index.html.erb:1
+#: ../lib/foreman_remote_execution/engine.rb:93
+msgid "Remote Execution Features"
+msgstr "リモート実行機能"
+
+# translation auto-copied from project subscription-manager, version 1.10.10,
+# document keys
+#: ../app/views/remote_execution_features/index.html.erb:6
+msgid "Label"
+msgstr "ラベル"
+
+#: ../app/views/remote_execution_features/index.html.erb:7
+msgid "Name"
+msgstr "名前"
+
+#: ../app/views/remote_execution_features/show.html.erb:1
+msgid "Edit Remote Execution Feature"
+msgstr "リモート実行機能を編集"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:3
+msgid "Foreign input set"
+msgstr "外部入力セット"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:5
+msgid "remove template input set"
+msgstr "テンプレート入力セットを削除"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:9
+msgid ""
+"A comma separated list of input names to be excluded from the foreign "
+"template."
+msgstr "外部テンプレートから除外する入力名のコンマ区切り一覧。"
+
+#: ../app/views/template_inputs/_form.html.erb:19
+msgid ""
+"A list of options the user can select from. If not provided, the user will "
+"be given a free-form field"
+msgstr "ユーザーが選択できるオプションの一覧。提供されていない場合は、ユーザーに自由形式のフィールドが提供されます"
+
+#: ../app/views/template_invocations/show.html.erb:1
+msgid "Detail of %s run"
+msgstr "%s 実行の詳細"
+
+#: ../app/views/template_invocations/show.html.erb:7
+msgid "Back to Job"
+msgstr "ジョブに戻る"
+
+#: ../app/views/template_invocations/show.html.erb:8
+msgid "Toggle command"
+msgstr "コマンドの切り替え"
+
+#: ../app/views/template_invocations/show.html.erb:9
+msgid "Toggle STDERR"
+msgstr "STDERR の切り替え"
+
+#: ../app/views/template_invocations/show.html.erb:10
+msgid "Toggle STDOUT"
+msgstr "STDOUT の切り替え"
+
+#: ../app/views/template_invocations/show.html.erb:11
+msgid "Toggle DEBUG"
+msgstr "DEBUG の切り替え"
+
+#: ../app/views/template_invocations/show.html.erb:16
+msgid "Target: "
+msgstr "ターゲット: "
+
+#: ../app/views/template_invocations/show.html.erb:26
+msgid "Scroll to bottom"
+msgstr "最下部へスクロール"
+
+#: ../app/views/template_invocations/show.html.erb:32
+msgid "Scroll to top"
+msgstr "最上部へスクロール"
+
+#: ../app/views/templates/package_action.erb:5
+msgid "Unsupported or no operating system found for this host."
+msgstr "サポートされていないか、このホストのオペレーティングシステムが見つかりません。"
+
+#: ../lib/foreman_remote_execution/engine.rb:88
+msgid "Job templates"
+msgstr "ジョブテンプレート"
+
+#: ../lib/foreman_remote_execution/engine.rb:99
+msgid "Jobs"
+msgstr "ジョブ"
+
+#: action_names.rb:3
+msgid "Import Puppet classes"
+msgstr "Puppet クラスのインポート"
+
+#: action_names.rb:4
+msgid "Import facts"
+msgstr "ファクトのインポート"
+
+#: action_names.rb:5
+msgid "Update architecture"
+msgstr "アーキテクチャーの更新"
+
+#: action_names.rb:6
+msgid "Delete architecture"
+msgstr "アーキテクチャーの削除"
+
+#: action_names.rb:7
+msgid "Create architecture"
+msgstr "アーキテクチャーの作成"
+
+#: action_names.rb:8
+msgid "Action with sub plans"
+msgstr "サブプランによるアクション"
+
+#: gemspec.rb:2
+msgid ""
+"A plugin bringing remote execution to the Foreman, completing the config "
+"management functionality with remote management functionality."
+msgstr "リモート実行を Foreman で実現するプラグイン。設定管理機能にリモート管理機能を補完します。"

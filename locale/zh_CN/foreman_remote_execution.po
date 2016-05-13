@@ -1,0 +1,1148 @@
+# Leah Liu <lliu@redhat.com>, 2015. #zanata
+# Leah Liu <lliu@redhat.com>, 2016. #zanata
+# bkearney <bkearney@redhat.com>, 2016. #zanata
+# dcbw <dcbw@redhat.com>, 2016. #zanata
+# pnemade <pnemade@redhat.com>, 2016. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: foreman_remote_execution 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-12 12:31-0400\n"
+"PO-Revision-Date: 2016-05-11 10:33+0000\n"
+"Last-Translator: Leah Liu <lliu@redhat.com>\n"
+"Language-Team: Chinese (China)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh-CN\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Zanata 3.8.4\n"
+
+#: ../app/assets/javascripts/execution_interface.js:2
+msgid ""
+"Another interface is already set as execution. Are you sure you want to use "
+"this one instead?"
+msgstr "已将另一接口设定为执行接口。您确定要使用这个接口吗？"
+
+#: ../app/assets/javascripts/template_invocation.js:99
+msgid "There was an error while updating the status, try refreshing the page."
+msgstr "更新状态时发生错误，请尝试刷新此页面。"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:10
+msgid "List foreign input sets"
+msgstr "列出外部输入集"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:17
+msgid "Show foreign input set details"
+msgstr "显示外部输入集详情"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:25
+msgid "Target template ID"
+msgstr "目标模板 ID"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:26
+msgid "Include all inputs form the foreign template"
+msgstr "在外部模板中包含所有输入格式"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:27
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:28
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:8
+msgid ""
+"A comma separated list of input names to be included from the foreign "
+"template."
+msgstr "包含外部模板中用逗号分开的输入名称列表。"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:29
+msgid "Input set description"
+msgstr "输入集描述"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:33
+msgid "Create a foreign input set"
+msgstr "创建外部输入集"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:41
+msgid "Delete a foreign input set"
+msgstr "删除外部输入集"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:48
+msgid "Update a foreign input set"
+msgstr "更新外部输入集"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:15
+msgid "List job invocations"
+msgstr "列出任务调用"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:21
+msgid "Show job invocation"
+msgstr "显示任务调用"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:28
+msgid "The job template to use"
+msgstr "要使用的任务模板"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:29
+msgid "Invocation type, one of %s"
+msgstr "调用类型，%s 之一"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:30
+msgid "Inputs to use"
+msgstr "要使用的输入"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:31
+#: ../app/controllers/api/v2/job_templates_controller.rb:43
+msgid "SSH provider specific options"
+msgstr "SSH 提供者的具体选项"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:34
+msgid ""
+"What user should be used to run the script (using sudo-like mechanisms). "
+"Defaults to a template parameter or global setting."
+msgstr "应由什么用户运行此脚本（使用类似 sudo 的机制）。默认为模板参数或全局设置。"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:37
+msgid "Create a recurring job"
+msgstr "创建重复任务"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:38
+msgid "How often the job should occur, in the cron format"
+msgstr "该任务的重复频率是什么，请使用 cron 形式。"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:39
+msgid "Repeat a maximum of N times"
+msgstr "最多重复 N 次"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:40
+msgid "Perform no more executions after this time"
+msgstr "这个时间后不再执行任何操作"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:43
+msgid "Schedule the job to start at a later time"
+msgstr "将该任务调度为于稍后开始"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:44
+msgid "Schedule the job for a future time"
+msgstr "将该任务调度为在将来的某个时间开始"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:45
+msgid ""
+"Indicates that the action should be cancelled if it cannot be started before"
+" this time."
+msgstr "表示如果在这个时间之前无法启动该操作，则应将其取消。"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:48
+msgid "Control concurrency level and distribution over time"
+msgstr "控制并行等级及分配时间"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:49
+msgid "Distribute tasks over N seconds"
+msgstr "N 秒后分配任务"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:50
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Run at most N tasks at a time"
+msgstr "同时最多运行 N 个任务"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:55
+msgid ""
+"Override the description format from the template for this invocation only"
+msgstr "只为这个调用使用该模板替代描述格式"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:59
+msgid "Create a job invocation"
+msgstr "创建任务调用"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:68
+msgid "Get output for a host"
+msgstr "获取主机输出结果"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:101
+msgid "Host with id '%{id}' was not found"
+msgstr "未找到 id 为 '%{id}' 的主机"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:107
+msgid "Template with id '%{id}' was not found"
+msgstr "未找到 id 为 '%{id}' 的模板"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:16
+msgid "List job templates"
+msgstr "列出任务模板"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:17
+msgid "List job templates per location"
+msgstr "列出每个位置的任务模板"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:18
+msgid "List job templates per organization"
+msgstr "列出每个机构的任务模板"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:25
+msgid "Show job template details"
+msgstr "显示任务模板详情"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:32
+#: ../app/controllers/api/v2/job_templates_controller.rb:83
+msgid "Template name"
+msgstr "模板名称"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:33
+#: ../app/views/job_invocations/_form.html.erb:9
+#: ../app/views/job_templates/_custom_tabs.html.erb:3
+#: ../app/views/job_templates/_custom_tabs.html.erb:6
+msgid "Job category"
+msgstr "任务类别"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:34
+#: ../app/views/job_templates/_custom_tabs.html.erb:14
+msgid ""
+"This template is used to generate the description. Input values can be used "
+"using the syntax %{package}. You may also include the job category and "
+"template name using %{job_category} and %{template_name}."
+msgstr ""
+"这个模板是用来生成描述。可和使用句法 %{package} 输入参数值。还可以和使用 %{job_category} 和 "
+"%{template_name} 在其中包含任务类别及模板名称。"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:39
+msgid "Provider type"
+msgstr "提供者类型"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:42
+msgid "Whether or not the template is locked for editing"
+msgstr "是否已锁定该模板进行编辑"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:44
+msgid "Effective user options"
+msgstr "有效用户选项"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:45
+msgid ""
+"What user should be used to run the script (using sudo-like mechanisms)"
+msgstr "应由什么用户运行此脚本（使用类似 sudo 的机制）。"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:46
+msgid ""
+"Whether it should be allowed to override the effective user from the "
+"invocation form."
+msgstr "是否应允许使用调用形式替代有效用户。"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:47
+msgid "Whether the current user login should be used as the effective user"
+msgstr "是否应使用当前登录用户作为有效用户"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:54
+msgid "Create a job template"
+msgstr "创建任务模板"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
+msgid "Update a job template"
+msgstr "更新任务模板"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:69
+msgid "Template version"
+msgstr "模板版本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:75
+msgid "Delete a job template"
+msgstr "删除任务模板"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:87
+msgid "Clone a provision template"
+msgstr "克隆预配模板"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:8
+msgid "List remote execution features"
+msgstr "列出远程执行功能"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:13
+msgid "Show remote execution feature"
+msgstr "显示远程执行功能"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:20
+msgid "Job template ID to be used for the feature"
+msgstr "用于这些功能的任务模板 ID"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:11
+msgid "List template inputs"
+msgstr "列出模板输入"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:18
+msgid "Show template input details"
+msgstr "显示模板输入详情"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:26
+msgid "Input name"
+msgstr "输入名称"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:27
+msgid "Input description"
+msgstr "输入描述"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:28
+msgid "Input is required"
+msgstr "需要输入"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:29
+msgid "Input is advanced"
+msgstr "输入时高级的"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:30
+msgid "Input type"
+msgstr "输入类型"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:31
+msgid "Fact name, used when input type is fact"
+msgstr "Fact 名称，输入类型为 fact 时使用。"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:32
+msgid "Variable name, used when input type is variable"
+msgstr "变量名称，输入类型为 variable 时使用。"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:33
+msgid "Puppet class name, used when input type is puppet_parameter"
+msgstr "Puppet 类别名称，输入类型为 puppet_parameter 时使用。"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:34
+msgid "Puppet parameter name, used when input type is puppet_parameter"
+msgstr "Puppet 参数名称，输入类型为 puppet_parameter 时使用。"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:35
+msgid "Selectable values for user inputs"
+msgstr "用户输入的可选值"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:39
+msgid "Create a template input"
+msgstr "创建模板输入"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:47
+msgid "Delete a template input"
+msgstr "删除模板输入"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:54
+msgid "Update a template input"
+msgstr "更新模板输入"
+
+#: ../app/controllers/job_templates_controller.rb:23
+msgid ""
+"Problem with previewing the template: %{error}. Note that you must save "
+"template input changes before you try to preview it."
+msgstr "预览该模板时出错： %{error}。注：预览前必须保存模板输入更改。"
+
+#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:11
+#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:15
+#: ../app/helpers/remote_execution_helper.rb:97
+msgid "Run Job"
+msgstr "运行任务"
+
+#: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:13
+msgid "Run"
+msgstr "运行"
+
+#: ../app/helpers/remote_execution_helper.rb:23
+msgid "Success"
+msgstr "成功"
+
+#: ../app/helpers/remote_execution_helper.rb:24
+#: ../app/views/job_invocations/index.html.erb:11
+msgid "Failed"
+msgstr "已失败"
+
+#: ../app/helpers/remote_execution_helper.rb:25
+#: ../app/views/job_invocations/index.html.erb:12
+msgid "Pending"
+msgstr "等待处理"
+
+#: ../app/helpers/remote_execution_helper.rb:26
+msgid "Cancelled"
+msgstr "已取消"
+
+#: ../app/helpers/remote_execution_helper.rb:36
+msgid "queued"
+msgstr "已排队"
+
+#: ../app/helpers/remote_execution_helper.rb:38
+msgid "running %{percent}%"
+msgstr "正在运行 %{percent}%"
+
+#: ../app/helpers/remote_execution_helper.rb:40
+msgid "succeeded"
+msgstr "已成功"
+
+#: ../app/helpers/remote_execution_helper.rb:42
+#: ../app/helpers/remote_execution_helper.rb:71
+msgid "failed"
+msgstr "已失败"
+
+#: ../app/helpers/remote_execution_helper.rb:44
+msgid "unknown status"
+msgstr "未知状态"
+
+#: ../app/helpers/remote_execution_helper.rb:69
+msgid "cancelled"
+msgstr "已取消"
+
+#: ../app/helpers/remote_execution_helper.rb:74
+msgid "success"
+msgstr "成功"
+
+#: ../app/helpers/remote_execution_helper.rb:76
+msgid "pending"
+msgstr "等待处理"
+
+#: ../app/helpers/remote_execution_helper.rb:85
+msgid "Host detail"
+msgstr "主机详情"
+
+#: ../app/helpers/remote_execution_helper.rb:86
+msgid "Rerun on %s"
+msgstr "在 %s 中运行"
+
+#: ../app/helpers/remote_execution_helper.rb:91
+#: ../app/helpers/remote_execution_helper.rb:198
+#: ../app/models/job_invocation.rb:125
+msgid "N/A"
+msgstr "不适用"
+
+#: ../app/helpers/remote_execution_helper.rb:105
+msgid "Refresh this page"
+msgstr "刷新此页面"
+
+# translation auto-copied from project anaconda, version 19.31.34, document
+# anaconda
+#: ../app/helpers/remote_execution_helper.rb:105
+#: ../app/views/job_invocations/_form.html.erb:40
+msgid "Refresh"
+msgstr "刷新"
+
+#: ../app/helpers/remote_execution_helper.rb:107
+msgid "Rerun"
+msgstr "重新运行"
+
+#: ../app/helpers/remote_execution_helper.rb:109
+msgid "Rerun the job"
+msgstr "重新运行该任务"
+
+#: ../app/helpers/remote_execution_helper.rb:112
+msgid "Rerun failed"
+msgstr "重新运行失败"
+
+#: ../app/helpers/remote_execution_helper.rb:115
+msgid "Rerun on failed hosts"
+msgstr "在失败的主机中重新运行"
+
+#: ../app/helpers/remote_execution_helper.rb:118
+msgid "Job Task"
+msgstr "Job 任务"
+
+#: ../app/helpers/remote_execution_helper.rb:120
+msgid "See the last task details"
+msgstr "查看最新任务详情"
+
+#: ../app/helpers/remote_execution_helper.rb:123
+#: ../app/helpers/remote_execution_helper.rb:141
+msgid "Cancel Job"
+msgstr "取消任务"
+
+#: ../app/helpers/remote_execution_helper.rb:125
+msgid "Try to cancel the job"
+msgstr "尝试取消该任务"
+
+#: ../app/helpers/remote_execution_helper.rb:136
+msgid "Task Details"
+msgstr "任务详情"
+
+#: ../app/helpers/remote_execution_helper.rb:138
+msgid "See the task details"
+msgstr "查看任务详情"
+
+#: ../app/helpers/remote_execution_helper.rb:143
+msgid "Try to cancel the job on a host"
+msgstr "尝试取消主机中的任务"
+
+#: ../app/helpers/remote_execution_helper.rb:200
+msgid "%s ago"
+msgstr "%s 前"
+
+#: ../app/helpers/remote_execution_helper.rb:200
+msgid "in %s"
+msgstr "%s 中"
+
+#: ../app/helpers/remote_execution_helper.rb:210
+msgid "Documentation"
+msgstr "文档"
+
+#: ../app/helpers/remote_execution_helper.rb:217
+msgid "Template input"
+msgstr "模板输入"
+
+#: ../app/helpers/remote_execution_helper.rb:218
+msgid "remove template input"
+msgstr "删除模板输入"
+
+#: ../app/helpers/remote_execution_helper.rb:230
+msgid "Use default description template"
+msgstr "使用默认描述模板"
+
+#: ../app/helpers/remote_execution_helper.rb:235
+msgid "Description template"
+msgstr "描述模板"
+
+#: ../app/helpers/remote_execution_helper.rb:241
+#: ../app/views/job_invocations/_form.html.erb:101
+#: ../app/views/job_templates/_custom_tabs.html.erb:14
+msgid "Explanation"
+msgstr "说明"
+
+#: ../app/helpers/remote_execution_helper.rb:242
+msgid ""
+"This template is used to generate the description Input values can be used "
+"using the syntax %{package}. You may also include the job category and "
+"template name using %{job_category} and %{template_name}."
+msgstr ""
+"这个模板是用来生成描述。可和使用句法 %{package} 输入参数值。还可以和使用 %{job_category} 和 "
+"%{template_name} 在其中包含任务类别及模板名称。"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:25
+msgid "Could not use any template used in the job invocation"
+msgstr "无法使用在任务调用中使用的任意模板"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:30
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] "所有 %{count} 可用代理服务器均无法访问。尝试使用 %{proxy_names}"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:37
+msgid ""
+"Could not use any proxy. Consider configuring %{global_proxy} or "
+"%{fallback_proxy} in settings"
+msgstr "无法使用任何代理服务器。可考虑在设置中配置 %{global_proxy} 或者 %{fallback_proxy}。"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:43
+msgid "Failed rendering template: %s"
+msgstr "修改模板失败：%s"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:66
+msgid "Failed to initialize command"
+msgstr "初始化命令失败"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:71
+msgid "%{description} on %{host}"
+msgstr "%{host} 中的 %{description} "
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:2
+msgid "Remote action:"
+msgstr "远程动作："
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:96
+msgid "User can not execute job on host %s"
+msgstr "用户无法在主机 %s 中执行任务"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:97
+msgid "User can not execute this job template"
+msgstr "用户无法执行这个任务模板"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:102
+msgid "User can not execute this job template on %s"
+msgstr "用户无法在 %s 中执行这个任务模板"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:24
+msgid "Script execution failed"
+msgstr "脚本执行失败"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:56
+msgid "Initialization error: %s"
+msgstr "初始化出错：%s"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:66
+msgid "Error loading data from proxy"
+msgstr "从代理服务器载入数据出错"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:75
+msgid "No output"
+msgstr "无输出结果"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:79
+msgid "Exit status: %s"
+msgstr "退出状态：%s"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:81
+msgid "Job finished with error"
+msgstr "任务完成但有错误"
+
+#: ../app/lib/proxy_api/remote_execution_ssh.rb:11
+msgid "Unable to fetch public key"
+msgstr "无法获取公钥"
+
+#: ../app/models/concerns/foreman_remote_execution/nic_extensions.rb:21
+msgid "host already has an execution interface"
+msgstr "主机已有执行接口"
+
+#: ../app/models/foreign_input_set.rb:18
+msgid ""
+"Circular dependency detected in foreign input set '%{template}' -> "
+"'%{target_template}'. Templates stack: %{templates_stack}"
+msgstr ""
+"在外部输出集中探测到循环相依性  '%{template}' -> "
+"'%{target_template}'。模板栈：%{templates_stack}"
+
+#: ../app/models/host_status/execution_status.rb:30
+msgid "Execution"
+msgstr "执行"
+
+#: ../app/models/host_status/execution_status.rb:36
+msgid "Last execution succeeded"
+msgstr "上一个执行成功"
+
+#: ../app/models/host_status/execution_status.rb:36
+msgid "No execution finished yet"
+msgstr "尚未完成任何执行"
+
+#: ../app/models/host_status/execution_status.rb:38
+msgid "Last execution failed"
+msgstr "上一个执行失败"
+
+#: ../app/models/host_status/execution_status.rb:40
+msgid "Unknown execution status"
+msgstr "未知执行状态"
+
+#: ../app/models/input_template_renderer.rb:16
+msgid "Recursive rendering of templates detected"
+msgstr "探测到模板的递归修改"
+
+#: ../app/models/input_template_renderer.rb:30
+msgid "error during rendering: %s"
+msgstr "修改时出错：%s"
+
+#: ../app/models/input_template_renderer.rb:49
+msgid ""
+"input macro with name '%s' used, but no input with such name defined for "
+"this template"
+msgstr "名为 '%s' 的输入宏已被使用，但没有为这个模板定义使用这个名称的输入。"
+
+#: ../app/models/input_template_renderer.rb:63
+msgid "included template '%s' not found"
+msgstr "未找到所包含模板 '%s'"
+
+#: ../app/models/job_invocation.rb:7
+msgid "template"
+msgstr "模板"
+
+#: ../app/models/job_invocation_composer.rb:79
+msgid "Cannot specify both bookmark_id and search_query"
+msgstr "无法指定 bookmark_id 和 search_query"
+
+#: ../app/models/job_invocation_composer.rb:84
+msgid "Cannot specify both recurrence and scheduling"
+msgstr "无法指定 recurrence 和 scheduling"
+
+#: ../app/models/job_invocation_composer.rb:118
+msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr "模板 %{template_name} 的未知输入 %{input_name} "
+
+#: ../app/models/job_invocation_composer.rb:226
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr "模板 %{template_name} 的功能输入 %{input_name} "
+
+#: ../app/models/job_invocation_composer.rb:235
+msgid "No template mapped to feature %{feature_name}"
+msgstr "没有与功能 %{feature_name} 映射的模板"
+
+#: ../app/models/job_invocation_composer.rb:241
+msgid ""
+"The template %{template_name} mapped to feature %{feature_name} is not "
+"accessible by the user"
+msgstr "用户无法访问与功能 %{feature_name} 映射的模板 %{template_name}"
+
+#: ../app/models/job_invocation_task_group.rb:8
+msgid "Job Invocation"
+msgstr "任务调用"
+
+#: ../app/models/job_template.rb:136
+msgid "Duplicated inputs detected: %{duplicated_inputs}"
+msgstr "探测到重复的输入：%{duplicated_inputs}"
+
+#: ../app/models/job_template.rb:203
+msgid ""
+"This template is locked. Please clone it to a new template to customize."
+msgstr "这个模板已锁定。请克隆一个新模板进行编辑。"
+
+#: ../app/models/remote_execution_feature.rb:20
+msgid "Unknown remote execution feature %s"
+msgstr "未知远程执行功能 %s"
+
+#: ../app/models/setting/remote_execution.rb:10
+msgid ""
+"Search the host for any proxy with Remote Execution, useful when the host "
+"has no subnet or the subnet does not have an execution proxy"
+msgstr "为任意有远程执行功能的代理服务器搜索主机，这在主机没有子网或子网没有任何执行代理服务器时很有帮助。"
+
+#: ../app/models/setting/remote_execution.rb:13
+msgid ""
+"Search for remote execution proxy outside of the proxies assigned to the "
+"host. If locations or organizations are enabled, the search will be limited "
+"to the host's organization or location."
+msgstr ""
+"在为该主机分配的代理服务器之外搜索远程执行代理服务器。如果已启用 location 或者 organization，则会将搜索限制为该主机的机构或位置。"
+
+#: ../app/models/setting/remote_execution.rb:18
+msgid ""
+"Default user to use for SSH.  You may override per host by setting a "
+"parameter called remote_execution_ssh_user."
+msgstr "SSH 默认使用的用户。可设置 remote_execution_ssh_user 调用的参数替换每台主机设置。"
+
+#: ../app/models/setting/remote_execution.rb:21
+msgid ""
+"Default user to use for executing the script. If the user differs from the "
+"SSH user, su or sudo is used to switch the user."
+msgstr "执行此脚本时默认使用的用户。如果该用户将与 SSH 用户有别，则可使用 su 或者 sudo 切换至该用户。"
+
+#: ../app/models/setting/remote_execution.rb:24
+msgid "What command should be used to switch to the effective user. One of %s"
+msgstr "用来切换至有效用户的命令。%s 之一。"
+
+#: ../app/models/setting/remote_execution.rb:27
+msgid "Whether we should sync templates from disk when running db:seed."
+msgstr "运行 db:seed 时是否应将模板与磁盘同步。"
+
+#: ../app/models/ssh_execution_provider.rb:13
+msgid "SSH"
+msgstr "SSH"
+
+#: ../app/models/ssh_execution_provider.rb:33
+msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
+msgstr "有效用户方法 \"%{current_value}\" 不是 %{valid_methods} 之一"
+
+#: ../app/models/targeting.rb:5
+msgid "Dynamic Query"
+msgstr "动态查询"
+
+#: ../app/models/targeting.rb:5
+msgid "Static Query"
+msgstr "静态查询"
+
+#: ../app/models/targeting.rb:37
+msgid "Cannot resolve hosts without a user"
+msgstr "没有用户则无法解析主机"
+
+#: ../app/models/targeting.rb:38
+msgid "Cannot resolve hosts without a bookmark or search query"
+msgstr "没有书签或搜索查询则无法解析主机"
+
+#: ../app/models/targeting.rb:67 ../app/models/targeting.rb:68
+msgid "Must select a bookmark or enter a search query"
+msgstr "必须选择书签或输入搜索查询"
+
+#: ../app/models/template_input.rb:7
+msgid "User input"
+msgstr "用户输入"
+
+#: ../app/models/template_input.rb:7
+msgid "Variable"
+msgstr "变量"
+
+#: ../app/models/template_input.rb:7
+msgid "Fact value"
+msgstr "Fact 值"
+
+#: ../app/models/template_input.rb:8
+msgid "Puppet parameter"
+msgstr "Puppet 参数"
+
+#: ../app/models/template_input.rb:109
+msgid "Value for required input '%s' was not specified"
+msgstr "未指定必填输入值 '%s'"
+
+#: ../app/models/template_invocation.rb:7
+msgid "Input"
+msgstr "输入"
+
+#: ../app/models/template_invocation.rb:48
+msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr "没有为所有必填输入分配值。缺少输入：%s"
+
+#: ../app/views/job_invocations/_description_fields.html.erb:1
+#: ../app/views/job_invocations/index.html.erb:8
+#: ../app/views/remote_execution_features/index.html.erb:8
+msgid "Description"
+msgstr "描述"
+
+#: ../app/views/job_invocations/_form.html.erb:20
+msgid "Job template"
+msgstr "任务模板"
+
+#: ../app/views/job_invocations/_form.html.erb:36
+msgid "Resolves to"
+msgstr "解析为"
+
+#: ../app/views/job_invocations/_form.html.erb:39
+msgid "hosts"
+msgstr "主机"
+
+#: ../app/views/job_invocations/_form.html.erb:43
+msgid "Preview"
+msgstr "预览"
+
+#: ../app/views/job_invocations/_form.html.erb:64
+msgid "Hide advanced fields"
+msgstr "隐藏高级字段"
+
+#: ../app/views/job_invocations/_form.html.erb:64
+msgid "Display advanced fields"
+msgstr "显示高级字段"
+
+#: ../app/views/job_invocations/_form.html.erb:75
+msgid ""
+"A user to be used for executing the script. If it differs from the SSH user,"
+" su or sudo is used to switch the accounts."
+msgstr "用来执行该脚本的用户。如果与 SSH 用户不同，则可使用 su 或者 sudo 切换至该账户。"
+
+#: ../app/views/job_invocations/_form.html.erb:75
+#: ../app/views/job_invocations/_tab_overview.html.erb:44
+#: ../app/views/job_templates/_custom_tabs.html.erb:39
+msgid "Effective user"
+msgstr "有效用户"
+
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Concurrency level"
+msgstr "并发等级"
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Distribute execution over N seconds"
+msgstr "N 秒后分配执行"
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Time span"
+msgstr "时间跨度"
+
+#: ../app/views/job_invocations/_form.html.erb:94
+msgid "Type of query"
+msgstr "查询类型"
+
+#: ../app/views/job_invocations/_form.html.erb:102
+msgid ""
+"Type has impact on when is the query evaulated to "
+"hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this "
+"form</li><li><b>Dynamic</b> - evaluates just before the execution is "
+"started, so if it's planed in future, targeted hosts set may change before "
+"it</li></ul>"
+msgstr ""
+"类型会对何时评估主机查询产生影响。<br><ul><li><b>Static</b> - "
+"提交此表格后立即评估</li>；<li><b>Dynamic</b> - "
+"开始执行前进行评估。因此，如果以后计划，则可能会在执行前更改目标主机集</li></ul>"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
+msgid ""
+"The final host list may change because the selected query is dynamic.  It "
+"will be rerun during execution."
+msgstr "由于所选查询为 dynamic，最终主机列表可能会有变化。会在执行过程中重新运行。"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:14
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] "...和 %{count} 以上"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:18
+msgid "No hosts found."
+msgstr "未找到任何主机。"
+
+#: ../app/views/job_invocations/_preview_hosts_modal.html.erb:6
+msgid "Close"
+msgstr "关闭"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:6
+msgid "Filter"
+msgstr "过滤"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:9
+msgid "Search"
+msgstr "搜索"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:21
+msgid "Host"
+msgstr "主机"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:22
+#: ../app/views/job_invocations/index.html.erb:9
+msgid "Status"
+msgstr "状态"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:23
+#: ../app/views/job_templates/index.html.erb:16
+msgid "Actions"
+msgstr "操作"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:45
+msgid ""
+"The dynamic query '%{query}' was not resolved yet. The list of hosts to "
+"which it would resolve now can be seen %{here}."
+msgstr "尚未解析动态查询 '%{query}'。请在 %{here} 查看现在应已被解析的主机列表。"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1,
+# document foreman
+#: ../app/views/job_invocations/_tab_hosts.html.erb:47
+msgid "here"
+msgstr "这里"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:6
+msgid "Target hosts"
+msgstr "没"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:8
+msgid "Bookmark"
+msgstr "收藏"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:10
+msgid "Manual selection"
+msgstr "手动选择"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:15
+msgid "Evaluated at:"
+msgstr "评估于："
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:21
+#: ../app/views/job_invocations/index.html.erb:13
+msgid "Total hosts"
+msgstr "主机总数"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:25
+msgid "Providers and templates"
+msgstr "提供者及模板"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:31
+msgid "Preview for target %s"
+msgstr "目标 %s 预览"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:36
+msgid "following user inputs were provided"
+msgstr "已提供以下用户输入"
+
+#: ../app/views/job_invocations/index.html.erb:1
+msgid "Job invocations"
+msgstr "任务调用"
+
+#: ../app/views/job_invocations/index.html.erb:10
+msgid "Succeeded"
+msgstr "已成功"
+
+#: ../app/views/job_invocations/index.html.erb:14
+msgid "Start"
+msgstr "开始"
+
+#: ../app/views/job_invocations/new.html.erb:3
+msgid "Job invocation"
+msgstr "任务调用"
+
+#: ../app/views/job_invocations/show.html.erb:10
+msgid "Overview"
+msgstr "概览"
+
+#: ../app/views/job_invocations/show.html.erb:11
+msgid "Hosts"
+msgstr "主机"
+
+#: ../app/views/job_invocations/show.html.erb:12
+msgid "Recurring logic"
+msgstr "重复的逻辑"
+
+#: ../app/views/job_templates/_custom_tab_headers.html.erb:1
+msgid "Job"
+msgstr "工作"
+
+#: ../app/views/job_templates/_custom_tab_headers.html.erb:2
+msgid "Type"
+msgstr "类型"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:28
+msgid "Add Input"
+msgstr "添加输入"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:28
+msgid "add a input for this template"
+msgstr "为这个模板添加输入"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:35
+msgid "Add Foreign Input Set"
+msgstr "添加外部输入集"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:35
+msgid ""
+"add an input set for this template to reference a different template inputs"
+msgstr "为这个模板添加输入以参考不同的模板输入"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:53
+msgid "Snippet"
+msgstr "片段"
+
+#: ../app/views/job_templates/edit.html.erb:4
+msgid "Edit Job Template"
+msgstr "编辑任务模板"
+
+#: ../app/views/job_templates/index.html.erb:5
+msgid "Job Templates"
+msgstr "任务模板"
+
+#: ../app/views/job_templates/index.html.erb:7
+#: ../app/views/job_templates/new.html.erb:4
+msgid "New Job Template"
+msgstr "新建任务模板"
+
+#: ../app/views/job_templates/index.html.erb:13
+msgid "JobTemplate|Name"
+msgstr "名称"
+
+#: ../app/views/job_templates/index.html.erb:14
+msgid "JobTemplate|Snippet"
+msgstr "片段"
+
+#: ../app/views/job_templates/index.html.erb:15
+msgid "JobTemplate|Locked"
+msgstr "锁定"
+
+#: ../app/views/job_templates/index.html.erb:26
+msgid "This template is locked for editing."
+msgstr "这个模板已锁定，无法编辑。"
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:5
+msgid "The execution interface is used for remote execution"
+msgstr "这个执行接口已用于远程执行"
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:8
+msgid "Remote execution"
+msgstr "远程执行"
+
+#: ../app/views/overrides/subnets/_rex_tab.html.erb:1
+msgid "Remote Execution"
+msgstr "远程执行"
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid "Proxies"
+msgstr "代理服务器"
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid ""
+"Select as many remote execution proxies as applicable for this subnet.  When"
+" multiple proxies with the same provider are added, actions will be load "
+"balanced among them."
+msgstr "为这个子网选择所有可使用的远程执行代理服务器。添加使用同一提供者的多个代理服务器时，会在它们之间均衡操作负载。"
+
+#: ../app/views/remote_execution_features/_form.html.erb:18
+msgid ""
+"You are not allowed to see the currently assigned template. Saving the form "
+"now would unassign the template."
+msgstr "不允许您查看当前分配的模板。现在保存该表格则会取消分配该模板。"
+
+#: ../app/views/remote_execution_features/index.html.erb:1
+#: ../lib/foreman_remote_execution/engine.rb:93
+msgid "Remote Execution Features"
+msgstr "远程执行功能"
+
+# translation auto-copied from project subscription-manager, version 1.10.10,
+# document keys
+#: ../app/views/remote_execution_features/index.html.erb:6
+msgid "Label"
+msgstr "标签"
+
+#: ../app/views/remote_execution_features/index.html.erb:7
+msgid "Name"
+msgstr "名称"
+
+#: ../app/views/remote_execution_features/show.html.erb:1
+msgid "Edit Remote Execution Feature"
+msgstr "编辑远程执行功能"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:3
+msgid "Foreign input set"
+msgstr "外部输入集"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:5
+msgid "remove template input set"
+msgstr "删除模板输入集"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:9
+msgid ""
+"A comma separated list of input names to be excluded from the foreign "
+"template."
+msgstr "用逗号分开的不包含于外部模板的输入列表名称。"
+
+#: ../app/views/template_inputs/_form.html.erb:19
+msgid ""
+"A list of options the user can select from. If not provided, the user will "
+"be given a free-form field"
+msgstr "用户可选择的选项列表。如未提供，则会为用户提供自由格式字段。"
+
+#: ../app/views/template_invocations/show.html.erb:1
+msgid "Detail of %s run"
+msgstr "%s 运行详情"
+
+#: ../app/views/template_invocations/show.html.erb:7
+msgid "Back to Job"
+msgstr "返回任务"
+
+#: ../app/views/template_invocations/show.html.erb:8
+msgid "Toggle command"
+msgstr "切换命令"
+
+#: ../app/views/template_invocations/show.html.erb:9
+msgid "Toggle STDERR"
+msgstr "切换 STDERR"
+
+#: ../app/views/template_invocations/show.html.erb:10
+msgid "Toggle STDOUT"
+msgstr "切换 STDOUT"
+
+#: ../app/views/template_invocations/show.html.erb:11
+msgid "Toggle DEBUG"
+msgstr "切换 DEBUG"
+
+#: ../app/views/template_invocations/show.html.erb:16
+msgid "Target: "
+msgstr "目标："
+
+#: ../app/views/template_invocations/show.html.erb:26
+msgid "Scroll to bottom"
+msgstr "滚动到底部"
+
+#: ../app/views/template_invocations/show.html.erb:32
+msgid "Scroll to top"
+msgstr "滚动到顶部"
+
+#: ../app/views/templates/package_action.erb:5
+msgid "Unsupported or no operating system found for this host."
+msgstr "不支持的主机或者没有找到这台主机使用的操作系统。"
+
+#: ../lib/foreman_remote_execution/engine.rb:88
+msgid "Job templates"
+msgstr "任务模板"
+
+#: ../lib/foreman_remote_execution/engine.rb:99
+msgid "Jobs"
+msgstr "任务"
+
+#: action_names.rb:3
+msgid "Import Puppet classes"
+msgstr "导入 Puppet 分类"
+
+#: action_names.rb:4
+msgid "Import facts"
+msgstr "导入详情"
+
+#: action_names.rb:5
+msgid "Update architecture"
+msgstr "更新架构"
+
+#: action_names.rb:6
+msgid "Delete architecture"
+msgstr "删除架构"
+
+#: action_names.rb:7
+msgid "Create architecture"
+msgstr "生成架构"
+
+#: action_names.rb:8
+msgid "Action with sub plans"
+msgstr "有子计划的操作"
+
+#: gemspec.rb:2
+msgid ""
+"A plugin bringing remote execution to the Foreman, completing the config "
+"management functionality with remote management functionality."
+msgstr "为 Foreman 提供远程执行的插件，可使用远程管理功能完成配置管理功能。"

@@ -1,0 +1,1149 @@
+# tchuang <tchuang@redhat.com>, 2015. #zanata
+# bkearney <bkearney@redhat.com>, 2016. #zanata
+# ccheng <ccheng@redhat.com>, 2016. #zanata
+# dcbw <dcbw@redhat.com>, 2016. #zanata
+# pnemade <pnemade@redhat.com>, 2016. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: foreman_remote_execution 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-12 12:31-0400\n"
+"PO-Revision-Date: 2016-05-10 06:44+0000\n"
+"Last-Translator: ccheng <ccheng@redhat.com>\n"
+"Language-Team: Chinese (Taiwan)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh-TW\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Zanata 3.8.4\n"
+
+#: ../app/assets/javascripts/execution_interface.js:2
+msgid ""
+"Another interface is already set as execution. Are you sure you want to use "
+"this one instead?"
+msgstr "另一個介面已設為執行。行您是否確定要使用此介面？"
+
+#: ../app/assets/javascripts/template_invocation.js:99
+msgid "There was an error while updating the status, try refreshing the page."
+msgstr "更新狀態時發生錯誤，請更新此頁面。"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:10
+msgid "List foreign input sets"
+msgstr "列出外部輸入集"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:17
+msgid "Show foreign input set details"
+msgstr "顯示外部輸入集的詳細資料"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:25
+msgid "Target template ID"
+msgstr "目標範本 ID"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:26
+msgid "Include all inputs form the foreign template"
+msgstr "從外部範本納入所有輸入"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:27
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:28
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:8
+msgid ""
+"A comma separated list of input names to be included from the foreign "
+"template."
+msgstr "從外部範本納入的輸入名稱清單，以逗號隔開。"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:29
+msgid "Input set description"
+msgstr "輸入集的描述"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:33
+msgid "Create a foreign input set"
+msgstr "建立外部輸入集"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:41
+msgid "Delete a foreign input set"
+msgstr "刪除外部輸入集"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:48
+msgid "Update a foreign input set"
+msgstr "更新外部輸入集"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:15
+msgid "List job invocations"
+msgstr "列出工作祈願"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:21
+msgid "Show job invocation"
+msgstr "顯示工作祈願"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:28
+msgid "The job template to use"
+msgstr "要使用的工作範本"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:29
+msgid "Invocation type, one of %s"
+msgstr "祈願類型，%s 之一"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:30
+msgid "Inputs to use"
+msgstr "要使用的輸入"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:31
+#: ../app/controllers/api/v2/job_templates_controller.rb:43
+msgid "SSH provider specific options"
+msgstr "SSH 供應者特定選項"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:34
+msgid ""
+"What user should be used to run the script (using sudo-like mechanisms). "
+"Defaults to a template parameter or global setting."
+msgstr "哪位使用者該用來執行此 script（使用類似 sudo 機制）。預設值設為範本參數或全域設定。"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:37
+msgid "Create a recurring job"
+msgstr "建立週期性工作"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:38
+msgid "How often the job should occur, in the cron format"
+msgstr "工作多常發生，格式同 cron"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:39
+msgid "Repeat a maximum of N times"
+msgstr "重複最多 N 次"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:40
+msgid "Perform no more executions after this time"
+msgstr "此時間之後不再進行任何執行"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:43
+msgid "Schedule the job to start at a later time"
+msgstr "排程工作至晚一點的時間"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:44
+msgid "Schedule the job for a future time"
+msgstr "排程工作至未來時間"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:45
+msgid ""
+"Indicates that the action should be cancelled if it cannot be started before"
+" this time."
+msgstr "這表示如果不能在這時間之前開始，就應該取消動作。"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:48
+msgid "Control concurrency level and distribution over time"
+msgstr "隨時間控制週期等級並散佈"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:49
+msgid "Distribute tasks over N seconds"
+msgstr "在幾秒間散佈工作"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:50
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Run at most N tasks at a time"
+msgstr "一次最多執行 N 個任務"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:55
+msgid ""
+"Override the description format from the template for this invocation only"
+msgstr "僅為這祈願從範本覆寫描述格式"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:59
+msgid "Create a job invocation"
+msgstr "建立工作祈願"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:68
+msgid "Get output for a host"
+msgstr "取得主機輸出"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:101
+msgid "Host with id '%{id}' was not found"
+msgstr "找不到 ID 為 '%{id}' 的主機"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:107
+msgid "Template with id '%{id}' was not found"
+msgstr "找不到 ID 為 '%{id}' 的範本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:16
+msgid "List job templates"
+msgstr "列出工作範本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:17
+msgid "List job templates per location"
+msgstr "列出各個位置上的工作範本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:18
+msgid "List job templates per organization"
+msgstr "列出各個組織的工作範本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:25
+msgid "Show job template details"
+msgstr "顯示工作範本的詳情"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:32
+#: ../app/controllers/api/v2/job_templates_controller.rb:83
+msgid "Template name"
+msgstr "範本名稱"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:33
+#: ../app/views/job_invocations/_form.html.erb:9
+#: ../app/views/job_templates/_custom_tabs.html.erb:3
+#: ../app/views/job_templates/_custom_tabs.html.erb:6
+msgid "Job category"
+msgstr "工作類別"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:34
+#: ../app/views/job_templates/_custom_tabs.html.erb:14
+msgid ""
+"This template is used to generate the description. Input values can be used "
+"using the syntax %{package}. You may also include the job category and "
+"template name using %{job_category} and %{template_name}."
+msgstr ""
+"這範本是用來產生描述。輸入值可以使用 %{package} 語法。您也可以使用 %{job_category} 與 %{template_name} "
+"來包括工作類別與範本名稱。"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:39
+msgid "Provider type"
+msgstr "供應商種類"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:42
+msgid "Whether or not the template is locked for editing"
+msgstr "範本是否鎖定並禁止進行編輯"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:44
+msgid "Effective user options"
+msgstr "有效的使用者選項"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:45
+msgid ""
+"What user should be used to run the script (using sudo-like mechanisms)"
+msgstr "哪位使用者該用來執行此 script（使用類似 sudo 機制）"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:46
+msgid ""
+"Whether it should be allowed to override the effective user from the "
+"invocation form."
+msgstr "是否允許從祈願清單覆寫有效使用者。"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:47
+msgid "Whether the current user login should be used as the effective user"
+msgstr "目前登入的使用者是否應作為有效使用者"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:54
+msgid "Create a job template"
+msgstr "建立工作範本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
+msgid "Update a job template"
+msgstr "更新工作範本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:69
+msgid "Template version"
+msgstr "範本版本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:75
+msgid "Delete a job template"
+msgstr "刪除工作範本"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:87
+msgid "Clone a provision template"
+msgstr "複製佈建範本"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:8
+msgid "List remote execution features"
+msgstr "列出遠端執行功能"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:13
+msgid "Show remote execution feature"
+msgstr "顯示遠端執行功能"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:20
+msgid "Job template ID to be used for the feature"
+msgstr "要給這功能使用的工作範本 ID"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:11
+msgid "List template inputs"
+msgstr "列出範本輸入"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:18
+msgid "Show template input details"
+msgstr "顯示範本輸入的詳細資料"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:26
+msgid "Input name"
+msgstr "輸入的名稱"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:27
+msgid "Input description"
+msgstr "輸入的描述"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:28
+msgid "Input is required"
+msgstr "需要輸入"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:29
+msgid "Input is advanced"
+msgstr "輸入是進階的"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:30
+msgid "Input type"
+msgstr "輸入類型"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:31
+msgid "Fact name, used when input type is fact"
+msgstr "事實名稱，當輸入類型是 fact 時使用"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:32
+msgid "Variable name, used when input type is variable"
+msgstr "變數名稱，當輸入類型是 variable 時使用"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:33
+msgid "Puppet class name, used when input type is puppet_parameter"
+msgstr "puppet class 名稱，當輸入類型是 puppet_parameter 時使用"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:34
+msgid "Puppet parameter name, used when input type is puppet_parameter"
+msgstr "puppet 參數名稱，當輸入類型是 puppet_parameter 時使用"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:35
+msgid "Selectable values for user inputs"
+msgstr "使用者輸入可選擇的值"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:39
+msgid "Create a template input"
+msgstr "建立範本輸入"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:47
+msgid "Delete a template input"
+msgstr "刪除範本輸入"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:54
+msgid "Update a template input"
+msgstr "更新範本輸入"
+
+#: ../app/controllers/job_templates_controller.rb:23
+msgid ""
+"Problem with previewing the template: %{error}. Note that you must save "
+"template input changes before you try to preview it."
+msgstr "預覽範本時發生問題：%{error}。請注意，您必須在預覽範本前，先儲存範本輸入的變更。"
+
+#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:11
+#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:15
+#: ../app/helpers/remote_execution_helper.rb:97
+msgid "Run Job"
+msgstr "執行工作"
+
+#: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:13
+msgid "Run"
+msgstr "執行"
+
+#: ../app/helpers/remote_execution_helper.rb:23
+msgid "Success"
+msgstr "成功"
+
+#: ../app/helpers/remote_execution_helper.rb:24
+#: ../app/views/job_invocations/index.html.erb:11
+msgid "Failed"
+msgstr "已失敗"
+
+#: ../app/helpers/remote_execution_helper.rb:25
+#: ../app/views/job_invocations/index.html.erb:12
+msgid "Pending"
+msgstr "等待處理中"
+
+#: ../app/helpers/remote_execution_helper.rb:26
+msgid "Cancelled"
+msgstr "已取消"
+
+#: ../app/helpers/remote_execution_helper.rb:36
+msgid "queued"
+msgstr "已排程"
+
+#: ../app/helpers/remote_execution_helper.rb:38
+msgid "running %{percent}%"
+msgstr "執行中 %{percent}%"
+
+#: ../app/helpers/remote_execution_helper.rb:40
+msgid "succeeded"
+msgstr "已成功"
+
+#: ../app/helpers/remote_execution_helper.rb:42
+#: ../app/helpers/remote_execution_helper.rb:71
+msgid "failed"
+msgstr "已失敗"
+
+#: ../app/helpers/remote_execution_helper.rb:44
+msgid "unknown status"
+msgstr "未知的狀態"
+
+#: ../app/helpers/remote_execution_helper.rb:69
+msgid "cancelled"
+msgstr "已取消"
+
+#: ../app/helpers/remote_execution_helper.rb:74
+msgid "success"
+msgstr "成功"
+
+#: ../app/helpers/remote_execution_helper.rb:76
+msgid "pending"
+msgstr "正在處理"
+
+#: ../app/helpers/remote_execution_helper.rb:85
+msgid "Host detail"
+msgstr "主機詳細資料"
+
+#: ../app/helpers/remote_execution_helper.rb:86
+msgid "Rerun on %s"
+msgstr "傳回於 %s"
+
+#: ../app/helpers/remote_execution_helper.rb:91
+#: ../app/helpers/remote_execution_helper.rb:198
+#: ../app/models/job_invocation.rb:125
+msgid "N/A"
+msgstr "N/A"
+
+#: ../app/helpers/remote_execution_helper.rb:105
+msgid "Refresh this page"
+msgstr "更新此網頁"
+
+# translation auto-copied from project anaconda, version 19.31.34, document
+# anaconda
+#: ../app/helpers/remote_execution_helper.rb:105
+#: ../app/views/job_invocations/_form.html.erb:40
+msgid "Refresh"
+msgstr "重新整理"
+
+#: ../app/helpers/remote_execution_helper.rb:107
+msgid "Rerun"
+msgstr "重新執行"
+
+#: ../app/helpers/remote_execution_helper.rb:109
+msgid "Rerun the job"
+msgstr "重新執行工作"
+
+#: ../app/helpers/remote_execution_helper.rb:112
+msgid "Rerun failed"
+msgstr "重新執行失敗"
+
+#: ../app/helpers/remote_execution_helper.rb:115
+msgid "Rerun on failed hosts"
+msgstr "在失敗的主機上重新執行"
+
+#: ../app/helpers/remote_execution_helper.rb:118
+msgid "Job Task"
+msgstr "工作任務"
+
+#: ../app/helpers/remote_execution_helper.rb:120
+msgid "See the last task details"
+msgstr "檢視最後工作的詳情"
+
+#: ../app/helpers/remote_execution_helper.rb:123
+#: ../app/helpers/remote_execution_helper.rb:141
+msgid "Cancel Job"
+msgstr "取消工作"
+
+#: ../app/helpers/remote_execution_helper.rb:125
+msgid "Try to cancel the job"
+msgstr "試著取消工作"
+
+#: ../app/helpers/remote_execution_helper.rb:136
+msgid "Task Details"
+msgstr "工作詳細資料"
+
+#: ../app/helpers/remote_execution_helper.rb:138
+msgid "See the task details"
+msgstr "檢視工作的詳情"
+
+#: ../app/helpers/remote_execution_helper.rb:143
+msgid "Try to cancel the job on a host"
+msgstr "試著取消主機上的工作"
+
+#: ../app/helpers/remote_execution_helper.rb:200
+msgid "%s ago"
+msgstr "%s 之前"
+
+#: ../app/helpers/remote_execution_helper.rb:200
+msgid "in %s"
+msgstr "%s 中"
+
+#: ../app/helpers/remote_execution_helper.rb:210
+msgid "Documentation"
+msgstr "文件"
+
+#: ../app/helpers/remote_execution_helper.rb:217
+msgid "Template input"
+msgstr "範本輸入"
+
+#: ../app/helpers/remote_execution_helper.rb:218
+msgid "remove template input"
+msgstr "移除範本輸入"
+
+#: ../app/helpers/remote_execution_helper.rb:230
+msgid "Use default description template"
+msgstr "使用預設的描述範本"
+
+#: ../app/helpers/remote_execution_helper.rb:235
+msgid "Description template"
+msgstr "描述範本"
+
+#: ../app/helpers/remote_execution_helper.rb:241
+#: ../app/views/job_invocations/_form.html.erb:101
+#: ../app/views/job_templates/_custom_tabs.html.erb:14
+msgid "Explanation"
+msgstr "解釋"
+
+#: ../app/helpers/remote_execution_helper.rb:242
+msgid ""
+"This template is used to generate the description Input values can be used "
+"using the syntax %{package}. You may also include the job category and "
+"template name using %{job_category} and %{template_name}."
+msgstr ""
+"這範本是用來產生描述。輸入值可以使用 %{package} 語法。您也可以使用 %{job_category} 與 %{template_name} "
+"來包括工作類別與範本名稱。"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:25
+msgid "Could not use any template used in the job invocation"
+msgstr "無法使用任何用於這工作祈願的範本"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:30
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] "唯一可套用代理 %{proxy_names} 已停機"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:37
+msgid ""
+"Could not use any proxy. Consider configuring %{global_proxy} or "
+"%{fallback_proxy} in settings"
+msgstr "無法使用任何代理伺服器。請考慮配置設定中的 %{global_proxy} 或 %{fallback_proxy}"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:43
+msgid "Failed rendering template: %s"
+msgstr "無法生成範本：%s"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:66
+msgid "Failed to initialize command"
+msgstr "無法初始化指令"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:71
+msgid "%{description} on %{host}"
+msgstr "%{description} 於 %{host} 之上"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:2
+msgid "Remote action:"
+msgstr "遠端動作："
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:96
+msgid "User can not execute job on host %s"
+msgstr "使用者無法在主機 %s 上執行工作"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:97
+msgid "User can not execute this job template"
+msgstr "使用者無法執行此工作範本"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:102
+msgid "User can not execute this job template on %s"
+msgstr "使用者無法在 %s 上執行此工作範本"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:24
+msgid "Script execution failed"
+msgstr "執行 script 失敗"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:56
+msgid "Initialization error: %s"
+msgstr "初始化錯誤：%s"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:66
+msgid "Error loading data from proxy"
+msgstr "從代理載入資料時發生錯誤"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:75
+msgid "No output"
+msgstr "沒有輸出"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:79
+msgid "Exit status: %s"
+msgstr "退出狀態：%s"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:81
+msgid "Job finished with error"
+msgstr "工作完成但發生錯誤"
+
+#: ../app/lib/proxy_api/remote_execution_ssh.rb:11
+msgid "Unable to fetch public key"
+msgstr "無法取得公開金鑰"
+
+#: ../app/models/concerns/foreman_remote_execution/nic_extensions.rb:21
+msgid "host already has an execution interface"
+msgstr "主機已有執行介面"
+
+#: ../app/models/foreign_input_set.rb:18
+msgid ""
+"Circular dependency detected in foreign input set '%{template}' -> "
+"'%{target_template}'. Templates stack: %{templates_stack}"
+msgstr ""
+"在外部輸入集偵測到環狀相依性： '%{template}' -> "
+"'%{target_template}'。範本堆疊：%{templates_stack}"
+
+#: ../app/models/host_status/execution_status.rb:30
+msgid "Execution"
+msgstr "執行"
+
+#: ../app/models/host_status/execution_status.rb:36
+msgid "Last execution succeeded"
+msgstr "最後的執行成功"
+
+#: ../app/models/host_status/execution_status.rb:36
+msgid "No execution finished yet"
+msgstr "尚無執行完成"
+
+#: ../app/models/host_status/execution_status.rb:38
+msgid "Last execution failed"
+msgstr "最後的執行失敗"
+
+#: ../app/models/host_status/execution_status.rb:40
+msgid "Unknown execution status"
+msgstr "未知的執行狀態"
+
+#: ../app/models/input_template_renderer.rb:16
+msgid "Recursive rendering of templates detected"
+msgstr "偵測到遞迴處理範本"
+
+#: ../app/models/input_template_renderer.rb:30
+msgid "error during rendering: %s"
+msgstr "處理時發生錯誤：%s"
+
+#: ../app/models/input_template_renderer.rb:49
+msgid ""
+"input macro with name '%s' used, but no input with such name defined for "
+"this template"
+msgstr "使用了名為 '%s' 的輸入巨集，但此範本並未輸入這樣的名稱"
+
+#: ../app/models/input_template_renderer.rb:63
+msgid "included template '%s' not found"
+msgstr "找不到包含的範本 '%s'"
+
+#: ../app/models/job_invocation.rb:7
+msgid "template"
+msgstr "範本"
+
+#: ../app/models/job_invocation_composer.rb:79
+msgid "Cannot specify both bookmark_id and search_query"
+msgstr "無法指定 bookmark_id 和 search_query"
+
+#: ../app/models/job_invocation_composer.rb:84
+msgid "Cannot specify both recurrence and scheduling"
+msgstr "無法指定 recurrence 和 scheduling"
+
+#: ../app/models/job_invocation_composer.rb:118
+msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr "未知的輸入 %{input_name} 給範本 %{template_name}"
+
+#: ../app/models/job_invocation_composer.rb:226
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr "未知的輸入 %{input_name} 未定義於範本 %{template_name}"
+
+#: ../app/models/job_invocation_composer.rb:235
+msgid "No template mapped to feature %{feature_name}"
+msgstr "沒有範本定義至功能 %{feature_name}"
+
+#: ../app/models/job_invocation_composer.rb:241
+msgid ""
+"The template %{template_name} mapped to feature %{feature_name} is not "
+"accessible by the user"
+msgstr "使用者無法存取範本 %{template_name} 對應至功能 %{feature_name}"
+
+#: ../app/models/job_invocation_task_group.rb:8
+msgid "Job Invocation"
+msgstr "工作祈願"
+
+#: ../app/models/job_template.rb:136
+msgid "Duplicated inputs detected: %{duplicated_inputs}"
+msgstr "偵測到重複的輸入：%{duplicated_inputs}"
+
+#: ../app/models/job_template.rb:203
+msgid ""
+"This template is locked. Please clone it to a new template to customize."
+msgstr "此範本已鎖定。請將它複製至一個新的範本以自訂化。"
+
+#: ../app/models/remote_execution_feature.rb:20
+msgid "Unknown remote execution feature %s"
+msgstr "未知的遠端執行功能 %s"
+
+#: ../app/models/setting/remote_execution.rb:10
+msgid ""
+"Search the host for any proxy with Remote Execution, useful when the host "
+"has no subnet or the subnet does not have an execution proxy"
+msgstr "使用遠端執行為代理搜尋主機，這在主機沒有子網路、或子網路沒有執行代理時很有用"
+
+#: ../app/models/setting/remote_execution.rb:13
+msgid ""
+"Search for remote execution proxy outside of the proxies assigned to the "
+"host. If locations or organizations are enabled, the search will be limited "
+"to the host's organization or location."
+msgstr "搜尋指定給主機的代理之外的遠端執行代理。如果位置或組織都已啟用，搜尋會被限制至主機的組織或地點。"
+
+#: ../app/models/setting/remote_execution.rb:18
+msgid ""
+"Default user to use for SSH.  You may override per host by setting a "
+"parameter called remote_execution_ssh_user."
+msgstr "使用 SSH 的預設使用者。您可以透過設定參數呼叫 remote_execution_ssh_user 來覆寫每台主機的設定。"
+
+#: ../app/models/setting/remote_execution.rb:21
+msgid ""
+"Default user to use for executing the script. If the user differs from the "
+"SSH user, su or sudo is used to switch the user."
+msgstr "要使用執行這 script 的預設使用者。如果使用者與 SSH 使用者不同，會用 su 或 sudo 來切換使用者。"
+
+#: ../app/models/setting/remote_execution.rb:24
+msgid "What command should be used to switch to the effective user. One of %s"
+msgstr "該用哪個指令來切換至有效的使用者。%s 之一"
+
+#: ../app/models/setting/remote_execution.rb:27
+msgid "Whether we should sync templates from disk when running db:seed."
+msgstr "執行 db:seed 時是否要從磁碟同步範本。"
+
+#: ../app/models/ssh_execution_provider.rb:13
+msgid "SSH"
+msgstr "SSH"
+
+#: ../app/models/ssh_execution_provider.rb:33
+msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
+msgstr "有效使用者方法 \"%{current_value}\" 並非 %{valid_methods} 之一"
+
+#: ../app/models/targeting.rb:5
+msgid "Dynamic Query"
+msgstr "動態查詢"
+
+#: ../app/models/targeting.rb:5
+msgid "Static Query"
+msgstr "靜態查詢"
+
+#: ../app/models/targeting.rb:37
+msgid "Cannot resolve hosts without a user"
+msgstr "沒有使用者就無法解析主機"
+
+#: ../app/models/targeting.rb:38
+msgid "Cannot resolve hosts without a bookmark or search query"
+msgstr "沒有書籤或搜尋查詢，就無法解析主機"
+
+#: ../app/models/targeting.rb:67 ../app/models/targeting.rb:68
+msgid "Must select a bookmark or enter a search query"
+msgstr "必須選擇書籤或輸入搜尋查詢"
+
+#: ../app/models/template_input.rb:7
+msgid "User input"
+msgstr "使用者輸入"
+
+#: ../app/models/template_input.rb:7
+msgid "Variable"
+msgstr "變數"
+
+#: ../app/models/template_input.rb:7
+msgid "Fact value"
+msgstr "詳情值"
+
+#: ../app/models/template_input.rb:8
+msgid "Puppet parameter"
+msgstr "Puppet 參數"
+
+#: ../app/models/template_input.rb:109
+msgid "Value for required input '%s' was not specified"
+msgstr "所需輸入的值 '%s' 並未指定"
+
+#: ../app/models/template_invocation.rb:7
+msgid "Input"
+msgstr "輸入"
+
+#: ../app/models/template_invocation.rb:48
+msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr "並不是所需的輸入都有值。缺少的輸入：%s"
+
+#: ../app/views/job_invocations/_description_fields.html.erb:1
+#: ../app/views/job_invocations/index.html.erb:8
+#: ../app/views/remote_execution_features/index.html.erb:8
+msgid "Description"
+msgstr "說明"
+
+#: ../app/views/job_invocations/_form.html.erb:20
+msgid "Job template"
+msgstr "工作範本"
+
+#: ../app/views/job_invocations/_form.html.erb:36
+msgid "Resolves to"
+msgstr "解析至"
+
+#: ../app/views/job_invocations/_form.html.erb:39
+msgid "hosts"
+msgstr "主機"
+
+#: ../app/views/job_invocations/_form.html.erb:43
+msgid "Preview"
+msgstr "預覽"
+
+#: ../app/views/job_invocations/_form.html.erb:64
+msgid "Hide advanced fields"
+msgstr "隱藏進階欄位"
+
+#: ../app/views/job_invocations/_form.html.erb:64
+msgid "Display advanced fields"
+msgstr "顯示進階欄位"
+
+#: ../app/views/job_invocations/_form.html.erb:75
+msgid ""
+"A user to be used for executing the script. If it differs from the SSH user,"
+" su or sudo is used to switch the accounts."
+msgstr "要使用執行這 script 的使用者。如果使用者與 SSH 使用者不同，會用 su 或 sudo 來切換使用者。"
+
+#: ../app/views/job_invocations/_form.html.erb:75
+#: ../app/views/job_invocations/_tab_overview.html.erb:44
+#: ../app/views/job_templates/_custom_tabs.html.erb:39
+msgid "Effective user"
+msgstr "有效的使用者"
+
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Concurrency level"
+msgstr "同步等級"
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Distribute execution over N seconds"
+msgstr "在幾秒間散佈執行"
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Time span"
+msgstr "時間跨度"
+
+#: ../app/views/job_invocations/_form.html.erb:94
+msgid "Type of query"
+msgstr "查詢類型"
+
+#: ../app/views/job_invocations/_form.html.erb:102
+msgid ""
+"Type has impact on when is the query evaulated to "
+"hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this "
+"form</li><li><b>Dynamic</b> - evaluates just before the execution is "
+"started, so if it's planed in future, targeted hosts set may change before "
+"it</li></ul>"
+msgstr ""
+"「類型」對於何時查詢主機評量時有影響。<br><ul><li><b>Static</b> - "
+"送出此表單時進行評量</li><li><b>Dynamic</b> - "
+"在執行開始前評量，因此會計畫在未來執行，目標主機可能會在這之前改變</li></ul>"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
+msgid ""
+"The final host list may change because the selected query is dynamic.  It "
+"will be rerun during execution."
+msgstr "最終主機清單可能會改變，因為選擇查詢是動態的。這會在執行時重新執行。"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:14
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] "……和 %{count} 個"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:18
+msgid "No hosts found."
+msgstr "找不到主機。"
+
+#: ../app/views/job_invocations/_preview_hosts_modal.html.erb:6
+msgid "Close"
+msgstr "關閉"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:6
+msgid "Filter"
+msgstr "篩選器"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:9
+msgid "Search"
+msgstr "搜尋"
+
+# translation auto-copied from project setroubleshoot, version 3.2.11,
+# document setroubleshoot
+#: ../app/views/job_invocations/_tab_hosts.html.erb:21
+msgid "Host"
+msgstr "主機"
+
+# translation auto-copied from project subscription-manager, version 1.10.7,
+# document keys
+#: ../app/views/job_invocations/_tab_hosts.html.erb:22
+#: ../app/views/job_invocations/index.html.erb:9
+msgid "Status"
+msgstr "狀態"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:23
+#: ../app/views/job_templates/index.html.erb:16
+msgid "Actions"
+msgstr "動作"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:45
+msgid ""
+"The dynamic query '%{query}' was not resolved yet. The list of hosts to "
+"which it would resolve now can be seen %{here}."
+msgstr "動態查詢 '%{query}' 尚未被解析。該解析的主機清單可以在 %{here} 找到。"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:47
+msgid "here"
+msgstr "這裏"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:6
+msgid "Target hosts"
+msgstr "目標主機"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:8
+msgid "Bookmark"
+msgstr "書籤"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:10
+msgid "Manual selection"
+msgstr "手動選擇"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:15
+msgid "Evaluated at:"
+msgstr "評量於："
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:21
+#: ../app/views/job_invocations/index.html.erb:13
+msgid "Total hosts"
+msgstr "主機總數"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:25
+msgid "Providers and templates"
+msgstr "供應者與範本"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:31
+msgid "Preview for target %s"
+msgstr "預覽目標 %s"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:36
+msgid "following user inputs were provided"
+msgstr "提供了以下使用者輸入"
+
+#: ../app/views/job_invocations/index.html.erb:1
+msgid "Job invocations"
+msgstr "工作祈願"
+
+#: ../app/views/job_invocations/index.html.erb:10
+msgid "Succeeded"
+msgstr "已成功"
+
+#: ../app/views/job_invocations/index.html.erb:14
+msgid "Start"
+msgstr "開始"
+
+#: ../app/views/job_invocations/new.html.erb:3
+msgid "Job invocation"
+msgstr "工作祈願"
+
+#: ../app/views/job_invocations/show.html.erb:10
+msgid "Overview"
+msgstr "概覽"
+
+#: ../app/views/job_invocations/show.html.erb:11
+msgid "Hosts"
+msgstr "主機"
+
+#: ../app/views/job_invocations/show.html.erb:12
+msgid "Recurring logic"
+msgstr "週期邏輯"
+
+#: ../app/views/job_templates/_custom_tab_headers.html.erb:1
+msgid "Job"
+msgstr "工作"
+
+#: ../app/views/job_templates/_custom_tab_headers.html.erb:2
+msgid "Type"
+msgstr "類型"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:28
+msgid "Add Input"
+msgstr "新增輸入"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:28
+msgid "add a input for this template"
+msgstr "新增輸入至此範本"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:35
+msgid "Add Foreign Input Set"
+msgstr "新增外部輸入集"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:35
+msgid ""
+"add an input set for this template to reference a different template inputs"
+msgstr "為此範本新增輸入集，以參照至不同的範本輸入"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:53
+msgid "Snippet"
+msgstr "程式碼片段"
+
+#: ../app/views/job_templates/edit.html.erb:4
+msgid "Edit Job Template"
+msgstr "編輯工作範本"
+
+#: ../app/views/job_templates/index.html.erb:5
+msgid "Job Templates"
+msgstr "工作範本"
+
+#: ../app/views/job_templates/index.html.erb:7
+#: ../app/views/job_templates/new.html.erb:4
+msgid "New Job Template"
+msgstr "新工作範本"
+
+#: ../app/views/job_templates/index.html.erb:13
+msgid "JobTemplate|Name"
+msgstr "JobTemplate|Name"
+
+#: ../app/views/job_templates/index.html.erb:14
+msgid "JobTemplate|Snippet"
+msgstr "JobTemplate|Snippet"
+
+#: ../app/views/job_templates/index.html.erb:15
+msgid "JobTemplate|Locked"
+msgstr "JobTemplate|Locked"
+
+#: ../app/views/job_templates/index.html.erb:26
+msgid "This template is locked for editing."
+msgstr "此範本已鎖定，因此無法編輯。"
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:5
+msgid "The execution interface is used for remote execution"
+msgstr "用來遠端執行的執行介面"
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:8
+msgid "Remote execution"
+msgstr "遠端執行"
+
+#: ../app/views/overrides/subnets/_rex_tab.html.erb:1
+msgid "Remote Execution"
+msgstr "遠端執行"
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid "Proxies"
+msgstr "代理伺服器"
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid ""
+"Select as many remote execution proxies as applicable for this subnet.  When"
+" multiple proxies with the same provider are added, actions will be load "
+"balanced among them."
+msgstr "為此子網路儘可能選擇遠端執行代理。加入有著同樣供應者的多重代理之後，動作就會在這些代理上進行負載平衡。"
+
+#: ../app/views/remote_execution_features/_form.html.erb:18
+msgid ""
+"You are not allowed to see the currently assigned template. Saving the form "
+"now would unassign the template."
+msgstr "您不能看到目前指定的範本。現在儲存表單會取消指定範本。"
+
+#: ../app/views/remote_execution_features/index.html.erb:1
+#: ../lib/foreman_remote_execution/engine.rb:93
+msgid "Remote Execution Features"
+msgstr "遠端執行功能"
+
+# translation auto-copied from project subscription-manager, version 1.10.10,
+# document keys
+#: ../app/views/remote_execution_features/index.html.erb:6
+msgid "Label"
+msgstr "標籤"
+
+#: ../app/views/remote_execution_features/index.html.erb:7
+msgid "Name"
+msgstr "名稱"
+
+#: ../app/views/remote_execution_features/show.html.erb:1
+msgid "Edit Remote Execution Feature"
+msgstr "編輯遠端執行功能"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:3
+msgid "Foreign input set"
+msgstr "外部輸入集"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:5
+msgid "remove template input set"
+msgstr "移除範本輸入集"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:9
+msgid ""
+"A comma separated list of input names to be excluded from the foreign "
+"template."
+msgstr "從外部範本排除的輸入名稱清單，以逗號隔開。"
+
+#: ../app/views/template_inputs/_form.html.erb:19
+msgid ""
+"A list of options the user can select from. If not provided, the user will "
+"be given a free-form field"
+msgstr "使用者可以選擇的選項清單。如果沒有提供的話，使用者會被給予開放清單的欄位"
+
+#: ../app/views/template_invocations/show.html.erb:1
+msgid "Detail of %s run"
+msgstr "%s 執行的詳細資料"
+
+#: ../app/views/template_invocations/show.html.erb:7
+msgid "Back to Job"
+msgstr "回到工作"
+
+#: ../app/views/template_invocations/show.html.erb:8
+msgid "Toggle command"
+msgstr "切換指令"
+
+#: ../app/views/template_invocations/show.html.erb:9
+msgid "Toggle STDERR"
+msgstr "切換 STDERR"
+
+#: ../app/views/template_invocations/show.html.erb:10
+msgid "Toggle STDOUT"
+msgstr "切換 STDOUT"
+
+#: ../app/views/template_invocations/show.html.erb:11
+msgid "Toggle DEBUG"
+msgstr "切換 DEBUG"
+
+#: ../app/views/template_invocations/show.html.erb:16
+msgid "Target: "
+msgstr "目標："
+
+#: ../app/views/template_invocations/show.html.erb:26
+msgid "Scroll to bottom"
+msgstr "捲動至底端"
+
+#: ../app/views/template_invocations/show.html.erb:32
+msgid "Scroll to top"
+msgstr "捲動至頂端"
+
+#: ../app/views/templates/package_action.erb:5
+msgid "Unsupported or no operating system found for this host."
+msgstr "不支援或此主機上找不到作業系統。"
+
+#: ../lib/foreman_remote_execution/engine.rb:88
+msgid "Job templates"
+msgstr "工作範本"
+
+#: ../lib/foreman_remote_execution/engine.rb:99
+msgid "Jobs"
+msgstr "工作"
+
+#: action_names.rb:3
+msgid "Import Puppet classes"
+msgstr "匯入 Puppet 類別"
+
+#: action_names.rb:4
+msgid "Import facts"
+msgstr "匯入詳情"
+
+#: action_names.rb:5
+msgid "Update architecture"
+msgstr "更新架構"
+
+#: action_names.rb:6
+msgid "Delete architecture"
+msgstr "刪除架構"
+
+#: action_names.rb:7
+msgid "Create architecture"
+msgstr "建立架構"
+
+#: action_names.rb:8
+msgid "Action with sub plans"
+msgstr "有子計畫的動作"
+
+#: gemspec.rb:2
+msgid ""
+"A plugin bringing remote execution to the Foreman, completing the config "
+"management functionality with remote management functionality."
+msgstr "將遠端執行帶入 Foreman 的外掛程式，搭配遠端管理功能來完成配置管理。"

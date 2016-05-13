@@ -4,96 +4,344 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 msgid ""
-msgstr "Project-Id-Version: foreman_remote_execution 1.0.0\nReport-Msgid-Bugs-To: \nPO-Revision-Date: 2016-02-03 04:48-0500\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: English\nLanguage: en\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\n\n"
+msgstr ""
+"Project-Id-Version: foreman_remote_execution 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2016-02-03 04:48-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
 
-msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
+msgid "%s ago"
 msgstr ""
 
-msgid "There was an error while updating the status, try refreshing the page."
+msgid "%{description} on %{host}"
 msgstr ""
 
-msgid "List foreign input sets"
-msgstr ""
+#, fuzzy
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] ""
+msgstr[1] ""
 
-msgid "Show foreign input set details"
-msgstr ""
-
-msgid "Target template ID"
-msgstr ""
-
-msgid "Include all inputs form the foreign template"
+msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr ""
 
 msgid "A comma separated list of input names to be included from the foreign template."
 msgstr ""
 
-msgid "Input set description"
+msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
+msgstr ""
+
+msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
+msgstr "A plugin bringing remote execution to the Satellite, completing the config management functionality with remote management functionality."
+
+msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
+msgstr ""
+
+msgid "Action with sub plans"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Add Foreign Input Set"
+msgstr ""
+
+msgid "Add Input"
+msgstr ""
+
+msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
+msgstr ""
+
+msgid "Back to Job"
+msgstr ""
+
+msgid "Bookmark"
+msgstr ""
+
+msgid "Cancel Job"
+msgstr ""
+
+msgid "Cancelled"
+msgstr ""
+
+msgid "Cannot resolve hosts without a bookmark or search query"
+msgstr ""
+
+msgid "Cannot resolve hosts without a user"
+msgstr ""
+
+msgid "Cannot specify both bookmark_id and search_query"
+msgstr ""
+
+msgid "Cannot specify both recurrence and scheduling"
+msgstr ""
+
+msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
+msgstr ""
+
+msgid "Clone a provision template"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Concurrency level"
+msgstr ""
+
+msgid "Control concurrency level and distribution over time"
+msgstr ""
+
+msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
+msgstr "Could not use any Capsule. Consider configuring %{global_Capsule} or %{fallback_Capsule} in settings"
+
+msgid "Could not use any template used in the job invocation"
 msgstr ""
 
 msgid "Create a foreign input set"
 msgstr ""
 
-msgid "Delete a foreign input set"
+msgid "Create a job invocation"
 msgstr ""
 
-msgid "Update a foreign input set"
-msgstr ""
-
-msgid "List job invocations"
-msgstr ""
-
-msgid "Show job invocation"
-msgstr ""
-
-msgid "The job template to use"
-msgstr ""
-
-msgid "Invocation type, one of %s"
-msgstr ""
-
-msgid "Inputs to use"
-msgstr ""
-
-msgid "SSH provider specific options"
-msgstr ""
-
-msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
+msgid "Create a job template"
 msgstr ""
 
 msgid "Create a recurring job"
 msgstr ""
 
-msgid "How often the job should occur, in the cron format"
+msgid "Create a template input"
 msgstr ""
 
-msgid "Repeat a maximum of N times"
+msgid "Create architecture"
 msgstr ""
 
-msgid "Perform no more executions after this time"
+msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr ""
 
-msgid "Schedule the job to start at a later time"
+msgid "Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user."
 msgstr ""
 
-msgid "Schedule the job for a future time"
+msgid "Delete a foreign input set"
 msgstr ""
 
-msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgid "Delete a job template"
 msgstr ""
 
-msgid "Override the description format from the template for this invocation only"
+msgid "Delete a template input"
 msgstr ""
 
-msgid "Create a job invocation"
+msgid "Delete architecture"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Description template"
+msgstr ""
+
+msgid "Detail of %s run"
+msgstr ""
+
+msgid "Display advanced fields"
+msgstr ""
+
+msgid "Distribute execution over N seconds"
+msgstr ""
+
+msgid "Distribute tasks over N seconds"
+msgstr ""
+
+msgid "Documentation"
+msgstr ""
+
+msgid "Duplicated inputs detected: %{duplicated_inputs}"
+msgstr ""
+
+msgid "Dynamic Query"
+msgstr ""
+
+msgid "Edit Job Template"
+msgstr ""
+
+msgid "Edit Remote Execution Feature"
+msgstr ""
+
+msgid "Effective user"
+msgstr ""
+
+msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
+msgstr ""
+
+msgid "Effective user options"
+msgstr ""
+
+msgid "Error loading data from proxy"
+msgstr "Error loading data from Capsule"
+
+msgid "Evaluated at:"
+msgstr ""
+
+msgid "Execution"
+msgstr ""
+
+msgid "Exit status: %s"
+msgstr ""
+
+msgid "Explanation"
+msgstr ""
+
+msgid "Fact name, used when input type is fact"
+msgstr ""
+
+msgid "Fact value"
+msgstr ""
+
+msgid "Failed"
+msgstr ""
+
+msgid "Failed rendering template: %s"
+msgstr ""
+
+msgid "Failed to initialize command"
+msgstr ""
+
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Foreign input set"
 msgstr ""
 
 msgid "Get output for a host"
 msgstr ""
 
+msgid "Hide advanced fields"
+msgstr ""
+
+msgid "Host"
+msgstr ""
+
+msgid "Host detail"
+msgstr ""
+
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-msgid "Template with id '%{id}' was not found"
+msgid "Hosts"
+msgstr ""
+
+msgid "How often the job should occur, in the cron format"
+msgstr ""
+
+msgid "Import Puppet classes"
+msgstr ""
+
+msgid "Import facts"
+msgstr ""
+
+msgid "Include all inputs form the foreign template"
+msgstr ""
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr ""
+
+msgid "Initialization error: %s"
+msgstr ""
+
+msgid "Input"
+msgstr ""
+
+msgid "Input description"
+msgstr ""
+
+msgid "Input is advanced"
+msgstr ""
+
+msgid "Input is required"
+msgstr ""
+
+msgid "Input name"
+msgstr ""
+
+msgid "Input set description"
+msgstr ""
+
+msgid "Input type"
+msgstr ""
+
+msgid "Inputs to use"
+msgstr ""
+
+msgid "Invocation type, one of %s"
+msgstr ""
+
+msgid "Job"
+msgstr ""
+
+msgid "Job Invocation"
+msgstr ""
+
+msgid "Job Task"
+msgstr ""
+
+msgid "Job Templates"
+msgstr ""
+
+msgid "Job category"
+msgstr ""
+
+msgid "Job finished with error"
+msgstr ""
+
+msgid "Job invocation"
+msgstr ""
+
+msgid "Job invocations"
+msgstr ""
+
+msgid "Job template"
+msgstr ""
+
+msgid "Job template ID to be used for the feature"
+msgstr ""
+
+msgid "Job templates"
+msgstr ""
+
+msgid "JobTemplate|Locked"
+msgstr ""
+
+msgid "JobTemplate|Name"
+msgstr ""
+
+msgid "JobTemplate|Snippet"
+msgstr ""
+
+msgid "Jobs"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Last execution failed"
+msgstr ""
+
+msgid "Last execution succeeded"
+msgstr ""
+
+msgid "List foreign input sets"
+msgstr ""
+
+msgid "List job invocations"
 msgstr ""
 
 msgid "List job templates"
@@ -105,232 +353,330 @@ msgstr ""
 msgid "List job templates per organization"
 msgstr ""
 
-msgid "Show job template details"
-msgstr ""
-
-msgid "Template name"
-msgstr ""
-
-msgid "Job category"
-msgstr ""
-
-msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr ""
-
-msgid "Provider type"
-msgstr ""
-
-msgid "Whether or not the template is locked for editing"
-msgstr ""
-
-msgid "Effective user options"
-msgstr ""
-
-msgid "What user should be used to run the script (using sudo-like mechanisms)"
-msgstr ""
-
-msgid "Whether it should be allowed to override the effective user from the invocation form."
-msgstr ""
-
-msgid "Whether the current user login should be used as the effective user"
-msgstr ""
-
-msgid "Create a job template"
-msgstr ""
-
-msgid "Update a job template"
-msgstr ""
-
-msgid "Template version"
-msgstr ""
-
-msgid "Delete a job template"
-msgstr ""
-
-msgid "Clone a provision template"
+msgid "List remote execution features"
 msgstr ""
 
 msgid "List template inputs"
 msgstr ""
 
-msgid "Show template input details"
+msgid "Manual selection"
 msgstr ""
 
-msgid "Input name"
-msgstr ""
-
-msgid "Input description"
-msgstr ""
-
-msgid "Input is required"
-msgstr ""
-
-msgid "Input is advanced"
-msgstr ""
-
-msgid "Input type"
-msgstr ""
-
-msgid "Fact name, used when input type is fact"
-msgstr ""
-
-msgid "Variable name, used when input type is variable"
-msgstr ""
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr ""
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr ""
-
-msgid "Selectable values for user inputs"
-msgstr ""
-
-msgid "Create a template input"
-msgstr ""
-
-msgid "Delete a template input"
-msgstr ""
-
-msgid "Update a template input"
-msgstr ""
-
-msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
-msgstr ""
-
-msgid "Run Job"
-msgstr ""
-
-msgid "Run"
-msgstr ""
-
-msgid "Success"
-msgstr ""
-
-msgid "Failed"
-msgstr ""
-
-msgid "Pending"
-msgstr ""
-
-msgid "Cancelled"
-msgstr ""
-
-msgid "queued"
-msgstr ""
-
-msgid "running %{percent}%"
-msgstr ""
-
-msgid "succeeded"
-msgstr ""
-
-msgid "failed"
-msgstr ""
-
-msgid "unknown status"
-msgstr ""
-
-msgid "cancelled"
-msgstr ""
-
-msgid "success"
-msgstr ""
-
-msgid "pending"
-msgstr ""
-
-msgid "Host detail"
-msgstr ""
-
-msgid "Rerun on %s"
+msgid "Must select a bookmark or enter a search query"
 msgstr ""
 
 msgid "N/A"
 msgstr ""
 
-msgid "Refresh this page"
+msgid "Name"
+msgstr ""
+
+msgid "New Job Template"
+msgstr ""
+
+msgid "No execution finished yet"
+msgstr ""
+
+msgid "No hosts found."
+msgstr ""
+
+msgid "No output"
+msgstr ""
+
+msgid "No template mapped to feature %{feature_name}"
+msgstr ""
+
+msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr ""
+
+msgid "Override the description format from the template for this invocation only"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Pending"
+msgstr ""
+
+msgid "Perform no more executions after this time"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Preview for target %s"
+msgstr ""
+
+msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
+msgstr ""
+
+msgid "Provider type"
+msgstr ""
+
+msgid "Providers and templates"
+msgstr ""
+
+msgid "Proxies"
+msgstr "Capsules"
+
+msgid "Puppet class name, used when input type is puppet_parameter"
+msgstr ""
+
+msgid "Puppet parameter"
+msgstr ""
+
+msgid "Puppet parameter name, used when input type is puppet_parameter"
+msgstr ""
+
+msgid "Recurring logic"
+msgstr ""
+
+msgid "Recursive rendering of templates detected"
 msgstr ""
 
 msgid "Refresh"
 msgstr ""
 
-msgid "Rerun"
+msgid "Refresh this page"
 msgstr ""
 
-msgid "Rerun the job"
+msgid "Remote Execution"
+msgstr ""
+
+msgid "Remote Execution Features"
+msgstr ""
+
+msgid "Remote action:"
+msgstr ""
+
+msgid "Remote execution"
+msgstr ""
+
+msgid "Repeat a maximum of N times"
+msgstr ""
+
+msgid "Rerun"
 msgstr ""
 
 msgid "Rerun failed"
 msgstr ""
 
+msgid "Rerun on %s"
+msgstr ""
+
 msgid "Rerun on failed hosts"
 msgstr ""
 
-msgid "Job Task"
+msgid "Rerun the job"
 msgstr ""
+
+msgid "Resolves to"
+msgstr ""
+
+msgid "Run"
+msgstr ""
+
+msgid "Run Job"
+msgstr ""
+
+msgid "Run at most N tasks at a time"
+msgstr ""
+
+msgid "SSH"
+msgstr ""
+
+msgid "SSH provider specific options"
+msgstr ""
+
+msgid "Schedule the job for a future time"
+msgstr ""
+
+msgid "Schedule the job to start at a later time"
+msgstr ""
+
+msgid "Script execution failed"
+msgstr ""
+
+msgid "Scroll to bottom"
+msgstr ""
+
+msgid "Scroll to top"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
+msgstr "Search for remote execution Capsule outside of the Capsules assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
+
+msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
+msgstr "Search the host for any Capsule with Remote Execution, useful when the host has no subnet or the subnet does not have an execution Capsule"
 
 msgid "See the last task details"
-msgstr ""
-
-msgid "Cancel Job"
-msgstr ""
-
-msgid "Try to cancel the job"
-msgstr ""
-
-msgid "Task Details"
 msgstr ""
 
 msgid "See the task details"
 msgstr ""
 
-msgid "Try to cancel the job on a host"
+msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
+msgstr "Select as many remote execution Capsules as applicable for this subnet.  When multiple Capsules with the same provider are added, actions will be load balanced among them."
+
+msgid "Selectable values for user inputs"
 msgstr ""
 
-msgid "in %s"
+msgid "Show foreign input set details"
 msgstr ""
 
-msgid "%s ago"
+msgid "Show job invocation"
 msgstr ""
 
-msgid "Documentation"
+msgid "Show job template details"
+msgstr ""
+
+msgid "Show remote execution feature"
+msgstr ""
+
+msgid "Show template input details"
+msgstr ""
+
+msgid "Snippet"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Static Query"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Succeeded"
+msgstr ""
+
+msgid "Success"
+msgstr ""
+
+msgid "Target hosts"
+msgstr ""
+
+msgid "Target template ID"
+msgstr ""
+
+msgid "Target: "
+msgstr ""
+
+msgid "Task Details"
 msgstr ""
 
 msgid "Template input"
 msgstr ""
 
-msgid "remove template input"
+msgid "Template name"
 msgstr ""
 
-msgid "Use default description template"
+msgid "Template version"
 msgstr ""
 
-msgid "Description template"
+msgid "Template with id '%{id}' was not found"
 msgstr ""
 
-msgid "Explanation"
+msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
+msgstr ""
+
+msgid "The execution interface is used for remote execution"
+msgstr ""
+
+msgid "The final host list may change because the selected query is dynamic.  It will be rerun during execution."
+msgstr ""
+
+msgid "The job template to use"
+msgstr ""
+
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
+msgstr ""
+
+msgid "There was an error while updating the status, try refreshing the page."
+msgstr ""
+
+msgid "This template is locked for editing."
+msgstr ""
+
+msgid "This template is locked. Please clone it to a new template to customize."
 msgstr ""
 
 msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr ""
 
-msgid "Could not use any template used in the job invocation"
+msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr ""
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "Could not use any Capsule. Consider configuring %{global_Capsule} or %{fallback_Capsule} in settings"
-
-msgid "Failed rendering template: %s"
+msgid "Time span"
 msgstr ""
 
-msgid "Failed to initialize command"
+msgid "Toggle DEBUG"
 msgstr ""
 
-msgid "%{description} on %{host}"
+msgid "Toggle STDERR"
 msgstr ""
 
-msgid "Remote action:"
+msgid "Toggle STDOUT"
+msgstr ""
+
+msgid "Toggle command"
+msgstr ""
+
+msgid "Total hosts"
+msgstr ""
+
+msgid "Try to cancel the job"
+msgstr ""
+
+msgid "Try to cancel the job on a host"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
+msgstr ""
+
+msgid "Type of query"
+msgstr ""
+
+msgid "Unable to fetch public key"
+msgstr ""
+
+msgid "Unknown execution status"
+msgstr ""
+
+msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr ""
+
+msgid "Unknown remote execution feature %s"
+msgstr ""
+
+msgid "Unsupported or no operating system found for this host."
+msgstr ""
+
+msgid "Update a foreign input set"
+msgstr ""
+
+msgid "Update a job template"
+msgstr ""
+
+msgid "Update a template input"
+msgstr ""
+
+msgid "Update architecture"
+msgstr ""
+
+msgid "Use default description template"
 msgstr ""
 
 msgid "User can not execute job on host %s"
@@ -342,371 +688,101 @@ msgstr ""
 msgid "User can not execute this job template on %s"
 msgstr ""
 
-msgid "Script execution failed"
-msgstr ""
-
-msgid "Initialization error: %s"
-msgstr ""
-
-msgid "Error loading data from proxy"
-msgstr "Error loading data from Capsule"
-
-msgid "No output"
-msgstr ""
-
-msgid "Exit status: %s"
-msgstr ""
-
-msgid "Job finished with error"
-msgstr ""
-
-msgid "Unable to fetch public key"
-msgstr ""
-
-msgid "host already has an execution interface"
-msgstr ""
-
-msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
-msgstr ""
-
-msgid "Execution"
-msgstr ""
-
-msgid "No execution finished yet"
-msgstr ""
-
-msgid "Last execution succeeded"
-msgstr ""
-
-msgid "Last execution failed"
-msgstr ""
-
-msgid "Unknown execution status"
-msgstr ""
-
-msgid "Recursive rendering of templates detected"
-msgstr ""
-
-msgid "error during rendering: %s"
-msgstr ""
-
-msgid "input macro with name '%s' used, but no input with such name defined for this template"
-msgstr ""
-
-msgid "included template '%s' not found"
-msgstr ""
-
-msgid "template"
-msgstr ""
-
-msgid "Cannot specify both bookmark_id and search_query"
-msgstr ""
-
-msgid "Cannot specify both recurrence and scheduling"
-msgstr ""
-
-msgid "Unknown input %{input_name} for template %{template_name}"
-msgstr ""
-
-msgid "Job Invocation"
-msgstr ""
-
-msgid "Duplicated inputs detected: %{duplicated_inputs}"
-msgstr ""
-
-msgid "This template is locked. Please clone it to a new template to customize."
-msgstr ""
-
-msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
-msgstr "Search the host for any Capsule with Remote Execution, useful when the host has no subnet or the subnet does not have an execution Capsule"
-
-msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
-msgstr "Search for remote execution Capsule outside of the Capsules assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
-
-msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
-msgstr ""
-
-msgid "Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user."
-msgstr ""
-
-msgid "What command should be used to switch to the effective user. One of %s"
-msgstr ""
-
-msgid "SSH"
-msgstr ""
-
-msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
-msgstr ""
-
-msgid "Static Query"
-msgstr ""
-
-msgid "Dynamic Query"
-msgstr ""
-
-msgid "Cannot resolve hosts without a user"
-msgstr ""
-
-msgid "Cannot resolve hosts without a bookmark or search query"
-msgstr ""
-
-msgid "Must select a bookmark or enter a search query"
-msgstr ""
-
 msgid "User input"
-msgstr ""
-
-msgid "Variable"
-msgstr ""
-
-msgid "Fact value"
-msgstr ""
-
-msgid "Puppet parameter"
 msgstr ""
 
 msgid "Value for required input '%s' was not specified"
 msgstr ""
 
-msgid "Input"
+msgid "Variable"
 msgstr ""
 
-msgid "Not all required inputs have values. Missing inputs: %s"
+msgid "Variable name, used when input type is variable"
 msgstr ""
 
-msgid "The execution interface is used for remote execution"
+msgid "What command should be used to switch to the effective user. One of %s"
 msgstr ""
 
-msgid "Remote execution"
+msgid "What user should be used to run the script (using sudo-like mechanisms)"
 msgstr ""
 
-msgid "Remote Execution"
+msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr ""
 
-msgid "Proxies"
-msgstr "Capsules"
-
-msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
-msgstr "Select as many remote execution Capsules as applicable for this subnet.  When multiple Capsules with the same provider are added, actions will be load balanced among them."
-
-msgid "Description"
+msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr ""
 
-msgid "Job template"
+msgid "Whether or not the template is locked for editing"
 msgstr ""
 
-msgid "Resolves to"
+msgid "Whether the current user login should be used as the effective user"
 msgstr ""
 
-msgid "hosts"
+msgid "Whether we should sync templates from disk when running db:seed."
 msgstr ""
 
-msgid "Preview"
-msgstr ""
-
-msgid "Hide advanced fields"
-msgstr ""
-
-msgid "Display advanced fields"
-msgstr ""
-
-msgid "Effective user"
-msgstr ""
-
-msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
-msgstr ""
-
-msgid "Type of query"
-msgstr ""
-
-msgid "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
-msgstr ""
-
-msgid "The final host list may change because the selected query is dynamic.  It will be rerun during execution."
-msgstr ""
-
-#, fuzzy
-msgid "...and %{count} more"
-msgid_plural "...and %{count} more"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "No hosts found."
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "Filter"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-msgid "Host"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
-msgstr ""
-
-msgid "here"
-msgstr ""
-
-msgid "Target hosts"
-msgstr ""
-
-msgid "Bookmark"
-msgstr ""
-
-msgid "Manual selection"
-msgstr ""
-
-msgid "Evaluated at:"
-msgstr ""
-
-msgid "Total hosts"
-msgstr ""
-
-msgid "Providers and templates"
-msgstr ""
-
-msgid "Preview for target %s"
-msgstr ""
-
-msgid "following user inputs were provided"
-msgstr ""
-
-msgid "Job invocations"
-msgstr ""
-
-msgid "Succeeded"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-msgid "Job invocation"
-msgstr ""
-
-msgid "Overview"
-msgstr ""
-
-msgid "Hosts"
-msgstr ""
-
-msgid "Recurring logic"
-msgstr ""
-
-msgid "Job"
-msgstr ""
-
-msgid "Type"
+msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr ""
 
 msgid "add a input for this template"
 msgstr ""
 
-msgid "Add Input"
-msgstr ""
-
-msgid "Add Foreign Input Set"
-msgstr ""
-
 msgid "add an input set for this template to reference a different template inputs"
 msgstr ""
 
-msgid "Snippet"
+msgid "cancelled"
 msgstr ""
 
-msgid "Edit Job Template"
+msgid "error during rendering: %s"
 msgstr ""
 
-msgid "Job Templates"
+msgid "failed"
 msgstr ""
 
-msgid "New Job Template"
+msgid "following user inputs were provided"
 msgstr ""
 
-msgid "JobTemplate|Name"
+msgid "here"
 msgstr ""
 
-msgid "JobTemplate|Snippet"
+msgid "host already has an execution interface"
 msgstr ""
 
-msgid "JobTemplate|Locked"
+msgid "hosts"
 msgstr ""
 
-msgid "This template is locked for editing."
+msgid "in %s"
 msgstr ""
 
-msgid "Foreign input set"
+msgid "included template '%s' not found"
+msgstr ""
+
+msgid "input macro with name '%s' used, but no input with such name defined for this template"
+msgstr ""
+
+msgid "pending"
+msgstr ""
+
+msgid "queued"
+msgstr ""
+
+msgid "remove template input"
 msgstr ""
 
 msgid "remove template input set"
 msgstr ""
 
-msgid "A comma separated list of input names to be excluded from the foreign template."
+msgid "running %{percent}%"
 msgstr ""
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
+msgid "succeeded"
 msgstr ""
 
-msgid "Detail of %s run"
+msgid "success"
 msgstr ""
 
-msgid "Back to Job"
+msgid "template"
 msgstr ""
 
-msgid "Toggle command"
+msgid "unknown status"
 msgstr ""
-
-msgid "Toggle STDERR"
-msgstr ""
-
-msgid "Toggle STDOUT"
-msgstr ""
-
-msgid "Toggle DEBUG"
-msgstr ""
-
-msgid "Target: "
-msgstr ""
-
-msgid "Scroll to bottom"
-msgstr ""
-
-msgid "Scroll to top"
-msgstr ""
-
-msgid "Job templates"
-msgstr ""
-
-msgid "Jobs"
-msgstr ""
-
-msgid "Create architecture"
-msgstr ""
-
-msgid "Delete architecture"
-msgstr ""
-
-msgid "Update architecture"
-msgstr ""
-
-msgid "Import facts"
-msgstr ""
-
-msgid "Import puppetclasses"
-msgstr ""
-
-msgid "Action with sub plans"
-msgstr ""
-
-msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
-msgstr "A plugin bringing remote execution to the Satellite, completing the config management functionality with remote management functionality."
