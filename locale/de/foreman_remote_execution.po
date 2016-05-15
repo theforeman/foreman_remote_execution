@@ -1,0 +1,1244 @@
+# hpeters <hpeters@redhat.com>, 2015. #zanata
+# bkearney <bkearney@redhat.com>, 2016. #zanata
+# dcbw <dcbw@redhat.com>, 2016. #zanata
+# jdimanos <jdimanos@redhat.com>, 2016. #zanata
+# lstemmle <lstemmle@redhat.com>, 2016. #zanata
+# pnemade <pnemade@redhat.com>, 2016. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: foreman_remote_execution 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-12 12:31-0400\n"
+"PO-Revision-Date: 2016-05-11 03:18+0000\n"
+"Last-Translator: lstemmle <lstemmle@redhat.com>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Zanata 3.8.4\n"
+
+#: ../app/assets/javascripts/execution_interface.js:2
+msgid ""
+"Another interface is already set as execution. Are you sure you want to use "
+"this one instead?"
+msgstr ""
+"Es ist bereits eine andere Schnittstelle für die Ausführung gesetzt. Sind "
+"Sie sicher, dass Sie stattdessen diese Schnittstelle verwenden möchten?"
+
+#: ../app/assets/javascripts/template_invocation.js:99
+msgid "There was an error while updating the status, try refreshing the page."
+msgstr ""
+"Beim Status-Update ist ein Fehler aufgetreten, versuchen Sie die Seite zu "
+"aktualisieren."
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:10
+#, fuzzy
+msgid "List foreign input sets"
+msgstr "Fremdeingabesets auflisten"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:17
+msgid "Show foreign input set details"
+msgstr " Details zu Fremdeingabesets anzeigen"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:25
+msgid "Target template ID"
+msgstr "Zielvorlage-ID"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:26
+#, fuzzy
+msgid "Include all inputs form the foreign template"
+msgstr "Alle Eingaben von Fremdvorlage einbeziehen"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:27
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:28
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:8
+msgid ""
+"A comma separated list of input names to be included from the foreign "
+"template."
+msgstr ""
+"Kommagetrennte Liste von Eingabenamen, die in die Fremdvorlage einzubeziehen"
+" ist"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:29
+msgid "Input set description"
+msgstr "Beschreibung des Eingabesets"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:33
+msgid "Create a foreign input set"
+msgstr "Fremdeingabeset erstellen"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:41
+msgid "Delete a foreign input set"
+msgstr "Fremdeingabeset löschen"
+
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:48
+msgid "Update a foreign input set"
+msgstr "Fremdeingabeset aktualisieren"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:15
+msgid "List job invocations"
+msgstr "Job-Aufrufe auflisten"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:21
+msgid "Show job invocation"
+msgstr "Job-Aufrufe anzeigen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:28
+msgid "The job template to use"
+msgstr "Zu verwendende Job-Vorlage"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:29
+msgid "Invocation type, one of %s"
+msgstr "Jobtyp, einer von %s"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:30
+msgid "Inputs to use"
+msgstr "Zu verwendende Eingaben"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:31
+#: ../app/controllers/api/v2/job_templates_controller.rb:43
+msgid "SSH provider specific options"
+msgstr "Spezifische Optionen des SSH-Anbieters"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:34
+msgid ""
+"What user should be used to run the script (using sudo-like mechanisms). "
+"Defaults to a template parameter or global setting."
+msgstr ""
+"Welcher Benutzer soll zur Ausführung des Skripts (mittels sudo-ähnlichen "
+"Mechanismen) verwendet werden. Standardmäßig wird ein Vorlagenparameter oder"
+" eine allgemeine Einstellung verwendet."
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:37
+msgid "Create a recurring job"
+msgstr "Wiederkehrenden Job erstellen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:38
+msgid "How often the job should occur, in the cron format"
+msgstr "Wie oft der Job auftreten soll, in Cron-Format"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:39
+msgid "Repeat a maximum of N times"
+msgstr "Maximal n-mal wiederholen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:40
+msgid "Perform no more executions after this time"
+msgstr "Danach nicht mehr ausführen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:43
+msgid "Schedule the job to start at a later time"
+msgstr "Job zu einer späteren Zeit starten lassen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:44
+msgid "Schedule the job for a future time"
+msgstr "Job zu einem zukünftigen Zeitpunkt starten lassen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:45
+msgid ""
+"Indicates that the action should be cancelled if it cannot be started before"
+" this time."
+msgstr ""
+"Gibt an, dass die Aktion abgebrochen werden soll, wenn sie nicht vor diesem "
+"Zeitpunkt gestartet werden kann."
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:48
+msgid "Control concurrency level and distribution over time"
+msgstr "Parallelitätsebene und zeitliche Verteilung steuern"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:49
+msgid "Distribute tasks over N seconds"
+msgstr "Aufgaben über n Sekunden verteilen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:50
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Run at most N tasks at a time"
+msgstr "Höchstens n Aufgaben gleichzeitig ausführen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:55
+msgid ""
+"Override the description format from the template for this invocation only"
+msgstr ""
+"Beschreibungsformat der Vorlage nur für diesen Aufruf außer Kraft setzen "
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:59
+msgid "Create a job invocation"
+msgstr "Neuen Job-Aufruf erstellen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:68
+msgid "Get output for a host"
+msgstr "Ausgabe für einen Host beziehen"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:101
+msgid "Host with id '%{id}' was not found"
+msgstr "Host mit ID '%{id}' nicht gefunden"
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:107
+msgid "Template with id '%{id}' was not found"
+msgstr "Vorlage mit ID '%{id}' nicht gefunden"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:16
+msgid "List job templates"
+msgstr "Job-Vorlagen auflisten"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:17
+msgid "List job templates per location"
+msgstr "Job-Vorlagen pro Standort auflisten"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:18
+msgid "List job templates per organization"
+msgstr "Job-Vorlagen pro Organisation auflisten"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:25
+msgid "Show job template details"
+msgstr "Details der Job-Vorlage anzeigen"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:32
+#: ../app/controllers/api/v2/job_templates_controller.rb:83
+msgid "Template name"
+msgstr "Vorlagenname"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:33
+#: ../app/views/job_invocations/_form.html.erb:9
+#: ../app/views/job_templates/_custom_tabs.html.erb:3
+#: ../app/views/job_templates/_custom_tabs.html.erb:6
+msgid "Job category"
+msgstr "Job-Kategorie"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:34
+#: ../app/views/job_templates/_custom_tabs.html.erb:14
+msgid ""
+"This template is used to generate the description. Input values can be used "
+"using the syntax %{package}. You may also include the job category and "
+"template name using %{job_category} and %{template_name}."
+msgstr ""
+"Diese Vorlage wird für die Erstellung der Beschreibung verwendet. "
+"Eingabewerte können unter Verwendung der Syntax %{package} verwendet werden."
+" Sie können auch Job-Kategorie und Vorlagennamen über %{job_category} und "
+"%{template_name} einschließen."
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:39
+msgid "Provider type"
+msgstr "Providertyp"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:42
+msgid "Whether or not the template is locked for editing"
+msgstr "Ob die Vorlage schreibgeschützt ist"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:44
+msgid "Effective user options"
+msgstr "Effektive Benutzeroptionen"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:45
+msgid ""
+"What user should be used to run the script (using sudo-like mechanisms)"
+msgstr ""
+"Welcher Benutzer zur Ausführung des Skripts verwendet werden soll (mittels "
+"sudo-ähnlichen Mechanismen)"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:46
+msgid ""
+"Whether it should be allowed to override the effective user from the "
+"invocation form."
+msgstr ""
+"Ob es möglich sein soll, den effektiven Benutzer aus dem Aufruf-Formular "
+"außer Kraft zu setzen."
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:47
+msgid "Whether the current user login should be used as the effective user"
+msgstr "Ob das aktuelle Login als effektiver Benutzer verwendet werden soll "
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:54
+msgid "Create a job template"
+msgstr "Job-Vorlage erstellen"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
+msgid "Update a job template"
+msgstr "Job-Vorlage aktualisieren"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:69
+msgid "Template version"
+msgstr "Vorlagenversion"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:75
+msgid "Delete a job template"
+msgstr "Job-Vorlage löschen"
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:87
+msgid "Clone a provision template"
+msgstr "Bereitstellungsvorlage klonen"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:8
+msgid "List remote execution features"
+msgstr "Entfernte Ausführungsfunktionen auflisten"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:13
+msgid "Show remote execution feature"
+msgstr "Entfernte Ausführungsfunktionen anzeigen"
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:20
+msgid "Job template ID to be used for the feature"
+msgstr "Zukünftig zu verwendende ID der Job-Vorlage"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:11
+msgid "List template inputs"
+msgstr "Vorlageneingabe auflisten"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:18
+msgid "Show template input details"
+msgstr "Details der Vorlageneingabe anzeigen"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:26
+msgid "Input name"
+msgstr "Eingabename"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:27
+msgid "Input description"
+msgstr "Eingabebeschreibung"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:28
+msgid "Input is required"
+msgstr "Eingabe ist erforderlich"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:29
+msgid "Input is advanced"
+msgstr "Eingabe ist erweitert"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:30
+msgid "Input type"
+msgstr "Eingabetyp"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:31
+msgid "Fact name, used when input type is fact"
+msgstr "Faktenname wird benutzt, wenn Eingabetyp Fakt ist"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:32
+msgid "Variable name, used when input type is variable"
+msgstr "Variablenname wird benutzt, wenn Eingabetyp Variable ist"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:33
+#, fuzzy
+msgid "Puppet class name, used when input type is puppet_parameter"
+msgstr ""
+"Puppet-Klassen-Name wird benutzt, wenn Eingabetyp Puppet-Parameter ist"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:34
+msgid "Puppet parameter name, used when input type is puppet_parameter"
+msgstr ""
+"Puppet-Parameter-Name wird benutzt, wenn Eingabetyp Puppet-Parameter ist"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:35
+msgid "Selectable values for user inputs"
+msgstr "Auswählbare Werte für Benutzereingaben"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:39
+msgid "Create a template input"
+msgstr "Vorlageneingabe erstellen"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:47
+msgid "Delete a template input"
+msgstr "Vorlageneingabe löschen"
+
+#: ../app/controllers/api/v2/template_inputs_controller.rb:54
+msgid "Update a template input"
+msgstr "Vorlageneingabe aktualisieren"
+
+#: ../app/controllers/job_templates_controller.rb:23
+msgid ""
+"Problem with previewing the template: %{error}. Note that you must save "
+"template input changes before you try to preview it."
+msgstr ""
+"Problem bei Vorlagen-Vorschau: %{error}. Beachten Sie, dass Sie die "
+"Änderungen an der Vorlageneingabe speichern müssen, bevor eine Vorschau "
+"angezeigt werden kann."
+
+#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:11
+#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:15
+#: ../app/helpers/remote_execution_helper.rb:97
+msgid "Run Job"
+msgstr "Job ausführen"
+
+#: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:13
+msgid "Run"
+msgstr "Ausführen"
+
+#: ../app/helpers/remote_execution_helper.rb:23
+msgid "Success"
+msgstr "Erfolg"
+
+#: ../app/helpers/remote_execution_helper.rb:24
+#: ../app/views/job_invocations/index.html.erb:11
+msgid "Failed"
+msgstr "Fehlgeschlagen"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version
+# 6.1, document hammer-cli-foreman
+#: ../app/helpers/remote_execution_helper.rb:25
+#: ../app/views/job_invocations/index.html.erb:12
+msgid "Pending"
+msgstr "Ausstehend"
+
+#: ../app/helpers/remote_execution_helper.rb:26
+msgid "Cancelled"
+msgstr "Abgebrochen"
+
+#: ../app/helpers/remote_execution_helper.rb:36
+msgid "queued"
+msgstr "in der Warteschlange"
+
+#: ../app/helpers/remote_execution_helper.rb:38
+msgid "running %{percent}%"
+msgstr "wird ausgeführt %{percent}%"
+
+#: ../app/helpers/remote_execution_helper.rb:40
+msgid "succeeded"
+msgstr "erfolgreich"
+
+#: ../app/helpers/remote_execution_helper.rb:42
+#: ../app/helpers/remote_execution_helper.rb:71
+msgid "failed"
+msgstr "fehlgeschlagen"
+
+#: ../app/helpers/remote_execution_helper.rb:44
+msgid "unknown status"
+msgstr "unbekannter Status"
+
+#: ../app/helpers/remote_execution_helper.rb:69
+msgid "cancelled"
+msgstr "abgebrochen"
+
+#: ../app/helpers/remote_execution_helper.rb:74
+msgid "success"
+msgstr "erfolgreich"
+
+#: ../app/helpers/remote_execution_helper.rb:76
+msgid "pending"
+msgstr "ausstehend"
+
+#: ../app/helpers/remote_execution_helper.rb:85
+msgid "Host detail"
+msgstr "Hostdetail"
+
+#: ../app/helpers/remote_execution_helper.rb:86
+msgid "Rerun on %s"
+msgstr "Erneut ausführen auf %s"
+
+#: ../app/helpers/remote_execution_helper.rb:91
+#: ../app/helpers/remote_execution_helper.rb:198
+#: ../app/models/job_invocation.rb:125
+msgid "N/A"
+msgstr "k.A."
+
+#: ../app/helpers/remote_execution_helper.rb:105
+msgid "Refresh this page"
+msgstr "Seite aktualisieren"
+
+#: ../app/helpers/remote_execution_helper.rb:105
+#: ../app/views/job_invocations/_form.html.erb:40
+msgid "Refresh"
+msgstr "Aktualisieren"
+
+#: ../app/helpers/remote_execution_helper.rb:107
+msgid "Rerun"
+msgstr "Erneut ausführen"
+
+#: ../app/helpers/remote_execution_helper.rb:109
+msgid "Rerun the job"
+msgstr "Job erneut ausführen"
+
+#: ../app/helpers/remote_execution_helper.rb:112
+msgid "Rerun failed"
+msgstr "Erneutes Ausführen fehlgeschlagen"
+
+#: ../app/helpers/remote_execution_helper.rb:115
+msgid "Rerun on failed hosts"
+msgstr "Erneut ausführen auf fehlgeschlagenen Hosts"
+
+#: ../app/helpers/remote_execution_helper.rb:118
+msgid "Job Task"
+msgstr "Aufgaben des Jobs"
+
+#: ../app/helpers/remote_execution_helper.rb:120
+msgid "See the last task details"
+msgstr "Ansicht der letzten Aufgabendetails"
+
+#: ../app/helpers/remote_execution_helper.rb:123
+#: ../app/helpers/remote_execution_helper.rb:141
+msgid "Cancel Job"
+msgstr "Job abbrechen"
+
+#: ../app/helpers/remote_execution_helper.rb:125
+msgid "Try to cancel the job"
+msgstr "Versuche den Job abzubrechen"
+
+#: ../app/helpers/remote_execution_helper.rb:136
+msgid "Task Details"
+msgstr "Aufgabendetails"
+
+#: ../app/helpers/remote_execution_helper.rb:138
+msgid "See the task details"
+msgstr "Ansicht der Aufgabendetails"
+
+#: ../app/helpers/remote_execution_helper.rb:143
+msgid "Try to cancel the job on a host"
+msgstr "Versuche den Job auf einem Host abzubrechen"
+
+#: ../app/helpers/remote_execution_helper.rb:200
+msgid "%s ago"
+msgstr "vor %s"
+
+#: ../app/helpers/remote_execution_helper.rb:200
+msgid "in %s"
+msgstr "in %s"
+
+#: ../app/helpers/remote_execution_helper.rb:210
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#: ../app/helpers/remote_execution_helper.rb:217
+msgid "Template input"
+msgstr "Vorlageneingabe"
+
+#: ../app/helpers/remote_execution_helper.rb:218
+msgid "remove template input"
+msgstr "Vorlageneingabe entfernen"
+
+#: ../app/helpers/remote_execution_helper.rb:230
+msgid "Use default description template"
+msgstr "Standardbeschreibungsvorlage verwenden"
+
+#: ../app/helpers/remote_execution_helper.rb:235
+msgid "Description template"
+msgstr "Beschreibungsvorlage"
+
+#: ../app/helpers/remote_execution_helper.rb:241
+#: ../app/views/job_invocations/_form.html.erb:101
+#: ../app/views/job_templates/_custom_tabs.html.erb:14
+msgid "Explanation"
+msgstr "Erklärung"
+
+#: ../app/helpers/remote_execution_helper.rb:242
+msgid ""
+"This template is used to generate the description Input values can be used "
+"using the syntax %{package}. You may also include the job category and "
+"template name using %{job_category} and %{template_name}."
+msgstr ""
+"Diese Vorlage wird für die Erstellung der Beschreibung verwendet. "
+"Eingabewerte können unter Verwendung der Syntax %{package} verwendet werden."
+" Sie können auch Job-Kategorie und Vorlagennamen über %{job_category} und "
+"%{template_name} einschließen."
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:25
+msgid "Could not use any template used in the job invocation"
+msgstr "Es konnte keine Vorlage aus dem Jobaufruf verwendet werden"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:30
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] "Der einzige anwendbare Proxy %{proxy_names} ist ausgefallen"
+msgstr[1] ""
+"Alle %{count} anwendbaren Proxys sind ausgefallen. %{proxy_names} "
+"ausprobiert"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:37
+msgid ""
+"Could not use any proxy. Consider configuring %{global_proxy} or "
+"%{fallback_proxy} in settings"
+msgstr ""
+"Es konnte kein Proxy verwendet werden. Erwägen Sie %{global_proxy} oder "
+"%{fallback_proxy} in den Einstellungen zu konfigurieren"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:43
+msgid "Failed rendering template: %s"
+msgstr "Rendern der Vorlage fehlgeschlagen: %s"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:66
+msgid "Failed to initialize command"
+msgstr "Initialisieren des Befehls fehlgeschlagen"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:71
+msgid "%{description} on %{host}"
+msgstr "%{description} auf %{host}"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:2
+msgid "Remote action:"
+msgstr "Entfernte Aktion"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:96
+msgid "User can not execute job on host %s"
+msgstr "Benutzer kann den Job auf Host %s nicht ausführen"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:97
+msgid "User can not execute this job template"
+msgstr "Benutzer kann diese Job-Vorlage nicht ausführen"
+
+#: ../app/lib/actions/remote_execution/run_host_job.rb:102
+msgid "User can not execute this job template on %s"
+msgstr "Benutzer kann diese Job-Vorlage auf %s nicht ausführen"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:24
+msgid "Script execution failed"
+msgstr "Ausführung des Skripts fehlgeschlagen"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:56
+msgid "Initialization error: %s"
+msgstr "Initialisierungsfehler: %s"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:66
+msgid "Error loading data from proxy"
+msgstr "Fehler beim Laden der Daten vom Proxy."
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:75
+msgid "No output"
+msgstr "Keine Ausgabe"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:79
+msgid "Exit status: %s"
+msgstr "Exit-Status: %s"
+
+#: ../app/lib/actions/remote_execution/run_proxy_command.rb:81
+msgid "Job finished with error"
+msgstr "Job abgeschlossen mit Fehler"
+
+#: ../app/lib/proxy_api/remote_execution_ssh.rb:11
+msgid "Unable to fetch public key"
+msgstr "Öffentlicher Schlüssel konnte nicht abgerufen werden"
+
+#: ../app/models/concerns/foreman_remote_execution/nic_extensions.rb:21
+msgid "host already has an execution interface"
+msgstr "Host verfügt bereits über eine Ausführungsschnittstelle"
+
+#: ../app/models/foreign_input_set.rb:18
+msgid ""
+"Circular dependency detected in foreign input set '%{template}' -> "
+"'%{target_template}'. Templates stack: %{templates_stack}"
+msgstr ""
+"Zirkuläre Abhängigkeit im Fremdeingabe gefunden '%{template}' -> "
+"'%{target_template}'. Vorlagen-Stack: %{templates_stack}"
+
+#: ../app/models/host_status/execution_status.rb:30
+msgid "Execution"
+msgstr "Ausführung"
+
+#: ../app/models/host_status/execution_status.rb:36
+msgid "Last execution succeeded"
+msgstr "Letzte Ausführung erfolgreich"
+
+#: ../app/models/host_status/execution_status.rb:36
+msgid "No execution finished yet"
+msgstr "Noch keine Ausführung abgeschlossen"
+
+#: ../app/models/host_status/execution_status.rb:38
+msgid "Last execution failed"
+msgstr "Letzte Ausführung fehlgeschlagen"
+
+#: ../app/models/host_status/execution_status.rb:40
+msgid "Unknown execution status"
+msgstr "Unbekannter Ausführungsstatus"
+
+#: ../app/models/input_template_renderer.rb:16
+msgid "Recursive rendering of templates detected"
+msgstr "Rekursives Rendern von Vorlagen festgestellt"
+
+#: ../app/models/input_template_renderer.rb:30
+msgid "error during rendering: %s"
+msgstr "Fehler beim Rendern: %s"
+
+#: ../app/models/input_template_renderer.rb:49
+msgid ""
+"input macro with name '%s' used, but no input with such name defined for "
+"this template"
+msgstr ""
+"Es wurde ein Eingabe-Macro namens '%s' verwendet, aber es wurde keine "
+"Eingabe mit diesem Namen für diese Vorlage definiert"
+
+#: ../app/models/input_template_renderer.rb:63
+msgid "included template '%s' not found"
+msgstr "enthaltene Vorlage '%s' nicht gefunden"
+
+# translation auto-copied from project Cloudforms Cloud Engine User Guide,
+# version 1.0, document topics/References/Cloud/CF_TDL_template, author
+# hpeters
+#: ../app/models/job_invocation.rb:7
+msgid "template"
+msgstr "Vorlage"
+
+#: ../app/models/job_invocation_composer.rb:79
+msgid "Cannot specify both bookmark_id and search_query"
+msgstr "Lesezeichen_ID und Such_anfrage konnte nicht angegeben werden"
+
+#: ../app/models/job_invocation_composer.rb:84
+msgid "Cannot specify both recurrence and scheduling"
+msgstr "Wiederholung und Planung konnten nicht angegeben werden"
+
+#: ../app/models/job_invocation_composer.rb:118
+msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr "Unbekannte Eingabe %{input_name} für Vorlage %{template_name}"
+
+#: ../app/models/job_invocation_composer.rb:226
+#, fuzzy
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr ""
+"Funktionseingabe %{input_name} nicht definiert in Vorlage %{template_name}"
+
+#: ../app/models/job_invocation_composer.rb:235
+msgid "No template mapped to feature %{feature_name}"
+msgstr "Der Funktion %{feature_name} wurde keine Vorlage zugewiesen"
+
+#: ../app/models/job_invocation_composer.rb:241
+msgid ""
+"The template %{template_name} mapped to feature %{feature_name} is not "
+"accessible by the user"
+msgstr ""
+"Der Benutzer kann auf die Vorlage %{template_name}, die der Funktion "
+"%{feature_name} zugewiesen ist, nicht zugreifen"
+
+#: ../app/models/job_invocation_task_group.rb:8
+msgid "Job Invocation"
+msgstr "Job-Aufruf"
+
+#: ../app/models/job_template.rb:136
+msgid "Duplicated inputs detected: %{duplicated_inputs}"
+msgstr "Doppelte Eingaben gefunden: %{duplicated_inputs}"
+
+#: ../app/models/job_template.rb:203
+msgid ""
+"This template is locked. Please clone it to a new template to customize."
+msgstr ""
+"Diese Vorlage ist gesperrt. Bitte klonen Sie sie zum Bearbeiten in eine neue"
+" Vorlage."
+
+#: ../app/models/remote_execution_feature.rb:20
+msgid "Unknown remote execution feature %s"
+msgstr "Unbekannte Funktion %s zur entfernten Ausführung"
+
+#: ../app/models/setting/remote_execution.rb:10
+msgid ""
+"Search the host for any proxy with Remote Execution, useful when the host "
+"has no subnet or the subnet does not have an execution proxy"
+msgstr ""
+"Den Host nach einem Proxy mit Entfernter Ausführung durchsuchen. Dies ist "
+"nützlich, wenn der Host kein Subnetz hat oder das Subnetz keinen Proxy für "
+"die Ausführung hat."
+
+#: ../app/models/setting/remote_execution.rb:13
+msgid ""
+"Search for remote execution proxy outside of the proxies assigned to the "
+"host. If locations or organizations are enabled, the search will be limited "
+"to the host's organization or location."
+msgstr ""
+"Außerhalb der dem Host zugewiesenen Proxys nach Proxy mit entfernter "
+"Ausführung suchen. Wenn Standorte oder Organisationen aktiviert sind, wird "
+"die Suche auf Organisation oder Standort des Hosts begrenzt."
+
+#: ../app/models/setting/remote_execution.rb:18
+#, fuzzy
+msgid ""
+"Default user to use for SSH.  You may override per host by setting a "
+"parameter called remote_execution_ssh_user."
+msgstr ""
+"Standardbenutzer, der für SSH verwendet werden soll. Kann für jeden Host "
+"außer Kraft gesetzt werden, indem Sie ein Parameter namens "
+"remote_execution_ssh_user bestimmen."
+
+#: ../app/models/setting/remote_execution.rb:21
+msgid ""
+"Default user to use for executing the script. If the user differs from the "
+"SSH user, su or sudo is used to switch the user."
+msgstr ""
+"Standardbenutzer, der für die Ausführung des Skripts verwendet werden soll. "
+"Wenn dieser sich vom SSH-Benutzer unterscheidet, kann mittels su oder sudo "
+"der Benutzer gewechselt werden."
+
+#: ../app/models/setting/remote_execution.rb:24
+msgid "What command should be used to switch to the effective user. One of %s"
+msgstr ""
+"Welcher Befehl für den Wechsel zum effektiven Benutzer verwendet werden "
+"soll. Einer von %s"
+
+#: ../app/models/setting/remote_execution.rb:27
+msgid "Whether we should sync templates from disk when running db:seed."
+msgstr ""
+"Ob Vorlagen von der Festplatte synchronisiert werden sollten, wenn db:seed "
+"ausgeführt wird."
+
+#: ../app/models/ssh_execution_provider.rb:13
+msgid "SSH"
+msgstr "SSH"
+
+#: ../app/models/ssh_execution_provider.rb:33
+msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
+msgstr ""
+"Methode \"%{current_value}\" für effektiver Benutzer ist keine von "
+"%{valid_methods}"
+
+#: ../app/models/targeting.rb:5
+msgid "Dynamic Query"
+msgstr "Dynamische Anfrage"
+
+#: ../app/models/targeting.rb:5
+msgid "Static Query"
+msgstr "Statische Anfrage"
+
+#: ../app/models/targeting.rb:37
+msgid "Cannot resolve hosts without a user"
+msgstr "Hosts können nicht ohne Benutzer aufgelöst werden"
+
+#: ../app/models/targeting.rb:38
+msgid "Cannot resolve hosts without a bookmark or search query"
+msgstr "Hosts können nicht ohne Lesezeichen oder Suchanfrage aufgelöst werden"
+
+#: ../app/models/targeting.rb:67 ../app/models/targeting.rb:68
+msgid "Must select a bookmark or enter a search query"
+msgstr "Es muss ein Lesezeichen oder eine Suchanfrage ausgewählt werden"
+
+#: ../app/models/template_input.rb:7
+msgid "User input"
+msgstr "Benutzereingabe"
+
+#: ../app/models/template_input.rb:7
+msgid "Variable"
+msgstr "Variable"
+
+#: ../app/models/template_input.rb:7
+msgid "Fact value"
+msgstr "Faktenwert"
+
+#: ../app/models/template_input.rb:8
+msgid "Puppet parameter"
+msgstr "Puppet-Parameter"
+
+#: ../app/models/template_input.rb:109
+msgid "Value for required input '%s' was not specified"
+msgstr "Wert für erforderliche Eingabe '%s' wurde nicht angegeben"
+
+#: ../app/models/template_invocation.rb:7
+msgid "Input"
+msgstr "Eingabe"
+
+#: ../app/models/template_invocation.rb:48
+msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr "Nicht alle erforderlichen Eingaben haben Werte. Fehlende Eingaben: %s"
+
+#: ../app/views/job_invocations/_description_fields.html.erb:1
+#: ../app/views/job_invocations/index.html.erb:8
+#: ../app/views/remote_execution_features/index.html.erb:8
+msgid "Description"
+msgstr "Beschreibung"
+
+#: ../app/views/job_invocations/_form.html.erb:20
+msgid "Job template"
+msgstr "Job-Vorlage "
+
+#: ../app/views/job_invocations/_form.html.erb:36
+#, fuzzy
+msgid "Resolves to"
+msgstr "Löst auf"
+
+#: ../app/views/job_invocations/_form.html.erb:39
+msgid "hosts"
+msgstr "Hosts"
+
+#: ../app/views/job_invocations/_form.html.erb:43
+msgid "Preview"
+msgstr "Vorschau"
+
+#: ../app/views/job_invocations/_form.html.erb:64
+msgid "Hide advanced fields"
+msgstr "Erweiterte Felder ausblenden"
+
+#: ../app/views/job_invocations/_form.html.erb:64
+msgid "Display advanced fields"
+msgstr "Erweiterte Felder einblenden"
+
+#: ../app/views/job_invocations/_form.html.erb:75
+msgid ""
+"A user to be used for executing the script. If it differs from the SSH user,"
+" su or sudo is used to switch the accounts."
+msgstr ""
+"Ein Benutzer, der für die Ausführung des Skripts verwendet werden soll. Wenn"
+" dieser sich vom SSH-Benutzer unterscheidet, kann mittels su oder sudo der "
+"Account gewechselt werden."
+
+#: ../app/views/job_invocations/_form.html.erb:75
+#: ../app/views/job_invocations/_tab_overview.html.erb:44
+#: ../app/views/job_templates/_custom_tabs.html.erb:39
+msgid "Effective user"
+msgstr "Effektiver Benutzer"
+
+#: ../app/views/job_invocations/_form.html.erb:89
+msgid "Concurrency level"
+msgstr "Parallelitätsebene"
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Distribute execution over N seconds"
+msgstr "Ausführung über n Sekunden verteilen"
+
+#: ../app/views/job_invocations/_form.html.erb:90
+msgid "Time span"
+msgstr "Zeitspanne"
+
+#: ../app/views/job_invocations/_form.html.erb:94
+msgid "Type of query"
+msgstr "Anfragetyp"
+
+#: ../app/views/job_invocations/_form.html.erb:102
+#, fuzzy
+msgid ""
+"Type has impact on when is the query evaulated to "
+"hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this "
+"form</li><li><b>Dynamic</b> - evaluates just before the execution is "
+"started, so if it's planed in future, targeted hosts set may change before "
+"it</li></ul>"
+msgstr ""
+"Der Anfragetyp beeinflusst, wann die Anfrage evaluiert "
+"wird.<br><ul><li><b>Statisch</b> - evaluiert direkt nach Einreichen dieses "
+"Formulars</li><li><b>Dynamisch</b> - evaluiert direkt vor Beginn der "
+"Ausführung, wenn es also in der Zukunft geplant ist, können sie "
+"Einstellungen der Zielhosts zuvor geändert werden</li></ul>"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
+#, fuzzy
+msgid ""
+"The final host list may change because the selected query is dynamic.  It "
+"will be rerun during execution."
+msgstr ""
+"Die endgültige Hostliste kann sich ändern, da die ausgewählte Anfrage "
+"dynamisch ist. Sie wird während der Ausführung wiederholt."
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:14
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] "...und %{count} mehr"
+msgstr[1] "...und %{count} mehr"
+
+#: ../app/views/job_invocations/_preview_hosts_list.html.erb:18
+msgid "No hosts found."
+msgstr "Keine Hosts gefunden"
+
+#: ../app/views/job_invocations/_preview_hosts_modal.html.erb:6
+msgid "Close"
+msgstr "Schließen"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:6
+msgid "Filter"
+msgstr "Filter"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:9
+msgid "Search"
+msgstr "Suchen"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:21
+msgid "Host"
+msgstr "Rechner"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:22
+#: ../app/views/job_invocations/index.html.erb:9
+msgid "Status"
+msgstr "Status"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:23
+#: ../app/views/job_templates/index.html.erb:16
+msgid "Actions"
+msgstr "Aktionen"
+
+#: ../app/views/job_invocations/_tab_hosts.html.erb:45
+msgid ""
+"The dynamic query '%{query}' was not resolved yet. The list of hosts to "
+"which it would resolve now can be seen %{here}."
+msgstr ""
+"Die dynamische Anfrage '%{query}' wurde noch nicht aufgelöst. Die Liste von "
+"Hosts, zu denen sie sich auflösen würde, ist jetzt %{here} zu sehen."
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1,
+# document foreman
+#: ../app/views/job_invocations/_tab_hosts.html.erb:47
+msgid "here"
+msgstr "hier"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:6
+msgid "Target hosts"
+msgstr "Zielhosts"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:8
+msgid "Bookmark"
+msgstr "Lesezeichen"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:10
+msgid "Manual selection"
+msgstr "Manuelle Auswahl"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:15
+msgid "Evaluated at:"
+msgstr "Evaluiert an:"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:21
+#: ../app/views/job_invocations/index.html.erb:13
+msgid "Total hosts"
+msgstr "Hosts gesamt"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:25
+msgid "Providers and templates"
+msgstr "Anbieter und Vorlagen"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:31
+msgid "Preview for target %s"
+msgstr "Vorschau für Ziel %s"
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:36
+msgid "following user inputs were provided"
+msgstr "folgende Benutzereingaben wurden bereitgestellt"
+
+#: ../app/views/job_invocations/index.html.erb:1
+msgid "Job invocations"
+msgstr "Job-Aufrufe "
+
+# translation auto-copied from project RHN Satellite UI, version 5.5, document
+# java/code/src/com/redhat/rhn/frontend/strings/jsp/StringResource
+#: ../app/views/job_invocations/index.html.erb:10
+msgid "Succeeded"
+msgstr "Erfolgreich"
+
+#: ../app/views/job_invocations/index.html.erb:14
+msgid "Start"
+msgstr "Start"
+
+#: ../app/views/job_invocations/new.html.erb:3
+msgid "Job invocation"
+msgstr "Job-Aufrufe "
+
+#: ../app/views/job_invocations/show.html.erb:10
+msgid "Overview"
+msgstr "Überblick"
+
+#: ../app/views/job_invocations/show.html.erb:11
+msgid "Hosts"
+msgstr "Hosts"
+
+#: ../app/views/job_invocations/show.html.erb:12
+msgid "Recurring logic"
+msgstr "Wiederkehrende Logik"
+
+#: ../app/views/job_templates/_custom_tab_headers.html.erb:1
+msgid "Job"
+msgstr "Job"
+
+#: ../app/views/job_templates/_custom_tab_headers.html.erb:2
+msgid "Type"
+msgstr "Typ"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:28
+msgid "Add Input"
+msgstr "Eingabe hinzufügen"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:28
+msgid "add a input for this template"
+msgstr "Eingabe für diese Vorlage hinzufügen"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:35
+#, fuzzy
+msgid "Add Foreign Input Set"
+msgstr "Fremdeingabeset hinzufügen"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:35
+#, fuzzy
+msgid ""
+"add an input set for this template to reference a different template inputs"
+msgstr ""
+"Eingabeset für diese Vorlage hinzufügen, um auf andere Vorlage-Eingaben zu "
+"verweisen"
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:53
+msgid "Snippet"
+msgstr "Snippet"
+
+#: ../app/views/job_templates/edit.html.erb:4
+msgid "Edit Job Template"
+msgstr "Job-Vorlage bearbeiten"
+
+#: ../app/views/job_templates/index.html.erb:5
+msgid "Job Templates"
+msgstr "Job-Vorlagen"
+
+#: ../app/views/job_templates/index.html.erb:7
+#: ../app/views/job_templates/new.html.erb:4
+msgid "New Job Template"
+msgstr "Neue Job-Vorlage"
+
+#: ../app/views/job_templates/index.html.erb:13
+msgid "JobTemplate|Name"
+msgstr "JobVorlage|Name"
+
+#: ../app/views/job_templates/index.html.erb:14
+msgid "JobTemplate|Snippet"
+msgstr "JobVorlage|Snippet"
+
+#: ../app/views/job_templates/index.html.erb:15
+msgid "JobTemplate|Locked"
+msgstr "JobVorlage|Gesperrt"
+
+#: ../app/views/job_templates/index.html.erb:26
+msgid "This template is locked for editing."
+msgstr "Diese Vorlage ist schreibgeschützt."
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:5
+msgid "The execution interface is used for remote execution"
+msgstr "Die Ausführungsschnittstelle wird für entfernte Ausführung verwendet"
+
+#: ../app/views/overrides/nics/_execution_interface.html.erb:8
+msgid "Remote execution"
+msgstr "Entfernte Ausführung"
+
+#: ../app/views/overrides/subnets/_rex_tab.html.erb:1
+msgid "Remote Execution"
+msgstr "Entfernte Ausführung"
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid "Proxies"
+msgstr "Proxys"
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+#, fuzzy
+msgid ""
+"Select as many remote execution proxies as applicable for this subnet.  When"
+" multiple proxies with the same provider are added, actions will be load "
+"balanced among them."
+msgstr ""
+"Wählen Sie so viele Proxys für entfernte Ausführung aus, wie es für dieses "
+"Subnetz zutreffend ist. Wenn mehrere Proxys mit demselben Provider "
+"hinzugefügt werden, dann wird die Auslastung unter diesen ausgeglichen."
+
+#: ../app/views/remote_execution_features/_form.html.erb:18
+msgid ""
+"You are not allowed to see the currently assigned template. Saving the form "
+"now would unassign the template."
+msgstr ""
+"Sie haben nicht die Genehmigung, die aktuell zugewiesenen Vorlagen "
+"einzusehen. Wenn Sie das Formular jetzt speichern, wird die Zuweisung der "
+"Vorlage aufgehoben."
+
+#: ../app/views/remote_execution_features/index.html.erb:1
+#: ../lib/foreman_remote_execution/engine.rb:93
+msgid "Remote Execution Features"
+msgstr "Entfernte Ausführungsfunktionen "
+
+#: ../app/views/remote_execution_features/index.html.erb:6
+msgid "Label"
+msgstr "Kennung"
+
+#: ../app/views/remote_execution_features/index.html.erb:7
+msgid "Name"
+msgstr "Name"
+
+#: ../app/views/remote_execution_features/show.html.erb:1
+msgid "Edit Remote Execution Feature"
+msgstr "Entfernte Ausführungsfunktionen bearbeiten"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:3
+msgid "Foreign input set"
+msgstr "Fremdeingabesatz "
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:5
+msgid "remove template input set"
+msgstr "Vorlageneingabeset entfernen"
+
+#: ../app/views/template_inputs/_foreign_input_set_form.html.erb:9
+msgid ""
+"A comma separated list of input names to be excluded from the foreign "
+"template."
+msgstr ""
+"Kommagetrennte Liste von Eingabenamen, die aus der Fremdvorlage "
+"auszuschließen ist"
+
+#: ../app/views/template_inputs/_form.html.erb:19
+msgid ""
+"A list of options the user can select from. If not provided, the user will "
+"be given a free-form field"
+msgstr ""
+"Eine Liste von Optionen, aus der der Benutzer auswählen kann. Wenn keine "
+"Liste bereitgestellt ist, wird dem Benutzer ein Freitext-Feld zur Verfügung "
+"gestellt"
+
+#: ../app/views/template_invocations/show.html.erb:1
+msgid "Detail of %s run"
+msgstr "Detail der %s Ausführung"
+
+#: ../app/views/template_invocations/show.html.erb:7
+msgid "Back to Job"
+msgstr "Zurück zum Job"
+
+#: ../app/views/template_invocations/show.html.erb:8
+msgid "Toggle command"
+msgstr "Umschalt-Befehl"
+
+#: ../app/views/template_invocations/show.html.erb:9
+msgid "Toggle STDERR"
+msgstr "Umschalt STDERR"
+
+#: ../app/views/template_invocations/show.html.erb:10
+msgid "Toggle STDOUT"
+msgstr "Umschalt STDOUT"
+
+#: ../app/views/template_invocations/show.html.erb:11
+msgid "Toggle DEBUG"
+msgstr "Umschalt DEBUG"
+
+#: ../app/views/template_invocations/show.html.erb:16
+msgid "Target: "
+msgstr "Ziel:"
+
+#: ../app/views/template_invocations/show.html.erb:26
+msgid "Scroll to bottom"
+msgstr "Zum Ende scrollen"
+
+#: ../app/views/template_invocations/show.html.erb:32
+msgid "Scroll to top"
+msgstr "Zum Anfang scrollen"
+
+#: ../app/views/templates/package_action.erb:5
+msgid "Unsupported or no operating system found for this host."
+msgstr "Betriebssystem für diesen Host nicht unterstützt oder nicht gefunden."
+
+#: ../lib/foreman_remote_execution/engine.rb:88
+msgid "Job templates"
+msgstr "Job-Vorlagen"
+
+#: ../lib/foreman_remote_execution/engine.rb:99
+msgid "Jobs"
+msgstr "Jobs"
+
+#: action_names.rb:3
+msgid "Import Puppet classes"
+msgstr "Puppet-Klassen importieren"
+
+#: action_names.rb:4
+msgid "Import facts"
+msgstr "Fakten importieren"
+
+#: action_names.rb:5
+msgid "Update architecture"
+msgstr "Architektur aktualisieren"
+
+#: action_names.rb:6
+msgid "Delete architecture"
+msgstr "Architektur löschen"
+
+#: action_names.rb:7
+msgid "Create architecture"
+msgstr "Architektur erstellen"
+
+#: action_names.rb:8
+msgid "Action with sub plans"
+msgstr "Aktion mit Unterplänen"
+
+#: gemspec.rb:2
+#, fuzzy
+msgid ""
+"A plugin bringing remote execution to the Foreman, completing the config "
+"management functionality with remote management functionality."
+msgstr ""
+"Ein Plugin, das Foreman entfernte Ausführung bringt und die Konfig-"
+"Verwaltungsfunktion mit einer entfernten Verwaltungsfunktion "
+"vervollständigt."
