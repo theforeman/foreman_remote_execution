@@ -1,3 +1,3 @@
 module ForemanRemoteExecution
-  VERSION = '0.3.0.7'
+  VERSION = '0.3.0.8'
 end
