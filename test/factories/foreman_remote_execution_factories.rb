@@ -15,6 +15,10 @@ FactoryGirl.define do
     trait :with_description_format do
       description_format 'Factory-built %{job_category}'
     end
+
+    trait :with_feature do
+      remote_execution_feature
+    end
   end
 
   factory :template_input do |f|
@@ -53,6 +57,11 @@ FactoryGirl.define do
 
   factory :template_invocation_input_value do |f|
     f.sequence(:value) { |n| "Input Value #{n}" }
+  end
+
+  factory :remote_execution_feature do |f|
+    f.sequence(:label) { |n| "remote_execution_feature_#{n}" }
+    f.sequence(:name) { |n| "Remote Execution Feature #{n}" }
   end
 end
 
