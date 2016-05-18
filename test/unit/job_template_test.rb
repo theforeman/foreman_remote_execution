@@ -73,6 +73,10 @@ describe JobTemplate do
   end
 
   context 'importing a new template' do
+    let(:remote_execution_feature) do
+      FactoryGirl.create(:remote_execution_feature)
+    end
+
     let(:template) do
       template = <<-END_TEMPLATE
       <%#
@@ -80,6 +84,7 @@ describe JobTemplate do
       name: Service Restart
       job_category: Service Restart
       provider_type: SSH
+      feature: #{remote_execution_feature.label}
       template_inputs:
       - name: service_name
         input_type: user
@@ -127,6 +132,12 @@ describe JobTemplate do
     it 'imports input sets' do
       template_with_input_sets.foreign_input_sets.first.target_template.must_equal template
       template_with_input_sets.template_inputs_with_foreign.map(&:name).must_equal ['service_name']
+    end
+
+    it 'imports feature' do
+      template # let is lazy
+      remote_execution_feature.reload
+      remote_execution_feature.job_template.must_equal template
     end
 
     it 'sets additional options' do
