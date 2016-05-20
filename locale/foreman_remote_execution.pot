@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-12 12:31-0400\n"
-"PO-Revision-Date: 2016-04-12 12:31-0400\n"
+"POT-Creation-Date: 2016-05-20 10:04-0400\n"
+"PO-Revision-Date: 2016-05-20 10:04-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -41,7 +41,7 @@ msgid "Target template ID"
 msgstr ""
 
 #: ../app/controllers/api/v2/foreign_input_sets_controller.rb:26
-msgid "Include all inputs form the foreign template"
+msgid "Include all inputs from the foreign template"
 msgstr ""
 
 #: ../app/controllers/api/v2/foreign_input_sets_controller.rb:27
@@ -89,7 +89,7 @@ msgid "Inputs to use"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_invocations_controller.rb:31
-#: ../app/controllers/api/v2/job_templates_controller.rb:43
+#: ../app/controllers/api/v2/job_templates_controller.rb:60
 msgid "SSH provider specific options"
 msgstr ""
 
@@ -175,22 +175,38 @@ msgid "List job templates per organization"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_templates_controller.rb:25
+msgid "Import a job template from ERB"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:26
+msgid "Template ERB"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:27
+msgid "Overwrite template if it already exists"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:36
+msgid "Export a job template to ERB"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_templates_controller.rb:42
 msgid "Show job template details"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:32
-#: ../app/controllers/api/v2/job_templates_controller.rb:83
+#: ../app/controllers/api/v2/job_templates_controller.rb:49
+#: ../app/controllers/api/v2/job_templates_controller.rb:100
 msgid "Template name"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:33
+#: ../app/controllers/api/v2/job_templates_controller.rb:50
 #: ../app/views/job_invocations/_form.html.erb:9
 #: ../app/views/job_templates/_custom_tabs.html.erb:3
 #: ../app/views/job_templates/_custom_tabs.html.erb:6
 msgid "Job category"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:34
+#: ../app/controllers/api/v2/job_templates_controller.rb:51
 #: ../app/views/job_templates/_custom_tabs.html.erb:14
 msgid ""
 "This template is used to generate the description. Input values can be used us"
@@ -198,50 +214,50 @@ msgid ""
 "name using %{job_category} and %{template_name}."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:39
+#: ../app/controllers/api/v2/job_templates_controller.rb:56
 msgid "Provider type"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:42
+#: ../app/controllers/api/v2/job_templates_controller.rb:59
 msgid "Whether or not the template is locked for editing"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:44
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
 msgid "Effective user options"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:45
+#: ../app/controllers/api/v2/job_templates_controller.rb:62
 msgid "What user should be used to run the script (using sudo-like mechanisms)"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:46
+#: ../app/controllers/api/v2/job_templates_controller.rb:63
 msgid ""
 "Whether it should be allowed to override the effective user from the invocatio"
 "n form."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:47
+#: ../app/controllers/api/v2/job_templates_controller.rb:64
 msgid "Whether the current user login should be used as the effective user"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:54
+#: ../app/controllers/api/v2/job_templates_controller.rb:71
 msgid "Create a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/job_templates_controller.rb:78
 #: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
 msgid "Update a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:69
+#: ../app/controllers/api/v2/job_templates_controller.rb:86
 msgid "Template version"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:75
+#: ../app/controllers/api/v2/job_templates_controller.rb:92
 msgid "Delete a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:87
+#: ../app/controllers/api/v2/job_templates_controller.rb:104
 msgid "Clone a provision template"
 msgstr ""
 
@@ -323,6 +339,14 @@ msgid ""
 "te input changes before you try to preview it."
 msgstr ""
 
+#: ../app/controllers/job_templates_controller.rb:32
+msgid "Job template imported successfully."
+msgstr ""
+
+#: ../app/controllers/job_templates_controller.rb:37
+msgid "Unable to save template. Correct highlighted errors"
+msgstr ""
+
 #:
 #: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:11
 #: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:15
@@ -332,6 +356,11 @@ msgstr ""
 
 #:
 #: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:13
+msgid "Export"
+msgstr ""
+
+#:
+#: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:14
 msgid "Run"
 msgstr ""
 
@@ -462,33 +491,29 @@ msgstr ""
 msgid "in %s"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:210
-msgid "Documentation"
-msgstr ""
-
-#: ../app/helpers/remote_execution_helper.rb:217
+#: ../app/helpers/remote_execution_helper.rb:212
 msgid "Template input"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:218
+#: ../app/helpers/remote_execution_helper.rb:213
 msgid "remove template input"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:230
+#: ../app/helpers/remote_execution_helper.rb:225
 msgid "Use default description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:235
+#: ../app/helpers/remote_execution_helper.rb:230
 msgid "Description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:241
+#: ../app/helpers/remote_execution_helper.rb:236
 #: ../app/views/job_invocations/_form.html.erb:101
 #: ../app/views/job_templates/_custom_tabs.html.erb:14
 msgid "Explanation"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:242
+#: ../app/helpers/remote_execution_helper.rb:237
 msgid ""
 "This template is used to generate the description Input values can be used usi"
 "ng the syntax %{package}. You may also include the job category and template n"
@@ -571,7 +596,7 @@ msgstr ""
 msgid "host already has an execution interface"
 msgstr ""
 
-#: ../app/models/foreign_input_set.rb:18
+#: ../app/models/foreign_input_set.rb:21
 msgid ""
 "Circular dependency detected in foreign input set '%{template}' -> '%{target_t"
 "emplate}'. Templates stack: %{templates_stack}"
@@ -619,27 +644,27 @@ msgstr ""
 msgid "template"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:79
+#: ../app/models/job_invocation_composer.rb:87
 msgid "Cannot specify both bookmark_id and search_query"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:84
+#: ../app/models/job_invocation_composer.rb:92
 msgid "Cannot specify both recurrence and scheduling"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:118
+#: ../app/models/job_invocation_composer.rb:126
 msgid "Unknown input %{input_name} for template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:226
+#: ../app/models/job_invocation_composer.rb:234
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:235
+#: ../app/models/job_invocation_composer.rb:243
 msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:241
+#: ../app/models/job_invocation_composer.rb:249
 msgid ""
 "The template %{template_name} mapped to feature %{feature_name} is not accessi"
 "ble by the user"
@@ -649,11 +674,11 @@ msgstr ""
 msgid "Job Invocation"
 msgstr ""
 
-#: ../app/models/job_template.rb:136
+#: ../app/models/job_template.rb:153
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr ""
 
-#: ../app/models/job_template.rb:203
+#: ../app/models/job_template.rb:219
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr ""
 
@@ -703,11 +728,11 @@ msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-msgid "Dynamic Query"
+msgid "Static Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-msgid "Static Query"
+msgid "Dynamic Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:37
@@ -722,23 +747,23 @@ msgstr ""
 msgid "Must select a bookmark or enter a search query"
 msgstr ""
 
-#: ../app/models/template_input.rb:7
-msgid "User input"
-msgstr ""
-
-#: ../app/models/template_input.rb:7
+#: ../app/models/template_input.rb:9
 msgid "Variable"
 msgstr ""
 
-#: ../app/models/template_input.rb:7
+#: ../app/models/template_input.rb:9
 msgid "Fact value"
 msgstr ""
 
-#: ../app/models/template_input.rb:8
+#: ../app/models/template_input.rb:9
+msgid "User input"
+msgstr ""
+
+#: ../app/models/template_input.rb:10
 msgid "Puppet parameter"
 msgstr ""
 
-#: ../app/models/template_input.rb:109
+#: ../app/models/template_input.rb:113
 msgid "Value for required input '%s' was not specified"
 msgstr ""
 
@@ -781,15 +806,15 @@ msgid "Display advanced fields"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:75
-msgid ""
-"A user to be used for executing the script. If it differs from the SSH user, s"
-"u or sudo is used to switch the accounts."
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:75
 #: ../app/views/job_invocations/_tab_overview.html.erb:44
 #: ../app/views/job_templates/_custom_tabs.html.erb:39
 msgid "Effective user"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:75
+msgid ""
+"A user to be used for executing the script. If it differs from the SSH user, s"
+"u or sudo is used to switch the accounts."
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:89
@@ -797,11 +822,11 @@ msgid "Concurrency level"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:90
-msgid "Distribute execution over N seconds"
+msgid "Time span"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:90
-msgid "Time span"
+msgid "Distribute execution over N seconds"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:94
@@ -832,7 +857,8 @@ msgstr[1] ""
 msgid "No hosts found."
 msgstr ""
 
-#: ../app/views/job_invocations/_preview_hosts_modal.html.erb:6
+#: ../app/views/job_invocations/_preview_hosts_modal.html.erb:8
+#: ../app/views/job_templates/_import_job_template_modal.html.erb:8
 msgid "Close"
 msgstr ""
 
@@ -854,7 +880,7 @@ msgid "Status"
 msgstr ""
 
 #: ../app/views/job_invocations/_tab_hosts.html.erb:23
-#: ../app/views/job_templates/index.html.erb:16
+#: ../app/views/job_templates/index.html.erb:18
 msgid "Actions"
 msgstr ""
 
@@ -938,11 +964,11 @@ msgid "Type"
 msgstr ""
 
 #: ../app/views/job_templates/_custom_tabs.html.erb:28
-msgid "Add Input"
+msgid "add a input for this template"
 msgstr ""
 
 #: ../app/views/job_templates/_custom_tabs.html.erb:28
-msgid "add a input for this template"
+msgid "Add Input"
 msgstr ""
 
 #: ../app/views/job_templates/_custom_tabs.html.erb:35
@@ -957,32 +983,50 @@ msgstr ""
 msgid "Snippet"
 msgstr ""
 
+#: ../app/views/job_templates/_import_job_template_modal.html.erb:13
+msgid ""
+"Select an ERB file to upload in order to import a job template.  The template "
+"must contain metadata in the first ERB comment."
+msgstr ""
+
+#: ../app/views/job_templates/_import_job_template_modal.html.erb:14
+msgid "Whether to overwrite the template if it already exists"
+msgstr ""
+
+#: ../app/views/job_templates/_import_job_template_modal.html.erb:14
+msgid "Overwrite"
+msgstr ""
+
 #: ../app/views/job_templates/edit.html.erb:4
 msgid "Edit Job Template"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:5
+#: ../app/views/job_templates/index.html.erb:6
 msgid "Job Templates"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:7
+#: ../app/views/job_templates/index.html.erb:8
+msgid "Import"
+msgstr ""
+
+#: ../app/views/job_templates/index.html.erb:9
 #: ../app/views/job_templates/new.html.erb:4
 msgid "New Job Template"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:13
+#: ../app/views/job_templates/index.html.erb:15
 msgid "JobTemplate|Name"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:14
+#: ../app/views/job_templates/index.html.erb:16
 msgid "JobTemplate|Snippet"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:15
+#: ../app/views/job_templates/index.html.erb:17
 msgid "JobTemplate|Locked"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:26
+#: ../app/views/job_templates/index.html.erb:28
 msgid "This template is locked for editing."
 msgstr ""
 
