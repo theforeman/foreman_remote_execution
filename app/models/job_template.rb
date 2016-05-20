@@ -195,8 +195,8 @@ class JobTemplate < ::Template
   end
 
   def sync_feature(feature_name)
-    if feature_name && (feature = RemoteExecutionFeature.feature(feature_name))
-      feature.job_template ||= self
+    if feature_name && (feature = RemoteExecutionFeature.feature(feature_name)) && feature.job_template.blank?
+      self.remote_execution_features << feature
     end
   end
 
