@@ -29,7 +29,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', after: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
-        requires_foreman '>= 1.11'
+        requires_foreman '>= 1.12'
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
 
