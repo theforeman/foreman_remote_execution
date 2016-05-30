@@ -50,6 +50,7 @@ module Actions
       def finalize(*args)
         host = Host.find(input[:host][:id])
         host.refresh_statuses
+        host.refresh_global_status!
       rescue => e
         ::Foreman::Logging.exception "Could not update execution status for #{input[:host][:name]}", e
       end
