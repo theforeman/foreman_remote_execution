@@ -35,7 +35,7 @@ module RemoteExecutionHelper
       when HostStatus::ExecutionStatus::QUEUED
         _('queued')
       when HostStatus::ExecutionStatus::RUNNING
-        _('running %{percent}%') % {:percent => invocation.progress}
+        _('running %{percent}%%') % {:percent => invocation.progress}
       when HostStatus::ExecutionStatus::OK
         _('succeeded')
       when HostStatus::ExecutionStatus::ERROR
