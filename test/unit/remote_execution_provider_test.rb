@@ -50,6 +50,9 @@ describe RemoteExecutionProvider do
   end
 
   describe SSHExecutionProvider do
+    before { User.current = FactoryGirl.build(:user, :admin) }
+    after { User.current = nil }
+
     before do
       Setting::RemoteExecution.load_defaults
     end
@@ -69,7 +72,7 @@ describe RemoteExecutionProvider do
     describe 'ssh user' do
       it 'uses the remote_execution_ssh_user on the host param' do
         host.params['remote_execution_ssh_user'] = 'my user'
-        host.host_parameters << FactoryGirl.build(:host_parameter, :name => 'remote_execution_ssh_user', :value => 'my user')
+        host.host_parameters << FactoryGirl.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'my user')
         proxy_options[:ssh_user].must_equal 'my user'
       end
     end
@@ -77,7 +80,7 @@ describe RemoteExecutionProvider do
     describe 'sudo' do
       it 'uses the remote_execution_ssh_user on the host param' do
         host.params['remote_execution_effective_user_method'] = 'sudo'
-        method_param = FactoryGirl.build(:host_parameter, :name => 'remote_execution_effective_user_method', :value => 'sudo')
+        method_param = FactoryGirl.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'sudo')
         host.host_parameters << method_param
         proxy_options[:effective_user_method].must_equal 'sudo'
         method_param.update_attributes!(:value => 'su')

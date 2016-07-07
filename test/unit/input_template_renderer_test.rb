@@ -412,6 +412,9 @@ TEMPLATE
         end
 
         context 'with host specified' do
+          before { User.current = FactoryGirl.build(:user, :admin) }
+          after { User.current = nil }
+
           let(:environment) { FactoryGirl.create(:environment) }
           before { renderer.host = FactoryGirl.create(:host, :environment => environment) }
 
