@@ -3,14 +3,11 @@ require 'test_plugin_helper'
 describe ForemanRemoteExecution::HostExtensions do
   let(:provider) { 'SSH' }
 
-  before do
-    User.current = FactoryGirl.build(:user, :admin)
-  end
-
+  before { User.current = FactoryGirl.build(:user, :admin) }
   after { User.current = nil }
 
   describe 'ssh specific params' do
-    let(:host) { FactoryGirl.build(:host, :with_execution) }
+    let(:host) { FactoryGirl.create(:host, :with_execution) }
     let(:sshkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQ foo@example.com' }
 
     before do
@@ -24,7 +21,7 @@ describe ForemanRemoteExecution::HostExtensions do
     end
 
     it 'can override ssh user' do
-      host.host_parameters << FactoryGirl.build(:host_parameter, :name => 'remote_execution_ssh_user', :value => 'amy')
+      host.host_parameters << FactoryGirl.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'amy')
       host.params['remote_execution_ssh_user'].must_equal 'amy'
     end
 
@@ -33,7 +30,7 @@ describe ForemanRemoteExecution::HostExtensions do
     end
 
     it 'can override effective user method' do
-      host.host_parameters << FactoryGirl.build(:host_parameter, :name => 'remote_execution_effective_user_method', :value => 'su')
+      host.host_parameters << FactoryGirl.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'su')
       host.params['remote_execution_effective_user_method'].must_equal 'su'
     end
 
