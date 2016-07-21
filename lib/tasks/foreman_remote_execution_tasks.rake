@@ -36,7 +36,7 @@ namespace :foreman_remote_execution do
   end
 end
 
-Rake::Task[:test].enhance ['test:foreman_remote_execution']
+Rake::Task["test:plugins"].enhance ['test:foreman_remote_execution']
 
 load 'tasks/jenkins.rake'
 if Rake::Task.task_defined?(:'jenkins:unit')
