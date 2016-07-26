@@ -89,5 +89,28 @@ describe RemoteExecutionProvider do
         proxy_options[:effective_user_method].must_equal 'su'
       end
     end
+
+
+    describe 'ssh port from settings' do
+      before do
+        Setting[:remote_execution_ssh_port] = '66'
+      end
+
+      it 'has ssh port changed in settings and check return type' do
+        proxy_options[:ssh_port].must_be_kind_of Integer
+        proxy_options[:ssh_port].must_equal 66
+      end
+    end
+
+    describe 'ssh port from params' do
+      it 'takes ssh port number from params and check return type' do
+        host.params['remote_execution_ssh_port'] = '30'
+        host.host_parameters << FactoryGirl.build(:host_parameter, :name => 'remote_execution_ssh_port', :value => '30')
+        host.clear_host_parameters_cache!
+        proxy_options[:ssh_port].must_be_kind_of Integer
+        proxy_options[:ssh_port].must_equal 30
+      end
+    end
+
   end
 end

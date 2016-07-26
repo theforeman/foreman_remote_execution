@@ -28,7 +28,10 @@ class Setting::RemoteExecution < Setting
                  { :collection => Proc.new {Hash[SSHExecutionProvider::EFFECTIVE_USER_METHODS.map{|method| [method, method]}]} }),
         self.set('remote_execution_sync_templates',
                  N_('Whether we should sync templates from disk when running db:seed.'),
-                 true)
+                 true),
+        self.set('remote_execution_ssh_port',
+                N_('Port to use for SSH communication. Default port 22.'),
+                '22')
       ].each { |s| self.create! s.update(:category => 'Setting::RemoteExecution') }
     end
 
