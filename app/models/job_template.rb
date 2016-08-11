@@ -4,7 +4,6 @@ class JobTemplate < ::Template
   class NonUniqueInputsError < Foreman::Exception
   end
 
-  attr_accessible :job_category, :provider_type, :description_format, :effective_user_attributes
   attr_exportable :name, :job_category, :description_format, :snippet, :template_inputs,
                   :foreign_input_sets, :provider_type, :kind => ->(template) { template.class.name.underscore }
 

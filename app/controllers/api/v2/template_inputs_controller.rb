@@ -3,6 +3,7 @@ module Api
     class TemplateInputsController < ::Api::V2::BaseController
       include ::Api::Version2
       include ::Foreman::Renderer
+      include ::Foreman::Controller::Parameters::TemplateInput
 
       before_filter :find_required_nested_object
       before_filter :find_resource, :only => %w{show update destroy}
@@ -40,7 +41,7 @@ module Api
       param :template_id, :identifier, :required => true
       param_group :template_input, :as => :create
       def create
-        @template_input = resource_class.new(params[:template_input].merge(:template_id => @nested_obj.id))
+        @template_input = resource_class.new(template_input_params.merge(:template_id => @nested_obj.id))
         process_response @template_input.save
       end
 
@@ -56,7 +57,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :template_input
       def update
-        process_response @template_input.update_attributes(params[:template_input])
+        process_response @template_input.update_attributes(template_input_params)
       end
 
       def resource_name(nested_resource = nil)

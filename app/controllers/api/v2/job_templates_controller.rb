@@ -5,6 +5,7 @@ module Api
       include ::Api::TaxonomyScope
       include ::Foreman::Renderer
       include ::Foreman::Controller::ProvisioningTemplates
+      include ::Foreman::Controller::Parameters::JobTemplate
 
       before_filter :find_optional_nested_object
       before_filter :find_resource, :only => %w{show update destroy clone export}
@@ -118,9 +119,10 @@ module Api
       private
 
       def job_template_params
-        job_template_params = params[:job_template].dup
+        job_template_params = params[:job_template]
         effective_user_attributes = (job_template_params.delete(:ssh) || {}).fetch(:effective_user, {})
         job_template_params.merge(:effective_user_attributes => effective_user_attributes)
+        super
       end
 
       def action_permission

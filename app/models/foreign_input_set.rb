@@ -4,7 +4,6 @@ class ForeignInputSet < ActiveRecord::Base
   class CircularDependencyError < Foreman::Exception
   end
 
-  attr_accessible :template_id, :target_template_id, :include_all, :include, :exclude
   attr_exportable :exclude, :include, :include_all, :template => ->(input_set) { input_set.template.name }
 
   belongs_to :template

@@ -1,5 +1,6 @@
 class JobInvocationsController < ApplicationController
-  include Foreman::Controller::AutoCompleteSearch
+  include ::Foreman::Controller::AutoCompleteSearch
+  include ::ForemanTasks::Concerns::Parameters::Triggering
 
   def new
     ui_params = {
@@ -34,7 +35,7 @@ class JobInvocationsController < ApplicationController
   end
 
   def create
-    @composer = JobInvocationComposer.from_ui_params(params)
+    @composer = JobInvocationComposer.from_ui_params(params.merge(:triggering => triggering_params))
     if @composer.trigger
       redirect_to job_invocation_path(@composer.job_invocation)
     else

@@ -12,7 +12,6 @@ module ForemanRemoteExecution
       end
       accepts_nested_attributes_for :template_inputs, :allow_destroy => true
       accepts_nested_attributes_for :foreign_input_sets, :allow_destroy => true
-      attr_accessible :template_inputs_attributes, :foreign_input_sets_attributes
     end
 
     # create or overwrite instance methods...

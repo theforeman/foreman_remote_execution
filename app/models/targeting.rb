@@ -16,8 +16,6 @@ class Targeting < ActiveRecord::Base
   validates :targeting_type, :presence => true, :inclusion => Targeting::TYPES.keys
   validate :bookmark_or_query_is_present
 
-  attr_accessible :targeting_type, :bookmark_id, :user, :search_query
-
   before_create :assign_search_query, :if => :static?
 
   def clone

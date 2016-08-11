@@ -2,6 +2,7 @@ module Api
   module V2
     class RemoteExecutionFeaturesController < ::Api::V2::BaseController
       include ::Api::Version2
+      include ::Foreman::Controller::Parameters::RemoteExecutionFeature
 
       before_filter :find_resource, :only => %w{show update}
 
@@ -25,7 +26,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :remote_execution_feature
       def update
-        process_response @remote_execution_feature.update_attributes(params[:remote_execution_feature])
+        process_response @remote_execution_feature.update_attributes(remote_execution_feature_params)
       end
 
       private
