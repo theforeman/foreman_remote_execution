@@ -11,6 +11,6 @@ node do |invocation|
   }
 end
 
-child :task do
+child :task => :dynflow_task do
   attributes :id, :state
 end
