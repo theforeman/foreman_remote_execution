@@ -9,11 +9,8 @@ class TemplateInput < ActiveRecord::Base
   TYPES = { :user => N_('User input'), :fact => N_('Fact value'), :variable => N_('Variable'),
             :puppet_parameter => N_('Puppet parameter') }.with_indifferent_access
 
-  attr_accessible :name, :required, :input_type, :fact_name, :variable_name,
-                  :puppet_class_name, :puppet_parameter_name, :description, :template_id,
-                  :options, :advanced
-
-  attr_exportable(*self.accessible_attributes - %w(template_id))
+  attr_exportable(:name, :required, :input_type, :fact_name, :variable_name, :puppet_class_name,
+                  :puppet_parameter_name, :description, :options, :advanced)
 
   belongs_to :template
   has_many :template_invocation_input_values, :dependent => :destroy

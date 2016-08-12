@@ -1,7 +1,5 @@
 class JobTemplateEffectiveUser < ActiveRecord::Base
 
-  attr_accessible :value, :current_user, :overridable
-
   belongs_to :job_template
 
   before_validation :set_defaults

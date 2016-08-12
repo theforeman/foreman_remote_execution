@@ -1,4 +1,6 @@
 class JobTemplatesController < ::TemplatesController
+  include ::Foreman::Controller::Parameters::JobTemplate
+
   def load_vars_from_template
     return unless @template
 

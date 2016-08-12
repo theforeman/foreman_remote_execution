@@ -3,6 +3,7 @@ module Api
     class ForeignInputSetsController < ::Api::V2::BaseController
       include ::Api::Version2
       include ::Foreman::Renderer
+      include ::Foreman::Controller::Parameters::ForeignInputSet
 
       before_filter :find_required_nested_object
       before_filter :find_resource, :only => %w{show update destroy}
@@ -34,7 +35,7 @@ module Api
       param :template_id, :identifier, :required => true
       param_group :foreign_input_set, :as => :create
       def create
-        @foreign_input_set = resource_class.new(params[:foreign_input_set].merge(:template_id => @nested_obj.id))
+        @foreign_input_set = resource_class.new(foreign_input_set_params.merge(:template_id => @nested_obj.id))
         process_response @foreign_input_set.save
       end
 
@@ -50,7 +51,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :foreign_input_set
       def update
-        process_response @foreign_input_set.update_attributes(params[:foreign_input_set])
+        process_response @foreign_input_set.update_attributes(foreign_input_set_params)
       end
 
       def resource_name(nested_resource = nil)

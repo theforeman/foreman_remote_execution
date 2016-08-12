@@ -4,7 +4,6 @@ module ForemanRemoteExecution
 
     included do
       before_validation :set_execution_flag
-      attr_accessible :execution
       validate :exclusive_execution_interface
     end
 
