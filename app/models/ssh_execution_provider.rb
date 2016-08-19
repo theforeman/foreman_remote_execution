@@ -6,7 +6,8 @@ class SSHExecutionProvider < RemoteExecutionProvider
     def proxy_command_options(template_invocation, host)
       super.merge(:ssh_user => ssh_user(host),
                   :effective_user => effective_user(template_invocation),
-                  :effective_user_method => effective_user_method(host))
+                  :effective_user_method => effective_user_method(host),
+                  :ssh_port => ssh_port(host))
     end
 
     def humanized_name
@@ -21,6 +22,10 @@ class SSHExecutionProvider < RemoteExecutionProvider
 
     def ssh_user(host)
       host.params['remote_execution_ssh_user']
+    end
+
+    def ssh_port(host)
+      Integer(host.params['remote_execution_ssh_port'] || Setting[:remote_execution_ssh_port])
     end
 
     def effective_user(template_invocation)
