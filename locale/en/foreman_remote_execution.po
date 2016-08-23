@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 0.3.1\n"
+"Project-Id-Version: foreman_remote_execution 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-03 04:48-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"

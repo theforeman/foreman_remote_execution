@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-23 09:57-0400\n"
-"PO-Revision-Date: 2016-08-23 09:57-0400\n"
+"POT-Creation-Date: 2016-08-23 10:19-0400\n"
+"PO-Revision-Date: 2016-08-23 10:19-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -552,7 +552,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:4
+#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:8
 msgid "Remote action:"
 msgstr ""
 
@@ -1149,27 +1149,27 @@ msgid "Jobs"
 msgstr ""
 
 #: action_names.rb:2
-msgid "Import facts"
-msgstr ""
-
-#: action_names.rb:3
-msgid "Import Puppet classes"
-msgstr ""
-
-#: action_names.rb:5
 msgid "Action with sub plans"
 msgstr ""
 
-#: action_names.rb:6
+#: action_names.rb:3
 msgid "Create architecture"
 msgstr ""
 
-#: action_names.rb:7
+#: action_names.rb:4
 msgid "Delete architecture"
 msgstr ""
 
-#: action_names.rb:8
+#: action_names.rb:5
 msgid "Update architecture"
+msgstr ""
+
+#: action_names.rb:6
+msgid "Import facts"
+msgstr ""
+
+#: action_names.rb:7
+msgid "Import Puppet classes"
 msgstr ""
 
 #: gemspec.rb:2

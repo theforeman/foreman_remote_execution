@@ -6,9 +6,9 @@
 # Claer <transiblu@claer.hammock.fr>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 0.3.1\n"
+"Project-Id-Version: foreman_remote_execution 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-03-14 10:51+0000\n"
+"PO-Revision-Date: 2016-05-04 18:45+0000\n"
 "Last-Translator: Claer <transiblu@claer.hammock.fr>\n"
 "Language-Team: French (http://www.transifex.com/foreman/foreman/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -92,10 +92,10 @@ msgid "Close"
 msgstr "Fermer"
 
 msgid "Concurrency level"
-msgstr ""
+msgstr "Niveau de parallélisme"
 
 msgid "Control concurrency level and distribution over time"
-msgstr ""
+msgstr "Contrôle le niveau de parallélisme et la distribution dans le temps"
 
 msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
 msgstr "Impossible d'utiliser aucun des proxies. Veuillez considérer définir %{global_proxy} ou %{fallback_proxy} dans les paramètres"
@@ -152,10 +152,10 @@ msgid "Display advanced fields"
 msgstr "Afficher les champs avancés"
 
 msgid "Distribute execution over N seconds"
-msgstr ""
+msgstr "Distribue l'exécution sur N secondes"
 
 msgid "Distribute tasks over N seconds"
-msgstr ""
+msgstr "Distribue les tâches sur N secondes"
 
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr "Entrées dupliquées détectés : %{duplicated_inputs}"
@@ -167,7 +167,7 @@ msgid "Edit Job Template"
 msgstr "Éditer le modèle de job"
 
 msgid "Edit Remote Execution Feature"
-msgstr ""
+msgstr "Modifier la capacité d'exécution distante"
 
 msgid "Effective user"
 msgstr "Utilisateur effectif"
@@ -194,10 +194,10 @@ msgid "Explanation"
 msgstr "Explications"
 
 msgid "Export"
-msgstr ""
+msgstr "Export"
 
 msgid "Export a job template to ERB"
-msgstr ""
+msgstr "Exporte un modèle de job vers ERB"
 
 msgid "Fact name, used when input type is fact"
 msgstr "Nom du fact, utilisé quand le type d'entrée est un fact"
@@ -215,7 +215,7 @@ msgid "Failed to initialize command"
 msgstr "Echec d'initialisation de la commande"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
-msgstr ""
+msgstr "L'entrée de fonction %{input_name} n'est pas définie dans le modèle %{template_name}"
 
 msgid "Filter"
 msgstr "Filtre"
@@ -245,13 +245,13 @@ msgid "How often the job should occur, in the cron format"
 msgstr "La fréquence d'exécution du job, au format cron"
 
 msgid "Import"
-msgstr ""
+msgstr "Import"
 
 msgid "Import Puppet classes"
-msgstr ""
+msgstr "Import des classes Puppet"
 
 msgid "Import a job template from ERB"
-msgstr ""
+msgstr "Importe un modèle de job depuis ERB"
 
 msgid "Import facts"
 msgstr "Import des facts"
@@ -320,10 +320,10 @@ msgid "Job template"
 msgstr "Modèle de job"
 
 msgid "Job template ID to be used for the feature"
-msgstr ""
+msgstr "l'ID du modèle de job à utiliser pour cette capacité"
 
 msgid "Job template imported successfully."
-msgstr ""
+msgstr "Import du modèle de job réussi."
 
 msgid "Job templates"
 msgstr "Modèles de job"
@@ -341,7 +341,7 @@ msgid "Jobs"
 msgstr "Tâches"
 
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 msgid "Last execution failed"
 msgstr "La dernière exécution a échoué"
@@ -365,7 +365,7 @@ msgid "List job templates per organization"
 msgstr "Afficher les modèles de job par organisation"
 
 msgid "List remote execution features"
-msgstr ""
+msgstr "Affiche les capacités d'exécution distantes"
 
 msgid "List template inputs"
 msgstr "Afficher les modèles de jeux de données en entrée"
@@ -380,7 +380,7 @@ msgid "N/A"
 msgstr "N/A"
 
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 msgid "New Job Template"
 msgstr "Nouveau modèle de job"
@@ -395,7 +395,7 @@ msgid "No output"
 msgstr "Aucune sortie"
 
 msgid "No template mapped to feature %{feature_name}"
-msgstr ""
+msgstr "Aucun modèle n'est en relation avec la fonction %{feature_name}"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Les entrées n'ont pas toutes des valeurs associées. Les entrées demandant de l'attention : %s"
@@ -407,10 +407,10 @@ msgid "Overview"
 msgstr "Vue globale"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Remplacer"
 
 msgid "Overwrite template if it already exists"
-msgstr ""
+msgstr "Remplace le modèle si il existe déjà"
 
 msgid "Pending"
 msgstr "En cours"
@@ -461,7 +461,7 @@ msgid "Remote Execution"
 msgstr "Exécution distante"
 
 msgid "Remote Execution Features"
-msgstr ""
+msgstr "Capacités d'exécution distantes"
 
 msgid "Remote action:"
 msgstr "Action distante :"
@@ -497,7 +497,7 @@ msgid "Run Job"
 msgstr "Lancer le job"
 
 msgid "Run at most N tasks at a time"
-msgstr ""
+msgstr "Lance un maximum de N tâches simultanément"
 
 msgid "SSH"
 msgstr "SSH"
@@ -536,7 +536,7 @@ msgid "See the task details"
 msgstr "Voir les détails de la tâche"
 
 msgid "Select an ERB file to upload in order to import a job template.  The template must contain metadata in the first ERB comment."
-msgstr ""
+msgstr "Choisir un fichier ERB à transmettre pour l'import du modèle du job. Le modèle doit contenir les metadatas dans le premier commentaire ERB."
 
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "Choisir tous les proxies d'exécution distante applicables pour ce sous-réseau. Quand plusieurs proxies avec un même fournisseur sont ajoutés, les actions seront réparties sur chacun d'entre eux."
@@ -554,7 +554,7 @@ msgid "Show job template details"
 msgstr "Voir les détails d'un modèle de job"
 
 msgid "Show remote execution feature"
-msgstr ""
+msgstr "Affiche la capacité d'exécution distante"
 
 msgid "Show template input details"
 msgstr "Afficher les détails du modèle de jeu de données en entrée"
@@ -590,7 +590,7 @@ msgid "Task Details"
 msgstr "Détails de la tâche"
 
 msgid "Template ERB"
-msgstr ""
+msgstr "Modèle ERB"
 
 msgid "Template input"
 msgstr "Modèles des données en entrée"
@@ -618,11 +618,11 @@ msgstr "Le modèle de job à utiliser"
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Le seul proxy applicable %{proxy_names} est indisponible"
+msgstr[1] "Tous les %{count} proxies applicables sont indisponibles. Essayé sur %{proxy_names}"
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
-msgstr ""
+msgstr "Le modèle %{template_name} en relation avec la fonction %{feature_name} n'est pas accessible par l'utilisateur"
 
 msgid "There was an error while updating the status, try refreshing the page."
 msgstr "Il y a eu une erreur lors de la mise à jour du statut, essayez de recharger la page."
@@ -640,7 +640,7 @@ msgid "This template is used to generate the description. Input values can be us
 msgstr "Ce modèle est utilisé pour générer la description. Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %{job_category} et %{template_name}."
 
 msgid "Time span"
-msgstr ""
+msgstr "Durée"
 
 msgid "Toggle DEBUG"
 msgstr "Afficher STDOUT"
@@ -676,7 +676,7 @@ msgid "Unable to fetch public key"
 msgstr "Impossible de récupérer la clef publique"
 
 msgid "Unable to save template. Correct highlighted errors"
-msgstr ""
+msgstr "Impossible de sauver le modèle. Merci de corriger les erreurs en surbrillance"
 
 msgid "Unknown execution status"
 msgstr "État d'exécution inconnu"
@@ -685,10 +685,10 @@ msgid "Unknown input %{input_name} for template %{template_name}"
 msgstr "Entrée inconnue %{input_name} pour le modèle %{template_name}"
 
 msgid "Unknown remote execution feature %s"
-msgstr ""
+msgstr "Fonction d'exécution distante inconnue %s"
 
 msgid "Unsupported or no operating system found for this host."
-msgstr ""
+msgstr "Système d'exploitation non supporté ou inexistant pour cet hôte."
 
 msgid "Update a foreign input set"
 msgstr "Mettre à jour un jeu de données en entrée externe"
@@ -745,13 +745,13 @@ msgid "Whether the current user login should be used as the effective user"
 msgstr "indique si l'utilisateur actuel doit être utilisé comme utilisateur effectif"
 
 msgid "Whether to overwrite the template if it already exists"
-msgstr ""
+msgstr "Défini si le modèle doit être remplacé s'il existe déjà"
 
 msgid "Whether we should sync templates from disk when running db:seed."
-msgstr ""
+msgstr "Défini si nous devons synchroniser les modèles depuis le disque lors de l'exécution de db:seed."
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
-msgstr ""
+msgstr "Vous n'êtes pas autorisé à afficher le modèle affecté en cours. La Sauvegarde du formulaire en cours supprimerait l'affectation au modèle."
 
 msgid "add a input for this template"
 msgstr "Ajout d'une entrée pour ce modèle"
@@ -790,7 +790,7 @@ msgid "input macro with name '%s' used, but no input with such name defined for 
 msgstr "La macro d'entrée au nom '%s' a été utilisée, mais aucune entrée avec ce nom n'est définie pour ce modèle"
 
 msgid "planned"
-msgstr ""
+msgstr "planifié"
 
 msgid "queued"
 msgstr "ajouté en file d'attente"
@@ -802,7 +802,7 @@ msgid "remove template input set"
 msgstr "supprimer un modèles des données en entrée"
 
 msgid "running"
-msgstr ""
+msgstr "lancé"
 
 msgid "running %{percent}%%"
 msgstr ""

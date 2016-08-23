@@ -1,0 +1,827 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_remote_execution package.
+#
+# Translators:
+# Yulia <yulia.poyarkova@redhat.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Foreman\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2016-08-22 15:06+0000\n"
+"Last-Translator: Bryan Kearney <bryan.kearney@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/foreman/foreman/language/ru/)"
+"\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=1"
+"1 && n%100<=14)? 2 : 3);\n"
+
+msgid "%s ago"
+msgstr "%s назад"
+
+msgid "%{description} on %{host}"
+msgstr "%{description} на %{host}"
+
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] "...и еще %{count}"
+msgstr[1] "...и еще %{count}"
+msgstr[2] "...и еще %{count}"
+msgstr[3] "...и еще %{count}"
+
+msgid "A comma separated list of input names to be excluded from the foreign template."
+msgstr "Список входных параметров, которые должны быть исключены при импорте другого шаблона."
+
+msgid "A comma separated list of input names to be included from the foreign template."
+msgstr "Список входных параметров, которые должны быть включены при импорте другого шаблона."
+
+msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
+msgstr "Список доступных пользователю параметров. Если не определен, пользователю будет предложено ввести параметры в свободной форме."
+
+msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
+msgstr "Дополнительный модуль Foreman для удаленного выполнения заданий, объединяющий функции управления конфигурацией и удаленного контроля."
+
+msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
+msgstr "Пользователь, от имени которого должен запускаться сценарий. Если отличается от пользователя SSH, для делегирования прав используется su или sudo."
+
+msgid "Action with sub plans"
+msgstr "Действия с подпланами"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid "Add Foreign Input Set"
+msgstr "Добавить шаблон"
+
+msgid "Add Input"
+msgstr "Добавить параметр"
+
+msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
+msgstr "Для удаленного выполнения уже выбран другой интерфейс. Вы действительно хотите его заменить?"
+
+msgid "Back to Job"
+msgstr "Назад к заданию"
+
+msgid "Bookmark"
+msgstr "Закладка"
+
+msgid "Cancel Job"
+msgstr "Отменить"
+
+msgid "Cancelled"
+msgstr "Отменено"
+
+msgid "Cannot resolve hosts without a bookmark or search query"
+msgstr "Невозможно сформировать список узлов, не выбрав закладку или не указав запрос поиска"
+
+msgid "Cannot resolve hosts without a user"
+msgstr "Невозможно сформировать список узлов, не выбрав пользователя."
+
+msgid "Cannot specify both bookmark_id and search_query"
+msgstr "bookmark_id и search_query не могут использоваться одновременно."
+
+msgid "Cannot specify both recurrence and scheduling"
+msgstr "Вы не можете выбрать произвольное время запуска, одновременно настроив многократное выполнение."
+
+msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
+msgstr "При добавлении входных параметров из «%{template}» в «%{target_template}» была обнаружена циклическая зависимость. Стек: %{templates_stack}"
+
+msgid "Clone a provision template"
+msgstr "Клонировать шаблон подготовки"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Concurrency level"
+msgstr "Параллелизм"
+
+msgid "Control concurrency level and distribution over time"
+msgstr "Контроль параллельного выполнения и распределения во времени"
+
+msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
+msgstr "Не удалось связаться с прокси. Попробуйте настроить %{global_proxy} или %{fallback_proxy}"
+
+msgid "Could not use any template used in the job invocation"
+msgstr "Не удалось применить ни один из шаблонов, настроенных для этого вызова задания"
+
+msgid "Create a foreign input set"
+msgstr "Создать набор входных параметров"
+
+msgid "Create a job invocation"
+msgstr "Создать вызов задания"
+
+msgid "Create a job template"
+msgstr "Создать шаблон задания"
+
+msgid "Create a recurring job"
+msgstr "Периодическое выполнение"
+
+msgid "Create a template input"
+msgstr "Создать входной параметр"
+
+msgid "Create architecture"
+msgstr "Создать архитектуру"
+
+msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
+msgstr "Пользователь по умолчанию для SSH. Для того чтобы переопределить это значение для отдельных узлов, используйте параметр remote_execution_ssh_user."
+
+msgid "Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user."
+msgstr "Пользователь, от имени которого по умолчанию будет запускаться сценарий. Если отличается от пользователя SSH, для делегирования прав будет использоваться su или sudo."
+
+msgid "Delete a foreign input set"
+msgstr "Удалить набор входных параметров"
+
+msgid "Delete a job template"
+msgstr "Удалить шаблон задания"
+
+msgid "Delete a template input"
+msgstr "Удалить входной параметр"
+
+msgid "Delete architecture"
+msgstr "Удалить архитектуру"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Description template"
+msgstr "Шаблон описания"
+
+msgid "Detail of %s run"
+msgstr "Сведения о выполнении %s"
+
+msgid "Display advanced fields"
+msgstr "Показать дополнительные параметры"
+
+msgid "Distribute execution over N seconds"
+msgstr "Распределить выполнение на протяжении заданного периода времени (в секундах)"
+
+msgid "Distribute tasks over N seconds"
+msgstr "Распределить задачи в пределах заданного периода времени (в секундах)"
+
+msgid "Duplicated inputs detected: %{duplicated_inputs}"
+msgstr "Обнаружены дубликаты входных данных: %{duplicated_inputs}"
+
+msgid "Dynamic Query"
+msgstr "Динамический"
+
+msgid "Edit Job Template"
+msgstr "Изменить шаблон задания"
+
+msgid "Edit Remote Execution Feature"
+msgstr "Изменение функции удаленного выполнения"
+
+msgid "Effective user"
+msgstr "Действующий пользователь"
+
+msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
+msgstr "Метод действующего пользователя, «%{current_value}», не является одним из допустимых вариантов: %{valid_methods}"
+
+msgid "Effective user options"
+msgstr "Параметры действующего пользователя"
+
+msgid "Error loading data from proxy"
+msgstr "Не удалось загрузить данные с прокси"
+
+msgid "Evaluated at:"
+msgstr "Обработано:"
+
+msgid "Execution"
+msgstr "Выполнение"
+
+msgid "Exit status: %s"
+msgstr "Код завершения: %s"
+
+msgid "Explanation"
+msgstr "Объяснение"
+
+msgid "Export"
+msgstr "Экспорт"
+
+msgid "Export a job template to ERB"
+msgstr "Экспорт шаблона в ERB"
+
+msgid "Fact name, used when input type is fact"
+msgstr "Имя факта (используется, если поле «Тип ввода» содержит «Значение факта»)"
+
+msgid "Fact value"
+msgstr "Значение факта"
+
+msgid "Failed"
+msgstr "Не удалась"
+
+msgid "Failed rendering template: %s"
+msgstr "Не удалось обработать шаблон: %s"
+
+msgid "Failed to initialize command"
+msgstr "Не удалось инициализировать команду"
+
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr "Входной параметр %{input_name}, заданный функцией, не определен в шаблоне %{template_name}."
+
+msgid "Filter"
+msgstr "Фильтр"
+
+msgid "Foreign input set"
+msgstr "Импорт входных данных"
+
+msgid "Get output for a host"
+msgstr "Получить данные вывода узла"
+
+msgid "Hide advanced fields"
+msgstr "Скрыть дополнительные параметры"
+
+msgid "Host"
+msgstr "Хост"
+
+msgid "Host detail"
+msgstr "Свойства узла"
+
+msgid "Host with id '%{id}' was not found"
+msgstr "Узел «%{id}» не найден."
+
+msgid "Hosts"
+msgstr "Узлы"
+
+msgid "How often the job should occur, in the cron format"
+msgstr "Частота выполнения задания, в формате cron"
+
+msgid "Import"
+msgstr "Импорт"
+
+msgid "Import Puppet classes"
+msgstr "Импорт классов Puppet"
+
+msgid "Import a job template from ERB"
+msgstr "Импорт шаблона из ERB"
+
+msgid "Import facts"
+msgstr "Импорт фактов"
+
+msgid "Include all inputs from the foreign template"
+msgstr ""
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr "Обозначает, что действие следует отменить, если оно не будет запущено до указанного времени."
+
+msgid "Initialization error: %s"
+msgstr "Ошибка инициализации: %s"
+
+msgid "Input"
+msgstr "Параметр"
+
+msgid "Input description"
+msgstr "Описание параметра"
+
+msgid "Input is advanced"
+msgstr "Расширенный параметр"
+
+msgid "Input is required"
+msgstr "Обязательный параметр"
+
+msgid "Input name"
+msgstr "Имя параметра"
+
+msgid "Input set description"
+msgstr "Описание набора входных параметров"
+
+msgid "Input type"
+msgstr "Тип ввода"
+
+msgid "Inputs to use"
+msgstr "Входящие параметры"
+
+msgid "Invocation type, one of %s"
+msgstr "Тип вызова. Возможные значения: %s"
+
+msgid "Job"
+msgstr "Задание"
+
+msgid "Job Invocation"
+msgstr "Вызов задания"
+
+msgid "Job Task"
+msgstr "Задача"
+
+msgid "Job Templates"
+msgstr "Шаблоны заданий"
+
+msgid "Job category"
+msgstr "Категория"
+
+msgid "Job finished with error"
+msgstr "Задание было завершено с ошибкой"
+
+msgid "Job invocation"
+msgstr "Вызов задания"
+
+msgid "Job invocations"
+msgstr "Вызовы заданий"
+
+msgid "Job template"
+msgstr "Шаблон задания"
+
+msgid "Job template ID to be used for the feature"
+msgstr "Идентификатор шаблона задания для этой функции"
+
+msgid "Job template imported successfully."
+msgstr "Импорт шаблона завершен успешно."
+
+msgid "Job templates"
+msgstr "Шаблоны заданий"
+
+msgid "JobTemplate|Locked"
+msgstr "Заблокирован"
+
+msgid "JobTemplate|Name"
+msgstr "Имя"
+
+msgid "JobTemplate|Snippet"
+msgstr "Фрагмент"
+
+msgid "Jobs"
+msgstr "Задания"
+
+msgid "Label"
+msgstr "Метка"
+
+msgid "Last execution failed"
+msgstr "Ошибка выполнения"
+
+msgid "Last execution succeeded"
+msgstr "Выполнено успешно"
+
+msgid "List foreign input sets"
+msgstr "Показать внешние наборы входных параметров"
+
+msgid "List job invocations"
+msgstr "Список вызовов заданий"
+
+msgid "List job templates"
+msgstr "Список шаблонов заданий"
+
+msgid "List job templates per location"
+msgstr "Список шаблонов заданий по местоположению"
+
+msgid "List job templates per organization"
+msgstr "Список шаблонов заданий по организациям"
+
+msgid "List remote execution features"
+msgstr "Список функций удаленного выполнения"
+
+msgid "List template inputs"
+msgstr "Показать параметры ввода"
+
+msgid "Manual selection"
+msgstr "Ручной выбор"
+
+msgid "Must select a bookmark or enter a search query"
+msgstr "Выберите закладку или введите запрос поиска"
+
+msgid "N/A"
+msgstr "Недоступно"
+
+msgid "Name"
+msgstr "Название"
+
+msgid "New Job Template"
+msgstr "Создать шаблон задания"
+
+msgid "No execution finished yet"
+msgstr "Ни один цикл выполнения не завершился"
+
+msgid "No hosts found."
+msgstr "Нет узлов."
+
+msgid "No output"
+msgstr "Нет вывода"
+
+msgid "No template mapped to feature %{feature_name}"
+msgstr "С %{feature_name} не связан ни один шаблон."
+
+msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr "Отсутствуют значения некоторых обязательных входных данных: %s"
+
+msgid "Override the description format from the template for this invocation only"
+msgstr "Переопределить формат описания из шаблона только на время этого вызова"
+
+msgid "Overview"
+msgstr "Обзор"
+
+msgid "Overwrite"
+msgstr "Перезаписать"
+
+msgid "Overwrite template if it already exists"
+msgstr "Перезаписать, если шаблон уже существует"
+
+msgid "Pending"
+msgstr "Ожидание"
+
+msgid "Perform no more executions after this time"
+msgstr "Остановить после указанного числа повторений"
+
+msgid "Preview"
+msgstr "Просмотр"
+
+msgid "Preview for target %s"
+msgstr "Предварительный просмотр для %s"
+
+msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
+msgstr "Не удалось открыть шаблон для предварительного просмотра: %{error}. Прежде чем повторить попытку, сохраните изменения входных параметров."
+
+msgid "Provider type"
+msgstr "Тип провайдера"
+
+msgid "Providers and templates"
+msgstr "Сервисы и шаблоны"
+
+msgid "Proxies"
+msgstr "Прокси"
+
+msgid "Puppet class name, used when input type is puppet_parameter"
+msgstr "Имя класса Puppet (используется, если поле «Тип ввода» содержит «Параметр Puppet»)"
+
+msgid "Puppet parameter"
+msgstr "Параметр Puppet"
+
+msgid "Puppet parameter name, used when input type is puppet_parameter"
+msgstr "Имя параметра Puppet (используется, если поле «Тип ввода» содержит «Параметр Puppet»)"
+
+msgid "Recurring logic"
+msgstr "Регулярное выполнение"
+
+msgid "Recursive rendering of templates detected"
+msgstr "Обнаружена рекурсия при обработке шаблонов"
+
+msgid "Refresh"
+msgstr "Обновить"
+
+msgid "Refresh this page"
+msgstr "Обновить страницу"
+
+msgid "Remote Execution"
+msgstr "Удаленное выполнение"
+
+msgid "Remote Execution Features"
+msgstr "Функции удаленного выполнения"
+
+msgid "Remote action:"
+msgstr "Удаленное действие:"
+
+msgid "Remote execution"
+msgstr "Удаленное выполнение"
+
+msgid "Repeat a maximum of N times"
+msgstr "Количество повторений"
+
+msgid "Rerun"
+msgstr "Повторить"
+
+msgid "Rerun failed"
+msgstr "Повторить неудавшиеся"
+
+msgid "Rerun on %s"
+msgstr "Повторить на %s"
+
+msgid "Rerun on failed hosts"
+msgstr "Повторить на узлах с ошибками"
+
+msgid "Rerun the job"
+msgstr "Повторно выполнить задание"
+
+msgid "Resolves to"
+msgstr "Применимо к "
+
+msgid "Run"
+msgstr "Выполнить"
+
+msgid "Run Job"
+msgstr "Выполнить задание"
+
+msgid "Run at most N tasks at a time"
+msgstr "Максимальное количество параллельно выполняемых задач"
+
+msgid "SSH"
+msgstr "SSH"
+
+msgid "SSH provider specific options"
+msgstr "Параметры провайдера SSH"
+
+msgid "Schedule the job for a future time"
+msgstr "Настроить время запуска"
+
+msgid "Schedule the job to start at a later time"
+msgstr "Отложенный запуск"
+
+msgid "Script execution failed"
+msgstr "Не удалось выполнить сценарий"
+
+msgid "Scroll to bottom"
+msgstr "Перейти вниз"
+
+msgid "Scroll to top"
+msgstr "Перейти наверх"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
+msgstr "Искать прокси с возможностью удаленного запуска заданий за пределами серверов для этого узла. Если были настроены местоположения и организации, поиск будет ограничен местоположением данного узла и организацией, которой он принадлежит."
+
+msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
+msgstr "Искать любые прокси с возможностью удаленного запуска заданий для этого узла. Используется, если для узла не настроена подсеть или в подсети не настроен прокси-сервер."
+
+msgid "See the last task details"
+msgstr "Показать последнюю выполненную задачу"
+
+msgid "See the task details"
+msgstr "Просмотр подробной информации о задаче"
+
+msgid "Select an ERB file to upload in order to import a job template.  The template must contain metadata in the first ERB comment."
+msgstr "Выберите файл ERB для импорта шаблона. Первый комментарий ERB в шаблоне должен содержать метаданные."
+
+msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
+msgstr "Выберите все возможные прокси для этой подсети. Добавление нескольких прокси позволит равномерно распределять действия между ними."
+
+msgid "Selectable values for user inputs"
+msgstr "Список возможных значений"
+
+msgid "Show foreign input set details"
+msgstr "Показать информацию о внешнем наборе входных параметров"
+
+msgid "Show job invocation"
+msgstr "Показать вызов задания"
+
+msgid "Show job template details"
+msgstr "Показать информацию о шаблоне"
+
+msgid "Show remote execution feature"
+msgstr "Показать функцию удаленного выполнения"
+
+msgid "Show template input details"
+msgstr "Показать информацию о параметрах ввода"
+
+msgid "Snippet"
+msgstr "Фрагмент"
+
+msgid "Start"
+msgstr "Начало"
+
+msgid "Static Query"
+msgstr "Статический"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Succeeded"
+msgstr "Успешно"
+
+msgid "Success"
+msgstr "Успешно"
+
+msgid "Target hosts"
+msgstr "Узлы"
+
+msgid "Target template ID"
+msgstr "Идентификатор подключаемого шаблона"
+
+msgid "Target: "
+msgstr "Узел:"
+
+msgid "Task Details"
+msgstr "Описание задачи"
+
+msgid "Template ERB"
+msgstr "ERB"
+
+msgid "Template input"
+msgstr "Параметр вввода"
+
+msgid "Template name"
+msgstr "Имя шаблона"
+
+msgid "Template version"
+msgstr "Версия шаблона"
+
+msgid "Template with id '%{id}' was not found"
+msgstr "Шаблон «%{id}» не найден."
+
+msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
+msgstr "Динамический запрос «%{query}» еще не был обработан. Список узлов, к которым он будет применен, можно проверить %{here}."
+
+msgid "The execution interface is used for remote execution"
+msgstr "Интерфейс используется для удаленного исполнения заданий"
+
+msgid "The final host list may change because the selected query is dynamic.  It will be rerun during execution."
+msgstr "Окончательный список узлов может измениться, так как динамический запрос обрабатывается непосредственно во время запуска задания."
+
+msgid "The job template to use"
+msgstr "Шаблон для использования"
+
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] "Единственный доступный прокси, %{proxy_names}, выключен"
+msgstr[1] "Ни один из %{count} доступных прокси не работает: %{proxy_names}"
+msgstr[2] "Ни один из %{count} доступных прокси не работает: %{proxy_names}"
+msgstr[3] "Ни один из %{count} доступных прокси не работает: %{proxy_names}"
+
+msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
+msgstr "У этого пользователя нет доступа к шаблону %{template_name}, связанному с %{feature_name}"
+
+msgid "There was an error while updating the status, try refreshing the page."
+msgstr "Во время обновления статуса произошла ошибка. Попробуйте обновить страницу."
+
+msgid "This template is locked for editing."
+msgstr "Шаблон заблокирован."
+
+msgid "This template is locked. Please clone it to a new template to customize."
+msgstr "Шаблон заблокирован. Скопируйте его для создания нового шаблона на его основе."
+
+msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
+msgstr "Это шаблон для генерации описания. Для того чтобы добавить переменную, используйте синтаксис %{package}; категорию задания — %{job_category}; название шаблона — %{template_name}."
+
+msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
+msgstr "Это шаблон для генерации описания. Для того чтобы добавить переменную, используйте синтаксис %{package}; категорию задания — %{job_category}; название шаблона — %{template_name}."
+
+msgid "Time span"
+msgstr "Интервал"
+
+msgid "Toggle DEBUG"
+msgstr "Показать DEBUG"
+
+msgid "Toggle STDERR"
+msgstr "Показать STDERR"
+
+msgid "Toggle STDOUT"
+msgstr "Показать STDOUT"
+
+msgid "Toggle command"
+msgstr "Показать команды"
+
+msgid "Total hosts"
+msgstr "Всего узлов"
+
+msgid "Try to cancel the job"
+msgstr "Попытаться отменить задание"
+
+msgid "Try to cancel the job on a host"
+msgstr "Попытаться отменить задание на узле"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
+msgstr "Тип контролирует то, в какое время будет обработан запрос.<br><ul><li><b>Статический</b> запрос обрабатывается сразу после сохранения этой формы.</li><li><b>Динамический</b> запрос обрабатывается непосредственно перед запуском задания, поэтому в случае с отложенными заданиями не исключено, что за время ожидания запуска список узлов может измениться.</li></ul>"
+
+msgid "Type of query"
+msgstr "Тип запроса"
+
+msgid "Unable to fetch public key"
+msgstr "Не удалось получить открытый ключ"
+
+msgid "Unable to save template. Correct highlighted errors"
+msgstr "Не удалось сохранить шаблон. Исправьте выделенные ошибки."
+
+msgid "Unknown execution status"
+msgstr "Статус выполнения неизвестен"
+
+msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr "Неизвестный ввод данных из шаблона %{template_name}: %{input_name}"
+
+msgid "Unknown remote execution feature %s"
+msgstr "Неизвестная функция удаленного выполнения: %s"
+
+msgid "Unsupported or no operating system found for this host."
+msgstr "Не поддерживается, или операционная система узла не обнаружена."
+
+msgid "Update a foreign input set"
+msgstr "Обновить набор входных параметров"
+
+msgid "Update a job template"
+msgstr "Обновить шаблон задания"
+
+msgid "Update a template input"
+msgstr "Обновить входной параметр"
+
+msgid "Update architecture"
+msgstr "Обновить архитектуру"
+
+msgid "Use default description template"
+msgstr "Использовать описание из шаблона"
+
+msgid "User can not execute job on host %s"
+msgstr "Пользователь не может запустить задание на %s"
+
+msgid "User can not execute this job template"
+msgstr "Пользователь не может запустить этот шаблон задания"
+
+msgid "User can not execute this job template on %s"
+msgstr "Пользователь не может запустить этот шаблон задания на %s"
+
+msgid "User input"
+msgstr "Ввод пользователя"
+
+msgid "Value for required input '%s' was not specified"
+msgstr "Входные данные «%s» не определены."
+
+msgid "Variable"
+msgstr "Переменная"
+
+msgid "Variable name, used when input type is variable"
+msgstr "Имя переменной (используется, если поле «Тип ввода» содержит «Переменная»)"
+
+msgid "What command should be used to switch to the effective user. One of %s"
+msgstr "Команда для переключения в режим действующего пользователя. Возможные варианты: %s"
+
+msgid "What user should be used to run the script (using sudo-like mechanisms)"
+msgstr "Пользователь, от имени которого будет запускаться сценарий (по принципу sudo)"
+
+msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
+msgstr "Пользователь, от имени которого будет запускаться сценарий (по принципу sudo). По умолчанию определяется параметрами шаблона или глобальными параметрами."
+
+msgid "Whether it should be allowed to override the effective user from the invocation form."
+msgstr "Разрешает переопределение действующего пользователя из формы вызова."
+
+msgid "Whether or not the template is locked for editing"
+msgstr "Сообщает о блокировании шаблона для редактирования"
+
+msgid "Whether the current user login should be used as the effective user"
+msgstr "Разрешает текущему пользователю выступать в роли действующего пользователя"
+
+msgid "Whether to overwrite the template if it already exists"
+msgstr "Перезаписывать ли существующий шаблон"
+
+msgid "Whether we should sync templates from disk when running db:seed."
+msgstr "Разрешает синхронизацию шаблонов с диска во время выполнения db:seed."
+
+msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
+msgstr "У вас нет доступа к используемому шаблону. При сохранении формы он будет автоматически отключен."
+
+msgid "add a input for this template"
+msgstr "Добавить входные параметры"
+
+msgid "add an input set for this template to reference a different template inputs"
+msgstr "Добавить набор входных параметров из другого шаблона"
+
+msgid "cancelled"
+msgstr "отменено"
+
+msgid "error during rendering: %s"
+msgstr "ошибка при обработке шаблонов: %s"
+
+msgid "failed"
+msgstr "ошибка"
+
+msgid "following user inputs were provided"
+msgstr "Ввод пользователя:"
+
+msgid "here"
+msgstr "здесь"
+
+msgid "host already has an execution interface"
+msgstr "для этого узла уже настроен интерфейс выполнения"
+
+msgid "hosts"
+msgstr "узлу(ам)"
+
+msgid "in %s"
+msgstr "в %s"
+
+msgid "included template '%s' not found"
+msgstr "связанный шаблон «%s» не найден"
+
+msgid "input macro with name '%s' used, but no input with such name defined for this template"
+msgstr "ожидается макрос «%s», но входных параметров с таким именем для этого шаблона не обнаружено"
+
+msgid "planned"
+msgstr "запланировано"
+
+msgid "queued"
+msgstr "в очереди"
+
+msgid "remove template input"
+msgstr "удалить параметр ввода"
+
+msgid "remove template input set"
+msgstr "удалить набор входных данных шаблона"
+
+msgid "running"
+msgstr "выполняется"
+
+msgid "running %{percent}%%"
+msgstr ""
+
+msgid "succeeded"
+msgstr "завершено"
+
+msgid "success"
+msgstr "успешно"
+
+msgid "template"
+msgstr "шаблон"
+
+msgid "unknown status"
+msgstr "неизвестный статус"
