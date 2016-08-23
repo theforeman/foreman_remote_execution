@@ -158,9 +158,6 @@ msgstr ""
 msgid "Distribute tasks over N seconds"
 msgstr ""
 
-msgid "Documentation"
-msgstr ""
-
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr ""
 
@@ -260,7 +257,7 @@ msgstr ""
 msgid "Import facts"
 msgstr ""
 
-msgid "Include all inputs form the foreign template"
+msgid "Include all inputs from the foreign template"
 msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
@@ -808,7 +805,7 @@ msgstr ""
 msgid "running"
 msgstr ""
 
-msgid "running %{percent}%"
+msgid "running %{percent}%%"
 msgstr ""
 
 msgid "succeeded"

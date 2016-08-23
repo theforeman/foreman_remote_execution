@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-27 10:42-0400\n"
-"PO-Revision-Date: 2016-04-27 10:42-0400\n"
+"POT-Creation-Date: 2016-08-23 09:57-0400\n"
+"PO-Revision-Date: 2016-08-23 09:57-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -28,43 +28,43 @@ msgstr ""
 msgid "There was an error while updating the status, try refreshing the page."
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:10
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:11
 msgid "List foreign input sets"
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:17
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:18
 msgid "Show foreign input set details"
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:25
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:26
 msgid "Target template ID"
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:26
-msgid "Include all inputs form the foreign template"
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:27
+msgid "Include all inputs from the foreign template"
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:27
 #: ../app/controllers/api/v2/foreign_input_sets_controller.rb:28
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:29
 #: ../app/views/template_inputs/_foreign_input_set_form.html.erb:8
 msgid ""
 "A comma separated list of input names to be included from the foreign template"
 "."
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:29
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:30
 msgid "Input set description"
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:33
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:34
 msgid "Create a foreign input set"
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:41
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:42
 msgid "Delete a foreign input set"
 msgstr ""
 
-#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:48
+#: ../app/controllers/api/v2/foreign_input_sets_controller.rb:49
 msgid "Update a foreign input set"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgid "Inputs to use"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_invocations_controller.rb:31
-#: ../app/controllers/api/v2/job_templates_controller.rb:60
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
 msgid "SSH provider specific options"
 msgstr ""
 
@@ -162,51 +162,51 @@ msgstr ""
 msgid "Template with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:16
+#: ../app/controllers/api/v2/job_templates_controller.rb:17
 msgid "List job templates"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:17
+#: ../app/controllers/api/v2/job_templates_controller.rb:18
 msgid "List job templates per location"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:18
+#: ../app/controllers/api/v2/job_templates_controller.rb:19
 msgid "List job templates per organization"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:25
+#: ../app/controllers/api/v2/job_templates_controller.rb:26
 msgid "Import a job template from ERB"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:26
+#: ../app/controllers/api/v2/job_templates_controller.rb:27
 msgid "Template ERB"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:27
+#: ../app/controllers/api/v2/job_templates_controller.rb:28
 msgid "Overwrite template if it already exists"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:36
+#: ../app/controllers/api/v2/job_templates_controller.rb:37
 msgid "Export a job template to ERB"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:42
+#: ../app/controllers/api/v2/job_templates_controller.rb:43
 msgid "Show job template details"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:49
-#: ../app/controllers/api/v2/job_templates_controller.rb:100
+#: ../app/controllers/api/v2/job_templates_controller.rb:50
+#: ../app/controllers/api/v2/job_templates_controller.rb:101
 msgid "Template name"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:50
+#: ../app/controllers/api/v2/job_templates_controller.rb:51
 #: ../app/views/job_invocations/_form.html.erb:9
 #: ../app/views/job_templates/_custom_tabs.html.erb:3
 #: ../app/views/job_templates/_custom_tabs.html.erb:6
 msgid "Job category"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:51
+#: ../app/controllers/api/v2/job_templates_controller.rb:52
 #: ../app/views/job_templates/_custom_tabs.html.erb:14
 msgid ""
 "This template is used to generate the description. Input values can be used us"
@@ -214,136 +214,136 @@ msgid ""
 "name using %{job_category} and %{template_name}."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:56
+#: ../app/controllers/api/v2/job_templates_controller.rb:57
 msgid "Provider type"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:59
+#: ../app/controllers/api/v2/job_templates_controller.rb:60
 msgid "Whether or not the template is locked for editing"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/job_templates_controller.rb:62
 msgid "Effective user options"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:62
+#: ../app/controllers/api/v2/job_templates_controller.rb:63
 msgid "What user should be used to run the script (using sudo-like mechanisms)"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:63
+#: ../app/controllers/api/v2/job_templates_controller.rb:64
 msgid ""
 "Whether it should be allowed to override the effective user from the invocatio"
 "n form."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:64
+#: ../app/controllers/api/v2/job_templates_controller.rb:65
 msgid "Whether the current user login should be used as the effective user"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:71
+#: ../app/controllers/api/v2/job_templates_controller.rb:72
 msgid "Create a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:78
-#: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
+#: ../app/controllers/api/v2/job_templates_controller.rb:79
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:25
 msgid "Update a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:86
+#: ../app/controllers/api/v2/job_templates_controller.rb:87
 msgid "Template version"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:92
+#: ../app/controllers/api/v2/job_templates_controller.rb:93
 msgid "Delete a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:104
+#: ../app/controllers/api/v2/job_templates_controller.rb:105
 msgid "Clone a provision template"
 msgstr ""
 
-#: ../app/controllers/api/v2/remote_execution_features_controller.rb:8
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:9
 msgid "List remote execution features"
 msgstr ""
 
-#: ../app/controllers/api/v2/remote_execution_features_controller.rb:13
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:14
 msgid "Show remote execution feature"
 msgstr ""
 
-#: ../app/controllers/api/v2/remote_execution_features_controller.rb:20
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:21
 msgid "Job template ID to be used for the feature"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:11
+#: ../app/controllers/api/v2/template_inputs_controller.rb:12
 msgid "List template inputs"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:18
+#: ../app/controllers/api/v2/template_inputs_controller.rb:19
 msgid "Show template input details"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:26
+#: ../app/controllers/api/v2/template_inputs_controller.rb:27
 msgid "Input name"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:27
+#: ../app/controllers/api/v2/template_inputs_controller.rb:28
 msgid "Input description"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:28
+#: ../app/controllers/api/v2/template_inputs_controller.rb:29
 msgid "Input is required"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:29
+#: ../app/controllers/api/v2/template_inputs_controller.rb:30
 msgid "Input is advanced"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:30
+#: ../app/controllers/api/v2/template_inputs_controller.rb:31
 msgid "Input type"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:31
+#: ../app/controllers/api/v2/template_inputs_controller.rb:32
 msgid "Fact name, used when input type is fact"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:32
+#: ../app/controllers/api/v2/template_inputs_controller.rb:33
 msgid "Variable name, used when input type is variable"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:33
+#: ../app/controllers/api/v2/template_inputs_controller.rb:34
 msgid "Puppet class name, used when input type is puppet_parameter"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:34
+#: ../app/controllers/api/v2/template_inputs_controller.rb:35
 msgid "Puppet parameter name, used when input type is puppet_parameter"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:35
+#: ../app/controllers/api/v2/template_inputs_controller.rb:36
 msgid "Selectable values for user inputs"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:39
+#: ../app/controllers/api/v2/template_inputs_controller.rb:40
 msgid "Create a template input"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:47
+#: ../app/controllers/api/v2/template_inputs_controller.rb:48
 msgid "Delete a template input"
 msgstr ""
 
-#: ../app/controllers/api/v2/template_inputs_controller.rb:54
+#: ../app/controllers/api/v2/template_inputs_controller.rb:55
 msgid "Update a template input"
 msgstr ""
 
-#: ../app/controllers/job_templates_controller.rb:23
+#: ../app/controllers/job_templates_controller.rb:25
 msgid ""
 "Problem with previewing the template: %{error}. Note that you must save templa"
 "te input changes before you try to preview it."
 msgstr ""
 
-#: ../app/controllers/job_templates_controller.rb:32
+#: ../app/controllers/job_templates_controller.rb:34
 msgid "Job template imported successfully."
 msgstr ""
 
-#: ../app/controllers/job_templates_controller.rb:37
+#: ../app/controllers/job_templates_controller.rb:39
 msgid "Unable to save template. Correct highlighted errors"
 msgstr ""
 
@@ -387,7 +387,7 @@ msgid "queued"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:38
-msgid "running %{percent}%"
+msgid "running %{percent}%%"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:40
@@ -429,7 +429,7 @@ msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:93
 #: ../app/helpers/remote_execution_helper.rb:200
-#: ../app/models/job_invocation.rb:128
+#: ../app/models/job_invocation.rb:131
 msgid "N/A"
 msgstr ""
 
@@ -495,33 +495,29 @@ msgstr ""
 msgid "%s ago"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:212
-msgid "Documentation"
-msgstr ""
-
-#: ../app/helpers/remote_execution_helper.rb:219
+#: ../app/helpers/remote_execution_helper.rb:214
 msgid "Template input"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:220
+#: ../app/helpers/remote_execution_helper.rb:215
 msgid "remove template input"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:232
+#: ../app/helpers/remote_execution_helper.rb:227
 msgid "Use default description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:237
+#: ../app/helpers/remote_execution_helper.rb:232
 msgid "Description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:243
+#: ../app/helpers/remote_execution_helper.rb:238
 #: ../app/views/job_invocations/_form.html.erb:101
 #: ../app/views/job_templates/_custom_tabs.html.erb:14
 msgid "Explanation"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:244
+#: ../app/helpers/remote_execution_helper.rb:239
 msgid ""
 "This template is used to generate the description Input values can be used usi"
 "ng the syntax %{package}. You may also include the job category and template n"
@@ -556,7 +552,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:8
+#: ../app/lib/actions/remote_execution/run_host_job.rb:76 action_names.rb:4
 msgid "Remote action:"
 msgstr ""
 
@@ -600,11 +596,11 @@ msgstr ""
 msgid "Unable to fetch public key"
 msgstr ""
 
-#: ../app/models/concerns/foreman_remote_execution/nic_extensions.rb:21
+#: ../app/models/concerns/foreman_remote_execution/nic_extensions.rb:20
 msgid "host already has an execution interface"
 msgstr ""
 
-#: ../app/models/foreign_input_set.rb:21
+#: ../app/models/foreign_input_set.rb:20
 msgid ""
 "Circular dependency detected in foreign input set '%{template}' -> '%{target_t"
 "emplate}'. Templates stack: %{templates_stack}"
@@ -652,27 +648,27 @@ msgstr ""
 msgid "template"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:79
+#: ../app/models/job_invocation_composer.rb:87
 msgid "Cannot specify both bookmark_id and search_query"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:84
+#: ../app/models/job_invocation_composer.rb:92
 msgid "Cannot specify both recurrence and scheduling"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:118
+#: ../app/models/job_invocation_composer.rb:126
 msgid "Unknown input %{input_name} for template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:226
+#: ../app/models/job_invocation_composer.rb:234
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:235
+#: ../app/models/job_invocation_composer.rb:243
 msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:241
+#: ../app/models/job_invocation_composer.rb:249
 msgid ""
 "The template %{template_name} mapped to feature %{feature_name} is not accessi"
 "ble by the user"
@@ -682,15 +678,15 @@ msgstr ""
 msgid "Job Invocation"
 msgstr ""
 
-#: ../app/models/job_template.rb:153
+#: ../app/models/job_template.rb:152
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr ""
 
-#: ../app/models/job_template.rb:219
+#: ../app/models/job_template.rb:218
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr ""
 
-#: ../app/models/remote_execution_feature.rb:20
+#: ../app/models/remote_execution_feature.rb:18
 msgid "Unknown remote execution feature %s"
 msgstr ""
 
@@ -723,7 +719,7 @@ msgstr ""
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:27
+#: ../app/models/setting/remote_execution.rb:30
 msgid "Whether we should sync templates from disk when running db:seed."
 msgstr ""
 
@@ -743,15 +739,15 @@ msgstr ""
 msgid "Dynamic Query"
 msgstr ""
 
-#: ../app/models/targeting.rb:37
+#: ../app/models/targeting.rb:35
 msgid "Cannot resolve hosts without a user"
 msgstr ""
 
-#: ../app/models/targeting.rb:38
+#: ../app/models/targeting.rb:36
 msgid "Cannot resolve hosts without a bookmark or search query"
 msgstr ""
 
-#: ../app/models/targeting.rb:67 ../app/models/targeting.rb:68
+#: ../app/models/targeting.rb:65 ../app/models/targeting.rb:66
 msgid "Must select a bookmark or enter a search query"
 msgstr ""
 
@@ -771,7 +767,7 @@ msgstr ""
 msgid "Puppet parameter"
 msgstr ""
 
-#: ../app/models/template_input.rb:113
+#: ../app/models/template_input.rb:110
 msgid "Value for required input '%s' was not specified"
 msgstr ""
 
@@ -888,7 +884,7 @@ msgid "Status"
 msgstr ""
 
 #: ../app/views/job_invocations/_tab_hosts.html.erb:23
-#: ../app/views/job_templates/index.html.erb:18
+#: ../app/views/job_templates/index.html.erb:16
 msgid "Actions"
 msgstr ""
 
@@ -1009,32 +1005,32 @@ msgstr ""
 msgid "Edit Job Template"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:6
+#: ../app/views/job_templates/index.html.erb:5
 msgid "Job Templates"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:8
+#: ../app/views/job_templates/index.html.erb:7
 msgid "Import"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:9
+#: ../app/views/job_templates/index.html.erb:8
 #: ../app/views/job_templates/new.html.erb:4
 msgid "New Job Template"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:15
+#: ../app/views/job_templates/index.html.erb:13
 msgid "JobTemplate|Name"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:16
+#: ../app/views/job_templates/index.html.erb:14
 msgid "JobTemplate|Snippet"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:17
+#: ../app/views/job_templates/index.html.erb:15
 msgid "JobTemplate|Locked"
 msgstr ""
 
-#: ../app/views/job_templates/index.html.erb:28
+#: ../app/views/job_templates/index.html.erb:26
 msgid "This template is locked for editing."
 msgstr ""
 
@@ -1140,7 +1136,7 @@ msgstr ""
 msgid "Scroll to top"
 msgstr ""
 
-#: ../app/views/templates/package_action.erb:5
+#: ../app/views/templates/ssh/package_action.erb:5
 msgid "Unsupported or no operating system found for this host."
 msgstr ""
 
@@ -1153,27 +1149,27 @@ msgid "Jobs"
 msgstr ""
 
 #: action_names.rb:2
-msgid "Action with sub plans"
-msgstr ""
-
-#: action_names.rb:3
-msgid "Create architecture"
-msgstr ""
-
-#: action_names.rb:4
-msgid "Delete architecture"
-msgstr ""
-
-#: action_names.rb:5
-msgid "Update architecture"
-msgstr ""
-
-#: action_names.rb:6
 msgid "Import facts"
 msgstr ""
 
-#: action_names.rb:7
+#: action_names.rb:3
 msgid "Import Puppet classes"
+msgstr ""
+
+#: action_names.rb:5
+msgid "Action with sub plans"
+msgstr ""
+
+#: action_names.rb:6
+msgid "Create architecture"
+msgstr ""
+
+#: action_names.rb:7
+msgid "Delete architecture"
+msgstr ""
+
+#: action_names.rb:8
+msgid "Update architecture"
 msgstr ""
 
 #: gemspec.rb:2

@@ -157,9 +157,6 @@ msgstr ""
 msgid "Distribute tasks over N seconds"
 msgstr ""
 
-msgid "Documentation"
-msgstr "Documentation"
-
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr "Entrées dupliquées détectés : %{duplicated_inputs}"
 
@@ -259,8 +256,8 @@ msgstr ""
 msgid "Import facts"
 msgstr "Import des facts"
 
-msgid "Include all inputs form the foreign template"
-msgstr "Inclure toutes les entrées du modèle externe"
+msgid "Include all inputs from the foreign template"
+msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Indique que l'action doit pouvoir être annulée si elle ne peut pas être démarrée avant cette heure."
@@ -807,8 +804,8 @@ msgstr "supprimer un modèles des données en entrée"
 msgid "running"
 msgstr ""
 
-msgid "running %{percent}%"
-msgstr "en cours d’exécution %{percent}%"
+msgid "running %{percent}%%"
+msgstr ""
 
 msgid "succeeded"
 msgstr "réussi"
