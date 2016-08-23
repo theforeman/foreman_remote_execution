@@ -104,7 +104,7 @@ module ForemanRemoteExecution
         # add dashboard widget
         # widget 'foreman_remote_execution_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
 
-        parameter_filter Subnet, :remote_execution_proxies, :remote_execution_proxy_ids
+        parameter_filter Subnet, :remote_execution_proxies, :remote_execution_proxy_ids => []
         parameter_filter Nic, :execution
       end
     end
