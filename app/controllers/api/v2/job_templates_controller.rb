@@ -112,8 +112,8 @@ module Api
         process_response @job_template.save
       end
 
-      def resource_name
-        'job_template'
+      def resource_name(nested_resource = nil)
+        nested_resource || 'job_template'
       end
 
       private

@@ -14,6 +14,16 @@ module Api
         assert_response :success
       end
 
+      test 'should get templates of give organization' do
+        @organization = FactoryGirl.create(:organization)
+        @template.organizations << @organization
+        @template.save!
+        get :index, :organization_id => @organization.id
+        templates = ActiveSupport::JSON.decode(@response.body)
+        assert !templates.empty?, 'Should respond with template'
+        assert_response :success
+      end
+
       test 'should get template detail' do
         get :show, :id => @template.to_param
         assert_response :success

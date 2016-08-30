@@ -55,6 +55,18 @@ Rails.application.routes.draw do
         end
       end
 
+      if SETTINGS[:organizations_enabled]
+        resources :organizations, :only => [:index] do
+          resources :job_templates, :only =>[:index, :show]
+        end
+      end
+
+      if SETTINGS[:locations_enabled]
+        resources :locations, :only => [:index] do
+          resources :job_templates, :only =>[:index, :show]
+        end
+      end
+
       resources :templates, :only => :none do
         resources :template_inputs, :only => [:index, :show, :create, :destroy, :update]
         resources :foreign_input_sets, :only => [:index, :show, :create, :destroy, :update]
