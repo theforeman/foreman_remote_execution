@@ -14,6 +14,10 @@ class Setting::RemoteExecution < Setting
                  "If locations or organizations are enabled, the search will be limited to the host's " +
                  'organization or location.'),
                  true),
+        self.set('remote_execution_without_proxy',
+                 N_('When enabled, the remote execution will try to run the commands directly, when no
+                     proxy with remote execution feature is configured for the host.'),
+                 false),
         self.set('remote_execution_ssh_user',
                  N_('Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user.'),
                  'root'),

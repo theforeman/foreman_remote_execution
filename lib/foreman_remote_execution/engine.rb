@@ -1,3 +1,5 @@
+require 'foreman_remote_execution_core'
+
 module ForemanRemoteExecution
   class Engine < ::Rails::Engine
     engine_name 'foreman_remote_execution'

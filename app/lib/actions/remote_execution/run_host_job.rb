@@ -1,15 +1,16 @@
 module Actions
   module RemoteExecution
     class RunHostJob < Actions::EntryAction
+      include ::Actions::Helpers::WithContinuousOutput
+      include ::Actions::Helpers::WithDelegatedAction
 
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
-      include Actions::RemoteExecution::Helpers::LiveOutput
 
       def resource_locks
         :link
       end
 
-      def plan(job_invocation, host, template_invocation, proxy, options = {})
+      def plan(job_invocation, host, template_invocation, proxy_selector = ::RemoteExecutionProxySelector.new, options = {})
         action_subject(host, :job_category => job_invocation.job_category, :description => job_invocation.description)
 
         template_invocation.host_id = host.id
@@ -24,18 +25,21 @@ module Actions
 
         raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
-        if proxy.blank?
-          offline_proxies = options.fetch(:offline_proxies, [])
+        provider = template_invocation.template.provider_type.to_s
+        proxy = proxy_selector.determine_proxy(host, provider)
+        if proxy == :not_available
+          offline_proxies = proxy_selector.offline
           settings = { :count => offline_proxies.count, :proxy_names => offline_proxies.map(&:name).join(', ') }
           raise n_('The only applicable proxy %{proxy_names} is down',
                    'All %{count} applicable proxies are down. Tried %{proxy_names}',
-                   offline_proxies.count) % settings unless offline_proxies.empty?
+                   offline_proxies.count) % settings
+        elsif proxy == :not_defined && !Setting['remote_execution_without_proxy']
+          settings = { :global_proxy => 'remote_execution_global_proxy',
+                       :fallback_proxy => 'remote_execution_fallback_proxy',
+                       :no_proxy => 'remote_execution_no_proxy' }
 
-          settings = { :global_proxy   => 'remote_execution_global_proxy',
-                       :fallback_proxy => 'remote_execution_fallback_proxy' }
-
-          raise _('Could not use any proxy. Consider configuring %{global_proxy} ' +
-                  'or %{fallback_proxy} in settings') % settings
+          raise _('Could not use any proxy. Consider configuring %{global_proxy}, ' +
+                  '%{fallback_proxy} or %{no_proxy} in settings') % settings
         end
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
@@ -43,28 +47,24 @@ module Actions
         raise _('Failed rendering template: %s') % renderer.error_message unless script
 
         provider = template_invocation.template.provider
-        plan_action(RunProxyCommand, proxy, hostname, script, provider.proxy_command_options(template_invocation, host))
+        action_options = provider.proxy_command_options(template_invocation, host).merge(:hostname => hostname, :script => script)
+        plan_delegated_action(proxy, ForemanRemoteExecutionCore::Actions::RunScript, action_options)
         plan_self
       end
 
       def finalize(*args)
-        host = Host.find(input[:host][:id])
-        host.refresh_statuses
-      rescue => e
-        ::Foreman::Logging.exception "Could not update execution status for #{input[:host][:name]}", e
+        check_exit_status
       end
 
-      def humanized_output
-        live_output.map { |line| line['output'].chomp }.join("\n")
+      def check_exit_status
+        if delegated_output[:exit_status].to_s != '0'
+          error! _('Playbook execution failed')
+        end
       end
 
       def live_output
-        proxy_command_action = planned_actions(RunProxyCommand).first
-        if proxy_command_action
-          proxy_command_action.live_output
-        else
-          execution_plan.errors.map { |e| exception_to_output(_('Failed to initialize command'), e) }
-        end
+        continuous_output.sort!
+        continuous_output.raw_outputs
       end
 
       def humanized_input
@@ -74,6 +74,43 @@ module Actions
 
       def humanized_name
         N_('Remote action:')
+      end
+
+      def finalize
+        if exit_status.to_s != '0'
+          error! _('Playbook execution failed')
+        end
+      end
+
+      def rescue_strategy
+        ::Dynflow::Action::Rescue::Fail
+      end
+
+      def humanized_output
+        continuous_output.humanize
+      end
+
+      def continuous_output_providers
+        super << self
+      end
+
+      def fill_continuous_output(continuous_output)
+        fill_planning_errors_to_continuous_output(continuous_output) unless exit_status
+        delegated_output.fetch('result', []).each do |raw_output|
+          continuous_output.add_raw_output(raw_output)
+        end
+        final_timestamp = (continuous_output.last_timestamp || task.ended_at).to_f + 1
+        if exit_status
+          continuous_output.add_output(_('Exit status: %s') % exit_status, 'stdout', final_timestamp)
+        elsif run_step && run_step.error
+          continuous_output.add_ouput(_('Job finished with error') + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', final_timestamp)
+        end
+      rescue => e
+        continuous_output.add_exception(_('Error loading data from proxy'), e)
+      end
+
+      def exit_status
+        delegated_output[:exit_status]
       end
 
       def find_ip_or_hostname(host)
@@ -90,6 +127,19 @@ module Actions
       end
 
       private
+
+      def delegated_output
+        if input[:delegated_action_id]
+          super
+        elsif phase?(Present)
+          # for compatibility with old actions
+          if old_action = all_planned_actions.first
+            old_action.output.fetch('proxy_output', {})
+          else
+            {}
+          end
+        end
+      end
 
       def verify_permissions(host, template_invocation)
         raise _('User can not execute job on host %s') % host.name unless User.current.can?(:view_hosts, host)
