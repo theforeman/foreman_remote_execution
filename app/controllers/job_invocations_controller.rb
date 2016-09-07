@@ -35,7 +35,7 @@ class JobInvocationsController < ApplicationController
   end
 
   def create
-    @composer = JobInvocationComposer.from_ui_params(params.merge(:triggering => triggering_params))
+    @composer = prepare_composer
     if @composer.trigger
       redirect_to job_invocation_path(@composer.job_invocation)
     else
@@ -58,11 +58,11 @@ class JobInvocationsController < ApplicationController
   # refreshes the form
   def refresh
     params[:job_invocation].delete :description_format if params[:job_invocation].key?(:description_override)
-    @composer = JobInvocationComposer.from_ui_params(params)
+    @composer = prepare_composer
   end
 
   def preview_hosts
-    composer = JobInvocationComposer.from_ui_params(params)
+    composer = prepare_composer
 
     @hosts = composer.targeted_hosts.limit(Setting[:entries_per_page])
     @additional = composer.targeted_hosts.count - Setting[:entries_per_page]
@@ -83,5 +83,9 @@ class JobInvocationsController < ApplicationController
       else
         super
     end
+  end
+
+  def prepare_composer
+    JobInvocationComposer.from_ui_params(params.merge(:triggering => triggering_params))
   end
 end
