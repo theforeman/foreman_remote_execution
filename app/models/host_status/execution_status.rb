@@ -10,7 +10,7 @@ class HostStatus::ExecutionStatus < HostStatus::Status
   # mapping to string representation
   STATUS_NAMES = { OK => 'succeeded', ERROR => 'failed', QUEUED => 'queued', RUNNING => 'running' }
 
-  def relevant?
+  def relevant?(*args)
     execution_tasks.present?
   end
 
