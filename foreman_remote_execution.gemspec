@@ -14,7 +14,12 @@ Gem::Specification.new do |s|
   s.description = 'A plugin bringing remote execution to the Foreman, completing the config ' +
                   'management functionality with remote management functionality.'
 
-  s.files =            `git ls-files`.split("\n").reject { |f| f =~ /^scripts/ }
+  s.files =            `git ls-files`.split("\n").reject do |file|
+    file =~ /^scripts/ ||
+        file.start_with?('lib/foreman_remote_execution_core') ||
+        file == 'foreman_remote_execution_core.gemspec'
+  end
+
   s.test_files =       `git ls-files test`.split("\n")
   s.extra_rdoc_files = `git ls-files doc`.split("\n") + Dir['README*', 'LICENSE']
 
