@@ -12,10 +12,10 @@ Gem::Specification.new do |s|
   s.description = <<DESC
   Ssh remote execution provider code sharable between Foreman and Foreman-Proxy
 DESC
-  s.licenses    = ['GPL-3']
+  s.license = 'GPLv3'
 
   s.files = Dir['lib/foreman_remote_execution_core/**/*'] +
-      ['lib/foreman_remote_execution_core.rb']
+            ['lib/foreman_remote_execution_core.rb', 'LICENSE']
 
   s.add_runtime_dependency('foreman-tasks-core', '~> 0.1.0')
   s.add_runtime_dependency('net-ssh')
