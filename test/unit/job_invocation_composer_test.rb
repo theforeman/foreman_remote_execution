@@ -4,7 +4,7 @@ RemoteExecutionProvider.register(:Mcollective, OpenStruct)
 
 describe JobInvocationComposer do
   before do
-    permission1 = FactoryGirl.create(:permission, :name => 'view_job_templates', :resource_type => 'JobTemplate')
+    permission1 = Permission.find_by_name('view_job_templates')
     permission2 = Permission.find_by_name('view_bookmarks')
     permission3 = Permission.find_by_name('view_hosts')
     filter1 = FactoryGirl.build(:filter, :permissions => [permission1], :search => 'name ~ trying*')
@@ -17,7 +17,7 @@ describe JobInvocationComposer do
     role.filters = filter1, filter2, filter3
     role.save
     User.current = FactoryGirl.build(:user)
-    User.current.roles<< role
+    User.current.roles << role
     User.current.save
   end
 
