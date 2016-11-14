@@ -24,14 +24,14 @@ module ForemanRemoteExecutionCore
     def start
       remote_script = cp_script_to_remote
       output_path = File.join(File.dirname(remote_script), 'output')
+      exit_code_path = File.join(File.dirname(remote_script), 'exit_code')
 
-      # pipe the output to tee while capturing the exit code
+      # pipe the output to tee while capturing the exit code in a file
       script = <<-SCRIPT
-          exec 4>&1
-          exit_code=`((#{su_prefix}#{remote_script}; echo $?>&3 ) | /usr/bin/tee #{output_path} ) 3>&1 >&4`
-          exec 4>&-
-          exit $exit_code
+          (#{su_prefix}#{remote_script}; echo $?>#{exit_code_path}) | /usr/bin/tee #{output_path}
+          exit $(< #{exit_code_path})
       SCRIPT
+
       logger.debug("executing script:\n#{script.lines.map { |line| "  | #{line}" }.join}")
       run_async(script)
     rescue => e
