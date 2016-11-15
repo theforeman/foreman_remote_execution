@@ -17,6 +17,7 @@ describe JobInvocationComposer do
     role.filters = filter1, filter2, filter3
     role.save
     User.current = FactoryGirl.build(:user)
+    User.current.current_password = User.current.password
     User.current.roles << role
     User.current.save
   end
