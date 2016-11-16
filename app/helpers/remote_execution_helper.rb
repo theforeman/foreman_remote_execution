@@ -167,6 +167,11 @@ module RemoteExecutionHelper
     end
   end
 
+  def invocation_description(invocation)
+    description = invocation.description.try(:capitalize) || invocation.job_category
+    trunc_with_tooltip(description, 80)
+  end
+
   def invocation_result(invocation, key)
     unknown = '&mdash;'
     result = invocation_count(invocation, :output_key => key, :unknown_string => unknown.html_safe)

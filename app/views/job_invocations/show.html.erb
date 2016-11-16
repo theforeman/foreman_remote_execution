@@ -1,4 +1,4 @@
-<% title @job_invocation.description %>
+<% title @job_invocation.description, trunc_with_tooltip(@job_invocation.description, 120) %>
 <% stylesheet 'job_invocations' %>
 <% javascript 'template_invocation' %>
 
