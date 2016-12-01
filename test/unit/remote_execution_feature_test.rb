@@ -42,5 +42,15 @@ describe RemoteExecutionFeature do
 
       composer.targeting.search_query.must_equal "name = #{host.name}"
     end
+
+    it "updates the feature when attributes change" do
+      updated_feature = RemoteExecutionFeature.register(install_feature.label, N_('Katello: Install package'),
+                                                        :description => 'New description',
+                                                        :provided_inputs => ['package', 'force'])
+      updated_feature.reload
+      updated_feature.id.must_equal(install_feature.id)
+      updated_feature.description.must_equal 'New description'
+      updated_feature.provided_input_names.must_equal ['package', 'force']
+    end
   end
 end

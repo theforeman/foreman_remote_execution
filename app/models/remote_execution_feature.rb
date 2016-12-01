@@ -25,7 +25,8 @@ class RemoteExecutionFeature < ActiveRecord::Base
     if feature.nil?
       feature = self.create!(:label => label, :name => name, :provided_input_names => options[:provided_inputs], :description => options[:description])
     else
-      feature.update_attributes!(:name => name, :provided_input_names => options[:provided_inputs], :description => options[:description])
+      feature.attributes = { :name => name, :provided_input_names => options[:provided_inputs], :description => options[:description] }
+      feature.save if feature.changed?
     end
     return feature
   end
