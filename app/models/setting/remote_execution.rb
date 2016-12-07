@@ -35,7 +35,10 @@ class Setting::RemoteExecution < Setting
                  true),
         self.set('remote_execution_ssh_port',
                 N_('Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.'),
-                '22')
+                '22'),
+        self.set('remote_execution_connect_by_ip',
+                 N_('Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip.'),
+                false),
       ].each { |s| self.create! s.update(:category => 'Setting::RemoteExecution') }
     end
 

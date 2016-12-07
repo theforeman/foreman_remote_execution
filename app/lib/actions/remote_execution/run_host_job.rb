@@ -21,7 +21,6 @@ module Actions
         link!(template_invocation)
 
         verify_permissions(host, template_invocation)
-        hostname = find_ip_or_hostname(host)
 
         raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
@@ -47,6 +46,7 @@ module Actions
         raise _('Failed rendering template: %s') % renderer.error_message unless script
 
         provider = template_invocation.template.provider
+        hostname = provider.find_ip_or_hostname(host)
         action_options = provider.proxy_command_options(template_invocation, host).merge(:hostname => hostname, :script => script)
         plan_delegated_action(proxy, ForemanRemoteExecutionCore::Actions::RunScript, action_options)
         plan_self
@@ -111,19 +111,6 @@ module Actions
 
       def exit_status
         delegated_output[:exit_status]
-      end
-
-      def find_ip_or_hostname(host)
-        %w(execution primary provision).each do |flag|
-          interface = host.send(flag + '_interface')
-          return interface.ip if interface && interface.ip.present?
-        end
-
-        host.interfaces.each do |interface|
-          return interface.ip unless interface.ip.blank?
-        end
-
-        return host.fqdn
       end
 
       private

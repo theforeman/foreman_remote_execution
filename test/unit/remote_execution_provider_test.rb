@@ -90,7 +90,6 @@ describe RemoteExecutionProvider do
       end
     end
 
-
     describe 'ssh port from settings' do
       before do
         Setting[:remote_execution_ssh_port] = '66'
@@ -112,5 +111,60 @@ describe RemoteExecutionProvider do
       end
     end
 
+    describe '#find_ip_or_hostname' do
+      let(:host) do
+        FactoryGirl.create(:host) do |host|
+          host.interfaces = [FactoryGirl.build(:nic_managed, flags.merge(:ip => nil, :name => 'somehost.somedomain.org', :primary => true)),
+                             FactoryGirl.build(:nic_managed, flags.merge(:ip => '127.0.0.1'))]
+        end
+      end
+
+      let(:flags) do
+        { :primary => false, :provision => false, :execution => false }
+      end
+
+      it 'gets fqdn from flagged interfaces if not preferring ips' do
+        # falling to primary interface
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal 'somehost.somedomain.org'
+
+        # execution wins if present
+        execution_interface = FactoryGirl.build(:nic_managed,
+                                                flags.merge(:execution => true, :name => 'special.somedomain.org'))
+        host.interfaces << execution_interface
+        host.primary_interface.update_attributes(:execution => false)
+        host.interfaces.each(&:save)
+        host.reload
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.fqdn
+      end
+
+      it 'gets ip from flagged interfaces' do
+        host.params['remote_execution_connect_by_ip'] = true
+        # no ip address set on relevant interface - fallback to fqdn
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal 'somehost.somedomain.org'
+
+        # provision interface with ip while primary without
+        provision_interface = FactoryGirl.build(:nic_managed,
+                                                flags.merge(:provision => true, :ip => '10.0.0.1'))
+        host.interfaces << provision_interface
+        host.primary_interface.update_attributes(:provision => false)
+        host.interfaces.each(&:save)
+        host.reload
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal provision_interface.ip
+
+        # both primary and provision interface have IPs: the primary wins
+        host.primary_interface.update_attributes(:ip => '10.0.0.2', :execution => false)
+        host.reload
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal host.primary_interface.ip
+
+        # there is an execution interface with IP: it wins
+        execution_interface = FactoryGirl.build(:nic_managed,
+                                                flags.merge(:execution => true, :ip => '10.0.0.3'))
+        host.interfaces << execution_interface
+        host.primary_interface.update_attributes(:execution => false)
+        host.interfaces.each(&:save)
+        host.reload
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip
+      end
+    end
   end
 end
