@@ -97,8 +97,8 @@ msgstr "Nivel de concurrencia"
 msgid "Control concurrency level and distribution over time"
 msgstr "Controlar el nivel de concurrencia y la distribución en el tiempo"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "No se pudo utilizar ningún proxy. Considere configurar %{global_proxy} o %{fallback_proxy} en configuración"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "No se pudo utilizar ninguna plantilla utilizada en la invocación de trabajo."
@@ -118,9 +118,6 @@ msgstr "Crear un trabajo recurrente"
 msgid "Create a template input"
 msgstr "Crear una entrada de la plantilla"
 
-msgid "Create architecture"
-msgstr "Crear una arquitectura"
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "Usuario predeterminado que se debe utilizar para SSH. Puede sustituir por host al establecer un parámetro llamado remote_execution_ssh_user."
 
@@ -135,9 +132,6 @@ msgstr "Eliminar una plantilla de trabajo"
 
 msgid "Delete a template input"
 msgstr "Eliminar una entrada de la plantilla"
-
-msgid "Delete architecture"
-msgstr "Borrar una arquitectura"
 
 msgid "Description"
 msgstr "Descripción"
@@ -211,9 +205,6 @@ msgstr "Errores"
 msgid "Failed rendering template: %s"
 msgstr "Falló la reproducción de la plantilla: %s."
 
-msgid "Failed to initialize command"
-msgstr "No se pudo inicializar el comando."
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "Entrada de funcionalidad %{input_name} no definida en la plantilla %{template_name}"
 
@@ -261,9 +252,6 @@ msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Indica que la acción se debe cancelar si no se puede iniciar antes de este momento."
-
-msgid "Initialization error: %s"
-msgstr "Error de inicialización: %s"
 
 msgid "Input"
 msgstr "Entrada"
@@ -391,9 +379,6 @@ msgstr "Aún no finalizó ninguna ejecución."
 msgid "No hosts found."
 msgstr "No se encontraron hosts."
 
-msgid "No output"
-msgstr "Sin salida"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "No hay ninguna plantilla mapeada a la funcionalidad %{feature_name}."
 
@@ -417,6 +402,12 @@ msgstr "pendiente"
 
 msgid "Perform no more executions after this time"
 msgstr "No ejecutar más después de esta cantidad de veces"
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
 
 msgid "Preview"
 msgstr "Vista previa"
@@ -510,9 +501,6 @@ msgstr "Programar el trabajo para el futuro"
 
 msgid "Schedule the job to start at a later time"
 msgstr "Programar el trabajo para que comience más tarde"
-
-msgid "Script execution failed"
-msgstr "Falló la ejecución del script."
 
 msgid "Scroll to bottom"
 msgstr "Desplazarse hasta el final"
@@ -699,9 +687,6 @@ msgstr "Actualizar una plantilla de trabajo"
 msgid "Update a template input"
 msgstr "Actualizar una entrada de la plantilla"
 
-msgid "Update architecture"
-msgstr "Actualizar una arquitectura"
-
 msgid "Use default description template"
 msgstr "Utilizar plantilla de descripción predeterminada"
 
@@ -734,6 +719,11 @@ msgstr "El usuario que se debe utilizar para ejecutar el script (con mecanismos 
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "El usuario que se debe utilizar para ejecutar el script (con mecanismos tipo sudo). El valor predeterminado es un parámetro de plantilla o una configuración global."
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
+msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "Si debe tener permiso para sustituir el usuario efectivo del formulario de invocación."

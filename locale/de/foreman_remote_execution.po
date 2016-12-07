@@ -97,8 +97,8 @@ msgstr "Parallelitätsebene"
 msgid "Control concurrency level and distribution over time"
 msgstr "Parallelitätsebene und zeitliche Verteilung steuern"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "Es konnte kein Proxy verwendet werden. Erwägen Sie %{global_proxy} oder %{fallback_proxy} in den Einstellungen zu konfigurieren"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "Es konnte keine Vorlage aus dem Jobaufruf verwendet werden"
@@ -118,9 +118,6 @@ msgstr "Wiederholten Job erstellen"
 msgid "Create a template input"
 msgstr "Vorlageneingabe erstellen"
 
-msgid "Create architecture"
-msgstr "Architektur erstellen"
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "Standardbenutzer für SSH. Kann für jeden Host einzeln überschrieben werden, indem Sie ein Parameter namens remote_execution_ssh_user bestimmen."
 
@@ -135,9 +132,6 @@ msgstr "Job-Vorlage löschen"
 
 msgid "Delete a template input"
 msgstr "Vorlageneingabe löschen"
-
-msgid "Delete architecture"
-msgstr "Architektur löschen"
 
 msgid "Description"
 msgstr "Beschreibung"
@@ -211,9 +205,6 @@ msgstr "Fehlgeschlagen"
 msgid "Failed rendering template: %s"
 msgstr "Rendern der Vorlage fehlgeschlagen: %s"
 
-msgid "Failed to initialize command"
-msgstr "Initialisieren des Befehls fehlgeschlagen"
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "Funktionseingabe %{input_name} nicht definiert in Vorlage %{template_name}"
 
@@ -261,9 +252,6 @@ msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Gibt an, dass die Aktion abgebrochen werden soll, wenn sie nicht vor diesem Zeitpunkt gestartet werden kann."
-
-msgid "Initialization error: %s"
-msgstr "Initialisierungsfehler: %s"
 
 msgid "Input"
 msgstr "Eingabe"
@@ -391,9 +379,6 @@ msgstr "Noch keine Ausführung abgeschlossen"
 msgid "No hosts found."
 msgstr "Keine Hosts gefunden"
 
-msgid "No output"
-msgstr "Keine Ausgabe"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "Der Funktion %{feature_name} wurde keine Vorlage zugewiesen"
 
@@ -417,6 +402,12 @@ msgstr "Ausstehend"
 
 msgid "Perform no more executions after this time"
 msgstr "Danach nicht mehr ausführen"
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
 
 msgid "Preview"
 msgstr "Vorschau"
@@ -510,9 +501,6 @@ msgstr "Job zu einem zukünftigen Zeitpunkt starten lassen"
 
 msgid "Schedule the job to start at a later time"
 msgstr "Job zu einer späteren Zeit starten lassen"
-
-msgid "Script execution failed"
-msgstr "Ausführung des Skripts fehlgeschlagen"
 
 msgid "Scroll to bottom"
 msgstr "Zum Ende scrollen"
@@ -699,9 +687,6 @@ msgstr "Job-Vorlage aktualisieren"
 msgid "Update a template input"
 msgstr "Vorlageneingabe aktualisieren"
 
-msgid "Update architecture"
-msgstr "Architektur aktualisieren"
-
 msgid "Use default description template"
 msgstr "Standardbeschreibungsvorlage verwenden"
 
@@ -734,6 +719,11 @@ msgstr "Welcher Benutzer zur Ausführung des Skripts verwendet werden soll (mitt
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "Welcher Benutzer zur Ausführung des Skripts (mittels sudo-ähnlichen Mechanismen) verwendet werden soll. Standardmäßig wird ein Vorlagenparameter oder eine allgemeine Einstellung verwendet."
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
+msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "Ob es möglich sein soll, den effektiven Benutzer des Aufruf-Formulars außer Kraft zu setzen."

@@ -96,8 +96,8 @@ msgstr "동시 실행 레벨"
 msgid "Control concurrency level and distribution over time"
 msgstr "동시 실행 레벨 및 기간별 배분 제어"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "프록시를 사용할 수 없습니다. 설정에서 %{global_proxy} 또는 %{fallback_proxy}을(를) 구성해 보십시오."
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "작업 호출에 사용된 템플릿을 사용할 수 없습니다."
@@ -117,9 +117,6 @@ msgstr "반복 작업 생성"
 msgid "Create a template input"
 msgstr "템플릿 입력 생성"
 
-msgid "Create architecture"
-msgstr "아키텍처 생성 "
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "SSH에 사용할 기본 사용자입니다. remote_execution_ssh_user라는 매개 변수를 설정하여 호스트별로 덮어쓸 수 있습니다."
 
@@ -134,9 +131,6 @@ msgstr "작업 템플릿 삭제"
 
 msgid "Delete a template input"
 msgstr "템플릿 입력 삭제"
-
-msgid "Delete architecture"
-msgstr "아키텍처 삭제"
 
 msgid "Description"
 msgstr "설명"
@@ -210,9 +204,6 @@ msgstr "실패"
 msgid "Failed rendering template: %s"
 msgstr "템플릿 렌더링 실패: %s"
 
-msgid "Failed to initialize command"
-msgstr "명령을 초기화하지 못했습니다."
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "%{template_name} 템플릿에 대한 기능 입력 %{input_name}이(가) 정의되지 않았습니다."
 
@@ -260,9 +251,6 @@ msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "이 시간 전에 시작할 수 없는 경우 작업을 취소한다는 것을 나타냅니다."
-
-msgid "Initialization error: %s"
-msgstr "초기화 오류: %s"
 
 msgid "Input"
 msgstr "입력"
@@ -390,9 +378,6 @@ msgstr "아직 완료된 실행이 없습니다."
 msgid "No hosts found."
 msgstr "호스트를 찾을 수 없습니다."
 
-msgid "No output"
-msgstr "출력 없음"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "%{feature_name} 기능에 매핑된 템플릿이 없습니다."
 
@@ -416,6 +401,12 @@ msgstr "보류 중 "
 
 msgid "Perform no more executions after this time"
 msgstr "이 시간 이후 더 이상 실행을 수행하지 않음"
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
 
 msgid "Preview"
 msgstr "미리 보기"
@@ -509,9 +500,6 @@ msgstr "이후 시간에 대해 작업 스케줄"
 
 msgid "Schedule the job to start at a later time"
 msgstr "나중에 시작하도록 작업 스케줄"
-
-msgid "Script execution failed"
-msgstr "스크립트 실행 실패"
 
 msgid "Scroll to bottom"
 msgstr "맨 아래로 스크롤"
@@ -698,9 +686,6 @@ msgstr "작업 템플릿 업데이트"
 msgid "Update a template input"
 msgstr "템플릿 입력 업데이트"
 
-msgid "Update architecture"
-msgstr "아키텍처 업데이트 "
-
 msgid "Use default description template"
 msgstr "기본 설명 템플릿 사용"
 
@@ -733,6 +718,11 @@ msgstr "사용자가 스크립트를 실행하는 데 사용해야 할 옵션입
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "사용자가 스크립트를 실행하는 데 사용해야 할 옵션입니다(sudo와 유사한 메커니즘 사용). 템플릿 매개 변수 또는 글로벌 설정으로 기본 설정됩니다."
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
+msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "호출할 유효 사용자를 덮어쓰도록 허용할지 여부입니다."

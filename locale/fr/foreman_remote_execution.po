@@ -97,8 +97,8 @@ msgstr "Niveau de parallélisme"
 msgid "Control concurrency level and distribution over time"
 msgstr "Contrôle le niveau de parallélisme et la distribution dans le temps"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "Impossible d'utiliser aucun des proxies. Veuillez considérer définir %{global_proxy} ou %{fallback_proxy} dans les paramètres"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "Impossible d'utiliser un modèle qui est utilisé pour un lancement de job"
@@ -118,9 +118,6 @@ msgstr "Créer un job récurrent"
 msgid "Create a template input"
 msgstr "Créer un modèle d'entrée"
 
-msgid "Create architecture"
-msgstr "Créer une architecture"
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "L'utilisateur par défaut pour SSH. Vous pouvez remplacer cette valeur par hôte, en définissant un paramètre nommé remote_execution_ssh_user."
 
@@ -135,9 +132,6 @@ msgstr "Supprimer un modèle de job"
 
 msgid "Delete a template input"
 msgstr "Supprimer un modèle d'entrée"
-
-msgid "Delete architecture"
-msgstr "Supprimer une architecture"
 
 msgid "Description"
 msgstr "Description"
@@ -211,9 +205,6 @@ msgstr "Échoué"
 msgid "Failed rendering template: %s"
 msgstr "Echec de rendu du modèle : %s"
 
-msgid "Failed to initialize command"
-msgstr "Echec d'initialisation de la commande"
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "L'entrée de fonction %{input_name} n'est pas définie dans le modèle %{template_name}"
 
@@ -261,9 +252,6 @@ msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Indique que l'action doit pouvoir être annulée si elle ne peut pas être démarrée avant cette heure."
-
-msgid "Initialization error: %s"
-msgstr "Erreur d'initialisation : %s"
 
 msgid "Input"
 msgstr "Entrée"
@@ -391,9 +379,6 @@ msgstr "Aucune exécution n'est encore terminée"
 msgid "No hosts found."
 msgstr "Aucun hôte trouvé."
 
-msgid "No output"
-msgstr "Aucune sortie"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "Aucun modèle n'est en relation avec la fonction %{feature_name}"
 
@@ -417,6 +402,12 @@ msgstr "En cours"
 
 msgid "Perform no more executions after this time"
 msgstr "Ne pas lancer d'autres exécutions après cette date."
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
 
 msgid "Preview"
 msgstr "Prévisualisation"
@@ -510,9 +501,6 @@ msgstr "Planifier le job à une date ultérieure"
 
 msgid "Schedule the job to start at a later time"
 msgstr "Planifier le démarrage du job à une date ultérieure"
-
-msgid "Script execution failed"
-msgstr "L'exécution du script a échoué"
 
 msgid "Scroll to bottom"
 msgstr "Faire défiler en bas de page"
@@ -699,9 +687,6 @@ msgstr "Mise à jour d'un modèle de job"
 msgid "Update a template input"
 msgstr "Mise à jour d'un modèle d'entrée"
 
-msgid "Update architecture"
-msgstr "Mise à jour d'une architecture"
-
 msgid "Use default description template"
 msgstr "Utiliser le modèle de description par défaut"
 
@@ -734,6 +719,11 @@ msgstr "Ce que l'utilisateur devrait utiliser pour lancer le script (comme des m
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "Ce que l'utilisateur devrait utiliser pour lancer le script (comme des mécanismes sudo). La valeur par défaut est un paramètre de modèle ou un paramètre global."
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
+msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "Défini s'il est permis de remplacer l'utilisateur effectif depuis formulaire de lancement."

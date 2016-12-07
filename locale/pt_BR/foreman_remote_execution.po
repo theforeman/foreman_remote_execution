@@ -97,8 +97,8 @@ msgstr "Nível de simultaneidade"
 msgid "Control concurrency level and distribution over time"
 msgstr "Controlar nível de simultaneidade e distribuição ao longo do tempo"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "Não foi possível usar proxy algum. Considere configurar %{global_proxy} ou %{fallback_proxy} "
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "Não foi possível usar nenhum modelo utilizado na invocação de trabalho "
@@ -118,9 +118,6 @@ msgstr "Criar um trabalho recorrente "
 msgid "Create a template input"
 msgstr "Criar uma entrada de modelo"
 
-msgid "Create architecture"
-msgstr "Criar arquitetura"
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "Usuário padrão a ser usado para SSH. Você pode substituir por host configurando um parâmetro chamado remote_execution_ssh_user."
 
@@ -135,9 +132,6 @@ msgstr "Remover um modelo de trabalho "
 
 msgid "Delete a template input"
 msgstr "Remover uma entrada de modelo "
-
-msgid "Delete architecture"
-msgstr "Remover arquitetura"
 
 msgid "Description"
 msgstr "Descrição"
@@ -211,9 +205,6 @@ msgstr "Falhou"
 msgid "Failed rendering template: %s"
 msgstr "Falha ao renderizar modelo:%s"
 
-msgid "Failed to initialize command"
-msgstr "Falha ao inicializar comando "
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "Entrada de recurso %{input_name} não definida no modelo %{template_name}"
 
@@ -261,9 +252,6 @@ msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Indica que a ação deve ser cancelada se não puder ser iniciada antes deste período."
-
-msgid "Initialization error: %s"
-msgstr "Erro de inicialização: %s"
 
 msgid "Input"
 msgstr "Entrada"
@@ -391,9 +379,6 @@ msgstr "Nenhuma execução concluída ainda "
 msgid "No hosts found."
 msgstr "Nenhum host localizado."
 
-msgid "No output"
-msgstr "Nenhuma saída"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "Nenhum modelo mapeado para o recurso %{feature_name}"
 
@@ -417,6 +402,12 @@ msgstr "Pendente"
 
 msgid "Perform no more executions after this time"
 msgstr "Não desempenhar execuções depois deste período"
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
 
 msgid "Preview"
 msgstr "Pré-visualizar"
@@ -510,9 +501,6 @@ msgstr "Agendar o trabalho para depois "
 
 msgid "Schedule the job to start at a later time"
 msgstr "Agendar o trabalho para começar mais tarde "
-
-msgid "Script execution failed"
-msgstr "Falha na execução de script"
 
 msgid "Scroll to bottom"
 msgstr "Rolar até a parte inferior"
@@ -699,9 +687,6 @@ msgstr "Atualizar um modelo de trabalho"
 msgid "Update a template input"
 msgstr "Atualizar uma entrada de modelo"
 
-msgid "Update architecture"
-msgstr "Atualizar arquitetura"
-
 msgid "Use default description template"
 msgstr "Usar modelo de descrição padrão"
 
@@ -734,6 +719,11 @@ msgstr "O usuário que deve ser usado para executar o script (usando mecanismos 
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "O usuário que deve ser usado para executar o script (usando mecanismos do tipo sudo). Usa um parâmetro de modelo ou configuração global como padrão. "
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
+msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "Se deve ser permitida ou não a substituição do usuário efetivo do formulário de invocação. "

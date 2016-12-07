@@ -102,8 +102,8 @@ msgstr "Параллелизм"
 msgid "Control concurrency level and distribution over time"
 msgstr "Контроль параллельного выполнения и распределения во времени"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "Не удалось связаться с прокси. Попробуйте настроить %{global_proxy} или %{fallback_proxy}"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "Не удалось применить ни один из шаблонов, настроенных для этого вызова задания"
@@ -123,9 +123,6 @@ msgstr "Периодическое выполнение"
 msgid "Create a template input"
 msgstr "Создать входной параметр"
 
-msgid "Create architecture"
-msgstr "Создать архитектуру"
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "Пользователь по умолчанию для SSH. Для того чтобы переопределить это значение для отдельных узлов, используйте параметр remote_execution_ssh_user."
 
@@ -140,9 +137,6 @@ msgstr "Удалить шаблон задания"
 
 msgid "Delete a template input"
 msgstr "Удалить входной параметр"
-
-msgid "Delete architecture"
-msgstr "Удалить архитектуру"
 
 msgid "Description"
 msgstr "Описание"
@@ -216,9 +210,6 @@ msgstr "Не удалась"
 msgid "Failed rendering template: %s"
 msgstr "Не удалось обработать шаблон: %s"
 
-msgid "Failed to initialize command"
-msgstr "Не удалось инициализировать команду"
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "Входной параметр %{input_name}, заданный функцией, не определен в шаблоне %{template_name}."
 
@@ -266,9 +257,6 @@ msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Обозначает, что действие следует отменить, если оно не будет запущено до указанного времени."
-
-msgid "Initialization error: %s"
-msgstr "Ошибка инициализации: %s"
 
 msgid "Input"
 msgstr "Параметр"
@@ -396,9 +384,6 @@ msgstr "Ни один цикл выполнения не завершился"
 msgid "No hosts found."
 msgstr "Нет узлов."
 
-msgid "No output"
-msgstr "Нет вывода"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "С %{feature_name} не связан ни один шаблон."
 
@@ -422,6 +407,12 @@ msgstr "Ожидание"
 
 msgid "Perform no more executions after this time"
 msgstr "Остановить после указанного числа повторений"
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
 
 msgid "Preview"
 msgstr "Просмотр"
@@ -515,9 +506,6 @@ msgstr "Настроить время запуска"
 
 msgid "Schedule the job to start at a later time"
 msgstr "Отложенный запуск"
-
-msgid "Script execution failed"
-msgstr "Не удалось выполнить сценарий"
 
 msgid "Scroll to bottom"
 msgstr "Перейти вниз"
@@ -706,9 +694,6 @@ msgstr "Обновить шаблон задания"
 msgid "Update a template input"
 msgstr "Обновить входной параметр"
 
-msgid "Update architecture"
-msgstr "Обновить архитектуру"
-
 msgid "Use default description template"
 msgstr "Использовать описание из шаблона"
 
@@ -741,6 +726,11 @@ msgstr "Пользователь, от имени которого будет з
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "Пользователь, от имени которого будет запускаться сценарий (по принципу sudo). По умолчанию определяется параметрами шаблона или глобальными параметрами."
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
+msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "Разрешает переопределение действующего пользователя из формы вызова."

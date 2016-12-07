@@ -97,8 +97,8 @@ msgstr "同步等級"
 msgid "Control concurrency level and distribution over time"
 msgstr "隨時間控制週期等級並散佈"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "無法使用任何代理伺服器。請考慮配置設定中的 %{global_proxy} 或 %{fallback_proxy}"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "無法使用任何用於這工作祈願的範本"
@@ -118,9 +118,6 @@ msgstr "建立週期性工作"
 msgid "Create a template input"
 msgstr "建立範本輸入"
 
-msgid "Create architecture"
-msgstr "建立架構"
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "使用 SSH 的預設使用者。您可以透過設定參數呼叫 remote_execution_ssh_user 來覆寫每台主機的設定。"
 
@@ -135,9 +132,6 @@ msgstr "刪除工作範本"
 
 msgid "Delete a template input"
 msgstr "刪除範本輸入"
-
-msgid "Delete architecture"
-msgstr "刪除架構"
 
 msgid "Description"
 msgstr "說明"
@@ -211,9 +205,6 @@ msgstr "已失敗"
 msgid "Failed rendering template: %s"
 msgstr "無法生成範本：%s"
 
-msgid "Failed to initialize command"
-msgstr "無法初始化指令"
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "未知的輸入 %{input_name} 未定義於範本 %{template_name}"
 
@@ -261,9 +252,6 @@ msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "這表示如果不能在這時間之前開始，就應該取消動作。"
-
-msgid "Initialization error: %s"
-msgstr "初始化錯誤：%s"
 
 msgid "Input"
 msgstr "輸入"
@@ -391,9 +379,6 @@ msgstr "尚無執行完成"
 msgid "No hosts found."
 msgstr "找不到主機。"
 
-msgid "No output"
-msgstr "沒有輸出"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "沒有範本定義至功能 %{feature_name}"
 
@@ -417,6 +402,12 @@ msgstr "等待處理中"
 
 msgid "Perform no more executions after this time"
 msgstr "此時間之後不再進行任何執行"
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
 
 msgid "Preview"
 msgstr "預覽"
@@ -510,9 +501,6 @@ msgstr "排程工作至未來時間"
 
 msgid "Schedule the job to start at a later time"
 msgstr "排程工作至晚一點的時間"
-
-msgid "Script execution failed"
-msgstr "執行 script 失敗"
 
 msgid "Scroll to bottom"
 msgstr "捲動至底端"
@@ -699,9 +687,6 @@ msgstr "更新工作範本"
 msgid "Update a template input"
 msgstr "更新範本輸入"
 
-msgid "Update architecture"
-msgstr "更新架構"
-
 msgid "Use default description template"
 msgstr "使用預設的描述範本"
 
@@ -734,6 +719,11 @@ msgstr "哪位使用者該用來執行此 script（使用類似 sudo 機制）"
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "哪位使用者該用來執行此 script（使用類似 sudo 機制）。預設值設為範本參數或全域設定。"
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
+msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "是否允許從祈願清單覆寫有效使用者。"

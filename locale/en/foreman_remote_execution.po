@@ -98,7 +98,7 @@ msgstr ""
 msgid "Control concurrency level and distribution over time"
 msgstr ""
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
 
 msgid "Could not use any template used in the job invocation"
@@ -119,9 +119,6 @@ msgstr ""
 msgid "Create a template input"
 msgstr ""
 
-msgid "Create architecture"
-msgstr ""
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr ""
 
@@ -135,9 +132,6 @@ msgid "Delete a job template"
 msgstr ""
 
 msgid "Delete a template input"
-msgstr ""
-
-msgid "Delete architecture"
 msgstr ""
 
 msgid "Description"
@@ -212,9 +206,6 @@ msgstr ""
 msgid "Failed rendering template: %s"
 msgstr ""
 
-msgid "Failed to initialize command"
-msgstr ""
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
 
@@ -261,9 +252,6 @@ msgid "Include all inputs from the foreign template"
 msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
-msgstr ""
-
-msgid "Initialization error: %s"
 msgstr ""
 
 msgid "Input"
@@ -392,9 +380,6 @@ msgstr ""
 msgid "No hosts found."
 msgstr ""
 
-msgid "No output"
-msgstr ""
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
@@ -417,6 +402,12 @@ msgid "Pending"
 msgstr ""
 
 msgid "Perform no more executions after this time"
+msgstr ""
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
 msgid "Preview"
@@ -510,9 +501,6 @@ msgid "Schedule the job for a future time"
 msgstr ""
 
 msgid "Schedule the job to start at a later time"
-msgstr ""
-
-msgid "Script execution failed"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -700,9 +688,6 @@ msgstr ""
 msgid "Update a template input"
 msgstr ""
 
-msgid "Update architecture"
-msgstr ""
-
 msgid "Use default description template"
 msgstr ""
 
@@ -734,6 +719,11 @@ msgid "What user should be used to run the script (using sudo-like mechanisms)"
 msgstr ""
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
+msgstr ""
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
 msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."

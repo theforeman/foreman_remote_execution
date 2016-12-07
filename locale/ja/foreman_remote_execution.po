@@ -97,8 +97,8 @@ msgstr "同時実行レベル"
 msgid "Control concurrency level and distribution over time"
 msgstr "同時実行レベルと分散を制御"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy} or %{fallback_proxy} in settings"
-msgstr "プロキシーを使用できませんでした。設定で %{global_proxy} または %{fallback_proxy} を指定することを検討してください"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "ジョブ呼び出しで使用されるテンプレートを使用できませんでした"
@@ -118,9 +118,6 @@ msgstr "繰り返しジョブを作成"
 msgid "Create a template input"
 msgstr "テンプレート入力を作成"
 
-msgid "Create architecture"
-msgstr "アーキテクチャーの作成"
-
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "SSH に使用するデフォルトユーザー。remote_execution_ssh_user という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
 
@@ -135,9 +132,6 @@ msgstr "ジョブテンプレートを削除"
 
 msgid "Delete a template input"
 msgstr "テンプレート入力を削除"
-
-msgid "Delete architecture"
-msgstr "アーキテクチャーの削除"
 
 msgid "Description"
 msgstr "説明"
@@ -211,9 +205,6 @@ msgstr "失敗しました"
 msgid "Failed rendering template: %s"
 msgstr "テンプレートのレンダリングに失敗しました: %s"
 
-msgid "Failed to initialize command"
-msgstr "コマンドの初期化に失敗しました"
-
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "機能入力 %{input_name} はテンプレート %{template_name} で定義されていません"
 
@@ -261,9 +252,6 @@ msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "アクションはこの時刻よりも前に開始できない場合にキャンセルされることを示しています。"
-
-msgid "Initialization error: %s"
-msgstr "初期化エラー: %s"
 
 msgid "Input"
 msgstr "入力"
@@ -391,9 +379,6 @@ msgstr "未完了の実行なし"
 msgid "No hosts found."
 msgstr "ホストが見つかりません。"
 
-msgid "No output"
-msgstr "出力なし"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "機能 %{feature_name} にマッピングされたテンプレートがありません"
 
@@ -417,6 +402,12 @@ msgstr "保留"
 
 msgid "Perform no more executions after this time"
 msgstr "これ以降実行しない"
+
+msgid "Playbook execution failed"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
 
 msgid "Preview"
 msgstr "プレビュー"
@@ -510,9 +501,6 @@ msgstr "将来のジョブをスケジュール"
 
 msgid "Schedule the job to start at a later time"
 msgstr "後で開始するジョブをスケジュール"
-
-msgid "Script execution failed"
-msgstr "スクリプトの実行に失敗しました"
 
 msgid "Scroll to bottom"
 msgstr "最下部へスクロール"
@@ -699,9 +687,6 @@ msgstr "ジョブテンプレートを更新"
 msgid "Update a template input"
 msgstr "テンプレート入力を更新"
 
-msgid "Update architecture"
-msgstr "アーキテクチャーの更新"
-
 msgid "Use default description template"
 msgstr "デフォルトの説明テンプレートを使用"
 
@@ -734,6 +719,11 @@ msgstr "スクリプトを実行するために使用するユーザー (sudo �
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "スクリプトを実行するために使用するユーザー (sudo と同様のメカニズムを使用)。デフォルト値は、テンプレートパラメーターまたはグローバル設定です。"
+
+msgid ""
+"When enabled, the remote execution will try to run the commands directly, when no\n"
+"                     proxy with remote execution feature is configured for the host."
+msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "呼び出し形式から実効ユーザを上書きするのを許可するかどうか。"
