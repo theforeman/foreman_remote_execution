@@ -48,7 +48,7 @@ class JobInvocation < ActiveRecord::Base
 
   scope :with_task, -> { references(:task) }
 
-  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id', :complete_value => true
+  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
 
   scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring',
                 :ext_method => :search_by_recurring_logic, :only_explicit => true,
