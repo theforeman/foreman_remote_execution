@@ -26,8 +26,9 @@ module ForemanRemoteExecution
 
     def params_with_remote_execution
       params = params_without_remote_execution
-      keys = remote_execution_ssh_keys
-      params['remote_execution_ssh_keys'] = keys unless keys.blank?
+      if (keys = remote_execution_ssh_keys).present?
+        params['remote_execution_ssh_keys'] = params['remote_execution_ssh_keys'].to_s + keys.join('\n')
+      end
       [:remote_execution_ssh_user, :remote_execution_effective_user_method].each do |key|
         params[key.to_s] = Setting[key] unless params.key?(key.to_s)
       end
