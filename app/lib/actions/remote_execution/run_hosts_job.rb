@@ -20,7 +20,8 @@ module Actions
         action_subject(job_invocation)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !job_invocation.targeting.resolved?
         input.update(:job_category => job_invocation.job_category)
-        plan_self(:job_invocation_id => job_invocation.id)
+        # TODO: Get runner_class from the user
+        plan_self(:job_invocation_id => job_invocation.id, :runner_class => '::ForemanRemoteExecutionCore::PollingScriptRunner')
       end
 
       def create_sub_plans
@@ -32,7 +33,7 @@ module Actions
           # during actual run (here) so we build template invocations from these patterns
           template_invocation = job_invocation.pattern_template_invocation_for_host(host).deep_clone
           template_invocation.host_id = host.id
-          trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector)
+          trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector, :runner_class => input[:runner_class])
         end
       end
 

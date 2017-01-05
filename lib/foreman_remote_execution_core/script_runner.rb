@@ -30,23 +30,33 @@ module ForemanRemoteExecutionCore
     end
 
     def start
-      remote_script = cp_script_to_remote
-      output_path = File.join(File.dirname(remote_script), 'output')
-      exit_code_path = File.join(File.dirname(remote_script), 'exit_code')
+      prepare_start
+      script = control_script
+      logger.debug("executing script:\n#{script.lines.map { |line| "  | #{line}" }.join}")
+      trigger(script)
+    rescue => e
+      logger.error("error while initalizing command #{e.class} #{e.message}:\n #{e.backtrace.join("\n")}")
+      publish_exception('Error initializing command', e)
+    end
 
+    def trigger(*args)
+      run_async(*args)
+    end
+
+    def prepare_start
+      @remote_script = cp_script_to_remote
+      @output_path = File.join(File.dirname(@remote_script), 'output')
+      @exit_code_path = File.join(File.dirname(@remote_script), 'exit_code')
+    end
+
+    def control_script
       # pipe the output to tee while capturing the exit code in a file
-      script = <<-SCRIPT.gsub(/^\s+\| /, '')
+      <<-SCRIPT.gsub(/^\s+\| /, '')
       | sh <<WRAPPER
       | (#{su_prefix}#{remote_script} < /dev/null; echo \\$?>#{exit_code_path}) | /usr/bin/tee #{output_path}
       | exit \\$(cat #{exit_code_path})
       | WRAPPER
       SCRIPT
-
-      logger.debug("executing script:\n#{script.lines.map { |line| "  | #{line}" }.join}")
-      run_async(script)
-    rescue => e
-      logger.error("error while initalizing command #{e.class} #{e.message}:\n #{e.backtrace.join("\n")}")
-      publish_exception('Error initializing command', e)
     end
 
     def refresh
@@ -182,7 +192,9 @@ module ForemanRemoteExecutionCore
         ch.on_extended_data { |_, _, data| stderr.concat(data) }
         ch.on_request('exit-status') { |_, data| exit_status = data.read_long }
         # Send data to stdin if we have some
-        ch.send_data(stdin) unless stdin.nil?
+        unless stdin.nil?
+          ch.send_data(stdin)
+        end
         # on signal: sending the signal value (such as 'TERM')
         ch.on_request('exit-signal') do |_, data|
           exit_status = data.read_string
@@ -246,8 +258,8 @@ module ForemanRemoteExecutionCore
       return path
     end
 
-    def cp_script_to_remote
-      upload_data(sanitize_script(@script), remote_command_file('script'), 555)
+    def cp_script_to_remote(script = @script, name = 'script')
+      upload_data(sanitize_script(script), remote_command_file(name), 555)
     end
 
     def upload_data(data, path, permissions = 555)

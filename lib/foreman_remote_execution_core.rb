@@ -24,6 +24,7 @@ module ForemanRemoteExecutionCore
       require 'foreman_remote_execution_core/fake_script_runner'
     else
       require 'foreman_remote_execution_core/script_runner'
+      require 'foreman_remote_execution_core/polling_script_runner'
     end
     require 'foreman_remote_execution_core/actions'
   end
