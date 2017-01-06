@@ -1,9 +1,38 @@
 require 'net/ssh'
 require 'net/scp'
 
+module Net
+  class SCP
+
+    def await_response_state(channel)
+      return if channel[:buffer].available == 0
+
+      # The state machine expects the start of the transmission to begin with byte 0
+      # Original Net::SCP implementation raises if it gets anything else
+      #   c = channel[:buffer].read_byte
+      #   raise Net::SCP::Error, "#{c.chr}#{channel[:buffer].read}" if c != 0
+
+      # We keep discarding incoming data until we get a null byte
+      _, pos = channel[:buffer].content.each_byte.each_with_index.find { |b, i| b == 0 }
+      if pos.nil?
+        # The 0 byte is not in the buffer, clear the buffer and retry
+        channel[:buffer].clear!
+        return
+      elsif pos > 0
+        # The 0 byte is in the buffer, but is not first, discard everything in front of it
+        channel[:buffer].consume!(pos)
+      end
+
+      channel[:next], channel[:state] = nil, channel[:next]
+      send("#{channel[:state]}_state", channel)
+    end
+  end
+end
+
 module ForemanRemoteExecutionCore
   class ScriptRunner < ForemanTasksCore::Runner::Base
     EXPECTED_POWER_ACTION_MESSAGES = ["restart host", "shutdown host"]
+    MAX_PROCESS_RETRIES = 4
 
     def initialize(options)
       super()
