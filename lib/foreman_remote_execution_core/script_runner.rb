@@ -152,7 +152,7 @@ module ForemanRemoteExecutionCore
       output = ""
       exit_status = nil
       channel = session.open_channel do |ch|
-        ch.on_data { |data| output.concat(data) }
+        ch.on_data { |_, data| output.concat(data) }
         ch.on_extended_data { |_, _, data| output.concat(data) }
         ch.on_request("exit-status") { |_, data| exit_status = data.read_long }
         # on signal: sending the signal value (such as 'TERM')
