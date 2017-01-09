@@ -91,7 +91,7 @@ module Api
         erb_data = @template.to_erb
         post :import, :template => erb_data
         assert_response :success
-        assert JobTemplate.find_by_name(new_name)
+        assert JobTemplate.unscoped.find_by_name(new_name)
       end
     end
 
