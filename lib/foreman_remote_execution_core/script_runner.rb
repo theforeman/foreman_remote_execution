@@ -1,5 +1,4 @@
 require 'net/ssh'
-require 'net/scp'
 
 module ForemanRemoteExecutionCore
   class ScriptRunner < ForemanTasksCore::Runner::Base
@@ -148,13 +147,18 @@ module ForemanRemoteExecutionCore
       return true
     end
 
-    def run_sync(command)
-      output = ""
+    def run_sync(command, stdin = nil)
+      stdout = ""
+      stderr = ""
       exit_status = nil
+      started = false
+
       channel = session.open_channel do |ch|
-        ch.on_data { |_, data| output.concat(data) }
-        ch.on_extended_data { |_, _, data| output.concat(data) }
+        ch.on_data { |_, data| stdout.concat(data) }
+        ch.on_extended_data { |_, _, data| stderr.concat(data) }
         ch.on_request("exit-status") { |_, data| exit_status = data.read_long }
+        # Send data to stdin if we have some
+        ch.send_data(stdin) unless stdin.nil?
         # on signal: sending the signal value (such as 'TERM')
         ch.on_request("exit-signal") do |_, data|
           exit_status = data.read_string
@@ -163,10 +167,14 @@ module ForemanRemoteExecutionCore
         end
         ch.exec command do |_, success|
           raise "could not execute command" unless success
+          started = true
         end
       end
+      session.process(0) until started
+      # Closing the channel without sending any data gives us SIGPIPE
+      channel.close unless stdin.nil?
       channel.wait
-      return exit_status, output
+      return exit_status, stdout, stderr
     end
 
     def su_prefix
@@ -215,29 +223,36 @@ module ForemanRemoteExecutionCore
     end
 
     def cp_script_to_remote
-      local_script_file = write_command_file_locally('script', sanitize_script(@script))
-      File.chmod(0555, local_script_file)
-      remote_script_file = remote_command_file('script')
-      upload_file(local_script_file, remote_script_file)
-      return remote_script_file
+      upload_data(sanitize_script(@script), remote_command_file('script'), 555)
+    end
+
+    def upload_data(data, path, permissions = 555)
+      ensure_remote_directory File.dirname(path)
+      # We use tee here to pipe stdin coming from ssh to a file at $path, while silencing its output
+      # This is used to write to $path with elevated permissions, solutions using cat and output redirection
+      # would not work, because the redirection would happen in the non-elevated shell.
+      command = "#{su_prefix} tee '#{path}' >/dev/null && #{su_prefix} chmod '#{permissions}' '#{path}'"
+
+      @logger.debug("Sending data to #{path} on remote host:\n#{data}")
+      status, _out, err = run_sync(command, data)
+
+      @logger.warn("Output on stderr while uploading #{path}:\n#{err}") unless err.empty?
+      if status != 0
+        raise "Unable to upload file to #{path} on remote system: exit code: #{status}"
+      end
+      path
     end
 
     def upload_file(local_path, remote_path)
-      ensure_remote_directory(File.dirname(remote_path))
-      scp = Net::SCP.new(session)
-      upload_channel = scp.upload(local_path, remote_path)
-      upload_channel.wait
-    ensure
-      if upload_channel
-        upload_channel.close
-        upload_channel.wait
-      end
+      mode = File.stat(local_path).mode.to_s(8)[-3..-1]
+      @logger.debug('Uploading local file: #{local_path} as #{remote_path} with #{mode} permissions')
+      upload_data(File.read(local_path), remote_path, mode)
     end
 
     def ensure_remote_directory(path)
-      exit_code, output = run_sync("mkdir -p #{path}")
+      exit_code, _output, err = run_sync("mkdir -p #{path}")
       if exit_code != 0
-        raise "Unable to create directory on remote system #{path}: exit code: #{exit_code}\n #{output}"
+        raise "Unable to create directory on remote system #{path}: exit code: #{exit_code}\n #{err}"
       end
     end
 
