@@ -27,7 +27,7 @@ module ForemanRemoteExecutionCore
 
       # pipe the output to tee while capturing the exit code in a file
       script = <<-SCRIPT
-          (#{su_prefix}#{remote_script}; echo $?>#{exit_code_path}) | /usr/bin/tee #{output_path}
+          (#{su_prefix}#{remote_script} < /dev/null; echo $?>#{exit_code_path}) | /usr/bin/tee #{output_path}
           exit $(< #{exit_code_path})
       SCRIPT
 
