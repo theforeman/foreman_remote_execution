@@ -53,4 +53,34 @@ describe RemoteExecutionFeature do
       updated_feature.provided_input_names.must_equal ['package', 'force']
     end
   end
+
+  describe '.register' do
+    it "creates a feature if it's missing" do
+      feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist', 'name')
+      feature.must_be :persisted?
+      feature.label.must_equal 'new_feature_that_does_not_exist'
+      feature.name.must_equal 'name'
+      refute feature.host_action_button
+    end
+
+    it "creates a feature with host action flag" do
+      feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist_button', 'name', :host_action_button => true)
+      feature.must_be :persisted?
+      assert feature.host_action_button
+    end
+
+    it "created feature with host action flag can be found using named scope" do
+      feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist_button', 'name', :host_action_button => true)
+      assert_includes RemoteExecutionFeature.with_host_action_button, feature
+    end
+
+
+    it "updates a feature if it exists" do
+      existing = FactoryGirl.create(:remote_execution_feature, :name => 'existing_feature_withou_action_button')
+      feature = RemoteExecutionFeature.register(existing.label, existing.name, :host_action_button => true)
+      feature.must_be :persisted?
+      existing.reload
+      assert existing.host_action_button
+    end
+  end
 end
