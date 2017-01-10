@@ -39,7 +39,7 @@ class JobInvocationsController < ApplicationController
     if @composer.trigger
       redirect_to job_invocation_path(@composer.job_invocation)
     else
-      @composer.job_invocation.description_format = nil if params[:job_invocation].key?(:description_override)
+      @composer.job_invocation.description_format = nil if params.fetch(:job_invocation, {}).key?(:description_override)
       render :action => 'new'
     end
   end
@@ -86,6 +86,10 @@ class JobInvocationsController < ApplicationController
   end
 
   def prepare_composer
-    JobInvocationComposer.from_ui_params(params.merge(:triggering => triggering_params))
+    if params[:feature].present?
+      JobInvocationComposer.for_feature(params[:feature], params[:host_ids], {})
+    else
+      JobInvocationComposer.from_ui_params(params.merge(:triggering => triggering_params))
+    end
   end
 end
