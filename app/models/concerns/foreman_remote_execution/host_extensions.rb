@@ -6,7 +6,7 @@ module ForemanRemoteExecution
       alias_method_chain :build_required_interfaces, :remote_execution
       alias_method_chain :reload, :remote_execution
       alias_method_chain :becomes, :remote_execution
-      alias_method_chain :params, :remote_execution
+      alias_method_chain :host_params, :remote_execution
 
       has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
       has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
@@ -24,8 +24,8 @@ module ForemanRemoteExecution
       @execution_status_label ||= get_status(HostStatus::ExecutionStatus).to_label(options)
     end
 
-    def params_with_remote_execution
-      params = params_without_remote_execution
+    def host_params_with_remote_execution
+      params = host_params_without_remote_execution
       keys = remote_execution_ssh_keys
       params['remote_execution_ssh_keys'] = keys unless keys.blank?
       [:remote_execution_ssh_user, :remote_execution_effective_user_method].each do |key|
