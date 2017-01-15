@@ -36,9 +36,13 @@ class Targeting < ActiveRecord::Base
     raise ::Foreman::Exception, _('Cannot resolve hosts without a bookmark or search query') if bookmark.nil? && search_query.blank?
 
     self.search_query = bookmark.query if dynamic? && bookmark.present?
-    self.save!
-    self.touch(:resolved_at)
-    self.hosts = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query) }
+    self.resolved_at = Time.zone.now
+    self.validate!
+    # avoid validation of hosts objects - tey will be loaded for no reason.
+    host_ids = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query).pluck(:id) }
+    # this can be optimized even more, by introducing bulk insert
+    self.targeting_hosts.build(host_ids.map { |id| { :host_id => id } })
+    self.save(:validate => false)
   end
 
   def dynamic?
