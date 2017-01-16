@@ -41,11 +41,6 @@ class JobTemplatesController < ::TemplatesController
     end
   end
 
-  def export
-    find_resource unless @template.present?
-    send_data @template.to_erb, :type => 'text/plain', :disposition => 'attachment', :filename => @template.filename
-  end
-
   private
 
   def find_resource
