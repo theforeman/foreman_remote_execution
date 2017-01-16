@@ -10,7 +10,6 @@ module ForemanRemoteExecution
       original = permitted_actions_without_run_button(template)
 
       if template.is_a?(JobTemplate)
-        original.unshift(display_link_if_authorized(_('Export'), hash_for_export_job_template_path(:id => template.id), 'data-no-turbolink' => true))
         original.unshift(display_link_if_authorized(_('Run'), hash_for_new_job_invocation_path(:template_id => template.id))) unless template.snippet
       end
 
