@@ -58,7 +58,7 @@ class InputTemplateRenderer
   def render_template(template_name, input_values = {}, options = {})
     options.assert_valid_keys(:with_foreign_input_set)
     with_foreign_input_set = options.fetch(:with_foreign_input_set, true)
-    template = JobTemplate.authorized(:view_job_templates).find_by(:name => template_name)
+    template = @template.class.authorized("view_#{@template.class.to_s.underscore}").find_by(:name => template_name)
     unless template
       self.error_message = _('included template \'%s\' not found') % template_name
       raise error_message
