@@ -45,6 +45,10 @@ describe JobInvocation do
 
     before do
       input = job_invocation.pattern_template_invocations.first.template.template_inputs.create!(:name => 'foo', :required => true, :input_type => 'user')
+      input2 = job_invocation.pattern_template_invocations.first.template.template_inputs.create!(:name => 'bar', :required => true, :input_type => 'user')
+      FactoryGirl.create(:template_invocation_input_value,
+                         :template_invocation => job_invocation.pattern_template_invocations.first,
+                         :template_input => input2)
       @input_value = FactoryGirl.create(:template_invocation_input_value,
                                         :template_invocation => job_invocation.pattern_template_invocations.first,
                                         :template_input => input)
