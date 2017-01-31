@@ -88,10 +88,10 @@ describe Targeting do
     context 'for two hosts' do
       let(:query) { Targeting.build_query_from_hosts([ host.id, second_host.id ]) }
 
-      it 'builds query using host names joining with or' do
-        query.must_include "name = #{host.name}"
-        query.must_include "name = #{second_host.name}"
-        query.must_include ' or '
+      it 'builds query using host names joining inside ^' do
+        query.must_include host.name
+        query.must_include second_host.name
+        query.must_include 'name ^'
 
         Host.search_for(query).must_include host
         Host.search_for(query).must_include second_host
@@ -102,7 +102,7 @@ describe Targeting do
       let(:query) { Targeting.build_query_from_hosts([ host.id ]) }
 
       it 'builds query using host name' do
-        query.must_equal "name = #{host.name}"
+        query.must_equal "name ^ (#{host.name})"
         Host.search_for(query).must_include host
         Host.search_for(query).wont_include second_host
       end

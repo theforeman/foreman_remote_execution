@@ -5,6 +5,8 @@ require 'dynflow/testing'
 
 # Add plugin to FactoryGirl's paths
 FactoryGirl.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
+# Add foreman tasks factories too
+FactoryGirl.definition_file_paths << "#{ForemanTasks::Engine.root}/test/factories"
 FactoryGirl.reload
 
 # Foreman's setup doesn't handle cleaning up for Minitest::Spec

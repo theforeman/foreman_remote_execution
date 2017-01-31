@@ -54,8 +54,9 @@ class Targeting < ActiveRecord::Base
   end
 
   def self.build_query_from_hosts(ids)
-    hosts = Host.where(:id => ids).all.group_by(&:id)
-    hosts.map { |id, h| "name = #{h.first.name}" }.join(' or ')
+    return '' if ids.empty?
+    hosts = Host.where(:id => ids).distinct.pluck(:name)
+    "name ^ (#{hosts.join(', ')})"
   end
 
   def resolved?
