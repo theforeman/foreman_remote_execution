@@ -40,7 +40,7 @@ describe RemoteExecutionFeature do
       input_value.value.must_equal 'zsh'
       input_value.template_input.name.must_equal 'package'
 
-      composer.targeting.search_query.must_equal "name = #{host.name}"
+      composer.targeting.search_query.must_equal "name ^ (#{host.name})"
     end
 
     it "updates the feature when attributes change" do
