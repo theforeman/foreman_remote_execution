@@ -25,13 +25,25 @@ module Actions
         job_invocation = JobInvocation.find(input[:job_invocation_id])
         proxy_selector = RemoteExecutionProxySelector.new
 
-        # composer creates just "pattern" for template_invocations because target is evaluated
-        # during actual run (here) so we build template invocations from these patterns
-        job_invocation.targeting.hosts.map do |host|
+        ::Host.where(:id => current_batch).map do |host|
+          # composer creates just "pattern" for template_invocations because target is evaluated
+          # during actual run (here) so we build template invocations from these patterns
           template_invocation = job_invocation.pattern_template_invocation_for_host(host).deep_clone
           template_invocation.host_id = host.id
           trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector)
         end
+      end
+
+      def entries(from, size)
+        host_ids.slice(from, size)
+      end
+
+      def total_count
+        host_ids.count
+      end
+
+      def host_ids
+        JobInvocation.find(input[:job_invocation_id]).targeting.host_ids
       end
 
       def set_up_concurrency_control(invocation)
