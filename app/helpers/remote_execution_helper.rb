@@ -12,17 +12,21 @@ module RemoteExecutionHelper
     options = { :class => 'statistics-pie small', :expandable => true, :border => 0, :show_title => true }
 
     if (bulk_task = invocation.task)
-      failed_tasks = bulk_task.sub_tasks.select { |sub_task| task_failed? sub_task }
-      cancelled_tasks, failed_tasks = failed_tasks.partition { |task| task_cancelled? task }
-      success = bulk_task.output['success_count'] || 0
-      cancelled = cancelled_tasks.length
-      failed = failed_tasks.length
-      pending = (bulk_task.output['pending_count'] || bulk_task.sub_tasks.count)
+      unless invocation.queued?
+        total = invocation.targeting.resolved? ? invocation.targeting.hosts.count : 0
+        failed, not_failed = bulk_task.sub_tasks.partition { |sub_task| task_failed? sub_task }
+        cancelled, failed  = failed.partition { |task| task_cancelled? task }.map(&:count)
+        success = not_failed.count { |task| task_success? task }
+        pending = total - (success + failed + cancelled)
+        percent = ((1 - pending.to_f / total) * 100).round
+      else
+        cancelled = failed = pending = success = percent = 0
+      end
 
-      flot_pie_chart('status', job_invocation_status(invocation),
-                     [{:label => _('Success'), :data => success, :color => '#5CB85C'},
-                      {:label => _('Failed'), :data => failed, :color => '#D9534F'},
-                      {:label => _('Pending'), :data => pending, :color => '#DEDEDE'},
+      flot_pie_chart('status', job_invocation_status(invocation, percent),
+                     [{:label => _('Success'),   :data => success,   :color => '#5CB85C'},
+                      {:label => _('Failed'),    :data => failed,    :color => '#D9534F'},
+                      {:label => _('Pending'),   :data => pending,   :color => '#DEDEDE'},
                       {:label => _('Cancelled'), :data => cancelled, :color => '#B7312D'}],
                      options)
     else
@@ -34,12 +38,12 @@ module RemoteExecutionHelper
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
   end
 
-  def job_invocation_status(invocation)
+  def job_invocation_status(invocation, percent = 0)
     case invocation.status
       when HostStatus::ExecutionStatus::QUEUED
         _('queued')
       when HostStatus::ExecutionStatus::RUNNING
-        _('running %{percent}%%') % {:percent => invocation.progress}
+        _('running %{percent}%%') % {:percent => percent}
       when HostStatus::ExecutionStatus::OK
         _('succeeded')
       when HostStatus::ExecutionStatus::ERROR
@@ -51,6 +55,10 @@ module RemoteExecutionHelper
 
   def task_failed?(task)
     %w(warning error).include? task.result
+  end
+
+  def task_success?(task)
+    task.result == 'success'
   end
 
   def task_cancelled?(task)
