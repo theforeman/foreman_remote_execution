@@ -32,7 +32,7 @@ module RemoteExecutionHelper
   def job_invocation_status(invocation, percent = nil)
     case invocation.status
       when HostStatus::ExecutionStatus::QUEUED
-        _('queued')
+        _('queued to start executing in %{time}') % {:time => time_ago_in_words(invocation.task.start_at) }
       when HostStatus::ExecutionStatus::RUNNING
         percent ||= invocation.progress_report[:progress]
         _('running %{percent}%%') % {:percent => percent}
