@@ -184,8 +184,14 @@ module RemoteExecutionHelper
     if (preview = renderer.preview)
       content_tag :pre, preview
     else
-      alert :class => 'alert-block alert-danger base in fade has-error',
-            :text => renderer.error_message.html_safe
+      if target.nil?
+        alert :text => _('Could not render the preview because no host matches the search query.'),
+              :class => 'alert alert-block alert-warning base',
+              :close => false
+      else
+        alert :class => 'alert-block alert-danger base in fade has-error',
+              :text => renderer.error_message.html_safe
+      end
     end
   end
 
