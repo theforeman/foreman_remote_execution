@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do
       get 'clone_template'
       get 'lock'
+      get 'export'
       get 'unlock'
       post 'preview'
     end
