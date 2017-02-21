@@ -41,7 +41,10 @@
       </ul>
     <% end %>
     <% if template_invocation.effective_user %>
-      <b><%= _("Effective user") %></b>: <%= template_invocation.effective_user %>
+      <b><%= _("Effective user") %></b>: <%= template_invocation.effective_user %><br>
+    <% end %>
+    <% if job_invocation.task && job_invocation.task.start_at.to_i != job_invocation.task.started_at.to_i || !job_invocation.task.recurring_logic_task_group_ids.empty? %>
+      <b><%= _("Scheduled to start at") %></b>: <%= job_invocation.task.start_at.try(:in_time_zone) %>
     <% end %>
   <% end %>
 </div>
