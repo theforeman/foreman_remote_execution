@@ -78,7 +78,7 @@ module Actions
 
       def finalize
         if exit_status.to_s != '0'
-          error! _('Playbook execution failed')
+          error! _('Job execution failed')
         end
       end
 
