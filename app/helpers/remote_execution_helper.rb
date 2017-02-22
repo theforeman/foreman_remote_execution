@@ -11,23 +11,13 @@ module RemoteExecutionHelper
   def job_invocation_chart(invocation)
     options = { :class => 'statistics-pie small', :expandable => true, :border => 0, :show_title => true }
 
-    if (bulk_task = invocation.task)
-      unless invocation.queued?
-        total = invocation.targeting.resolved? ? invocation.targeting.hosts.count : 0
-        failed, not_failed = bulk_task.sub_tasks.partition { |sub_task| task_failed? sub_task }
-        cancelled, failed  = failed.partition { |task| task_cancelled? task }.map(&:count)
-        success = not_failed.count { |task| task_success? task }
-        pending = total - (success + failed + cancelled)
-        percent = ((1 - pending.to_f / total) * 100).round
-      else
-        cancelled = failed = pending = success = percent = 0
-      end
-
-      flot_pie_chart('status', job_invocation_status(invocation, percent),
-                     [{:label => _('Success'),   :data => success,   :color => '#5CB85C'},
-                      {:label => _('Failed'),    :data => failed,    :color => '#D9534F'},
-                      {:label => _('Pending'),   :data => pending,   :color => '#DEDEDE'},
-                      {:label => _('Cancelled'), :data => cancelled, :color => '#B7312D'}],
+    if (invocation.task)
+      report = invocation.progress_report
+      flot_pie_chart('status', job_invocation_status(invocation, report[:progress]),
+                     [{:label => _('Success'),   :data => report[:success],   :color => '#5CB85C'},
+                      {:label => _('Failed'),    :data => report[:failed],    :color => '#D9534F'},
+                      {:label => _('Pending'),   :data => report[:pending],   :color => '#DEDEDE'},
+                      {:label => _('Cancelled'), :data => report[:cancelled], :color => '#B7312D'}],
                      options)
     else
       content_tag(:h4, job_invocation_status(invocation))
@@ -38,7 +28,7 @@ module RemoteExecutionHelper
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
   end
 
-  def job_invocation_status(invocation, percent = 0)
+  def job_invocation_status(invocation, percent = invocation.percent)
     case invocation.status
       when HostStatus::ExecutionStatus::QUEUED
         _('queued')

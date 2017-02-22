@@ -105,6 +105,16 @@ describe JobInvocation do
 
   context 'with task' do
     let(:task) { ForemanTasks::Task.new }
+    let(:progress_report_without_sub_tasks) do
+      {
+        :total     => 0,
+        :success   => 0,
+        :cancelled => 0,
+        :failed    => 0,
+        :pending   => 0,
+        :progress  => 0
+      }
+    end
     before { job_invocation.task = task }
 
     context 'which is scheduled' do
@@ -113,6 +123,7 @@ describe JobInvocation do
       specify { job_invocation.status.must_equal HostStatus::ExecutionStatus::QUEUED }
       specify { job_invocation.queued?.must_equal true }
       specify { job_invocation.progress.must_equal 0 }
+      specify { job_invocation.progress_report.must_equal progress_report_without_sub_tasks }
     end
 
     context 'with succeeded task' do
@@ -123,7 +134,29 @@ describe JobInvocation do
 
       specify { job_invocation.status.must_equal HostStatus::ExecutionStatus::OK }
       specify { job_invocation.queued?.must_equal false }
-      specify { job_invocation.progress.must_equal 100 }
+
+      it 'calculates the progress correctly' do
+        sub_tasks = [ForemanTasks::Task.new]
+        job_invocation.targeting.expects(:resolved?).returns(true)
+        job_invocation.targeting.expects(:hosts).returns([1])
+        sub_tasks.expects(:where).with(:result => %w(success warning error)).returns(sub_tasks)
+        job_invocation.stubs(:sub_tasks).returns(sub_tasks)
+
+        job_invocation.progress.must_equal 100
+      end
+
+      it 'calculates the progress report correctly' do
+        sub_tasks = [ForemanTasks::Task.new]
+        job_invocation.targeting.expects(:resolved?).twice.returns(true)
+        job_invocation.targeting.expects(:hosts).returns([1])
+        sub_tasks.expects(:where).with(:result => 'success').returns(sub_tasks)
+        sub_tasks.expects(:where).with(:result => %w(warning error)).returns([])
+        job_invocation.stubs(:sub_tasks).returns(sub_tasks)
+
+        expected_result = progress_report_without_sub_tasks.merge(:total => 1, :success => 1, :progress => 100)
+        job_invocation.progress_report.must_equal expected_result
+      end
     end
   end
+
 end

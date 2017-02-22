@@ -86,8 +86,14 @@ class JobInvocation < ActiveRecord::Base
   end
 
   # returns progress in percents
-  def progress
-    queued? ? 0 : (task.progress * 100).to_i
+  def progress(total = nil, done = nil)
+    if queued? || !targeting.resolved?
+      0
+    else
+      total ||= targeting.hosts.count
+      done  ||= sub_tasks.where(:result => %w(success warning error)).count
+      ((done.to_f / total) * 100).round
+    end
   end
 
   def queued?
@@ -170,6 +176,34 @@ class JobInvocation < ActiveRecord::Base
       self.description.gsub!(Regexp.new("%\{#{k}\}"), v || '')
     end
     self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
+  end
+
+  def progress_report
+    if queued? || !targeting.resolved?
+      %w(success total cancelled failed pending progress).map(&:to_sym).reduce({}) do |acc, key|
+        acc.merge(key => 0)
+      end
+    else
+      total   = targeting.hosts.count
+      success = sub_tasks.where(:result => 'success').count
+      error   = sub_tasks.where(:result => %w(warning error))
+      cancelled, failed = error.partition do |task|
+        task.execution_plan
+            .errors.map(&:exception)
+                   .any? { |exception| exception.class == ::ForemanTasks::Task::TaskCancelledException }
+      end.map(&:count)
+      done    = success + failed + cancelled
+      pending = total - done
+      percent = progress(total, done)
+      {
+        :total     => total,
+        :success   => success,
+        :cancelled => cancelled,
+        :failed    => failed,
+        :pending   => pending,
+        :progress  => percent
+      }
+    end
   end
 
   private
