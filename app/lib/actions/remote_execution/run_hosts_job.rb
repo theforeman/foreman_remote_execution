@@ -2,6 +2,8 @@ module Actions
   module RemoteExecution
     class RunHostsJob < Actions::ActionWithSubPlans
 
+      include Dynflow::Action::WithBulkSubPlans
+
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
 
