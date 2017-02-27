@@ -1,17 +1,21 @@
 module ForemanRemoteExecutionCore
   class ScriptRunner < ForemanTasksCore::Runner::Base
 
-    @@data = []
+    @data = []
+
+    class << self
+      attr_accessor :data
+    end
 
     def initialize(*args)
       super
       # Load the fake output the first time its needed
-      unless @@data.frozen?
+      unless self.class.data.frozen?
         logger.debug("Loading fake output file #{configuration_path}")
         File.open(configuration_path, 'r') do |f|
-          @@data = f.readlines.map(&:chomp)
+          self.class.data = f.readlines.map(&:chomp)
         end
-        @@data.freeze
+        self.class.data.freeze
       end
       @position = 0
     end
@@ -44,11 +48,11 @@ module ForemanRemoteExecutionCore
     end
 
     def done?
-      @position == @@data.count
+      @position == self.class.data.count
     end
 
     def next_chunk
-      output = @@data[@position]
+      output = self.class.data[@position]
       @position += 1
       output
     end
