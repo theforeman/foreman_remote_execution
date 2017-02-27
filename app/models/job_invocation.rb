@@ -184,25 +184,10 @@ class JobInvocation < ActiveRecord::Base
         acc.merge(key => 0)
       end
     else
-      total   = targeting.hosts.count
-      success = sub_tasks.where(:result => 'success').count
-      error   = sub_tasks.where(:result => %w(warning error))
-      cancelled, failed = error.partition do |task|
-        task.execution_plan
-            .errors.map(&:exception)
-                   .any? { |exception| exception.class == ::ForemanTasks::Task::TaskCancelledException }
-      end.map(&:count)
-      done    = success + failed + cancelled
-      pending = total - done
-      percent = progress(total, done)
-      {
-        :total     => total,
-        :success   => success,
-        :cancelled => cancelled,
-        :failed    => failed,
-        :pending   => pending,
-        :progress  => percent
-      }
+      counts  = task.sub_tasks_counts
+      done    = counts.values_at(:success, :failed, :cancelled).reduce(:+)
+      percent = progress(counts[:total], done)
+      counts.merge(:progress => percent)
     end
   end
 

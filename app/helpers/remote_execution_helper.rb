@@ -12,6 +12,7 @@ module RemoteExecutionHelper
     options = { :class => 'statistics-pie small', :expandable => true, :border => 0, :show_title => true }
 
     if (invocation.task)
+      # Request precise subtask counts only if the task is stopped
       report = invocation.progress_report
       flot_pie_chart('status', job_invocation_status(invocation, report[:progress]),
                      [{:label => _('Success'),   :data => report[:success],   :color => '#5CB85C'},
@@ -28,11 +29,12 @@ module RemoteExecutionHelper
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
   end
 
-  def job_invocation_status(invocation, percent = invocation.percent)
+  def job_invocation_status(invocation, percent = nil)
     case invocation.status
       when HostStatus::ExecutionStatus::QUEUED
         _('queued')
       when HostStatus::ExecutionStatus::RUNNING
+        percent ||= invocation.progress_report[:progress]
         _('running %{percent}%%') % {:percent => percent}
       when HostStatus::ExecutionStatus::OK
         _('succeeded')
@@ -51,10 +53,6 @@ module RemoteExecutionHelper
     task.result == 'success'
   end
 
-  def task_cancelled?(task)
-    task.execution_plan.errors.map(&:exception).any? { |exception| exception.class == ::ForemanTasks::Task::TaskCancelledException }
-  end
-
   def host_counter(label, count)
     content_tag(:div, :class => 'host_counter') do
       content_tag(:div, label, :class => 'header') + content_tag(:div, count.to_s, :class => 'count')
@@ -71,11 +69,9 @@ module RemoteExecutionHelper
     else
       case task.result
         when 'warning', 'error'
-          if task_cancelled?(task)
-            icon_text('warning-triangle-o', _('cancelled'), :kind => 'pficon')
-          else
-            icon_text('error-circle-o', _('failed'), :kind => 'pficon')
-          end
+          icon_text('error-circle-o', _('failed'), :kind => 'pficon')
+        when 'cancelled'
+          icon_text('warning-triangle-o', _('cancelled'), :kind => 'pficon')
         when 'success'
           icon_text('ok', _('success'), :kind => 'pficon')
         else
@@ -116,7 +112,7 @@ module RemoteExecutionHelper
     if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_('Rerun failed'), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
                          :class => 'btn btn-default',
-                         :disabled => !task.sub_tasks.any? { |sub_task| task_failed?(sub_task) },
+                         :disabled => task.sub_tasks.where(:result => %w(error warning)).count.zero?,
                          :title => _('Rerun on failed hosts'))
     end
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task, :authorizer => task_authorizer)
