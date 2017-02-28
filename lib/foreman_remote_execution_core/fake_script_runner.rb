@@ -5,18 +5,29 @@ module ForemanRemoteExecutionCore
 
     class << self
       attr_accessor :data
+
+      def load_data(path = nil)
+        if path.nil?
+          @data = <<-END.gsub(/^\s+\| ?/, '').lines
+            | ====== Simulated Remote Execution ======
+            |
+            | This is an output of a simulated remote
+            | execution run. It should run for about
+            | 5 seconds and finish successfully.
+          END
+        else
+          File.open(File.expand_path(path), 'r') do |f|
+            @data = f.readlines.map(&:chomp)
+          end
+        end
+        @data.freeze
+      end
     end
 
     def initialize(*args)
       super
       # Load the fake output the first time its needed
-      unless self.class.data.frozen?
-        logger.debug("Loading fake output file #{configuration_path}")
-        File.open(configuration_path, 'r') do |f|
-          self.class.data = f.readlines.map(&:chomp)
-        end
-        self.class.data.freeze
-      end
+      self.class.load_data(ENV['REX_SIMULATE_PATH']) unless self.class.data.frozen?
       @position = 0
     end
 
@@ -59,19 +70,13 @@ module ForemanRemoteExecutionCore
 
     # Decide if the execution should fail or not
     def exit_code
-      fail_chance   = ENV.fetch('REX_DEBUG_FAIL_CHANCE', 0).to_i
-      fail_exitcode = ENV['REX_DEBUG_EXIT'] || 0
+      fail_chance   = ENV.fetch('REX_SIMULATE_FAIL_CHANCE', 0).to_i
+      fail_exitcode = ENV.fetch('REX_SIMULATE_EXIT', 0)
       if fail_exitcode == 0 || fail_chance < (Random.rand * 100).round
         0
       else
         fail_exitcode
       end
     end
-
-    def configuration_path
-      path = ENV['REX_DEBUG_PATH'] || '/dev/null'
-      File.expand_path(path)
-    end
-
   end
 end
