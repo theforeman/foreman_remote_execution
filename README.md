@@ -24,6 +24,17 @@ management functionality with remote management functionality.
 
 Check the Foreman manual [remote execution section](http://theforeman.org/plugins/foreman_remote_execution/)
 
+## Simulated runs
+There is an option to use an alternative `ScriptRunner` implementation. Instead of doing ssh connections it discards any input its given and gives back fake output.
+
+It is controlled by setting the following environment variables
+`REX_SIMULATE` - setting to 1, yes or true enables the use of the fake runner
+`REX_SIMULATE_PATH` - full path to a file which should be given back as output by the runner, currently one line per runner's refresh
+`REX_SIMULATE_FAIL_CHANCE` - number from 0 to 100, each host has a `REX_SIMULATE_FAIL_CHANCE` of exiting with `REX_SIMULATE_EXIT`, useful for simulating random failures
+`REX_SIMULATE_EXIT` - see the previous
+
+Because it doesn't really open the outgoing connections, it doesn't need hosts with valid IP addresses as targets.
+
 ## Links
 
 * [Design document](http://theforeman.github.io/foreman_remote_execution/design/)
