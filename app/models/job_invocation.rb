@@ -130,6 +130,10 @@ class JobInvocation < ActiveRecord::Base
     failed_template_invocations.includes(:host).map(&:host)
   end
 
+  def hosts_with_result(result)
+    template_invocations_with_result(result).includes(:host).map(&:host)
+  end
+
   def total_hosts_count
     if targeting.resolved?
       targeting.hosts.count
@@ -193,9 +197,15 @@ class JobInvocation < ActiveRecord::Base
     end
   end
 
+  def template_invocations_with_result(result)
+    template_invocations.joins(:run_host_job_task)
+                        .where("#{ForemanTasks::Task.table_name}.result" => result)
+  end
+
   private
 
   def failed_template_invocations
-    template_invocations.joins(:run_host_job_task).where("#{ForemanTasks::Task.table_name}.result" => ['error', 'warning'])
+    template_invocations_with_result(%w(error warning))
   end
+
 end

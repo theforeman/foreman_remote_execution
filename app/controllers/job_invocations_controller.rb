@@ -42,7 +42,8 @@ class JobInvocationsController < ApplicationController
   def show
     @job_invocation = resource_base.includes(:template_invocations => :run_host_job_task).find(params[:id])
     @auto_refresh = @job_invocation.task.try(:pending?)
-    hosts_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+    ids = @job_invocation.template_invocations_with_result(requested_results).select(:host_id)
+    hosts_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host).where(:id => ids)
     @hosts = hosts_base.search_for(params[:search], :order => params[:order] || 'name ASC').paginate(:page => params[:page])
   end
 
@@ -86,5 +87,14 @@ class JobInvocationsController < ApplicationController
     else
       JobInvocationComposer.from_ui_params(params.merge(:triggering => triggering_params))
     end
+  end
+
+  def requested_results
+    result_map = Hash.new { |hash, key| hash[key] = key }
+    result_map.update('failed' => %w(error warning))
+    base = Hash.new('1').merge(params['filters'] || {})
+    %w(success cancelled pending failed).map do |result|
+      base[result] == '1' ? result_map[result] : nil
+    end.compact
   end
 end
