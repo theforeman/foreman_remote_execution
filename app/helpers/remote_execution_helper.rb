@@ -246,11 +246,14 @@ module RemoteExecutionHelper
                :onchange => 'regenerate_description(this);',
                :class => 'description_format advanced',
                :disabled => disabled,
-               :help_inline => popover(_('Explanation'),
-                                       _('This template is used to generate the description ' +
-                                         'Input values can be used using the syntax %{package}. ' +
-                                         'You may also include the job category and template ' +
-                                         'name using %{job_category} and %{template_name}.'))
+               :label_help => description_format_help
+  end
+
+  def description_format_help
+    _('This template is used to generate the description.<br/>' +
+        'Input values can be used using the syntax %{package}.<br/>' +
+        'You may also include the job category and template<br/>' +
+        'name using %{job_category} and %{template_name}.').html_safe
   end
 
   def advanced_switch_f(default_text, switch_text)
