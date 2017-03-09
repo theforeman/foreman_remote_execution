@@ -12,7 +12,7 @@
   <tbody>
     <% @remote_execution_features.each do |feature| %>
       <tr>
-        <td><%= link_to_if_authorized feature.label, hash_for_remote_execution_feature_path(feature).merge(:auth_object => feature, :permission => :edit_remote_execution_features) %></td>
+        <td><%= link_to_if_authorized feature.label, hash_for_remote_execution_feature_path(feature).merge(:auth_object => feature, :permission => :edit_remote_execution_features, :authorizer => authorizer) %></td>
         <td><%= feature.name %></td>
         <td><%= feature.description %></td>
       </tr>
