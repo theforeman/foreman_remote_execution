@@ -10,7 +10,7 @@ module ForemanRemoteExecution
       original = permitted_actions_without_run_button(template)
 
       if template.is_a?(JobTemplate)
-        original.unshift(display_link_if_authorized(_('Run'), hash_for_new_job_invocation_path(:template_id => template.id))) unless template.snippet
+        original.unshift(display_link_if_authorized(_('Run'), hash_for_new_job_invocation_path(:template_id => template.id).merge(:authorizer => authorizer))) unless template.snippet
       end
 
       original

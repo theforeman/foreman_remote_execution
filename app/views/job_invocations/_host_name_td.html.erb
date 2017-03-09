@@ -1,6 +1,7 @@
 <td class="host_name" id="<%= dom_id(host) %>-name" data-refresh_required="<%= task.nil? ? 'true' : '' %>" data-id="<%= host.id %>">
   <% if task %>
-    <%= link_to_if_authorized host.name, hash_for_template_invocation_path(:id => template_invocation).merge(:auth_object => host, :permission => :view_hosts) %>
+    <%= link_to_if_authorized host.name, hash_for_template_invocation_path(:id => template_invocation).merge(:auth_object => host, :permission => :view_hosts, :authorizer => job_hosts_authorizer) %>
+
   <% else %>
     <%= host.name %>
   <% end %>

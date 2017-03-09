@@ -30,6 +30,10 @@ module RemoteExecutionHelper
     end
   end
 
+  def job_hosts_authorizer
+    @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
+  end
+
   def job_invocation_status(invocation)
     case invocation.status
       when HostStatus::ExecutionStatus::QUEUED
@@ -84,8 +88,8 @@ module RemoteExecutionHelper
 
   def template_invocation_actions(task, host, job_invocation, template_invocation)
     [
-      display_link_if_authorized(_('Host detail'), hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts)),
-      display_link_if_authorized(_('Rerun on %s') % host.name, hash_for_rerun_job_invocation_path(:id => job_invocation, :host_ids => [ host.id ])),
+      display_link_if_authorized(_('Host detail'), hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts, :authorizer => job_hosts_authorizer)),
+      display_link_if_authorized(_('Rerun on %s') % host.name, hash_for_rerun_job_invocation_path(:id => job_invocation, :host_ids => [ host.id ], :authorizer => job_hosts_authorizer)),
     ]
   end
 
@@ -103,6 +107,7 @@ module RemoteExecutionHelper
   # rubocop:disable Metrics/AbcSize
   def job_invocation_task_buttons(task)
     job_invocation = task.task_groups.find { |group| group.class == JobInvocationTaskGroup }.job_invocation
+    task_authorizer = Authorizer.new(User.current, :collection => [task])
     buttons = []
     buttons << link_to(_('Refresh'), {}, :class => 'btn btn-default', :title => _('Refresh this page'))
     if authorized_for(hash_for_new_job_invocation_path)
@@ -116,12 +121,12 @@ module RemoteExecutionHelper
                          :disabled => !task.sub_tasks.any? { |sub_task| task_failed?(sub_task) },
                          :title => _('Rerun on failed hosts'))
     end
-    if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
+    if authorized_for(:permission => :view_foreman_tasks, :auth_object => task, :authorizer => task_authorizer)
       buttons << link_to(_('Job Task'), foreman_tasks_task_path(task),
                          :class => 'btn btn-default',
                          :title => _('See the last task details'))
     end
-    if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task)
+    if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task, :authorizer => task_authorizer)
       buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
                          :class => 'btn btn-danger',
                          :title => _('Try to cancel the job'),
@@ -153,8 +158,9 @@ module RemoteExecutionHelper
     if invocation.queued?
       job_invocation_status(invocation)
     else
+      task_authorizer = Authorizer.new(User.current, :collection => [invocation.task])
       link_to_if_authorized job_invocation_status(invocation),
-                            hash_for_foreman_tasks_task_path(invocation.task).merge(:auth_object => invocation.task, :permission => :view_foreman_tasks)
+                            hash_for_foreman_tasks_task_path(invocation.task).merge(:auth_object => invocation.task, :permission => :view_foreman_tasks, :authorizer => task_authorizer)
     end
   end
 
