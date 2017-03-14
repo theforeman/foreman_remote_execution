@@ -37,7 +37,7 @@ module Actions
       end
 
       def batch(from, size)
-        hosts.slice(from, size)
+        hosts.offset(from).limit(size)
       end
 
       def total_count
