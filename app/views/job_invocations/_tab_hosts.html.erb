@@ -12,17 +12,6 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <%= fields_for('filters') do |f| %>
-          <% base = params.fetch('filters', {}) %>
-          <% [_('Success'), _('Failed'), _('Cancelled'), _('Pending')].each do |label| %>
-            <%= f.check_box(label.downcase, {:checked => base[label.downcase].nil? || base[label.downcase] == '1'}, '1', '0') %>
-             <label><%= label %></label>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
   <% end %>
   <br>
 
