@@ -12,6 +12,10 @@ module ForemanRemoteExecutionCore
     %w(yes true 1).include? ENV.fetch('REX_SIMULATE', '').downcase
   end
 
+  def self.runner_class
+    @runner_class ||= simulate? ? FakeScriptRunner : ScriptRunner
+  end
+
   if ForemanTasksCore.dynflow_present?
     require 'foreman_tasks_core/runner'
     if simulate?

@@ -1,5 +1,5 @@
 module ForemanRemoteExecutionCore
-  class ScriptRunner < ForemanTasksCore::Runner::Base
+  class FakeScriptRunner < ForemanTasksCore::Runner::Base
 
     @data = []
 
