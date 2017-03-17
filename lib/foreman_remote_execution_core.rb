@@ -8,9 +8,22 @@ module ForemanRemoteExecutionCore
                     :remote_working_dir    => '/var/tmp',
                     :local_working_dir     => '/var/tmp')
 
+  def self.simulate?
+    %w(yes true 1).include? ENV.fetch('REX_SIMULATE', '').downcase
+  end
+
+  def self.runner_class
+    @runner_class ||= simulate? ? FakeScriptRunner : ScriptRunner
+  end
+
   if ForemanTasksCore.dynflow_present?
     require 'foreman_tasks_core/runner'
-    require 'foreman_remote_execution_core/script_runner'
+    if simulate?
+      # Load the fake implementation of the script runner if debug is enabled
+      require 'foreman_remote_execution_core/fake_script_runner'
+    else
+      require 'foreman_remote_execution_core/script_runner'
+    end
     require 'foreman_remote_execution_core/actions'
   end
 

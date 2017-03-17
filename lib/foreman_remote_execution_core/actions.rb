@@ -4,7 +4,7 @@ module ForemanRemoteExecutionCore
   module Actions
     class RunScript < ForemanTasksCore::Runner::Action
       def initiate_runner
-        ScriptRunner.new(input)
+        ForemanRemoteExecutionCore.runner_class.new(input)
       end
     end
   end
