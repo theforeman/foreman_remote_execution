@@ -1,6 +1,6 @@
 <% title @job_invocation.description, trunc_with_tooltip(@job_invocation.description, 120) %>
 <% stylesheet 'job_invocations' %>
-<% javascript 'template_invocation' %>
+<% javascript 'charts', 'template_invocation' %>
 
 <% if @job_invocation.task %>
   <% title_actions(button_group(job_invocation_task_buttons(@job_invocation.task))) %>
