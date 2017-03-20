@@ -45,14 +45,6 @@ module RemoteExecutionHelper
     end
   end
 
-  def task_failed?(task)
-    %w(warning error).include? task.result
-  end
-
-  def task_success?(task)
-    task.result == 'success'
-  end
-
   def host_counter(label, count)
     content_tag(:div, :class => 'host_counter') do
       content_tag(:div, label, :class => 'header') + content_tag(:div, count.to_s, :class => 'count')
