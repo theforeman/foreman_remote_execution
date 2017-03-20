@@ -185,9 +185,9 @@ class JobInvocation < ActiveRecord::Base
       end
     else
       counts  = task.sub_tasks_counts
-      done    = counts.values_at(:success, :failed, :cancelled).reduce(:+)
+      done    = counts.values_at(:cancelled, :error, :success, :warning).reduce(:+)
       percent = progress(counts[:total], done)
-      counts.merge(:progress => percent)
+      counts.merge(:progress => percent, :failed => counts[:error] + counts[:warning])
     end
   end
 
