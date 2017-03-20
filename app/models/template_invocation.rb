@@ -12,7 +12,7 @@ class TemplateInvocation < ActiveRecord::Base
   belongs_to :job_invocation, :inverse_of => :template_invocations
   has_many :input_values, :class_name => 'TemplateInvocationInputValue', :dependent => :destroy
   has_one :targeting, :through => :job_invocation
-  belongs_to :host, :class_name => 'Host::Managed', :foreign_key => :host_id
+  belongs_to :host, :class_name => 'Host::Managed', :foreign_key => :host_id, :inverse_of => :template_invocations
   has_one :host_group, :through => :host, :source => :hostgroup
   belongs_to :run_host_job_task, :class_name => 'ForemanTasks::Task'
 
