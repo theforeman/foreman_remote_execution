@@ -107,6 +107,8 @@ describe JobInvocation do
     let(:task) { ForemanTasks::Task.new }
     let(:progress_report_without_sub_tasks) do
       {
+        :error     => 0,
+        :warning   => 0,
         :total     => 0,
         :success   => 0,
         :cancelled => 0,
@@ -143,18 +145,6 @@ describe JobInvocation do
         job_invocation.stubs(:sub_tasks).returns(sub_tasks)
 
         job_invocation.progress.must_equal 100
-      end
-
-      it 'calculates the progress report correctly' do
-        sub_tasks = [ForemanTasks::Task.new]
-        job_invocation.targeting.expects(:resolved?).twice.returns(true)
-        job_invocation.targeting.expects(:hosts).returns([1])
-        sub_tasks.expects(:where).with(:result => 'success').returns(sub_tasks)
-        sub_tasks.expects(:where).with(:result => %w(warning error)).returns([])
-        job_invocation.stubs(:sub_tasks).returns(sub_tasks)
-
-        expected_result = progress_report_without_sub_tasks.merge(:total => 1, :success => 1, :progress => 100)
-        job_invocation.progress_report.must_equal expected_result
       end
     end
   end

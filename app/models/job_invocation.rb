@@ -87,7 +87,7 @@ class JobInvocation < ActiveRecord::Base
 
   # returns progress in percents
   def progress(total = nil, done = nil)
-    if queued? || !targeting.resolved?
+    if queued? || !targeting.resolved? || done == 0
       0
     else
       total ||= targeting.hosts.count
@@ -180,7 +180,7 @@ class JobInvocation < ActiveRecord::Base
 
   def progress_report
     if queued? || !targeting.resolved?
-      %w(success total cancelled failed pending progress).map(&:to_sym).reduce({}) do |acc, key|
+      %w(success total cancelled failed error warning pending progress).map(&:to_sym).reduce({}) do |acc, key|
         acc.merge(key => 0)
       end
     else
