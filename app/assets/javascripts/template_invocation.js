@@ -30,22 +30,17 @@ function refresh_search_query(value){
 }
 
 function show_preview_hosts_modal() {
-  var modal_window = $('#previewHostsModal');
-
   var form = $('form#job_invocation_form');
   var data = form.serializeArray();
-
   request = $.ajax({
     data: data,
     type: 'GET',
-    url: modal_window.attr('data-url'),
-    success: function(request) {
-      modal_window.find('.modal-body').html(request);
-    },
-    complete: function() {
-      modal_window.modal({'show': true});
-      modal_window.find('a[rel="popover-modal"]').popover();
-    }
+    url: $('#previewHostsModal').attr('data-url')
+  }).then(function(result){
+    var modal_window = $('#previewHostsModal');
+    modal_window.find('.modal-body').html(result);
+    modal_window.modal({'show': true});
+    modal_window.find('a[rel="popover-modal"]').popover();
   });
 }
 
