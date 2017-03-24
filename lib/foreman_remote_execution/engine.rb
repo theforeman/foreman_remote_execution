@@ -84,6 +84,8 @@ module ForemanRemoteExecution
         role 'Remote Execution User', USER_PERMISSIONS
         role 'Remote Execution Manager', MANAGER_PERMISSIONS
 
+        add_all_permissions_to_default_roles
+
         # add menu entry
         menu :top_menu, :job_templates,
              url_hash: { controller: :job_templates, action: :index },
