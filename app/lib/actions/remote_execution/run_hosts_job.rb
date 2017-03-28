@@ -2,6 +2,8 @@ module Actions
   module RemoteExecution
     class RunHostsJob < Actions::ActionWithSubPlans
 
+      include Dynflow::Action::WithBulkSubPlans
+
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
 
@@ -25,13 +27,25 @@ module Actions
         job_invocation = JobInvocation.find(input[:job_invocation_id])
         proxy_selector = RemoteExecutionProxySelector.new
 
-        # composer creates just "pattern" for template_invocations because target is evaluated
-        # during actual run (here) so we build template invocations from these patterns
-        job_invocation.targeting.hosts.map do |host|
+        current_batch.map do |host|
+          # composer creates just "pattern" for template_invocations because target is evaluated
+          # during actual run (here) so we build template invocations from these patterns
           template_invocation = job_invocation.pattern_template_invocation_for_host(host).deep_clone
           template_invocation.host_id = host.id
           trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector)
         end
+      end
+
+      def batch(from, size)
+        hosts.offset(from).limit(size)
+      end
+
+      def total_count
+        hosts.count
+      end
+
+      def hosts
+        JobInvocation.find(input[:job_invocation_id]).targeting.hosts.order(:name, :id)
       end
 
       def set_up_concurrency_control(invocation)

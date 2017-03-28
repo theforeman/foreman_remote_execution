@@ -43,6 +43,7 @@ module ForemanRemoteExecution
     end
 
     it 'triggers the RunHostJob actions on the resolved hosts in run phase' do
+      planned.expects(:output).returns(:planned_count => 0)
       planned.expects(:trigger).with() { |*args| args[0] == Actions::RemoteExecution::RunHostJob }
       planned.create_sub_plans
     end
