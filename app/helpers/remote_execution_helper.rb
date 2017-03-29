@@ -11,19 +11,14 @@ module RemoteExecutionHelper
   def job_invocation_chart(invocation)
     options = { :class => 'statistics-pie small', :expandable => true, :border => 0, :show_title => true }
 
-    if (bulk_task = invocation.task)
-      failed_tasks = bulk_task.sub_tasks.select { |sub_task| task_failed? sub_task }
-      cancelled_tasks, failed_tasks = failed_tasks.partition { |task| task_cancelled? task }
-      success = bulk_task.output['success_count'] || 0
-      cancelled = cancelled_tasks.length
-      failed = failed_tasks.length
-      pending = (bulk_task.output['pending_count'] || bulk_task.sub_tasks.count)
-
-      flot_pie_chart('status', job_invocation_status(invocation),
-                     [{:label => _('Success'), :data => success, :color => '#5CB85C'},
-                      {:label => _('Failed'), :data => failed, :color => '#D9534F'},
-                      {:label => _('Pending'), :data => pending, :color => '#DEDEDE'},
-                      {:label => _('Cancelled'), :data => cancelled, :color => '#B7312D'}],
+    if (invocation.task)
+      # Request precise subtask counts only if the task is stopped
+      report = invocation.progress_report
+      flot_pie_chart('status', job_invocation_status(invocation, report[:progress]),
+                     [{:label => _('Success'),   :data => report[:success],   :color => '#5CB85C'},
+                      {:label => _('Failed'),    :data => report[:failed],    :color => '#D9534F'},
+                      {:label => _('Pending'),   :data => report[:pending],   :color => '#DEDEDE'},
+                      {:label => _('Cancelled'), :data => report[:cancelled], :color => '#B7312D'}],
                      options)
     else
       content_tag(:h4, job_invocation_status(invocation))
@@ -34,12 +29,13 @@ module RemoteExecutionHelper
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
   end
 
-  def job_invocation_status(invocation)
+  def job_invocation_status(invocation, percent = nil)
     case invocation.status
       when HostStatus::ExecutionStatus::QUEUED
         _('queued')
       when HostStatus::ExecutionStatus::RUNNING
-        _('running %{percent}%%') % {:percent => invocation.progress}
+        percent ||= invocation.progress_report[:progress]
+        _('running %{percent}%%') % {:percent => percent}
       when HostStatus::ExecutionStatus::OK
         _('succeeded')
       when HostStatus::ExecutionStatus::ERROR
@@ -47,14 +43,6 @@ module RemoteExecutionHelper
       else
         _('unknown status')
     end
-  end
-
-  def task_failed?(task)
-    %w(warning error).include? task.result
-  end
-
-  def task_cancelled?(task)
-    task.execution_plan.errors.map(&:exception).any? { |exception| exception.class == ::ForemanTasks::Task::TaskCancelledException }
   end
 
   def host_counter(label, count)
@@ -73,11 +61,9 @@ module RemoteExecutionHelper
     else
       case task.result
         when 'warning', 'error'
-          if task_cancelled?(task)
-            icon_text('warning-triangle-o', _('cancelled'), :kind => 'pficon')
-          else
-            icon_text('error-circle-o', _('failed'), :kind => 'pficon')
-          end
+          icon_text('error-circle-o', _('failed'), :kind => 'pficon')
+        when 'cancelled'
+          icon_text('warning-triangle-o', _('cancelled'), :kind => 'pficon')
         when 'success'
           icon_text('ok', _('success'), :kind => 'pficon')
         else
@@ -118,7 +104,7 @@ module RemoteExecutionHelper
     if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_('Rerun failed'), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
                          :class => 'btn btn-default',
-                         :disabled => !task.sub_tasks.any? { |sub_task| task_failed?(sub_task) },
+                         :disabled => task.sub_tasks.where(:result => %w(error warning)).count.zero?,
                          :title => _('Rerun on failed hosts'))
     end
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task, :authorizer => task_authorizer)

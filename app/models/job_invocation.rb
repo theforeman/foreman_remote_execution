@@ -86,8 +86,14 @@ class JobInvocation < ActiveRecord::Base
   end
 
   # returns progress in percents
-  def progress
-    queued? ? 0 : (task.progress * 100).to_i
+  def progress(total = nil, done = nil)
+    if queued? || !targeting.resolved? || done == 0
+      0
+    else
+      total ||= targeting.hosts.count
+      done  ||= sub_tasks.where(:result => %w(success warning error)).count
+      ((done.to_f / total) * 100).round
+    end
   end
 
   def queued?
@@ -170,6 +176,19 @@ class JobInvocation < ActiveRecord::Base
       self.description.gsub!(Regexp.new("%\{#{k}\}"), v || '')
     end
     self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
+  end
+
+  def progress_report
+    if queued? || !targeting.resolved?
+      %w(success total cancelled failed error warning pending progress).map(&:to_sym).reduce({}) do |acc, key|
+        acc.merge(key => 0)
+      end
+    else
+      counts  = task.sub_tasks_counts
+      done    = counts.values_at(:cancelled, :error, :success, :warning).reduce(:+)
+      percent = progress(counts[:total], done)
+      counts.merge(:progress => percent, :failed => counts[:error] + counts[:warning])
+    end
   end
 
   private
