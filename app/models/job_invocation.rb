@@ -193,11 +193,6 @@ class JobInvocation < ActiveRecord::Base
     end
   end
 
-  def template_invocations_with_result(result)
-    template_invocations.joins(:run_host_job_task)
-                        .where("#{ForemanTasks::Task.table_name}.result" => result)
-  end
-
   private
 
   def failed_template_invocations

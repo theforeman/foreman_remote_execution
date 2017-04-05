@@ -9,16 +9,9 @@ module ForemanRemoteExecution
       alias_method_chain :host_params, :remote_execution
 
       has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
-      has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id', :inverse_of => :host
+      has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
       has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
-
-      has_many :job_invocations, :through => :template_invocations,
-               :class_name => '::JobInvocation',
-               :source => 'job_invocation'
-
-      has_many :run_host_job_tasks, :class_name => 'ForemanTasks::Task',
-               :through => :template_invocations,
-               :source => 'run_host_job_task'
+      has_many :run_host_job_tasks, :through => :template_invocations
 
       scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_task.result',
                     :ext_method => :search_by_job_invocation,
@@ -28,14 +21,10 @@ module ForemanRemoteExecution
                                          :cancelled => 'cancelled' }
 
       scoped_search :relation => :template_invocations, :on => :job_invocation_id,
-                    :rename => 'job_invocation.id', :only_explicit => true, :ext_method => :search_by_job_invocation
+                    :rename => 'job_invocation.id', :only_explicit => true , :ext_method => :search_by_job_invocation
 
       scoped_search :in => :execution_status_object, :on => :status, :rename => :execution_status,
                     :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
-
-      scoped_search :relation => :template_invocations, :on => :job_invocation_id,
-                    :rename => 'failed_job_invocation.id', :only_explicit => true,
-                    :ext_method => :search_failed_by_id
 
       def self.search_by_job_invocation(key, operator, value)
         mapping = {
