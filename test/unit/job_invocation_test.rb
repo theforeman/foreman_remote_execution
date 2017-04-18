@@ -1,7 +1,6 @@
 require 'test_plugin_helper'
 
 describe JobInvocation do
-
   let(:job_invocation) { FactoryGirl.build(:job_invocation) }
   let(:template) { FactoryGirl.create(:job_template, :with_input) }
 
@@ -78,14 +77,11 @@ describe JobInvocation do
         job_invocation.description.must_equal "#{job_invocation.job_category} - %{missing_key}"
       end
 
-      it 'truncates generated description to 255 characters' do
-        column_limit = 255
-        expected_result = 'a' * column_limit
-        JobInvocation.columns_hash['description'].expects(:limit).returns(column_limit)
+      it 'accepts description greater than 255 characters' do
         job_invocation.description_format = '%{job_category}'
         job_invocation.job_category = 'a' * 1000
         job_invocation.generate_description
-        job_invocation.description.must_equal expected_result
+        assert job_invocation.description.length > 255
       end
     end
   end

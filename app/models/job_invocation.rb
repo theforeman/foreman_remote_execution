@@ -175,7 +175,6 @@ class JobInvocation < ActiveRecord::Base
     input_hash.each do |k, v|
       self.description.gsub!(Regexp.new("%\{#{k}\}"), v || '')
     end
-    self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
   end
 
   def progress_report
