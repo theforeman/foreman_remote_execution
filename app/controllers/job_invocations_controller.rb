@@ -25,12 +25,7 @@ class JobInvocationsController < ApplicationController
 
   def rerun
     job_invocation = resource_base.find(params[:id])
-    @composer = JobInvocationComposer.from_job_invocation(job_invocation)
-    if params[:failed_only]
-      host_ids = job_invocation.failed_host_ids
-      @composer.search_query = Targeting.build_query_from_hosts(host_ids)
-    end
-
+    @composer = JobInvocationComposer.from_job_invocation(job_invocation, params)
     render :action => 'new'
   end
 

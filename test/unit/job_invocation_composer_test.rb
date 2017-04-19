@@ -525,6 +525,11 @@ describe JobInvocationComposer do
           new_composer.job_category.must_equal existing.job_category
         end
 
+        it 'accepts additional host ids' do
+          new_composer = JobInvocationComposer.from_job_invocation(composer.job_invocation, { :host_ids => [host.id] })
+          new_composer.search_query.must_equal("name ^ (#{host.name})")
+        end
+
         it 'builds new targeting object which keeps search query' do
           new_composer.targeting.wont_equal existing.targeting
           new_composer.search_query.must_equal existing.targeting.search_query

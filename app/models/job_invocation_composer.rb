@@ -146,8 +146,13 @@ class JobInvocationComposer
   class ParamsFromJobInvocation
     attr_reader :job_invocation
 
-    def initialize(job_invocation)
+    def initialize(job_invocation, params = {})
       @job_invocation = job_invocation
+      if params[:host_ids]
+        @host_ids = params[:host_ids]
+      elsif params[:failed_only]
+        @host_ids = job_invocation.failed_host_ids
+      end
     end
 
     def params
@@ -169,7 +174,11 @@ class JobInvocationComposer
     end
 
     def targeting_params
-      job_invocation.targeting.attributes.slice('search_query', 'bookmark_id', 'user_id', 'targeting_type')
+      if @host_ids
+        { :search_query => Targeting.build_query_from_hosts(@host_ids) }
+      else
+        job_invocation.targeting.attributes.slice('search_query', 'bookmark_id', 'user_id', 'targeting_type')
+      end
     end
 
     def template_invocations_params
@@ -268,8 +277,8 @@ class JobInvocationComposer
     @search_query = job_invocation.targeting.search_query unless job_invocation.targeting.bookmark_id.present?
   end
 
-  def self.from_job_invocation(job_invocation)
-    self.new(ParamsFromJobInvocation.new(job_invocation).params)
+  def self.from_job_invocation(job_invocation, params = {})
+    self.new(ParamsFromJobInvocation.new(job_invocation, params).params)
   end
 
   def self.from_ui_params(ui_params)
