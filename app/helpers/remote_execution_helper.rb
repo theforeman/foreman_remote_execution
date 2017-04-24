@@ -29,7 +29,7 @@ module RemoteExecutionHelper
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
   end
 
-  def job_invocation_status(invocation, percent = nil)
+  def job_invocation_status(invocation, percent = nil, verbose = true)
     case invocation.status
       when HostStatus::ExecutionStatus::QUEUED
         if verbose && invocation.task
@@ -145,7 +145,7 @@ module RemoteExecutionHelper
   end
 
   def link_to_invocation_task_if_authorized(invocation)
-    status = job_invocation_status(invocation, false)
+    status = job_invocation_status(invocation, nil, false)
     if invocation.queued?
       status
     else
