@@ -13,6 +13,7 @@ describe RemoteExecutionProvider do
   end
 
   describe '.register_provider' do
+    before { RemoteExecutionProvider.providers.delete(:new) }
     let(:new_provider) { RemoteExecutionProvider.providers[:new] }
     it { new_provider.must_be_nil }
 

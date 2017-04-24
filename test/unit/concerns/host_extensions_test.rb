@@ -94,10 +94,10 @@ describe ForemanRemoteExecution::HostExtensions do
     end
 
     context 'global strategy' do
-      let(:organization) { FactoryGirl.build(:organization) }
-      let(:location) { FactoryGirl.build(:location) }
-      let(:host) { FactoryGirl.build(:host, :organization => organization, :location => location) }
-      let(:proxy_in_taxonomies) { FactoryGirl.create(:smart_proxy, :ssh, :organizations => [organization], :locations => [location]) }
+      let(:tax_organization) { FactoryGirl.build(:organization) }
+      let(:tax_location) { FactoryGirl.build(:location) }
+      let(:host) { FactoryGirl.build(:host, :organization => tax_organization, :location => tax_location) }
+      let(:proxy_in_taxonomies) { FactoryGirl.create(:smart_proxy, :ssh, :organizations => [tax_organization], :locations => [tax_location]) }
       let(:proxy_no_taxonomies) { FactoryGirl.create(:smart_proxy, :ssh) }
 
       context 'enabled' do
