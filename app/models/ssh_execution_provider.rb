@@ -1,6 +1,6 @@
 class SSHExecutionProvider < RemoteExecutionProvider
 
-  EFFECTIVE_USER_METHODS = %w[sudo su]
+  EFFECTIVE_USER_METHODS = %w[sudo su].freeze
 
   class << self
     def proxy_command_options(template_invocation, host)
@@ -57,8 +57,6 @@ class SSHExecutionProvider < RemoteExecutionProvider
       end
       method
     end
-
-    private
 
     def effective_interfaces(host)
       interfaces = []

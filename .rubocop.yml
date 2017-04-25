@@ -2,11 +2,16 @@ inherit_from:
   - .rubocop_todo.yml
 
 AllCops:
-  RunRailsCops: true # always run the rails cops
   Exclude:
     - 'doc/plugins/**'
 
+Rails:
+  Enabled: true
+
 Rails/Date:
+  Enabled: false
+
+Rails/HttpPositionalArguments:
   Enabled: false
 
 # Don't enforce documentation
@@ -20,8 +25,11 @@ Rails/ActionFilter:
 Metrics/MethodLength:
   Max: 40
 
-Style/TrailingComma:
+Style/TrailingCommaInLiteral:
   Enabled: false
+
+#Style/TrailingCommaInArguments:
+#Enabled: false
 
 Style/AccessorMethodName:
   Enabled: false
@@ -51,5 +59,21 @@ Style/ClassAndModuleChildren:
 Style/EachWithObject:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+       - 'config/routes.rb'
+       - 'lib/foreman_remote_execution/engine.rb'
+       - 'test/**/*'
+
 Metrics/ParameterLists:
+  Enabled: false
+
+Style/VariableNumber:
+  Enabled: false
+
+# a == 0 is not the same as a.zero?, when a is not a number
+Style/NumericPredicate:
   Enabled: false

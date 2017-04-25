@@ -5,8 +5,8 @@ FactoryGirl.define do
     sequence(:job_category) { |n| "job name #{n}" }
     f.template 'id'
     f.provider_type 'SSH'
-    organizations { [Organization.find_by_name('Organization 1')] } if SETTINGS[:organizations_enabled]
-    locations { [Location.find_by_name('Location 1')] } if SETTINGS[:locations_enabled]
+    organizations { [Organization.find_by(name: 'Organization 1')] } if SETTINGS[:organizations_enabled]
+    locations { [Location.find_by(name: 'Location 1')] } if SETTINGS[:locations_enabled]
 
 
     trait :with_input do

@@ -39,6 +39,7 @@ module ForemanRemoteExecution
       get_interface_by_flag(:execution)
     end
 
+    # rubocop:disable Metrics/PerceivedComplexity
     def remote_execution_proxies(provider, authorized = true)
       proxies = {}
       proxies[:subnet]   = execution_interface.subnet.remote_execution_proxies.with_features(provider) if execution_interface && execution_interface.subnet
@@ -48,7 +49,7 @@ module ForemanRemoteExecution
         proxy_scope = if Taxonomy.enabled_taxonomies.any? && User.current.present?
                         ::SmartProxy.with_taxonomy_scope_override(location, organization)
                       else
-                        proxy_scope = ::SmartProxy.unscoped
+                        ::SmartProxy.unscoped
                       end
 
         proxy_scope = proxy_scope.authorized if authorized

@@ -8,7 +8,7 @@ class HostStatus::ExecutionStatus < HostStatus::Status
   # execution is in progress, dynflow task was created
   RUNNING = 3
   # mapping to string representation
-  STATUS_NAMES = { OK => 'succeeded', ERROR => 'failed', QUEUED => 'queued', RUNNING => 'running' }
+  STATUS_NAMES = { OK => 'succeeded', ERROR => 'failed', QUEUED => 'queued', RUNNING => 'running' }.freeze
 
   def relevant?(*args)
     execution_tasks.present?

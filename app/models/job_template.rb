@@ -70,7 +70,7 @@ class JobTemplate < ::Template
       return if metadata.blank? || metadata.delete('kind') != 'job_template'
 
       # Don't look for existing if we should always create a new template
-      existing = self.find_by_name(metadata['name']) unless options.delete(:build_new)
+      existing = self.find_by(name: metadata['name']) unless options.delete(:build_new)
       # Don't update if the template already exists, unless we're told to
       return if !options.delete(:update) && existing
 
@@ -130,7 +130,7 @@ class JobTemplate < ::Template
   end
 
   def effective_user
-    super || (build_effective_user.tap(&:set_defaults))
+    super || build_effective_user.tap(&:set_defaults)
   end
 
   def generate_description_format

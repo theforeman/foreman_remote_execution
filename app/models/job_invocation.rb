@@ -6,7 +6,7 @@ class JobInvocation < ActiveRecord::Base
     :pattern_template_invocations => lambda do |template_invocation|
       _('template') + " #{template_invocation.template.name}"
     end
-  }
+  }.freeze
 
   belongs_to :targeting, :dependent => :destroy
   has_many :all_template_invocations, :inverse_of => :job_invocation, :dependent => :destroy, :class_name => 'TemplateInvocation'
@@ -167,7 +167,9 @@ class JobInvocation < ActiveRecord::Base
     key_re = /%\{([^\}]+)\}/
     template_invocation = pattern_template_invocations.first
     hash_base = Hash.new { |hash, key| hash[key] = "%{#{key}}" }
-    input_hash = template_invocation.input_values.reduce(hash_base) { |h, v| h.update(v.template_input.name => v.value) }
+    input_hash = template_invocation.input_values.reduce(hash_base) do |h, v|
+      h.update(v.template_input.name => v.value)
+    end
     input_hash.update(:job_category => job_category)
     input_hash.update(:template_name => template_invocation.template.name)
     description_format.scan(key_re) { |key| input_hash[key.first] }

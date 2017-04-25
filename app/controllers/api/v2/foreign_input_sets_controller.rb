@@ -18,8 +18,7 @@ module Api
       api :GET, '/templates/:template_id/foreign_input_sets/:id', N_('Show foreign input set details')
       param :template_id, :identifier, :required => true
       param :id, :identifier, :required => true
-      def show
-      end
+      def show; end
 
       def_param_group :foreign_input_set do
         param :foreign_input_set, Hash, :required => true, :action_aware => true do

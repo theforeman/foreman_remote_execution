@@ -1,4 +1,4 @@
-require "benchmark/benchmark_helper"
+require 'benchmark/benchmark_helper'
 require 'dynflow/testing'
 
 # Add plugin to FactoryGirl's paths
@@ -63,7 +63,7 @@ foreman_benchmark do
   Benchmark.ips do |x|
     x.config(:time => 10, :warmup => 0)
 
-    x.report("rex-run-hosts-job") do
+    x.report('rex-run-hosts-job') do
       tester.run_action(job_invocation)
     end
   end

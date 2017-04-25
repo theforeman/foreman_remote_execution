@@ -1,8 +1,8 @@
 class Targeting < ActiveRecord::Base
 
-  STATIC_TYPE = 'static_query'
-  DYNAMIC_TYPE = 'dynamic_query'
-  TYPES = { STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query') }
+  STATIC_TYPE = 'static_query'.freeze
+  DYNAMIC_TYPE = 'dynamic_query'.freeze
+  TYPES = { STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query') }.freeze
   RESOLVE_PERMISSION = :view_hosts
 
   belongs_to :user

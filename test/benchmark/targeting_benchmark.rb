@@ -1,4 +1,4 @@
-require "benchmark/benchmark_helper"
+require 'benchmark/benchmark_helper'
 require 'dynflow/testing'
 
 # Add plugin to FactoryGirl's paths
@@ -23,7 +23,7 @@ foreman_benchmark do
   Benchmark.ips do |x|
     x.config(:time => 10, :warmup => 0)
 
-    x.report("rex-targeting-resolve-hosts") do
+    x.report('rex-targeting-resolve-hosts') do
       targeting = FactoryGirl.create(:targeting, :search_query => "comment = benchmark-#{Foreman.uuid}", :user => User.current)
       targeting.resolve_hosts!
     end

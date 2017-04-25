@@ -2,7 +2,7 @@ class JobInvocationTaskGroup < ::ForemanTasks::TaskGroup
 
   has_one :job_invocation, :foreign_key => :task_group_id
 
-  alias_method :resource, :job_invocation
+  alias resource job_invocation
 
   def resource_name
     N_('Job Invocation')

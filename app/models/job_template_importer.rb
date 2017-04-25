@@ -18,7 +18,6 @@ class JobTemplateImporter
     { :old => template.template_was,
       :new => template.template,
       :status => template.save,
-      :result => result
-    }
+      :result => result}
   end
 end

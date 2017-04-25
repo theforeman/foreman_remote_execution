@@ -20,9 +20,9 @@ module Api
 
       api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
-      def show
-      end
+      def show; end
 
+      # rubocop:disable Metrics/BlockLength
       def_param_group :job_invocation do
         param :job_invocation, Hash, :required => true, :action_aware => true do
           param :job_template_id, String, :required => true, :desc => N_('The job template to use')
