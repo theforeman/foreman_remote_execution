@@ -47,6 +47,13 @@ FactoryGirl.define do
       end
 
     end
+
+    trait :with_task do
+      after(:build) do |invocation, _evaluator|
+        invocation.template_invocations << FactoryGirl.build(:template_invocation, :with_task, :with_host)
+        invocation.task = FactoryGirl.build(:some_task)
+      end
+    end
   end
 
   factory :remote_execution_provider do |f|
@@ -56,6 +63,24 @@ FactoryGirl.define do
   factory :template_invocation do |f|
     job_invocation
     association :template, :factory => :job_template
+
+    trait :with_task do
+      after(:build) do |template, _evaluator|
+        template.run_host_job_task = FactoryGirl.build(:some_task)
+      end
+    end
+
+    trait :with_failed_task do
+      after(:build) do |template, _evaluator|
+        template.run_host_job_task = FactoryGirl.build(:some_task, :result => 'error')
+      end
+    end
+
+    trait :with_host do
+      after(:build) do |template, _evaluator|
+        template.host = FactoryGirl.build(:host)
+      end
+    end
   end
 
   factory :template_invocation_input_value do |f|

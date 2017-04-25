@@ -13,12 +13,10 @@ module ForemanRemoteExecution
       has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
       has_many :run_host_job_tasks, :through => :template_invocations
 
-      scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_task.result',
+      scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_invocation.result',
                     :ext_method => :search_by_job_invocation,
                     :only_explicit => true,
-                    :complete_value => { :error => 'error', :success => 'success',
-                                         :pending => 'pending', :warning => 'warning',
-                                         :cancelled => 'cancelled' }
+                    :complete_value => TemplateInvocation::TaskResultMap::REVERSE_MAP
 
       scoped_search :relation => :template_invocations, :on => :job_invocation_id,
                     :rename => 'job_invocation.id', :only_explicit => true , :ext_method => :search_by_job_invocation
@@ -27,9 +25,14 @@ module ForemanRemoteExecution
                     :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
 
       def self.search_by_job_invocation(key, operator, value)
+        if key == 'job_invocation.result'
+          operator = operator == '=' ? 'IN' : 'NOT IN'
+          value = TemplateInvocation::TaskResultMap.status_to_task_result(value)
+        end
+
         mapping = {
-          'job_invocation.id' => %Q("#{TemplateInvocation.table_name}"."job_invocation_id" #{operator} ?),
-          'job_task.result'   => %Q("#{ForemanTasks::Task.table_name}"."result" #{operator} ?)
+          'job_invocation.id'     => %Q("#{TemplateInvocation.table_name}"."job_invocation_id" #{operator} ?),
+          'job_invocation.result' => %Q("#{ForemanTasks::Task.table_name}"."result" #{operator} (?))
         }
         {
           :conditions => sanitize_sql_for_conditions([mapping[key], value_to_sql(operator, value)]),

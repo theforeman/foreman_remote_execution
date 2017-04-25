@@ -64,6 +64,51 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     end
   end
 
+  context 'scoped search' do
+    let(:job) do
+      job = FactoryGirl.create(:job_invocation, :with_task)
+      job.template_invocations << FactoryGirl.create(:template_invocation, :with_host, :with_failed_task)
+      job
+    end
+
+    let(:job2) do
+      job = FactoryGirl.create(:job_invocation, :with_task)
+      job.template_invocations << FactoryGirl.create(:template_invocation, :with_host, :with_failed_task)
+      job
+    end
+
+    it 'finds hosts for job_invocation.id' do
+      found_ids = Host.search_for("job_invocation.id = #{job.id}").map(&:id).sort
+      found_ids.must_equal job.template_invocations_host_ids.sort
+    end
+
+    it 'finds hosts by job_invocation.result' do
+      success, failed = job.template_invocations
+                          .partition{ |template| template.run_host_job_task.result == 'success' }
+      found_ids = Host.search_for("job_invocation.result = success").map(&:id)
+      found_ids.must_equal success.map(&:host_id)
+      found_ids = Host.search_for("job_invocation.result = failed").map(&:id)
+      found_ids.must_equal failed.map(&:host_id)
+    end
+
+    it 'finds hosts by job_invocation.id and job_invocation.result' do
+      # Force evaluation of the jobs
+      job; job2
+
+      Host.search_for("job_invocation.id = #{job.id}").count.must_equal 2
+      Host.search_for("job_invocation.id = #{job2.id}").count.must_equal 2
+      Host.search_for("job_invocation.result = success").count.must_equal 2
+      Host.search_for("job_invocation.result = failed").count.must_equal 2
+
+      success, failed = job.template_invocations
+                          .partition { |template| template.run_host_job_task.result == 'success' }
+      found_ids = Host.search_for("job_invocation.id = #{job.id} AND job_invocation.result = success").map(&:id)
+      found_ids.must_equal success.map(&:host_id)
+      found_ids = Host.search_for("job_invocation.id = #{job.id} AND job_invocation.result = failed").map(&:id)
+      found_ids.must_equal failed.map(&:host_id)
+    end
+  end
+
   describe 'proxy determination strategies' do
     context 'subnet strategy' do
       let(:host) { FactoryGirl.build(:host, :with_execution) }

@@ -25,6 +25,48 @@ class TemplateInvocation < ActiveRecord::Base
   scoped_search :in => :template, :on => :job_category, :complete_value => true
   scoped_search :in => :template, :on => :name, :complete_value => true
 
+  class TaskResultMap
+    MAP = {
+      :cancelled => :cancelled,
+      :error     => :failed,
+      :pending   => :pending,
+      :success   => :success,
+      :warning   => :failed
+    }.with_indifferent_access
+
+    REVERSE_MAP = MAP.reduce({}) do |acc, (key, value)|
+      acc[value] ||= []
+      acc[value] << key
+      acc
+    end.with_indifferent_access
+
+    class << self
+      def results
+        MAP.keys.map(&:to_sym)
+      end
+
+      def statuses
+        REVERSE_MAP.keys.map(&:to_sym)
+      end
+
+      # 1:1
+      # error => failed
+      def task_result_to_status(result)
+        MAP[result].try(:to_sym) || result
+      end
+
+      # 1:n
+      # failed => [:error, :warning]
+      def status_to_task_result(status)
+        if REVERSE_MAP.key? status
+          REVERSE_MAP[status].map(&:to_sym)
+        else
+          Array(status)
+        end
+      end
+    end
+  end
+
   def to_action_input
     { :id => id, :name => template.name }
   end
