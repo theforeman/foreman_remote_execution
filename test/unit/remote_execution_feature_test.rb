@@ -43,7 +43,7 @@ describe RemoteExecutionFeature do
       composer.targeting.search_query.must_equal "name ^ (#{host.name})"
     end
 
-    it "updates the feature when attributes change" do
+    it 'updates the feature when attributes change' do
       updated_feature = RemoteExecutionFeature.register(install_feature.label, N_('Katello: Install package'),
                                                         :description => 'New description',
                                                         :provided_inputs => ['package', 'force'])
@@ -63,19 +63,19 @@ describe RemoteExecutionFeature do
       refute feature.host_action_button
     end
 
-    it "creates a feature with host action flag" do
+    it 'creates a feature with host action flag' do
       feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist_button', 'name', :host_action_button => true)
       feature.must_be :persisted?
       assert feature.host_action_button
     end
 
-    it "created feature with host action flag can be found using named scope" do
+    it 'created feature with host action flag can be found using named scope' do
       feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist_button', 'name', :host_action_button => true)
       assert_includes RemoteExecutionFeature.with_host_action_button, feature
     end
 
 
-    it "updates a feature if it exists" do
+    it 'updates a feature if it exists' do
       existing = FactoryGirl.create(:remote_execution_feature, :name => 'existing_feature_withou_action_button')
       feature = RemoteExecutionFeature.register(existing.label, existing.name, :host_action_button => true)
       feature.must_be :persisted?

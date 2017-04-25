@@ -13,8 +13,7 @@ module Api
 
       api :GET, '/remote_execution_features/:id', N_('Show remote execution feature')
       param :id, :identifier, :required => true
-      def show
-      end
+      def show; end
 
       def_param_group :remote_execution_feature do
         param :remote_execution_feature, Hash, :required => true, :action_aware => true do

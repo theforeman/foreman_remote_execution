@@ -4,6 +4,7 @@ class Setting::RemoteExecution < Setting
     # Check the table exists
     return unless super
 
+    # rubocop:disable Metrics/BlockLength
     self.transaction do
       [
         self.set('remote_execution_fallback_proxy',
@@ -29,16 +30,17 @@ class Setting::RemoteExecution < Setting
                  'sudo',
                  'remote_execution_effective_user_method',
                  nil,
-                 { :collection => Proc.new {Hash[SSHExecutionProvider::EFFECTIVE_USER_METHODS.map{|method| [method, method]}]} }),
+                 { :collection => proc { Hash[SSHExecutionProvider::EFFECTIVE_USER_METHODS.map { |method| [method, method] }] } }),
         self.set('remote_execution_sync_templates',
                  N_('Whether we should sync templates from disk when running db:seed.'),
                  true),
         self.set('remote_execution_ssh_port',
-                N_('Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.'),
-                '22'),
+                 N_('Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.'),
+                 '22'),
         self.set('remote_execution_connect_by_ip',
-                 N_('Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip.'),
-                false),
+                 N_('Should the ip addresses on host interfaces be preferred over the fqdn? '\
+                 'It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip.'),
+                 false),
       ].each { |s| self.create! s.update(:category => 'Setting::RemoteExecution') }
     end
 

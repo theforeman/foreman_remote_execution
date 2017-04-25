@@ -19,8 +19,7 @@ module Api
       api :GET, '/templates/:template_id/template_inputs/:id', N_('Show template input details')
       param :template_id, :identifier, :required => true
       param :id, :identifier, :required => true
-      def show
-      end
+      def show; end
 
       def_param_group :template_input do
         param :template_input, Hash, :required => true, :action_aware => true do

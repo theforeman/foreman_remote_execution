@@ -5,7 +5,7 @@ class TemplateInvocation < ActiveRecord::Base
   include ForemanRemoteExecution::ErrorsFlattener
   FLATTENED_ERRORS_MAPPING = { :input_values => lambda do |input_value|
                                                  _('Input') + " #{input_value.template_input.name}"
-                                                end }
+                                                end }.freeze
 
 
   belongs_to :template, :class_name => 'JobTemplate', :foreign_key => 'template_id'

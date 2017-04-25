@@ -69,7 +69,7 @@ module ForemanRemoteExecution
           :execute_template_invocation,
           :view_hosts,
           :view_smart_proxies
-        ]
+        ].freeze
         MANAGER_PERMISSIONS = USER_PERMISSIONS + [
           :destroy_job_templates,
           :edit_job_templates,

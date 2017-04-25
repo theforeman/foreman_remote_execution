@@ -42,7 +42,7 @@ class InputTemplateRenderer
 
   def input(name)
     return @input_values[name.to_s] if @input_values
-    input = find_by_name(@template.template_inputs_with_foreign, name)
+    input = find_by_name(@template.template_inputs_with_foreign, name) # rubocop:disable Rails/DynamicFindBy
     if input
       @preview ? input.preview(self) : input.value(self)
     else

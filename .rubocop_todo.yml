@@ -40,13 +40,6 @@ Metrics/PerceivedComplexity:
   Max: 8
 
 # Offense count: 2
-# Configuration parameters: Include.
-Rails/DefaultScope:
-  Exclude:
-    - 'app/models/job_invocation.rb'
-    - 'app/models/job_template.rb'
-
-# Offense count: 2
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Rails/TimeZone:
   Exclude:

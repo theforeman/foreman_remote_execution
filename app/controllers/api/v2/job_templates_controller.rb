@@ -43,8 +43,7 @@ module Api
 
       api :GET, '/job_templates/:id', N_('Show job template details')
       param :id, :identifier, :required => true
-      def show
-      end
+      def show; end
 
       def_param_group :job_template do
         param :job_template, Hash, :required => true, :action_aware => true do

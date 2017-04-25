@@ -1,5 +1,5 @@
 class RemoteExecutionFeature < ActiveRecord::Base
-  VALID_OPTIONS = [:provided_inputs, :description, :host_action_button]
+  VALID_OPTIONS = [:provided_inputs, :description, :host_action_button].freeze
   validates :label, :name, :presence => true, :uniqueness => true
 
   belongs_to :job_template
@@ -7,7 +7,7 @@ class RemoteExecutionFeature < ActiveRecord::Base
   extend FriendlyId
   friendly_id :label
 
-  scope :with_host_action_button, lambda { where(:host_action_button => true) }
+  scope :with_host_action_button, -> { where(:host_action_button => true) }
 
   def provided_input_names
     self.provided_inputs.to_s.split(',').map(&:strip)
@@ -18,7 +18,7 @@ class RemoteExecutionFeature < ActiveRecord::Base
   end
 
   def self.feature(label)
-    self.find_by_label(label) || raise(::Foreman::Exception.new(N_('Unknown remote execution feature %s'), label))
+    self.find_by(label: label) || raise(::Foreman::Exception.new(N_('Unknown remote execution feature %s'), label))
   end
 
   def self.register(label, name, options = {})
@@ -26,7 +26,7 @@ class RemoteExecutionFeature < ActiveRecord::Base
     options.assert_valid_keys(*VALID_OPTIONS)
     options[:host_action_button] = false unless options.key?(:host_action_button)
 
-    feature = self.find_by_label(label)
+    feature = self.find_by(label: label)
 
     attributes = { :name => name, :provided_input_names => options[:provided_inputs], :description => options[:description], :host_action_button => options[:host_action_button] }
     # in case DB does not have the attribute created yet but plugin initializer registers the feature, we need to skip this attribute

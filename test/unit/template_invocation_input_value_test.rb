@@ -29,10 +29,10 @@ describe TemplateInvocationInputValue do
 
   it 'supports large inputs' do
     template.template_inputs << FactoryGirl.build(:template_input, :name => 'service_name',
-                                                  :input_type => 'user', :required => true)
+                                                                   :input_type => 'user', :required => true)
     assert_valid FactoryGirl.create(:template_invocation_input_value,
                                     :template_invocation => template_invocation,
                                     :template_input => template.template_inputs.first,
-                                    :value => 'foreman' * 1000000)
+                                    :value => 'foreman' * 1_000_000)
   end
 end

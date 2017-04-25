@@ -10,6 +10,7 @@ module Actions
         :link
       end
 
+      # rubocop:disable Metrics/AbcSize
       def plan(job_invocation, host, template_invocation, proxy_selector = ::RemoteExecutionProxySelector.new, options = {})
         action_subject(host, :job_category => job_invocation.job_category, :description => job_invocation.description)
 
@@ -57,9 +58,7 @@ module Actions
       end
 
       def check_exit_status
-        if delegated_output[:exit_status].to_s != '0'
-          error! _('Playbook execution failed')
-        end
+        error! _('Job execution failed') if exit_status.to_s != '0'
       end
 
       def live_output
@@ -74,12 +73,6 @@ module Actions
 
       def humanized_name
         N_('Remote action:')
-      end
-
-      def finalize
-        if exit_status.to_s != '0'
-          error! _('Job execution failed')
-        end
       end
 
       def rescue_strategy
@@ -120,7 +113,8 @@ module Actions
           super
         elsif phase?(Present)
           # for compatibility with old actions
-          if old_action = all_planned_actions.first
+          old_action = all_planned_actions.first
+          if old_action
             old_action.output.fetch('proxy_output', {})
           else
             {}

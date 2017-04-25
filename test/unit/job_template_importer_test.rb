@@ -9,7 +9,7 @@ describe JobTemplateImporter do
     end
 
     let(:result) do
-      name = "Community Service Restart"
+      name = 'Community Service Restart'
       text = <<-END_TEMPLATE
 <%#
 model: JobTemplateImporter
@@ -31,12 +31,12 @@ END_TEMPLATE
 
       # This parameter is unused but foreman_templates will supply it
       # so we test it's accepted
-      metadata = "unused"
+      metadata = 'unused'
 
       JobTemplateImporter.import!(name, text, metadata)
     end
 
-    let(:template) { JobTemplate.find_by_name 'Community Service Restart' }
+    let(:template) { JobTemplate.find_by name: 'Community Service Restart' }
 
     it 'returns a valid foreman_templates hash' do
       result[:status].must_equal true

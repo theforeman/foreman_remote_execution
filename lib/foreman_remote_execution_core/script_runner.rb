@@ -2,7 +2,7 @@ require 'net/ssh'
 
 module ForemanRemoteExecutionCore
   class ScriptRunner < ForemanTasksCore::Runner::Base
-    EXPECTED_POWER_ACTION_MESSAGES = ["restart host", "shutdown host"]
+    EXPECTED_POWER_ACTION_MESSAGES = ['restart host', 'shutdown host'].freeze
 
     def initialize(options)
       super()
@@ -35,7 +35,7 @@ module ForemanRemoteExecutionCore
       run_async(script)
     rescue => e
       logger.error("error while initalizing command #{e.class} #{e.message}:\n #{e.backtrace.join("\n")}")
-      publish_exception("Error initializing command", e)
+      publish_exception('Error initializing command', e)
     end
 
     def refresh
@@ -53,10 +53,10 @@ module ForemanRemoteExecutionCore
       if @session
         run_sync("pkill -f #{remote_command_file('script')}")
       else
-        logger.debug("connection closed")
+        logger.debug('connection closed')
       end
     rescue => e
-      publish_exception("Unexpected error", e, false)
+      publish_exception('Unexpected error', e, false)
     end
 
     def with_retries
@@ -70,7 +70,7 @@ module ForemanRemoteExecutionCore
           logger.error('Retrying')
           retry
         else
-          publish_exception("Unexpected error", e)
+          publish_exception('Unexpected error', e)
         end
       end
     end
@@ -83,7 +83,7 @@ module ForemanRemoteExecutionCore
       if @expecting_disconnect
         publish_exit_status(0)
       else
-        publish_exception("Unexpected disconnect", e)
+        publish_exception('Unexpected disconnect', e)
       end
     end
 
@@ -109,7 +109,7 @@ module ForemanRemoteExecutionCore
       # if the host public key is contained in the known_hosts_file,
       # verify it, otherwise, if missing, import it and continue
       ssh_options[:paranoid] = true
-      ssh_options[:auth_methods] = ["publickey"]
+      ssh_options[:auth_methods] = ['publickey']
       ssh_options[:user_known_hosts_file] = prepare_known_hosts if @host_public_key
       return ssh_options
     end
@@ -122,16 +122,16 @@ module ForemanRemoteExecutionCore
     # available. The yielding doesn't happen automatically, but as
     # part of calling the `refresh` method.
     def run_async(command)
-      raise "Async command already in progress" if @started
+      raise 'Async command already in progress' if @started
       @started = false
       session.open_channel do |channel|
         channel.request_pty
         channel.on_data { |ch, data| publish_data(data, 'stdout') }
         channel.on_extended_data { |ch, type, data| publish_data(data, 'stderr') }
         # standard exit of the command
-        channel.on_request("exit-status") { |ch, data| publish_exit_status(data.read_long) }
+        channel.on_request('exit-status') { |ch, data| publish_exit_status(data.read_long) }
         # on signal: sending the signal value (such as 'TERM')
-        channel.on_request("exit-signal") do |ch, data|
+        channel.on_request('exit-signal') do |ch, data|
           publish_exit_status(data.read_string)
           ch.close
           # wait for the channel to finish so that we know at the end
@@ -140,7 +140,7 @@ module ForemanRemoteExecutionCore
         end
         channel.exec(command) do |ch, success|
           @started = true
-          raise("Error initializing command") unless success
+          raise('Error initializing command') unless success
         end
       end
       session.process(0) until @started
@@ -148,25 +148,25 @@ module ForemanRemoteExecutionCore
     end
 
     def run_sync(command, stdin = nil)
-      stdout = ""
-      stderr = ""
+      stdout = ''
+      stderr = ''
       exit_status = nil
       started = false
 
       channel = session.open_channel do |ch|
         ch.on_data { |_, data| stdout.concat(data) }
         ch.on_extended_data { |_, _, data| stderr.concat(data) }
-        ch.on_request("exit-status") { |_, data| exit_status = data.read_long }
+        ch.on_request('exit-status') { |_, data| exit_status = data.read_long }
         # Send data to stdin if we have some
         ch.send_data(stdin) unless stdin.nil?
         # on signal: sending the signal value (such as 'TERM')
-        ch.on_request("exit-signal") do |_, data|
+        ch.on_request('exit-signal') do |_, data|
           exit_status = data.read_string
           ch.close
           ch.wait
         end
         ch.exec command do |_, success|
-          raise "could not execute command" unless success
+          raise 'could not execute command' unless success
           started = true
         end
       end

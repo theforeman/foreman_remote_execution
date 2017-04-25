@@ -11,7 +11,7 @@ class JobInvocationsController < ApplicationController
       }
     }
 
-    if (template = JobTemplate.find_by_id(params[:template_id]))
+    if (template = JobTemplate.find_by(id: params[:template_id]))
       ui_params[:job_invocation] = {
         :job_category => template.job_category,
         :providers => {

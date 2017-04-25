@@ -11,7 +11,7 @@ module RemoteExecutionHelper
   def job_invocation_chart(invocation)
     options = { :class => 'statistics-pie small', :expandable => true, :border => 0, :show_title => true }
 
-    if (invocation.task)
+    if invocation.task
       # Request precise subtask counts only if the task is stopped
       report = invocation.progress_report
       flot_pie_chart('status', job_invocation_status(invocation, report[:progress]),
@@ -166,7 +166,7 @@ module RemoteExecutionHelper
 
   def invocation_result(invocation, key)
     unknown = '&mdash;'
-    result = invocation_count(invocation, :output_key => key, :unknown_string => unknown.html_safe)
+    result = invocation_count(invocation, :output_key => key, :unknown_string => unknown.html_safe) # rubocop:disable Rails/OutputSafety
     label = key == :failed_count ? 'danger' : 'info'
     result == unknown ? result : report_event_column(result, "label-#{label}")
   end
@@ -175,15 +175,13 @@ module RemoteExecutionHelper
     renderer = InputTemplateRenderer.new(template_invocation.template, target, template_invocation)
     if (preview = renderer.preview)
       content_tag :pre, preview
+    elsif target.nil?
+      alert :text => _('Could not render the preview because no host matches the search query.'),
+            :class => 'alert alert-block alert-warning base',
+            :close => false
     else
-      if target.nil?
-        alert :text => _('Could not render the preview because no host matches the search query.'),
-              :class => 'alert alert-block alert-warning base',
-              :close => false
-      else
-        alert :class => 'alert-block alert-danger base in fade has-error',
-              :text => renderer.error_message.html_safe
-      end
+      alert :class => 'alert-block alert-danger base in fade has-error',
+            :text => renderer.error_message.html_safe # rubocop:disable Rails/OutputSafety
     end
   end
 
@@ -215,9 +213,11 @@ module RemoteExecutionHelper
 
   def template_input_header(f, template)
     header = _('Template input')
-    header += ' ' + remove_child_link('x', f, {:rel => 'twipsy', :'data-title' => _('remove template input'), :'data-placement' => 'left',
-                                               :class => 'fr badge badge-danger'}) unless template.locked?
-    header.html_safe
+    unless template.locked?
+      header += ' ' + remove_child_link('x', f, {:rel => 'twipsy', :'data-title' => _('remove template input'), :'data-placement' => 'left',
+                                                 :class => 'fr badge badge-danger'})
+    end
+    header.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   def description_checkbox_f(f, job_template, disabled)
@@ -245,7 +245,7 @@ module RemoteExecutionHelper
     _('This template is used to generate the description.<br/>' +
         'Input values can be used using the syntax %{package}.<br/>' +
         'You may also include the job category and template<br/>' +
-        'name using %{job_category} and %{template_name}.').html_safe
+        'name using %{job_category} and %{template_name}.').html_safe # rubocop:disable Rails/OutputSafety
   end
 
   def advanced_switch_f(default_text, switch_text)

@@ -40,7 +40,7 @@ class JobInvocationComposer
     # }
     def template_invocations_params
       providers_base.values.map do |template_params|
-        template_base = (template_params.fetch(:job_templates, {}).fetch(template_params[:job_template_id], {})).dup.with_indifferent_access
+        template_base = template_params.fetch(:job_templates, {}).fetch(template_params[:job_template_id], {}).dup.with_indifferent_access
         template_base[:template_id] = template_params[:job_template_id]
         input_values_params = template_base.fetch(:input_values, {})
         template_base[:input_values] = input_values_params.map do |id, values|
@@ -252,7 +252,7 @@ class JobInvocationComposer
         raise Foreman::Exception.new(N_('No template mapped to feature %{feature_name}'),
                                      :feature_name => feature.name)
       end
-      template = JobTemplate.authorized(:view_job_templates).find_by_id(feature.job_template_id)
+      template = JobTemplate.authorized(:view_job_templates).find_by(id: feature.job_template_id)
 
       unless template
         raise Foreman::Exception.new(N_('The template %{template_name} mapped to feature %{feature_name} is not accessible by the user'),

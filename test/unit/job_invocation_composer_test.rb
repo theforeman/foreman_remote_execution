@@ -4,9 +4,9 @@ RemoteExecutionProvider.register(:Mcollective, OpenStruct)
 
 describe JobInvocationComposer do
   before do
-    permission1 = Permission.find_by_name('view_job_templates')
-    permission2 = Permission.find_by_name('view_bookmarks')
-    permission3 = Permission.find_by_name('view_hosts')
+    permission1 = Permission.find_by(name: 'view_job_templates')
+    permission2 = Permission.find_by(name: 'view_bookmarks')
+    permission3 = Permission.find_by(name: 'view_hosts')
     filter1 = FactoryGirl.build(:filter, :permissions => [permission1], :search => 'name ~ trying*')
     filter2 = FactoryGirl.build(:filter, :permissions => [permission2])
     filter3 = FactoryGirl.build(:filter, :permissions => [permission3])
@@ -213,8 +213,7 @@ describe JobInvocationComposer do
               trying_job_template_1.id.to_s => {
                 :input_values => { input1.id.to_s => { :value => 'value1' }, unauthorized_input1.id.to_s => { :value => 'dropped' } }
               }
-            }
-          }
+            }}
         end
         let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
         let(:invocations) { composer.pattern_template_invocations }
@@ -233,8 +232,7 @@ describe JobInvocationComposer do
               trying_job_template_1.id.to_s => {
                 :effective_user => invocation_effective_user
               }
-            }
-          }
+            }}
         end
         let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
         let(:template_invocation) do
@@ -382,7 +380,8 @@ describe JobInvocationComposer do
               :job_templates => {
                 trying_job_template_1.id.to_s => {
                   :input_values => { }
-                } } }
+                }
+              } }
           end
           let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
 
@@ -398,7 +397,8 @@ describe JobInvocationComposer do
               :job_templates => {
                 trying_job_template_1.id.to_s => {
                   :input_values => { input1.id.to_s => { :value => 'value1' } }
-                } } }
+                }
+              } }
           end
           let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
 
@@ -415,7 +415,8 @@ describe JobInvocationComposer do
             :job_templates => {
               trying_job_template_1.id.to_s => {
                 :input_values => { input1.id.to_s => { :value => 'value1' } }
-              } } }
+              }
+            } }
         end
         let(:params) do
           { :job_invocation => { :providers => { :ssh => ssh_params } }, :targeting => { :search_query => "name = #{host.name}" } }.with_indifferent_access
@@ -496,7 +497,8 @@ describe JobInvocationComposer do
             :job_templates => {
               trying_job_template_1.id.to_s => {
                 :input_values => { input1.id.to_s => { :value => 'value1' } }
-              } } }
+              }
+            } }
         end
         let(:params) do
           {

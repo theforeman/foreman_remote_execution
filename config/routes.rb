@@ -57,13 +57,13 @@ Rails.application.routes.draw do
 
       if SETTINGS[:organizations_enabled]
         resources :organizations, :only => [:index] do
-          resources :job_templates, :only =>[:index, :show]
+          resources :job_templates, :only => [:index, :show]
         end
       end
 
       if SETTINGS[:locations_enabled]
         resources :locations, :only => [:index] do
-          resources :job_templates, :only =>[:index, :show]
+          resources :job_templates, :only => [:index, :show]
         end
       end
 

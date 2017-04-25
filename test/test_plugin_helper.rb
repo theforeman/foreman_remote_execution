@@ -14,7 +14,7 @@ DatabaseCleaner.strategy = :transaction
 
 class Minitest::Spec
   class << self
-    alias_method :context, :describe
+    alias context describe
   end
 
   before :each do
