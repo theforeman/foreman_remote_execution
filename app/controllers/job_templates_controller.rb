@@ -29,12 +29,12 @@ class JobTemplatesController < ::TemplatesController
   def import
     contents = params.fetch(:imported_template, {}).fetch(:template, nil).try(:read)
 
-    @template = JobTemplate.import(contents, :update => Foreman::Cast.to_bool(params[:imported_template][:overwrite]))
+    @template = JobTemplate.import_raw(contents, :update => Foreman::Cast.to_bool(params[:imported_template][:overwrite]))
     if @template && @template.save
       flash[:notice] = _('Job template imported successfully.')
       redirect_to job_templates_path(:search => "name = \"#{@template.name}\"")
     else
-      @template ||= JobTemplate.import(contents, :build_new => true)
+      @template ||= JobTemplate.import_raw(contents, :build_new => true)
       @template.valid?
       flash[:warning] = _('Unable to save template. Correct highlighted errors')
       render :action => 'new'

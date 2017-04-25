@@ -96,7 +96,7 @@ class JobTemplateTest < ActiveSupport::TestCase
       service <%= input("service_name") %> restart
       END_TEMPLATE
 
-      JobTemplate.import!(template, :default => true)
+      JobTemplate.import_raw!(template, :default => true)
     end
 
     let(:template_with_input_sets) do
@@ -114,7 +114,7 @@ class JobTemplateTest < ActiveSupport::TestCase
       service <%= input("service_name") %> restart
       END_TEMPLATE
 
-      JobTemplate.import!(template_with_input_sets, :default => true)
+      JobTemplate.import_raw!(template_with_input_sets, :default => true)
     end
 
     it 'sets the name' do
@@ -162,7 +162,7 @@ class JobTemplateTest < ActiveSupport::TestCase
       echo input(:banner_message)
       END_TEMPLATE
 
-      JobTemplate.import!(template, :default => true)
+      JobTemplate.import_raw!(template, :default => true)
     end
 
     let(:existing) do
@@ -184,7 +184,7 @@ class JobTemplateTest < ActiveSupport::TestCase
       ping -c 5 <%= input("hostname") %>
       END_TEMPLATE
 
-      JobTemplate.import!(template, :default => true)
+      JobTemplate.import_raw!(template, :default => true)
     end
 
     let(:updated) do
@@ -213,12 +213,12 @@ class JobTemplateTest < ActiveSupport::TestCase
 
     it 'will not overwrite by default' do
       existing
-      refute JobTemplate.import!(updated)
+      refute JobTemplate.import_raw!(updated)
     end
 
     let(:synced_template) do
       existing
-      JobTemplate.import!(updated, :update => true)
+      JobTemplate.import_raw!(updated, :update => true)
       existing.reload
     end
 
@@ -263,7 +263,7 @@ class JobTemplateTest < ActiveSupport::TestCase
       old_name = exportable_template.name
       exportable_template.update_attributes(:name => "#{old_name}_renamed")
 
-      imported = JobTemplate.import!(erb)
+      imported = JobTemplate.import_raw!(erb)
       imported.name.must_equal old_name
       imported.template_inputs.first.to_export.must_equal exportable_template.template_inputs.first.to_export
     end

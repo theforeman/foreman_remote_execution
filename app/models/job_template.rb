@@ -55,40 +55,54 @@ class JobTemplate < ::Template
   has_one :effective_user, :class_name => 'JobTemplateEffectiveUser', :foreign_key => 'job_template_id', :dependent => :destroy
   accepts_nested_attributes_for :effective_user, :update_only => true
 
-  # we have to override the base_class because polymorphic associations does not detect it correctly, more details at
-  # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_many#1010-Polymorphic-has-many-within-inherited-class-gotcha
-  def self.base_class
-    self
-  end
-  self.table_name = 'templates'
-
-  # Import a template from ERB, with YAML metadata in the first comment.  It
-  # will overwrite (sync) an existing template if options[:update] is true.
-  def self.import(contents, options = {})
-    transaction do
+  class << self
+    # we have to override the base_class because polymorphic associations does not detect it correctly, more details at
+    # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_many#1010-Polymorphic-has-many-within-inherited-class-gotcha
+    def base_class
+      self
+    end
+    table_name = 'templates'
+    
+    # Import a template from ERB, with YAML metadata in the first comment.  It
+    # will overwrite (sync) an existing template if options[:update] is true.
+    def import_raw(contents, options = {})
       metadata = parse_metadata(contents)
-      return if metadata.blank? || metadata.delete('kind') != 'job_template'
+      import_parsed(metadata['name'], contents, metadata, options)
+    end
 
-      # Don't look for existing if we should always create a new template
-      existing = self.find_by(name: metadata['name']) unless options.delete(:build_new)
-      # Don't update if the template already exists, unless we're told to
-      return if !options.delete(:update) && existing
-
-      template = existing || self.new
-      template.sync_inputs(metadata.delete('template_inputs'))
-      template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
-      template.sync_feature(metadata.delete('feature'))
-      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '').strip).merge(options))
-      template.assign_taxonomies if template.new_record?
-
+    def import_raw!(contents, options = {})
+      template = import_raw(contents, options)
+      template.save! if template
       template
     end
-  end
 
-  def self.import!(template, options = {})
-    template = import(template, options)
-    template.save! if template
-    template
+    # This method is used by foreman_templates to import templates, the API should be kept compatible with it
+    def import!(name, text, metadata)
+      metadata = metadata.dup
+      metadata.delete('associate')
+      JobTemplateImporter.import!(name, text, metadata)
+    end
+
+    def import_parsed(name, text, metadata, options = {})
+      transaction do
+        return if metadata.blank? || metadata.delete('kind') != 'job_template' ||
+                  (metadata.key? 'model' && metadata.delete('model') != self.to_s)
+        metadata['name'] = name
+        # Don't look for existing if we should always create a new template
+        existing = self.find_by_name(name) unless options.delete(:build_new)
+        # Don't update if the template already exists, unless we're told to
+        return if !options.delete(:update) && existing
+
+        template = existing || self.new
+        template.sync_inputs(metadata.delete('template_inputs'))
+        template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
+        template.sync_feature(metadata.delete('feature'))
+        template.assign_attributes(metadata.merge(:template => text.gsub(/<%\#.+?.-?%>\n?/m, '').strip).merge(options))
+        template.assign_taxonomies if template.new_record?
+
+        template
+      end
+    end
   end
 
   def metadata
