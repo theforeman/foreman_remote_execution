@@ -1,12 +1,12 @@
-class FakeNic < ActiveRecord::Base
-  self.table_name = 'nics'
-
-  def type
-    Nic::Managed
-  end
-end
-
 class AddExecutionToInterface < ActiveRecord::Migration
+  class FakeNic < ActiveRecord::Base
+    self.table_name = 'nics'
+
+    def type
+      Nic::Managed
+    end
+  end
+
   def up
     add_column :nics, :execution, :boolean, :default => false
 
