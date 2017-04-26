@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe JobTemplateImporter do
+class JobTemplateImporterTest < ActiveSupport::TestCase
   context 'importing a new template' do
     # JobTemplate tests handle most of this, we just check that the shim
     # correctly loads a template returns a hash

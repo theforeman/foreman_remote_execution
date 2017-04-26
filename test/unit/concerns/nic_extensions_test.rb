@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe ForemanRemoteExecution::NicExtensions do
+class ForemanRemoteExecutionNicExtensionsTest < ActiveSupport::TestCase
   let(:host) { FactoryGirl.create(:host) }
 
   it 'sets the first primary interface as the execution interface' do

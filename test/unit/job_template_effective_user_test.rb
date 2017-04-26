@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe JobTemplateEffectiveUser do
+class JobTemplateEffectiveUserTest < ActiveSupport::TestCase
   let(:job_template) { FactoryGirl.build(:job_template, :job_category => '') }
   let(:effective_user) { job_template.effective_user }
 
