@@ -2,7 +2,7 @@ require 'test_plugin_helper'
 RemoteExecutionProvider.register(:Ansible, OpenStruct)
 RemoteExecutionProvider.register(:Mcollective, OpenStruct)
 
-describe JobInvocationComposer do
+class JobInvocationComposerTest < ActiveSupport::TestCase
   before do
     permission1 = Permission.find_by(name: 'view_job_templates')
     permission2 = Permission.find_by(name: 'view_bookmarks')

@@ -39,6 +39,8 @@ Style/RedundantSelf:
 
 Metrics/ClassLength:
   Max: 500
+  Exclude:
+       - 'test/**/*'
 
 Style/FileName:
   Exclude:

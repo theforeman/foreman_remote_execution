@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe RemoteExecutionProvider do
+class RemoteExecutionProviderTest < ActiveSupport::TestCase
   describe '.providers' do
     let(:providers) { RemoteExecutionProvider.providers }
     it { providers.must_be_kind_of HashWithIndifferentAccess }

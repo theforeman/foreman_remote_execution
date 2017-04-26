@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe Targeting do
+class TargetingTest < ActiveSupport::TestCase
   let(:targeting) { FactoryGirl.build(:targeting) }
   let(:bookmark) { bookmarks(:one) }
   let(:host) { FactoryGirl.create(:host) }

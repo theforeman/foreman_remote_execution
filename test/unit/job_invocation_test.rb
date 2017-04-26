@@ -1,7 +1,6 @@
 require 'test_plugin_helper'
 
-describe JobInvocation do
-
+class JobInvocationTest < ActiveSupport::TestCase
   let(:job_invocation) { FactoryGirl.build(:job_invocation) }
   let(:template) { FactoryGirl.create(:job_template, :with_input) }
 

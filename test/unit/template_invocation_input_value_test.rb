@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe TemplateInvocationInputValue do
+class TemplateInvocationInputTest < ActiveSupport::TestCase
   let(:template) { FactoryGirl.build(:job_template, :template => 'service restart <%= input("service_name") -%>') }
   let(:renderer) { InputTemplateRenderer.new(template) }
   let(:job_invocation) { FactoryGirl.create(:job_invocation) }

@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe InputTemplateRenderer do
+class InputTemplateRendererTest < ActiveSupport::TestCase
   context 'renderer for simple template without inputs' do
     let(:renderer) { InputTemplateRenderer.new(FactoryGirl.build(:job_template, :template => 'id <%= preview? %>')) }
 

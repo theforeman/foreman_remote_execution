@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe TemplateInput do
+class TemplateInputTest < ActiveSupport::TestCase
   let(:template_input) { FactoryGirl.build(:template_input) }
 
   context 'export' do

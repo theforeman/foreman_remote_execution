@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe RemoteExecutionFeature do
+class RemoteExecutionFeatureTest < ActiveSupport::TestCase
   should validate_presence_of(:name)
   should validate_presence_of(:label)
   should validate_uniqueness_of(:name)

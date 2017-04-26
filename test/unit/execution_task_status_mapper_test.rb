@@ -1,7 +1,6 @@
 require 'test_plugin_helper'
 
-describe HostStatus::ExecutionStatus::ExecutionTaskStatusMapper do
-
+class ExecutionTaskStatusMapperTest < ActiveSupport::TestCase
   describe '.sql_conditions_for(status)' do
     let(:subject) { HostStatus::ExecutionStatus::ExecutionTaskStatusMapper }
 

@@ -1,6 +1,9 @@
 require 'test_plugin_helper'
 
-describe ForemanRemoteExecution::HostExtensions do
+class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
+  before do
+    Setting::RemoteExecution.load_defaults
+  end
   let(:provider) { 'SSH' }
 
   before { User.current = FactoryGirl.build(:user, :admin) }

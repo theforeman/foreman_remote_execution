@@ -11,7 +11,7 @@ end
 # Tests
 namespace :test do
   desc 'Test ForemanRemoteExecution'
-  Rake::TestTask.new(:foreman_remote_execution) do |t|
+  Rake::TestTask.new(:foreman_remote_execution => ['db:test:prepare']) do |t|
     test_dir = File.join(File.dirname(__FILE__), '../..', 'test')
     t.libs << ['test', test_dir]
     t.pattern = "#{test_dir}/**/*_test.rb"

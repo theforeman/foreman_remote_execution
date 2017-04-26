@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-describe JobTemplate do
+class JobTemplateTest < ActiveSupport::TestCase
   context 'when creating a template' do
     let(:job_template) { FactoryGirl.build(:job_template, :job_category => '') }
     let(:template_with_inputs) do
