@@ -84,24 +84,25 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
 
     it 'finds hosts by job_invocation.result' do
       success, failed = job.template_invocations
-                          .partition{ |template| template.run_host_job_task.result == 'success' }
-      found_ids = Host.search_for("job_invocation.result = success").map(&:id)
+                           .partition { |template| template.run_host_job_task.result == 'success' }
+      found_ids = Host.search_for('job_invocation.result = success').map(&:id)
       found_ids.must_equal success.map(&:host_id)
-      found_ids = Host.search_for("job_invocation.result = failed").map(&:id)
+      found_ids = Host.search_for('job_invocation.result = failed').map(&:id)
       found_ids.must_equal failed.map(&:host_id)
     end
 
     it 'finds hosts by job_invocation.id and job_invocation.result' do
       # Force evaluation of the jobs
-      job; job2
+      job
+      job2
 
       Host.search_for("job_invocation.id = #{job.id}").count.must_equal 2
       Host.search_for("job_invocation.id = #{job2.id}").count.must_equal 2
-      Host.search_for("job_invocation.result = success").count.must_equal 2
-      Host.search_for("job_invocation.result = failed").count.must_equal 2
+      Host.search_for('job_invocation.result = success').count.must_equal 2
+      Host.search_for('job_invocation.result = failed').count.must_equal 2
 
       success, failed = job.template_invocations
-                          .partition { |template| template.run_host_job_task.result == 'success' }
+                           .partition { |template| template.run_host_job_task.result == 'success' }
       found_ids = Host.search_for("job_invocation.id = #{job.id} AND job_invocation.result = success").map(&:id)
       found_ids.must_equal success.map(&:host_id)
       found_ids = Host.search_for("job_invocation.id = #{job.id} AND job_invocation.result = failed").map(&:id)

@@ -2,6 +2,7 @@ module ForemanRemoteExecution
   module HostExtensions
     extend ActiveSupport::Concern
 
+    # rubocop:disable Metrics/BlockLength
     included do
       alias_method_chain :build_required_interfaces, :remote_execution
       alias_method_chain :reload, :remote_execution
@@ -19,7 +20,7 @@ module ForemanRemoteExecution
                     :complete_value => TemplateInvocation::TaskResultMap::REVERSE_MAP
 
       scoped_search :relation => :template_invocations, :on => :job_invocation_id,
-                    :rename => 'job_invocation.id', :only_explicit => true , :ext_method => :search_by_job_invocation
+                    :rename => 'job_invocation.id', :only_explicit => true, :ext_method => :search_by_job_invocation
 
       scoped_search :in => :execution_status_object, :on => :status, :rename => :execution_status,
                     :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
@@ -31,8 +32,8 @@ module ForemanRemoteExecution
         end
 
         mapping = {
-          'job_invocation.id'     => %Q("#{TemplateInvocation.table_name}"."job_invocation_id" #{operator} ?),
-          'job_invocation.result' => %Q("#{ForemanTasks::Task.table_name}"."result" #{operator} (?))
+          'job_invocation.id'     => %("#{TemplateInvocation.table_name}"."job_invocation_id" #{operator} ?),
+          'job_invocation.result' => %("#{ForemanTasks::Task.table_name}"."result" #{operator} (?))
         }
         {
           :conditions => sanitize_sql_for_conditions([mapping[key], value_to_sql(operator, value)]),
@@ -40,6 +41,7 @@ module ForemanRemoteExecution
         }
       end
     end
+    # rubocop:enable Metrics/BlockLength
 
     def execution_status(options = {})
       @execution_status ||= get_status(HostStatus::ExecutionStatus).to_status(options)
