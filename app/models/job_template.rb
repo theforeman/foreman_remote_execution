@@ -62,7 +62,7 @@ class JobTemplate < ::Template
       self
     end
     table_name = 'templates'
-    
+
     # Import a template from ERB, with YAML metadata in the first comment.  It
     # will overwrite (sync) an existing template if options[:update] is true.
     def import_raw(contents, options = {})
@@ -83,13 +83,14 @@ class JobTemplate < ::Template
       JobTemplateImporter.import!(name, text, metadata)
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def import_parsed(name, text, metadata, options = {})
       transaction do
         return if metadata.blank? || metadata.delete('kind') != 'job_template' ||
-                  (metadata.key? 'model' && metadata.delete('model') != self.to_s)
+                  (metadata.key?('model') && metadata.delete('model') != self.to_s)
         metadata['name'] = name
         # Don't look for existing if we should always create a new template
-        existing = self.find_by_name(name) unless options.delete(:build_new)
+        existing = self.find_by(:name => name) unless options.delete(:build_new)
         # Don't update if the template already exists, unless we're told to
         return if !options.delete(:update) && existing
 
@@ -102,6 +103,7 @@ class JobTemplate < ::Template
 
         template
       end
+      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     end
   end
 
