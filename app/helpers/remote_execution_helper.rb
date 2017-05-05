@@ -29,10 +29,14 @@ module RemoteExecutionHelper
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
   end
 
-  def job_invocation_status(invocation, percent = nil)
+  def job_invocation_status(invocation, percent = nil, verbose = true)
     case invocation.status
       when HostStatus::ExecutionStatus::QUEUED
-        _('queued')
+        if verbose && invocation.task
+          _('queued to start executing in %{time}') % {:time => time_ago_in_words(invocation.task.start_at) }
+        else
+          _('queued')
+        end
       when HostStatus::ExecutionStatus::RUNNING
         percent ||= invocation.progress_report[:progress]
         _('running %{percent}%%') % {:percent => percent}
@@ -141,8 +145,9 @@ module RemoteExecutionHelper
   end
 
   def link_to_invocation_task_if_authorized(invocation)
+    status = job_invocation_status(invocation, nil, false)
     if invocation.queued?
-      job_invocation_status(invocation)
+      status
     else
       task_authorizer = Authorizer.new(User.current, :collection => [invocation.task])
       link_to_if_authorized job_invocation_status(invocation),
