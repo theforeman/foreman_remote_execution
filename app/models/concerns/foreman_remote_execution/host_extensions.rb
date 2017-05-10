@@ -32,8 +32,8 @@ module ForemanRemoteExecution
         end
 
         mapping = {
-          'job_invocation.id'     => %("#{TemplateInvocation.table_name}"."job_invocation_id" #{operator} ?),
-          'job_invocation.result' => %("#{ForemanTasks::Task.table_name}"."result" #{operator} (?))
+          'job_invocation.id'     => %(#{TemplateInvocation.table_name}.job_invocation_id #{operator} ?),
+          'job_invocation.result' => %(#{ForemanTasks::Task.table_name}.result #{operator} (?))
         }
         {
           :conditions => sanitize_sql_for_conditions([mapping[key], value_to_sql(operator, value)]),
