@@ -4,22 +4,9 @@ RemoteExecutionProvider.register(:Mcollective, OpenStruct)
 
 class JobInvocationComposerTest < ActiveSupport::TestCase
   before do
-    permission1 = Permission.find_by(name: 'view_job_templates')
-    permission2 = Permission.find_by(name: 'view_bookmarks')
-    permission3 = Permission.find_by(name: 'view_hosts')
-    filter1 = FactoryGirl.build(:filter, :permissions => [permission1], :search => 'name ~ trying*')
-    filter2 = FactoryGirl.build(:filter, :permissions => [permission2])
-    filter3 = FactoryGirl.build(:filter, :permissions => [permission3])
-    filter1.save
-    filter2.save
-    filter3.save
-    role = FactoryGirl.build(:role)
-    role.filters = filter1, filter2, filter3
-    role.save
-    User.current = FactoryGirl.build(:user)
-    User.current.current_password = User.current.password
-    User.current.roles << role
-    User.current.save
+    setup_user('view', 'job_templates', 'name ~ trying*')
+    setup_user('view', 'bookmarks')
+    setup_user('view', 'hosts')
   end
 
   let(:trying_job_template_1) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
