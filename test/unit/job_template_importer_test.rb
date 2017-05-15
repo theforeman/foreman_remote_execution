@@ -41,7 +41,7 @@ END_TEMPLATE
     it 'returns a valid foreman_templates hash' do
       result[:status].must_equal true
       result[:result].must_equal '  Created Template :Community Service Restart'
-      result[:old].must_equal nil
+      result[:old].must_be_nil
       result[:new].must_equal template.template.squish
     end
   end

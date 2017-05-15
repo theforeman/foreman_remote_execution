@@ -491,10 +491,8 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           {
             :job_invocation => {
               :providers => { :ssh => ssh_params },
-              :concurrency_control => {
-                :level => 5,
-                :time_span => 60
-              }
+              :concurrency_level => 5,
+              :time_span => 60,
             },
             :targeting => {
               :search_query => "name = #{host.name}",
