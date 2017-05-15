@@ -27,8 +27,10 @@ module ForemanRemoteExecutionCore
 
       # pipe the output to tee while capturing the exit code in a file
       script = <<-SCRIPT
-          (#{su_prefix}#{remote_script} < /dev/null; echo $status>#{exit_code_path}) | /usr/bin/tee #{output_path}
-          exit `cat #{exit_code_path}`
+          sh <<WRAPPER
+          (#{su_prefix}#{remote_script} < /dev/null; echo \\$?>#{exit_code_path}) | /usr/bin/tee #{output_path}
+          exit \\$(cat #{exit_code_path})
+          WRAPPER
       SCRIPT
 
       logger.debug("executing script:\n#{script.lines.map { |line| "  | #{line}" }.join}")
