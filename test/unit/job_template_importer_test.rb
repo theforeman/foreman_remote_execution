@@ -10,28 +10,25 @@ class JobTemplateImporterTest < ActiveSupport::TestCase
 
     let(:result) do
       name = 'Community Service Restart'
+      metadata = {
+        'model' => 'JobTemplate',
+        'kind' => 'job_template',
+        'name' => 'Service Restart',
+        'job_category' => 'Service Restart',
+        'provider_type' => 'SSH',
+        'feature' => remote_execution_feature.label,
+        'template_inputs' => [
+          { 'name' => 'service_name', 'input_type' => 'user', 'required' => true },
+          { 'name' => 'verbose', 'input_type' => 'user' }
+        ]
+      }
       text = <<-END_TEMPLATE
 <%#
-model: JobTemplateImporter
-kind: job_template
-name: Service Restart
-job_category: Service Restart
-provider_type: SSH
-feature: #{remote_execution_feature.label}
-template_inputs:
-- name: service_name
-  input_type: user
-  required: true
-- name: verbose
-  input_type: user
+#{YAML.dump(metadata)}
 %>
 
 service <%= input("service_name") %> restart
 END_TEMPLATE
-
-      # This parameter is unused but foreman_templates will supply it
-      # so we test it's accepted
-      metadata = 'unused'
 
       JobTemplateImporter.import!(name, text, metadata)
     end
