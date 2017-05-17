@@ -29,7 +29,7 @@ module Api
       def import
         options = params[:overwrite] ? { :update => true } : { :build_new => true }
 
-        @job_template = JobTemplate.import(params[:template], options)
+        @job_template = JobTemplate.import_raw(params[:template], options)
         @job_template ||= JobTemplate.new
         process_response @job_template.save
       end

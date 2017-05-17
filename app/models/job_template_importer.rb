@@ -5,11 +5,8 @@
 # translation layer.
 
 class JobTemplateImporter
-  def self.import!(name, text, _metadata)
-    template = JobTemplate.import(
-      text.sub(/^name: .*$/, "name: #{name}").sub(/^model: .*$/, ''),
-      :update => true
-    )
+  def self.import!(name, text, metadata)
+    template = JobTemplate.import_parsed(name, text, metadata, :update => true)
 
     c_or_u = template.new_record? ? 'Created' : 'Updated'
     id_string = ('id' + template.id) rescue ''
