@@ -231,7 +231,7 @@ module ForemanRemoteExecutionCore
       # We use tee here to pipe stdin coming from ssh to a file at $path, while silencing its output
       # This is used to write to $path with elevated permissions, solutions using cat and output redirection
       # would not work, because the redirection would happen in the non-elevated shell.
-      command = "#{su_prefix} tee '#{path}' >/dev/null && #{su_prefix} chmod '#{permissions}' '#{path}'"
+      command = "tee '#{path}' >/dev/null && chmod '#{permissions}' '#{path}'"
 
       @logger.debug("Sending data to #{path} on remote host:\n#{data}")
       status, _out, err = run_sync(command, data)
