@@ -119,7 +119,7 @@ class JobInvocation < ActiveRecord::Base
   end
 
   def failed_template_invocation_tasks
-    template_invocation_tasks.where(:result => [ 'error', 'warning' ])
+    template_invocation_tasks.where(:result => TemplateInvocation::TaskResultMap.status_to_task_result(:failed))
   end
 
   def failed_host_ids
@@ -181,21 +181,24 @@ class JobInvocation < ActiveRecord::Base
   end
 
   def progress_report
+    map = TemplateInvocation::TaskResultMap
+    all_keys = (map.results | map.statuses | [:progress, :total])
     if queued? || !targeting.resolved?
-      %w(success total cancelled failed error warning pending progress).map(&:to_sym).reduce({}) do |acc, key|
+      all_keys.reduce({}) do |acc, key|
         acc.merge(key => 0)
       end
     else
       counts  = task.sub_tasks_counts
-      done    = counts.values_at(:cancelled, :error, :success, :warning).reduce(:+)
+      done    = counts.values_at(*map.results).reduce(:+)
       percent = progress(counts[:total], done)
-      counts.merge(:progress => percent, :failed => counts[:error] + counts[:warning])
+      counts.merge(:progress => percent, :failed => counts.values_at(*map.status_to_task_result(:failed)).reduce(:+))
     end
   end
 
   private
 
   def failed_template_invocations
-    template_invocations.joins(:run_host_job_task).where("#{ForemanTasks::Task.table_name}.result" => ['error', 'warning'])
+    results = TemplateInvocation::TaskResultMap.status_to_task_result(:failed)
+    template_invocations.joins(:run_host_job_task).where("#{ForemanTasks::Task.table_name}.result" => results)
   end
 end

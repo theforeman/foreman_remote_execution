@@ -2,6 +2,7 @@ module ForemanRemoteExecution
   module HostExtensions
     extend ActiveSupport::Concern
 
+    # rubocop:disable Metrics/BlockLength
     included do
       alias_method_chain :build_required_interfaces, :remote_execution
       alias_method_chain :reload, :remote_execution
@@ -11,10 +12,36 @@ module ForemanRemoteExecution
       has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
       has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
       has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
+      has_many :run_host_job_tasks, :through => :template_invocations
+
+      scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_invocation.result',
+                    :ext_method => :search_by_job_invocation,
+                    :only_explicit => true,
+                    :complete_value => TemplateInvocation::TaskResultMap::REVERSE_MAP
+
+      scoped_search :relation => :template_invocations, :on => :job_invocation_id,
+                    :rename => 'job_invocation.id', :only_explicit => true, :ext_method => :search_by_job_invocation
 
       scoped_search :in => :execution_status_object, :on => :status, :rename => :execution_status,
                     :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
+
+      def self.search_by_job_invocation(key, operator, value)
+        if key == 'job_invocation.result'
+          operator = operator == '=' ? 'IN' : 'NOT IN'
+          value = TemplateInvocation::TaskResultMap.status_to_task_result(value)
+        end
+
+        mapping = {
+          'job_invocation.id'     => %(#{TemplateInvocation.table_name}.job_invocation_id #{operator} ?),
+          'job_invocation.result' => %(#{ForemanTasks::Task.table_name}.result #{operator} (?))
+        }
+        {
+          :conditions => sanitize_sql_for_conditions([mapping[key], value_to_sql(operator, value)]),
+          :joins => { :template_invocations => [:run_host_job_task] }
+        }
+      end
     end
+    # rubocop:enable Metrics/BlockLength
 
     def execution_status(options = {})
       @execution_status ||= get_status(HostStatus::ExecutionStatus).to_status(options)
