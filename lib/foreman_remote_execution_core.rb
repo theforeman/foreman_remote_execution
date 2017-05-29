@@ -7,14 +7,21 @@ module ForemanRemoteExecutionCore
                     :ssh_user              => 'root',
                     :remote_working_dir    => '/var/tmp',
                     :local_working_dir     => '/var/tmp',
-                    :kerberos_auth         => false)
+                    :kerberos_auth         => false,
+                    :async_ssh             => false)
 
   def self.simulate?
     %w(yes true 1).include? ENV.fetch('REX_SIMULATE', '').downcase
   end
 
   def self.runner_class
-    @runner_class ||= simulate? ? FakeScriptRunner : ScriptRunner
+    @runner_class ||= if simulate?
+                        FakeScriptRunner
+                      elsif settings[:async_ssh]
+                        PollingScriptRunner
+                      else
+                        ScriptRunner
+                      end
   end
 
   if ForemanTasksCore.dynflow_present?

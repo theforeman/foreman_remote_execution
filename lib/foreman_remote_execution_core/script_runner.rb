@@ -53,8 +53,8 @@ module ForemanRemoteExecutionCore
       # pipe the output to tee while capturing the exit code in a file
       <<-SCRIPT.gsub(/^\s+\| /, '')
       | sh <<WRAPPER
-      | (#{su_prefix}#{remote_script} < /dev/null; echo \\$?>#{exit_code_path}) | /usr/bin/tee #{output_path}
-      | exit \\$(cat #{exit_code_path})
+      | (#{su_prefix}#{@remote_script} < /dev/null; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
+      | exit \\$(cat #{@exit_code_path})
       | WRAPPER
       SCRIPT
     end
@@ -192,9 +192,7 @@ module ForemanRemoteExecutionCore
         ch.on_extended_data { |_, _, data| stderr.concat(data) }
         ch.on_request('exit-status') { |_, data| exit_status = data.read_long }
         # Send data to stdin if we have some
-        unless stdin.nil?
-          ch.send_data(stdin)
-        end
+        ch.send_data(stdin) unless stdin.nil?
         # on signal: sending the signal value (such as 'TERM')
         ch.on_request('exit-signal') do |_, data|
           exit_status = data.read_string

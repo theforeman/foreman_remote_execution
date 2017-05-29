@@ -8,8 +8,7 @@ module ForemanRemoteExecutionCore
           :step_id => run_step_id,
           :uuid => execution_plan_id
         }
-        # Alternative to ActiveSupport's String#constantize
-        Object.const_get(input[:runner_class]).new(input.merge additional_options)
+        ForemanRemoteExecutionCore.runner_class.new(input.merge additional_options)
       end
     end
   end
