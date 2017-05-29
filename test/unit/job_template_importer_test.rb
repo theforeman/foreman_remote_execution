@@ -42,4 +42,25 @@ END_TEMPLATE
       result[:new].must_equal template.template.squish
     end
   end
+
+  context 'updating locked template' do
+    it 'does not update locked template' do
+      name = 'Locked job template'
+      template = FactoryGirl.create(:job_template, :locked => true, :name => name)
+      res = JobTemplateImporter.import!(name, 'some text', 'metadata')
+      assert_equal "Skipping Template #{template.id}:#{template.name} - template is locked", res[:result]
+    end
+
+    it 'updates locked template' do
+      name = 'Locked job template again'
+      metadata = {
+        'model' => 'JobTemplate',
+        'kind' => 'job_template',
+        'name' => name
+      }
+      template = FactoryGirl.create(:job_template, :locked => true, :name => name)
+      res = JobTemplateImporter.import!(name, 'some text', metadata, true)
+      assert_equal "  Updated Template #{template.id}:Locked job template again", res[:result]
+    end
+  end
 end

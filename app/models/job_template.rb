@@ -77,7 +77,7 @@ class JobTemplate < ::Template
     end
 
     # This method is used by foreman_templates to import templates, the API should be kept compatible with it
-    def import!(name, text, metadata)
+    def import!(name, text, metadata, force = false)
       metadata = metadata.dup
       metadata.delete('associate')
       JobTemplateImporter.import!(name, text, metadata)
@@ -98,9 +98,9 @@ class JobTemplate < ::Template
         template.sync_inputs(metadata.delete('template_inputs'))
         template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
         template.sync_feature(metadata.delete('feature'))
+        template.locked = false if options.delete(:force)
         template.assign_attributes(metadata.merge(:template => text.gsub(/<%\#.+?.-?%>\n?/m, '').strip).merge(options))
         template.assign_taxonomies if template.new_record?
-
         template
       end
       # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
