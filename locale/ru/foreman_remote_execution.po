@@ -20,6 +20,9 @@ msgstr ""
 "4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=1"
 "1 && n%100<=14)? 2 : 3);\n"
 
+msgid "%s"
+msgstr ""
+
 msgid "%s ago"
 msgstr "%s назад"
 
@@ -99,8 +102,17 @@ msgstr "Закрыть"
 msgid "Concurrency level"
 msgstr "Параллелизм"
 
+msgid "Concurrency level limited to"
+msgstr ""
+
 msgid "Control concurrency level and distribution over time"
 msgstr "Контроль параллельного выполнения и распределения во времени"
+
+msgid "Could not find any suitable interface for execution"
+msgstr ""
+
+msgid "Could not render the preview because no host matches the search query."
+msgstr ""
 
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
@@ -188,12 +200,6 @@ msgstr "Выполнение"
 
 msgid "Exit status: %s"
 msgstr "Код завершения: %s"
-
-msgid "Explanation"
-msgstr "Объяснение"
-
-msgid "Export"
-msgstr "Экспорт"
 
 msgid "Export a job template to ERB"
 msgstr "Экспорт шаблона в ERB"
@@ -299,6 +305,9 @@ msgstr "Шаблоны заданий"
 
 msgid "Job category"
 msgstr "Категория"
+
+msgid "Job execution failed"
+msgstr ""
 
 msgid "Job finished with error"
 msgstr "Задание было завершено с ошибкой"
@@ -408,9 +417,6 @@ msgstr "Ожидание"
 msgid "Perform no more executions after this time"
 msgstr "Остановить после указанного числа повторений"
 
-msgid "Playbook execution failed"
-msgstr ""
-
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
@@ -501,11 +507,17 @@ msgstr "SSH"
 msgid "SSH provider specific options"
 msgstr "Параметры провайдера SSH"
 
+msgid "Schedule Remote Job"
+msgstr ""
+
 msgid "Schedule the job for a future time"
 msgstr "Настроить время запуска"
 
 msgid "Schedule the job to start at a later time"
 msgstr "Отложенный запуск"
+
+msgid "Scheduled to start at"
+msgstr ""
 
 msgid "Scroll to bottom"
 msgstr "Перейти вниз"
@@ -536,6 +548,12 @@ msgstr "Выберите все возможные прокси для этой 
 
 msgid "Selectable values for user inputs"
 msgstr "Список возможных значений"
+
+msgid "Set to distribute over"
+msgstr ""
+
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
+msgstr ""
 
 msgid "Show foreign input set details"
 msgstr "Показать информацию о внешнем наборе входных параметров"
@@ -628,11 +646,11 @@ msgstr "Шаблон заблокирован."
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "Шаблон заблокирован. Скопируйте его для создания нового шаблона на его основе."
 
-msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "Это шаблон для генерации описания. Для того чтобы добавить переменную, используйте синтаксис %{package}; категорию задания — %{job_category}; название шаблона — %{template_name}."
-
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr "Это шаблон для генерации описания. Для того чтобы добавить переменную, используйте синтаксис %{package}; категорию задания — %{job_category}; название шаблона — %{template_name}."
+
+msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
+msgstr ""
 
 msgid "Time span"
 msgstr "Интервал"
@@ -786,11 +804,17 @@ msgstr "связанный шаблон «%s» не найден"
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "ожидается макрос «%s», но входных параметров с таким именем для этого шаблона не обнаружено"
 
+msgid "minutes"
+msgstr ""
+
 msgid "planned"
 msgstr "запланировано"
 
 msgid "queued"
 msgstr "в очереди"
+
+msgid "queued to start executing in %{time}"
+msgstr ""
 
 msgid "remove template input"
 msgstr "удалить параметр ввода"
@@ -809,6 +833,9 @@ msgstr "завершено"
 
 msgid "success"
 msgstr "успешно"
+
+msgid "tasks at a time"
+msgstr ""
 
 msgid "template"
 msgstr "шаблон"

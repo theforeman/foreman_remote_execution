@@ -17,6 +17,9 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+msgid "%s"
+msgstr ""
+
 msgid "%s ago"
 msgstr "%s atrás"
 
@@ -94,8 +97,17 @@ msgstr "Fechar"
 msgid "Concurrency level"
 msgstr "Nível de simultaneidade"
 
+msgid "Concurrency level limited to"
+msgstr ""
+
 msgid "Control concurrency level and distribution over time"
 msgstr "Controlar nível de simultaneidade e distribuição ao longo do tempo"
+
+msgid "Could not find any suitable interface for execution"
+msgstr ""
+
+msgid "Could not render the preview because no host matches the search query."
+msgstr ""
 
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
@@ -183,12 +195,6 @@ msgstr "Execução"
 
 msgid "Exit status: %s"
 msgstr "Status de saída: %s"
-
-msgid "Explanation"
-msgstr "Explicação "
-
-msgid "Export"
-msgstr "Exportar"
 
 msgid "Export a job template to ERB"
 msgstr "Exportar um modelo de trabalho para o ERB "
@@ -294,6 +300,9 @@ msgstr "Modelos de Trabalho"
 
 msgid "Job category"
 msgstr "Categoria de trabalho"
+
+msgid "Job execution failed"
+msgstr ""
 
 msgid "Job finished with error"
 msgstr "Trabalho concluído com erro"
@@ -403,9 +412,6 @@ msgstr "Pendente"
 msgid "Perform no more executions after this time"
 msgstr "Não desempenhar execuções depois deste período"
 
-msgid "Playbook execution failed"
-msgstr ""
-
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
@@ -496,11 +502,17 @@ msgstr "SSH"
 msgid "SSH provider specific options"
 msgstr "Opções específicas do provedor SSH "
 
+msgid "Schedule Remote Job"
+msgstr ""
+
 msgid "Schedule the job for a future time"
 msgstr "Agendar o trabalho para depois "
 
 msgid "Schedule the job to start at a later time"
 msgstr "Agendar o trabalho para começar mais tarde "
+
+msgid "Scheduled to start at"
+msgstr ""
 
 msgid "Scroll to bottom"
 msgstr "Rolar até a parte inferior"
@@ -531,6 +543,12 @@ msgstr "Selecione o máximo possível de proxies de execução remota aplicável
 
 msgid "Selectable values for user inputs"
 msgstr "Valores selecionáveis para entradas de usuário "
+
+msgid "Set to distribute over"
+msgstr ""
+
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
+msgstr ""
 
 msgid "Show foreign input set details"
 msgstr "Exibir detalhes do conjunto de entradas externas"
@@ -621,11 +639,11 @@ msgstr "Este mdelo está travado para edição."
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "Este modelo está travado. Clone-o para um novo modelo para padronizar."
 
-msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "Este modelo é usado para gerar a descrição. Os valores de entrada podem ser usados com a sintaxe %{package}. Você pode incluir também a categoria de trabalho e o nome do modelo usando %{job_category} e %{template_name}."
-
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr "Este modelo é usado para gerar a descrição. Os valores de entrada podem ser usados com a sintaxe %{package}. Você pode incluir também a categoria de trabalho e o nome do modelo usando %{job_category} e %{template_name}."
+
+msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
+msgstr ""
 
 msgid "Time span"
 msgstr "Período de tempo"
@@ -779,11 +797,17 @@ msgstr "modelo '%s' incluído não localizado "
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "macro de entrada com nome '%s' usado, mas nenhuma entrada com tal nome foi definida para este modelo "
 
+msgid "minutes"
+msgstr ""
+
 msgid "planned"
 msgstr ""
 
 msgid "queued"
 msgstr "em fila"
+
+msgid "queued to start executing in %{time}"
+msgstr ""
 
 msgid "remove template input"
 msgstr "remover entrada de modelo"
@@ -802,6 +826,9 @@ msgstr "com êxito "
 
 msgid "success"
 msgstr "sucesso"
+
+msgid "tasks at a time"
+msgstr ""
 
 msgid "template"
 msgstr "template"

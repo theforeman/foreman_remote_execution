@@ -16,6 +16,9 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+msgid "%s"
+msgstr ""
+
 msgid "%s ago"
 msgstr "%s 전 "
 
@@ -93,8 +96,17 @@ msgstr "종료"
 msgid "Concurrency level"
 msgstr "동시 실행 레벨"
 
+msgid "Concurrency level limited to"
+msgstr ""
+
 msgid "Control concurrency level and distribution over time"
 msgstr "동시 실행 레벨 및 기간별 배분 제어"
+
+msgid "Could not find any suitable interface for execution"
+msgstr ""
+
+msgid "Could not render the preview because no host matches the search query."
+msgstr ""
 
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
@@ -182,12 +194,6 @@ msgstr "실행"
 
 msgid "Exit status: %s"
 msgstr "종료 상태: %s"
-
-msgid "Explanation"
-msgstr "설명"
-
-msgid "Export"
-msgstr ""
 
 msgid "Export a job template to ERB"
 msgstr ""
@@ -293,6 +299,9 @@ msgstr "작업 템플릿"
 
 msgid "Job category"
 msgstr "작업 카테고리"
+
+msgid "Job execution failed"
+msgstr ""
 
 msgid "Job finished with error"
 msgstr "작업을 마쳤지만 오류가 발생했습니다."
@@ -402,9 +411,6 @@ msgstr "보류 중 "
 msgid "Perform no more executions after this time"
 msgstr "이 시간 이후 더 이상 실행을 수행하지 않음"
 
-msgid "Playbook execution failed"
-msgstr ""
-
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
@@ -495,11 +501,17 @@ msgstr "SSH"
 msgid "SSH provider specific options"
 msgstr "SSH 공급자 관련 옵션"
 
+msgid "Schedule Remote Job"
+msgstr ""
+
 msgid "Schedule the job for a future time"
 msgstr "이후 시간에 대해 작업 스케줄"
 
 msgid "Schedule the job to start at a later time"
 msgstr "나중에 시작하도록 작업 스케줄"
+
+msgid "Scheduled to start at"
+msgstr ""
 
 msgid "Scroll to bottom"
 msgstr "맨 아래로 스크롤"
@@ -530,6 +542,12 @@ msgstr "이 서브넷에 적용할 수 있는 원격 실행 프록시를 모두 
 
 msgid "Selectable values for user inputs"
 msgstr "사용자 입력으로 선택 가능한 값"
+
+msgid "Set to distribute over"
+msgstr ""
+
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
+msgstr ""
 
 msgid "Show foreign input set details"
 msgstr "외부 입력 세트 정보 표시"
@@ -620,11 +638,11 @@ msgstr "이 템플릿은 편집 용으로 잠금되어 있습니다. "
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "이 템플릿은 잠겨 있습니다. 사용자 정의하려면 이를 새 템플릿에 복제하십시오. "
 
-msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "이 템플릿은 설명을 생성하는 데 사용됩니다. %{package} 구문을 통해 입력 값을 사용할 수 있습니다. 또한 %{job_category} 및 %{template_name}을(를) 사용하여 작업 카테고리와 템플릿 이름을 포함할 수도 있습니다."
-
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr "이 템플릿은 설명을 생성하는 데 사용됩니다. %{package} 구문을 통해 입력 값을 사용할 수 있습니다. 또한 %{job_category} 및 %{template_name}을(를) 사용하여 작업 카테고리와 템플릿 이름을 포함할 수도 있습니다."
+
+msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
+msgstr ""
 
 msgid "Time span"
 msgstr "기간"
@@ -778,11 +796,17 @@ msgstr "포함된 템플릿 '%s'을(를) 찾을 수 없습니다."
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "이름이 '%s'인 입력 매크로를 사용했지만 이 템플릿에 대해 해당 이름의 입력이 정의되지 않았습니다."
 
+msgid "minutes"
+msgstr ""
+
 msgid "planned"
 msgstr ""
 
 msgid "queued"
 msgstr "대기열에 추가됨"
+
+msgid "queued to start executing in %{time}"
+msgstr ""
 
 msgid "remove template input"
 msgstr "템플릿 입력 삭제"
@@ -801,6 +825,9 @@ msgstr "성공"
 
 msgid "success"
 msgstr "성공"
+
+msgid "tasks at a time"
+msgstr ""
 
 msgid "template"
 msgstr "템플릿"

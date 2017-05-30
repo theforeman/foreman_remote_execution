@@ -17,6 +17,9 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+msgid "%s"
+msgstr ""
+
 msgid "%s ago"
 msgstr "%s 前"
 
@@ -94,8 +97,17 @@ msgstr "关闭"
 msgid "Concurrency level"
 msgstr "并发等级"
 
+msgid "Concurrency level limited to"
+msgstr ""
+
 msgid "Control concurrency level and distribution over time"
 msgstr "控制并行等级及分配时间"
+
+msgid "Could not find any suitable interface for execution"
+msgstr ""
+
+msgid "Could not render the preview because no host matches the search query."
+msgstr ""
 
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
@@ -183,12 +195,6 @@ msgstr "执行"
 
 msgid "Exit status: %s"
 msgstr "退出状态：%s"
-
-msgid "Explanation"
-msgstr "说明"
-
-msgid "Export"
-msgstr "导出"
 
 msgid "Export a job template to ERB"
 msgstr "导出任务模版到 ERB"
@@ -294,6 +300,9 @@ msgstr "任务模板"
 
 msgid "Job category"
 msgstr "任务类别"
+
+msgid "Job execution failed"
+msgstr ""
 
 msgid "Job finished with error"
 msgstr "任务完成但有错误"
@@ -403,9 +412,6 @@ msgstr "等待处理"
 msgid "Perform no more executions after this time"
 msgstr "这个时间后不再执行任何操作"
 
-msgid "Playbook execution failed"
-msgstr ""
-
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
@@ -496,11 +502,17 @@ msgstr "SSH"
 msgid "SSH provider specific options"
 msgstr "SSH 提供者的具体选项"
 
+msgid "Schedule Remote Job"
+msgstr ""
+
 msgid "Schedule the job for a future time"
 msgstr "将该任务调度为在将来的某个时间开始"
 
 msgid "Schedule the job to start at a later time"
 msgstr "将该任务调度为于稍后开始"
+
+msgid "Scheduled to start at"
+msgstr ""
 
 msgid "Scroll to bottom"
 msgstr "滚动到底部"
@@ -531,6 +543,12 @@ msgstr "为这个子网选择所有可使用的远程执行代理服务器。添
 
 msgid "Selectable values for user inputs"
 msgstr "用户输入的可选值"
+
+msgid "Set to distribute over"
+msgstr ""
+
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
+msgstr ""
 
 msgid "Show foreign input set details"
 msgstr "显示外部输入集详情"
@@ -621,11 +639,11 @@ msgstr "这个模板已锁定，无法编辑。"
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "这个模板已锁定。请克隆一个新模板进行编辑。"
 
-msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "这个模板是用来生成描述。可和使用句法 %{package} 输入参数值。还可以和使用 %{job_category} 和 %{template_name} 在其中包含任务类别及模板名称。"
-
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr "这个模板是用来生成描述。可和使用句法 %{package} 输入参数值。还可以和使用 %{job_category} 和 %{template_name} 在其中包含任务类别及模板名称。"
+
+msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
+msgstr ""
 
 msgid "Time span"
 msgstr "时间跨度"
@@ -779,11 +797,17 @@ msgstr "未找到所包含模板 '%s'"
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "名为 '%s' 的输入宏已被使用，但没有为这个模板定义使用这个名称的输入。"
 
+msgid "minutes"
+msgstr ""
+
 msgid "planned"
 msgstr ""
 
 msgid "queued"
 msgstr "已排队"
+
+msgid "queued to start executing in %{time}"
+msgstr ""
 
 msgid "remove template input"
 msgstr "删除模板输入"
@@ -802,6 +826,9 @@ msgstr "已成功"
 
 msgid "success"
 msgstr "成功"
+
+msgid "tasks at a time"
+msgstr ""
 
 msgid "template"
 msgstr "模板"

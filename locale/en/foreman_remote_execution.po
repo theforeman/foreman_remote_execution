@@ -17,6 +17,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 
+msgid "%s"
+msgstr ""
+
 msgid "%s ago"
 msgstr ""
 
@@ -95,7 +98,16 @@ msgstr ""
 msgid "Concurrency level"
 msgstr ""
 
+msgid "Concurrency level limited to"
+msgstr ""
+
 msgid "Control concurrency level and distribution over time"
+msgstr ""
+
+msgid "Could not find any suitable interface for execution"
+msgstr ""
+
+msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
@@ -183,12 +195,6 @@ msgid "Execution"
 msgstr ""
 
 msgid "Exit status: %s"
-msgstr ""
-
-msgid "Explanation"
-msgstr ""
-
-msgid "Export"
 msgstr ""
 
 msgid "Export a job template to ERB"
@@ -294,6 +300,9 @@ msgid "Job Templates"
 msgstr ""
 
 msgid "Job category"
+msgstr ""
+
+msgid "Job execution failed"
 msgstr ""
 
 msgid "Job finished with error"
@@ -404,9 +413,6 @@ msgstr ""
 msgid "Perform no more executions after this time"
 msgstr ""
 
-msgid "Playbook execution failed"
-msgstr ""
-
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
@@ -497,10 +503,16 @@ msgstr ""
 msgid "SSH provider specific options"
 msgstr ""
 
+msgid "Schedule Remote Job"
+msgstr ""
+
 msgid "Schedule the job for a future time"
 msgstr ""
 
 msgid "Schedule the job to start at a later time"
+msgstr ""
+
+msgid "Scheduled to start at"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -531,6 +543,12 @@ msgid "Select as many remote execution proxies as applicable for this subnet.  W
 msgstr ""
 
 msgid "Selectable values for user inputs"
+msgstr ""
+
+msgid "Set to distribute over"
+msgstr ""
+
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
 msgstr ""
 
 msgid "Show foreign input set details"
@@ -622,10 +640,10 @@ msgstr ""
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr ""
 
-msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
+msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr ""
 
-msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
+msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr ""
 
 msgid "Time span"
@@ -780,10 +798,16 @@ msgstr ""
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr ""
 
+msgid "minutes"
+msgstr ""
+
 msgid "planned"
 msgstr ""
 
 msgid "queued"
+msgstr ""
+
+msgid "queued to start executing in %{time}"
 msgstr ""
 
 msgid "remove template input"
@@ -802,6 +826,9 @@ msgid "succeeded"
 msgstr ""
 
 msgid "success"
+msgstr ""
+
+msgid "tasks at a time"
 msgstr ""
 
 msgid "template"

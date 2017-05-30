@@ -17,6 +17,9 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+msgid "%s"
+msgstr ""
+
 msgid "%s ago"
 msgstr "%s前"
 
@@ -94,8 +97,17 @@ msgstr "クローズ"
 msgid "Concurrency level"
 msgstr "同時実行レベル"
 
+msgid "Concurrency level limited to"
+msgstr ""
+
 msgid "Control concurrency level and distribution over time"
 msgstr "同時実行レベルと分散を制御"
+
+msgid "Could not find any suitable interface for execution"
+msgstr ""
+
+msgid "Could not render the preview because no host matches the search query."
+msgstr ""
 
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
@@ -183,12 +195,6 @@ msgstr "Execution"
 
 msgid "Exit status: %s"
 msgstr "終了ステータス: %s"
-
-msgid "Explanation"
-msgstr "説明"
-
-msgid "Export"
-msgstr "エクスポート"
 
 msgid "Export a job template to ERB"
 msgstr "ジョブテンプレートを ERB にエクスポート"
@@ -294,6 +300,9 @@ msgstr "ジョブテンプレート"
 
 msgid "Job category"
 msgstr "ジョブカテゴリー"
+
+msgid "Job execution failed"
+msgstr ""
 
 msgid "Job finished with error"
 msgstr "エラーでジョブが終了しました"
@@ -403,9 +412,6 @@ msgstr "保留"
 msgid "Perform no more executions after this time"
 msgstr "これ以降実行しない"
 
-msgid "Playbook execution failed"
-msgstr ""
-
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
@@ -496,11 +502,17 @@ msgstr "SSH"
 msgid "SSH provider specific options"
 msgstr "SSH プロバイダー固有オプション"
 
+msgid "Schedule Remote Job"
+msgstr ""
+
 msgid "Schedule the job for a future time"
 msgstr "将来のジョブをスケジュール"
 
 msgid "Schedule the job to start at a later time"
 msgstr "後で開始するジョブをスケジュール"
+
+msgid "Scheduled to start at"
+msgstr ""
 
 msgid "Scroll to bottom"
 msgstr "最下部へスクロール"
@@ -531,6 +543,12 @@ msgstr "このサブネットに適用可能なすべてのリモート実行プ
 
 msgid "Selectable values for user inputs"
 msgstr "ユーザー入力に選択できる値"
+
+msgid "Set to distribute over"
+msgstr ""
+
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
+msgstr ""
 
 msgid "Show foreign input set details"
 msgstr "外部入力セット詳細を表示"
@@ -621,11 +639,11 @@ msgstr "このテンプレートは編集用にロックされています。"
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "このテンプレートはロックされています。カスタマイズするには、このクローンを新規テンプレートに作成してください。"
 
-msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "このテンプレートは説明を生成するために使用されます。入力値は構文 %{package} を使用して使用できます。また、%{job_category} と %{template_name} を使用してジョブカテゴリーおよびテンプレート名を含めることもできます。"
-
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr "このテンプレートは説明を生成するために使用されます。入力値は構文 %{package} を使用して使用できます。また、%{job_category} と %{template_name} を使用してジョブカテゴリーおよびテンプレート名を含めることもできます。"
+
+msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
+msgstr ""
 
 msgid "Time span"
 msgstr "タイムスパン"
@@ -779,11 +797,17 @@ msgstr "含まれるテンプレート '%s' が見つかりません"
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "名前が '%s' の入力マクロが使用されていますが、このテンプレートにはこのような名前の入力は定義されていません"
 
+msgid "minutes"
+msgstr ""
+
 msgid "planned"
 msgstr ""
 
 msgid "queued"
 msgstr "キューに登録済み"
+
+msgid "queued to start executing in %{time}"
+msgstr ""
 
 msgid "remove template input"
 msgstr "テンプレート入力を削除"
@@ -802,6 +826,9 @@ msgstr "成功"
 
 msgid "success"
 msgstr "success"
+
+msgid "tasks at a time"
+msgstr ""
 
 msgid "template"
 msgstr "template"
