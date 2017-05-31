@@ -6,7 +6,8 @@ module ForemanRemoteExecutionCore
                     :ssh_identity_key_file => '~/.ssh/id_rsa_foreman_proxy',
                     :ssh_user              => 'root',
                     :remote_working_dir    => '/var/tmp',
-                    :local_working_dir     => '/var/tmp')
+                    :local_working_dir     => '/var/tmp',
+                    :kerberos_auth         => false)
 
   def self.simulate?
     %w(yes true 1).include? ENV.fetch('REX_SIMULATE', '').downcase

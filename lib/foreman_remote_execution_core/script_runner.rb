@@ -18,8 +18,6 @@ module ForemanRemoteExecutionCore
       @effective_user_method = options.fetch(:effective_user_method, 'sudo')
       @host_public_key = options.fetch(:host_public_key, nil)
       @verify_host = options.fetch(:verify_host, nil)
-      @authentication_methods = filter_authentication_methods(options.fetch(:authentication_methods, %w(pubkey)))
-
       @client_private_key_file = settings.fetch(:ssh_identity_key_file)
       @local_working_dir = options.fetch(:local_working_dir, settings.fetch(:local_working_dir))
       @remote_working_dir = options.fetch(:remote_working_dir, settings.fetch(:remote_working_dir))
@@ -116,7 +114,7 @@ module ForemanRemoteExecutionCore
       # if the host public key is contained in the known_hosts_file,
       # verify it, otherwise, if missing, import it and continue
       ssh_options[:paranoid] = true
-      ssh_options[:auth_methods] = @authentication_methods
+      ssh_options[:auth_methods] = available_authentication_methods
       ssh_options[:user_known_hosts_file] = prepare_known_hosts if @host_public_key
       return ssh_options
     end
@@ -285,10 +283,14 @@ module ForemanRemoteExecutionCore
       end
     end
 
-    def filter_authentication_methods(methods)
-      if methods.include?('gssapi-with-mic') && !defined? Net::SSH::Kerberos
-        @logger.warn('Kerberos authentication requested but not available, disabling')
-        methods.delete('gssapi-with-mic')
+    def available_authentication_methods
+      methods = %w(pubkey) # Always use pubkey auth as fallback
+      if settings.kerberos_auth
+        if defined? Net::SSH::Kerberos
+          methods.unshift('gssapi-with-mic')
+        else
+          @logger.warn('Kerberos authentication requested but not available')
+        end
       end
       methods
     end

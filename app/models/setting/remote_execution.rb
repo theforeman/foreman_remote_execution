@@ -40,9 +40,6 @@ class Setting::RemoteExecution < Setting
         self.set('remote_execution_connect_by_ip',
                  N_('Should the ip addresses on host interfaces be preferred over the fqdn? '\
                  'It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip.'),
-                 false),
-        self.set('remote_execution_kerberos_auth',
-                 N_('Should SSH try to authenticate using kerberos?'),
                  false)
       ].each { |s| self.create! s.update(:category => 'Setting::RemoteExecution') }
     end

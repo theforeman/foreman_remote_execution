@@ -7,8 +7,7 @@ class SSHExecutionProvider < RemoteExecutionProvider
       super.merge(:ssh_user => ssh_user(host),
                   :effective_user => effective_user(template_invocation),
                   :effective_user_method => effective_user_method(host),
-                  :ssh_port => ssh_port(host),
-                  :authentication_methods => authentication_methods(host))
+                  :ssh_port => ssh_port(host))
     end
 
     def humanized_name
@@ -69,13 +68,6 @@ class SSHExecutionProvider < RemoteExecutionProvider
 
     def host_setting(host, setting)
       host.params[setting.to_s] || Setting[setting]
-    end
-
-    def authentication_methods(host)
-      arr = []
-      arr << 'gssapi-with-mic' if host_setting(host, :remote_execution_kerberos_auth)
-      arr << 'pubkey'
-      arr
     end
   end
 end
