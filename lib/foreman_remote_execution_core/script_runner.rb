@@ -94,6 +94,10 @@ module ForemanRemoteExecutionCore
       @session.close if @session && !@session.closed?
     end
 
+    def publish_data(data, type)
+      super(data.force_encoding('UTF-8'), type)
+    end
+
     private
 
     def session
