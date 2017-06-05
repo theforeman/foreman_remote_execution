@@ -1,6 +1,6 @@
 object @job_invocation
 
-extends "api/v2/job_invocations/base"
+extends 'api/v2/job_invocations/base'
 
 node do |invocation|
   if invocation.triggering
@@ -19,7 +19,7 @@ child :targeting do
   attributes :bookmark_id, :search_query, :targeting_type, :user_id, :status, :status_label
 
   child :hosts do
-    extends "api/v2/hosts/base"
+    extends 'api/v2/hosts/base'
   end
 end
 

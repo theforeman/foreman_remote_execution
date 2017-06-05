@@ -22,13 +22,13 @@ class JobTemplateImporterTest < ActiveSupport::TestCase
           { 'name' => 'verbose', 'input_type' => 'user' }
         ]
       }
-      text = <<-END_TEMPLATE
-<%#
-#{YAML.dump(metadata)}
-%>
+      text = <<-END_TEMPLATE.strip_heredoc
+        <%#
+        #{YAML.dump(metadata)}
+        %>
 
-service <%= input("service_name") %> restart
-END_TEMPLATE
+        service <%= input("service_name") %> restart
+      END_TEMPLATE
 
       JobTemplateImporter.import!(name, text, metadata)
     end
