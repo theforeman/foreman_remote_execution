@@ -274,7 +274,7 @@ class JobInvocationComposer
     compose
 
     @host_ids = validate_host_ids(params[:host_ids])
-    @search_query = job_invocation.targeting.search_query unless job_invocation.targeting.bookmark_id.present?
+    @search_query = job_invocation.targeting.search_query if job_invocation.targeting.bookmark_id.blank?
   end
 
   def self.from_job_invocation(job_invocation, params = {})
@@ -300,8 +300,8 @@ class JobInvocationComposer
     job_invocation.triggering = build_triggering
     job_invocation.pattern_template_invocations = build_template_invocations
     job_invocation.description_format = params[:description_format]
-    job_invocation.time_span = params[:concurrency_control][:time_span].to_i unless params[:concurrency_control][:time_span].blank?
-    job_invocation.concurrency_level = params[:concurrency_control][:level].to_i unless params[:concurrency_control][:level].blank?
+    job_invocation.time_span = params[:concurrency_control][:time_span].to_i if params[:concurrency_control][:time_span].present?
+    job_invocation.concurrency_level = params[:concurrency_control][:level].to_i if params[:concurrency_control][:level].present?
 
     self
   end

@@ -217,7 +217,7 @@ class JobTemplate < ::Template
 
   def self.parse_metadata(template)
     match = template.match(/<%\#(.+?).-?%>/m)
-    match.nil? ? {} : YAML.load(match[1])
+    match.nil? ? {} : YAML.safe_load(match[1])
   end
 
   private

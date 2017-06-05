@@ -68,7 +68,7 @@ class HostStatus::ExecutionStatus < HostStatus::Status
     def status
       if task.nil? || task.state == 'scheduled'
         QUEUED
-      elsif task.state == 'stopped' && 'success' == task.result
+      elsif task.state == 'stopped' && task.result == 'success'
         OK
       elsif task.pending?
         RUNNING

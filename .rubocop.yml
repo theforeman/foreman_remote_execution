@@ -79,3 +79,19 @@ Style/VariableNumber:
 # a == 0 is not the same as a.zero?, when a is not a number
 Style/NumericPredicate:
   Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+# for compatibility with Foreman 1.15
+Rails/ApplicationRecord:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false

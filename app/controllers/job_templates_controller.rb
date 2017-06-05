@@ -14,7 +14,7 @@ class JobTemplatesController < ::TemplatesController
   end
 
   def preview
-    find_resource unless @template.present?
+    find_resource if @template.blank?
     base = Host.authorized(:view_hosts, Host)
     host = params[:preview_host_id].present? ? base.find(params[:preview_host_id]) : base.first
     @template.template = params[:template]

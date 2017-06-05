@@ -147,9 +147,9 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       end
 
       let(:package_template) do
-        FactoryGirl.build(:job_template, :name => 'package action', :template => <<TEMPLATE) do |template|
-<%= render_template("command action", "command" => "yum -y \#{ input("action") } \#{ input('package') }") -%>
-TEMPLATE
+        FactoryGirl.build(:job_template, :name => 'package action', :template => <<-TEMPLATE.strip_heredoc) do |template|
+          <%= render_template("command action", "command" => "yum -y \#{ input("action") } \#{ input('package') }") -%>
+        TEMPLATE
           template.template_inputs << FactoryGirl.build(:template_input, :name => 'package', :input_type => 'user')
           template.template_inputs << FactoryGirl.build(:template_input, :name => 'action', :input_type => 'user')
           template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => command_template, :include_all => true, :exclude => 'command')
