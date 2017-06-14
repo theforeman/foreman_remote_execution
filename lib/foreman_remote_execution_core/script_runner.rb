@@ -20,6 +20,8 @@ module ForemanRemoteExecutionCore
       @effective_user_method = options.fetch(:effective_user_method, 'sudo')
       @host_public_key = options.fetch(:host_public_key, nil)
       @verify_host = options.fetch(:verify_host, nil)
+      @timeout_interval = options.fetch(:timeout_interval, nil)
+
       @client_private_key_file = settings.fetch(:ssh_identity_key_file)
       @local_working_dir = options.fetch(:local_working_dir, settings.fetch(:local_working_dir))
       @remote_working_dir = options.fetch(:remote_working_dir, settings.fetch(:remote_working_dir))
@@ -64,6 +66,15 @@ module ForemanRemoteExecutionCore
       end
     rescue => e
       publish_exception('Unexpected error', e, false)
+    end
+
+    def timeout
+      @logger.debug('job timed out')
+      super
+    end
+
+    def timeout_interval
+      @timeout_interval
     end
 
     def with_retries

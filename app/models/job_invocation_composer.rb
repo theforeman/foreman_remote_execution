@@ -13,6 +13,7 @@ class JobInvocationComposer
         :host_ids => ui_params[:host_ids],
         :description_format => job_invocation_base[:description_format],
         :concurrency_control => concurrency_control_params,
+        :timeout_interval => timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -24,6 +25,14 @@ class JobInvocationComposer
       job_invocation_base.fetch(:providers, {})
     end
 
+    def timeout_interval
+      providers_base.values.map do |provider|
+        id = provider[:job_template_id]
+        provider.fetch(:job_templates, {}).fetch(id, {})[:timeout_interval]
+      end.first
+    end
+
+    # TODO: Fix this comment
     # parses params to get job templates in form of id => attributes for selected job templates, e.g.
     # {
     #   "459" => {},
@@ -80,6 +89,7 @@ class JobInvocationComposer
         :triggering => triggering_params,
         :description_format => api_params[:description_format],
         :concurrency_control => concurrency_control_params,
+        :timeout_interval => api_params[:timeout_interval] || template.timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -161,6 +171,7 @@ class JobInvocationComposer
         :triggering => triggering_params,
         :description_format => job_invocation.description_format,
         :concurrency_control => concurrency_control_params,
+        :timeout_interval => job_invocation.timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -302,6 +313,7 @@ class JobInvocationComposer
     job_invocation.description_format = params[:description_format]
     job_invocation.time_span = params[:concurrency_control][:time_span].to_i if params[:concurrency_control][:time_span].present?
     job_invocation.concurrency_level = params[:concurrency_control][:level].to_i if params[:concurrency_control][:level].present?
+    job_invocation.timeout_interval = params[:timeout_interval]
 
     self
   end

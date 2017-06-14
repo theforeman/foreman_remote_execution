@@ -76,6 +76,10 @@
                       <% end %>
                       <%= render :partial => 'description_fields', :locals => { :f => f, :job_template => job_template, :disabled => job_template != selected_templates_per_provider[provider_type] } %>
                     </div>
+
+                    <div class="advanced hidden">
+                      <%= number_f job_template_fields, :timeout_interval, :value => f.object.timeout_interval || job_template.timeout_interval, :label => _('Timeout interval'), :help_inline => N_("Time in seconds after which the job should be killed.") %>
+                    </div>
                   <% end %>
                 </fieldset>
               <% end %>

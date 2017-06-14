@@ -15,7 +15,7 @@ module Foreman::Controller::Parameters::JobTemplate
 
     def job_template_params_filter
       Foreman::ParameterFilter.new(::TemplateInput).tap do |filter|
-        filter.permit :job_category, :provider_type, :description_format,
+        filter.permit :job_category, :provider_type, :description_format, :timeout_interval,
                       :effective_user_attributes => [job_template_effective_user_filter],
                       :template_inputs_attributes => [template_input_params_filter],
                       :foreign_input_sets_attributes => [foreign_input_set_params_filter]
