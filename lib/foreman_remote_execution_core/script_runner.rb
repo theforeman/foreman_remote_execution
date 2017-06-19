@@ -97,9 +97,30 @@ module ForemanRemoteExecutionCore
 
     def session
       @session ||= begin
-                     @logger.debug("opening session to #{@ssh_user}@#{@host}")
-                     Net::SSH.start(@host, @ssh_user, ssh_options)
+                     with_process_reaping do
+                       @logger.debug("opening session to #{@ssh_user}@#{@host}")
+                       Net::SSH.start(@host, @ssh_user, ssh_options)
+                     end
                    end
+    end
+
+    def with_process_reaping(&block)
+      yield
+    rescue => e
+      reap
+      raise e
+    end
+
+    def reap
+      reaped = 0
+      # While there are any dead child processes without waiting for the ones that are running
+      while Process.waitpid(-1, Process::WNOHANG)
+        reaped += 1
+      end
+    rescue Errno::ECHILD
+      # Raised when there are no child processes
+    ensure
+      @logger.debug("Reaped #{reaped} processes")
     end
 
     def ssh_options
