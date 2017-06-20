@@ -28,7 +28,6 @@ module ForemanRemoteExecutionCore
       # pipe the output to tee while capturing the exit code in a file
       script = <<-SCRIPT.gsub(/^\s+\| /, '')
       | sh <<WRAPPER
-      | LC_ALL=C.UTF-8
       | (#{su_prefix}#{remote_script} < /dev/null; echo \\$?>#{exit_code_path}) | /usr/bin/tee #{output_path}
       | exit \\$(cat #{exit_code_path})
       | WRAPPER
