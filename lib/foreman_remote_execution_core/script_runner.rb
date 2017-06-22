@@ -285,7 +285,7 @@ module ForemanRemoteExecutionCore
 
     def available_authentication_methods
       methods = %w(pubkey) # Always use pubkey auth as fallback
-      if settings.kerberos_auth
+      if settings[:kerberos_auth]
         if defined? Net::SSH::Kerberos
           methods.unshift('gssapi-with-mic')
         else
