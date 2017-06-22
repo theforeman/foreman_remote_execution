@@ -2,6 +2,7 @@ require 'net/ssh'
 begin
   require 'net/ssh/krb'
 rescue LoadError
+  $stderr.puts 'Failed to load net/ssh/krb, kerberos authentication won\'t be available'
 end
 
 module ForemanRemoteExecutionCore
@@ -284,10 +285,10 @@ module ForemanRemoteExecutionCore
     end
 
     def available_authentication_methods
-      methods = %w(pubkey) # Always use pubkey auth as fallback
+      methods = %w(publickey) # Always use pubkey auth as fallback
       if settings[:kerberos_auth]
         if defined? Net::SSH::Kerberos
-          methods.unshift('gssapi-with-mic')
+          methods << 'gssapi-with-mic'
         else
           @logger.warn('Kerberos authentication requested but not available')
         end
