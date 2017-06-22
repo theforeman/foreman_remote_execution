@@ -53,7 +53,7 @@
       <b><%= _("Scheduled to start at") %></b>: <%= job_invocation.task.start_at.try(:in_time_zone) %><br>
     <% end %>
     <% unless job_invocation.timeout_interval.nil? %>
-      <b><%= _("Set to timeout after") %></b>: <%= job_invocation.timeout_interval %> <%= _('seconds') %><br>
+      <b><%= _("Timeout to kill after") %></b>: <%= job_invocation.timeout_interval %> <%= _('seconds') %><br>
     <% end %>
   <% end %>
 </div>
