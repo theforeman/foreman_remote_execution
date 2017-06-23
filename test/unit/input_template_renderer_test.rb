@@ -464,7 +464,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
               puppetclass
             end
             let(:lookup_key) do
-              lookup_key_factory = SETTINGS[:version].short == '1.9' ? :lookup_key : :variable_lookup_key
+              lookup_key_factory = :variable_lookup_key
               FactoryGirl.create(lookup_key_factory,
                                  :key => 'client_key',
                                  :puppetclass => puppet_class,
@@ -550,7 +550,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
               puppetclass
             end
             let(:lookup_key) do
-              lookup_key_factory = SETTINGS[:version].short == '1.9' ? :lookup_key : :puppetclass_lookup_key
+              lookup_key_factory = :puppetclass_lookup_key
               FactoryGirl.create(lookup_key_factory, :as_smart_class_param,
                                  :key => 'version',
                                  :puppetclass => puppet_class,
