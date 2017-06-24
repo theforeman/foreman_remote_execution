@@ -464,8 +464,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
               puppetclass
             end
             let(:lookup_key) do
-              lookup_key_factory = :variable_lookup_key
-              FactoryGirl.create(lookup_key_factory,
+              FactoryGirl.create(:variable_lookup_key,
                                  :key => 'client_key',
                                  :puppetclass => puppet_class,
                                  :overrides => {"fqdn=#{renderer.host.fqdn}" => 'RSA KEY'})
@@ -550,8 +549,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
               puppetclass
             end
             let(:lookup_key) do
-              lookup_key_factory = :puppetclass_lookup_key
-              FactoryGirl.create(lookup_key_factory, :as_smart_class_param,
+              FactoryGirl.create(:puppetclass_lookup_key, :as_smart_class_param,
                                  :key => 'version',
                                  :puppetclass => puppet_class,
                                  :path => 'fqdn',

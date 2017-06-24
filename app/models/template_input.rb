@@ -173,11 +173,11 @@ class TemplateInput < ActiveRecord::Base
     private
 
     def get_enc
-      if SETTINGS[:version].short <= '1.15'
-        @enc ||= Classification::ClassParam.new(:host => @renderer.host).enc
-      else
-        @enc ||= HostInfoProviders::PuppetInfo.new(@renderer.host).puppetclass_parameters
-      end
+      @enc ||= if SETTINGS[:version].short <= '1.15'
+                 Classification::ClassParam.new(:host => @renderer.host).enc
+               else
+                 HostInfoProviders::PuppetInfo.new(@renderer.host).puppetclass_parameters
+               end
     end
   end
 end
