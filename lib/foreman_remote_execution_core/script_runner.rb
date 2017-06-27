@@ -8,6 +8,8 @@ rescue LoadError; end
 
 module ForemanRemoteExecutionCore
   class ScriptRunner < ForemanTasksCore::Runner::Base
+    attr_reader :timeout_interval
+
     EXPECTED_POWER_ACTION_MESSAGES = ['restart host', 'shutdown host'].freeze
 
     def initialize(options)
@@ -71,10 +73,6 @@ module ForemanRemoteExecutionCore
     def timeout
       @logger.debug('job timed out')
       super
-    end
-
-    def timeout_interval
-      @timeout_interval
     end
 
     def with_retries
