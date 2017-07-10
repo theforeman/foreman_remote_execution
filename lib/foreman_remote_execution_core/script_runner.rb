@@ -1,9 +1,10 @@
 require 'net/ssh'
+
+# rubocop:disable Lint/HandleExceptions
 begin
   require 'net/ssh/krb'
-rescue LoadError
-  $stderr.puts 'Failed to load net/ssh/krb, kerberos authentication won\'t be available'
-end
+rescue LoadError; end
+# rubocop:enable Lint/HandleExceptions:
 
 module ForemanRemoteExecutionCore
   class ScriptRunner < ForemanTasksCore::Runner::Base
