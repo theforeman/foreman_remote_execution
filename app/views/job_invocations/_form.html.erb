@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="advanced hidden">
-                      <%= number_f job_template_fields, :timeout_interval, :value => f.object.timeout_interval || job_template.timeout_interval, :label => _('Timeout to kill'), :help_inline => N_('Time in seconds from the start on the remote host after which the job should be killed.') %>
+                      <%= number_f job_template_fields, :execution_timeout_interval, :value => f.object.execution_timeout_interval || job_template.execution_timeout_interval, :label => _('Timeout to kill'), :help_inline => N_('Time in seconds from the start on the remote host after which the job should be killed.') %>
                     </div>
                   <% end %>
                 </fieldset>

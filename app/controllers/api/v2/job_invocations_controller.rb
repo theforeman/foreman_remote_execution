@@ -53,7 +53,7 @@ module Api
           param :bookmark_id, Integer, :required => false
           param :search_query, Integer, :required => false
           param :description_format, String, :required => false, :desc => N_('Override the description format from the template for this invocation only')
-          param :timeout_interval, Integer, :required => false, :desc => N_('Override the timeout interval from the template for this invocation only')
+          param :execution_timeout_interval, Integer, :required => false, :desc => N_('Override the timeout interval from the template for this invocation only')
         end
       end
 
