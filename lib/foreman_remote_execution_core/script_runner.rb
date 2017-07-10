@@ -1,5 +1,11 @@
 require 'net/ssh'
 
+# rubocop:disable Lint/HandleExceptions
+begin
+  require 'net/ssh/krb'
+rescue LoadError; end
+# rubocop:enable Lint/HandleExceptions:
+
 module ForemanRemoteExecutionCore
   class ScriptRunner < ForemanTasksCore::Runner::Base
     EXPECTED_POWER_ACTION_MESSAGES = ['restart host', 'shutdown host'].freeze
@@ -14,7 +20,6 @@ module ForemanRemoteExecutionCore
       @effective_user_method = options.fetch(:effective_user_method, 'sudo')
       @host_public_key = options.fetch(:host_public_key, nil)
       @verify_host = options.fetch(:verify_host, nil)
-
       @client_private_key_file = settings.fetch(:ssh_identity_key_file)
       @local_working_dir = options.fetch(:local_working_dir, settings.fetch(:local_working_dir))
       @remote_working_dir = options.fetch(:remote_working_dir, settings.fetch(:remote_working_dir))
@@ -115,7 +120,7 @@ module ForemanRemoteExecutionCore
       # if the host public key is contained in the known_hosts_file,
       # verify it, otherwise, if missing, import it and continue
       ssh_options[:paranoid] = true
-      ssh_options[:auth_methods] = ['publickey']
+      ssh_options[:auth_methods] = available_authentication_methods
       ssh_options[:user_known_hosts_file] = prepare_known_hosts if @host_public_key
       return ssh_options
     end
@@ -282,6 +287,18 @@ module ForemanRemoteExecutionCore
       if EXPECTED_POWER_ACTION_MESSAGES.any? { |message| last_output['output'] =~ /^#{message}/ }
         @expecting_disconnect = true
       end
+    end
+
+    def available_authentication_methods
+      methods = %w(publickey) # Always use pubkey auth as fallback
+      if settings[:kerberos_auth]
+        if defined? Net::SSH::Kerberos
+          methods << 'gssapi-with-mic'
+        else
+          @logger.warn('Kerberos authentication requested but not available')
+        end
+      end
+      methods
     end
   end
 end

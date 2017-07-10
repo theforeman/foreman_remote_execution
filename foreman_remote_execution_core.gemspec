@@ -19,5 +19,4 @@ DESC
 
   s.add_runtime_dependency('foreman-tasks-core', '~> 0.1.0')
   s.add_runtime_dependency('net-ssh')
-  s.add_runtime_dependency('net-scp')
 end
