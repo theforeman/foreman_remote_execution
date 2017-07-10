@@ -38,8 +38,9 @@ class Targeting < ActiveRecord::Base
     self.search_query = bookmark.query if dynamic? && bookmark.present?
     self.resolved_at = Time.zone.now
     self.validate!
-    # avoid validation of hosts objects - tey will be loaded for no reason.
-    host_ids = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query).pluck(:id) }
+    # avoid validation of hosts objects - they will be loaded for no reason.
+    #   pluck(:id) returns duplicate results for HostCollections
+    host_ids = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query).pluck(:id).uniq }
     # this can be optimized even more, by introducing bulk insert
     self.targeting_hosts.build(host_ids.map { |id| { :host_id => id } })
     self.save(:validate => false)
