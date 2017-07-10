@@ -164,6 +164,7 @@ module ForemanRemoteExecution
       # having issues with resolving it to Rake::Task otherwise
       require_dependency 'foreman_tasks/task'
       ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
+      ForemanTasks::Cleaner.send(:include, ForemanRemoteExecution::ForemanTasksCleanerExtensions)
       RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
     end
 

@@ -49,7 +49,7 @@
     <% if job_invocation.time_span %>
       <b><%= _("Set to distribute over") %></b>: <%= job_invocation.concurrency_level %> <%= _('minutes') %><br>
     <% end %>
-    <% if job_invocation.task && job_invocation.task.delayed? || job_invocation.task.recurring? %>
+    <% if job_invocation.task && (job_invocation.task.delayed? || job_invocation.task.recurring?) %>
       <b><%= _("Scheduled to start at") %></b>: <%= job_invocation.task.start_at.try(:in_time_zone) %><br>
     <% end %>
   <% end %>
