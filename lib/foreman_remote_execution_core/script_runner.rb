@@ -75,6 +75,10 @@ module ForemanRemoteExecutionCore
       super
     end
 
+    def timeout_interval
+      execution_timeout_interval
+    end
+
     def with_retries
       tries = 0
       begin
