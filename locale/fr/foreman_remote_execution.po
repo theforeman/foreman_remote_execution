@@ -397,6 +397,9 @@ msgstr "Les entrées n'ont pas toutes des valeurs associées. Les entrées deman
 msgid "Override the description format from the template for this invocation only"
 msgstr "Remplacer le format de description du modèle pour ce lancement uniquement"
 
+msgid "Override the timeout interval from the template for this invocation only"
+msgstr ""
+
 msgid "Overview"
 msgstr "Vue globale"
 
@@ -411,6 +414,9 @@ msgstr "En cours"
 
 msgid "Perform no more executions after this time"
 msgstr "Ne pas lancer d'autres exécutions après cette date."
+
+msgid "Play Ansible roles"
+msgstr ""
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
@@ -645,8 +651,20 @@ msgstr "Ce modèle est utilisé pour générer la description. Les valeurs d'ent
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr ""
 
+msgid "Time in seconds from the start on the remote host after which the job should be killed."
+msgstr ""
+
 msgid "Time span"
 msgstr "Durée"
+
+msgid "Timeout interval"
+msgstr ""
+
+msgid "Timeout to kill"
+msgstr ""
+
+msgid "Timeout to kill after"
+msgstr ""
 
 msgid "Toggle DEBUG"
 msgstr "Afficher STDOUT"
@@ -819,6 +837,9 @@ msgid "running"
 msgstr "lancé"
 
 msgid "running %{percent}%%"
+msgstr ""
+
+msgid "seconds"
 msgstr ""
 
 msgid "succeeded"

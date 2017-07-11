@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 18:05+0200\n"
-"PO-Revision-Date: 2017-05-30 18:05+0200\n"
+"POT-Creation-Date: 2017-07-11 20:38+0200\n"
+"PO-Revision-Date: 2017-07-11 20:38+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -138,7 +138,7 @@ msgid "Distribute tasks over N seconds"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_invocations_controller.rb:50
-#: ../app/views/job_invocations/_form.html.erb:89
+#: ../app/views/job_invocations/_form.html.erb:93
 msgid "Run at most N tasks at a time"
 msgstr ""
 
@@ -146,19 +146,23 @@ msgstr ""
 msgid "Override the description format from the template for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:59
+#: ../app/controllers/api/v2/job_invocations_controller.rb:56
+msgid "Override the timeout interval from the template for this invocation only"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:60
 msgid "Create a job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:68
+#: ../app/controllers/api/v2/job_invocations_controller.rb:69
 msgid "Get output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:101
+#: ../app/controllers/api/v2/job_invocations_controller.rb:102
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:107
+#: ../app/controllers/api/v2/job_invocations_controller.rb:108
 msgid "Template with id '%{id}' was not found"
 msgstr ""
 
@@ -548,39 +552,39 @@ msgstr ""
 msgid "Failed rendering template: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:61
+#: ../app/lib/actions/remote_execution/run_host_job.rb:63
 msgid "Job execution failed"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:70
+#: ../app/lib/actions/remote_execution/run_host_job.rb:72
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:75 action_names.rb:5
+#: ../app/lib/actions/remote_execution/run_host_job.rb:77 action_names.rb:3
 msgid "Remote action:"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:97
+#: ../app/lib/actions/remote_execution/run_host_job.rb:99
 msgid "Exit status: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:99
+#: ../app/lib/actions/remote_execution/run_host_job.rb:101
 msgid "Job finished with error"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:102
+#: ../app/lib/actions/remote_execution/run_host_job.rb:104
 msgid "Error loading data from proxy"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:126
+#: ../app/lib/actions/remote_execution/run_host_job.rb:128
 msgid "User can not execute job on host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:127
+#: ../app/lib/actions/remote_execution/run_host_job.rb:129
 msgid "User can not execute this job template"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:132
+#: ../app/lib/actions/remote_execution/run_host_job.rb:134
 msgid "User can not execute this job template on %s"
 msgstr ""
 
@@ -640,27 +644,27 @@ msgstr ""
 msgid "template"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:87
+#: ../app/models/job_invocation_composer.rb:97
 msgid "Cannot specify both bookmark_id and search_query"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:92
+#: ../app/models/job_invocation_composer.rb:102
 msgid "Cannot specify both recurrence and scheduling"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:126
+#: ../app/models/job_invocation_composer.rb:136
 msgid "Unknown input %{input_name} for template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:243
+#: ../app/models/job_invocation_composer.rb:254
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:252
+#: ../app/models/job_invocation_composer.rb:263
 msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:258
+#: ../app/models/job_invocation_composer.rb:269
 msgid ""
 "The template %{template_name} mapped to feature %{feature_name} is not accessi"
 "ble by the user"
@@ -749,11 +753,11 @@ msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-msgid "Dynamic Query"
+msgid "Static Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-msgid "Static Query"
+msgid "Dynamic Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:35
@@ -764,8 +768,12 @@ msgstr ""
 msgid "Cannot resolve hosts without a bookmark or search query"
 msgstr ""
 
-#: ../app/models/targeting.rb:70 ../app/models/targeting.rb:71
+#: ../app/models/targeting.rb:71 ../app/models/targeting.rb:72
 msgid "Must select a bookmark or enter a search query"
+msgstr ""
+
+#: ../app/models/template_input.rb:9
+msgid "Variable"
 msgstr ""
 
 #: ../app/models/template_input.rb:9
@@ -774,10 +782,6 @@ msgstr ""
 
 #: ../app/models/template_input.rb:9
 msgid "User input"
-msgstr ""
-
-#: ../app/models/template_input.rb:9
-msgid "Variable"
 msgstr ""
 
 #: ../app/models/template_input.rb:10
@@ -819,11 +823,17 @@ msgid "Preview"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:64
-msgid "Display advanced fields"
+msgid "Hide advanced fields"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:64
-msgid "Hide advanced fields"
+msgid "Display advanced fields"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:75
+#: ../app/views/job_invocations/_tab_overview.html.erb:44
+#: ../app/views/job_templates/_custom_tabs.html.erb:38
+msgid "Effective user"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:75
@@ -832,34 +842,38 @@ msgid ""
 "u or sudo is used to switch the accounts."
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:75
-#: ../app/views/job_invocations/_tab_overview.html.erb:44
-#: ../app/views/job_templates/_custom_tabs.html.erb:36
-msgid "Effective user"
+#: ../app/views/job_invocations/_form.html.erb:81
+msgid ""
+"Time in seconds from the start on the remote host after which the job should b"
+"e killed."
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:89
+#: ../app/views/job_invocations/_form.html.erb:81
+msgid "Timeout to kill"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:93
 msgid "Concurrency level"
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:90
+#: ../app/views/job_invocations/_form.html.erb:94
 msgid "Distribute execution over N seconds"
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:90
+#: ../app/views/job_invocations/_form.html.erb:94
 msgid "Time span"
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:94
+#: ../app/views/job_invocations/_form.html.erb:98
+msgid "Type of query"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:98
 msgid ""
 "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static<"
 "/b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evalu"
 "ates just before the execution is started, so if it's planed in future, target"
 "ed hosts set may change before it</li></ul>"
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:94
-msgid "Type of query"
 msgstr ""
 
 #: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
@@ -957,15 +971,23 @@ msgid "Concurrency level limited to"
 msgstr ""
 
 #: ../app/views/job_invocations/_tab_overview.html.erb:50
-msgid "minutes"
+msgid "Set to distribute over"
 msgstr ""
 
 #: ../app/views/job_invocations/_tab_overview.html.erb:50
-msgid "Set to distribute over"
+msgid "minutes"
 msgstr ""
 
 #: ../app/views/job_invocations/_tab_overview.html.erb:53
 msgid "Scheduled to start at"
+msgstr ""
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:56
+msgid "Timeout to kill after"
+msgstr ""
+
+#: ../app/views/job_invocations/_tab_overview.html.erb:56
+msgid "seconds"
 msgstr ""
 
 #: ../app/views/job_invocations/index.html.erb:1
@@ -1004,23 +1026,27 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../app/views/job_templates/_custom_tabs.html.erb:25
-msgid "Add Input"
+#: ../app/views/job_templates/_custom_tabs.html.erb:18
+msgid "Timeout interval"
 msgstr ""
 
-#: ../app/views/job_templates/_custom_tabs.html.erb:25
+#: ../app/views/job_templates/_custom_tabs.html.erb:27
 msgid "add a input for this template"
 msgstr ""
 
-#: ../app/views/job_templates/_custom_tabs.html.erb:32
+#: ../app/views/job_templates/_custom_tabs.html.erb:27
+msgid "Add Input"
+msgstr ""
+
+#: ../app/views/job_templates/_custom_tabs.html.erb:34
 msgid "add an input set for this template to reference a different template inputs"
 msgstr ""
 
-#: ../app/views/job_templates/_custom_tabs.html.erb:32
+#: ../app/views/job_templates/_custom_tabs.html.erb:34
 msgid "Add Foreign Input Set"
 msgstr ""
 
-#: ../app/views/job_templates/_custom_tabs.html.erb:50
+#: ../app/views/job_templates/_custom_tabs.html.erb:52
 msgid "Snippet"
 msgstr ""
 
@@ -1031,11 +1057,11 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_templates/_import_job_template_modal.html.erb:14
-msgid "Whether to overwrite the template if it already exists"
+msgid "Overwrite"
 msgstr ""
 
 #: ../app/views/job_templates/_import_job_template_modal.html.erb:14
-msgid "Overwrite"
+msgid "Whether to overwrite the template if it already exists"
 msgstr ""
 
 #: ../app/views/job_templates/edit.html.erb:4
@@ -1186,15 +1212,19 @@ msgid "Jobs"
 msgstr ""
 
 #: action_names.rb:2
-msgid "Action with sub plans"
-msgstr ""
-
-#: action_names.rb:3
-msgid "Import facts"
+msgid "Play Ansible roles"
 msgstr ""
 
 #: action_names.rb:4
 msgid "Import Puppet classes"
+msgstr ""
+
+#: action_names.rb:5
+msgid "Import facts"
+msgstr ""
+
+#: action_names.rb:6
+msgid "Action with sub plans"
 msgstr ""
 
 #: gemspec.rb:2

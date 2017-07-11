@@ -397,6 +397,9 @@ msgstr "Nicht alle erforderlichen Eingaben haben Werte. Fehlende Eingaben: %s"
 msgid "Override the description format from the template for this invocation only"
 msgstr "Beschreibungsformat der Vorlage nur für diesen Aufruf außer Kraft setzen "
 
+msgid "Override the timeout interval from the template for this invocation only"
+msgstr ""
+
 msgid "Overview"
 msgstr "Überblick"
 
@@ -411,6 +414,9 @@ msgstr "Ausstehend"
 
 msgid "Perform no more executions after this time"
 msgstr "Danach nicht mehr ausführen"
+
+msgid "Play Ansible roles"
+msgstr ""
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
@@ -645,8 +651,20 @@ msgstr "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. Einga
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr ""
 
+msgid "Time in seconds from the start on the remote host after which the job should be killed."
+msgstr ""
+
 msgid "Time span"
 msgstr "Zeitspanne"
+
+msgid "Timeout interval"
+msgstr ""
+
+msgid "Timeout to kill"
+msgstr ""
+
+msgid "Timeout to kill after"
+msgstr ""
 
 msgid "Toggle DEBUG"
 msgstr "Umschalt DEBUG"
@@ -819,6 +837,9 @@ msgid "running"
 msgstr ""
 
 msgid "running %{percent}%%"
+msgstr ""
+
+msgid "seconds"
 msgstr ""
 
 msgid "succeeded"

@@ -396,6 +396,9 @@ msgstr "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
 msgid "Override the description format from the template for this invocation only"
 msgstr "이 호출에 대한 템플릿에서만 설명 형식 덮어쓰기"
 
+msgid "Override the timeout interval from the template for this invocation only"
+msgstr ""
+
 msgid "Overview"
 msgstr "개요"
 
@@ -410,6 +413,9 @@ msgstr "보류 중 "
 
 msgid "Perform no more executions after this time"
 msgstr "이 시간 이후 더 이상 실행을 수행하지 않음"
+
+msgid "Play Ansible roles"
+msgstr ""
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
@@ -644,8 +650,20 @@ msgstr "이 템플릿은 설명을 생성하는 데 사용됩니다. %{package} 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr ""
 
+msgid "Time in seconds from the start on the remote host after which the job should be killed."
+msgstr ""
+
 msgid "Time span"
 msgstr "기간"
+
+msgid "Timeout interval"
+msgstr ""
+
+msgid "Timeout to kill"
+msgstr ""
+
+msgid "Timeout to kill after"
+msgstr ""
 
 msgid "Toggle DEBUG"
 msgstr "DEBUG 토글"
@@ -818,6 +836,9 @@ msgid "running"
 msgstr ""
 
 msgid "running %{percent}%%"
+msgstr ""
+
+msgid "seconds"
 msgstr ""
 
 msgid "succeeded"
