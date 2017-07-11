@@ -52,5 +52,8 @@
     <% if job_invocation.task && (job_invocation.task.delayed? || job_invocation.task.recurring?) %>
       <b><%= _("Scheduled to start at") %></b>: <%= job_invocation.task.start_at.try(:in_time_zone) %><br>
     <% end %>
+    <% unless job_invocation.execution_timeout_interval.nil? %>
+      <b><%= _("Timeout to kill after") %></b>: <%= job_invocation.execution_timeout_interval %> <%= _('seconds') %><br>
+    <% end %>
   <% end %>
 </div>
