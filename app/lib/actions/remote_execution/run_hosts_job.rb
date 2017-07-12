@@ -7,18 +7,18 @@ module Actions
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
 
-      def delay(delay_options, job_invocation, locked = false)
+      def delay(delay_options, job_invocation)
         task.add_missing_task_groups(job_invocation.task_group)
-        job_invocation.targeting.resolve_hosts! if job_invocation.targeting.static?
-        super delay_options, job_invocation, locked
+        job_invocation.targeting.resolve_hosts! if job_invocation.targeting.static? && !job_invocation.targeting.resolved?
+        super delay_options, job_invocation
       end
 
-      def plan(job_invocation, locked = false)
+      def plan(job_invocation)
         set_up_concurrency_control job_invocation
         job_invocation.task_group.save! if job_invocation.task_group.try(:new_record?)
         task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
-        action_subject(job_invocation) unless locked
-        job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !locked
+        action_subject(job_invocation)
+        job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !job_invocation.targeting.resolved?
         input.update(:job_category => job_invocation.job_category)
         plan_self(:job_invocation_id => job_invocation.id)
       end
