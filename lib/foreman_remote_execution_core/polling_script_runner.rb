@@ -10,7 +10,7 @@ module ForemanRemoteExecutionCore
     end
 
     def refresh_interval
-      60
+      ForemanRemoteExecutionCore.settings[:runner_refresh_interval, 60].to_i
     end
 
     def prepare_start
