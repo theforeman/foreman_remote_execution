@@ -39,7 +39,7 @@ module ForemanRemoteExecution
 
     context 'targeting resolving' do
       let(:delayed) do
-        action.delay({ :start_at => Time.now }, job_invocation)
+        action.delay({ :start_at => Time.now.getlocal }, job_invocation)
         action
       end
 
