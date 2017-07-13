@@ -60,6 +60,7 @@ module Actions
       end
 
       def check_exit_status
+        error! ForemanTasks::Task::TaskCancelledException.new(_('Task cancelled')) if delegated_action && delegated_action.output[:cancel_sent]
         error! _('Job execution failed') if exit_status.to_s != '0'
       end
 
