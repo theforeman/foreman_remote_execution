@@ -10,7 +10,7 @@ module ForemanRemoteExecutionCore
     end
 
     def refresh_interval
-      ForemanRemoteExecutionCore.settings[:runner_refresh_interval, 60].to_i
+      ForemanRemoteExecutionCore.settings[:runner_refresh_interval].to_i
     end
 
     def prepare_start
@@ -41,9 +41,9 @@ module ForemanRemoteExecutionCore
         _, output, err = run_sync("#{su_prefix} #{@retrieval_script}")
       end
       lines = output.lines
-      @logger.error("error: #{err}") unless err.empty?
       result = lines.shift.match(/^DONE (\d+)?/)
-      publish_data(lines.join, 'stdout') if lines && !lines.empty?
+      publish_data(lines.join, 'stdout') unless lines.empty?
+      publish_data(err, 'stderr') unless err.empty?
       if result
         exitcode = result[1] || 0
         publish_exit_status(exitcode.to_i)
@@ -73,6 +73,11 @@ module ForemanRemoteExecutionCore
       script = <<-SCRIPT.gsub(/^ +\| /, '')
       | #!/bin/sh
       | pid=$(cat "#{@pid_path}")
+      | if ! pgrep --help 2>/dev/null >/dev/null; then
+      |   echo DONE 1
+      |   echo "pgrep is required" >&2
+      |   exit 1
+      | fi
       | if pgrep -P "$pid" >/dev/null 2>/dev/null; then
       |   echo RUNNING
       | else
