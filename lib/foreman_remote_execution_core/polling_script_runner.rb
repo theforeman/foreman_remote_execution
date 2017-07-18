@@ -6,7 +6,7 @@ module ForemanRemoteExecutionCore
       @callback_host = options[:callback_host]
       @task_id = options[:uuid]
       @step_id = options[:step_id]
-      try_obtain_otp!
+      @otp = ForemanTasksCore::OtpManager.generate_otp(@uuid)
     end
 
     def refresh_interval
@@ -59,7 +59,7 @@ module ForemanRemoteExecutionCore
 
     def close
       super
-      SmartProxyDynflowCore::OtpManager.drop_otp(@uuid, @otp) if @otp
+      ForemanTasksCore::OtpManager.drop_otp(@uuid, @otp) if @otp
     end
 
     def prepare_retrieval
@@ -110,8 +110,7 @@ module ForemanRemoteExecutionCore
       | #!/bin/sh
       | exit_code=$(cat "#{@exit_code_path}")
       | url="#{@callback_host}/dynflow/tasks/#{@task_id}/done"
-      | output="$(cat "#{@output_path}" | base64 --wrap 0)"
-      | json="{\\\"step_id\\\": #{@step_id}, \\\"output\\\": \\\"$output\\\", \\\"exit_code\\\": $exit_code }"
+      | json="{ \\\"step_id\\\": #{@step_id} }"
       | if which curl >/dev/null; then
       |   curl -X POST -d "$json" -u "#{@task_id}:#{@otp}" "$url"
       | else
@@ -129,10 +128,6 @@ module ForemanRemoteExecutionCore
         @session.close
         @session = nil
       end
-    end
-
-    def try_obtain_otp!
-      @otp = SmartProxyDynflowCore::OtpManager.get_otp(@uuid) if defined? SmartProxyDynflowCore
     end
   end
 end
