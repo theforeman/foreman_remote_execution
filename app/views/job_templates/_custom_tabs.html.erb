@@ -15,7 +15,7 @@
 
   <%= select_f f, :provider_type, providers_options, :first, :last, :disabled => @template.locked? %>
 
-  <%= number_f f, :timeout_interval, :disabled => @template.locked?, :label => _('Timeout interval') %>
+  <%= number_f f, :execution_timeout_interval, :disabled => @template.locked?, :label => _('Timeout to kill') %>
 
   <div class="children_fields">
     <%= new_child_fields_template(f, :template_inputs, { :partial => "template_inputs/form" }) %>
