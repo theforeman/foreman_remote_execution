@@ -37,9 +37,34 @@ module ForemanRemoteExecution
       action
     end
 
-    it 'resolves the hosts on targeting in plan phase' do
-      planned
-      targeting.hosts.must_include(host)
+    context 'targeting resolving' do
+      let(:delayed) do
+        action.delay({ :start_at => Time.now.getlocal }, job_invocation)
+        action
+      end
+
+      it 'resolves dynamic targeting in plan' do
+        targeting.targeting_type = 'dynamic_query'
+        refute targeting.resolved?
+        delayed
+        refute targeting.resolved?
+        planned
+        targeting.hosts.must_include(host)
+      end
+
+      it 'resolves the hosts on static targeting in delay' do
+        refute targeting.resolved?
+        delayed
+        targeting.hosts.must_include(host)
+        # Verify Targeting#resolve_hosts! won't be hit again
+        targeting.expects(:resolve_hosts!).never
+        planned
+      end
+
+      it 'resolves the hosts on static targeting in plan phase if not resolved yet' do
+        planned
+        targeting.hosts.must_include(host)
+      end
     end
 
     it 'triggers the RunHostJob actions on the resolved hosts in run phase' do
