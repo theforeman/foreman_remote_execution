@@ -47,12 +47,6 @@ module ForemanRemoteExecutionCore
       destroy_session
     end
 
-    def external_event(event)
-      publish_data(event.data['output'], 'stdout')
-      publish_exit_status(event.data['exit_code'].to_i)
-      super
-    end
-
     def close
       super
       ForemanTasksCore::OtpManager.drop_otp(@uuid, @otp) if @otp
