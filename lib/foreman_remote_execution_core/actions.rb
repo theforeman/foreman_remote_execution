@@ -10,6 +10,10 @@ module ForemanRemoteExecutionCore
         }
         ForemanRemoteExecutionCore.runner_class.new(input.merge additional_options)
       end
+
+      def runner_dispatcher
+        ForemanRemoteExecutionCore::Dispatcher.instance
+      end
     end
   end
 end

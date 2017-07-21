@@ -9,10 +9,6 @@ module ForemanRemoteExecutionCore
       @otp = ForemanTasksCore::OtpManager.generate_otp(@uuid)
     end
 
-    def refresh_interval
-      ForemanRemoteExecutionCore.settings[:runner_refresh_interval].to_i
-    end
-
     def prepare_start
       super
       basedir         = File.dirname @remote_script
