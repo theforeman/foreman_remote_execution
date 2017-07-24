@@ -4,9 +4,15 @@ RemoteExecutionProvider.register(:Mcollective, OpenStruct)
 
 class JobInvocationComposerTest < ActiveSupport::TestCase
   before do
-    setup_user('view', 'job_templates', 'name ~ trying*')
-    setup_user('view', 'bookmarks')
-    setup_user('view', 'hosts')
+    setup_user('view',   'job_templates', 'name ~ trying*')
+    setup_user('create', 'job_templates', 'name ~ trying*')
+    setup_user('view',   'job_invocations')
+    setup_user('create', 'job_invocations')
+    setup_user('view',   'bookmarks')
+    setup_user('create', 'bookmarks')
+    setup_user('edit',   'bookmarks')
+    setup_user('view',   'hosts')
+    setup_user('create', 'hosts')
   end
 
   let(:trying_job_template_1) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
@@ -500,8 +506,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
             }
           }.with_indifferent_access
         end
-        let(:existing) { composer.job_invocation.reload }
-        let(:new_job_invocation) { JobInvocation.new }
+        let(:existing) { composer.job_invocation }
         let(:new_composer) { JobInvocationComposer.from_job_invocation(composer.job_invocation) }
 
         before do
@@ -590,7 +595,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       it 'finds the inputs by name' do
         assert composer.save!
-        assert_equal 1, composer.pattern_template_invocations.first.input_values.count
+        assert_equal 1, composer.pattern_template_invocations.first.input_values.collect.count
       end
     end
 
