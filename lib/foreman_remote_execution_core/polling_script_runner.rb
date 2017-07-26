@@ -99,7 +99,7 @@ module ForemanRemoteExecutionCore
       <<-SCRIPT.gsub(/^ +\| /, '')
       | #!/bin/sh
       | exit_code=$(cat "#{@exit_code_path}")
-      | url="#{@callback_host}/tasks/#{@task_id}/done"
+      | url="#{@callback_host}/dynflow/tasks/#{@task_id}/done"
       | json="{ \\\"step_id\\\": #{@step_id} }"
       | if which curl >/dev/null; then
       |   curl -X POST -d "$json" -u "#{@task_id}:#{@otp}" "$url"
