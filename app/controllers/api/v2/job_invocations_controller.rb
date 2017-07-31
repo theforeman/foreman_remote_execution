@@ -97,7 +97,7 @@ module Api
       end
 
       def find_host
-        @host = Host::Base.authorized(:view_hosts).find(params['host_id'])
+        @host = Host.authorized(:view_hosts).find(params['host_id'])
       rescue ActiveRecord::RecordNotFound
         not_found({ :error => { :message => (_("Host with id '%{id}' was not found") % { :id => params['host_id'] }) } })
       end
