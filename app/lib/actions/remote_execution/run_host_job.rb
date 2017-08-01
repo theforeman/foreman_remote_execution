@@ -90,20 +90,28 @@ module Actions
         super << self
       end
 
+      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def fill_continuous_output(continuous_output)
-        fill_planning_errors_to_continuous_output(continuous_output) unless exit_status
+        final_timestamp = (continuous_output.last_timestamp || task.ended_at).to_f + 1
+
+        if task.state == 'stopped' && task.result == 'cancelled'
+          continuous_output.add_output(_('Job cancelled by user'), 'debug', final_timestamp)
+        else
+          fill_planning_errors_to_continuous_output(continuous_output) unless exit_status
+        end
+
         delegated_output.fetch('result', []).each do |raw_output|
           continuous_output.add_raw_output(raw_output)
         end
-        final_timestamp = (continuous_output.last_timestamp || task.ended_at).to_f + 1
         if exit_status
           continuous_output.add_output(_('Exit status: %s') % exit_status, 'stdout', final_timestamp)
         elsif run_step && run_step.error
-          continuous_output.add_ouput(_('Job finished with error') + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', final_timestamp)
+          continuous_output.add_output(_('Job finished with error') + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', final_timestamp)
         end
       rescue => e
         continuous_output.add_exception(_('Error loading data from proxy'), e)
       end
+      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       def exit_status
         delegated_output[:exit_status]
