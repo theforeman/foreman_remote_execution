@@ -3,6 +3,7 @@ module Actions
     class RunHostsJob < Actions::ActionWithSubPlans
 
       include Dynflow::Action::WithBulkSubPlans
+      include Dynflow::Action::WithPollingSubPlans
 
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
