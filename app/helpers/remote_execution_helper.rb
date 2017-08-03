@@ -122,6 +122,11 @@ module RemoteExecutionHelper
                          :title => _('Try to cancel the job'),
                          :disabled => !task.cancellable?,
                          :method => :post)
+      buttons << link_to(_('Abort Job'), abort_foreman_tasks_task_path(task),
+                         :class => 'btn btn-danger',
+                         :title => _('Try to abort the job without waiting for the results from the remote hosts'),
+                         :disabled => !task.cancellable?,
+                         :method => :post)
     end
     return buttons
   end
@@ -138,6 +143,11 @@ module RemoteExecutionHelper
       buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
                          :class => 'btn btn-danger',
                          :title => _('Try to cancel the job on a host'),
+                         :disabled => !task.cancellable?,
+                         :method => :post)
+      buttons << link_to(_('Abort Job'), abort_foreman_tasks_task_path(task),
+                         :class => 'btn btn-danger',
+                         :title => _('Try to abort the job on a host without waiting for its result'),
                          :disabled => !task.cancellable?,
                          :method => :post)
     end
