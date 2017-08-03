@@ -92,16 +92,16 @@ module Actions
 
       # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def fill_continuous_output(continuous_output)
+        delegated_output.fetch('result', []).each do |raw_output|
+          continuous_output.add_raw_output(raw_output)
+        end
+
         final_timestamp = (continuous_output.last_timestamp || task.ended_at).to_f + 1
 
         if task.state == 'stopped' && task.result == 'cancelled'
           continuous_output.add_output(_('Job cancelled by user'), 'debug', final_timestamp)
         else
           fill_planning_errors_to_continuous_output(continuous_output) unless exit_status
-        end
-
-        delegated_output.fetch('result', []).each do |raw_output|
-          continuous_output.add_raw_output(raw_output)
         end
         if exit_status
           continuous_output.add_output(_('Exit status: %s') % exit_status, 'stdout', final_timestamp)
