@@ -127,6 +127,19 @@ class JobInvocationTest < ActiveSupport::TestCase
       specify { job_invocation.progress_report.must_equal progress_report_without_sub_tasks }
     end
 
+    context 'with cancelled task' do
+      before do
+        task.state = 'stopped'
+        task.result = 'error'
+      end
+
+      it 'calculates the progress correctly' do
+        job_invocation.targeting.stubs(:resolved?).returns(true)
+        task.expects(:sub_tasks_counts).never
+        job_invocation.progress_report.must_equal progress_report_without_sub_tasks
+      end
+    end
+
     context 'with succeeded task' do
       before do
         task.state = 'stopped'
