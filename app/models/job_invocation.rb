@@ -183,7 +183,7 @@ class JobInvocation < ActiveRecord::Base
   def progress_report
     map = TemplateInvocation::TaskResultMap
     all_keys = (map.results | map.statuses | [:progress, :total])
-    if queued? || !targeting.resolved?
+    if queued? || (task && task.started_at.nil?) || !targeting.resolved?
       all_keys.reduce({}) do |acc, key|
         acc.merge(key => 0)
       end
