@@ -1,6 +1,8 @@
 module ForemanRemoteExecutionCore
   class PollingScriptRunner < ScriptRunner
 
+    DEFAULT_REFRESH_INTERVAL = 60
+
     def initialize(options = {})
       super(options)
       @callback_host = options[:callback_host]

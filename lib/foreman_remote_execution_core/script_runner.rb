@@ -11,6 +11,7 @@ module ForemanRemoteExecutionCore
     attr_reader :execution_timeout_interval
 
     EXPECTED_POWER_ACTION_MESSAGES = ['restart host', 'shutdown host'].freeze
+    DEFAULT_REFRESH_INTERVAL = 1
 
     def initialize(options)
       super()

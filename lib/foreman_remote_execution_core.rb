@@ -9,7 +9,7 @@ module ForemanRemoteExecutionCore
                     :local_working_dir       => '/var/tmp',
                     :kerberos_auth           => false,
                     :async_ssh               => false,
-                    :runner_refresh_interval => 60)
+                    :runner_refresh_interval => nil)
 
   def self.simulate?
     %w(yes true 1).include? ENV.fetch('REX_SIMULATE', '').downcase
