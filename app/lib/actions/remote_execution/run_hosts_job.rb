@@ -10,6 +10,7 @@ module Actions
       def delay(delay_options, job_invocation)
         task.add_missing_task_groups(job_invocation.task_group)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.static? && !job_invocation.targeting.resolved?
+        input.update :job_invocation => job_invocation.to_action_input
         super delay_options, job_invocation
       end
 
@@ -62,7 +63,7 @@ module Actions
       end
 
       def humanized_input
-        input[:job_invocation][:description]
+        input.fetch(:job_invocation, {}).fetch(:description, '')
       end
 
       def humanized_name
