@@ -40,17 +40,17 @@ module Actions
         hosts.offset(from).limit(size)
       end
 
-      def total_count
-        hosts.count
+      def total_count(job_invocation = nil)
+        hosts(job_invocation).count
       end
 
-      def hosts
-        JobInvocation.find(input[:job_invocation_id]).targeting.hosts.order(:name, :id)
+      def hosts(job_invocation = nil)
+        (job_invocation || JobInvocation.find(input[:job_invocation_id])).targeting.hosts.order(:name, :id)
       end
 
       def set_up_concurrency_control(invocation)
         limit_concurrency_level invocation.concurrency_level unless invocation.concurrency_level.nil?
-        distribute_over_time invocation.time_span unless invocation.time_span.nil?
+        distribute_over_time(invocation.time_span, total_count(invocation)) unless invocation.time_span.nil?
       end
 
       def rescue_strategy
