@@ -186,7 +186,7 @@ class JobInvocationComposer
 
     def targeting_params
       if @host_ids
-        { :search_query => Targeting.build_query_from_hosts(@host_ids) }
+        { :search_query => Targeting.build_query_from_hosts(@host_ids), :targeting_type => job_invocation.targeting.targeting_type }
       else
         job_invocation.targeting.attributes.slice('search_query', 'bookmark_id', 'user_id', 'targeting_type')
       end
