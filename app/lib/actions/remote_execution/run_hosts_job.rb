@@ -14,11 +14,11 @@ module Actions
       end
 
       def plan(job_invocation)
-        set_up_concurrency_control job_invocation
         job_invocation.task_group.save! if job_invocation.task_group.try(:new_record?)
         task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
         action_subject(job_invocation)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !job_invocation.targeting.resolved?
+        set_up_concurrency_control job_invocation
         input.update(:job_category => job_invocation.job_category)
         plan_self(:job_invocation_id => job_invocation.id)
       end
