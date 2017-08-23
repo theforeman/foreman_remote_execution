@@ -1,5 +1,6 @@
 class JobInvocation < ActiveRecord::Base
   include Authorizable
+  audited :except => [ :task_id, :targeting_id, :task_group_id, :triggering_id ]
 
   include ForemanRemoteExecution::ErrorsFlattener
   FLATTENED_ERRORS_MAPPING = {
@@ -83,6 +84,10 @@ class JobInvocation < ActiveRecord::Base
 
   def status_label
     HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.new(task).status_label
+  end
+
+  def to_label
+    description
   end
 
   # returns progress in percents
