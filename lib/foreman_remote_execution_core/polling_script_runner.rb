@@ -8,7 +8,7 @@ module ForemanRemoteExecutionCore
       @callback_host = options[:callback_host]
       @task_id = options[:uuid]
       @step_id = options[:step_id]
-      @otp = ForemanTasksCore::OtpManager.generate_otp(@uuid)
+      @otp = ForemanTasksCore::OtpManager.generate_otp(@task_id)
     end
 
     def prepare_start
@@ -51,7 +51,7 @@ module ForemanRemoteExecutionCore
 
     def close
       super
-      ForemanTasksCore::OtpManager.drop_otp(@uuid, @otp) if @otp
+      ForemanTasksCore::OtpManager.drop_otp(@task_id, @otp) if @otp
     end
 
     def prepare_retrieval
