@@ -11,6 +11,7 @@ module ForemanRemoteExecutionCore
     attr_reader :execution_timeout_interval
 
     EXPECTED_POWER_ACTION_MESSAGES = ['restart host', 'shutdown host'].freeze
+    DEFAULT_REFRESH_INTERVAL = 1
 
     def initialize(options)
       super()
@@ -30,23 +31,33 @@ module ForemanRemoteExecutionCore
     end
 
     def start
-      remote_script = cp_script_to_remote
-      output_path = File.join(File.dirname(remote_script), 'output')
-      exit_code_path = File.join(File.dirname(remote_script), 'exit_code')
-
-      # pipe the output to tee while capturing the exit code in a file
-      script = <<-SCRIPT.gsub(/^\s+\| /, '')
-      | sh <<WRAPPER
-      | (#{su_prefix}#{remote_script} < /dev/null; echo \\$?>#{exit_code_path}) | /usr/bin/tee #{output_path}
-      | exit \\$(cat #{exit_code_path})
-      | WRAPPER
-      SCRIPT
-
+      prepare_start
+      script = control_script
       logger.debug("executing script:\n#{script.lines.map { |line| "  | #{line}" }.join}")
-      run_async(script)
+      trigger(script)
     rescue => e
       logger.error("error while initalizing command #{e.class} #{e.message}:\n #{e.backtrace.join("\n")}")
       publish_exception('Error initializing command', e)
+    end
+
+    def trigger(*args)
+      run_async(*args)
+    end
+
+    def prepare_start
+      @remote_script = cp_script_to_remote
+      @output_path = File.join(File.dirname(@remote_script), 'output')
+      @exit_code_path = File.join(File.dirname(@remote_script), 'exit_code')
+    end
+
+    def control_script
+      # pipe the output to tee while capturing the exit code in a file
+      <<-SCRIPT.gsub(/^\s+\| /, '')
+      | sh <<WRAPPER
+      | (#{su_prefix}#{@remote_script} < /dev/null; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
+      | exit \\$(cat #{@exit_code_path})
+      | WRAPPER
+      SCRIPT
     end
 
     def refresh
@@ -246,8 +257,8 @@ module ForemanRemoteExecutionCore
       return path
     end
 
-    def cp_script_to_remote
-      upload_data(sanitize_script(@script), remote_command_file('script'), 555)
+    def cp_script_to_remote(script = @script, name = 'script')
+      upload_data(sanitize_script(script), remote_command_file(name), 555)
     end
 
     def upload_data(data, path, permissions = 555)
