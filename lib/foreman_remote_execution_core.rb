@@ -9,6 +9,7 @@ module ForemanRemoteExecutionCore
                     :local_working_dir       => '/var/tmp',
                     :kerberos_auth           => false,
                     :async_ssh               => false,
+                    # When set to nil, makes REX use the runner's default interval
                     :runner_refresh_interval => nil)
 
   def self.simulate?
