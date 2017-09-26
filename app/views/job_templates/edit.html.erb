@@ -1,5 +1,9 @@
 <%= javascript 'lookup_keys' %>
 <%= javascript 'template_input' %>
+<%= # TODO: on foreman_version_bump
+    # rescue in case running against a Foreman version without
+    # https://github.com/theforeman/foreman/pull/4876
+    javascript 'templates' rescue '' %>
 
 <% title _("Edit Job Template") %>
 
