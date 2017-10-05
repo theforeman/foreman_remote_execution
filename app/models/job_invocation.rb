@@ -22,7 +22,7 @@ class JobInvocation < ActiveRecord::Base
   scoped_search :on => :description # FIXME No auto complete because of https://github.com/wvanbergen/scoped_search/issues/138
 
   has_many :template_invocations_hosts, :through => :template_invocations, :source => :host
-  scoped_search :in => :template_invocations_hosts, :on => :name, :rename => 'host', :complete_value => true
+  scoped_search :relation => :template_invocations_hosts, :on => :name, :rename => 'host', :complete_value => true
 
   delegate :bookmark, :resolved?, :to => :targeting, :allow_nil => true
 
@@ -38,10 +38,10 @@ class JobInvocation < ActiveRecord::Base
                                        :class_name => 'ForemanTasks::Task',
                                        :source => 'run_host_job_task'
 
-  scoped_search :in => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
-  scoped_search :in => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
-  scoped_search :in => :task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
-  scoped_search :in => :task, :on => :state, :rename => 'status', :ext_method => :search_by_status,
+  scoped_search :relation => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
+  scoped_search :relation => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
+  scoped_search :relation => :task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
+  scoped_search :relation => :task, :on => :state, :rename => 'status', :ext_method => :search_by_status,
                 :only_explicit => true, :complete_value => Hash[HostStatus::ExecutionStatus::STATUS_NAMES.values.map { |v| [v, v] }]
 
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
@@ -49,9 +49,9 @@ class JobInvocation < ActiveRecord::Base
 
   scope :with_task, -> { references(:task) }
 
-  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
+  scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
 
-  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring',
+  scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring',
                 :ext_method => :search_by_recurring_logic, :only_explicit => true,
                 :complete_value => { :true => true, :false => false }
 
