@@ -16,7 +16,7 @@ module ForemanRemoteExecution
         scoped_search :relation => :template_invocations, :on => :job_invocation_id,
                       :rename => 'job_invocation.id', :only_explicit => true, :ext_method => :search_by_job_invocation
 
-        scoped_search :in => :execution_status_object, :on => :status, :rename => :execution_status,
+        scoped_search :relation => :execution_status_object, :on => :status, :rename => :execution_status,
                       :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
 
         def search_by_job_invocation(key, operator, value)

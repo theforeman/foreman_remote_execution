@@ -20,10 +20,10 @@ class TemplateInvocation < ActiveRecord::Base
   validate :provides_required_input_values
   before_validation :set_effective_user
 
-  scoped_search :in => :host, :on => :name, :rename => 'host.name', :complete_value => true
-  scoped_search :in => :host_group, :on => :name, :rename => 'host_group.name', :complete_value => true
-  scoped_search :in => :template, :on => :job_category, :complete_value => true
-  scoped_search :in => :template, :on => :name, :complete_value => true
+  scoped_search :relation => :host, :on => :name, :rename => 'host.name', :complete_value => true
+  scoped_search :relation => :host_group, :on => :name, :rename => 'host_group.name', :complete_value => true
+  scoped_search :relation => :template, :on => :job_category, :complete_value => true
+  scoped_search :relation => :template, :on => :name, :complete_value => true
 
   class TaskResultMap
     MAP = {
