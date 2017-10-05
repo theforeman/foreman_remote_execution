@@ -1,47 +1,41 @@
 module ForemanRemoteExecution
   module HostExtensions
-    extend ActiveSupport::Concern
-
     # rubocop:disable Metrics/BlockLength
-    included do
-      alias_method_chain :build_required_interfaces, :remote_execution
-      alias_method_chain :reload, :remote_execution
-      alias_method_chain :becomes, :remote_execution
-      alias_method_chain :host_params, :remote_execution
+    def self.prepended(base)
+      base.instance_eval do
+        has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
+        has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
+        has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
+        has_many :run_host_job_tasks, :through => :template_invocations
 
-      has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
-      has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
-      has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
-      has_many :run_host_job_tasks, :through => :template_invocations
+        scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_invocation.result',
+                      :ext_method => :search_by_job_invocation,
+                      :only_explicit => true,
+                      :complete_value => TemplateInvocation::TaskResultMap::REVERSE_MAP
 
-      scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_invocation.result',
-                    :ext_method => :search_by_job_invocation,
-                    :only_explicit => true,
-                    :complete_value => TemplateInvocation::TaskResultMap::REVERSE_MAP
+        scoped_search :relation => :template_invocations, :on => :job_invocation_id,
+                      :rename => 'job_invocation.id', :only_explicit => true, :ext_method => :search_by_job_invocation
 
-      scoped_search :relation => :template_invocations, :on => :job_invocation_id,
-                    :rename => 'job_invocation.id', :only_explicit => true, :ext_method => :search_by_job_invocation
+        scoped_search :in => :execution_status_object, :on => :status, :rename => :execution_status,
+                      :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
 
-      scoped_search :in => :execution_status_object, :on => :status, :rename => :execution_status,
-                    :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
+        def search_by_job_invocation(key, operator, value)
+          if key == 'job_invocation.result'
+            operator = operator == '=' ? 'IN' : 'NOT IN'
+            value = TemplateInvocation::TaskResultMap.status_to_task_result(value)
+          end
 
-      def self.search_by_job_invocation(key, operator, value)
-        if key == 'job_invocation.result'
-          operator = operator == '=' ? 'IN' : 'NOT IN'
-          value = TemplateInvocation::TaskResultMap.status_to_task_result(value)
+          mapping = {
+            'job_invocation.id'     => %(#{TemplateInvocation.table_name}.job_invocation_id #{operator} ?),
+            'job_invocation.result' => %(#{ForemanTasks::Task.table_name}.result #{operator} (?))
+          }
+          {
+            :conditions => sanitize_sql_for_conditions([mapping[key], value_to_sql(operator, value)]),
+            :joins => { :template_invocations => [:run_host_job_task] }
+          }
         end
-
-        mapping = {
-          'job_invocation.id'     => %(#{TemplateInvocation.table_name}.job_invocation_id #{operator} ?),
-          'job_invocation.result' => %(#{ForemanTasks::Task.table_name}.result #{operator} (?))
-        }
-        {
-          :conditions => sanitize_sql_for_conditions([mapping[key], value_to_sql(operator, value)]),
-          :joins => { :template_invocations => [:run_host_job_task] }
-        }
       end
     end
-    # rubocop:enable Metrics/BlockLength
 
     def execution_status(options = {})
       @execution_status ||= get_status(HostStatus::ExecutionStatus).to_status(options)
@@ -51,8 +45,8 @@ module ForemanRemoteExecution
       @execution_status_label ||= get_status(HostStatus::ExecutionStatus).to_label(options)
     end
 
-    def host_params_with_remote_execution
-      params = host_params_without_remote_execution
+    def host_params
+      params = super
       keys = remote_execution_ssh_keys
       params['remote_execution_ssh_keys'] = keys if keys.present?
       [:remote_execution_ssh_user, :remote_execution_effective_user_method,
@@ -94,21 +88,21 @@ module ForemanRemoteExecution
       @execution_interface = nil
     end
 
-    def becomes_with_remote_execution(*args)
-      became = becomes_without_remote_execution(*args)
+    def becomes(*args)
+      became = super(*args)
       became.drop_execution_interface_cache if became.respond_to? :drop_execution_interface_cache
       became
     end
 
-    def reload_with_remote_execution(*args)
+    def reload(*args)
       drop_execution_interface_cache
-      reload_without_remote_execution(*args)
+      super(*args)
     end
 
     private
 
-    def build_required_interfaces_with_remote_execution(attrs = {})
-      build_required_interfaces_without_remote_execution(attrs)
+    def build_required_interfaces(attrs = {})
+      super(attrs)
       self.primary_interface.execution = true if self.execution_interface.nil?
     end
   end
