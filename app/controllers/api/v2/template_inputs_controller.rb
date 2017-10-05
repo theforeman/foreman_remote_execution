@@ -5,9 +5,9 @@ module Api
       include ::Foreman::Renderer
       include ::Foreman::Controller::Parameters::TemplateInput
 
-      before_filter :find_required_nested_object
-      before_filter :find_resource, :only => %w{show update destroy}
-      before_filter :normalize_options, :only => %w{create update}
+      before_action :find_required_nested_object
+      before_action :find_resource, :only => %w{show update destroy}
+      before_action :normalize_options, :only => %w{create update}
 
       api :GET, '/templates/:template_id/template_inputs', N_('List template inputs')
       param :template_id, :identifier, :required => true

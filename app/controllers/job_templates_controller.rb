@@ -20,7 +20,7 @@ class JobTemplatesController < ::TemplatesController
     @template.template = params[:template]
     renderer = InputTemplateRenderer.new(@template, host)
     if (output = renderer.preview)
-      render :text => output
+      render :plain => output
     else
       render :status => 406, :text => _('Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it.' % {:error => renderer.error_message})
     end

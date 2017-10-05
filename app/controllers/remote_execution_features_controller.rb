@@ -1,5 +1,5 @@
 class RemoteExecutionFeaturesController < ::ApplicationController
-  before_filter :find_resource, :only => [:show, :update]
+  before_action :find_resource, :only => [:show, :update]
   include ::Foreman::Controller::Parameters::RemoteExecutionFeature
 
   def index

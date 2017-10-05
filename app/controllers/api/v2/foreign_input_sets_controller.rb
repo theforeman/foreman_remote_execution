@@ -5,8 +5,8 @@ module Api
       include ::Foreman::Renderer
       include ::Foreman::Controller::Parameters::ForeignInputSet
 
-      before_filter :find_required_nested_object
-      before_filter :find_resource, :only => %w{show update destroy}
+      before_action :find_required_nested_object
+      before_action :find_resource, :only => %w{show update destroy}
 
       api :GET, '/templates/:template_id/foreign_input_sets', N_('List foreign input sets')
       param :template_id, :identifier, :required => true

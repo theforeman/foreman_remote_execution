@@ -18,10 +18,6 @@ Rails/HttpPositionalArguments:
 Style/Documentation:
   Enabled: false
 
-# Force before_filter until upgrade to Rails 4
-Rails/ActionFilter:
-  EnforcedStyle: filter
-
 Metrics/MethodLength:
   Max: 40
 
