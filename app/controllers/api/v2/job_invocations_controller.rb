@@ -5,10 +5,10 @@ module Api
       include ::Api::TaxonomyScope
       include ::Foreman::Renderer
 
-      before_filter :find_optional_nested_object
-      before_filter :find_host, :only => %w{output}
-      before_filter :find_resource, :only => %w{show update destroy clone}
-      before_filter :validate_template, :only => :create
+      before_action :find_optional_nested_object
+      before_action :find_host, :only => %w{output}
+      before_action :find_resource, :only => %w{show update destroy clone}
+      before_action :validate_template, :only => :create
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 

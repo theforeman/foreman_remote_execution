@@ -7,10 +7,10 @@ module Api
       include ::Foreman::Controller::ProvisioningTemplates
       include ::Foreman::Controller::Parameters::JobTemplate
 
-      before_filter :find_optional_nested_object
-      before_filter :find_resource, :only => %w{show update destroy clone export}
+      before_action :find_optional_nested_object
+      before_action :find_resource, :only => %w{show update destroy clone export}
 
-      before_filter :handle_template_upload, :only => [:create, :update]
+      before_action :handle_template_upload, :only => [:create, :update]
 
       wrap_parameters JobTemplate, :include => (JobTemplate.attribute_names + [:ssh])
 

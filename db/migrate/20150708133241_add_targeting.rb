@@ -5,7 +5,7 @@ class AddTargeting < ActiveRecord::Migration
       t.references :bookmark
       t.references :user
       t.string :targeting_type, :null => false, :limit => 255
-      t.timestamps
+      t.timestamps :null => true
     end
 
     add_index :targetings, [:bookmark_id], :name => 'targetings_bookmark_id'
