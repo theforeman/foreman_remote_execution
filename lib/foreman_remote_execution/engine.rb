@@ -146,7 +146,7 @@ module ForemanRemoteExecution
 
       User.send(:include, ForemanRemoteExecution::UserExtensions)
 
-      Host::Managed.send(:include, ForemanRemoteExecution::HostExtensions)
+      Host::Managed.send(:prepend, ForemanRemoteExecution::HostExtensions)
       Host::Managed.send(:include, ForemanTasks::Concerns::HostActionSubject)
 
       (Nic::Base.descendants + [Nic::Base]).each do |klass|
@@ -154,10 +154,10 @@ module ForemanRemoteExecution
       end
 
       Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
-      HostsHelper.send(:include, ForemanRemoteExecution::HostsHelperExtensions)
-      ProvisioningTemplatesHelper.send(:include, ForemanRemoteExecution::JobTemplatesExtensions)
+      HostsHelper.send(:prepend, ForemanRemoteExecution::HostsHelperExtensions)
+      ProvisioningTemplatesHelper.send(:prepend, ForemanRemoteExecution::JobTemplatesExtensions)
 
-      SmartProxy.send(:include, ForemanRemoteExecution::SmartProxyExtensions)
+      SmartProxy.send(:prepend, ForemanRemoteExecution::SmartProxyExtensions)
       Subnet.send(:include, ForemanRemoteExecution::SubnetExtensions)
 
       # We need to explicitly force to load the Task model due to Rails loader

@@ -1,11 +1,5 @@
 module ForemanRemoteExecution
   module SmartProxyExtensions
-    extend ActiveSupport::Concern
-
-    included do
-      alias_method_chain :refresh, :remote_execution
-    end
-
     def pubkey
       self[:pubkey] || update_pubkey
     end
@@ -17,8 +11,8 @@ module ForemanRemoteExecution
       key
     end
 
-    def refresh_with_remote_execution
-      errors = refresh_without_remote_execution
+    def refresh
+      errors = super
       update_pubkey
       errors
     end
