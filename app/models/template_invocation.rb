@@ -67,6 +67,10 @@ class TemplateInvocation < ActiveRecord::Base
     end
   end
 
+  def template
+    JobTemplate.unscoped { super }
+  end
+
   def to_action_input
     { :id => id, :name => template.name }
   end
