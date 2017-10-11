@@ -58,6 +58,18 @@ class JobInvocationTest < ActiveSupport::TestCase
     it { refute job_invocation.reload.pattern_template_invocations.empty? }
     it { refute job_invocation.reload.pattern_template_invocations.first.input_values.empty? }
 
+    it "can look up templates not belonging to user's organization" do
+      organization = job_invocation.pattern_template_invocations.first.template.organizations.first
+      Organization.current = organization
+      job_invocation.pattern_template_invocations.first.template.organizations = []
+      # The following line raises UndefinedMethod if the user can't look up the template
+      job_invocation.pattern_template_invocations.first.template.name
+
+      # Restore things to original state
+      job_invocation.pattern_template_invocations.first.template.organizations = [organization]
+      Organization.current = nil
+    end
+
     it 'validates required inputs have values' do
       assert job_invocation.valid?
       @input_value.destroy
