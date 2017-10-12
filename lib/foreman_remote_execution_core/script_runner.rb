@@ -109,7 +109,7 @@ module ForemanRemoteExecutionCore
 
     def with_disconnect_handling
       yield
-    rescue Net::SSH::Disconnect => e
+    rescue IOError, Net::SSH::Disconnect => e
       @session.shutdown!
       check_expecting_disconnect
       if @expecting_disconnect
