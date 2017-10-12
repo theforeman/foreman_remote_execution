@@ -12,6 +12,7 @@ module ForemanRemoteExecutionCore
 
     EXPECTED_POWER_ACTION_MESSAGES = ['restart host', 'shutdown host'].freeze
     DEFAULT_REFRESH_INTERVAL = 1
+    MAX_PROCESS_RETRIES = 4
 
     def initialize(options)
       super()
