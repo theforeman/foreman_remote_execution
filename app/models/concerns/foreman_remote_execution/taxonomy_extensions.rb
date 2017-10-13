@@ -10,7 +10,8 @@ module ForemanRemoteExecution
       # the default templates, remove after it's fixed in upstream
       # (https://github.com/theforeman/foreman/pull/4890) and gets
       # into a 1.17 release
-      skip_callback :create, :after, :assign_default_templates, :raise => false
+      skip_options = Rails::VERSION::MAJOR < 5 ? {} : { :raise => false }
+      skip_callback :create, :after, :assign_default_templates, skip_options
       before_create :assign_default_templates
     end
   end
