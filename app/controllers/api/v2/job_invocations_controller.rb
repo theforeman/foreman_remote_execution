@@ -2,7 +2,6 @@ module Api
   module V2
     class JobInvocationsController < ::Api::V2::BaseController
       include ::Api::Version2
-      include ::Api::TaxonomyScope
       include ::Foreman::Renderer
 
       before_action :find_optional_nested_object
