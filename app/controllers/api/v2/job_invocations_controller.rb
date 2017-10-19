@@ -94,7 +94,7 @@ module Api
         end
       end
 
-      api :POST, '/job_invocations/:id/cancel'
+      api :POST, '/job_invocations/:id/cancel', N_('Cancel job invocation')
       param :id, :identifier, :required => true
       param :force, :bool
       def cancel
