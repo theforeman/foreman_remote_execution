@@ -214,6 +214,11 @@ class JobInvocation < ApplicationRecord
     end
   end
 
+  def cancel(force = false)
+    method = force ? :abort : :cancel
+    task.public_send(method)
+  end
+
   private
 
   def failed_template_invocations

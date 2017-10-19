@@ -42,6 +42,9 @@ Rails.application.routes.draw do
         resources :hosts, :only => :none do
           get '/', :to => 'job_invocations#output'
         end
+        member do
+          post 'cancel'
+        end
       end
 
       resources :job_templates, :except => [:new, :edit] do
