@@ -72,6 +72,7 @@ module ForemanRemoteExecution
           :view_smart_proxies
         ].freeze
         MANAGER_PERMISSIONS = USER_PERMISSIONS + [
+          :edit_job_invocations,
           :destroy_job_templates,
           :edit_job_templates,
           :create_job_templates,

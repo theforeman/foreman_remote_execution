@@ -110,6 +110,18 @@ module Api
         assert_response :success
       end
 
+      test 'should abort a job' do
+        @invocation.task.expects(:cancellable?).returns(true)
+        @invocation.task.expects(:abort).returns(true)
+        JobInvocation.expects(:from_param).with(@invocation.id.to_s).returns(@invocation)
+        post :cancel, :id => @invocation.id, :force => true
+        result = ActiveSupport::JSON.decode(@response.body)
+        assert_equal result['cancelled'], true
+        assert_equal result['id'], @invocation.id
+
+        assert_response :success
+      end
+
       test 'should error when trying to cancel a stopped job' do
         @invocation.task.expects(:cancellable?).returns(false)
         JobInvocation.expects(:from_param).with(@invocation.id.to_s).returns(@invocation)
@@ -121,9 +133,13 @@ module Api
         user = FactoryGirl.build(:user)
         user.roles << Role.find_by(:name => 'Tasks Reader')
         user.roles << Role.find_by(:name => 'Remote Execution Manager')
+        user.save!
+
+        admin = User.current
         User.current = user
         post :cancel, :id => @invocation.id
         assert_response 403
+        User.current = admin
       end
     end
   end

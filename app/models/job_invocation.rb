@@ -216,7 +216,7 @@ class JobInvocation < ApplicationRecord
 
   def cancel(force = false)
     method = force ? :abort : :cancel
-    task.public_send(method)
+    task.send(method)
   end
 
   private
