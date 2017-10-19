@@ -119,7 +119,7 @@ module Api
         when 'output'
           :view
         when 'cancel'
-          :view
+          :edit
         else
           super
         end
