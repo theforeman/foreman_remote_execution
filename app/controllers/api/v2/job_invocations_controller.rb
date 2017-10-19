@@ -6,7 +6,7 @@ module Api
 
       before_action :find_optional_nested_object
       before_action :find_host, :only => %w{output}
-      before_action :find_resource, :only => %w{show update destroy clone cancel}
+      before_action :find_resource, :only => %w{show update destroy clone cancel rerun}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -107,6 +107,15 @@ module Api
         end
       end
 
+      api :POST, '/job_invocations/:id/rerun', N_('Rerun job on failed hosts')
+      param :id, :identifier, :required => true
+      def rerun
+        composer = JobInvocationComposer.from_job_invocation(@job_invocation, params)
+        composer.trigger!
+        @job_invocation = composer.job_invocation
+        process_response @job_invocation
+      end
+
       private
 
       def action_permission
@@ -115,6 +124,8 @@ module Api
           :view
         when 'cancel'
           :cancel
+        when 'rerun'
+          :create
         else
           super
         end
