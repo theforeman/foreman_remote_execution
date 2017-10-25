@@ -7,6 +7,7 @@ module Actions
 
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
+      middleware.use Actions::Middleware::HidePassword
 
       def delay(delay_options, job_invocation)
         task.add_missing_task_groups(job_invocation.task_group)
@@ -38,6 +39,10 @@ module Actions
           template_invocation.host_id = host.id
           trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector)
         end
+      end
+
+      def finalize
+        [:password, :key_passphrase].each { |key| input.delete key }
       end
 
       def batch(from, size)

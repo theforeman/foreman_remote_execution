@@ -5,6 +5,7 @@ module Actions
       include ::Actions::Helpers::WithDelegatedAction
 
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
+      middleware.use Actions::Middleware::HidePassword
 
       def resource_locks
         :link
