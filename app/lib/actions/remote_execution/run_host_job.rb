@@ -48,11 +48,15 @@ module Actions
         raise _('Failed rendering template: %s') % renderer.error_message unless script
 
         provider = template_invocation.template.provider
-        hostname = provider.find_ip_or_hostname(host)
+
+        additional_options = { :hostname => provider.find_ip_or_hostname(host),
+                               :script => script,
+                               :execution_timeout_interval => job_invocation.execution_timeout_interval,
+                               :ssh_password => job_invocation.password,
+                               :key_passphrase => job_invocation.key_passphrase }
         action_options = provider.proxy_command_options(template_invocation, host)
-                                 .merge(:hostname => hostname, :script => script,
-                                        :execution_timeout_interval => job_invocation.execution_timeout_interval,
-                                        :ssh_password => job_invocation.password, :key_passphrase => job_invocation.key_passphrase)
+                           .merge(additional_options)
+
         plan_delegated_action(proxy, ForemanRemoteExecutionCore::Actions::RunScript, action_options)
         plan_self
       end
