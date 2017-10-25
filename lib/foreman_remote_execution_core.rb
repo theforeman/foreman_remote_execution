@@ -10,10 +10,22 @@ module ForemanRemoteExecutionCore
                     :kerberos_auth           => false,
                     :async_ssh               => false,
                     # When set to nil, makes REX use the runner's default interval
-                    :runner_refresh_interval => nil)
+                    :runner_refresh_interval => nil,
+                    :ssh_log_level           => :fatal
+                   )
+
+  SSH_LOG_LEVELS = %w(debug info warn error fatal).freeze
 
   def self.simulate?
     %w(yes true 1).include? ENV.fetch('REX_SIMULATE', '').downcase
+  end
+
+  def self.validate_settings!
+    super
+    unless SSH_LOG_LEVELS.include? @settings[:ssh_log_level].to_s
+      raise "Wrong value '#{@settings[:ssh_log_level]}' for ssh_log_level, must be one of #{SSH_LOG_LEVELS.join(', ')}"
+    end
+    @settings[:ssh_log_level] = @settings[:ssh_log_level].to_sym
   end
 
   def self.runner_class
