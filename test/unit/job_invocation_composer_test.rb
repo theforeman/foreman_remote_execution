@@ -15,17 +15,17 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
     setup_user('create', 'hosts')
   end
 
-  let(:trying_job_template_1) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
-  let(:trying_job_template_2) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_2', :name => 'trying2', :provider_type => 'Mcollective') }
-  let(:trying_job_template_3) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying3', :provider_type => 'SSH') }
-  let(:unauthorized_job_template_1) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'unauth1', :provider_type => 'SSH') }
-  let(:unauthorized_job_template_2) { FactoryGirl.create(:job_template, :job_category => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
+  let(:trying_job_template_1) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
+  let(:trying_job_template_2) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_2', :name => 'trying2', :provider_type => 'Mcollective') }
+  let(:trying_job_template_3) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying3', :provider_type => 'SSH') }
+  let(:unauthorized_job_template_1) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'unauth1', :provider_type => 'SSH') }
+  let(:unauthorized_job_template_2) { FactoryBot.create(:job_template, :job_category => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
 
 
-  let(:input1) { FactoryGirl.create(:template_input, :template => trying_job_template_1, :input_type => 'user') }
-  let(:input2) { FactoryGirl.create(:template_input, :template => trying_job_template_3, :input_type => 'user') }
-  let(:input3) { FactoryGirl.create(:template_input, :template => trying_job_template_1, :input_type => 'user', :required => true) }
-  let(:unauthorized_input1) { FactoryGirl.create(:template_input, :template => unauthorized_job_template_1, :input_type => 'user') }
+  let(:input1) { FactoryBot.create(:template_input, :template => trying_job_template_1, :input_type => 'user') }
+  let(:input2) { FactoryBot.create(:template_input, :template => trying_job_template_3, :input_type => 'user') }
+  let(:input3) { FactoryBot.create(:template_input, :template => trying_job_template_1, :input_type => 'user', :required => true) }
+  let(:unauthorized_input1) { FactoryBot.create(:template_input, :template => unauthorized_job_template_1, :input_type => 'user') }
 
   let(:ansible_params) { { } }
   let(:ssh_params) { { } }
@@ -140,7 +140,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       describe '#templates_for_provider(provider_type)' do
         it 'returns all templates for a given provider respecting template permissions' do
-          trying_job_template_4 = FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Ansible')
+          trying_job_template_4 = FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Ansible')
           result = composer.templates_for_provider('SSH')
           result.must_include trying_job_template_1
           result.must_include trying_job_template_3
@@ -161,8 +161,8 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         end
 
         context 'extra unavailable templates id were selected' do
-          let(:unauthorized) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'unauth3', :provider_type => 'Ansible') }
-          let(:mcollective_authorized) { FactoryGirl.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Mcollective') }
+          let(:unauthorized) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'unauth3', :provider_type => 'Ansible') }
+          let(:mcollective_authorized) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Mcollective') }
           let(:ssh_params) { { :job_template_id => trying_job_template_1.id.to_s } }
           let(:ansible_params) { { :job_template_id => unauthorized.id.to_s } }
           let(:mcollective_params) { { :job_template_id => mcollective_authorized.id.to_s } }
@@ -270,7 +270,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           composer.displayed_search_query.must_be_empty
         end
 
-        let(:host) { FactoryGirl.create(:host) }
+        let(:host) { FactoryBot.create(:host) }
         let(:bookmark) { Bookmark.create!(:query => 'b', :name => 'bookmark', :public => true, :controller => 'hosts') }
 
         context 'all targetings parameters are present' do
@@ -336,7 +336,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       end
 
       describe '#targeted_hosts_count' do
-        let(:host) { FactoryGirl.create(:host) }
+        let(:host) { FactoryBot.create(:host) }
 
         it 'obeys authorization' do
           composer.stubs(:displayed_search_query => "name = #{host.name}")
@@ -402,7 +402,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       end
 
       describe '#valid?' do
-        let(:host) { FactoryGirl.create(:host) }
+        let(:host) { FactoryBot.create(:host) }
         let(:ssh_params) do
           { :job_template_id => trying_job_template_1.id.to_s,
             :job_templates => {
@@ -484,7 +484,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       end
 
       describe '#compose_from_invocation(existing_invocation)' do
-        let(:host) { FactoryGirl.create(:host) }
+        let(:host) { FactoryBot.create(:host) }
         let(:ssh_params) do
           { :job_template_id => trying_job_template_1.id.to_s,
             :job_templates => {

@@ -4,7 +4,7 @@ module Api
   module V2
     class JobTemplatesControllerTest < ActionController::TestCase
       setup do
-        @template = FactoryGirl.create :job_template
+        @template = FactoryBot.create :job_template
       end
 
       test 'should get index' do
@@ -15,7 +15,7 @@ module Api
       end
 
       test 'should get templates of give organization' do
-        @organization = FactoryGirl.create(:organization)
+        @organization = FactoryBot.create(:organization)
         @template.organizations << @organization
         @template.save!
         get :index, :organization_id => @organization.id

@@ -5,7 +5,7 @@ class JobTemplateImporterTest < ActiveSupport::TestCase
     # JobTemplate tests handle most of this, we just check that the shim
     # correctly loads a template returns a hash
     let(:remote_execution_feature) do
-      FactoryGirl.create(:remote_execution_feature)
+      FactoryBot.create(:remote_execution_feature)
     end
 
     let(:result) do
@@ -46,7 +46,7 @@ class JobTemplateImporterTest < ActiveSupport::TestCase
   context 'updating locked template' do
     it 'does not update locked template' do
       name = 'Locked job template'
-      template = FactoryGirl.create(:job_template, :locked => true, :name => name)
+      template = FactoryBot.create(:job_template, :locked => true, :name => name)
       res = JobTemplateImporter.import!(name, 'some text', 'metadata')
       assert_equal "Skipping Template #{template.id}:#{template.name} - template is locked", res[:result]
     end
@@ -58,7 +58,7 @@ class JobTemplateImporterTest < ActiveSupport::TestCase
         'kind' => 'job_template',
         'name' => name
       }
-      template = FactoryGirl.create(:job_template, :locked => true, :name => name)
+      template = FactoryBot.create(:job_template, :locked => true, :name => name)
       res = JobTemplateImporter.import!(name, 'some text', metadata, true)
       assert_equal "  Updated Template #{template.id}:Locked job template again", res[:result]
     end

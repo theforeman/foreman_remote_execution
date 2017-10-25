@@ -13,14 +13,14 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
   end
 
   let(:package_template) do
-    FactoryGirl.create(:job_template).tap do |job_template|
+    FactoryBot.create(:job_template).tap do |job_template|
       job_template.job_category = 'Package Action'
       job_template.name = 'Package Action - SSH Default'
       job_template.template_inputs.create(:name => 'package', :input_type => 'user')
     end
   end
 
-  let(:host) { FactoryGirl.create(:host) }
+  let(:host) { FactoryBot.create(:host) }
 
   before do
     User.current = users :admin
@@ -76,7 +76,7 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
 
 
     it 'updates a feature if it exists' do
-      existing = FactoryGirl.create(:remote_execution_feature, :name => 'existing_feature_withou_action_button')
+      existing = FactoryBot.create(:remote_execution_feature, :name => 'existing_feature_withou_action_button')
       feature = RemoteExecutionFeature.register(existing.label, existing.name, :host_action_button => true)
       feature.must_be :persisted?
       existing.reload

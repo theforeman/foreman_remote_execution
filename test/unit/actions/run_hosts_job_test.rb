@@ -5,11 +5,11 @@ module ForemanRemoteExecution
   class RunHostsJobTest < ActiveSupport::TestCase
     include Dynflow::Testing
 
-    let(:host) { FactoryGirl.create(:host, :with_execution) }
+    let(:host) { FactoryBot.create(:host, :with_execution) }
     let(:proxy) { host.remote_execution_proxies('SSH')[:subnet].first }
-    let(:targeting) { FactoryGirl.create(:targeting, :search_query => "name = #{host.name}", :user => User.current) }
+    let(:targeting) { FactoryBot.create(:targeting, :search_query => "name = #{host.name}", :user => User.current) }
     let(:job_invocation) do
-      FactoryGirl.build(:job_invocation, :with_template).tap do |invocation|
+      FactoryBot.build(:job_invocation, :with_template).tap do |invocation|
         invocation.targeting = targeting
         invocation.description = 'Some short description'
         invocation.save

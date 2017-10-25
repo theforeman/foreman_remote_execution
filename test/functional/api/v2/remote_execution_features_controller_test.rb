@@ -7,7 +7,7 @@ module Api
         @remote_execution_feature = RemoteExecutionFeature.register(:my_awesome_feature, 'My awesome feature',
                                                                     :description => 'You will not believe what it does',
                                                                     :provided_inputs => ['awesomeness_level'])
-        @template = FactoryGirl.create(:job_template, :with_input)
+        @template = FactoryBot.create(:job_template, :with_input)
       end
 
       test 'should get index' do
