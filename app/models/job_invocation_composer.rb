@@ -12,8 +12,8 @@ class JobInvocationComposer
         :triggering => triggering,
         :host_ids => ui_params[:host_ids],
         :description_format => job_invocation_base[:description_format],
-        :password => job_invocation_base[:password],
-        :key_passphrase => job_invocation_base[:key_passphrase],
+        :password => blank_to_nil(job_invocation_base[:password]),
+        :key_passphrase => blank_to_nil(job_invocation_base[:key_passphrase]),
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => execution_timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
@@ -32,6 +32,10 @@ class JobInvocationComposer
         id = provider[:job_template_id]
         provider.fetch(:job_templates, {}).fetch(id, {})[:execution_timeout_interval]
       end.first
+    end
+
+    def blank_to_nil(thing)
+      thing.blank? ? nil : thing
     end
 
     # TODO: Fix this comment
