@@ -64,6 +64,9 @@ class JobInvocation < ApplicationRecord
 
   delegate :start_at, :to => :task, :allow_nil => true
 
+  attr_accessor :password
+  attr_accessor :key_passphrase
+
   def self.search_by_status(key, operator, value)
     conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)
     conditions[0] = "NOT (#{conditions[0]})" if operator == '<>'

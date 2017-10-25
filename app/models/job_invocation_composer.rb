@@ -12,6 +12,8 @@ class JobInvocationComposer
         :triggering => triggering,
         :host_ids => ui_params[:host_ids],
         :description_format => job_invocation_base[:description_format],
+        :password => job_invocation_base[:password],
+        :key_passphrase => job_invocation_base[:key_passphrase],
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => execution_timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
@@ -314,6 +316,8 @@ class JobInvocationComposer
     job_invocation.time_span = params[:concurrency_control][:time_span].to_i if params[:concurrency_control][:time_span].present?
     job_invocation.concurrency_level = params[:concurrency_control][:level].to_i if params[:concurrency_control][:level].present?
     job_invocation.execution_timeout_interval = params[:execution_timeout_interval]
+    job_invocation.password = params[:password]
+    job_invocation.key_passphrase = params[:key_passphrase]
 
     self
   end

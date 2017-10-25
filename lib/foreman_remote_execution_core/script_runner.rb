@@ -20,6 +20,8 @@ module ForemanRemoteExecutionCore
       @script = options.fetch(:script)
       @ssh_user = options.fetch(:ssh_user, 'root')
       @ssh_port = options.fetch(:ssh_port, 22)
+      @ssh_password = options.fetch(:ssh_password, nil)
+      @key_passphrase = options.fetch(:key_passphrase, nil)
       @effective_user = options.fetch(:effective_user, nil)
       @effective_user_method = options.fetch(:effective_user_method, 'sudo')
       @host_public_key = options.fetch(:host_public_key, nil)
@@ -140,6 +142,8 @@ module ForemanRemoteExecutionCore
       ssh_options = {}
       ssh_options[:port] = @ssh_port if @ssh_port
       ssh_options[:keys] = [@client_private_key_file] if @client_private_key_file
+      ssh_options[:password] = @ssh_password if @ssh_password
+      ssh_options[:passphrase] = @key_passphrase if @key_passphrase
       ssh_options[:user_known_hosts_file] = @known_hosts_file if @known_hosts_file
       ssh_options[:keys_only] = true
       # if the host public key is contained in the known_hosts_file,
@@ -147,6 +151,7 @@ module ForemanRemoteExecutionCore
       ssh_options[:paranoid] = true
       ssh_options[:auth_methods] = available_authentication_methods
       ssh_options[:user_known_hosts_file] = prepare_known_hosts if @host_public_key
+      ssh_options[:number_of_password_prompts] = 1
       return ssh_options
     end
 
@@ -323,6 +328,8 @@ module ForemanRemoteExecutionCore
           @logger.warn('Kerberos authentication requested but not available')
         end
       end
+      methods.unshift('password') if @ssh_password
+
       methods
     end
   end

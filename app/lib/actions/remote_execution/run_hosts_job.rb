@@ -22,11 +22,13 @@ module Actions
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !job_invocation.targeting.resolved?
         set_up_concurrency_control job_invocation
         input.update(:job_category => job_invocation.job_category)
-        plan_self(:job_invocation_id => job_invocation.id)
+        plan_self(:job_invocation_id => job_invocation.id, :password => job_invocation.password, :key_passphrase => job_invocation.key_passphrase)
       end
 
       def create_sub_plans
         job_invocation = JobInvocation.find(input[:job_invocation_id])
+        job_invocation.password = input[:password]
+        job_invocation.key_passphrase = input[:key_passphrase]
         proxy_selector = RemoteExecutionProxySelector.new
 
         current_batch.map do |host|

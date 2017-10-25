@@ -50,7 +50,8 @@ module Actions
         hostname = provider.find_ip_or_hostname(host)
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(:hostname => hostname, :script => script,
-                                        :execution_timeout_interval => job_invocation.execution_timeout_interval)
+                                        :execution_timeout_interval => job_invocation.execution_timeout_interval,
+                                        :ssh_password => job_invocation.password, :key_passphrase => job_invocation.key_passphrase)
         plan_delegated_action(proxy, ForemanRemoteExecutionCore::Actions::RunScript, action_options)
         plan_self
       end
