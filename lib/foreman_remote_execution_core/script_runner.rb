@@ -280,7 +280,7 @@ module ForemanRemoteExecutionCore
 
     def upload_file(local_path, remote_path)
       mode = File.stat(local_path).mode.to_s(8)[-3..-1]
-      @logger.debug('Uploading local file: #{local_path} as #{remote_path} with #{mode} permissions')
+      @logger.debug("Uploading local file: #{local_path} as #{remote_path} with #{mode} permissions")
       upload_data(File.read(local_path), remote_path, mode)
     end
 
