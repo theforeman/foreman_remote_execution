@@ -184,7 +184,7 @@ class JobTemplate < ::Template
     end
 
     # Create new inputs
-    inputs.values.each { |new_input| template_inputs.build(new_input) }
+    inputs.each_value { |new_input| template_inputs.build(new_input) }
   end
 
   def sync_foreign_input_sets(input_sets)
@@ -206,7 +206,7 @@ class JobTemplate < ::Template
     end
 
     # Create new input_sets
-    input_sets.values.each { |input_set| self.foreign_input_sets.build(input_set) }
+    input_sets.each_value { |input_set| self.foreign_input_sets.build(input_set) }
   end
 
   def sync_feature(feature_name)
