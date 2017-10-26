@@ -91,3 +91,12 @@ Rails/ApplicationRecord:
 
 Style/FormatString:
   Enabled: false
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Lint/RescueWithoutErrorClass:
+  Enabled: false
+
+Lint/BooleanSymbol:
+  Enabled: false
