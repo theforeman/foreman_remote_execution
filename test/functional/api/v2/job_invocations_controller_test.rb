@@ -56,7 +56,7 @@ module Api
       test 'should create with schedule' do
         attrs = { :job_category => @template.job_category, :name => 'RandomName',
                   :job_template_id => @template.id,:targeting_type => 'static_query',
-                  :search_query => 'foobar', :scheduling => {:start_at => DateTime.now.to_s}}
+                  :search_query => 'foobar', :scheduling => {:start_at => Time.now.to_s}}
 
         post :create, :job_invocation => attrs
         invocation = ActiveSupport::JSON.decode(@response.body)
