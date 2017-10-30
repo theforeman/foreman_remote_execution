@@ -10,9 +10,7 @@ class Targeting < ActiveRecord::Base
 
   has_many :targeting_hosts, :dependent => :destroy
   has_many :hosts, :through => :targeting_hosts
-  # rubocop:disable Rails/HasManyOrHasOneDependent
-  has_one :job_invocation
-  # rubocop:enable Rails/HasManyOrHasOneDependent
+  has_one :job_invocation, :dependent => :destroy
   has_many :template_invocations, :through => :job_invocation
 
   validates :targeting_type, :presence => true, :inclusion => Targeting::TYPES.keys
