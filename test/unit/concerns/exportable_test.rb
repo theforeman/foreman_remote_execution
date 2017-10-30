@@ -5,7 +5,7 @@ module ForemanRemoteExecution
     class SampleModel
       include ::ForemanRemoteExecution::Exportable
 
-      attr_accessor :name, :attrs, :subnet, :mac, :password, :subnet
+      attr_accessor :name, :attrs, :subnet, :mac, :password
       attr_exportable :name, :attrs, :mac, :subnet, :mac => ->(m) { m.mac.upcase if m.mac },
                                                     :custom_attr => ->(m) { 'hello world' }
 

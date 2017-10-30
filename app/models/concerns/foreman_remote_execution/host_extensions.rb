@@ -5,7 +5,7 @@ module ForemanRemoteExecution
       base.instance_eval do
         has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
         has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
-        has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id'
+        has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id', :dependent => :destroy
         has_many :run_host_job_tasks, :through => :template_invocations
 
         scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_invocation.result',

@@ -6,6 +6,8 @@ module ForemanRemoteExecution
 
     def flattened_errors
       errors = Hash.new { |h, k| h[k] = [] }
+      # self.errors is ActiveModel::Errors, not Hash and doesn't have the #each_key method
+      # rubocop:disable Performance/HashEachMethods
       self.errors.keys.each do |key|
         messages = self.errors[key]
         invalid_objects = invalid_objects_for_attribute(key)
@@ -17,6 +19,7 @@ module ForemanRemoteExecution
           end
         end
       end
+      # rubocop:enable Performance/HashEachMethods
       errors.map { |key, messages| self.errors.full_message(key, messages.join(', ')) }
     end
 
