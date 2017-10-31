@@ -4,7 +4,7 @@ module Api
   module V2
     class JobInvocationsControllerTest < ActionController::TestCase
       setup do
-        @invocation = FactoryGirl.create(:job_invocation, :with_template)
+        @invocation = FactoryGirl.create(:job_invocation, :with_template, :with_task)
         @template = FactoryGirl.create(:job_template, :with_input)
       end
 
@@ -61,6 +61,17 @@ module Api
         post :create, :job_invocation => attrs
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal invocation['mode'], 'future'
+        assert_response :success
+      end
+
+      test 'should provide output for delayed task' do
+        host = @invocation.template_invocations_hosts.first
+        ForemanTasks::Task.any_instance.expects(:delayed?).returns(true)
+        get :output, :job_invocation_id => @invocation.id, :host_id => host.id
+        result = ActiveSupport::JSON.decode(@response.body)
+        assert_equal result['delayed'], true
+        assert_equal result['refresh'], true
+        assert_equal result['output'], []
         assert_response :success
       end
     end
