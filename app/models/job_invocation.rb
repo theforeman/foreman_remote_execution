@@ -123,6 +123,8 @@ class JobInvocation < ApplicationRecord
       invocation.description_format = self.description_format
       invocation.description = self.description
       invocation.pattern_template_invocations = self.pattern_template_invocations.map(&:deep_clone)
+      invocation.password = self.password
+      invocation.key_passphrase = self.key_passphrase
     end
   end
 

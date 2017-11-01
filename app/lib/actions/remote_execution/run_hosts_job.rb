@@ -12,11 +12,12 @@ module Actions
       def delay(delay_options, job_invocation)
         task.add_missing_task_groups(job_invocation.task_group)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.static? && !job_invocation.targeting.resolved?
-        input.update :job_invocation => job_invocation.to_action_input
+        input.update :job_invocation => job_invocation.to_action_input, :password => job_invocation.password, :key_passphrase => job_invocation.key_passphrase
         super delay_options, job_invocation
       end
 
       def plan(job_invocation)
+        load_password(job_invocation)
         job_invocation.task_group.save! if job_invocation.task_group.try(:new_record?)
         task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
         action_subject(job_invocation)
@@ -28,8 +29,7 @@ module Actions
 
       def create_sub_plans
         job_invocation = JobInvocation.find(input[:job_invocation_id])
-        job_invocation.password = input[:password]
-        job_invocation.key_passphrase = input[:key_passphrase]
+        load_password(job_invocation)
         proxy_selector = RemoteExecutionProxySelector.new
 
         current_batch.map do |host|
@@ -85,6 +85,13 @@ module Actions
 
       def humanized_name
         '%s:' % _(super)
+      end
+
+      private
+
+      def load_password(job_invocation)
+        job_invocation.password = input[:password] if input[:password]
+        job_invocation.key_passphrase = input[:key_passphrase] if input[:key_passphrase]
       end
     end
   end
