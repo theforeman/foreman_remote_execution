@@ -1,8 +1,8 @@
 require 'test_plugin_helper'
 
 class JobInvocationTest < ActiveSupport::TestCase
-  let(:job_invocation) { FactoryGirl.build(:job_invocation) }
-  let(:template) { FactoryGirl.create(:job_template, :with_input) }
+  let(:job_invocation) { FactoryBot.build(:job_invocation) }
+  let(:template) { FactoryBot.create(:job_template, :with_input) }
 
   context 'search for job invocations' do
     before do
@@ -27,7 +27,7 @@ class JobInvocationTest < ActiveSupport::TestCase
 
   context 'can delete a host' do
     let(:host) do
-      FactoryGirl.create(:host)
+      FactoryBot.create(:host)
     end
 
     it 'can remove a host' do
@@ -40,17 +40,17 @@ class JobInvocationTest < ActiveSupport::TestCase
   end
 
   context 'has template invocations with input values' do
-    let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
+    let(:job_invocation) { FactoryBot.create(:job_invocation, :with_template) }
 
     before do
       input = job_invocation.pattern_template_invocations.first.template.template_inputs.create!(:name => 'foo', :required => true, :input_type => 'user')
       input2 = job_invocation.pattern_template_invocations.first.template.template_inputs.create!(:name => 'bar', :required => true, :input_type => 'user')
-      FactoryGirl.create(:template_invocation_input_value,
-                         :template_invocation => job_invocation.pattern_template_invocations.first,
-                         :template_input => input2)
-      @input_value = FactoryGirl.create(:template_invocation_input_value,
-                                        :template_invocation => job_invocation.pattern_template_invocations.first,
-                                        :template_input => input)
+      FactoryBot.create(:template_invocation_input_value,
+                        :template_invocation => job_invocation.pattern_template_invocations.first,
+                        :template_input => input2)
+      @input_value = FactoryBot.create(:template_invocation_input_value,
+                                       :template_invocation => job_invocation.pattern_template_invocations.first,
+                                       :template_input => input)
       job_invocation.reload
       job_invocation.pattern_template_invocations.first.reload
     end

@@ -2,17 +2,17 @@ require 'test_plugin_helper'
 
 class JobTemplateTest < ActiveSupport::TestCase
   context 'when creating a template' do
-    let(:job_template) { FactoryGirl.build(:job_template, :job_category => '') }
+    let(:job_template) { FactoryBot.build(:job_template, :job_category => '') }
     let(:template_with_inputs) do
-      FactoryGirl.build(:job_template, :template => 'test').tap do |template|
-        template.template_inputs << FactoryGirl.build(:template_input, :name => 'command', :input_type => 'user')
+      FactoryBot.build(:job_template, :template => 'test').tap do |template|
+        template.template_inputs << FactoryBot.build(:template_input, :name => 'command', :input_type => 'user')
         template.save!
       end
     end
 
     it 'has a unique name' do
-      template1 = FactoryGirl.create(:job_template)
-      template2 = FactoryGirl.build(:job_template, :name => template1.name)
+      template1 = FactoryBot.create(:job_template)
+      template2 = FactoryBot.build(:job_template, :name => template1.name)
       refute template2.valid?
     end
 
@@ -27,17 +27,17 @@ class JobTemplateTest < ActiveSupport::TestCase
 
     it 'validates the inputs are uniq in the template' do
       job_template.job_category = 'Miscellaneous'
-      job_template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => template_with_inputs)
-      job_template.foreign_input_sets << FactoryGirl.build(:foreign_input_set, :target_template => template_with_inputs)
+      job_template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => template_with_inputs)
+      job_template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => template_with_inputs)
       refute job_template.valid?
       job_template.errors.full_messages.first.must_include 'Duplicated inputs detected: ["command"]'
     end
   end
 
   context 'description format' do
-    let(:template_with_description) { FactoryGirl.build(:job_template, :with_description_format, :job_category => 'test job') }
-    let(:template) { FactoryGirl.build(:job_template, :with_input, :job_category => 'test job') }
-    let(:minimal_template) { FactoryGirl.build(:job_template) }
+    let(:template_with_description) { FactoryBot.build(:job_template, :with_description_format, :job_category => 'test job') }
+    let(:template) { FactoryBot.build(:job_template, :with_input, :job_category => 'test job') }
+    let(:minimal_template) { FactoryBot.build(:job_template) }
 
     it 'uses the description_format attribute if set' do
       template_with_description.generate_description_format.must_equal template_with_description.description_format
@@ -59,7 +59,7 @@ class JobTemplateTest < ActiveSupport::TestCase
   end
 
   context 'cloning' do
-    let(:job_template) { FactoryGirl.build(:job_template, :with_input) }
+    let(:job_template) { FactoryBot.build(:job_template, :with_input) }
 
     describe '#dup' do
       it 'duplicates also template inputs' do
@@ -74,7 +74,7 @@ class JobTemplateTest < ActiveSupport::TestCase
 
   context 'importing a new template' do
     let(:remote_execution_feature) do
-      FactoryGirl.create(:remote_execution_feature)
+      FactoryBot.create(:remote_execution_feature)
     end
 
     let(:template) do
@@ -239,7 +239,7 @@ class JobTemplateTest < ActiveSupport::TestCase
 
   context 'template export' do
     let(:exportable_template) do
-      FactoryGirl.create(:job_template, :with_input)
+      FactoryBot.create(:job_template, :with_input)
     end
 
     let(:erb) do
@@ -270,7 +270,7 @@ class JobTemplateTest < ActiveSupport::TestCase
   end
 
   context 'there is existing template invocation of a job template' do
-    let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
+    let(:job_invocation) { FactoryBot.create(:job_invocation, :with_template) }
     let(:job_template) { job_invocation.pattern_template_invocations.first.template }
 
     describe 'job template deletion' do
@@ -283,7 +283,7 @@ class JobTemplateTest < ActiveSupport::TestCase
 
   context 'template locked' do
     it 'inputs cannot be changed' do
-      job_template = FactoryGirl.create(:job_template, :with_input, :locked => true)
+      job_template = FactoryBot.create(:job_template, :with_input, :locked => true)
       Foreman.expects(:in_rake?).returns(false).at_least_once
       assert_valid job_template
       job_template.template_inputs.first.name = 'something else'

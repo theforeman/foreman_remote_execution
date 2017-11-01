@@ -6,11 +6,11 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
   end
   let(:provider) { 'SSH' }
 
-  before { User.current = FactoryGirl.build(:user, :admin) }
+  before { User.current = FactoryBot.build(:user, :admin) }
   after { User.current = nil }
 
   describe 'ssh specific params' do
-    let(:host) { FactoryGirl.create(:host, :with_execution) }
+    let(:host) { FactoryBot.create(:host, :with_execution) }
     let(:sshkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQ foo@example.com' }
 
     before do
@@ -24,7 +24,7 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     end
 
     it 'can override ssh user' do
-      host.host_parameters << FactoryGirl.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'amy')
+      host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'amy')
       host.params['remote_execution_ssh_user'].must_equal 'amy'
     end
 
@@ -33,7 +33,7 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     end
 
     it 'can override effective user method' do
-      host.host_parameters << FactoryGirl.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'su')
+      host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'su')
       host.params['remote_execution_effective_user_method'].must_equal 'su'
     end
 
@@ -43,7 +43,7 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
 
     it 'has ssh keys in the parameters even when no user specified' do
       # this is a case, when using the helper in provisioning templates
-      FactoryGirl.create(:smart_proxy, :ssh)
+      FactoryBot.create(:smart_proxy, :ssh)
       host.interfaces.first.subnet.remote_execution_proxies.clear
       User.current = nil
       host.remote_execution_ssh_keys.must_include sshkey
@@ -51,10 +51,10 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
   end
 
   context 'host has multiple nics' do
-    let(:host) { FactoryGirl.build(:host, :with_execution) }
+    let(:host) { FactoryBot.build(:host, :with_execution) }
 
     it 'should only have one execution interface' do
-      host.interfaces << FactoryGirl.build(:nic_managed)
+      host.interfaces << FactoryBot.build(:nic_managed)
       host.interfaces.each { |interface| interface.execution = true }
       host.wont_be :valid?
     end
@@ -66,14 +66,14 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
 
   context 'scoped search' do
     let(:job) do
-      job = FactoryGirl.create(:job_invocation, :with_task)
-      job.template_invocations << FactoryGirl.create(:template_invocation, :with_host, :with_failed_task)
+      job = FactoryBot.create(:job_invocation, :with_task)
+      job.template_invocations << FactoryBot.create(:template_invocation, :with_host, :with_failed_task)
       job
     end
 
     let(:job2) do
-      job = FactoryGirl.create(:job_invocation, :with_task)
-      job.template_invocations << FactoryGirl.create(:template_invocation, :with_host, :with_failed_task)
+      job = FactoryBot.create(:job_invocation, :with_task)
+      job.template_invocations << FactoryBot.create(:template_invocation, :with_host, :with_failed_task)
       job
     end
 
@@ -112,17 +112,17 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
 
   describe 'proxy determination strategies' do
     context 'subnet strategy' do
-      let(:host) { FactoryGirl.build(:host, :with_execution) }
+      let(:host) { FactoryBot.build(:host, :with_execution) }
       it { host.remote_execution_proxies(provider)[:subnet].must_include host.subnet.remote_execution_proxies.first }
     end
 
     context 'fallback strategy' do
-      let(:host) { FactoryGirl.build(:host, :with_puppet) }
+      let(:host) { FactoryBot.build(:host, :with_puppet) }
 
       context 'enabled' do
         before do
           Setting[:remote_execution_fallback_proxy] = true
-          host.puppet_proxy.features << FactoryGirl.create(:feature, :ssh)
+          host.puppet_proxy.features << FactoryBot.create(:feature, :ssh)
         end
 
         it 'returns a fallback proxy' do
@@ -133,7 +133,7 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       context 'disabled' do
         before do
           Setting[:remote_execution_fallback_proxy] = false
-          host.puppet_proxy.features << FactoryGirl.create(:feature, :ssh)
+          host.puppet_proxy.features << FactoryBot.create(:feature, :ssh)
         end
 
         it 'returns no proxy' do
@@ -143,11 +143,11 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     end
 
     context 'global strategy' do
-      let(:tax_organization) { FactoryGirl.build(:organization) }
-      let(:tax_location) { FactoryGirl.build(:location) }
-      let(:host) { FactoryGirl.build(:host, :organization => tax_organization, :location => tax_location) }
-      let(:proxy_in_taxonomies) { FactoryGirl.create(:smart_proxy, :ssh, :organizations => [tax_organization], :locations => [tax_location]) }
-      let(:proxy_no_taxonomies) { FactoryGirl.create(:smart_proxy, :ssh) }
+      let(:tax_organization) { FactoryBot.build(:organization) }
+      let(:tax_location) { FactoryBot.build(:location) }
+      let(:host) { FactoryBot.build(:host, :organization => tax_organization, :location => tax_location) }
+      let(:proxy_in_taxonomies) { FactoryBot.create(:smart_proxy, :ssh, :organizations => [tax_organization], :locations => [tax_location]) }
+      let(:proxy_no_taxonomies) { FactoryBot.create(:smart_proxy, :ssh) }
 
       context 'enabled' do
         before { Setting[:remote_execution_global_proxy] = true }

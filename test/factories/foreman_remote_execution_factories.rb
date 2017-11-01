@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :job_template do |f|
     f.sequence(:name) { |n| "Job template #{n}" }
@@ -11,7 +11,7 @@ FactoryGirl.define do
 
     trait :with_input do
       after(:build) do |template, evaluator|
-        template.template_inputs << FactoryGirl.build(:template_input)
+        template.template_inputs << FactoryBot.build(:template_input)
       end
     end
 
@@ -43,15 +43,15 @@ FactoryGirl.define do
     f.description_format '%{job_category}'
     trait :with_template do
       after(:build) do |invocation, evaluator|
-        invocation.pattern_template_invocations << FactoryGirl.build(:template_invocation)
+        invocation.pattern_template_invocations << FactoryBot.build(:template_invocation)
       end
 
     end
 
     trait :with_task do
       after(:build) do |invocation, _evaluator|
-        invocation.template_invocations << FactoryGirl.build(:template_invocation, :with_task, :with_host)
-        invocation.task = FactoryGirl.build(:some_task)
+        invocation.template_invocations << FactoryBot.build(:template_invocation, :with_task, :with_host)
+        invocation.task = FactoryBot.build(:some_task)
       end
     end
   end
@@ -66,19 +66,19 @@ FactoryGirl.define do
 
     trait :with_task do
       after(:build) do |template, _evaluator|
-        template.run_host_job_task = FactoryGirl.build(:some_task)
+        template.run_host_job_task = FactoryBot.build(:some_task)
       end
     end
 
     trait :with_failed_task do
       after(:build) do |template, _evaluator|
-        template.run_host_job_task = FactoryGirl.build(:some_task, :result => 'error')
+        template.run_host_job_task = FactoryBot.build(:some_task, :result => 'error')
       end
     end
 
     trait :with_host do
       after(:build) do |template, _evaluator|
-        template.host = FactoryGirl.build(:host)
+        template.host = FactoryBot.build(:host)
       end
     end
   end
@@ -93,7 +93,7 @@ FactoryGirl.define do
   end
 end
 
-FactoryGirl.modify do
+FactoryBot.modify do
   factory :feature do
     trait :ssh do
       name 'SSH'
@@ -102,14 +102,14 @@ FactoryGirl.modify do
 
   factory :smart_proxy do
     trait :ssh do
-      features { [FactoryGirl.build(:feature, :ssh)] }
+      features { [FactoryBot.build(:feature, :ssh)] }
       pubkey 'ssh-rsa AAAAB3N...'
     end
   end
 
   factory :subnet do
     trait :execution do
-      remote_execution_proxies { [FactoryGirl.build(:smart_proxy, :ssh)] }
+      remote_execution_proxies { [FactoryBot.build(:smart_proxy, :ssh)] }
     end
   end
 
@@ -119,19 +119,19 @@ FactoryGirl.modify do
       domain
       subnet do
         overrides = {
-          :remote_execution_proxies => [FactoryGirl.create(:smart_proxy, :ssh)]
+          :remote_execution_proxies => [FactoryBot.create(:smart_proxy, :ssh)]
         }
 
         overrides[:locations] = [location] unless location.nil?
         overrides[:organizations] = [organization] unless organization.nil?
 
-        FactoryGirl.create(
+        FactoryBot.create(
           :subnet_ipv4,
           overrides
         )
       end
       interfaces do
-        [FactoryGirl.build(:nic_primary_and_provision, :ip => subnet.network.sub(/0\Z/, '1'), :execution => true)]
+        [FactoryBot.build(:nic_primary_and_provision, :ip => subnet.network.sub(/0\Z/, '1'), :execution => true)]
       end
     end
   end

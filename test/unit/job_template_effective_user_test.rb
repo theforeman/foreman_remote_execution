@@ -1,7 +1,7 @@
 require 'test_plugin_helper'
 
 class JobTemplateEffectiveUserTest < ActiveSupport::TestCase
-  let(:job_template) { FactoryGirl.build(:job_template, :job_category => '') }
+  let(:job_template) { FactoryBot.build(:job_template, :job_category => '') }
   let(:effective_user) { job_template.effective_user }
 
   before do
@@ -20,7 +20,7 @@ class JobTemplateEffectiveUserTest < ActiveSupport::TestCase
 
   describe 'compute value' do
     it 'computes the value based on the current user when current_user set to true' do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       User.current = user
       effective_user.current_user = true
       effective_user.compute_value.must_equal user.login

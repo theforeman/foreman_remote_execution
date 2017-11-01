@@ -1,7 +1,7 @@
 require 'test_plugin_helper'
 
 class TemplateInputTest < ActiveSupport::TestCase
-  let(:template_input) { FactoryGirl.build(:template_input) }
+  let(:template_input) { FactoryBot.build(:template_input) }
 
   context 'export' do
     before do

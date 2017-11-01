@@ -51,16 +51,16 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
   end
 
   describe SSHExecutionProvider do
-    before { User.current = FactoryGirl.build(:user, :admin) }
+    before { User.current = FactoryBot.build(:user, :admin) }
     after { User.current = nil }
 
     before do
       Setting::RemoteExecution.load_defaults
     end
 
-    let(:job_invocation) { FactoryGirl.create(:job_invocation, :with_template) }
+    let(:job_invocation) { FactoryBot.create(:job_invocation, :with_template) }
     let(:template_invocation) { job_invocation.pattern_template_invocations.first }
-    let(:host) { FactoryGirl.create(:host) }
+    let(:host) { FactoryBot.create(:host) }
     let(:proxy_options) { SSHExecutionProvider.proxy_command_options(template_invocation, host) }
 
     describe 'effective user' do
@@ -73,7 +73,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     describe 'ssh user' do
       it 'uses the remote_execution_ssh_user on the host param' do
         host.params['remote_execution_ssh_user'] = 'my user'
-        host.host_parameters << FactoryGirl.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'my user')
+        host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'my user')
         proxy_options[:ssh_user].must_equal 'my user'
       end
     end
@@ -81,7 +81,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     describe 'sudo' do
       it 'uses the remote_execution_ssh_user on the host param' do
         host.params['remote_execution_effective_user_method'] = 'sudo'
-        method_param = FactoryGirl.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'sudo')
+        method_param = FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'sudo')
         host.host_parameters << method_param
         proxy_options[:effective_user_method].must_equal 'sudo'
         method_param.update_attributes!(:value => 'su')
@@ -105,7 +105,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     describe 'ssh port from params' do
       it 'takes ssh port number from params and check return type' do
         host.params['remote_execution_ssh_port'] = '30'
-        host.host_parameters << FactoryGirl.build(:host_parameter, :name => 'remote_execution_ssh_port', :value => '30')
+        host.host_parameters << FactoryBot.build(:host_parameter, :name => 'remote_execution_ssh_port', :value => '30')
         host.clear_host_parameters_cache!
         proxy_options[:ssh_port].must_be_kind_of Integer
         proxy_options[:ssh_port].must_equal 30
@@ -114,9 +114,9 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
     describe '#find_ip_or_hostname' do
       let(:host) do
-        FactoryGirl.create(:host) do |host|
-          host.interfaces = [FactoryGirl.build(:nic_managed, flags.merge(:ip => nil, :name => 'somehost.somedomain.org', :primary => true)),
-                             FactoryGirl.build(:nic_managed, flags.merge(:ip => '127.0.0.1'))]
+        FactoryBot.create(:host) do |host|
+          host.interfaces = [FactoryBot.build(:nic_managed, flags.merge(:ip => nil, :name => 'somehost.somedomain.org', :primary => true)),
+                             FactoryBot.build(:nic_managed, flags.merge(:ip => '127.0.0.1'))]
         end
       end
 
@@ -129,8 +129,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal 'somehost.somedomain.org'
 
         # execution wins if present
-        execution_interface = FactoryGirl.build(:nic_managed,
-                                                flags.merge(:execution => true, :name => 'special.somedomain.org'))
+        execution_interface = FactoryBot.build(:nic_managed,
+                                               flags.merge(:execution => true, :name => 'special.somedomain.org'))
         host.interfaces << execution_interface
         host.primary_interface.update_attributes(:execution => false)
         host.interfaces.each(&:save)
@@ -144,8 +144,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal 'somehost.somedomain.org'
 
         # provision interface with ip while primary without
-        provision_interface = FactoryGirl.build(:nic_managed,
-                                                flags.merge(:provision => true, :ip => '10.0.0.1'))
+        provision_interface = FactoryBot.build(:nic_managed,
+                                               flags.merge(:provision => true, :ip => '10.0.0.1'))
         host.interfaces << provision_interface
         host.primary_interface.update_attributes(:provision => false)
         host.interfaces.each(&:save)
@@ -158,8 +158,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal host.primary_interface.ip
 
         # there is an execution interface with IP: it wins
-        execution_interface = FactoryGirl.build(:nic_managed,
-                                                flags.merge(:execution => true, :ip => '10.0.0.3'))
+        execution_interface = FactoryBot.build(:nic_managed,
+                                               flags.merge(:execution => true, :ip => '10.0.0.3'))
         host.interfaces << execution_interface
         host.primary_interface.update_attributes(:execution => false)
         host.interfaces.each(&:save)

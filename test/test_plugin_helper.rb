@@ -2,8 +2,8 @@
 require 'test_helper'
 require 'dynflow/testing'
 
-# Add plugin to FactoryGirl's paths
-FactoryGirl.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
+# Add plugin to FactoryBot's paths
+FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
 # Add foreman tasks factories too
-FactoryGirl.definition_file_paths << "#{ForemanTasks::Engine.root}/test/factories"
-FactoryGirl.reload
+FactoryBot.definition_file_paths << "#{ForemanTasks::Engine.root}/test/factories"
+FactoryBot.reload

@@ -1,9 +1,9 @@
 require 'test_plugin_helper'
 
 class TargetingTest < ActiveSupport::TestCase
-  let(:targeting) { FactoryGirl.build(:targeting) }
+  let(:targeting) { FactoryBot.build(:targeting) }
   let(:bookmark) { bookmarks(:one) }
-  let(:host) { FactoryGirl.create(:host) }
+  let(:host) { FactoryBot.create(:host) }
 
   before do
     bookmark.query = 'name = bar'
@@ -78,7 +78,7 @@ class TargetingTest < ActiveSupport::TestCase
   end
 
   describe '#build_query_from_hosts(ids)' do
-    let(:second_host) { FactoryGirl.create(:host) }
+    let(:second_host) { FactoryBot.create(:host) }
 
     before do
       host

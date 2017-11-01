@@ -4,8 +4,8 @@ module Api
   module V2
     class JobInvocationsControllerTest < ActionController::TestCase
       setup do
-        @invocation = FactoryGirl.create(:job_invocation, :with_template, :with_task)
-        @template = FactoryGirl.create(:job_template, :with_input)
+        @invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
+        @template = FactoryBot.create(:job_template, :with_input)
       end
 
       test 'should get index' do

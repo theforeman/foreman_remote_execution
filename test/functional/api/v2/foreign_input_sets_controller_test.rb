@@ -4,9 +4,9 @@ module Api
   module V2
     class ForeignInputSetsControllerTest < ActionController::TestCase
       setup do
-        @template = FactoryGirl.create(:job_template)
-        @foreign_template = FactoryGirl.create(:job_template, :with_input)
-        @new_foreign_template = FactoryGirl.create(:job_template, :with_input)
+        @template = FactoryBot.create(:job_template)
+        @foreign_template = FactoryBot.create(:job_template, :with_input)
+        @new_foreign_template = FactoryBot.create(:job_template, :with_input)
         @input_set = @template.foreign_input_sets.create(:target_template_id => @foreign_template.id)
       end
 
