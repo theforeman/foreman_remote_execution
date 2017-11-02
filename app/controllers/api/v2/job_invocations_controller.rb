@@ -119,8 +119,6 @@ module Api
         case params[:action]
         when 'output'
           :view
-        when 'cancel'
-          :edit
         else
           super
         end
