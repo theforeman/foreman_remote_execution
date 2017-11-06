@@ -412,6 +412,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
               }
             } }
         end
+
         let(:params) do
           { :job_invocation => { :providers => { :ssh => ssh_params } }, :targeting => { :search_query => "name = #{host.name}" } }.with_indifferent_access
         end
@@ -473,6 +474,30 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           composer
           composer.job_invocation.expects(:job_category)
           composer.job_category
+        end
+      end
+
+      describe '#password' do
+        let(:password) { 'changeme' }
+        let(:params) do
+          { :job_invocation => { :password => password }}.with_indifferent_access
+        end
+
+        it 'sets the password properly' do
+          composer
+          composer.job_invocation.password.must_equal password
+        end
+      end
+
+      describe '#key_passphrase' do
+        let(:key_passphrase) { 'changeme' }
+        let(:params) do
+          { :job_invocation => { :key_passphrase => key_passphrase }}
+        end
+
+        it 'sets the key passphrase properly' do
+          composer
+          composer.job_invocation.key_passphrase.must_equal key_passphrase
         end
       end
 

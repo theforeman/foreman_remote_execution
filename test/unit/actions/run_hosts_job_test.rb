@@ -12,6 +12,8 @@ module ForemanRemoteExecution
       FactoryBot.build(:job_invocation, :with_template).tap do |invocation|
         invocation.targeting = targeting
         invocation.description = 'Some short description'
+        invocation.password = 'changeme'
+        invocation.key_passphrase = 'changemetoo'
         invocation.save
       end
     end
@@ -85,6 +87,8 @@ module ForemanRemoteExecution
       delayed.input[:job_invocation]['id'].must_equal job_invocation.id
       delayed.input[:job_invocation]['name'].must_equal job_invocation.job_category
       delayed.input[:job_invocation]['description'].must_equal job_invocation.description
+      delayed.input[:password].must_equal job_invocation.password
+      delayed.input[:key_passphrase].must_equal job_invocation.key_passphrase
       planned # To make the expectations happy
     end
 
