@@ -55,7 +55,7 @@ module Actions
                                :ssh_password => job_invocation.password,
                                :key_passphrase => job_invocation.key_passphrase }
         action_options = provider.proxy_command_options(template_invocation, host)
-                           .merge(additional_options)
+                                 .merge(additional_options)
 
         plan_delegated_action(proxy, ForemanRemoteExecutionCore::Actions::RunScript, action_options)
         plan_self
