@@ -130,7 +130,7 @@ module Api
       end
 
       test 'should not allow the user to cancel the job if the user can\'t edit tasks' do
-        user = FactoryGirl.build(:user)
+        user = FactoryBot.build(:user)
         user.roles << Role.find_by(:name => 'Tasks Reader')
         user.roles << Role.find_by(:name => 'Remote Execution Manager')
         user.save!
