@@ -137,6 +137,18 @@ module Api
         post :cancel, :params => { :id => @invocation.id }
         assert_response 422
       end
+
+      test 'should rerun' do
+        JobInvocation.any_instance.expects(:generate_description)
+        JobInvocationComposer.any_instance.expects(:validate_job_category)
+                                          .with(@invocation.job_category)
+                                          .returns(@invocation.job_category)
+        post :rerun, :id => @invocation.id
+        assert_response :success
+        result = ActiveSupport::JSON.decode(@response.body)
+        targeting = Targeting.find(result['targeting_id'])
+        targeting.search_query.must_equal @invocation.targeting.search_query
+      end
     end
   end
 end
