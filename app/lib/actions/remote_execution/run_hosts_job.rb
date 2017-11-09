@@ -12,6 +12,8 @@ module Actions
         ForemanRemoteExecution::DYNFLOW_QUEUE
       end
 
+      class CheckOnProxyActions; end
+
       def delay(delay_options, job_invocation)
         task.add_missing_task_groups(job_invocation.task_group)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.static? && !job_invocation.targeting.resolved?
@@ -27,6 +29,11 @@ module Actions
         set_up_concurrency_control job_invocation
         input.update(:job_category => job_invocation.job_category)
         plan_self(:job_invocation_id => job_invocation.id)
+      end
+
+      def initiate
+        world.clock.ping suspended_action, 30, CheckOnProxyActions
+        super
       end
 
       def create_sub_plans
@@ -77,8 +84,22 @@ module Actions
         ::Dynflow::Action::Rescue::Skip
       end
 
+      def poll_proxy_tasks
+        delegated_actions_by_proxy.each do |(url, actions)|
+          results = poll_proxy_actions(url, actions)
+          missing, present = results.partition { |result| result[:result].nil? }
+          notify_missing(missing.map { |action| action[:action] })
+          dispatch_results_to_actions(present) if present.any?
+        end
+      end
+
       def run(event = nil)
-        super unless event == Dynflow::Action::Skip
+        if event == CheckOnProxyActions
+          poll_proxy_tasks
+          suspend
+        else
+          super unless event == Dynflow::Action::Skip
+        end
       end
 
       def humanized_input
@@ -87,6 +108,42 @@ module Actions
 
       def humanized_name
         '%s:' % _(super)
+      end
+
+      private
+
+      def notify_missing(actions)
+        actions.each do |action|
+          world.event action.execution_plan_id,
+                      action.run_step_id,
+                      ::Actions::ProxyAction::ProxyActionMissing.new
+        end
+      end
+
+      def dispatch_results_to_actions(actions)
+        # actions.each do |action|
+        #   id = action.output['proxy_task_id']
+        #   unless results.key?(id)
+        #     world.event(actions.execution_plan_id, action.run_step_id)
+        #   end
+        # end
+      end
+
+      def delegated_actions_by_proxy
+        running = sub_plans('state' => %w(running)).map(&:entry_action)
+        with_delegated = running.select { |action| action.input.key? :delegated_action_id }
+        on_proxy = with_delegated.map do |action|
+          action.planned_actions.find { |planned| planned.id == action.input[:delegated_action_id] }
+        end.select { |action| action.output.key?(:proxy_task_id) }
+        on_proxy.group_by { |action| action.input[:proxy_url] }
+      end
+
+      def poll_proxy_actions(url, actions)
+        proxy = ProxyAPI::ForemanDynflow::DynflowProxy.new(:url => url)
+        results = proxy.task_states(actions.map { |action| action.output[:proxy_task_id] })
+        actions.map do |action|
+          { :action => action, :result => results[action.output[:proxy_task_id]] }
+        end
       end
     end
   end
