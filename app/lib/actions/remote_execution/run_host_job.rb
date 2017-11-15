@@ -5,7 +5,7 @@ module Actions
       include ::Actions::Helpers::WithDelegatedAction
 
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
-      middleware.use Actions::Middleware::HidePassword
+      middleware.use Actions::Middleware::HideSecrets
 
       def resource_locks
         :link
@@ -49,11 +49,13 @@ module Actions
 
         provider = template_invocation.template.provider
 
+        secrets = { :ssh_password => job_invocation.password,
+                   :key_passphrase => job_invocation.key_passphrase }
+
         additional_options = { :hostname => provider.find_ip_or_hostname(host),
                                :script => script,
                                :execution_timeout_interval => job_invocation.execution_timeout_interval,
-                               :ssh_password => job_invocation.password,
-                               :key_passphrase => job_invocation.key_passphrase }
+                               :secrets => secrets }
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
 
