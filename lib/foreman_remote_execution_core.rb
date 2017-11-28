@@ -21,10 +21,24 @@ module ForemanRemoteExecutionCore
 
   def self.validate_settings!
     super
-    unless SSH_LOG_LEVELS.include? @settings[:ssh_log_level].to_s
+    self.validate_ssh_log_level!
+    @settings[:ssh_log_level] = @settings[:ssh_log_level].to_sym
+  end
+
+  def self.validate_ssh_log_level!
+    wanted_level = @settings[:ssh_log_level].to_s
+    unless SSH_LOG_LEVELS.include? wanted_level
       raise "Wrong value '#{@settings[:ssh_log_level]}' for ssh_log_level, must be one of #{SSH_LOG_LEVELS.join(', ')}"
     end
-    @settings[:ssh_log_level] = @settings[:ssh_log_level].to_sym
+
+    # regular log levels correspond to upcased ssh logger levels
+    ssh, regular = [wanted_level, SmartProxyDynflowCore::SETTINGS.log_level.to_s.downcase].map do |wanted|
+      SSH_LOG_LEVELS.each_with_index.find { |value, _index| value == wanted }.last
+    end
+
+    if ssh < regular
+      raise "ssh_log_level cannot be more verbose than regular log level"
+    end
   end
 
   def self.runner_class
