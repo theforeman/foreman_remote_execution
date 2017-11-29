@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   end
 
   s.test_files =       `git ls-files test`.split("\n")
-  s.extra_rdoc_files = `git ls-files doc`.split("\n") + Dir['README*', 'LICENSE']
+  s.extra_rdoc_files = Dir['README*', 'LICENSE']
 
   s.add_dependency 'deface'
   s.add_dependency 'dynflow', '~> 0.8.26'
