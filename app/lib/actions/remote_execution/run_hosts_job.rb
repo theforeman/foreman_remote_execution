@@ -7,29 +7,25 @@ module Actions
 
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
-      middleware.use Actions::Middleware::HideSecrets
 
       def delay(delay_options, job_invocation)
         task.add_missing_task_groups(job_invocation.task_group)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.static? && !job_invocation.targeting.resolved?
-        input.update :job_invocation => job_invocation.to_action_input, :secrets => secrets(job_invocation)
+        input.update :job_invocation => job_invocation.to_action_input
         super delay_options, job_invocation
       end
 
       def plan(job_invocation)
-        load_secrets(job_invocation)
         job_invocation.task_group.save! if job_invocation.task_group.try(:new_record?)
         task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
         action_subject(job_invocation)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !job_invocation.targeting.resolved?
         set_up_concurrency_control job_invocation
         input.update(:job_category => job_invocation.job_category)
-        plan_self(:job_invocation_id => job_invocation.id, :secrets => secrets(job_invocation))
+        plan_self(:job_invocation_id => job_invocation.id)
       end
 
       def create_sub_plans
-        job_invocation = JobInvocation.find(input[:job_invocation_id])
-        load_secrets(job_invocation)
         proxy_selector = RemoteExecutionProxySelector.new
 
         current_batch.map do |host|
@@ -42,7 +38,12 @@ module Actions
       end
 
       def finalize
-        input.delete(:secrets)
+        job_invocation.password = job_invocation.key_passphrase = nil
+        job_invocation.save!
+      end
+
+      def job_invocation
+        @job_invocation ||= JobInvocation.find(input[:job_invocation_id])
       end
 
       def batch(from, size)
@@ -54,7 +55,7 @@ module Actions
       end
 
       def hosts
-        JobInvocation.find(input[:job_invocation_id]).targeting.hosts.order(:name, :id)
+        job_invocation.targeting.hosts.order(:name, :id)
       end
 
       def set_up_concurrency_control(invocation)
@@ -85,18 +86,6 @@ module Actions
 
       def humanized_name
         '%s:' % _(super)
-      end
-
-      def secrets(job_invocation)
-        { :password => job_invocation.password, :key_passphrase => job_invocation.key_passphrase }
-      end
-
-      private
-
-      def load_secrets(job_invocation)
-        secrets = input.fetch(:secrets, {})
-        job_invocation.password = secrets[:password] if secrets[:password]
-        job_invocation.key_passphrase = secrets[:key_passphrase] if secrets[:key_passphrase]
       end
     end
   end

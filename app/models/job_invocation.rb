@@ -1,5 +1,8 @@
 class JobInvocation < ApplicationRecord
   include Authorizable
+  include EncryptValue
+  extend  ForemanRemoteExecution::EncryptedValueExtensions
+
   audited :except => [ :task_id, :targeting_id, :task_group_id, :triggering_id ]
 
   include ForemanRemoteExecution::ErrorsFlattener
@@ -64,8 +67,7 @@ class JobInvocation < ApplicationRecord
 
   delegate :start_at, :to => :task, :allow_nil => true
 
-  attr_accessor :password
-  attr_accessor :key_passphrase
+  encrypted_attributes :password, :key_passphrase
 
   def self.search_by_status(key, operator, value)
     conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)

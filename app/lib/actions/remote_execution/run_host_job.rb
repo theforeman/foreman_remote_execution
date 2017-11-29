@@ -50,7 +50,7 @@ module Actions
         provider = template_invocation.template.provider
 
         secrets = { :ssh_password => job_invocation.password,
-                   :key_passphrase => job_invocation.key_passphrase }
+                    :key_passphrase => job_invocation.key_passphrase }
 
         additional_options = { :hostname => provider.find_ip_or_hostname(host),
                                :script => script,
