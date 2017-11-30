@@ -1,4 +1,4 @@
-class RenameJobNameToJobCategory < ActiveRecord::Migration
+class RenameJobNameToJobCategory < ActiveRecord::Migration[4.2]
   def up
     rename_column :templates, :job_name, :job_category
     rename_column :job_invocations, :job_name, :job_category

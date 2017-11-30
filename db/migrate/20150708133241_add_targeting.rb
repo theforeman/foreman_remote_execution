@@ -1,4 +1,4 @@
-class AddTargeting < ActiveRecord::Migration
+class AddTargeting < ActiveRecord::Migration[4.2]
   def change
     create_table :targetings do |t|
       t.string :search_query, :limit => 255

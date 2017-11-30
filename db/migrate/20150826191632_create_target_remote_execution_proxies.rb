@@ -1,4 +1,4 @@
-class CreateTargetRemoteExecutionProxies < ActiveRecord::Migration
+class CreateTargetRemoteExecutionProxies < ActiveRecord::Migration[4.2]
   def change
     create_table :target_remote_execution_proxies do |t|
       t.integer :remote_execution_proxy_id

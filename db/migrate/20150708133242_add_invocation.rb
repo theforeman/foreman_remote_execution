@@ -1,4 +1,4 @@
-class AddInvocation< ActiveRecord::Migration
+class AddInvocation< ActiveRecord::Migration[4.2]
   def change
     create_table :job_invocations do |t|
       t.references :targeting, :null => false

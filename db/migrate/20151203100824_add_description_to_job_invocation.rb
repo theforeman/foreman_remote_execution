@@ -1,4 +1,4 @@
-class AddDescriptionToJobInvocation < ActiveRecord::Migration
+class AddDescriptionToJobInvocation < ActiveRecord::Migration[4.2]
   def up
     add_column :job_invocations, :description, :string, :limit => 255
     add_column :templates, :description_format, :string, :limit => 255

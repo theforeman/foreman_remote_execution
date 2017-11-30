@@ -1,4 +1,4 @@
-class CreateJobTemplateEffectiveUsers < ActiveRecord::Migration
+class CreateJobTemplateEffectiveUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :job_template_effective_users do |t|
       t.integer :job_template_id

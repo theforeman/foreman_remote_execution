@@ -1,4 +1,4 @@
-class ExpandAllTemplateInvocations < ActiveRecord::Migration
+class ExpandAllTemplateInvocations < ActiveRecord::Migration[4.2]
   class FakeTemplateInvocation < ActiveRecord::Base
     self.table_name = 'template_invocations'
 

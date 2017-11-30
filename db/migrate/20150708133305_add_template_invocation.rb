@@ -1,4 +1,4 @@
-class AddTemplateInvocation < ActiveRecord::Migration
+class AddTemplateInvocation < ActiveRecord::Migration[4.2]
   def change
     create_table :template_invocations do |t|
       t.references :template, :null => false
