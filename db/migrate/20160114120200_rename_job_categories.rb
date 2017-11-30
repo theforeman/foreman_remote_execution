@@ -1,4 +1,4 @@
-class RenameJobCategories < ActiveRecord::Migration
+class RenameJobCategories < ActiveRecord::Migration[4.2]
   MAP = {
     'Package Action - SSH Default' => ['Package Action', 'Packages'],
     'Puppet Run Once - SSH Default' => ['Puppet Run Once', 'Puppet'],

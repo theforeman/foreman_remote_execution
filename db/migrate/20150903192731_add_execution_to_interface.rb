@@ -1,4 +1,4 @@
-class AddExecutionToInterface < ActiveRecord::Migration
+class AddExecutionToInterface < ActiveRecord::Migration[4.2]
   class FakeNic < ActiveRecord::Base
     self.table_name = 'nics'
 

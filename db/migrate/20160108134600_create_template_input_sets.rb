@@ -1,4 +1,4 @@
-class CreateTemplateInputSets < ActiveRecord::Migration
+class CreateTemplateInputSets < ActiveRecord::Migration[4.2]
   def change
     create_table :foreign_input_sets do |t|
       t.integer :template_id, :null => false

@@ -1,4 +1,4 @@
-class CreateTemplateInput < ActiveRecord::Migration
+class CreateTemplateInput < ActiveRecord::Migration[4.2]
   def change
     create_table :template_inputs do |t|
       t.string :name, :null => false, :limit => 255

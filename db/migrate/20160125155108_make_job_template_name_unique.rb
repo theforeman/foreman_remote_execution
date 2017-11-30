@@ -1,4 +1,4 @@
-class MakeJobTemplateNameUnique < ActiveRecord::Migration
+class MakeJobTemplateNameUnique < ActiveRecord::Migration[4.2]
   def up
     duplicates = JobTemplate.unscoped.group(:name).count.delete_if { |_name, value| value == 1 }
     duplicates.each_key do |duplicated_name|

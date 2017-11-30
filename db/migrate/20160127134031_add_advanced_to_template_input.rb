@@ -1,4 +1,4 @@
-class AddAdvancedToTemplateInput < ActiveRecord::Migration
+class AddAdvancedToTemplateInput < ActiveRecord::Migration[4.2]
   def up
     add_column :template_inputs, :advanced, :boolean, :default => false, :null => false
     template = JobTemplate.find_by(name: 'Package Action - SSH Default')

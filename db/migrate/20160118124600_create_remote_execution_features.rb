@@ -1,4 +1,4 @@
-class CreateRemoteExecutionFeatures < ActiveRecord::Migration
+class CreateRemoteExecutionFeatures < ActiveRecord::Migration[4.2]
   def change
     create_table :remote_execution_features do |t|
       t.string :label, :index => true, :null => false, :limit => 255
