@@ -116,7 +116,7 @@ module RemoteExecutionHelper
                          :class => 'btn btn-default',
                          :title => _('See the last task details'))
     end
-    if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task, :authorizer => task_authorizer)
+    if authorized_for(:permission => :cancel_job_invocations, :auth_object => job_invocation)
       buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
                          :class => 'btn btn-danger',
                          :title => _('Try to cancel the job'),
@@ -132,14 +132,14 @@ module RemoteExecutionHelper
   end
   # rubocop:enable Metrics/AbcSize
 
-  def template_invocation_task_buttons(task)
+  def template_invocation_task_buttons(task, invocation)
     buttons = []
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
       buttons << link_to(_('Task Details'), foreman_tasks_task_path(task),
                          :class => 'btn btn-default',
                          :title => _('See the task details'))
     end
-    if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task)
+    if authorized_for(:permission => :cancel_job_invocations, :auth_object => invocation)
       buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
                          :class => 'btn btn-danger',
                          :title => _('Try to cancel the job on a host'),
