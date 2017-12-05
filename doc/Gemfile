@@ -1,7 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'jekyll'
-gem 'pry'
-gem 'rake'
-gem 'ruby-nuggets' # require by tags plugin
-gem 'therubyracer'
