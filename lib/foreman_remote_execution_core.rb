@@ -43,7 +43,7 @@ module ForemanRemoteExecutionCore
     end
 
     if ssh < regular
-      raise "ssh_log_level cannot be more verbose than regular log level"
+      raise 'ssh_log_level cannot be more verbose than regular log level'
     end
   end
 
