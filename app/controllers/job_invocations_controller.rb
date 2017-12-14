@@ -77,13 +77,17 @@ class JobInvocationsController < ApplicationController
     result = @job_invocation.cancel(params[:force])
 
     if result
-      flash[:notice] = params[:force] ?
-        _('Trying to abort the job') :
-        _('Trying to cancel the job')
+      flash[:notice] = if params[:force]
+                         _('Trying to abort the job')
+                       else
+                         _('Trying to cancel the job')
+                       end
     else
-      flash[:warning] = params[:force] ?
-        _('The job cannot be aborted at the moment.') :
-        _('The job cannot be cancelled at the moment.')
+      flash[:warning] = if params[:force]
+                          _('The job cannot be aborted at the moment.')
+                        else
+                          _('The job cannot be cancelled at the moment.')
+                        end
     end
     redirect_to :back
   end
