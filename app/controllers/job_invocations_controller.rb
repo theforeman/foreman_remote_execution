@@ -72,6 +72,22 @@ class JobInvocationsController < ApplicationController
     render :partial => 'job_invocations/preview_hosts_list'
   end
 
+  def cancel
+    @job_invocation = resource_base.find(params[:id])
+    result = @job_invocation.cancel(params[:force])
+
+    if result
+      flash[:notice] = params[:force] ?
+        _('Trying to abort the job') :
+        _('Trying to cancel the job')
+    else
+      flash[:warning] = params[:force] ?
+        _('The job cannot be aborted at the moment.') :
+        _('The job cannot be cancelled at the moment.')
+    end
+    redirect_to :back
+  end
+
   private
 
   def action_permission
@@ -80,6 +96,8 @@ class JobInvocationsController < ApplicationController
         'create'
       when 'preview_hosts'
         'create'
+      when 'cancel'
+        'cancel'
       else
         super
     end

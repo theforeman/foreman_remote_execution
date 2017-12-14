@@ -98,12 +98,6 @@ module Api
       param :id, :identifier, :required => true
       param :force, :bool
       def cancel
-        unless Authorizer.new(User.current, :collection => [@job_invocation.task]).can? :edit_foreman_tasks
-          render :json => { :error => _('The user is not authorized to cancel the job') },
-                 :status => 403
-          return
-        end
-
         if @job_invocation.task.cancellable?
           result = @job_invocation.cancel(params.fetch('force', false))
           render :json => { :cancelled => result, :id => @job_invocation.id }

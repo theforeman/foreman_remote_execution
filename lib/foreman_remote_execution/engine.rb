@@ -57,7 +57,7 @@ module ForemanRemoteExecution
           permission :view_job_invocations, { :job_invocations => [:index, :show, :auto_complete_search], :template_invocations => [:show],
                                               'api/v2/job_invocations' => [:index, :show, :output] }, :resource_type => 'JobInvocation'
           permission :create_template_invocations, {}, :resource_type => 'TemplateInvocation'
-          permission :cancel_job_invocations, { 'api/v2/job_invocations' => [:cancel] }, :resource_type => 'JobInvocation'
+          permission :cancel_job_invocations, { :job_invocations => [:cancel], 'api/v2/job_invocations' => [:cancel] }, :resource_type => 'JobInvocation'
           # this permissions grants user to get auto completion hints when setting up filters
           permission :filter_autocompletion_for_template_invocation, { :template_invocations => [ :auto_complete_search, :index ] },
                      :resource_type => 'TemplateInvocation'

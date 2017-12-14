@@ -117,12 +117,12 @@ module RemoteExecutionHelper
                          :title => _('See the last task details'))
     end
     if authorized_for(:permission => :cancel_job_invocations, :auth_object => job_invocation)
-      buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
+      buttons << link_to(_('Cancel Job'), cancel_job_invocation_path(job_invocation),
                          :class => 'btn btn-danger',
                          :title => _('Try to cancel the job'),
                          :disabled => !task.cancellable?,
                          :method => :post)
-      buttons << link_to(_('Abort Job'), abort_foreman_tasks_task_path(task),
+      buttons << link_to(_('Abort Job'), cancel_job_invocation_path(job_invocation, :force => true),
                          :class => 'btn btn-danger',
                          :title => _('Try to abort the job without waiting for the results from the remote hosts'),
                          :disabled => !task.cancellable?,

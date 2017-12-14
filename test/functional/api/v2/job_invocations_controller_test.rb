@@ -128,19 +128,6 @@ module Api
         post :cancel, :id => @invocation.id
         assert_response 422
       end
-
-      test 'should not allow the user to cancel the job if the user can\'t edit tasks' do
-        user = FactoryBot.build(:user)
-        user.roles << Role.find_by(:name => 'Tasks Reader')
-        user.roles << Role.find_by(:name => 'Remote Execution Manager')
-        user.save!
-
-        admin = User.current
-        User.current = user
-        post :cancel, :id => @invocation.id
-        assert_response 403
-        User.current = admin
-      end
     end
   end
 end
