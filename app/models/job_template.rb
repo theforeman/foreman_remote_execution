@@ -93,17 +93,33 @@ class JobTemplate < ::Template
         existing = self.find_by(:name => name) unless options.delete(:build_new)
         # Don't update if the template already exists, unless we're told to
         return if !options.delete(:update) && existing
-
         template = existing || self.new
         template.sync_inputs(metadata.delete('template_inputs'))
         template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
         template.sync_feature(metadata.delete('feature'))
         template.locked = false if options.delete(:force)
-        template.assign_attributes(metadata.merge(:template => text.gsub(/<%\#.+?.-?%>\n?/m, '').strip).merge(options))
-        template.assign_taxonomies if template.new_record?
+        template.assign_attributes(metadata.merge(:template => text.gsub(/<%\#.+?.-?%>\n?/m, '').strip).merge(options).except('organizations', 'locations'))
+        template.assign_taxonomies(metadata) if template.new_record?
         template
       end
       # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    end
+  end
+
+  def map_metadata(metadata, taxonomy)
+    if metadata[taxonomy]
+      case param
+      when 'locations'
+        metadata[taxonomy].map do |loc|
+          Location.all.map { |db| db.name =~ /^#{loc}/ ? db : nil }
+        end.flatten.compact
+      when 'organizations'
+        metadata[taxonomy].map do |org|
+          Organization.all.map { |db| db.name =~ /^#{org}/ ? db : nil }
+        end.flatten.compact
+      end
+    else
+      []
     end
   end
 
@@ -134,10 +150,10 @@ class JobTemplate < ::Template
     dup
   end
 
-  def assign_taxonomies
+  def assign_taxonomies(metadata)
     if default
-      organizations << Organization.all if SETTINGS[:organizations_enabled]
-      locations << Location.all if SETTINGS[:locations_enabled]
+      organizations << map_metadata(metadata, 'organizations') if SETTINGS[:organizations_enabled]
+      locations << map_metadata(metadata, 'locations') if SETTINGS[:locations_enabled]
     end
   end
 
