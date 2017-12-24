@@ -16,7 +16,7 @@ module Api
       end
 
       test 'should get invocation detail' do
-        get :show, :id => @invocation.id
+        get :show, params: { :id => @invocation.id }
         assert_response :success
         template = ActiveSupport::JSON.decode(@response.body)
         refute_empty template
@@ -26,7 +26,7 @@ module Api
       test 'should create valid with job_template_id' do
         attrs = { :job_category => @template.job_category, :name => 'RandomName', :job_template_id => @template.id,
                   :targeting_type => 'static_query', :search_query => 'foobar'}
-        post :create, :job_invocation => attrs
+        post :create, params: { :job_invocation => attrs }
 
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal attrs[:job_category], invocation['job_category']
@@ -36,7 +36,7 @@ module Api
       test 'should create with description format overridden' do
         attrs = { :job_category => @template.job_category, :name => 'RandomName', :job_template_id => @template.id,
                   :targeting_type => 'static_query', :search_query => 'foobar', :description_format => 'format' }
-        post :create, :job_invocation => attrs
+        post :create, params: { :job_invocation => attrs }
 
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal attrs[:description_format], invocation['description']
@@ -47,7 +47,7 @@ module Api
                   :job_template_id => @template.id,:targeting_type => 'static_query',
                   :search_query => 'foobar', :recurrence => {:cron_line => '5 * * * *'}}
 
-        post :create, :job_invocation => attrs
+        post :create, params: { :job_invocation => attrs }
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal invocation['mode'], 'recurring'
         assert_response :success
@@ -58,7 +58,7 @@ module Api
                   :job_template_id => @template.id,:targeting_type => 'static_query',
                   :search_query => 'foobar', :scheduling => {:start_at => Time.now.to_s}}
 
-        post :create, :job_invocation => attrs
+        post :create, params: { :job_invocation => attrs }
         invocation = ActiveSupport::JSON.decode(@response.body)
         assert_equal invocation['mode'], 'future'
         assert_response :success
@@ -67,7 +67,7 @@ module Api
       test 'should provide output for delayed task' do
         host = @invocation.template_invocations_hosts.first
         ForemanTasks::Task.any_instance.expects(:delayed?).returns(true)
-        get :output, :job_invocation_id => @invocation.id, :host_id => host.id
+        get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
         result = ActiveSupport::JSON.decode(@response.body)
         assert_equal result['delayed'], true
         assert_equal result['refresh'], true

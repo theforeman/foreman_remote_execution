@@ -18,7 +18,7 @@ module Api
       end
 
       test 'should get input set detail' do
-        get :show, :id => @remote_execution_feature.to_param
+        get :show, params: { :id => @remote_execution_feature.to_param }
         assert_response :success
         remote_execution_feature = ActiveSupport::JSON.decode(@response.body)
         refute remote_execution_feature.empty?
@@ -26,8 +26,7 @@ module Api
       end
 
       test 'should update valid' do
-        put :update, :id => @remote_execution_feature.to_param,
-                     :job_template_id => @template.id
+        put :update, params: { :id => @remote_execution_feature.to_param, :job_template_id => @template.id }
         assert_response :ok
       end
     end
