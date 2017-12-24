@@ -27,7 +27,7 @@ Style/TrailingCommaInLiteral:
 #Style/TrailingCommaInArguments:
 #Enabled: false
 
-Style/AccessorMethodName:
+Naming/AccessorMethodName:
   Enabled: false
 
 Style/RedundantSelf:
@@ -38,7 +38,7 @@ Metrics/ClassLength:
   Exclude:
        - 'test/**/*'
 
-Style/FileName:
+Naming/FileName:
   Exclude:
       - 'db/seeds.d/*'
 
@@ -69,7 +69,7 @@ Metrics/BlockLength:
 Metrics/ParameterLists:
   Enabled: false
 
-Style/VariableNumber:
+Naming/VariableNumber:
   Enabled: false
 
 # a == 0 is not the same as a.zero?, when a is not a number
@@ -95,7 +95,7 @@ Style/FormatString:
 Naming/HeredocDelimiterNaming:
   Enabled: false
 
-Lint/RescueWithoutErrorClass:
+Style/RescueStandardError:
   Enabled: false
 
 Lint/BooleanSymbol:
