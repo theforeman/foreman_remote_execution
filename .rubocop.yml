@@ -11,9 +11,6 @@ Rails:
 Rails/Date:
   Enabled: false
 
-Rails/HttpPositionalArguments:
-  Enabled: false
-
 # Don't enforce documentation
 Style/Documentation:
   Enabled: false
