@@ -1,4 +1,4 @@
-class Targeting < ActiveRecord::Base
+class Targeting < ApplicationRecord
 
   STATIC_TYPE = 'static_query'.freeze
   DYNAMIC_TYPE = 'dynamic_query'.freeze

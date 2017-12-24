@@ -1,4 +1,4 @@
-class TemplateInvocation < ActiveRecord::Base
+class TemplateInvocation < ApplicationRecord
   include Authorizable
   include ForemanTasks::Concerns::ActionSubject
 

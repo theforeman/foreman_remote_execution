@@ -1,4 +1,4 @@
-class TemplateInvocationInputValue < ActiveRecord::Base
+class TemplateInvocationInputValue < ApplicationRecord
 
   belongs_to :template_invocation
   belongs_to :template_input

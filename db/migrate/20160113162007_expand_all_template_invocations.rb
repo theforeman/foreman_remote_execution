@@ -1,11 +1,11 @@
 class ExpandAllTemplateInvocations < ActiveRecord::Migration[4.2]
-  class FakeTemplateInvocation < ActiveRecord::Base
+  class FakeTemplateInvocation < ApplicationRecord
     self.table_name = 'template_invocations'
 
     has_many :input_values, :class_name => 'FakeInputValue', :foreign_key => 'template_invocation_id'
   end
 
-  class FakeInputValue < ActiveRecord::Base
+  class FakeInputValue < ApplicationRecord
     self.table_name = 'template_invocation_input_values'
   end
 
