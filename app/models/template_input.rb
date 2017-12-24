@@ -1,4 +1,4 @@
-class TemplateInput < ActiveRecord::Base
+class TemplateInput < ApplicationRecord
   include ForemanRemoteExecution::Exportable
 
   class ValueNotReady < ::Foreman::Exception

@@ -1,4 +1,4 @@
-class JobTemplateEffectiveUser < ActiveRecord::Base
+class JobTemplateEffectiveUser < ApplicationRecord
 
   belongs_to :job_template
 

@@ -1,5 +1,5 @@
 class AddExecutionToInterface < ActiveRecord::Migration[4.2]
-  class FakeNic < ActiveRecord::Base
+  class FakeNic < ApplicationRecord
     self.table_name = 'nics'
 
     def type

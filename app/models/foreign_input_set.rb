@@ -1,4 +1,4 @@
-class ForeignInputSet < ActiveRecord::Base
+class ForeignInputSet < ApplicationRecord
   include ForemanRemoteExecution::Exportable
 
   class CircularDependencyError < Foreman::Exception

@@ -1,4 +1,4 @@
-class RemoteExecutionFeature < ActiveRecord::Base
+class RemoteExecutionFeature < ApplicationRecord
   VALID_OPTIONS = [:provided_inputs, :description, :host_action_button].freeze
   validates :label, :name, :presence => true, :uniqueness => true
 
