@@ -1,5 +1,5 @@
 class TemplateInput < ApplicationRecord
-  include ForemanRemoteExecution::Exportable
+  include ::Exportable
 
   class ValueNotReady < ::Foreman::Exception
   end

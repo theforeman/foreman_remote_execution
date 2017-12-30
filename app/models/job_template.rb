@@ -1,10 +1,10 @@
 class JobTemplate < ::Template
-  include ForemanRemoteExecution::Exportable
+  include ::Exportable
 
   class NonUniqueInputsError < Foreman::Exception
   end
 
-  attr_exportable :name, :job_category, :description_format, :snippet, :template_inputs,
+  attr_exportable :job_category, :description_format, :template_inputs,
                   :foreign_input_sets, :provider_type, :kind => ->(template) { template.class.name.underscore }
 
   include Authorizable
