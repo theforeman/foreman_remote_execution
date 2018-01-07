@@ -89,7 +89,12 @@ class JobInvocationsController < ApplicationController
     if params[:feature].present?
       JobInvocationComposer.for_feature(params[:feature], params[:host_ids], {})
     else
-      JobInvocationComposer.from_ui_params(params.merge(:triggering => triggering_params))
+      # triggering_params is a Hash
+      #   when a hash is merged into ActionController::Parameters,
+      #   it is assumed not to be #permitted?
+      with_triggering = params.merge(:triggering => triggering_params)
+      with_triggering[:triggering].permit!
+      JobInvocationComposer.from_ui_params(with_triggering)
     end
   end
 end
