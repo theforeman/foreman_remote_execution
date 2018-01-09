@@ -130,7 +130,7 @@ class JobInvocationComposer
 
     def template_invocations_params
       template_invocation_params = { :template_id => template.id, :effective_user => api_params[:effective_user] }
-      template_invocation_params[:input_values] = api_params.fetch(:inputs, {}).map do |name, value|
+      template_invocation_params[:input_values] = api_params.fetch(:inputs, {}).to_h.map do |name, value|
         input = template.template_inputs_with_foreign.find { |i| i.name == name }
         unless input
           raise ::Foreman::Exception, _('Unknown input %{input_name} for template %{template_name}') %
