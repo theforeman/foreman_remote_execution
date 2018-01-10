@@ -119,5 +119,14 @@ module ForemanRemoteExecution
         planned.input[:concurrency_control][:level].wont_be_empty
       end
     end
+
+    describe 'notifications' do
+      it 'creates notification on sucess run' do
+        FactoryBot.create(:notification_blueprint, :name => 'rex_job_succeeded')
+        assert_difference 'NotificationRecipient.where(:user_id => targeting.user.id).count' do
+          finalize_action planned
+        end
+      end
+    end
   end
 end
