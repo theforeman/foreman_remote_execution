@@ -4,6 +4,7 @@ RemoteExecutionProvider.register(:Mcollective, OpenStruct)
 
 class JobInvocationComposerTest < ActiveSupport::TestCase
   before do
+    setup_user('create', 'template_invocations')
     setup_user('view',   'job_templates', 'name ~ trying*')
     setup_user('create', 'job_templates', 'name ~ trying*')
     setup_user('view',   'job_invocations')
