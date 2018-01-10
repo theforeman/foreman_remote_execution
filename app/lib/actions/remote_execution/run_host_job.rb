@@ -140,7 +140,7 @@ module Actions
         # we don't want to load all template_invocations to verify so we construct Authorizer object manually and set
         # the base collection to current template
         authorizer = Authorizer.new(User.current, :collection => [ template_invocation.id ])
-        raise _('User can not execute this job template on %s') % host.name unless authorizer.can?(:execute_template_invocation, template_invocation)
+        raise _('User can not execute this job template on %s') % host.name unless authorizer.can?(:create_template_invocations, template_invocation)
 
         true
       end

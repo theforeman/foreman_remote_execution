@@ -56,7 +56,7 @@ module ForemanRemoteExecution
                                                 'api/v2/job_invocations' => [:create] }, :resource_type => 'JobInvocation'
           permission :view_job_invocations, { :job_invocations => [:index, :show, :auto_complete_search], :template_invocations => [:show],
                                               'api/v2/job_invocations' => [:index, :show, :output] }, :resource_type => 'JobInvocation'
-          permission :execute_template_invocation, {}, :resource_type => 'TemplateInvocation'
+          permission :create_template_invocations, {}, :resource_type => 'TemplateInvocation'
           # this permissions grants user to get auto completion hints when setting up filters
           permission :filter_autocompletion_for_template_invocation, { :template_invocations => [ :auto_complete_search, :index ] },
                      :resource_type => 'TemplateInvocation'
@@ -66,7 +66,7 @@ module ForemanRemoteExecution
           :view_job_templates,
           :view_job_invocations,
           :create_job_invocations,
-          :execute_template_invocation,
+          :create_template_invocations,
           :view_hosts,
           :view_smart_proxies
         ].freeze
