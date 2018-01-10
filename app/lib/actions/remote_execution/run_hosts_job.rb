@@ -66,6 +66,12 @@ module Actions
         super unless event == Dynflow::Action::Skip
       end
 
+      def finalize
+        # creating the success notification should be the very last thing this tasks do
+        job_invocation = JobInvocation.find(input[:job_invocation_id])
+        job_invocation.build_notification.deliver!
+      end
+
       def humanized_input
         input.fetch(:job_invocation, {}).fetch(:description, '')
       end
