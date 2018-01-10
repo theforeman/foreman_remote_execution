@@ -102,7 +102,7 @@ FactoryBot.modify do
 
   factory :smart_proxy do
     trait :ssh do
-      features { [FactoryBot.build(:feature, :ssh)] }
+      features { [FactoryBot.create(:feature, :ssh)] }
       pubkey 'ssh-rsa AAAAB3N...'
     end
   end
