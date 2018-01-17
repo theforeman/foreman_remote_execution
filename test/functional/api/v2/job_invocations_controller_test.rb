@@ -102,7 +102,7 @@ module Api
         @invocation.task.expects(:cancellable?).returns(true)
         @invocation.task.expects(:cancel).returns(true)
         JobInvocation.expects(:from_param).with(@invocation.id.to_s).returns(@invocation)
-        post :cancel, :id => @invocation.id
+        post :cancel, :params => { :id => @invocation.id }
         result = ActiveSupport::JSON.decode(@response.body)
         assert_equal result['cancelled'], true
         assert_equal result['id'], @invocation.id
@@ -114,7 +114,7 @@ module Api
         @invocation.task.expects(:cancellable?).returns(true)
         @invocation.task.expects(:abort).returns(true)
         JobInvocation.expects(:from_param).with(@invocation.id.to_s).returns(@invocation)
-        post :cancel, :id => @invocation.id, :force => true
+        post :cancel, :params => { :id => @invocation.id, :force => true }
         result = ActiveSupport::JSON.decode(@response.body)
         assert_equal result['cancelled'], true
         assert_equal result['id'], @invocation.id
@@ -125,7 +125,7 @@ module Api
       test 'should error when trying to cancel a stopped job' do
         @invocation.task.expects(:cancellable?).returns(false)
         JobInvocation.expects(:from_param).with(@invocation.id.to_s).returns(@invocation)
-        post :cancel, :id => @invocation.id
+        post :cancel, :params => { :id => @invocation.id }
         assert_response 422
       end
     end
