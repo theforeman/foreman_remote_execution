@@ -1,5 +1,6 @@
 class JobTemplate < ::Template
   include ForemanRemoteExecution::Exportable
+  include ForemanRemoteExecution::JobTemplateImportable
 
   class NonUniqueInputsError < Foreman::Exception
   end
@@ -74,13 +75,6 @@ class JobTemplate < ::Template
       template = import_raw(contents, options)
       template.save! if template
       template
-    end
-
-    # This method is used by foreman_templates to import templates, the API should be kept compatible with it
-    def import!(name, text, metadata, force = false)
-      metadata = metadata.dup
-      metadata.delete('associate')
-      JobTemplateImporter.import!(name, text, metadata)
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -173,7 +167,6 @@ class JobTemplate < ::Template
     inputs ||= []
     # Build a hash where keys are input names
     inputs = inputs.inject({}) { |h, input| h.update(input['name'] => input) }
-
     # Sync existing inputs
     template_inputs.each do |existing_input|
       if inputs.include?(existing_input.name)
