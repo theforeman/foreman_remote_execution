@@ -1,5 +1,6 @@
 module ForemanRemoteExecutionCore
   class FakeScriptRunner < ForemanTasksCore::Runner::Base
+    DEFAULT_REFRESH_INTERVAL = 1
 
     @data = []
 
