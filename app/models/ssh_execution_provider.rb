@@ -24,5 +24,13 @@ class SSHExecutionProvider < RemoteExecutionProvider
     def ssh_port(host)
       Integer(host_setting(host, :remote_execution_ssh_port))
     end
+
+    def ssh_password(host)
+      host_setting(host, :remote_execution_ssh_password)
+    end
+
+    def ssh_key_passphrase(host)
+      host_setting(host, :remote_execution_ssh_key_passphrase)
+    end
   end
 end
