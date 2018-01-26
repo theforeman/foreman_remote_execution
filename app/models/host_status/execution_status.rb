@@ -7,8 +7,10 @@ class HostStatus::ExecutionStatus < HostStatus::Status
   QUEUED = 2
   # execution is in progress, dynflow task was created
   RUNNING = 3
+  # execution has been cancelled
+  CANCELLED = 4
   # mapping to string representation
-  STATUS_NAMES = { OK => 'succeeded', ERROR => 'failed', QUEUED => 'queued', RUNNING => 'running' }.freeze
+  STATUS_NAMES = { OK => 'succeeded', ERROR => 'failed', QUEUED => 'queued', RUNNING => 'running', CANCELLED => 'cancelled' }.freeze
 
   def relevant?(*args)
     execution_tasks.present?
@@ -34,6 +36,8 @@ class HostStatus::ExecutionStatus < HostStatus::Status
     case to_status(options)
       when OK
         execution_tasks.present? ? N_('Last execution succeeded') : N_('No execution finished yet')
+      when CANCELLED
+        N_('Last execution cancelled')
       when ERROR
         N_('Last execution failed')
       else
@@ -50,6 +54,8 @@ class HostStatus::ExecutionStatus < HostStatus::Status
       case status
         when OK
           [ "state = 'stopped' AND result = 'success'" ]
+        when CANCELLED
+          [ "state = 'stopped' AND result = 'cancelled'" ]
         when ERROR
           [ "state = 'stopped' AND (result = 'error' OR result = 'warning')" ]
         when QUEUED
@@ -70,6 +76,8 @@ class HostStatus::ExecutionStatus < HostStatus::Status
         QUEUED
       elsif task.state == 'stopped' && task.result == 'success'
         OK
+      elsif task.state == 'stopped' && task.result == 'cancelled'
+        CANCELLED
       elsif task.pending?
         RUNNING
       else
