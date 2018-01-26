@@ -37,6 +37,8 @@ module JobInvocationsChartHelper
       _('running %{percent}%%') % {:percent => percent}
     when HostStatus::ExecutionStatus::OK
       _('succeeded')
+    when HostStatus::ExecutionStatus::CANCELLED
+      _('cancelled')
     when HostStatus::ExecutionStatus::ERROR
       _('failed')
     else
