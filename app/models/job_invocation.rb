@@ -96,7 +96,7 @@ class JobInvocation < ApplicationRecord
       0
     else
       total ||= targeting.hosts.count
-      done  ||= sub_tasks.where(:result => %w(success warning error)).count
+      done  ||= sub_tasks.where(:id => template_invocations.select('run_host_job_task_id'), :result => %w(success warning error)).count
       ((done.to_f / total) * 100).round
     end
   end
@@ -193,11 +193,18 @@ class JobInvocation < ApplicationRecord
         acc.merge(key => 0)
       end
     else
-      counts  = task.sub_tasks_counts
-      done    = counts.values_at(*map.results).reduce(:+)
-      percent = progress(counts[:total], done)
+      counts  = sub_tasks_counts
+      percent = progress(counts[:total], nil)
       counts.merge(:progress => percent, :failed => counts.values_at(*map.status_to_task_result(:failed)).reduce(:+))
     end
+  end
+
+  def sub_tasks_counts
+    to_ret = %w[cancelled error pending success warning].inject({}) do |all, current|
+      all.update(current.to_sym => sub_tasks.where(:id => template_invocations.select('run_host_job_task_id'), :result => current).count)
+    end
+    to_ret[:total] = targeting.hosts.count
+    to_ret
   end
 
   private
