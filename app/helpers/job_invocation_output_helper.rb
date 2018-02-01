@@ -1,21 +1,20 @@
 module JobInvocationOutputHelper
   CONSOLE_COLOR = {
-      '31' => 'red',
-      '32' => 'lightgreen',
-      '33' => 'orange',
-      '34' => 'deepskyblue',
-      '35' => 'mediumpurple',
-      '36' => 'cyan',
-      '37' => 'grey',
-      '91' => 'red',
-      '92' => 'lightgreen',
-      '93' => 'yellow',
-      '94' => 'lightblue',
-      '95' => 'violet',
-      '96' => 'turquoise',
-      '0'  => 'default',
-    }
-  CONSOLE_COLOR.default = 'default'
+    '31' => 'red',
+    '32' => 'lightgreen',
+    '33' => 'orange',
+    '34' => 'deepskyblue',
+    '35' => 'mediumpurple',
+    '36' => 'cyan',
+    '37' => 'grey',
+    '91' => 'red',
+    '92' => 'lightgreen',
+    '93' => 'yellow',
+    '94' => 'lightblue',
+    '95' => 'violet',
+    '96' => 'turquoise',
+    '0'  => 'default',
+  }.tap { |h| h.default = 'default' }.freeze
 
   def colorize_line(line)
     line = line.gsub(/\e\[.*?m/) do |seq|
