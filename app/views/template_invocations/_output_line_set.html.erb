@@ -2,6 +2,6 @@
   <%= content_tag :div, :class => 'line ' + output_line_set['output_type'], :data => { :timestamp => output_line_set['timestamp'] } do %>
 
     <%= content_tag(:span, (@line_counter += 1).to_s.rjust(4).gsub(' ', '&nbsp;').html_safe + ':', :class => 'counter', :title => (output_line_set['timestamp'] && Time.at(output_line_set['timestamp']))) %>
-    <%= content_tag(:div, (line.empty? ? '&nbsp;' : h(line)).html_safe, :class => 'content') %>
+    <%= content_tag(:div, (line.empty? ? '&nbsp;' : colorize_line(line)).html_safe, :class => 'content') %>
   <% end %>
 <% end %>
