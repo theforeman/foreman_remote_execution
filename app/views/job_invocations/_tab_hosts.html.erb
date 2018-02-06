@@ -15,7 +15,7 @@
   <% end %>
   <br>
 
-  <table class="table table-bordered table-striped table-condensed">
+  <table class="<%= table_css_classes('table-condensed') %>">
     <thead>
     <tr>
       <th><%= sort :name, :as => _('Host') %></th>
