@@ -84,11 +84,10 @@ module ForemanRemoteExecution
     # In plan phase this is handled by #action_subject
     #   which is expected in tests
     it 'sets input in delay phase when delayed' do
-      delayed.input[:job_invocation]['id'].must_equal job_invocation.id
-      delayed.input[:job_invocation]['name'].must_equal job_invocation.job_category
-      delayed.input[:job_invocation]['description'].must_equal job_invocation.description
-      delayed.input[:password].must_equal job_invocation.password
-      delayed.input[:key_passphrase].must_equal job_invocation.key_passphrase
+      job_invocation_hash = delayed.input[:job_invocation]
+      job_invocation_hash['id'].must_equal job_invocation.id
+      job_invocation_hash['name'].must_equal job_invocation.job_category
+      job_invocation_hash['description'].must_equal job_invocation.description
       planned # To make the expectations happy
     end
 
