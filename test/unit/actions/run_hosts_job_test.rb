@@ -12,6 +12,8 @@ module ForemanRemoteExecution
       FactoryBot.build(:job_invocation, :with_template).tap do |invocation|
         invocation.targeting = targeting
         invocation.description = 'Some short description'
+        invocation.password = 'changeme'
+        invocation.key_passphrase = 'changemetoo'
         invocation.save
       end
     end
@@ -82,9 +84,10 @@ module ForemanRemoteExecution
     # In plan phase this is handled by #action_subject
     #   which is expected in tests
     it 'sets input in delay phase when delayed' do
-      delayed.input[:job_invocation]['id'].must_equal job_invocation.id
-      delayed.input[:job_invocation]['name'].must_equal job_invocation.job_category
-      delayed.input[:job_invocation]['description'].must_equal job_invocation.description
+      job_invocation_hash = delayed.input[:job_invocation]
+      job_invocation_hash['id'].must_equal job_invocation.id
+      job_invocation_hash['name'].must_equal job_invocation.job_category
+      job_invocation_hash['description'].must_equal job_invocation.description
       planned # To make the expectations happy
     end
 

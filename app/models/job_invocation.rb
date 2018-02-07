@@ -1,5 +1,7 @@
 class JobInvocation < ApplicationRecord
   include Authorizable
+  include Encryptable
+
   audited :except => [ :task_id, :targeting_id, :task_group_id, :triggering_id ]
 
   include ForemanRemoteExecution::ErrorsFlattener
@@ -64,6 +66,8 @@ class JobInvocation < ApplicationRecord
 
   delegate :start_at, :to => :task, :allow_nil => true
 
+  encrypts :password, :key_passphrase
+
   def self.search_by_status(key, operator, value)
     conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)
     conditions[0] = "NOT (#{conditions[0]})" if operator == '<>'
@@ -120,6 +124,8 @@ class JobInvocation < ApplicationRecord
       invocation.description_format = self.description_format
       invocation.description = self.description
       invocation.pattern_template_invocations = self.pattern_template_invocations.map(&:deep_clone)
+      invocation.password = self.password
+      invocation.key_passphrase = self.key_passphrase
     end
   end
 

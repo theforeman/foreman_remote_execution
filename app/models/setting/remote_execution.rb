@@ -1,5 +1,8 @@
 class Setting::RemoteExecution < Setting
 
+  ::Setting::BLANK_ATTRS.concat %w{remote_execution_ssh_password remote_execution_ssh_key_passphrase}
+
+  # rubocop:disable Metrics/MethodLength
   def self.load_defaults
     # Check the table exists
     return unless super
@@ -40,11 +43,23 @@ class Setting::RemoteExecution < Setting
         self.set('remote_execution_connect_by_ip',
                  N_('Should the ip addresses on host interfaces be preferred over the fqdn? '\
                  'It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip.'),
-                 false)
+                 false),
+        self.set('remote_execution_ssh_password',
+                 N_('Default password to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_password'),
+                 nil,
+                 N_('Default password to use for SSH'),
+                 nil,
+                 { :encrypted => true }),
+        self.set('remote_execution_ssh_key_passphrase',
+                 N_('Default key passphrase to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_key_passphrase'),
+                 nil,
+                 N_('Default key passphrase to use for SSH'),
+                 nil,
+                 { :encrypted => true })
       ].each { |s| self.create! s.update(:category => 'Setting::RemoteExecution') }
     end
 
     true
   end
-
+  # rubocop:enable Metrics/MethodLength
 end

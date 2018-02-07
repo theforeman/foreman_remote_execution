@@ -15,6 +15,14 @@ class SSHExecutionProvider < RemoteExecutionProvider
       true
     end
 
+    def ssh_password(host)
+      host_setting(host, :remote_execution_ssh_password)
+    end
+
+    def ssh_key_passphrase(host)
+      host_setting(host, :remote_execution_ssh_key_passphrase)
+    end
+
     private
 
     def ssh_user(host)

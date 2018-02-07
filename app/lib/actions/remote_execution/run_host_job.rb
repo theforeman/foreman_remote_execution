@@ -5,12 +5,12 @@ module Actions
       include ::Actions::Helpers::WithDelegatedAction
 
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
+      middleware.use Actions::Middleware::HideSecrets
 
       def resource_locks
         :link
       end
 
-      # rubocop:disable Metrics/AbcSize
       def plan(job_invocation, host, template_invocation, proxy_selector = ::RemoteExecutionProxySelector.new, options = {})
         action_subject(host, :job_category => job_invocation.job_category, :description => job_invocation.description)
 
@@ -25,32 +25,25 @@ module Actions
 
         raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
-        provider = template_invocation.template.provider_type.to_s
-        proxy = proxy_selector.determine_proxy(host, provider)
-        if proxy == :not_available
-          offline_proxies = proxy_selector.offline
-          settings = { :count => offline_proxies.count, :proxy_names => offline_proxies.map(&:name).join(', ') }
-          raise n_('The only applicable proxy %{proxy_names} is down',
-                   'All %{count} applicable proxies are down. Tried %{proxy_names}',
-                   offline_proxies.count) % settings
-        elsif proxy == :not_defined && !Setting['remote_execution_without_proxy']
-          settings = { :global_proxy => 'remote_execution_global_proxy',
-                       :fallback_proxy => 'remote_execution_fallback_proxy',
-                       :no_proxy => 'remote_execution_no_proxy' }
-
-          raise _('Could not use any proxy. Consider configuring %{global_proxy}, ' +
-                  '%{fallback_proxy} or %{no_proxy} in settings') % settings
-        end
+        provider_type = template_invocation.template.provider_type.to_s
+        proxy = determine_proxy!(proxy_selector, provider_type, host)
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render
         raise _('Failed rendering template: %s') % renderer.error_message unless script
 
         provider = template_invocation.template.provider
-        hostname = provider.find_ip_or_hostname(host)
+
+        secrets = { :ssh_password => job_invocation.password || provider.ssh_password(host),
+                    :key_passphrase => job_invocation.key_passphrase || provider.ssh_key_passphrase(host) }
+
+        additional_options = { :hostname => provider.find_ip_or_hostname(host),
+                               :script => script,
+                               :execution_timeout_interval => job_invocation.execution_timeout_interval,
+                               :secrets => secrets }
         action_options = provider.proxy_command_options(template_invocation, host)
-                                 .merge(:hostname => hostname, :script => script,
-                                        :execution_timeout_interval => job_invocation.execution_timeout_interval)
+                                 .merge(additional_options)
+
         plan_delegated_action(proxy, ForemanRemoteExecutionCore::Actions::RunScript, action_options)
         plan_self
       end
@@ -143,6 +136,25 @@ module Actions
         raise _('User can not execute this job template on %s') % host.name unless authorizer.can?(:create_template_invocations, template_invocation)
 
         true
+      end
+
+      def determine_proxy!(proxy_selector, provider, host)
+        proxy = proxy_selector.determine_proxy(host, provider)
+        if proxy == :not_available
+          offline_proxies = proxy_selector.offline
+          settings = { :count => offline_proxies.count, :proxy_names => offline_proxies.map(&:name).join(', ') }
+          raise n_('The only applicable proxy %{proxy_names} is down',
+                   'All %{count} applicable proxies are down. Tried %{proxy_names}',
+                   offline_proxies.count) % settings
+        elsif proxy == :not_defined && !Setting['remote_execution_without_proxy']
+          settings = { :global_proxy => 'remote_execution_global_proxy',
+                       :fallback_proxy => 'remote_execution_fallback_proxy',
+                       :no_proxy => 'remote_execution_no_proxy' }
+
+          raise _('Could not use any proxy. Consider configuring %{global_proxy}, ' +
+                  '%{fallback_proxy} or %{no_proxy} in settings') % settings
+        end
+        proxy
       end
     end
   end

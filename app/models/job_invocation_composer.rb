@@ -12,6 +12,8 @@ class JobInvocationComposer
         :triggering => triggering,
         :host_ids => ui_params[:host_ids],
         :description_format => job_invocation_base[:description_format],
+        :password => blank_to_nil(job_invocation_base[:password]),
+        :key_passphrase => blank_to_nil(job_invocation_base[:key_passphrase]),
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => execution_timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
@@ -30,6 +32,10 @@ class JobInvocationComposer
         id = provider[:job_template_id]
         provider.fetch(:job_templates, {}).fetch(id, {})[:execution_timeout_interval]
       end.first
+    end
+
+    def blank_to_nil(thing)
+      thing.blank? ? nil : thing
     end
 
     # TODO: Fix this comment
@@ -304,6 +310,7 @@ class JobInvocationComposer
     self.new(ParamsForFeature.new(feature_label, hosts, provided_inputs).params)
   end
 
+  # rubocop:disable Metrics/AbcSize
   def compose
     job_invocation.job_category = validate_job_category(params[:job_category])
     job_invocation.job_category ||= available_job_categories.first if @set_defaults
@@ -314,9 +321,12 @@ class JobInvocationComposer
     job_invocation.time_span = params[:concurrency_control][:time_span].to_i if params[:concurrency_control][:time_span].present?
     job_invocation.concurrency_level = params[:concurrency_control][:level].to_i if params[:concurrency_control][:level].present?
     job_invocation.execution_timeout_interval = params[:execution_timeout_interval]
+    job_invocation.password = params[:password]
+    job_invocation.key_passphrase = params[:key_passphrase]
 
     self
   end
+  # rubocop:enable Metrics/AbcSize
 
   def trigger(raise_on_error = false)
     generate_description

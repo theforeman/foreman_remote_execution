@@ -26,7 +26,6 @@ module Actions
       end
 
       def create_sub_plans
-        job_invocation = JobInvocation.find(input[:job_invocation_id])
         proxy_selector = RemoteExecutionProxySelector.new
 
         current_batch.map do |host|
@@ -38,6 +37,18 @@ module Actions
         end
       end
 
+      def finalize
+        job_invocation.password = job_invocation.key_passphrase = nil
+        job_invocation.save!
+
+        # creating the success notification should be the very last thing this tasks do
+        job_invocation.build_notification.deliver!
+      end
+
+      def job_invocation
+        @job_invocation ||= JobInvocation.find(input[:job_invocation_id])
+      end
+
       def batch(from, size)
         hosts.offset(from).limit(size)
       end
@@ -47,7 +58,7 @@ module Actions
       end
 
       def hosts
-        JobInvocation.find(input[:job_invocation_id]).targeting.hosts.order(:name, :id)
+        job_invocation.targeting.hosts.order(:name, :id)
       end
 
       def set_up_concurrency_control(invocation)
@@ -64,12 +75,6 @@ module Actions
 
       def run(event = nil)
         super unless event == Dynflow::Action::Skip
-      end
-
-      def finalize
-        # creating the success notification should be the very last thing this tasks do
-        job_invocation = JobInvocation.find(input[:job_invocation_id])
-        job_invocation.build_notification.deliver!
       end
 
       def humanized_input

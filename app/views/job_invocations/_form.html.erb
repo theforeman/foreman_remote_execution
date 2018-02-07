@@ -90,6 +90,11 @@
     <% end %>
 
     <div class="advanced hidden">
+      <%= password_f f, :password, :placeholder => '*****', :label => _('Password') %>
+      <%= password_f f, :key_passphrase, :placeholder => '*****', :label => _('Private key passphrase') %>
+    </div>
+
+    <div class="advanced hidden">
       <%= number_f f, :concurrency_level, :label => _('Concurrency level'), :placeholder => 'N', :min => 1, :help_inline => N_("Run at most N tasks at a time") %>
       <%= number_f f, :time_span, :label => _('Time span'), :placeholder => 'N', :min => 1, :help_inline => N_("Distribute execution over N seconds")  %>
     </div>
