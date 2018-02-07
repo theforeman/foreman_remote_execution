@@ -1,7 +1,8 @@
 class Setting::RemoteExecution < Setting
 
-  ::Setting::BLANK_ATTRS.concat %w{ remote_execution_ssh_password remote_execution_ssh_key_passphrase }
+  ::Setting::BLANK_ATTRS.concat %w{remote_execution_ssh_password remote_execution_ssh_key_passphrase}
 
+  # rubocop:disable Metrics/MethodLength
   def self.load_defaults
     # Check the table exists
     return unless super
@@ -60,5 +61,5 @@ class Setting::RemoteExecution < Setting
 
     true
   end
-
+  # rubocop:enable Metrics/MethodLength
 end

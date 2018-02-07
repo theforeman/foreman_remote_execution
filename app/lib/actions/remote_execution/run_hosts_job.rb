@@ -40,6 +40,9 @@ module Actions
       def finalize
         job_invocation.password = job_invocation.key_passphrase = nil
         job_invocation.save!
+
+        # creating the success notification should be the very last thing this tasks do
+        job_invocation.build_notification.deliver!
       end
 
       def job_invocation
@@ -72,12 +75,6 @@ module Actions
 
       def run(event = nil)
         super unless event == Dynflow::Action::Skip
-      end
-
-      def finalize
-        # creating the success notification should be the very last thing this tasks do
-        job_invocation = JobInvocation.find(input[:job_invocation_id])
-        job_invocation.build_notification.deliver!
       end
 
       def humanized_input
