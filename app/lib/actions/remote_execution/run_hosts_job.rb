@@ -8,6 +8,8 @@ module Actions
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
 
+      execution_plan_hooks.use ::Hooks::TriggerRepeat
+
       def queue
         ForemanRemoteExecution::DYNFLOW_QUEUE
       end
