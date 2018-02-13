@@ -1,0 +1,33 @@
+<% template_invocations = job_invocation.pattern_template_invocations %>
+<div class="card-pf card-pf-accented">
+  <div class="card-pf-title">
+    <h2 style="height: 18px;" class="card-pf-title">
+      <%= _('Target hosts') %>
+    </h2>
+  </div>
+  <div class="card-pf-body">
+    <p>
+    <% if job_invocation.bookmark.present? %>
+      <%= _('Bookmark') %> <%= job_invocation.bookmark.name %><br>
+    <% else %>
+      <%= _('Manual selection') %>
+    <% end %>
+    <%= _('using ') %>
+    <strong><%= _(Targeting::TYPES[job_invocation.targeting.targeting_type]).downcase %></strong>
+    <pre><%= job_invocation.targeting.search_query %></pre>
+    </p>
+  </div>
+  <div class='card-pf-footer'>
+    <p>
+    <%= _('Evaluated at:') %> <%= job_invocation.targeting.resolved_at %><br>
+    <% if template_invocations.size > 1 %>
+      <% template_invocations.each do |template_invocation| %>
+        <%= host_counter template_invocation.template.provider.humanized_name,
+          ForemanTasks::Task::DynflowTask.
+          for_action(Actions::RemoteExecution::RunHostJob).
+          for_resource(template_invocation).uniq.size %>
+      <% end %>
+    <% end %>
+    </p>
+  </div>
+</div>
