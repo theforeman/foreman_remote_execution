@@ -1,0 +1,13 @@
+scss:
+  enabled: false
+
+stylelint:
+  enabled: true
+
+ruby:
+  config_file: .rubocop.yml
+
+jshint:
+  enabled: false
+
+fail_on_violations: true

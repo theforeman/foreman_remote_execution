@@ -7,7 +7,6 @@ module Api
       before_action :find_optional_nested_object
       before_action :find_host, :only => %w{output}
       before_action :find_resource, :only => %w{show update destroy clone}
-      before_action :validate_template, :only => :create
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -59,7 +58,14 @@ module Api
       api :POST, '/job_invocations/', N_('Create a job invocation')
       param_group :job_invocation, :as => :create
       def create
-        composer = JobInvocationComposer.from_api_params(job_invocation_params)
+        if job_invocation_params[:feature].present?
+          composer = composer_for_feature
+        else
+          validate_template
+          composer = JobInvocationComposer.from_api_params(
+            job_invocation_params
+          )
+        end
         composer.trigger!
         @job_invocation = composer.job_invocation
         process_response @job_invocation
@@ -112,11 +118,23 @@ module Api
       end
 
       def job_invocation_params
+        return @job_invocation_params if @job_invocation_params.present?
         job_invocation_params = params.fetch(:job_invocation, {}).dup
         job_invocation_params.merge!(job_invocation_params.delete(:ssh)) if job_invocation_params.key?(:ssh)
         job_invocation_params[:inputs] ||= {}
         job_invocation_params[:inputs].permit!
         job_invocation_params
+      end
+
+      def composer_for_feature
+        hosts = job_invocation_params[:host_ids].map do |id|
+          resource_finder(scope_for(Host::Managed), id)
+        end
+        JobInvocationComposer.for_feature(
+          job_invocation_params[:feature],
+          hosts,
+          job_invocation_params[:inputs].to_hash
+        )
       end
     end
   end
