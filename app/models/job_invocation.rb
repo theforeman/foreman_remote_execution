@@ -49,6 +49,8 @@ class JobInvocation < ApplicationRecord
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
   has_one :recurring_logic, :through => :triggering, :class_name => 'ForemanTasks::RecurringLogic'
 
+  belongs_to :remote_execution_feature
+
   scope :with_task, -> { references(:task) }
 
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
@@ -87,7 +89,16 @@ class JobInvocation < ApplicationRecord
   end
 
   def build_notification
-    UINotifications::RemoteExecutionJobs::BaseJobFinish.new(self)
+    klass = nil
+    if self.remote_execution_feature && self.remote_execution_feature.notification_builder.present?
+      begin
+        klass = remote_execution_feature.notification_builder.constantize
+      rescue NameError => e
+        logger.exception "REX feature defines unknown notification builder class", e
+      end
+    end
+    klass ||= UINotifications::RemoteExecutionJobs::BaseJobFinish
+    klass.new(self)
   end
 
   def status

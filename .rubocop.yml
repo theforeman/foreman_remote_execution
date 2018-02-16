@@ -91,5 +91,14 @@ Naming/HeredocDelimiterNaming:
 Style/RescueStandardError:
   Enabled: false
 
+Style/SafeNavigation:
+  Enabled: false
+
 Lint/BooleanSymbol:
   Enabled: false
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+Metrics/AbcSize:
+  Max: 45
