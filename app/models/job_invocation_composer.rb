@@ -254,6 +254,7 @@ class JobInvocationComposer
     end
 
     def input_values_params
+      return {} if @provided_inputs.blank?
       @provided_inputs.map do |key, value|
         input = job_template.template_inputs_with_foreign.find { |i| i.name == key.to_s }
         unless input
