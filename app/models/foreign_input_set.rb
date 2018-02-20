@@ -1,5 +1,5 @@
 class ForeignInputSet < ApplicationRecord
-  include ForemanRemoteExecution::Exportable
+  include ::Exportable
 
   class CircularDependencyError < Foreman::Exception
   end
