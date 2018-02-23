@@ -224,6 +224,10 @@ class JobInvocationComposer
         @host_bookmark = hosts
       elsif hosts.is_a? Host::Base
         @host_objects = [hosts]
+      elsif hosts.is_a? Array
+        @host_objects = hosts.map do |id|
+          Host::Managed.authorized.friendly.find(id)
+        end
       elsif hosts.is_a? String
         @host_scoped_search = hosts
       else

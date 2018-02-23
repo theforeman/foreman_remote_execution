@@ -64,26 +64,35 @@ module Api
           assert_response :success
         end
 
-        test 'should create with feature' do
-          feature = FactoryBot.create(:remote_execution_feature,
-                                      :job_template => @template)
-          attrs = {
-            feature: feature.label,
-            host_ids: ['testfqdn'],
-            inputs: { 'plan_id' => 3, 'organization_id' => 10 }
-          }
-          # To avoid creating a host that has to be found on the
-          # JobInvocationComposer I just mock it here
-          Api::V2::JobInvocationsController.any_instance
-                                           .expects(:resource_finder)
-                                           .returns('testfqdn')
-          JobInvocationComposer.expects(:for_feature).with(
-            attrs[:feature],
-            anything,
-            has_entries('plan_id' => 3, 'organization_id' => 10)
-          ).returns(OpenStruct.new(trigger!: true, job_invocation: @invocation))
-          post :create, params: { job_invocation: attrs }
-          assert_response :success
+        context 'with_feature' do
+          setup do
+            @feature = FactoryBot.create(:remote_execution_feature,
+                                         :job_template => @template)
+            @attrs = {
+              feature: @feature.label
+            }
+          end
+
+          test 'host ids as array of FQDNs' do
+            host = FactoryBot.create(:host)
+            @attrs[:host_ids] = [host.fqdn]
+            post :create, params: { job_invocation: @attrs }
+            assert_response :success
+          end
+
+          test 'host ids as array of IDs' do
+            host = FactoryBot.create(:host)
+            host2 = FactoryBot.create(:host)
+            @attrs[:host_ids] = [host.id, host2.id]
+            post :create, params: { job_invocation: @attrs }
+            assert_response :success
+          end
+
+          test 'search_query' do
+            @attrs[:host_ids] = 'name = testfqdn'
+            post :create, params: { job_invocation: @attrs }
+            assert_response :success
+          end
         end
       end
 
