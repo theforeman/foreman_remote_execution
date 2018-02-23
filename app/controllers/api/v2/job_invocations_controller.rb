@@ -49,7 +49,7 @@ module Api
           end
 
           param :bookmark_id, Integer, :required => false
-          param :search_query, Integer, :required => false
+          param :search_query, String, :required => false
           param :description_format, String, :required => false, :desc => N_('Override the description format from the template for this invocation only')
           param :execution_timeout_interval, Integer, :required => false, :desc => N_('Override the timeout interval from the template for this invocation only')
         end
@@ -123,16 +123,13 @@ module Api
         job_invocation_params.merge!(job_invocation_params.delete(:ssh)) if job_invocation_params.key?(:ssh)
         job_invocation_params[:inputs] ||= {}
         job_invocation_params[:inputs].permit!
-        job_invocation_params
+        @job_invocation_params = job_invocation_params
       end
 
       def composer_for_feature
-        hosts = job_invocation_params[:host_ids].map do |id|
-          resource_finder(scope_for(Host::Managed), id)
-        end
         JobInvocationComposer.for_feature(
           job_invocation_params[:feature],
-          hosts,
+          job_invocation_params[:host_ids],
           job_invocation_params[:inputs].to_hash
         )
       end
