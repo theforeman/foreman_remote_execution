@@ -23,7 +23,7 @@ module Api
       # rubocop:disable Metrics/BlockLength
       def_param_group :job_invocation do
         param :job_invocation, Hash, :required => true, :action_aware => true do
-          param :job_template_id, String, :required => true, :desc => N_('The job template to use')
+          param :job_template_id, String, :required => false, :desc => N_('The job template to use, parameter is required unless feature was specified')
           param :targeting_type, String, :required => true, :desc => N_('Invocation type, one of %s') % Targeting::TYPES
           param :inputs, Hash, :required => false, :desc => N_('Inputs to use')
           param :ssh, Hash, :desc => N_('SSH provider specific options') do
@@ -52,6 +52,7 @@ module Api
           param :search_query, Integer, :required => false
           param :description_format, String, :required => false, :desc => N_('Override the description format from the template for this invocation only')
           param :execution_timeout_interval, Integer, :required => false, :desc => N_('Override the timeout interval from the template for this invocation only')
+          param :feature, String, :required => false, :desc => N_('Remote execution feature label that should be triggered, job template assigned to this feature will be used')
         end
       end
 
