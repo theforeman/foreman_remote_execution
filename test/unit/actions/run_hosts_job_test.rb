@@ -1,5 +1,5 @@
-
 require 'test_plugin_helper'
+require 'securerandom'
 
 module ForemanRemoteExecution
   class RunHostsJobTest < ActiveSupport::TestCase
@@ -18,8 +18,9 @@ module ForemanRemoteExecution
       end
     end
 
+    let(:uuid) { SecureRandom.uuid }
     let(:task) do
-      OpenStruct.new(:id => '123').tap do |o|
+      OpenStruct.new(:id => uuid).tap do |o|
         o.stubs(:add_missing_task_groups)
         o.stubs(:task_groups).returns([])
       end
@@ -78,7 +79,7 @@ module ForemanRemoteExecution
 
     it 'uses the BindJobInvocation middleware' do
       planned
-      job_invocation.task_id.must_equal '123'
+      job_invocation.task_id.must_equal uuid
     end
 
     # In plan phase this is handled by #action_subject

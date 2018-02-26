@@ -14,7 +14,7 @@ class ForemanRemoteExecutionForemanTasksCleanerExtensionsTest < ActiveSupport::T
     job.reload
     job.task.must_be :nil?
     job.task_id.wont_be :nil?
-    ForemanTasks::Cleaner.new(:filter => 'id = 1').delete
+    ForemanTasks::Cleaner.new(:filter => '').delete
     JobInvocation.where(:id => job.id).must_be :empty?
   end
 end
