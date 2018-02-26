@@ -11,6 +11,7 @@ class JobInvocationComposer
         :targeting => ui_params.fetch(:targeting, {}).merge(:user_id => User.current.id),
         :triggering => triggering,
         :host_ids => ui_params[:host_ids],
+        :remote_execution_feature_id => ui_params[:remote_execution_feature_id],
         :description_format => job_invocation_base[:description_format],
         :password => blank_to_nil(job_invocation_base[:password]),
         :key_passphrase => blank_to_nil(job_invocation_base[:key_passphrase]),
@@ -94,6 +95,7 @@ class JobInvocationComposer
         :targeting => targeting_params,
         :triggering => triggering_params,
         :description_format => api_params[:description_format],
+        :remote_execution_feature_id => api_params[:remote_execution_feature_id],
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => api_params[:execution_timeout_interval] || template.execution_timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
@@ -178,6 +180,7 @@ class JobInvocationComposer
         :description_format => job_invocation.description_format,
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => job_invocation.execution_timeout_interval,
+        :remote_execution_feature_id => job_invocation.remote_execution_feature_id,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -233,6 +236,7 @@ class JobInvocationComposer
         :targeting => targeting_params,
         :triggering => {},
         :concurrency_control => {},
+        :remote_execution_feature_id => @feature.id,
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -281,7 +285,7 @@ class JobInvocationComposer
   end
 
   attr_accessor :params, :job_invocation, :host_ids, :search_query
-  delegate :job_category, :pattern_template_invocations, :template_invocations, :targeting, :triggering, :to => :job_invocation
+  delegate :job_category, :remote_execution_feature_id, :pattern_template_invocations, :template_invocations, :targeting, :triggering, :to => :job_invocation
 
   def initialize(params, set_defaults = false)
     @params = params
@@ -314,6 +318,7 @@ class JobInvocationComposer
   def compose
     job_invocation.job_category = validate_job_category(params[:job_category])
     job_invocation.job_category ||= available_job_categories.first if @set_defaults
+    job_invocation.remote_execution_feature_id = params[:remote_execution_feature_id]
     job_invocation.targeting = build_targeting
     job_invocation.triggering = build_triggering
     job_invocation.pattern_template_invocations = build_template_invocations

@@ -1,5 +1,5 @@
 class RemoteExecutionFeature < ApplicationRecord
-  VALID_OPTIONS = [:provided_inputs, :description, :host_action_button].freeze
+  VALID_OPTIONS = [:provided_inputs, :description, :host_action_button, :notification_builder].freeze
   validates :label, :name, :presence => true, :uniqueness => true
 
   belongs_to :job_template
@@ -27,11 +27,19 @@ class RemoteExecutionFeature < ApplicationRecord
     options[:host_action_button] = false unless options.key?(:host_action_button)
 
     feature = self.find_by(label: label)
+    builder = options[:notification_builder] ? options[:notification_builder].to_s : nil
 
-    attributes = { :name => name, :provided_input_names => options[:provided_inputs], :description => options[:description], :host_action_button => options[:host_action_button] }
+    attributes = { :name => name,
+                   :provided_input_names => options[:provided_inputs],
+                   :description => options[:description],
+                   :host_action_button => options[:host_action_button],
+                   :notification_builder => builder }
     # in case DB does not have the attribute created yet but plugin initializer registers the feature, we need to skip this attribute
-    unless self.attribute_names.include?('host_action_button')
-      attributes.delete(:host_action_button)
+    attrs = [ :host_action_button, :notification_builder ]
+    attrs.each do |attr|
+      unless self.attribute_names.include?(attr.to_s)
+        attributes.delete(attr)
+      end
     end
 
     if feature.nil?

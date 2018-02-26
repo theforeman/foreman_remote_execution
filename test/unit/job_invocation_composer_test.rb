@@ -655,13 +655,30 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           },
           :targeting_type => 'static_query',
           :search_query => 'some hosts',
-          :inputs => {input1.name => 'some_value'}}
+          :inputs => { input1.name => 'some_value' } }
       end
 
       it 'sets the concurrency level and time span based on the input' do
         assert composer.save!
         composer.job_invocation.time_span.must_equal time_span
         composer.job_invocation.concurrency_level.must_equal level
+      end
+    end
+
+    context 'with rex feature defined' do
+      let(:feature) { FactoryBot.create(:remote_execution_feature) }
+      let(:params) do
+        { :job_category => trying_job_template_1.job_category,
+          :job_template_id => trying_job_template_1.id,
+          :remote_execution_feature_id => feature.id,
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
+          :inputs => { input1.name => 'some_value' } }
+      end
+
+      it 'sets the remote execution feature based on the input' do
+        assert composer.save!
+        composer.job_invocation.remote_execution_feature.must_equal feature
       end
     end
 
