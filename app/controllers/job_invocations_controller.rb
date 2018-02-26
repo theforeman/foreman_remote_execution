@@ -3,6 +3,7 @@ class JobInvocationsController < ApplicationController
   include ::ForemanTasks::Concerns::Parameters::Triggering
 
   def new
+    return @composer = prepare_composer if params[:feature].present?
     ui_params = {
       :host_ids => params[:host_ids],
       :targeting => {
@@ -87,7 +88,12 @@ class JobInvocationsController < ApplicationController
 
   def prepare_composer
     if params[:feature].present?
-      JobInvocationComposer.for_feature(params[:feature], params[:host_ids], {})
+      inputs = params[:inputs].permit!.to_hash if params.include?(:inputs)
+      JobInvocationComposer.for_feature(
+        params[:feature],
+        params[:host_ids],
+        inputs
+      )
     else
       # triggering_params is a Hash
       #   when a hash is merged into ActionController::Parameters,
