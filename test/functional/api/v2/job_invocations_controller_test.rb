@@ -144,7 +144,7 @@ module Api
                              .expects(:validate_job_category)
                              .with(@invocation.job_category)
                              .returns(@invocation.job_category)
-        post :rerun, :id => @invocation.id
+        post :rerun, params: { :id => @invocation.id }
         assert_response :success
         result = ActiveSupport::JSON.decode(@response.body)
         targeting = Targeting.find(result['targeting_id'])
