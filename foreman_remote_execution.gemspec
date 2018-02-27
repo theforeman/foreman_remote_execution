@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'deface'
   s.add_dependency 'dynflow', '~> 0.8.26'
   s.add_dependency 'foreman_remote_execution_core'
-  s.add_dependency 'foreman-tasks', '>= 0.11.1'
+  s.add_dependency 'foreman-tasks', '~> 0.12'
 
   s.add_development_dependency 'factory_bot_rails', '~> 4.8.0'
   s.add_development_dependency 'rubocop'
