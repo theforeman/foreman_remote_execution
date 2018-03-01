@@ -152,6 +152,8 @@ module ForemanRemoteExecutionCore
       ssh_options[:auth_methods] = available_authentication_methods
       ssh_options[:user_known_hosts_file] = prepare_known_hosts if @host_public_key
       ssh_options[:number_of_password_prompts] = 1
+      ssh_options[:verbose] = settings[:ssh_log_level]
+      ssh_options[:logger] = ForemanRemoteExecutionCore::LogFilter.new(SmartProxyDynflowCore::Log.instance)
       return ssh_options
     end
 
