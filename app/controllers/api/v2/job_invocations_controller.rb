@@ -6,7 +6,7 @@ module Api
 
       before_action :find_optional_nested_object
       before_action :find_host, :only => %w{output}
-      before_action :find_resource, :only => %w{show update destroy clone}
+      before_action :find_resource, :only => %w{show update destroy clone cancel}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -94,12 +94,27 @@ module Api
         end
       end
 
+      api :POST, '/job_invocations/:id/cancel', N_('Cancel job invocation')
+      param :id, :identifier, :required => true
+      param :force, :bool
+      def cancel
+        if @job_invocation.task.cancellable?
+          result = @job_invocation.cancel(params.fetch('force', false))
+          render :json => { :cancelled => result, :id => @job_invocation.id }
+        else
+          render :json => { :message => _('The job could not be cancelled.') },
+                 :status => 422
+        end
+      end
+
       private
 
       def action_permission
         case params[:action]
         when 'output'
           :view
+        when 'cancel'
+          :cancel
         else
           super
         end

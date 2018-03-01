@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
     member do
       get 'rerun'
+      post 'cancel'
     end
   end
 
@@ -41,6 +42,9 @@ Rails.application.routes.draw do
       resources :job_invocations, :except => [:new, :edit, :update, :destroy] do
         resources :hosts, :only => :none do
           get '/', :to => 'job_invocations#output'
+        end
+        member do
+          post 'cancel'
         end
       end
 

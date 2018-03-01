@@ -9,7 +9,7 @@
                      link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()', :class => 'btn btn-default'),
                      link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()', :class => 'btn btn-default'),
                      link_to_function(_('Toggle DEBUG'), '$("div.line.debug").toggle()', :class => 'btn btn-default')) %>
-    <%= button_group(template_invocation_task_buttons(@template_invocation_task)) %>
+    <%= button_group(template_invocation_task_buttons(@template_invocation_task, @template_invocation.job_invocation)) %>
   </div>
 </div>
 
