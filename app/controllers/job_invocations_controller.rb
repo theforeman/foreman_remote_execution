@@ -89,7 +89,7 @@ class JobInvocationsController < ApplicationController
                           _('The job cannot be cancelled at the moment.')
                         end
     end
-    redirect_to :back
+    redirect_back(:fallback_location => job_invocation_path(@job_invocation))
   end
 
   private
