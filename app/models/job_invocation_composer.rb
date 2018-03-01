@@ -194,7 +194,7 @@ class JobInvocationComposer
     end
 
     def targeting_params
-      base = { :user_id => job_invocation.targeting.user_id }
+      base = { :user_id => User.current.id }
       if @host_ids
         search_query = @host_ids.empty? ? 'name ^ ()' : Targeting.build_query_from_hosts(@host_ids)
         base.merge(:search_query => search_query, :targeting_type => job_invocation.targeting.targeting_type)

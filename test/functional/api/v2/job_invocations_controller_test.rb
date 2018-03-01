@@ -148,11 +148,11 @@ module Api
         assert_response :success
         result = ActiveSupport::JSON.decode(@response.body)
         targeting = Targeting.find(result['targeting_id'])
-        targeting.user_id.must_equal @invocation.targeting.user_id
+        targeting.user_id.must_equal users(:admin).id
         targeting.search_query.must_equal @invocation.targeting.search_query
       end
 
-      test 'should rerun' do
+      test 'should not raise an exception when reruning failed has no hosts' do
         JobInvocation.any_instance.expects(:generate_description)
         JobInvocationComposer.any_instance
                              .expects(:validate_job_category)
@@ -162,7 +162,7 @@ module Api
         assert_response :success
         result = ActiveSupport::JSON.decode(@response.body)
         targeting = Targeting.find(result['targeting_id'])
-        targeting.user_id.must_equal @invocation.targeting.user_id
+        targeting.user_id.must_equal users(:admin).id
         targeting.search_query.must_equal 'name ^ ()'
       end
 
@@ -178,7 +178,7 @@ module Api
         result = ActiveSupport::JSON.decode(@response.body)
         targeting = Targeting.find(result['targeting_id'])
         hostnames = @invocation.template_invocations.map { |ti| ti.host.name }
-        targeting.user_id.must_equal @invocation.targeting.user_id
+        targeting.user_id.must_equal users(:admin).id
         targeting.search_query.must_equal "name ^ (#{hostnames.join(',')})"
       end
     end
