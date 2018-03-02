@@ -45,6 +45,7 @@ Rails.application.routes.draw do
         end
         member do
           post 'cancel'
+          post 'rerun'
         end
       end
 

@@ -45,7 +45,13 @@ FactoryBot.define do
       after(:build) do |invocation, evaluator|
         invocation.pattern_template_invocations << FactoryBot.build(:template_invocation)
       end
+    end
 
+    trait :with_failed_task do
+      after(:build) do |invocation, _evaluator|
+        invocation.template_invocations << FactoryBot.build(:template_invocation, :with_failed_task, :with_host)
+        invocation.task = FactoryBot.build(:some_task)
+      end
     end
 
     trait :with_task do

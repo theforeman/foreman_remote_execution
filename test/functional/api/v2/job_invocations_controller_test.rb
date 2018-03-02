@@ -137,6 +137,50 @@ module Api
         post :cancel, :params => { :id => @invocation.id }
         assert_response 422
       end
+
+      test 'should rerun' do
+        JobInvocation.any_instance.expects(:generate_description)
+        JobInvocationComposer.any_instance
+                             .expects(:validate_job_category)
+                             .with(@invocation.job_category)
+                             .returns(@invocation.job_category)
+        post :rerun, params: { :id => @invocation.id }
+        assert_response :success
+        result = ActiveSupport::JSON.decode(@response.body)
+        targeting = Targeting.find(result['targeting_id'])
+        targeting.user_id.must_equal users(:admin).id
+        targeting.search_query.must_equal @invocation.targeting.search_query
+      end
+
+      test 'should not raise an exception when reruning failed has no hosts' do
+        JobInvocation.any_instance.expects(:generate_description)
+        JobInvocationComposer.any_instance
+                             .expects(:validate_job_category)
+                             .with(@invocation.job_category)
+                             .returns(@invocation.job_category)
+        post :rerun, params: { :id => @invocation.id, :failed_only => true }
+        assert_response :success
+        result = ActiveSupport::JSON.decode(@response.body)
+        targeting = Targeting.find(result['targeting_id'])
+        targeting.user_id.must_equal users(:admin).id
+        targeting.search_query.must_equal 'name ^ ()'
+      end
+
+      test 'should rerun failed only' do
+        @invocation = FactoryBot.create(:job_invocation, :with_template, :with_failed_task)
+        JobInvocation.any_instance.expects(:generate_description)
+        JobInvocationComposer.any_instance
+                             .expects(:validate_job_category)
+                             .with(@invocation.job_category)
+                             .returns(@invocation.job_category)
+        post :rerun, params: { :id => @invocation.id, :failed_only => true }
+        assert_response :success
+        result = ActiveSupport::JSON.decode(@response.body)
+        targeting = Targeting.find(result['targeting_id'])
+        hostnames = @invocation.template_invocations.map { |ti| ti.host.name }
+        targeting.user_id.must_equal users(:admin).id
+        targeting.search_query.must_equal "name ^ (#{hostnames.join(',')})"
+      end
     end
   end
 end
