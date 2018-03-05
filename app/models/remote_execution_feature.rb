@@ -4,6 +4,8 @@ class RemoteExecutionFeature < ApplicationRecord
 
   belongs_to :job_template
 
+  audited :only => :job_template_id
+
   extend FriendlyId
   friendly_id :label
 
@@ -42,12 +44,14 @@ class RemoteExecutionFeature < ApplicationRecord
       end
     end
 
-    if feature.nil?
-      feature = self.create!({ :label => label }.merge(attributes))
-    else
-      feature.attributes = attributes
-      feature.save if feature.changed?
+    self.without_auditing do
+      if feature.nil?
+        feature = self.create!({ :label => label }.merge(attributes))
+      else
+        feature.attributes = attributes
+        feature.save if feature.changed?
+      end
+      return feature
     end
-    return feature
   end
 end
