@@ -2,7 +2,7 @@ class Setting::RemoteExecution < Setting
 
   ::Setting::BLANK_ATTRS.concat %w{remote_execution_ssh_password remote_execution_ssh_key_passphrase}
 
-  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
   def self.load_defaults
     # Check the table exists
     return unless super
@@ -63,12 +63,16 @@ class Setting::RemoteExecution < Setting
                  nil,
                  N_('Default SSH key passphrase'),
                  nil,
-                 { :encrypted => true })
+                 { :encrypted => true }),
+        self.set('remote_execution_workers_pool_size',
+                 N_('Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required.'),
+                 5,
+                 N_('Workers pool size'))
       ].each { |s| self.create! s.update(:category => 'Setting::RemoteExecution') }
     end
 
     true
   end
   # rubocop:enable AbcSize
-  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/MethodLength,Metrics/AbcSize
 end

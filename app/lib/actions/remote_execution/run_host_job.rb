@@ -7,6 +7,10 @@ module Actions
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
       middleware.use Actions::Middleware::HideSecrets
 
+      def queue
+        ForemanRemoteExecution::DYNFLOW_QUEUE
+      end
+
       def resource_locks
         :link
       end

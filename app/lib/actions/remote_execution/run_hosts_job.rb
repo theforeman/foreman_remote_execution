@@ -8,6 +8,10 @@ module Actions
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
 
+      def queue
+        ForemanRemoteExecution::DYNFLOW_QUEUE
+      end
+
       def delay(delay_options, job_invocation)
         task.add_missing_task_groups(job_invocation.task_group)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.static? && !job_invocation.targeting.resolved?
