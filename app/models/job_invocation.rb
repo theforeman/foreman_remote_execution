@@ -1,8 +1,8 @@
 class JobInvocation < ApplicationRecord
+  audited :except => [:task_id, :targeting_id, :task_group_id, :triggering_id]
+
   include Authorizable
   include Encryptable
-
-  audited :except => [ :task_id, :targeting_id, :task_group_id, :triggering_id ]
 
   include ForemanRemoteExecution::ErrorsFlattener
   FLATTENED_ERRORS_MAPPING = {
