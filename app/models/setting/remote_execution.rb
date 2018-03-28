@@ -67,7 +67,11 @@ class Setting::RemoteExecution < Setting
         self.set('remote_execution_workers_pool_size',
                  N_('Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required.'),
                  5,
-                 N_('Workers pool size'))
+                 N_('Workers pool size')),
+        self.set('remote_execution_cleanup_working_dirs',
+                 N_('When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs.'),
+                 true,
+                 N_('Cleanup working directories'))
       ].each { |s| self.create! s.update(:category => 'Setting::RemoteExecution') }
     end
 

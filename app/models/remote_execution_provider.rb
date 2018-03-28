@@ -44,6 +44,11 @@ class RemoteExecutionProvider
       method
     end
 
+    def cleanup_working_dirs?(host)
+      setting = host_setting(host, :remote_execution_cleanup_working_dirs)
+      [true, 'true', 'True', 'TRUE', '1'].include?(setting)
+    end
+
     def effective_interfaces(host)
       interfaces = []
       %w(execution primary provision).map do |flag|

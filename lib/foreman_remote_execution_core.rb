@@ -11,7 +11,8 @@ module ForemanRemoteExecutionCore
                     :async_ssh               => false,
                     # When set to nil, makes REX use the runner's default interval
                     :runner_refresh_interval => nil,
-                    :ssh_log_level           => :fatal)
+                    :ssh_log_level           => :fatal,
+                    :cleanup_working_dirs    => true)
 
   SSH_LOG_LEVELS = %w(debug info warn error fatal).freeze
 

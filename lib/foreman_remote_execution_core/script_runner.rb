@@ -1,4 +1,5 @@
 require 'net/ssh'
+require 'fileutils'
 
 # rubocop:disable Lint/HandleExceptions
 begin
@@ -31,6 +32,7 @@ module ForemanRemoteExecutionCore
       @client_private_key_file = settings.fetch(:ssh_identity_key_file)
       @local_working_dir = options.fetch(:local_working_dir, settings.fetch(:local_working_dir))
       @remote_working_dir = options.fetch(:remote_working_dir, settings.fetch(:remote_working_dir))
+      @cleanup_working_dirs = options.fetch(:cleanup_working_dirs, settings.fetch(:cleanup_working_dirs))
     end
 
     def start
@@ -122,7 +124,12 @@ module ForemanRemoteExecutionCore
     end
 
     def close
+      run_sync("rm -rf \"#{remote_command_dir}\"") if should_cleanup?
+    rescue => e
+      publish_exception('Error when removing remote working dir', e, false)
+    ensure
       @session.close if @session && !@session.closed?
+      FileUtils.rm_rf(local_command_dir) if Dir.exist?(local_command_dir) && @cleanup_working_dirs
     end
 
     def publish_data(data, type)
@@ -130,6 +137,10 @@ module ForemanRemoteExecutionCore
     end
 
     private
+
+    def should_cleanup?
+      @session && !@session.closed? && @cleanup_working_dirs
+    end
 
     def session
       @session ||= begin
