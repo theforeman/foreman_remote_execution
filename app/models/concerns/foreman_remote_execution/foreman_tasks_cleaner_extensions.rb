@@ -10,13 +10,10 @@ module ForemanRemoteExecution
   module JobInvocationCleaner
     def delete
       super
-      if noop
-        say '[noop] deleting orphaned job invocations'
-        say "[noop] #{orphaned_job_invocations.count} job invocations would be deleted"
-      else
-        count = orphaned_job_invocations.count
-        orphaned_job_invocations.find_each(&:destroy)
-        say "deleted #{count} orphaned job_invocations", false if verbose
+      with_noop(orphaned_job_invocations, 'oprhaned job invocations') do |source, name|
+        with_batches(source, name) do |chunk|
+          delete_job_invocations chunk
+        end
       end
     end
 
