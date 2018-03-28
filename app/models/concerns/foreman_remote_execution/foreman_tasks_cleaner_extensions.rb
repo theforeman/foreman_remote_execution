@@ -11,8 +11,8 @@ module ForemanRemoteExecution
     def delete
       super
       with_noop(orphaned_job_invocations, 'oprhaned job invocations') do |source, name|
-        with_batches(source, name) do |chunk|
-          delete_job_invocations chunk
+        with_batches(source, name) do |invocations|
+          invocations.destroy_all
         end
       end
     end
@@ -22,8 +22,8 @@ module ForemanRemoteExecution
       delete_job_invocations(chunk)
     end
 
-    def delete_job_invocations(chunk)
-      JobInvocation.where(:task_id => chunk.map(&:id)).find_each(&:destroy)
+    def delete_job_invocations(tasks)
+      JobInvocation.where(:task_id => tasks.map(&:id)).find_each(&:destroy)
     end
 
     def orphaned_job_invocations
