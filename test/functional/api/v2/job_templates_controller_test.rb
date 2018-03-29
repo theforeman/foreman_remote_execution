@@ -30,6 +30,8 @@ module Api
         template = ActiveSupport::JSON.decode(@response.body)
         assert !template.empty?
         assert_equal template['name'], @template.name
+        refute_nil template['created_at']
+        refute_nil template['updated_at']
       end
 
       test 'should create valid' do
