@@ -85,7 +85,7 @@ module ForemanRemoteExecutionCore
     end
 
     def timeout
-      @logger.debug('job timed out')
+      logger.debug('job timed out')
       super
     end
 
@@ -133,7 +133,7 @@ module ForemanRemoteExecutionCore
 
     def session
       @session ||= begin
-                     @logger.debug("opening session to #{@ssh_user}@#{@host}")
+                     logger.debug("opening session to #{@ssh_user}@#{@host}")
                      Net::SSH.start(@host, @ssh_user, ssh_options)
                    end
     end
@@ -153,7 +153,6 @@ module ForemanRemoteExecutionCore
       ssh_options[:user_known_hosts_file] = prepare_known_hosts if @host_public_key
       ssh_options[:number_of_password_prompts] = 1
       ssh_options[:verbose] = settings[:ssh_log_level]
-      logger = defined?(SmartProxyDynflowCore) ? SmartProxyDynflowCore::Log.instance : @logger
       ssh_options[:logger] = ForemanRemoteExecutionCore::LogFilter.new(logger)
       return ssh_options
     end
@@ -277,10 +276,10 @@ module ForemanRemoteExecutionCore
       # would not work, because the redirection would happen in the non-elevated shell.
       command = "tee '#{path}' >/dev/null && chmod '#{permissions}' '#{path}'"
 
-      @logger.debug("Sending data to #{path} on remote host:\n#{data}")
+      logger.debug("Sending data to #{path} on remote host:\n#{data}")
       status, _out, err = run_sync(command, data)
 
-      @logger.warn("Output on stderr while uploading #{path}:\n#{err}") unless err.empty?
+      logger.warn("Output on stderr while uploading #{path}:\n#{err}") unless err.empty?
       if status != 0
         raise "Unable to upload file to #{path} on remote system: exit code: #{status}"
       end
@@ -289,7 +288,7 @@ module ForemanRemoteExecutionCore
 
     def upload_file(local_path, remote_path)
       mode = File.stat(local_path).mode.to_s(8)[-3..-1]
-      @logger.debug("Uploading local file: #{local_path} as #{remote_path} with #{mode} permissions")
+      logger.debug("Uploading local file: #{local_path} as #{remote_path} with #{mode} permissions")
       upload_data(File.read(local_path), remote_path, mode)
     end
 
@@ -328,7 +327,7 @@ module ForemanRemoteExecutionCore
         if defined? Net::SSH::Kerberos
           methods << 'gssapi-with-mic'
         else
-          @logger.warn('Kerberos authentication requested but not available')
+          logger.warn('Kerberos authentication requested but not available')
         end
       end
       methods.unshift('password') if @ssh_password
