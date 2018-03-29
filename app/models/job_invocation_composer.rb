@@ -11,7 +11,7 @@ class JobInvocationComposer
         :targeting => ui_params.fetch(:targeting, {}).merge(:user_id => User.current.id),
         :triggering => triggering,
         :host_ids => ui_params[:host_ids],
-        :remote_execution_feature_id => ui_params[:remote_execution_feature_id],
+        :remote_execution_feature_id => job_invocation_base[:remote_execution_feature_id],
         :description_format => job_invocation_base[:description_format],
         :password => blank_to_nil(job_invocation_base[:password]),
         :key_passphrase => blank_to_nil(job_invocation_base[:key_passphrase]),
