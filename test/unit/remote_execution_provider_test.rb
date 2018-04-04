@@ -78,6 +78,14 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       end
     end
 
+    describe 'sudo password' do
+      it 'uses the remote_execution_sudo_password on the host param' do
+        host.params['remote_execution_sudo_password'] = 'mypassword'
+        host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_sudo_password', :value => 'mypassword')
+        proxy_options[:sudo_password].must_equal 'mypassword'
+      end
+    end
+
     describe 'sudo' do
       it 'uses the remote_execution_ssh_user on the host param' do
         host.params['remote_execution_effective_user_method'] = 'sudo'

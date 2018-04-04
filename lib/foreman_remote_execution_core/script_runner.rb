@@ -8,6 +8,83 @@ rescue LoadError; end
 # rubocop:enable Lint/HandleExceptions:
 
 module ForemanRemoteExecutionCore
+  class SudoUserMethod
+    LOGIN_PROMPT = 'rex login: '.freeze
+
+    attr_reader :effective_user, :ssh_user, :effective_user_password, :password_sent
+
+    def initialize(effective_user, ssh_user, effective_user_password)
+      @effective_user = effective_user
+      @ssh_user = ssh_user
+      @effective_user_password = effective_user_password.to_s
+      @password_sent = false
+    end
+
+    def on_data(received_data, ssh_channel)
+      if received_data.match(LOGIN_PROMPT)
+        ssh_channel.send_data(effective_user_password + "\n")
+        @password_sent = true
+      end
+    end
+
+    def filter_password?(received_data)
+      !@effective_user_password.empty? && @password_sent && received_data.match(@effective_user_password)
+    end
+
+    def sent_all_data?
+      effective_user_password.empty? || password_sent
+    end
+
+    def cli_command_prefix
+      "sudo -p '#{LOGIN_PROMPT}' -u #{effective_user} "
+    end
+
+    def reset
+      @password_sent = false
+    end
+  end
+
+  class SuUserMethod
+    attr_accessor :effective_user, :ssh_user
+
+    def initialize(effective_user, ssh_user)
+      @effective_user = effective_user
+      @ssh_user = ssh_user
+    end
+
+    def on_data(_, _); end
+
+    def filter_password?(received_data)
+      false
+    end
+
+    def sent_all_data?
+      true
+    end
+
+    def cli_command_prefix
+      "su - #{effective_user} -c "
+    end
+
+    def reset; end
+  end
+
+  class NoopUserMethod
+    def on_data(_, _); end
+
+    def filter_password?(received_data)
+      false
+    end
+
+    def sent_all_data?
+      true
+    end
+
+    def cli_command_prefix; end
+
+    def reset; end
+  end
+
   class ScriptRunner < ForemanTasksCore::Runner::Base
     attr_reader :execution_timeout_interval
 
@@ -15,7 +92,7 @@ module ForemanRemoteExecutionCore
     DEFAULT_REFRESH_INTERVAL = 1
     MAX_PROCESS_RETRIES = 4
 
-    def initialize(options)
+    def initialize(options, user_method)
       super()
       @host = options.fetch(:hostname)
       @script = options.fetch(:script)
@@ -23,8 +100,6 @@ module ForemanRemoteExecutionCore
       @ssh_port = options.fetch(:ssh_port, 22)
       @ssh_password = options.fetch(:secrets, {}).fetch(:ssh_password, nil)
       @key_passphrase = options.fetch(:secrets, {}).fetch(:key_passphrase, nil)
-      @effective_user = options.fetch(:effective_user, nil)
-      @effective_user_method = options.fetch(:effective_user_method, 'sudo')
       @host_public_key = options.fetch(:host_public_key, nil)
       @verify_host = options.fetch(:verify_host, nil)
       @execution_timeout_interval = options.fetch(:execution_timeout_interval, nil)
@@ -33,6 +108,26 @@ module ForemanRemoteExecutionCore
       @local_working_dir = options.fetch(:local_working_dir, settings.fetch(:local_working_dir))
       @remote_working_dir = options.fetch(:remote_working_dir, settings.fetch(:remote_working_dir))
       @cleanup_working_dirs = options.fetch(:cleanup_working_dirs, settings.fetch(:cleanup_working_dirs))
+      @user_method = user_method
+    end
+
+    def self.build(options)
+      effective_user = options.fetch(:effective_user, nil)
+      ssh_user = options.fetch(:ssh_user, 'root')
+      effective_user_method = options.fetch(:effective_user_method, 'sudo')
+
+      user_method = if effective_user.nil? || effective_user == ssh_user
+                      NoopUserMethod.new
+                    elsif effective_user_method == 'sudo'
+                      SudoUserMethod.new(effective_user, ssh_user,
+                                         options.fetch(:secrets, {}).fetch(:sudo_password, nil))
+                    elsif effective_user_method == 'su'
+                      SuUserMethod.new(effective_user, ssh_user)
+                    else
+                      raise "effective_user_method '#{effective_user_method}' not supported"
+                    end
+
+      new(options, user_method)
     end
 
     def start
@@ -59,7 +154,7 @@ module ForemanRemoteExecutionCore
       # pipe the output to tee while capturing the exit code in a file
       <<-SCRIPT.gsub(/^\s+\| /, '')
       | sh <<WRAPPER
-      | (#{su_prefix}#{@remote_script} < /dev/null; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
+      | (#{@user_method.cli_command_prefix}#{@remote_script} < /dev/null; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
       | exit \\$(cat #{@exit_code_path})
       | WRAPPER
       SCRIPT
@@ -178,9 +273,14 @@ module ForemanRemoteExecutionCore
     def run_async(command)
       raise 'Async command already in progress' if @started
       @started = false
+      @user_method.reset
+
       session.open_channel do |channel|
         channel.request_pty
-        channel.on_data { |ch, data| publish_data(data, 'stdout') }
+        channel.on_data do |ch, data|
+          publish_data(data, 'stdout') unless @user_method.filter_password?(data)
+          @user_method.on_data(data, ch)
+        end
         channel.on_extended_data { |ch, type, data| publish_data(data, 'stderr') }
         # standard exit of the command
         channel.on_request('exit-status') { |ch, data| publish_exit_status(data.read_long) }
@@ -192,13 +292,17 @@ module ForemanRemoteExecutionCore
           # that the session is inactive
           ch.wait
         end
-        channel.exec(command) do |ch, success|
+        channel.exec(command) do |_, success|
           @started = true
           raise('Error initializing command') unless success
         end
       end
-      session.process(0) until @started
+      session.loop(0.1) { !run_started? }
       return true
+    end
+
+    def run_started?
+      @started && @user_method.sent_all_data?
     end
 
     def run_sync(command, stdin = nil)
@@ -208,7 +312,9 @@ module ForemanRemoteExecutionCore
       started = false
 
       channel = session.open_channel do |ch|
-        ch.on_data { |_, data| stdout.concat(data) }
+        ch.on_data do |c, data|
+          stdout.concat(data)
+        end
         ch.on_extended_data { |_, _, data| stderr.concat(data) }
         ch.on_request('exit-status') { |_, data| exit_status = data.read_long }
         # Send data to stdin if we have some
@@ -224,23 +330,11 @@ module ForemanRemoteExecutionCore
           started = true
         end
       end
-      session.process(0) until started
+      session.loop(0.1) { !started }
       # Closing the channel without sending any data gives us SIGPIPE
       channel.close unless stdin.nil?
       channel.wait
       return exit_status, stdout, stderr
-    end
-
-    def su_prefix
-      return if @effective_user.nil? || @effective_user == @ssh_user
-      case @effective_user_method
-      when 'sudo'
-        "sudo -n -u #{@effective_user} "
-      when 'su'
-        "su - #{@effective_user} -c "
-      else
-        raise "effective_user_method ''#{@effective_user_method}'' not supported"
-      end
     end
 
     def prepare_known_hosts

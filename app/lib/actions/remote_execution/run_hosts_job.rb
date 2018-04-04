@@ -42,7 +42,7 @@ module Actions
       end
 
       def finalize
-        job_invocation.password = job_invocation.key_passphrase = nil
+        job_invocation.password = job_invocation.key_passphrase = job_invocation.sudo_password = nil
         job_invocation.save!
 
         # creating the success notification should be the very last thing this tasks do
