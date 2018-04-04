@@ -14,6 +14,7 @@ module ForemanRemoteExecution
         invocation.description = 'Some short description'
         invocation.password = 'changeme'
         invocation.key_passphrase = 'changemetoo'
+        invocation.sudo_password = 'sudopassword'
         invocation.save
       end
     end

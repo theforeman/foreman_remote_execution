@@ -3,8 +3,8 @@ module ForemanRemoteExecutionCore
 
     DEFAULT_REFRESH_INTERVAL = 60
 
-    def initialize(options = {})
-      super(options)
+    def initialize(options, user_method)
+      super(options, user_method)
       @callback_host = options[:callback_host]
       @task_id = options[:uuid]
       @step_id = options[:step_id]
@@ -24,7 +24,7 @@ module ForemanRemoteExecutionCore
       close_fds = close_stdin + ' >/dev/null 2>/dev/null'
       # pipe the output to tee while capturing the exit code in a file, don't wait for it to finish, output PID of the main command
       <<-SCRIPT.gsub(/^\s+\| /, '')
-      | sh -c '(#{su_prefix}#{@remote_script} #{close_stdin}; echo $?>#{@exit_code_path}) | /usr/bin/tee #{@output_path} >/dev/null; #{callback_scriptlet}' #{close_fds} &
+      | sh -c '(#{@user_method.cli_command_prefix}#{@remote_script} #{close_stdin}; echo $?>#{@exit_code_path}) | /usr/bin/tee #{@output_path} >/dev/null; #{callback_scriptlet}' #{close_fds} &
       | echo $! > '#{@pid_path}'
       SCRIPT
     end
@@ -36,7 +36,7 @@ module ForemanRemoteExecutionCore
     def refresh
       err = output = nil
       with_retries do
-        _, output, err = run_sync("#{su_prefix} #{@retrieval_script}")
+        _, output, err = run_sync("#{@user_method.cli_command_prefix} #{@retrieval_script}")
       end
       lines = output.lines
       result = lines.shift.match(/^DONE (\d+)?/)
@@ -92,7 +92,7 @@ module ForemanRemoteExecutionCore
     def callback_scriptlet(callback_script_path = nil)
       if @otp
         callback_script_path = cp_script_to_remote(callback_script, 'callback') if callback_script_path.nil?
-        "#{su_prefix}#{callback_script_path}"
+        "#{@user_method.cli_command_prefix}#{callback_script_path}"
       else
         ':' # Shell synonym for "do nothing"
       end

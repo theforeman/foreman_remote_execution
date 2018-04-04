@@ -501,6 +501,18 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         end
       end
 
+      describe '#sudo_password' do
+        let(:sudo_password) { 'password' }
+        let(:params) do
+          { :job_invocation => { :sudo_password => sudo_password }}
+        end
+
+        it 'sets the sudo password properly' do
+          composer
+          composer.job_invocation.sudo_password.must_equal sudo_password
+        end
+      end
+
       describe '#targeting' do
         it 'triggers targeting on job_invocation' do
           composer

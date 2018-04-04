@@ -23,6 +23,10 @@ module ForemanRemoteExecutionCore
         end
         @data.freeze
       end
+
+      def self.build(options)
+        new(options)
+      end
     end
 
     def initialize(*args)
