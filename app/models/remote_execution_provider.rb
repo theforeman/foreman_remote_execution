@@ -72,5 +72,9 @@ class RemoteExecutionProvider
     def host_setting(host, setting)
       host.params[setting.to_s] || Setting[setting]
     end
+
+    def ssh_password(_host) end
+
+    def ssh_key_passphrase(_host) end
   end
 end
