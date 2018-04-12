@@ -86,7 +86,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     end
 
     describe 'sudo' do
-      it 'uses the remote_execution_ssh_user on the host param' do
+      it 'uses the remote_execution_effective_user_method on the host param' do
+        host.params['remote_execution_effective_user_method'] = 'sudo'
         method_param = FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'sudo')
         host.host_parameters << method_param
         proxy_options[:effective_user_method].must_equal 'sudo'
@@ -94,6 +95,10 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.clear_host_parameters_cache!
         proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
         proxy_options[:effective_user_method].must_equal 'su'
+        method_param.update_attributes!(:value => 'dzdo')
+        host.clear_host_parameters_cache!
+        proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
+        proxy_options[:effective_user_method].must_equal 'dzdo'
       end
     end
 
