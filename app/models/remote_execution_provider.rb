@@ -1,6 +1,6 @@
 class RemoteExecutionProvider
 
-  EFFECTIVE_USER_METHODS = %w[sudo su].freeze
+  EFFECTIVE_USER_METHODS = %w[sudo dzdo su].freeze
 
   class << self
     def provider_for(type)

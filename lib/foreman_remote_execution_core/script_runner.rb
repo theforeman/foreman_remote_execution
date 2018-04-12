@@ -21,10 +21,14 @@ module ForemanRemoteExecutionCore
     end
 
     def on_data(received_data, ssh_channel)
-      if received_data.match(LOGIN_PROMPT)
+      if received_data.match(login_prompt)
         ssh_channel.send_data(effective_user_password + "\n")
         @password_sent = true
       end
+    end
+
+    def login_prompt
+      LOGIN_PROMPT
     end
 
     def filter_password?(received_data)
@@ -41,6 +45,18 @@ module ForemanRemoteExecutionCore
 
     def reset
       @password_sent = false
+    end
+  end
+
+  class DzdoUserMethod < SudoUserMethod
+    LOGIN_PROMPT = /password/i
+
+    def login_prompt
+      LOGIN_PROMPT
+    end
+
+    def cli_command_prefix
+      "dzdo -u #{effective_user} "
     end
   end
 
@@ -120,6 +136,9 @@ module ForemanRemoteExecutionCore
                       NoopUserMethod.new
                     elsif effective_user_method == 'sudo'
                       SudoUserMethod.new(effective_user, ssh_user,
+                                         options.fetch(:secrets, {}).fetch(:sudo_password, nil))
+                    elsif effective_user_method == 'dzdo'
+                      DzdoUserMethod.new(effective_user, ssh_user,
                                          options.fetch(:secrets, {}).fetch(:sudo_password, nil))
                     elsif effective_user_method == 'su'
                       SuUserMethod.new(effective_user, ssh_user)
