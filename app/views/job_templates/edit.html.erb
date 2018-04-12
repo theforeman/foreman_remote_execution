@@ -1,6 +1,19 @@
 <%= javascript 'lookup_keys' %>
 <%= javascript 'foreman_remote_execution/template_input' %>
 
+<%= breadcrumbs(
+    items: [
+      {
+        caption: _('Job Templates'),
+        url: url_for(job_templates_path)
+      },
+      {
+        caption: _('Edit %s' % @template.to_label)
+      }
+    ]
+  )
+%>
+
 <% title _("Edit Job Template") %>
 
 <%= render :partial => 'form' %>
