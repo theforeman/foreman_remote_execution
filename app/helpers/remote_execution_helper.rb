@@ -140,6 +140,8 @@ module RemoteExecutionHelper
     options = { :unknown_string => 'N/A' }.merge(options)
     if invocation.queued?
       options[:unknown_string]
+    elsif options[:output_key] == :total_count
+      invocation.total_hosts_count
     else
       (invocation.task.try(:output) || {}).fetch(options[:output_key], options[:unknown_string])
     end
