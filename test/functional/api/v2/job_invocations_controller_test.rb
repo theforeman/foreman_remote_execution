@@ -98,7 +98,7 @@ module Api
 
       test 'should provide output for delayed task' do
         host = @invocation.template_invocations_hosts.first
-        ForemanTasks::Task.any_instance.expects(:delayed?).returns(true)
+        ForemanTasks::Task.any_instance.expects(:scheduled?).returns(true)
         get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
         result = ActiveSupport::JSON.decode(@response.body)
         assert_equal result['delayed'], true
