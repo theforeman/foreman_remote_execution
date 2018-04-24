@@ -15,7 +15,11 @@ class HostStatus::ExecutionStatus < HostStatus::Status
   end
 
   def to_status(options = {})
-    ExecutionTaskStatusMapper.new(last_stopped_task).status
+    if self.new_record?
+      ExecutionTaskStatusMapper.new(last_stopped_task).status
+    else
+      self.status
+    end
   end
 
   def to_global(options = {})
