@@ -53,6 +53,7 @@ module Actions
       end
 
       def finalize(*args)
+        update_host_status
         check_exit_status
       end
 
@@ -115,6 +116,13 @@ module Actions
       end
 
       private
+
+      def update_host_status
+        host = Host.find(input[:host][:id])
+        status = (host.execution_status_object ||= HostStatus::ExecutionStatus.new)
+        status.status = exit_status.zero? ? HostStatus::ExecutionStatus::OK : HostStatus::ExecutionStatus::ERROR
+        status.save!
+      end
 
       def delegated_output
         if input[:delegated_action_id]
