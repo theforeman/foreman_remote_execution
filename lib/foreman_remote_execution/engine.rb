@@ -1,6 +1,8 @@
 require 'foreman_remote_execution_core'
 
 module ForemanRemoteExecution
+  DYNFLOW_QUEUE = :remote_execution
+
   class Engine < ::Rails::Engine
     engine_name 'foreman_remote_execution'
 
@@ -26,6 +28,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.require_dynflow', :before => 'foreman_tasks.initialize_dynflow' do |app|
       ForemanTasks.dynflow.require!
+      ForemanTasks.dynflow.config.queues.add(DYNFLOW_QUEUE, :pool_size => Setting['remote_execution_workers_pool_size']) if Setting.table_exists? rescue(false)
       ForemanTasks.dynflow.config.eager_load_paths << File.join(ForemanRemoteExecution::Engine.root, 'app/lib/actions')
     end
 
