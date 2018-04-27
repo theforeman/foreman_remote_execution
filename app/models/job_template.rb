@@ -83,9 +83,8 @@ class JobTemplate < ::Template
         # Don't update if the template already exists, unless we're told to
         return if !options.delete(:update) && existing
 
-        template = existing || self.new
+        template = existing || self.new(:name => name)
         template.import_without_save(text, options)
-        template.import_custom_data(options)
         template
       end
     end
@@ -208,6 +207,10 @@ class JobTemplate < ::Template
       value = @importing_metadata[attribute]
       self.public_send "#{attribute}=", value if @importing_metadata.key?(attribute)
     end
+
+    # this should be moved to core but meanwhile we support default attribute here
+    # see http://projects.theforeman.org/issues/23426 for more details
+    self.default = options[:default] unless options[:default].nil?
 
     # job templates have too long metadata, we remove them on parsing until it's stored in separate attribute
     self.template = self.template.gsub(/<%\#.+?.-?%>\n?/m, '').strip
