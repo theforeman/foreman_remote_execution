@@ -66,7 +66,7 @@ class JobTemplate < ::Template
     # Import a template from ERB, with YAML metadata in the first comment.  It
     # will overwrite (sync) an existing template if options[:update] is true.
     def import_raw(contents, options = {})
-      metadata = parse_metadata(contents)
+      metadata = Template.parse_metadata(contents)
       import_parsed(metadata['name'], contents, metadata, options)
     end
 
@@ -76,34 +76,17 @@ class JobTemplate < ::Template
       template
     end
 
-    # This method is used by foreman_templates to import templates, the API should be kept compatible with it
-    def import!(name, text, metadata, force = false)
-      metadata = metadata.dup
-      metadata.delete('associate')
-      JobTemplateImporter.import!(name, text, metadata)
-    end
-
-    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-    def import_parsed(name, text, metadata, options = {})
+    def import_parsed(name, text, _metadata, options = {})
       transaction do
-        return if metadata.blank? || metadata.delete('kind') != 'job_template' ||
-                  (metadata.key?('model') && metadata.delete('model') != self.to_s)
-        metadata['name'] = name
         # Don't look for existing if we should always create a new template
         existing = self.find_by(:name => name) unless options.delete(:build_new)
         # Don't update if the template already exists, unless we're told to
         return if !options.delete(:update) && existing
 
-        template = existing || self.new
-        template.sync_inputs(metadata.delete('template_inputs'))
-        template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
-        template.sync_feature(metadata.delete('feature'))
-        template.locked = false if options.delete(:force)
-        template.assign_attributes(metadata.merge(:template => text.gsub(/<%\#.+?.-?%>\n?/m, '').strip).merge(options))
-        template.assign_taxonomies if template.new_record?
+        template = existing || self.new(:name => name)
+        template.import_without_save(text, options)
         template
       end
-      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     end
   end
 
@@ -215,9 +198,22 @@ class JobTemplate < ::Template
     end
   end
 
-  def self.parse_metadata(template)
-    match = template.match(/<%\#(.+?).-?%>/m)
-    match.nil? ? {} : YAML.safe_load(match[1])
+  def import_custom_data(options)
+    sync_inputs(@importing_metadata['template_inputs'])
+    sync_foreign_input_sets(@importing_metadata['foreign_input_sets'])
+    sync_feature(@importing_metadata['feature'])
+
+    %w(job_category description_format provider_type).each do |attribute|
+      value = @importing_metadata[attribute]
+      self.public_send "#{attribute}=", value if @importing_metadata.key?(attribute)
+    end
+
+    # this should be moved to core but meanwhile we support default attribute here
+    # see http://projects.theforeman.org/issues/23426 for more details
+    self.default = options[:default] unless options[:default].nil?
+
+    # job templates have too long metadata, we remove them on parsing until it's stored in separate attribute
+    self.template = self.template.gsub(/<%\#.+?.-?%>\n?/m, '').strip
   end
 
   private
