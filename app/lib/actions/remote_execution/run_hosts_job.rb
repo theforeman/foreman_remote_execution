@@ -4,9 +4,9 @@ module Actions
 
       include Dynflow::Action::WithBulkSubPlans
       include Dynflow::Action::WithPollingSubPlans
+      include Actions::RecurringAction
 
       middleware.use Actions::Middleware::BindJobInvocation
-      middleware.use Actions::Middleware::RecurringLogic
 
       def queue
         ForemanRemoteExecution::DYNFLOW_QUEUE
