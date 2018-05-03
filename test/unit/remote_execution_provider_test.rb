@@ -72,7 +72,6 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
     describe 'ssh user' do
       it 'uses the remote_execution_ssh_user on the host param' do
-        host.params['remote_execution_ssh_user'] = 'my user'
         host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'my user')
         proxy_options[:ssh_user].must_equal 'my user'
       end
@@ -80,7 +79,6 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
     describe 'sudo' do
       it 'uses the remote_execution_ssh_user on the host param' do
-        host.params['remote_execution_effective_user_method'] = 'sudo'
         method_param = FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'sudo')
         host.host_parameters << method_param
         proxy_options[:effective_user_method].must_equal 'sudo'
@@ -158,7 +156,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       end
 
       it 'gets ip from flagged interfaces' do
-        host.params['remote_execution_connect_by_ip'] = true
+        host.host_params['remote_execution_connect_by_ip'] = true
         # no ip address set on relevant interface - fallback to fqdn
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal 'somehost.somedomain.org'
 

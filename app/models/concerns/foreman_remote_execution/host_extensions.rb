@@ -45,13 +45,17 @@ module ForemanRemoteExecution
       @execution_status_label ||= get_status(HostStatus::ExecutionStatus).to_label(options)
     end
 
-    def host_params
+    def host_params_hash
       params = super
       keys = remote_execution_ssh_keys
-      params['remote_execution_ssh_keys'] = keys if keys.present?
+      source = 'global'
+      if keys.present?
+        params['remote_execution_ssh_keys'] = {:value => keys, :safe_value => keys, :source => source}
+      end
       [:remote_execution_ssh_user, :remote_execution_effective_user_method,
        :remote_execution_connect_by_ip].each do |key|
-        params[key.to_s] = Setting[key] unless params.key?(key.to_s)
+        value = Setting[key]
+        params[key.to_s] = {:value => value, :safe_value => value, :source => source} unless params.key?(key.to_s)
       end
       params
     end
