@@ -28,7 +28,7 @@ class SSHExecutionProvider < RemoteExecutionProvider
     private
 
     def ssh_user(host)
-      host.params['remote_execution_ssh_user']
+      host.host_param('remote_execution_ssh_user')
     end
 
     def ssh_port(host)

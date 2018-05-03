@@ -20,21 +20,21 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     end
 
     it 'has ssh user in the parameters' do
-      host.params['remote_execution_ssh_user'].must_equal Setting[:remote_execution_ssh_user]
+      host.host_param('remote_execution_ssh_user').must_equal Setting[:remote_execution_ssh_user]
     end
 
     it 'can override ssh user' do
       host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'amy')
-      host.params['remote_execution_ssh_user'].must_equal 'amy'
+      host.host_param('remote_execution_ssh_user').must_equal 'amy'
     end
 
     it 'has effective user method in the parameters' do
-      host.params['remote_execution_effective_user_method'].must_equal Setting[:remote_execution_effective_user_method]
+      host.host_param('remote_execution_effective_user_method').must_equal Setting[:remote_execution_effective_user_method]
     end
 
     it 'can override effective user method' do
       host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'su')
-      host.params['remote_execution_effective_user_method'].must_equal 'su'
+      host.host_param('remote_execution_effective_user_method').must_equal 'su'
     end
 
     it 'has ssh keys in the parameters' do
