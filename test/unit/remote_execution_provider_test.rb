@@ -112,6 +112,25 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       end
     end
 
+    describe 'cleanup working directories setting' do
+      before do
+        Setting[:remote_execution_cleanup_working_dirs] = false
+      end
+
+      it 'updates the value via settings' do
+        proxy_options[:cleanup_working_dirs].must_equal false
+      end
+    end
+
+    describe 'cleanup working directories from parameters' do
+      it 'takes the value from host parameters' do
+        host.params['remote_execution_cleanup_working_dirs'] = 'false'
+        host.host_parameters << FactoryBot.build(:host_parameter, :name => 'remote_execution_cleanup_working_dirs', :value => 'false')
+        host.clear_host_parameters_cache!
+        proxy_options[:cleanup_working_dirs].must_equal false
+      end
+    end
+
     describe '#find_ip_or_hostname' do
       let(:host) do
         FactoryBot.create(:host) do |host|

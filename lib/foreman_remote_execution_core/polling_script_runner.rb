@@ -45,6 +45,7 @@ module ForemanRemoteExecutionCore
       if result
         exitcode = result[1] || 0
         publish_exit_status(exitcode.to_i)
+        run_sync("rm -rf \"#{remote_command_dir}\"") if @cleanup_working_dirs
       end
       destroy_session
     end

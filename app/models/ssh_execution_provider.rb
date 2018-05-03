@@ -4,7 +4,8 @@ class SSHExecutionProvider < RemoteExecutionProvider
       super.merge(:ssh_user => ssh_user(host),
                   :effective_user => effective_user(template_invocation),
                   :effective_user_method => effective_user_method(host),
-                  :ssh_port => ssh_port(host))
+                  :ssh_port => ssh_port(host),
+                  :cleanup_working_dirs => cleanup_working_dirs?(host))
     end
 
     def humanized_name
