@@ -8,7 +8,7 @@ class JobInvocationComposer
 
     def params
       { :job_category => job_invocation_base[:job_category],
-        :targeting => ui_params.fetch(:targeting, {}).merge(:user_id => User.current.id),
+        :targeting => targeting(ui_params.fetch(:targeting, {})),
         :triggering => triggering,
         :host_ids => ui_params[:host_ids],
         :remote_execution_feature_id => job_invocation_base[:remote_execution_feature_id],
@@ -81,6 +81,10 @@ class JobInvocationComposer
       keys = (1..5).map { |i| "end_time(#{i}i)" }
       return trig unless trig.key?(:end_time) && trig[:end_time].keys == keys
       trig.merge(:end_time => Time.local(*trig[:end_time].values_at(*keys)))
+    end
+
+    def targeting(targeting_params)
+      targeting_params.merge(:user_id => User.current.id)
     end
   end
 
