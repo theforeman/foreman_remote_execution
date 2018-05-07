@@ -13,6 +13,12 @@ class JobInvocationsController < ApplicationController
         :bookmark_id => params[:bookmark_id]
       }
     }
+    # replace an empty string search with a dummy search query to match all hosts
+    # but only if search query was entered (based on presence of :search parameter)
+    if params.key?(:search)
+      query = params[:search].empty? ? "name != ''" : params[:search]
+      ui_params[:targeting].update(:search_query => query)
+    end
 
     if (template = JobTemplate.find_by(id: params[:template_id]))
       ui_params[:job_invocation] = {
