@@ -297,7 +297,7 @@ module ForemanRemoteExecutionCore
           raise('Error initializing command') unless success
         end
       end
-      session.loop(0.1) { !run_started? }
+      session.process(0) { !run_started? }
       return true
     end
 
@@ -330,7 +330,7 @@ module ForemanRemoteExecutionCore
           started = true
         end
       end
-      session.loop(0.1) { !started }
+      session.process(0) { !started }
       # Closing the channel without sending any data gives us SIGPIPE
       channel.close unless stdin.nil?
       channel.wait
