@@ -77,7 +77,7 @@ module Api
       param :host_id, :identifier, :required => true
       param :since, String, :required => false
       def output
-        if @nested_obj.task.delayed?
+        if @nested_obj.task.scheduled?
           render :json => { :refresh => true, :output => [], :delayed => true, :start_at => @nested_obj.task.start_at }
           return
         end
