@@ -5,6 +5,7 @@ require 'date'
 Gem::Specification.new do |s|
   s.name        = 'foreman_remote_execution_core'
   s.version     = ForemanRemoteExecutionCore::VERSION
+  s.license     = 'GPL-3.0'
   s.authors     = ['Ivan Nečas']
   s.email       = ['inecas@redhat.com']
   s.homepage    = 'https://github.com/theforeman/foreman_remote_execution'
