@@ -4,6 +4,7 @@ require 'date'
 Gem::Specification.new do |s|
   s.name        = 'foreman_remote_execution'
   s.version     = ForemanRemoteExecution::VERSION
+  s.license     = 'GPL-3.0'
   s.date        = Date.today.to_s
   s.authors     = ['Foreman Remote Execution team']
   s.email       = ['foreman-dev@googlegroups.com']
