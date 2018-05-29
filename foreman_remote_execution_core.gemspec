@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.description = <<DESC
   Ssh remote execution provider code sharable between Foreman and Foreman-Proxy
 DESC
-  s.license = 'GPLv3'
 
   s.files = Dir['lib/foreman_remote_execution_core/**/*'] +
             ['lib/foreman_remote_execution_core.rb', 'LICENSE']
