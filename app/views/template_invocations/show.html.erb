@@ -1,4 +1,13 @@
-<% title _('Detail of %s run') % @template_invocation.job_invocation.job_category %>
+<% items = [{ :caption => @template_invocation.job_invocation.description,
+              :url => job_invocation_path(@template_invocation.job_invocation_id) },
+            { :caption => _('Template Invocation for %s') % @template_invocation.host.name }] %>
+
+<% breadcrumbs(:resource_url => template_invocations_api_job_invocation_path(@template_invocation.job_invocation_id),
+               :name_field => 'host_name',
+               :switcher_item_url => '/template_invocations/:id',
+               :items => items)
+%>
+
 <% stylesheet 'foreman_remote_execution/template_invocation' %>
 <% javascript 'foreman_remote_execution/template_invocation' %>
 
