@@ -1,15 +1,13 @@
 module Api
   module V2
     class TemplateInvocationsController < ::Api::V2::BaseController
-      include ::Api::Version2
-      include ::Foreman::Renderer
 
       before_action :find_job_invocation, :only => %w{template_invocations}
 
-      api :GET, '/job_invocations/:id/template_invocations',
+      api :GET, '/job_invocations/:job_invocation_id/template_invocations',
           N_('List template invocations belonging to job invocation')
       param_group :search_and_pagination, ::Api::V2::BaseController
-      param :id, :identifier, :required => true
+      param :job_invocation_id, :identifier, :required => true
       def template_invocations
         @template_invocations = resource_scope.paginate(paginate_options)
         render :layout => 'api/v2/layouts/index_layout'
