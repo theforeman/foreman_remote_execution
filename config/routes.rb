@@ -47,6 +47,7 @@ Rails.application.routes.draw do
         member do
           post 'cancel'
           post 'rerun'
+          get  'template_invocations', :to => 'template_invocations#template_invocations'
         end
       end
 
