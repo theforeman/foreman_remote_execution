@@ -4,7 +4,7 @@
 
 <% breadcrumbs(:resource_url => template_invocations_api_job_invocation_path(@template_invocation.job_invocation_id),
                :name_field => 'host_name',
-               :switcher_item_url => '/template_invocations/:id',
+               :switcher_item_url => template_invocation_path(':id'),
                :items => items)
 %>
 
