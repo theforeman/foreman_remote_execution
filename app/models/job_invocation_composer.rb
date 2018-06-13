@@ -186,7 +186,8 @@ class JobInvocationComposer
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => job_invocation.execution_timeout_interval,
         :remote_execution_feature_id => job_invocation.remote_execution_feature_id,
-        :template_invocations => template_invocations_params }.with_indifferent_access
+        :template_invocations => template_invocations_params,
+        :reruns => job_invocation.id }.with_indifferent_access
     end
 
     private
@@ -297,6 +298,7 @@ class JobInvocationComposer
   end
 
   attr_accessor :params, :job_invocation, :host_ids, :search_query
+  attr_reader :reruns
   delegate :job_category, :remote_execution_feature_id, :pattern_template_invocations, :template_invocations, :targeting, :triggering, :to => :job_invocation
 
   def initialize(params, set_defaults = false)
@@ -308,6 +310,7 @@ class JobInvocationComposer
 
     @host_ids = validate_host_ids(params[:host_ids])
     @search_query = job_invocation.targeting.search_query if job_invocation.targeting.bookmark_id.blank?
+    @reruns = params[:reruns]
   end
 
   def self.from_job_invocation(job_invocation, params = {})
