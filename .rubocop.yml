@@ -105,3 +105,6 @@ Metrics/PerceivedComplexity:
 
 Metrics/AbcSize:
   Max: 45
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
