@@ -1,4 +1,5 @@
-<% items = [{ :caption => @template_invocation.job_invocation.description,
+<% items = [{ :caption => _('Job invocations'), :url => job_invocations_path },
+            { :caption => @template_invocation.job_invocation.description,
               :url => job_invocation_path(@template_invocation.job_invocation_id) },
             { :caption => _('Template Invocation for %s') % @template_invocation.host.name }] %>
 
