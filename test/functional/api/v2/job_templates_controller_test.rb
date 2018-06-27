@@ -59,6 +59,18 @@ module Api
         assert_response :unprocessable_entity
       end
 
+      test 'should update effective user' do
+        template = { name: @template.name, job_category: @template.job_category,
+                     template: @template.template, provider_type: 'SSH',
+                     effective_user_attributes: {
+                       value: 'nobody',
+                       overridable: true,
+                       current_user: false,
+                     } }
+        put :update, params: { id: @template.to_param, job_template: template }
+        assert_response :ok
+      end
+
       test 'should destroy' do
         delete :destroy, params: { :id => @template.to_param }
         assert_response :ok
