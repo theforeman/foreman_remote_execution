@@ -7,6 +7,10 @@ module Actions
       include Actions::RecurringAction
 
       middleware.use Actions::Middleware::BindJobInvocation
+      middleware.use Actions::Middleware::RecurringLogic
+      middleware.use Actions::Middleware::WatchDelegatedProxySubTasks
+
+      class CheckOnProxyActions; end
 
       def queue
         ForemanRemoteExecution::DYNFLOW_QUEUE
