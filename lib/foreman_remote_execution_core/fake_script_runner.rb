@@ -24,7 +24,7 @@ module ForemanRemoteExecutionCore
         @data.freeze
       end
 
-      def self.build(options)
+      def build(options)
         new(options)
       end
     end
