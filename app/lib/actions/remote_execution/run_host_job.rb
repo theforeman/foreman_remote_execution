@@ -121,7 +121,7 @@ module Actions
       def update_host_status
         host = Host.find(input[:host][:id])
         status = host.execution_status_object || host.build_execution_status_object
-        status.status = exit_status.to_i.zero? ? HostStatus::ExecutionStatus::OK : HostStatus::ExecutionStatus::ERROR
+        status.status = exit_status.to_s == "0" ? HostStatus::ExecutionStatus::OK : HostStatus::ExecutionStatus::ERROR
         status.save!
       end
 
