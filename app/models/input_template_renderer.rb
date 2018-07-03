@@ -5,9 +5,9 @@ class InputTemplateRenderer
   class RenderError < ::Foreman::Exception
   end
 
-  include UnattendedHelper
+  delegate :logger, to: Rails
 
-  attr_accessor :template, :host, :invocation, :input_values, :error_message
+  attr_accessor :template, :host, :invocation, :input_values, :error_message, :templates_stack
 
   # takes template object that should be rendered
   # host and template invocation arguments are optional
@@ -16,8 +16,8 @@ class InputTemplateRenderer
     raise Foreman::Exception, N_('Recursive rendering of templates detected') if templates_stack.include?(template)
 
     @host = host
-    @invocation = invocation
     @template = template
+    @invocation = invocation
     @input_values = input_values
     @preview = preview
     @templates_stack = templates_stack + [template]
@@ -25,11 +25,39 @@ class InputTemplateRenderer
 
   def render
     @template.validate_unique_inputs!
-    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template, :preview?, :render_error ], :host => @host)
+    source = Foreman::Renderer.get_source(
+      template: template,
+      host: host
+    )
+    scope = Foreman::Renderer.get_scope(
+      host: host,
+      klass: renderer_scope,
+      variables: {
+        host: host,
+        template: template,
+        preview: @preview,
+        invocation: invocation,
+        input_values: input_values,
+        templates_stack: templates_stack,
+        input_template_instance: self
+      }
+    )
+    Foreman::Renderer.render(source, scope)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
-    Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")
-    return false
+    Foreman::Logging.exception('Error during rendering of a job template', e)
+    false
+  end
+
+  def input(name)
+    return @input_values[name.to_s] if @input_values
+    input = find_by_name(template.template_inputs_with_foreign, name) # rubocop:disable Rails/DynamicFindBy
+    if input
+      @preview ? input.preview(self) : input.value(self)
+    else
+      error_message = _('input macro with name \'%s\' used, but no input with such name defined for this template') % name
+      raise UndefinedInput, "Rendering failed, no input with name #{name} for input macro found"
+    end
   end
 
   def preview
@@ -40,60 +68,10 @@ class InputTemplateRenderer
     @preview = old_preview
   end
 
-  def input(name)
-    return @input_values[name.to_s] if @input_values
-    input = find_by_name(@template.template_inputs_with_foreign, name) # rubocop:disable Rails/DynamicFindBy
-    if input
-      @preview ? input.preview(self) : input.value(self)
-    else
-      self.error_message = _('input macro with name \'%s\' used, but no input with such name defined for this template') % name
-      raise UndefinedInput, "Rendering failed, no input with name #{name} for input macro found"
-    end
-  end
+  private
 
-  def render_error(message)
-    raise RenderError.new(message)
-  end
-
-  def render_template(template_name, input_values = {}, options = {})
-    options.assert_valid_keys(:with_foreign_input_set)
-    with_foreign_input_set = options.fetch(:with_foreign_input_set, true)
-    template = @template.class.authorized("view_#{@template.class.to_s.underscore.pluralize}").find_by(:name => template_name)
-    unless template
-      self.error_message = _('included template \'%s\' not found') % template_name
-      raise error_message
-    end
-    if with_foreign_input_set
-      input_values = foreign_input_set_values(template, input_values)
-    end
-    included_renderer = self.class.new(template, host, invocation, input_values.with_indifferent_access, @preview, @templates_stack)
-    out = included_renderer.render
-    if included_renderer.error_message
-      self.error_message = included_renderer.error_message
-      raise error_message
-    else
-      out
-    end
-  end
-
-  def preview?
-    !!@preview
-  end
-
-  def foreign_input_set_values(target_template, overrides = {})
-    input_set = @template.foreign_input_sets.find_by(:target_template_id => target_template)
-    return overrides if input_set.nil?
-
-    inputs_to_generate = input_set.inputs.map(&:name) - overrides.keys.map(&:to_s)
-    included_renderer = self.class.new(input_set.target_template, host, invocation, nil, @preview, @templates_stack)
-    input_values = inputs_to_generate.inject(HashWithIndifferentAccess.new) do |hash, input_name|
-      hash.merge(input_name => included_renderer.input(input_name))
-    end
-    input_values.merge(overrides)
-  end
-
-  def logger
-    Rails.logger
+  def renderer_scope
+    ForemanRemoteExecution::Renderer::Scope::Input
   end
 
   def find_by_name(collection, name)
