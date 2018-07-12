@@ -19,10 +19,15 @@ class JobTemplatesController < ::TemplatesController
     host = params[:preview_host_id].present? ? base.find(params[:preview_host_id]) : base.first
     @template.template = params[:template]
     renderer = InputTemplateRenderer.new(@template, host)
-    if (output = renderer.preview)
+    output = renderer.preview
+    if output
       render :plain => output
     else
-      render :status => 406, :text => _('Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it.' % {:error => renderer.error_message})
+      render status: :not_acceptable,
+             plain: _(
+               'Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it.' %
+               {:error => renderer.error_message}
+             )
     end
   end
 
