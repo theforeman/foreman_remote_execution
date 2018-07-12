@@ -1,13 +1,11 @@
 FactoryBot.define do
-
-  factory :job_template do |f|
-    f.sequence(:name) { |n| "Job template #{n}" }
+  factory :job_template do
+    sequence(:name) { |n| "Job template #{n}" }
     sequence(:job_category) { |n| "job name #{n}" }
-    f.template 'id'
-    f.provider_type 'SSH'
+    template 'id'
+    provider_type 'SSH'
     organizations { [Organization.find_by(name: 'Organization 1')] } if SETTINGS[:organizations_enabled]
     locations { [Location.find_by(name: 'Location 1')] } if SETTINGS[:locations_enabled]
-
 
     trait :with_input do
       after(:build) do |template, evaluator|
