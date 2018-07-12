@@ -5,10 +5,10 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Foreman\n"
+"Project-Id-Version: foreman_remote_execution 1.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-22 15:06+0000\n"
-"Last-Translator: Bryan Kearney <bryan.kearney@gmail.com>\n"
+"PO-Revision-Date: 2018-06-14 23:10+0000\n"
+"Last-Translator: Dominic Cleal <dominic@cleal.org>\n"
 "Language-Team: Korean (http://www.transifex.com/foreman/foreman/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "%s ago"
 msgstr "%s 전 "
@@ -27,8 +27,7 @@ msgstr "%{host}에 대한 %{description}"
 
 msgid "...and %{count} more"
 msgid_plural "...and %{count} more"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "...및 추가 %{count}개"
 
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr "외부 템플릿에서 제외되는 입력 이름의 쉼표로 구분된 목록입니다."
@@ -196,7 +195,7 @@ msgid "Dynamic Query"
 msgstr "동적 쿼리"
 
 msgid "Edit %s"
-msgstr ""
+msgstr "%s 편집 "
 
 msgid "Edit Job Template"
 msgstr "작업 템플릿 편집"
@@ -289,7 +288,7 @@ msgid "How often the job should occur, in the cron format"
 msgstr "cron 형식으로 설정하는 작업 발생 빈도입니다."
 
 msgid "Import"
-msgstr ""
+msgstr "불러오기"
 
 msgid "Import Puppet classes"
 msgstr "Puppet 클래스 가져오기"
@@ -406,7 +405,7 @@ msgid "Last execution succeeded"
 msgstr "성공한 마지막 실행"
 
 msgid "Learn more about this in the documentation."
-msgstr ""
+msgstr "설명서에서 자세한 내용을 참조하십시오."
 
 msgid "List foreign input sets"
 msgstr "외부 입력 세트 나열"
@@ -469,13 +468,13 @@ msgid "Overview"
 msgstr "개요"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "덮어쓰기"
 
 msgid "Overwrite template if it already exists"
 msgstr ""
 
 msgid "Password"
-msgstr ""
+msgstr "암호 "
 
 msgid "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
@@ -592,7 +591,7 @@ msgid "SSH provider specific options"
 msgstr "SSH 공급자 관련 옵션"
 
 msgid "Schedule"
-msgstr ""
+msgstr "스케줄 "
 
 msgid "Schedule Remote Job"
 msgstr ""
@@ -746,8 +745,7 @@ msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "적용 가능한 유일한 프록시인 %{proxy_names}이(가) 작동하지 않습니다."
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
 msgstr "사용자가 %{feature_name} 기능에 매핑된 %{template_name} 템플릿에 액세스할 수 없습니다."
@@ -867,7 +865,7 @@ msgid "User input"
 msgstr "사용자 입력"
 
 msgid "Value"
-msgstr ""
+msgstr "값 "
 
 msgid "Value for required input '%s' was not specified"
 msgstr "필수 입력 '%s'의 값을 지정하지 않았습니다."
@@ -968,13 +966,13 @@ msgid "remove template input set"
 msgstr "템플릿 입력 세트 삭제"
 
 msgid "running"
-msgstr ""
+msgstr "실행 중"
 
 msgid "running %{percent}%%"
 msgstr ""
 
 msgid "seconds"
-msgstr ""
+msgstr "초"
 
 msgid "succeeded"
 msgstr "성공"

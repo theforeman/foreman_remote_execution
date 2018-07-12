@@ -6,10 +6,10 @@
 # Yulia <yulia.poyarkova@redhat.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Foreman\n"
+"Project-Id-Version: foreman_remote_execution 1.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-22 15:06+0000\n"
-"Last-Translator: Bryan Kearney <bryan.kearney@gmail.com>\n"
+"PO-Revision-Date: 2018-06-14 23:10+0000\n"
+"Last-Translator: Yulia <yulia.poyarkova@redhat.com>\n"
 "Language-Team: Russian (http://www.transifex.com/foreman/foreman/language/ru/)"
 "\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "1 && n%100<=14)? 2 : 3);\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "%s ago"
 msgstr "%s назад"
@@ -202,7 +202,7 @@ msgid "Dynamic Query"
 msgstr "Динамический"
 
 msgid "Edit %s"
-msgstr ""
+msgstr "Изменить %s"
 
 msgid "Edit Job Template"
 msgstr "Изменить шаблон задания"
@@ -307,7 +307,7 @@ msgid "Import facts"
 msgstr "Импорт фактов"
 
 msgid "Include all inputs from the foreign template"
-msgstr ""
+msgstr "Добавить все входные параметры из внешнего шаблона"
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Обозначает, что действие следует отменить, если оно не будет запущено до указанного времени."
@@ -412,7 +412,7 @@ msgid "Last execution succeeded"
 msgstr "Выполнено успешно"
 
 msgid "Learn more about this in the documentation."
-msgstr ""
+msgstr "Обратиться к документации"
 
 msgid "List foreign input sets"
 msgstr "Показать внешние наборы входных параметров"
@@ -481,7 +481,7 @@ msgid "Overwrite template if it already exists"
 msgstr "Перезаписать, если шаблон уже существует"
 
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 msgid "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
@@ -598,7 +598,7 @@ msgid "SSH provider specific options"
 msgstr "Параметры провайдера SSH"
 
 msgid "Schedule"
-msgstr ""
+msgstr "Расписание"
 
 msgid "Schedule Remote Job"
 msgstr ""
@@ -875,7 +875,7 @@ msgid "User input"
 msgstr "Ввод пользователя"
 
 msgid "Value"
-msgstr ""
+msgstr "Значение"
 
 msgid "Value for required input '%s' was not specified"
 msgstr "Входные данные «%s» не определены."
@@ -982,7 +982,7 @@ msgid "running %{percent}%%"
 msgstr ""
 
 msgid "seconds"
-msgstr ""
+msgstr "секунд"
 
 msgid "succeeded"
 msgstr "завершено"

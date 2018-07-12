@@ -6,10 +6,10 @@
 # Dominic Cleal <dominic@cleal.org>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 1.1.0\n"
+"Project-Id-Version: foreman_remote_execution 1.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-05-19 14:47+0000\n"
-"Last-Translator: Lukáš Zapletal\n"
+"PO-Revision-Date: 2018-06-14 23:10+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/foreman/fore"
 "man/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -408,7 +408,7 @@ msgid "Last execution succeeded"
 msgstr ""
 
 msgid "Learn more about this in the documentation."
-msgstr ""
+msgstr "Learn more about this in the documentation."
 
 msgid "List foreign input sets"
 msgstr ""
@@ -869,7 +869,7 @@ msgid "User input"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Value"
 
 msgid "Value for required input '%s' was not specified"
 msgstr ""

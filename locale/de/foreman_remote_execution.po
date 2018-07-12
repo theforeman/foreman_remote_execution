@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the foreman_remote_execution package.
 #
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2016
+# Ettore Atalan <atalanttore@googlemail.com>, 2016-2017
+# Paul Puschmann, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 1.1.0\n"
+"Project-Id-Version: foreman_remote_execution 1.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-22 15:03+0000\n"
+"PO-Revision-Date: 2018-06-14 23:10+0000\n"
 "Last-Translator: Bryan Kearney <bryan.kearney@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/foreman/foreman/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "%s ago"
 msgstr "vor %s"
@@ -197,7 +198,7 @@ msgid "Dynamic Query"
 msgstr "Dynamische Anfrage"
 
 msgid "Edit %s"
-msgstr ""
+msgstr "%s bearbeiten"
 
 msgid "Edit Job Template"
 msgstr "Job-Vorlage bearbeiten"
@@ -302,7 +303,7 @@ msgid "Import facts"
 msgstr "Fakten importieren"
 
 msgid "Include all inputs from the foreign template"
-msgstr ""
+msgstr "Alle Eingaben aus Fremdvorlage einschließen"
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Gibt an, dass die Aktion abgebrochen werden soll, wenn sie nicht vor diesem Zeitpunkt gestartet werden kann."
@@ -407,7 +408,7 @@ msgid "Last execution succeeded"
 msgstr "Letzte Ausführung erfolgreich"
 
 msgid "Learn more about this in the documentation."
-msgstr ""
+msgstr "Mehr dazu in der Dokumentation."
 
 msgid "List foreign input sets"
 msgstr "Fremdeingabe-Sätze auflisten"
@@ -476,7 +477,7 @@ msgid "Overwrite template if it already exists"
 msgstr "Vorlage überschreiben, falls bereits vorhanden"
 
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 msgid "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
@@ -489,6 +490,8 @@ msgstr "Danach nicht mehr ausführen"
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
+"Port für die Verwendung von SSH Kommunikation. Standardport 22. \n"
+"Sie können diese Einstellung pro Host mit dem Parameter remote_execution_ssh_port überschreiben."
 
 msgid "Preview"
 msgstr "Vorschau"
@@ -593,7 +596,7 @@ msgid "SSH provider specific options"
 msgstr "Besondere Optionen des SSH-Anbieters"
 
 msgid "Schedule"
-msgstr ""
+msgstr "Plan"
 
 msgid "Schedule Remote Job"
 msgstr ""
@@ -747,8 +750,8 @@ msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Der einzige anwendbare Proxy %{proxy_names} ist ausgefallen"
+msgstr[1] "Alle %{count} anwendbaren Proxys sind ausgefallen. %{proxy_names} ausprobiert"
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
 msgstr "Der Benutzer kann auf die Vorlage %{template_name}, die der Funktion %{feature_name} zugewiesen ist, nicht zugreifen"
@@ -868,7 +871,7 @@ msgid "User input"
 msgstr "Benutzereingabe"
 
 msgid "Value"
-msgstr ""
+msgstr "Wert"
 
 msgid "Value for required input '%s' was not specified"
 msgstr "Wert für erforderliche Eingabe '%s' wurde nicht angegeben"
@@ -954,7 +957,7 @@ msgid "input macro with name '%s' used, but no input with such name defined for 
 msgstr "Es wurde ein Eingabe-Macro namens '%s' verwendet, aber es wurde keine Eingabe mit diesem Namen für diese Vorlage definiert"
 
 msgid "planned"
-msgstr ""
+msgstr "geplant"
 
 msgid "queued"
 msgstr "in der Warteschlange"
@@ -969,13 +972,13 @@ msgid "remove template input set"
 msgstr "Vorlageneingabe-Satz entfernen"
 
 msgid "running"
-msgstr ""
+msgstr "wird ausgeführt"
 
 msgid "running %{percent}%%"
-msgstr ""
+msgstr "wird ausgeführt %{percent}%%"
 
 msgid "seconds"
-msgstr ""
+msgstr "Sekunden"
 
 msgid "succeeded"
 msgstr "erfolgreich"

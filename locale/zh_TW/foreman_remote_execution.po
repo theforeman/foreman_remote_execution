@@ -5,10 +5,10 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Foreman\n"
+"Project-Id-Version: foreman_remote_execution 1.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-12 16:30+0000\n"
-"Last-Translator: Bryan Kearney <bryan.kearney@gmail.com>\n"
+"PO-Revision-Date: 2018-06-14 23:10+0000\n"
+"Last-Translator: Dominic Cleal <dominic@cleal.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/foreman/foreman/lang"
 "uage/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "%s ago"
 msgstr "%s 之前"
@@ -197,7 +197,7 @@ msgid "Dynamic Query"
 msgstr "動態查詢"
 
 msgid "Edit %s"
-msgstr ""
+msgstr "編輯 %s"
 
 msgid "Edit Job Template"
 msgstr "編輯工作範本"
@@ -290,7 +290,7 @@ msgid "How often the job should occur, in the cron format"
 msgstr "工作多常發生，格式同 cron"
 
 msgid "Import"
-msgstr ""
+msgstr "匯入"
 
 msgid "Import Puppet classes"
 msgstr "匯入 Puppet 類別"
@@ -407,7 +407,7 @@ msgid "Last execution succeeded"
 msgstr "最後的執行成功"
 
 msgid "Learn more about this in the documentation."
-msgstr ""
+msgstr "欲知更多，請參閱文件。"
 
 msgid "List foreign input sets"
 msgstr "列出外部輸入集"
@@ -470,7 +470,7 @@ msgid "Overview"
 msgstr "概覽"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "覆寫"
 
 msgid "Overwrite template if it already exists"
 msgstr ""
@@ -593,7 +593,7 @@ msgid "SSH provider specific options"
 msgstr "SSH 供應者特定選項"
 
 msgid "Schedule"
-msgstr ""
+msgstr "排程"
 
 msgid "Schedule Remote Job"
 msgstr ""
@@ -868,7 +868,7 @@ msgid "User input"
 msgstr "使用者輸入"
 
 msgid "Value"
-msgstr ""
+msgstr "值"
 
 msgid "Value for required input '%s' was not specified"
 msgstr "所需輸入的值 '%s' 並未指定"
@@ -969,13 +969,13 @@ msgid "remove template input set"
 msgstr "移除範本輸入集"
 
 msgid "running"
-msgstr ""
+msgstr "執行中"
 
 msgid "running %{percent}%%"
 msgstr ""
 
 msgid "seconds"
-msgstr ""
+msgstr "秒"
 
 msgid "succeeded"
 msgstr "已成功"

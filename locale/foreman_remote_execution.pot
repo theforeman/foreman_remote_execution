@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 21:18+0200\n"
-"PO-Revision-Date: 2018-06-14 21:18+0200\n"
+"POT-Creation-Date: 2018-07-12 14:11+0200\n"
+"PO-Revision-Date: 2018-07-12 14:11+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -89,7 +89,6 @@ msgid "Inputs to use"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_invocations_controller.rb:29
-#: ../app/controllers/api/v2/job_templates_controller.rb:60
 msgid "SSH provider specific options"
 msgstr ""
 
@@ -217,7 +216,7 @@ msgid "Show job template details"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_templates_controller.rb:49
-#: ../app/controllers/api/v2/job_templates_controller.rb:100
+#: ../app/controllers/api/v2/job_templates_controller.rb:98
 msgid "Template name"
 msgstr ""
 
@@ -243,42 +242,42 @@ msgstr ""
 msgid "Whether or not the template is locked for editing"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/job_templates_controller.rb:60
 msgid "Effective user options"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:62
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
 msgid "What user should be used to run the script (using sudo-like mechanisms)"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:63
+#: ../app/controllers/api/v2/job_templates_controller.rb:62
 msgid ""
 "Whether it should be allowed to override the effective user from the invocatio"
 "n form."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:64
+#: ../app/controllers/api/v2/job_templates_controller.rb:63
 msgid "Whether the current user login should be used as the effective user"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:71
+#: ../app/controllers/api/v2/job_templates_controller.rb:69
 msgid "Create a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:78
+#: ../app/controllers/api/v2/job_templates_controller.rb:76
 #: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
 msgid "Update a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:86
+#: ../app/controllers/api/v2/job_templates_controller.rb:84
 msgid "Template version"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:92
+#: ../app/controllers/api/v2/job_templates_controller.rb:90
 msgid "Delete a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:104
+#: ../app/controllers/api/v2/job_templates_controller.rb:102
 msgid "Clone a provision template"
 msgstr ""
 
@@ -1193,6 +1192,7 @@ msgid "Value"
 msgstr ""
 
 #: ../app/views/job_invocations/index.html.erb:1
+#: ../app/views/template_invocations/show.html.erb:1
 msgid "Job invocations"
 msgstr ""
 
@@ -1382,39 +1382,39 @@ msgid ""
 "given a free-form field"
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:3
+#: ../app/views/template_invocations/show.html.erb:4
 msgid "Template Invocation for %s"
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:16
+#: ../app/views/template_invocations/show.html.erb:17
 msgid "Back to Job"
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:17
+#: ../app/views/template_invocations/show.html.erb:18
 msgid "Toggle command"
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:18
+#: ../app/views/template_invocations/show.html.erb:19
 msgid "Toggle STDERR"
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:19
+#: ../app/views/template_invocations/show.html.erb:20
 msgid "Toggle STDOUT"
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:20
+#: ../app/views/template_invocations/show.html.erb:21
 msgid "Toggle DEBUG"
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:25
+#: ../app/views/template_invocations/show.html.erb:26
 msgid "Target: "
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:35
+#: ../app/views/template_invocations/show.html.erb:36
 msgid "Scroll to bottom"
 msgstr ""
 
-#: ../app/views/template_invocations/show.html.erb:41
+#: ../app/views/template_invocations/show.html.erb:42
 msgid "Scroll to top"
 msgstr ""
 
@@ -1440,7 +1440,7 @@ msgid "Job templates"
 msgstr ""
 
 #: action_names.rb:3
-msgid "Import Puppet classes"
+msgid "Action with sub plans"
 msgstr ""
 
 #: action_names.rb:4
@@ -1448,7 +1448,7 @@ msgid "Import facts"
 msgstr ""
 
 #: action_names.rb:5
-msgid "Action with sub plans"
+msgid "Import Puppet classes"
 msgstr ""
 
 #: gemspec.rb:2
