@@ -1,12 +1,14 @@
 class JobTemplate < ::Template
   audited
   include ::Exportable
+  include ::TemplateTax
 
   class NonUniqueInputsError < Foreman::Exception
   end
 
   attr_exportable :job_category, :description_format, :template_inputs,
-                  :foreign_input_sets, :provider_type, :kind => ->(template) { template.class.name.underscore }
+                  :foreign_input_sets, :provider_type,
+                  { :kind => ->(template) { template.class.name.underscore } }.merge(taxonomy_exportable)
 
   include Authorizable
   extend FriendlyId
