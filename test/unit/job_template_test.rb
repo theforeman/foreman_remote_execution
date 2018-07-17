@@ -267,6 +267,11 @@ class JobTemplateTest < ActiveSupport::TestCase
       imported.name.must_equal old_name
       imported.template_inputs.first.to_export.must_equal exportable_template.template_inputs.first.to_export
     end
+
+    it 'has taxonomies in metadata' do
+      assert_equal 'Organization 1', exportable_template.to_export["organizations"].first
+      assert_equal 'Location 1', exportable_template.to_export["locations"].first
+    end
   end
 
   context 'there is existing template invocation of a job template' do

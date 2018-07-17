@@ -92,6 +92,7 @@ module Api
 
       test 'should export template' do
         get :export, params: { :id => @template.to_param }
+        User.current = users(:admin)
         assert_equal @response.body, @template.to_erb
         assert_response :success
       end
