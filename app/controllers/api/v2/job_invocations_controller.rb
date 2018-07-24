@@ -82,17 +82,15 @@ module Api
           return
         end
         task = @nested_obj.sub_task_for_host(@host)
-        refresh = task.pending?
-        since = params[:since].to_f if params[:since].present?
+        refresh = true
+        line_sets = []
 
-        line_sets = task.main_action.live_output
-        line_sets = line_sets.drop_while { |o| o['timestamp'].to_f <= since } if since
-
-        if line_sets.blank?
-          render :json => {:refresh => refresh, :output => []}
-        else
-          render :json => {:refresh => refresh, :output => line_sets }
+        if task
+          refresh = task.pending?
+          line_sets = output_lines_since task, params[:since]
         end
+
+        render :json => { :refresh => refresh, :output => line_sets || [] }
       end
 
       api :POST, '/job_invocations/:id/cancel', N_('Cancel job invocation')
@@ -162,6 +160,13 @@ module Api
           job_invocation_params[:host_ids],
           job_invocation_params[:inputs].to_hash
         )
+      end
+
+      def output_lines_since(task, time)
+        since = time.to_f if time.present?
+        line_sets = task.main_action.live_output
+        line_sets = line_sets.drop_while { |o| o['timestamp'].to_f <= since } if since
+        line_sets
       end
     end
   end

@@ -107,6 +107,16 @@ module Api
         assert_response :success
       end
 
+      test 'should provide empty output for host which does not have a task yet' do
+        host = @invocation.template_invocations_hosts.first
+        JobInvocation.any_instance.expects(:sub_task_for_host).returns(nil)
+        get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
+        result = ActiveSupport::JSON.decode(@response.body)
+        assert_equal result['refresh'], true
+        assert_equal result['output'], []
+        assert_response :success
+      end
+
       test 'should cancel a job' do
         @invocation.task.expects(:cancellable?).returns(true)
         @invocation.task.expects(:cancel).returns(true)
