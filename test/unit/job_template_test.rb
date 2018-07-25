@@ -295,4 +295,20 @@ class JobTemplateTest < ActiveSupport::TestCase
       refute_valid job_template
     end
   end
+
+  context 'rendering' do
+    it 'renders nested template as a non-admin user' do
+      inner = FactoryBot.create(:job_template)
+      template_invocation = FactoryBot.create(:template_invocation)
+      template_invocation.template.template = "<wrap><%= render_template('#{inner.name}') %></wrap>"
+      template_invocation.template.save!
+
+      setup_user('view', 'job_templates')
+      renderer = InputTemplateRenderer.new template_invocation.template,
+                                           template_invocation.host,
+                                           template_invocation
+      result = renderer.render
+      result.must_equal "<wrap>#{inner.template}</wrap>"
+    end
+  end
 end
