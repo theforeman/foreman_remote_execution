@@ -31,6 +31,7 @@ class InputTemplateRenderer
       host: host
     )
     @scope = Foreman::Renderer.get_scope(
+      source: source,
       host: host,
       klass: renderer_scope,
       template_input_values: @template_input_values,
