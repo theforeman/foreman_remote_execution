@@ -161,7 +161,7 @@ module RemoteExecutionHelper
 
   def preview_box(template_invocation, target)
     renderer = InputTemplateRenderer.new(template_invocation.template, target, template_invocation)
-    if (preview = renderer.preview)
+    if (preview = (load_template_from_task(template_invocation, target) || renderer.preview))
       content_tag :pre, preview
     elsif target.nil?
       alert :text => _('Could not render the preview because no host matches the search query.'),
@@ -233,5 +233,11 @@ module RemoteExecutionHelper
         link_to(default_text, '#', :class => 'advanced_fields_switch', :'data-alternative-label' => switch_text)
       end
     end
+  end
+
+  def load_template_from_task(template_invocation, target)
+    task = template_invocation.job_invocation.sub_task_for_host(target)
+    return if task.nil?
+    task.execution_plan.actions[1].try(:input) { |input| input['script'] }
   end
 end
