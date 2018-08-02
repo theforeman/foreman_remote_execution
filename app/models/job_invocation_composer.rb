@@ -306,11 +306,11 @@ class JobInvocationComposer
     @set_defaults = set_defaults
     @job_invocation = JobInvocation.new
     @job_invocation.task_group = JobInvocationTaskGroup.new
+    @reruns = params[:reruns]
     compose
 
     @host_ids = validate_host_ids(params[:host_ids])
     @search_query = job_invocation.targeting.search_query if job_invocation.targeting.bookmark_id.blank?
-    @reruns = params[:reruns]
   end
 
   def self.from_job_invocation(job_invocation, params = {})
@@ -344,6 +344,8 @@ class JobInvocationComposer
     job_invocation.password = params[:password]
     job_invocation.key_passphrase = params[:key_passphrase]
     job_invocation.sudo_password = params[:sudo_password]
+
+    job_invocation.job_category = nil unless rerun_possible?
 
     self
   end
@@ -471,6 +473,10 @@ class JobInvocationComposer
 
   def job_template_ids
     job_invocation.pattern_template_invocations.map(&:template_id)
+  end
+
+  def rerun_possible?
+    !(@reruns && job_invocation.pattern_template_invocations.empty?)
   end
 
   private
