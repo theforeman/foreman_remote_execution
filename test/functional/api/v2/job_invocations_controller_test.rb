@@ -6,6 +6,11 @@ module Api
       setup do
         @invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
         @template = FactoryBot.create(:job_template, :with_input)
+
+        # Without this the template in template_invocations and in pattern_template_invocations
+        # would belong to different job_categories, causing trouble when trying to rerun
+        @invocation.job_category = @invocation.pattern_template_invocations.first.template.job_category
+        @invocation.save!
       end
 
       test 'should get index' do
