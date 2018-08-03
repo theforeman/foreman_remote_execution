@@ -196,6 +196,13 @@ module Api
         targeting.user_id.must_equal users(:admin).id
         targeting.search_query.must_equal "name ^ (#{hostnames.join(',')})"
       end
+
+      test 'should return 404 if template is not found' do
+        @invocation.job_category = 'Missing category'
+        @invocation.save!
+        post :rerun, params: { :id => @invocation.id }
+        assert_response 404
+      end
     end
   end
 end
