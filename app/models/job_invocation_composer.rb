@@ -476,7 +476,7 @@ class JobInvocationComposer
   end
 
   def rerun_possible?
-    !(@reruns && job_invocation.pattern_template_invocations.empty?)
+    !(reruns && job_invocation.pattern_template_invocations.empty?)
   end
 
   private
