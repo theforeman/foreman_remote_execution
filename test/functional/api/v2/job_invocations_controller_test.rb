@@ -6,6 +6,11 @@ module Api
       setup do
         @invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
         @template = FactoryBot.create(:job_template, :with_input)
+
+        # Without this the template in template_invocations and in pattern_template_invocations
+        # would belong to different job_categories, causing trouble when trying to rerun
+        @invocation.job_category = @invocation.pattern_template_invocations.first.template.job_category
+        @invocation.save!
       end
 
       test 'should get index' do
@@ -178,6 +183,8 @@ module Api
 
       test 'should rerun failed only' do
         @invocation = FactoryBot.create(:job_invocation, :with_template, :with_failed_task)
+        @invocation.job_category = @invocation.pattern_template_invocations.first.template.job_category
+        @invocation.save!
         JobInvocation.any_instance.expects(:generate_description)
         JobInvocationComposer.any_instance
                              .expects(:validate_job_category)
@@ -190,6 +197,13 @@ module Api
         hostnames = @invocation.template_invocations.map { |ti| ti.host.name }
         targeting.user_id.must_equal users(:admin).id
         targeting.search_query.must_equal "name ^ (#{hostnames.join(',')})"
+      end
+
+      test 'should return 404 if template is not found' do
+        @invocation.job_category = 'Missing category'
+        @invocation.save!
+        post :rerun, params: { :id => @invocation.id }
+        assert_response 404
       end
     end
   end

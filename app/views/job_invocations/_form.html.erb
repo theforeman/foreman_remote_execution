@@ -6,7 +6,15 @@
 
 <%= form_for @composer.job_invocation, :html => {'data-refresh-url' => refresh_job_invocations_path, :id => 'job_invocation_form'} do |f| %>
 
-  <%= selectable_f f, :job_category, @composer.available_job_categories, {}, :label => _('Job category') %>
+  <% unless @composer.rerun_possible? %>
+  <%= alert :text => _('Could not rerun job %{id} because its template could not be found') % { :id => @composer.reruns },
+            :class => 'alert alert-block alert-danger has-error',
+            :close => false %>
+  <% end %>
+
+  <%= selectable_f f, :job_category, @composer.available_job_categories,
+                   { :selected => @composer.job_invocation.job_category, :include_blank => @composer.job_invocation.job_category.nil? },
+                   :label => _('Job category') %>
   <%= f.hidden_field(:remote_execution_feature_id, :value => @composer.remote_execution_feature_id) %>
 
   <% selected_templates_per_provider = {} %>
@@ -116,5 +124,5 @@
 
   <%= render :partial => 'preview_hosts_modal' %>
 
-  <%= submit_or_cancel f, false, :cancel_path => job_invocations_path %>
+  <%= submit_or_cancel f, false, :cancel_path => job_invocations_path, :disabled => !@composer.rerun_possible? %>
 <% end %>

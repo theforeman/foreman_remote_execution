@@ -156,6 +156,24 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         end
       end
 
+      describe '#rerun_possible?' do
+        it 'is true when not rerunning' do
+          composer.must_be :rerun_possible?
+        end
+
+        it 'is true when rerunning with pattern tempalte invocations' do
+          composer.expects(:reruns).returns(1)
+          composer.job_invocation.expects(:pattern_template_invocations).returns([1])
+          composer.must_be :rerun_possible?
+        end
+
+        it 'is false when rerunning without pattern template invocations' do
+          composer.expects(:reruns).returns(1)
+          composer.job_invocation.expects(:pattern_template_invocations).returns([])
+          composer.wont_be :rerun_possible?
+        end
+      end
+
       describe '#selected_job_templates' do
         it 'returns no template if none was selected through params' do
           composer.selected_job_templates.must_be_empty
