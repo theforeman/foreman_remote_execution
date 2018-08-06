@@ -111,9 +111,14 @@ module Api
       param :failed_only, :bool
       def rerun
         composer = JobInvocationComposer.from_job_invocation(@job_invocation, params)
-        composer.trigger!
-        @job_invocation = composer.job_invocation
-        process_response @job_invocation
+        if composer.rerun_possible?
+          composer.trigger!
+          @job_invocation = composer.job_invocation
+          process_response @job_invocation
+        else
+          render :json => { :error => _('Could not rerun job %{id} because its template could not be found') % { :id => composer.reruns } },
+                 :status => 404
+        end
       end
 
       private
