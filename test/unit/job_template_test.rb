@@ -44,14 +44,14 @@ class JobTemplateTest < ActiveSupport::TestCase
     end
 
     it 'uses the job name as description_format if not set or blank and has no inputs' do
-      minimal_template.generate_description_format.must_equal '%{job_category}'
+      minimal_template.generate_description_format.must_equal '%{template_name}'
       minimal_template.description_format = ''
-      minimal_template.generate_description_format.must_equal '%{job_category}'
+      minimal_template.generate_description_format.must_equal '%{template_name}'
     end
 
     it 'generates the description_format if not set or blank and has inputs' do
       input_name = template.template_inputs.first.name
-      expected_result = %(%{job_category} with inputs #{input_name}="%{#{input_name}}")
+      expected_result = %(%{template_name} with inputs #{input_name}="%{#{input_name}}")
       template.generate_description_format.must_equal expected_result
       template.description_format = ''
       template.generate_description_format.must_equal expected_result

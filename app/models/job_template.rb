@@ -136,7 +136,7 @@ class JobTemplate < ::Template
 
   def generate_description_format
     if description_format.blank?
-      generated_description = '%{job_category}'
+      generated_description = '%{template_name}'
       unless template_inputs_with_foreign.empty?
         inputs = template_inputs_with_foreign.map(&:name).map { |name| %{#{name}="%{#{name}}"} }.join(' ')
         generated_description << " with inputs #{inputs}"
