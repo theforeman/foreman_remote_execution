@@ -1,9 +1,3 @@
-<script type="text/javascript">
-  $(function () {
-    template_change($('select.job_template_selector'));
-  });
-</script>
-
 <%= form_for @composer.job_invocation, :html => {'data-refresh-url' => refresh_job_invocations_path, :id => 'job_invocation_form'} do |f| %>
 
   <% unless @composer.rerun_possible? %>
@@ -67,7 +61,7 @@
                     <%= job_template_fields.fields_for :input_values do |input_values_fields| %>
                       <% inputs = job_template.template_inputs_with_foreign.select { |input| input.input_type == 'user' } %>
                       <% inputs.select { |i| i.basic? }.each do |input| %>
-                        <%= render :partial => 'template_inputs/invocation_form', :locals => { :input_values_fields => input_values_fields, :composer => @composer, :job_template => job_template, :input => input } %>
+                        <%= render :partial => 'template_inputs/invocation_form', :locals => { :input_values_fields => input_values_fields, :composer => @composer, :job_template => job_template, :input => input, :onchange => "regenerate_description(this);" } %>
                       <% end %>
 
                       <%= advanced_switch_f _('Display advanced fields'), _('Hide advanced fields') %>

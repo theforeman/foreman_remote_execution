@@ -6,7 +6,7 @@ class JobTemplate < ::Template
   class NonUniqueInputsError < Foreman::Exception
   end
 
-  attr_exportable :job_category, :description_format, :template_inputs,
+  attr_exportable :job_category, :description_format,
                   :foreign_input_sets, :provider_type,
                   { :kind => ->(template) { template.class.name.underscore } }.merge(taxonomy_exportable)
 
@@ -43,15 +43,6 @@ class JobTemplate < ::Template
   validates :provider_type, :presence => true
   validates :name, :uniqueness => true
   validate :provider_type_whitelist
-  validate :inputs_unchanged_when_locked, :if => ->(template) { (template.locked? || template.locked_changed?) && template.persisted? && !Foreman.in_rake? }
-
-  validate do
-    begin
-      validate_unique_inputs!
-    rescue Foreman::Exception => e
-      errors.add :base, e.message
-    end
-  end
   validates_associated :foreign_input_sets
 
   has_one :effective_user, :class_name => 'JobTemplateEffectiveUser', :foreign_key => 'job_template_id', :dependent => :destroy
@@ -90,6 +81,21 @@ class JobTemplate < ::Template
         template
       end
     end
+
+    def acceptable_template_input_types
+      [ :user, :fact, :variable, :puppet_parameter ]
+    end
+
+    def default_render_scope_class
+      ForemanRemoteExecution::Renderer::Scope::Input
+    end
+  end
+
+  def validate_unique_inputs!
+    duplicated_inputs = template_inputs_with_foreign.group_by(&:name).values.select { |values| values.size > 1 }.map(&:first)
+    unless duplicated_inputs.empty?
+      raise NonUniqueInputsError.new(N_('Duplicated inputs detected: %{duplicated_inputs}'), :duplicated_inputs => duplicated_inputs.map(&:name))
+    end
   end
 
   def metadata
@@ -109,14 +115,6 @@ class JobTemplate < ::Template
   # and matching a Host does not prevent removing a template from its taxonomy.
   def used_taxonomy_ids(type)
     []
-  end
-
-  def dup
-    dup = super
-    self.template_inputs.each do |input|
-      dup.template_inputs.build input.attributes.except('template_id', 'id', 'created_at', 'updated_at')
-    end
-    dup
   end
 
   def assign_taxonomies
@@ -145,31 +143,6 @@ class JobTemplate < ::Template
     else
       description_format
     end
-  end
-
-  def validate_unique_inputs!
-    duplicated_inputs = template_inputs_with_foreign.group_by(&:name).values.select { |values| values.size > 1 }.map(&:first)
-    unless duplicated_inputs.empty?
-      raise NonUniqueInputsError.new(N_('Duplicated inputs detected: %{duplicated_inputs}'), :duplicated_inputs => duplicated_inputs.map(&:name))
-    end
-  end
-
-  def sync_inputs(inputs)
-    inputs ||= []
-    # Build a hash where keys are input names
-    inputs = inputs.inject({}) { |h, input| h.update(input['name'] => input) }
-
-    # Sync existing inputs
-    template_inputs.each do |existing_input|
-      if inputs.include?(existing_input.name)
-        existing_input.assign_attributes(inputs.delete(existing_input.name))
-      else
-        existing_input.mark_for_destruction
-      end
-    end
-
-    # Create new inputs
-    inputs.each_value { |new_input| template_inputs.build(new_input) }
   end
 
   def sync_foreign_input_sets(input_sets)
@@ -201,7 +174,7 @@ class JobTemplate < ::Template
   end
 
   def import_custom_data(options)
-    sync_inputs(@importing_metadata['template_inputs'])
+    super
     sync_foreign_input_sets(@importing_metadata['foreign_input_sets'])
     sync_feature(@importing_metadata['feature'])
 
@@ -218,18 +191,16 @@ class JobTemplate < ::Template
     self.template = self.template.gsub(/<%\#.+?.-?%>\n?/m, '').strip
   end
 
+  def default_input_values(ignore_keys)
+    result = self.template_inputs_with_foreign.select { |ti| !ti.required? && ti.user_template_input? }.map { |ti| ti.name.to_s }
+    result -= ignore_keys.map(&:to_s)
+    Hash[result.map { |k| [ k, nil ] }]
+  end
+
   private
 
   # we can't use standard validator, .provider_names output can change but the validator does not reflect it
   def provider_type_whitelist
     errors.add :provider_type, :uniq unless RemoteExecutionProvider.provider_names.include?(self.provider_type)
-  end
-
-  def inputs_unchanged_when_locked
-    inputs_changed = template_inputs.any? { |input| input.changed? || input.new_record? }
-    foreign_input_sets_changed = foreign_input_sets.any? { |input_set| input_set.changed? || input_set.new_record? }
-    if inputs_changed || foreign_input_sets_changed
-      errors.add(:base, _('This template is locked. Please clone it to a new template to customize.'))
-    end
   end
 end

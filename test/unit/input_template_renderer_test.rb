@@ -1,6 +1,8 @@
 require 'test_plugin_helper'
 
 class InputTemplateRendererTest < ActiveSupport::TestCase
+  let(:host) { FactoryBot.build(:host) }
+
   context 'renderer for simple template without inputs' do
     let(:renderer) { InputTemplateRenderer.new(FactoryBot.build(:job_template, :template => 'id <%= preview? %>')) }
 
@@ -59,12 +61,6 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       end
 
       describe 'rendering' do
-        it 'cannot render the content without job invocation' do
-          refute result
-          renderer.error_message.wont_be_nil
-          renderer.error_message.wont_be_empty
-        end
-
         it 'can preview' do
           renderer.preview.must_equal 'service restart $USER_INPUT[service_name]'
         end
@@ -72,6 +68,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
         context 'with invocation specified and a required input' do
           before do
             template.template_inputs.first.update_attributes(:required => true)
+            template_invocation.reload
             renderer.invocation = template_invocation
           end
 
@@ -88,8 +85,8 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
                               :template_invocation => template_invocation,
                               :template_input => template.template_inputs.first,
                               :value => 'foreman')
+            template_invocation.reload # need to get input_values findable
             renderer.invocation = template_invocation
-            renderer.invocation.reload
           end
 
           it 'can render with job invocation with corresponding value' do
@@ -252,8 +249,8 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
         end
 
         before do
+          template_invocation.reload
           renderer.invocation = template_invocation
-          renderer.invocation.reload
         end
 
         it 'can render with job invocation with corresponding value' do
@@ -286,9 +283,9 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       before do
         template.template_inputs << FactoryBot.build(:template_input, :name => 'service_name', :input_type => 'user', :options => "httpd\nforeman", :required => required)
         job_invocation.template_invocations << template_invocation
-        renderer.invocation = template_invocation
         input
-        renderer.invocation.reload
+        template_invocation.reload
+        renderer.invocation = template_invocation
       end
 
       context 'with a valid input defined' do
@@ -333,7 +330,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
     let(:renderer) { InputTemplateRenderer.new(template) }
 
     context 'with matching input defined' do
-      before { renderer.template.template_inputs<< FactoryBot.build(:template_input, :name => 'issue', :input_type => 'fact', :fact_name => 'issue') }
+      before { renderer.template.template_inputs<< FactoryBot.build(:template_input, :name => 'issue', :input_type => 'fact', :fact_name => 'issue', :required => true) }
       let(:result) { renderer.render }
 
       describe 'rendering' do

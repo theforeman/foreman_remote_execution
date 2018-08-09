@@ -70,18 +70,7 @@ function job_invocation_form_binds() {
 
   $('select#targeting_bookmark_id').on('change', refresh_search_query);
 
-  $('a.advanced_fields_switch').on('click', toggle_advanced_fields )
-}
-
-function toggle_advanced_fields() {
-  switcher = $('a.advanced_fields_switch');
-  original = switcher.html();
-  switcher.html(switcher.data('alternativeLabel'));
-  switcher.data('alternativeLabel', original);
-
-  switcher.siblings('i').toggleClass('fa-angle-right').toggleClass('fa-angle-down');
-
-  $('div.advanced').toggle()
+  tfm.advancedFields.initAdvancedFields()
 }
 
 function delayed_refresh(url, data){
