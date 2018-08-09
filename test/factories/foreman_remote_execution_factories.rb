@@ -22,11 +22,6 @@ FactoryBot.define do
     end
   end
 
-  factory :template_input do |f|
-    f.sequence(:name) { |n| "Template input #{n}" }
-    f.input_type 'user'
-  end
-
   factory :foreign_input_set
 
   factory :targeting do |f|

@@ -4,10 +4,6 @@ module RemoteExecutionHelper
     RemoteExecutionProvider.providers.map { |key, provider| [ key, _(provider.humanized_name) ] }
   end
 
-  def template_input_types_options
-    TemplateInput::TYPES.map { |key, name| [ _(name), key ] }
-  end
-
   def job_hosts_authorizer
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
   end
@@ -188,15 +184,6 @@ module RemoteExecutionHelper
     documentation_button section, :root_url => url
   end
 
-  def template_input_header(f, template)
-    header = _('Template input')
-    unless template.locked?
-      header += ' ' + remove_child_link('x', f, {:rel => 'twipsy', :'data-title' => _('remove template input'), :'data-placement' => 'left',
-                                                 :class => 'fr badge badge-danger'})
-    end
-    header.html_safe # rubocop:disable Rails/OutputSafety
-  end
-
   def description_checkbox_f(f, job_template, disabled)
     check_box_tag('description_format_override',
                   job_template.generate_description_format,
@@ -223,16 +210,6 @@ module RemoteExecutionHelper
         'Input values can be used using the syntax %{package}.<br/>' +
         'You may also include the job category and template<br/>' +
         'name using %{job_category} and %{template_name}.').html_safe # rubocop:disable Rails/OutputSafety
-  end
-
-  def advanced_switch_f(default_text, switch_text)
-    content_tag :div, :class => 'form-group' do
-      content_tag(:div, '', :class => 'col-md-2 control-label') +
-      content_tag(:div, :class => 'col-md-4') do
-        content_tag(:i, '', :class => 'fa fa-angle-right') + ' ' +
-        link_to(default_text, '#', :class => 'advanced_fields_switch', :'data-alternative-label' => switch_text)
-      end
-    end
   end
 
   def load_template_from_task(template_invocation, target)

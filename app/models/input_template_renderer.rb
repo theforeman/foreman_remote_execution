@@ -7,7 +7,7 @@ class InputTemplateRenderer
 
   delegate :logger, to: Rails
 
-  attr_accessor :template, :host, :invocation, :input_values, :error_message, :templates_stack, :current_user
+  attr_accessor :template, :host, :invocation, :template_input_values, :error_message, :templates_stack, :current_user
 
   # takes template object that should be rendered
   # host and template invocation arguments are optional
@@ -18,47 +18,38 @@ class InputTemplateRenderer
     @host = host
     @template = template
     @invocation = invocation
-    @input_values = input_values
+    @template_input_values = input_values
     @preview = preview
     @templates_stack = templates_stack + [template]
   end
 
   def render
+    @template_input_values ||= values_from_invocation
     @template.validate_unique_inputs!
     source = Foreman::Renderer.get_source(
       template: template,
       host: host
     )
-    scope = Foreman::Renderer.get_scope(
+    @scope = Foreman::Renderer.get_scope(
       host: host,
       klass: renderer_scope,
+      template_input_values: @template_input_values,
       variables: {
         host: host,
         template: template,
         preview: @preview,
         invocation: invocation,
-        input_values: input_values,
+        input_values: @template_input_values,
         templates_stack: templates_stack,
         input_template_instance: self,
         current_user: User.current.try(:login)
       }
     )
-    Foreman::Renderer.render(source, scope)
+    Foreman::Renderer.render(source, @scope)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
     Foreman::Logging.exception('Error during rendering of a job template', e)
     false
-  end
-
-  def input(name)
-    return @input_values[name.to_s] if @input_values
-    input = find_by_name(template.template_inputs_with_foreign, name) # rubocop:disable Rails/DynamicFindBy
-    if input
-      @preview ? input.preview(self) : input.value(self)
-    else
-      error_message = _('input macro with name \'%s\' used, but no input with such name defined for this template') % name
-      raise UndefinedInput, "Rendering failed, no input with name #{name} for input macro found"
-    end
   end
 
   def preview
@@ -70,6 +61,13 @@ class InputTemplateRenderer
   end
 
   private
+
+  def values_from_invocation
+    input_values = @invocation ? Hash[@invocation.input_values.map { |iv| [iv.template_input.name, iv.value] }] : {}
+    default_values = template.default_input_values(input_values.keys)
+    result = @preview ? input_values : default_values.merge(input_values)
+    result.with_indifferent_access
+  end
 
   def renderer_scope
     ForemanRemoteExecution::Renderer::Scope::Input

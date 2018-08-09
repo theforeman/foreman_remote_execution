@@ -461,14 +461,10 @@ class JobInvocationComposer
     pattern_template_invocations.find { |invocation| invocation.template == job_template }
   end
 
-  def template_invocation_input_value_for(job_template, input)
+  def input_value_for(input)
     invocations = pattern_template_invocations
     default = TemplateInvocationInputValue.new
-    if (invocation = invocations.detect { |i| i.template_id == job_template.id })
-      invocation.input_values.detect { |iv| iv.template_input_id == input.id } || default
-    else
-      default
-    end
+    invocations.map(&:input_values).flatten.detect { |iv| iv.template_input_id == input.id } || default
   end
 
   def job_template_ids
