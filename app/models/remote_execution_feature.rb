@@ -23,8 +23,9 @@ class RemoteExecutionFeature < ApplicationRecord
     self.find_by(label: label) || raise(::Foreman::Exception.new(N_('Unknown remote execution feature %s'), label))
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def self.register(label, name, options = {})
-    return false unless RemoteExecutionFeature.table_exists?
+    return false if Foreman.in_setup_db_rake? || !RemoteExecutionFeature.table_exists?
     options.assert_valid_keys(*VALID_OPTIONS)
     options[:host_action_button] = false unless options.key?(:host_action_button)
 
@@ -54,4 +55,5 @@ class RemoteExecutionFeature < ApplicationRecord
       return feature
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 end
