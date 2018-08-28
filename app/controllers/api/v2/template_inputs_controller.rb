@@ -30,7 +30,7 @@ module Api
           param :input_type, TemplateInput::TYPES.keys.map(&:to_s), :required => true, :desc => N_('Input type')
           param :fact_name, String, :required => false, :desc => N_('Fact name, used when input type is fact')
           param :variable_name, String, :required => false, :desc => N_('Variable name, used when input type is variable')
-          param :puppet_parameter_class, String, :required => false, :desc => N_('Puppet class name, used when input type is puppet_parameter')
+          param :puppet_class_name, String, :required => false, :desc => N_('Puppet class name, used when input type is puppet_parameter')
           param :puppet_parameter_name, String, :required => false, :desc => N_('Puppet parameter name, used when input type is puppet_parameter')
           param :options, Array, :required => false, :desc => N_('Selectable values for user inputs')
         end
