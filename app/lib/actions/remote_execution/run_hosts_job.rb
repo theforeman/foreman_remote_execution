@@ -49,6 +49,8 @@ module Actions
         job_invocation.password = job_invocation.key_passphrase = job_invocation.sudo_password = nil
         job_invocation.save!
 
+        Rails.logger.debug "cleaning cache for keys that begin with 'job_invocation_#{job_invocation.id}'"
+        Rails.cache.delete_matched(/\A#{JobInvocation::CACHE_PREFIX}_#{job_invocation.id}/)
         # creating the success notification should be the very last thing this tasks do
         job_invocation.build_notification.deliver!
       end

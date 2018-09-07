@@ -15,6 +15,14 @@ module ForemanRemoteExecution
           !!@preview
         end
 
+        def cached(key, &block)
+          return yield if preview?
+
+          cache_key = "#{JobInvocation::CACHE_PREFIX}_#{invocation.job_invocation_id}_#{key}"
+          Rails.logger.debug "cache hit for #{cache_key}" if Rails.cache.exist?(cache_key)
+          Rails.cache.fetch(cache_key, &block)
+        end
+
         def render_template(template_name, input_values = {}, options = {})
           options.assert_valid_keys(:with_foreign_input_set)
           with_foreign_input_set = options.fetch(:with_foreign_input_set, true)

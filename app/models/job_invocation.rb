@@ -1,4 +1,6 @@
 class JobInvocation < ApplicationRecord
+  CACHE_PREFIX = "job_invocation".freeze
+
   audited :except => [:task_id, :targeting_id, :task_group_id, :triggering_id]
 
   include Authorizable
