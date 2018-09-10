@@ -25,7 +25,7 @@ class InputTemplateRenderer
 
   def render
     @template.validate_unique_inputs!
-    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template, :preview?, :render_error ], :host => @host)
+    render_safe(@template.template, ::Foreman::Renderer::ALLOWED_HELPERS + [ :input, :render_template, :preview?, :render_error, :cached ], :host => @host)
   rescue => e
     self.error_message ||= _('error during rendering: %s') % e.message
     Rails.logger.debug e.to_s + "\n" + e.backtrace.join("\n")
@@ -38,6 +38,13 @@ class InputTemplateRenderer
     render
   ensure
     @preview = old_preview
+  end
+
+  def cached(key, &block)
+    return yield if preview?
+    cache_key = "#{JobInvocation::CACHE_PREFIX}_#{invocation.job_invocation_id}_#{key}"
+    Rails.logger.debug "cache hit for #{cache_key}" if Rails.cache.exist?(cache_key)
+    Rails.cache.fetch(cache_key, &block)
   end
 
   def input(name)
