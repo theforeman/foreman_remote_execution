@@ -39,6 +39,36 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           renderer.error_message.wont_be_empty
         end
       end
+
+      describe 'caching helper' do
+        it 'caches the value under given key in real mode' do
+          renderer.stubs(:invocation => OpenStruct.new(:job_invocation_id => 1))
+
+          i = 1
+          result = renderer.cached('some_key') { i }
+          result.must_equal 1
+          i += 1
+          result = renderer.cached('some_key') { i }
+          result.must_equal 1
+          i += 1
+          result = renderer.cached('different_key') { i }
+          result.must_equal 3
+        end
+
+        it 'does not cache the value in preview mode' do
+          renderer.stubs(:invocation => OpenStruct.new(:job_invocation_id => 1), :preview? => true)
+
+          i = 1
+          result = renderer.cached('some_key') { i }
+          result.must_equal 1
+          i += 1
+          result = renderer.cached('some_key') { i }
+          result.must_equal 2
+          i += 1
+          result = renderer.cached('different_key') { i }
+          result.must_equal 3
+        end
+      end
     end
 
     context 'with matching input defined' do
