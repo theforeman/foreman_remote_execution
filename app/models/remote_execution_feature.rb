@@ -25,7 +25,13 @@ class RemoteExecutionFeature < ApplicationRecord
 
   # rubocop:disable Metrics/PerceivedComplexity
   def self.register(label, name, options = {})
-    return false if Foreman.in_setup_db_rake? || !RemoteExecutionFeature.table_exists?
+    begin
+      return false unless RemoteExecutionFeature.table_exists?
+    rescue ActiveRecord::NoDatabaseError => e
+      # just ignore the problem if DB does not exist yet (rake db:create call)
+      return false
+    end
+
     options.assert_valid_keys(*VALID_OPTIONS)
     options[:host_action_button] = false unless options.key?(:host_action_button)
 
