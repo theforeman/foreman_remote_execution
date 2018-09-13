@@ -126,6 +126,8 @@ module Api
         invocation_id = @invocation.id + 1
         assert_empty JobInvocation.where(:id => invocation_id)
         get :output, params: { :job_invocation_id => invocation_id, :host_id => 1234 }
+        result = ActiveSupport::JSON.decode(@response.body)
+        assert_equal result['message'], "Job invocation not found by id '#{invocation_id}'"
         assert_response :missing
       end
 

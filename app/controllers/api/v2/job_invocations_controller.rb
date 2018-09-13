@@ -4,7 +4,7 @@ module Api
       include ::Api::Version2
       include ::Foreman::Renderer
 
-      before_action :find_required_nested_object, :only => %w{output}
+      before_action :find_optional_nested_object, :only => %w{output}
       before_action :find_host, :only => %w{output}
       before_action :find_resource, :only => %w{show update destroy clone cancel rerun}
 
@@ -122,6 +122,10 @@ module Api
       end
 
       private
+
+      def allowed_nested_id
+        %w(job_invocation_id)
+      end
 
       def action_permission
         case params[:action]
