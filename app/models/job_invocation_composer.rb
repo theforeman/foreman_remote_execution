@@ -108,7 +108,7 @@ class JobInvocationComposer
 
     def targeting_params
       raise ::Foreman::Exception, _('Cannot specify both bookmark_id and search_query') if api_params[:bookmark_id] && api_params[:search_query]
-      api_params.slice(:targeting_type, :bookmark_id, :search_query).merge(:user_id => User.current.id)
+      api_params.slice(:targeting_type, :bookmark_id, :search_query, :randomized_ordering).merge(:user_id => User.current.id)
     end
 
     def triggering_params
@@ -205,7 +205,7 @@ class JobInvocationComposer
         search_query = @host_ids.empty? ? 'name ^ ()' : Targeting.build_query_from_hosts(@host_ids)
         base.merge(:search_query => search_query, :targeting_type => job_invocation.targeting.targeting_type)
       else
-        base.merge job_invocation.targeting.attributes.slice('search_query', 'bookmark_id', 'targeting_type')
+        base.merge job_invocation.targeting.attributes.slice('search_query', 'bookmark_id', 'targeting_type', 'randomized_ordering')
       end
     end
 
@@ -512,7 +512,8 @@ class JobInvocationComposer
     Targeting.new(
       :bookmark_id => bookmark_id,
       :targeting_type => params[:targeting][:targeting_type],
-      :search_query => query
+      :search_query => query,
+      :randomized_ordering => params[:targeting][:randomized_ordering]
     ) { |t| t.user_id = params[:targeting][:user_id] }
   end
 

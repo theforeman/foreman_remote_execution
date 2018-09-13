@@ -5,6 +5,10 @@ class Targeting < ApplicationRecord
   TYPES = { STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query') }.freeze
   RESOLVE_PERMISSION = :view_hosts
 
+  ORDERED = 'ordered_execution'.freeze
+  RANDOMIZED = 'randomized_execution'.freeze
+  ORDERINGS = { ORDERED => N_('Alphabetical'), RANDOMIZED => N_('Randomized') }.freeze
+
   belongs_to :user
   belongs_to :bookmark
 
@@ -40,8 +44,9 @@ class Targeting < ApplicationRecord
     self.validate!
     # avoid validation of hosts objects - they will be loaded for no reason.
     #   pluck(:id) returns duplicate results for HostCollections
-    host_ids = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query).pluck(:id).uniq }
+    host_ids = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query).order(:name, :id).pluck(:id).uniq }
     # this can be optimized even more, by introducing bulk insert
+    host_ids.shuffle!(random: Random.new) if randomized_ordering
     self.targeting_hosts.build(host_ids.map { |id| { :host_id => id } })
     self.save(:validate => false)
   end

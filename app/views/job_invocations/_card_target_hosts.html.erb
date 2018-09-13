@@ -16,6 +16,10 @@
     <strong><%= _(Targeting::TYPES[job_invocation.targeting.targeting_type]).downcase %></strong>
     <pre><%= job_invocation.targeting.search_query %></pre>
     </p>
+    <p>
+      <% key = job_invocation.targeting.randomized_ordering ? Targeting::RANDOMIZED : Targeting::ORDERED %>
+      <%= _('Execution order') %>: <strong><%= Targeting::ORDERINGS[key].downcase %></strong>
+    </p>
   </div>
   <div class='card-pf-footer'>
     <p>

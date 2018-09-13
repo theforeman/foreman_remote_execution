@@ -69,7 +69,7 @@ module Actions
       end
 
       def hosts
-        job_invocation.targeting.hosts.order(:name, :id)
+        job_invocation.targeting.hosts
       end
 
       def set_up_concurrency_control(invocation)
