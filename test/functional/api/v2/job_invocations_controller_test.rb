@@ -122,6 +122,15 @@ module Api
         assert_response :success
       end
 
+      test 'should fail with 404 for non-existing job invocation' do
+        invocation_id = @invocation.id + 1
+        assert_empty JobInvocation.where(:id => invocation_id)
+        get :output, params: { :job_invocation_id => invocation_id, :host_id => 1234 }
+        result = ActiveSupport::JSON.decode(@response.body)
+        assert_equal result['message'], "Job invocation not found by id '#{invocation_id}'"
+        assert_response :missing
+      end
+
       test 'should cancel a job' do
         @invocation.task.expects(:cancellable?).returns(true)
         @invocation.task.expects(:cancel).returns(true)
