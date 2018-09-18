@@ -78,7 +78,7 @@ module RemoteExecutionHelper
     if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_('Rerun failed'), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
                          :class => 'btn btn-default',
-                         :disabled => !job_invocation.failed_hosts.any?,
+                         :disabled => job_invocation.failed_hosts.none?,
                          :title => _('Rerun on failed hosts'))
     end
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task, :authorizer => task_authorizer)
