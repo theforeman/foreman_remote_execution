@@ -188,4 +188,40 @@ class JobInvocationTest < ActiveSupport::TestCase
     end
   end
 
+  describe '#failed_hosts' do
+    let(:invocation) do
+      invocation = FactoryBot.build(:job_invocation, :with_template, :with_task, :with_failed_task, :with_unplanned_host)
+      invocation.template_invocations.each { |ti| invocation.targeting.hosts << ti.host }
+      invocation.save!
+      invocation
+    end
+
+    it 'returns only failed hosts when not #finished?' do
+      invocation.stubs(:finished?).returns(false)
+      invocation.failed_hosts.count.must_equal 1
+    end
+
+    it 'returns failed hosts and hosts without task when #finished?' do
+      invocation.stubs(:finished?).returns(true)
+      invocation.failed_hosts.count.must_equal 2
+    end
+
+    describe '#failed_template_invocations' do
+      it 'finds only failed template invocations' do
+        template_invocations = invocation.send(:failed_template_invocations)
+        template_invocations.count.must_equal 1
+        template_invocation = template_invocations.first
+        template_invocation.run_host_job_task.result.must_equal 'error'
+      end
+    end
+
+    describe '#not_failed_template_invocations' do
+      it 'finds only non-failed template invocations' do
+        template_invocations = invocation.send(:not_failed_template_invocations)
+        template_invocations.count.must_equal 1
+        template_invocation = template_invocations.first
+        template_invocation.run_host_job_task.result.must_equal 'success'
+      end
+    end
+  end
 end

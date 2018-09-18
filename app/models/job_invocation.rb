@@ -156,11 +156,16 @@ class JobInvocation < ApplicationRecord
   end
 
   def failed_host_ids
-    failed_template_invocations.map(&:host_id)
+    failed_hosts.pluck(:id)
   end
 
   def failed_hosts
-    failed_template_invocations.includes(:host).map(&:host)
+    base = targeting.hosts
+    if finished?
+      base.where.not(:id => not_failed_template_invocations.select(:host_id))
+    else
+      base.where(:id => failed_template_invocations.select(:host_id))
+    end
   end
 
   def total_hosts_count
@@ -240,7 +245,12 @@ class JobInvocation < ApplicationRecord
   private
 
   def failed_template_invocations
-    results = TemplateInvocation::TaskResultMap.status_to_task_result(:failed)
-    template_invocations.joins(:run_host_job_task).where("#{ForemanTasks::Task.table_name}.result" => results)
+    results = [:cancelled, :failed].map { |state| TemplateInvocation::TaskResultMap.status_to_task_result(state) }.flatten
+    template_invocations.joins(:run_host_job_task).where(ForemanTasks::Task.table_name => { :result => results })
+  end
+
+  def not_failed_template_invocations
+    results = [:cancelled, :failed].map { |state| TemplateInvocation::TaskResultMap.status_to_task_result(state) }.flatten
+    template_invocations.joins(:run_host_job_task).where.not(ForemanTasks::Task.table_name => { :result => results })
   end
 end
