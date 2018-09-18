@@ -12,35 +12,6 @@ module JobInvocationsHelper
     end
   end
 
-  def job_invocation_task_buttons(task)
-    job_invocation = task.task_groups.find { |group| group.class == JobInvocationTaskGroup }.job_invocation
-    buttons = []
-    if authorized_for(hash_for_new_job_invocation_path)
-      buttons << link_to(_('Rerun'), rerun_job_invocation_path(:id => job_invocation.id),
-                         :class => 'btn btn-default',
-                         :title => _('Rerun the job'))
-    end
-    if authorized_for(hash_for_new_job_invocation_path)
-      buttons << link_to(_('Rerun failed'), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
-                         :class => 'btn btn-default',
-                         :disabled => task.sub_tasks.none? { |sub_task| task_failed?(sub_task) },
-                         :title => _('Rerun on failed hosts'))
-    end
-    if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
-      buttons << link_to(_('Job Task'), foreman_tasks_task_path(task),
-                         :class => 'btn btn-default',
-                         :title => _('See the last task details'))
-    end
-    if authorized_for(:permission => :edit_foreman_tasks, :auth_object => task)
-      buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
-                         :class => 'btn btn-danger',
-                         :title => _('Try to cancel the job'),
-                         :disabled => !task.cancellable?,
-                         :method => :post)
-    end
-    buttons
-  end
-
   def job_invocations_buttons
     [
       documentation_button_rex('3.2ExecutingaJob'),
