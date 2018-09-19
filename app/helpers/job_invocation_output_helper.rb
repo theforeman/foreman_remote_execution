@@ -23,14 +23,14 @@ module JobInvocationOutputHelper
       "{{{format color:#{color}}}}"
     end
 
-    current_color = 'default'
-    out = %{<span style="color: #{current_color}">}
+    @current_color ||= 'default'
+    out = %{<span style="color: #{@current_color}">}
     parts = line.split(/({{{format.*?}}})/)
     parts.each do |console_line|
       if console_line.include?('{{{format')
         if (color_index = console_line[/color:(\d+)/, 1]).present?
-          current_color = CONSOLE_COLOR[color_index]
-          out << %{</span><span style="color: #{current_color}">}
+          @current_color = CONSOLE_COLOR[color_index]
+          out << %{</span><span style="color: #{@current_color}">}
         end
       else
         out << h(console_line)
