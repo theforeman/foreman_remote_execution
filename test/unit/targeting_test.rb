@@ -129,7 +129,7 @@ class TargetingTest < ActiveSupport::TestCase
       targeting.search_query = 'name ~ host*'
       targeting.user = users(:admin)
       targeting.resolve_hosts!
-      randomized_host_ids = targeting.targeting_hosts.map(&:host_id)
+      randomized_host_ids = targeting.hosts.map(&:id)
       host_ids = hosts.map(&:id)
 
       assert_not_equal host_ids, randomized_host_ids

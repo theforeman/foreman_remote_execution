@@ -13,7 +13,7 @@ class Targeting < ApplicationRecord
   belongs_to :bookmark
 
   has_many :targeting_hosts, :dependent => :destroy
-  has_many :hosts, :through => :targeting_hosts
+  has_many :hosts, -> { order TargetingHost.table_name + '.id' }, :through => :targeting_hosts
   has_one :job_invocation, :dependent => :delete
   has_many :template_invocations, :through => :job_invocation
 
