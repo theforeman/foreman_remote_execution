@@ -1,4 +1,5 @@
 module JobInvocationOutputHelper
+  COLOR_PATTERN = /\e\[.*?m/.freeze
   CONSOLE_COLOR = {
     '31' => 'red',
     '32' => 'lightgreen',
@@ -17,13 +18,13 @@ module JobInvocationOutputHelper
   }.tap { |h| h.default = 'default' }.freeze
 
   def colorize_line(line)
-    line = line.gsub(/\e\[.*?m/) do |seq|
+    line = line.gsub(COLOR_PATTERN) do |seq|
       color = seq[/(\d+)m/,1]
       "{{{format color:#{color}}}}"
     end
 
     current_color = 'default'
-    out = %{<span style="color: #{@current_color}">}
+    out = %{<span style="color: #{current_color}">}
     parts = line.split(/({{{format.*?}}})/)
     parts.each do |console_line|
       if console_line.include?('{{{format')
