@@ -122,6 +122,53 @@ module Api
         assert_response :success
       end
 
+      describe 'raw output' do
+        let(:fake_output) do
+          (1..5).map do |i|
+            { 'timestamp' => (Time.now - (5 - i)).to_f, 'output' => i.to_s }
+          end
+        end
+        let(:fake_task) do
+          OpenStruct.new :pending? => false, :main_action => OpenStruct.new(:live_output => fake_output)
+        end
+        let(:host) { @invocation.template_invocations_hosts.first }
+
+        test 'should provide raw output for a host' do
+          JobInvocation.any_instance.expects(:task).returns(OpenStruct.new(:scheduled? => false))
+          JobInvocation.any_instance.expects(:sub_task_for_host).returns(fake_task)
+          get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal result['complete'], true
+          assert_equal result['output'], (1..5).map(&:to_s).join("\n")
+          assert_response :success
+        end
+
+        test 'should provide raw output for delayed task' do
+          start_time = Time.now
+          JobInvocation.any_instance
+                       .expects(:task).twice
+                       .returns(OpenStruct.new(:scheduled? => true, :start_at => start_time))
+          JobInvocation.any_instance.expects(:sub_task_for_host).never
+          get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal result['complete'], false
+          assert_equal result['delayed'], true
+          assert_nil result['output']
+          Time.parse(result['start_at']).to_f.must_be_close_to start_time.to_f
+          assert_response :success
+        end
+
+        test 'should provide raw output for host without task' do
+          JobInvocation.any_instance.expects(:task).returns(OpenStruct.new(:scheduled? => false))
+          JobInvocation.any_instance.expects(:sub_task_for_host)
+          get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal result['complete'], false
+          assert_nil result['output']
+          assert_response :success
+        end
+      end
+
       test 'should fail with 404 for non-existing job invocation' do
         invocation_id = @invocation.id + 1
         assert_empty JobInvocation.where(:id => invocation_id)

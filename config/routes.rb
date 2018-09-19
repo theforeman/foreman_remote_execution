@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       resources :job_invocations, :except => [:new, :edit, :update, :destroy] do
         resources :hosts, :only => :none do
           get '/', :to => 'job_invocations#output'
+          get '/raw', :to => 'job_invocations#raw_output'
         end
         member do
           post 'cancel'

@@ -4,8 +4,8 @@ module Api
       include ::Api::Version2
       include ::Foreman::Renderer
 
-      before_action :find_optional_nested_object, :only => %w{output}
-      before_action :find_host, :only => %w{output}
+      before_action :find_optional_nested_object, :only => %w{output raw_output}
+      before_action :find_host, :only => %w{output raw_output}
       before_action :find_resource, :only => %w{show update destroy clone cancel rerun}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
@@ -93,6 +93,22 @@ module Api
         render :json => { :refresh => refresh, :output => line_sets || [] }
       end
 
+      api :GET, '/job_invocations/:id/hosts/:host_id/raw', N_('Get raw output for a host')
+      param :id, :identifier, :required => true
+      param :host_id, :identifier, :required => true
+      def raw_output
+        if @nested_obj.task.scheduled?
+          render :json => { :complete => false, :delayed => true, :start_at => @nested_obj.task.start_at, :output => nil }
+          return
+        end
+
+        if task = @nested_obj.sub_task_for_host(@host)
+          output = output_lines_since(task, nil).map { |set| set['output'] }.join("\n")
+        end
+
+        render :json => { :complete => task ? !task.pending? : false, :output => output }
+      end
+
       api :POST, '/job_invocations/:id/cancel', N_('Cancel job invocation')
       param :id, :identifier, :required => true
       param :force, :bool
@@ -129,7 +145,7 @@ module Api
 
       def action_permission
         case params[:action]
-        when 'output'
+        when 'output', 'raw_output'
           :view
         when 'cancel'
           :cancel
