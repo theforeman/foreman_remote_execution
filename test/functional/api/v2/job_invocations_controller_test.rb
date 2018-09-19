@@ -101,25 +101,36 @@ module Api
         end
       end
 
-      test 'should provide output for delayed task' do
-        host = @invocation.template_invocations_hosts.first
-        ForemanTasks::Task.any_instance.expects(:scheduled?).returns(true)
-        get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
-        result = ActiveSupport::JSON.decode(@response.body)
-        assert_equal result['delayed'], true
-        assert_equal result['refresh'], true
-        assert_equal result['output'], []
-        assert_response :success
-      end
+      describe '#output' do
+        let(:host) { @invocation.template_invocations_hosts.first }
 
-      test 'should provide empty output for host which does not have a task yet' do
-        host = @invocation.template_invocations_hosts.first
-        JobInvocation.any_instance.expects(:sub_task_for_host).returns(nil)
-        get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
-        result = ActiveSupport::JSON.decode(@response.body)
-        assert_equal result['refresh'], true
-        assert_equal result['output'], []
-        assert_response :success
+        test 'should provide output for delayed task' do
+          ForemanTasks::Task.any_instance.expects(:scheduled?).returns(true)
+          get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal result['delayed'], true
+          assert_equal result['refresh'], true
+          assert_equal result['output'], []
+          assert_response :success
+        end
+
+        test 'should provide empty output for host which does not have a task yet' do
+          JobInvocation.any_instance.expects(:sub_task_for_host).returns(nil)
+          get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal result['refresh'], true
+          assert_equal result['output'], []
+          assert_response :success
+        end
+
+        test 'should fail with 404 for non-existing job invocation' do
+          invocation_id = @invocation.id + 1
+          assert_empty JobInvocation.where(:id => invocation_id)
+          get :output, params: { :job_invocation_id => invocation_id, :host_id => 1234 }
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal result['message'], "Job invocation not found by id '#{invocation_id}'"
+          assert_response :missing
+        end
       end
 
       describe 'raw output' do
@@ -167,15 +178,6 @@ module Api
           assert_nil result['output']
           assert_response :success
         end
-      end
-
-      test 'should fail with 404 for non-existing job invocation' do
-        invocation_id = @invocation.id + 1
-        assert_empty JobInvocation.where(:id => invocation_id)
-        get :output, params: { :job_invocation_id => invocation_id, :host_id => 1234 }
-        result = ActiveSupport::JSON.decode(@response.body)
-        assert_equal result['message'], "Job invocation not found by id '#{invocation_id}'"
-        assert_response :missing
       end
 
       test 'should cancel a job' do
