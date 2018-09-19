@@ -185,7 +185,7 @@ module Api
       def host_output(job_invocation, host, default: nil, since: nil, raw: false)
         refresh = true
 
-        if task = job_invocation.sub_task_for_host(host)
+        if(task = job_invocation.sub_task_for_host(host))
           refresh = task.pending?
           output  = output_lines_since(task, since)
           output  = output.map { |set| set['output'] }.join("\n") if raw
