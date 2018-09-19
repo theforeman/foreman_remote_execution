@@ -78,19 +78,11 @@ module Api
       param :since, String, :required => false
       def output
         if @nested_obj.task.scheduled?
-          render :json => { :refresh => true, :output => [], :delayed => true, :start_at => @nested_obj.task.start_at }
+          render :json => delayed_task_output(@nested_obj.task, :default => [])
           return
         end
-        task = @nested_obj.sub_task_for_host(@host)
-        refresh = true
-        line_sets = []
 
-        if task
-          refresh = task.pending?
-          line_sets = output_lines_since task, params[:since]
-        end
-
-        render :json => { :refresh => refresh, :output => line_sets || [] }
+        render :json => host_output(@nested_obj, @host, :default => [], :since => params[:since])
       end
 
       api :GET, '/job_invocations/:id/hosts/:host_id/raw', N_('Get raw output for a host')
@@ -98,15 +90,11 @@ module Api
       param :host_id, :identifier, :required => true
       def raw_output
         if @nested_obj.task.scheduled?
-          render :json => { :complete => false, :delayed => true, :start_at => @nested_obj.task.start_at, :output => nil }
+          render :json => delayed_task_output(@nested_obj.task)
           return
         end
 
-        if task = @nested_obj.sub_task_for_host(@host)
-          output = output_lines_since(task, nil).map { |set| set['output'] }.join("\n")
-        end
-
-        render :json => { :complete => task ? !task.pending? : false, :output => output }
+        render :json => host_output(@nested_obj, @host, :raw => true)
       end
 
       api :POST, '/job_invocations/:id/cancel', N_('Cancel job invocation')
@@ -192,6 +180,22 @@ module Api
         line_sets = task.main_action.live_output
         line_sets = line_sets.drop_while { |o| o['timestamp'].to_f <= since } if since
         line_sets
+      end
+
+      def host_output(job_invocation, host, default: nil, since: nil, raw: false)
+        refresh = true
+
+        if task = job_invocation.sub_task_for_host(host)
+          refresh = task.pending?
+          output  = output_lines_since(task, since)
+          output  = output.map { |set| set['output'] }.join("\n") if raw
+        end
+
+        { :complete => !refresh, :refresh => refresh, :output => output || default }
+      end
+
+      def delayed_task_output(task, default: nil)
+        { :complete => false, :refresh => true, :output => default, :delayed => true, :start_at => task.start_at }
       end
     end
   end
