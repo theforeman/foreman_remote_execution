@@ -117,4 +117,23 @@ class TargetingTest < ActiveSupport::TestCase
       end
     end
   end
+
+  context 'randomized ordering' do
+    let(:targeting) { FactoryBot.build(:targeting, :with_randomized_ordering) }
+    let(:hosts) { (0..4).map { FactoryBot.create(:host) } }
+
+    it 'loads the hosts in random order' do
+      rng = Random.new(4) # Chosen by a fair dice roll
+      Random.stubs(:new).returns(rng)
+      hosts
+      targeting.search_query = 'name ~ host*'
+      targeting.user = users(:admin)
+      targeting.resolve_hosts!
+      randomized_host_ids = targeting.targeting_hosts.map(&:host_id)
+      host_ids = hosts.map(&:id)
+
+      assert_not_equal host_ids, randomized_host_ids
+      assert_equal host_ids, randomized_host_ids.sort
+    end
+  end
 end

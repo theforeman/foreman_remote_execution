@@ -28,6 +28,10 @@ FactoryBot.define do
     search_query { 'name = foo' }
     targeting_type { 'static_query' }
     user
+
+    trait :with_randomized_ordering do
+      randomized_ordering true
+    end
   end
 
   factory :job_invocation do |f|
