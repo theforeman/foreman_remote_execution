@@ -58,6 +58,12 @@ FactoryBot.define do
         invocation.task = FactoryBot.build(:some_task)
       end
     end
+
+    trait :with_unplanned_host do
+      after(:build) do |invocation, _evaluator|
+        invocation.targeting.hosts << FactoryBot.build(:host)
+      end
+    end
   end
 
   factory :remote_execution_provider do |f|
