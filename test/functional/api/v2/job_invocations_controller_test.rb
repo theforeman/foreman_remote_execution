@@ -193,6 +193,7 @@ module Api
       test 'should rerun failed only' do
         @invocation = FactoryBot.create(:job_invocation, :with_template, :with_failed_task)
         @invocation.job_category = @invocation.pattern_template_invocations.first.template.job_category
+        @invocation.targeting.hosts = @invocation.template_invocations.map(&:host)
         @invocation.save!
         JobInvocation.any_instance.expects(:generate_description)
         JobInvocationComposer.any_instance
