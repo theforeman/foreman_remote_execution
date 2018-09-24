@@ -796,4 +796,20 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       end
     end
   end
+
+  describe '#from_job_invocation' do
+    let(:job_invocation) do
+      as_admin { FactoryBot.create(:job_invocation, :with_template, :with_task) }
+    end
+
+    before do
+      job_invocation.targeting.host_ids = job_invocation.template_invocations_host_ids
+    end
+
+    it 'marks targeting as resolved if static' do
+      created = JobInvocationComposer.from_job_invocation(job_invocation).job_invocation
+      assert created.targeting.resolved?
+      assert_equal job_invocation.template_invocations_host_ids, created.targeting.host_ids
+    end
+  end
 end

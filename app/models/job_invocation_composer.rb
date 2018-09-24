@@ -345,6 +345,11 @@ class JobInvocationComposer
     job_invocation.key_passphrase = params[:key_passphrase]
     job_invocation.sudo_password = params[:sudo_password]
 
+    if @reruns && job_invocation.targeting.static?
+      job_invocation.targeting.host_ids = JobInvocation.find(@reruns).targeting.host_ids
+      job_invocation.targeting.mark_resolved!
+    end
+
     job_invocation.job_category = nil unless rerun_possible?
 
     self

@@ -36,7 +36,7 @@ class Targeting < ApplicationRecord
     raise ::Foreman::Exception, _('Cannot resolve hosts without a bookmark or search query') if bookmark.nil? && search_query.blank?
 
     self.search_query = bookmark.query if dynamic? && bookmark.present?
-    self.resolved_at = Time.zone.now
+    mark_resolved!
     self.validate!
     # avoid validation of hosts objects - they will be loaded for no reason.
     #   pluck(:id) returns duplicate results for HostCollections
@@ -62,6 +62,10 @@ class Targeting < ApplicationRecord
 
   def resolved?
     self.resolved_at.present?
+  end
+
+  def mark_resolved!
+    self.resolved_at = Time.zone.now
   end
 
   private
