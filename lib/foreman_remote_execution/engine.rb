@@ -119,6 +119,8 @@ module ForemanRemoteExecution
         parameter_filter Nic::Interface do |ctx|
           ctx.permit :execution
         end
+
+        extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/pubkey'
       end
     end
 
