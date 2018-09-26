@@ -7,7 +7,7 @@ class InputTemplateRenderer
 
   delegate :logger, to: Rails
 
-  attr_accessor :template, :host, :invocation, :input_values, :error_message, :templates_stack
+  attr_accessor :template, :host, :invocation, :input_values, :error_message, :templates_stack, :current_user
 
   # takes template object that should be rendered
   # host and template invocation arguments are optional
@@ -39,7 +39,8 @@ class InputTemplateRenderer
         invocation: invocation,
         input_values: input_values,
         templates_stack: templates_stack,
-        input_template_instance: self
+        input_template_instance: self,
+        current_user: User.current.try(:login)
       }
     )
     Foreman::Renderer.render(source, scope)

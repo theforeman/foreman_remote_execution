@@ -4,7 +4,7 @@ module ForemanRemoteExecution
       class Input < ::Foreman::Renderer::Scope::Base
         include Foreman::Renderer::Scope::Macros::HostTemplate
 
-        attr_reader :template, :host, :invocation, :input_values, :input_template_instance
+        attr_reader :template, :host, :invocation, :input_values, :input_template_instance, :current_user
         delegate :input, to: :input_template_instance
 
         def render_error(message)
@@ -57,7 +57,7 @@ module ForemanRemoteExecution
         end
 
         def allowed_helpers
-          super + [:input, :render_template, :preview?, :render_error]
+          super + [:input, :render_template, :preview?, :render_error, :current_user]
         end
       end
     end
