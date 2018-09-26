@@ -11,6 +11,12 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
     it 'should render preview' do
       renderer.preview.must_equal 'id true'
     end
+
+    it 'should allow accessing current_user' do
+      setup_user(:view_job_templates)
+      renderer = InputTemplateRenderer.new(FactoryBot.build(:job_template, :template => "They call me '<%= current_user %>'"))
+      renderer.preview.must_equal "They call me '#{User.current.login}'"
+    end
   end
 
   context 'renderer for template with user input used' do
