@@ -266,29 +266,57 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
     end
 
     context 'with options specified' do
-
       let(:job_invocation) { FactoryBot.create(:job_invocation) }
       let(:template_invocation) { FactoryBot.build(:template_invocation, :template => template) }
       let(:result) { renderer.render }
+      let(:required) { false }
+      let(:input) do
+        FactoryBot.create(:template_invocation_input_value,
+                          :template_invocation => template_invocation,
+                          :template_input => template.template_inputs.first,
+                          :value => 'foreman')
+      end
 
       before do
-        template.template_inputs << FactoryBot.build(:template_input, :name => 'service_name', :input_type => 'user', :options => "httpd\nforeman")
+        template.template_inputs << FactoryBot.build(:template_input, :name => 'service_name', :input_type => 'user', :options => "httpd\nforeman", :required => required)
+        job_invocation.template_invocations << template_invocation
+        renderer.invocation = template_invocation
+        input
+        renderer.invocation.reload
       end
 
       context 'with a valid input defined' do
-        before do
-          job_invocation.template_invocations << template_invocation
-          renderer.invocation = template_invocation
-
-          FactoryBot.create(:template_invocation_input_value,
-                            :template_invocation => template_invocation,
-                            :template_input => template.template_inputs.first,
-                            :value => 'foreman')
-          renderer.invocation.reload
+        context 'with an optional input' do
+          it 'can render with job invocation with corresponding value' do
+            result.must_equal 'service restart foreman'
+          end
         end
 
-        it 'can render with job invocation with corresponding value' do
-          renderer.render.must_equal 'service restart foreman'
+        context 'with required input' do
+          let(:required) { true }
+
+          it 'renders the template when the input is provided' do
+            result.must_equal 'service restart foreman'
+          end
+        end
+      end
+
+      context 'without provided input' do
+        let(:input) { nil }
+
+        context 'with optional input' do
+          it 'renders the template' do
+            result.must_equal 'service restart '
+          end
+        end
+
+        context 'with required input' do
+          let(:required) { true }
+
+          it 'renders the template' do
+            result
+            assert_match(/Value for required input '.*' was not specified/, renderer.error_message)
+          end
         end
       end
     end
