@@ -57,7 +57,8 @@ class JobInvocationsController < ApplicationController
       hosts_base = hosts_base.joins(:template_invocations)
                              .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
     end
-    @hosts = hosts_base.search_for(params[:search], :order => params[:order] || 'name ASC').paginate(:page => params[:page])
+    @hosts = hosts_base.search_for(params[:search], :order => params[:order] || 'name ASC')
+                       .paginate(:page => params[:page], :per_page => params[:per_page])
   end
 
   def index
