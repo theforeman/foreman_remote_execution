@@ -51,14 +51,13 @@ class JobInvocationsController < ApplicationController
   def show
     @job_invocation = resource_base.includes(:template_invocations => :run_host_job_task).find(params[:id])
     @auto_refresh = @job_invocation.task.try(:pending?)
-    hosts_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+    @resource_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
     # There's no need to do the joining if we're not filtering
     unless params[:search].nil?
-      hosts_base = hosts_base.joins(:template_invocations)
-                             .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
+      @resource_base = @resource_base.joins(:template_invocations)
+                                     .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
     end
-    @hosts = hosts_base.search_for(params[:search], :order => params[:order] || 'name ASC')
-                       .paginate(:page => params[:page], :per_page => params[:per_page])
+    @hosts = resource_base_search_and_page
   end
 
   def index
