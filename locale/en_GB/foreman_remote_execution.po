@@ -41,9 +41,6 @@ msgstr ""
 msgid "A job '%{subject}' has finished successfully"
 msgstr ""
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr ""
-
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr ""
 
@@ -60,9 +57,6 @@ msgid "Actions"
 msgstr ""
 
 msgid "Add Foreign Input Set"
-msgstr ""
-
-msgid "Add Input"
 msgstr ""
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
@@ -128,6 +122,9 @@ msgstr ""
 msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
 
@@ -144,9 +141,6 @@ msgid "Create a job template"
 msgstr ""
 
 msgid "Create a recurring job"
-msgstr ""
-
-msgid "Create a template input"
 msgstr ""
 
 msgid "Default SSH key passphrase"
@@ -171,9 +165,6 @@ msgid "Delete a foreign input set"
 msgstr ""
 
 msgid "Delete a job template"
-msgstr ""
-
-msgid "Delete a template input"
 msgstr ""
 
 msgid "Description"
@@ -237,12 +228,6 @@ msgid "Exit status: %s"
 msgstr ""
 
 msgid "Export a job template to ERB"
-msgstr ""
-
-msgid "Fact name, used when input type is fact"
-msgstr ""
-
-msgid "Fact value"
 msgstr ""
 
 msgid "Failed"
@@ -311,22 +296,7 @@ msgstr ""
 msgid "Input"
 msgstr ""
 
-msgid "Input description"
-msgstr ""
-
-msgid "Input is advanced"
-msgstr ""
-
-msgid "Input is required"
-msgstr ""
-
-msgid "Input name"
-msgstr ""
-
 msgid "Input set description"
-msgstr ""
-
-msgid "Input type"
 msgstr ""
 
 msgid "Inputs to use"
@@ -428,9 +398,6 @@ msgstr "List job templates per organisation"
 msgid "List remote execution features"
 msgstr ""
 
-msgid "List template inputs"
-msgstr ""
-
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
@@ -510,15 +477,6 @@ msgid "Providers and templates"
 msgstr ""
 
 msgid "Proxies"
-msgstr ""
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr ""
-
-msgid "Puppet parameter"
-msgstr ""
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
 msgstr ""
 
 msgid "Recurring logic"
@@ -638,9 +596,6 @@ msgstr ""
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr ""
 
-msgid "Selectable values for user inputs"
-msgstr ""
-
 msgid "Set to distribute over"
 msgstr ""
 
@@ -657,9 +612,6 @@ msgid "Show job template details"
 msgstr ""
 
 msgid "Show remote execution feature"
-msgstr ""
-
-msgid "Show template input details"
 msgstr ""
 
 msgid "Snippet"
@@ -708,9 +660,6 @@ msgid "Template ERB"
 msgstr ""
 
 msgid "Template Invocation for %s"
-msgstr ""
-
-msgid "Template input"
 msgstr ""
 
 msgid "Template name"
@@ -847,9 +796,6 @@ msgstr ""
 msgid "Update a job template"
 msgstr ""
 
-msgid "Update a template input"
-msgstr ""
-
 msgid "Use default description template"
 msgstr ""
 
@@ -870,15 +816,6 @@ msgstr ""
 
 msgid "Value"
 msgstr "Value"
-
-msgid "Value for required input '%s' was not specified"
-msgstr ""
-
-msgid "Variable"
-msgstr ""
-
-msgid "Variable name, used when input type is variable"
-msgstr ""
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr ""
@@ -916,9 +853,6 @@ msgid "Workers pool size"
 msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
-msgstr ""
-
-msgid "add a input for this template"
 msgstr ""
 
 msgid "add an input set for this template to reference a different template inputs"
@@ -961,9 +895,6 @@ msgid "queued"
 msgstr ""
 
 msgid "queued to start executing in %{time}"
-msgstr ""
-
-msgid "remove template input"
 msgstr ""
 
 msgid "remove template input set"

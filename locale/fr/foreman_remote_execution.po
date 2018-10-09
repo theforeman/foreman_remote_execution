@@ -41,9 +41,6 @@ msgstr "Une liste des entrées du modèle externe à inclure, séparées par des
 msgid "A job '%{subject}' has finished successfully"
 msgstr "Un job '%{subject}' s'est terminé avec succès"
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr "Une liste d'options que l'utilisateur peut choisir. Si non fournie, l'utilisateur aura un champ de saisie à structure libre"
-
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "Un greffon qui apporte l'exécution distante à Foreman, complétant la fonction de gestion de configuration avec la fonction d'exécution distante."
 
@@ -61,9 +58,6 @@ msgstr "Actions"
 
 msgid "Add Foreign Input Set"
 msgstr "Ajout d'un jeu de données en entrée externes"
-
-msgid "Add Input"
-msgstr "Ajout d'entrée"
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
@@ -128,6 +122,9 @@ msgstr "Impossible de trouver une interface qui convient pour l'exécution"
 msgid "Could not render the preview because no host matches the search query."
 msgstr "Impossible d'afficher l'aperçu car aucun hôte ne correspond à la recherche."
 
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr "N'a pas pu utiliser un proxy quelconque. Considérez configurer %{global_proxy}, %{fallback_proxy} ou %{no_proxy} "
 
@@ -145,9 +142,6 @@ msgstr "Créer un modèle de job"
 
 msgid "Create a recurring job"
 msgstr "Créer un job récurrent"
-
-msgid "Create a template input"
-msgstr "Créer un modèle d'entrée"
 
 msgid "Default SSH key passphrase"
 msgstr "Phrase de passe de clé par défaut"
@@ -172,9 +166,6 @@ msgstr "Supprimer un jeu de données en entrée externe"
 
 msgid "Delete a job template"
 msgstr "Supprimer un modèle de job"
-
-msgid "Delete a template input"
-msgstr "Supprimer un modèle d'entrée"
 
 msgid "Description"
 msgstr "Description"
@@ -238,12 +229,6 @@ msgstr "Statut de sortie : %s"
 
 msgid "Export a job template to ERB"
 msgstr "Exporte un modèle de job vers ERB"
-
-msgid "Fact name, used when input type is fact"
-msgstr "Nom du fact, utilisé quand le type d'entrée est un fact"
-
-msgid "Fact value"
-msgstr "Valeur du Fact"
 
 msgid "Failed"
 msgstr "Échoué"
@@ -311,23 +296,8 @@ msgstr "Indique que l'action doit pouvoir être annulée si elle ne peut pas êt
 msgid "Input"
 msgstr "Entrée"
 
-msgid "Input description"
-msgstr "Description de l'entrée"
-
-msgid "Input is advanced"
-msgstr "L'entrée est de type avancé"
-
-msgid "Input is required"
-msgstr "Entrée requise"
-
-msgid "Input name"
-msgstr "Nom de l'entrée"
-
 msgid "Input set description"
 msgstr "Description du jeu de données en entrée"
-
-msgid "Input type"
-msgstr "Type de l'entrée"
 
 msgid "Inputs to use"
 msgstr "Les entrées à utiliser"
@@ -428,9 +398,6 @@ msgstr "Afficher les modèles de job par organisation"
 msgid "List remote execution features"
 msgstr "Affiche les capacités d'exécution distantes"
 
-msgid "List template inputs"
-msgstr "Afficher les modèles de jeux de données en entrée"
-
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
@@ -511,15 +478,6 @@ msgstr "Modèles et fournisseurs"
 
 msgid "Proxies"
 msgstr "Proxies"
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr "Nom de la classe Puppet, utilisé quand le type d'entrée est puppet_parameter"
-
-msgid "Puppet parameter"
-msgstr "Paramètre Puppet"
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr "Nom du paramètre Puppet, utilisé quand le type d'entrée est puppet_parameter"
 
 msgid "Recurring logic"
 msgstr "Logique récurrente"
@@ -638,9 +596,6 @@ msgstr "Choisir un fichier ERB à transmettre pour l'import du modèle du job. L
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "Choisir tous les proxies d'exécution distante applicables pour ce sous-réseau. Quand plusieurs proxies avec un même fournisseur sont ajoutés, les actions seront réparties sur chacun d'entre eux."
 
-msgid "Selectable values for user inputs"
-msgstr "Valeurs sélectionnables pour les entrées utilisateur"
-
 msgid "Set to distribute over"
 msgstr "Défini pour distribuer sur"
 
@@ -658,9 +613,6 @@ msgstr "Voir les détails d'un modèle de job"
 
 msgid "Show remote execution feature"
 msgstr "Affiche la capacité d'exécution distante"
-
-msgid "Show template input details"
-msgstr "Afficher les détails du modèle de jeu de données en entrée"
 
 msgid "Snippet"
 msgstr "Snippet"
@@ -709,9 +661,6 @@ msgstr "Modèle ERB"
 
 msgid "Template Invocation for %s"
 msgstr ""
-
-msgid "Template input"
-msgstr "Modèles des données en entrée"
 
 msgid "Template name"
 msgstr "Nom de modèle"
@@ -847,9 +796,6 @@ msgstr "Mettre à jour un jeu de données en entrée externe"
 msgid "Update a job template"
 msgstr "Mise à jour d'un modèle de job"
 
-msgid "Update a template input"
-msgstr "Mise à jour d'un modèle d'entrée"
-
 msgid "Use default description template"
 msgstr "Utiliser le modèle de description par défaut"
 
@@ -870,15 +816,6 @@ msgstr "Entrée utilisateur"
 
 msgid "Value"
 msgstr "Valeur"
-
-msgid "Value for required input '%s' was not specified"
-msgstr "La valeur requise pour l'entrée '%s' n'a pas été donnée"
-
-msgid "Variable"
-msgstr "Variable"
-
-msgid "Variable name, used when input type is variable"
-msgstr "Nom de variable, utilisé quand le type d'entrée est une variable"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "La commande qui doit être utilisée pour changer l'utilisateur effectif. Choisir parmi %s"
@@ -919,9 +856,6 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "Vous n'êtes pas autorisé à afficher le modèle affecté en cours. La Sauvegarde du formulaire en cours supprimerait l'affectation au modèle."
-
-msgid "add a input for this template"
-msgstr "Ajout d'une entrée pour ce modèle"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "Ajout d'un jeu d'entrées pour ce modèle pour faire référence à des entrées sur un modèle différent"
@@ -964,9 +898,6 @@ msgstr "ajouté en file d'attente"
 
 msgid "queued to start executing in %{time}"
 msgstr "ajouté en file d'attente pour lancer l'exécution dans %{time}"
-
-msgid "remove template input"
-msgstr "supprimer un modèles des données en entrée"
 
 msgid "remove template input set"
 msgstr "supprimer un modèles des données en entrée"

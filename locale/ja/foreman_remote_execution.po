@@ -41,9 +41,6 @@ msgstr "外部テンプレートから含める入力名のコンマ区切り一
 msgid "A job '%{subject}' has finished successfully"
 msgstr "ジョブ '%{subject}' が正常に完了しました。"
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr "ユーザーが選択できるオプションの一覧。提供されていない場合は、ユーザーに自由形式のフィールドが提供されます"
-
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "リモート実行を Foreman で実現するプラグイン。設定管理機能にリモート管理機能を補完します。"
 
@@ -61,9 +58,6 @@ msgstr "アクション"
 
 msgid "Add Foreign Input Set"
 msgstr "外部入力セットを追加"
-
-msgid "Add Input"
-msgstr "入力を追加"
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
@@ -128,6 +122,9 @@ msgstr "実行に適したインターフェースを見つけることができ
 msgid "Could not render the preview because no host matches the search query."
 msgstr "検索クエリーに一致するホストがないため、プレビューをレンダリングできませんでした。"
 
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr "プロキシーを使用できませんでした。設定で %{global_proxy}、%{fallback_proxy}、または %{no_proxy} を指定することを検討してください"
 
@@ -145,9 +142,6 @@ msgstr "ジョブテンプレートを作成"
 
 msgid "Create a recurring job"
 msgstr "繰り返しジョブを作成"
-
-msgid "Create a template input"
-msgstr "テンプレート入力を作成"
 
 msgid "Default SSH key passphrase"
 msgstr "デフォルトの SSH 鍵パスフレーズ"
@@ -172,9 +166,6 @@ msgstr "外部入力セットを削除"
 
 msgid "Delete a job template"
 msgstr "ジョブテンプレートを削除"
-
-msgid "Delete a template input"
-msgstr "テンプレート入力を削除"
 
 msgid "Description"
 msgstr "説明"
@@ -238,12 +229,6 @@ msgstr "終了ステータス: %s"
 
 msgid "Export a job template to ERB"
 msgstr "ジョブテンプレートを ERB にエクスポート"
-
-msgid "Fact name, used when input type is fact"
-msgstr "ファクト名。入力タイプがファクトの場合に使用されます"
-
-msgid "Fact value"
-msgstr "ファクト値"
 
 msgid "Failed"
 msgstr "失敗しました"
@@ -311,23 +296,8 @@ msgstr "アクションはこの時刻よりも前に開始できない場合に
 msgid "Input"
 msgstr "入力"
 
-msgid "Input description"
-msgstr "入力の説明"
-
-msgid "Input is advanced"
-msgstr "入力が高度"
-
-msgid "Input is required"
-msgstr "入力が必要"
-
-msgid "Input name"
-msgstr "入力名"
-
 msgid "Input set description"
 msgstr "入力セットの説明"
-
-msgid "Input type"
-msgstr "入力タイプ"
 
 msgid "Inputs to use"
 msgstr "使用する入力"
@@ -428,9 +398,6 @@ msgstr "組織ごとのジョブテンプレートを一覧表示"
 msgid "List remote execution features"
 msgstr "リモート実行機能を一覧表示"
 
-msgid "List template inputs"
-msgstr "テンプレート入力を一覧表示"
-
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
@@ -511,15 +478,6 @@ msgstr "プロバイダーおよびテンプレート"
 
 msgid "Proxies"
 msgstr "プロキシー"
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr "Puppet クラス名。入力タイプが puppet_parameter の場合に使用されます"
-
-msgid "Puppet parameter"
-msgstr "Puppet パラメーター"
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr "Puppet パラメーター名。入力タイプが puppet_parameter の場合に使用されます"
 
 msgid "Recurring logic"
 msgstr "再帰論理"
@@ -638,9 +596,6 @@ msgstr "ジョブテンプレートをインポートするためにアップロ
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "このサブネットに適用可能なすべてのリモート実行プロキシーを選択します。同じプロバイダーがある複数のプロキシーが追加された場合は、それらのプロキシー間で負荷が分散されます。"
 
-msgid "Selectable values for user inputs"
-msgstr "ユーザー入力に選択できる値"
-
 msgid "Set to distribute over"
 msgstr "ディストリビューションに設定"
 
@@ -658,9 +613,6 @@ msgstr "ジョブテンプレートの詳細を表示"
 
 msgid "Show remote execution feature"
 msgstr "リモート実行機能を表示"
-
-msgid "Show template input details"
-msgstr "テンプレート入力詳細を表示"
 
 msgid "Snippet"
 msgstr "スニペット"
@@ -709,9 +661,6 @@ msgstr "テンプレート ERB"
 
 msgid "Template Invocation for %s"
 msgstr ""
-
-msgid "Template input"
-msgstr "テンプレート入力"
 
 msgid "Template name"
 msgstr "テンプレート名"
@@ -847,9 +796,6 @@ msgstr "外部入力セットを更新"
 msgid "Update a job template"
 msgstr "ジョブテンプレートを更新"
 
-msgid "Update a template input"
-msgstr "テンプレート入力を更新"
-
 msgid "Use default description template"
 msgstr "デフォルトの説明テンプレートを使用"
 
@@ -870,15 +816,6 @@ msgstr "ユーザー入力"
 
 msgid "Value"
 msgstr "値"
-
-msgid "Value for required input '%s' was not specified"
-msgstr "必要な入力 '%s' の値が指定されていませんでした"
-
-msgid "Variable"
-msgstr "変数"
-
-msgid "Variable name, used when input type is variable"
-msgstr "変数名。入力タイプが変数の場合に使用されます"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "実効ユーザーに切り替えるために使用するコマンド。%s のいずれか"
@@ -919,9 +856,6 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "現在割り当てられているテンプレートを参照することは許可されていません。フォームを保存すると、テンプレートの割り当てが解除されます。"
-
-msgid "add a input for this template"
-msgstr "このテンプレートの入力を追加"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "異なるテンプレート入力を参照するためにこのテンプレートの入力セットを追加"
@@ -964,9 +898,6 @@ msgstr "キューに登録済み"
 
 msgid "queued to start executing in %{time}"
 msgstr "%{time} 後に実行を開始するようキューに入れられています"
-
-msgid "remove template input"
-msgstr "テンプレート入力を削除"
 
 msgid "remove template input set"
 msgstr "テンプレート入力セットを削除"

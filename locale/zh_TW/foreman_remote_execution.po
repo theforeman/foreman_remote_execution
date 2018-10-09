@@ -40,9 +40,6 @@ msgstr "從外部範本納入的輸入名稱清單，以逗號隔開。"
 msgid "A job '%{subject}' has finished successfully"
 msgstr ""
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr "使用者可以選擇的選項清單。如果沒有提供的話，使用者會被給予開放清單的欄位"
-
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "將遠端執行帶入 Foreman 的外掛程式，搭配遠端管理功能來完成配置管理。"
 
@@ -60,9 +57,6 @@ msgstr "動作"
 
 msgid "Add Foreign Input Set"
 msgstr "新增外部輸入集"
-
-msgid "Add Input"
-msgstr "新增輸入"
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
@@ -127,6 +121,9 @@ msgstr ""
 msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
 
@@ -144,9 +141,6 @@ msgstr "建立工作範本"
 
 msgid "Create a recurring job"
 msgstr "建立週期性工作"
-
-msgid "Create a template input"
-msgstr "建立範本輸入"
 
 msgid "Default SSH key passphrase"
 msgstr ""
@@ -171,9 +165,6 @@ msgstr "刪除外部輸入集"
 
 msgid "Delete a job template"
 msgstr "刪除工作範本"
-
-msgid "Delete a template input"
-msgstr "刪除範本輸入"
 
 msgid "Description"
 msgstr "說明"
@@ -237,12 +228,6 @@ msgstr "退出狀態：%s"
 
 msgid "Export a job template to ERB"
 msgstr ""
-
-msgid "Fact name, used when input type is fact"
-msgstr "事實名稱，當輸入類型是 fact 時使用"
-
-msgid "Fact value"
-msgstr "詳情值"
 
 msgid "Failed"
 msgstr "已失敗"
@@ -310,23 +295,8 @@ msgstr "這表示如果不能在這時間之前開始，就應該取消動作。
 msgid "Input"
 msgstr "輸入"
 
-msgid "Input description"
-msgstr "輸入的描述"
-
-msgid "Input is advanced"
-msgstr "輸入是進階的"
-
-msgid "Input is required"
-msgstr "需要輸入"
-
-msgid "Input name"
-msgstr "輸入的名稱"
-
 msgid "Input set description"
 msgstr "輸入集的描述"
-
-msgid "Input type"
-msgstr "輸入類型"
 
 msgid "Inputs to use"
 msgstr "要使用的輸入"
@@ -427,9 +397,6 @@ msgstr "列出各個組織的工作範本"
 msgid "List remote execution features"
 msgstr "列出遠端執行功能"
 
-msgid "List template inputs"
-msgstr "列出範本輸入"
-
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
@@ -510,15 +477,6 @@ msgstr "供應者與範本"
 
 msgid "Proxies"
 msgstr "代理伺服器"
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr "puppet class 名稱，當輸入類型是 puppet_parameter 時使用"
-
-msgid "Puppet parameter"
-msgstr "Puppet 參數"
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr "puppet 參數名稱，當輸入類型是 puppet_parameter 時使用"
 
 msgid "Recurring logic"
 msgstr "週期邏輯"
@@ -637,9 +595,6 @@ msgstr ""
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "為此子網路儘可能選擇遠端執行代理。加入有著同樣供應者的多重代理之後，動作就會在這些代理上進行負載平衡。"
 
-msgid "Selectable values for user inputs"
-msgstr "使用者輸入可選擇的值"
-
 msgid "Set to distribute over"
 msgstr ""
 
@@ -657,9 +612,6 @@ msgstr "顯示工作範本的詳情"
 
 msgid "Show remote execution feature"
 msgstr "顯示遠端執行功能"
-
-msgid "Show template input details"
-msgstr "顯示範本輸入的詳細資料"
 
 msgid "Snippet"
 msgstr "程式碼片段"
@@ -708,9 +660,6 @@ msgstr ""
 
 msgid "Template Invocation for %s"
 msgstr ""
-
-msgid "Template input"
-msgstr "範本輸入"
 
 msgid "Template name"
 msgstr "範本名稱"
@@ -846,9 +795,6 @@ msgstr "更新外部輸入集"
 msgid "Update a job template"
 msgstr "更新工作範本"
 
-msgid "Update a template input"
-msgstr "更新範本輸入"
-
 msgid "Use default description template"
 msgstr "使用預設的描述範本"
 
@@ -869,15 +815,6 @@ msgstr "使用者輸入"
 
 msgid "Value"
 msgstr "值"
-
-msgid "Value for required input '%s' was not specified"
-msgstr "所需輸入的值 '%s' 並未指定"
-
-msgid "Variable"
-msgstr "變數"
-
-msgid "Variable name, used when input type is variable"
-msgstr "變數名稱，當輸入類型是 variable 時使用"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "該用哪個指令來切換至有效的使用者。%s 之一"
@@ -916,9 +853,6 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "您不能看到目前指定的範本。現在儲存表單會取消指定範本。"
-
-msgid "add a input for this template"
-msgstr "新增輸入至此範本"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "為此範本新增輸入集，以參照至不同的範本輸入"
@@ -961,9 +895,6 @@ msgstr "已排程"
 
 msgid "queued to start executing in %{time}"
 msgstr ""
-
-msgid "remove template input"
-msgstr "移除範本輸入"
 
 msgid "remove template input set"
 msgstr "移除範本輸入集"

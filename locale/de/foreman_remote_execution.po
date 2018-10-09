@@ -41,9 +41,6 @@ msgstr "Kommagetrennte Liste von Eingabenamen, die in die Fremdvorlage einzubezi
 msgid "A job '%{subject}' has finished successfully"
 msgstr ""
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr "Eine Liste von Optionen, aus der der Benutzer auswählen kann. Wenn keine Liste bereitgestellt ist, wird dem Benutzer ein Freitext-Feld zur Verfügung gestellt"
-
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "Ein Plugin, das Foreman entfernte Ausführung bietet und die Konfig-Verwaltungsfunktion mit einer entfernten Verwaltungsfunktion ergänzt."
 
@@ -61,9 +58,6 @@ msgstr "Aktionen"
 
 msgid "Add Foreign Input Set"
 msgstr "Fremdeingabe-Satz hinzufügen"
-
-msgid "Add Input"
-msgstr "Eingabe hinzufügen"
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
@@ -128,6 +122,9 @@ msgstr ""
 msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
 
@@ -145,9 +142,6 @@ msgstr "Job-Vorlage erstellen"
 
 msgid "Create a recurring job"
 msgstr "Wiederholten Job erstellen"
-
-msgid "Create a template input"
-msgstr "Vorlageneingabe erstellen"
 
 msgid "Default SSH key passphrase"
 msgstr ""
@@ -172,9 +166,6 @@ msgstr "Fremdeingabe-Satz löschen"
 
 msgid "Delete a job template"
 msgstr "Job-Vorlage löschen"
-
-msgid "Delete a template input"
-msgstr "Vorlageneingabe löschen"
 
 msgid "Description"
 msgstr "Beschreibung"
@@ -238,12 +229,6 @@ msgstr "Exit-Status: %s"
 
 msgid "Export a job template to ERB"
 msgstr "Job-Vorlage nach ERB exportieren"
-
-msgid "Fact name, used when input type is fact"
-msgstr "Faktenname wird benutzt, wenn Eingabetyp Fakt ist"
-
-msgid "Fact value"
-msgstr "Faktenwert"
 
 msgid "Failed"
 msgstr "Fehlgeschlagen"
@@ -311,23 +296,8 @@ msgstr "Gibt an, dass die Aktion abgebrochen werden soll, wenn sie nicht vor die
 msgid "Input"
 msgstr "Eingabe"
 
-msgid "Input description"
-msgstr "Eingabebeschreibung"
-
-msgid "Input is advanced"
-msgstr "Eingabe ist erweitert"
-
-msgid "Input is required"
-msgstr "Eingabe ist erforderlich"
-
-msgid "Input name"
-msgstr "Eingabename"
-
 msgid "Input set description"
 msgstr "Beschreibung des Eingabe-Satzes"
-
-msgid "Input type"
-msgstr "Eingabetyp"
 
 msgid "Inputs to use"
 msgstr "Zu verwendende Eingaben"
@@ -428,9 +398,6 @@ msgstr "Job-Vorlagen pro Organisation auflisten"
 msgid "List remote execution features"
 msgstr "Entfernte Ausführungsfunktionen auflisten"
 
-msgid "List template inputs"
-msgstr "Vorlageneingabe auflisten"
-
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
@@ -513,15 +480,6 @@ msgstr "Anbieter und Vorlagen"
 
 msgid "Proxies"
 msgstr "Proxys"
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr "Name der Puppet-Klasse wird benutzt, wenn Eingabetyp Puppet-Parameter ist"
-
-msgid "Puppet parameter"
-msgstr "Puppet-Parameter"
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr "Puppet-Parameter-Name wird benutzt, wenn Eingabetyp Puppet-Parameter ist"
 
 msgid "Recurring logic"
 msgstr "Wiederholungslogik"
@@ -640,9 +598,6 @@ msgstr "ERB-Datei zum Hochladen auswählen, um Job-Vorlage zu importieren. Die V
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "Wählen Sie so viele Proxys für entfernte Ausführung aus, wie es für dieses Subnetz zutreffend ist. Wenn mehrere Proxys mit demselben Provider hinzugefügt werden, dann wird die Auslastung unter diesen ausgeglichen."
 
-msgid "Selectable values for user inputs"
-msgstr "Auswählbare Werte für Benutzereingaben"
-
 msgid "Set to distribute over"
 msgstr ""
 
@@ -660,9 +615,6 @@ msgstr "Details der Job-Vorlage anzeigen"
 
 msgid "Show remote execution feature"
 msgstr "Entfernte Ausführungsfunktionen anzeigen"
-
-msgid "Show template input details"
-msgstr "Details der Vorlageneingabe anzeigen"
 
 msgid "Snippet"
 msgstr "Snippet"
@@ -711,9 +663,6 @@ msgstr "Vorlage ERB"
 
 msgid "Template Invocation for %s"
 msgstr ""
-
-msgid "Template input"
-msgstr "Vorlageneingabe"
 
 msgid "Template name"
 msgstr "Vorlagenname"
@@ -849,9 +798,6 @@ msgstr "Fremdeingabe-Satz aktualisieren"
 msgid "Update a job template"
 msgstr "Job-Vorlage aktualisieren"
 
-msgid "Update a template input"
-msgstr "Vorlageneingabe aktualisieren"
-
 msgid "Use default description template"
 msgstr "Standardbeschreibungsvorlage verwenden"
 
@@ -872,15 +818,6 @@ msgstr "Benutzereingabe"
 
 msgid "Value"
 msgstr "Wert"
-
-msgid "Value for required input '%s' was not specified"
-msgstr "Wert für erforderliche Eingabe '%s' wurde nicht angegeben"
-
-msgid "Variable"
-msgstr "Variable"
-
-msgid "Variable name, used when input type is variable"
-msgstr "Variablenname wird benutzt, wenn Eingabetyp Variable ist"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "Welcher Befehl für den Wechsel zum effektiven Benutzer verwendet werden soll. Einer von %s"
@@ -919,9 +856,6 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "Sie haben nicht die Genehmigung, die aktuell zugewiesenen Vorlagen einzusehen. Wenn Sie das Formular jetzt speichern, wird die Zuweisung der Vorlage aufgehoben."
-
-msgid "add a input for this template"
-msgstr "Eingabe für diese Vorlage hinzufügen"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "Eingabe-Satz für diese Vorlage hinzufügen, um auf andere Vorlage-Eingaben zu verweisen"
@@ -964,9 +898,6 @@ msgstr "in der Warteschlange"
 
 msgid "queued to start executing in %{time}"
 msgstr ""
-
-msgid "remove template input"
-msgstr "Vorlageneingabe entfernen"
 
 msgid "remove template input set"
 msgstr "Vorlageneingabe-Satz entfernen"

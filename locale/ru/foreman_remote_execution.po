@@ -45,9 +45,6 @@ msgstr "Список входных параметров, которые дол�
 msgid "A job '%{subject}' has finished successfully"
 msgstr ""
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr "Список доступных пользователю параметров. Если не определен, пользователю будет предложено ввести параметры в свободной форме."
-
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "Дополнительный модуль Foreman для удаленного выполнения заданий, объединяющий функции управления конфигурацией и удаленного контроля."
 
@@ -65,9 +62,6 @@ msgstr "Действия"
 
 msgid "Add Foreign Input Set"
 msgstr "Добавить шаблон"
-
-msgid "Add Input"
-msgstr "Добавить параметр"
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
@@ -132,6 +126,9 @@ msgstr ""
 msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr ""
 
@@ -149,9 +146,6 @@ msgstr "Создать шаблон задания"
 
 msgid "Create a recurring job"
 msgstr "Периодическое выполнение"
-
-msgid "Create a template input"
-msgstr "Создать входной параметр"
 
 msgid "Default SSH key passphrase"
 msgstr ""
@@ -176,9 +170,6 @@ msgstr "Удалить набор входных параметров"
 
 msgid "Delete a job template"
 msgstr "Удалить шаблон задания"
-
-msgid "Delete a template input"
-msgstr "Удалить входной параметр"
 
 msgid "Description"
 msgstr "Описание"
@@ -242,12 +233,6 @@ msgstr "Код завершения: %s"
 
 msgid "Export a job template to ERB"
 msgstr "Экспорт шаблона в ERB"
-
-msgid "Fact name, used when input type is fact"
-msgstr "Имя факта (используется, если поле «Тип ввода» содержит «Значение факта»)"
-
-msgid "Fact value"
-msgstr "Значение факта"
 
 msgid "Failed"
 msgstr "Не удалась"
@@ -315,23 +300,8 @@ msgstr "Обозначает, что действие следует отмен�
 msgid "Input"
 msgstr "Параметр"
 
-msgid "Input description"
-msgstr "Описание параметра"
-
-msgid "Input is advanced"
-msgstr "Расширенный параметр"
-
-msgid "Input is required"
-msgstr "Обязательный параметр"
-
-msgid "Input name"
-msgstr "Имя параметра"
-
 msgid "Input set description"
 msgstr "Описание набора входных параметров"
-
-msgid "Input type"
-msgstr "Тип ввода"
 
 msgid "Inputs to use"
 msgstr "Входящие параметры"
@@ -432,9 +402,6 @@ msgstr "Список шаблонов заданий по организация
 msgid "List remote execution features"
 msgstr "Список функций удаленного выполнения"
 
-msgid "List template inputs"
-msgstr "Показать параметры ввода"
-
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
@@ -515,15 +482,6 @@ msgstr "Сервисы и шаблоны"
 
 msgid "Proxies"
 msgstr "Прокси"
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr "Имя класса Puppet (используется, если поле «Тип ввода» содержит «Параметр Puppet»)"
-
-msgid "Puppet parameter"
-msgstr "Параметр Puppet"
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr "Имя параметра Puppet (используется, если поле «Тип ввода» содержит «Параметр Puppet»)"
 
 msgid "Recurring logic"
 msgstr "Регулярное выполнение"
@@ -642,9 +600,6 @@ msgstr "Выберите файл ERB для импорта шаблона. Пе
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "Выберите все возможные прокси для этой подсети. Добавление нескольких прокси позволит равномерно распределять действия между ними."
 
-msgid "Selectable values for user inputs"
-msgstr "Список возможных значений"
-
 msgid "Set to distribute over"
 msgstr ""
 
@@ -662,9 +617,6 @@ msgstr "Показать информацию о шаблоне"
 
 msgid "Show remote execution feature"
 msgstr "Показать функцию удаленного выполнения"
-
-msgid "Show template input details"
-msgstr "Показать информацию о параметрах ввода"
 
 msgid "Snippet"
 msgstr "Фрагмент"
@@ -713,9 +665,6 @@ msgstr "ERB"
 
 msgid "Template Invocation for %s"
 msgstr ""
-
-msgid "Template input"
-msgstr "Параметр вввода"
 
 msgid "Template name"
 msgstr "Имя шаблона"
@@ -853,9 +802,6 @@ msgstr "Обновить набор входных параметров"
 msgid "Update a job template"
 msgstr "Обновить шаблон задания"
 
-msgid "Update a template input"
-msgstr "Обновить входной параметр"
-
 msgid "Use default description template"
 msgstr "Использовать описание из шаблона"
 
@@ -876,15 +822,6 @@ msgstr "Ввод пользователя"
 
 msgid "Value"
 msgstr "Значение"
-
-msgid "Value for required input '%s' was not specified"
-msgstr "Входные данные «%s» не определены."
-
-msgid "Variable"
-msgstr "Переменная"
-
-msgid "Variable name, used when input type is variable"
-msgstr "Имя переменной (используется, если поле «Тип ввода» содержит «Переменная»)"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "Команда для переключения в режим действующего пользователя. Возможные варианты: %s"
@@ -923,9 +860,6 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "У вас нет доступа к используемому шаблону. При сохранении формы он будет автоматически отключен."
-
-msgid "add a input for this template"
-msgstr "Добавить входные параметры"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "Добавить набор входных параметров из другого шаблона"
@@ -968,9 +902,6 @@ msgstr "в очереди"
 
 msgid "queued to start executing in %{time}"
 msgstr ""
-
-msgid "remove template input"
-msgstr "удалить параметр ввода"
 
 msgid "remove template input set"
 msgstr "удалить набор входных данных шаблона"

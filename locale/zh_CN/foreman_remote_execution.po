@@ -40,9 +40,6 @@ msgstr "包含外部模板中用逗号分开的输入名称列表。"
 msgid "A job '%{subject}' has finished successfully"
 msgstr "任务 '%{subject}' 成功完成"
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr "用户可选择的选项列表。如未提供，则会为用户提供自由格式字段。"
-
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "为 Foreman 提供远程执行的插件，可使用远程管理功能完成配置管理功能。"
 
@@ -60,9 +57,6 @@ msgstr "操作"
 
 msgid "Add Foreign Input Set"
 msgstr "添加外部输入集"
-
-msgid "Add Input"
-msgstr "添加输入"
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
@@ -127,6 +121,9 @@ msgstr "无法找到适合执行的接口"
 msgid "Could not render the preview because no host matches the search query."
 msgstr "无法渲染预览，因为没有符合搜索查询的主机。"
 
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr "无法使用任何代理。请考虑在设置中配置 %{global_proxy}、%{fallback_proxy} 或 %{no_proxy}"
 
@@ -144,9 +141,6 @@ msgstr "创建任务模板"
 
 msgid "Create a recurring job"
 msgstr "创建重复任务"
-
-msgid "Create a template input"
-msgstr "创建模板输入"
 
 msgid "Default SSH key passphrase"
 msgstr "默认的 SSH 密钥口令"
@@ -171,9 +165,6 @@ msgstr "删除外部输入集"
 
 msgid "Delete a job template"
 msgstr "删除任务模板"
-
-msgid "Delete a template input"
-msgstr "删除模板输入"
 
 msgid "Description"
 msgstr "描述"
@@ -237,12 +228,6 @@ msgstr "退出状态：%s"
 
 msgid "Export a job template to ERB"
 msgstr "导出任务模版到 ERB"
-
-msgid "Fact name, used when input type is fact"
-msgstr "Fact 名称，输入类型为 fact 时使用。"
-
-msgid "Fact value"
-msgstr "Fact 值"
 
 msgid "Failed"
 msgstr "已失败"
@@ -310,23 +295,8 @@ msgstr "表示如果在这个时间之前无法启动该操作，则应将其取
 msgid "Input"
 msgstr "输入"
 
-msgid "Input description"
-msgstr "输入描述"
-
-msgid "Input is advanced"
-msgstr "输入时高级的"
-
-msgid "Input is required"
-msgstr "需要输入"
-
-msgid "Input name"
-msgstr "输入名称"
-
 msgid "Input set description"
 msgstr "输入集描述"
-
-msgid "Input type"
-msgstr "输入类型"
 
 msgid "Inputs to use"
 msgstr "要使用的输入"
@@ -427,9 +397,6 @@ msgstr "列出每个机构的任务模板"
 msgid "List remote execution features"
 msgstr "列出远程执行功能"
 
-msgid "List template inputs"
-msgstr "列出模板输入"
-
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
@@ -510,15 +477,6 @@ msgstr "提供者及模板"
 
 msgid "Proxies"
 msgstr "代理服务器"
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr "Puppet 类别名称，输入类型为 puppet_parameter 时使用。"
-
-msgid "Puppet parameter"
-msgstr "Puppet 参数"
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr "Puppet 参数名称，输入类型为 puppet_parameter 时使用。"
 
 msgid "Recurring logic"
 msgstr "重复的逻辑"
@@ -637,9 +595,6 @@ msgstr "选择要上传的 ERB 文件来导入任务模版。这个模版必须�
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "为这个子网选择所有可使用的远程执行代理服务器。添加使用同一提供者的多个代理服务器时，会在它们之间均衡操作负载。"
 
-msgid "Selectable values for user inputs"
-msgstr "用户输入的可选值"
-
 msgid "Set to distribute over"
 msgstr "设置为通过...分配"
 
@@ -657,9 +612,6 @@ msgstr "显示任务模板详情"
 
 msgid "Show remote execution feature"
 msgstr "显示远程执行功能"
-
-msgid "Show template input details"
-msgstr "显示模板输入详情"
 
 msgid "Snippet"
 msgstr "片段"
@@ -708,9 +660,6 @@ msgstr "模版 ERB"
 
 msgid "Template Invocation for %s"
 msgstr ""
-
-msgid "Template input"
-msgstr "模板输入"
 
 msgid "Template name"
 msgstr "模板名称"
@@ -846,9 +795,6 @@ msgstr "更新外部输入集"
 msgid "Update a job template"
 msgstr "更新任务模板"
 
-msgid "Update a template input"
-msgstr "更新模板输入"
-
 msgid "Use default description template"
 msgstr "使用默认描述模板"
 
@@ -869,15 +815,6 @@ msgstr "用户输入"
 
 msgid "Value"
 msgstr "值"
-
-msgid "Value for required input '%s' was not specified"
-msgstr "未指定必填输入值 '%s'"
-
-msgid "Variable"
-msgstr "变量"
-
-msgid "Variable name, used when input type is variable"
-msgstr "变量名称，输入类型为 variable 时使用。"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "用来切换至有效用户的命令。%s 之一。"
@@ -918,9 +855,6 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "不允许您查看当前分配的模板。现在保存该表格则会取消分配该模板。"
-
-msgid "add a input for this template"
-msgstr "为这个模板添加输入"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "为这个模板添加输入以参考不同的模板输入"
@@ -963,9 +897,6 @@ msgstr "已排队"
 
 msgid "queued to start executing in %{time}"
 msgstr "已排队，在  %{time} 时开始实施"
-
-msgid "remove template input"
-msgstr "删除模板输入"
 
 msgid "remove template input set"
 msgstr "删除模板输入集"

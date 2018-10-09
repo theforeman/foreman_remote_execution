@@ -40,9 +40,6 @@ msgstr "Una lista de nombres de entrada separados por comas que se incluirá des
 msgid "A job '%{subject}' has finished successfully"
 msgstr "El trabajo '%{subject}' ha finalizado correctamente"
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr "Una lista de opciones desde la que el usuario puede realizar selecciones. Si no se proporciona, el usuario recibirá un campo libre."
-
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "Un complemento que ofrece ejecución remota a Foreman y completa la funcionalidad de administración de la configuración con la funcionalidad de administración remota."
 
@@ -60,9 +57,6 @@ msgstr "Acciones"
 
 msgid "Add Foreign Input Set"
 msgstr "Agregar conjunto de entrada externo"
-
-msgid "Add Input"
-msgstr "Agregar entrada"
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
@@ -127,6 +121,9 @@ msgstr "No se pudo hallar una interfaz adecuada para la ejecución"
 msgid "Could not render the preview because no host matches the search query."
 msgstr "No se pudo mostrar la vista previa porque no hay ningún host que coincida con la consulta de búsqueda."
 
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
 msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
 msgstr "No se pudo usar un proxy. Considere configurar %{global_proxy}, %{fallback_proxy} o %{no_proxy} en los ajustes"
 
@@ -144,9 +141,6 @@ msgstr "Crear una plantilla de trabajo"
 
 msgid "Create a recurring job"
 msgstr "Crear un trabajo recurrente"
-
-msgid "Create a template input"
-msgstr "Crear una entrada de la plantilla"
 
 msgid "Default SSH key passphrase"
 msgstr "Frase de contraseña de clave SSH predeterminada"
@@ -171,9 +165,6 @@ msgstr "Eliminar un conjunto de entrada externo"
 
 msgid "Delete a job template"
 msgstr "Eliminar una plantilla de trabajo"
-
-msgid "Delete a template input"
-msgstr "Eliminar una entrada de la plantilla"
 
 msgid "Description"
 msgstr "Descripción"
@@ -237,12 +228,6 @@ msgstr "Estado de salida: %s"
 
 msgid "Export a job template to ERB"
 msgstr "Exportar una plantilla de trabajo desde ERB"
-
-msgid "Fact name, used when input type is fact"
-msgstr "Nombre del evento, utilizado cuando el tipo de entrada es evento"
-
-msgid "Fact value"
-msgstr "Valor de evento"
 
 msgid "Failed"
 msgstr "Errores"
@@ -310,23 +295,8 @@ msgstr "Indica que la acción se debe cancelar si no se puede iniciar antes de e
 msgid "Input"
 msgstr "Entrada"
 
-msgid "Input description"
-msgstr "Descripción de la entrada"
-
-msgid "Input is advanced"
-msgstr "La entrada es avanzada."
-
-msgid "Input is required"
-msgstr "La entrada es obligatoria."
-
-msgid "Input name"
-msgstr "Nombre de la entrada"
-
 msgid "Input set description"
 msgstr "Descripción del conjunto de entrada"
-
-msgid "Input type"
-msgstr "Tipo de entrada"
 
 msgid "Inputs to use"
 msgstr "Entradas que se deben utilizar"
@@ -427,9 +397,6 @@ msgstr "Listar plantillas de trabajo por organización"
 msgid "List remote execution features"
 msgstr "Listar funcionalidades de ejecución remota"
 
-msgid "List template inputs"
-msgstr "Listar entradas de la plantilla"
-
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
@@ -510,15 +477,6 @@ msgstr "Proveedores y plantillas"
 
 msgid "Proxies"
 msgstr "Proxis"
-
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr "Nombre de clase Puppet, utilizado cuando el tipo de entrada es puppet_parameter"
-
-msgid "Puppet parameter"
-msgstr "Parámetro Puppet"
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr "Nombre de parámetro Puppet, utilizado cuando el tipo de entrada es puppet_parameter"
 
 msgid "Recurring logic"
 msgstr "Lógica recurrente"
@@ -637,9 +595,6 @@ msgstr "Seleccione un archivo ERB a cargar con el fin de importar una plantilla 
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "Seleccione tantos proxy de ejecución remota como se puedan aplicar a esta subred. Cuando se añaden múltiples proxy con el mismo proveedor, las acciones se cargarán de manera equilibrada entre ellos."
 
-msgid "Selectable values for user inputs"
-msgstr "Valores que se pueden seleccionar para entradas de usuario"
-
 msgid "Set to distribute over"
 msgstr "Definir para distribuir sobre"
 
@@ -657,9 +612,6 @@ msgstr "Mostrar detalles de la plantilla de trabajo"
 
 msgid "Show remote execution feature"
 msgstr "Mostrar funcionalidad de ejecución remota"
-
-msgid "Show template input details"
-msgstr "Mostrar detalles de entrada de la plantilla"
 
 msgid "Snippet"
 msgstr "Snippet"
@@ -708,9 +660,6 @@ msgstr "Plantilla ERB"
 
 msgid "Template Invocation for %s"
 msgstr ""
-
-msgid "Template input"
-msgstr "Entrada de la plantilla"
 
 msgid "Template name"
 msgstr "nombre de plantilla"
@@ -846,9 +795,6 @@ msgstr "Actualizar un conjunto de entrada externo"
 msgid "Update a job template"
 msgstr "Actualizar una plantilla de trabajo"
 
-msgid "Update a template input"
-msgstr "Actualizar una entrada de la plantilla"
-
 msgid "Use default description template"
 msgstr "Utilizar plantilla de descripción predeterminada"
 
@@ -869,15 +815,6 @@ msgstr "Entrada de usuario"
 
 msgid "Value"
 msgstr "Valor"
-
-msgid "Value for required input '%s' was not specified"
-msgstr "No se especificó el valor para la entrada requerida '%s'."
-
-msgid "Variable"
-msgstr "Variable"
-
-msgid "Variable name, used when input type is variable"
-msgstr "Nombre de la variable, utilizada cuando el tipo de entrada es variable"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "El comando que se debe utilizar para cambiar el usuario efectivo. Uno de %s"
@@ -918,9 +855,6 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "No puede ver la plantilla actualmente asignada. Si guarda el formulario ahora, se eliminará la asignación de la plantilla."
-
-msgid "add a input for this template"
-msgstr "agregar una entrada para esta plantilla"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "agregar un conjunto de entrada para esta plantilla para hacer referencia a entradas de una plantilla diferente"
@@ -963,9 +897,6 @@ msgstr "en cola"
 
 msgid "queued to start executing in %{time}"
 msgstr "en cola para comenzar a ejecutarse en %{time}"
-
-msgid "remove template input"
-msgstr "eliminar entrada de la plantilla"
 
 msgid "remove template input set"
 msgstr "eliminar el conjunto de entrada de la plantilla"
