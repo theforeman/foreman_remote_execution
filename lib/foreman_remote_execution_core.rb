@@ -70,6 +70,10 @@ module ForemanRemoteExecutionCore
     end
     require 'foreman_remote_execution_core/dispatcher'
     require 'foreman_remote_execution_core/actions'
+
+    if defined?(::SmartProxyDynflowCore)
+      SmartProxyDynflowCore::TaskLauncherRegistry.register('ssh', ForemanTasksCore::TaskLauncher::Batch)
+    end
   end
 
   require 'foreman_remote_execution_core/version'

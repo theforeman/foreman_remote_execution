@@ -25,6 +25,10 @@ class SSHExecutionProvider < RemoteExecutionProvider
       host_setting(host, :remote_execution_ssh_key_passphrase)
     end
 
+    def proxy_operation_name
+      'ssh'
+    end
+
     private
 
     def ssh_user(host)
