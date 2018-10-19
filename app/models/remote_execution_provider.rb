@@ -20,7 +20,11 @@ class RemoteExecutionProvider
     end
 
     def proxy_command_options(template_invocation, host)
-      {}
+      {:proxy_operation_name => proxy_operation_name}
+    end
+
+    def proxy_operation_name
+      'ssh'
     end
 
     def humanized_name

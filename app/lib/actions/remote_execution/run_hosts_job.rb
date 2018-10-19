@@ -9,6 +9,7 @@ module Actions
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
       middleware.use Actions::Middleware::WatchDelegatedProxySubTasks
+      middleware.use Actions::Middleware::RemoteTaskTriggering
 
       class CheckOnProxyActions; end
 

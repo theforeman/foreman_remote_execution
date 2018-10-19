@@ -108,8 +108,8 @@ module ForemanRemoteExecutionCore
     DEFAULT_REFRESH_INTERVAL = 1
     MAX_PROCESS_RETRIES = 4
 
-    def initialize(options, user_method)
-      super()
+    def initialize(options, user_method, suspended_action: nil)
+      super suspended_action: suspended_action
       @host = options.fetch(:hostname)
       @script = options.fetch(:script)
       @ssh_user = options.fetch(:ssh_user, 'root')
@@ -127,7 +127,7 @@ module ForemanRemoteExecutionCore
       @user_method = user_method
     end
 
-    def self.build(options)
+    def self.build(options, suspended_action:)
       effective_user = options.fetch(:effective_user, nil)
       ssh_user = options.fetch(:ssh_user, 'root')
       effective_user_method = options.fetch(:effective_user_method, 'sudo')
@@ -146,7 +146,7 @@ module ForemanRemoteExecutionCore
                       raise "effective_user_method '#{effective_user_method}' not supported"
                     end
 
-      new(options, user_method)
+      new(options, user_method, suspended_action: suspended_action)
     end
 
     def start

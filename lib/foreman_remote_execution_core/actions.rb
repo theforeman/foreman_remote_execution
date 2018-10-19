@@ -8,7 +8,8 @@ module ForemanRemoteExecutionCore
           :step_id => run_step_id,
           :uuid => execution_plan_id
         }
-        ForemanRemoteExecutionCore.runner_class.build(input.merge(additional_options))
+        ForemanRemoteExecutionCore.runner_class.build(input.merge(additional_options),
+                                                      suspended_action: suspended_action)
       end
 
       def runner_dispatcher
