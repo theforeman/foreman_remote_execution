@@ -28,6 +28,11 @@ module Api
         process_response @remote_execution_feature.update_attributes(remote_execution_feature_params)
       end
 
+      api :GET, '/remote_execution/ssh_params', N_('Get default parameters for SSH to a host')
+      def ssh_params
+        render :json => SSHExecutionProvider.ssh_params(Host.find_by(name: params[:host_id]))
+      end
+
       private
 
       def parent_scope
