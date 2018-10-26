@@ -79,6 +79,9 @@ Rails.application.routes.draw do
       end
 
       resources :remote_execution_features, :only => [:show, :index, :update]
+
+      get 'remote_execution/ssh_params', to: 'remote_execution_features#ssh_params'
+
     end
   end
 end
