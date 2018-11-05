@@ -61,6 +61,7 @@ module ForemanRemoteExecution
 
         def input(name)
           return template_input_values[name.to_s] if template_input_values.key?(name.to_s)
+
           input = find_by_name(template.template_inputs_with_foreign, name) # rubocop:disable Rails/DynamicFindBy
           if input
             @preview ? input.preview(self) : input.value(self)

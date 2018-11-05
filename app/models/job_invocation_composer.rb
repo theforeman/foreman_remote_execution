@@ -77,9 +77,11 @@ class JobInvocationComposer
 
     def triggering
       return {} unless ui_params.key?(:triggering)
+
       trig = ui_params[:triggering]
       keys = (1..5).map { |i| "end_time(#{i}i)" }
       return trig unless trig.key?(:end_time) && trig[:end_time].keys == keys
+
       trig.merge(:end_time => Time.local(*trig[:end_time].values_at(*keys)))
     end
 
@@ -108,6 +110,7 @@ class JobInvocationComposer
 
     def targeting_params
       raise ::Foreman::Exception, _('Cannot specify both bookmark_id and search_query') if api_params[:bookmark_id] && api_params[:search_query]
+
       api_params.slice(:targeting_type, :bookmark_id, :search_query).merge(:user_id => User.current.id)
     end
 
@@ -162,6 +165,7 @@ class JobInvocationComposer
 
     def format_datetime(datetime)
       return datetime if datetime.blank?
+
       Time.parse(datetime).strftime('%Y-%m-%d %H:%M')
     end
   end
@@ -271,6 +275,7 @@ class JobInvocationComposer
 
     def input_values_params
       return {} if @provided_inputs.blank?
+
       @provided_inputs.map do |key, value|
         input = job_template.template_inputs_with_foreign.find { |i| i.name == key.to_s }
         unless input

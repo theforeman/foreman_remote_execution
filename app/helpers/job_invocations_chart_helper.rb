@@ -9,6 +9,7 @@ module JobInvocationsChartHelper
 
   def job_invocation_data(invocation)
     return @job_invocation_data if @job_invocation_data.present?
+
     progress_report = invocation.progress_report
     success = progress_report[:success]
     cancelled = progress_report[:cancelled]
