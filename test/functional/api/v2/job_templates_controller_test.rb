@@ -10,7 +10,7 @@ module Api
       test 'should get index' do
         get :index
         templates = ActiveSupport::JSON.decode(@response.body)
-        assert !templates.empty?, 'Should response with template'
+        assert_not templates.empty?, 'Should response with template'
         assert_response :success
       end
 
@@ -20,7 +20,7 @@ module Api
         @template.save!
         get :index, params: { :organization_id => @organization.id }
         templates = ActiveSupport::JSON.decode(@response.body)
-        assert !templates.empty?, 'Should respond with template'
+        assert_not templates.empty?, 'Should respond with template'
         assert_response :success
       end
 
@@ -28,7 +28,7 @@ module Api
         get :show, params: { :id => @template.to_param }
         assert_response :success
         template = ActiveSupport::JSON.decode(@response.body)
-        assert !template.empty?
+        assert_not template.empty?
         assert_equal template['name'], @template.name
         refute_nil template['created_at']
         refute_nil template['updated_at']
