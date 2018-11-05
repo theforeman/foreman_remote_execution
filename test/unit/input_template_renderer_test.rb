@@ -73,7 +73,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           end
 
           it 'cannot render the content' do
-            refute result
+            assert_not result
             renderer.error_message.wont_be_nil
             renderer.error_message.wont_be_empty
           end
@@ -125,7 +125,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           it 'handles circular references in templates' do
             renderer.invocation = FactoryBot.build(:template_invocation, :template => template_without_inputs)
             renderer.template = template_without_inputs
-            refute renderer.render
+            assert_not renderer.render
             renderer.error_message.must_include 'Recursive rendering of templates detected'
           end
 
@@ -335,7 +335,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
       describe 'rendering' do
         it 'can\'t render the content without host since we don\'t have facts' do
-          refute result
+          assert_not result
         end
 
         it 'registers an error' do
@@ -349,7 +349,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
           describe 'rendering' do
             it 'can\'t render the content without host since we don\'t have fact value' do
-              refute result
+              assert_not result
             end
 
             it 'registers an error' do
@@ -371,7 +371,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
             describe 'rendering' do
               it 'can\'t render the content without host since we don\'t have fact value' do
                 fact # let is lazy
-                refute result
+                assert_not result
               end
 
               it 'registers an error' do
@@ -433,7 +433,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
       describe 'rendering' do
         it 'can\'t render the content without host since we don\'t have host so no classification' do
-          refute result
+          assert_not result
         end
 
         it 'registers an error' do
@@ -451,7 +451,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
           describe 'rendering' do
             it 'can\'t render the content without host since we don\'t have variable value in classification' do
-              refute result
+              assert_not result
             end
 
             it 'registers an error' do
@@ -542,7 +542,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
       describe 'rendering' do
         it 'can\'t render the content without host since we don\'t have host so no classification' do
-          refute result
+          assert_not result
         end
 
         it 'registers an error' do
@@ -557,7 +557,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
           describe 'rendering' do
             it 'can\'t render the content without host since we don\'t have puppet parameter in classification' do
-              refute result
+              assert_not result
             end
 
             it 'registers an error' do

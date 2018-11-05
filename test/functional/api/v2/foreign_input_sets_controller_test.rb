@@ -51,7 +51,7 @@ module Api
       test 'should destroy' do
         delete :destroy, params: { :template_id => @template.to_param, :id => @input_set.to_param }
         assert_response :ok
-        refute ForeignInputSet.exists?(@input_set.id)
+        assert_not ForeignInputSet.exists?(@input_set.id)
       end
     end
   end

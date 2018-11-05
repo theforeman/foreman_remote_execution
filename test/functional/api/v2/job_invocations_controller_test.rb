@@ -16,7 +16,7 @@ module Api
       test 'should get index' do
         get :index
         invocations = ActiveSupport::JSON.decode(@response.body)
-        refute_empty invocations, 'Should response with invocation'
+        assert_not_empty invocations, 'Should response with invocation'
         assert_response :success
       end
 
@@ -24,7 +24,7 @@ module Api
         get :show, params: { :id => @invocation.id }
         assert_response :success
         template = ActiveSupport::JSON.decode(@response.body)
-        refute_empty template
+        assert_not_empty template
         assert_equal template['job_category'], @invocation.job_category
       end
 

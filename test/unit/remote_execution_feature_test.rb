@@ -60,7 +60,7 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
       feature.must_be :persisted?
       feature.label.must_equal 'new_feature_that_does_not_exist'
       feature.name.must_equal 'name'
-      refute feature.host_action_button
+      assert_not feature.host_action_button
     end
 
     it 'creates a feature with host action flag' do

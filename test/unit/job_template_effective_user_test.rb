@@ -14,7 +14,7 @@ class JobTemplateEffectiveUserTest < ActiveSupport::TestCase
     end
 
     it 'does not use the current user' do
-      refute effective_user.current_user?
+      assert_not effective_user.current_user?
     end
   end
 

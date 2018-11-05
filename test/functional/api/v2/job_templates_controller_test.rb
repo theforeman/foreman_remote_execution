@@ -30,8 +30,8 @@ module Api
         template = ActiveSupport::JSON.decode(@response.body)
         assert_not template.empty?
         assert_equal template['name'], @template.name
-        refute_nil template['created_at']
-        refute_nil template['updated_at']
+        assert_not_nil template['created_at']
+        assert_not_nil template['updated_at']
       end
 
       test 'should create valid' do
@@ -74,7 +74,7 @@ module Api
       test 'should destroy' do
         delete :destroy, params: { :id => @template.to_param }
         assert_response :ok
-        refute JobTemplate.exists?(@template.id)
+        assert_not JobTemplate.exists?(@template.id)
       end
 
       test 'should clone template' do

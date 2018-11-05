@@ -54,7 +54,7 @@ module ForemanRemoteExecution
 
           it 'creates a new status' do
             subject.finalize
-            refute_nil host.execution_status_object
+            assert_not_nil host.execution_status_object
           end
         end
       end
