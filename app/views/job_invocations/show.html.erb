@@ -1,9 +1,9 @@
-<% title @job_invocation.description, trunc_with_tooltip(@job_invocation.description, 120) %>
+<% title @job_invocation.description %>
 <% stylesheet 'foreman_remote_execution/job_invocations' %>
 <% javascript 'charts', 'foreman_remote_execution/template_invocation' %>
 <%= javascript_include_tag *webpack_asset_paths('foreman_remote_execution', :extension => 'js'), "data-turbolinks-track" => true, 'defer' => 'defer' %>
 
-<%= breadcrumbs name_field: 'description' %>
+<%= breadcrumbs name_field: 'description', max_length: 120 %>
 
 <% if @job_invocation.task %>
   <% title_actions(button_group(job_invocation_task_buttons(@job_invocation.task))) %>
