@@ -6,7 +6,6 @@ class JobInvocationsController < ApplicationController
 
   def new
     return @composer = prepare_composer if params[:feature].present?
-
     ui_params = {
       :host_ids => params[:host_ids],
       :targeting => {

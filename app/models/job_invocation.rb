@@ -198,7 +198,6 @@ class JobInvocation < ApplicationRecord
 
   def output(host)
     return unless (task = sub_task_for_host(host)) && task.main_action && task.main_action.live_output.any?
-
     task.main_action.live_output.first['output']
   end
 

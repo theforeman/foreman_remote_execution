@@ -154,7 +154,6 @@ module Api
 
       def job_invocation_params
         return @job_invocation_params if @job_invocation_params.present?
-
         job_invocation_params = params.fetch(:job_invocation, {}).dup
         if job_invocation_params.key?(:ssh)
           job_invocation_params.merge!(job_invocation_params.delete(:ssh).permit(:effective_user))

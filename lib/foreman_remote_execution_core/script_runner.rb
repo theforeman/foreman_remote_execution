@@ -181,7 +181,6 @@ module ForemanRemoteExecutionCore
 
     def refresh
       return if @session.nil?
-
       with_retries do
         with_disconnect_handling do
           @session.process(0)
@@ -292,7 +291,6 @@ module ForemanRemoteExecutionCore
     # part of calling the `refresh` method.
     def run_async(command)
       raise 'Async command already in progress' if @started
-
       @started = false
       @user_method.reset
 
@@ -348,7 +346,6 @@ module ForemanRemoteExecutionCore
         end
         ch.exec command do |_, success|
           raise 'could not execute command' unless success
-
           started = true
         end
       end
@@ -410,7 +407,6 @@ module ForemanRemoteExecutionCore
       if status != 0
         raise "Unable to upload file to #{path} on remote system: exit code: #{status}"
       end
-
       path
     end
 
@@ -444,7 +440,6 @@ module ForemanRemoteExecutionCore
     def check_expecting_disconnect
       last_output = @continuous_output.raw_outputs.find { |d| d['output_type'] == 'stdout' }
       return unless last_output
-
       if EXPECTED_POWER_ACTION_MESSAGES.any? { |message| last_output['output'] =~ /^#{message}/ }
         @expecting_disconnect = true
       end
