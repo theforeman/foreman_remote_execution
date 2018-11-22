@@ -30,7 +30,7 @@ class SSHExecutionProvider < RemoteExecutionProvider
       proxy = proxy_selector.determine_proxy(host, 'SSH')
       {
         :hostname => find_ip_or_hostname(host),
-        :proxy => proxy && proxy.url,
+        :proxy => proxy.class == Symbol ? proxy : proxy.url,
         :ssh_user => ssh_user(host),
         :ssh_port => ssh_port(host),
         :ssh_password => ssh_password(host),
