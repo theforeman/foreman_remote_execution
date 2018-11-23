@@ -1,6 +1,8 @@
 class AddConcurrencyOptionsToJobInvocation < ActiveRecord::Migration[4.2]
   def change
-    add_column :job_invocations, :concurrency_level, :integer, :null => true
-    add_column :job_invocations, :time_span, :integer, :null => true
+    change_table :job_invocations, :bulk => true do |t|
+      t.column :concurrency_level, :integer, :null => true
+      t.column :time_span, :integer, :null => true
+    end
   end
 end

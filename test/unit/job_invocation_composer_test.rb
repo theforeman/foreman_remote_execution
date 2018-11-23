@@ -131,7 +131,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         it 'returns false if there is one provider' do
           composer.stubs(:available_provider_types => [ 'SSH' ])
-          refute composer.needs_provider_type_selection?
+          assert_not composer.needs_provider_type_selection?
         end
       end
 
@@ -440,7 +440,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           composer.job_invocation.expects(:valid?).returns(false)
           composer.targeting.expects(:valid?).returns(false)
           composer.pattern_template_invocations.each { |invocation| invocation.expects(:valid?).returns(false) }
-          refute composer.valid?
+          assert_not composer.valid?
         end
       end
 
@@ -621,7 +621,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         assert composer.save!
         assert_equal bookmark, composer.job_invocation.targeting.bookmark
         assert_equal composer.job_invocation.targeting.user, User.current
-        refute_empty composer.job_invocation.pattern_template_invocations
+        assert_not_empty composer.job_invocation.pattern_template_invocations
       end
     end
 
@@ -636,7 +636,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       it 'creates invocation with a search query' do
         assert composer.save!
         assert_equal 'some hosts', composer.job_invocation.targeting.search_query
-        refute_empty composer.job_invocation.pattern_template_invocations
+        assert_not_empty composer.job_invocation.pattern_template_invocations
       end
     end
 
@@ -772,7 +772,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       it 'accepts the params' do
         composer.save!
-        refute composer.job_invocation.new_record?
+        assert_not composer.job_invocation.new_record?
       end
     end
 

@@ -55,8 +55,8 @@ class JobInvocationTest < ActiveSupport::TestCase
       job_invocation.pattern_template_invocations.first.reload
     end
 
-    it { refute job_invocation.reload.pattern_template_invocations.empty? }
-    it { refute job_invocation.reload.pattern_template_invocations.first.input_values.empty? }
+    it { assert_not job_invocation.reload.pattern_template_invocations.empty? }
+    it { assert_not job_invocation.reload.pattern_template_invocations.first.input_values.empty? }
 
     it "can look up templates not belonging to user's organization" do
       organization = job_invocation.pattern_template_invocations.first.template.organizations.first
@@ -73,7 +73,7 @@ class JobInvocationTest < ActiveSupport::TestCase
     it 'validates required inputs have values' do
       assert job_invocation.valid?
       @input_value.destroy
-      refute job_invocation.reload.valid?
+      assert_not job_invocation.reload.valid?
     end
 
     describe 'descriptions' do
@@ -179,7 +179,7 @@ class JobInvocationTest < ActiveSupport::TestCase
 
     it 'returns false if task state is pending' do
       job_invocation.task.expects(:pending?).returns(true)
-      refute job_invocation.finished?
+      assert_not job_invocation.finished?
     end
 
     it 'returns true if task is not pending' do

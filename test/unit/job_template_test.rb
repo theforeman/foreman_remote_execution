@@ -13,11 +13,11 @@ class JobTemplateTest < ActiveSupport::TestCase
     it 'has a unique name' do
       template1 = FactoryBot.create(:job_template)
       template2 = FactoryBot.build(:job_template, :name => template1.name)
-      refute template2.valid?
+      assert_not template2.valid?
     end
 
     it 'needs a job_category' do
-      refute job_template.valid?
+      assert_not job_template.valid?
     end
 
     it 'does not need a job_category if it is a snippet' do
@@ -29,7 +29,7 @@ class JobTemplateTest < ActiveSupport::TestCase
       job_template.job_category = 'Miscellaneous'
       job_template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => template_with_inputs)
       job_template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => template_with_inputs)
-      refute job_template.valid?
+      assert_not job_template.valid?
       job_template.errors.full_messages.first.must_include 'Duplicated inputs detected: ["command"]'
     end
   end
@@ -213,7 +213,7 @@ class JobTemplateTest < ActiveSupport::TestCase
 
     it 'will not overwrite by default' do
       existing
-      refute JobTemplate.import_raw!(updated)
+      assert_not JobTemplate.import_raw!(updated)
     end
 
     let(:synced_template) do

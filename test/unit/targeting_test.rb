@@ -12,7 +12,7 @@ class TargetingTest < ActiveSupport::TestCase
   describe '#resolved?' do
     context 'resolved_at is nil' do
       before { targeting.resolved_at = nil }
-      it { refute targeting.resolved? }
+      it { assert_not targeting.resolved? }
     end
 
     context 'resolved_at is set' do

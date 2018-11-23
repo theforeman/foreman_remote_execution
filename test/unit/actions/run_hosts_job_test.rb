@@ -50,15 +50,15 @@ module ForemanRemoteExecution
     context 'targeting resolving' do
       it 'resolves dynamic targeting in plan' do
         targeting.targeting_type = 'dynamic_query'
-        refute targeting.resolved?
+        assert_not targeting.resolved?
         delayed
-        refute targeting.resolved?
+        assert_not targeting.resolved?
         planned
         targeting.hosts.must_include(host)
       end
 
       it 'resolves the hosts on static targeting in delay' do
-        refute targeting.resolved?
+        assert_not targeting.resolved?
         delayed
         targeting.hosts.must_include(host)
         # Verify Targeting#resolve_hosts! won't be hit again

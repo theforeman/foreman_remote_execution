@@ -13,7 +13,7 @@ module Api
       test 'should get index' do
         get :index
         remote_execution_features = ActiveSupport::JSON.decode(@response.body)
-        refute remote_execution_features.empty?, 'Should respond with input sets'
+        assert_not remote_execution_features.empty?, 'Should respond with input sets'
         assert_response :success
       end
 
@@ -21,7 +21,7 @@ module Api
         get :show, params: { :id => @remote_execution_feature.to_param }
         assert_response :success
         remote_execution_feature = ActiveSupport::JSON.decode(@response.body)
-        refute remote_execution_feature.empty?
+        assert_not remote_execution_feature.empty?
         assert_equal remote_execution_feature['name'], @remote_execution_feature.name
       end
 

@@ -13,7 +13,7 @@ module Api
       test 'should get index' do
         get :index, params: { :template_id => @template.id }
         input_sets = ActiveSupport::JSON.decode(@response.body)
-        assert !input_sets.empty?, 'Should respond with input sets'
+        assert_not input_sets.empty?, 'Should respond with input sets'
         assert_response :success
       end
 
@@ -21,7 +21,7 @@ module Api
         get :show, params: { :template_id => @template.to_param, :id => @input_set.to_param }
         assert_response :success
         input_set = ActiveSupport::JSON.decode(@response.body)
-        assert !input_set.empty?
+        assert_not input_set.empty?
         assert_equal input_set['target_template_name'], @foreign_template.name
       end
 
@@ -51,7 +51,7 @@ module Api
       test 'should destroy' do
         delete :destroy, params: { :template_id => @template.to_param, :id => @input_set.to_param }
         assert_response :ok
-        refute ForeignInputSet.exists?(@input_set.id)
+        assert_not ForeignInputSet.exists?(@input_set.id)
       end
     end
   end
