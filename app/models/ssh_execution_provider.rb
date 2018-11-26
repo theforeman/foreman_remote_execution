@@ -38,9 +38,12 @@ class SSHExecutionProvider < RemoteExecutionProvider
         :ssh_user => ssh_user(host),
         :ssh_port => ssh_port(host),
         :ssh_password => ssh_password(host),
-        :ssh_key_passphrase => ssh_key_passphrase(host),
-        :ssh_key_file => File.expand_path(ForemanRemoteExecutionCore.settings.fetch(:ssh_identity_key_file))
+        :ssh_key_passphrase => ssh_key_passphrase(host)
       }
+    end
+
+    def cockpit_url_for_host(host)
+      Setting[:remote_execution_cockpit_url] % { :host => host } if Setting[:remote_execution_cockpit_url].present?
     end
 
     private

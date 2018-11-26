@@ -66,6 +66,7 @@ module ForemanRemoteExecution
           # this permissions grants user to get auto completion hints when setting up filters
           permission :filter_autocompletion_for_template_invocation, { :template_invocations => [ :auto_complete_search, :index ] },
                      :resource_type => 'TemplateInvocation'
+          permission :cockpit_hosts, { 'cockpit' => [:redirect, :host_ssh_params] }, :resource_type => 'Host'
         end
 
         USER_PERMISSIONS = [

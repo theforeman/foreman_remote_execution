@@ -38,6 +38,11 @@ Rails.application.routes.draw do
     end
   end
 
+  constraints(:id => %r{[^/]+}) do
+    get 'cockpit/host_ssh_params/:id', to: 'cockpit#host_ssh_params'
+  end
+  get 'cockpit/redirect', to: 'cockpit#redirect'
+
   namespace :api, :defaults => {:format => 'json'} do
     scope '(:apiv)', :module => :v2, :defaults => {:apiv => 'v2'}, :apiv => /v1|v2/, :constraints => ApiConstraints.new(:version => 2, :default => true) do
       resources :job_invocations, :except => [:new, :edit, :update, :destroy] do
@@ -80,9 +85,6 @@ Rails.application.routes.draw do
       end
 
       resources :remote_execution_features, :only => [:show, :index, :update]
-
-      get 'cockpit_redirect', to: 'remote_execution_features#cockpit_redirect'
-
     end
   end
 end
