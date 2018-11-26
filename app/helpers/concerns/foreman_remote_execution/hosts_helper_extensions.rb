@@ -20,13 +20,9 @@ module ForemanRemoteExecution
       link_to(_('Schedule Remote Job'), new_job_invocation_path(:host_ids => [args.first.id]), :id => :run_button, :class => 'btn btn-default')
     end
 
-    def cockpit_url_for_host(host)
-      tmpl = Setting[:remote_execution_cockpit_href]
-      tmpl && tmpl != "" ? tmpl % { :host => host } : nil
-    end
-
-    def web_console_button(*args)
-      url = cockpit_url_for_host(args.first.name)
+    def web_console_button(host, *args)
+      return unless authorized_for(permission: 'cockpit_hosts', auth_object: host)
+      url = SSHExecutionProvider.cockpit_url_for_host(host.name)
       url ? link_to(_('Web Console'), url, :class => 'btn btn-default') : nil
     end
 

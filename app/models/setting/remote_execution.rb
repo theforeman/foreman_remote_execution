@@ -1,6 +1,6 @@
 class Setting::RemoteExecution < Setting
 
-  ::Setting::BLANK_ATTRS.concat %w{remote_execution_ssh_password remote_execution_ssh_key_passphrase remote_execution_sudo_password remote_execution_cockpit_href}
+  ::Setting::BLANK_ATTRS.concat %w{remote_execution_ssh_password remote_execution_ssh_key_passphrase remote_execution_sudo_password remote_execution_cockpit_url}
 
   # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
   def self.load_defaults
@@ -68,7 +68,7 @@ class Setting::RemoteExecution < Setting
                  N_('When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs.'),
                  true,
                  N_('Cleanup working directories')),
-        self.set('remote_execution_cockpit_href',
+        self.set('remote_execution_cockpit_url',
                  N_('Where to find the Cockpit instance for the Web Console button.  By default, no button is shown.'),
                  nil,
                  N_('Cockpit URL'),
