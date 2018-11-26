@@ -62,20 +62,19 @@ class RemoteExecutionProvider
     end
 
     def find_ip_or_hostname(host)
-      interfaces = effective_interfaces(host)
+      interfaces = effective_interfaces host
+
+      find_ip(host, interfaces) || find_fqdn(interfaces) || raise(_('Could not find any suitable interface for execution'))
+    end
+
+    def find_ip(host, interfaces)
       if host_setting(host, :remote_execution_connect_by_ip)
-        ip_interface = interfaces.find { |i| i.ip.present? }
+        interfaces.find { |i| i.ip.present? }.try(:ip)
       end
-      if ip_interface
-        ip_interface.ip
-      else
-        fqdn_interface = interfaces.find { |i| i.fqdn.present? }
-        if fqdn_interface
-          fqdn_interface.fqdn
-        else
-          raise _('Could not find any suitable interface for execution')
-        end
-      end
+    end
+
+    def find_fqdn(interfaces)
+      interfaces.find { |i| i.fqdn.present? }.try(:fqdn)
     end
 
     def host_setting(host, setting)
