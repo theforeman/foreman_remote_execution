@@ -28,16 +28,6 @@ module Api
         process_response @remote_execution_feature.update_attributes(remote_execution_feature_params)
       end
 
-      api :GET, '/remote_execution/ssh_params', N_('Get default parameters for SSH to a host')
-      def ssh_params
-        host = Host.find_by(name: params[:host_id]) || Host.find_by(id: params[:host_id])
-        if host
-          render :json => SSHExecutionProvider.ssh_params(host)
-        else
-          raise ActionController::RoutingError.new('Host not found')
-        end
-      end
-
       private
 
       def parent_scope

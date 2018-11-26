@@ -66,6 +66,7 @@ module ForemanRemoteExecution
           # this permissions grants user to get auto completion hints when setting up filters
           permission :filter_autocompletion_for_template_invocation, { :template_invocations => [ :auto_complete_search, :index ] },
                      :resource_type => 'TemplateInvocation'
+          Foreman::AccessControl.permission(:edit_hosts).actions.concat(['api/v2/hosts/ssh_params'])
         end
 
         USER_PERMISSIONS = [
@@ -172,6 +173,8 @@ module ForemanRemoteExecution
 
       SmartProxy.send(:prepend, ForemanRemoteExecution::SmartProxyExtensions)
       Subnet.send(:include, ForemanRemoteExecution::SubnetExtensions)
+
+      Api::V2::HostsController.send(:prepend, Concerns::ForemanRemoteExecution::Api::V2::HostsControllerExtensions)
 
       # We need to explicitly force to load the Task model due to Rails loader
       # having issues with resolving it to Rake::Task otherwise
