@@ -80,7 +80,9 @@ Rails.application.routes.draw do
 
       resources :remote_execution_features, :only => [:show, :index, :update]
 
-      get 'hosts/:id/ssh_params', to: 'hosts#ssh_params'
+      constraints(:id => %r{[^/]+}) do
+        get 'hosts/:id/ssh_params', to: 'hosts#ssh_params'
+      end
 
     end
   end
