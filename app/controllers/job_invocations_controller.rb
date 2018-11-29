@@ -51,17 +51,17 @@ class JobInvocationsController < ApplicationController
   def show
     @job_invocation = resource_base.includes(:template_invocations => :run_host_job_task).find(params[:id])
     @auto_refresh = @job_invocation.task.try(:pending?)
-    hosts_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+    @resource_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
     # There's no need to do the joining if we're not filtering
     unless params[:search].nil?
-      hosts_base = hosts_base.joins(:template_invocations)
-                             .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
+      @resource_base = @resource_base.joins(:template_invocations)
+                                     .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
     end
-    @hosts = hosts_base.search_for(params[:search], :order => params[:order] || 'name ASC').paginate(:page => params[:page])
+    @hosts = resource_base_search_and_page
   end
 
   def index
-    @job_invocations = resource_base.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page]).with_task.order('job_invocations.id DESC')
+    @job_invocations = resource_base_search_and_page.with_task.order('job_invocations.id DESC')
   end
 
   # refreshes the form
