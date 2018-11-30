@@ -169,6 +169,25 @@ module RemoteExecutionHelper
     end
   end
 
+  # we assume that a line_set will always end with a line break. Sometimes however, the lines can
+  # be cut in the middle. This methods makes sure the cut line ends up in on line set
+  def normalize_line_sets(line_sets)
+    previous_line_break = true
+    line_sets.each_with_index do |line_set, index|
+      # if previous line_set was missing break, add the first line from next set
+      unless previous_line_break
+        first_line_pattern = /\A.*\n/
+        first_line = line_set['output'][first_line_pattern]
+        if first_line
+          line_sets[index - 1]['output'] << first_line
+          line_set['output'].sub!(first_line_pattern, '')
+        end
+      end
+      previous_line_break = line_set['output'] =~ /\n\Z/
+    end
+    line_sets
+  end
+
   def time_in_words_span(time)
     if time.nil?
       _('N/A')
