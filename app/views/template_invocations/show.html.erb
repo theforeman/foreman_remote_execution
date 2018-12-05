@@ -36,7 +36,7 @@
     <%= link_to_function(_('Scroll to bottom'), '$("html, body").animate({ scrollTop: $(document).height() }, "slow");', :class => 'pull-right scroll-link-bottom') %>
 
     <div class="printable">
-      <%= render :partial => 'output_line_set', :collection => @line_sets %>
+      <%= render :partial => 'output_line_set', :collection => normalize_line_sets(@line_sets) %>
     </div>
 
     <%= link_to_function(_('Scroll to top'), '$("html, body").animate({ scrollTop: 0 }, "slow");', :class => 'pull-right scroll-link-top') %>
