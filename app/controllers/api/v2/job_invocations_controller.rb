@@ -188,7 +188,7 @@ module Api
         if (task = job_invocation.sub_task_for_host(host))
           refresh = task.pending?
           output  = output_lines_since(task, since)
-          output  = output.map { |set| set['output'] }.join("\n") if raw
+          output  = output.map { |set| set['output'] }.join if raw
         end
 
         { :complete => !refresh, :refresh => refresh, :output => output || default }
