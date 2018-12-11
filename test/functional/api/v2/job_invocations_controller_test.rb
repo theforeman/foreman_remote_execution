@@ -150,7 +150,7 @@ module Api
           get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
           result = ActiveSupport::JSON.decode(@response.body)
           assert_equal result['complete'], true
-          assert_equal result['output'], (1..5).map(&:to_s).join("\n")
+          assert_equal result['output'], (1..5).map(&:to_s).join("\n") + "\n"
           assert_response :success
         end
 
