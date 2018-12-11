@@ -136,7 +136,7 @@ module Api
       describe 'raw output' do
         let(:fake_output) do
           (1..5).map do |i|
-            { 'timestamp' => (Time.now - (5 - i)).to_f, 'output' => i.to_s }
+            { 'timestamp' => (Time.now - (5 - i)).to_f, 'output' => "#{i}\n" }
           end
         end
         let(:fake_task) do
