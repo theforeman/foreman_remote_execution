@@ -4,8 +4,8 @@ module Api
       include ::Api::Version2
       include ::Foreman::Renderer
 
-      before_action :find_optional_nested_object, :only => %w{output}
-      before_action :find_host, :only => %w{output}
+      before_action :find_optional_nested_object, :only => %w{output raw_output}
+      before_action :find_host, :only => %w{output raw_output}
       before_action :find_resource, :only => %w{show update destroy clone cancel rerun}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
@@ -78,19 +78,23 @@ module Api
       param :since, String, :required => false
       def output
         if @nested_obj.task.scheduled?
-          render :json => { :refresh => true, :output => [], :delayed => true, :start_at => @nested_obj.task.start_at }
+          render :json => delayed_task_output(@nested_obj.task, :default => [])
           return
         end
-        task = @nested_obj.sub_task_for_host(@host)
-        refresh = true
-        line_sets = []
 
-        if task
-          refresh = task.pending?
-          line_sets = output_lines_since task, params[:since]
+        render :json => host_output(@nested_obj, @host, :default => [], :since => params[:since])
+      end
+
+      api :GET, '/job_invocations/:id/hosts/:host_id/raw', N_('Get raw output for a host')
+      param :id, :identifier, :required => true
+      param :host_id, :identifier, :required => true
+      def raw_output
+        if @nested_obj.task.scheduled?
+          render :json => delayed_task_output(@nested_obj.task)
+          return
         end
 
-        render :json => { :refresh => refresh, :output => line_sets || [] }
+        render :json => host_output(@nested_obj, @host, :raw => true)
       end
 
       api :POST, '/job_invocations/:id/cancel', N_('Cancel job invocation')
@@ -129,7 +133,7 @@ module Api
 
       def action_permission
         case params[:action]
-        when 'output'
+        when 'output', 'raw_output'
           :view
         when 'cancel'
           :cancel
@@ -176,6 +180,22 @@ module Api
         line_sets = task.main_action.live_output
         line_sets = line_sets.drop_while { |o| o['timestamp'].to_f <= since } if since
         line_sets
+      end
+
+      def host_output(job_invocation, host, default: nil, since: nil, raw: false)
+        refresh = true
+
+        if (task = job_invocation.sub_task_for_host(host))
+          refresh = task.pending?
+          output  = output_lines_since(task, since)
+          output  = output.map { |set| set['output'] }.join if raw
+        end
+
+        { :complete => !refresh, :refresh => refresh, :output => output || default }
+      end
+
+      def delayed_task_output(task, default: nil)
+        { :complete => false, :refresh => true, :output => default, :delayed => true, :start_at => task.start_at }
       end
     end
   end
