@@ -269,7 +269,6 @@ module ForemanRemoteExecutionCore
       ssh_options[:keys] = [@client_private_key_file] if @client_private_key_file
       ssh_options[:password] = @ssh_password if @ssh_password
       ssh_options[:passphrase] = @key_passphrase if @key_passphrase
-      ssh_options[:user_known_hosts_file] = @known_hosts_file if @known_hosts_file
       ssh_options[:keys_only] = true
       # if the host public key is contained in the known_hosts_file,
       # verify it, otherwise, if missing, import it and continue
