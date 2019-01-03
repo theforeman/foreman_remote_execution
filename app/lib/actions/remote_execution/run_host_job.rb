@@ -159,13 +159,12 @@ module Actions
           raise n_('The only applicable proxy %{proxy_names} is down',
                    'All %{count} applicable proxies are down. Tried %{proxy_names}',
                    offline_proxies.count) % settings
-        elsif proxy == :not_defined && !Setting['remote_execution_without_proxy']
+        elsif proxy == :not_defined
           settings = { :global_proxy => 'remote_execution_global_proxy',
-                       :fallback_proxy => 'remote_execution_fallback_proxy',
-                       :no_proxy => 'remote_execution_no_proxy' }
+                       :fallback_proxy => 'remote_execution_fallback_proxy' }
 
           raise _('Could not use any proxy. Consider configuring %{global_proxy}, ' +
-                  '%{fallback_proxy} or %{no_proxy} in settings') % settings
+                  '%{fallback_proxy} in settings') % settings
         end
         proxy
       end

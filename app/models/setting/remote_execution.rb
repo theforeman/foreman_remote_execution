@@ -20,11 +20,6 @@ class Setting::RemoteExecution < Setting
                  'organization or location.'),
                  true,
                  N_('Enable Global Proxy')),
-        self.set('remote_execution_without_proxy',
-                 N_('When enabled, the remote execution will try to run the commands directly, when no
-                     proxy with remote execution feature is configured for the host.'),
-                 false,
-                 N_('Fallback Without Proxy')),
         self.set('remote_execution_ssh_user',
                  N_('Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user.'),
                  'root',
