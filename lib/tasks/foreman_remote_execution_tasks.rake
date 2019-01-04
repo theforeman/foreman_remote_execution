@@ -43,3 +43,30 @@ load 'tasks/jenkins.rake'
 if Rake::Task.task_defined?(:'jenkins:unit')
   Rake::Task['jenkins:unit'].enhance ['test:foreman_remote_execution', 'foreman_remote_execution:rubocop']
 end
+
+Rake::Task["webpack:compile"].clear
+# WIP: test that setting max_oldspace_size will fix rex issues: this is meant for testing only,
+# it it proves to be working, the fix should go to the foreman proper
+namespace :webpack do
+  desc <<-EOF.strip_heredoc
+  Compile webpack bundles: overriding the rake task from webpack-rails to be
+  able to set the max_old_space_size option.
+  EOF
+  task compile: :environment do
+    ENV["TARGET"] = 'production' # TODO: Deprecated, use NODE_ENV instead
+    ENV["NODE_ENV"] ||= 'production'
+    webpack_bin = ::Rails.root.join(::Rails.configuration.webpack.binary)
+    config_file = ::Rails.root.join(::Rails.configuration.webpack.config_file)
+    max_old_space_size = "2048"
+
+    unless File.exist?(webpack_bin)
+      raise "Can't find our webpack executable at #{webpack_bin} - have you run `npm install`?"
+    end
+
+    unless File.exist?(config_file)
+      raise "Can't find our webpack config file at #{config_file}"
+    end
+
+    sh "node --max_old_space_size=#{max_old_space_size} #{webpack_bin} --config #{config_file} --bail"
+  end
+end
