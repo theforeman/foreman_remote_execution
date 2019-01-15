@@ -3,8 +3,8 @@ module ForemanRemoteExecutionCore
 
     DEFAULT_REFRESH_INTERVAL = 60
 
-    def initialize(options, user_method)
-      super(options, user_method)
+    def initialize(options, user_method, suspended_action: nil)
+      super(options, user_method, suspended_action: suspended_action)
       @callback_host = options[:callback_host]
       @task_id = options[:uuid]
       @step_id = options[:step_id]
