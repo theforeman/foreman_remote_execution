@@ -45,7 +45,8 @@ module Actions
         additional_options = { :hostname => provider.find_ip_or_hostname(host),
                                :script => script,
                                :execution_timeout_interval => job_invocation.execution_timeout_interval,
-                               :secrets => secrets }
+                               :secrets => secrets,
+                               :use_batch_triggering => true}
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
 

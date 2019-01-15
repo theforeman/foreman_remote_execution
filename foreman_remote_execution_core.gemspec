@@ -17,6 +17,6 @@ DESC
   s.files = Dir['lib/foreman_remote_execution_core/**/*'] +
             ['lib/foreman_remote_execution_core.rb', 'LICENSE']
 
-  s.add_runtime_dependency('foreman-tasks-core', '>= 0.1.5')
+  s.add_runtime_dependency('foreman-tasks-core', '>= 0.3.1')
   s.add_runtime_dependency('net-ssh')
 end
