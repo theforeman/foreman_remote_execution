@@ -180,6 +180,13 @@ module ForemanRemoteExecution
       ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
       ForemanTasks::Cleaner.send(:include, ForemanRemoteExecution::ForemanTasksCleanerExtensions)
       RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
+
+      RemoteExecutionFeature.register(
+        :puppet_run_host,
+        N_('Run Puppet Once'),
+        :description => N_('Perform a single Puppet run'),
+        :host_action_button => true
+      )
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
