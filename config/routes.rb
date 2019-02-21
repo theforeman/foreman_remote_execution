@@ -80,6 +80,9 @@ Rails.application.routes.draw do
       end
 
       resources :remote_execution_features, :only => [:show, :index, :update]
+
+      get 'cockpit_redirect', to: 'remote_execution_features#cockpit_redirect'
+
     end
   end
 end

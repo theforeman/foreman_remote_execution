@@ -29,6 +29,20 @@ class SSHExecutionProvider < RemoteExecutionProvider
       'ssh'
     end
 
+    def ssh_params(host)
+      proxy_selector = ::RemoteExecutionProxySelector.new
+      proxy = proxy_selector.determine_proxy(host, 'SSH')
+      {
+        :hostname => find_ip_or_hostname(host),
+        :proxy => proxy.class == Symbol ? proxy : proxy.url,
+        :ssh_user => ssh_user(host),
+        :ssh_port => ssh_port(host),
+        :ssh_password => ssh_password(host),
+        :ssh_key_passphrase => ssh_key_passphrase(host),
+        :ssh_key_file => File.expand_path(ForemanRemoteExecutionCore.settings.fetch(:ssh_identity_key_file))
+      }
+    end
+
     private
 
     def ssh_user(host)
