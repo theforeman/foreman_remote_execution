@@ -49,7 +49,7 @@ module ForemanRemoteExecutionCore
   end
 
   class DzdoUserMethod < SudoUserMethod
-    LOGIN_PROMPT = /password/i
+    LOGIN_PROMPT = /password/i.freeze
 
     def login_prompt
       LOGIN_PROMPT
