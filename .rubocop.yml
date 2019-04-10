@@ -111,3 +111,9 @@ Style/FrozenStringLiteralComment:
 
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Rails/ReflectionClassName:
+  Enabled: false

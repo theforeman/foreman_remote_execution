@@ -1,5 +1,5 @@
 module JobInvocationOutputHelper
-  COLOR_PATTERN = /\e\[.*?m/
+  COLOR_PATTERN = /\e\[.*?m/.freeze
   CONSOLE_COLOR = {
     '31' => 'red',
     '32' => 'lightgreen',
