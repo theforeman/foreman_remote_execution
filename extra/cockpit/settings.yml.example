@@ -1,0 +1,8 @@
+:foreman_url: http://localhost:3000/
+
+# :log_level: INFO
+
+# Certificates used to call to external proxies
+# :ssl_ca_file: /path/to/certs/cacert.pem
+# :ssl_certificate: /path/to/certs/cert.pem
+# :ssl_private_key: /path/to/certs/key.pem
