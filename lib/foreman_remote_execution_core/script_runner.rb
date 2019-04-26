@@ -151,8 +151,8 @@ module ForemanRemoteExecutionCore
 
     def start
       prepare_start
-      script = control_script
-      logger.debug("executing script:\n#{script.lines.map { |line| "  | #{line}" }.join}")
+      script = initialization_script
+      logger.debug("executing script:\n#{indent_multiline(script)}")
       trigger(script)
     rescue => e
       logger.error("error while initalizing command #{e.class} #{e.message}:\n #{e.backtrace.join("\n")}")
@@ -169,7 +169,8 @@ module ForemanRemoteExecutionCore
       @exit_code_path = File.join(File.dirname(@remote_script), 'exit_code')
     end
 
-    def control_script
+    # the script that initiates the execution
+    def initialization_script
       # pipe the output to tee while capturing the exit code in a file
       <<-SCRIPT.gsub(/^\s+\| /, '')
       | sh <<WRAPPER
@@ -251,6 +252,10 @@ module ForemanRemoteExecutionCore
     end
 
     private
+
+    def indent_multiline(string)
+      string.lines.map { |line| "  | #{line}" }.join
+    end
 
     def should_cleanup?
       @session && !@session.closed? && @cleanup_working_dirs
@@ -389,7 +394,9 @@ module ForemanRemoteExecutionCore
     end
 
     def cp_script_to_remote(script = @script, name = 'script')
-      upload_data(sanitize_script(script), remote_command_file(name), 555)
+      path = remote_command_file(name)
+      @logger.debug("copying script to #{path}:\n#{indent_multiline(script)}")
+      upload_data(sanitize_script(script), path, 555)
     end
 
     def upload_data(data, path, permissions = 555)
