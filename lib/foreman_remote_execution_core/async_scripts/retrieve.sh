@@ -6,7 +6,7 @@ if ! pgrep --help 2>/dev/null >/dev/null; then
     exit 1
 fi
 
-BASE_DIR="$(dirname $(readlink -f "${BASH_SOURCE[0]}"))"
+BASE_DIR="$(dirname $(readlink -f "$0"))"
 
 function release_lock() {
     rm $BASE_DIR/retrieve_lock
@@ -23,7 +23,7 @@ trap "release_lock" EXIT
 
 pid=$(cat "$BASE_DIR/pid")
 
-if [ -e $BASE_DIR/manual_mode ] || ([ -n "$PID"] && pgrep -P "$pid" >/dev/null 2>&1); then
+if [ -e $BASE_DIR/manual_mode ] || ([ -n "$pid" ] && pgrep -P "$pid" >/dev/null 2>&1); then
   echo RUNNING
 else
   echo "DONE $(cat "$BASE_DIR/exit_code" 2>/dev/null)"

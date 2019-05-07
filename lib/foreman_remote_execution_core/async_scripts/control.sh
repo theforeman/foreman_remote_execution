@@ -13,12 +13,12 @@
 # one can call `echo message | $CONTROL_SCRIPT update` to send output to the remote execution jobs
 # and `$CONTROL_SCRIPT finish 0` once finished (with 0 as exit code) to send output to the remote execution jobs
 # and `$CONTROL_SCRIPT finish 0` once finished (with 0 as exit code)
-BASE_DIR="$(dirname $(readlink -f "${BASH_SOURCE[0]}"))"
+BASE_DIR="$(dirname $(readlink -f "$0"))"
 
 # load the data required for generating the callback
-source $BASE_DIR/env.sh
+. "$BASE_DIR/env.sh"
 
-if ! which curl >/dev/null; then
+if ! command -v curl >/dev/null; then
     echo 'curl is required' >&2
     exit 1
 fi
@@ -28,7 +28,7 @@ AUTH="$TASK_ID:$OTP"
 CURL="curl --silent --show-error"
 
 # prepare the callback payload
-function payload() {
+payload() {
     if [ -e "$BASE_DIR/exit_code" ]; then
         exit_code="\"$(cat "$BASE_DIR/exit_code")\""
     else
@@ -49,13 +49,13 @@ function payload() {
 }
 
 # send the callback data to proxy
-function update() {
+update() {
     $CURL -X POST -d "$(payload)" -u "$AUTH" "$URL_PREFIX"/update
 }
 
 # wait for named pipe $1 to retrieve data. If $2 is provided, it serves as timeout
 # in seconds on how long to wait when reading.
-function wait_for_pipe() {
+wait_for_pipe() {
     pipe_path=$1
     if [ -n "$2" ]; then
         timeout="-t $2"
@@ -69,10 +69,10 @@ function wait_for_pipe() {
 }
 
 # function run in background, when receiving update data via STDIN.
-function periodic_update() {
+periodic_update() {
     interval=1
     # reading some data from periodic_update_control signals we're done
-    while ! wait_for_pipe $BASE_DIR/periodic_update_control 1; do
+    while ! wait_for_pipe $BASE_DIR/periodic_update_control $interval; do
         update
     done
     # one more update before we finish
@@ -82,13 +82,13 @@ function periodic_update() {
 }
 
 # signal the periodic_update process that the main process is finishing
-function periodic_update_finish() {
+periodic_update_finish() {
     if [ -e $BASE_DIR/periodic_update_control ]; then
        echo > $BASE_DIR/periodic_update_control
     fi
 }
 
-function finish() {
+finish() {
     echo finish
     $CURL -X POST -d "$(payload)" -u "$AUTH" "$URL_PREFIX"/done
 }
@@ -123,7 +123,7 @@ case "$ACTION" in
             # run periodic update as separate process to keep sending updates in output to server
             periodic_update &
             # redirect the input into output
-            cat | tee -a $BASE_DIR/output
+            tee -a $BASE_DIR/output
             periodic_update_finish
             # ensure the periodic update finished before we return
             wait_for_pipe $BASE_DIR/periodic_update_finished
