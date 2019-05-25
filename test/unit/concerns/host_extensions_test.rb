@@ -147,22 +147,13 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       let(:tax_location) { FactoryBot.build(:location) }
       let(:host) { FactoryBot.build(:host, :organization => tax_organization, :location => tax_location) }
       let(:proxy_in_taxonomies) { FactoryBot.create(:smart_proxy, :ssh, :organizations => [tax_organization], :locations => [tax_location]) }
-      let(:proxy_no_taxonomies) { FactoryBot.create(:smart_proxy, :ssh) }
 
       context 'enabled' do
         before { Setting[:remote_execution_global_proxy] = true }
 
         it 'returns correct proxies confined by taxonomies' do
           proxy_in_taxonomies
-          proxy_no_taxonomies
           host.remote_execution_proxies(provider)[:global].must_include proxy_in_taxonomies
-          host.remote_execution_proxies(provider)[:global].wont_include proxy_no_taxonomies
-        end
-
-        it 'returns all proxies when there\'s no taxonomies' do
-          Taxonomy.stubs(:enabled_taxonomies).returns([])
-          host.remote_execution_proxies(provider)[:global].must_include proxy_in_taxonomies
-          host.remote_execution_proxies(provider)[:global].must_include proxy_no_taxonomies
         end
       end
 
