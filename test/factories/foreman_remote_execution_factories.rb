@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :job_template do
     sequence(:name) { |n| "Job template #{n}" }
     sequence(:job_category) { |n| "Job name #{n}" }
-    template 'id'
-    provider_type 'SSH'
+    template { 'id' }
+    provider_type { 'SSH' }
     organizations { [Organization.find_by(name: 'Organization 1')] } if SETTINGS[:organizations_enabled]
     locations { [Location.find_by(name: 'Location 1')] } if SETTINGS[:locations_enabled]
 
@@ -14,7 +14,7 @@ FactoryBot.define do
     end
 
     trait :with_description_format do
-      description_format 'Factory-built %{job_category}'
+      description_format { 'Factory-built %{job_category}' }
     end
 
     trait :with_feature do
@@ -24,16 +24,16 @@ FactoryBot.define do
 
   factory :foreign_input_set
 
-  factory :targeting do |f|
-    search_query 'name = foo'
-    targeting_type 'static_query'
+  factory :targeting do
+    search_query { 'name = foo' }
+    targeting_type { 'static_query' }
     user
   end
 
   factory :job_invocation do |f|
     targeting
     f.sequence(:job_category) { |n| "Job name #{n}" }
-    f.description_format '%{job_category}'
+    f.description_format { "%{job_category}" }
     trait :with_template do
       after(:build) do |invocation, evaluator|
         invocation.pattern_template_invocations << FactoryBot.build(:template_invocation)
@@ -65,7 +65,7 @@ FactoryBot.define do
     f.sequence(:name) { |n| "Provider #{n}" }
   end
 
-  factory :template_invocation do |f|
+  factory :template_invocation do
     job_invocation
     association :template, :factory => :job_template
 
@@ -101,14 +101,14 @@ end
 FactoryBot.modify do
   factory :feature do
     trait :ssh do
-      name 'SSH'
+      name { 'SSH' }
     end
   end
 
   factory :smart_proxy do
     trait :ssh do
       features { [FactoryBot.create(:feature, :ssh)] }
-      pubkey 'ssh-rsa AAAAB3N...'
+      pubkey { 'ssh-rsa AAAAB3N...' }
     end
   end
 
