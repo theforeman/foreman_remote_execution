@@ -90,13 +90,6 @@ module Api
         assert_response :unprocessable_entity
       end
 
-      test 'should export template' do
-        get :export, params: { :id => @template.to_param }
-        User.current = users(:admin)
-        assert_equal @response.body, @template.to_erb
-        assert_response :success
-      end
-
       test 'should import template' do
         new_name = @template.name = "#{@template.name}_renamed"
         erb_data = @template.to_erb

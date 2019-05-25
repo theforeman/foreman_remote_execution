@@ -33,13 +33,6 @@ module Api
         process_response @job_template.save
       end
 
-      api :GET, '/job_templates/:id/export', N_('Export a job template to ERB')
-      param :id, :identifier, :required => true
-      def export
-        Foreman::Deprecation.api_deprecation_warning('Exporting template is provided by Foreman core, please use that endpoint instead')
-        send_data @job_template.to_erb, :type => 'text/plain', :disposition => 'attachment', :filename => @job_template.filename
-      end
-
       api :GET, '/job_templates/:id', N_('Show job template details')
       param :id, :identifier, :required => true
       def show; end
@@ -128,8 +121,6 @@ module Api
           :create
         when 'import'
           :create
-        when 'export'
-          :view
         else
           super
         end
