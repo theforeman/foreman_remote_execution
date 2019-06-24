@@ -10,7 +10,7 @@ module ForemanRemoteExecution
   module JobInvocationCleaner
     def delete
       super
-      with_noop(orphaned_job_invocations, 'oprhaned job invocations') do |source, name|
+      with_noop(orphaned_job_invocations, 'orphaned job invocations') do |source, name|
         with_batches(source, name) do |invocations|
           invocations.destroy_all
         end
