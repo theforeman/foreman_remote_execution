@@ -30,7 +30,7 @@ CURL="curl --silent --show-error"
 # prepare the callback payload
 payload() {
     if [ -e "$BASE_DIR/exit_code" ]; then
-        exit_code="\"$(cat "$BASE_DIR/exit_code")\""
+        exit_code="$(cat "$BASE_DIR/exit_code")"
     else
         exit_code=null
     fi

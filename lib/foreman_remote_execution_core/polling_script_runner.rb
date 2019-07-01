@@ -73,14 +73,12 @@ module ForemanRemoteExecutionCore
 
     def external_event(event)
       data = event.data
-      return no_update unless data['manual_mode']
-      continuous_output = ForemanTasksCore::ContinuousOutput.new
-      if data.key?('output')
-        lines = Base64.decode64(data['output']).sub(/\A(RUNNING|DONE).*\n/, '')
-        continuous_output.add_output(lines, 'stdout')
+      if data['manual_mode']
+        load_event_updates(data)
+      else
+        # getting the update from automatic mode - reaching to the host to get the latest update
+        return run_refresh
       end
-      cleanup if data['exit_code']
-      new_update(continuous_output, data['exit_code'])
     ensure
       destroy_session
     end
@@ -109,6 +107,17 @@ module ForemanRemoteExecutionCore
     end
 
     private
+
+    # Generates updates based on the callback data from the manual mode
+    def load_event_updates(event_data)
+      continuous_output = ForemanTasksCore::ContinuousOutput.new
+      if event_data.key?('output')
+        lines = Base64.decode64(event_data['output']).sub(/\A(RUNNING|DONE).*\n/, '')
+        continuous_output.add_output(lines, 'stdout')
+      end
+      cleanup if event_data['exit_code']
+      new_update(continuous_output, event_data['exit_code'])
+    end
 
     def cleanup
       run_sync("rm -rf \"#{remote_command_dir}\"") if @cleanup_working_dirs
