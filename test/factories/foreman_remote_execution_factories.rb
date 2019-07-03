@@ -30,7 +30,7 @@ FactoryBot.define do
     user
 
     trait :with_randomized_ordering do
-      randomized_ordering true
+      randomized_ordering { true }
     end
   end
 
