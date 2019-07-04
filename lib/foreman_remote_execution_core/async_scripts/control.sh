@@ -15,42 +15,14 @@
 # and `$CONTROL_SCRIPT finish 0` once finished (with 0 as exit code)
 BASE_DIR="$(dirname $(readlink -f "$0"))"
 
-# load the data required for generating the callback
-. "$BASE_DIR/env.sh"
-
 if ! command -v curl >/dev/null; then
     echo 'curl is required' >&2
     exit 1
 fi
 
-URL_PREFIX="$CALLBACK_HOST/dynflow/tasks/$TASK_ID"
-AUTH="$TASK_ID:$OTP"
-CURL="curl --silent --show-error"
-
-# prepare the callback payload
-payload() {
-    if [ -e "$BASE_DIR/exit_code" ]; then
-        exit_code="$(cat "$BASE_DIR/exit_code")"
-    else
-        exit_code=null
-    fi
-
-    if [ -e "$BASE_DIR/manual_mode" ]; then
-        manual_mode=true
-        output=$($BASE_DIR/retrieve.sh | base64 -w0)
-    else
-        manual_mode=false
-    fi
-
-    echo "{ \"step_id\": \"$STEP_ID\","\
-         "  \"manual_mode\": $manual_mode,"\
-         "  \"exit_code\": $exit_code,"\
-         "  \"output\": \"$output\" }"
-}
-
 # send the callback data to proxy
 update() {
-    $CURL -X POST -d "$(payload)" -u "$AUTH" "$URL_PREFIX"/update
+    $BASE_DIR/retrieve.sh push_update
 }
 
 # wait for named pipe $1 to retrieve data. If $2 is provided, it serves as timeout
@@ -88,11 +60,6 @@ periodic_update_finish() {
     fi
 }
 
-finish() {
-    echo finish
-    $CURL -X POST -d "$(payload)" -u "$AUTH" "$URL_PREFIX"/done
-}
-
 ACTION=${1:-finish}
 
 case "$ACTION" in
@@ -100,7 +67,7 @@ case "$ACTION" in
         if ! [ -e $BASE_DIR/manual_mode ]; then
             # make the exit code of initialization script the exit code of the whole job
             cp init_exit_code exit_code
-            finish
+            update
         fi
         ;;
     finish)
@@ -108,7 +75,7 @@ case "$ACTION" in
         # to the exit code of the initialization script
         exit_code=${2:-$(cat $BASE_DIR/init_exit_code)}
         echo $exit_code > $BASE_DIR/exit_code
-        finish
+        update
         if [ -e $BASE_DIR/manual_mode ]; then
             rm $BASE_DIR/manual_mode
         fi
