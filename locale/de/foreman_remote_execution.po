@@ -104,6 +104,9 @@ msgstr "Bereitstellungsvorlage klonen"
 msgid "Close"
 msgstr "Schließen"
 
+msgid "Cockpit URL"
+msgstr ""
+
 msgid "Concurrency level"
 msgstr "Parallelitätsebene"
 
@@ -125,7 +128,7 @@ msgstr ""
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
 msgid "Could not use any template used in the job invocation"
@@ -256,6 +259,9 @@ msgstr ""
 
 msgid "Get output for a host"
 msgstr "Ausgabe für einen Host abfragen"
+
+msgid "Get raw output for a host"
+msgstr ""
 
 msgid "Hide advanced fields"
 msgstr "Erweiterte Felder ausblenden"
@@ -580,6 +586,9 @@ msgstr "Zum Anfang scrollen"
 msgid "Search"
 msgstr "Suchen"
 
+msgid "Search Query"
+msgstr ""
+
 msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
 msgstr "Außerhalb der dem Host zugewiesenen Proxys nach Proxy mit entfernter Ausführung suchen. Wenn Standorte oder Organisationen aktiviert sind, wird die Suche auf Organisation oder Standort des Hosts begrenzt."
 
@@ -819,6 +828,9 @@ msgstr "Benutzereingabe"
 msgid "Value"
 msgstr "Wert"
 
+msgid "Web Console"
+msgstr ""
+
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "Welcher Befehl für den Wechsel zum effektiven Benutzer verwendet werden soll. Einer von %s"
 
@@ -828,12 +840,13 @@ msgstr "Welcher Benutzer zur Ausführung des Skripts verwendet werden soll (mitt
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "Welcher Benutzer zur Ausführung des Skripts (mittels sudo-ähnlichen Mechanismen) verwendet werden soll. Standardmäßig wird ein Vorlagenparameter oder eine allgemeine Einstellung verwendet."
 
-msgid ""
-"When enabled, the remote execution will try to run the commands directly, when no\n"
-"                     proxy with remote execution feature is configured for the host."
+msgid "When enabled, the remote execution will try to run the commands directly, when no proxy with remote execution feature is configured for the host."
 msgstr ""
 
 msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
+msgstr ""
+
+msgid "Where to find the Cockpit instance for the Web Console button.  By default, no button is shown."
 msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."

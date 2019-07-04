@@ -101,6 +101,9 @@ msgstr "프로비저닝 템플릿 복제"
 msgid "Close"
 msgstr "종료"
 
+msgid "Cockpit URL"
+msgstr ""
+
 msgid "Concurrency level"
 msgstr "동시 실행 레벨"
 
@@ -122,7 +125,7 @@ msgstr ""
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
 msgid "Could not use any template used in the job invocation"
@@ -253,6 +256,9 @@ msgstr ""
 
 msgid "Get output for a host"
 msgstr "호스트에 대한 출력 가져오기"
+
+msgid "Get raw output for a host"
+msgstr ""
 
 msgid "Hide advanced fields"
 msgstr "고급 필드 숨기기"
@@ -575,6 +581,9 @@ msgstr "맨 위로 스크롤"
 msgid "Search"
 msgstr "검색"
 
+msgid "Search Query"
+msgstr ""
+
 msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
 msgstr "호스트에 할당된 프록시 이외의 프록시에서 원격 실행 프록시를 검색합니다. 위치 또는 조직이 활성화된 경우 호스트의 조직 또는 위치로 검색 범위가 제한됩니다."
 
@@ -813,6 +822,9 @@ msgstr "사용자 입력"
 msgid "Value"
 msgstr "값 "
 
+msgid "Web Console"
+msgstr ""
+
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "유효 사용자를 전환하는 데 사용할 명령입니다(%s 중 하나)."
 
@@ -822,12 +834,13 @@ msgstr "사용자가 스크립트를 실행하는 데 사용해야 할 옵션입
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "사용자가 스크립트를 실행하는 데 사용해야 할 옵션입니다(sudo와 유사한 메커니즘 사용). 템플릿 매개 변수 또는 글로벌 설정으로 기본 설정됩니다."
 
-msgid ""
-"When enabled, the remote execution will try to run the commands directly, when no\n"
-"                     proxy with remote execution feature is configured for the host."
+msgid "When enabled, the remote execution will try to run the commands directly, when no proxy with remote execution feature is configured for the host."
 msgstr ""
 
 msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
+msgstr ""
+
+msgid "Where to find the Cockpit instance for the Web Console button.  By default, no button is shown."
 msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."

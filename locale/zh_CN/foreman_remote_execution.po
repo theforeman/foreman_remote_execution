@@ -103,6 +103,9 @@ msgstr "克隆预配模板"
 msgid "Close"
 msgstr "关闭"
 
+msgid "Cockpit URL"
+msgstr ""
+
 msgid "Concurrency level"
 msgstr "并发等级"
 
@@ -124,8 +127,8 @@ msgstr "无法渲染预览，因为没有符合搜索查询的主机。"
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
-msgstr "无法使用任何代理。请考虑在设置中配置 %{global_proxy}、%{fallback_proxy} 或 %{no_proxy}"
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
+msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "无法使用在任务调用中使用的任意模板"
@@ -255,6 +258,9 @@ msgstr ""
 
 msgid "Get output for a host"
 msgstr "获取主机输出结果"
+
+msgid "Get raw output for a host"
+msgstr ""
 
 msgid "Hide advanced fields"
 msgstr "隐藏高级字段"
@@ -577,6 +583,9 @@ msgstr "滚动到顶部"
 msgid "Search"
 msgstr "搜索"
 
+msgid "Search Query"
+msgstr ""
+
 msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
 msgstr "在为该主机分配的代理服务器之外搜索远程执行代理服务器。如果已启用 location 或者 organization，则会将搜索限制为该主机的机构或位置。"
 
@@ -816,6 +825,9 @@ msgstr "用户输入"
 msgid "Value"
 msgstr "值"
 
+msgid "Web Console"
+msgstr ""
+
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "用来切换至有效用户的命令。%s 之一。"
 
@@ -825,14 +837,13 @@ msgstr "应由什么用户运行此脚本（使用类似 sudo 的机制）。"
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "应由什么用户运行此脚本（使用类似 sudo 的机制）。默认为模板参数或全局设置。"
 
-msgid ""
-"When enabled, the remote execution will try to run the commands directly, when no\n"
-"                     proxy with remote execution feature is configured for the host."
+msgid "When enabled, the remote execution will try to run the commands directly, when no proxy with remote execution feature is configured for the host."
 msgstr ""
-"启用后，如果没有为主机配置具有远程执行功能的代理，则远程执行将尝试\n"
-"                     直接运行命令。"
 
 msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
+msgstr ""
+
+msgid "Where to find the Cockpit instance for the Web Console button.  By default, no button is shown."
 msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
