@@ -117,3 +117,9 @@ Layout/AlignHash:
 
 Rails/ReflectionClassName:
   Enabled: false
+
+Rails/HelperInstanceVariable:
+  Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
