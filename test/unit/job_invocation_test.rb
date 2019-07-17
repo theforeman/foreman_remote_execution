@@ -1,7 +1,7 @@
 require 'test_plugin_helper'
 
 class JobInvocationTest < ActiveSupport::TestCase
-  let(:job_invocation) { FactoryBot.build(:job_invocation) }
+  let(:job_invocation) { FactoryBot.build(:job_invocation, :description => 'A text with "quotes"') }
   let(:template) { FactoryBot.create(:job_template, :with_input) }
 
   context 'search for job invocations' do
@@ -12,6 +12,11 @@ class JobInvocationTest < ActiveSupport::TestCase
     it 'is able to perform search through job invocations' do
       found_jobs = JobInvocation.search_for(%{job_category = "#{job_invocation.job_category}"}).paginate(:page => 1).with_task.order('job_invocations.id DESC')
       found_jobs.must_equal [job_invocation]
+    end
+
+    it 'is able to auto complete description' do
+      expected = 'description =  "A text with \"quotes\""'
+      JobInvocation.complete_for('description = ').must_equal [expected]
     end
   end
 
