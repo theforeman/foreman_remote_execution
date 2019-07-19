@@ -23,7 +23,7 @@ class JobInvocation < ApplicationRecord
   validates_associated :targeting, :all_template_invocations
 
   scoped_search :on => :job_category, :complete_value => true
-  scoped_search :on => :description # FIXME No auto complete because of https://github.com/wvanbergen/scoped_search/issues/138
+  scoped_search :on => :description, :complete_value => true
 
   has_many :template_invocations_hosts, :through => :template_invocations, :source => :host
   scoped_search :relation => :template_invocations_hosts, :on => :name, :rename => 'host', :complete_value => true
