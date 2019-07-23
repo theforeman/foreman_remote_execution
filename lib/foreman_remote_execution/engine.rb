@@ -181,12 +181,7 @@ module ForemanRemoteExecution
       ForemanTasks::Cleaner.send(:include, ForemanRemoteExecution::ForemanTasksCleanerExtensions)
       RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
 
-      RemoteExecutionFeature.register(
-        :puppet_run_host,
-        N_('Run Puppet Once'),
-        :description => N_('Perform a single Puppet run'),
-        :host_action_button => true
-      )
+      ForemanRemoteExecution.register_rex_feature
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
@@ -194,5 +189,14 @@ module ForemanRemoteExecution
       locale_domain = 'foreman_remote_execution'
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
+  end
+
+  def self.register_rex_feature
+    RemoteExecutionFeature.register(
+      :puppet_run_host,
+      N_('Run Puppet Once'),
+      :description => N_('Perform a single Puppet run'),
+      :host_action_button => true
+    )
   end
 end
