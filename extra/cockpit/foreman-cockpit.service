@@ -1,0 +1,9 @@
+[Service]
+Environment=XDG_CONFIG_DIRS=/etc/foreman/
+Environment=FOREMAN_COCKPIT_SETTINGS=/etc/foreman/cockpit/foreman-cockpit-session.yml
+ExecStart=/usr/libexec/cockpit-ws --no-tls --address 127.0.0.1 --port 9999
+User=foreman
+Group=foreman
+
+[Install]
+WantedBy=multi-user.target
