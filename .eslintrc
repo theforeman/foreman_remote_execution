@@ -11,16 +11,6 @@
     "jasmine": true,
     "jest": true
   },
-  "globals": {
-    "document": false,
-    "escape": false,
-    "navigator": false,
-    "unescape": false,
-    "window": false,
-    "$": true,
-    "_": true,
-    "__": true
-  },
   "parser": "babel-eslint",
   "rules": {
     "react/jsx-uses-vars": "error",
