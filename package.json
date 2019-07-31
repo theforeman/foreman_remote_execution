@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "GPL-3.0",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint -c .eslintrc webpack/ script/ || exit 0",
+    "lint": "./node_modules/.bin/eslint -c .eslintrc webpack/ script/",
     "test": "node node_modules/.bin/jest webpack",
     "test:watch": "node node_modules/.bin/jest webpack --watchAll",
     "test:current": "node node_modules/.bin/jest webpack --watch"
