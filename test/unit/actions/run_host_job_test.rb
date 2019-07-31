@@ -5,14 +5,45 @@ module ForemanRemoteExecution
     include Dynflow::Testing
 
     subject { create_action(Actions::RemoteExecution::RunHostJob) }
-    let(:host) { FactoryBot.create(:host, :with_execution) }
 
-    before do
-      subject.stubs(:input).returns({ host: { id: host.id } })
-      Host.expects(:find).with(host.id).returns(host)
+    describe '#secrets' do
+      let(:job_invocation) { FactoryBot.create(:job_invocation, :with_task) }
+      let(:host) { job_invocation.template_invocations.first.host }
+      let(:provider) do
+        provider = ::SSHExecutionProvider
+        provider.expects(:ssh_password).with(host).returns('sshpass')
+        provider.expects(:sudo_password).with(host).returns('sudopass')
+        provider.expects(:ssh_key_passphrase).with(host).returns('keypass')
+        provider
+      end
+
+      it 'uses provider secrets' do
+        secrets = subject.secrets(host, job_invocation, provider)
+
+        assert_equal 'sshpass', secrets[:ssh_password]
+        assert_equal 'sudopass', secrets[:sudo_password]
+        assert_equal 'keypass', secrets[:key_passphrase]
+      end
+
+      it 'prefers job secrets over provider secrets' do
+        job_invocation.password = 'jobsshpass'
+        job_invocation.key_passphrase = 'jobkeypass'
+        secrets = subject.secrets(host, job_invocation, provider)
+
+        assert_equal 'jobsshpass', secrets[:ssh_password]
+        assert_equal 'sudopass', secrets[:sudo_password]
+        assert_equal 'jobkeypass', secrets[:key_passphrase]
+      end
     end
 
     describe '#finalize' do
+      let(:host) { FactoryBot.create(:host, :with_execution) }
+
+      before do
+        subject.stubs(:input).returns({ host: { id: host.id } })
+        Host.expects(:find).with(host.id).returns(host)
+      end
+
       describe 'updates the host status' do
         before do
           subject.expects(:check_exit_status).returns(nil)

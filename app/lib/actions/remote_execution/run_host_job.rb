@@ -38,14 +38,10 @@ module Actions
 
         provider = template_invocation.template.provider
 
-        secrets = { :ssh_password => job_invocation.password || provider.ssh_password(host),
-                    :key_passphrase => job_invocation.key_passphrase || provider.ssh_key_passphrase(host),
-                    :sudo_password => job_invocation.sudo_password || provider.sudo_password(host) }
-
         additional_options = { :hostname => provider.find_ip_or_hostname(host),
                                :script => script,
                                :execution_timeout_interval => job_invocation.execution_timeout_interval,
-                               :secrets => secrets,
+                               :secrets => secrets(host, job_invocation, provider),
                                :use_batch_triggering => true}
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
@@ -57,6 +53,14 @@ module Actions
       def finalize(*args)
         update_host_status
         check_exit_status
+      end
+
+      def secrets(host, job_invocation, provider)
+        job_secrets = { :ssh_password => job_invocation.password,
+                        :key_passphrase => job_invocation.key_passphrase,
+                        :sudo_password => job_invocation.sudo_password }
+
+        job_secrets.merge(provider.secrets(host)) { |_key, job_secret, provider_secret| job_secret || provider_secret }
       end
 
       def check_exit_status

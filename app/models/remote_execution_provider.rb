@@ -23,6 +23,10 @@ class RemoteExecutionProvider
       {:proxy_operation_name => proxy_operation_name}
     end
 
+    def secrets(_host)
+      {}
+    end
+
     def proxy_operation_name
       'ssh'
     end
