@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "./node_modules/@theforeman/vendor-dev/eslint.extends.js"],
   "plugins": [
     "react"
   ],
@@ -35,13 +35,6 @@
     "no-underscore-dangle": "off",
     "no-use-before-define": "off",
     "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        // Allow importing devDependencies like @storybook
-        "devDependencies": true
-      }
-    ],
     // Import rules off for now due to HoundCI issue
     "import/no-unresolved": "off",
     "import/extensions": "off"
