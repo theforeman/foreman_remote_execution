@@ -25,6 +25,7 @@ module Api
         param :job_invocation, Hash, :required => true, :action_aware => true do
           param :job_template_id, String, :required => false, :desc => N_('The job template to use, parameter is required unless feature was specified')
           param :targeting_type, String, :required => true, :desc => N_('Invocation type, one of %s') % Targeting::TYPES
+          param :randomized_ordering, :bool, :desc => N_('Execute the jobs on hosts in randomized order')
           param :inputs, Hash, :required => false, :desc => N_('Inputs to use')
           param :ssh, Hash, :desc => N_('SSH provider specific options') do
             param :effective_user, String,
