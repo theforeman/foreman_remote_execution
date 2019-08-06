@@ -103,21 +103,21 @@
       <%= number_f f, :time_span, :label => _('Time span'), :placeholder => 'N', :min => 1, :label_help => N_("Distribute execution over N seconds")  %>
     </div>
 
-    <div class="form-group">
-      <%= add_label({ :label => _('Type of query'), :label_help => _("Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>") }, f, :targetting_type) %>
-
-      <div class="col-md-4">
-        <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
-        <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
-      </div>
-    </div>
-
     <div class="form-group advanced hidden">
       <%= add_label({ :label => _('Execution ordering'), :label_help => _("Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>") }, f, :randomized_ordering) %>
 
       <div class="col-md-4">
         <%= radio_button_f targeting_fields, :randomized_ordering, :value => false, :text => _(Targeting::ORDERINGS[Targeting::ORDERED]), :checked => !@composer.targeting.randomized_ordering %>
         <%= radio_button_f targeting_fields, :randomized_ordering, :value => true, :text => _(Targeting::ORDERINGS[Targeting::RANDOMIZED]) %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= add_label({ :label => _('Type of query'), :label_help => _("Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>") }, f, :targetting_type) %>
+
+      <div class="col-md-4">
+        <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
+        <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
       </div>
     </div>
   <% end %>
