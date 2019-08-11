@@ -6,7 +6,7 @@ if ! pgrep --help 2>/dev/null >/dev/null; then
     exit 1
 fi
 
-BASE_DIR="$(dirname $(readlink -f "$0"))"
+BASE_DIR="$(dirname "$(readlink -f "$0")")"
 
 # load the data required for generating the callback
 . "$BASE_DIR/env.sh"
@@ -15,14 +15,14 @@ AUTH="$TASK_ID:$OTP"
 CURL="curl --silent --show-error --fail --max-time 10"
 
 # acquiring the lock before proceeding, to ensure only one instance of the script is running
-while ! mkfifo $BASE_DIR/retrieve_lock 1>/dev/null 2>&1; do
+while ! mkfifo "$BASE_DIR/retrieve_lock" 1>/dev/null 2>&1; do
     # we failed to create retrieve_lock - assuming there is already another retrieve script running
     # waiting until it finished before we try to acquire it
-    read -t 10 <>$BASE_DIR/retrieve_lock
+    read -t 10 <>"$BASE_DIR/retrieve_lock"
 done
 
 release_lock() {
-    rm $BASE_DIR/retrieve_lock
+    rm "$BASE_DIR/retrieve_lock"
 }
 # ensure the release the lock at exit
 trap "release_lock" EXIT
@@ -32,7 +32,7 @@ pid=$(cat "$BASE_DIR/pid")
 position=$(cat "$BASE_DIR/position")
 
 prepare_output() {
-    if [ -e $BASE_DIR/manual_mode ] || ([ -n "$pid" ] && pgrep -P "$pid" >/dev/null 2>&1); then
+    if [ -e "$BASE_DIR/manual_mode" ] || ([ -n "$pid" ] && pgrep -P "$pid" >/dev/null 2>&1); then
         echo RUNNING
     else
         echo "DONE $(cat "$BASE_DIR/exit_code" 2>/dev/null)"
