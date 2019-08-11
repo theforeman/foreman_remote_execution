@@ -57,9 +57,9 @@ payload() {
         manual_mode=false
     fi
 
-    echo "{ \"step_id\": \"$STEP_ID\","\
+    echo "{ \"exit_code\": $exit_code,"\
+         "  \"step_id\": \"$STEP_ID\","\
          "  \"manual_mode\": $manual_mode,"\
-         "  \"exit_code\": $exit_code,"\
          "  \"output\": \"$output\" }"
 }
 
