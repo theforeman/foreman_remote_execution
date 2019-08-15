@@ -18,6 +18,7 @@ MY_LOCK_FILE="$BASE_DIR/retrieve_lock.$$"
 MY_PID=$$
 echo $MY_PID >"$MY_LOCK_FILE"
 LOCK_FILE="$BASE_DIR/retrieve_lock"
+TMP_OUTPUT_FILE="$BASE_DIR/tmp_output"
 
 RUN_TIMEOUT=30 # for how long can the script hold the lock
 WAIT_TIMEOUT=60 # for how long the script is trying to acquire the lock
@@ -87,6 +88,11 @@ release_lock() {
 # ensure the release the lock at exit
 trap "release_lock" EXIT
 
+# make sure we clear previous tmp output file
+if [ -e "$TMP_OUTPUT_FILE" ]; then
+    rm "$TMP_OUTPUT_FILE"
+fi
+
 pid=$(cat "$BASE_DIR/pid")
 [ -f "$BASE_DIR/position" ] || echo 1 > "$BASE_DIR/position"
 position=$(cat "$BASE_DIR/position")
@@ -98,8 +104,8 @@ prepare_output() {
         echo "DONE $(cat "$BASE_DIR/exit_code" 2>/dev/null)"
     fi
     [ -f "$BASE_DIR/output" ] || exit 0
-    tail --bytes "+${position}" "$BASE_DIR/output" > "$BASE_DIR/tmp"
-    cat "$BASE_DIR/tmp"
+    tail --bytes "+${position}" "$BASE_DIR/output" > "$TMP_OUTPUT_FILE"
+    cat "$TMP_OUTPUT_FILE"
 }
 
 # prepare the callback payload
@@ -138,8 +144,8 @@ else
     success=$?
 fi
 
-if [ "$success" = 0 ]; then
+if [ "$success" = 0 ] && [ -e "$TMP_OUTPUT_FILE" ]; then
     # in case the retrieval was successful, move the position of the cursor to be read next time
-    bytes=$(wc --bytes < "$BASE_DIR/tmp")
+    bytes=$(wc --bytes < "$TMP_OUTPUT_FILE")
     expr "${position}" + "${bytes}" > "$BASE_DIR/position"
 fi
