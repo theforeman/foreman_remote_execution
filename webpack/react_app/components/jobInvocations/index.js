@@ -40,18 +40,21 @@ const mapStateToProps = (state) => {
 
 JobInvocationContainer.propTypes = {
   startJobInvocationsPolling: PropTypes.func,
-  data: PropTypes.string,
-  jobInvocations: PropTypes.arrayOf(PropTypes.arrayOf(
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.string,
-  )),
-  statuses: PropTypes.shape({}),
+  data: PropTypes.shape({
+    url: PropTypes.string,
+  }),
+  jobInvocations: PropTypes.arrayOf(PropTypes.array),
+  statuses: PropTypes.shape({
+    cancelled: PropTypes.number,
+    failed: PropTypes.number,
+    pending: PropTypes.number,
+    success: PropTypes.number,
+  }),
 };
 
 JobInvocationContainer.defaultProps = {
   startJobInvocationsPolling: JobInvocationActions.startJobInvocationsPolling,
-  data: '',
+  data: {},
   jobInvocations: [['property', 3, 'color']],
   statuses: {},
 };
