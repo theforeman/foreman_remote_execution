@@ -28,6 +28,12 @@ module Api
         assert_equal template['job_category'], @invocation.job_category
       end
 
+      test 'should get invocation detail when taxonomies are set' do
+        taxonomy_params = %w(organization location).reduce({}) { |acc, cur| acc.merge("#{cur}_id" => FactoryBot.create(cur)) }
+        get :show, params: taxonomy_params.merge(:id => @invocation.id)
+        assert_response :success
+      end
+
       context 'creation' do
         setup do
           @attrs = { :job_category => @template.job_category,
