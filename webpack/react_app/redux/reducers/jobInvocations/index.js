@@ -9,7 +9,7 @@ import {
 const initialState = Immutable({
   isPolling: false,
   jobInvocations: [],
-  statuses: [],
+  statuses: {},
 });
 
 export default (state = initialState, action) => {

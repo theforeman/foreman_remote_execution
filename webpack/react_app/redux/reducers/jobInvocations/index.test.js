@@ -25,7 +25,7 @@ describe('job invocations chart reducer', () => {
   it('should stop polling given JOB_FINISHED', () => {
     expect(reducer(pollingStarted, {
       type: JOB_INVOCATIONS_JOB_FINISHED,
-      payload: { jobInvocations: { job_invocations: [], statuses: [] } },
+      payload: { jobInvocations: { job_invocations: [], statuses: {} } },
     })).toEqual(initialState);
   });
   it('should receive job invocations given GET_JOB_INVOCATIONS', () => {

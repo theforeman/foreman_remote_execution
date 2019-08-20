@@ -3,13 +3,13 @@ import Immutable from 'seamless-immutable';
 export const initialState = Immutable({
   isPolling: false,
   jobInvocations: [],
-  statuses: [],
+  statuses: {},
 });
 
 export const pollingStarted = Immutable({
   isPolling: true,
   jobInvocations: [],
-  statuses: [],
+  statuses: {},
 });
 
 export const jobInvocationsPayload = Immutable({
