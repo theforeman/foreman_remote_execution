@@ -198,6 +198,11 @@ module Api
       def delayed_task_output(task, default: nil)
         { :complete => false, :refresh => true, :output => default, :delayed => true, :start_at => task.start_at }
       end
+
+      # Do not try to scope JobInvocations by taxonomies
+      def parent_scope
+        resource_class.where(nil)
+      end
     end
   end
 end
