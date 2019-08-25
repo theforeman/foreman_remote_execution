@@ -31,7 +31,7 @@
     "url": "http://projects.theforeman.org/projects/foreman_remote_execution/issues"
   },
   "devDependencies": {
-    "@theforeman/vendor-dev": "^0.1.1",
+    "@theforeman/vendor-dev": "^1.4.0",
     "babel-eslint": "^8.2.1",
     "babel-plugin-lodash": "^3.3.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -51,6 +51,6 @@
     "jest": "^21.2.1"
   },
   "dependencies": {
-    "@theforeman/vendor": "^0.1.1"
+    "@theforeman/vendor": "^1.4.0"
   }
 }
