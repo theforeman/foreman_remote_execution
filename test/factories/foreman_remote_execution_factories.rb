@@ -4,8 +4,8 @@ FactoryBot.define do
     sequence(:job_category) { |n| "Job name #{n}" }
     template { 'id' }
     provider_type { 'SSH' }
-    organizations { [Organization.find_by(name: 'Organization 1')] } if SETTINGS[:organizations_enabled]
-    locations { [Location.find_by(name: 'Location 1')] } if SETTINGS[:locations_enabled]
+    organizations { [Organization.find_by(name: 'Organization 1')] }
+    locations { [Location.find_by(name: 'Location 1')] }
 
     trait :with_input do
       after(:build) do |template, evaluator|

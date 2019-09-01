@@ -119,8 +119,8 @@ class JobTemplate < ::Template
 
   def assign_taxonomies
     if default
-      organizations << Organization.all if SETTINGS[:organizations_enabled]
-      locations << Location.all if SETTINGS[:locations_enabled]
+      organizations << Organization.all
+      locations << Location.all
     end
   end
 

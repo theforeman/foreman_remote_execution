@@ -58,8 +58,8 @@ Rails.application.routes.draw do
       end
 
       resources :job_templates, :except => [:new, :edit] do
-        (resources :locations, :only => [:index, :show]) if SETTINGS[:locations_enabled]
-        (resources :organizations, :only => [:index, :show]) if SETTINGS[:organizations_enabled]
+        resources :locations, :only => [:index, :show]
+        resources :organizations, :only => [:index, :show]
         get :export, :on => :member
         post :clone, :on => :member
         collection do
@@ -68,16 +68,12 @@ Rails.application.routes.draw do
         end
       end
 
-      if SETTINGS[:organizations_enabled]
-        resources :organizations, :only => [:index] do
-          resources :job_templates, :only => [:index, :show]
-        end
+      resources :organizations, :only => [:index] do
+        resources :job_templates, :only => [:index, :show]
       end
 
-      if SETTINGS[:locations_enabled]
-        resources :locations, :only => [:index] do
-          resources :job_templates, :only => [:index, :show]
-        end
+      resources :locations, :only => [:index] do
+        resources :job_templates, :only => [:index, :show]
       end
 
       resources :templates, :only => :none do

@@ -158,12 +158,6 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
           host.remote_execution_proxies(provider)[:global].must_include proxy_in_taxonomies
           host.remote_execution_proxies(provider)[:global].wont_include proxy_no_taxonomies
         end
-
-        it 'returns all proxies when there\'s no taxonomies' do
-          Taxonomy.stubs(:enabled_taxonomies).returns([])
-          host.remote_execution_proxies(provider)[:global].must_include proxy_in_taxonomies
-          host.remote_execution_proxies(provider)[:global].must_include proxy_no_taxonomies
-        end
       end
 
       context 'disabled' do

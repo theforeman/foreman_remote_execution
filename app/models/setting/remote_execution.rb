@@ -16,8 +16,7 @@ class Setting::RemoteExecution < Setting
                  N_('Fallback to Any Proxy')),
         self.set('remote_execution_global_proxy',
                  N_('Search for remote execution proxy outside of the proxies assigned to the host. ' +
-                 "If locations or organizations are enabled, the search will be limited to the host's " +
-                 'organization or location.'),
+                 "The search will be limited to the host's organization and location."),
                  true,
                  N_('Enable Global Proxy')),
         self.set('remote_execution_ssh_user',
