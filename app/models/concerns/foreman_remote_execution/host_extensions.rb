@@ -71,7 +71,7 @@ module ForemanRemoteExecution
       proxies[:fallback] = smart_proxies.with_features(provider) if Setting[:remote_execution_fallback_proxy]
 
       if Setting[:remote_execution_global_proxy]
-        proxy_scope = if Taxonomy.enabled_taxonomies.any? && User.current.present?
+        proxy_scope = if User.current.present?
                         ::SmartProxy.with_taxonomy_scope_override(location, organization)
                       else
                         ::SmartProxy.unscoped
