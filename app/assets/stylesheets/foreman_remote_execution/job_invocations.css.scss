@@ -6,3 +6,26 @@ div.infoblock {
     margin-top: 5px;
   }
 }
+
+#title_action {
+  .button_to {
+    display: inline-block;
+  }
+
+  .btn-toolbar {
+    .button_to {
+      float: left;
+    }
+  }
+
+  .btn-group {
+    .btn + .button_to,
+    .button_to + .button_to {
+      margin-left: -1px;
+    }
+
+    .button_to:not(:first-child):not(:last-child) .btn {
+      border-radius: 0;
+    }
+  }
+}
