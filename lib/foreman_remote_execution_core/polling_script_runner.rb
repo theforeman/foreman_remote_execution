@@ -1,7 +1,24 @@
+require 'base64'
+
 module ForemanRemoteExecutionCore
   class PollingScriptRunner < ScriptRunner
 
     DEFAULT_REFRESH_INTERVAL = 60
+
+    def self.load_script(name)
+      script_dir = File.expand_path('../async_scripts', __FILE__)
+      File.read(File.join(script_dir, name))
+    end
+
+    # The script that controls the flow of the job, able to initiate update or
+    # finish on the task, or take over the control over script lifecycle
+    CONTROL_SCRIPT = load_script('control.sh')
+
+    # The script always outputs at least one line
+    # First line of the output either has to begin with
+    # "RUNNING" or "DONE $EXITCODE"
+    # The following lines are treated as regular output
+    RETRIEVE_SCRIPT = load_script('retrieve.sh')
 
     def initialize(options, user_method, suspended_action: nil)
       super(options, user_method, suspended_action: suspended_action)
@@ -13,19 +30,19 @@ module ForemanRemoteExecutionCore
 
     def prepare_start
       super
-      basedir         = File.dirname @remote_script
-      @pid_path       = File.join(basedir, 'pid')
-      @retrieval_script ||= File.join(basedir, 'retrieve')
-      prepare_retrieval unless @prepared
+      @base_dir = File.dirname @remote_script
+      upload_control_scripts
     end
 
-    def control_script
+    def initialization_script
       close_stdin = '</dev/null'
       close_fds = close_stdin + ' >/dev/null 2>/dev/null'
-      # pipe the output to tee while capturing the exit code in a file, don't wait for it to finish, output PID of the main command
-      <<-SCRIPT.gsub(/^\s+\| /, '')
-      | sh -c '(#{@user_method.cli_command_prefix}#{@remote_script} #{close_stdin}; echo $?>#{@exit_code_path}) | /usr/bin/tee #{@output_path} >/dev/null; #{callback_scriptlet}' #{close_fds} &
-      | echo $! > '#{@pid_path}'
+      main_script = "(#{@remote_script} #{close_stdin} 2>&1; echo $?>#{@base_dir}/init_exit_code) >#{@base_dir}/output"
+      control_script_finish = "#{@control_script_path} init-script-finish"
+      <<-SCRIPT.gsub(/^ +\| /, '')
+      | export CONTROL_SCRIPT="#{@control_script_path}"
+      | sh -c '#{main_script}; #{control_script_finish}' #{close_fds} &
+      | echo $! > '#{@base_dir}/pid'
       SCRIPT
     end
 
@@ -35,9 +52,12 @@ module ForemanRemoteExecutionCore
 
     def refresh
       err = output = nil
-      with_retries do
+      begin
         _, output, err = run_sync("#{@user_method.cli_command_prefix} #{@retrieval_script}")
+      rescue => e
+        @logger.info("Error while connecting to the remote host on refresh: #{e.message}")
       end
+      return if output.nil? || output.empty?
       lines = output.lines
       result = lines.shift.match(/^DONE (\d+)?/)
       publish_data(lines.join, 'stdout') unless lines.empty?
@@ -45,8 +65,21 @@ module ForemanRemoteExecutionCore
       if result
         exitcode = result[1] || 0
         publish_exit_status(exitcode.to_i)
-        run_sync("rm -rf \"#{remote_command_dir}\"") if @cleanup_working_dirs
+        cleanup
       end
+    ensure
+      destroy_session
+    end
+
+    def external_event(event)
+      data = event.data
+      if data['manual_mode']
+        load_event_updates(data)
+      else
+        # getting the update from automatic mode - reaching to the host to get the latest update
+        return run_refresh
+      end
+    ensure
       destroy_session
     end
 
@@ -55,65 +88,40 @@ module ForemanRemoteExecutionCore
       ForemanTasksCore::OtpManager.drop_otp(@task_id, @otp) if @otp
     end
 
-    def prepare_retrieval
-      # The script always outputs at least one line
-      # First line of the output either has to begin with
-      # "RUNNING" or "DONE $EXITCODE"
-      # The following lines are treated as regular output
-      base = File.dirname(@output_path)
-      posfile = File.join(base, 'position')
-      tmpfile = File.join(base, 'tmp')
-      script = <<-SCRIPT.gsub(/^ +\| /, '')
-      | #!/bin/sh
-      | pid=$(cat "#{@pid_path}")
-      | if ! pgrep --help 2>/dev/null >/dev/null; then
-      |   echo DONE 1
-      |   echo "pgrep is required" >&2
-      |   exit 1
-      | fi
-      | if pgrep -P "$pid" >/dev/null 2>/dev/null; then
-      |   echo RUNNING
-      | else
-      |   echo "DONE $(cat "#{@exit_code_path}" 2>/dev/null)"
-      | fi
-      | [ -f "#{@output_path}" ] || exit 0
-      | [ -f "#{posfile}" ] || echo 1 > "#{posfile}"
-      | position=$(cat "#{posfile}")
-      | tail --bytes "+${position}" "#{@output_path}" > "#{tmpfile}"
-      | bytes=$(cat "#{tmpfile}" | wc --bytes)
-      | expr "${position}" + "${bytes}" > "#{posfile}"
-      | cat "#{tmpfile}"
-      SCRIPT
-      @logger.debug("copying script:\n#{script.lines.map { |line| "    | #{line}" }.join}")
-      cp_script_to_remote(script, 'retrieve')
-      @prepared = true
+    def upload_control_scripts
+      return if @control_scripts_uploaded
+      cp_script_to_remote(env_script, 'env.sh')
+      @control_script_path = cp_script_to_remote(CONTROL_SCRIPT, 'control.sh')
+      @retrieval_script = cp_script_to_remote(RETRIEVE_SCRIPT, 'retrieve.sh')
+      @control_scripts_uploaded = true
     end
 
-    def callback_scriptlet(callback_script_path = nil)
-      if @otp
-        callback_script_path = cp_script_to_remote(callback_script, 'callback') if callback_script_path.nil?
-        "#{@user_method.cli_command_prefix}#{callback_script_path}"
-      else
-        ':' # Shell synonym for "do nothing"
-      end
-    end
-
-    def callback_script
+    # Script setting the dynamic values to env variables: it's sourced from other control scripts
+    def env_script
       <<-SCRIPT.gsub(/^ +\| /, '')
-      | #!/bin/sh
-      | exit_code=$(cat "#{@exit_code_path}")
-      | url="#{@callback_host}/dynflow/tasks/#{@task_id}/done"
-      | json="{ \\\"step_id\\\": #{@step_id} }"
-      | if which curl >/dev/null; then
-      |   curl -X POST -d "$json" -u "#{@task_id}:#{@otp}" "$url"
-      | else
-      |   echo 'curl is required' >&2
-      |   exit 1
-      | fi
+      | CALLBACK_HOST="#{@callback_host}"
+      | TASK_ID="#{@task_id}"
+      | STEP_ID="#{@step_id}"
+      | OTP="#{@otp}"
       SCRIPT
     end
 
     private
+
+    # Generates updates based on the callback data from the manual mode
+    def load_event_updates(event_data)
+      continuous_output = ForemanTasksCore::ContinuousOutput.new
+      if event_data.key?('output')
+        lines = Base64.decode64(event_data['output']).sub(/\A(RUNNING|DONE).*\n/, '')
+        continuous_output.add_output(lines, 'stdout')
+      end
+      cleanup if event_data['exit_code']
+      new_update(continuous_output, event_data['exit_code'])
+    end
+
+    def cleanup
+      run_sync("rm -rf \"#{remote_command_dir}\"") if @cleanup_working_dirs
+    end
 
     def destroy_session
       if @session
