@@ -86,12 +86,12 @@ module RemoteExecutionHelper
       buttons << button_to(_('Cancel Job'), cancel_job_invocation_path(job_invocation),
                            :class => 'btn btn-danger',
                            :title => _('Try to cancel the job'),
-                           :disabled => !task.cancellable?,
+                           :disabled => true,
                            :method => :post)
       buttons << button_to(_('Abort Job'), cancel_job_invocation_path(job_invocation, :force => true),
                            :class => 'btn btn-danger',
                            :title => _('Try to abort the job without waiting for the results from the remote hosts'),
-                           :disabled => !task.cancellable?,
+                           :disabled => true,
                            :method => :post)
     end
     return buttons
