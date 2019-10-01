@@ -47,6 +47,7 @@ module Api
       def_param_group :job_template do
         param :job_template, Hash, :required => true, :action_aware => true do
           param :name, String, :required => true, :desc => N_('Template name')
+          param :description, String
           param :job_category, String, :required => true, :desc => N_('Job category')
           param :description_format, String, :required => false, :desc => N_('This template is used to generate the description. ' +
                                                                              'Input values can be used using the syntax %{package}. ' +
