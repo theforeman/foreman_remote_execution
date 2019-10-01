@@ -62,6 +62,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     let(:template_invocation) { job_invocation.pattern_template_invocations.first }
     let(:host) { FactoryBot.create(:host) }
     let(:proxy_options) { SSHExecutionProvider.proxy_command_options(template_invocation, host) }
+    let(:secrets) { SSHExecutionProvider.secrets(host) }
 
     describe 'effective user' do
       it 'takes the effective user from value from the template invocation' do
@@ -81,7 +82,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       it 'uses the remote_execution_sudo_password on the host param' do
         host.params['remote_execution_sudo_password'] = 'mypassword'
         host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_sudo_password', :value => 'mypassword')
-        proxy_options[:sudo_password].must_equal 'mypassword'
+        assert_not proxy_options.key?(:sudo_password)
+        secrets[:sudo_password].must_equal 'mypassword'
       end
     end
 

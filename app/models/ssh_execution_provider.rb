@@ -5,7 +5,6 @@ class SSHExecutionProvider < RemoteExecutionProvider
                   :effective_user => effective_user(template_invocation),
                   :effective_user_method => effective_user_method(host),
                   :cleanup_working_dirs => cleanup_working_dirs?(host),
-                  :sudo_password => sudo_password(host),
                   :ssh_port => ssh_port(host))
     end
 
@@ -27,6 +26,14 @@ class SSHExecutionProvider < RemoteExecutionProvider
 
     def proxy_operation_name
       'ssh'
+    end
+
+    def secrets(host)
+      {
+        :ssh_password => ssh_password(host),
+        :key_passphrase => ssh_key_passphrase(host),
+        :sudo_password => sudo_password(host)
+      }
     end
 
     def ssh_params(host)
