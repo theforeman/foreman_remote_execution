@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-04 10:11+0200\n"
-"PO-Revision-Date: 2019-07-04 10:11+0200\n"
+"POT-Creation-Date: 2019-10-16 08:54+0200\n"
+"PO-Revision-Date: 2019-10-16 08:54+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -85,110 +85,114 @@ msgid "Invocation type, one of %s"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_invocations_controller.rb:28
-msgid "Inputs to use"
+msgid "Execute the jobs on hosts in randomized order"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_invocations_controller.rb:29
+msgid "Inputs to use"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:30
 msgid "SSH provider specific options"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:32
+#: ../app/controllers/api/v2/job_invocations_controller.rb:33
 msgid ""
 "What user should be used to run the script (using sudo-like mechanisms). Defau"
 "lts to a template parameter or global setting."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:35
+#: ../app/controllers/api/v2/job_invocations_controller.rb:36
 msgid "Create a recurring job"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:36
+#: ../app/controllers/api/v2/job_invocations_controller.rb:37
 msgid "How often the job should occur, in the cron format"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:37
+#: ../app/controllers/api/v2/job_invocations_controller.rb:38
 msgid "Repeat a maximum of N times"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:38
+#: ../app/controllers/api/v2/job_invocations_controller.rb:39
 msgid "Perform no more executions after this time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:41
+#: ../app/controllers/api/v2/job_invocations_controller.rb:42
 msgid "Schedule the job to start at a later time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:42
+#: ../app/controllers/api/v2/job_invocations_controller.rb:43
 msgid "Schedule the job for a future time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:43
+#: ../app/controllers/api/v2/job_invocations_controller.rb:44
 msgid ""
 "Indicates that the action should be cancelled if it cannot be started before t"
 "his time."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:46
+#: ../app/controllers/api/v2/job_invocations_controller.rb:47
 msgid "Control concurrency level and distribution over time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:47
+#: ../app/controllers/api/v2/job_invocations_controller.rb:48
 msgid "Distribute tasks over N seconds"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:48
+#: ../app/controllers/api/v2/job_invocations_controller.rb:49
 #: ../app/views/job_invocations/_form.html.erb:102
 msgid "Run at most N tasks at a time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:53
+#: ../app/controllers/api/v2/job_invocations_controller.rb:54
 msgid "Override the description format from the template for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:54
+#: ../app/controllers/api/v2/job_invocations_controller.rb:55
 msgid "Override the timeout interval from the template for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:55
+#: ../app/controllers/api/v2/job_invocations_controller.rb:56
 msgid ""
 "Remote execution feature label that should be triggered, job template assigned"
 " to this feature will be used"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:59
+#: ../app/controllers/api/v2/job_invocations_controller.rb:60
 msgid "Create a job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:75
+#: ../app/controllers/api/v2/job_invocations_controller.rb:76
 msgid "Get output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:88
+#: ../app/controllers/api/v2/job_invocations_controller.rb:89
 msgid "Get raw output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:100
+#: ../app/controllers/api/v2/job_invocations_controller.rb:101
 msgid "Cancel job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:108
+#: ../app/controllers/api/v2/job_invocations_controller.rb:109
 msgid "The job could not be cancelled."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:113
+#: ../app/controllers/api/v2/job_invocations_controller.rb:114
 msgid "Rerun job on failed hosts"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:123
+#: ../app/controllers/api/v2/job_invocations_controller.rb:124
 #: ../app/views/job_invocations/_form.html.erb:4
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:150
+#: ../app/controllers/api/v2/job_invocations_controller.rb:151
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:156
+#: ../app/controllers/api/v2/job_invocations_controller.rb:157
 msgid "Template with id '%{id}' was not found"
 msgstr ""
 
@@ -225,68 +229,68 @@ msgid "Show job template details"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_templates_controller.rb:49
-#: ../app/controllers/api/v2/job_templates_controller.rb:98
+#: ../app/controllers/api/v2/job_templates_controller.rb:99
 msgid "Template name"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:50
+#: ../app/controllers/api/v2/job_templates_controller.rb:51
 #: ../app/views/job_invocations/_form.html.erb:11
 #: ../app/views/job_templates/_custom_tabs.html.erb:3
 #: ../app/views/job_templates/_custom_tabs.html.erb:6
 msgid "Job category"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:51
+#: ../app/controllers/api/v2/job_templates_controller.rb:52
 msgid ""
 "This template is used to generate the description. Input values can be used us"
 "ing the syntax %{package}. You may also include the job category and template "
 "name using %{job_category} and %{template_name}."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:56
+#: ../app/controllers/api/v2/job_templates_controller.rb:57
 msgid "Provider type"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:59
+#: ../app/controllers/api/v2/job_templates_controller.rb:60
 msgid "Whether or not the template is locked for editing"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:60
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
 msgid "Effective user options"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/job_templates_controller.rb:62
 msgid "What user should be used to run the script (using sudo-like mechanisms)"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:62
+#: ../app/controllers/api/v2/job_templates_controller.rb:63
 msgid ""
 "Whether it should be allowed to override the effective user from the invocatio"
 "n form."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:63
+#: ../app/controllers/api/v2/job_templates_controller.rb:64
 msgid "Whether the current user login should be used as the effective user"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:69
+#: ../app/controllers/api/v2/job_templates_controller.rb:70
 msgid "Create a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:76
+#: ../app/controllers/api/v2/job_templates_controller.rb:77
 #: ../app/controllers/api/v2/remote_execution_features_controller.rb:24
 msgid "Update a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:84
+#: ../app/controllers/api/v2/job_templates_controller.rb:85
 msgid "Template version"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:90
+#: ../app/controllers/api/v2/job_templates_controller.rb:91
 msgid "Delete a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:102
+#: ../app/controllers/api/v2/job_templates_controller.rb:103
 msgid "Clone a provision template"
 msgstr ""
 
@@ -533,57 +537,57 @@ msgstr ""
 msgid "Failed rendering template: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:63
+#: ../app/lib/actions/remote_execution/run_host_job.rb:67
 msgid "Task cancelled"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:64
+#: ../app/lib/actions/remote_execution/run_host_job.rb:68
 msgid "Job execution failed"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:73
+#: ../app/lib/actions/remote_execution/run_host_job.rb:77
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:78 action_names.rb:5
+#: ../app/lib/actions/remote_execution/run_host_job.rb:82 action_names.rb:2
 msgid "Remote action:"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:102
+#: ../app/lib/actions/remote_execution/run_host_job.rb:106
 msgid "Job cancelled by user"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:107
+#: ../app/lib/actions/remote_execution/run_host_job.rb:111
 msgid "Exit status: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:109
+#: ../app/lib/actions/remote_execution/run_host_job.rb:113
 msgid "Job finished with error"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:112
+#: ../app/lib/actions/remote_execution/run_host_job.rb:116
 msgid "Error loading data from proxy"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:144
+#: ../app/lib/actions/remote_execution/run_host_job.rb:148
 msgid "User can not execute job on host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:145
+#: ../app/lib/actions/remote_execution/run_host_job.rb:149
 msgid "User can not execute this job template"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:150
+#: ../app/lib/actions/remote_execution/run_host_job.rb:154
 msgid "User can not execute this job template on %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:160
+#: ../app/lib/actions/remote_execution/run_host_job.rb:164
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:167
+#: ../app/lib/actions/remote_execution/run_host_job.rb:171
 msgid ""
 "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_prox"
 "y} in settings"
@@ -687,149 +691,148 @@ msgstr ""
 msgid "Unknown remote execution feature %s"
 msgstr ""
 
-#: ../app/models/remote_execution_provider.rb:45
+#: ../app/models/remote_execution_provider.rb:49
 msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
 msgstr ""
 
-#: ../app/models/remote_execution_provider.rb:71
+#: ../app/models/remote_execution_provider.rb:75
 msgid "Could not find any suitable interface for execution"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:14
+#: ../app/models/setting/remote_execution.rb:9
 msgid ""
 "Search the host for any proxy with Remote Execution, useful when the host has "
 "no subnet or the subnet does not have an execution proxy"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:16
+#: ../app/models/setting/remote_execution.rb:11
 msgid "Fallback to Any Proxy"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:18
+#: ../app/models/setting/remote_execution.rb:13
 msgid ""
 "Search for remote execution proxy outside of the proxies assigned to the host."
-" If locations or organizations are enabled, the search will be limited to the "
-"host's organization or location."
+" The search will be limited to the host's organization and location."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:22
+#: ../app/models/setting/remote_execution.rb:16
 msgid "Enable Global Proxy"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:24
+#: ../app/models/setting/remote_execution.rb:18
 msgid ""
 "Default user to use for SSH.  You may override per host by setting a parameter"
 " called remote_execution_ssh_user."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:26
+#: ../app/models/setting/remote_execution.rb:20
 msgid "SSH User"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:28
+#: ../app/models/setting/remote_execution.rb:22
 msgid ""
 "Default user to use for executing the script. If the user differs from the SSH"
 " user, su or sudo is used to switch the user."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:30
+#: ../app/models/setting/remote_execution.rb:24
 msgid "Effective User"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:32
+#: ../app/models/setting/remote_execution.rb:26
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:34
+#: ../app/models/setting/remote_execution.rb:28
 msgid "Effective User Method"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:37
+#: ../app/models/setting/remote_execution.rb:31
 #: ../app/views/job_invocations/_form.html.erb:98
 msgid "Sudo password"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:39
+#: ../app/models/setting/remote_execution.rb:33
 msgid "Whether we should sync templates from disk when running db:seed."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:41
+#: ../app/models/setting/remote_execution.rb:35
 msgid "Sync Job Templates"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:43
+#: ../app/models/setting/remote_execution.rb:37
 msgid ""
 "Port to use for SSH communication. Default port 22. You may override per host "
 "by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:45
+#: ../app/models/setting/remote_execution.rb:39
 msgid "SSH Port"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:47
+#: ../app/models/setting/remote_execution.rb:41
 msgid ""
 "Should the ip addresses on host interfaces be preferred over the fqdn? It is u"
 "seful, when DNS not resolving the fqdns properly. You may override this per ho"
 "st by setting a parameter called remote_execution_connect_by_ip."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:50
+#: ../app/models/setting/remote_execution.rb:44
 msgid "Connect by IP"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:52
+#: ../app/models/setting/remote_execution.rb:46
 msgid ""
 "Default password to use for SSH. You may override per host by setting a parame"
 "ter called remote_execution_ssh_password"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:54
+#: ../app/models/setting/remote_execution.rb:48
 msgid "Default SSH password"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:58
+#: ../app/models/setting/remote_execution.rb:52
 msgid ""
 "Default key passphrase to use for SSH. You may override per host by setting a "
 "parameter called remote_execution_ssh_key_passphrase"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:60
+#: ../app/models/setting/remote_execution.rb:54
 msgid "Default SSH key passphrase"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:64
+#: ../app/models/setting/remote_execution.rb:58
 msgid ""
 "Amount of workers in the pool to handle the execution of the remote execution "
 "jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:66
+#: ../app/models/setting/remote_execution.rb:60
 msgid "Workers pool size"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:68
+#: ../app/models/setting/remote_execution.rb:62
 msgid ""
 "When enabled, working directories will be removed after task completion. You m"
 "ay override this per host by setting a parameter called remote_execution_clean"
 "up_working_dirs."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:70
+#: ../app/models/setting/remote_execution.rb:64
 msgid "Cleanup working directories"
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:72
+#: ../app/models/setting/remote_execution.rb:66
 msgid ""
 "Where to find the Cockpit instance for the Web Console button.  By default, no"
 " button is shown."
 msgstr ""
 
-#: ../app/models/setting/remote_execution.rb:74
+#: ../app/models/setting/remote_execution.rb:68
 msgid "Cockpit URL"
 msgstr ""
 
-#: ../app/models/ssh_execution_provider.rb:13
+#: ../app/models/ssh_execution_provider.rb:12
 msgid "SSH"
 msgstr ""
 
@@ -841,15 +844,23 @@ msgstr ""
 msgid "Dynamic Query"
 msgstr ""
 
-#: ../app/models/targeting.rb:35
+#: ../app/models/targeting.rb:10
+msgid "Alphabetical"
+msgstr ""
+
+#: ../app/models/targeting.rb:10
+msgid "Randomized"
+msgstr ""
+
+#: ../app/models/targeting.rb:39
 msgid "Cannot resolve hosts without a user"
 msgstr ""
 
-#: ../app/models/targeting.rb:36
+#: ../app/models/targeting.rb:40
 msgid "Cannot resolve hosts without a bookmark or search query"
 msgstr ""
 
-#: ../app/models/targeting.rb:75 ../app/models/targeting.rb:76
+#: ../app/models/targeting.rb:80 ../app/models/targeting.rb:81
 msgid "Must select a bookmark or enter a search query"
 msgstr ""
 
@@ -914,7 +925,11 @@ msgstr ""
 msgid "using "
 msgstr ""
 
-#: ../app/views/job_invocations/_card_target_hosts.html.erb:22
+#: ../app/views/job_invocations/_card_target_hosts.html.erb:21
+msgid "Execution order"
+msgstr ""
+
+#: ../app/views/job_invocations/_card_target_hosts.html.erb:26
 msgid "Evaluated at:"
 msgstr ""
 
@@ -1019,10 +1034,22 @@ msgid "Distribute execution over N seconds"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:107
-msgid "Type of query"
+msgid "Execution ordering"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:107
+msgid ""
+"Execution ordering determines whether the jobs should be executed on hosts in "
+"alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - execute"
+"s the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomiz"
+"es the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:116
+msgid "Type of query"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:116
 msgid ""
 "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static<"
 "/b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evalu"
@@ -1361,16 +1388,24 @@ msgstr ""
 msgid "Job templates"
 msgstr ""
 
-#: action_names.rb:2
-msgid "Action with sub plans"
+#: ../lib/foreman_remote_execution/engine.rb:197
+msgid "Run Puppet Once"
+msgstr ""
+
+#: ../lib/foreman_remote_execution/engine.rb:198
+msgid "Perform a single Puppet run"
 msgstr ""
 
 #: action_names.rb:3
-msgid "Import facts"
+msgid "Import Puppet classes"
 msgstr ""
 
 #: action_names.rb:4
-msgid "Import Puppet classes"
+msgid "Import facts"
+msgstr ""
+
+#: action_names.rb:5
+msgid "Action with sub plans"
 msgstr ""
 
 #: gemspec.rb:2
