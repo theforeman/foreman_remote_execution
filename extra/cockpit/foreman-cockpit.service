@@ -1,14 +1,14 @@
 [Unit]
-Description=Foreman Cockpit
+Description=Foreman authentication service for Cockpit
 Documentation=https://theforeman.org
 After=network.target remote-fs.target nss-lookup.target
 
 [Service]
 Environment=XDG_CONFIG_DIRS=/etc/foreman/
 Environment=FOREMAN_COCKPIT_SETTINGS=/etc/foreman/cockpit/foreman-cockpit-session.yml
-Environment=ADDRESS=127.0.0.1
-Environment=PORT=9999
-ExecStart=/usr/libexec/cockpit-ws --no-tls --address $ADDRESS --port $PORT
+Environment=FOREMAN_COCKPIT_ADDRESS=127.0.0.1
+Environment=FOREMAN_COCKPIT_PORT=9999
+ExecStart=/usr/libexec/foreman-cockpit --no-tls --address $FOREMAN_COCKPIT_ADDRESS --port $FOREMAN_COCKPIT_PORT
 User=foreman
 Group=foreman
 
