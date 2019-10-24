@@ -1,3 +1,0 @@
-#!/bin/sh
-# Wrapper script for SELinux transition
-exec /usr/libexec/cockpit-ws "$@"
