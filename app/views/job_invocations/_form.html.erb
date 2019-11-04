@@ -16,7 +16,7 @@
     <%= f.fields_for 'providers' do |providers_fields| %>
       <%= providers_fields.fields_for provider_type do |provider_type_fields| %>
         <% templates_for_provider = @composer.templates_for_provider(provider_type) %>
-        <% selected_templates_per_provider[provider_type] = @composer.preselected_template_for_provider(provider_type) || templates_for_provider.first %>
+        <% selected_templates_per_provider[provider_type] = @composer.preselected_template_for_provider(provider_type) || @composer.resolve_job_template(templates_for_provider) %>
 
         <%= selectable_f provider_type_fields, 'job_template_id', templates_for_provider.map { |t| [t.name, t.id] },
                          { :selected => selected_templates_per_provider[provider_type].try(:id) },

@@ -332,7 +332,7 @@ class JobInvocationComposer
   # rubocop:disable Metrics/AbcSize
   def compose
     job_invocation.job_category = validate_job_category(params[:job_category])
-    job_invocation.job_category ||= available_job_categories.first if @set_defaults
+    job_invocation.job_category ||= resolve_job_category(available_job_categories.first) { |tempate| template.job_category } if @set_defaults
     job_invocation.remote_execution_feature_id = params[:remote_execution_feature_id]
     job_invocation.targeting = build_targeting
     job_invocation.triggering = build_triggering
@@ -426,6 +426,16 @@ class JobInvocationComposer
 
   def preselected_template_for_provider(provider_type)
     (templates_for_provider(provider_type) & selected_job_templates).first
+  end
+
+  def resolve_job_category(default_category)
+    resolve_for_composer(default_category) { |form_template| form_template.job_category }
+  end
+
+  def resolve_job_template(provider_templates)
+    resolve_for_composer(provider_templates.first) do |form_template|
+      provider_templates.include?(form_template) ? form_template : provider_templates.first
+    end
   end
 
   def displayed_search_query
@@ -561,5 +571,17 @@ class JobInvocationComposer
 
   def validate_host_ids(ids)
     Host.authorized(Targeting::RESOLVE_PERMISSION, Host).where(:id => ids).pluck(:id)
+  end
+
+  def resolve_for_composer(default_value, &block)
+    setting_value = Setting['remote_execution_form_job_template']
+    return default_value unless setting_value
+    form_template = JobTemplate.find_by :name => setting_value
+    return default_value unless form_template
+    if block_given?
+      yield form_template
+    else
+      form_template
+    end
   end
 end
