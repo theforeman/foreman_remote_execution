@@ -812,4 +812,46 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       assert_equal job_invocation.template_invocations_host_ids, created.targeting.host_ids
     end
   end
+
+  describe '#resolve_job_category and #resolve job_templates' do
+    let(:setting_template) { as_admin { FactoryBot.create(:job_template, :name => 'trying setting', :job_category => 'fluff') } }
+    let(:other_template) { as_admin { FactoryBot.create(:job_template, :name => 'trying something', :job_category => 'fluff') } }
+    let(:second_template) { as_admin { FactoryBot.create(:job_template, :name => 'second template', :job_category => 'fluff') } }
+    let(:params) { { :host_ids => nil, :targeting => { :targeting_type => "static_query", :bookmark_id => nil }, :job_template_id => setting_template.id } }
+    let(:composer) { JobInvocationComposer.from_api_params(params) }
+
+    context 'with template in setting present' do
+      before do
+        FactoryBot.create(
+          :setting,
+          :name => 'remote_execution_form_job_template',
+          :category => 'Setting::RemoteExecution',
+          :value => setting_template.name
+        )
+      end
+
+      it 'should resolve category to the setting value' do
+        assert_equal setting_template.job_category, composer.resolve_job_category('foo')
+      end
+
+      it 'should resolve template to the setting value' do
+        assert_equal setting_template, composer.resolve_job_template([other_template, setting_template])
+      end
+
+      it 'should respect provider templates when resolving templates' do
+        assert_equal other_template, composer.resolve_job_template([other_template])
+      end
+    end
+
+    context 'with template in setting absent' do
+      it 'should resolve category to the default value' do
+        category = 'foo'
+        assert_equal category, composer.resolve_job_category(category)
+      end
+
+      it 'should resolve template to the first in category' do
+        assert_equal other_template, composer.resolve_job_template([other_template, second_template])
+      end
+    end
+  end
 end
