@@ -811,5 +811,13 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       assert created.targeting.resolved?
       assert_equal job_invocation.template_invocations_host_ids, created.targeting.host_ids
     end
+
+    it 'takes randomized_ordering from the original job invocation when rerunning failed' do
+      job_invocation.targeting.randomized_ordering = true
+      job_invocation.targeting.save!
+      host_ids = job_invocation.targeting.hosts.pluck(:id)
+      composer = JobInvocationComposer.from_job_invocation(job_invocation, :host_ids => host_ids)
+      assert composer.job_invocation.targeting.randomized_ordering
+    end
   end
 end
