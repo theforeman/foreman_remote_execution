@@ -31,14 +31,12 @@
     "url": "http://projects.theforeman.org/projects/foreman_remote_execution/issues"
   },
   "devDependencies": {
-    "@theforeman/vendor-dev": "^1.4.0",
-    "babel-eslint": "^8.2.1",
-    "babel-plugin-lodash": "^3.3.2",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
+    "@babel/core": "^7.7.0",
+    "@theforeman/env": "^3.3.2",
+    "@theforeman/builder": "^3.3.2",
+    "@theforeman/vendor-dev": "^3.3.2",
+    "babel-eslint": "^10.0.0",
+    "babel-jest": "^24.9.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "enzyme-to-json": "^3.1.2",
@@ -48,9 +46,9 @@
     "eslint-plugin-jest": "^21.2.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
-    "jest": "^21.2.1"
+    "jest": "^24.9.0"
   },
   "dependencies": {
-    "@theforeman/vendor": "^1.4.0"
+    "@theforeman/vendor": "^3.3.2"
   }
 }
