@@ -38,6 +38,8 @@ module ForemanRemoteExecution
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
 
+        automatic_assets(false)
+
         # Add permissions
         security_block :foreman_remote_execution do
           permission :view_job_templates, { :job_templates => [:index, :show, :revision, :auto_complete_search, :auto_complete_job_category, :preview, :export],
@@ -130,10 +132,12 @@ module ForemanRemoteExecution
     # content twice.
     assets_to_precompile =
       Dir.chdir(root) do
-        Dir['app/assets/javascripts/**/*', 'app/assets/stylesheets/**/*'].map do |f|
-          f.split(File::SEPARATOR, 4).last.gsub(/\.scss\Z/, '')
+        Dir['app/assets/javascripts/**/*'].map do |f|
+          f.split(File::SEPARATOR, 4).last
         end
       end
+    assets_to_precompile += %w(foreman_remote_execution/foreman_remote_execution.css)
+
     initializer 'foreman_remote_execution.assets.precompile' do |app|
       app.config.assets.precompile += assets_to_precompile
     end
