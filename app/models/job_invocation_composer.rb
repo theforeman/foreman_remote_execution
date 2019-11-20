@@ -203,7 +203,7 @@ class JobInvocationComposer
       base = { :user_id => User.current.id }
       if @host_ids
         search_query = @host_ids.empty? ? 'name ^ ()' : Targeting.build_query_from_hosts(@host_ids)
-        base.merge(:search_query => search_query, :targeting_type => job_invocation.targeting.targeting_type)
+        base.merge(:search_query => search_query).merge(job_invocation.targeting.attributes.slice('targeting_type', 'randomized_ordering'))
       else
         base.merge job_invocation.targeting.attributes.slice('search_query', 'bookmark_id', 'targeting_type', 'randomized_ordering')
       end
