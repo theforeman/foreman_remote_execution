@@ -10,5 +10,11 @@ module ::ProxyAPI
     rescue => e
       raise ProxyException.new(url, e, N_('Unable to fetch public key'))
     end
+
+    def drop_from_known_hosts(hostname)
+      delete('known_hosts/' + hostname)
+    rescue => e
+      raise ProxyException.new(url, e, N_('Unable to remove host from known hosts'))
+    end
   end
 end

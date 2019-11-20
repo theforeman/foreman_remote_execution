@@ -12,6 +12,10 @@ module ForemanRemoteExecution
       key
     end
 
+    def drop_host_from_known_hosts(host)
+      ::ProxyAPI::RemoteExecutionSSH.new(:url => url).drop_from_known_hosts(host)
+    end
+
     def refresh
       errors = super
       update_pubkey

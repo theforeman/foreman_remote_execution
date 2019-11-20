@@ -149,7 +149,10 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         FactoryBot.create(:host) do |host|
           host.interfaces = [FactoryBot.build(:nic_managed, flags.merge(:ip => nil, :name => 'somehost.somedomain.org', :primary => true)),
                              FactoryBot.build(:nic_managed, flags.merge(:ip => '127.0.0.1'))]
-        end
+        end.reload
+        # Reassigning the interfaces triggers the on-deletion ssh key removal for the interface which is being replaced
+        # This has an undesired side effect of caching the original interface as execution one which made the tests
+        # give wrong results. Reloading the host wipes the cache
       end
 
       let(:flags) do
