@@ -1,9 +1,9 @@
 <% if job_invocation.resolved? %>
-  <%= form_tag job_invocation_path(job_invocation), :method => "get",:id =>"search-form" do %>
+  <%= form_with url: job_invocation_path(job_invocation), method: "get", id: "search-form" do |f| %>
     <div class="row">
       <div class="title_filter col-md-6">
         <div class="input-group">
-            <%= auto_complete_search(:search, params[:search].try(:squeeze, " "), :placeholder => _("Filter") + ' ...', :path => hosts_path) %>
+            <%= autocomplete_f(f, :search, value: params[:search].try(:squeeze, " "), placeholder: _("Filter") + ' ...', path: hosts_path, only_input: true) %>
             <span class="input-group-btn">
               <button class="btn btn-default" type="submit">
                 <%= icon_text('search', content_tag(:span, _('Search'), :class => 'hidden-xs', :kind => 'fa')) %>
