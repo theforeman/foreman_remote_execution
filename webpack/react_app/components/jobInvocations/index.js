@@ -7,6 +7,8 @@ import DonutChart from 'foremanReact/components/common/charts/DonutChart';
 import AggregateStatus from './AggregateStatus/index.js';
 import * as JobInvocationActions from '../../redux/actions/jobInvocations';
 
+const colIndexOfMaxValue = columns => columns.reduce((iMax, x, i, arr) => (x[1] > arr[iMax][1] ? i : iMax), 0);
+
 class JobInvocationContainer extends React.Component {
   componentDidMount() {
     const { startJobInvocationsPolling, data: { url } } = this.props;
@@ -16,10 +18,12 @@ class JobInvocationContainer extends React.Component {
 
   render() {
     const { jobInvocations, statuses } = this.props;
+    const iMax = colIndexOfMaxValue(jobInvocations);
 
     return (
       <div id="job_invocations_chart_container">
-        <DonutChart data={Immutable.asMutable(jobInvocations)} />
+        <DonutChart data={Immutable.asMutable(jobInvocations)}
+                    title={{type: 'percent', secondary: (jobInvocations[iMax] || [])[0]}}/>
         <AggregateStatus statuses={statuses} />
       </div>
     );
