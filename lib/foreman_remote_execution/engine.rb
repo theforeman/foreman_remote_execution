@@ -10,6 +10,16 @@ module ForemanRemoteExecution
     config.autoload_paths += Dir["#{config.root}/app/helpers/concerns"]
     config.autoload_paths += Dir["#{config.root}/app/models/concerns"]
 
+    # Precompile any JS or CSS files under app/assets/
+    # If requiring files from each other, list them explicitly here to avoid precompiling the same
+    # content twice.
+    assets_to_precompile =
+      Dir.chdir(root) do
+        Dir['app/assets/javascripts/**/*'].map do |f|
+          f.split(File::SEPARATOR, 4).last
+        end
+      end
+    assets_to_precompile += %w(foreman_remote_execution/foreman_remote_execution.css)
 
     initializer 'foreman_remote_execution.load_default_settings', :before => :load_config_initializers do
       require_dependency File.expand_path('../../../app/models/setting/remote_execution.rb', __FILE__) if (Setting.table_exists? rescue(false))
@@ -39,6 +49,7 @@ module ForemanRemoteExecution
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
 
         automatic_assets(false)
+        precompile_assets(*assets_to_precompile)
 
         # Add permissions
         security_block :foreman_remote_execution do
@@ -126,17 +137,6 @@ module ForemanRemoteExecution
         extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/pubkey'
       end
     end
-
-    # Precompile any JS or CSS files under app/assets/
-    # If requiring files from each other, list them explicitly here to avoid precompiling the same
-    # content twice.
-    assets_to_precompile =
-      Dir.chdir(root) do
-        Dir['app/assets/javascripts/**/*'].map do |f|
-          f.split(File::SEPARATOR, 4).last
-        end
-      end
-    assets_to_precompile += %w(foreman_remote_execution/foreman_remote_execution.css)
 
     initializer 'foreman_remote_execution.assets.precompile' do |app|
       app.config.assets.precompile += assets_to_precompile
