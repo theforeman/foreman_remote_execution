@@ -3,22 +3,25 @@ inherit_from:
 
 AllCops:
   Exclude:
+    - 'config/routes.rb'
+    - 'node_modules/**'
+    - 'test/**/*'
     - 'doc/plugins/**'
 
 Rails:
   Enabled: true
   Exclude:
     - 'lib/foreman_remote_execution_core/**'
+    - 'node_modules/**'
 
 Rails/Date:
   Enabled: false
 
-# Don't enforce documentation
-Style/Documentation:
+Metrics:
   Enabled: false
 
-Metrics/MethodLength:
-  Max: 40
+Style/Documentation:
+  Enabled: false
 
 Style/TrailingCommaInArrayLiteral:
   Enabled: false
@@ -35,14 +38,10 @@ Naming/AccessorMethodName:
 Style/RedundantSelf:
   Enabled: false
 
-Metrics/ClassLength:
-  Max: 500
-  Exclude:
-       - 'test/**/*'
-
 Naming/FileName:
   Exclude:
       - 'db/seeds.d/*'
+      - 'node_modules/font-awesome-sass/lib/font-awesome-sass.rb'
 
 Style/WordArray:
   Enabled: false
@@ -60,15 +59,6 @@ Style/EachWithObject:
   Enabled: false
 
 Style/GuardClause:
-  Enabled: false
-
-Metrics/BlockLength:
-  Exclude:
-       - 'config/routes.rb'
-       - 'lib/foreman_remote_execution/engine.rb'
-       - 'test/**/*'
-
-Metrics/ParameterLists:
   Enabled: false
 
 Naming/VariableNumber:
@@ -101,12 +91,6 @@ Style/SafeNavigation:
 
 Lint/BooleanSymbol:
   Enabled: false
-
-Metrics/PerceivedComplexity:
-  Max: 8
-
-Metrics/AbcSize:
-  Max: 45
 
 Style/FrozenStringLiteralComment:
   Enabled: false

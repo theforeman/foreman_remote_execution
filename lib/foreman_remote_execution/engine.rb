@@ -157,32 +157,32 @@ module ForemanRemoteExecution
       #   ProvisioningTemplate.reflect_on_association :template_inputs # => nil
       require_dependency 'job_template'
       (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateExtensions) }
-      Template.send(:prepend, ForemanRemoteExecution::TemplateOverrides)
+      Template.prepend ForemanRemoteExecution::TemplateOverrides
 
       (Taxonomy.descendants + [Taxonomy]).each { |klass| klass.send(:include, ForemanRemoteExecution::TaxonomyExtensions) }
 
-      User.send(:include, ForemanRemoteExecution::UserExtensions)
+      User.include ForemanRemoteExecution::UserExtensions
 
-      Host::Managed.send(:prepend, ForemanRemoteExecution::HostExtensions)
-      Host::Managed.send(:include, ForemanTasks::Concerns::HostActionSubject)
+      Host::Managed.prepend ForemanRemoteExecution::HostExtensions
+      Host::Managed.include ForemanTasks::Concerns::HostActionSubject
 
       (Nic::Base.descendants + [Nic::Base]).each do |klass|
         klass.send(:include, ForemanRemoteExecution::NicExtensions)
       end
 
-      Bookmark.send(:include, ForemanRemoteExecution::BookmarkExtensions)
-      HostsHelper.send(:prepend, ForemanRemoteExecution::HostsHelperExtensions)
-      ProvisioningTemplatesHelper.send(:prepend, ForemanRemoteExecution::JobTemplatesExtensions)
-      TemplateInput.send(:include, ForemanRemoteExecution::TemplateInputExtensions)
+      Bookmark.include ForemanRemoteExecution::BookmarkExtensions
+      HostsHelper.prepend ForemanRemoteExecution::HostsHelperExtensions
+      ProvisioningTemplatesHelper.prepend ForemanRemoteExecution::JobTemplatesExtensions
+      TemplateInput.include ForemanRemoteExecution::TemplateInputExtensions
 
-      SmartProxy.send(:prepend, ForemanRemoteExecution::SmartProxyExtensions)
-      Subnet.send(:include, ForemanRemoteExecution::SubnetExtensions)
+      SmartProxy.prepend ForemanRemoteExecution::SmartProxyExtensions
+      Subnet.include ForemanRemoteExecution::SubnetExtensions
 
       # We need to explicitly force to load the Task model due to Rails loader
       # having issues with resolving it to Rake::Task otherwise
       require_dependency 'foreman_tasks/task'
-      ForemanTasks::Task.send(:include, ForemanRemoteExecution::ForemanTasksTaskExtensions)
-      ForemanTasks::Cleaner.send(:include, ForemanRemoteExecution::ForemanTasksCleanerExtensions)
+      ForemanTasks::Task.include ForemanRemoteExecution::ForemanTasksTaskExtensions
+      ForemanTasks::Cleaner.include ForemanRemoteExecution::ForemanTasksCleanerExtensions
       RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
 
       ForemanRemoteExecution.register_rex_feature

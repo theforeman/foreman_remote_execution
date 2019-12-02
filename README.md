@@ -44,6 +44,14 @@ Because it doesn't really open the outgoing connections, it doesn't need hosts w
 
 Fork and send a Pull Request. Thanks!
 
+To run Rubocop use the rake task in foreman dir:
+
+    bundle exec rake foreman_remote_execution:rubocop
+
+Auto correct can be executed directly too:
+
+    bundle exec rubocop ~/work/foreman_remote_execution -a
+
 ## Release Process
 
 ### Pull Translations from Transifex
