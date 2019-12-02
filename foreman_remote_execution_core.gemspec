@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 require File.expand_path('../lib/foreman_remote_execution_core/version', __FILE__)
 require 'date'
 

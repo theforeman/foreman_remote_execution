@@ -8,7 +8,7 @@ require "yaml"
 # Logging
 
 LOG = Logger.new($stderr)
-LOG.formatter = proc { | severity, datetime, progname, msg | "#{severity}: #{msg}\n" }
+LOG.formatter = proc { |severity, datetime, progname, msg| "#{severity}: #{msg}\n" }
 
 def safe_log(format_string, data = nil)
   if data.is_a? Hash
@@ -26,7 +26,7 @@ end
 
 def read_settings
   settings_path = ENV["FOREMAN_COCKPIT_SETTINGS"] || "/etc/foreman-cockpit/settings.yml"
-  settings = YAML.load(File.read(settings_path))
+  settings = YAML.safe_load(File.read(settings_path))
   LOG.level = Logger.const_get(settings.fetch(:log_level, "INFO"))
   LOG.info("Running foreman-cockpit-session with settings from #{settings_path}:\n#{settings.inspect}")
   settings
@@ -46,7 +46,7 @@ def read_control
   raise ArgumentError, "Invalid frame: invalid size" if size.zero?
   data = $stdin.read(size)
   LOG.debug("Received control message #{data.lstrip}")
-  raise ArgumentError, "Invalid frame: too short" if data == nil || data.length < size
+  raise ArgumentError, "Invalid frame: too short" if data.nil? || data.length < size
   JSON.parse(data)
 end
 
@@ -55,18 +55,16 @@ end
 def send_auth_challenge(challenge)
   send_control({ "command" => "authorize",
                  "cookie" => "1234", # must be present, but value doesn't matter
-                 "challenge" => challenge
-               })
+                 "challenge" => challenge})
 end
 
 def send_auth_response(response)
   send_control({ "command" => "authorize",
-                 "response" => response
-               })
+                 "response" => response})
 end
 
 def read_auth_reply
-  cmd = read_control()
+  cmd = read_control
   response = cmd["response"]
   raise ArgumentError, "Did not receive a valid authorize command" if cmd["command"] != "authorize" || !response
   response
@@ -77,8 +75,7 @@ def exit_with_problem(problem, message, auth_methods)
   send_control({ "command" => "init",
                  "problem" => problem,
                  "message" => message,
-                 "auth-method-results" => auth_methods
-               })
+                 "auth-method-results" => auth_methods})
   exit 1
 end
 
@@ -137,7 +134,7 @@ def ssh_read_and_handle_response_header(sock, url, params)
   header = ""
   loop do
     line = sock.readline
-    break unless line and line != "\r\n"
+    break unless line && (line != "\r\n")
     header += line
   end
 
@@ -145,11 +142,11 @@ def ssh_read_and_handle_response_header(sock, url, params)
   status = status_line.split(" ")[1]
   if status != "101"
     m = /^Content-Length:[ \t]*([0-9]+)\r?$/i.match(headers_text)
-    if m
-      expected_len = m[1].to_i
-    else
-      expected_len = -1
-    end
+    expected_len = if m
+      m[1].to_i
+                   else
+      -1
+                   end
     response = ""
     while expected_len < 0 || response.length < expected_len
       begin
@@ -162,7 +159,7 @@ def ssh_read_and_handle_response_header(sock, url, params)
       exit_with_problem("access-denied", "The proxy #{url.hostname} does not support web console sessions", nil)
     elsif status[0] == "4"
       if response.include? "cockpit-bridge: command not found"
-        exit_with_problem("access-denied", "#{params["hostname"]} has no web console", nil)
+        exit_with_problem("access-denied", "#{params['hostname']} has no web console", nil)
       else
         exit_with_problem("access-denied", response, nil)
       end
@@ -191,16 +188,14 @@ def ssh_read_sock(sock)
 end
 
 def ssh_write_sock(sock, data)
-  begin
     sock.write_nonblock(data)
-  rescue IO::WaitWritable
+rescue IO::WaitWritable
     0
-  rescue IO::WaitReadable
+rescue IO::WaitReadable
     # This might happen with SSL during a renegotiation.  Block a
     # bit to get it over with.
     IO.select([sock])
     retry
-  end
 end
 
 def ssh_with_proxy(proxy, params)
@@ -208,7 +203,7 @@ def ssh_with_proxy(proxy, params)
   LOG.debug("Connecting to proxy at #{url}")
   raw_sock = TCPSocket.open(url.hostname, url.port)
   if url.scheme == 'https'
-    ssl_context = OpenSSL::SSL::SSLContext.new()
+    ssl_context = OpenSSL::SSL::SSLContext.new
     ssl_context.cert = OpenSSL::X509::Certificate.new(File.read(SETTINGS[:ssl_certificate]))
     ssl_context.key = OpenSSL::PKey.read(File.read(SETTINGS[:ssl_private_key]))
     sock = OpenSSL::SSL::SSLSocket.new(raw_sock, ssl_context)
@@ -253,7 +248,7 @@ def ssh_with_proxy(proxy, params)
       begin
         n = ssh_write_sock(sock, inp_buf)
         inp_buf = inp_buf[n..-1]
-        raw_sock.close_write() if inp_buf == "" and ws_eof
+        raw_sock.close_write if (inp_buf == "") && ws_eof
       end
     end
 
@@ -262,16 +257,15 @@ def ssh_with_proxy(proxy, params)
         inp_buf += $stdin.readpartial(4096)
       rescue EOFError
         ws_eof = true
-        raw_sock.close_write() if inp_buf == ""
+        raw_sock.close_write if inp_buf == ""
       end
     end
 
-    if w.include?($stdout)
-      n = $stdout.write(out_buf)
-      $stdout.flush()
-      out_buf = out_buf[n..-1]
-      break if out_buf == "" and bridge_eof
-    end
+    next unless w.include?($stdout)
+    n = $stdout.write(out_buf)
+    $stdout.flush
+    out_buf = out_buf[n..-1]
+    break if (out_buf == "") && bridge_eof
 
   end
 end
@@ -283,7 +277,7 @@ SETTINGS = read_settings
 host = ARGV[0]
 
 send_auth_challenge("*")
-token = get_token_from_auth_data(read_auth_reply())
+token = get_token_from_auth_data(read_auth_reply)
 
 params = foreman_call("cockpit/host_ssh_params/#{host}", token)
 exit_with_problem("access-denied", "Host #{host} is not known", nil) unless params
