@@ -50,7 +50,8 @@ module ForemanRemoteExecution
       keys = remote_execution_ssh_keys
       source = 'global'
       if keys.present?
-        params['remote_execution_ssh_keys'] = {:value => keys, :safe_value => keys, :source => source}
+        value, safe_value = params.fetch('remote_execution_ssh_keys', {}).values_at(:value, :safe_value).map { |v| v || [] }
+        params['remote_execution_ssh_keys'] = {:value => value + keys, :safe_value => safe_value + keys, :source => source}
       end
       [:remote_execution_ssh_user, :remote_execution_effective_user_method,
        :remote_execution_connect_by_ip].each do |key|
