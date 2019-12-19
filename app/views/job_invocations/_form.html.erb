@@ -33,7 +33,7 @@
       <% end %>
     </span>
     <%= selectable_f targeting_fields, :bookmark_id, @composer.available_bookmarks.map { |b| [b.name, b.id] }, :selected => @composer.targeting.bookmark_id, :include_blank => true %>
-    <%= autocomplete_f targeting_fields, :search_query, :search_query => @composer.displayed_search_query, :full_path => auto_complete_search_hosts_path %>
+    <%= textarea_f targeting_fields, :search_query, :value => @composer.displayed_search_query, :rows => 5, :class => 'autocomplete-input form-control', :'data-url' => auto_complete_search_hosts_path %>
 
     <div class="form-group ">
       <label class="col-md-2 control-label"><%= _('Resolves to') %></label>
