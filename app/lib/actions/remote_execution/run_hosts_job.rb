@@ -42,7 +42,7 @@ module Actions
           # during actual run (here) so we build template invocations from these patterns
           template_invocation = job_invocation.pattern_template_invocation_for_host(host).deep_clone
           template_invocation.host_id = host.id
-          trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector)
+          trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector, { :use_concurrency_control => uses_concurrency_control })
         end
       end
 

@@ -42,7 +42,8 @@ module Actions
                                :script => script,
                                :execution_timeout_interval => job_invocation.execution_timeout_interval,
                                :secrets => secrets(host, job_invocation, provider),
-                               :use_batch_triggering => true}
+                               :use_batch_triggering => true,
+                               :use_concurrency_control => options[:use_concurrency_control]}
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
 
