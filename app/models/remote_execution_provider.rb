@@ -92,5 +92,9 @@ class RemoteExecutionProvider
     def ssh_password(_host) end
 
     def ssh_key_passphrase(_host) end
+
+    def proxy_action_class
+      ForemanRemoteExecutionCore::Actions::RunScript
+    end
   end
 end

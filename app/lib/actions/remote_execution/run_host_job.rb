@@ -46,7 +46,7 @@ module Actions
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
 
-        plan_delegated_action(proxy, ForemanRemoteExecutionCore::Actions::RunScript, action_options)
+        plan_delegated_action(proxy, provider.proxy_action_class, action_options)
         plan_self
       end
 
