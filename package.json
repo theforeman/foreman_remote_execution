@@ -48,7 +48,7 @@
     "eslint-plugin-react": "^7.4.0",
     "jest": "^24.9.0"
   },
-  "dependencies": {
-    "@theforeman/vendor": "^3.3.2"
+  "peerDependencies": {
+    "@theforeman/vendor": ">= 3.3.2"
   }
 }
