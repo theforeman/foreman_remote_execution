@@ -26,7 +26,7 @@ end
 
 def read_settings
   settings_path = ENV["FOREMAN_COCKPIT_SETTINGS"] || "/etc/foreman-cockpit/settings.yml"
-  settings = YAML.safe_load(File.read(settings_path))
+  settings = YAML.safe_load(File.read(settings_path), [Symbol])
   LOG.level = Logger.const_get(settings.fetch(:log_level, "INFO"))
   LOG.info("Running foreman-cockpit-session with settings from #{settings_path}:\n#{settings.inspect}")
   settings
