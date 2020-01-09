@@ -487,34 +487,6 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
               end
             end
           end
-
-          context 'with existing variable implemented as smart variable' do
-            let(:puppet_class) do
-              puppetclass = FactoryBot.create(:puppetclass, :environments => [environment])
-              puppetclass.update_attribute(:hosts, [renderer.host])
-              puppetclass
-            end
-            let(:lookup_key) do
-              FactoryBot.create(:variable_lookup_key,
-                                :key => 'client_key',
-                                :puppetclass => puppet_class,
-                                :overrides => {"fqdn=#{renderer.host.fqdn}" => 'RSA KEY'})
-            end
-
-            describe 'rendering' do
-              it 'renders the value from host parameter' do
-                lookup_key
-                result.must_equal 'echo RSA KEY > /etc/chef/client.pem'
-              end
-            end
-
-            describe 'preview' do
-              it 'should render preview' do
-                lookup_key
-                renderer.preview.must_equal 'echo RSA KEY > /etc/chef/client.pem'
-              end
-            end
-          end
         end
 
         describe 'preview' do
