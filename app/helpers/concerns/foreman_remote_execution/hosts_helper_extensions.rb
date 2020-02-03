@@ -1,5 +1,11 @@
 module ForemanRemoteExecution
   module HostsHelperExtensions
+    def host_overview_buttons(host)
+      [
+        { :button => link_to_if_authorized(_("Jobs"), hash_for_job_invocations_path(search: "host=#{host.name}"), :title => _("Job invocations"), :class => 'btn btn-default'), :priority => 200 }
+      ]
+    end
+
     def multiple_actions
       super + [ [_('Schedule Remote Job'), new_job_invocation_path, false] ]
     end
