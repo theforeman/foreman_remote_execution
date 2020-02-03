@@ -135,6 +135,7 @@ module ForemanRemoteExecution
         end
 
         extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/pubkey'
+        describe_host { overview_buttons_provider :host_overview_buttons }
       end
     end
 
