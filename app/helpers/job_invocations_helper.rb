@@ -47,4 +47,12 @@ module JobInvocationsHelper
       content_tag(:span, '', :class => 'caret') + title
     end
   end
+
+  def show_job_organization(organization)
+    organization.present? ? organization : _('Any Organization')
+  end
+
+  def show_job_location(location)
+    location.present? ? location : _('Any Location')
+  end
 end
