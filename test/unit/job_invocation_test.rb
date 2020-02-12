@@ -91,7 +91,7 @@ class JobInvocationTest < ActiveSupport::TestCase
       it 'handles missing keys correctly' do
         job_invocation.description_format = '%{job_category} - %{missing_key}'
         job_invocation.generate_description
-        job_invocation.description.must_equal "#{job_invocation.job_category} - %{missing_key}"
+        job_invocation.description.must_equal "#{job_invocation.job_category} - ''"
       end
 
       it 'truncates generated description to 255 characters' do

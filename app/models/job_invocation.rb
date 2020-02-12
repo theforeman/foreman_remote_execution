@@ -202,19 +202,14 @@ class JobInvocation < ApplicationRecord
   end
 
   def generate_description
-    key_re = /%\{([^\}]+)\}/
     template_invocation = pattern_template_invocations.first
-    hash_base = Hash.new { |hash, key| hash[key] = "%{#{key}}" }
-    input_hash = template_invocation.input_values.reduce(hash_base) do |h, v|
-      h.update(v.template_input.name => v.value)
+    input_hash = template_invocation.input_values.reduce({}) do |h, v|
+      h.update("%{#{v.template_input.name}}" => v.value)
     end
-    input_hash.update(:job_category => job_category)
-    input_hash.update(:template_name => template_invocation.template.name)
-    description_format.scan(key_re) { |key| input_hash[key.first] }
-    self.description = description_format
-    input_hash.each do |k, v|
-      self.description.gsub!(Regexp.new("%\{#{k}\}"), v || '')
-    end
+    input_hash.update("%{job_category}" => job_category)
+    input_hash.update("%{template_name}" => template_invocation.template.name)
+    input_hash.default = "''"
+    self.description = description_format.gsub(/%{[^}]+}/) { |key| input_hash[key] }
     self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
   end
 
