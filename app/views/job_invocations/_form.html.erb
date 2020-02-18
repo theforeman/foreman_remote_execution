@@ -49,22 +49,6 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="col-md-2 control-label">
-        <%= _('Organization') %><br>
-        <%= _('Location') %>
-      </label>
-      <div class="col-md-4">
-        <p class="form-control-static">
-          <%= show_job_organization(Organization.current) %>
-          <br>
-          <%= show_job_location(Location.current) %>
-        </p>
-      </div>
-    </div>
-    <%= targeting_fields.hidden_field :organization_id, value: (Organization.current.present? ? Organization.current.id : nil) %>
-    <%= targeting_fields.hidden_field :location_id, value: (Location.current.present? ? Location.current.id : nil) %>
-
     <% @composer.displayed_provider_types.each do |provider_type| %>
       <fieldset id="provider_<%= provider_type %>" class="provider_form">
         <%= f.fields_for 'providers' do |providers_fields| %>

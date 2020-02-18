@@ -11,8 +11,6 @@ class Targeting < ApplicationRecord
 
   belongs_to :user
   belongs_to :bookmark
-  belongs_to :organization, optional: true
-  belongs_to :location, optional: true
 
   has_many :targeting_hosts, :dependent => :destroy
   has_many :hosts, -> { order TargetingHost.table_name + '.id' }, :through => :targeting_hosts
@@ -21,6 +19,7 @@ class Targeting < ApplicationRecord
 
   validates :targeting_type, :presence => true, :inclusion => Targeting::TYPES.keys
   validate :bookmark_or_query_is_present
+
   before_create :assign_search_query, :if => :static?
 
   def clone
@@ -31,9 +30,7 @@ class Targeting < ApplicationRecord
         :user => self.user,
         :bookmark_id => self.bookmark.try(:id),
         :targeting_type => self.targeting_type,
-        :search_query => self.search_query,
-        :organization_id => self.organization_id,
-        :location_id => self.location_id
+        :search_query => self.search_query
       )
     end.tap(&:save)
   end

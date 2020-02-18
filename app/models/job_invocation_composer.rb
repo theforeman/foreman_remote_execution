@@ -523,9 +523,7 @@ class JobInvocationComposer
       :bookmark_id => bookmark_id,
       :targeting_type => params[:targeting][:targeting_type],
       :search_query => query,
-      :randomized_ordering => params[:targeting][:randomized_ordering],
-      :organization_id => params[:targeting][:organization_id],
-      :location_id => params[:targeting][:location_id]
+      :randomized_ordering => params[:targeting][:randomized_ordering]
     ) { |t| t.user_id = params[:targeting][:user_id] }
   end
 
