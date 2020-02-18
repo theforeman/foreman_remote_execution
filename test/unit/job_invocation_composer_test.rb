@@ -465,11 +465,15 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       describe 'triggering' do
         let(:params) do
-          { :job_invocation => { :providers => { :ssh => ssh_params } }, :triggering => { :mode => 'future' }}.with_indifferent_access
+          { :job_invocation => { :providers => { :ssh => ssh_params } }, :triggering => { :mode => 'future', :end_time=> {"end_time(3i)": 1, "end_time(2i)": 2, "end_time(1i)": 3, "end_time(4i)": 4, "end_time(5i)": 5} }}.with_indifferent_access
         end
 
         it 'accepts the triggering params' do
           composer.job_invocation.triggering.mode.must_equal :future
+        end
+
+        it 'formats the triggering end time when its unordered' do
+          composer.job_invocation.triggering.end_time.must_equal Time.local(3,2,1,4,5)
         end
       end
 
