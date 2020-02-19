@@ -58,6 +58,8 @@ class JobInvocationsController < ApplicationController
                                      .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
     end
     @hosts = resource_base_search_and_page
+    @job_organization = Taxonomy.find_by(id: @job_invocation.task.input[:current_organization_id])
+    @job_location = Taxonomy.find_by(id: @job_invocation.task.input[:current_location_id])
   end
 
   def index

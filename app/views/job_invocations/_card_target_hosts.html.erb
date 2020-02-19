@@ -20,6 +20,18 @@
       <% key = job_invocation.targeting.randomized_ordering ? Targeting::RANDOMIZED : Targeting::ORDERED %>
       <%= _('Execution order') %>: <strong><%= Targeting::ORDERINGS[key].downcase %></strong>
     </p>
+    <p>
+      <%= _('Organization') %>:
+      <strong>
+        <%= show_job_organization(@job_organization) %>
+      </strong>
+    </p>
+    <p>
+      <%= _('Location') %>:
+      <strong>
+        <%= show_job_location(@job_location) %>
+      </strong>
+    </p>
   </div>
   <div class='card-pf-footer'>
     <p>
