@@ -102,8 +102,8 @@ module ForemanRemoteExecution
         ]
 
         # Add a new role called 'Remote Execution User ' if it doesn't exist
-        role 'Remote Execution User', USER_PERMISSIONS, 'TODO'
-        role 'Remote Execution Manager', MANAGER_PERMISSIONS, 'TODO'
+        role 'Remote Execution User', USER_PERMISSIONS, 'Role with permissions to run remote execution jobs against hosts.'
+        role 'Remote Execution Manager', MANAGER_PERMISSIONS, 'Role with permissions to manage job templates, remote execution features, cancel jobs and view audit logs'
 
         add_all_permissions_to_default_roles
 
