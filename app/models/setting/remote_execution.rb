@@ -73,6 +73,16 @@ class Setting::RemoteExecution < Setting
         _('Form Job Template'),
         nil,
         { :collection => proc { Hash[JobTemplate.unscoped.map { |template| [template.name, template.name] }] } }),
+      self.set('remote_execution_job_invocation_report_template',
+        N_('Select a report template used for generating a report for a particular remote execution job'),
+        'Jobs - Invocation report template',
+        _('Job Invocation Report Template'),
+        nil,
+        { :collection => proc { self.job_invocation_report_templates_select } }),
     ]
+  end
+
+  def self.job_invocation_report_templates_select
+    Hash[ReportTemplate.unscoped.joins(:template_inputs).where(template_inputs: TemplateInput.where(name: 'job_id')).map { |template| [template.name, template.name] }]
   end
 end

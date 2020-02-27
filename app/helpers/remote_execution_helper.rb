@@ -60,6 +60,12 @@ module RemoteExecutionHelper
     job_invocation = task.task_groups.find { |group| group.class == JobInvocationTaskGroup }.job_invocation
     task_authorizer = Authorizer.new(User.current, :collection => [task])
     buttons = []
+    if (template = job_report_template) && authorized_for(controller: :report_templates, action: :generate)
+      buttons << link_to(_('Create Report'), generate_report_template_path(template, job_report_template_parameters(job_invocation, template)),
+        class: 'btn btn-default',
+        title: _('Create report for this job'),
+        disabled: task.pending?)
+    end
     if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_('Rerun'), rerun_job_invocation_path(:id => job_invocation.id),
         :class => 'btn btn-default',
@@ -228,6 +234,27 @@ module RemoteExecutionHelper
     return if task.nil?
 
     task.execution_plan.actions[1].try(:input).try(:[], 'script')
+  end
+
+  def job_report_template
+    template = ReportTemplate.where(name: Setting['remote_execution_job_invocation_report_template']).first
+
+    template if template.template_inputs.where(name: 'job_id').exists?
+  end
+
+  def job_report_template_parameters(job_invocation, template)
+    template_input = template.template_inputs.where(name: 'job_id').first
+    raise "#job_report_template_parameters need template that has 'job_id' input" unless template_input
+
+    {
+      report_template_report: {
+        input_values: {
+          "#{template_input.id}": {
+            value: job_invocation.id,
+          },
+        },
+      },
+    }
   end
 
   def targeting_hosts(job_invocation, hosts)

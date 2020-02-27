@@ -23,4 +23,20 @@ class RemoteExecutionHelperTest < ActionView::TestCase
                                                         "Exit status: 0"])
     end
   end
+
+  describe 'test correct setting' do
+    it 'should found correct template from setting' do
+      Setting::RemoteExecution.load_defaults
+      template_name = 'Job Invocation Report Template'
+      setting_key = 'remote_execution_job_invocation_report_template'
+      template = FactoryBot.create(:report_template, name: template_name)
+      input = FactoryBot.create(:template_input, name: 'job_id', input_type: 'user')
+      template.template_inputs << input
+      Setting.expects(:[]).with(setting_key).returns(template_name)
+
+      found_template = job_report_template
+
+      assert_equal template.id, found_template.id
+    end
+  end
 end

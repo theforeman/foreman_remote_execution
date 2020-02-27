@@ -76,6 +76,10 @@ class JobInvocation < ApplicationRecord
 
   encrypts :password, :key_passphrase, :effective_user_password
 
+  class Jail < Safemode::Jail
+    allow :sub_task_for_host, :template_invocations_hosts
+  end
+
   def self.search_by_status(key, operator, value)
     conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)
     conditions[0] = "NOT (#{conditions[0]})" if operator == '<>'
