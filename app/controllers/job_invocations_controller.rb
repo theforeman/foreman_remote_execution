@@ -3,7 +3,6 @@ class JobInvocationsController < ApplicationController
   include ::ForemanTasks::Concerns::Parameters::Triggering
   include ::JobInvocationsChartHelper
 
-
   def new
     return @composer = prepare_composer if params[:feature].present?
     ui_params = {
@@ -35,6 +34,8 @@ class JobInvocationsController < ApplicationController
   def rerun
     job_invocation = resource_base.find(params[:id])
     @composer = JobInvocationComposer.from_job_invocation(job_invocation, params)
+    @job_organization = Taxonomy.find_by(id: job_invocation.task.input[:current_organization_id])
+    @job_location = Taxonomy.find_by(id: job_invocation.task.input[:current_location_id])
     render :action => 'new'
   end
 

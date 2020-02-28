@@ -1,0 +1,22 @@
+<% if Organization.current != @job_organization %>
+  <div class="form-group">
+    <div class="col-md-6">
+      <div class="alert alert-warning">
+        <span class="pficon pficon-warning-triangle-o"></span>
+        <%= _("Current organization %{org_c} is different from job's organization %{org_j}.") % { org_c: show_job_organization(Organization.current),
+                                                                                                  org_j: show_job_organization(@job_organization) } %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if Location.current != @job_location %>
+  <div class="form-group">
+    <div class="col-md-6">
+      <div class="alert alert-warning">
+        <span class="pficon pficon-warning-triangle-o"></span>
+        <%= _("Current location %{loc_c} is different from job's location %{loc_j}.") % { loc_c: show_job_location(Location.current),
+                                                                                          loc_j: show_job_location(@job_location) } %>
+      </div>
+    </div>
+  </div>
+<% end %>

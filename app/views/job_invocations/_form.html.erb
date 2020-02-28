@@ -126,5 +126,6 @@
 
   <%= render :partial => 'preview_hosts_modal' %>
 
+  <%= render partial: 'rerun_taxonomies' if action_name == 'rerun' %>
   <%= submit_or_cancel f, false, :cancel_path => job_invocations_path, :disabled => !@composer.rerun_possible? %>
 <% end %>
