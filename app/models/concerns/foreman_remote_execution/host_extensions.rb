@@ -1,6 +1,5 @@
 module ForemanRemoteExecution
   module HostExtensions
-    # rubocop:disable Metrics/BlockLength
     def self.prepended(base)
       base.instance_eval do
         has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
@@ -65,7 +64,6 @@ module ForemanRemoteExecution
       get_interface_by_flag(:execution)
     end
 
-    # rubocop:disable Metrics/PerceivedComplexity
     def remote_execution_proxies(provider, authorized = true)
       proxies = {}
       proxies[:subnet]   = execution_interface.subnet.remote_execution_proxies.with_features(provider) if execution_interface && execution_interface.subnet

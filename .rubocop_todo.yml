@@ -91,16 +91,6 @@ Layout/SpaceInsideHashLiteralBraces:
 Lint/MissingCopEnableDirective:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/UnneededCopDisableDirective:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/UnneededCopEnableDirective:
-  Enabled: false
-
 # Offense count: 10
 # Cop supports --auto-correct.
 # Configuration parameters: IgnoreEmptyBlocks, AllowUnusedKeywordArguments.
@@ -117,16 +107,6 @@ Lint/UnusedMethodArgument:
 Lint/UselessAssignment:
   Enabled: false
 
-# Offense count: 5
-Metrics/CyclomaticComplexity:
-  Max: 8
-
-# Offense count: 940
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 204
-
 # Offense count: 2
 Naming/MemoizedInstanceVariableName:
   Enabled: false
@@ -134,7 +114,7 @@ Naming/MemoizedInstanceVariableName:
 # Offense count: 3
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
 # AllowedNames: io, id, to
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Enabled: false
 
 # Offense count: 15
@@ -203,6 +183,15 @@ Style/ExpandPathArguments:
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: annotated, template, unannotated
 Style/FormatStringToken:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
   Enabled: false
 
 # Offense count: 1527

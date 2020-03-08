@@ -20,7 +20,6 @@ module Api
       param :id, :identifier, :required => true
       def show; end
 
-      # rubocop:disable Metrics/BlockLength
       def_param_group :job_invocation do
         param :job_invocation, Hash, :required => true, :action_aware => true do
           param :job_template_id, String, :required => false, :desc => N_('The job template to use, parameter is required unless feature was specified')

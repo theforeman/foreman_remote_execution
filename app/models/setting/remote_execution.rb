@@ -2,7 +2,6 @@ class Setting::RemoteExecution < Setting
 
   ::Setting::BLANK_ATTRS.concat %w{remote_execution_ssh_password remote_execution_ssh_key_passphrase remote_execution_sudo_password remote_execution_cockpit_url remote_execution_form_job_template}
 
-  # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
   def self.default_settings
     [
       self.set('remote_execution_fallback_proxy',
@@ -76,6 +75,4 @@ class Setting::RemoteExecution < Setting
                { :collection => proc { Hash[JobTemplate.unscoped.map { |template| [template.name, template.name] }] } })
     ]
   end
-  # rubocop:enable AbcSize
-  # rubocop:enable Metrics/MethodLength,Metrics/AbcSize
 end

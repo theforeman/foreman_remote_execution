@@ -1,11 +1,11 @@
 require 'net/ssh'
 require 'fileutils'
 
-# rubocop:disable Lint/HandleExceptions
+# rubocop:disable Lint/SuppressedException
 begin
   require 'net/ssh/krb'
 rescue LoadError; end
-# rubocop:enable Lint/HandleExceptions:
+# rubocop:enable Lint/SuppressedException:
 
 module ForemanRemoteExecutionCore
   class SudoUserMethod

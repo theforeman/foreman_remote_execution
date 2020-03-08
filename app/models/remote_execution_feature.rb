@@ -23,7 +23,6 @@ class RemoteExecutionFeature < ApplicationRecord
     self.find_by(label: label) || raise(::Foreman::Exception.new(N_('Unknown remote execution feature %s'), label))
   end
 
-  # rubocop:disable Metrics/PerceivedComplexity
   def self.register(label, name, options = {})
     begin
       return false unless RemoteExecutionFeature.table_exists?
@@ -61,5 +60,4 @@ class RemoteExecutionFeature < ApplicationRecord
       return feature
     end
   end
-  # rubocop:enable Metrics/PerceivedComplexity
 end

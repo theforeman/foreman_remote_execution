@@ -94,7 +94,6 @@ module Actions
         super << self
       end
 
-      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def fill_continuous_output(continuous_output)
         delegated_output.fetch('result', []).each do |raw_output|
           continuous_output.add_raw_output(raw_output)
@@ -115,7 +114,6 @@ module Actions
       rescue => e
         continuous_output.add_exception(_('Error loading data from proxy'), e)
       end
-      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       def exit_status
         delegated_output[:exit_status]
