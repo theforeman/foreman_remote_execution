@@ -330,7 +330,6 @@ class JobInvocationComposer
     self.new(ParamsForFeature.new(feature_label, hosts, provided_inputs).params)
   end
 
-  # rubocop:disable Metrics/AbcSize
   def compose
     job_invocation.job_category = validate_job_category(params[:job_category])
     job_invocation.job_category ||= resolve_job_category(available_job_categories.first) { |tempate| template.job_category } if @set_defaults
@@ -355,7 +354,6 @@ class JobInvocationComposer
 
     self
   end
-  # rubocop:enable Metrics/AbcSize
 
   def trigger(raise_on_error = false)
     generate_description

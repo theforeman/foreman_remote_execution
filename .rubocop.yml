@@ -1,3 +1,7 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
 inherit_from:
   - .rubocop_todo.yml
 
@@ -18,6 +22,9 @@ Rails/Date:
   Enabled: false
 
 Metrics:
+  Enabled: false
+
+Layout/LineLength:
   Enabled: false
 
 Style/Documentation:
@@ -44,9 +51,6 @@ Naming/FileName:
       - 'node_modules/font-awesome-sass/lib/font-awesome-sass.rb'
 
 Style/WordArray:
-  Enabled: false
-
-Style/BracesAroundHashParameters:
   Enabled: false
 
 Style/RescueModifier:
@@ -98,7 +102,7 @@ Style/FrozenStringLiteralComment:
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: false
 
 Rails/ReflectionClassName:

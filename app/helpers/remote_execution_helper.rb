@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/ModuleLength
 module RemoteExecutionHelper
   def providers_options
     RemoteExecutionProvider.providers.map { |key, provider| [ key, _(provider.humanized_name) ] }
@@ -61,7 +60,6 @@ module RemoteExecutionHelper
     ]
   end
 
-  # rubocop:disable Metrics/AbcSize
   def job_invocation_task_buttons(task)
     job_invocation = task.task_groups.find { |group| group.class == JobInvocationTaskGroup }.job_invocation
     task_authorizer = Authorizer.new(User.current, :collection => [task])
@@ -96,8 +94,6 @@ module RemoteExecutionHelper
     end
     return buttons
   end
-
-  # rubocop:enable Metrics/AbcSize
 
   def template_invocation_task_buttons(task, invocation)
     buttons = []
