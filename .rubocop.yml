@@ -113,3 +113,20 @@ Rails/HelperInstanceVariable:
 
 Naming/RescuedExceptionsVariableName:
   Enabled: false
+
+Rails/RakeEnvironment:
+  Enabled: false
+
+# Support both, Ruby 1.9 hashmap and hash-rocket syntax
+Style/HashSyntax:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/LineEndConcatenation:
+  Enabled: false
+
+# Both double and single quotes are OK
+Style/StringLiterals:
+  Enabled: false

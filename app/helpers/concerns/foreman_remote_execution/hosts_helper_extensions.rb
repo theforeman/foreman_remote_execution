@@ -38,5 +38,4 @@ module ForemanRemoteExecution
       super(*args)
     end
   end
-
 end

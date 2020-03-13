@@ -25,7 +25,7 @@ class ForeignInputSet < ApplicationRecord
       inputs = inputs.select { |input| included_names.include?(input.name) }
     end
     inputs = inputs.reject { |input| excluded_names.include?(input.name) }
-    return inputs
+    inputs
   end
 
   def included_names

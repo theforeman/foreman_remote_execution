@@ -1,8 +1,6 @@
 module Actions
   module Middleware
-
     class BindJobInvocation < ::Dynflow::Middleware
-
       def delay(*args)
         schedule_options, job_invocation = args
         if !job_invocation.task_id.nil? && job_invocation.task_id != task.id
@@ -26,8 +24,6 @@ module Actions
       def bind(job_invocation)
         job_invocation.update_attribute :task_id, task.id if job_invocation.task_id != task.id
       end
-
     end
-
   end
 end

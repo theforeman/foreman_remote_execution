@@ -25,7 +25,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :remote_execution_feature
       def update
-        process_response @remote_execution_feature.update_attributes(remote_execution_feature_params)
+        process_response @remote_execution_feature.update(remote_execution_feature_params)
       end
 
       private

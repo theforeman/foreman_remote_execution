@@ -3,7 +3,6 @@
 module Api
   module V2
     class TemplateInvocationsController < ::Api::V2::BaseController
-
       before_action :find_job_invocation, :only => %w{template_invocations}
 
       api :GET, '/job_invocations/:job_invocation_id/template_invocations',

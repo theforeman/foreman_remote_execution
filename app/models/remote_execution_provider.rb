@@ -1,5 +1,4 @@
 class RemoteExecutionProvider
-
   EFFECTIVE_USER_METHODS = %w[sudo dzdo su].freeze
 
   class << self

@@ -6,7 +6,7 @@ module JobInvocationsHelper
                 card-pf-aggregate-status card-pf-aggregate-status-mini') do
       content_tag(:h2, :class => 'card-pf-title', :style => 'line-height: 1.1') do
         icon_text(icon, '', :kind => 'pficon') +
-        content_tag(:span, number, :class =>'card-pf-aggregate-status-count') +
+        content_tag(:span, number, :class => 'card-pf-aggregate-status-count') +
         text
       end
     end
@@ -49,10 +49,10 @@ module JobInvocationsHelper
   end
 
   def show_job_organization(organization)
-    organization.present? ? organization : _('Any Organization')
+    organization.presence || _('Any Organization')
   end
 
   def show_job_location(location)
-    location.present? ? location : _('Any Location')
+    location.presence || _('Any Location')
   end
 end

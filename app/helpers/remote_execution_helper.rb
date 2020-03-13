@@ -92,7 +92,7 @@ module RemoteExecutionHelper
                            :disabled => !task.cancellable?,
                            :method => :post)
     end
-    return buttons
+    buttons
   end
 
   def template_invocation_task_buttons(task, invocation)

@@ -1,5 +1,4 @@
 class TemplateInvocationInputValue < ApplicationRecord
-
   belongs_to :template_invocation
   belongs_to :template_input
 
@@ -9,7 +8,6 @@ class TemplateInvocationInputValue < ApplicationRecord
                     :if => proc { |v| v.template_input.input_type == 'user' && v.template_input.options_array.present? }
 
   class << self
-
     private
 
     def options_for_template_input(template_input)

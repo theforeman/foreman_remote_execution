@@ -24,9 +24,9 @@ class HostStatus::ExecutionStatus < HostStatus::Status
 
   def to_global(options = {})
     if to_status(options) == ERROR
-      return HostStatus::Global::ERROR
+      HostStatus::Global::ERROR
     else
-      return HostStatus::Global::OK
+      HostStatus::Global::OK
     end
   end
 

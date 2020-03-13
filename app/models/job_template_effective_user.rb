@@ -1,5 +1,4 @@
 class JobTemplateEffectiveUser < ApplicationRecord
-
   belongs_to :job_template
 
   before_validation :set_defaults

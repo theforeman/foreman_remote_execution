@@ -283,7 +283,7 @@ module ForemanRemoteExecutionCore
       ssh_options[:number_of_password_prompts] = 1
       ssh_options[:verbose] = settings[:ssh_log_level]
       ssh_options[:logger] = ForemanRemoteExecutionCore::LogFilter.new(SmartProxyDynflowCore::Log.instance)
-      return ssh_options
+      ssh_options
     end
 
     def settings
@@ -321,7 +321,7 @@ module ForemanRemoteExecutionCore
         end
       end
       session.process(0) { !run_started? }
-      return true
+      true
     end
 
     def run_started?
@@ -357,7 +357,7 @@ module ForemanRemoteExecutionCore
       # Closing the channel without sending any data gives us SIGPIPE
       channel.close unless stdin.nil?
       channel.wait
-      return exit_status, stdout, stderr
+      [exit_status, stdout, stderr]
     end
 
     def prepare_known_hosts
@@ -365,7 +365,7 @@ module ForemanRemoteExecutionCore
       if @host_public_key
         write_command_file_locally('known_hosts', "#{@host} #{@host_public_key}")
       end
-      return path
+      path
     end
 
     def local_command_dir
@@ -390,7 +390,7 @@ module ForemanRemoteExecutionCore
       else
         FileUtils.mkdir_p(path)
       end
-      return path
+      path
     end
 
     def cp_script_to_remote(script = @script, name = 'script')
@@ -437,7 +437,7 @@ module ForemanRemoteExecutionCore
       path = local_command_file(filename)
       ensure_local_directory(File.dirname(path))
       File.write(path, content)
-      return path
+      path
     end
 
     # when a remote server disconnects, it's hard to tell if it was on purpose (when calling reboot)

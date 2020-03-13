@@ -37,7 +37,7 @@ end
 def send_control(msg)
   text = JSON.dump(msg)
   LOG.debug("Sending control message #{text}")
-  $stdout.write("#{text.length+1}\n\n#{text}")
+  $stdout.write("#{text.length + 1}\n\n#{text}")
   $stdout.flush
 end
 
@@ -109,13 +109,13 @@ def foreman_call(path, token)
 
   case res.code
   when "200"
-    return JSON.parse(res.body)
+    JSON.parse(res.body)
   when "401"
     exit_with_problem("authentication-failed",
                       "Token was not valid",
                       { "password" => "not-tried", "token" => "denied" })
   when "404"
-    return nil
+    nil
   else
     LOG.error("Error talking to foreman: #{res.body}\n")
     exit 1
@@ -143,9 +143,9 @@ def ssh_read_and_handle_response_header(sock, url, params)
   if status != "101"
     m = /^Content-Length:[ \t]*([0-9]+)\r?$/i.match(headers_text)
     expected_len = if m
-      m[1].to_i
+                     m[1].to_i
                    else
-      -1
+                     -1
                    end
     response = ""
     while expected_len < 0 || response.length < expected_len
@@ -188,14 +188,14 @@ def ssh_read_sock(sock)
 end
 
 def ssh_write_sock(sock, data)
-    sock.write_nonblock(data)
+  sock.write_nonblock(data)
 rescue IO::WaitWritable
-    0
+  0
 rescue IO::WaitReadable
-    # This might happen with SSL during a renegotiation.  Block a
-    # bit to get it over with.
-    IO.select([sock])
-    retry
+  # This might happen with SSL during a renegotiation.  Block a
+  # bit to get it over with.
+  IO.select([sock])
+  retry
 end
 
 def ssh_with_proxy(proxy, params)
@@ -266,7 +266,6 @@ def ssh_with_proxy(proxy, params)
     $stdout.flush
     out_buf = out_buf[n..-1]
     break if (out_buf == "") && bridge_eof
-
   end
 end
 

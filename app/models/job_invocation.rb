@@ -189,7 +189,7 @@ class JobInvocation < ApplicationRecord
 
   # TODO: determine from the host and job_invocation details
   def available_providers(host)
-    return RemoteExecutionProvider.provider_names
+    RemoteExecutionProvider.provider_names
   end
 
   def sub_task_for_host(host)

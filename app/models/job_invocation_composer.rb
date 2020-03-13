@@ -1,5 +1,4 @@
 class JobInvocationComposer
-
   class UiParams
     attr_reader :ui_params
     def initialize(ui_params)
@@ -37,7 +36,7 @@ class JobInvocationComposer
     end
 
     def blank_to_nil(thing)
-      thing.blank? ? nil : thing
+      thing.presence
     end
 
     # TODO: Fix this comment

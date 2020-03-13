@@ -2,11 +2,10 @@ require 'base64'
 
 module ForemanRemoteExecutionCore
   class PollingScriptRunner < ScriptRunner
-
     DEFAULT_REFRESH_INTERVAL = 60
 
     def self.load_script(name)
-      script_dir = File.expand_path('../async_scripts', __FILE__)
+      script_dir = File.expand_path('async_scripts', __dir__)
       File.read(File.join(script_dir, name))
     end
 
@@ -77,7 +76,7 @@ module ForemanRemoteExecutionCore
         load_event_updates(data)
       else
         # getting the update from automatic mode - reaching to the host to get the latest update
-        return run_refresh
+        run_refresh
       end
     ensure
       destroy_session

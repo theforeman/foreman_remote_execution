@@ -57,7 +57,7 @@ module ForemanRemoteExecution
                else
                  original_message
                end
-      return { "#{key}:" => errors }
+      { "#{key}:" => errors }
     end
   end
 end

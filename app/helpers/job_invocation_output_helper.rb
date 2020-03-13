@@ -19,7 +19,7 @@ module JobInvocationOutputHelper
 
   def colorize_line(line)
     line = line.gsub(COLOR_PATTERN) do |seq|
-      color = seq[/(\d+)m/,1]
+      color = seq[/(\d+)m/, 1]
       "{{{format color:#{color}}}}"
     end
 

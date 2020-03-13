@@ -1,4 +1,4 @@
-require File.expand_path('../lib/foreman_remote_execution/version', __FILE__)
+require File.expand_path('lib/foreman_remote_execution/version', __dir__)
 require 'date'
 
 Gem::Specification.new do |s|
@@ -26,10 +26,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'deface'
   s.add_dependency 'dynflow', '>= 1.0.1', '< 2.0.0'
-  s.add_dependency 'foreman_remote_execution_core'
   s.add_dependency 'foreman-tasks', '>= 0.15.1'
+  s.add_dependency 'foreman_remote_execution_core'
 
   s.add_development_dependency 'factory_bot_rails', '~> 4.8.0'
-  s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rdoc'
+  s.add_development_dependency 'rubocop'
 end

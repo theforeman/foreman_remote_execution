@@ -50,7 +50,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :foreign_input_set
       def update
-        process_response @foreign_input_set.update_attributes(foreign_input_set_params)
+        process_response @foreign_input_set.update(foreign_input_set_params)
       end
 
       def resource_name(nested_resource = nil)

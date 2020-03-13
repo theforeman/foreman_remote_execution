@@ -1,7 +1,6 @@
 module Actions
   module RemoteExecution
     class RunHostsJob < Actions::ActionWithSubPlans
-
       include Dynflow::Action::WithBulkSubPlans
       include Dynflow::Action::WithPollingSubPlans
       include Actions::RecurringAction

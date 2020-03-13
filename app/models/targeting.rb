@@ -1,5 +1,4 @@
 class Targeting < ApplicationRecord
-
   STATIC_TYPE = 'static_query'.freeze
   DYNAMIC_TYPE = 'dynamic_query'.freeze
   TYPES = { STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query') }.freeze

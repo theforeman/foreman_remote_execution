@@ -22,7 +22,7 @@ module ForemanRemoteExecution
     assets_to_precompile += %w(foreman_remote_execution/foreman_remote_execution.css)
 
     initializer 'foreman_remote_execution.load_default_settings', :before => :load_config_initializers do
-      require_dependency File.expand_path('../../../app/models/setting/remote_execution.rb', __FILE__) if (Setting.table_exists? rescue(false))
+      require_dependency File.expand_path('../../app/models/setting/remote_execution.rb', __dir__) if (Setting.table_exists? rescue(false))
     end
 
     # Add any db migrations
@@ -190,7 +190,7 @@ module ForemanRemoteExecution
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
-      locale_dir = File.join(File.expand_path('../../..', __FILE__), 'locale')
+      locale_dir = File.join(File.expand_path('../..', __dir__), 'locale')
       locale_domain = 'foreman_remote_execution'
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end

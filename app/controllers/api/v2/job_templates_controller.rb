@@ -78,7 +78,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :job_template
       def update
-        process_response @job_template.update_attributes(job_template_params)
+        process_response @job_template.update(job_template_params)
       end
 
       api :GET, '/job_templates/revision'
