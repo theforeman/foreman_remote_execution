@@ -19,6 +19,7 @@
   <% if @job_invocation.recurring_logic.present? %>
     <li><a href="#recurring_logic" data-toggle="tab"><%= _('Recurring logic') %></a></li>
   <% end %>
+  <%= slot('jobInvocationsTabHeaderSlot', true) %>
 </ul>
 
 <div class="tab-content">
@@ -38,6 +39,7 @@
     </div>
   </div>
   <% end %>
+  <%= slot('jobInvocationsTabContentSlot', true) %>
 </div>
 
 <script id="job_invocation_refresh" data-refresh-url="<%= job_invocation_path(@job_invocation) %>">
