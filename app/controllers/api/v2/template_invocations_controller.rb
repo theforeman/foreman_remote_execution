@@ -7,7 +7,7 @@ module Api
       before_action :find_job_invocation, :only => %w{template_invocations}
 
       api :GET, '/job_invocations/:job_invocation_id/template_invocations',
-          N_('List template invocations belonging to job invocation')
+        N_('List template invocations belonging to job invocation')
       param_group :search_and_pagination, ::Api::V2::BaseController
       param :job_invocation_id, :identifier, :required => true
       def template_invocations

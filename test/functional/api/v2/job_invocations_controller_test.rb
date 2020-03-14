@@ -78,9 +78,9 @@ module Api
         context 'with_feature' do
           setup do
             @feature = FactoryBot.create(:remote_execution_feature,
-                                         :job_template => @template)
+              :job_template => @template)
             @attrs = {
-              feature: @feature.label
+              feature: @feature.label,
             }
           end
 

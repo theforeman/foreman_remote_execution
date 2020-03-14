@@ -45,7 +45,7 @@ module RemoteExecutionHelper
           hash_for_foreman_tasks_task_path(host_task)
           .merge(:auth_object => host_task, :permission => :view_foreman_tasks)
         )
-      end
+      end,
     ]
   end
 
@@ -56,7 +56,7 @@ module RemoteExecutionHelper
   def job_invocations_buttons
     [
       documentation_button_rex('3.2ExecutingaJob'),
-      new_link(_('Run Job'))
+      new_link(_('Run Job')),
     ]
   end
 
@@ -66,31 +66,31 @@ module RemoteExecutionHelper
     buttons = []
     if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_('Rerun'), rerun_job_invocation_path(:id => job_invocation.id),
-                         :class => 'btn btn-default',
-                         :title => _('Rerun the job'))
+        :class => 'btn btn-default',
+        :title => _('Rerun the job'))
     end
     if authorized_for(hash_for_new_job_invocation_path)
       buttons << link_to(_('Rerun failed'), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
-                         :class => 'btn btn-default',
-                         :disabled => job_invocation.failed_hosts.none?,
-                         :title => _('Rerun on failed hosts'))
+        :class => 'btn btn-default',
+        :disabled => job_invocation.failed_hosts.none?,
+        :title => _('Rerun on failed hosts'))
     end
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task, :authorizer => task_authorizer)
       buttons << link_to(_('Job Task'), foreman_tasks_task_path(task),
-                         :class => 'btn btn-default',
-                         :title => _('See the last task details'))
+        :class => 'btn btn-default',
+        :title => _('See the last task details'))
     end
     if authorized_for(:permission => :cancel_job_invocations, :auth_object => job_invocation)
       buttons << button_to(_('Cancel Job'), cancel_job_invocation_path(job_invocation),
-                           :class => 'btn btn-danger',
-                           :title => _('Try to cancel the job'),
-                           :disabled => !task.cancellable?,
-                           :method => :post)
+        :class => 'btn btn-danger',
+        :title => _('Try to cancel the job'),
+        :disabled => !task.cancellable?,
+        :method => :post)
       buttons << button_to(_('Abort Job'), cancel_job_invocation_path(job_invocation, :force => true),
-                           :class => 'btn btn-danger',
-                           :title => _('Try to abort the job without waiting for the results from the remote hosts'),
-                           :disabled => !task.cancellable?,
-                           :method => :post)
+        :class => 'btn btn-danger',
+        :title => _('Try to abort the job without waiting for the results from the remote hosts'),
+        :disabled => !task.cancellable?,
+        :method => :post)
     end
     return buttons
   end
@@ -99,20 +99,20 @@ module RemoteExecutionHelper
     buttons = []
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task)
       buttons << link_to(_('Task Details'), foreman_tasks_task_path(task),
-                         :class => 'btn btn-default',
-                         :title => _('See the task details'))
+        :class => 'btn btn-default',
+        :title => _('See the task details'))
     end
     if authorized_for(:permission => :cancel_job_invocations, :auth_object => invocation)
       buttons << link_to(_('Cancel Job'), cancel_foreman_tasks_task_path(task),
-                         :class => 'btn btn-danger',
-                         :title => _('Try to cancel the job on a host'),
-                         :disabled => !task.cancellable?,
-                         :method => :post)
+        :class => 'btn btn-danger',
+        :title => _('Try to cancel the job on a host'),
+        :disabled => !task.cancellable?,
+        :method => :post)
       buttons << link_to(_('Abort Job'), abort_foreman_tasks_task_path(task),
-                         :class => 'btn btn-danger',
-                         :title => _('Try to abort the job on a host without waiting for its result'),
-                         :disabled => !task.cancellable?,
-                         :method => :post)
+        :class => 'btn btn-danger',
+        :title => _('Try to abort the job on a host without waiting for its result'),
+        :disabled => !task.cancellable?,
+        :method => :post)
     end
     buttons
   end
@@ -124,7 +124,7 @@ module RemoteExecutionHelper
     else
       task_authorizer = Authorizer.new(User.current, :collection => [invocation.task])
       link_to_if_authorized job_invocation_status(invocation),
-                            hash_for_foreman_tasks_task_path(invocation.task).merge(:auth_object => invocation.task, :permission => :view_foreman_tasks, :authorizer => task_authorizer)
+        hash_for_foreman_tasks_task_path(invocation.task).merge(:auth_object => invocation.task, :permission => :view_foreman_tasks, :authorizer => task_authorizer)
     end
   end
 
@@ -189,7 +189,7 @@ module RemoteExecutionHelper
       _('N/A')
     else
       content_tag :span, (time > Time.now.utc ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
-                  { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
+        { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
     end
   end
 
@@ -201,23 +201,23 @@ module RemoteExecutionHelper
 
   def description_checkbox_f(f, job_template, disabled)
     check_box_tag('description_format_override',
-                  job_template.generate_description_format,
-                  f.object.description_format.nil?,
-                  :class => 'description_format_override',
-                  :name => f.object_name + '[description_override]',
-                  :disabled => disabled,
-                  :onchange => 'description_override(this);') + ' ' + _('Use default description template')
+      job_template.generate_description_format,
+      f.object.description_format.nil?,
+      :class => 'description_format_override',
+      :name => f.object_name + '[description_override]',
+      :disabled => disabled,
+      :onchange => 'description_override(this);') + ' ' + _('Use default description template')
   end
 
   def description_format_textarea_f(f, job_template, disabled)
     textarea_f f, 'description_format',
-               :label => _('Description template'),
-               :value => f.object.description_format || job_template.generate_description_format,
-               :rows => 2,
-               :onchange => 'regenerate_description(this);',
-               :class => 'description_format advanced',
-               :disabled => disabled,
-               :label_help => description_format_help
+      :label => _('Description template'),
+      :value => f.object.description_format || job_template.generate_description_format,
+      :rows => 2,
+      :onchange => 'regenerate_description(this);',
+      :class => 'description_format advanced',
+      :disabled => disabled,
+      :label_help => description_format_help
   end
 
   def description_format_help
@@ -230,6 +230,7 @@ module RemoteExecutionHelper
   def load_template_from_task(template_invocation, target)
     task = template_invocation.job_invocation.sub_task_for_host(target)
     return if task.nil?
+
     task.execution_plan.actions[1].try(:input).try(:[], 'script')
   end
 end

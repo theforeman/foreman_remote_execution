@@ -16,7 +16,7 @@ class JobTemplatesControllerTest < ActionController::TestCase
       post :preview, params: {
         job_template: template.to_param,
         template: '<%= @host.name %>',
-        preview_host_id: host.id
+        preview_host_id: host.id,
       }, session: set_session_user
       assert_response :success
       assert_equal host.name, @response.body

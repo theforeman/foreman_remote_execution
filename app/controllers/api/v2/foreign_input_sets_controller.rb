@@ -18,7 +18,8 @@ module Api
       api :GET, '/templates/:template_id/foreign_input_sets/:id', N_('Show foreign input set details')
       param :template_id, :identifier, :required => true
       param :id, :identifier, :required => true
-      def show; end
+      def show
+      end
 
       def_param_group :foreign_input_set do
         param :foreign_input_set, Hash, :required => true, :action_aware => true do
@@ -50,7 +51,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :foreign_input_set
       def update
-        process_response @foreign_input_set.update_attributes(foreign_input_set_params)
+        process_response @foreign_input_set.update(foreign_input_set_params)
       end
 
       def resource_name(nested_resource = nil)

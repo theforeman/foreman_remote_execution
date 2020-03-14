@@ -6,10 +6,11 @@ class RemoteExecutionFeaturesController < ::ApplicationController
     @remote_execution_features = resource_base.all
   end
 
-  def show; end
+  def show
+  end
 
   def update
-    if @remote_execution_feature.update_attributes(remote_execution_feature_params)
+    if @remote_execution_feature.update(remote_execution_feature_params)
       process_success :object => @remote_execution_feature
     else
       process_error :object => @remote_execution_feature

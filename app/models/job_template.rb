@@ -7,8 +7,8 @@ class JobTemplate < ::Template
   end
 
   attr_exportable :job_category, :description_format,
-                  :foreign_input_sets, :provider_type,
-                  { :kind => ->(template) { template.class.name.underscore } }.merge(taxonomy_exportable)
+    :foreign_input_sets, :provider_type,
+    { :kind => ->(template) { template.class.name.underscore } }.merge(taxonomy_exportable)
 
   include Authorizable
   extend FriendlyId
@@ -65,7 +65,7 @@ class JobTemplate < ::Template
 
     def import_raw!(contents, options = {})
       template = import_raw(contents, options)
-      template.save! if template
+      template&.save!
       template
     end
 

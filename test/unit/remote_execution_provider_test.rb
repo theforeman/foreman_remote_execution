@@ -93,11 +93,11 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         method_param = FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'sudo')
         host.host_parameters << method_param
         proxy_options[:effective_user_method].must_equal 'sudo'
-        method_param.update_attributes!(:value => 'su')
+        method_param.update!(:value => 'su')
         host.clear_host_parameters_cache!
         proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
         proxy_options[:effective_user_method].must_equal 'su'
-        method_param.update_attributes!(:value => 'dzdo')
+        method_param.update!(:value => 'dzdo')
         host.clear_host_parameters_cache!
         proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
         proxy_options[:effective_user_method].must_equal 'dzdo'
@@ -162,9 +162,9 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
         # execution wins if present
         execution_interface = FactoryBot.build(:nic_managed,
-                                               flags.merge(:execution => true, :name => 'special.somedomain.org'))
+          flags.merge(:execution => true, :name => 'special.somedomain.org'))
         host.interfaces << execution_interface
-        host.primary_interface.update_attributes(:execution => false)
+        host.primary_interface.update(:execution => false)
         host.interfaces.each(&:save)
         host.reload
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.fqdn
@@ -177,23 +177,23 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
         # provision interface with ip while primary without
         provision_interface = FactoryBot.build(:nic_managed,
-                                               flags.merge(:provision => true, :ip => '10.0.0.1'))
+          flags.merge(:provision => true, :ip => '10.0.0.1'))
         host.interfaces << provision_interface
-        host.primary_interface.update_attributes(:provision => false)
+        host.primary_interface.update(:provision => false)
         host.interfaces.each(&:save)
         host.reload
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal provision_interface.ip
 
         # both primary and provision interface have IPs: the primary wins
-        host.primary_interface.update_attributes(:ip => '10.0.0.2', :execution => false)
+        host.primary_interface.update(:ip => '10.0.0.2', :execution => false)
         host.reload
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal host.primary_interface.ip
 
         # there is an execution interface with IP: it wins
         execution_interface = FactoryBot.build(:nic_managed,
-                                               flags.merge(:execution => true, :ip => '10.0.0.3'))
+          flags.merge(:execution => true, :ip => '10.0.0.3'))
         host.interfaces << execution_interface
-        host.primary_interface.update_attributes(:execution => false)
+        host.primary_interface.update(:execution => false)
         host.interfaces.each(&:save)
         host.reload
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip

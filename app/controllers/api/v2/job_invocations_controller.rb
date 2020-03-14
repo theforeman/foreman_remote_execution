@@ -18,7 +18,8 @@ module Api
 
       api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
-      def show; end
+      def show
+      end
 
       def_param_group :job_invocation do
         param :job_invocation, Hash, :required => true, :action_aware => true do
@@ -28,8 +29,8 @@ module Api
           param :inputs, Hash, :required => false, :desc => N_('Inputs to use')
           param :ssh, Hash, :desc => N_('SSH provider specific options') do
             param :effective_user, String,
-                  :required => false,
-                  :desc => N_('What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting.')
+              :required => false,
+              :desc => N_('What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting.')
           end
 
           param :recurrence, Hash, :desc => N_('Create a recurring job') do
@@ -106,7 +107,7 @@ module Api
           render :json => { :cancelled => result, :id => @job_invocation.id }
         else
           render :json => { :message => _('The job could not be cancelled.') },
-                 :status => 422
+                 :status => :unprocessable_entity
         end
       end
 
@@ -121,7 +122,7 @@ module Api
           process_response @job_invocation
         else
           render :json => { :error => _('Could not rerun job %{id} because its template could not be found') % { :id => composer.reruns } },
-                 :status => 404
+                 :status => :not_found
         end
       end
 
@@ -158,6 +159,7 @@ module Api
 
       def job_invocation_params
         return @job_invocation_params if @job_invocation_params.present?
+
         job_invocation_params = params.fetch(:job_invocation, {}).dup
         if job_invocation_params.key?(:ssh)
           job_invocation_params.merge!(job_invocation_params.delete(:ssh).permit(:effective_user))

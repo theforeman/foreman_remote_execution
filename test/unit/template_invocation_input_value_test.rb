@@ -31,8 +31,8 @@ class TemplateInvocationInputTest < ActiveSupport::TestCase
     template.template_inputs << FactoryBot.build(:template_input, :name => 'service_name',
                                                                   :input_type => 'user', :required => true)
     assert_valid FactoryBot.create(:template_invocation_input_value,
-                                   :template_invocation => template_invocation,
-                                   :template_input => template.template_inputs.first,
-                                   :value => 'foreman' * 1_000_000)
+      :template_invocation => template_invocation,
+      :template_input => template.template_inputs.first,
+      :value => 'foreman' * 1_000_000)
   end
 end

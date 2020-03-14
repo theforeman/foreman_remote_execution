@@ -89,9 +89,11 @@ class RemoteExecutionProvider
       host.host_param(setting.to_s) || Setting[setting]
     end
 
-    def ssh_password(_host) end
+    def ssh_password(_host)
+    end
 
-    def ssh_key_passphrase(_host) end
+    def ssh_key_passphrase(_host)
+    end
 
     def proxy_action_class
       ForemanRemoteExecutionCore::Actions::RunScript

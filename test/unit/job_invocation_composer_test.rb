@@ -223,8 +223,8 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           { :job_template_id => trying_job_template_1.id.to_s,
             :job_templates => {
               trying_job_template_1.id.to_s => {
-                :input_values => { input1.id.to_s => { :value => 'value1' }, unauthorized_input1.id.to_s => { :value => 'dropped' } }
-              }
+                :input_values => { input1.id.to_s => { :value => 'value1' }, unauthorized_input1.id.to_s => { :value => 'dropped' } },
+              },
             }}
         end
         let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
@@ -242,13 +242,13 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           { :job_template_id => trying_job_template_1.id.to_s,
             :job_templates => {
               trying_job_template_1.id.to_s => {
-                :effective_user => invocation_effective_user
-              }
+                :effective_user => invocation_effective_user,
+              },
             }}
         end
         let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
         let(:template_invocation) do
-          trying_job_template_1.effective_user.update_attributes(:overridable => overridable, :value => 'template user')
+          trying_job_template_1.effective_user.update(:overridable => overridable, :value => 'template user')
           composer.pattern_template_invocations.first
         end
 
@@ -391,8 +391,8 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
             { :job_template_id => trying_job_template_1.id.to_s,
               :job_templates => {
                 trying_job_template_1.id.to_s => {
-                  :input_values => { }
-                }
+                  :input_values => { },
+                },
               } }
           end
           let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
@@ -408,8 +408,8 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
             { :job_template_id => trying_job_template_1.id.to_s,
               :job_templates => {
                 trying_job_template_1.id.to_s => {
-                  :input_values => { input1.id.to_s => { :value => 'value1' } }
-                }
+                  :input_values => { input1.id.to_s => { :value => 'value1' } },
+                },
               } }
           end
           let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
@@ -426,8 +426,8 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           { :job_template_id => trying_job_template_1.id.to_s,
             :job_templates => {
               trying_job_template_1.id.to_s => {
-                :input_values => { input1.id.to_s => { :value => 'value1' } }
-              }
+                :input_values => { input1.id.to_s => { :value => 'value1' } },
+              },
             } }
         end
 
@@ -549,8 +549,8 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           { :job_template_id => trying_job_template_1.id.to_s,
             :job_templates => {
               trying_job_template_1.id.to_s => {
-                :input_values => { input1.id.to_s => { :value => 'value1' } }
-              }
+                :input_values => { input1.id.to_s => { :value => 'value1' } },
+              },
             } }
         end
         let(:params) do
@@ -562,8 +562,8 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
             },
             :targeting => {
               :search_query => "name = #{host.name}",
-              :targeting_type => Targeting::STATIC_TYPE
-            }
+              :targeting_type => Targeting::STATIC_TYPE,
+            },
           }.with_indifferent_access
         end
         let(:existing) { composer.job_invocation }
@@ -685,7 +685,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           :job_template_id => trying_job_template_1.id,
           :concurrency_control => {
             :concurrency_level => level,
-            :time_span => time_span
+            :time_span => time_span,
           },
           :targeting_type => 'static_query',
           :search_query => 'some hosts',

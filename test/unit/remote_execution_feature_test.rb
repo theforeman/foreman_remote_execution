@@ -8,8 +8,8 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
 
   let(:install_feature) do
     RemoteExecutionFeature.register(:katello_install_package, N_('Katello: Install package'),
-                                    :description => 'Install package via Katello user interface',
-                                    :provided_inputs => ['package'])
+      :description => 'Install package via Katello user interface',
+      :provided_inputs => ['package'])
   end
 
   let(:package_template) do
@@ -24,7 +24,7 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
 
   before do
     User.current = users :admin
-    install_feature.update_attributes!(:job_template_id => package_template.id)
+    install_feature.update!(:job_template_id => package_template.id)
   end
 
   describe 'composer' do
@@ -45,8 +45,8 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
 
     it 'updates the feature when attributes change' do
       updated_feature = RemoteExecutionFeature.register(install_feature.label, N_('Katello: Install package'),
-                                                        :description => 'New description',
-                                                        :provided_inputs => ['package', 'force'])
+        :description => 'New description',
+        :provided_inputs => ['package', 'force'])
       updated_feature.reload
       updated_feature.id.must_equal(install_feature.id)
       updated_feature.description.must_equal 'New description'

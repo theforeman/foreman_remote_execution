@@ -13,7 +13,8 @@ module Api
 
       api :GET, '/remote_execution_features/:id', N_('Show remote execution feature')
       param :id, :identifier, :required => true
-      def show; end
+      def show
+      end
 
       def_param_group :remote_execution_feature do
         param :remote_execution_feature, Hash, :required => true, :action_aware => true do
@@ -25,7 +26,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :remote_execution_feature
       def update
-        process_response @remote_execution_feature.update_attributes(remote_execution_feature_params)
+        process_response @remote_execution_feature.update(remote_execution_feature_params)
       end
 
       private

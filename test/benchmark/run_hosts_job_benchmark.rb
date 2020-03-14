@@ -37,7 +37,7 @@ class ActionTester
 
   def run_action(*args)
     action = create_action(Actions::RemoteExecution::RunHostsJob)
-    @task.update_attributes(:external_id => action.execution_plan_id)
+    @task.update(:external_id => action.execution_plan_id)
     plan_action(action, *args)
   end
 end

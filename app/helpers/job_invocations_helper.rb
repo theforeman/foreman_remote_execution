@@ -15,7 +15,7 @@ module JobInvocationsHelper
   def job_invocations_buttons
     [
       documentation_button_rex('3.2ExecutingaJob'),
-      display_link_if_authorized(_('Run Job'), hash_for_new_job_invocation_path)
+      display_link_if_authorized(_('Run Job'), hash_for_new_job_invocation_path),
     ]
   end
 
@@ -25,7 +25,7 @@ module JobInvocationsHelper
     link_content = template_name + ' - ' + provider + ' ' +
       icon_text('edit', '', :kind => 'pficon')
     link_to_if_authorized(link_content,
-                          hash_for_edit_job_template_path(:id => template.id))
+      hash_for_edit_job_template_path(:id => template.id))
   end
 
   def preview_hosts(template_invocation)
@@ -41,18 +41,18 @@ module JobInvocationsHelper
   def collapsed_preview(target)
     title = target.try(:name) || 'N/A'
     content_tag(:h5,
-                :class => "expander collapsed out",
-                :data => { :toggle => 'collapse',
-                           :target => "#preview_#{target.id}" }) do
+      :class => "expander collapsed out",
+      :data => { :toggle => 'collapse',
+                 :target => "#preview_#{target.id}" }) do
       content_tag(:span, '', :class => 'caret') + title
     end
   end
 
   def show_job_organization(organization)
-    organization.present? ? organization : _('Any Organization')
+    organization.presence || _('Any Organization')
   end
 
   def show_job_location(location)
-    location.present? ? location : _('Any Location')
+    location.presence || _('Any Location')
   end
 end

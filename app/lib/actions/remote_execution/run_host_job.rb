@@ -109,7 +109,7 @@ module Actions
         end
         if exit_status
           continuous_output.add_output(_('Exit status: %s') % exit_status, 'stdout', final_timestamp)
-        elsif run_step && run_step.error
+        elsif run_step&.error
           continuous_output.add_output(_('Job finished with error') + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', final_timestamp)
         end
       rescue => e
@@ -161,8 +161,8 @@ module Actions
           offline_proxies = proxy_selector.offline
           settings = { :count => offline_proxies.count, :proxy_names => offline_proxies.map(&:name).join(', ') }
           raise n_('The only applicable proxy %{proxy_names} is down',
-                   'All %{count} applicable proxies are down. Tried %{proxy_names}',
-                   offline_proxies.count) % settings
+            'All %{count} applicable proxies are down. Tried %{proxy_names}',
+            offline_proxies.count) % settings
         elsif proxy == :not_defined
           settings = { :global_proxy => 'remote_execution_global_proxy',
                        :fallback_proxy => 'remote_execution_fallback_proxy' }

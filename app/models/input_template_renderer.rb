@@ -43,7 +43,7 @@ class InputTemplateRenderer
         input_values: @template_input_values,
         templates_stack: templates_stack,
         input_template_instance: self,
-        current_user: User.current.try(:login)
+        current_user: User.current.try(:login),
       }
     )
     Foreman::Renderer.render(source, @scope)

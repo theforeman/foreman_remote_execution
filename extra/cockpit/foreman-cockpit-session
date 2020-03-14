@@ -44,9 +44,11 @@ end
 def read_control
   size = $stdin.readline.chomp.to_i
   raise ArgumentError, "Invalid frame: invalid size" if size.zero?
+
   data = $stdin.read(size)
   LOG.debug("Received control message #{data.lstrip}")
   raise ArgumentError, "Invalid frame: too short" if data.nil? || data.length < size
+
   JSON.parse(data)
 end
 
@@ -67,6 +69,7 @@ def read_auth_reply
   cmd = read_control
   response = cmd["response"]
   raise ArgumentError, "Did not receive a valid authorize command" if cmd["command"] != "authorize" || !response
+
   response
 end
 
@@ -112,8 +115,8 @@ def foreman_call(path, token)
     return JSON.parse(res.body)
   when "401"
     exit_with_problem("authentication-failed",
-                      "Token was not valid",
-                      { "password" => "not-tried", "token" => "denied" })
+      "Token was not valid",
+      { "password" => "not-tried", "token" => "denied" })
   when "404"
     return nil
   else
@@ -135,6 +138,7 @@ def ssh_read_and_handle_response_header(sock, url, params)
   loop do
     line = sock.readline
     break unless line && (line != "\r\n")
+
     header += line
   end
 
@@ -262,6 +266,7 @@ def ssh_with_proxy(proxy, params)
     end
 
     next unless w.include?($stdout)
+
     n = $stdout.write(out_buf)
     $stdout.flush
     out_buf = out_buf[n..-1]
