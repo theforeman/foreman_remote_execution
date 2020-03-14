@@ -68,7 +68,8 @@ module ForemanRemoteExecutionCore
       @ssh_user = ssh_user
     end
 
-    def on_data(_, _); end
+    def on_data(_, _)
+    end
 
     def filter_password?(received_data)
       false
@@ -82,11 +83,13 @@ module ForemanRemoteExecutionCore
       "su - #{effective_user} -c "
     end
 
-    def reset; end
+    def reset
+    end
   end
 
   class NoopUserMethod
-    def on_data(_, _); end
+    def on_data(_, _)
+    end
 
     def filter_password?(received_data)
       false
@@ -96,9 +99,11 @@ module ForemanRemoteExecutionCore
       true
     end
 
-    def cli_command_prefix; end
+    def cli_command_prefix
+    end
 
-    def reset; end
+    def reset
+    end
   end
 
   class ScriptRunner < ForemanTasksCore::Runner::Base
@@ -136,10 +141,10 @@ module ForemanRemoteExecutionCore
                       NoopUserMethod.new
                     elsif effective_user_method == 'sudo'
                       SudoUserMethod.new(effective_user, ssh_user,
-                                         options.fetch(:secrets, {}).fetch(:sudo_password, nil))
+                        options.fetch(:secrets, {}).fetch(:sudo_password, nil))
                     elsif effective_user_method == 'dzdo'
                       DzdoUserMethod.new(effective_user, ssh_user,
-                                         options.fetch(:secrets, {}).fetch(:sudo_password, nil))
+                        options.fetch(:secrets, {}).fetch(:sudo_password, nil))
                     elsif effective_user_method == 'su'
                       SuUserMethod.new(effective_user, ssh_user)
                     else
@@ -182,6 +187,7 @@ module ForemanRemoteExecutionCore
 
     def refresh
       return if @session.nil?
+
       with_retries do
         with_disconnect_handling do
           @session.process(0)
@@ -295,6 +301,7 @@ module ForemanRemoteExecutionCore
     # part of calling the `refresh` method.
     def run_async(command)
       raise 'Async command already in progress' if @started
+
       @started = false
       @user_method.reset
 
@@ -350,6 +357,7 @@ module ForemanRemoteExecutionCore
         end
         ch.exec command do |_, success|
           raise 'could not execute command' unless success
+
           started = true
         end
       end
@@ -413,6 +421,7 @@ module ForemanRemoteExecutionCore
       if status != 0
         raise "Unable to upload file to #{path} on remote system: exit code: #{status}"
       end
+
       path
     end
 
@@ -446,6 +455,7 @@ module ForemanRemoteExecutionCore
     def check_expecting_disconnect
       last_output = @continuous_output.raw_outputs.find { |d| d['output_type'] == 'stdout' }
       return unless last_output
+
       if EXPECTED_POWER_ACTION_MESSAGES.any? { |message| last_output['output'] =~ /^#{message}/ }
         @expecting_disconnect = true
       end

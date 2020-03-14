@@ -2,7 +2,7 @@ module ForemanRemoteExecution
   module HostsHelperExtensions
     def host_overview_buttons(host)
       [
-        { :button => link_to_if_authorized(_("Jobs"), hash_for_job_invocations_path(search: "host=#{host.name}"), :title => _("Job invocations"), :class => 'btn btn-default'), :priority => 200 }
+        { :button => link_to_if_authorized(_("Jobs"), hash_for_job_invocations_path(search: "host=#{host.name}"), :title => _("Job invocations"), :class => 'btn btn-default'), :priority => 200 },
       ]
     end
 
@@ -28,13 +28,14 @@ module ForemanRemoteExecution
 
     def web_console_button(host, *args)
       return unless authorized_for(permission: 'cockpit_hosts', auth_object: host)
+
       url = SSHExecutionProvider.cockpit_url_for_host(host.name)
       url ? link_to(_('Web Console'), url, :class => 'btn btn-default', :id => :'web-console-button') : nil
     end
 
     def host_title_actions(*args)
       title_actions(button_group(schedule_job_multi_button(*args)),
-                    button_group(web_console_button(*args)))
+        button_group(web_console_button(*args)))
       super(*args)
     end
   end

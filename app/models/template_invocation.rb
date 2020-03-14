@@ -31,13 +31,12 @@ class TemplateInvocation < ApplicationRecord
       :error     => :failed,
       :pending   => :pending,
       :success   => :success,
-      :warning   => :failed
+      :warning   => :failed,
     }.with_indifferent_access
 
-    REVERSE_MAP = MAP.reduce({}) do |acc, (key, value)|
+    REVERSE_MAP = MAP.each_with_object({}) do |(key, value), acc|
       acc[value] ||= []
       acc[value] << key
-      acc
     end.with_indifferent_access
 
     class << self

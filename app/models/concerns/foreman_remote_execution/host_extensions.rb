@@ -26,11 +26,11 @@ module ForemanRemoteExecution
 
           mapping = {
             'job_invocation.id'     => %(#{TemplateInvocation.table_name}.job_invocation_id #{operator} ?),
-            'job_invocation.result' => %(#{ForemanTasks::Task.table_name}.result #{operator} (?))
+            'job_invocation.result' => %(#{ForemanTasks::Task.table_name}.result #{operator} (?)),
           }
           {
             :conditions => sanitize_sql_for_conditions([mapping[key], value_to_sql(operator, value)]),
-            :joins => { :template_invocations => [:run_host_job_task] }
+            :joins => { :template_invocations => [:run_host_job_task] },
           }
         end
       end
@@ -66,7 +66,7 @@ module ForemanRemoteExecution
 
     def remote_execution_proxies(provider, authorized = true)
       proxies = {}
-      proxies[:subnet]   = execution_interface.subnet.remote_execution_proxies.with_features(provider) if execution_interface && execution_interface.subnet
+      proxies[:subnet]   = execution_interface.subnet.remote_execution_proxies.with_features(provider) if execution_interface&.subnet
       proxies[:fallback] = smart_proxies.with_features(provider) if Setting[:remote_execution_fallback_proxy]
 
       if Setting[:remote_execution_global_proxy]

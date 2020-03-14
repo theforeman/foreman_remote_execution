@@ -10,6 +10,7 @@ Bookmark.without_auditing do
     next if Bookmark.where(:controller => 'job_invocations').find_by(name: input[:name])
     # TODO audit should be fixed once core #13109 gets merged
     next if SeedHelper.audit_modified? Bookmark, input[:name]
+
     attributes = { :public => true }.merge(input)
     b = Bookmark.where(:name => input[:name], :controller => input[:controller]).first || Bookmark.new
     b.attributes = attributes

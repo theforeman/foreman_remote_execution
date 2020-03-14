@@ -128,7 +128,7 @@ FactoryBot.modify do
       domain
       subnet do
         overrides = {
-          :remote_execution_proxies => [FactoryBot.create(:smart_proxy, :ssh)]
+          :remote_execution_proxies => [FactoryBot.create(:smart_proxy, :ssh)],
         }
 
         overrides[:locations] = [location] unless location.nil?

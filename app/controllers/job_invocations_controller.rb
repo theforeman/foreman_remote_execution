@@ -5,12 +5,13 @@ class JobInvocationsController < ApplicationController
 
   def new
     return @composer = prepare_composer if params[:feature].present?
+
     ui_params = {
       :host_ids => params[:host_ids],
       :targeting => {
         :targeting_type => Targeting::STATIC_TYPE,
-        :bookmark_id => params[:bookmark_id]
-      }
+        :bookmark_id => params[:bookmark_id],
+      },
     }
     # replace an empty string search with a dummy search query to match all hosts
     # but only if search query was entered (based on presence of :search parameter)
@@ -23,8 +24,8 @@ class JobInvocationsController < ApplicationController
       ui_params[:job_invocation] = {
         :job_category => template.job_category,
         :providers => {
-          template.provider_type => {:job_template_id => template.id}
-        }
+          template.provider_type => {:job_template_id => template.id},
+        },
       }
     end
 
@@ -82,7 +83,7 @@ class JobInvocationsController < ApplicationController
         :success => @job_invocation.progress_report[:success],
         :cancelled => @job_invocation.progress_report[:cancelled],
         :failed => @job_invocation.progress_report[:error],
-        :pending => @job_invocation.progress_report[:pending]
+        :pending => @job_invocation.progress_report[:pending],
       },
     }
   end

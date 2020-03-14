@@ -7,6 +7,7 @@ class CockpitController < ApplicationController
 
   def redirect
     return invalid_request unless params[:redirect_uri]
+
     redir_url = URI.parse(params[:redirect_uri])
 
     cockpit_url = SSHExecutionProvider.cockpit_url_for_host('')

@@ -32,7 +32,7 @@ class SSHExecutionProvider < RemoteExecutionProvider
       {
         :ssh_password => ssh_password(host),
         :key_passphrase => ssh_key_passphrase(host),
-        :sudo_password => sudo_password(host)
+        :sudo_password => sudo_password(host),
       }
     end
 
@@ -45,7 +45,7 @@ class SSHExecutionProvider < RemoteExecutionProvider
         :ssh_user => ssh_user(host),
         :ssh_port => ssh_port(host),
         :ssh_password => ssh_password(host),
-        :ssh_key_passphrase => ssh_key_passphrase(host)
+        :ssh_key_passphrase => ssh_key_passphrase(host),
       }
     end
 

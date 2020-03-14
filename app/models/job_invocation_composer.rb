@@ -37,7 +37,7 @@ class JobInvocationComposer
     end
 
     def blank_to_nil(thing)
-      thing.blank? ? nil : thing
+      thing.presence
     end
 
     # TODO: Fix this comment
@@ -71,16 +71,18 @@ class JobInvocationComposer
     def concurrency_control_params
       {
         :time_span => job_invocation_base[:time_span],
-        :level => job_invocation_base[:concurrency_level]
+        :level => job_invocation_base[:concurrency_level],
       }
     end
 
     def triggering
       return {} unless ui_params.key?(:triggering)
+
       trig = ui_params[:triggering]
       keys = (1..5).map { |i| "end_time(#{i}i)" }
       values = trig.fetch(:end_time, {}).values_at(*keys)
       return trig if values.any?(&:nil?)
+
       trig.merge(:end_time => Time.local(*values))
     end
 
@@ -109,6 +111,7 @@ class JobInvocationComposer
 
     def targeting_params
       raise ::Foreman::Exception, _('Cannot specify both bookmark_id and search_query') if api_params[:bookmark_id] && api_params[:search_query]
+
       api_params.slice(:targeting_type, :bookmark_id, :search_query, :randomized_ordering).merge(:user_id => User.current.id)
     end
 
@@ -121,14 +124,14 @@ class JobInvocationComposer
           :cronline => api_params[:recurrence][:cron_line],
           :end_time => format_datetime(api_params[:recurrence][:end_time]),
           :input_type => :cronline,
-          :max_iteration => api_params[:recurrence][:max_iteration]
+          :max_iteration => api_params[:recurrence][:max_iteration],
         }
       elsif api_params[:scheduling].present?
         {
           :mode => :future,
           :start_at_raw => format_datetime(api_params[:scheduling][:start_at]),
           :start_before_raw => format_datetime(api_params[:scheduling][:start_before]),
-          :end_time_limited => api_params[:scheduling][:start_before] ? true : false
+          :end_time_limited => api_params[:scheduling][:start_before] ? true : false,
         }
       else
         {}
@@ -138,7 +141,7 @@ class JobInvocationComposer
     def concurrency_control_params
       {
         :level => api_params.fetch(:concurrency_control, {})[:concurrency_level],
-        :time_span => api_params.fetch(:concurrency_control, {})[:time_span]
+        :time_span => api_params.fetch(:concurrency_control, {})[:time_span],
       }
     end
 
@@ -163,6 +166,7 @@ class JobInvocationComposer
 
     def format_datetime(datetime)
       return datetime if datetime.blank?
+
       Time.parse(datetime).strftime('%Y-%m-%d %H:%M')
     end
   end
@@ -196,7 +200,7 @@ class JobInvocationComposer
     def concurrency_control_params
       {
         :level => job_invocation.concurrency_level,
-        :time_span => job_invocation.time_span
+        :time_span => job_invocation.time_span,
       }
     end
 
@@ -272,11 +276,12 @@ class JobInvocationComposer
 
     def input_values_params
       return {} if @provided_inputs.blank?
+
       @provided_inputs.map do |key, value|
         input = job_template.template_inputs_with_foreign.find { |i| i.name == key.to_s }
         unless input
           raise Foreman::Exception.new(N_('Feature input %{input_name} not defined in template %{template_name}'),
-                                       :input_name => key, :template_name => job_template.name)
+            :input_name => key, :template_name => job_template.name)
         end
         { 'template_input_id' => input.id, 'value' => value }
       end
@@ -285,14 +290,14 @@ class JobInvocationComposer
     def job_template
       unless feature.job_template
         raise Foreman::Exception.new(N_('No template mapped to feature %{feature_name}'),
-                                     :feature_name => feature.name)
+          :feature_name => feature.name)
       end
       template = JobTemplate.authorized(:view_job_templates).find_by(id: feature.job_template_id)
 
       unless template
         raise Foreman::Exception.new(N_('The template %{template_name} mapped to feature %{feature_name} is not accessible by the user'),
-                                     :template_name => template.name,
-                                     :feature_name => feature.name)
+          :template_name => template.name,
+          :feature_name => feature.name)
       end
       template
     end
@@ -575,8 +580,10 @@ class JobInvocationComposer
   def resolve_for_composer(default_value, &block)
     setting_value = Setting['remote_execution_form_job_template']
     return default_value unless setting_value
+
     form_template = JobTemplate.find_by :name => setting_value
     return default_value unless form_template
+
     if block_given?
       yield form_template
     else

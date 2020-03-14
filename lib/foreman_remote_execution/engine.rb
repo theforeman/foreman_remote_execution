@@ -78,7 +78,7 @@ module ForemanRemoteExecution
           permission :cancel_job_invocations, { :job_invocations => [:cancel], 'api/v2/job_invocations' => [:cancel] }, :resource_type => 'JobInvocation'
           # this permissions grants user to get auto completion hints when setting up filters
           permission :filter_autocompletion_for_template_invocation, { :template_invocations => [ :auto_complete_search, :index ] },
-                     :resource_type => 'TemplateInvocation'
+            :resource_type => 'TemplateInvocation'
           permission :cockpit_hosts, { 'cockpit' => [:redirect, :host_ssh_params] }, :resource_type => 'Host'
         end
 
@@ -88,7 +88,7 @@ module ForemanRemoteExecution
           :create_job_invocations,
           :create_template_invocations,
           :view_hosts,
-          :view_smart_proxies
+          :view_smart_proxies,
         ].freeze
         MANAGER_PERMISSIONS = USER_PERMISSIONS + [
           :cancel_job_invocations,
@@ -98,7 +98,7 @@ module ForemanRemoteExecution
           :lock_job_templates,
           :view_audit_logs,
           :filter_autocompletion_for_template_invocation,
-          :edit_remote_execution_features
+          :edit_remote_execution_features,
         ]
 
         # Add a new role called 'Remote Execution User ' if it doesn't exist
@@ -109,21 +109,21 @@ module ForemanRemoteExecution
 
         # add menu entry
         menu :top_menu, :job_templates,
-             url_hash: { controller: :job_templates, action: :index },
-             caption: N_('Job templates'),
-             parent: :hosts_menu,
-             after: :provisioning_templates
+          url_hash: { controller: :job_templates, action: :index },
+          caption: N_('Job templates'),
+          parent: :hosts_menu,
+          after: :provisioning_templates
         menu :admin_menu, :remote_execution_features,
-             url_hash: { controller: :remote_execution_features, action: :index },
-             caption: N_('Remote Execution Features'),
-             parent: :administer_menu,
-             after: :bookmarks
+          url_hash: { controller: :remote_execution_features, action: :index },
+          caption: N_('Remote Execution Features'),
+          parent: :administer_menu,
+          after: :bookmarks
 
         menu :top_menu, :job_invocations,
-             url_hash: { controller: :job_invocations, action: :index },
-             caption: N_('Jobs'),
-             parent: :monitor_menu,
-             after: :audits
+          url_hash: { controller: :job_invocations, action: :index },
+          caption: N_('Jobs'),
+          parent: :monitor_menu,
+          after: :audits
 
         register_custom_status HostStatus::ExecutionStatus
         # add dashboard widget

@@ -3,12 +3,13 @@
 module JobInvocationsChartHelper
   def job_invocation_chart(invocation)
     donut_chart('#status_chart',
-                job_invocation_data(invocation)[:columns],
-                job_invocation_data(invocation)[:groups])
+      job_invocation_data(invocation)[:columns],
+      job_invocation_data(invocation)[:groups])
   end
 
   def job_invocation_data(invocation)
     return @job_invocation_data if @job_invocation_data.present?
+
     progress_report = invocation.progress_report
     success = progress_report[:success]
     cancelled = progress_report[:cancelled]
@@ -45,26 +46,26 @@ module JobInvocationsChartHelper
 
   def job_invocation_success_status
     icon_text('ok',
-              @job_invocation_data[0][1],
-              :kind => 'pficon')
+      @job_invocation_data[0][1],
+      :kind => 'pficon')
   end
 
   def job_invocation_failed_status
     icon_text('error-circle-o',
-              @job_invocation_data[1][1],
-              :kind => 'pficon')
+      @job_invocation_data[1][1],
+      :kind => 'pficon')
   end
 
   def job_invocation_pending_status
     icon_text('running',
-              @job_invocation_data[2][1],
-              :kind => 'pficon')
+      @job_invocation_data[2][1],
+      :kind => 'pficon')
   end
 
   def job_invocation_cancelled_status
     icon_text('close',
-              @job_invocation_data[3][1],
-              :kind => 'pficon')
+      @job_invocation_data[3][1],
+      :kind => 'pficon')
   end
 
   def task_failed?(task)

@@ -23,7 +23,7 @@ module Api
           'template_id'          => @template_invocation.template_id,
           'effective_user'       => @template_invocation.effective_user,
           'job_invocation_id'    => @job.id,
-          'run_host_job_task_id' => @template_invocation.run_host_job_task_id
+          'run_host_job_task_id' => @template_invocation.run_host_job_task_id,
         }
         invocations['results'].must_equal [expected_result]
         assert_response :success

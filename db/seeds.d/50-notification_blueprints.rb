@@ -9,10 +9,10 @@ blueprints = [
       links:
       [
         path_method: :job_invocation_path,
-        title: N_('Job Details')
-      ]
-    }
-  }
+        title: N_('Job Details'),
+      ],
+    },
+  },
 ]
 
 blueprints.each { |blueprint| UINotifications::Seed.new(blueprint).configure }

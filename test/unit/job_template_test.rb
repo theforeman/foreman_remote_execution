@@ -261,7 +261,7 @@ class JobTemplateTest < ActiveSupport::TestCase
     it 'is importable' do
       erb
       old_name = exportable_template.name
-      exportable_template.update_attributes(:name => "#{old_name}_renamed")
+      exportable_template.update(:name => "#{old_name}_renamed")
 
       imported = JobTemplate.import_raw!(erb)
       imported.name.must_equal old_name
@@ -305,8 +305,8 @@ class JobTemplateTest < ActiveSupport::TestCase
 
       setup_user('view', 'job_templates')
       renderer = InputTemplateRenderer.new template_invocation.template,
-                                           template_invocation.host,
-                                           template_invocation
+        template_invocation.host,
+        template_invocation
       result = renderer.render
       result.must_equal "<wrap>#{inner.template}</wrap>"
     end

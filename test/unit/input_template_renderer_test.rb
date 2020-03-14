@@ -67,7 +67,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         context 'with invocation specified and a required input' do
           before do
-            template.template_inputs.first.update_attributes(:required => true)
+            template.template_inputs.first.update(:required => true)
             template_invocation.reload
             renderer.invocation = template_invocation
           end
@@ -82,9 +82,9 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
         context 'with invocation specified' do
           before do
             FactoryBot.create(:template_invocation_input_value,
-                              :template_invocation => template_invocation,
-                              :template_input => template.template_inputs.first,
-                              :value => 'foreman')
+              :template_invocation => template_invocation,
+              :template_input => template.template_inputs.first,
+              :value => 'foreman')
             template_invocation.reload # need to get input_values findable
             renderer.invocation = template_invocation
           end
@@ -161,7 +161,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
       let(:template) do
         FactoryBot.create(:job_template,
-                          :template => '<%= render_template("package action", { :action => "install" }, { :with_foreign_input_set => true }) %>').tap do |template|
+          :template => '<%= render_template("package action", { :action => "install" }, { :with_foreign_input_set => true }) %>').tap do |template|
           template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => package_template, :include_all => true, :exclude => 'action')
         end
       end
@@ -189,7 +189,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           let(:template_2) do
             FactoryBot.create(:job_template, :template => '<%= render_template("package action", "action" => "install") %>').tap do |template|
               template.foreign_input_sets << FactoryBot.build(:foreign_input_set,
-                                                              :target_template => package_template, :include_all => true, :include => '', :exclude => '')
+                :target_template => package_template, :include_all => true, :include => '', :exclude => '')
             end
           end
 
@@ -228,9 +228,9 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       context 'with invocation specified' do
         before do
           FactoryBot.create(:template_invocation_input_value,
-                            :template_invocation => template_invocation,
-                            :template_input => template.template_inputs_with_foreign.find { |input| input.name == 'package' },
-                            :value => 'zsh')
+            :template_invocation => template_invocation,
+            :template_input => template.template_inputs_with_foreign.find { |input| input.name == 'package' },
+            :value => 'zsh')
           renderer.invocation = template_invocation
           renderer.invocation.reload
         end
@@ -245,7 +245,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       context 'with explicitly specifying inputs' do
         let(:template) do
           FactoryBot.create(:job_template,
-                            :template => '<%= render_template("package action", {"action" => "install", :package => "zsh"}) %>')
+            :template => '<%= render_template("package action", {"action" => "install", :package => "zsh"}) %>')
         end
 
         before do
@@ -275,9 +275,9 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       let(:required) { false }
       let(:input) do
         FactoryBot.create(:template_invocation_input_value,
-                          :template_invocation => template_invocation,
-                          :template_input => template.template_inputs.first,
-                          :value => 'foreman')
+          :template_invocation => template_invocation,
+          :template_input => template.template_inputs.first,
+          :value => 'foreman')
       end
 
       before do
@@ -505,10 +505,10 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
     context 'with matching input defined' do
       before do
         renderer.template.template_inputs<< FactoryBot.build(:template_input,
-                                                             :name => 'nginx_version',
-                                                             :input_type => 'puppet_parameter',
-                                                             :puppet_parameter_name => 'version',
-                                                             :puppet_class_name => 'nginx')
+          :name => 'nginx_version',
+          :input_type => 'puppet_parameter',
+          :puppet_parameter_name => 'version',
+          :puppet_class_name => 'nginx')
       end
       let(:result) { renderer.render }
 
@@ -553,11 +553,11 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
             end
             let(:lookup_key) do
               FactoryBot.create(:puppetclass_lookup_key, :as_smart_class_param,
-                                :key => 'version',
-                                :puppetclass => puppet_class,
-                                :path => 'fqdn',
-                                :override => true,
-                                :overrides => {"fqdn=#{renderer.host.fqdn}" => '1.4.7'})
+                :key => 'version',
+                :puppetclass => puppet_class,
+                :path => 'fqdn',
+                :override => true,
+                :overrides => {"fqdn=#{renderer.host.fqdn}" => '1.4.7'})
             end
 
             describe 'rendering' do

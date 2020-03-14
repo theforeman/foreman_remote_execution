@@ -61,6 +61,7 @@ class Targeting < ApplicationRecord
 
   def self.build_query_from_hosts(ids)
     return '' if ids.empty?
+
     hosts = Host.where(:id => ids).distinct.pluck(:name)
     "name ^ (#{hosts.join(', ')})"
   end

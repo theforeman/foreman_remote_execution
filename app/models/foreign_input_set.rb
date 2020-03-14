@@ -16,9 +16,10 @@ class ForeignInputSet < ApplicationRecord
 
   def inputs(templates_stack = [])
     return [] unless target_template
+
     if templates_stack.include?(target_template) || template&.id == target_template&.id
       raise CircularDependencyError.new(N_("Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"),
-                                        :template => template.name, :target_template => target_template.name, :templates_stack => templates_stack.map(&:name).inspect)
+        :template => template.name, :target_template => target_template.name, :templates_stack => templates_stack.map(&:name).inspect)
     end
     inputs = target_template.template_inputs_with_foreign(templates_stack + [target_template])
     unless self.include_all?

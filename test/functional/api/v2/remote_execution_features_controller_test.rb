@@ -5,8 +5,8 @@ module Api
     class RemoteExecutionFeaturesControllerTest < ActionController::TestCase
       setup do
         @remote_execution_feature = RemoteExecutionFeature.register(:my_awesome_feature, 'My awesome feature',
-                                                                    :description => 'You will not believe what it does',
-                                                                    :provided_inputs => ['awesomeness_level'])
+          :description => 'You will not believe what it does',
+          :provided_inputs => ['awesomeness_level'])
         @template = FactoryBot.create(:job_template, :with_input)
       end
 

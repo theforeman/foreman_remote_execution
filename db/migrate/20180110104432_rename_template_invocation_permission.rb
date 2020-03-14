@@ -14,6 +14,7 @@ class RenameTemplateInvocationPermission < ActiveRecord::Migration[4.2]
   def switch_filtering_permission!(old, new)
     old_permission = Permission.find_by(:name => old)
     return if old_permission.nil?
+
     new_permission = Permission.find_or_create_by(:name => new,
                                                   :resource_type => 'TemplateInvocation')
     old_permission.filterings.each do |filtering|

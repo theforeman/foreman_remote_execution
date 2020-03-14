@@ -58,6 +58,7 @@ module ForemanRemoteExecutionCore
         @logger.info("Error while connecting to the remote host on refresh: #{e.message}")
       end
       return if output.nil? || output.empty?
+
       lines = output.lines
       result = lines.shift.match(/^DONE (\d+)?/)
       publish_data(lines.join, 'stdout') unless lines.empty?
@@ -90,6 +91,7 @@ module ForemanRemoteExecutionCore
 
     def upload_control_scripts
       return if @control_scripts_uploaded
+
       cp_script_to_remote(env_script, 'env.sh')
       @control_script_path = cp_script_to_remote(CONTROL_SCRIPT, 'control.sh')
       @retrieval_script = cp_script_to_remote(RETRIEVE_SCRIPT, 'retrieve.sh')
