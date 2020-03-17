@@ -19,6 +19,7 @@
   <% if @job_invocation.recurring_logic.present? %>
     <li><a href="#recurring_logic" data-toggle="tab"><%= _('Recurring logic') %></a></li>
   <% end %>
+  <%= render_tab_header_for(:main_tabs, subject: @job_invocation) %>
 </ul>
 
 <div class="tab-content">
@@ -38,6 +39,7 @@
     </div>
   </div>
   <% end %>
+  <%= render_tab_content_for(:main_tabs, subject: @job_invocation) %>
 </div>
 
 <script id="job_invocation_refresh" data-refresh-url="<%= job_invocation_path(@job_invocation) %>">
