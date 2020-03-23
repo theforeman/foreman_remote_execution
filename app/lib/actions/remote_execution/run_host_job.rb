@@ -47,8 +47,13 @@ module Actions
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
 
-        plan_delegated_action(proxy, provider.proxy_action_class, action_options)
-        plan_self
+        proxy_action = plan_delegated_action(proxy, provider.proxy_action_class, action_options)
+        plan_self(proxy_action_output: proxy_action)
+      end
+
+      def run
+        self.input[:proxy_action_output]
+        self.output.update(success: true)
       end
 
       def finalize(*args)
