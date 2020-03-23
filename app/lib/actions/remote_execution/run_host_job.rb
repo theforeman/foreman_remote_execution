@@ -52,8 +52,7 @@ module Actions
       end
 
       def run
-        self.input[:proxy_action_output]
-        self.output.update(success: true)
+        self.output.update(success: exit_status.to_s == '0')
       end
 
       def finalize(*args)
