@@ -48,7 +48,7 @@ module Actions
                                  .merge(additional_options)
 
         proxy_action = plan_delegated_action(proxy, provider.proxy_action_class, action_options)
-        plan_self(proxy_action_output: proxy_action)
+        plan_self(proxy_action_output: proxy_action.output)
       end
 
       def run
