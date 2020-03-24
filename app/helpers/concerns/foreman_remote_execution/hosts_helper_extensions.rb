@@ -11,14 +11,18 @@ module ForemanRemoteExecution
     end
 
     def schedule_job_multi_button(*args)
-      host_features = RemoteExecutionFeature.with_host_action_button.order(:label).map do |feature|
-        link_to(_('%s') % feature.name, job_invocations_path(:host_ids => [args.first.id], :feature => feature.label), :method => :post)
-      end
+      host_features = rex_host_features(*args)
 
       if host_features.present?
         action_buttons(schedule_job_button(*args), *host_features)
       else
         schedule_job_button(*args)
+      end
+    end
+
+    def rex_host_features(*args)
+      RemoteExecutionFeature.with_host_action_button.order(:label).map do |feature|
+        link_to(_('%s') % feature.name, job_invocations_path(:host_ids => [args.first.id], :feature => feature.label), :method => :post)
       end
     end
 
