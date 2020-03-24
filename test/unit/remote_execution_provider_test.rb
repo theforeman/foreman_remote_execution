@@ -3,23 +3,23 @@ require 'test_plugin_helper'
 class RemoteExecutionProviderTest < ActiveSupport::TestCase
   describe '.providers' do
     let(:providers) { RemoteExecutionProvider.providers }
-    it { providers.must_be_kind_of HashWithIndifferentAccess }
+    it { _(providers).must_be_kind_of HashWithIndifferentAccess }
     it 'makes providers accessible using symbol' do
-      providers[:SSH].must_equal SSHExecutionProvider
+      _(providers[:SSH]).must_equal SSHExecutionProvider
     end
     it 'makes providers accessible using string' do
-      providers['SSH'].must_equal SSHExecutionProvider
+      _(providers['SSH']).must_equal SSHExecutionProvider
     end
   end
 
   describe '.register_provider' do
     before { RemoteExecutionProvider.providers.delete(:new) }
     let(:new_provider) { RemoteExecutionProvider.providers[:new] }
-    it { new_provider.must_be_nil }
+    it { _(new_provider).must_be_nil }
 
     context 'registers a provider under key :new' do
       before { RemoteExecutionProvider.register(:new, String) }
-      it { new_provider.must_equal String }
+      it { _(new_provider).must_equal String }
     end
   end
 
@@ -38,15 +38,15 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
     it 'returns only strings' do
       provider_names.each do |name|
-        name.must_be_kind_of String
+        _(name).must_be_kind_of String
       end
     end
 
     context 'provider is registetered under :custom symbol' do
       before { RemoteExecutionProvider.register(:Custom, String) }
 
-      it { provider_names.must_include 'SSH' }
-      it { provider_names.must_include 'Custom' }
+      it { _(provider_names).must_include 'SSH' }
+      it { _(provider_names).must_include 'Custom' }
     end
   end
 
@@ -67,14 +67,14 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     describe 'effective user' do
       it 'takes the effective user from value from the template invocation' do
         template_invocation.effective_user = 'my user'
-        proxy_options[:effective_user].must_equal 'my user'
+        _(proxy_options[:effective_user]).must_equal 'my user'
       end
     end
 
     describe 'ssh user' do
       it 'uses the remote_execution_ssh_user on the host param' do
         host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'my user')
-        proxy_options[:ssh_user].must_equal 'my user'
+        _(proxy_options[:ssh_user]).must_equal 'my user'
       end
     end
 
@@ -83,7 +83,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.params['remote_execution_sudo_password'] = 'mypassword'
         host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_sudo_password', :value => 'mypassword')
         assert_not proxy_options.key?(:sudo_password)
-        secrets[:sudo_password].must_equal 'mypassword'
+        _(secrets[:sudo_password]).must_equal 'mypassword'
       end
     end
 
@@ -92,15 +92,15 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.params['remote_execution_effective_user_method'] = 'sudo'
         method_param = FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'sudo')
         host.host_parameters << method_param
-        proxy_options[:effective_user_method].must_equal 'sudo'
+        _(proxy_options[:effective_user_method]).must_equal 'sudo'
         method_param.update!(:value => 'su')
         host.clear_host_parameters_cache!
         proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
-        proxy_options[:effective_user_method].must_equal 'su'
+        _(proxy_options[:effective_user_method]).must_equal 'su'
         method_param.update!(:value => 'dzdo')
         host.clear_host_parameters_cache!
         proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
-        proxy_options[:effective_user_method].must_equal 'dzdo'
+        _(proxy_options[:effective_user_method]).must_equal 'dzdo'
       end
     end
 
@@ -110,8 +110,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       end
 
       it 'has ssh port changed in settings and check return type' do
-        proxy_options[:ssh_port].must_be_kind_of Integer
-        proxy_options[:ssh_port].must_equal 66
+        _(proxy_options[:ssh_port]).must_be_kind_of Integer
+        _(proxy_options[:ssh_port]).must_equal 66
       end
     end
 
@@ -120,8 +120,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.params['remote_execution_ssh_port'] = '30'
         host.host_parameters << FactoryBot.build(:host_parameter, :name => 'remote_execution_ssh_port', :value => '30')
         host.clear_host_parameters_cache!
-        proxy_options[:ssh_port].must_be_kind_of Integer
-        proxy_options[:ssh_port].must_equal 30
+        _(proxy_options[:ssh_port]).must_be_kind_of Integer
+        _(proxy_options[:ssh_port]).must_equal 30
       end
     end
 
@@ -131,7 +131,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       end
 
       it 'updates the value via settings' do
-        proxy_options[:cleanup_working_dirs].must_equal false
+        _(proxy_options[:cleanup_working_dirs]).must_equal false
       end
     end
 
@@ -140,7 +140,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.params['remote_execution_cleanup_working_dirs'] = 'false'
         host.host_parameters << FactoryBot.build(:host_parameter, :name => 'remote_execution_cleanup_working_dirs', :value => 'false')
         host.clear_host_parameters_cache!
-        proxy_options[:cleanup_working_dirs].must_equal false
+        _(proxy_options[:cleanup_working_dirs]).must_equal false
       end
     end
 

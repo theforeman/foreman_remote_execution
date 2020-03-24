@@ -20,32 +20,32 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     end
 
     it 'has ssh user in the parameters' do
-      host.host_param('remote_execution_ssh_user').must_equal Setting[:remote_execution_ssh_user]
+      _(host.host_param('remote_execution_ssh_user')).must_equal Setting[:remote_execution_ssh_user]
     end
 
     it 'can override ssh user' do
       host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'amy')
-      host.host_param('remote_execution_ssh_user').must_equal 'amy'
+      _(host.host_param('remote_execution_ssh_user')).must_equal 'amy'
     end
 
     it 'has effective user method in the parameters' do
-      host.host_param('remote_execution_effective_user_method').must_equal Setting[:remote_execution_effective_user_method]
+      _(host.host_param('remote_execution_effective_user_method')).must_equal Setting[:remote_execution_effective_user_method]
     end
 
     it 'can override effective user method' do
       host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'su')
-      host.host_param('remote_execution_effective_user_method').must_equal 'su'
+      _(host.host_param('remote_execution_effective_user_method')).must_equal 'su'
     end
 
     it 'has ssh keys in the parameters' do
-      host.remote_execution_ssh_keys.must_include sshkey
+      _(host.remote_execution_ssh_keys).must_include sshkey
     end
 
     it 'merges ssh keys from host parameters and proxies' do
       key = 'ssh-rsa not-even-a-key something@somewhere.com'
       host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_keys', :value => [key])
-      host.host_param('remote_execution_ssh_keys').must_include key
-      host.host_param('remote_execution_ssh_keys').must_include sshkey
+      _(host.host_param('remote_execution_ssh_keys')).must_include key
+      _(host.host_param('remote_execution_ssh_keys')).must_include sshkey
     end
 
     it 'has ssh keys in the parameters even when no user specified' do
@@ -53,7 +53,7 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       FactoryBot.create(:smart_proxy, :ssh)
       host.interfaces.first.subnet.remote_execution_proxies.clear
       User.current = nil
-      host.remote_execution_ssh_keys.must_include sshkey
+      _(host.remote_execution_ssh_keys).must_include sshkey
     end
   end
 
@@ -63,11 +63,11 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     it 'should only have one execution interface' do
       host.interfaces << FactoryBot.build(:nic_managed)
       host.interfaces.each { |interface| interface.execution = true }
-      host.wont_be :valid?
+      _(host).wont_be :valid?
     end
 
     it 'returns the execution interface' do
-      host.execution_interface.must_be_kind_of Nic::Managed
+      _(host.execution_interface).must_be_kind_of Nic::Managed
     end
   end
 
@@ -86,16 +86,16 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
 
     it 'finds hosts for job_invocation.id' do
       found_ids = Host.search_for("job_invocation.id = #{job.id}").map(&:id).sort
-      found_ids.must_equal job.template_invocations_host_ids.sort
+      _(found_ids).must_equal job.template_invocations_host_ids.sort
     end
 
     it 'finds hosts by job_invocation.result' do
       success, failed = job.template_invocations
                            .partition { |template| template.run_host_job_task.result == 'success' }
       found_ids = Host.search_for('job_invocation.result = success').map(&:id)
-      found_ids.must_equal success.map(&:host_id)
+      _(found_ids).must_equal success.map(&:host_id)
       found_ids = Host.search_for('job_invocation.result = failed').map(&:id)
-      found_ids.must_equal failed.map(&:host_id)
+      _(found_ids).must_equal failed.map(&:host_id)
     end
 
     it 'finds hosts by job_invocation.id and job_invocation.result' do
@@ -103,17 +103,17 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       job
       job2
 
-      Host.search_for("job_invocation.id = #{job.id}").count.must_equal 2
-      Host.search_for("job_invocation.id = #{job2.id}").count.must_equal 2
-      Host.search_for('job_invocation.result = success').count.must_equal 2
-      Host.search_for('job_invocation.result = failed').count.must_equal 2
+      _(Host.search_for("job_invocation.id = #{job.id}").count).must_equal 2
+      _(Host.search_for("job_invocation.id = #{job2.id}").count).must_equal 2
+      _(Host.search_for('job_invocation.result = success').count).must_equal 2
+      _(Host.search_for('job_invocation.result = failed').count).must_equal 2
 
       success, failed = job.template_invocations
                            .partition { |template| template.run_host_job_task.result == 'success' }
       found_ids = Host.search_for("job_invocation.id = #{job.id} AND job_invocation.result = success").map(&:id)
-      found_ids.must_equal success.map(&:host_id)
+      _(found_ids).must_equal success.map(&:host_id)
       found_ids = Host.search_for("job_invocation.id = #{job.id} AND job_invocation.result = failed").map(&:id)
-      found_ids.must_equal failed.map(&:host_id)
+      _(found_ids).must_equal failed.map(&:host_id)
     end
   end
 

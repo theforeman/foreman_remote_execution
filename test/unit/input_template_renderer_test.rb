@@ -7,17 +7,17 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
     let(:renderer) { InputTemplateRenderer.new(FactoryBot.build(:job_template, :template => 'id <%= preview? %>')) }
 
     it 'should render the content' do
-      renderer.render.must_equal 'id false'
+      _(renderer.render).must_equal 'id false'
     end
 
     it 'should render preview' do
-      renderer.preview.must_equal 'id true'
+      _(renderer.preview).must_equal 'id true'
     end
 
     it 'should allow accessing current_user' do
       setup_user(:view_job_templates)
       renderer = InputTemplateRenderer.new(FactoryBot.build(:job_template, :template => "They call me '<%= current_user %>'"))
-      renderer.preview.must_equal "They call me '#{User.current.login}'"
+      _(renderer.preview).must_equal "They call me '#{User.current.login}'"
     end
   end
 
@@ -28,23 +28,23 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
     context 'but without input defined' do
       describe 'rendering' do
         let(:result) { renderer.render }
-        it { result.must_equal false }
+        it { _(result).must_equal false }
 
         it 'registers an error' do
           result # let is lazy
-          renderer.error_message.wont_be_nil
-          renderer.error_message.wont_be_empty
+          _(renderer.error_message).wont_be_nil
+          _(renderer.error_message).wont_be_empty
         end
       end
 
       describe 'preview' do
         let(:result) { renderer.preview }
-        it { result.must_equal false }
+        it { _(result).must_equal false }
 
         it 'registers an error' do
           result # let is lazy
-          renderer.error_message.wont_be_nil
-          renderer.error_message.wont_be_empty
+          _(renderer.error_message).wont_be_nil
+          _(renderer.error_message).wont_be_empty
         end
       end
     end
@@ -62,7 +62,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
       describe 'rendering' do
         it 'can preview' do
-          renderer.preview.must_equal 'service restart $USER_INPUT[service_name]'
+          _(renderer.preview).must_equal 'service restart $USER_INPUT[service_name]'
         end
 
         context 'with invocation specified and a required input' do
@@ -74,8 +74,8 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
           it 'cannot render the content' do
             assert_not result
-            renderer.error_message.wont_be_nil
-            renderer.error_message.wont_be_empty
+            _(renderer.error_message).wont_be_nil
+            _(renderer.error_message).wont_be_empty
           end
         end
 
@@ -90,13 +90,13 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           end
 
           it 'can render with job invocation with corresponding value' do
-            renderer.render.must_equal 'service restart foreman'
+            _(renderer.render).must_equal 'service restart foreman'
           end
         end
 
         it 'renders even without an input value' do
           renderer.invocation = template_invocation
-          renderer.render.must_equal 'service restart '
+          _(renderer.render).must_equal 'service restart '
         end
 
         describe 'with circular reference' do
@@ -126,7 +126,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
             renderer.invocation = FactoryBot.build(:template_invocation, :template => template_without_inputs)
             renderer.template = template_without_inputs
             assert_not renderer.render
-            renderer.error_message.must_include 'Recursive rendering of templates detected'
+            _(renderer.error_message).must_include 'Recursive rendering of templates detected'
           end
 
           it 'handles circular references in inputs' do
@@ -194,8 +194,8 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           end
 
           it 'includes all inputs from the imported template' do
-            template.template_inputs_with_foreign.map(&:name).sort.must_equal ['action', 'debug', 'package']
-            template_2.template_inputs_with_foreign.map(&:name).sort.must_equal ['action', 'debug', 'package']
+            _(template.template_inputs_with_foreign.map(&:name).sort).must_equal ['action', 'debug', 'package']
+            _(template_2.template_inputs_with_foreign.map(&:name).sort).must_equal ['action', 'debug', 'package']
           end
         end
 
@@ -207,7 +207,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           end
 
           it 'includes all inputs from the imported template except the listed once' do
-            template.template_inputs_with_foreign.map(&:name).sort.must_equal ['package']
+            _(template.template_inputs_with_foreign.map(&:name).sort).must_equal ['package']
           end
         end
 
@@ -220,7 +220,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           end
 
           it 'includes all inputs from the imported template' do
-            template.template_inputs_with_foreign.map(&:name).sort.must_equal ['package']
+            _(template.template_inputs_with_foreign.map(&:name).sort).must_equal ['package']
           end
         end
       end
@@ -237,8 +237,8 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         it 'can render with job invocation with corresponding value' do
           rendered = renderer.render
-          renderer.error_message.must_be_nil
-          rendered.must_equal 'yum -y install zsh'
+          _(renderer.error_message).must_be_nil
+          _(rendered).must_equal 'yum -y install zsh'
         end
       end
 
@@ -255,16 +255,16 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         it 'can render with job invocation with corresponding value' do
           rendered = renderer.render
-          renderer.error_message.must_be_nil
-          rendered.must_equal 'yum -y install zsh'
+          _(renderer.error_message).must_be_nil
+          _(rendered).must_equal 'yum -y install zsh'
         end
       end
 
       it 'renders even without an input value' do
         renderer.invocation = template_invocation
         rendered = renderer.render
-        renderer.error_message.must_be_nil
-        rendered.must_equal 'yum -y install '
+        _(renderer.error_message).must_be_nil
+        _(rendered).must_equal 'yum -y install '
       end
     end
 
@@ -291,7 +291,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       context 'with a valid input defined' do
         context 'with an optional input' do
           it 'can render with job invocation with corresponding value' do
-            result.must_equal 'service restart foreman'
+            _(result).must_equal 'service restart foreman'
           end
         end
 
@@ -299,7 +299,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           let(:required) { true }
 
           it 'renders the template when the input is provided' do
-            result.must_equal 'service restart foreman'
+            _(result).must_equal 'service restart foreman'
           end
         end
       end
@@ -309,7 +309,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         context 'with optional input' do
           it 'renders the template' do
-            result.must_equal 'service restart '
+            _(result).must_equal 'service restart '
           end
         end
 
@@ -340,8 +340,8 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         it 'registers an error' do
           result # let is lazy
-          renderer.error_message.wont_be_nil
-          renderer.error_message.wont_be_empty
+          _(renderer.error_message).wont_be_nil
+          _(renderer.error_message).wont_be_empty
         end
 
         context 'with host specified' do
@@ -354,14 +354,14 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
             it 'registers an error' do
               result # let is lazy
-              renderer.error_message.wont_be_nil
-              renderer.error_message.wont_be_empty
+              _(renderer.error_message).wont_be_nil
+              _(renderer.error_message).wont_be_empty
             end
           end
 
           describe 'preview' do
             it 'should render preview' do
-              renderer.preview.must_equal 'echo $FACT_INPUT[issue] > /etc/issue'
+              _(renderer.preview).must_equal 'echo $FACT_INPUT[issue] > /etc/issue'
             end
           end
 
@@ -376,14 +376,14 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
               it 'registers an error' do
                 result # let is lazy
-                renderer.error_message.wont_be_nil
-                renderer.error_message.wont_be_empty
+                _(renderer.error_message).wont_be_nil
+                _(renderer.error_message).wont_be_empty
               end
             end
 
             describe 'preview' do
               it 'should render preview' do
-                renderer.preview.must_equal 'echo $FACT_INPUT[issue] > /etc/issue'
+                _(renderer.preview).must_equal 'echo $FACT_INPUT[issue] > /etc/issue'
               end
             end
 
@@ -393,7 +393,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
               let(:result) { renderer.render }
 
               it 'can render with job invocation with corresponding value' do
-                result.must_equal 'echo banner > /etc/issue'
+                _(result).must_equal 'echo banner > /etc/issue'
               end
             end
           end
@@ -402,7 +402,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
       describe 'preview' do
         it 'should render preview' do
-          renderer.preview.must_equal 'echo $FACT_INPUT[issue] > /etc/issue'
+          _(renderer.preview).must_equal 'echo $FACT_INPUT[issue] > /etc/issue'
         end
 
         context 'with host specified' do
@@ -416,7 +416,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           let(:result) { renderer.render }
 
           it 'uses the value even in preview' do
-            result.must_equal 'echo banner > /etc/issue'
+            _(result).must_equal 'echo banner > /etc/issue'
           end
         end
       end
@@ -438,8 +438,8 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         it 'registers an error' do
           result # let is lazy
-          renderer.error_message.wont_be_nil
-          renderer.error_message.wont_be_empty
+          _(renderer.error_message).wont_be_nil
+          _(renderer.error_message).wont_be_empty
         end
 
         context 'with host specified' do
@@ -456,14 +456,14 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
             it 'registers an error' do
               result # let is lazy
-              renderer.error_message.wont_be_nil
-              renderer.error_message.wont_be_empty
+              _(renderer.error_message).wont_be_nil
+              _(renderer.error_message).wont_be_empty
             end
           end
 
           describe 'preview' do
             it 'should render preview' do
-              renderer.preview.must_equal 'echo $VARIABLE_INPUT[client_key] > /etc/chef/client.pem'
+              _(renderer.preview).must_equal 'echo $VARIABLE_INPUT[client_key] > /etc/chef/client.pem'
             end
           end
 
@@ -475,7 +475,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
               it 'renders the value from host parameter' do
                 parameter
                 renderer.host.reload
-                result.must_equal 'echo RSA KEY > /etc/chef/client.pem'
+                _(result).must_equal 'echo RSA KEY > /etc/chef/client.pem'
               end
             end
 
@@ -483,7 +483,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
               it 'should render preview' do
                 parameter
                 renderer.host.reload
-                renderer.preview.must_equal 'echo RSA KEY > /etc/chef/client.pem'
+                _(renderer.preview).must_equal 'echo RSA KEY > /etc/chef/client.pem'
               end
             end
           end
@@ -491,7 +491,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         describe 'preview' do
           it 'should render preview' do
-            renderer.preview.must_equal 'echo $VARIABLE_INPUT[client_key] > /etc/chef/client.pem'
+            _(renderer.preview).must_equal 'echo $VARIABLE_INPUT[client_key] > /etc/chef/client.pem'
           end
         end
       end
@@ -519,8 +519,8 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         it 'registers an error' do
           result # let is lazy
-          renderer.error_message.wont_be_nil
-          renderer.error_message.wont_be_empty
+          _(renderer.error_message).wont_be_nil
+          _(renderer.error_message).wont_be_empty
         end
 
         context 'with host specified' do
@@ -534,14 +534,14 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
             it 'registers an error' do
               result # let is lazy
-              renderer.error_message.wont_be_nil
-              renderer.error_message.wont_be_empty
+              _(renderer.error_message).wont_be_nil
+              _(renderer.error_message).wont_be_empty
             end
           end
 
           describe 'preview' do
             it 'should render preview' do
-              renderer.preview.must_equal 'echo "This is WebServer with nginx $PUPPET_PARAMETER_INPUT[nginx_version]" > /etc/motd'
+              _(renderer.preview).must_equal 'echo "This is WebServer with nginx $PUPPET_PARAMETER_INPUT[nginx_version]" > /etc/motd'
             end
           end
 
@@ -563,14 +563,14 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
             describe 'rendering' do
               it 'renders the value from puppet parameter' do
                 lookup_key
-                result.must_equal 'echo "This is WebServer with nginx 1.4.7" > /etc/motd'
+                _(result).must_equal 'echo "This is WebServer with nginx 1.4.7" > /etc/motd'
               end
             end
 
             describe 'preview' do
               it 'should render preview' do
                 lookup_key
-                renderer.preview.must_equal 'echo "This is WebServer with nginx 1.4.7" > /etc/motd'
+                _(renderer.preview).must_equal 'echo "This is WebServer with nginx 1.4.7" > /etc/motd'
               end
             end
           end
@@ -578,7 +578,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
 
         describe 'preview' do
           it 'should render preview' do
-            renderer.preview.must_equal 'echo "This is WebServer with nginx $PUPPET_PARAMETER_INPUT[nginx_version]" > /etc/motd'
+            _(renderer.preview).must_equal 'echo "This is WebServer with nginx $PUPPET_PARAMETER_INPUT[nginx_version]" > /etc/motd'
           end
         end
       end
