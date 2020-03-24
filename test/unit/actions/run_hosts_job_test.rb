@@ -54,13 +54,13 @@ module ForemanRemoteExecution
         delayed
         assert_not targeting.resolved?
         planned
-        targeting.hosts.must_include(host)
+        _(targeting.hosts).must_include(host)
       end
 
       it 'resolves the hosts on static targeting in delay' do
         assert_not targeting.resolved?
         delayed
-        targeting.hosts.must_include(host)
+        _(targeting.hosts).must_include(host)
         # Verify Targeting#resolve_hosts! won't be hit again
         targeting.expects(:resolve_hosts!).never
         planned
@@ -68,7 +68,7 @@ module ForemanRemoteExecution
 
       it 'resolves the hosts on static targeting in plan phase if not resolved yet' do
         planned
-        targeting.hosts.must_include(host)
+        _(targeting.hosts).must_include(host)
       end
     end
 
@@ -80,16 +80,16 @@ module ForemanRemoteExecution
 
     it 'uses the BindJobInvocation middleware' do
       planned
-      job_invocation.task_id.must_equal uuid
+      _(job_invocation.task_id).must_equal uuid
     end
 
     # In plan phase this is handled by #action_subject
     #   which is expected in tests
     it 'sets input in delay phase when delayed' do
       job_invocation_hash = delayed.input[:job_invocation]
-      job_invocation_hash['id'].must_equal job_invocation.id
-      job_invocation_hash['name'].must_equal job_invocation.job_category
-      job_invocation_hash['description'].must_equal job_invocation.description
+      _(job_invocation_hash['id']).must_equal job_invocation.id
+      _(job_invocation_hash['name']).must_equal job_invocation.job_category
+      _(job_invocation_hash['description']).must_equal job_invocation.description
       planned # To make the expectations happy
     end
 
@@ -100,7 +100,7 @@ module ForemanRemoteExecution
       it 'can be disabled' do
         job_invocation.expects(:concurrency_level)
         job_invocation.expects(:time_span)
-        planned.input.key?(:concurrency_control).must_equal false
+        _(planned.input.key?(:concurrency_control)).must_equal false
       end
 
       it 'can limit concurrency level' do

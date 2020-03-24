@@ -51,7 +51,7 @@ class TargetingTest < ActiveSupport::TestCase
       targeting.resolve_hosts!
     end
 
-    it { targeting.hosts.must_include(host) }
+    it { _(targeting.hosts).must_include(host) }
   end
 
   context 'can delete a user' do
@@ -74,7 +74,7 @@ class TargetingTest < ActiveSupport::TestCase
       host.destroy
     end
 
-    it { targeting.reload.hosts.must_be_empty }
+    it { _(targeting.reload.hosts).must_be_empty }
   end
 
   describe '#build_query_from_hosts(ids)' do
@@ -89,9 +89,9 @@ class TargetingTest < ActiveSupport::TestCase
       let(:query) { Targeting.build_query_from_hosts([ host.id, second_host.id ]) }
 
       it 'builds query using host names joining inside ^' do
-        query.must_include host.name
-        query.must_include second_host.name
-        query.must_include 'name ^'
+        _(query).must_include host.name
+        _(query).must_include second_host.name
+        _(query).must_include 'name ^'
 
         Host.search_for(query).must_include host
         Host.search_for(query).must_include second_host
@@ -102,7 +102,7 @@ class TargetingTest < ActiveSupport::TestCase
       let(:query) { Targeting.build_query_from_hosts([ host.id ]) }
 
       it 'builds query using host name' do
-        query.must_equal "name ^ (#{host.name})"
+        _(query).must_equal "name ^ (#{host.name})"
         Host.search_for(query).must_include host
         Host.search_for(query).wont_include second_host
       end

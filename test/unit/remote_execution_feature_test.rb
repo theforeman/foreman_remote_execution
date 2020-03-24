@@ -31,16 +31,16 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
     it 'prepares composer for given feature based on the mapping' do
       composer = JobInvocationComposer.for_feature(:katello_install_package, host, :package => 'zsh')
       assert composer.valid?
-      composer.pattern_template_invocations.size.must_equal 1
+      _(composer.pattern_template_invocations.size).must_equal 1
       template_invocation = composer.pattern_template_invocations.first
-      template_invocation.template.must_equal package_template
-      template_invocation.input_values.size.must_equal 1
+      _(template_invocation.template).must_equal package_template
+      _(template_invocation.input_values.size).must_equal 1
 
       input_value = template_invocation.input_values.first
-      input_value.value.must_equal 'zsh'
-      input_value.template_input.name.must_equal 'package'
+      _(input_value.value).must_equal 'zsh'
+      _(input_value.template_input.name).must_equal 'package'
 
-      composer.targeting.search_query.must_equal "name ^ (#{host.name})"
+      _(composer.targeting.search_query).must_equal "name ^ (#{host.name})"
     end
 
     it 'updates the feature when attributes change' do
@@ -48,24 +48,24 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
         :description => 'New description',
         :provided_inputs => ['package', 'force'])
       updated_feature.reload
-      updated_feature.id.must_equal(install_feature.id)
-      updated_feature.description.must_equal 'New description'
-      updated_feature.provided_input_names.must_equal ['package', 'force']
+      _(updated_feature.id).must_equal(install_feature.id)
+      _(updated_feature.description).must_equal 'New description'
+      _(updated_feature.provided_input_names).must_equal ['package', 'force']
     end
   end
 
   describe '.register' do
     it "creates a feature if it's missing" do
       feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist', 'name')
-      feature.must_be :persisted?
-      feature.label.must_equal 'new_feature_that_does_not_exist'
-      feature.name.must_equal 'name'
+      _(feature).must_be :persisted?
+      _(feature.label).must_equal 'new_feature_that_does_not_exist'
+      _(feature.name).must_equal 'name'
       assert_not feature.host_action_button
     end
 
     it 'creates a feature with host action flag' do
       feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist_button', 'name', :host_action_button => true)
-      feature.must_be :persisted?
+      _(feature).must_be :persisted?
       assert feature.host_action_button
     end
 
@@ -78,7 +78,7 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
     it 'updates a feature if it exists' do
       existing = FactoryBot.create(:remote_execution_feature, :name => 'existing_feature_withou_action_button')
       feature = RemoteExecutionFeature.register(existing.label, existing.name, :host_action_button => true)
-      feature.must_be :persisted?
+      _(feature).must_be :persisted?
       existing.reload
       assert existing.host_action_button
     end

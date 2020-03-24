@@ -39,7 +39,7 @@ module Api
         valid_attrs = { :template => 'This is a test template', :name => 'RandomName', :provider_type => 'ssh' }
         post :create, params: { :job_template => valid_attrs }
         template = ActiveSupport::JSON.decode(@response.body)
-        assert template['name'] == 'RandomName'
+        assert_equal template['name'], 'RandomName'
         assert_response :success
       end
 

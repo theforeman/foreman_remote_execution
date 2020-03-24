@@ -23,19 +23,19 @@ class JobTemplateEffectiveUserTest < ActiveSupport::TestCase
       user = FactoryBot.create(:user)
       User.current = user
       effective_user.current_user = true
-      effective_user.compute_value.must_equal user.login
+      _(effective_user.compute_value).must_equal user.login
     end
 
     it 'returns the value when not current user is set to true' do
       effective_user.current_user = false
       effective_user.value = 'testuser'
-      effective_user.compute_value.must_equal 'testuser'
+      _(effective_user.compute_value).must_equal 'testuser'
     end
 
     it 'returns a default value when no value is specified for the user' do
       effective_user.value = ''
       Setting[:remote_execution_effective_user] = 'myuser'
-      effective_user.compute_value.must_equal 'myuser'
+      _(effective_user.compute_value).must_equal 'myuser'
     end
   end
 end

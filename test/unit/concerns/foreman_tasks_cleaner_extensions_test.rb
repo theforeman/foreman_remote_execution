@@ -18,11 +18,11 @@ class ForemanRemoteExecutionForemanTasksCleanerExtensionsTest < ActiveSupport::T
 
   it 'removes orphaned job invocations' do
     job = FactoryBot.create(:job_invocation, :with_task)
-    JobInvocation.where(:id => job.id).count.must_equal 1
+    _(JobInvocation.where(:id => job.id).count).must_equal 1
     job.task.delete
     job.reload
-    job.task.must_be :nil?
-    job.task_id.wont_be :nil?
+    _(job.task).must_be :nil?
+    _(job.task_id).wont_be :nil?
     ForemanTasks::Cleaner.new(:filter => '').delete
     JobInvocation.where(:id => job.id).must_be :empty?
   end
