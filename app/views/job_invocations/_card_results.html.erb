@@ -5,6 +5,7 @@
     </h2>
     <div class="card-pf-body">
       <div id='status_chart'>
+        <%= react_component('JobInvocationContainer', data: { url: "/job_invocations/chart?id=#{job_invocation.id}" }) %>
       </div>
     </div>
   </div>
