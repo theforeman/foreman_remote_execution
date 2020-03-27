@@ -34,7 +34,7 @@ module ForemanRemoteExecution
       return unless authorized_for(permission: 'cockpit_hosts', auth_object: host)
 
       url = SSHExecutionProvider.cockpit_url_for_host(host.name)
-      url ? link_to(_('Web Console'), url, :class => 'btn btn-default', :id => :'web-console-button') : nil
+      url ? link_to(_('Web Console'), url, :class => 'btn btn-default', :id => :'web-console-button', :target => '_new') : nil
     end
 
     def host_title_actions(*args)
