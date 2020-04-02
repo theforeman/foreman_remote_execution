@@ -8,7 +8,7 @@
     <p>
     <ul>
       <% template_invocation.input_values.joins(:template_input).each do |input_value| %>
-        <li><b><%= input_value.template_input.name %></b>: <%= trunc_with_tooltip(input_value.value, 255) %></li>
+        <li><b><%= input_value.template_input.name %></b>: <%= input_value.template_input.hidden_value ? '*' * 5 : trunc_with_tooltip(input_value.value, 255) %></li>
       <% end %>
     </ul>
     </p>
