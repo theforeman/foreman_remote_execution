@@ -205,7 +205,9 @@ class JobInvocation < ApplicationRecord
   def generate_description
     template_invocation = pattern_template_invocations.first
     input_hash = template_invocation.input_values.reduce({}) do |h, v|
-      h.update("%{#{v.template_input.name}}" => v.value)
+      value = v.value
+      value = '*' * 3 if v.template_input.respond_to?(:hidden_value) && v.template_input.hidden_value?
+      h.update("%{#{v.template_input.name}}" => value)
     end
     input_hash.update("%{job_category}" => job_category)
     input_hash.update("%{template_name}" => template_invocation.template.name)
