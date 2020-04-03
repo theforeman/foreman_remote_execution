@@ -31,6 +31,9 @@ end
 child :template_invocations do
   attributes :template_id, :template_name
   child :input_values do
-    attributes :template_input_name, :template_input_id, :value
+    attributes :template_input_name, :template_input_id
+    node :value do |iv|
+      iv.template_input.respond_to?(:hidden_value) && iv.template_input.hidden_value? ? '*' * 5 : iv.value
+    end
   end
 end
