@@ -25,11 +25,12 @@
     </thead>
 
     <tbody>
+    <% parent_task = @job_invocation.task %>
     <% hosts.each do |host| %>
       <% template_invocation = job_invocation.template_invocations.find { |template_invocation| template_invocation.host_id == host.id } %>
       <% task = template_invocation.try(:run_host_job_task) %>
       <tr>
-        <% options = { :host => host, :task => task, :job_invocation => job_invocation, :template_invocation => template_invocation } %>
+        <% options = { :host => host, :task => task, :job_invocation => job_invocation, :template_invocation => template_invocation, :parent_task => parent_task } %>
         <%= render 'host_name_td', options %>
         <%= render 'host_status_td', options %>
         <%= render 'host_actions_td', options %>
