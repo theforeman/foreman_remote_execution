@@ -13,9 +13,13 @@ module RemoteExecutionHelper
     end
   end
 
-  def template_invocation_status(task)
+  def template_invocation_status(task, parent_task)
     if task.nil?
-      icon_text('question', 'N/A', :kind => 'fa')
+      if parent_task.result == 'cancelled'
+        icon_text('warning-triangle-o', _('cancelled'), :kind => 'pficon')
+      else
+        icon_text('question', 'N/A', :kind => 'fa')
+      end
     elsif task.state == 'running'
       icon_text('running', _('running'), :kind => 'pficon')
     elsif task.state == 'planned'
