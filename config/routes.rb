@@ -16,7 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :job_invocations, :only => [:new, :create, :show, :index] do
+  match 'job_invocations/new', to: 'job_invocations#new', via: [:get, :post], as: 'new_job_invocation'
+  resources :job_invocations, :only => [:create, :show, :index] do
     collection do
       post 'refresh'
       get 'chart'

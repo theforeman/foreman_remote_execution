@@ -46,4 +46,16 @@ class JobInvocationsControllerTest < ActionController::TestCase
     assert_equal(template_invocation_params,
       assigns(:composer).params['template_invocations'])
   end
+
+  test 'new via GET and POST' do
+    template = FactoryBot.create(:job_template, :with_input)
+    feature = FactoryBot.create(:remote_execution_feature, job_template: template)
+    params = { feature: feature.label, inputs: { template.template_inputs.first.name => 'foobar' } }
+
+    get :new, params: params, session: set_session_user
+    assert_response :success
+
+    post :new, params: params, session: set_session_user
+    assert_response :success
+  end
 end
