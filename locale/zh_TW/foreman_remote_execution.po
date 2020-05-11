@@ -26,11 +26,6 @@ msgstr "%s 之前"
 msgid "%{description} on %{host}"
 msgstr "%{description} 於 %{host} 之上"
 
-msgid "...and %{count} more"
-msgid_plural "...and %{count} more"
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr "從外部範本排除的輸入名稱清單，以逗號隔開。"
 
@@ -58,11 +53,20 @@ msgstr "動作"
 msgid "Add Foreign Input Set"
 msgstr "新增外部輸入集"
 
+msgid "Alphabetical"
+msgstr ""
+
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "另一個介面已設為執行。行您是否確定要使用此介面？"
+
+msgid "Any Location"
+msgstr ""
+
+msgid "Any Organization"
+msgstr ""
 
 msgid "Back to Job"
 msgstr "回到工作"
@@ -90,6 +94,9 @@ msgstr "無法指定 bookmark_id 和 search_query"
 
 msgid "Cannot specify both recurrence and scheduling"
 msgstr "無法指定 recurrence 和 scheduling"
+
+msgid "Choose a job template that is pre-selected in job invocation form"
+msgstr ""
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
 msgstr "在外部輸入集偵測到環狀相依性： '%{template}' -> '%{target_template}'。範本堆疊：%{templates_stack}"
@@ -145,6 +152,12 @@ msgstr "建立工作範本"
 msgid "Create a recurring job"
 msgstr "建立週期性工作"
 
+msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr ""
+
+msgid "Current organization %{org_c} is different from job's organization %{org_j}."
+msgstr ""
+
 msgid "Default SSH key passphrase"
 msgstr ""
 
@@ -178,8 +191,8 @@ msgstr "描述範本"
 msgid "Display advanced fields"
 msgstr "顯示進階欄位"
 
-msgid "Distribute execution over N seconds"
-msgstr "在幾秒間散佈執行"
+msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
 
 msgid "Distribute tasks over N seconds"
 msgstr "在幾秒間散佈工作"
@@ -223,8 +236,20 @@ msgstr "從代理載入資料時發生錯誤"
 msgid "Evaluated at:"
 msgstr "評量於："
 
+msgid "Execute the jobs on hosts in randomized order"
+msgstr ""
+
 msgid "Execution"
 msgstr "執行"
+
+msgid "Execution order"
+msgstr ""
+
+msgid "Execution ordering"
+msgstr ""
+
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
 
 msgid "Exit status: %s"
 msgstr "退出狀態：%s"
@@ -254,6 +279,9 @@ msgid "Foreign input set"
 msgstr "外部輸入集"
 
 msgid "Foreman can run arbitrary commands on remote hosts using different providers, such as SSH or Ansible. Communication goes through the Smart Proxy so Foreman does not have to have direct access to the target hosts and can scale to control many hosts."
+msgstr ""
+
+msgid "Form Job Template"
 msgstr ""
 
 msgid "Get output for a host"
@@ -376,6 +404,9 @@ msgstr ""
 msgid "Label"
 msgstr "標籤"
 
+msgid "Last execution cancelled"
+msgstr ""
+
 msgid "Last execution failed"
 msgstr "最後的執行失敗"
 
@@ -406,6 +437,9 @@ msgstr "列出遠端執行功能"
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
+msgid "Location"
+msgstr ""
+
 msgid "Manual selection"
 msgstr "手動選擇"
 
@@ -424,14 +458,14 @@ msgstr "新工作範本"
 msgid "No execution finished yet"
 msgstr "尚無執行完成"
 
-msgid "No hosts found."
-msgstr "找不到主機。"
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "沒有範本定義至功能 %{feature_name}"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "並不是所需的輸入都有值。缺少的輸入：%s"
+
+msgid "Organization"
+msgstr ""
 
 msgid "Override the description format from the template for this invocation only"
 msgstr "僅為這祈願從範本覆寫描述格式"
@@ -456,6 +490,9 @@ msgstr ""
 
 msgid "Pending"
 msgstr "等待處理中"
+
+msgid "Perform a single Puppet run"
+msgstr ""
 
 msgid "Perform no more executions after this time"
 msgstr "此時間之後不再進行任何執行"
@@ -484,6 +521,9 @@ msgstr "供應者與範本"
 msgid "Proxies"
 msgstr "代理伺服器"
 
+msgid "Randomized"
+msgstr ""
+
 msgid "Recurring logic"
 msgstr "週期邏輯"
 
@@ -506,6 +546,9 @@ msgid "Remote execution"
 msgstr "遠端執行"
 
 msgid "Remote execution feature label that should be triggered, job template assigned to this feature will be used"
+msgstr ""
+
+msgid "Remove SSH known hosts for %s"
 msgstr ""
 
 msgid "Repeat a maximum of N times"
@@ -541,8 +584,14 @@ msgstr "執行"
 msgid "Run Job"
 msgstr "執行工作"
 
+msgid "Run Puppet Once"
+msgstr ""
+
 msgid "Run at most N tasks at a time"
 msgstr "一次最多執行 N 個任務"
+
+msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
 
 msgid "SSH"
 msgstr "SSH"
@@ -586,8 +635,8 @@ msgstr "搜尋"
 msgid "Search Query"
 msgstr ""
 
-msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
-msgstr "搜尋指定給主機的代理之外的遠端執行代理。如果位置或組織都已啟用，搜尋會被限制至主機的組織或地點。"
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host's organization and location."
+msgstr ""
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "使用遠端執行為代理搜尋主機，這在主機沒有子網路、或子網路沒有執行代理時很有用"
@@ -607,7 +656,7 @@ msgstr "為此子網路儘可能選擇遠端執行代理。加入有著同樣供
 msgid "Set to distribute over"
 msgstr ""
 
-msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
 msgstr ""
 
 msgid "Show foreign input set details"
@@ -678,9 +727,6 @@ msgstr "範本版本"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "找不到 ID 為 '%{id}' 的範本"
-
-msgid "The dynamic query '#{job_invocation.targeting.search_query}' was not resolved yet. The list of hosts to which it would resolve now can be seen"
-msgstr ""
 
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "動態查詢 '%{query}' 尚未被解析。該解析的主機清單可以在 %{here} 找到。"
@@ -782,6 +828,9 @@ msgstr "查詢類型"
 
 msgid "Unable to fetch public key"
 msgstr "無法取得公開金鑰"
+
+msgid "Unable to remove host from known hosts"
+msgstr ""
 
 msgid "Unable to save template. Correct highlighted errors"
 msgstr ""
