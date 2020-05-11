@@ -26,11 +26,6 @@ msgstr "%s atrás"
 msgid "%{description} on %{host}"
 msgstr "%{description} em %{host}"
 
-msgid "...and %{count} more"
-msgid_plural "...and %{count} more"
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr "Uma lista separada por vírgula dos nomes de entradas a serem executados do modelo externo. "
 
@@ -58,11 +53,20 @@ msgstr "Ações"
 msgid "Add Foreign Input Set"
 msgstr "Adicionar Conjunto de Entradas Externas"
 
+msgid "Alphabetical"
+msgstr ""
+
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "Uma outra interface já está definida para execução. Tem certeza que deseja usar esta? "
+
+msgid "Any Location"
+msgstr ""
+
+msgid "Any Organization"
+msgstr ""
 
 msgid "Back to Job"
 msgstr "Voltar ao Trabalho "
@@ -90,6 +94,9 @@ msgstr "Não é possível especificar tanto bookmark_id quanto search_query"
 
 msgid "Cannot specify both recurrence and scheduling"
 msgstr "Não foi possível especificar tanto recorrência quanto agendamento "
+
+msgid "Choose a job template that is pre-selected in job invocation form"
+msgstr ""
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
 msgstr "Dependência circular detectada em conjunto de entradas externas '%{template}' -> '%{target_template}'. Pilha de modelos: %{templates_stack}"
@@ -145,6 +152,12 @@ msgstr "Criar um modelo de trabalho"
 msgid "Create a recurring job"
 msgstr "Criar um trabalho recorrente "
 
+msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr ""
+
+msgid "Current organization %{org_c} is different from job's organization %{org_j}."
+msgstr ""
+
 msgid "Default SSH key passphrase"
 msgstr "Senha da chave SSH padrão"
 
@@ -178,8 +191,8 @@ msgstr "Modelo de descrição"
 msgid "Display advanced fields"
 msgstr "Exibir campos avançados"
 
-msgid "Distribute execution over N seconds"
-msgstr "Distribuir execuções em N segundos "
+msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
 
 msgid "Distribute tasks over N seconds"
 msgstr "Distribuir tarefas em N segundos "
@@ -223,8 +236,20 @@ msgstr "Erro ao carregar dados do proxy"
 msgid "Evaluated at:"
 msgstr "Avaliado(a) em:"
 
+msgid "Execute the jobs on hosts in randomized order"
+msgstr ""
+
 msgid "Execution"
 msgstr "Execução"
+
+msgid "Execution order"
+msgstr ""
+
+msgid "Execution ordering"
+msgstr ""
+
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
 
 msgid "Exit status: %s"
 msgstr "Status de saída: %s"
@@ -254,6 +279,9 @@ msgid "Foreign input set"
 msgstr "Conjunto de entradas externas"
 
 msgid "Foreman can run arbitrary commands on remote hosts using different providers, such as SSH or Ansible. Communication goes through the Smart Proxy so Foreman does not have to have direct access to the target hosts and can scale to control many hosts."
+msgstr ""
+
+msgid "Form Job Template"
 msgstr ""
 
 msgid "Get output for a host"
@@ -376,6 +404,9 @@ msgstr "A senha da chave só é aplicável ao fornecedor SSH. Outros fornecedore
 msgid "Label"
 msgstr "Rótulo"
 
+msgid "Last execution cancelled"
+msgstr ""
+
 msgid "Last execution failed"
 msgstr "Falha na última execução "
 
@@ -406,6 +437,9 @@ msgstr "Listar recursos de execução remota "
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
+msgid "Location"
+msgstr ""
+
 msgid "Manual selection"
 msgstr "Seleção manual"
 
@@ -424,14 +458,14 @@ msgstr "Novo Modelo de Trabalho "
 msgid "No execution finished yet"
 msgstr "Nenhuma execução concluída ainda "
 
-msgid "No hosts found."
-msgstr "Nenhum host localizado."
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "Nenhum modelo mapeado para o recurso %{feature_name}"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Nem todas as entradas necessárias possuem valores. Entradas ausentes: %s"
+
+msgid "Organization"
+msgstr ""
 
 msgid "Override the description format from the template for this invocation only"
 msgstr "Substituir o formato de descrição do modelo somente para esta invocação"
@@ -456,6 +490,9 @@ msgstr "A senha é armazenada criptografada no banco de dados até que o trabalh
 
 msgid "Pending"
 msgstr "Pendente"
+
+msgid "Perform a single Puppet run"
+msgstr ""
 
 msgid "Perform no more executions after this time"
 msgstr "Não desempenhar execuções depois deste período"
@@ -484,6 +521,9 @@ msgstr "Provedores e modelos"
 msgid "Proxies"
 msgstr "Proxies"
 
+msgid "Randomized"
+msgstr ""
+
 msgid "Recurring logic"
 msgstr "Lógica recorrente"
 
@@ -507,6 +547,9 @@ msgstr "Execução remota"
 
 msgid "Remote execution feature label that should be triggered, job template assigned to this feature will be used"
 msgstr "O rótulo do recurso de execução remota que deve ser acionado. O modelo de trabalho atribuído a esse recurso será usado."
+
+msgid "Remove SSH known hosts for %s"
+msgstr ""
 
 msgid "Repeat a maximum of N times"
 msgstr "Repetir no máximo N vezes "
@@ -541,8 +584,14 @@ msgstr "Executar"
 msgid "Run Job"
 msgstr "Executar Trabalho"
 
+msgid "Run Puppet Once"
+msgstr ""
+
 msgid "Run at most N tasks at a time"
 msgstr "Executar no máximo N tarefas de cada vez "
+
+msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
 
 msgid "SSH"
 msgstr "SSH"
@@ -586,8 +635,8 @@ msgstr "Pesquisar"
 msgid "Search Query"
 msgstr ""
 
-msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
-msgstr "Pesquise por proxies de execução remota fora dos proxies atribuídos ao host. Se as localizações ou organizações estiverem habilitadas, a pesquisa ficará limitada à organização ou localização do host. "
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host's organization and location."
+msgstr ""
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "Pesquise o host por quaisquer proxies com execução remota, útil quando o host não possui subrede ou a subrede não tem um proxy de execução "
@@ -607,8 +656,8 @@ msgstr "Selecione o máximo possível de proxies de execução remota aplicável
 msgid "Set to distribute over"
 msgstr "Definir para distribuir em"
 
-msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
-msgstr "Os endereços IP nas interfaces de host devem ser preferidos em relação ao FQDN? É útil, quando o DNS não está resolvendo os FQDNs adequadamente. É possível substituir isso por host, configurando um parâmetro chamado remote_execution_connect_by_ip."
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
+msgstr ""
 
 msgid "Show foreign input set details"
 msgstr "Exibir detalhes do conjunto de entradas externas"
@@ -678,9 +727,6 @@ msgstr "Versão do modelo"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "Modelo com id '%{id}' não foi localizado "
-
-msgid "The dynamic query '#{job_invocation.targeting.search_query}' was not resolved yet. The list of hosts to which it would resolve now can be seen"
-msgstr ""
 
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "A consulta dinâmica '%{query}' não foi resolvida ainda. A lista dos hosts de que ela poderia ser resolvida agora pode ser visualizada %{here}."
@@ -782,6 +828,9 @@ msgstr "Tipo de consulta"
 
 msgid "Unable to fetch public key"
 msgstr "Não é possível capturar chave pública "
+
+msgid "Unable to remove host from known hosts"
+msgstr ""
 
 msgid "Unable to save template. Correct highlighted errors"
 msgstr "Não foi possível salvar o modelo. Corrija os erros em destaque "

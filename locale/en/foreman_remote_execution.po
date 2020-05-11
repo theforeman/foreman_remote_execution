@@ -26,12 +26,6 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#, fuzzy
-msgid "...and %{count} more"
-msgid_plural "...and %{count} more"
-msgstr[0] ""
-msgstr[1] ""
-
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr ""
 
@@ -59,10 +53,19 @@ msgstr ""
 msgid "Add Foreign Input Set"
 msgstr ""
 
+msgid "Alphabetical"
+msgstr ""
+
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
+msgstr ""
+
+msgid "Any Location"
+msgstr ""
+
+msgid "Any Organization"
 msgstr ""
 
 msgid "Back to Job"
@@ -90,6 +93,9 @@ msgid "Cannot specify both bookmark_id and search_query"
 msgstr ""
 
 msgid "Cannot specify both recurrence and scheduling"
+msgstr ""
+
+msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr ""
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
@@ -146,6 +152,12 @@ msgstr ""
 msgid "Create a recurring job"
 msgstr ""
 
+msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr ""
+
+msgid "Current organization %{org_c} is different from job's organization %{org_j}."
+msgstr ""
+
 msgid "Default SSH key passphrase"
 msgstr ""
 
@@ -179,7 +191,7 @@ msgstr ""
 msgid "Display advanced fields"
 msgstr ""
 
-msgid "Distribute execution over N seconds"
+msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr ""
 
 msgid "Distribute tasks over N seconds"
@@ -224,7 +236,19 @@ msgstr ""
 msgid "Evaluated at:"
 msgstr ""
 
+msgid "Execute the jobs on hosts in randomized order"
+msgstr ""
+
 msgid "Execution"
+msgstr ""
+
+msgid "Execution order"
+msgstr ""
+
+msgid "Execution ordering"
+msgstr ""
+
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
 msgstr ""
 
 msgid "Exit status: %s"
@@ -255,6 +279,9 @@ msgid "Foreign input set"
 msgstr ""
 
 msgid "Foreman can run arbitrary commands on remote hosts using different providers, such as SSH or Ansible. Communication goes through the Smart Proxy so Foreman does not have to have direct access to the target hosts and can scale to control many hosts."
+msgstr ""
+
+msgid "Form Job Template"
 msgstr ""
 
 msgid "Get output for a host"
@@ -377,6 +404,9 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
+msgid "Last execution cancelled"
+msgstr ""
+
 msgid "Last execution failed"
 msgstr ""
 
@@ -407,6 +437,9 @@ msgstr ""
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
+msgid "Location"
+msgstr ""
+
 msgid "Manual selection"
 msgstr ""
 
@@ -425,13 +458,13 @@ msgstr ""
 msgid "No execution finished yet"
 msgstr ""
 
-msgid "No hosts found."
-msgstr ""
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
 msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr ""
+
+msgid "Organization"
 msgstr ""
 
 msgid "Override the description format from the template for this invocation only"
@@ -456,6 +489,9 @@ msgid "Password is stored encrypted in DB until the job finishes. For future or 
 msgstr ""
 
 msgid "Pending"
+msgstr ""
+
+msgid "Perform a single Puppet run"
 msgstr ""
 
 msgid "Perform no more executions after this time"
@@ -485,6 +521,9 @@ msgstr ""
 msgid "Proxies"
 msgstr ""
 
+msgid "Randomized"
+msgstr ""
+
 msgid "Recurring logic"
 msgstr ""
 
@@ -507,6 +546,9 @@ msgid "Remote execution"
 msgstr ""
 
 msgid "Remote execution feature label that should be triggered, job template assigned to this feature will be used"
+msgstr ""
+
+msgid "Remove SSH known hosts for %s"
 msgstr ""
 
 msgid "Repeat a maximum of N times"
@@ -542,7 +584,13 @@ msgstr ""
 msgid "Run Job"
 msgstr ""
 
+msgid "Run Puppet Once"
+msgstr ""
+
 msgid "Run at most N tasks at a time"
+msgstr ""
+
+msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr ""
 
 msgid "SSH"
@@ -587,7 +635,7 @@ msgstr ""
 msgid "Search Query"
 msgstr ""
 
-msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host's organization and location."
 msgstr ""
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
@@ -608,7 +656,7 @@ msgstr ""
 msgid "Set to distribute over"
 msgstr ""
 
-msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
 msgstr ""
 
 msgid "Show foreign input set details"
@@ -678,9 +726,6 @@ msgid "Template version"
 msgstr ""
 
 msgid "Template with id '%{id}' was not found"
-msgstr ""
-
-msgid "The dynamic query '#{job_invocation.targeting.search_query}' was not resolved yet. The list of hosts to which it would resolve now can be seen"
 msgstr ""
 
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
@@ -782,6 +827,9 @@ msgid "Type of query"
 msgstr ""
 
 msgid "Unable to fetch public key"
+msgstr ""
+
+msgid "Unable to remove host from known hosts"
 msgstr ""
 
 msgid "Unable to save template. Correct highlighted errors"

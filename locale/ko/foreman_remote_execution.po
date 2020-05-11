@@ -25,10 +25,6 @@ msgstr "%s 전 "
 msgid "%{description} on %{host}"
 msgstr "%{host}에 대한 %{description}"
 
-msgid "...and %{count} more"
-msgid_plural "...and %{count} more"
-msgstr[0] "...및 추가 %{count}개"
-
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr "외부 템플릿에서 제외되는 입력 이름의 쉼표로 구분된 목록입니다."
 
@@ -56,11 +52,20 @@ msgstr "작업"
 msgid "Add Foreign Input Set"
 msgstr "외부 입력 세트 추가"
 
+msgid "Alphabetical"
+msgstr ""
+
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "이미 다른 인터페이스가 실행 인터페이스로 설정되어 있습니다. 이 인터페이스를 대신 사용하시겠습니까?"
+
+msgid "Any Location"
+msgstr ""
+
+msgid "Any Organization"
+msgstr ""
 
 msgid "Back to Job"
 msgstr "작업으로 돌아가기"
@@ -88,6 +93,9 @@ msgstr "bookmark_id와 search_query를 모두 지정할 수 없습니다."
 
 msgid "Cannot specify both recurrence and scheduling"
 msgstr "반복 및 스케줄을 모두 지정할 수 없습니다."
+
+msgid "Choose a job template that is pre-selected in job invocation form"
+msgstr ""
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
 msgstr "외부 입력 세트 '%{template}' -> '%{target_template}'의 순환 종속 관계가 감지되었습니다. 템플릿 스택: %{templates_stack}"
@@ -143,6 +151,12 @@ msgstr "작업 템플릿 생성"
 msgid "Create a recurring job"
 msgstr "반복 작업 생성"
 
+msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr ""
+
+msgid "Current organization %{org_c} is different from job's organization %{org_j}."
+msgstr ""
+
 msgid "Default SSH key passphrase"
 msgstr ""
 
@@ -176,8 +190,8 @@ msgstr "설명 템플릿"
 msgid "Display advanced fields"
 msgstr "고급 필드 표시"
 
-msgid "Distribute execution over N seconds"
-msgstr "N초에 걸쳐 실행 배분"
+msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
 
 msgid "Distribute tasks over N seconds"
 msgstr "N초에 걸쳐 태스크 배분"
@@ -221,8 +235,20 @@ msgstr "프록시에서 데이터를 로드하는 도중 오류가 발생했습�
 msgid "Evaluated at:"
 msgstr "평가 시점:"
 
+msgid "Execute the jobs on hosts in randomized order"
+msgstr ""
+
 msgid "Execution"
 msgstr "실행"
+
+msgid "Execution order"
+msgstr ""
+
+msgid "Execution ordering"
+msgstr ""
+
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
 
 msgid "Exit status: %s"
 msgstr "종료 상태: %s"
@@ -252,6 +278,9 @@ msgid "Foreign input set"
 msgstr "외부 입력 세트"
 
 msgid "Foreman can run arbitrary commands on remote hosts using different providers, such as SSH or Ansible. Communication goes through the Smart Proxy so Foreman does not have to have direct access to the target hosts and can scale to control many hosts."
+msgstr ""
+
+msgid "Form Job Template"
 msgstr ""
 
 msgid "Get output for a host"
@@ -374,6 +403,9 @@ msgstr ""
 msgid "Label"
 msgstr "레이블 "
 
+msgid "Last execution cancelled"
+msgstr ""
+
 msgid "Last execution failed"
 msgstr "실패한 마지막 실행"
 
@@ -404,6 +436,9 @@ msgstr "원격 실행 기능 나열"
 msgid "List template invocations belonging to job invocation"
 msgstr ""
 
+msgid "Location"
+msgstr ""
+
 msgid "Manual selection"
 msgstr "수동 선택"
 
@@ -422,14 +457,14 @@ msgstr "새 작업 템플릿"
 msgid "No execution finished yet"
 msgstr "아직 완료된 실행이 없습니다."
 
-msgid "No hosts found."
-msgstr "호스트를 찾을 수 없습니다."
-
 msgid "No template mapped to feature %{feature_name}"
 msgstr "%{feature_name} 기능에 매핑된 템플릿이 없습니다."
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
+
+msgid "Organization"
+msgstr ""
 
 msgid "Override the description format from the template for this invocation only"
 msgstr "이 호출에 대한 템플릿에서만 설명 형식 덮어쓰기"
@@ -454,6 +489,9 @@ msgstr ""
 
 msgid "Pending"
 msgstr "보류 중 "
+
+msgid "Perform a single Puppet run"
+msgstr ""
 
 msgid "Perform no more executions after this time"
 msgstr "이 시간 이후 더 이상 실행을 수행하지 않음"
@@ -482,6 +520,9 @@ msgstr "공급자 및 템플릿"
 msgid "Proxies"
 msgstr "프록시 "
 
+msgid "Randomized"
+msgstr ""
+
 msgid "Recurring logic"
 msgstr "반복 로직"
 
@@ -504,6 +545,9 @@ msgid "Remote execution"
 msgstr "원격 실행"
 
 msgid "Remote execution feature label that should be triggered, job template assigned to this feature will be used"
+msgstr ""
+
+msgid "Remove SSH known hosts for %s"
 msgstr ""
 
 msgid "Repeat a maximum of N times"
@@ -539,8 +583,14 @@ msgstr "실행"
 msgid "Run Job"
 msgstr "작업 실행"
 
+msgid "Run Puppet Once"
+msgstr ""
+
 msgid "Run at most N tasks at a time"
 msgstr "한 번에 최대 N개 태스크 실행"
+
+msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
 
 msgid "SSH"
 msgstr "SSH"
@@ -584,8 +634,8 @@ msgstr "검색"
 msgid "Search Query"
 msgstr ""
 
-msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
-msgstr "호스트에 할당된 프록시 이외의 프록시에서 원격 실행 프록시를 검색합니다. 위치 또는 조직이 활성화된 경우 호스트의 조직 또는 위치로 검색 범위가 제한됩니다."
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host's organization and location."
+msgstr ""
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "원격 실행 기능이 있는 모든 프록시의 호스트를 검색합니다. 호스트에 서브넷이 없거나 서브넷에 실행 프록시가 없는 경우 유용합니다."
@@ -605,7 +655,7 @@ msgstr "이 서브넷에 적용할 수 있는 원격 실행 프록시를 모두 
 msgid "Set to distribute over"
 msgstr ""
 
-msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful, when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip."
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
 msgstr ""
 
 msgid "Show foreign input set details"
@@ -676,9 +726,6 @@ msgstr "템플릿 버전"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "ID가 '%{id}'인 템플릿을 찾을 수 없습니다."
-
-msgid "The dynamic query '#{job_invocation.targeting.search_query}' was not resolved yet. The list of hosts to which it would resolve now can be seen"
-msgstr ""
 
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "동적 쿼리 '%{query}'이(가) 아직 확인되지 않았습니다. 확인할 대상 호스트의 목록을 %{here}에서 볼 수 있습니다."
@@ -779,6 +826,9 @@ msgstr "쿼리 유형"
 
 msgid "Unable to fetch public key"
 msgstr "공개 키를 가져올 수 없습니다."
+
+msgid "Unable to remove host from known hosts"
+msgstr ""
 
 msgid "Unable to save template. Correct highlighted errors"
 msgstr ""
