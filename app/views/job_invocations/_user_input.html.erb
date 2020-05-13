@@ -12,7 +12,7 @@
       <% template_invocation.input_values.joins(:template_input).each do |input_value| %>
         <tr>
           <td><b><%= input_value.template_input.name %></b></td>
-          <td><%= input_value.template_input.hidden_value? ? '*' * 5 : input_value.value %></td>
+          <td><%= input_safe_value(input_value) %></td>
         </tr>
       <% end %>
       </tbody>
