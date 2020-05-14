@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HostItem renders HostItem 1`] = `
+<tr>
+  <td
+    className="host_name"
+  >
+    <a
+      href="/host1"
+    >
+      Host1
+    </a>
+  </td>
+  <td
+    className="host_status"
+  >
+    <HostStatus
+      status="success"
+    />
+  </td>
+  <td
+    className="host_actions"
+  >
+    <HostActions
+      actions={Array []}
+    />
+  </td>
+</tr>
+`;

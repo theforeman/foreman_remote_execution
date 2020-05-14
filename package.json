@@ -4,9 +4,9 @@
   "license": "GPL-3.0",
   "scripts": {
     "lint": "./node_modules/.bin/eslint -c .eslintrc webpack/ script/",
-    "test": "node node_modules/.bin/jest webpack",
-    "test:watch": "node node_modules/.bin/jest webpack --watchAll",
-    "test:current": "node node_modules/.bin/jest webpack --watch"
+    "test": "tfm-test --plugin",
+    "test:watch": "tfm-test --plugin --watchAll",
+    "test:current": "tfm-test --plugin --watch"
   },
   "jest": {
     "verbose": true,
@@ -32,8 +32,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": "^4.0.2",
-    "@theforeman/vendor-dev": "^4.0.2",
+    "@theforeman/builder": "^4.2.1",
+    "@theforeman/vendor-dev": "^4.2.1",
+    "@theforeman/test": "^4.2.1",
     "babel-eslint": "^10.0.0",
     "babel-jest": "^24.9.0",
     "enzyme": "^3.2.0",
@@ -48,6 +49,6 @@
     "jest": "^24.9.0"
   },
   "peerDependencies": {
-    "@theforeman/vendor": ">= 4.0.2"
+    "@theforeman/vendor": ">= 4.2.1"
   }
 }
