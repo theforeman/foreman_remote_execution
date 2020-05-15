@@ -1,6 +1,7 @@
-class InternalProxyProxySelector < ::RemoteExecutionProxySelector
+class DefaultProxyProxySelector < ::RemoteExecutionProxySelector
   def initialize
     # TODO: Remove this once we have a reliable way of determining the internal proxy without katello
+    # Tracked as https://projects.theforeman.org/issues/29840
     raise _('Internal proxy selector can only be used if Katello is enabled') unless defined?(::Katello)
     super
   end
