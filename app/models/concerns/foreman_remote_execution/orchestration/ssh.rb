@@ -13,6 +13,9 @@ module ForemanRemoteExecution
       proxy = ::SmartProxy.find(proxy_id)
       begin
         proxy.drop_host_from_known_hosts(target)
+      rescue RestClient::ResourceNotFound => e
+        # ignore 404 when known_hosts entry is missing or the module was not enabled
+        Foreman::Logging.exception "Proxy failed to delete SSH known_hosts for #{name}, #{ip}", e, :level => :error
       rescue => e
         Rails.logger.warn e.message
         return false
