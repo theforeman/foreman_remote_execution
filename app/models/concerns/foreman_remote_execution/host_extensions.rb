@@ -2,6 +2,8 @@ module ForemanRemoteExecution
   module HostExtensions
     def self.prepended(base)
       base.instance_eval do
+        attr_accessor :template_invocation_status
+
         has_many :targeting_hosts, :dependent => :destroy, :foreign_key => 'host_id'
         has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
         has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id', :dependent => :destroy

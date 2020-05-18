@@ -21,6 +21,12 @@ child :targeting do
 
   child @hosts do
     extends 'api/v2/hosts/base'
+
+    if params[:host_status]
+      node :job_status do |host|
+        host.template_invocation_status
+      end
+    end
   end
 end
 
