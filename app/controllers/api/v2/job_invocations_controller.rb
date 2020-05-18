@@ -18,6 +18,7 @@ module Api
 
       api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
+      param :host_status, :bool, required: false, desc: N_('Show Job status of each hosts.')
       def show
       end
 

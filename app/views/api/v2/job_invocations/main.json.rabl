@@ -21,6 +21,14 @@ child :targeting do
 
   child :hosts do
     extends 'api/v2/hosts/base'
+
+    if params[:host_status]
+      node(:job_status) do |host|
+        template_invocation = @job_invocation.template_invocations.find { |template_inv| template_inv.host_id == host.id }
+        task = template_invocation.try(:run_host_job_task)
+        template_invocation_status(task, @job_invocation.task)
+      end
+    end
   end
 end
 
