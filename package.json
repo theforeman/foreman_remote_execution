@@ -50,8 +50,5 @@
   },
   "peerDependencies": {
     "@theforeman/vendor": ">= 4.0.2"
-  },
-  "dependencies": {
-    "@theforeman/vendor": "^4.0.2"
   }
 }
