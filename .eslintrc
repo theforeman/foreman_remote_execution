@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["airbnb-base", "./node_modules/@theforeman/vendor-dev/eslint.extends.js"],
+  "extends": ["airbnb-base"],
   "plugins": [
     "react"
   ],
