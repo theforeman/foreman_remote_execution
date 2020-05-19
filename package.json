@@ -3,25 +3,14 @@
   "version": "1.0.0",
   "license": "GPL-3.0",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint -c .eslintrc webpack/ script/",
-    "test": "node node_modules/.bin/jest webpack",
-    "test:watch": "node node_modules/.bin/jest webpack --watchAll",
-    "test:current": "node node_modules/.bin/jest webpack --watch"
-  },
-  "jest": {
-    "verbose": true,
-    "moduleDirectories": [
-      "node_modules",
-      "webpack"
-    ],
-    "setupFiles": [
-      "raf/polyfill",
-      "./webpack/test_setup.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "<rootDir>/foreman/"
-    ]
+    "lint": "tfm-lint --plugin -d /webpack",
+    "test": "tfm-test --plugin",
+    "test:watch": "tfm-test --plugin --watchAll",
+    "test:current": "tfm-test --plugin --watch",
+    "publish-coverage": "tfm-publish-coverage",
+    "stories": "tfm-stories --plugin",
+    "stories:build": "tfm-build-stories --plugin",
+    "stories:deploy": "surge --project .storybook-dist"
   },
   "repository": {
     "type": "git",
@@ -32,22 +21,16 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": "^4.0.2",
-    "@theforeman/vendor-dev": "^4.0.2",
+    "@theforeman/builder": "^4.2.1",
+    "@theforeman/eslint-plugin-foreman": "4.2.1",
+    "@theforeman/stories": "^4.2.1",
+    "@theforeman/test": "^4.2.1",
+    "@theforeman/vendor-dev": "^4.2.1",
     "babel-eslint": "^10.0.0",
-    "babel-jest": "^24.9.0",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0",
-    "enzyme-to-json": "^3.1.2",
-    "eslint": "^4.10.0",
-    "eslint-config-airbnb": "^16.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jest": "^21.2.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
-    "jest": "^24.9.0"
+    "eslint": "^6.8.0",
+    "prettier": "^1.19.1"
   },
   "peerDependencies": {
-    "@theforeman/vendor": ">= 4.0.2"
+    "@theforeman/vendor": ">= 4.2.1"
   }
 }

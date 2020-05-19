@@ -1,32 +1,7 @@
 {
-  "root": true,
-  "extends": ["airbnb-base", "./node_modules/@theforeman/vendor-dev/eslint.extends.js"],
-  "plugins": [
-    "react"
-  ],
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true,
-    "jasmine": true,
-    "jest": true
-  },
-  "parser": "babel-eslint",
-  "rules": {
-    "react/jsx-uses-vars": "error",
-    "react/jsx-uses-react": "error",
-    "no-unused-vars": [
-      "error",
-      {
-        "vars": "all",
-        "args": "none"
-      }
-    ],
-    "no-underscore-dangle": "off",
-    "no-use-before-define": "off",
-    "import/prefer-default-export": "off",
-    // Import rules off for now due to HoundCI issue
-    "import/no-unresolved": "off",
-    "import/extensions": "off"
-  }
+  "plugins": ["@theforeman/foreman"],
+  "extends": [
+    "plugin:@theforeman/foreman/core",
+    "plugin:@theforeman/foreman/plugins"
+  ]
 }
