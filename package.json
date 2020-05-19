@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": "^4.2.1",
-    "@theforeman/vendor-dev": "^4.2.1",
-    "@theforeman/test": "^4.2.1",
+    "@theforeman/builder": "^4.0.2",
+    "@theforeman/vendor-dev": "^4.0.2",
+    "@theforeman/test": "^4.0.2",
     "babel-eslint": "^10.0.0",
     "babel-jest": "^24.9.0",
     "enzyme": "^3.2.0",
@@ -49,6 +49,9 @@
     "jest": "^24.9.0"
   },
   "peerDependencies": {
-    "@theforeman/vendor": ">= 4.2.1"
+    "@theforeman/vendor": ">= 4.0.2"
+  },
+  "dependencies": {
+    "@theforeman/vendor": "^4.0.2"
   }
 }
