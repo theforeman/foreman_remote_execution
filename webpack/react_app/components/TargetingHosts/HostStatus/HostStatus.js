@@ -1,31 +1,58 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Icon } from 'patternfly-react';
 import PropTypes from 'prop-types';
 
-const HostStatus = (props) => {
-  const { status } = props;
-
+const HostStatus = ({ status }) => {
   switch (status) {
     case 'cancelled':
-      return (<Fragment><span className="pficon pficon-warning-triangle-o"></span> cancelled</Fragment>);
+      return (
+        <div>
+          <Icon type="pf" name="warning-triangle-o" /> cancelled
+        </div>
+      );
     case 'N/A':
-      return (<Fragment><span className="fa fa-question"></span> N/A</Fragment>);
+      return (
+        <div>
+          <Icon type="fa" name="question" /> N/A
+        </div>
+      );
     case 'running':
-      return (<Fragment><span className="pficon pficon-running"></span> running</Fragment>);
+      return (
+        <div>
+          <Icon type="pf" name="running" /> running
+        </div>
+      );
     case 'planned':
-      return (<Fragment><span className="pficon pficon-build"></span> running</Fragment>);
+      return (
+        <div>
+          <Icon type="pf" name="build" /> planned
+        </div>
+      );
     case 'warning':
-      return (<Fragment><span className="pficon pficon-error-circle-o"></span> failed</Fragment>);
+      return (
+        <div>
+          <Icon type="pf" name="error-circle-o" /> failed
+        </div>
+      );
     case 'error':
-      return (<Fragment><span className="pficon pficon-error-circle-o"></span> failed</Fragment>);
+      return (
+        <div>
+          <Icon type="pf" name="error-circle-o" /> failed
+        </div>
+      );
     case 'success':
-      return (<Fragment><span className="pficon pficon-ok"></span> success</Fragment>);
+      return (
+        <div>
+          <Icon type="pf" name="ok" /> success
+        </div>
+      );
     default:
-      return (<span>{status}</span>);
+      return <span>{status}</span>;
   }
 };
 
 HostStatus.propTypes = {
-  status: PropTypes.string,
+  status: PropTypes.string.isRequired,
 };
 
 export default HostStatus;

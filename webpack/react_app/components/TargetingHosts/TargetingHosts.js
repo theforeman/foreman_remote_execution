@@ -1,92 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import API from 'foremanReact/API';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoadingState } from 'patternfly-react';
 import PropTypes from 'prop-types';
-import HostItem from './HostItem/HostItem.js';
+import { translate as __ } from 'foremanReact/common/I18n';
+import HostItem from './HostItem/HostItem';
+import { getTargetingHostsAction } from '../../redux/actions/TargetingHosts';
+import {
+  selectLoadingState,
+  selectErrorState,
+  selectHostsState,
+  selectRefreshState,
+} from '../../redux/selectors/TargetingHosts';
 
-const TargetingHosts = (props) => {
-  const { jobInvocationId } = props;
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [hosts, setHosts] = useState([]);
-
-  const renderLoading = () => {
-    if (loading) {
-      return (
-        <tr>
-          <td colSpan="3" className="text-center">
-            Loading hosts ...
-          </td>
-        </tr>
-      );
-    }
-
-    return (null);
-  };
-
-  const getHostsData = () => {
-    const apiUrl = `/job_invocations/${jobInvocationId}?format=json`;
-
-    API.get(apiUrl)
-      .then((result) => {
-        setHosts(result.data.hosts);
-        setLoading(false);
-
-        if (result.data.autoRefresh === 'true') {
-
-          setTimeout(() => {
-            getHostsData();
-          }, 1000);
-        }
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
-  };
-
-  const renderError = () => {
-    if (error) {
-      return (
-        <tr>
-          <td colSpan="3" className="text-center">
-            <div className="alert alert-danger">
-              <span className="pficon pficon-error-circle-o "></span>
-                <span className="text">There was an error while updating the status, try refreshing the page.</span>
-            </div>
-          </td>
-        </tr>
-      );
-    }
-    return (null);
-  };
+const TargetingHosts = ({ data }) => {
+  const { jobInvocationId } = data;
+  const loading = useSelector(state => selectLoadingState(state));
+  const error = useSelector(state => selectErrorState(state));
+  const hosts = useSelector(state => selectHostsState(state));
+  const refresh = useSelector(state => selectRefreshState(state));
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getHostsData();
-  }, [null]);
+    if (refresh === true) {
+      setTimeout(
+        () =>
+          dispatch(
+            getTargetingHostsAction(
+              `/job_invocations/${jobInvocationId}?format=json`
+            )
+          ),
+        loading ? 0 : 1000
+      );
+    }
+  }, [dispatch, hosts, jobInvocationId, refresh, loading]);
+
+  if (error) {
+    return (
+      <div className="alert alert-danger">
+        <span className="pficon pficon-error-circle-o " />
+        <span className="text">
+          {__(
+            'There was an error while updating the status, try refreshing the page.'
+          )}
+        </span>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <table className="table table-bordered table-striped table-hover ">
+    <LoadingState loading={loading}>
+      <table className="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th>Host</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th>{__('Host')}</th>
+            <th>{__('Status')}</th>
+            <th>{__('Actions')}</th>
           </tr>
         </thead>
         <tbody>
-          { renderLoading() }
-          { renderError() }
-
-          { hosts.map(host => <HostItem host={host} key={host.name}/>)}
+          {hosts.map(host => (
+            <HostItem
+              key={host.name}
+              name={host.name}
+              link={host.link}
+              status={host.status}
+              actions={host.actions}
+            />
+          ))}
         </tbody>
       </table>
-    </div>
+    </LoadingState>
   );
 };
 
 TargetingHosts.propTypes = {
-  jobInvocationId: PropTypes.number.isRequired,
+  data: PropTypes.shape({
+    jobInvocationId: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default TargetingHosts;

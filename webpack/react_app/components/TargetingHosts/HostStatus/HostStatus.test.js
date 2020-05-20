@@ -5,7 +5,6 @@ const fixtures = {
   'renders HostStatus': {
     status: 'success',
   },
-
 };
 describe('HostStatus', () =>
   testComponentSnapshotsWithFixtures(HostStatus, fixtures));
