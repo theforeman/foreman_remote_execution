@@ -22,7 +22,7 @@
   "devDependencies": {
     "@babel/core": "^7.7.0",
     "@theforeman/builder": "^4.2.1",
-    "@theforeman/eslint-plugin-foreman": "4.2.1",
+    "@theforeman/eslint-plugin-foreman": "^4.2.1",
     "@theforeman/stories": "^4.2.1",
     "@theforeman/test": "^4.2.1",
     "@theforeman/vendor-dev": "^4.2.1",
