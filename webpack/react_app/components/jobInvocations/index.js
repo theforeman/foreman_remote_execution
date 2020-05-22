@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import DonutChart from 'foremanReact/components/common/charts/DonutChart';
-import AggregateStatus from './AggregateStatus/';
+import AggregateStatus from './AggregateStatus';
 import * as JobInvocationActions from '../../redux/actions/jobInvocations';
 
 const colIndexOfMaxValue = columns =>
