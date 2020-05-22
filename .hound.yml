@@ -11,9 +11,4 @@ rubocop:
 jshint:
   enabled: false
 
-eslint:
-  enabled: false
-  config_file: .eslintrc
-  ignore_file: .eslintignore
-
 fail_on_violations: true
