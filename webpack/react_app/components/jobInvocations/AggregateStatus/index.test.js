@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import AggregateStatus from './index.js';
+import { shallow } from '@theforeman/test';
+import AggregateStatus from './index';
 
 jest.unmock('./index.js');
 
@@ -20,7 +20,10 @@ describe('AggregateStatus', () => {
 
     it('renders cards with props passed', () => {
       const statuses = {
-        success: 19, failed: 20, cancelled: 31, pending: 3,
+        success: 19,
+        failed: 20,
+        cancelled: 31,
+        pending: 3,
       };
       const chartNumbers = shallow(<AggregateStatus statuses={statuses} />);
       const success = chartNumbers.find('#success_count').text();

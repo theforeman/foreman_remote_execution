@@ -1,6 +1,5 @@
-import URI from 'urijs';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mount, registerReducer } from 'foremanReact/common/MountingService';
+import { registerReducer } from 'foremanReact/common/MountingService';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import componentRegistry from 'foremanReact/components/componentRegistry';
 import JobInvocationContainer from './react_app/components/jobInvocations';

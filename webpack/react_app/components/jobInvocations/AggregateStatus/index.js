@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const AggregateStatus = ({ statuses }) => (
   <div id="aggregate_statuses">
@@ -30,5 +31,14 @@ const AggregateStatus = ({ statuses }) => (
     </p>
   </div>
 );
+
+AggregateStatus.propTypes = {
+  statuses: PropTypes.shape({
+    cancelled: PropTypes.number,
+    failed: PropTypes.number,
+    pending: PropTypes.number,
+    success: PropTypes.number,
+  }).isRequired,
+};
 
 export default AggregateStatus;

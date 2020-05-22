@@ -15,26 +15,10 @@ export const pollingStarted = Immutable({
 export const jobInvocationsPayload = Immutable({
   jobInvocations: {
     job_invocations: [
-      [
-        'Success',
-        100,
-        '#B7312D',
-      ],
-      [
-        'Failed',
-        20,
-        '#B7312D',
-      ],
-      [
-        'Pending',
-        40,
-        '#B7312D',
-      ],
-      [
-        'Cancelled',
-        0,
-        '#B7312D',
-      ],
+      ['Success', 100, '#B7312D'],
+      ['Failed', 20, '#B7312D'],
+      ['Pending', 40, '#B7312D'],
+      ['Cancelled', 0, '#B7312D'],
     ],
     statuses: {
       cancelled: 0,
@@ -48,26 +32,10 @@ export const jobInvocationsPayload = Immutable({
 export const jobInvocationsReceived = Immutable({
   isPolling: true,
   jobInvocations: [
-    [
-      'Success',
-      100,
-      '#B7312D',
-    ],
-    [
-      'Failed',
-      20,
-      '#B7312D',
-    ],
-    [
-      'Pending',
-      40,
-      '#B7312D',
-    ],
-    [
-      'Cancelled',
-      0,
-      '#B7312D',
-    ],
+    ['Success', 100, '#B7312D'],
+    ['Failed', 20, '#B7312D'],
+    ['Pending', 40, '#B7312D'],
+    ['Cancelled', 0, '#B7312D'],
   ],
   statuses: {
     cancelled: 0,

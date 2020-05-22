@@ -18,20 +18,26 @@ describe('job invocations chart reducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
   it('should start polling given POLLING_STARTED', () => {
-    expect(reducer(initialState, {
-      type: JOB_INVOCATIONS_POLLING_STARTED,
-    })).toEqual(pollingStarted);
+    expect(
+      reducer(initialState, {
+        type: JOB_INVOCATIONS_POLLING_STARTED,
+      })
+    ).toEqual(pollingStarted);
   });
   it('should stop polling given JOB_FINISHED', () => {
-    expect(reducer(pollingStarted, {
-      type: JOB_INVOCATIONS_JOB_FINISHED,
-      payload: { jobInvocations: { job_invocations: [], statuses: {} } },
-    })).toEqual(initialState);
+    expect(
+      reducer(pollingStarted, {
+        type: JOB_INVOCATIONS_JOB_FINISHED,
+        payload: { jobInvocations: { job_invocations: [], statuses: {} } },
+      })
+    ).toEqual(initialState);
   });
   it('should receive job invocations given GET_JOB_INVOCATIONS', () => {
-    expect(reducer(pollingStarted, {
-      type: JOB_INVOCATIONS_GET_JOB_INVOCATIONS,
-      payload: jobInvocationsPayload,
-    })).toEqual(jobInvocationsReceived);
+    expect(
+      reducer(pollingStarted, {
+        type: JOB_INVOCATIONS_GET_JOB_INVOCATIONS,
+        payload: jobInvocationsPayload,
+      })
+    ).toEqual(jobInvocationsReceived);
   });
 });
