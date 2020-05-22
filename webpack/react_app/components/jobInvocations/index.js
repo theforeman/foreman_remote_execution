@@ -4,14 +4,18 @@ import Immutable from 'seamless-immutable';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import DonutChart from 'foremanReact/components/common/charts/DonutChart';
-import AggregateStatus from './AggregateStatus/index.js';
+import AggregateStatus from './AggregateStatus/';
 import * as JobInvocationActions from '../../redux/actions/jobInvocations';
 
-const colIndexOfMaxValue = columns => columns.reduce((iMax, x, i, arr) => (x[1] > arr[iMax][1] ? i : iMax), 0);
+const colIndexOfMaxValue = columns =>
+  columns.reduce((iMax, x, i, arr) => (x[1] > arr[iMax][1] ? i : iMax), 0);
 
 class JobInvocationContainer extends React.Component {
   componentDidMount() {
-    const { startJobInvocationsPolling, data: { url } } = this.props;
+    const {
+      startJobInvocationsPolling,
+      data: { url },
+    } = this.props;
 
     startJobInvocationsPolling(url);
   }
@@ -22,15 +26,20 @@ class JobInvocationContainer extends React.Component {
 
     return (
       <div id="job_invocations_chart_container">
-        <DonutChart data={Immutable.asMutable(jobInvocations)}
-                    title={{type: 'percent', secondary: (jobInvocations[iMax] || [])[0]}}/>
+        <DonutChart
+          data={Immutable.asMutable(jobInvocations)}
+          title={{
+            type: 'percent',
+            secondary: (jobInvocations[iMax] || [])[0],
+          }}
+        />
         <AggregateStatus statuses={statuses} />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const {
     jobInvocations,
     statuses,
@@ -62,4 +71,7 @@ JobInvocationContainer.defaultProps = {
   jobInvocations: [['property', 3, 'color']],
   statuses: {},
 };
-export default connect(mapStateToProps, JobInvocationActions)(JobInvocationContainer);
+export default connect(
+  mapStateToProps,
+  JobInvocationActions
+)(JobInvocationContainer);

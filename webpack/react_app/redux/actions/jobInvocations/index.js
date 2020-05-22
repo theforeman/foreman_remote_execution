@@ -8,10 +8,10 @@ import {
 } from '../../consts';
 
 const defaultJobInvocationsPollingInterval = 1000;
-const jobInvocationsInterval = process.env.JOB_INVOCATIONS_POLLING ||
-  defaultJobInvocationsPollingInterval;
+const jobInvocationsInterval =
+  process.env.JOB_INVOCATIONS_POLLING || defaultJobInvocationsPollingInterval;
 
-const getJobInvocations = url => (dispatch, getState) => {
+const getJobInvocations = url => async (dispatch, getState) => {
   function onGetJobInvocationsSuccess({ data }) {
     // If the job has finished, stop polling
     if (data.finished) {
@@ -41,7 +41,7 @@ const getJobInvocations = url => (dispatch, getState) => {
     if (jobInvocationsInterval) {
       setTimeout(
         () => dispatch(getJobInvocations(url)),
-        jobInvocationsInterval,
+        jobInvocationsInterval
       );
     }
   }
@@ -52,10 +52,14 @@ const getJobInvocations = url => (dispatch, getState) => {
 
   if (getState().foremanRemoteExecutionReducers.jobInvocations.isPolling) {
     if (isDocumentVisible) {
-      API.get(url)
-        .then(onGetJobInvocationsSuccess)
-        .catch(onGetJobInvocationsFailed)
-        .then(triggerPolling);
+      try {
+        const data = await API.get(url);
+        onGetJobInvocationsSuccess(data);
+      } catch (error) {
+        onGetJobInvocationsFailed(error);
+      } finally {
+        triggerPolling();
+      }
     } else {
       // document is not visible, keep polling without api call
       triggerPolling();
