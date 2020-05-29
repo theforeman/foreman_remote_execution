@@ -1,40 +1,39 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { LoadingState } from 'patternfly-react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { LoadingState } from 'patternfly-react';
+import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
+import { STATUS } from 'foremanReact/constants';
 import HostItem from './HostItem/HostItem';
-import { getTargetingHostsAction } from '../../redux/actions/TargetingHosts';
 import {
-  selectLoadingState,
-  selectErrorState,
-  selectHostsState,
-  selectRefreshState,
-} from '../../redux/selectors/TargetingHosts';
+  selectItems,
+  selectStatus,
+  selectAutoRefresh,
+} from './TargetingHostsSelectors';
+import { getData } from './TargetingHostsActions';
+import { TARGETING_HOSTS } from './TargetingHostsConsts';
 
-const TargetingHosts = ({ data }) => {
-  const { jobInvocationId } = data;
-  const loading = useSelector(state => selectLoadingState(state));
-  const error = useSelector(state => selectErrorState(state));
-  const hosts = useSelector(state => selectHostsState(state));
-  const refresh = useSelector(state => selectRefreshState(state));
+const TargetingHosts = () => {
   const dispatch = useDispatch();
+  const autoRefresh = useSelector(selectAutoRefresh);
+  const items = useSelector(selectItems);
+  const status = useSelector(selectStatus);
 
   useEffect(() => {
-    if (refresh === true) {
-      setTimeout(
-        () =>
-          dispatch(
-            getTargetingHostsAction(
-              `/job_invocations/${jobInvocationId}?format=json`
-            )
-          ),
-        loading ? 0 : 1000
-      );
-    }
-  }, [dispatch, hosts, jobInvocationId, refresh, loading]);
+    dispatch(getData());
 
-  if (error) {
+    return () => {
+      dispatch(stopInterval(TARGETING_HOSTS));
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (autoRefresh === 'false') {
+      dispatch(stopInterval(TARGETING_HOSTS));
+    }
+  }, [autoRefresh, dispatch]);
+
+  if (status === STATUS.ERROR) {
     return (
       <div className="alert alert-danger">
         <span className="pficon pficon-error-circle-o " />
@@ -48,35 +47,31 @@ const TargetingHosts = ({ data }) => {
   }
 
   return (
-    <LoadingState loading={loading}>
-      <table className="table table-bordered table-striped table-hover">
-        <thead>
-          <tr>
-            <th>{__('Host')}</th>
-            <th>{__('Status')}</th>
-            <th>{__('Actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {hosts.map(host => (
-            <HostItem
-              key={host.name}
-              name={host.name}
-              link={host.link}
-              status={host.status}
-              actions={host.actions}
-            />
-          ))}
-        </tbody>
-      </table>
+    <LoadingState loading={!items.length}>
+      <div>
+        <table className="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>{__('Host')}</th>
+              <th>{__('Status')}</th>
+              <th>{__('Actions')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map(host => (
+              <HostItem
+                key={host.name}
+                name={host.name}
+                link={host.link}
+                status={host.status}
+                actions={host.actions}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </LoadingState>
   );
-};
-
-TargetingHosts.propTypes = {
-  data: PropTypes.shape({
-    jobInvocationId: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default TargetingHosts;

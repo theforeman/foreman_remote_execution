@@ -43,15 +43,20 @@ module RemoteExecutionHelper
     host_task = template_invocation.try(:run_host_job_task)
 
     if authorized_for(hash_for_host_path(host).merge(auth_object: host, permission: :view_hosts, authorizer: job_hosts_authorizer))
-      links << { title: _('Host detail'), action: { href: host_path(host), 'data-method': 'get' } }
+      links << { title: _('Host detail'),
+                 action: { href: host_path(host), 'data-method': 'get', id: "#{host.name}-actions-detail" } }
     end
 
     if authorized_for(hash_for_rerun_job_invocation_path(id: job_invocation, host_ids: [ host.id ], authorizer: job_hosts_authorizer))
-      links << { title: (_('Rerun on %s') % host.name), action: { href: rerun_job_invocation_path(job_invocation, host_ids: [ host.id ]), 'data-method': 'get' }}
+      links << { title: (_('Rerun on %s') % host.name),
+                 action: { href: rerun_job_invocation_path(job_invocation, host_ids: [ host.id ]),
+                           'data-method': 'get', id: "#{host.name}-actions-rerun" } }
     end
 
     if host_task.present? && authorized_for(hash_for_foreman_tasks_task_path(host_task).merge(auth_object: host_task, permission: :view_foreman_tasks))
-      links << { title: _('Host task'), action: { href: foreman_tasks_task_path(host_task), 'data-method': 'get' }}
+      links << { title: _('Host task'),
+                 action: { href: foreman_tasks_task_path(host_task),
+                           'data-method': 'get', id: "#{host.name}-actions-task" } }
     end
 
     links

@@ -16,7 +16,7 @@
   <br>
 
   <div id="targeting_hosts">
-    <%= mount_react_component('TargetingHosts', '#targeting_hosts', { jobInvocationId: @job_invocation.id }.to_json) %>
+    <%= mount_react_component('TargetingHosts', '#targeting_hosts') %>
   </div>
   <%= will_paginate_with_info @hosts, :container => true %>
 <% else %>

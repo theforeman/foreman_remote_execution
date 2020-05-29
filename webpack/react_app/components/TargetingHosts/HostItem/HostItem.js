@@ -5,7 +5,7 @@ import HostStatus from '../HostStatus/HostStatus';
 
 const HostItem = ({ name, link, status, actions }) => {
   const renderName = () => {
-    if (link !== '' || link !== undefined) {
+    if (link) {
       return <a href={link}>{name}</a>;
     }
     return (
