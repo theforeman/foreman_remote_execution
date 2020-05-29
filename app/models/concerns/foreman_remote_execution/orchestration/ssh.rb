@@ -8,8 +8,10 @@ module ForemanRemoteExecution
       register_rebuild(:queue_ssh_destroy, N_("SSH_#{self.to_s.split('::').first}"))
     end
 
-    def drop_from_known_hosts(args)
-      proxy_id, target = args
+    def drop_from_known_hosts(proxy_id)
+      _, _, target = host_kind_target
+      return true if target.nil?
+
       proxy = ::SmartProxy.find(proxy_id)
       begin
         proxy.drop_host_from_known_hosts(target)
@@ -26,11 +28,11 @@ module ForemanRemoteExecution
     def ssh_destroy
       logger.debug "Scheduling SSH known_hosts cleanup"
 
-      host, _kind, target = host_kind_target
+      host, _kind, _target = host_kind_target
       proxies = host.remote_execution_proxies('SSH').values
       proxies.flatten.uniq.each do |proxy|
         queue.create(id: queue_id(proxy.id), name: _("Remove SSH known hosts for %s") % self,
-          priority: 200, action: [self, :drop_from_known_hosts, [proxy.id, target]])
+          priority: 200, action: [self, :drop_from_known_hosts, proxy.id])
       end
     end
 
@@ -40,7 +42,7 @@ module ForemanRemoteExecution
 
     def should_drop_from_known_hosts?
       host, = host_kind_target
-      host&.build && host&.changes&.key?('build')
+      host && !host.new_record? && host.build && host.changes.key?('build')
     end
 
     private
