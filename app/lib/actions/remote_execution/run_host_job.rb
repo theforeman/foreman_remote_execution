@@ -29,14 +29,15 @@ module Actions
 
         raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
+        provider = template_invocation.template.provider
+        proxy_selector = provider.required_proxy_selector_for(template_invocation.template) || proxy_selector
+
         provider_type = template_invocation.template.provider_type.to_s
         proxy = determine_proxy!(proxy_selector, provider_type, host)
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render
         raise _('Failed rendering template: %s') % renderer.error_message unless script
-
-        provider = template_invocation.template.provider
 
         additional_options = { :hostname => provider.find_ip_or_hostname(host),
                                :script => script,

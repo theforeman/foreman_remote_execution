@@ -98,5 +98,10 @@ class RemoteExecutionProvider
     def proxy_action_class
       ForemanRemoteExecutionCore::Actions::RunScript
     end
+
+    # Return a specific proxy selector to use for running a given template
+    # Returns either nil to use the default selector or an instance of a (sub)class of ::ForemanTasks::ProxySelector
+    def required_proxy_selector_for(_template)
+    end
   end
 end
