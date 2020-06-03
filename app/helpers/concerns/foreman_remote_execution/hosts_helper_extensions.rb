@@ -7,14 +7,21 @@ module ForemanRemoteExecution
     end
 
     def multiple_actions
-      super + [ [_('Schedule Remote Job'), new_job_invocation_path, false] ]
+      job_actions = JobAction.authorized(:view_job_actions).all.order(:name).map do |action|
+         [_(action.name), new_job_invocation_path(template_id: action.job_template.id), false]
+      end
+
+      super + [ [_('Schedule Remote Job'), new_job_invocation_path, false] ] + job_actions
     end
 
     def schedule_job_multi_button(*args)
       host_features = rex_host_features(*args)
+      job_actions = JobAction.authorized(:view_job_actions).all.order(:name).map do |action|
+        link_to _(action.name), new_job_invocation_path(template_id: action.job_template.id)
+      end
 
-      if host_features.present?
-        action_buttons(schedule_job_button(*args), *host_features)
+      if host_features.present? || job_actions.present?
+        action_buttons(schedule_job_button(*args), host_features, *job_actions)
       else
         schedule_job_button(*args)
       end

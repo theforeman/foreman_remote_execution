@@ -80,6 +80,12 @@ module ForemanRemoteExecution
           permission :filter_autocompletion_for_template_invocation, { :template_invocations => [ :auto_complete_search, :index ] },
             :resource_type => 'TemplateInvocation'
           permission :cockpit_hosts, { 'cockpit' => [:redirect, :host_ssh_params] }, :resource_type => 'Host'
+
+          # Job Action permissions
+          permission :view_job_actions, { job_actions: [:show, :index] }, resource_type: 'JobAction'
+          permission :create_job_actions, { job_actions: [:new, :create] }, resource_type: 'JobAction'
+          permission :edit_job_actions, { job_actions: [:edit, :update] }, resource_type: 'JobAction'
+          permission :destroy_job_actions, { job_actions: [:destroy] }, resource_type: 'JobAction'
         end
 
         USER_PERMISSIONS = [
@@ -89,6 +95,7 @@ module ForemanRemoteExecution
           :create_template_invocations,
           :view_hosts,
           :view_smart_proxies,
+          :view_job_actions,
         ].freeze
         MANAGER_PERMISSIONS = USER_PERMISSIONS + [
           :cancel_job_invocations,
@@ -99,6 +106,9 @@ module ForemanRemoteExecution
           :view_audit_logs,
           :filter_autocompletion_for_template_invocation,
           :edit_remote_execution_features,
+          :create_job_actions,
+          :edit_job_actions,
+          :destroy_job_actions,
         ]
 
         # Add a new role called 'Remote Execution User ' if it doesn't exist
@@ -113,11 +123,18 @@ module ForemanRemoteExecution
           caption: N_('Job templates'),
           parent: :hosts_menu,
           after: :provisioning_templates
+
         menu :admin_menu, :remote_execution_features,
           url_hash: { controller: :remote_execution_features, action: :index },
           caption: N_('Remote Execution Features'),
           parent: :administer_menu,
           after: :bookmarks
+
+        menu :admin_menu, :job_actions,
+          url_hash: { controller: :job_actions, action: :index },
+          caption: N_('Job Actions'),
+          parent: :administer_menu,
+          after: :remote_execution_features
 
         menu :top_menu, :job_invocations,
           url_hash: { controller: :job_invocations, action: :index },
