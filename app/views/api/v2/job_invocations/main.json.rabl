@@ -19,7 +19,7 @@ child :targeting do
   attributes :bookmark_id, :search_query, :targeting_type, :user_id, :status, :status_label,
     :randomized_ordering
 
-  child :hosts do
+  child @hosts do
     extends 'api/v2/hosts/base'
   end
 end
