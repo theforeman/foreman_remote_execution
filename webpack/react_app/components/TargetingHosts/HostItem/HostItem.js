@@ -16,7 +16,7 @@ const HostItem = ({ name, link, status, actions }) => {
   };
 
   return (
-    <tr>
+    <tr id={`targeting-host-${name}`}>
       <td className="host_name">{renderName()}</td>
       <td className="host_status">
         <HostStatus status={status} />

@@ -14,28 +14,11 @@ module RemoteExecutionHelper
   end
 
   def template_invocation_status(task, parent_task)
-    if task.nil?
-      if parent_task.result == 'cancelled'
-        'cancelled'
-      else
-        'N/A'
-      end
-    elsif task.state == 'running'
-      'running'
-    elsif task.state == 'planned'
-      'planned'
-    else
-      case task.result
-        when 'warning', 'error'
-          'error'
-        when 'cancelled'
-          'cancelled'
-        when 'success'
-          'success'
-        else
-          task.result
-      end
-    end
+    return(parent_task.result == 'cancelled' ? _('cancelled') : 'N/A') if task.nil?
+    return task.state if task.state == 'running' || task.state == 'planned'
+    return _('error') if task.result == 'warning'
+
+    task.result
   end
 
   def template_invocation_actions(task, host, job_invocation, template_invocation)
@@ -248,21 +231,15 @@ module RemoteExecutionHelper
   end
 
   def targeting_hosts(job_invocation, hosts)
-    response = []
-
-    hosts.each do |host|
+    hosts.map do |host|
       template_invocation = job_invocation.template_invocations.find { |template_inv| template_inv.host_id == host.id }
       task = template_invocation.try(:run_host_job_task)
       link_authorized = !task.nil? && authorized_for(hash_for_template_invocation_path(:id => template_invocation).merge(:auth_object => host, :permission => :view_hosts, :authorizer => job_hosts_authorizer))
 
-      response << {
-        name: host.name,
+      { name: host.name,
         link: link_authorized ? template_invocation_path(:id => template_invocation) : '',
         status: template_invocation_status(task, job_invocation.task),
-        actions: template_invocation_actions(task, host, job_invocation, template_invocation),
-      }
+        actions: template_invocation_actions(task, host, job_invocation, template_invocation) }
     end
-
-    response
   end
 end
