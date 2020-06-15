@@ -29,6 +29,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'foreman-tasks', '>= 0.15.1'
 
   s.add_development_dependency 'factory_bot_rails', '~> 4.8.0'
-  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop', '~> 0.80.0'
   s.add_development_dependency 'rdoc'
 end
