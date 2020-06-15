@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HostItem renders HostItem 1`] = `
-<tr>
+<tr
+  id="targeting-host-Host1"
+>
   <td
     className="host_name"
   >

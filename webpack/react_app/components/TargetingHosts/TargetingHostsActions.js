@@ -1,8 +1,6 @@
 import { getURI } from 'foremanReact/common/urlHelpers';
 import { API_OPERATIONS } from 'foremanReact/redux/API/APIConstants';
-import {
-  TARGETING_HOSTS,
-} from './TargetingHostsConsts';
+import { TARGETING_HOSTS } from './TargetingHostsConsts';
 
 export const getData = () => {
   const url = getURI().addQuery('format', 'json');

@@ -6,6 +6,7 @@ exports[`HostStatus renders HostStatus 1`] = `
     name="ok"
     type="pf"
   />
-   success
+   
+  success
 </div>
 `;
