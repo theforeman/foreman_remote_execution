@@ -1,6 +1,6 @@
 import React from 'react';
 import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
-import HostItem from './HostItem';
+import HostItem from '../components/HostItem';
 
 const fixtures = {
   'renders HostItem': {

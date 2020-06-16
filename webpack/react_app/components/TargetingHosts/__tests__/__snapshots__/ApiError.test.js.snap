@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiError renders ApiError 1`] = `
+<div
+  className="alert alert-danger"
+>
+  <span
+    className="pficon pficon-error-circle-o "
+  />
+  <span
+    className="text"
+  >
+    There was an error while updating the status, try refreshing the page.
+  </span>
+</div>
+`;

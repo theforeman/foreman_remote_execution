@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ActionButtons } from 'foremanReact/components/common/ActionButtons/ActionButtons';
-import HostStatus from '../HostStatus/HostStatus';
+import HostStatus from './HostStatus';
 
 const HostItem = ({ name, link, status, actions }) => {
   const renderName = () => {
