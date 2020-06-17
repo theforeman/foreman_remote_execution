@@ -39,7 +39,15 @@ exports[`ApiError renders TargetingHosts 1`] = `
 </LoadingState>
 `;
 
-exports[`ApiError renders TargetingHosts with error 1`] = `<ApiError />`;
+exports[`ApiError renders TargetingHosts with error 1`] = `
+<Alert
+  className=""
+  onDismiss={null}
+  type="error"
+>
+  There was an error while updating the status, try refreshing the page.
+</Alert>
+`;
 
 exports[`ApiError renders TargetingHosts with loading 1`] = `
 <LoadingState
