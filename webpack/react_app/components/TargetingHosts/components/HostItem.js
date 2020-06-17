@@ -4,20 +4,17 @@ import { ActionButtons } from 'foremanReact/components/common/ActionButtons/Acti
 import HostStatus from './HostStatus';
 
 const HostItem = ({ name, link, status, actions }) => {
-  const renderName = () => {
-    if (link) {
-      return <a href={link}>{name}</a>;
-    }
-    return (
-      <a href="#" className="disabled">
-        {name}
-      </a>
-    );
-  };
+  const hostLink = link ? (
+    <a href={link}>{name}</a>
+  ) : (
+    <a href="#" className="disabled">
+      {name}
+    </a>
+  );
 
   return (
     <tr id={`targeting-host-${name}`}>
-      <td className="host_name">{renderName()}</td>
+      <td className="host_name">{hostLink}</td>
       <td className="host_status">
         <HostStatus status={status} />
       </td>

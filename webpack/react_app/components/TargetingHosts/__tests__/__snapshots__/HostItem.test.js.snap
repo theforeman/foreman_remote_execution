@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HostItem renders HostItem 1`] = `
+exports[`HostItem renders 1`] = `
 <tr
   id="targeting-host-Host1"
 >

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ApiError renders TargetingHosts 1`] = `
+exports[`TargetingHosts renders 1`] = `
 <LoadingState
   additionalClasses=""
   loading={false}
@@ -39,7 +39,7 @@ exports[`ApiError renders TargetingHosts 1`] = `
 </LoadingState>
 `;
 
-exports[`ApiError renders TargetingHosts with error 1`] = `
+exports[`TargetingHosts renders with error 1`] = `
 <Alert
   className=""
   onDismiss={null}
@@ -49,7 +49,7 @@ exports[`ApiError renders TargetingHosts with error 1`] = `
 </Alert>
 `;
 
-exports[`ApiError renders TargetingHosts with loading 1`] = `
+exports[`TargetingHosts renders with loading 1`] = `
 <LoadingState
   additionalClasses=""
   loading={true}

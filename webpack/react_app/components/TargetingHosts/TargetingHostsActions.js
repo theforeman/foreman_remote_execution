@@ -1,15 +1,8 @@
 import { getURI } from 'foremanReact/common/urlHelpers';
-import { API_OPERATIONS } from 'foremanReact/redux/API/APIConstants';
+import { get } from 'foremanReact/redux/API';
+import { withInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
 import { TARGETING_HOSTS } from './TargetingHostsConsts';
 
-export const getData = () => {
-  const url = getURI().addQuery('format', 'json');
-  return {
-    type: API_OPERATIONS.GET,
-    interval: 1000,
-    payload: {
-      key: TARGETING_HOSTS,
-      url: `${url.pathname()}${url.search()}`,
-    },
-  };
-};
+const url = getURI().addQuery('format', 'json');
+export const getData = () =>
+  withInterval(get({ key: TARGETING_HOSTS, url }), 1000);

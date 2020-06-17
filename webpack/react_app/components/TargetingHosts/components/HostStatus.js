@@ -30,11 +30,6 @@ const HostStatus = ({ status }) => {
         </div>
       );
     case 'warning':
-      return (
-        <div>
-          <Icon type="pf" name="error-circle-o" /> {__('failed')}
-        </div>
-      );
     case 'error':
       return (
         <div>

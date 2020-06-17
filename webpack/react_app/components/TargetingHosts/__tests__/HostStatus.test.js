@@ -1,10 +1,6 @@
 import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 import HostStatus from '../components/HostStatus';
+import { HostStatusFixtures } from './fixtures';
 
-const fixtures = {
-  'renders HostStatus': {
-    status: 'success',
-  },
-};
 describe('HostStatus', () =>
-  testComponentSnapshotsWithFixtures(HostStatus, fixtures));
+  testComponentSnapshotsWithFixtures(HostStatus, HostStatusFixtures));
