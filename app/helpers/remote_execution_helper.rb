@@ -14,43 +14,35 @@ module RemoteExecutionHelper
   end
 
   def template_invocation_status(task, parent_task)
-    if task.nil?
-      if parent_task.result == 'cancelled'
-        icon_text('warning-triangle-o', _('cancelled'), :kind => 'pficon')
-      else
-        icon_text('question', 'N/A', :kind => 'fa')
-      end
-    elsif task.state == 'running'
-      icon_text('running', _('running'), :kind => 'pficon')
-    elsif task.state == 'planned'
-      icon_text('build', _('planned'), :kind => 'pficon')
-    else
-      case task.result
-        when 'warning', 'error'
-          icon_text('error-circle-o', _('failed'), :kind => 'pficon')
-        when 'cancelled'
-          icon_text('warning-triangle-o', _('cancelled'), :kind => 'pficon')
-        when 'success'
-          icon_text('ok', _('success'), :kind => 'pficon')
-        else
-          task.result
-      end
-    end
+    return(parent_task.result == 'cancelled' ? _('cancelled') : 'N/A') if task.nil?
+    return task.state if task.state == 'running' || task.state == 'planned'
+    return _('error') if task.result == 'warning'
+
+    task.result
   end
 
   def template_invocation_actions(task, host, job_invocation, template_invocation)
+    links = []
     host_task = template_invocation.try(:run_host_job_task)
-    [
-      display_link_if_authorized(_('Host detail'), hash_for_host_path(host).merge(:auth_object => host, :permission => :view_hosts, :authorizer => job_hosts_authorizer)),
-      display_link_if_authorized(_('Rerun on %s') % host.name, hash_for_rerun_job_invocation_path(:id => job_invocation, :host_ids => [ host.id ], :authorizer => job_hosts_authorizer)),
-      if host_task.present?
-        display_link_if_authorized(
-          _('Host task'),
-          hash_for_foreman_tasks_task_path(host_task)
-          .merge(:auth_object => host_task, :permission => :view_foreman_tasks)
-        )
-      end,
-    ]
+
+    if authorized_for(hash_for_host_path(host).merge(auth_object: host, permission: :view_hosts, authorizer: job_hosts_authorizer))
+      links << { title: _('Host detail'),
+                 action: { href: host_path(host), 'data-method': 'get', id: "#{host.name}-actions-detail" } }
+    end
+
+    if authorized_for(hash_for_rerun_job_invocation_path(id: job_invocation, host_ids: [ host.id ], authorizer: job_hosts_authorizer))
+      links << { title: (_('Rerun on %s') % host.name),
+                 action: { href: rerun_job_invocation_path(job_invocation, host_ids: [ host.id ]),
+                           'data-method': 'get', id: "#{host.name}-actions-rerun" } }
+    end
+
+    if host_task.present? && authorized_for(hash_for_foreman_tasks_task_path(host_task).merge(auth_object: host_task, permission: :view_foreman_tasks))
+      links << { title: _('Host task'),
+                 action: { href: foreman_tasks_task_path(host_task),
+                           'data-method': 'get', id: "#{host.name}-actions-task" } }
+    end
+
+    links
   end
 
   def remote_execution_provider_for(template_invocation)
@@ -236,5 +228,18 @@ module RemoteExecutionHelper
     return if task.nil?
 
     task.execution_plan.actions[1].try(:input).try(:[], 'script')
+  end
+
+  def targeting_hosts(job_invocation, hosts)
+    hosts.map do |host|
+      template_invocation = job_invocation.template_invocations.find { |template_inv| template_inv.host_id == host.id }
+      task = template_invocation.try(:run_host_job_task)
+      link_authorized = !task.nil? && authorized_for(hash_for_template_invocation_path(:id => template_invocation).merge(:auth_object => host, :permission => :view_hosts, :authorizer => job_hosts_authorizer))
+
+      { name: host.name,
+        link: link_authorized ? template_invocation_path(:id => template_invocation) : '',
+        status: template_invocation_status(task, job_invocation.task),
+        actions: template_invocation_actions(task, host, job_invocation, template_invocation) }
+    end
   end
 end

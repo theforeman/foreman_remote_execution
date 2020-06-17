@@ -1,13 +1,16 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { registerReducer } from 'foremanReact/common/MountingService';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import componentRegistry from 'foremanReact/components/componentRegistry';
 import JobInvocationContainer from './react_app/components/jobInvocations';
+import TargetingHosts from './react_app/components/TargetingHosts';
 import rootReducer from './react_app/redux/reducers';
 
-componentRegistry.register({
-  name: 'JobInvocationContainer',
-  type: JobInvocationContainer,
+const components = [
+  { name: 'JobInvocationContainer', type: JobInvocationContainer },
+  { name: 'TargetingHosts', type: TargetingHosts },
+];
+
+components.forEach(component => {
+  componentRegistry.register(component);
 });
 
 registerReducer('foremanRemoteExecutionReducers', rootReducer);

@@ -15,29 +15,9 @@
   <% end %>
   <br>
 
-  <table class="<%= table_css_classes('table-condensed') %>">
-    <thead>
-    <tr>
-      <th><%= sort :name, :as => _('Host') %></th>
-      <th><%= _('Status') %></th>
-      <th><%= _('Actions') %></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% hosts.each do |host| %>
-      <% template_invocation = job_invocation.template_invocations.find { |template_invocation| template_invocation.host_id == host.id } %>
-      <% task = template_invocation.try(:run_host_job_task) %>
-      <tr>
-        <% options = { :host => host, :task => task, :job_invocation => job_invocation, :template_invocation => template_invocation } %>
-        <%= render 'host_name_td', options %>
-        <%= render 'host_status_td', options %>
-        <%= render 'host_actions_td', options %>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-
+  <div id="targeting_hosts">
+    <%= mount_react_component('TargetingHosts', '#targeting_hosts') %>
+  </div>
   <%= will_paginate_with_info @hosts, :container => true %>
 <% else %>
   <div class="alert alert-warning">

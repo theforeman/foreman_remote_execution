@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HostItem renders 1`] = `
+<tr
+  id="targeting-host-Host1"
+>
+  <td
+    className="host_name"
+  >
+    <a
+      href="/host1"
+    >
+      Host1
+    </a>
+  </td>
+  <td
+    className="host_status"
+  >
+    <HostStatus
+      status="success"
+    />
+  </td>
+  <td
+    className="host_actions"
+  >
+    <ActionButtons
+      buttons={Array []}
+    />
+  </td>
+</tr>
+`;
