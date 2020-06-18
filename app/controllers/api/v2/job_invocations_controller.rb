@@ -20,6 +20,9 @@ module Api
       param :id, :identifier, :required => true
       def show
         @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+        @template_invocations = @job_invocation.template_invocations
+                                               .where(host: @hosts)
+                                               .includes(:input_values)
       end
 
       def_param_group :job_invocation do
