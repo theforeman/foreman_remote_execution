@@ -29,7 +29,7 @@ module JobInvocationsHelper
   end
 
   def preview_hosts(template_invocation)
-    hosts = template_invocation.targeting.hosts.take(20)
+    hosts = template_invocation.targeting.hosts.authorized(:view_hosts, Host).take(20)
     hosts.map do |host|
       collapsed_preview(host) +
         render(:partial => 'job_invocations/user_input',

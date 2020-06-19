@@ -4,7 +4,7 @@ module Api
   module V2
     class JobInvocationsControllerTest < ActionController::TestCase
       setup do
-        @invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
+        @invocation = FactoryBot.create(:job_invocation, :with_template, :with_task, :with_unplanned_host)
         @template = FactoryBot.create(:job_template, :with_input)
 
         # Without this the template in template_invocations and in pattern_template_invocations
@@ -20,18 +20,32 @@ module Api
         assert_response :success
       end
 
-      test 'should get invocation detail' do
-        get :show, params: { :id => @invocation.id }
-        assert_response :success
-        template = ActiveSupport::JSON.decode(@response.body)
-        assert_not_empty template
-        assert_equal template['job_category'], @invocation.job_category
-      end
+      describe 'show' do
+        test 'should get invocation detail' do
+          get :show, params: { :id => @invocation.id }
+          assert_response :success
+          template = ActiveSupport::JSON.decode(@response.body)
+          assert_not_empty template
+          assert_equal template['job_category'], @invocation.job_category
+          assert_not_empty template['targeting']['hosts']
+        end
 
-      test 'should get invocation detail when taxonomies are set' do
-        taxonomy_params = %w(organization location).reduce({}) { |acc, cur| acc.merge("#{cur}_id" => FactoryBot.create(cur)) }
-        get :show, params: taxonomy_params.merge(:id => @invocation.id)
-        assert_response :success
+        test 'should get invocation detail when taxonomies are set' do
+          taxonomy_params = %w(organization location).reduce({}) { |acc, cur| acc.merge("#{cur}_id" => FactoryBot.create(cur)) }
+          get :show, params: taxonomy_params.merge(:id => @invocation.id)
+          assert_response :success
+        end
+
+        test 'should see only permitted hosts' do
+          @user = FactoryBot.create(:user, admin: false)
+          setup_user('view', 'job_invocations', nil, @user)
+          setup_user('view', 'hosts', 'name ~ nope.example.com', @user)
+
+          get :show, params: { :id => @invocation.id }, session: set_session_user(@user)
+          assert_response :success
+          response = ActiveSupport::JSON.decode(@response.body)
+          assert_empty response['targeting']['hosts']
+        end
       end
 
       context 'creation' do
@@ -108,7 +122,7 @@ module Api
       end
 
       describe '#output' do
-        let(:host) { @invocation.template_invocations_hosts.first }
+        let(:host) { @invocation.targeting.hosts.first }
 
         test 'should provide output for delayed task' do
           ForemanTasks::Task.any_instance.expects(:scheduled?).returns(true)
@@ -137,6 +151,12 @@ module Api
           assert_equal result['message'], "Job invocation not found by id '#{invocation_id}'"
           assert_response :missing
         end
+
+        test 'should get output only for host in job invocation' do
+          get :output, params: { job_invocation_id: @invocation.id,
+                                 host_id: FactoryBot.create(:host).id }
+          assert_response :missing
+        end
       end
 
       describe 'raw output' do
@@ -148,7 +168,7 @@ module Api
         let(:fake_task) do
           OpenStruct.new :pending? => false, :main_action => OpenStruct.new(:live_output => fake_output)
         end
-        let(:host) { @invocation.template_invocations_hosts.first }
+        let(:host) { @invocation.targeting.hosts.first }
 
         test 'should provide raw output for a host' do
           JobInvocation.any_instance.expects(:task).returns(OpenStruct.new(:scheduled? => false))
@@ -183,6 +203,12 @@ module Api
           assert_equal result['complete'], false
           assert_nil result['output']
           assert_response :success
+        end
+
+        test 'should get raw output only for host in job invocation' do
+          get :raw_output, params: { job_invocation_id: @invocation.id,
+                                     host_id: FactoryBot.create(:host).id }
+          assert_response :missing
         end
       end
 
@@ -232,11 +258,13 @@ module Api
       end
 
       test 'should not raise an exception when reruning failed has no hosts' do
+        @invocation.targeting.hosts.first.destroy
         JobInvocation.any_instance.expects(:generate_description)
         JobInvocationComposer.any_instance
                              .expects(:validate_job_category)
                              .with(@invocation.job_category)
                              .returns(@invocation.job_category)
+
         post :rerun, params: { :id => @invocation.id, :failed_only => true }
         assert_response :success
         result = ActiveSupport::JSON.decode(@response.body)

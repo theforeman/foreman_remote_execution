@@ -19,6 +19,10 @@ module Api
       api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
       def show
+        @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+        @template_invocations = @job_invocation.template_invocations
+                                               .where(host: @hosts)
+                                               .includes(:input_values)
       end
 
       def_param_group :job_invocation do
@@ -146,7 +150,7 @@ module Api
       end
 
       def find_host
-        @host = Host.authorized(:view_hosts).find(params['host_id'])
+        @host = @nested_obj.targeting.hosts.authorized(:view_hosts, Host).find(params['host_id'])
       rescue ActiveRecord::RecordNotFound
         not_found({ :error => { :message => (_("Host with id '%{id}' was not found") % { :id => params['host_id'] }) } })
       end

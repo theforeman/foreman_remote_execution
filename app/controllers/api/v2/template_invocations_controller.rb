@@ -26,7 +26,10 @@ module Api
       private
 
       def resource_scope_for_template_invocations
-        @job_invocation.template_invocations.search_for(*search_options)
+        @job_invocation.template_invocations
+                       .includes(:host)
+                       .where(host: Host.authorized(:view_hosts, Host))
+                       .search_for(*search_options)
       end
 
       def find_job_invocation
