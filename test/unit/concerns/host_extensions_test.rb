@@ -48,6 +48,13 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       _(host.host_param('remote_execution_ssh_keys')).must_include sshkey
     end
 
+    it 'merges ssh key as a string from host parameters and proxies' do
+      key = 'ssh-rsa not-even-a-key something@somewhere.com'
+      host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_keys', :value => key)
+      _(host.host_param('remote_execution_ssh_keys')).must_include key
+      _(host.host_param('remote_execution_ssh_keys')).must_include sshkey
+    end
+
     it 'has ssh keys in the parameters even when no user specified' do
       # this is a case, when using the helper in provisioning templates
       FactoryBot.create(:smart_proxy, :ssh)
