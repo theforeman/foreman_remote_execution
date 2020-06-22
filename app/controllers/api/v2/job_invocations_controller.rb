@@ -23,14 +23,11 @@ module Api
         @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
         @template_invocations = @job_invocation.template_invocations
                                                .where(host: @hosts)
-                                               .includes([:input_values, :run_host_job_task])
-                                               .to_a
+                                               .includes(:input_values)
 
         if params[:host_status]
-          @hosts.each do |host|
-            template_invocation = @template_invocations.find { |t| t.host_id == host.id }
-            host.template_invocation_status = template_invocation_status(template_invocation)
-          end
+          template_invocations = @template_invocations.includes(:run_host_job_task).to_a
+          @host_statuses = Hash[template_invocations.map { |ti| [ti.host_id, template_invocation_status(ti)] }]
         end
       end
 

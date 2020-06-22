@@ -24,7 +24,7 @@ child :targeting do
 
     if params[:host_status]
       node :job_status do |host|
-        host.template_invocation_status
+        @host_statuses[host.id]
       end
     end
   end
