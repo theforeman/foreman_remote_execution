@@ -5,8 +5,8 @@ import { LoadingState, Alert } from 'patternfly-react';
 import { STATUS } from 'foremanReact/constants';
 import HostItem from './components/HostItem';
 
-const TargetingHosts = ({ status, items }) => {
-  if (status === STATUS.ERROR) {
+const TargetingHosts = ({ apiStatus, items }) => {
+  if (apiStatus === STATUS.ERROR) {
     return (
       <Alert type="error">
         {__(
@@ -16,8 +16,24 @@ const TargetingHosts = ({ status, items }) => {
     );
   }
 
+  const tableBodyRows = items.length ? (
+    items.map(({ name, link, status, actions }) => (
+      <HostItem
+        key={name}
+        name={name}
+        link={link}
+        status={status}
+        actions={actions}
+      />
+    ))
+  ) : (
+    <tr>
+      <td colSpan="3">{__('No hosts found.')}</td>
+    </tr>
+  );
+
   return (
-    <LoadingState loading={!items.length}>
+    <LoadingState loading={!items.length && apiStatus === STATUS.PENDING}>
       <div>
         <table className="table table-bordered table-striped table-hover">
           <thead>
@@ -27,17 +43,7 @@ const TargetingHosts = ({ status, items }) => {
               <th>{__('Actions')}</th>
             </tr>
           </thead>
-          <tbody>
-            {items.map(host => (
-              <HostItem
-                key={host.name}
-                name={host.name}
-                link={host.link}
-                status={host.status}
-                actions={host.actions}
-              />
-            ))}
-          </tbody>
+          <tbody>{tableBodyRows}</tbody>
         </table>
       </div>
     </LoadingState>
@@ -45,7 +51,7 @@ const TargetingHosts = ({ status, items }) => {
 };
 
 TargetingHosts.propTypes = {
-  status: PropTypes.string.isRequired,
+  apiStatus: PropTypes.string.isRequired,
   items: PropTypes.array.isRequired,
 };
 

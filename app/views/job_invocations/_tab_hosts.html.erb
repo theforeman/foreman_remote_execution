@@ -1,24 +1,5 @@
 <% if job_invocation.resolved? %>
-  <%= form_with url: job_invocation_path(job_invocation), method: "get", id: "search-form" do |f| %>
-    <div class="row">
-      <div class="title_filter col-md-6">
-        <div class="input-group">
-            <%= autocomplete_f(f, :search, value: params[:search].try(:squeeze, " "), placeholder: _("Filter") + ' ...', path: hosts_path, only_input: true) %>
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">
-                <%= icon_text('search', content_tag(:span, _('Search'), :class => 'hidden-xs', :kind => 'fa')) %>
-              </button>
-            </span>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <br>
-
-  <div id="targeting_hosts">
-    <%= mount_react_component('TargetingHosts', '#targeting_hosts') %>
-  </div>
-  <%= will_paginate_with_info @hosts, :container => true %>
+  <%= react_component('TargetingHosts' ) %>
 <% else %>
   <div class="alert alert-warning">
     <%=

@@ -52,16 +52,16 @@ class JobInvocationsController < ApplicationController
 
   def show
     @job_invocation = resource_base.includes(:template_invocations => :run_host_job_task).find(params[:id])
-    @auto_refresh = @job_invocation.task.try(:pending?)
-    @resource_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
-    # There's no need to do the joining if we're not filtering
-    unless params[:search].nil?
-      @resource_base = @resource_base.joins(:template_invocations)
-                                     .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
-    end
-    @hosts = resource_base_search_and_page
     @job_organization = Taxonomy.find_by(id: @job_invocation.task.input[:current_organization_id])
     @job_location = Taxonomy.find_by(id: @job_invocation.task.input[:current_location_id])
+
+    respond_to do |format|
+      format.json do
+        targeting_hosts_resources
+      end
+
+      format.html
+    end
   end
 
   def index
@@ -152,5 +152,17 @@ class JobInvocationsController < ApplicationController
       with_triggering[:triggering].permit!
       JobInvocationComposer.from_ui_params(with_triggering)
     end
+  end
+
+  def targeting_hosts_resources
+    @auto_refresh = @job_invocation.task.try(:pending?)
+    @resource_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+
+    unless params[:search].nil?
+      @resource_base = @resource_base.joins(:template_invocations)
+                                     .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
+    end
+    @hosts = resource_base_search_and_page
+    @total_hosts = resource_base_with_search.size
   end
 end

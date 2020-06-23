@@ -1,3 +1,18 @@
+const items = [
+  {
+    name: 'host',
+    link: '/link',
+    status: 'success',
+    actions: [],
+  },
+  {
+    name: 'host2',
+    link: '/link2',
+    status: 'success',
+    actions: [],
+  },
+];
+
 export const HostItemFixtures = {
   renders: {
     name: 'Host1',
@@ -15,29 +30,30 @@ export const HostStatusFixtures = {
 
 export const TargetingHostsFixtures = {
   renders: {
-    status: '',
-    items: [
-      {
-        name: 'host',
-        link: '/link',
-        status: 'success',
-        actions: [],
-      },
-    ],
+    apiStatus: 'RESOLVED',
+    items,
   },
   'renders with error': {
-    status: 'ERROR',
-    items: [
-      {
-        name: 'host',
-        link: '/link',
-        status: 'success',
-        actions: [],
-      },
-    ],
+    apiStatus: 'ERROR',
+    items,
   },
   'renders with loading': {
-    status: '',
+    apiStatus: 'PENDING',
     items: [],
+  },
+};
+
+export const TargetingHostsPageFixtures = {
+  renders: {
+    handleSearch: () => {},
+    searchQuery: '',
+    apiStatus: 'RESOLVED',
+    items,
+    totalHosts: 1,
+    pagination: {
+      page: 1,
+      perPage: 20,
+    },
+    handlePagination: () => {},
   },
 };

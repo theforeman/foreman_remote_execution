@@ -1,37 +1,97 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
-import TargetingHosts from './TargetingHosts';
+
+import { get } from 'foremanReact/redux/API';
+import { useForemanSettings } from 'foremanReact/Root/Context/ForemanContext';
+import {
+  withInterval,
+  stopInterval,
+} from 'foremanReact/redux/middlewares/IntervalMiddleware';
 
 import {
   selectItems,
-  selectStatus,
+  selectApiStatus,
   selectAutoRefresh,
+  selectTotalHosts,
+  selectIntervalExists,
 } from './TargetingHostsSelectors';
-import { getData } from './TargetingHostsActions';
+import { getApiUrl } from './TargetingHostsHelpers';
 import { TARGETING_HOSTS } from './TargetingHostsConsts';
+import TargetingHostsPage from './TargetingHostsPage';
 
 const WrappedTargetingHosts = () => {
   const dispatch = useDispatch();
+  const { perPage, perPageOptions } = useForemanSettings();
+
   const autoRefresh = useSelector(selectAutoRefresh);
   const items = useSelector(selectItems);
-  const status = useSelector(selectStatus);
+  const apiStatus = useSelector(selectApiStatus);
+  const totalHosts = useSelector(selectTotalHosts);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [pagination, setPagination] = useState({
+    page: 1,
+    perPage,
+    perPageOptions,
+  });
+  const [apiUrl, setApiUrl] = useState(getApiUrl(searchQuery, pagination));
+  const intervalExists = useSelector(selectIntervalExists);
+
+  const handleSearch = query => {
+    const defaultPagination = { page: 1, perPage: pagination.perPage };
+    stopApiInterval();
+
+    setApiUrl(getApiUrl(query, defaultPagination));
+    setSearchQuery(query);
+    setPagination(defaultPagination);
+  };
+
+  const handlePagination = args => {
+    stopApiInterval();
+    setPagination(args);
+    setApiUrl(getApiUrl(searchQuery, args));
+  };
+
+  const stopApiInterval = () => {
+    if (intervalExists) {
+      dispatch(stopInterval(TARGETING_HOSTS));
+    }
+  };
+
+  const getData = url =>
+    withInterval(
+      get({
+        key: TARGETING_HOSTS,
+        url,
+        handleError: () => {
+          dispatch(stopInterval(TARGETING_HOSTS));
+        },
+      }),
+      1000
+    );
 
   useEffect(() => {
-    dispatch(getData());
+    dispatch(getData(apiUrl));
+
+    if (autoRefresh === 'false') {
+      dispatch(stopInterval(TARGETING_HOSTS));
+    }
 
     return () => {
       dispatch(stopInterval(TARGETING_HOSTS));
     };
-  }, [dispatch]);
+  }, [dispatch, apiUrl, autoRefresh]);
 
-  useEffect(() => {
-    if (autoRefresh === 'false') {
-      dispatch(stopInterval(TARGETING_HOSTS));
-    }
-  }, [autoRefresh, dispatch]);
-
-  return <TargetingHosts status={status} items={items} />;
+  return (
+    <TargetingHostsPage
+      handleSearch={handleSearch}
+      searchQuery={searchQuery}
+      apiStatus={apiStatus}
+      items={items}
+      totalHosts={totalHosts}
+      pagination={pagination}
+      handlePagination={handlePagination}
+    />
+  );
 };
 
 export default WrappedTargetingHosts;
