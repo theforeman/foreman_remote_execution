@@ -21,6 +21,12 @@ child :targeting do
 
   child @hosts do
     extends 'api/v2/hosts/base'
+
+    if params[:host_status]
+      node :job_status do |host|
+        @host_statuses[host.id]
+      end
+    end
   end
 end
 
