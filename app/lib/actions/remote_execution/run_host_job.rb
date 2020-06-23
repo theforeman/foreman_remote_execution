@@ -60,7 +60,8 @@ module Actions
       def secrets(host, job_invocation, provider)
         job_secrets = { :ssh_password => job_invocation.password,
                         :key_passphrase => job_invocation.key_passphrase,
-                        :sudo_password => job_invocation.sudo_password }
+                        :sudo_password => job_invocation.sudo_password,
+                        :su_password => job_invocation.su_password }
 
         job_secrets.merge(provider.secrets(host)) { |_key, job_secret, provider_secret| job_secret || provider_secret }
       end

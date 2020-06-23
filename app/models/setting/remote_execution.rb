@@ -1,6 +1,6 @@
 class Setting::RemoteExecution < Setting
 
-  ::Setting::BLANK_ATTRS.concat %w{remote_execution_ssh_password remote_execution_ssh_key_passphrase remote_execution_sudo_password remote_execution_cockpit_url remote_execution_form_job_template}
+  ::Setting::BLANK_ATTRS.concat %w{remote_execution_ssh_password remote_execution_ssh_key_passphrase remote_execution_sudo_password remote_execution_su_password remote_execution_cockpit_url remote_execution_form_job_template}
 
   def self.default_settings
     [
@@ -28,6 +28,7 @@ class Setting::RemoteExecution < Setting
         nil,
         { :collection => proc { Hash[SSHExecutionProvider::EFFECTIVE_USER_METHODS.map { |method| [method, method] }] } }),
       self.set('remote_execution_sudo_password', N_("Sudo password"), '', N_("Sudo password"), nil, {:encrypted => true}),
+      self.set('remote_execution_su_password', N_("Su password"), '', N_("Su password"), nil, {:encrypted => true}),
       self.set('remote_execution_sync_templates',
         N_('Whether we should sync templates from disk when running db:seed.'),
         true,

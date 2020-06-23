@@ -47,7 +47,7 @@ module Actions
       end
 
       def finalize
-        job_invocation.password = job_invocation.key_passphrase = job_invocation.sudo_password = nil
+        job_invocation.password = job_invocation.key_passphrase = job_invocation.sudo_password = job_invocation.su_password = nil
         job_invocation.save!
 
         Rails.logger.debug "cleaning cache for keys that begin with 'job_invocation_#{job_invocation.id}'"

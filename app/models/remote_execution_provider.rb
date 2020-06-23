@@ -61,6 +61,10 @@ class RemoteExecutionProvider
       host_setting(host, :remote_execution_sudo_password)
     end
 
+    def su_password(host)
+      host_setting(host, :remote_execution_su_password)
+    end
+
     def effective_interfaces(host)
       interfaces = []
       %w(execution primary provision).map do |flag|

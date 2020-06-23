@@ -61,22 +61,32 @@ module ForemanRemoteExecutionCore
   end
 
   class SuUserMethod
-    attr_accessor :effective_user, :ssh_user
+    attr_accessor :effective_user, :ssh_user, :effective_user_password, :password_sent
 
-    def initialize(effective_user, ssh_user)
+    def initialize(effective_user, ssh_user, effective_user_password)
       @effective_user = effective_user
       @ssh_user = ssh_user
+      @effective_user_password = effective_user_password.to_s
+      @password_sent = false
     end
 
-    def on_data(_, _)
+    def on_data(received_data, ssh_channel)
+      if received_data.match(login_prompt)
+        ssh_channel.send_data(effective_user_password + "\n")
+        @password_sent = true
+      end
+    end
+
+    def login_prompt
+      'Password: '
     end
 
     def filter_password?(received_data)
-      false
+      !@effective_user_password.empty? && @password_sent && received_data.match(@effective_user_password)
     end
 
     def sent_all_data?
-      true
+      effective_user_password.empty? || password_sent
     end
 
     def cli_command_prefix
@@ -84,6 +94,7 @@ module ForemanRemoteExecutionCore
     end
 
     def reset
+      @password_sent = false
     end
   end
 
@@ -146,7 +157,8 @@ module ForemanRemoteExecutionCore
                       DzdoUserMethod.new(effective_user, ssh_user,
                         options.fetch(:secrets, {}).fetch(:sudo_password, nil))
                     elsif effective_user_method == 'su'
-                      SuUserMethod.new(effective_user, ssh_user)
+                      SuUserMethod.new(effective_user, ssh_user,
+                        options.fetch(:secrets, {}).fetch(:su_password, nil))
                     else
                       raise "effective_user_method '#{effective_user_method}' not supported"
                     end
@@ -178,10 +190,8 @@ module ForemanRemoteExecutionCore
     def initialization_script
       # pipe the output to tee while capturing the exit code in a file
       <<-SCRIPT.gsub(/^\s+\| /, '')
-      | sh <<WRAPPER
-      | (#{@user_method.cli_command_prefix}#{@remote_script} < /dev/null; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
-      | exit \\$(cat #{@exit_code_path})
-      | WRAPPER
+      | sh -c "(#{@user_method.cli_command_prefix}#{@user_method.instance_of? ForemanRemoteExecutionCore::SuUserMethod ? "'#{@remote_script} < /dev/null '" : "#{@remote_script} < /dev/null"}; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
+      | exit \\$(cat #{@exit_code_path})"
       SCRIPT
     end
 
