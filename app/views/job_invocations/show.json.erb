@@ -1,4 +1,5 @@
 {
   "autoRefresh": "<%= @auto_refresh %>",
-  "hosts": <%= targeting_hosts(@job_invocation, @hosts).to_json.html_safe %>
+  "hosts": <%= targeting_hosts(@job_invocation, @hosts).to_json.html_safe %>,
+  "total_hosts": <%= @total_hosts %>
 }

@@ -33,6 +33,13 @@ exports[`TargetingHosts renders 1`] = `
           name="host"
           status="success"
         />
+        <HostItem
+          actions={Array []}
+          key="host2"
+          link="/link2"
+          name="host2"
+          status="success"
+        />
       </tbody>
     </table>
   </div>
@@ -74,7 +81,15 @@ exports[`TargetingHosts renders with loading 1`] = `
           </th>
         </tr>
       </thead>
-      <tbody />
+      <tbody>
+        <tr>
+          <td
+            colSpan="3"
+          >
+            No hosts found.
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </LoadingState>
