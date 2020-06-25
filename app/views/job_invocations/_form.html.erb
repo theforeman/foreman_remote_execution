@@ -95,8 +95,7 @@
     <div class="advanced hidden">
       <%= password_f f, :password, :placeholder => '*****', :label => _('Password'), :label_help => N_('Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
       <%= password_f f, :key_passphrase, :placeholder => '*****', :label => _('Private key passphrase'), :label_help => N_('Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
-      <%= password_f f, :sudo_password, :placeholder => '*****', :label => _('Sudo password'), :label_help => N_('Sudo password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
-      <%= password_f f, :su_password, :placeholder => '*****', :label => _('Su password'), :label_help => N_('Su password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
+      <%= password_f f, :effective_user_password, :placeholder => '*****', :label => _('Effective user password'), :label_help => N_('Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
     </div>
 
     <div class="advanced hidden">

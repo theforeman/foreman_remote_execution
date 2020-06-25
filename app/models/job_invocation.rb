@@ -70,7 +70,7 @@ class JobInvocation < ApplicationRecord
 
   delegate :start_at, :to => :task, :allow_nil => true
 
-  encrypts :password, :key_passphrase, :sudo_password, :su_password
+  encrypts :password, :key_passphrase, :effective_user_password
 
   def self.search_by_status(key, operator, value)
     conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)
@@ -139,8 +139,7 @@ class JobInvocation < ApplicationRecord
       invocation.pattern_template_invocations = self.pattern_template_invocations.map(&:deep_clone)
       invocation.password = self.password
       invocation.key_passphrase = self.key_passphrase
-      invocation.sudo_password = self.sudo_password
-      invocation.su_password = self.su_password
+      invocation.effective_user_password = self.effective_user_password
     end
   end
 

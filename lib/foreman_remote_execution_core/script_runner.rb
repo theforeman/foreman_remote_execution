@@ -8,9 +8,7 @@ rescue LoadError; end
 # rubocop:enable Lint/SuppressedException:
 
 module ForemanRemoteExecutionCore
-  class SudoUserMethod
-    LOGIN_PROMPT = 'rex login: '.freeze
-
+  class EffectiveUserMethod
     attr_reader :effective_user, :ssh_user, :effective_user_password, :password_sent
 
     def initialize(effective_user, ssh_user, effective_user_password)
@@ -27,10 +25,6 @@ module ForemanRemoteExecutionCore
       end
     end
 
-    def login_prompt
-      LOGIN_PROMPT
-    end
-
     def filter_password?(received_data)
       !@effective_user_password.empty? && @password_sent && received_data.match(@effective_user_password)
     end
@@ -39,16 +33,30 @@ module ForemanRemoteExecutionCore
       effective_user_password.empty? || password_sent
     end
 
-    def cli_command_prefix
-      "sudo -p '#{LOGIN_PROMPT}' -u #{effective_user} "
-    end
-
     def reset
       @password_sent = false
     end
+
+    def cli_command_prefix
+    end
+
+    def login_prompt
+    end
   end
 
-  class DzdoUserMethod < SudoUserMethod
+  class SudoUserMethod < EffectiveUserMethod
+    LOGIN_PROMPT = 'rex login: '.freeze
+
+    def login_prompt
+      LOGIN_PROMPT
+    end
+
+    def cli_command_prefix
+      "sudo -p '#{LOGIN_PROMPT}' -u #{effective_user} "
+    end
+  end
+
+  class DzdoUserMethod < EffectiveUserMethod
     LOGIN_PROMPT = /password/i.freeze
 
     def login_prompt
@@ -60,41 +68,15 @@ module ForemanRemoteExecutionCore
     end
   end
 
-  class SuUserMethod
-    attr_accessor :effective_user, :ssh_user, :effective_user_password, :password_sent
-
-    def initialize(effective_user, ssh_user, effective_user_password)
-      @effective_user = effective_user
-      @ssh_user = ssh_user
-      @effective_user_password = effective_user_password.to_s
-      @password_sent = false
-    end
-
-    def on_data(received_data, ssh_channel)
-      if received_data.match(login_prompt)
-        ssh_channel.send_data(effective_user_password + "\n")
-        @password_sent = true
-      end
-    end
+  class SuUserMethod < EffectiveUserMethod
+    LOGIN_PROMPT = /Password: /i.freeze
 
     def login_prompt
-      'Password: '
-    end
-
-    def filter_password?(received_data)
-      !@effective_user_password.empty? && @password_sent && received_data.match(@effective_user_password)
-    end
-
-    def sent_all_data?
-      effective_user_password.empty? || password_sent
+      LOGIN_PROMPT
     end
 
     def cli_command_prefix
       "su - #{effective_user} -c "
-    end
-
-    def reset
-      @password_sent = false
     end
   end
 
@@ -152,13 +134,13 @@ module ForemanRemoteExecutionCore
                       NoopUserMethod.new
                     elsif effective_user_method == 'sudo'
                       SudoUserMethod.new(effective_user, ssh_user,
-                        options.fetch(:secrets, {}).fetch(:sudo_password, nil))
+                        options.fetch(:secrets, {}).fetch(:effective_user_password, nil))
                     elsif effective_user_method == 'dzdo'
                       DzdoUserMethod.new(effective_user, ssh_user,
-                        options.fetch(:secrets, {}).fetch(:sudo_password, nil))
+                        options.fetch(:secrets, {}).fetch(:effective_user_password, nil))
                     elsif effective_user_method == 'su'
                       SuUserMethod.new(effective_user, ssh_user,
-                        options.fetch(:secrets, {}).fetch(:su_password, nil))
+                        options.fetch(:secrets, {}).fetch(:effective_user_password, nil))
                     else
                       raise "effective_user_method '#{effective_user_method}' not supported"
                     end
@@ -190,7 +172,7 @@ module ForemanRemoteExecutionCore
     def initialization_script
       # pipe the output to tee while capturing the exit code in a file
       <<-SCRIPT.gsub(/^\s+\| /, '')
-      | sh -c "(#{@user_method.cli_command_prefix}#{@user_method.instance_of? ForemanRemoteExecutionCore::SuUserMethod ? "'#{@remote_script} < /dev/null '" : "#{@remote_script} < /dev/null"}; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
+      | sh -c "(#{@user_method.cli_command_prefix}#{@user_method.instance_of?(ForemanRemoteExecutionCore::SuUserMethod) ? "'#{@remote_script} < /dev/null '" : "#{@remote_script} < /dev/null"}; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
       | exit \\$(cat #{@exit_code_path})"
       SCRIPT
     end

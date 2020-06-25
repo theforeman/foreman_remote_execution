@@ -57,12 +57,8 @@ class RemoteExecutionProvider
       [true, 'true', 'True', 'TRUE', '1'].include?(setting)
     end
 
-    def sudo_password(host)
-      host_setting(host, :remote_execution_sudo_password)
-    end
-
-    def su_password(host)
-      host_setting(host, :remote_execution_su_password)
+    def effective_user_password(host)
+      host_setting(host, :remote_execution_effective_user_password)
     end
 
     def effective_interfaces(host)

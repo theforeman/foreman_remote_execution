@@ -523,15 +523,15 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         end
       end
 
-      describe '#sudo_password' do
-        let(:sudo_password) { 'password' }
+      describe '#effective_user_password' do
+        let(:effective_user_password) { 'password' }
         let(:params) do
-          { :job_invocation => { :sudo_password => sudo_password }}
+          { :job_invocation => { :effective_user_password => effective_user_password }}
         end
 
-        it 'sets the sudo password properly' do
+        it 'sets the effective_user_password password properly' do
           composer
-          _(composer.job_invocation.sudo_password).must_equal sudo_password
+          _(composer.job_invocation.effective_user_password).must_equal effective_user_password
         end
       end
 
