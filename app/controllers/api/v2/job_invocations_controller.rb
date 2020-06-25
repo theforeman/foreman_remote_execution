@@ -18,14 +18,14 @@ module Api
 
       api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
-      param :host_status, String, required: false, allow_blank: true, desc: N_('Show Job status for the hosts.')
+      param :host_status, :bool, required: false, desc: N_('Show Job status for the hosts')
       def show
         @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
         @template_invocations = @job_invocation.template_invocations
                                                .where(host: @hosts)
                                                .includes(:input_values)
 
-        if params[:host_status]
+        if params[:host_status] == 'true'
           template_invocations = @template_invocations.includes(:run_host_job_task).to_a
           @host_statuses = Hash[template_invocations.map { |ti| [ti.host_id, template_invocation_status(ti)] }]
         end
