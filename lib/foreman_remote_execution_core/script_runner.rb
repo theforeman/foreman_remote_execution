@@ -32,7 +32,7 @@ module ForemanRemoteExecutionCore
     end
 
     def filter_password?(received_data)
-      !@effective_user_password.empty? && @password_sent && received_data.match(@effective_user_password)
+      !@effective_user_password.empty? && @password_sent && received_data.match(Regexp.escape(@effective_user_password))
     end
 
     def sent_all_data?
