@@ -100,6 +100,12 @@ FactoryBot.define do
     f.sequence(:label) { |n| "remote_execution_feature_#{n}" }
     f.sequence(:name) { |n| "Remote Execution Feature #{n}" }
   end
+
+  factory :job_action do
+    sequence(:name) { |n| "Job Action #{n}" }
+    job_template
+    user
+  end
 end
 
 FactoryBot.modify do

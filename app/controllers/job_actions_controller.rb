@@ -1,12 +1,12 @@
-class JobActionsController < ::ApplicationController
-  before_action :find_resource, :only => [:show, :update, :destroy]
+class JobActionsController < ApplicationController
+  before_action :find_resource, only: [:show, :update, :destroy]
 
   def index
     @job_actions = resource_scope
   end
 
   def new
-    @job_action = JobAction.new(params.permit(:name, :job_template_id))
+    @job_action = JobAction.new
   end
 
   def create
@@ -26,6 +26,10 @@ class JobActionsController < ::ApplicationController
   end
 
   private
+
+  def resource_scope
+    super(user: current_user)
+  end
 
   def job_action_params
     params.require(:job_action).permit(:name, :job_template_id)

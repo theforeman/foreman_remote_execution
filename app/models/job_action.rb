@@ -2,9 +2,10 @@ class JobAction < ApplicationRecord
   include Authorizable
 
   belongs_to :job_template
+  belongs_to :user
+  before_validation :set_user
 
-  validates :job_template, presence: true
-  validates :name, presence: true, uniqueness: true
+  validates :name, :job_template, :user, presence: true
 
   def template_name
     self.job_template.name
@@ -16,5 +17,9 @@ class JobAction < ApplicationRecord
 
   def provider
     self.job_template.provider_type
+  end
+
+  def set_user
+    self.user = User.current
   end
 end

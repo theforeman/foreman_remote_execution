@@ -1,7 +1,7 @@
 <div class="col-md-8">
 <%= form_for @job_action, html: { id: 'job_action_form' } do |f| %>
   <%= text_f f, :name %>
-  <%= selectable_f f, :job_template_id, JobTemplate.all.map { |t| [t.name, t.id] },
+  <%= selectable_f f, :job_template_id, JobTemplate.authorized(:view_job_templates).map { |t| [t.name, t.id] },
                   { selected: @job_action.job_template_id, include_blank: false },
                     label: _('Job Template') %>
   <%= submit_or_cancel f %>

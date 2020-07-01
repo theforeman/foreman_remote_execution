@@ -84,7 +84,7 @@ module ForemanRemoteExecution
           # Job Action permissions
           permission :view_job_actions, { job_actions: [:show, :index] }, resource_type: 'JobAction'
           permission :create_job_actions, { job_actions: [:new, :create] }, resource_type: 'JobAction'
-          permission :edit_job_actions, { job_actions: [:edit, :update] }, resource_type: 'JobAction'
+          permission :edit_job_actions, { job_actions: [:update] }, resource_type: 'JobAction'
           permission :destroy_job_actions, { job_actions: [:destroy] }, resource_type: 'JobAction'
         end
 
@@ -96,6 +96,9 @@ module ForemanRemoteExecution
           :view_hosts,
           :view_smart_proxies,
           :view_job_actions,
+          :create_job_actions,
+          :edit_job_actions,
+          :destroy_job_actions,
         ].freeze
         MANAGER_PERMISSIONS = USER_PERMISSIONS + [
           :cancel_job_invocations,
@@ -106,9 +109,6 @@ module ForemanRemoteExecution
           :view_audit_logs,
           :filter_autocompletion_for_template_invocation,
           :edit_remote_execution_features,
-          :create_job_actions,
-          :edit_job_actions,
-          :destroy_job_actions,
         ]
 
         # Add a new role called 'Remote Execution User ' if it doesn't exist

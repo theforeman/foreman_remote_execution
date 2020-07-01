@@ -5,9 +5,9 @@
   <thead>
     <tr>
       <th class="col-md-2"><%= sort :name, :as => s_("JobAction|Name") %></th>
-      <th class="">Template</th>
-      <th class="">Category</th>
-      <th class="">Provider</th>
+      <th class=""><%= _('Template') %></th>
+      <th class=""><%= _('Category') %></th>
+      <th class=""><%= _('Provider') %></th>
       <th class="col-md-1"><%= _('Actions') %></th>
     </tr>
   </thead>
@@ -15,7 +15,6 @@
     <% @job_actions.each do |job_action| %>
       <% btns = [
             display_link_if_authorized(_('Run'), hash_for_new_job_invocation_path(template_id: job_action.job_template.id)),
-            display_link_if_authorized(_('Clone'), hash_for_new_job_action_path(name: job_action.name, job_template_id: job_action.job_template.id)),
             display_delete_if_authorized(hash_for_job_action_path(id: job_action).merge(auth_object: job_action, authorizer: authorizer), data: { confirm: _("Delete %s?") % job_action.name })
           ]
       %>

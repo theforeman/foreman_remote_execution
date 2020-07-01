@@ -7,21 +7,15 @@ module ForemanRemoteExecution
     end
 
     def multiple_actions
-      job_actions = JobAction.authorized(:view_job_actions).all.order(:name).map do |action|
-         [_(action.name), new_job_invocation_path(template_id: action.job_template.id), false]
-      end
-
-      super + [ [_('Schedule Remote Job'), new_job_invocation_path, false] ] + job_actions
+      super + [ [_('Schedule Remote Job'), new_job_invocation_path, false] ] +
+              user_job_actions.map { |a| a.push(false) }
     end
 
     def schedule_job_multi_button(*args)
-      host_features = rex_host_features(*args)
-      job_actions = JobAction.authorized(:view_job_actions).all.order(:name).map do |action|
-        link_to _(action.name), new_job_invocation_path(template_id: action.job_template.id)
-      end
+      items = [rex_host_features(*args), user_job_actions.map { |a| link_to(a[0], a[1]) }].flatten.compact
 
-      if host_features.present? || job_actions.present?
-        action_buttons(schedule_job_button(*args), host_features, *job_actions)
+      if items.any?
+        action_buttons(schedule_job_button(*args), *items)
       else
         schedule_job_button(*args)
       end
@@ -49,6 +43,12 @@ module ForemanRemoteExecution
         button_group(web_console_button(*args)))
       super(*args)
     end
-  end
 
+    def user_job_actions
+      JobAction.authorized(:view_job_actions)
+               .where(user: User.current)
+               .order(:name)
+               .map { |a| [a.name, new_job_invocation_path(template_id: a.job_template.id)] }
+    end
+  end
 end
