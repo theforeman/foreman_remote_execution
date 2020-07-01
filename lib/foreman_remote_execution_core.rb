@@ -32,7 +32,9 @@ module ForemanRemoteExecutionCore
       raise "Wrong value '#{@settings[:ssh_log_level]}' for ssh_log_level, must be one of #{SSH_LOG_LEVELS.join(', ')}"
     end
 
-    current = if defined?(SmartProxyDynflowCore)
+    current = if defined?(::Proxy::SETTINGS)
+                ::Proxy::SETTINGS.log_level.to_s.downcase
+              elsif defined?(SmartProxyDynflowCore)
                 SmartProxyDynflowCore::SETTINGS.log_level.to_s.downcase
               else
                 Rails.configuration.log_level.to_s
