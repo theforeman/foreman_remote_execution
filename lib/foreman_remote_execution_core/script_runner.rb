@@ -170,9 +170,10 @@ module ForemanRemoteExecutionCore
 
     # the script that initiates the execution
     def initialization_script
+      su_method = @user_method.instance_of?(ForemanRemoteExecutionCore::SuUserMethod)
       # pipe the output to tee while capturing the exit code in a file
       <<-SCRIPT.gsub(/^\s+\| /, '')
-      | sh -c "(#{@user_method.cli_command_prefix}#{@user_method.instance_of?(ForemanRemoteExecutionCore::SuUserMethod) ? "'#{@remote_script} < /dev/null '" : "#{@remote_script} < /dev/null"}; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
+      | sh -c "(#{@user_method.cli_command_prefix}#{su_method ? "'#{@remote_script} < /dev/null '" : "#{@remote_script} < /dev/null"}; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
       | exit \\$(cat #{@exit_code_path})"
       SCRIPT
     end
