@@ -215,6 +215,15 @@ module Api
         resource_class.where(nil)
       end
 
+      # Restrict access for non-admin users.
+      def scope_for(resource, options = {})
+        if User.current.admin?
+          super(resource, options = {})
+        else
+          super(resource, options = {}).joins(:task).where("foreman_tasks_tasks.user_id = ?", User.current.id)
+        end
+      end
+
       def template_invocation_status(template_invocation)
         task = template_invocation.try(:run_host_job_task)
         parent_task = @job_invocation.task

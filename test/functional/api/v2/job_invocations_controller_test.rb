@@ -38,10 +38,11 @@ module Api
 
         test 'should see only permitted hosts' do
           @user = FactoryBot.create(:user, admin: false)
+          @invocation.task.update(user: @user)
           setup_user('view', 'job_invocations', nil, @user)
           setup_user('view', 'hosts', 'name ~ nope.example.com', @user)
 
-          get :show, params: { :id => @invocation.id }, session: set_session_user(@user)
+          get :show, params: { :id => @invocation.id }, session: prepare_user(@user)
           assert_response :success
           response = ActiveSupport::JSON.decode(@response.body)
           assert_empty response['targeting']['hosts']
@@ -297,6 +298,70 @@ module Api
         @invocation.save!
         post :rerun, params: { :id => @invocation.id }
         assert_response 404
+      end
+
+      context 'restricted access' do
+        setup do
+          @admin = FactoryBot.create(:user, mail: 'admin@test.foreman.com', admin: true)
+          @user = FactoryBot.create(:user, mail: 'user@test.foreman.com', admin: false)
+          @invocation = FactoryBot.create(:job_invocation, :with_template, :with_task, :with_unplanned_host)
+          @invocation2 = FactoryBot.create(:job_invocation, :with_template, :with_task, :with_unplanned_host)
+
+          @invocation.task.update(user: @admin)
+          @invocation2.task.update(user: @user)
+
+          setup_user 'view', 'hosts', nil, @user
+          setup_user 'view', 'job_invocations', nil, @user
+          setup_user 'create', 'job_invocations', nil, @user
+          setup_user 'cancel', 'job_invocations', nil, @user
+        end
+
+        describe '#index' do
+          test 'admin can see all invocations' do
+            get :index, session: prepare_user(@admin)
+            assert_response :success
+            assert JSON.parse(@response.body)['results'].size >= 2
+          end
+
+          test 'regular user can see only his invocations' do
+            get :index, session: prepare_user(@user)
+            assert_response :success
+            assert_equal 1, JSON.parse(@response.body)['results'].size
+          end
+        end
+
+        describe '#show' do
+          test 'admin can access any invocation' do
+            get :show, params: { id: @invocation2.id }, session: prepare_user(@admin)
+            assert_response :success
+          end
+
+          test 'regular user can access only his invocations' do
+            get :show, params: { id: @invocation.id }, session: prepare_user(@user)
+            assert_response :not_found
+          end
+        end
+
+        describe '#output' do
+          let(:host) { @invocation.targeting.hosts.first }
+          let(:host2) { @invocation2.targeting.hosts.first }
+
+          test 'admin can access any invocation' do
+            get :output, params: { job_invocation_id: @invocation2.id, host_id: host2.id }, session: prepare_user(@admin)
+            assert_response :success
+          end
+
+          test 'non-admin cannot access other user invocation' do
+            get :output, params: { job_invocation_id: @invocation.id, host_id: host.id }, session: prepare_user(@user)
+            assert_response :not_found
+            assert_includes @response.body, 'Job invocation not found'
+          end
+        end
+      end
+
+      def prepare_user(user)
+        User.current = user
+        set_session_user(user)
       end
     end
   end
