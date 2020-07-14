@@ -29,7 +29,10 @@ module ForemanRemoteExecution
       logger.debug "Scheduling SSH known_hosts cleanup"
 
       host, _kind, _target = host_kind_target
-      proxies = host.remote_execution_proxies('SSH').values
+      # #remote_execution_proxies may not be defined on the host object in some case
+      # for example Host::Discovered does not have it defined, even though these hosts
+      # have Nic::Managed interfaces associated with them
+      proxies = (host.try(:remote_execution_proxies, 'SSH') || {}).values
       proxies.flatten.uniq.each do |proxy|
         queue.create(id: queue_id(proxy.id), name: _("Remove SSH known hosts for %s") % self,
           priority: 200, action: [self, :drop_from_known_hosts, proxy.id])
