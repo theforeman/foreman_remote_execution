@@ -10,7 +10,9 @@ class DefaultProxyProxySelector < ::RemoteExecutionProxySelector
   def available_proxies(host, provider)
     # TODO: Once we have a internal proxy marker/feature on the proxy, we can
     # swap the implementation
-    internal_proxy = ::Katello.default_capsule
+    raise _('default_capsule method missing from SmartProxy') unless ::SmartProxy.respond_to?(:default_capsule)
+
+    internal_proxy = ::SmartProxy.default_capsule
     super.reduce({}) do |acc, (key, proxies)|
       acc.merge(key => proxies.select { |proxy| proxy == internal_proxy })
     end
