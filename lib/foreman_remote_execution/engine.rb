@@ -47,6 +47,9 @@ module ForemanRemoteExecution
         requires_foreman '>= 1.25'
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
+        ApipieDSL.configuration.dsl_classes_matchers += [
+          "#{ForemanRemoteExecution::Engine.root}/app/lib/foreman_remote_execution/renderer/**/*.rb",
+        ]
 
         automatic_assets(false)
         precompile_assets(*assets_to_precompile)
