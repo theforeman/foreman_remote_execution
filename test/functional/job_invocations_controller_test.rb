@@ -71,58 +71,54 @@ class JobInvocationsControllerTest < ActionController::TestCase
       @invocation2.task.update(user: @user)
 
       setup_user 'view', 'hosts', nil, @user
-      setup_user 'view', 'job_invocations', nil, @user
-      setup_user 'create', 'job_invocations', nil, @user
-      setup_user 'cancel', 'job_invocations', nil, @user
+      setup_user 'view', 'job_invocations', 'user = current_user', @user
+      setup_user 'create', 'job_invocations', 'user = current_user', @user
+      setup_user 'cancel', 'job_invocations', 'user = current_user', @user
     end
 
-    describe '#index' do
-      test 'admin can see all invocations' do
+    context 'without user filter' do
+      test '#index' do
         get :index, session: prepare_user(@admin)
         assert_response :success
         assert 2, assigns(:job_invocations).size
       end
 
-      test 'regular user can see only his invocations' do
-        get :index, session: prepare_user(@user)
-        assert_response :success
-        assert_equal 1, assigns(:job_invocations).size
-        assert_equal @invocation2, assigns(:job_invocations).first
-      end
-    end
-
-    describe '#show' do
-      test 'admin can access any invocation' do
+      test '#show' do
         get :show, params: { id: @invocation2.id }, session: prepare_user(@admin)
         assert_response :success
       end
 
-      test 'regular user can access only his invocations' do
-        get :show, params: { id: @invocation.id }, session: prepare_user(@user)
-        assert_response :not_found
-      end
-    end
-
-    describe '#rerun' do
-      test 'admin can rerun any invocation' do
+      test '#rerun' do
         get :rerun, params: { id: @invocation2.id }, session: prepare_user(@admin)
         assert_response :success
       end
 
-      test "regular user can't rerun other's invocations" do
-        get :rerun, params: { id: @invocation.id }, session: prepare_user(@user)
-        assert_response :not_found
-      end
-    end
-
-    describe '#cancel' do
-      test 'admin can cancel any invocation' do
+      test '#cancel' do
         ForemanTasks::Task.any_instance.expects(:cancel).returns(true)
         post :cancel, params: { id: @invocation2.id }, session: prepare_user(@admin)
         assert_response :redirect
       end
+    end
 
-      test "regular user can't cancel other's invocations" do
+    context 'with user filter' do
+      test '#index' do
+        get :index, session: prepare_user(@user)
+        assert_response :success
+        assert_equal 1, assigns(:job_invocations).size
+        assert_equal @invocation2, assigns(:job_invocations)[0]
+      end
+
+      test '#show' do
+        get :show, params: { id: @invocation.id }, session: prepare_user(@user)
+        assert_response :not_found
+      end
+
+      test '#rerun' do
+        get :rerun, params: { id: @invocation.id }, session: prepare_user(@user)
+        assert_response :not_found
+      end
+
+      test 'cancel' do
         post :cancel, params: { id: @invocation.id }, session: prepare_user(@user)
         assert_response :not_found
       end

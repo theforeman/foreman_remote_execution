@@ -121,15 +121,6 @@ class JobInvocationsController < ApplicationController
 
   private
 
-  # Restrict access for non-admin users.
-  def resource_base
-    if current_user.admin?
-      super
-    else
-      super.joins(:task).where("foreman_tasks_tasks.user_id = ?", current_user.id)
-    end
-  end
-
   def action_permission
     case params[:action]
       when 'rerun'
@@ -165,14 +156,13 @@ class JobInvocationsController < ApplicationController
 
   def targeting_hosts_resources
     @auto_refresh = @job_invocation.task.try(:pending?)
-    @invocation_hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+    @resource_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
 
     unless params[:search].nil?
-      @invocation_hosts = @invocation_hosts.joins(:template_invocations)
-                                           .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
+      @resource_base = @resource_base.joins(:template_invocations)
+                                     .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
     end
-    @hosts = @invocation_hosts.search_for(params[:search], :order => params[:order])
-                              .paginate(:page => params[:page], :per_page => params[:per_page])
-    @total_hosts = @invocation_hosts.size
+    @hosts = resource_base_search_and_page
+    @total_hosts = resource_base_with_search.size
   end
 end
