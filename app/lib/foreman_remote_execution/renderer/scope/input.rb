@@ -3,14 +3,33 @@ module ForemanRemoteExecution
     module Scope
       class Input < ::Foreman::Renderer::Scope::Template
         include Foreman::Renderer::Scope::Macros::HostTemplate
+        extend ApipieDSL::Class
 
         attr_reader :template, :host, :invocation, :input_template_instance, :current_user
         delegate :input, to: :input_template_instance
 
+        apipie :class, 'Macros related to template rendering' do
+          name 'Template Input Render'
+          sections only: %w[all jobs]
+        end
+
+        apipie :method, 'Always raises an error with a description provided as an argument' do
+          desc 'This method is useful for aborting script execution if some of the conditions are not met'
+          required :message, String, desc: 'Description for the error'
+          raises error: ::InputTemplateRenderer::RenderError, desc: 'The error is always being raised'
+          returns nil, desc: "Doesn't return anything"
+          example "<%
+  @host.operatingsystem #=> nil
+  render_error(N_('Unsupported or no operating system found for this host.')) unless @host.operatingsystem #=> InputTemplateRenderer::RenderError is raised and the execution of the script is aborted
+%>"
+        end
         def render_error(message)
           raise ::InputTemplateRenderer::RenderError.new(message)
         end
 
+        apipie :method, 'Check whether the template in preview mode or not' do
+          returns one_of: [true, false], desc: 'Returns true if the template in preview mode, false otherwise'
+        end
         def preview?
           !!@preview
         end
@@ -23,6 +42,16 @@ module ForemanRemoteExecution
           Rails.cache.fetch(cache_key, &block)
         end
 
+        # rubocop:disable Lint/InterpolationCheck
+        apipie :method, 'Render template by given name' do
+          required :template_name, String, desc: 'name of the template to render'
+          optional :input_values, Hash, desc: 'key:value list of input values for the template'
+          optional :options, Hash, desc: 'Additional options such as :with_foreign_input_set. Set to true if a foreign input set should be considered when rendering the template'
+          raises error: StandardError, desc: 'raises an error if there is no template or template input with such name'
+          returns String, desc: 'Rendered template'
+          example '<%= render_template("Run Command - Ansible Default", command: "yum -y group install #{input("package")}") %>'
+        end
+        # rubocop:enable Lint/InterpolationCheck
         def render_template(template_name, input_values = {}, options = {})
           options.assert_valid_keys(:with_foreign_input_set)
           with_foreign_input_set = options.fetch(:with_foreign_input_set, true)
@@ -59,6 +88,12 @@ module ForemanRemoteExecution
           input_values.merge(overrides).with_indifferent_access
         end
 
+        apipie :method, 'Returns the value of template input' do
+          required :name, String, desc: 'name of the template input'
+          raises error: UndefinedInput, desc: 'when there is no input with such name defined for the current template'
+          returns Object, desc: 'The value of template input'
+          example 'input("Include Facts") #=> "yes"'
+        end
         def input(name)
           return template_input_values[name.to_s] if template_input_values.key?(name.to_s)
 
