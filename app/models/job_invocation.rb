@@ -41,7 +41,10 @@ class JobInvocation < ApplicationRecord
   has_many :template_invocation_tasks, :through => :template_invocations,
                                        :class_name => 'ForemanTasks::Task',
                                        :source => 'run_host_job_task'
-
+  has_one :user, through: :task
+  scoped_search relation: :user, on: :login, rename: 'user', complete_value: true,
+                value_translation: ->(value) { value == 'current_user' ? User.current.login : value },
+                special_values: [:current_user], aliases: ['owner'], :only_explicit => true
   scoped_search :relation => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
   scoped_search :relation => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
   scoped_search :relation => :task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
