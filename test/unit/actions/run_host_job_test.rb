@@ -12,7 +12,7 @@ module ForemanRemoteExecution
       let(:provider) do
         provider = ::SSHExecutionProvider
         provider.expects(:ssh_password).with(host).returns('sshpass')
-        provider.expects(:sudo_password).with(host).returns('sudopass')
+        provider.expects(:effective_user_password).with(host).returns('sudopass')
         provider.expects(:ssh_key_passphrase).with(host).returns('keypass')
         provider
       end
@@ -21,7 +21,7 @@ module ForemanRemoteExecution
         secrets = subject.secrets(host, job_invocation, provider)
 
         assert_equal 'sshpass', secrets[:ssh_password]
-        assert_equal 'sudopass', secrets[:sudo_password]
+        assert_equal 'sudopass', secrets[:effective_user_password]
         assert_equal 'keypass', secrets[:key_passphrase]
       end
 
@@ -31,7 +31,7 @@ module ForemanRemoteExecution
         secrets = subject.secrets(host, job_invocation, provider)
 
         assert_equal 'jobsshpass', secrets[:ssh_password]
-        assert_equal 'sudopass', secrets[:sudo_password]
+        assert_equal 'sudopass', secrets[:effective_user_password]
         assert_equal 'jobkeypass', secrets[:key_passphrase]
       end
     end

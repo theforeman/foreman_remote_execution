@@ -15,7 +15,7 @@ class JobInvocationComposer
         :description_format => job_invocation_base[:description_format],
         :password => blank_to_nil(job_invocation_base[:password]),
         :key_passphrase => blank_to_nil(job_invocation_base[:key_passphrase]),
-        :sudo_password => blank_to_nil(job_invocation_base[:sudo_password]),
+        :effective_user_password => blank_to_nil(job_invocation_base[:effective_user_password]),
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => execution_timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
@@ -348,7 +348,7 @@ class JobInvocationComposer
     job_invocation.execution_timeout_interval = params[:execution_timeout_interval]
     job_invocation.password = params[:password]
     job_invocation.key_passphrase = params[:key_passphrase]
-    job_invocation.sudo_password = params[:sudo_password]
+    job_invocation.effective_user_password = params[:effective_user_password]
 
     if @reruns && job_invocation.targeting.static?
       job_invocation.targeting.host_ids = JobInvocation.find(@reruns).targeting.host_ids
