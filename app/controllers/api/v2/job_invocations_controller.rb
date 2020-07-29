@@ -80,6 +80,7 @@ module Api
         end
         composer.trigger!
         @job_invocation = composer.job_invocation
+        @hosts = @job_invocation.targeting.hosts
         process_response @job_invocation
       end
 
