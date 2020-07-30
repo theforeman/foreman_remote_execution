@@ -54,6 +54,7 @@ class JobInvocationsController < ApplicationController
     @job_invocation = resource_base.includes(:template_invocations => :run_host_job_task).find(params[:id])
     @job_organization = Taxonomy.find_by(id: @job_invocation.task.input[:current_organization_id])
     @job_location = Taxonomy.find_by(id: @job_invocation.task.input[:current_location_id])
+    @auto_refresh = @job_invocation.task.try(:pending?)
 
     respond_to do |format|
       format.json do
@@ -61,6 +62,7 @@ class JobInvocationsController < ApplicationController
       end
 
       format.html
+      format.js
     end
   end
 
