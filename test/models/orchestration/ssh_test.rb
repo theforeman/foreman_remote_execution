@@ -30,7 +30,7 @@ class SSHOrchestrationTest < ActiveSupport::TestCase
 
   it 'does not fail on 404 from the smart proxy' do
     host.stubs(:skip_orchestration?).returns false
-    SmartProxy.any_instance.expects(:drop_host_from_known_hosts).raises(RestClient::ResourceNotFound).twice
+    ::ProxyAPI::RemoteExecutionSSH.any_instance.expects(:delete).raises(RestClient::ResourceNotFound).twice
     host.build = true
     host.save!
     ids = ["ssh_remove_known_hosts_interface_#{interface.ip}_#{proxy.id}",
