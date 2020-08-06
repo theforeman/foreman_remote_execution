@@ -17,7 +17,7 @@ const TargetingHosts = ({ status, items }) => {
   }
 
   return (
-    <LoadingState loading={!items.length}>
+    <LoadingState loading={!items.length && status === STATUS.PENDING}>
       <div>
         <table className="table table-bordered table-striped table-hover">
           <thead>
