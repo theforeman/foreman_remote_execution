@@ -52,7 +52,7 @@ exports[`TargetingHosts renders with error 1`] = `
 exports[`TargetingHosts renders with loading 1`] = `
 <LoadingState
   additionalClasses=""
-  loading={true}
+  loading={false}
   loadingText="Loading"
   size="lg"
   timeout={300}
