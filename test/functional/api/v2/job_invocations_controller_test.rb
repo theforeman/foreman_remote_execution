@@ -44,7 +44,7 @@ module Api
           get :show, params: { :id => @invocation.id }, session: set_session_user(@user)
           assert_response :success
           response = ActiveSupport::JSON.decode(@response.body)
-          assert_empty response['targeting']['hosts']
+          assert_equal response['targeting']['hosts'], []
         end
       end
 
