@@ -205,6 +205,8 @@ module ForemanRemoteExecution
       RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
 
       ForemanRemoteExecution.register_rex_feature
+
+      ::Api::V2::SubnetsController.include ::ForemanRemoteExecution::Concerns::Api::V2::SubnetsControllerExtensions
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
