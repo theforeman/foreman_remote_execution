@@ -10,7 +10,7 @@
     <%= minicard('user', template_invocation.effective_user || Setting[:remote_execution_effective_user],
                  template_invocation.template.name + ' ' + _('effective user')) %>
     <div class="row">
-      <% missing = job_invocation.total_hosts_count - job_invocation.targeting.hosts.count %>
+      <% missing = job_invocation.targeting.resolved? ? job_invocation.total_hosts_count - job_invocation.targeting.hosts.count : 0 %>
       <% size = missing.zero? ? 12 : 6 %>
       <div class="col-xs-12 col-sm-<%= size %> col-md-<%= size %>" >
         <%= minicard('cluster', job_invocation.total_hosts_count, _('Total hosts')) %>
