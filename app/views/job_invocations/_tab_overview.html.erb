@@ -9,7 +9,18 @@
   <% template_invocations.each do |template_invocation| %>
     <%= minicard('user', template_invocation.effective_user || Setting[:remote_execution_effective_user],
                  template_invocation.template.name + ' ' + _('effective user')) %>
-    <%= minicard('cluster', job_invocation.total_hosts_count, _('Total hosts')) %>
+    <div class="row">
+      <% missing = job_invocation.total_hosts_count - job_invocation.targeting.hosts.count %>
+      <% size = missing.zero? ? 12 : 6 %>
+      <div class="col-xs-12 col-sm-<%= size %> col-md-<%= size %>" >
+        <%= minicard('cluster', job_invocation.total_hosts_count, _('Total hosts')) %>
+      </div>
+      <% unless missing.zero? %>
+      <div class="col-xs-12 col-sm-6 col-md-6" >
+        <%= minicard('warning-triangle-o', missing, _('Hosts gone missing')) %>
+      </div>
+    <% end %>
+    </div>
     <% if template_invocation.input_values.present? %>
       <%= render :partial => 'card_user_input', :locals => { :template_invocation => template_invocation } %>
     <% end %>
