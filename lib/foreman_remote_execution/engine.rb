@@ -138,6 +138,7 @@ module ForemanRemoteExecution
         end
 
         extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/pubkey'
+        extend_rabl_template 'api/v2/interfaces/main', 'api/v2/interfaces/execution_flag'
         describe_host { overview_buttons_provider :host_overview_buttons }
       end
     end
@@ -184,6 +185,7 @@ module ForemanRemoteExecution
       SmartProxy.prepend ForemanRemoteExecution::SmartProxyExtensions
       Subnet.include ForemanRemoteExecution::SubnetExtensions
 
+      ::Api::V2::InterfacesController.include Api::V2::InterfacesControllerExtensions
       # We need to explicitly force to load the Task model due to Rails loader
       # having issues with resolving it to Rake::Task otherwise
       require_dependency 'foreman_tasks/task'
