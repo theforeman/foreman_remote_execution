@@ -1,5 +1,5 @@
 class RemoteExecutionFeature < ApplicationRecord
-  VALID_OPTIONS = [:provided_inputs, :description, :host_action_button, :notification_builder].freeze
+  VALID_OPTIONS = [:provided_inputs, :description, :host_action_button, :notification_builder, :proxy_selector_override].freeze
   validates :label, :name, :presence => true, :uniqueness => true
 
   belongs_to :job_template
@@ -41,6 +41,7 @@ class RemoteExecutionFeature < ApplicationRecord
                    :provided_input_names => options[:provided_inputs],
                    :description => options[:description],
                    :host_action_button => options[:host_action_button],
+                   :proxy_selector_override => options[:proxy_selector_override],
                    :notification_builder => builder }
     # in case DB does not have the attribute created yet but plugin initializer registers the feature, we need to skip this attribute
     attrs = [ :host_action_button, :notification_builder ]
