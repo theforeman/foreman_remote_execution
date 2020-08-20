@@ -101,7 +101,12 @@ class RemoteExecutionProvider
 
     # Return a specific proxy selector to use for running a given template
     # Returns either nil to use the default selector or an instance of a (sub)class of ::ForemanTasks::ProxySelector
-    def required_proxy_selector_for(_template)
+    def required_proxy_selector_for(template)
+      if template.remote_execution_features
+                 .where(:proxy_selector_override => ::RemoteExecutionProxySelector::INTERNAL_PROXY)
+                 .any?
+        ::DefaultProxyProxySelector.new
+      end
     end
   end
 end
