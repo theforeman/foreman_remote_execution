@@ -8,6 +8,7 @@ node do |invocation|
     :failed    => invocation_count(invocation, :output_key => :failed_count),
     :pending   => invocation_count(invocation, :output_key => :pending_count),
     :total     => invocation_count(invocation, :output_key => :total_count),
+    :missing   => invocation.missing_hosts_count
   }
 end
 

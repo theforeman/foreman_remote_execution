@@ -243,6 +243,10 @@ class JobInvocation < ApplicationRecord
     !task.pending?
   end
 
+  def missing_hosts_count
+    targeting.resolved? ? total_hosts_count - targeting.hosts.count : 0
+  end
+
   private
 
   def failed_template_invocations
