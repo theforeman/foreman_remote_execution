@@ -17,7 +17,8 @@
       </div>
       <% unless missing.zero? %>
       <div class="col-xs-12 col-sm-6 col-md-6" >
-        <%= minicard('warning-triangle-o', missing, _('Hosts gone missing')) %>
+          <%= minicard('warning-triangle-o', missing, _('Hosts gone missing'),
+                       :tooltip => _('This can happen if the host is removed or moved to another organization or location after the job was started')) %>
       </div>
     <% end %>
     </div>

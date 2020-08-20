@@ -1,10 +1,11 @@
 # frozen_string_literal:true
 
 module JobInvocationsHelper
-  def minicard(icon, number, text)
+  def minicard(icon, number, text, tooltip: nil)
+    tooltip_options = tooltip ? { :'data-original-title' => tooltip, :rel => 'twipsy' } : {}
     content_tag(:div, :class => 'card-pf card-pf-accented
                 card-pf-aggregate-status card-pf-aggregate-status-mini') do
-      content_tag(:h2, :class => 'card-pf-title', :style => 'line-height: 1.1') do
+      content_tag(:h2, { :class => 'card-pf-title', :style => 'line-height: 1.1' }.merge(tooltip_options)) do
         icon_text(icon, '', :kind => 'pficon') +
         content_tag(:span, number, :class =>'card-pf-aggregate-status-count') +
         text
