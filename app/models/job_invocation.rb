@@ -173,7 +173,7 @@ class JobInvocation < ApplicationRecord
 
   def total_hosts_count
     if targeting.resolved?
-      targeting.hosts.count
+      task&.main_action&.total_count || targeting.hosts.count
     else
       _('N/A')
     end
@@ -241,6 +241,10 @@ class JobInvocation < ApplicationRecord
 
   def finished?
     !task.pending?
+  end
+
+  def missing_hosts_count
+    targeting.resolved? ? total_hosts_count - targeting.hosts.count : 0
   end
 
   private

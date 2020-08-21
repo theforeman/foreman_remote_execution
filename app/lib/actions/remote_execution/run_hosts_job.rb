@@ -57,7 +57,8 @@ module Actions
       end
 
       def job_invocation
-        @job_invocation ||= JobInvocation.find(input[:job_invocation_id])
+        id = input[:job_invocation_id] || input.fetch(:job_invocation, {})[:id]
+        @job_invocation ||= JobInvocation.find(id)
       end
 
       def batch(from, size)
@@ -65,7 +66,7 @@ module Actions
       end
 
       def total_count
-        hosts.count
+        output[:total_count] || hosts.count
       end
 
       def hosts
