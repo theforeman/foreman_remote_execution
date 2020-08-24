@@ -32,6 +32,15 @@ module ForemanRemoteExecution
       end
     end
 
+    # A workaround for https://projects.theforeman.org/issues/30685
+    initializer 'foreman_remote_execution.rails_loading_workaround' do
+      # Without this, in production environment the module gets prepended too
+      # late and the extensions do not get applied
+      # TODO: Remove this and from config.to_prepare once there is an extension
+      # point in Foreman
+      ProvisioningTemplatesHelper.prepend ForemanRemoteExecution::JobTemplatesExtensions
+    end
+
     initializer 'foreman_remote_execution.apipie' do
       Apipie.configuration.checksum_path += ['/api/']
     end
