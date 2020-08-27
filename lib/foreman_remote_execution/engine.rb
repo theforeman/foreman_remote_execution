@@ -148,6 +148,8 @@ module ForemanRemoteExecution
 
         extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/pubkey'
         extend_rabl_template 'api/v2/interfaces/main', 'api/v2/interfaces/execution_flag'
+        extend_rabl_template 'api/v2/subnets/show', 'api/v2/subnets/remote_execution_proxies'
+        parameter_filter ::Subnet, :remote_execution_proxy_ids
         describe_host { overview_buttons_provider :host_overview_buttons }
       end
     end
@@ -203,6 +205,8 @@ module ForemanRemoteExecution
       RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
 
       ForemanRemoteExecution.register_rex_feature
+
+      ::Api::V2::SubnetsController.include ::ForemanRemoteExecution::Concerns::Api::V2::SubnetsControllerExtensions
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
