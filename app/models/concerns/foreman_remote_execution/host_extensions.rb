@@ -44,21 +44,11 @@ module ForemanRemoteExecution
       @execution_status_label ||= get_status(HostStatus::ExecutionStatus).to_label(options)
     end
 
+    # rubocop:disable Naming/MemoizedInstanceVariableName
     def host_params_hash
-      params = super
-      keys = remote_execution_ssh_keys
-      source = 'global'
-      if keys.present?
-        value, safe_value = params.fetch('remote_execution_ssh_keys', {}).values_at(:value, :safe_value).map { |v| [v].flatten.compact }
-        params['remote_execution_ssh_keys'] = {:value => value + keys, :safe_value => safe_value + keys, :source => source}
-      end
-      [:remote_execution_ssh_user, :remote_execution_effective_user_method,
-       :remote_execution_connect_by_ip].each do |key|
-        value = Setting[key]
-        params[key.to_s] = {:value => value, :safe_value => value, :source => source} unless params.key?(key.to_s)
-      end
-      params
+      @cached_rex_host_params_hash ||= extend_host_params_hash(super)
     end
+    # rubocop:enable Naming/MemoizedInstanceVariableName
 
     def execution_interface
       get_interface_by_flag(:execution)
@@ -103,6 +93,21 @@ module ForemanRemoteExecution
     end
 
     private
+
+    def extend_host_params_hash(params)
+      keys = remote_execution_ssh_keys
+      source = 'global'
+      if keys.present?
+        value, safe_value = params.fetch('remote_execution_ssh_keys', {}).values_at(:value, :safe_value).map { |v| [v].flatten.compact }
+        params['remote_execution_ssh_keys'] = {:value => value + keys, :safe_value => safe_value + keys, :source => source}
+      end
+      [:remote_execution_ssh_user, :remote_execution_effective_user_method,
+       :remote_execution_connect_by_ip].each do |key|
+        value = Setting[key]
+        params[key.to_s] = {:value => value, :safe_value => value, :source => source} unless params.key?(key.to_s)
+      end
+      params
+    end
 
     def build_required_interfaces(attrs = {})
       super(attrs)
