@@ -92,6 +92,11 @@ module ForemanRemoteExecution
       super(*args)
     end
 
+    def clear_host_parameters_cache!
+      super
+      @cached_rex_host_params_hash = nil
+    end
+
     private
 
     def extend_host_params_hash(params)
