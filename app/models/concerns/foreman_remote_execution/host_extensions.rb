@@ -56,7 +56,10 @@ module ForemanRemoteExecution
 
     def remote_execution_proxies(provider, authorized = true)
       proxies = {}
-      proxies[:subnet]   = execution_interface.subnet.remote_execution_proxies.with_features(provider) if execution_interface&.subnet
+      proxies[:subnet] = []
+      proxies[:subnet] += execution_interface.subnet6.remote_execution_proxies.with_features(provider) if execution_interface&.subnet6
+      proxies[:subnet] += execution_interface.subnet.remote_execution_proxies.with_features(provider) if execution_interface&.subnet
+      proxies[:subnet].uniq!
       proxies[:fallback] = smart_proxies.with_features(provider) if Setting[:remote_execution_fallback_proxy]
 
       if Setting[:remote_execution_global_proxy]
