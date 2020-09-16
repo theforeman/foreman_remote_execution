@@ -51,8 +51,12 @@ const TargetingHosts = ({ apiStatus, items }) => {
 };
 
 TargetingHosts.propTypes = {
-  apiStatus: PropTypes.string.isRequired,
+  apiStatus: PropTypes.string,
   items: PropTypes.array.isRequired,
+};
+
+TargetingHosts.defaultProps = {
+  apiStatus: null,
 };
 
 export default TargetingHosts;

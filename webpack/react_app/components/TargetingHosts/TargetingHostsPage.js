@@ -52,11 +52,15 @@ const TargetingHostsPage = ({
 TargetingHostsPage.propTypes = {
   handleSearch: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
-  apiStatus: PropTypes.string.isRequired,
+  apiStatus: PropTypes.string,
   items: PropTypes.array.isRequired,
   totalHosts: PropTypes.number.isRequired,
   pagination: PropTypes.object.isRequired,
   handlePagination: PropTypes.func.isRequired,
+};
+
+TargetingHostsPage.defaultProps = {
+  apiStatus: null,
 };
 
 export default TargetingHostsPage;
