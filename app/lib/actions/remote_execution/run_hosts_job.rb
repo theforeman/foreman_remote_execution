@@ -65,8 +65,15 @@ module Actions
         hosts.offset(from).limit(size)
       end
 
+      def initiate
+        output[:host_count] = total_count
+        super
+      end
+
       def total_count
-        output[:total_count] || hosts.count
+        # For compatibility with already existing tasks
+        return output[:total_count] unless output.has_key?(:host_count) || task.pending?
+        output[:host_count] || hosts.count
       end
 
       def hosts
