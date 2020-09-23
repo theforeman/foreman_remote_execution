@@ -22,6 +22,7 @@ class JobInvocation < ApplicationRecord
   validates :job_category, :presence => true
   validates_associated :targeting, :all_template_invocations
 
+  scoped_search :on => :id, :complete_value => true
   scoped_search :on => :job_category, :complete_value => true
   scoped_search :on => :description, :complete_value => true
 
