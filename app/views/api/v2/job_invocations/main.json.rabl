@@ -35,7 +35,7 @@ child :task do
 end
 
 child @template_invocations do
-  attributes :template_id, :template_name
+  attributes :template_id, :template_name, :host_id
   child :input_values do
     attributes :template_input_name, :template_input_id
     node :value do |iv|
