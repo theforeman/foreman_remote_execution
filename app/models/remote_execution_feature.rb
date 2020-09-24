@@ -24,8 +24,10 @@ class RemoteExecutionFeature < ApplicationRecord
   end
 
   def self.register(label, name, options = {})
+    pending_migrations = ::Foreman::Plugin.registered_plugins[:foreman_remote_execution]&.pending_migrations
     begin
-      return false unless RemoteExecutionFeature.table_exists?
+      # Let's not try to register features if rex is not registered as a plugin
+      return false if pending_migrations || pending_migrations.nil?
     rescue ActiveRecord::NoDatabaseError => e
       # just ignore the problem if DB does not exist yet (rake db:create call)
       return false
