@@ -482,7 +482,7 @@ class JobInvocationComposer
 
   def input_value_for(input)
     invocations = pattern_template_invocations
-    default = TemplateInvocationInputValue.new
+    default = TemplateInvocationInputValue.new(:template_input_id => input.id)
     invocations.map(&:input_values).flatten.detect { |iv| iv.template_input_id == input.id } || default
   end
 
