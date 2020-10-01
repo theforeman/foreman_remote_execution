@@ -113,7 +113,7 @@
     </div>
 
     <div class="form-group">
-      <%= add_label({ :label => _('Type of query'), :label_help => _("Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>") }, f, :targetting_type) %>
+      <%= add_label({ :label => _('Type of query'), :label_help => _("Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>") }, f, :targeting_type) %>
 
       <div class="col-md-4">
         <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
