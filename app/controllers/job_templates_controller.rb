@@ -36,7 +36,7 @@ class JobTemplatesController < ::TemplatesController
 
     @template = JobTemplate.import_raw(contents, :update => Foreman::Cast.to_bool(params[:imported_template][:overwrite]))
     if @template&.save
-      flash[:notice] = _('Job template imported successfully.')
+      flash[:success] = _('Job template imported successfully.')
       redirect_to job_templates_path(:search => "name = \"#{@template.name}\"")
     else
       @template ||= JobTemplate.import_raw(contents, :build_new => true)
