@@ -6,7 +6,7 @@ module Api
 
       before_action :find_optional_nested_object, :only => %w{output raw_output}
       before_action :find_host, :only => %w{output raw_output}
-      before_action :find_resource, :only => %w{show update destroy clone cancel rerun}
+      before_action :find_resource, :only => %w{show update destroy clone cancel rerun bulk_outputs}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -137,6 +137,21 @@ module Api
         end
       end
 
+      api :GET, '/job_invocation/:id/bulk_outputs', N_('Get outputs of hosts in a job')
+      param :id, :identifier, :required => true
+      param :search_query, :identifier, :required => false
+      param :since, String, :required => false
+      def bulk_outputs
+        hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+        hosts = hosts.search_for(params['search_query']) if params['search_query']
+        outputs = hosts.map do |host|
+          host_output(@job_invocation, host, :default => [], :since => params['since'])
+            .merge(id: host.id)
+        end
+
+        render :json => { :outputs => outputs }
+      end
+
       private
 
       def allowed_nested_id
@@ -145,7 +160,7 @@ module Api
 
       def action_permission
         case params[:action]
-        when 'output', 'raw_output'
+        when 'output', 'raw_output', 'bulk_outputs'
           :view
         when 'cancel'
           :cancel

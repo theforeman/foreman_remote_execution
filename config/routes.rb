@@ -55,6 +55,7 @@ Rails.application.routes.draw do
           post 'cancel'
           post 'rerun'
           get  'template_invocations', :to => 'template_invocations#template_invocations'
+          get 'bulk_outputs'
         end
       end
 
