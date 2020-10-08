@@ -24,6 +24,7 @@ module ForemanRemoteExecution
       OpenStruct.new(:id => uuid).tap do |o|
         o.stubs(:add_missing_task_groups)
         o.stubs(:task_groups).returns([])
+        o.stubs(:pending?).returns(true)
       end
     end
     let(:action) do
