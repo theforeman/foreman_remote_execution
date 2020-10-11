@@ -21,16 +21,16 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": "^4.2.1",
-    "@theforeman/eslint-plugin-foreman": "^4.2.1",
-    "@theforeman/stories": "^4.2.1",
-    "@theforeman/test": "^4.2.1",
-    "@theforeman/vendor-dev": "^4.2.1",
+    "@theforeman/builder": "^4.14.0",
+    "@theforeman/eslint-plugin-foreman": "^4.14.0",
+    "@theforeman/stories": "^4.14.0",
+    "@theforeman/test": "^4.14.0",
+    "@theforeman/vendor-dev": "^4.14.0",
     "babel-eslint": "^10.0.0",
     "eslint": "^6.8.0",
     "prettier": "^1.19.1"
   },
   "peerDependencies": {
-    "@theforeman/vendor": ">= 4.2.1"
+    "@theforeman/vendor": ">= 4.14.0"
   }
 }
