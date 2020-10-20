@@ -53,6 +53,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', before: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
+        register_global_js_file 'global'
         requires_foreman '>= 2.2'
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
@@ -137,6 +138,13 @@ module ForemanRemoteExecution
           caption: N_('Jobs'),
           parent: :monitor_menu,
           after: :audits
+
+        menu :labs_menu, :job_wizard,
+          url_hash: { controller: 'job_wizard', action: :index },
+          caption: N_('Job wizard'),
+          parent: :lab_features_menu,
+          url: 'experimental/job_wizard',
+          after: :host_wizard
 
         register_custom_status HostStatus::ExecutionStatus
         # add dashboard widget
