@@ -83,7 +83,7 @@ module ForemanRemoteExecution
           permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh, :rerun, :preview_hosts],
                                                 'api/v2/job_invocations' => [:create, :rerun] }, :resource_type => 'JobInvocation'
           permission :view_job_invocations, { :job_invocations => [:index, :chart, :show, :auto_complete_search], :template_invocations => [:show],
-                                              'api/v2/job_invocations' => [:index, :show, :output, :raw_output] }, :resource_type => 'JobInvocation'
+                                              'api/v2/job_invocations' => [:index, :show, :output, :raw_output, :outputs] }, :resource_type => 'JobInvocation'
           permission :view_template_invocations, { :template_invocations => [:show],
                                                    'api/v2/template_invocations' => [:template_invocations] }, :resource_type => 'TemplateInvocation'
           permission :create_template_invocations, {}, :resource_type => 'TemplateInvocation'
