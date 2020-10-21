@@ -137,7 +137,7 @@ module Api
         end
       end
 
-      api :GET, '/job_invocation/:id/outputs', N_('Get outputs of hosts in a job')
+      api :GET, '/job_invocations/:id/outputs', N_('Get outputs of hosts in a job')
       param :id, :identifier, :required => true
       param :search_query, :identifier, :required => false
       param :since, String, :required => false
