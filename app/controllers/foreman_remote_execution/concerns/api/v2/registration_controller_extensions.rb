@@ -1,12 +1,15 @@
 module ForemanRemoteExecution
   module Concerns
     module Api::V2::RegistrationControllerExtensions
-      extend Apipie::DSL::Concern
-      extend ActiveSupport::Concern
+      module ApipieExtensions
+        extend Apipie::DSL::Concern
 
-      update_api(:global, :host) do
-        param :remote_execution_interface, String, desc: N_("Identifier of the Host interface for Remote execution")
+        update_api(:global, :host) do
+          param :remote_execution_interface, String, desc: N_("Identifier of the Host interface for Remote execution")
+        end
       end
+
+      extend ActiveSupport::Concern
 
       def host_setup_extension
         remote_execution_interface

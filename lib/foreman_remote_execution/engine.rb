@@ -214,6 +214,7 @@ module ForemanRemoteExecution
 
       ::Api::V2::SubnetsController.include ::ForemanRemoteExecution::Concerns::Api::V2::SubnetsControllerExtensions
       ::Api::V2::RegistrationController.prepend ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions
+      ::Api::V2::RegistrationController.include ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions::ApipieExtensions
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
