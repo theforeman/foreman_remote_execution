@@ -151,6 +151,12 @@ module ForemanRemoteExecution
         extend_rabl_template 'api/v2/subnets/show', 'api/v2/subnets/remote_execution_proxies'
         parameter_filter ::Subnet, :remote_execution_proxy_ids
         describe_host { overview_buttons_provider :host_overview_buttons }
+
+        # Extend Registration module
+        extend_allowed_registration_vars :remote_execution_interface
+        extend_page 'registration/_form' do |cx|
+          cx.add_pagelet :global_registration, name: N_('Remote Execution'), partial: 'api/v2/registration/form', priority: 100, id: 'remote_execution_interface'
+        end
       end
     end
 
@@ -207,6 +213,7 @@ module ForemanRemoteExecution
       ForemanRemoteExecution.register_rex_feature
 
       ::Api::V2::SubnetsController.include ::ForemanRemoteExecution::Concerns::Api::V2::SubnetsControllerExtensions
+      ::Api::V2::RegistrationController.prepend ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
