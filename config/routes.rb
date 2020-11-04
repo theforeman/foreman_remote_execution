@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     get 'cockpit/host_ssh_params/:id', to: 'cockpit#host_ssh_params'
   end
   get 'cockpit/redirect', to: 'cockpit#redirect'
+  get 'ui_job_wizard/categories', to: 'ui_job_wizard#categories'
 
   namespace :api, :defaults => {:format => 'json'} do
     scope '(:apiv)', :module => :v2, :defaults => {:apiv => 'v2'}, :apiv => /v1|v2/, :constraints => ApiConstraints.new(:version => 2, :default => true) do
