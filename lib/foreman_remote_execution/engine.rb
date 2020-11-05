@@ -60,7 +60,7 @@ module ForemanRemoteExecution
         ApipieDSL.configuration.dsl_classes_matchers += [
           "#{ForemanRemoteExecution::Engine.root}/app/lib/foreman_remote_execution/renderer/**/*.rb",
         ]
-
+        register_global_js_file 'global'
         automatic_assets(false)
         precompile_assets(*assets_to_precompile)
 
