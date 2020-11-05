@@ -28,7 +28,8 @@
     "@theforeman/vendor-dev": "^4.14.0",
     "babel-eslint": "^10.0.0",
     "eslint": "^6.8.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "@patternfly/react-catalog-view-extension": "^4.8.126"
   },
   "peerDependencies": {
     "@theforeman/vendor": "^8.3.0"
