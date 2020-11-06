@@ -56,7 +56,7 @@ module ForemanRemoteExecution
 
     def set_execution_interface(identifier)
       if interfaces.find_by(identifier: identifier).nil?
-        msg = (N_("Host's interface '%s' not found.") % identifier)
+        msg = (N_("Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration.") % identifier)
         raise ActiveRecord::RecordNotFound, msg
       end
 
