@@ -54,6 +54,17 @@ module ForemanRemoteExecution
       get_interface_by_flag(:execution)
     end
 
+    def set_execution_interface(identifier)
+      if interfaces.find_by(identifier: identifier).nil?
+        msg = (N_("Host's interface '%s' not found.") % identifier)
+        raise ActiveRecord::RecordNotFound, msg
+      end
+
+      # Only one interface at time can be used for REX, all other must be set to false
+      interfaces.each { |int| int.execution = (int.identifier == identifier) }
+      interfaces.each(&:save!)
+    end
+
     def remote_execution_proxies(provider, authorized = true)
       proxies = {}
       proxies[:subnet] = []

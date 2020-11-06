@@ -19,12 +19,7 @@ module ForemanRemoteExecution
       def remote_execution_interface
         return unless params['remote_execution_interface'].present?
 
-        interfaces = @host.interfaces
-        interfaces.find_by!(identifier: params['remote_execution_interface'])
-
-        # Only one interface at time can be used for REX, all other must be set to false
-        interfaces.each { |int| int.execution = (int.identifier == params['remote_execution_interface']) }
-        interfaces.each(&:save!)
+        @host.set_execution_interface(params['remote_execution_interface'])
       end
     end
   end
