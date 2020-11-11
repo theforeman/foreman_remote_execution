@@ -62,7 +62,7 @@ exports[`TargetingHostsPage renders 1`] = `
         "perPage": 20,
       }
     }
-    viewType="list"
+    viewType="table"
   />
 </div>
 `;
