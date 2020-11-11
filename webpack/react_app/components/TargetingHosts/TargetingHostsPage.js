@@ -39,7 +39,7 @@ const TargetingHostsPage = ({
     <br />
     <TargetingHosts apiStatus={apiStatus} items={items} />
     <Pagination
-      viewType="list"
+      viewType="table"
       itemCount={totalHosts}
       pagination={pagination}
       onChange={args => handlePagination(args)}
