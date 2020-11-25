@@ -179,4 +179,40 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       end
     end
   end
+
+  describe '#execution_scope' do
+    let(:host) { FactoryBot.create(:host) }
+    let(:infra_host) { FactoryBot.create(:host, :with_infrastructure_facet) }
+
+    before do
+      host
+      infra_host
+    end
+
+    context 'without infrastructure host permission' do
+      it 'omits the infrastructure host' do
+        setup_user('view', 'hosts')
+
+        hosts = ::Host::Managed.execution_scope
+        hosts.must_include host
+        hosts.wont_include infra_host
+      end
+    end
+
+    context 'with infrastructure host permission' do
+      it 'finds the host as admin' do
+        assert User.current.admin?
+        hosts = ::Host::Managed.execution_scope
+        hosts.must_include host
+        hosts.must_include infra_host
+      end
+
+      it 'finds the host as user with needed permissions' do
+        setup_user('execute_jobs_on', 'infrastructure_hosts')
+        hosts = ::Host::Managed.execution_scope
+        hosts.must_include host
+        hosts.must_include infra_host
+      end
+    end
+  end
 end

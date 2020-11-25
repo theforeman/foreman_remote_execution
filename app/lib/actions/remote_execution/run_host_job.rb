@@ -196,6 +196,10 @@ module Actions
       def verify_permissions(host, template_invocation)
         raise _('User can not execute job on host %s') % host.name unless User.current.can?(:view_hosts, host)
         raise _('User can not execute this job template') unless User.current.can?(:view_job_templates, template_invocation.template)
+        infra_facet = host.infrastructure_facet
+        if (infra_facet&.foreman_instance || infra_facet&.smart_proxy_id) && !User.current.can?(:execute_jobs_on_infrastructure_hosts)
+          raise _('User can not execute job on infrastructure host %s') % host.name
+        end
 
         # we don't want to load all template_invocations to verify so we construct Authorizer object manually and set
         # the base collection to current template

@@ -36,6 +36,27 @@ module ForemanRemoteExecution
       end
     end
 
+    describe '#verify_permission' do
+      let(:job_invocation) { FactoryBot.create(:job_invocation, :with_task) }
+      let(:template_invocation) { job_invocation.template_invocations.first }
+
+      before { job_invocation }
+
+      it 'raises an exception when run against an infrastructure host' do
+        template_invocation.host = FactoryBot.create(:host, :with_infrastructure_facet)
+
+        setup_user('view', 'hosts')
+        setup_user('view', 'job_templates')
+        setup_user('create', 'template_invocations')
+
+        action = Actions::RemoteExecution::RunHostJob.allocate
+        exception = assert_raises do
+          action.send(:verify_permissions, template_invocation.host, template_invocation)
+        end
+        _(exception.message).must_include "infrastructure host #{template_invocation.host.name}"
+      end
+    end
+
     describe '#finalize' do
       let(:host) { FactoryBot.create(:host, :with_execution) }
 

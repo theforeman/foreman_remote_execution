@@ -528,7 +528,7 @@ class JobInvocationComposer
     if displayed_search_query.blank?
       Host.where('1 = 0')
     else
-      Host.authorized(Targeting::RESOLVE_PERMISSION, Host).search_for(displayed_search_query)
+      Host.execution_scope.authorized(Targeting::RESOLVE_PERMISSION, Host).search_for(displayed_search_query)
     end
   end
 
