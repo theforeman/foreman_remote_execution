@@ -366,8 +366,10 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         let(:host) { FactoryBot.create(:host) }
 
         it 'obeys authorization' do
+          fake_scope = mock
           composer.stubs(:displayed_search_query => "name = #{host.name}")
-          Host.expects(:authorized).with(:view_hosts, Host).returns(Host.where({}))
+          Host.expects(:execution_scope).returns(fake_scope)
+          fake_scope.expects(:authorized).with(:view_hosts, Host).returns(Host.where({}))
           composer.targeted_hosts_count
         end
 

@@ -20,6 +20,14 @@ module ForemanRemoteExecution
         scoped_search :relation => :execution_status_object, :on => :status, :rename => :execution_status,
           :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
 
+        scope :execution_scope, lambda {
+          if User.current&.can?('execute_jobs_on_infrastructure_hosts')
+            self
+          else
+            search_for('not (infrastructure_facet.foreman = true or set? infrastructure_facet.smart_proxy_id)')
+          end
+        }
+
         def search_by_job_invocation(key, operator, value)
           if key == 'job_invocation.result'
             operator = operator == '=' ? 'IN' : 'NOT IN'
