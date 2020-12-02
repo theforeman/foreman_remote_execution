@@ -1,28 +1,26 @@
-require:
-  - rubocop-minitest
-  - rubocop-performance
-  - rubocop-rails
+inherit_gem:
+  theforeman-rubocop:
+    - lenient.yml
+    - minitest.yml
 
 inherit_from: .rubocop_todo.yml
+
+inherit_mode:
+  merge:
+    - Exclude
 
 AllCops:
   TargetRubyVersion: 2.5
   TargetRailsVersion: 5.2
   Exclude:
     - 'node_modules/**/*'
+    - 'vendor/bundle/**/*'
 
 Bundler/OrderedGems:
   Enabled: false
 
-Layout/ArgumentAlignment:
-  EnforcedStyle: with_fixed_indentation
-  IndentationWidth: 2
-
 Layout/DotPosition:
   Enabled: false
-
-Layout/FirstArgumentIndentation:
-  EnforcedStyle: consistent
 
 Layout/HashAlignment:
   Enabled: false
@@ -33,6 +31,9 @@ Layout/LineLength:
 Layout/ParameterAlignment:
   Enabled: false
 
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
 Lint/BooleanSymbol:
   Enabled: false
 
@@ -41,12 +42,6 @@ Metrics:
 
 Performance/Casecmp:
   Enabled: false
-
-Performance/RedundantMatch:
-  Enabled: true
-
-Performance/RedundantMerge:
-  Enabled: true
 
 Performance/RegexpMatch:
   Enabled: false
@@ -66,12 +61,6 @@ Rails/BulkChangeTable:
 Rails/RefuteMethods:
   Enabled: false
 
-Style/Alias:
-  EnforcedStyle: prefer_alias_method
-
-Style/AndOr:
-  EnforcedStyle: conditionals
-
 # Don't prefer is_a? over kind_of?
 Style/ClassCheck:
   Enabled: false
@@ -82,13 +71,6 @@ Style/CollectionMethods:
 
 Style/ConditionalAssignment:
   Enabled: false
-
-# Don't enforce documentation
-Style/Documentation:
-  Enabled: false
-
-Style/EmptyMethod:
-  EnforcedStyle: expanded
 
 # Don't enforce frozen string literals
 Style/FrozenStringLiteralComment:
@@ -102,10 +84,6 @@ Style/IfUnlessModifier:
   Enabled: false
 
 Style/InverseMethods:
-  Enabled: false
-
-# disabled until we can configure "+" as concat sign
-Style/LineEndConcatenation:
   Enabled: false
 
 Style/MultipleComparison:
@@ -123,19 +101,5 @@ Style/ParenthesesAroundCondition:
 Style/PreferredHashMethods:
   Enabled: false
 
-# Both double and single quotes are OK
-Style/StringLiterals:
-  Enabled: false
-
-Style/TernaryParentheses:
-  EnforcedStyle: require_parentheses_when_complex
-
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: comma
-
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: comma
-
-#Allow both ['a', 'b'], %w[a b] and %w(a b) style arrays
-Style/WordArray:
+Style/RaiseArgs:
   Enabled: false
