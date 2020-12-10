@@ -4,7 +4,7 @@ class ForeignInputSet < ApplicationRecord
   class CircularDependencyError < Foreman::Exception
   end
 
-  attr_exportable :exclude, :include, :include_all, :template => ->(input_set) { input_set.template.name }
+  attr_exportable :exclude, :include, :include_all, :template => ->(input_set) { input_set.target_template.name }
 
   belongs_to :template
   belongs_to :target_template, :class_name => 'Template'
