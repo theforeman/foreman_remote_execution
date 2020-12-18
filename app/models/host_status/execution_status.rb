@@ -49,6 +49,13 @@ class HostStatus::ExecutionStatus < HostStatus::Status
     end
   end
 
+  def status_link
+    job_invocation = last_stopped_task.parent_task.job_invocations.first
+    return nil unless User.current.can?(:view_job_invocations, job_invocation)
+
+    Rails.application.routes.url_helpers.job_invocation_path(job_invocation)
+  end
+
   class ExecutionTaskStatusMapper
     attr_accessor :task
 
