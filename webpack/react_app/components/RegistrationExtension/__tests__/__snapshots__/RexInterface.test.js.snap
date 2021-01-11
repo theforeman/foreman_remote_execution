@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RexInterface renders 1`] = `
+<FormGroup
+  fieldId="reg_rex_interface"
+  label="Remote Execution Interface"
+  labelIcon={
+    <Popover
+      bodyContent={
+        <div>
+          Identifier of the Host interface for Remote execution
+        </div>
+      }
+    >
+      <button
+        className="pf-c-form__group-label-help"
+        onClick={[Function]}
+      >
+        <HelpIcon
+          color="currentColor"
+          noVerticalAlign={true}
+          size="sm"
+        />
+      </button>
+    </Popover>
+  }
+>
+  <TextInput
+    id="reg_rex_interface_input"
+    isDisabled={false}
+    onBlur={[Function]}
+    type="text"
+  />
+</FormGroup>
+`;
