@@ -163,8 +163,8 @@ module ForemanRemoteExecution
 
         # Extend Registration module
         extend_allowed_registration_vars :remote_execution_interface
-        extend_page 'registration/_form' do |cx|
-          cx.add_pagelet :global_registration, name: N_('Remote Execution'), partial: 'api/v2/registration/form', priority: 100, id: 'remote_execution_interface'
+        extend_page 'registration_commands/_form' do |cx|
+          cx.add_pagelet :global_registration, name: N_('Remote Execution'), partial: 'foreman/registration_commands/form', priority: 100, id: 'remote_execution_interface'
         end
         ForemanTasks.dynflow.eager_load_actions!
         extend_observable_events(::Dynflow::Action.descendants.select { |klass| klass <= ::Actions::ObservableAction }.map(&:namespaced_event_names))
@@ -226,6 +226,7 @@ module ForemanRemoteExecution
       ::Api::V2::SubnetsController.include ::ForemanRemoteExecution::Concerns::Api::V2::SubnetsControllerExtensions
       ::Api::V2::RegistrationController.prepend ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions
       ::Api::V2::RegistrationController.include ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions::ApipieExtensions
+      ::Api::V2::RegistrationCommandsController.include ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationCommandsControllerExtensions::ApipieExtensions
     end
 
     initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
