@@ -3,6 +3,7 @@ module Actions
     class RunHostJob < Actions::EntryAction
       include ::Actions::Helpers::WithContinuousOutput
       include ::Actions::Helpers::WithDelegatedAction
+      include ::Actions::ObservableAction
 
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
       middleware.use Actions::Middleware::HideSecrets
@@ -16,7 +17,7 @@ module Actions
       end
 
       def plan(job_invocation, host, template_invocation, proxy_selector = ::RemoteExecutionProxySelector.new, options = {})
-        action_subject(host, :job_category => job_invocation.job_category, :description => job_invocation.description)
+        action_subject(host, :job_category => job_invocation.job_category, :description => job_invocation.description, :job_invocation_id => job_invocation.id)
 
         template_invocation.host_id = host.id
         template_invocation.run_host_job_task_id = task.id
@@ -121,6 +122,26 @@ module Actions
         delegated_output[:exit_status]
       end
 
+      def host_id
+        input['host']['id']
+      end
+
+      def host_name
+        input['host']['name']
+      end
+
+      def job_invocation_id
+        input['job_invocation_id']
+      end
+
+      def job_invocation
+        @job_invocation ||= ::JobInvocation.authorized.find(job_invocation_id)
+      end
+
+      def host
+        @host ||= ::Host.authorized.find(host_id)
+      end
+
       private
 
       def update_host_status
@@ -172,6 +193,10 @@ module Actions
                   '%{fallback_proxy} in settings') % settings
         end
         proxy
+      end
+
+      class Jail < ::Actions::ObservableAction::Jail
+        allow :host_name, :host_id, :host, :job_invocation_id, :job_invocation
       end
     end
   end
