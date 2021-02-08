@@ -158,6 +158,8 @@ module ForemanRemoteExecution
         extend_page 'registration/_form' do |cx|
           cx.add_pagelet :global_registration, name: N_('Remote Execution'), partial: 'api/v2/registration/form', priority: 100, id: 'remote_execution_interface'
         end
+        ForemanTasks.dynflow.eager_load_actions!
+        extend_observable_events(::Dynflow::Action.descendants.select { |klass| klass <= ::Actions::ObservableAction }.map(&:namespaced_event_names))
       end
     end
 
