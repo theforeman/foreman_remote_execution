@@ -56,6 +56,7 @@ Rails.application.routes.draw do
           post 'rerun'
           get  'template_invocations', :to => 'template_invocations#template_invocations'
           get 'outputs'
+          post 'outputs'
         end
       end
 
