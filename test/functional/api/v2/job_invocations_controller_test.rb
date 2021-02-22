@@ -171,6 +171,16 @@ module Api
           assert_response :success
         end
 
+        test 'should provide outputs for selected hosts in the job' do
+          post :outputs, params: { :id => @invocation.id, :search_query => "id = #{@invocation.targeting.host_ids.first}" }, as: :json
+          result = ActiveSupport::JSON.decode(@response.body)
+          host_output = result['outputs'].first
+          assert_equal host_output['host_id'], @invocation.targeting.host_ids.first
+          assert_equal host_output['refresh'], true
+          assert_equal host_output['output'], []
+          assert_response :success
+        end
+
         test 'should provide outputs for hosts in the job matching a search query' do
           get :outputs, params: { :id => @invocation.id, :search_query => "name = definitely_not_in_the_job" }
           result = ActiveSupport::JSON.decode(@response.body)
