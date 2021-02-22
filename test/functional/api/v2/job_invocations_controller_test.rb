@@ -137,9 +137,19 @@ module Api
 
         test 'should provide empty output for host which does not have a task yet' do
           JobInvocation.any_instance.expects(:sub_task_for_host).returns(nil)
+          JobInvocation.any_instance.expects(:finished?).returns(false)
           get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
           result = ActiveSupport::JSON.decode(@response.body)
           assert_equal result['refresh'], true
+          assert_equal result['output'], []
+          assert_response :success
+        end
+
+        test 'should provide empty output marked as done for host which does not have a task when the job is finished' do
+          JobInvocation.any_instance.expects(:sub_task_for_host).returns(nil)
+          get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal result['refresh'], false
           assert_equal result['output'], []
           assert_response :success
         end
@@ -166,7 +176,7 @@ module Api
           result = ActiveSupport::JSON.decode(@response.body)
           host_output = result['outputs'].first
           assert_equal host_output['host_id'], @invocation.targeting.host_ids.first
-          assert_equal host_output['refresh'], true
+          assert_equal host_output['refresh'], false
           assert_equal host_output['output'], []
           assert_response :success
         end
@@ -176,7 +186,7 @@ module Api
           result = ActiveSupport::JSON.decode(@response.body)
           host_output = result['outputs'].first
           assert_equal host_output['host_id'], @invocation.targeting.host_ids.first
-          assert_equal host_output['refresh'], true
+          assert_equal host_output['refresh'], false
           assert_equal host_output['output'], []
           assert_response :success
         end
@@ -201,7 +211,7 @@ module Api
         let(:host) { @invocation.targeting.hosts.first }
 
         test 'should provide raw output for a host' do
-          JobInvocation.any_instance.expects(:task).returns(OpenStruct.new(:scheduled? => false))
+          JobInvocation.any_instance.expects(:task).twice.returns(OpenStruct.new(:scheduled? => false, :pending? => false))
           JobInvocation.any_instance.expects(:sub_task_for_host).returns(fake_task)
           get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
           result = ActiveSupport::JSON.decode(@response.body)
@@ -214,7 +224,7 @@ module Api
           start_time = Time.now
           JobInvocation.any_instance
                        .expects(:task).twice
-                       .returns(OpenStruct.new(:scheduled? => true, :start_at => start_time))
+                       .returns(OpenStruct.new(:scheduled? => true, :start_at => start_time, :pending? => true))
           JobInvocation.any_instance.expects(:sub_task_for_host).never
           get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
           result = ActiveSupport::JSON.decode(@response.body)
@@ -226,7 +236,7 @@ module Api
         end
 
         test 'should provide raw output for host without task' do
-          JobInvocation.any_instance.expects(:task).returns(OpenStruct.new(:scheduled? => false))
+          JobInvocation.any_instance.expects(:task).twice.returns(OpenStruct.new(:scheduled? => false, :pending? => true))
           JobInvocation.any_instance.expects(:sub_task_for_host)
           get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
           result = ActiveSupport::JSON.decode(@response.body)
