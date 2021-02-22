@@ -214,7 +214,7 @@ module Api
       end
 
       def host_output(job_invocation, host, default: nil, since: nil, raw: false)
-        refresh = true
+        refresh = !job_invocation.finished?
 
         if (task = job_invocation.sub_task_for_host(host))
           refresh = task.pending?
