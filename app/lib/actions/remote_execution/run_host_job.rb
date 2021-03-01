@@ -195,6 +195,18 @@ module Actions
         proxy
       end
 
+      extend ApipieDSL::Class
+      apipie :class, "An action representing execution of a job against a host" do
+        name 'Actions::RemoteExecution::RunHostJob'
+        refs 'Actions::RemoteExecution::RunHostJob'
+        sections only: %w[webhooks]
+        property :task, object_of: 'Task', desc: 'Returns the task to which this action belongs'
+        property :host_name, String, desc: "Returns the name of the host"
+        property :host_id, Integer, desc: "Returns the id of the host"
+        property :host, object_of: 'Host', desc: "Returns the host"
+        property :job_invocation_id, Integer, desc: "Returns the id of the job invocation"
+        property :job_invocation, object_of: 'JobInvocation', desc: "Returns the job invocation"
+      end
       class Jail < ::Actions::ObservableAction::Jail
         allow :host_name, :host_id, :host, :job_invocation_id, :job_invocation
       end
