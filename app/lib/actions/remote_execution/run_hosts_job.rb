@@ -31,7 +31,8 @@ module Actions
         set_up_concurrency_control job_invocation
         input.update(:job_category => job_invocation.job_category)
         plan_self(:job_invocation_id => job_invocation.id)
-        input[:proxy_batch_size] ||= Setting['foreman_tasks_proxy_batch_size']
+        provider = job_invocation.pattern_template_invocations.first&.template&.provider
+        input[:proxy_batch_size] ||= provider&.proxy_batch_size || Setting['foreman_tasks_proxy_batch_size']
         trigger_action = plan_action(Actions::TriggerProxyBatch, batch_size: proxy_batch_size, total_count: hosts.count)
         input[:trigger_run_step_id] = trigger_action.run_step_id
       end
