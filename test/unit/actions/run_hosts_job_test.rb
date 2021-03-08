@@ -104,6 +104,22 @@ module ForemanRemoteExecution
       planned # To make the expectations happy
     end
 
+    describe '#proxy_batch_size' do
+      it 'defaults to Setting[foreman_tasks_proxy_batch_size]' do
+        Setting.expects(:[]).with('foreman_tasks_proxy_batch_size').returns(14)
+        planned
+        _(planned.proxy_batch_size).must_equal 14
+      end
+
+      it 'gets the provider value' do
+        provider = mock('provider')
+        provider.expects(:proxy_batch_size).returns(15)
+        JobTemplate.any_instance.expects(:provider).returns(provider)
+
+        _(planned.proxy_batch_size).must_equal 15
+      end
+    end
+
     describe 'concurrency control' do
       let(:level) { 5 }
       let(:span) { 60 }

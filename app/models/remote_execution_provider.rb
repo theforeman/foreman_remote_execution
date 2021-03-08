@@ -122,6 +122,10 @@ class RemoteExecutionProvider
       'Proxy::RemoteExecution::Ssh::Actions::RunScript'
     end
 
+    def proxy_batch_size
+      Setting['foreman_tasks_proxy_batch_size']
+    end
+
     # Return a specific proxy selector to use for running a given template
     # Returns either nil to use the default selector or an instance of a (sub)class of ::ForemanTasks::ProxySelector
     def required_proxy_selector_for(template)
