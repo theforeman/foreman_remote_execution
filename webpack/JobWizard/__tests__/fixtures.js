@@ -1,4 +1,4 @@
-const jobTemplate = {
+export const jobTemplate = {
   id: 178,
   name: 'Run Command - Ansible Default',
   template:

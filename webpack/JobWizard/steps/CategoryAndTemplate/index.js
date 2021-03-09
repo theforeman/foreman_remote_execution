@@ -30,7 +30,8 @@ const ConnectedCategoryAndTemplate = ({
 
   const jobCategoriesStatus = useSelector(selectJobCategoriesStatus);
   useEffect(() => {
-    if (!jobCategoriesStatus) {
+    let mounted = true;
+    if (!jobCategoriesStatus && mounted) {
       // Don't reload categories if they are already loaded
       dispatch(
         get({
@@ -41,11 +42,15 @@ const ConnectedCategoryAndTemplate = ({
         })
       );
     }
+    return () => {
+      mounted = false;
+    };
   }, [jobCategoriesStatus, dispatch, setCategory]);
 
   const jobCategories = useSelector(selectJobCategories);
   useEffect(() => {
-    if (category) {
+    let mounted = true;
+    if (category && mounted) {
       const templatesUrlObject = new URI(templatesUrl);
       dispatch(
         get({
@@ -61,6 +66,9 @@ const ConnectedCategoryAndTemplate = ({
         })
       );
     }
+    return () => {
+      mounted = false;
+    };
   }, [category, dispatch, setJobTemplate]);
 
   const jobTemplates = useSelector(selectJobTemplates);

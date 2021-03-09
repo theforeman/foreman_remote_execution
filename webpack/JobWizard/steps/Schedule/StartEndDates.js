@@ -1,35 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, TextInput, Checkbox } from '@patternfly/react-core';
+import { FormGroup, Checkbox } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { DateTimePicker } from '../form/DateTimePicker';
 
-// TODO: change to datepicker
-export const StartEndDates = ({ starts, setStarts, ends, setEnds }) => {
-  const [isNeverEnds, setIsNeverEnds] = useState(false);
+export const StartEndDates = ({
+  starts,
+  setStarts,
+  ends,
+  setEnds,
+  isNeverEnds,
+  setIsNeverEnds,
+}) => {
   const toggleIsNeverEnds = (checked, event) => {
     const value = event?.target?.checked;
     setIsNeverEnds(value);
-    setEnds('');
+  };
+  const validateEndDate = () => {
+    if (isNeverEnds) return 'success';
+    if (!starts || !ends) return 'success';
+    if (new Date(starts).getTime() <= new Date(ends).getTime())
+      return 'success';
+    return 'error';
   };
   return (
     <>
-      <FormGroup label={__('Starts')} fieldId="start-date">
-        <TextInput
-          id="start-date"
-          value={starts}
-          type="text"
-          onChange={newValue => setStarts(newValue)}
-          placeholder="mm/dd/yy, hh:mm UTC"
-        />
+      <FormGroup
+        className="start-date"
+        label={__('Starts')}
+        fieldId="start-date"
+      >
+        <DateTimePicker dateTime={starts} setDateTime={setStarts} />
       </FormGroup>
-      <FormGroup label={__('Ends')} fieldId="end-date">
-        <TextInput
+      <FormGroup
+        className="end-date"
+        label={__('Ends')}
+        fieldId="end-date"
+        helperTextInvalid={__('End time needs to be after start time')}
+        validated={validateEndDate()}
+      >
+        <DateTimePicker
+          dateTime={ends}
+          setDateTime={setEnds}
           isDisabled={isNeverEnds}
-          id="end-date"
-          value={ends}
-          type="text"
-          onChange={newValue => setEnds(newValue)}
-          placeholder="mm/dd/yy, hh:mm UTC"
         />
         <Checkbox
           label={__('Never ends')}
@@ -48,4 +61,6 @@ StartEndDates.propTypes = {
   setStarts: PropTypes.func.isRequired,
   ends: PropTypes.string.isRequired,
   setEnds: PropTypes.func.isRequired,
+  isNeverEnds: PropTypes.bool.isRequired,
+  setIsNeverEnds: PropTypes.func.isRequired,
 };
