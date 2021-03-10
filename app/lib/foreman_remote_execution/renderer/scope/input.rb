@@ -6,6 +6,7 @@ module ForemanRemoteExecution
         extend ApipieDSL::Class
 
         attr_reader :template, :host, :invocation, :input_template_instance, :current_user
+        attr_accessor :error_message
         delegate :input, to: :input_template_instance
 
         apipie :class, 'Macros related to template rendering' do
