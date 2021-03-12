@@ -16,16 +16,34 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
     setup_user('create', 'hosts')
   end
 
+  class AnsibleInputs < RemoteExecutionProvider
+    class << self
+      def provider_input_namespace
+        [:ansible]
+      end
+
+      def provider_inputs
+        [
+          ForemanRemoteExecution::ProviderInput.new(name: 'tags', label: 'Tags', value: 'fooo', value_type: 'plain'),
+          ForemanRemoteExecution::ProviderInput.new(name: 'tags_flag', label: 'Tags Flag', value: '--tags', options: "--tags\n--skip-tags"),
+        ]
+      end
+    end
+  end
+  RemoteExecutionProvider.register(:AnsibleInputs, AnsibleInputs)
+
   let(:trying_job_template_1) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
   let(:trying_job_template_2) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_2', :name => 'trying2', :provider_type => 'Mcollective') }
   let(:trying_job_template_3) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying3', :provider_type => 'SSH') }
   let(:unauthorized_job_template_1) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'unauth1', :provider_type => 'SSH') }
   let(:unauthorized_job_template_2) { FactoryBot.create(:job_template, :job_category => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
 
+  let(:provider_inputs_job_template) { FactoryBot.create(:job_template, :job_category => 'trying_test_inputs', :name => 'trying provider inputs', :provider_type => 'AnsibleInputs') }
 
   let(:input1) { FactoryBot.create(:template_input, :template => trying_job_template_1, :input_type => 'user') }
   let(:input2) { FactoryBot.create(:template_input, :template => trying_job_template_3, :input_type => 'user') }
   let(:input3) { FactoryBot.create(:template_input, :template => trying_job_template_1, :input_type => 'user', :required => true) }
+  let(:input4) { FactoryBot.create(:template_input, :template => provider_inputs_job_template, :input_type => 'user') }
   let(:unauthorized_input1) { FactoryBot.create(:template_input, :template => unauthorized_job_template_1, :input_type => 'user') }
 
   let(:ansible_params) { { } }
@@ -605,7 +623,9 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
   end
 
   describe '#from_api_params' do
-    let(:composer) { JobInvocationComposer.from_api_params(params) }
+    let(:composer) do
+      JobInvocationComposer.from_api_params(params)
+    end
     let(:bookmark) { bookmarks(:one) }
 
     context 'with targeting from bookmark' do
@@ -656,6 +676,26 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       it 'finds the inputs by name' do
         assert composer.save!
         assert_equal 1, composer.pattern_template_invocations.first.input_values.collect.count
+      end
+    end
+
+    context 'with provider inputs' do
+      let(:params) do
+        { :job_category => provider_inputs_job_template.job_category,
+            :job_template_id => provider_inputs_job_template.id,
+            :targeting_type => 'static_query',
+          :search_query => 'some hosts',
+          :inputs => { input4.name => 'some_value' },
+          :ansible => { 'tags' => 'bar', 'tags_flag' => '--skip-tags' } }
+      end
+
+      it 'detects provider inputs' do
+        assert composer.save!
+        scope = composer.job_invocation.pattern_template_invocations.first.provider_input_values
+        tags = scope.find_by :name => 'tags'
+        flags = scope.find_by :name => 'tags_flag'
+        assert_equal 'bar', tags.value
+        assert_equal '--skip-tags', flags.value
       end
     end
 

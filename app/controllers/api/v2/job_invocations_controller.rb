@@ -195,7 +195,13 @@ module Api
         end
         job_invocation_params[:inputs] ||= {}
         job_invocation_params[:inputs].permit!
+        permit_provider_inputs job_invocation_params
         @job_invocation_params = job_invocation_params
+      end
+
+      def permit_provider_inputs(invocation_params)
+        providers = RemoteExecutionProvider.providers.values.reject { |provider| !provider.respond_to?(:provider_input_namespace) || provider.provider_input_namespace.empty? }
+        providers.map { |provider| invocation_params.dig(*provider.provider_input_namespace)&.permit! }
       end
 
       def composer_for_feature

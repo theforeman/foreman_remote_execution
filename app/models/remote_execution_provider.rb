@@ -35,6 +35,10 @@ class RemoteExecutionProvider
       self.name
     end
 
+    def provider_input_namespace
+      []
+    end
+
     def supports_effective_user?
       false
     end
@@ -93,6 +97,10 @@ class RemoteExecutionProvider
     end
 
     def ssh_key_passphrase(_host)
+    end
+
+    def provider_inputs
+      []
     end
 
     def proxy_action_class
