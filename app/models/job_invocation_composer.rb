@@ -349,6 +349,7 @@ class JobInvocationComposer
     job_invocation.password = params[:password]
     job_invocation.key_passphrase = params[:key_passphrase]
     job_invocation.effective_user_password = params[:effective_user_password]
+    job_invocation.skip_determination_of_proxy = params[:skip_determination_of_proxy]
 
     if @reruns && job_invocation.targeting.static?
       job_invocation.targeting.host_ids = JobInvocation.find(@reruns).targeting.host_ids

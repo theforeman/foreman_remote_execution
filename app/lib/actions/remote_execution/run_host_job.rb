@@ -30,10 +30,14 @@ module Actions
         raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
         provider = template_invocation.template.provider
-        proxy_selector = provider.required_proxy_selector_for(template_invocation.template) || proxy_selector
 
-        provider_type = template_invocation.template.provider_type.to_s
-        proxy = determine_proxy!(proxy_selector, provider_type, host)
+        if job_invoation.skip_determination_of_proxy
+          proxy = host
+        else
+          proxy_selector = provider.required_proxy_selector_for(template_invocation.template) || proxy_selector
+          provider_type = template_invocation.template.provider_type.to_s
+          proxy = determine_proxy!(proxy_selector, provider_type, host)
+        end
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render
