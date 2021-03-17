@@ -241,7 +241,7 @@ class JobInvocation < ApplicationRecord
   end
 
   def finished?
-    !task.pending?
+    !(task.nil? || task.pending?)
   end
 
   def missing_hosts_count

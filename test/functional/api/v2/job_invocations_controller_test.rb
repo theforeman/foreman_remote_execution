@@ -211,7 +211,7 @@ module Api
         let(:host) { @invocation.targeting.hosts.first }
 
         test 'should provide raw output for a host' do
-          JobInvocation.any_instance.expects(:task).twice.returns(OpenStruct.new(:scheduled? => false, :pending? => false))
+          JobInvocation.any_instance.expects(:task).times(3).returns(OpenStruct.new(:scheduled? => false, :pending? => false))
           JobInvocation.any_instance.expects(:sub_task_for_host).returns(fake_task)
           get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
           result = ActiveSupport::JSON.decode(@response.body)
@@ -236,7 +236,7 @@ module Api
         end
 
         test 'should provide raw output for host without task' do
-          JobInvocation.any_instance.expects(:task).twice.returns(OpenStruct.new(:scheduled? => false, :pending? => true))
+          JobInvocation.any_instance.expects(:task).times(3).returns(OpenStruct.new(:scheduled? => false, :pending? => true))
           JobInvocation.any_instance.expects(:sub_task_for_host)
           get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id }
           result = ActiveSupport::JSON.decode(@response.body)
