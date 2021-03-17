@@ -7,11 +7,10 @@ module Api
       describe 'host registration' do
         let(:organization) { FactoryBot.create(:organization) }
         let(:tax_location) { FactoryBot.create(:location) }
-        let(:template_kind) { template_kinds(:registration) }
-        let(:registration_template) do
+        let(:template) do
           FactoryBot.create(
             :provisioning_template,
-            template_kind: template_kind,
+            template_kind: template_kinds(:host_init_config),
             template: 'template content <%= @host.name %>',
             locations: [tax_location],
             organizations: [organization]
@@ -23,7 +22,7 @@ module Api
             :with_associations,
             family: 'Redhat',
             provisioning_templates: [
-              registration_template,
+              template,
             ]
           )
         end
@@ -36,17 +35,9 @@ module Api
                     operatingsystem_id: os.id } }
         end
 
-        setup do
-          FactoryBot.create(
-            :os_default_template,
-            template_kind: template_kind,
-            provisioning_template: registration_template,
-            operatingsystem: os
-          )
-        end
-
         describe 'remote_execution_interface' do
           setup do
+            Setting[:default_host_init_config_template] = template.name
             @host = Host.create(host_params[:host])
             @interface0 = FactoryBot.create(:nic_managed, host: @host, identifier: 'dummy0', execution: false)
           end
