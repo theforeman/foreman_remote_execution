@@ -199,7 +199,7 @@ module Actions
       apipie :class, "An action representing execution of a job against a host" do
         name 'Actions::RemoteExecution::RunHostJob'
         refs 'Actions::RemoteExecution::RunHostJob'
-        sections only: %w[webhooks]
+        sections only: %w[all webhooks]
         property :task, object_of: 'Task', desc: 'Returns the task to which this action belongs'
         property :host_name, String, desc: "Returns the name of the host"
         property :host_id, Integer, desc: "Returns the id of the host"
