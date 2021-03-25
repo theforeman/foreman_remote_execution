@@ -73,9 +73,12 @@ module ForemanRemoteExecutionCore
     require 'foreman_remote_execution_core/dispatcher'
     require 'foreman_remote_execution_core/actions'
 
+    # rubocop:disable Lint/SuppressedException
     begin
       require 'smart_proxy_dynflow_core/task_launcher_registry'
-    rescue; end
+    rescue LoadError
+    end
+    # rubocop:enable Lint/SuppressedException
 
     if defined?(::SmartProxyDynflowCore)
       SmartProxyDynflowCore::TaskLauncherRegistry.register('ssh', ForemanTasksCore::TaskLauncher::Batch)
