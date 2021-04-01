@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectField rendering renders with props 1`] = `
+<FormGroup
+  fieldId="field-id"
+  label="grouped select"
+>
+  <mockConstructor
+    className="without_select2"
+    isOpen={false}
+    maxHeight="45vh"
+    onSelect={[Function]}
+    onToggle={[Function]}
+    selections="Commands"
+  >
+    <mockConstructor
+      key="0"
+      value="Commands"
+    />
+  </mockConstructor>
+</FormGroup>
+`;

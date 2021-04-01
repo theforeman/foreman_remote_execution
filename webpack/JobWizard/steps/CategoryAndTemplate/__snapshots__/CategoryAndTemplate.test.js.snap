@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryAndTemplate rendering renders with props 1`] = `
+<Fragment>
+  <Title
+    headingLevel="h2"
+  >
+    Category And Template
+  </Title>
+  <Text
+    component="p"
+  >
+    All fields are required.
+  </Text>
+  <Form>
+    <SelectField
+      fieldId="job_category"
+      label="Job category"
+      options={
+        Array [
+          "Commands",
+          "Ansible Playbook",
+          "Ansible Galaxy",
+          "Ansible Roles Installation",
+        ]
+      }
+      setValue={[Function]}
+      value="I am a category"
+    />
+    <GroupedSelectField
+      fieldId="job_template"
+      groups={
+        Array [
+          Object {
+            "groupLabel": "SSH",
+            "options": Array [
+              Object {
+                "label": "ab Run Command - SSH Default clone",
+                "value": 190,
+              },
+            ],
+          },
+          Object {
+            "groupLabel": "Ansible",
+            "options": Array [
+              Object {
+                "label": "Ansible Roles - Ansible Default",
+                "value": 168,
+              },
+              Object {
+                "label": "Ansible Roles - Install from git",
+                "value": 170,
+              },
+            ],
+          },
+        ]
+      }
+      label="Job template"
+      selected="ab Run Command - SSH Default clone"
+      setSelected={[MockFunction]}
+    />
+  </Form>
+</Fragment>
+`;
