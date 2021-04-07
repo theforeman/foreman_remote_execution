@@ -9,6 +9,7 @@ exports[`SelectField rendering renders with props 1`] = `
     className="without_select2"
     isOpen={false}
     maxHeight="45vh"
+    menuAppendTo={[Function]}
     onSelect={[Function]}
     onToggle={[Function]}
     selections="Commands"

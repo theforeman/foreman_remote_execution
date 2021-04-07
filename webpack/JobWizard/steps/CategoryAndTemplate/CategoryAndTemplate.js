@@ -36,8 +36,8 @@ export const CategoryAndTemplate = ({
     setCategory(newCategory);
     setJobTemplate(null);
   };
-  const { categoryError, allTemplatesError } = errors;
-  const isError = !!(categoryError || allTemplatesError);
+  const { categoryError, allTemplatesError, templateError } = errors;
+  const isError = !!(categoryError || allTemplatesError || templateError);
   return (
     <>
       <Title headingLevel="h2">{__('Category And Template')}</Title>
@@ -58,7 +58,7 @@ export const CategoryAndTemplate = ({
           groups={Object.values(templatesGroups)}
           setSelected={setJobTemplate}
           selected={selectedTemplate}
-          isDisabled={isError}
+          isDisabled={!!(categoryError || allTemplatesError)}
           placeholderText={allTemplatesError ? __('Error') : ''}
         />
         {isError && (
@@ -71,6 +71,11 @@ export const CategoryAndTemplate = ({
             {allTemplatesError && (
               <span>
                 {__('Templates list failed with:')} {allTemplatesError}
+              </span>
+            )}
+            {templateError && (
+              <span>
+                {__('Template failed with:')} {templateError}
               </span>
             )}
           </Alert>
@@ -90,6 +95,7 @@ CategoryAndTemplate.propTypes = {
   errors: PropTypes.shape({
     categoryError: PropTypes.string,
     allTemplatesError: PropTypes.string,
+    templateError: PropTypes.string,
   }),
 };
 CategoryAndTemplate.defaultProps = {

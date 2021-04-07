@@ -1,6 +1,5 @@
 .job-wizard {
   .pf-c-wizard__main {
-    overflow: visible;
     z-index: calc(
       var(--pf-c-wizard__footer--ZIndex) + 1
     ); // So the select box can be shown above the wizard footer

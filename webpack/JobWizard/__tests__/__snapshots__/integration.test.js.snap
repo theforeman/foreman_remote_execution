@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Job wizard fill should select template: initial 1`] = `
+Array [
+  Object {
+    "key": "JOB_CATEGORIES",
+    "type": "get",
+    "url": "/ui_job_wizard/categories",
+  },
+  Object {
+    "key": "JOB_TEMPLATES",
+    "type": "get",
+    "url": URI {
+      "_deferred_build": true,
+      "_parts": Object {
+        "duplicateQueryParameters": false,
+        "escapeQuerySpace": true,
+        "fragment": null,
+        "hostname": null,
+        "password": null,
+        "path": "foreman/api/v2/job_templates",
+        "port": null,
+        "preventInvalidHostname": false,
+        "protocol": null,
+        "query": "search=job_category%3D%22Ansible+Commands%22&per_page=all",
+        "urn": null,
+        "username": null,
+      },
+      "_string": "",
+    },
+  },
+]
+`;
+
+exports[`Job wizard fill should select template: select template 1`] = `
+Array [
+  Object {
+    "key": "JOB_TEMPLATE",
+    "type": "get",
+    "url": "/ui_job_wizard/template/178",
+  },
+]
+`;

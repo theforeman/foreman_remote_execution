@@ -8,6 +8,14 @@ class UiJobWizardController < ::Api::V2::BaseController
     render :json => {:job_categories =>job_categories}
   end
 
+  def template
+    job_template = JobTemplate.find_by(id: params[:id])
+    render :json => {
+      :job_template => job_template,
+      :effective_user => job_template.effective_user,
+    }
+  end
+
   def resource_class
     JobTemplate
   end

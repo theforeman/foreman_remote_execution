@@ -1,54 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`JobWizard rendering renders  1`] = `
-<mockConstructor
-  className="job-wizard"
-  height="70vh"
-  navAriaLabel="Run Job steps"
-  onClose={[Function]}
-  steps={
-    Array [
-      Object {
-        "component": <ConnectedCategoryAndTemplate
-          category=""
-          jobTemplate={null}
-          setCategory={[Function]}
-          setJobTemplate={[Function]}
-        />,
-        "name": "Category and template",
-      },
-      Object {
-        "canJumpTo": false,
-        "component": <p>
-          TargetHosts 
-        </p>,
-        "name": "Target hosts",
-      },
-      Object {
-        "canJumpTo": false,
-        "component": <p>
-           AdvancedFields 
-        </p>,
-        "name": "Advanced fields",
-      },
-      Object {
-        "canJumpTo": false,
-        "component": <p>
-          Schedule
-        </p>,
-        "name": "Schedule",
-      },
-      Object {
-        "canJumpTo": false,
-        "component": <p>
-          ReviewDetails
-        </p>,
-        "name": "Review details",
-        "nextButtonText": "Run",
-      },
-    ]
+exports[` 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
   }
-/>
+>
+  <JobWizard>
+    <mockConstructor
+      className="job-wizard"
+      height="70vh"
+      navAriaLabel="Run Job steps"
+      onClose={[Function]}
+      steps={
+        Array [
+          Object {
+            "component": <ConnectedCategoryAndTemplate
+              category=""
+              jobTemplate={null}
+              setCategory={[Function]}
+              setJobTemplate={[Function]}
+            />,
+            "name": "Category and template",
+          },
+          Object {
+            "canJumpTo": false,
+            "component": <p>
+              TargetHosts 
+            </p>,
+            "name": "Target hosts",
+          },
+          Object {
+            "canJumpTo": false,
+            "component": <AdvancedFields
+              advancedValue={Object {}}
+              jobTemplateID={null}
+              setAdvancedValue={[Function]}
+            />,
+            "name": "Advanced fields",
+          },
+          Object {
+            "canJumpTo": false,
+            "component": <p>
+              Schedule
+            </p>,
+            "name": "Schedule",
+          },
+          Object {
+            "canJumpTo": false,
+            "component": <p>
+              ReviewDetails
+            </p>,
+            "name": "Review details",
+            "nextButtonText": "Run",
+          },
+        ]
+      }
+    >
+      <div>
+        Run Job steps
+      </div>
+    </mockConstructor>
+  </JobWizard>
+</Provider>
 `;
 
 exports[`JobWizardPage rendering renders  1`] = `

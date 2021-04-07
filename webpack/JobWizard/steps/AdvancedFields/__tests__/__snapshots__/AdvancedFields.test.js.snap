@@ -1,0 +1,239 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdvancedFields rendring 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <AdvancedFields
+    advancedValue={Object {}}
+    setAdvancedValue={[MockFunction]}
+  >
+    <Form>
+      <form
+        className="pf-c-form"
+        noValidate={true}
+      >
+        <EffectiveUserField
+          setValue={[Function]}
+          value=""
+        >
+          <mockConstructor
+            fieldId="effective-user"
+            label="Effective user"
+            labelIcon={
+              <Popover
+                aria-label="help-text"
+                bodyContent="A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
+                id="effective-user-help"
+              >
+                <button
+                  aria-label="open-help-tooltip-button"
+                  className="pf-c-form__group-label-help"
+                  onClick={[Function]}
+                >
+                  <HelpIcon
+                    color="currentColor"
+                    noVerticalAlign={true}
+                    size="sm"
+                  />
+                </button>
+              </Popover>
+            }
+          >
+            <div />
+          </mockConstructor>
+        </EffectiveUserField>
+        <TimeoutToKillField
+          setValue={[Function]}
+          value=""
+        >
+          <mockConstructor
+            fieldId="timeout-to-kill"
+            label="Timeout to kill"
+            labelIcon={
+              <Popover
+                aria-label="help-text"
+                bodyContent="Time in seconds from the start on the remote host after which the job should be killed."
+                id="timeout-to-kill-help"
+              >
+                <button
+                  aria-label="open-help-tooltip-button"
+                  className="pf-c-form__group-label-help"
+                  onClick={[Function]}
+                >
+                  <HelpIcon
+                    color="currentColor"
+                    noVerticalAlign={true}
+                    size="sm"
+                  />
+                </button>
+              </Popover>
+            }
+          >
+            <div />
+          </mockConstructor>
+        </TimeoutToKillField>
+        <PasswordField
+          setValue={[Function]}
+          value=""
+        >
+          <mockConstructor
+            fieldId="password"
+            label="Password"
+            labelIcon={
+              <Popover
+                aria-label="help-text"
+                bodyContent="Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+                id="password-help"
+              >
+                <button
+                  aria-label="open-help-tooltip-button"
+                  className="pf-c-form__group-label-help"
+                  onClick={[Function]}
+                >
+                  <HelpIcon
+                    color="currentColor"
+                    noVerticalAlign={true}
+                    size="sm"
+                  />
+                </button>
+              </Popover>
+            }
+          >
+            <div />
+          </mockConstructor>
+        </PasswordField>
+        <KeyPassphraseField
+          setValue={[Function]}
+          value=""
+        >
+          <mockConstructor
+            fieldId="key-passphrase"
+            label="Private key passphrase"
+            labelIcon={
+              <Popover
+                aria-label="help-text"
+                bodyContent="Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+                id="key-passphrase-help"
+              >
+                <button
+                  aria-label="open-help-tooltip-button"
+                  className="pf-c-form__group-label-help"
+                  onClick={[Function]}
+                >
+                  <HelpIcon
+                    color="currentColor"
+                    noVerticalAlign={true}
+                    size="sm"
+                  />
+                </button>
+              </Popover>
+            }
+          >
+            <div />
+          </mockConstructor>
+        </KeyPassphraseField>
+        <EffectiveUserPasswordField
+          setValue={[Function]}
+          value=""
+        >
+          <mockConstructor
+            fieldId="effective-user-password"
+            label="Effective user password"
+            labelIcon={
+              <Popover
+                aria-label="help-text"
+                bodyContent="Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+                id="effective-user-password-help"
+              >
+                <button
+                  aria-label="open-help-tooltip-button"
+                  className="pf-c-form__group-label-help"
+                  onClick={[Function]}
+                >
+                  <HelpIcon
+                    color="currentColor"
+                    noVerticalAlign={true}
+                    size="sm"
+                  />
+                </button>
+              </Popover>
+            }
+          >
+            <div />
+          </mockConstructor>
+        </EffectiveUserPasswordField>
+        <ConcurrencyLevelField
+          setValue={[Function]}
+          value=""
+        >
+          <mockConstructor
+            fieldId="concurrency-level"
+            label="Concurrency level"
+            labelIcon={
+              <Popover
+                aria-label="help-text"
+                bodyContent="Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+                id="concurrency-level-help"
+              >
+                <button
+                  aria-label="open-help-tooltip-button"
+                  className="pf-c-form__group-label-help"
+                  onClick={[Function]}
+                >
+                  <HelpIcon
+                    color="currentColor"
+                    noVerticalAlign={true}
+                    size="sm"
+                  />
+                </button>
+              </Popover>
+            }
+          >
+            <div />
+          </mockConstructor>
+        </ConcurrencyLevelField>
+        <TimeSpanLevelField
+          setValue={[Function]}
+          value=""
+        >
+          <mockConstructor
+            fieldId="time-span"
+            label="Time span"
+            labelIcon={
+              <Popover
+                aria-label="help-text"
+                bodyContent="Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+                id="time-span-help"
+              >
+                <button
+                  aria-label="open-help-tooltip-button"
+                  className="pf-c-form__group-label-help"
+                  onClick={[Function]}
+                >
+                  <HelpIcon
+                    color="currentColor"
+                    noVerticalAlign={true}
+                    size="sm"
+                  />
+                </button>
+              </Popover>
+            }
+          >
+            <div />
+          </mockConstructor>
+        </TimeSpanLevelField>
+      </form>
+    </Form>
+  </AdvancedFields>
+</Provider>
+`;

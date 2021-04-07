@@ -67,7 +67,7 @@ module ForemanRemoteExecution
                                             :'api/v2/job_templates' => [:index, :show, :revision, :export],
                                             :'api/v2/template_inputs' => [:index, :show],
                                             :'api/v2/foreign_input_sets' => [:index, :show],
-                                            :ui_job_wizard => [:categories]}, :resource_type => 'JobTemplate'
+                                            :ui_job_wizard => [:categories, :template]}, :resource_type => 'JobTemplate'
           permission :create_job_templates, { :job_templates => [:new, :create, :clone_template, :import],
                                               :'api/v2/job_templates' => [:create, :clone, :import] }, :resource_type => 'JobTemplate'
           permission :edit_job_templates, { :job_templates => [:edit, :update],
@@ -140,7 +140,7 @@ module ForemanRemoteExecution
           url_hash: { controller: 'job_wizard', action: :index },
           caption: N_('Job wizard'),
           parent: :lab_features_menu,
-          url: 'experimental/job_wizard',
+          url: '/experimental/job_wizard',
           after: :host_wizard
 
         register_custom_status HostStatus::ExecutionStatus
