@@ -34,7 +34,7 @@ module ForemanRemoteExecutionCore
 
     current = if defined?(::Proxy::SETTINGS)
                 ::Proxy::SETTINGS.log_level.to_s.downcase
-              elsif defined?(SmartProxyDynflowCore)
+              elsif defined?(SmartProxyDynflowCore::SETTINGS)
                 SmartProxyDynflowCore::SETTINGS.log_level.to_s.downcase
               else
                 Rails.configuration.log_level.to_s
