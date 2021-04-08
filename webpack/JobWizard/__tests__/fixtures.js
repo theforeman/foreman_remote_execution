@@ -23,4 +23,17 @@ export const jobTemplateResponse = {
     overridable: true,
     current_user: false,
   },
+  template_inputs_with_foreign: [
+    {
+      name: 'plain adv hidden',
+      required: true,
+      input_type: 'user',
+      description: 'some Description',
+      advanced: true,
+      value_type: 'plain',
+      resource_type: 'ansible_roles',
+      default: 'Default val',
+      hidden_value: true,
+    },
+  ],
 };

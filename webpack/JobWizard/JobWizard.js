@@ -18,9 +18,20 @@ export const JobWizard = () => {
 
   const setDefaults = useCallback(response => {
     const responseJob = response.data;
+    const templateValues = {};
+    const inputs = responseJob.template_inputs_with_foreign;
+    if (inputs) {
+      inputs
+        .filter(input => input.advanced)
+        .forEach(input => {
+          templateValues[input.name] = input?.default || '';
+        });
+    }
     setAdvancedValues({
+      ...advancedValues,
       effectiveUserValue: responseJob.effective_user?.value || '',
-      timeoutToKill: responseJob.job_template.execution_timeout_interval || '',
+      timeoutToKill: responseJob.job_template?.executionTimeoutInterval || '',
+      templateValues,
     });
   }, []);
   useEffect(() => {

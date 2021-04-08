@@ -27,11 +27,36 @@ exports[`AdvancedFields rendring 1`] = `
         Advanced Fields
       </h2>
     </Title>
-    <Form>
+    <Form
+      id="advanced-fields-job-template"
+    >
       <form
         className="pf-c-form"
+        id="advanced-fields-job-template"
         noValidate={true}
       >
+        <TemplateInputsFields
+          inputs={
+            Array [
+              Object {
+                "advanced": true,
+                "default": "default value advanced",
+                "name": "advanced input1",
+              },
+            ]
+          }
+          setValue={[Function]}
+          value={Object {}}
+        >
+          <mockConstructor
+            fieldId="advanced input1"
+            key="advanced input1"
+            label="advanced input1"
+            labelIcon={null}
+          >
+            <div />
+          </mockConstructor>
+        </TemplateInputsFields>
         <EffectiveUserField
           setValue={[Function]}
           value=""
