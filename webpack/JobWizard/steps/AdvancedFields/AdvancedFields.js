@@ -17,6 +17,7 @@ import {
   TimeSpanLevelField,
   TemplateInputsFields,
 } from './Fields';
+import { DescriptionField } from './DescriptionField';
 
 export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
   const effectiveUser = useSelector(selectEffectiveUser);
@@ -42,6 +43,13 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
             }
           />
         )}
+        <DescriptionField
+          inputs={templateInputs.filter(input => !input.advanced)}
+          value={advancedValues.description}
+          setValue={newValue =>
+            setAdvancedValues({ ...advancedValues, description: newValue })
+          }
+        />
         <TimeoutToKillField
           value={advancedValues.timeoutToKill}
           setValue={newValue =>
