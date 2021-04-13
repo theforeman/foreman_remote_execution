@@ -200,6 +200,40 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.interfaces.each(&:save)
         host.reload
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip
+
+        # there is an execution interface with both IPv6 and IPv4: IPv4 is being preferred over IPv6 by default
+        execution_interface = FactoryBot.build(:nic_managed,
+          flags.merge(:execution => true, :ip => '10.0.0.4', :ip6 => 'fd00::4'))
+        host.interfaces = [execution_interface]
+        host.interfaces.each(&:save)
+        host.reload
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip
+      end
+
+      it 'gets ipv6 from flagged interfaces with IPv6 preference' do
+        host.host_params['remote_execution_connect_by_ip_prefer_ipv6'] = true
+        host.host_params['remote_execution_connect_by_ip'] = true
+
+        # there is an execution interface with both IPv6 and IPv4: IPv6 is being preferred over IPv4 by host parameter configuration
+        execution_interface = FactoryBot.build(:nic_managed,
+          flags.merge(:execution => true, :ip => '10.0.0.4', :ip6 => 'fd00::4'))
+        host.interfaces = [execution_interface]
+        host.interfaces.each(&:save)
+        host.reload
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip6
+      end
+
+      it 'gets ipv6 from flagged interfaces with IPv4 preference but without IPv4 address' do
+        host.host_params['remote_execution_connect_by_ip_prefer_ipv6'] = false
+        host.host_params['remote_execution_connect_by_ip'] = true
+
+        # there is an execution interface with both IPv6 and IPv4: IPv6 is being preferred over IPv4 by host parameter configuration
+        execution_interface = FactoryBot.build(:nic_managed,
+          flags.merge(:execution => true, :ip => nil, :ip6 => 'fd00::4'))
+        host.interfaces = [execution_interface]
+        host.interfaces.each(&:save)
+        host.reload
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip6
       end
     end
   end
