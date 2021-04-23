@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormGroup, TextInput, TextArea } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import SearchBar from 'foremanReact/components/SearchBar';
 import { getControllerSearchProps } from 'foremanReact/constants';
+import { getResults } from 'foremanReact/components/AutoComplete/AutoCompleteActions';
+import { TRIGGERS } from 'foremanReact/components/AutoComplete/AutoCompleteConstants';
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
 
@@ -25,6 +27,18 @@ const TemplateSearchField = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
   const id = name.replace(/ /g, '-');
+  const dispatch = useDispatch();
+  const setSearch = newSearchQuery => {
+    dispatch(
+      getResults({
+        url,
+        searchQuery: newSearchQuery,
+        controller,
+        trigger: TRIGGERS.INPUT_CHANGE,
+        id: name,
+      })
+    );
+  };
   const props = getControllerSearchProps(controller.replace('/', '_'), name);
   return (
     <FormGroup
@@ -46,6 +60,7 @@ const TemplateSearchField = ({
             },
           }}
           onSearch={() => null}
+          onBookmarkClick={search => setSearch(search)}
         />
       </div>
     </FormGroup>

@@ -26,8 +26,26 @@
       .search-bar {
         display: block;
       }
+      .input-group {
+        display: table;
+      }
       .input-group-btn {
-        display: none;
+        .btn-group{
+          z-index: unset; // so the bookmarks drop down will be above other search boxes
+        }
+        .autocomplete-search-btn {
+          display: none;
+        }
+        .dropdown-toggle {
+          font-size: 16px;
+          background-color: white;
+          background-image: none;
+          padding-bottom: 4px;
+          padding-top: 4px;
+        }
+        .scrollable-dropdown {
+          max-width: 250px;
+        }
       }
       li {
         font-size: 16px;
