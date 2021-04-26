@@ -26,6 +26,11 @@ msgstr "%s 前"
 msgid "%{description} on %{host}"
 msgstr "%{host} 中的 %{description} "
 
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr "用逗号分开的不包含于外部模板的输入列表名称。"
 
@@ -52,6 +57,12 @@ msgstr "操作"
 
 msgid "Add Foreign Input Set"
 msgstr "添加外部输入集"
+
+msgid "Advanced fields"
+msgstr ""
+
+msgid "All fields are required."
+msgstr ""
 
 msgid "Alphabetical"
 msgstr ""
@@ -95,6 +106,12 @@ msgstr "无法指定 bookmark_id 和 search_query"
 msgid "Cannot specify both recurrence and scheduling"
 msgstr "无法指定 recurrence 和 scheduling"
 
+msgid "Category And Template"
+msgstr ""
+
+msgid "Category and template"
+msgstr ""
+
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr ""
 
@@ -124,6 +141,9 @@ msgstr "按 IP 连接"
 
 msgid "Control concurrency level and distribution over time"
 msgstr "控制并行等级及分配时间"
+
+msgid "Could not display data for job invocation."
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "无法找到适合执行的接口"
@@ -227,6 +247,12 @@ msgstr "有效用户方法 \"%{current_value}\" 不是 %{valid_methods} 之一"
 msgid "Effective user options"
 msgstr "有效用户选项"
 
+msgid "Effective user password"
+msgstr ""
+
+msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
 msgid "Enable Global Proxy"
 msgstr "启用全局代理服务器"
 
@@ -263,17 +289,11 @@ msgstr "已失败"
 msgid "Failed rendering template: %s"
 msgstr "修改模板失败：%s"
 
-msgid "Fallback Without Proxy"
-msgstr "在不使用代理服务器的情况下退回"
-
 msgid "Fallback to Any Proxy"
 msgstr "退回至任何代理服务器"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "模板 %{template_name} 的功能输入 %{input_name} "
-
-msgid "Filter"
-msgstr "过滤"
 
 msgid "Foreign input set"
 msgstr "外部输入集"
@@ -286,6 +306,9 @@ msgstr ""
 
 msgid "Get output for a host"
 msgstr "获取主机输出结果"
+
+msgid "Get outputs of hosts in a job"
+msgstr ""
 
 msgid "Get raw output for a host"
 msgstr ""
@@ -305,8 +328,14 @@ msgstr ""
 msgid "Host with id '%{id}' was not found"
 msgstr "未找到 id 为 '%{id}' 的主机"
 
+msgid "Hosts gone missing"
+msgstr ""
+
 msgid "How often the job should occur, in the cron format"
 msgstr "该任务的重复频率是什么，请使用 cron 形式。"
+
+msgid "Identifier of the Host interface for Remote execution"
+msgstr ""
 
 msgid "Import"
 msgstr "导入"
@@ -334,6 +363,12 @@ msgstr "输入集描述"
 
 msgid "Inputs to use"
 msgstr "要使用的输入"
+
+msgid "Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration."
+msgstr ""
+
+msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr ""
 
 msgid "Invocation type, one of %s"
 msgstr "调用类型，%s 之一"
@@ -386,6 +421,9 @@ msgstr "成功导入任务模版。"
 msgid "Job templates"
 msgstr "任务模板"
 
+msgid "Job wizard"
+msgstr ""
+
 msgid "JobTemplate|Locked"
 msgstr "锁定"
 
@@ -431,6 +469,9 @@ msgstr "列出每个位置的任务模板"
 msgid "List job templates per organization"
 msgstr "列出每个机构的任务模板"
 
+msgid "List of proxy IDs to be used for remote execution"
+msgstr ""
+
 msgid "List remote execution features"
 msgstr "列出远程执行功能"
 
@@ -457,6 +498,9 @@ msgstr "新建任务模板"
 
 msgid "No execution finished yet"
 msgstr "尚未完成任何执行"
+
+msgid "No hosts found."
+msgstr ""
 
 msgid "No template mapped to feature %{feature_name}"
 msgstr "没有与功能 %{feature_name} 映射的模板"
@@ -500,6 +544,9 @@ msgstr "这个时间后不再执行任何操作"
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "要用于 SSH 通信的端口。默认端口 22。您可以通过设置名为 remote_execution_ssh_port 的参数来按主机进行覆盖。"
 
+msgid "Preupgrade job"
+msgstr ""
+
 msgid "Preview"
 msgstr "预览"
 
@@ -538,6 +585,9 @@ msgstr "远程执行"
 
 msgid "Remote Execution Features"
 msgstr "远程执行功能"
+
+msgid "Remote Execution Interface"
+msgstr ""
 
 msgid "Remote action:"
 msgstr "远程动作："
@@ -578,6 +628,9 @@ msgstr "解析为"
 msgid "Results"
 msgstr ""
 
+msgid "Review details"
+msgstr ""
+
 msgid "Run"
 msgstr "运行"
 
@@ -591,6 +644,9 @@ msgid "Run at most N tasks at a time"
 msgstr "同时最多运行 N 个任务"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
+
+msgid "Run job"
 msgstr ""
 
 msgid "SSH"
@@ -629,9 +685,6 @@ msgstr "滚动到底部"
 msgid "Scroll to top"
 msgstr "滚动到顶部"
 
-msgid "Search"
-msgstr "搜索"
-
 msgid "Search Query"
 msgstr ""
 
@@ -657,6 +710,12 @@ msgid "Set to distribute over"
 msgstr "设置为通过...分配"
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
+msgstr ""
+
+msgid "Should this interface be used for remote execution?"
+msgstr ""
+
+msgid "Show Job status for the hosts"
 msgstr ""
 
 msgid "Show foreign input set details"
@@ -688,12 +747,6 @@ msgstr "已成功"
 
 msgid "Success"
 msgstr "成功"
-
-msgid "Sudo password"
-msgstr ""
-
-msgid "Sudo password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr ""
 
 msgid "Sync Job Templates"
 msgstr "同步任务模板"
@@ -759,6 +812,9 @@ msgstr "用户无法访问与功能 %{feature_name} 映射的模板 %{template_n
 
 msgid "There was an error while updating the status, try refreshing the page."
 msgstr "更新状态时发生错误，请尝试刷新此页面。"
+
+msgid "This can happen if the host is removed or moved to another organization or location after the job was started"
+msgstr ""
 
 msgid "This template is locked for editing."
 msgstr "这个模板已锁定，无法编辑。"
@@ -886,9 +942,6 @@ msgstr "应由什么用户运行此脚本（使用类似 sudo 的机制）。"
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "应由什么用户运行此脚本（使用类似 sudo 的机制）。默认为模板参数或全局设置。"
 
-msgid "When enabled, the remote execution will try to run the commands directly, when no proxy with remote execution feature is configured for the host."
-msgstr ""
-
 msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
 msgstr ""
 
@@ -922,7 +975,13 @@ msgstr "为这个模板添加输入以参考不同的模板输入"
 msgid "cancelled"
 msgstr "已取消"
 
+msgid "default_capsule method missing from SmartProxy"
+msgstr ""
+
 msgid "effective user"
+msgstr ""
+
+msgid "error"
 msgstr ""
 
 msgid "error during rendering: %s"
@@ -949,9 +1008,6 @@ msgstr "未找到所包含模板 '%s'"
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "名为 '%s' 的输入宏已被使用，但没有为这个模板定义使用这个名称的输入。"
 
-msgid "planned"
-msgstr "已计划"
-
 msgid "queued"
 msgstr "已排队"
 
@@ -961,9 +1017,6 @@ msgstr "已排队，在  %{time} 时开始实施"
 msgid "remove template input set"
 msgstr "删除模板输入集"
 
-msgid "running"
-msgstr "运行中"
-
 msgid "running %{percent}%%"
 msgstr "正在运行 %{percent}%%"
 
@@ -972,9 +1025,6 @@ msgstr "秒"
 
 msgid "succeeded"
 msgstr "已成功"
-
-msgid "success"
-msgstr "成功"
 
 msgid "tasks at a time"
 msgstr "在指定时间的任务"
