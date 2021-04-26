@@ -27,6 +27,11 @@ msgstr "%s前"
 msgid "%{description} on %{host}"
 msgstr "%{host} の %{description}"
 
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr "外部テンプレートから除外する入力名のコンマ区切り一覧。"
 
@@ -53,6 +58,12 @@ msgstr "アクション"
 
 msgid "Add Foreign Input Set"
 msgstr "外部入力セットを追加"
+
+msgid "Advanced fields"
+msgstr ""
+
+msgid "All fields are required."
+msgstr ""
 
 msgid "Alphabetical"
 msgstr ""
@@ -96,6 +107,12 @@ msgstr "bookmark_id と search_query を指定できません"
 msgid "Cannot specify both recurrence and scheduling"
 msgstr "繰り返しとスケジューリングの両方を指定できません"
 
+msgid "Category And Template"
+msgstr ""
+
+msgid "Category and template"
+msgstr ""
+
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr ""
 
@@ -125,6 +142,9 @@ msgstr "IP で接続"
 
 msgid "Control concurrency level and distribution over time"
 msgstr "同時実行レベルと分散を制御"
+
+msgid "Could not display data for job invocation."
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "実行に適したインターフェースを見つけることができませんでした"
@@ -228,6 +248,12 @@ msgstr "実効ユーザーメソッド \"%{current_value}\" は %{valid_methods}
 msgid "Effective user options"
 msgstr "実効ユーザーオプション"
 
+msgid "Effective user password"
+msgstr ""
+
+msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
 msgid "Enable Global Proxy"
 msgstr "グローバルプロキシーを有効にする"
 
@@ -264,17 +290,11 @@ msgstr "失敗しました"
 msgid "Failed rendering template: %s"
 msgstr "テンプレートのレンダリングに失敗しました: %s"
 
-msgid "Fallback Without Proxy"
-msgstr "プロキシーなしでのフォールバック"
-
 msgid "Fallback to Any Proxy"
 msgstr "プロキシーへのフォールバック"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "機能入力 %{input_name} はテンプレート %{template_name} で定義されていません"
-
-msgid "Filter"
-msgstr "フィルター"
 
 msgid "Foreign input set"
 msgstr "外部入力セット"
@@ -287,6 +307,9 @@ msgstr ""
 
 msgid "Get output for a host"
 msgstr "ホストの出力を取得"
+
+msgid "Get outputs of hosts in a job"
+msgstr ""
 
 msgid "Get raw output for a host"
 msgstr ""
@@ -306,8 +329,14 @@ msgstr ""
 msgid "Host with id '%{id}' was not found"
 msgstr "id '%{id}' のホストが見つかりませんでした"
 
+msgid "Hosts gone missing"
+msgstr ""
+
 msgid "How often the job should occur, in the cron format"
 msgstr "ジョブを実行する頻度 (cron 形式)"
+
+msgid "Identifier of the Host interface for Remote execution"
+msgstr ""
 
 msgid "Import"
 msgstr "インポート"
@@ -335,6 +364,12 @@ msgstr "入力セットの説明"
 
 msgid "Inputs to use"
 msgstr "使用する入力"
+
+msgid "Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration."
+msgstr ""
+
+msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr ""
 
 msgid "Invocation type, one of %s"
 msgstr "呼び出しタイプ、%s のいずれか"
@@ -387,6 +422,9 @@ msgstr "ジョブテンプレートが正常にインポートされました"
 msgid "Job templates"
 msgstr "ジョブテンプレート"
 
+msgid "Job wizard"
+msgstr ""
+
 msgid "JobTemplate|Locked"
 msgstr "ロック"
 
@@ -432,6 +470,9 @@ msgstr "ロケーションごとのジョブテンプレートを一覧表示"
 msgid "List job templates per organization"
 msgstr "組織ごとのジョブテンプレートを一覧表示"
 
+msgid "List of proxy IDs to be used for remote execution"
+msgstr ""
+
 msgid "List remote execution features"
 msgstr "リモート実行機能を一覧表示"
 
@@ -458,6 +499,9 @@ msgstr "新規ジョブテンプレート"
 
 msgid "No execution finished yet"
 msgstr "未完了の実行なし"
+
+msgid "No hosts found."
+msgstr ""
 
 msgid "No template mapped to feature %{feature_name}"
 msgstr "機能 %{feature_name} にマッピングされたテンプレートがありません"
@@ -501,6 +545,9 @@ msgstr "これ以降実行しない"
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "SSH 通信に使用するポート。デフォルトのポートは 22 です。remote_execution_ssh_port という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
 
+msgid "Preupgrade job"
+msgstr ""
+
 msgid "Preview"
 msgstr "プレビュー"
 
@@ -539,6 +586,9 @@ msgstr "リモート実行"
 
 msgid "Remote Execution Features"
 msgstr "リモート実行機能"
+
+msgid "Remote Execution Interface"
+msgstr ""
 
 msgid "Remote action:"
 msgstr "リモートアクション:"
@@ -579,6 +629,9 @@ msgstr "解決"
 msgid "Results"
 msgstr ""
 
+msgid "Review details"
+msgstr ""
+
 msgid "Run"
 msgstr "実行"
 
@@ -592,6 +645,9 @@ msgid "Run at most N tasks at a time"
 msgstr "一度に最大 N タスクを実行"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
+
+msgid "Run job"
 msgstr ""
 
 msgid "SSH"
@@ -630,9 +686,6 @@ msgstr "最下部へスクロール"
 msgid "Scroll to top"
 msgstr "最上部へスクロール"
 
-msgid "Search"
-msgstr "検索"
-
 msgid "Search Query"
 msgstr ""
 
@@ -658,6 +711,12 @@ msgid "Set to distribute over"
 msgstr "ディストリビューションに設定"
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
+msgstr ""
+
+msgid "Should this interface be used for remote execution?"
+msgstr ""
+
+msgid "Show Job status for the hosts"
 msgstr ""
 
 msgid "Show foreign input set details"
@@ -689,12 +748,6 @@ msgstr "成功"
 
 msgid "Success"
 msgstr "成功しました"
-
-msgid "Sudo password"
-msgstr ""
-
-msgid "Sudo password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr ""
 
 msgid "Sync Job Templates"
 msgstr "ジョブテンプレートの同期"
@@ -760,6 +813,9 @@ msgstr "ユーザーは機能 %{feature_name} にマッピングされたテン�
 
 msgid "There was an error while updating the status, try refreshing the page."
 msgstr "ステータスを更新する際にエラーが発生しました。ページの更新を試行してください。"
+
+msgid "This can happen if the host is removed or moved to another organization or location after the job was started"
+msgstr ""
 
 msgid "This template is locked for editing."
 msgstr "このテンプレートは編集用にロックされています。"
@@ -887,9 +943,6 @@ msgstr "スクリプトを実行するために使用するユーザー (sudo �
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "スクリプトを実行するために使用するユーザー (sudo と同様のメカニズムを使用)。デフォルト値は、テンプレートパラメーターまたはグローバル設定です。"
 
-msgid "When enabled, the remote execution will try to run the commands directly, when no proxy with remote execution feature is configured for the host."
-msgstr ""
-
 msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
 msgstr ""
 
@@ -923,7 +976,13 @@ msgstr "異なるテンプレート入力を参照するためにこのテンプ
 msgid "cancelled"
 msgstr "キャンセル"
 
+msgid "default_capsule method missing from SmartProxy"
+msgstr ""
+
 msgid "effective user"
+msgstr ""
+
+msgid "error"
 msgstr ""
 
 msgid "error during rendering: %s"
@@ -950,9 +1009,6 @@ msgstr "含まれるテンプレート '%s' が見つかりません"
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "名前が '%s' の入力マクロが使用されていますが、このテンプレートにはこのような名前の入力は定義されていません"
 
-msgid "planned"
-msgstr "計画"
-
 msgid "queued"
 msgstr "キューに登録済み"
 
@@ -962,9 +1018,6 @@ msgstr "%{time} 後に実行を開始するようキューに入れられてい�
 msgid "remove template input set"
 msgstr "テンプレート入力セットを削除"
 
-msgid "running"
-msgstr "実行中"
-
 msgid "running %{percent}%%"
 msgstr "%{percent}%% の実行中"
 
@@ -973,9 +1026,6 @@ msgstr "秒"
 
 msgid "succeeded"
 msgstr "成功"
-
-msgid "success"
-msgstr "success"
 
 msgid "tasks at a time"
 msgstr "1 度に実行されるタスク"

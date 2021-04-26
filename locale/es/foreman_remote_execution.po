@@ -26,6 +26,11 @@ msgstr "Hace %s"
 msgid "%{description} on %{host}"
 msgstr "%{description} en %{host}"
 
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "A comma separated list of input names to be excluded from the foreign template."
 msgstr "Una lista de nombres de entrada separados por comas que se debe excluir de la plantilla externa."
 
@@ -52,6 +57,12 @@ msgstr "Acciones"
 
 msgid "Add Foreign Input Set"
 msgstr "Agregar conjunto de entrada externo"
+
+msgid "Advanced fields"
+msgstr ""
+
+msgid "All fields are required."
+msgstr ""
 
 msgid "Alphabetical"
 msgstr ""
@@ -95,6 +106,12 @@ msgstr "No se pueden especificar bookmark_id y search_query."
 msgid "Cannot specify both recurrence and scheduling"
 msgstr "No se pueden especificar las recurrencias y las programaciones."
 
+msgid "Category And Template"
+msgstr ""
+
+msgid "Category and template"
+msgstr ""
+
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr ""
 
@@ -124,6 +141,9 @@ msgstr "Conectar por IP"
 
 msgid "Control concurrency level and distribution over time"
 msgstr "Controlar el nivel de concurrencia y la distribución en el tiempo"
+
+msgid "Could not display data for job invocation."
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "No se pudo hallar una interfaz adecuada para la ejecución"
@@ -227,6 +247,12 @@ msgstr "El método de usuario efectivo \"%{current_value}\" no es uno de %{valid
 msgid "Effective user options"
 msgstr "Opciones de usuario efectivo"
 
+msgid "Effective user password"
+msgstr ""
+
+msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
 msgid "Enable Global Proxy"
 msgstr "Activar proxy global"
 
@@ -263,17 +289,11 @@ msgstr "Errores"
 msgid "Failed rendering template: %s"
 msgstr "Falló la reproducción de la plantilla: %s."
 
-msgid "Fallback Without Proxy"
-msgstr "Acción de reserva sin proxy"
-
 msgid "Fallback to Any Proxy"
 msgstr "Acción de reserva en cualquier proxy"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "Entrada de funcionalidad %{input_name} no definida en la plantilla %{template_name}"
-
-msgid "Filter"
-msgstr "Filtro"
 
 msgid "Foreign input set"
 msgstr "Conjunto de entrada externo"
@@ -286,6 +306,9 @@ msgstr ""
 
 msgid "Get output for a host"
 msgstr "Obtener salida para un host"
+
+msgid "Get outputs of hosts in a job"
+msgstr ""
 
 msgid "Get raw output for a host"
 msgstr ""
@@ -305,8 +328,14 @@ msgstr ""
 msgid "Host with id '%{id}' was not found"
 msgstr "No se encontró el host con ID '%{id}'."
 
+msgid "Hosts gone missing"
+msgstr ""
+
 msgid "How often the job should occur, in the cron format"
 msgstr "Con qué frecuencia debe ocurrir el trabajo, en formato programado"
+
+msgid "Identifier of the Host interface for Remote execution"
+msgstr ""
 
 msgid "Import"
 msgstr "Importar"
@@ -334,6 +363,12 @@ msgstr "Descripción del conjunto de entrada"
 
 msgid "Inputs to use"
 msgstr "Entradas que se deben utilizar"
+
+msgid "Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration."
+msgstr ""
+
+msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr ""
 
 msgid "Invocation type, one of %s"
 msgstr "Tipo de invocación, una de %s"
@@ -386,6 +421,9 @@ msgstr "Se importó correctamente una plantilla de trabajo"
 msgid "Job templates"
 msgstr "Plantillas de trabajo"
 
+msgid "Job wizard"
+msgstr ""
+
 msgid "JobTemplate|Locked"
 msgstr "Plantilla de trabajo|Bloqueada"
 
@@ -431,6 +469,9 @@ msgstr "Listar plantillas de trabajo por ubicación"
 msgid "List job templates per organization"
 msgstr "Listar plantillas de trabajo por organización"
 
+msgid "List of proxy IDs to be used for remote execution"
+msgstr ""
+
 msgid "List remote execution features"
 msgstr "Listar funcionalidades de ejecución remota"
 
@@ -457,6 +498,9 @@ msgstr "Nueva plantilla de trabajo"
 
 msgid "No execution finished yet"
 msgstr "Aún no finalizó ninguna ejecución."
+
+msgid "No hosts found."
+msgstr ""
 
 msgid "No template mapped to feature %{feature_name}"
 msgstr "No hay ninguna plantilla mapeada a la funcionalidad %{feature_name}."
@@ -500,6 +544,9 @@ msgstr "No ejecutar más después de esta cantidad de veces"
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "Puerto para usar para la comunicación SSH. Puerto predeterminado: 22. Puede sustituir por host al establecer un parámetro llamado remote_execution_ssh_port."
 
+msgid "Preupgrade job"
+msgstr ""
+
 msgid "Preview"
 msgstr "Vista previa"
 
@@ -538,6 +585,9 @@ msgstr "Ejecución remota"
 
 msgid "Remote Execution Features"
 msgstr "Funcionalidades de ejecución remota"
+
+msgid "Remote Execution Interface"
+msgstr ""
 
 msgid "Remote action:"
 msgstr "Acción remota:"
@@ -578,6 +628,9 @@ msgstr "Se resuelve en"
 msgid "Results"
 msgstr ""
 
+msgid "Review details"
+msgstr ""
+
 msgid "Run"
 msgstr "Ejecutar"
 
@@ -591,6 +644,9 @@ msgid "Run at most N tasks at a time"
 msgstr "Ejecutar un máximo de N tareas por vez"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
+
+msgid "Run job"
 msgstr ""
 
 msgid "SSH"
@@ -629,9 +685,6 @@ msgstr "Desplazarse hasta el final"
 msgid "Scroll to top"
 msgstr "Desplazarse hasta la parte superior"
 
-msgid "Search"
-msgstr "Buscar"
-
 msgid "Search Query"
 msgstr ""
 
@@ -657,6 +710,12 @@ msgid "Set to distribute over"
 msgstr "Definir para distribuir sobre"
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
+msgstr ""
+
+msgid "Should this interface be used for remote execution?"
+msgstr ""
+
+msgid "Show Job status for the hosts"
 msgstr ""
 
 msgid "Show foreign input set details"
@@ -688,12 +747,6 @@ msgstr "exitoso"
 
 msgid "Success"
 msgstr "Éxito"
-
-msgid "Sudo password"
-msgstr ""
-
-msgid "Sudo password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr ""
 
 msgid "Sync Job Templates"
 msgstr "Sincronizar plantillas de trabajo"
@@ -759,6 +812,9 @@ msgstr "El usuario no puede acceder a la plantilla %{template_name} mapeada a la
 
 msgid "There was an error while updating the status, try refreshing the page."
 msgstr "Se produjo un error al actualizar el estado, intente actualizar la página."
+
+msgid "This can happen if the host is removed or moved to another organization or location after the job was started"
+msgstr ""
 
 msgid "This template is locked for editing."
 msgstr "La edición de la plantilla está bloqueada."
@@ -886,9 +942,6 @@ msgstr "El usuario que se debe utilizar para ejecutar el script (con mecanismos 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "El usuario que se debe utilizar para ejecutar el script (con mecanismos tipo sudo). El valor predeterminado es un parámetro de plantilla o una configuración global."
 
-msgid "When enabled, the remote execution will try to run the commands directly, when no proxy with remote execution feature is configured for the host."
-msgstr ""
-
 msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
 msgstr ""
 
@@ -922,7 +975,13 @@ msgstr "agregar un conjunto de entrada para esta plantilla para hacer referencia
 msgid "cancelled"
 msgstr "Cancelado"
 
+msgid "default_capsule method missing from SmartProxy"
+msgstr ""
+
 msgid "effective user"
+msgstr ""
+
+msgid "error"
 msgstr ""
 
 msgid "error during rendering: %s"
@@ -949,9 +1008,6 @@ msgstr "no se encontró la plantilla incluida '%s'."
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "macro de entrada con nombre '%s' en uso, pero ninguna entrada con ese nombre definida para esta plantilla"
 
-msgid "planned"
-msgstr "planificado"
-
 msgid "queued"
 msgstr "en cola"
 
@@ -961,9 +1017,6 @@ msgstr "en cola para comenzar a ejecutarse en %{time}"
 msgid "remove template input set"
 msgstr "eliminar el conjunto de entrada de la plantilla"
 
-msgid "running"
-msgstr "ejecutando"
-
 msgid "running %{percent}%%"
 msgstr "en ejecución %{percent}%%"
 
@@ -972,9 +1025,6 @@ msgstr "segundos"
 
 msgid "succeeded"
 msgstr "exitoso"
-
-msgid "success"
-msgstr "Éxito"
 
 msgid "tasks at a time"
 msgstr "tareas a la vez"
