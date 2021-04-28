@@ -11,7 +11,7 @@ class TemplateInvocation < ApplicationRecord
   belongs_to :template, :class_name => 'JobTemplate', :foreign_key => 'template_id'
   belongs_to :job_invocation, :inverse_of => :template_invocations
   has_many :input_values, :class_name => 'TemplateInvocationInputValue', :dependent => :destroy
-  has_many :provider_input_values, :class_name => 'TemplateInvocationProviderInputValue', :dependent => :destroy
+  has_many :provider_input_values, :class_name => 'InvocationProviderInputValue', :dependent => :destroy
   has_one :targeting, :through => :job_invocation
   belongs_to :host, :class_name => 'Host::Managed', :foreign_key => :host_id
   has_one :host_group, :through => :host, :source => :hostgroup

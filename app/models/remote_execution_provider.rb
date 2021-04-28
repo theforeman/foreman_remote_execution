@@ -36,7 +36,6 @@ class RemoteExecutionProvider
     end
 
     def provider_input_namespace
-      []
     end
 
     def supports_effective_user?

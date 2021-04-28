@@ -165,7 +165,7 @@ class JobInvocationComposer
 
     def filter_provider_inputs(api_params)
       return [] if template.provider.provider_input_namespace.empty?
-      inputs = api_params.dig(*template.provider.provider_input_namespace).to_h
+      inputs = api_params[template.provider.provider_input_namespace].to_h
       provider_input_names = template.provider.provider_inputs.map(&:name)
       inputs.select { |key, value| provider_input_names.include? key }.map { |key, value| { :name => key, :value => value } }
     end

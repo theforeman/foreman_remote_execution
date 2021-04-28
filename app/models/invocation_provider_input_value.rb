@@ -1,4 +1,4 @@
-class TemplateInvocationProviderInputValue < ApplicationRecord
+class InvocationProviderInputValue < ApplicationRecord
   belongs_to :template_invocation
 
   validates :name, :presence => true

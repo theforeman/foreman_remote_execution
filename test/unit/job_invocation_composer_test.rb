@@ -19,7 +19,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
   class AnsibleInputs < RemoteExecutionProvider
     class << self
       def provider_input_namespace
-        [:ansible]
+        :ansible
       end
 
       def provider_inputs
