@@ -40,7 +40,7 @@ export const CategoryAndTemplate = ({
   const isError = !!(categoryError || allTemplatesError || templateError);
   return (
     <>
-      <Title headingLevel="h2">{__('Category And Template')}</Title>
+      <Title headingLevel="h2">{__('Category and Template')}</Title>
       <Text component={TextVariants.p}>{__('All fields are required.')}</Text>
       <Form>
         <SelectField

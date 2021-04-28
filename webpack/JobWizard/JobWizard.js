@@ -13,12 +13,12 @@ import './JobWizard.scss';
 export const JobWizard = () => {
   const [jobTemplateID, setJobTemplateID] = useState(null);
   const [category, setCategory] = useState('');
-  const [advancedValue, setAdvancedValue] = useState({});
+  const [advancedValues, setAdvancedValues] = useState({});
   const dispatch = useDispatch();
 
   const setDefaults = useCallback(response => {
     const responseJob = response.data;
-    setAdvancedValue({
+    setAdvancedValues({
       effectiveUserValue: responseJob.effective_user?.value || '',
       timeoutToKill: responseJob.job_template.execution_timeout_interval || '',
     });
@@ -33,13 +33,13 @@ export const JobWizard = () => {
         })
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [jobTemplateID, dispatch]);
+  }, [jobTemplateID, setDefaults, dispatch]);
+
   const templateError = !!useSelector(selectTemplateError);
   const isTemplate = !templateError && !!jobTemplateID;
   const steps = [
     {
-      name: __('Category and template'),
+      name: __('Category and Template'),
       component: (
         <CategoryAndTemplate
           jobTemplate={jobTemplateID}
@@ -50,19 +50,19 @@ export const JobWizard = () => {
       ),
     },
     {
-      name: __('Target hosts'),
-      component: <p>TargetHosts </p>,
+      name: __('Target Hosts'),
+      component: <p>Target Hosts</p>,
       canJumpTo: isTemplate,
     },
     {
-      name: __('Advanced fields'),
+      name: __('Advanced Fields'),
       component: (
         <AdvancedFields
-          advancedValue={advancedValue}
-          setAdvancedValue={newValue => {
-            setAdvancedValue(currentAdvancedValue => ({
-              ...currentAdvancedValue,
-              ...newValue,
+          advancedValues={advancedValues}
+          setAdvancedValues={newValues => {
+            setAdvancedValues(currentAdvancedValues => ({
+              ...currentAdvancedValues,
+              ...newValues,
             }));
           }}
           jobTemplateID={jobTemplateID}
@@ -76,19 +76,18 @@ export const JobWizard = () => {
       canJumpTo: isTemplate,
     },
     {
-      name: __('Review details'),
-      component: <p>ReviewDetails</p>,
+      name: __('Review Details'),
+      component: <p>Review Details</p>,
       nextButtonText: 'Run',
       canJumpTo: isTemplate,
     },
   ];
-  const title = __('Run Job');
   return (
     <Wizard
       onClose={() => history.goBack()}
-      navAriaLabel={`${title} steps`}
+      navAriaLabel="Run Job steps"
       steps={steps}
-      height="70vh"
+      height="100%"
       className="job-wizard"
     />
   );

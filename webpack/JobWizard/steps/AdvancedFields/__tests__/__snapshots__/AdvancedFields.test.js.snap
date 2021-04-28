@@ -14,9 +14,19 @@ exports[`AdvancedFields rendring 1`] = `
   }
 >
   <AdvancedFields
-    advancedValue={Object {}}
-    setAdvancedValue={[MockFunction]}
+    advancedValues={Object {}}
+    setAdvancedValues={[MockFunction]}
   >
+    <Title
+      className="advanced-fields-title"
+      headingLevel="h2"
+    >
+      <h2
+        className="pf-c-title pf-m-xl advanced-fields-title"
+      >
+        Advanced Fields
+      </h2>
+    </Title>
     <Form>
       <form
         className="pf-c-form"

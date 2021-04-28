@@ -35,4 +35,4 @@ export const selectTemplateError = state =>
   selectAPIErrorMessage(state, JOB_TEMPLATE);
 
 export const selectJobTemplate = state =>
-  selectAPIResponse(state, JOB_TEMPLATE) || {};
+  selectAPIResponse(state, JOB_TEMPLATE);

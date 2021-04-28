@@ -10,12 +10,14 @@ patternfly.FormGroup.mockImplementation(props => (
   <div>{props.navAriaLabel}</div>
 ));
 const mockStore = configureMockStore([]);
-const store = mockStore({ effective_user: { overridable: true } });
+const store = mockStore({
+  JOB_TEMPLATE: { effective_user: { overridable: true } },
+});
 describe('AdvancedFields', () => {
   it('rendring', () => {
     const component = mount(
       <Provider store={store}>
-        <AdvancedFields advancedValue={{}} setAdvancedValue={jest.fn()} />
+        <AdvancedFields advancedValues={{}} setAdvancedValues={jest.fn()} />
       </Provider>
     );
     expect(component).toMatchSnapshot();
