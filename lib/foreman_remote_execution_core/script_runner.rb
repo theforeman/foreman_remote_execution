@@ -395,7 +395,7 @@ module ForemanRemoteExecutionCore
     end
 
     def cp_script_to_remote(script = @script, name = 'script')
-      path = remote_command_file(name)
+      path = remote_command_file(name).gsub(/\s/, '\ ')
       @logger.debug("copying script to #{path}:\n#{indent_multiline(script)}")
       upload_data(sanitize_script(script), path, 555)
     end
