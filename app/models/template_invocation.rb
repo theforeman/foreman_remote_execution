@@ -1,11 +1,11 @@
-class TemplateInvocation < ActiveRecord::Base
+class TemplateInvocation < ApplicationRecord
   include Authorizable
   include ForemanTasks::Concerns::ActionSubject
 
   include ForemanRemoteExecution::ErrorsFlattener
   FLATTENED_ERRORS_MAPPING = { :input_values => lambda do |input_value|
                                                  _('Input') + " #{input_value.template_input.name}"
-                                                end }
+                                                end }.freeze
 
 
   belongs_to :template, :class_name => 'JobTemplate', :foreign_key => 'template_id'
@@ -20,10 +20,55 @@ class TemplateInvocation < ActiveRecord::Base
   validate :provides_required_input_values
   before_validation :set_effective_user
 
-  scoped_search :in => :host, :on => :name, :rename => 'host.name', :complete_value => true
-  scoped_search :in => :host_group, :on => :name, :rename => 'host_group.name', :complete_value => true
-  scoped_search :in => :template, :on => :job_category, :complete_value => true
-  scoped_search :in => :template, :on => :name, :complete_value => true
+  scoped_search :relation => :host, :on => :name, :rename => 'host.name', :complete_value => true
+  scoped_search :relation => :host_group, :on => :name, :rename => 'host_group.name', :complete_value => true
+  scoped_search :relation => :template, :on => :job_category, :complete_value => true
+  scoped_search :relation => :template, :on => :name, :complete_value => true
+
+  class TaskResultMap
+    MAP = {
+      :cancelled => :cancelled,
+      :error     => :failed,
+      :pending   => :pending,
+      :success   => :success,
+      :warning   => :failed,
+    }.with_indifferent_access
+
+    REVERSE_MAP = MAP.each_with_object({}) do |(key, value), acc|
+      acc[value] ||= []
+      acc[value] << key
+    end.with_indifferent_access
+
+    class << self
+      def results
+        MAP.keys.map(&:to_sym)
+      end
+
+      def statuses
+        REVERSE_MAP.keys.map(&:to_sym)
+      end
+
+      # 1:1
+      # error => failed
+      def task_result_to_status(result)
+        MAP[result].try(:to_sym) || result
+      end
+
+      # 1:n
+      # failed => [:error, :warning]
+      def status_to_task_result(status)
+        if REVERSE_MAP.key? status
+          REVERSE_MAP[status].map(&:to_sym)
+        else
+          Array(status)
+        end
+      end
+    end
+  end
+
+  def template
+    JobTemplate.unscoped { super }
+  end
 
   def to_action_input
     { :id => id, :name => template.name }

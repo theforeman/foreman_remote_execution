@@ -1,0 +1,16 @@
+<div class="card-pf card-pf-accented">
+  <div class="card-pf-title">
+    <h2 style="height: 18px;" class="card-pf-title">
+      <%= _('User Inputs') %>
+    </h2>
+  </div>
+  <div class="card-pf-body">
+    <p>
+    <ul>
+      <% template_invocation.input_values.joins(:template_input).each do |input_value| %>
+        <li><b><%= input_value.template_input.name %></b>: <%= trunc_with_tooltip(input_safe_value(input_value), 255) %></li>
+      <% end %>
+    </ul>
+    </p>
+  </div>
+</div>

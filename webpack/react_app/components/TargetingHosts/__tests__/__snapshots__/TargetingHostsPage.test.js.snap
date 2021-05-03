@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TargetingHostsPage renders 1`] = `
+<div
+  id="targeting_hosts"
+>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Col
+      bsClass="col"
+      className="title_filter"
+      componentClass="div"
+      md={6}
+    >
+      <SearchBar
+        data={
+          Object {
+            "autocomplete": Object {
+              "id": "targeting_hosts_search",
+              "searchQuery": "",
+              "url": "/hosts/auto_complete_search",
+              "useKeyShortcuts": true,
+            },
+            "bookmarks": Object {},
+            "controller": "hosts",
+          }
+        }
+        onSearch={[Function]}
+      />
+    </Col>
+  </Row>
+  <br />
+  <TargetingHosts
+    apiStatus="RESOLVED"
+    items={
+      Array [
+        Object {
+          "actions": Array [],
+          "link": "/link",
+          "name": "host",
+          "status": "success",
+        },
+        Object {
+          "actions": Array [],
+          "link": "/link2",
+          "name": "host2",
+          "status": "success",
+        },
+      ]
+    }
+  />
+  <PaginationWrapper
+    className="targeting-hosts-pagination"
+    dropdownButtonId="targeting-hosts-pagination-dropdown"
+    itemCount={1}
+    onChange={[Function]}
+    pagination={
+      Object {
+        "page": 1,
+        "perPage": 20,
+      }
+    }
+    viewType="table"
+  />
+</div>
+`;

@@ -1,4 +1,4 @@
-class TargetingHost < ActiveRecord::Base
+class TargetingHost < ApplicationRecord
 
   belongs_to :targeting
   belongs_to_host

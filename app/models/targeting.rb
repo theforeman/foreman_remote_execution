@@ -1,16 +1,20 @@
-class Targeting < ActiveRecord::Base
+class Targeting < ApplicationRecord
 
-  STATIC_TYPE = 'static_query'
-  DYNAMIC_TYPE = 'dynamic_query'
-  TYPES = { STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query') }
+  STATIC_TYPE = 'static_query'.freeze
+  DYNAMIC_TYPE = 'dynamic_query'.freeze
+  TYPES = { STATIC_TYPE => N_('Static Query'), DYNAMIC_TYPE => N_('Dynamic Query') }.freeze
   RESOLVE_PERMISSION = :view_hosts
+
+  ORDERED = 'ordered_execution'.freeze
+  RANDOMIZED = 'randomized_execution'.freeze
+  ORDERINGS = { ORDERED => N_('Alphabetical'), RANDOMIZED => N_('Randomized') }.freeze
 
   belongs_to :user
   belongs_to :bookmark
 
   has_many :targeting_hosts, :dependent => :destroy
-  has_many :hosts, :through => :targeting_hosts
-  has_one :job_invocation
+  has_many :hosts, -> { order TargetingHost.table_name + '.id' }, :through => :targeting_hosts
+  has_one :job_invocation, :dependent => :delete
   has_many :template_invocations, :through => :job_invocation
 
   validates :targeting_type, :presence => true, :inclusion => Targeting::TYPES.keys
@@ -36,10 +40,12 @@ class Targeting < ActiveRecord::Base
     raise ::Foreman::Exception, _('Cannot resolve hosts without a bookmark or search query') if bookmark.nil? && search_query.blank?
 
     self.search_query = bookmark.query if dynamic? && bookmark.present?
-    self.resolved_at = Time.zone.now
+    mark_resolved!
     self.validate!
-    # avoid validation of hosts objects - tey will be loaded for no reason.
-    host_ids = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query).pluck(:id) }
+    # avoid validation of hosts objects - they will be loaded for no reason.
+    #   pluck(:id) returns duplicate results for HostCollections
+    host_ids = User.as(user.login) { Host.authorized(RESOLVE_PERMISSION, Host).search_for(search_query).order(:name, :id).pluck(:id).uniq }
+    host_ids.shuffle!(random: Random.new) if randomized_ordering
     # this can be optimized even more, by introducing bulk insert
     self.targeting_hosts.build(host_ids.map { |id| { :host_id => id } })
     self.save(:validate => false)
@@ -54,12 +60,18 @@ class Targeting < ActiveRecord::Base
   end
 
   def self.build_query_from_hosts(ids)
-    hosts = Host.where(:id => ids).all.group_by(&:id)
-    hosts.map { |id, h| "name = #{h.first.name}" }.join(' or ')
+    return '' if ids.empty?
+
+    hosts = Host.where(:id => ids).distinct.pluck(:name)
+    "name ^ (#{hosts.join(', ')})"
   end
 
   def resolved?
     self.resolved_at.present?
+  end
+
+  def mark_resolved!
+    self.resolved_at = Time.zone.now
   end
 
   private

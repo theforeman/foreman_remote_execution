@@ -1,6 +1,6 @@
 class JobInvocationTaskGroup < ::ForemanTasks::TaskGroup
 
-  has_one :job_invocation, :foreign_key => :task_group_id
+  has_one :job_invocation, :foreign_key => :task_group_id, :dependent => :nullify
 
   alias_method :resource, :job_invocation
 

@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TargetingHosts renders 1`] = `
+<LoadingState
+  additionalClasses=""
+  loading={false}
+  loadingText="Loading"
+  size="lg"
+  timeout={300}
+>
+  <div>
+    <table
+      className="table table-bordered table-striped table-hover"
+    >
+      <thead>
+        <tr>
+          <th>
+            Host
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <HostItem
+          actions={Array []}
+          key="host"
+          link="/link"
+          name="host"
+          status="success"
+        />
+        <HostItem
+          actions={Array []}
+          key="host2"
+          link="/link2"
+          name="host2"
+          status="success"
+        />
+      </tbody>
+    </table>
+  </div>
+</LoadingState>
+`;
+
+exports[`TargetingHosts renders with error 1`] = `
+<Alert
+  className=""
+  onDismiss={null}
+  type="error"
+>
+  There was an error while updating the status, try refreshing the page.
+</Alert>
+`;
+
+exports[`TargetingHosts renders with loading 1`] = `
+<LoadingState
+  additionalClasses=""
+  loading={true}
+  loadingText="Loading"
+  size="lg"
+  timeout={300}
+>
+  <div>
+    <table
+      className="table table-bordered table-striped table-hover"
+    >
+      <thead>
+        <tr>
+          <th>
+            Host
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            colSpan="3"
+          >
+            No hosts found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</LoadingState>
+`;

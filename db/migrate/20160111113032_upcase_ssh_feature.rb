@@ -1,5 +1,5 @@
-class UpcaseSshFeature < ActiveRecord::Migration
-  class FakeFeature < ActiveRecord::Base
+class UpcaseSshFeature < ActiveRecord::Migration[4.2]
+  class FakeFeature < ApplicationRecord
     self.table_name = 'features'
   end
 

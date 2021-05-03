@@ -11,6 +11,7 @@ module ForemanRemoteExecution
 
     def set_execution_flag
       return unless primary? && host.present?
+
       self.execution = true if host.interfaces.detect(&:execution).nil?
     end
 

@@ -1,5 +1,5 @@
 class RemoteExecutionFeaturesController < ::ApplicationController
-  before_filter :find_resource, :only => [:show, :update]
+  before_action :find_resource, :only => [:show, :update]
   include ::Foreman::Controller::Parameters::RemoteExecutionFeature
 
   def index
@@ -10,7 +10,7 @@ class RemoteExecutionFeaturesController < ::ApplicationController
   end
 
   def update
-    if @remote_execution_feature.update_attributes(remote_execution_feature_params)
+    if @remote_execution_feature.update(remote_execution_feature_params)
       process_success :object => @remote_execution_feature
     else
       process_error :object => @remote_execution_feature

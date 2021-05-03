@@ -1,24 +1,23 @@
 module ForemanRemoteExecution
   module SmartProxyExtensions
-    extend ActiveSupport::Concern
-
-    included do
-      alias_method_chain :refresh, :remote_execution
-    end
-
     def pubkey
       self[:pubkey] || update_pubkey
     end
 
     def update_pubkey
       return unless has_feature?('SSH')
+
       key = ::ProxyAPI::RemoteExecutionSSH.new(:url => url).pubkey
       self.update_attribute(:pubkey, key) if key
       key
     end
 
-    def refresh_with_remote_execution
-      errors = refresh_without_remote_execution
+    def drop_host_from_known_hosts(host)
+      ::ProxyAPI::RemoteExecutionSSH.new(:url => url).drop_from_known_hosts(host)
+    end
+
+    def refresh
+      errors = super
       update_pubkey
       errors
     end

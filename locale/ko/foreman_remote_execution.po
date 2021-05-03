@@ -5,16 +5,19 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Foreman\n"
+"Project-Id-Version: foreman_remote_execution 1.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-22 15:06+0000\n"
-"Last-Translator: Bryan Kearney <bryan.kearney@gmail.com>\n"
+"PO-Revision-Date: 2018-06-14 23:10+0000\n"
+"Last-Translator: Dominic Cleal <dominic@cleal.org>\n"
 "Language-Team: Korean (http://www.transifex.com/foreman/foreman/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "%s"
+msgstr "%s"
 
 msgid "%s ago"
 msgstr "%s 전 "
@@ -33,14 +36,17 @@ msgstr "외부 템플릿에서 제외되는 입력 이름의 쉼표로 구분된
 msgid "A comma separated list of input names to be included from the foreign template."
 msgstr "외부 템플릿에서 포함되는 입력 이름의 쉼표로 구분된 목록입니다."
 
-msgid "A list of options the user can select from. If not provided, the user will be given a free-form field"
-msgstr "사용자가 선택할 수 있는 옵션의 목록입니다. 지정하지 않을 경우 사용자에게 자유 형식 필드가 제공됩니다."
+msgid "A job '%{subject}' has finished successfully"
+msgstr ""
 
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "Foreman으로 원격 실행을 가져오는 플러그인입니다. 원격 관리 기능으로 구성 관리 기능을 완료합니다."
 
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "스크립트를 실행하는 데 사용할 사용자입니다. 이 사용자가 SSH 사용자와 다른 경우 su 또는 sudo를 사용하여 계정을 전환합니다."
+
+msgid "Abort Job"
+msgstr ""
 
 msgid "Action with sub plans"
 msgstr "하위 계획이 있는 작업"
@@ -51,11 +57,26 @@ msgstr "작업"
 msgid "Add Foreign Input Set"
 msgstr "외부 입력 세트 추가"
 
-msgid "Add Input"
-msgstr "입력 추가"
+msgid "Advanced fields"
+msgstr ""
+
+msgid "All fields are required."
+msgstr ""
+
+msgid "Alphabetical"
+msgstr ""
+
+msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
+msgstr ""
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "이미 다른 인터페이스가 실행 인터페이스로 설정되어 있습니다. 이 인터페이스를 대신 사용하시겠습니까?"
+
+msgid "Any Location"
+msgstr ""
+
+msgid "Any Organization"
+msgstr ""
 
 msgid "Back to Job"
 msgstr "작업으로 돌아가기"
@@ -65,6 +86,9 @@ msgstr "북마크 "
 
 msgid "Cancel Job"
 msgstr "작업 취소 "
+
+msgid "Cancel job invocation"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "취소함"
@@ -81,8 +105,20 @@ msgstr "bookmark_id와 search_query를 모두 지정할 수 없습니다."
 msgid "Cannot specify both recurrence and scheduling"
 msgstr "반복 및 스케줄을 모두 지정할 수 없습니다."
 
+msgid "Category And Template"
+msgstr ""
+
+msgid "Category and template"
+msgstr ""
+
+msgid "Choose a job template that is pre-selected in job invocation form"
+msgstr ""
+
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
 msgstr "외부 입력 세트 '%{template}' -> '%{target_template}'의 순환 종속 관계가 감지되었습니다. 템플릿 스택: %{templates_stack}"
+
+msgid "Cleanup working directories"
+msgstr ""
 
 msgid "Clone a provision template"
 msgstr "프로비저닝 템플릿 복제"
@@ -90,13 +126,34 @@ msgstr "프로비저닝 템플릿 복제"
 msgid "Close"
 msgstr "종료"
 
+msgid "Cockpit URL"
+msgstr ""
+
 msgid "Concurrency level"
 msgstr "동시 실행 레벨"
+
+msgid "Concurrency level limited to"
+msgstr ""
+
+msgid "Connect by IP"
+msgstr ""
 
 msgid "Control concurrency level and distribution over time"
 msgstr "동시 실행 레벨 및 기간별 배분 제어"
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} or %{no_proxy} in settings"
+msgid "Could not display data for job invocation."
+msgstr ""
+
+msgid "Could not find any suitable interface for execution"
+msgstr ""
+
+msgid "Could not render the preview because no host matches the search query."
+msgstr ""
+
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
+msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
 msgid "Could not use any template used in the job invocation"
@@ -114,8 +171,23 @@ msgstr "작업 템플릿 생성"
 msgid "Create a recurring job"
 msgstr "반복 작업 생성"
 
-msgid "Create a template input"
-msgstr "템플릿 입력 생성"
+msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr ""
+
+msgid "Current organization %{org_c} is different from job's organization %{org_j}."
+msgstr ""
+
+msgid "Default SSH key passphrase"
+msgstr ""
+
+msgid "Default SSH password"
+msgstr ""
+
+msgid "Default key passphrase to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_key_passphrase"
+msgstr ""
+
+msgid "Default password to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_password"
+msgstr ""
 
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "SSH에 사용할 기본 사용자입니다. remote_execution_ssh_user라는 매개 변수를 설정하여 호스트별로 덮어쓸 수 있습니다."
@@ -129,23 +201,17 @@ msgstr "외부 입력 세트 삭제"
 msgid "Delete a job template"
 msgstr "작업 템플릿 삭제"
 
-msgid "Delete a template input"
-msgstr "템플릿 입력 삭제"
-
 msgid "Description"
 msgstr "설명"
 
 msgid "Description template"
 msgstr "설명 템플릿"
 
-msgid "Detail of %s run"
-msgstr "%s 실행에 대한 상세 정보"
-
 msgid "Display advanced fields"
 msgstr "고급 필드 표시"
 
-msgid "Distribute execution over N seconds"
-msgstr "N초에 걸쳐 실행 배분"
+msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
 
 msgid "Distribute tasks over N seconds"
 msgstr "N초에 걸쳐 태스크 배분"
@@ -156,11 +222,20 @@ msgstr "중복된 입력이 감지되었습니다: %{duplicated_inputs}"
 msgid "Dynamic Query"
 msgstr "동적 쿼리"
 
+msgid "Edit %s"
+msgstr "%s 편집 "
+
 msgid "Edit Job Template"
 msgstr "작업 템플릿 편집"
 
 msgid "Edit Remote Execution Feature"
 msgstr "원격 실행 기능 편집"
+
+msgid "Effective User"
+msgstr ""
+
+msgid "Effective User Method"
+msgstr ""
 
 msgid "Effective user"
 msgstr "유효 사용자"
@@ -171,32 +246,41 @@ msgstr "유효 사용자 메서드 \"%{current_value}\"이(가) %{valid_methods}
 msgid "Effective user options"
 msgstr "유효 사용자 옵션"
 
+msgid "Effective user password"
+msgstr ""
+
+msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Enable Global Proxy"
+msgstr ""
+
 msgid "Error loading data from proxy"
 msgstr "프록시에서 데이터를 로드하는 도중 오류가 발생했습니다."
 
 msgid "Evaluated at:"
 msgstr "평가 시점:"
 
+msgid "Execute the jobs on hosts in randomized order"
+msgstr ""
+
 msgid "Execution"
 msgstr "실행"
+
+msgid "Execution order"
+msgstr ""
+
+msgid "Execution ordering"
+msgstr ""
+
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
 
 msgid "Exit status: %s"
 msgstr "종료 상태: %s"
 
-msgid "Explanation"
-msgstr "설명"
-
-msgid "Export"
-msgstr ""
-
 msgid "Export a job template to ERB"
 msgstr ""
-
-msgid "Fact name, used when input type is fact"
-msgstr "입력 유형이 팩트인 경우 사용되는 팩트 이름입니다."
-
-msgid "Fact value"
-msgstr "팩트 값 "
 
 msgid "Failed"
 msgstr "실패"
@@ -204,17 +288,29 @@ msgstr "실패"
 msgid "Failed rendering template: %s"
 msgstr "템플릿 렌더링 실패: %s"
 
+msgid "Fallback to Any Proxy"
+msgstr ""
+
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "%{template_name} 템플릿에 대한 기능 입력 %{input_name}이(가) 정의되지 않았습니다."
-
-msgid "Filter"
-msgstr "필터 "
 
 msgid "Foreign input set"
 msgstr "외부 입력 세트"
 
+msgid "Foreman can run arbitrary commands on remote hosts using different providers, such as SSH or Ansible. Communication goes through the Smart Proxy so Foreman does not have to have direct access to the target hosts and can scale to control many hosts."
+msgstr ""
+
+msgid "Form Job Template"
+msgstr ""
+
 msgid "Get output for a host"
 msgstr "호스트에 대한 출력 가져오기"
+
+msgid "Get outputs of hosts in a job"
+msgstr ""
+
+msgid "Get raw output for a host"
+msgstr ""
 
 msgid "Hide advanced fields"
 msgstr "고급 필드 숨기기"
@@ -225,17 +321,23 @@ msgstr "호스트"
 msgid "Host detail"
 msgstr "호스트 정보"
 
+msgid "Host task"
+msgstr ""
+
 msgid "Host with id '%{id}' was not found"
 msgstr "ID가 '%{id}'인 호스트를 찾을 수 없습니다."
 
-msgid "Hosts"
-msgstr "호스트"
+msgid "Hosts gone missing"
+msgstr ""
 
 msgid "How often the job should occur, in the cron format"
 msgstr "cron 형식으로 설정하는 작업 발생 빈도입니다."
 
-msgid "Import"
+msgid "Identifier of the Host interface for Remote execution"
 msgstr ""
+
+msgid "Import"
+msgstr "불러오기"
 
 msgid "Import Puppet classes"
 msgstr "Puppet 클래스 가져오기"
@@ -255,26 +357,17 @@ msgstr "이 시간 전에 시작할 수 없는 경우 작업을 취소한다는 
 msgid "Input"
 msgstr "입력"
 
-msgid "Input description"
-msgstr "입력 설명"
-
-msgid "Input is advanced"
-msgstr "입력이 진행됨"
-
-msgid "Input is required"
-msgstr "입력 필요"
-
-msgid "Input name"
-msgstr "입력 이름"
-
 msgid "Input set description"
 msgstr "입력 세트 설명"
 
-msgid "Input type"
-msgstr "입력 유형"
-
 msgid "Inputs to use"
 msgstr "사용할 입력"
+
+msgid "Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration."
+msgstr ""
+
+msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr ""
 
 msgid "Invocation type, one of %s"
 msgstr "호출 유형(%s 중 하나)"
@@ -282,8 +375,14 @@ msgstr "호출 유형(%s 중 하나)"
 msgid "Job"
 msgstr "업무"
 
+msgid "Job Details"
+msgstr ""
+
 msgid "Job Invocation"
 msgstr "작업 호출"
+
+msgid "Job Invocations"
+msgstr ""
 
 msgid "Job Task"
 msgstr "작업 태스크"
@@ -291,8 +390,14 @@ msgstr "작업 태스크"
 msgid "Job Templates"
 msgstr "작업 템플릿"
 
+msgid "Job cancelled by user"
+msgstr ""
+
 msgid "Job category"
 msgstr "작업 카테고리"
+
+msgid "Job execution failed"
+msgstr ""
 
 msgid "Job finished with error"
 msgstr "작업을 마쳤지만 오류가 발생했습니다."
@@ -315,6 +420,9 @@ msgstr ""
 msgid "Job templates"
 msgstr "작업 템플릿"
 
+msgid "Job wizard"
+msgstr ""
+
 msgid "JobTemplate|Locked"
 msgstr "JobTemplate|잠김"
 
@@ -327,14 +435,23 @@ msgstr "JobTemplate|조각 모음"
 msgid "Jobs"
 msgstr "작업"
 
+msgid "Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
 msgid "Label"
 msgstr "레이블 "
+
+msgid "Last execution cancelled"
+msgstr ""
 
 msgid "Last execution failed"
 msgstr "실패한 마지막 실행"
 
 msgid "Last execution succeeded"
 msgstr "성공한 마지막 실행"
+
+msgid "Learn more about this in the documentation."
+msgstr "설명서에서 자세한 내용을 참조하십시오."
 
 msgid "List foreign input sets"
 msgstr "외부 입력 세트 나열"
@@ -351,11 +468,17 @@ msgstr "위치별 작업 템플릿 나열"
 msgid "List job templates per organization"
 msgstr "조직별 작업 템플릿 나열"
 
+msgid "List of proxy IDs to be used for remote execution"
+msgstr ""
+
 msgid "List remote execution features"
 msgstr "원격 실행 기능 나열"
 
-msgid "List template inputs"
-msgstr "템플릿 입력 나열"
+msgid "List template invocations belonging to job invocation"
+msgstr ""
+
+msgid "Location"
+msgstr ""
 
 msgid "Manual selection"
 msgstr "수동 선택"
@@ -376,7 +499,7 @@ msgid "No execution finished yet"
 msgstr "아직 완료된 실행이 없습니다."
 
 msgid "No hosts found."
-msgstr "호스트를 찾을 수 없습니다."
+msgstr ""
 
 msgid "No template mapped to feature %{feature_name}"
 msgstr "%{feature_name} 기능에 매핑된 템플릿이 없습니다."
@@ -384,35 +507,53 @@ msgstr "%{feature_name} 기능에 매핑된 템플릿이 없습니다."
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
 
+msgid "Organization"
+msgstr ""
+
 msgid "Override the description format from the template for this invocation only"
 msgstr "이 호출에 대한 템플릿에서만 설명 형식 덮어쓰기"
+
+msgid "Override the timeout interval from the template for this invocation only"
+msgstr ""
 
 msgid "Overview"
 msgstr "개요"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "덮어쓰기"
 
 msgid "Overwrite template if it already exists"
+msgstr ""
+
+msgid "Password"
+msgstr "암호 "
+
+msgid "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
 
 msgid "Pending"
 msgstr "보류 중 "
 
+msgid "Perform a single Puppet run"
+msgstr ""
+
 msgid "Perform no more executions after this time"
 msgstr "이 시간 이후 더 이상 실행을 수행하지 않음"
 
-msgid "Playbook execution failed"
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
-msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgid "Preupgrade job"
 msgstr ""
 
 msgid "Preview"
 msgstr "미리 보기"
 
-msgid "Preview for target %s"
-msgstr "대상 %s의 미리 보기"
+msgid "Preview templates"
+msgstr ""
+
+msgid "Private key passphrase"
+msgstr ""
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "템플릿을 미리 보는 도중 문제가 발생했습니다: %{error}. 미리 보기 전에 템플릿 입력 변경 내용을 저장해야 합니다."
@@ -426,14 +567,8 @@ msgstr "공급자 및 템플릿"
 msgid "Proxies"
 msgstr "프록시 "
 
-msgid "Puppet class name, used when input type is puppet_parameter"
-msgstr "입력 유형이 puppet_parameter인 경우 사용되는 Puppet 클래스 이름입니다."
-
-msgid "Puppet parameter"
-msgstr "Puppet 매개 변수"
-
-msgid "Puppet parameter name, used when input type is puppet_parameter"
-msgstr "입력 유형이 puppet_parameter인 경우 사용되는 Puppet 매개 변수 이름입니다."
+msgid "Randomized"
+msgstr ""
 
 msgid "Recurring logic"
 msgstr "반복 로직"
@@ -444,20 +579,26 @@ msgstr "템플릿의 반복 렌더링이 감지되었습니다."
 msgid "Refresh"
 msgstr "새로고침 "
 
-msgid "Refresh this page"
-msgstr "이 페이지 새로 고침"
-
 msgid "Remote Execution"
 msgstr "원격 실행"
 
 msgid "Remote Execution Features"
 msgstr "원격 실행 기능"
 
+msgid "Remote Execution Interface"
+msgstr ""
+
 msgid "Remote action:"
 msgstr "원격 작업:"
 
 msgid "Remote execution"
 msgstr "원격 실행"
+
+msgid "Remote execution feature label that should be triggered, job template assigned to this feature will be used"
+msgstr ""
+
+msgid "Remove SSH known hosts for %s"
+msgstr ""
 
 msgid "Repeat a maximum of N times"
 msgstr "최대 N번 반복"
@@ -467,6 +608,9 @@ msgstr "재실행"
 
 msgid "Rerun failed"
 msgstr "재실행 실패"
+
+msgid "Rerun job on failed hosts"
+msgstr ""
 
 msgid "Rerun on %s"
 msgstr "%s에 재실행"
@@ -480,20 +624,47 @@ msgstr "작업 재실행"
 msgid "Resolves to"
 msgstr "다음으로 확인"
 
+msgid "Results"
+msgstr ""
+
+msgid "Review details"
+msgstr ""
+
 msgid "Run"
 msgstr "실행"
 
 msgid "Run Job"
 msgstr "작업 실행"
 
+msgid "Run Puppet Once"
+msgstr ""
+
 msgid "Run at most N tasks at a time"
 msgstr "한 번에 최대 N개 태스크 실행"
+
+msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
+
+msgid "Run job"
+msgstr ""
 
 msgid "SSH"
 msgstr "SSH"
 
+msgid "SSH Port"
+msgstr ""
+
+msgid "SSH User"
+msgstr ""
+
 msgid "SSH provider specific options"
 msgstr "SSH 공급자 관련 옵션"
+
+msgid "Schedule"
+msgstr "스케줄 "
+
+msgid "Schedule Remote Job"
+msgstr ""
 
 msgid "Schedule the job for a future time"
 msgstr "이후 시간에 대해 작업 스케줄"
@@ -501,17 +672,23 @@ msgstr "이후 시간에 대해 작업 스케줄"
 msgid "Schedule the job to start at a later time"
 msgstr "나중에 시작하도록 작업 스케줄"
 
+msgid "Scheduled to start at"
+msgstr ""
+
+msgid "Scheduled to start before"
+msgstr ""
+
 msgid "Scroll to bottom"
 msgstr "맨 아래로 스크롤"
 
 msgid "Scroll to top"
 msgstr "맨 위로 스크롤"
 
-msgid "Search"
-msgstr "검색"
+msgid "Search Query"
+msgstr ""
 
-msgid "Search for remote execution proxy outside of the proxies assigned to the host. If locations or organizations are enabled, the search will be limited to the host's organization or location."
-msgstr "호스트에 할당된 프록시 이외의 프록시에서 원격 실행 프록시를 검색합니다. 위치 또는 조직이 활성화된 경우 호스트의 조직 또는 위치로 검색 범위가 제한됩니다."
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host's organization and location."
+msgstr ""
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "원격 실행 기능이 있는 모든 프록시의 호스트를 검색합니다. 호스트에 서브넷이 없거나 서브넷에 실행 프록시가 없는 경우 유용합니다."
@@ -528,8 +705,17 @@ msgstr ""
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "이 서브넷에 적용할 수 있는 원격 실행 프록시를 모두 선택합니다. 공급자가 동일한 프록시를 여러 개 추가한 경우 해당 프록시 간에 작업이 로드 밸런싱됩니다."
 
-msgid "Selectable values for user inputs"
-msgstr "사용자 입력으로 선택 가능한 값"
+msgid "Set to distribute over"
+msgstr ""
+
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
+msgstr ""
+
+msgid "Should this interface be used for remote execution?"
+msgstr ""
+
+msgid "Show Job status for the hosts"
+msgstr ""
 
 msgid "Show foreign input set details"
 msgstr "외부 입력 세트 정보 표시"
@@ -542,9 +728,6 @@ msgstr "작업 템플릿 정보 표시"
 
 msgid "Show remote execution feature"
 msgstr "원격 실행 기능 표시"
-
-msgid "Show template input details"
-msgstr "템플릿 입력 정보 표시"
 
 msgid "Snippet"
 msgstr "조각 모음 "
@@ -564,6 +747,9 @@ msgstr "성공"
 msgid "Success"
 msgstr "성공"
 
+msgid "Sync Job Templates"
+msgstr ""
+
 msgid "Target hosts"
 msgstr "대상 호스트"
 
@@ -576,11 +762,14 @@ msgstr "대상: "
 msgid "Task Details"
 msgstr "작업 자세히"
 
+msgid "Task cancelled"
+msgstr ""
+
 msgid "Template ERB"
 msgstr ""
 
-msgid "Template input"
-msgstr "템플릿 입력"
+msgid "Template Invocation for %s"
+msgstr ""
 
 msgid "Template name"
 msgstr "템플릿 이름"
@@ -600,13 +789,21 @@ msgstr "원격 실행에 사용되는 실행 인터페이스입니다."
 msgid "The final host list may change because the selected query is dynamic.  It will be rerun during execution."
 msgstr "동적 쿼리를 선택했기 때문에 최종 호스트 목록이 변경될 수 있습니다. 실행 도중에 재실행됩니다."
 
-msgid "The job template to use"
-msgstr "사용할 작업 템플릿"
+msgid "The job cannot be aborted at the moment."
+msgstr ""
+
+msgid "The job cannot be cancelled at the moment."
+msgstr ""
+
+msgid "The job could not be cancelled."
+msgstr ""
+
+msgid "The job template to use, parameter is required unless feature was specified"
+msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "적용 가능한 유일한 프록시인 %{proxy_names}이(가) 작동하지 않습니다."
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
 msgstr "사용자가 %{feature_name} 기능에 매핑된 %{template_name} 템플릿에 액세스할 수 없습니다."
@@ -614,20 +811,32 @@ msgstr "사용자가 %{feature_name} 기능에 매핑된 %{template_name} 템플
 msgid "There was an error while updating the status, try refreshing the page."
 msgstr "상태를 업데이트하는 도중 오류가 발생했습니다. 페이지를 새로 고쳐 보십시오."
 
+msgid "This can happen if the host is removed or moved to another organization or location after the job was started"
+msgstr ""
+
 msgid "This template is locked for editing."
 msgstr "이 템플릿은 편집 용으로 잠금되어 있습니다. "
 
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "이 템플릿은 잠겨 있습니다. 사용자 정의하려면 이를 새 템플릿에 복제하십시오. "
 
-msgid "This template is used to generate the description Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "이 템플릿은 설명을 생성하는 데 사용됩니다. %{package} 구문을 통해 입력 값을 사용할 수 있습니다. 또한 %{job_category} 및 %{template_name}을(를) 사용하여 작업 카테고리와 템플릿 이름을 포함할 수도 있습니다."
-
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
 msgstr "이 템플릿은 설명을 생성하는 데 사용됩니다. %{package} 구문을 통해 입력 값을 사용할 수 있습니다. 또한 %{job_category} 및 %{template_name}을(를) 사용하여 작업 카테고리와 템플릿 이름을 포함할 수도 있습니다."
 
+msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
+msgstr ""
+
+msgid "Time in seconds from the start on the remote host after which the job should be killed."
+msgstr ""
+
 msgid "Time span"
 msgstr "기간"
+
+msgid "Timeout to kill"
+msgstr ""
+
+msgid "Timeout to kill after"
+msgstr ""
 
 msgid "Toggle DEBUG"
 msgstr "DEBUG 토글"
@@ -644,23 +853,38 @@ msgstr "명령 토글"
 msgid "Total hosts"
 msgstr "총 호스트"
 
+msgid "Try to abort the job on a host without waiting for its result"
+msgstr ""
+
+msgid "Try to abort the job without waiting for the results from the remote hosts"
+msgstr ""
+
 msgid "Try to cancel the job"
 msgstr "작업 취소 시도"
 
 msgid "Try to cancel the job on a host"
 msgstr "호스트에 대한 작업 취소 시도"
 
+msgid "Trying to abort the job"
+msgstr ""
+
+msgid "Trying to cancel the job"
+msgstr ""
+
 msgid "Type"
 msgstr "형태"
 
-msgid "Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
-msgstr "유형은 호스트에 대해 쿼리를 평가하는 시기에 영향을 줍니다.<br><ul><li><b>정적</b> - 이 양식을 제출한 직후에 평가합니다.</li><li><b>동적</b> - 실행을 시작하기 직전에 평가합니다. 따라서 미래의 시간으로 예정된 경우 평가 전에 대상 호스트 세트가 변경될 수 있습니다.</li></ul>"
+msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
+msgstr ""
 
 msgid "Type of query"
 msgstr "쿼리 유형"
 
 msgid "Unable to fetch public key"
 msgstr "공개 키를 가져올 수 없습니다."
+
+msgid "Unable to remove host from known hosts"
+msgstr ""
 
 msgid "Unable to save template. Correct highlighted errors"
 msgstr ""
@@ -683,11 +907,11 @@ msgstr "외부 입력 세트 업데이트"
 msgid "Update a job template"
 msgstr "작업 템플릿 업데이트"
 
-msgid "Update a template input"
-msgstr "템플릿 입력 업데이트"
-
 msgid "Use default description template"
 msgstr "기본 설명 템플릿 사용"
+
+msgid "User Inputs"
+msgstr ""
 
 msgid "User can not execute job on host %s"
 msgstr "사용자가 %s 호스트에 대해 작업을 실행할 수 없습니다."
@@ -701,14 +925,11 @@ msgstr "사용자가 %s에 대해 이 작업 템플릿을 실행할 수 없습�
 msgid "User input"
 msgstr "사용자 입력"
 
-msgid "Value for required input '%s' was not specified"
-msgstr "필수 입력 '%s'의 값을 지정하지 않았습니다."
+msgid "Value"
+msgstr "값 "
 
-msgid "Variable"
-msgstr "변수 "
-
-msgid "Variable name, used when input type is variable"
-msgstr "입력 유형이 변수인 경우 사용되는 변수 이름입니다."
+msgid "Web Console"
+msgstr ""
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "유효 사용자를 전환하는 데 사용할 명령입니다(%s 중 하나)."
@@ -719,9 +940,10 @@ msgstr "사용자가 스크립트를 실행하는 데 사용해야 할 옵션입
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "사용자가 스크립트를 실행하는 데 사용해야 할 옵션입니다(sudo와 유사한 메커니즘 사용). 템플릿 매개 변수 또는 글로벌 설정으로 기본 설정됩니다."
 
-msgid ""
-"When enabled, the remote execution will try to run the commands directly, when no\n"
-"                     proxy with remote execution feature is configured for the host."
+msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
+msgstr ""
+
+msgid "Where to find the Cockpit instance for the Web Console button.  By default, no button is shown."
 msgstr ""
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
@@ -739,11 +961,11 @@ msgstr ""
 msgid "Whether we should sync templates from disk when running db:seed."
 msgstr "db:seed를 실행할 때 디스크의 템플릿을 동기화할지 여부입니다."
 
+msgid "Workers pool size"
+msgstr ""
+
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "현재 할당된 템플릿을 볼 수 없습니다. 지금 양식을 저장하면 템플릿의 할당이 취소됩니다."
-
-msgid "add a input for this template"
-msgstr "이 템플릿에 대한 입력을 추가합니다."
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "이 템플릿에서 다른 템플릿 입력을 참조하기 위한 입력 세트를 추가합니다."
@@ -751,14 +973,20 @@ msgstr "이 템플릿에서 다른 템플릿 입력을 참조하기 위한 입�
 msgid "cancelled"
 msgstr "취소함"
 
+msgid "default_capsule method missing from SmartProxy"
+msgstr ""
+
+msgid "effective user"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
 msgid "error during rendering: %s"
 msgstr "렌더링 도중 오류가 발생했습니다: %s"
 
 msgid "failed"
 msgstr "실패함"
-
-msgid "following user inputs were provided"
-msgstr "다음 사용자 입력이 제공되었습니다."
 
 msgid "here"
 msgstr "여기 "
@@ -778,32 +1006,32 @@ msgstr "포함된 템플릿 '%s'을(를) 찾을 수 없습니다."
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "이름이 '%s'인 입력 매크로를 사용했지만 이 템플릿에 대해 해당 이름의 입력이 정의되지 않았습니다."
 
-msgid "planned"
-msgstr ""
-
 msgid "queued"
 msgstr "대기열에 추가됨"
 
-msgid "remove template input"
-msgstr "템플릿 입력 삭제"
+msgid "queued to start executing in %{time}"
+msgstr ""
 
 msgid "remove template input set"
 msgstr "템플릿 입력 세트 삭제"
 
-msgid "running"
-msgstr ""
-
 msgid "running %{percent}%%"
 msgstr ""
+
+msgid "seconds"
+msgstr "초"
 
 msgid "succeeded"
 msgstr "성공"
 
-msgid "success"
-msgstr "성공"
+msgid "tasks at a time"
+msgstr ""
 
 msgid "template"
 msgstr "템플릿"
 
 msgid "unknown status"
 msgstr "알 수 없는 상태"
+
+msgid "using "
+msgstr ""

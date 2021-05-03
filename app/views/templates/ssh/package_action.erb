@@ -1,6 +1,7 @@
 <%#
 kind: job_template
 name: Package Action - SSH Default
+model: JobTemplate
 job_category: Packages
 description_format: "%{action} package(s) %{package}"
 provider_type: SSH
@@ -27,19 +28,52 @@ template_inputs:
 %>
 
 <%
-  supported_families = ['Redhat', 'Debian']
+  supported_families = ['Redhat', 'Debian', 'Suse']
   render_error(N_('Unsupported or no operating system found for this host.')) unless @host.operatingsystem && supported_families.include?(@host.operatingsystem.family)
-%>
+  action = input("action")
+
+  if @host.operatingsystem.family == 'Redhat'
+    package_manager = 'yum'
+  elsif @host.operatingsystem.family == 'Debian'
+    package_manager = 'apt'
+  elsif @host.operatingsystem.family == 'Suse'
+    package_manager = 'zypper'
+  end
+-%>
+#!/bin/bash
 
 # Helper function that exits with a particular message and code.
 #
 # Usage:
 #   exit_with_message "Could not do a thing" 2
 #
-function exit_with_message() {
+exit_with_message () {
   echo "${1}, exiting..."
   exit $2
 }
+
+<% if package_manager == 'zypper' -%>
+handle_zypp_res_codes () {
+  RETVAL=$1
+
+  # See https://github.com/openSUSE/zypper/blob/master/src/main.h
+  declare -A ZYPP_RES_CODES
+  ZYPP_RES_CODES[100]='Updates are needed'
+  ZYPP_RES_CODES[101]='Security updates are needed'
+  ZYPP_RES_CODES[102]='Reboot needed after install/upgrade'
+  ZYPP_RES_CODES[103]='Restart of package manager itself needed'
+  ZYPP_RES_CODES[104]='given capability not found'
+  ZYPP_RES_CODES[105]='SIGINT or SIGTERM received'
+  ZYPP_RES_CODES[106]='Some repos have been skipped due to refresh errors'
+  ZYPP_RES_CODES[107]='Some rpm %post configuration script failed'
+
+  if [ "${ZYPP_RES_CODES[$RETVAL]}" != "" ]; then
+    echo ${ZYPP_RES_CODES[$RETVAL]}
+    RETVAL=0
+  fi
+  return $RETVAL
+}
+<% end -%>
 
 <% unless input("pre_script").blank? -%>
   # Pre Script
@@ -49,10 +83,35 @@ function exit_with_message() {
 <% end -%>
 
 # Action
-<% if @host.operatingsystem.family == 'Redhat' -%>
-  yum -y <%= input("action") %> <%= input("package") %>
-<% elsif @host.operatingsystem.family == 'Debian' -%>
-  apt-get -y <%= input("action") %> <%= input("package") %>
+<% if package_manager == 'yum' -%>
+  yum -y <%= action %> <%= input("package") %>
+<% elsif package_manager == 'apt' -%>
+  <%-
+    action = 'install' if action == 'group install'
+    action = 'remove' if action == 'group remove'
+    if action == 'group update' || action == 'update'
+      if input('package').blank?
+        action = 'upgrade'
+      else
+        action = '--only-upgrade install'
+      end
+    end
+  -%>
+  [ -x "$(command -v subscription-manager)" ] && subscription-manager refresh
+  export DEBIAN_FRONTEND=noninteractive
+  apt-get -y update
+  apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= action %> <%= input("package") %>
+<% elsif package_manager == 'zypper' -%>
+  <%-
+    if action == "group install"
+      action = "install -t pattern"
+    elsif action == "group remove"
+      action = "remove -t pattern"
+    end
+  -%>
+  zypper refresh
+  zypper -n <%= action %> <%= input("package") %>
+  handle_zypp_res_codes $?
 <% end -%>
 RETVAL=$?
 [ $RETVAL -eq 0 ] || exit_with_message "Package action failed" $RETVAL

@@ -7,15 +7,21 @@ class HostStatus::ExecutionStatus < HostStatus::Status
   QUEUED = 2
   # execution is in progress, dynflow task was created
   RUNNING = 3
+  # execution has been cancelled
+  CANCELLED = 4
   # mapping to string representation
-  STATUS_NAMES = { OK => 'succeeded', ERROR => 'failed', QUEUED => 'queued', RUNNING => 'running' }
+  STATUS_NAMES = { OK => 'succeeded', ERROR => 'failed', QUEUED => 'queued', RUNNING => 'running', CANCELLED => 'cancelled' }.freeze
 
   def relevant?(*args)
     execution_tasks.present?
   end
 
   def to_status(options = {})
-    ExecutionTaskStatusMapper.new(last_stopped_task).status
+    if self.new_record?
+      ExecutionTaskStatusMapper.new(last_stopped_task).status
+    else
+      self.status
+    end
   end
 
   def to_global(options = {})
@@ -34,11 +40,20 @@ class HostStatus::ExecutionStatus < HostStatus::Status
     case to_status(options)
       when OK
         execution_tasks.present? ? N_('Last execution succeeded') : N_('No execution finished yet')
+      when CANCELLED
+        N_('Last execution cancelled')
       when ERROR
         N_('Last execution failed')
       else
         N_('Unknown execution status')
     end
+  end
+
+  def status_link
+    job_invocation = last_stopped_task.parent_task.job_invocations.first
+    return nil unless User.current.can?(:view_job_invocations, job_invocation)
+
+    Rails.application.routes.url_helpers.job_invocation_path(job_invocation)
   end
 
   class ExecutionTaskStatusMapper
@@ -50,6 +65,8 @@ class HostStatus::ExecutionStatus < HostStatus::Status
       case status
         when OK
           [ "state = 'stopped' AND result = 'success'" ]
+        when CANCELLED
+          [ "state = 'stopped' AND result = 'cancelled'" ]
         when ERROR
           [ "state = 'stopped' AND (result = 'error' OR result = 'warning')" ]
         when QUEUED
@@ -68,8 +85,10 @@ class HostStatus::ExecutionStatus < HostStatus::Status
     def status
       if task.nil? || task.state == 'scheduled'
         QUEUED
-      elsif task.state == 'stopped' && 'success' == task.result
+      elsif task.state == 'stopped' && task.result == 'success'
         OK
+      elsif task.state == 'stopped' && task.result == 'cancelled'
+        CANCELLED
       elsif task.pending?
         RUNNING
       else

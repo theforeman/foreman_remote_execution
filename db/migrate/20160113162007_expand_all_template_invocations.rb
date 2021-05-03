@@ -1,11 +1,11 @@
-class ExpandAllTemplateInvocations < ActiveRecord::Migration
-  class FakeTemplateInvocation < ActiveRecord::Base
+class ExpandAllTemplateInvocations < ActiveRecord::Migration[4.2]
+  class FakeTemplateInvocation < ApplicationRecord
     self.table_name = 'template_invocations'
 
     has_many :input_values, :class_name => 'FakeInputValue', :foreign_key => 'template_invocation_id'
   end
 
-  class FakeInputValue < ActiveRecord::Base
+  class FakeInputValue < ApplicationRecord
     self.table_name = 'template_invocation_input_values'
   end
 
@@ -14,7 +14,7 @@ class ExpandAllTemplateInvocations < ActiveRecord::Migration
     FakeTemplateInvocation.update_all 'host_id = NULL'
 
     # expand all pattern template invocations and link RunHostJob
-    JobInvocation.joins(:targeting).where("#{Targeting.table_name}.resolved_at IS NOT NULL").includes([ :pattern_template_invocations, :targeting, :sub_tasks => :locks ]).each do |job_invocation|
+    JobInvocation.joins(:targeting).where("#{Targeting.table_name}.resolved_at IS NOT NULL").includes([:pattern_template_invocations, :targeting]).each do |job_invocation|
       job_invocation.pattern_template_invocations.each do |pattern_template_invocation|
         job_invocation.targeting.hosts.each do |host|
           task = job_invocation.sub_tasks.find do |sub_task|

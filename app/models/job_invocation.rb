@@ -1,12 +1,17 @@
-class JobInvocation < ActiveRecord::Base
+class JobInvocation < ApplicationRecord
+  CACHE_PREFIX = "job_invocation".freeze
+
+  audited :except => [:task_id, :targeting_id, :task_group_id, :triggering_id]
+
   include Authorizable
+  include Encryptable
 
   include ForemanRemoteExecution::ErrorsFlattener
   FLATTENED_ERRORS_MAPPING = {
     :pattern_template_invocations => lambda do |template_invocation|
       _('template') + " #{template_invocation.template.name}"
-    end
-  }
+    end,
+  }.freeze
 
   belongs_to :targeting, :dependent => :destroy
   has_many :all_template_invocations, :inverse_of => :job_invocation, :dependent => :destroy, :class_name => 'TemplateInvocation'
@@ -17,11 +22,12 @@ class JobInvocation < ActiveRecord::Base
   validates :job_category, :presence => true
   validates_associated :targeting, :all_template_invocations
 
+  scoped_search :on => :id, :complete_value => true
   scoped_search :on => :job_category, :complete_value => true
-  scoped_search :on => :description # FIXME No auto complete because of https://github.com/wvanbergen/scoped_search/issues/138
+  scoped_search :on => :description, :complete_value => true
 
   has_many :template_invocations_hosts, :through => :template_invocations, :source => :host
-  scoped_search :in => :template_invocations_hosts, :on => :name, :rename => 'host', :complete_value => true
+  scoped_search :relation => :template_invocations_hosts, :on => :name, :rename => 'host', :complete_value => true
 
   delegate :bookmark, :resolved?, :to => :targeting, :allow_nil => true
 
@@ -36,21 +42,26 @@ class JobInvocation < ActiveRecord::Base
   has_many :template_invocation_tasks, :through => :template_invocations,
                                        :class_name => 'ForemanTasks::Task',
                                        :source => 'run_host_job_task'
-
-  scoped_search :in => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
-  scoped_search :in => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
-  scoped_search :in => :task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
-  scoped_search :in => :task, :on => :state, :rename => 'status', :ext_method => :search_by_status,
+  has_one :user, through: :task
+  scoped_search relation: :user, on: :login, rename: 'user', complete_value: true,
+                value_translation: ->(value) { value == 'current_user' ? User.current.login : value },
+                special_values: [:current_user], aliases: ['owner'], :only_explicit => true
+  scoped_search :relation => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
+  scoped_search :relation => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
+  scoped_search :relation => :task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
+  scoped_search :relation => :task, :on => :state, :rename => 'status', :ext_method => :search_by_status,
                 :only_explicit => true, :complete_value => Hash[HostStatus::ExecutionStatus::STATUS_NAMES.values.map { |v| [v, v] }]
 
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
   has_one :recurring_logic, :through => :triggering, :class_name => 'ForemanTasks::RecurringLogic'
 
+  belongs_to :remote_execution_feature
+
   scope :with_task, -> { references(:task) }
 
-  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
+  scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
 
-  scoped_search :in => :recurring_logic, :on => 'id', :rename => 'recurring',
+  scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring',
                 :ext_method => :search_by_recurring_logic, :only_explicit => true,
                 :complete_value => { :true => true, :false => false }
 
@@ -62,6 +73,12 @@ class JobInvocation < ActiveRecord::Base
   attr_writer :start_at
 
   delegate :start_at, :to => :task, :allow_nil => true
+
+  encrypts :password, :key_passphrase, :effective_user_password
+
+  class Jail < Safemode::Jail
+    allow :sub_task_for_host, :template_invocations_hosts
+  end
 
   def self.search_by_status(key, operator, value)
     conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)
@@ -77,12 +94,33 @@ class JobInvocation < ActiveRecord::Base
     { :conditions => sanitize_sql_for_conditions(["foreman_tasks_recurring_logics.id IS #{not_operator} NULL"]), :joins => :recurring_logic }
   end
 
+  def notification_recipients_ids
+    [ self.targeting.user_id ]
+  end
+
+  def build_notification
+    klass = nil
+    if self.remote_execution_feature && self.remote_execution_feature.notification_builder.present?
+      begin
+        klass = remote_execution_feature.notification_builder.constantize
+      rescue NameError => e
+        logger.exception "REX feature defines unknown notification builder class", e
+      end
+    end
+    klass ||= UINotifications::RemoteExecutionJobs::BaseJobFinish
+    klass.new(self)
+  end
+
   def status
     HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.new(task).status
   end
 
   def status_label
     HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.new(task).status_label
+  end
+
+  def to_label
+    description
   end
 
   # returns progress in percents
@@ -107,6 +145,9 @@ class JobInvocation < ActiveRecord::Base
       invocation.description_format = self.description_format
       invocation.description = self.description
       invocation.pattern_template_invocations = self.pattern_template_invocations.map(&:deep_clone)
+      invocation.password = self.password
+      invocation.key_passphrase = self.key_passphrase
+      invocation.effective_user_password = self.effective_user_password
     end
   end
 
@@ -119,20 +160,25 @@ class JobInvocation < ActiveRecord::Base
   end
 
   def failed_template_invocation_tasks
-    template_invocation_tasks.where(:result => [ 'error', 'warning' ])
+    template_invocation_tasks.where(:result => TemplateInvocation::TaskResultMap.status_to_task_result(:failed))
   end
 
   def failed_host_ids
-    failed_template_invocations.map(&:host_id)
+    failed_hosts.pluck(:id)
   end
 
   def failed_hosts
-    failed_template_invocations.includes(:host).map(&:host)
+    base = targeting.hosts
+    if finished?
+      base.where.not(:id => not_failed_template_invocations.select(:host_id))
+    else
+      base.where(:id => failed_template_invocations.select(:host_id))
+    end
   end
 
   def total_hosts_count
     if targeting.resolved?
-      targeting.hosts.count
+      task&.main_action&.total_count || targeting.hosts.count
     else
       _('N/A')
     end
@@ -160,40 +206,61 @@ class JobInvocation < ActiveRecord::Base
 
   def output(host)
     return unless (task = sub_task_for_host(host)) && task.main_action && task.main_action.live_output.any?
+
     task.main_action.live_output.first['output']
   end
 
   def generate_description
-    key_re = /%\{([^\}]+)\}/
     template_invocation = pattern_template_invocations.first
-    hash_base = Hash.new { |hash, key| hash[key] = "%{#{key}}" }
-    input_hash = template_invocation.input_values.reduce(hash_base) { |h, v| h.update(v.template_input.name => v.value) }
-    input_hash.update(:job_category => job_category)
-    input_hash.update(:template_name => template_invocation.template.name)
-    description_format.scan(key_re) { |key| input_hash[key.first] }
-    self.description = description_format
-    input_hash.each do |k, v|
-      self.description.gsub!(Regexp.new("%\{#{k}\}"), v || '')
+    input_hash = template_invocation.input_values.reduce({}) do |h, v|
+      value = v.value
+      value = '*' * 3 if v.template_input.respond_to?(:hidden_value) && v.template_input.hidden_value?
+      h.update("%{#{v.template_input.name}}" => value)
     end
+    input_hash.update("%{job_category}" => job_category)
+    input_hash.update("%{template_name}" => template_invocation.template.name)
+    input_hash.default = "''"
+    self.description = description_format.gsub(/%{[^}]+}/) { |key| input_hash[key] }
     self.description = self.description[0..(JobInvocation.columns_hash['description'].limit - 1)]
   end
 
   def progress_report
-    if queued? || !targeting.resolved?
-      %w(success total cancelled failed error warning pending progress).map(&:to_sym).reduce({}) do |acc, key|
+    map = TemplateInvocation::TaskResultMap
+    all_keys = (map.results | map.statuses | [:progress, :total])
+    if queued? || (task && task.started_at.nil?) || !targeting.resolved?
+      all_keys.reduce({}) do |acc, key|
         acc.merge(key => 0)
       end
     else
       counts  = task.sub_tasks_counts
-      done    = counts.values_at(:cancelled, :error, :success, :warning).reduce(:+)
+      done    = counts.values_at(*map.results).reduce(:+)
       percent = progress(counts[:total], done)
-      counts.merge(:progress => percent, :failed => counts[:error] + counts[:warning])
+      counts.merge(:progress => percent, :failed => counts.values_at(*map.status_to_task_result(:failed)).reduce(:+))
     end
+  end
+
+  def cancel(force = false)
+    method = force ? :abort : :cancel
+    task.send(method)
+  end
+
+  def finished?
+    !(task.nil? || task.pending?)
+  end
+
+  def missing_hosts_count
+    targeting.resolved? ? total_hosts_count - targeting.hosts.count : 0
   end
 
   private
 
   def failed_template_invocations
-    template_invocations.joins(:run_host_job_task).where("#{ForemanTasks::Task.table_name}.result" => ['error', 'warning'])
+    results = [:cancelled, :failed].map { |state| TemplateInvocation::TaskResultMap.status_to_task_result(state) }.flatten
+    template_invocations.joins(:run_host_job_task).where(ForemanTasks::Task.table_name => { :result => results })
+  end
+
+  def not_failed_template_invocations
+    results = [:cancelled, :failed].map { |state| TemplateInvocation::TaskResultMap.status_to_task_result(state) }.flatten
+    template_invocations.joins(:run_host_job_task).where.not(ForemanTasks::Task.table_name => { :result => results })
   end
 end

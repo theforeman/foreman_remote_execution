@@ -1,11 +1,11 @@
-class AddTargeting < ActiveRecord::Migration
+class AddTargeting < ActiveRecord::Migration[4.2]
   def change
     create_table :targetings do |t|
       t.string :search_query, :limit => 255
       t.references :bookmark
       t.references :user
       t.string :targeting_type, :null => false, :limit => 255
-      t.timestamps
+      t.timestamps :null => true
     end
 
     add_index :targetings, [:bookmark_id], :name => 'targetings_bookmark_id'

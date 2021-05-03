@@ -1,6 +1,7 @@
 <%#
 kind: job_template
 name: Puppet Run Once - SSH Default
+model: JobTemplate
 job_category: Puppet
 description_format: 'Run Puppet once with "%{puppet_options}"'
 provider_type: SSH
@@ -10,4 +11,7 @@ template_inputs:
   input_type: user
   required: false
 %>
+<% if @host.operatingsystem.family == 'Debian' -%>
+export PATH=/opt/puppetlabs/bin:$PATH
+<% end -%>
 puppet agent --onetime --no-usecacheonfailure --no-daemonize <%= input("puppet_options") %>

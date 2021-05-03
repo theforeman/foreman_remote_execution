@@ -1,11 +1,13 @@
+<% stylesheet 'foreman_remote_execution/foreman_remote_execution' %>
 <% title _('Job invocations') %>
 
 <% title_actions(job_invocations_buttons) %>
 
-<table class="table table-bordered table-striped table-condensed table-fixed">
+<table class="<%= table_css_classes('table-condensed table-fixed') %>">
   <thead>
     <tr>
       <th><%= sort :description, :as => _('Description') %></th>
+      <th class="col-md-1"><%= _('Search Query') %></th>
       <th class="col-md-1"><%= _('Status') %></th>
       <th class="col-md-1"><%= _('Succeeded') %></th>
       <th class="col-md-1"><%= _('Failed') %></th>
@@ -18,7 +20,8 @@
   <tbody>
     <% @job_invocations.each do |invocation| %>
       <tr>
-        <td><%= link_to_if_authorized invocation_description(invocation), hash_for_job_invocation_path(invocation).merge(:auth_object => invocation, :permission => :view_job_invocations, :authorizer => authorizer) %></td>
+        <td class="text_warp"><%= link_to_if_authorized invocation_description(invocation), hash_for_job_invocation_path(invocation).merge(:auth_object => invocation, :permission => :view_job_invocations, :authorizer => authorizer) %></td>
+        <td><%= trunc_with_tooltip(invocation&.targeting&.search_query, 15) %></td>
         <td><%= link_to_invocation_task_if_authorized(invocation) %></td>
         <td><%= invocation_result(invocation, :success_count) %></td>
         <td><%= invocation_result(invocation, :failed_count) %></td>

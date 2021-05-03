@@ -1,3 +1,5 @@
 source 'http://rubygems.org'
 
-gemspec
+gemspec :name => 'foreman_remote_execution'
+
+gem 'theforeman-rubocop', '~> 0.1.0.pre'

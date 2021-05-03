@@ -1,25 +1,4 @@
 $('div#title_action div.btn-group').html('<%= button_group(job_invocation_task_buttons(@job_invocation.task)).html_safe %>');
-$('div#status_chart').html('<%=j job_invocation_chart(@job_invocation) %>');
-$('div#status').flot_pie();
-
-<% if params[:hosts_needs_refresh] == 'true' && @job_invocation.resolved? %>
-  var hosts_tab = $('div#hosts');
-  hosts_tab.html('<%=j render('tab_hosts', :job_invocation => @job_invocation, :hosts => @hosts) %>');
-  hosts_tab.data('refresh_required', '');
-<% end %>
-
-<% ['name', 'status', 'actions', 'provider'].each do |attribute| %>
-  <% if params["host_ids_needing_#{attribute}_update"].present? %>
-    var td_element;
-    <% Host.authorized(:view_hosts, Host).where(:id => params["host_ids_needing_#{attribute}_update"]).each do |host| %>
-      <% template_invocation = @job_invocation.template_invocations.find { |template_invocation| template_invocation.host_id == host.id } %>
-      <% task = template_invocation.try(:run_host_job_task) %>
-      <% options = { :host => host, :task => task, :job_invocation => @job_invocation, :template_invocation => template_invocation } %>
-      td_element= $('#<%= dom_id(host) %>-<%= attribute %>');
-      td_element.replaceWith('<%=j render("host_#{attribute}_td", options) %>');
-    <% end %>
-  <% end %>
-<% end %>
 
 <% if @auto_refresh %>
   delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), job_invocation_refresh_data());

@@ -1,0 +1,14 @@
+<div class="blank-slate-pf">
+    <div class="blank-slate-pf-icon">
+        <%= icon_text("globe", "", :kind => "fa") %>
+    </div>
+    <h1><%= _('Job Invocations') %></h1>
+    <p>
+        <%= _("Foreman can run arbitrary commands on remote hosts using different providers, such as SSH or Ansible. Communication goes through the Smart Proxy so Foreman does not have to have direct access to the target hosts and can scale to control many hosts.") %></br>
+    </p>
+    <p><%= link_to _('Learn more about this in the documentation.'),
+           documentation_url('1.ForemanRemoteExecution1.3Manual', :root_url => 'https://www.theforeman.org/plugins/foreman_remote_execution/1.3/index.html#'), :rel => 'external' %></p>
+    <div class="blank-slate-pf-main-action">
+        <%= new_link(_("Run Job"), {}, { :class => "btn-lg" }) %>
+    </div>
+</div>

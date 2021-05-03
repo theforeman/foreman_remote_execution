@@ -15,14 +15,9 @@
 
   <%= select_f f, :provider_type, providers_options, :first, :last, :disabled => @template.locked? %>
 
+  <%= number_f f, :execution_timeout_interval, :disabled => @template.locked?, :label => _('Timeout to kill') %>
+
   <div class="children_fields">
-    <%= new_child_fields_template(f, :template_inputs, { :partial => "template_inputs/form" }) %>
-    <%= f.fields_for :template_inputs do |ff| %>
-      <div class="template_input_form fields">
-        <%= render 'template_inputs/form', :f => ff %>
-      </div>
-    <% end %>
-    <%= add_child_link '+ ' + _("Add Input"), :template_inputs, { :title => _('add a input for this template')} unless @template.locked? %>
     <%= new_child_fields_template(f, :foreign_input_sets, { :partial => "template_inputs/foreign_input_set_form" }) %>
     <%= f.fields_for :foreign_input_sets do |ff| %>
       <div class="template_input_form fields">

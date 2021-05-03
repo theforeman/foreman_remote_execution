@@ -1,0 +1,1 @@
+export const TARGETING_HOSTS = 'TARGETING_HOSTS';

@@ -1,6 +1,7 @@
 <%#
 kind: job_template
 name: Service Action - SSH Default
+model: JobTemplate
 job_category: Services
 description_format: '%{action} service %{service}'
 provider_type: SSH
@@ -8,7 +9,7 @@ template_inputs:
 - name: action
   description: Action to perform on the service
   input_type: user
-  options: "restart\nstart\nstop\nstatus"
+  options: "restart\nstart\nstop\nstatus\nreload\nenable\ndisable"
   required: true
 - name: service
   description: Name of the service
@@ -18,5 +19,12 @@ template_inputs:
 <% if @host.operatingsystem.family == "Redhat" && @host.operatingsystem.major.to_i > 6 %>
 systemctl <%= input("action") %> <%= input("service") %>
 <% else %>
+  <% case input("action")
+  when 'enable' %>
+chkconfig --add <%= input("service") %>
+  <% when 'disable' %>
+chkconfig --del <%= input("service") %>
+  <% else %>
 service <%= input("service") %> <%= input("action") %>
+  <% end %>
 <% end -%>

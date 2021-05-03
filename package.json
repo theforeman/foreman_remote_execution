@@ -1,0 +1,37 @@
+{
+  "name": "foreman_remote_execution",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "scripts": {
+    "lint": "tfm-lint --plugin -d /webpack",
+    "test": "tfm-test --plugin",
+    "test:watch": "tfm-test --plugin --watchAll",
+    "test:current": "tfm-test --plugin --watch",
+    "publish-coverage": "tfm-publish-coverage",
+    "stories": "tfm-stories --plugin",
+    "stories:build": "tfm-build-stories --plugin",
+    "stories:deploy": "surge --project .storybook-dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foreman_remote_execution/foreman_remote_execution.git"
+  },
+  "bugs": {
+    "url": "http://projects.theforeman.org/projects/foreman_remote_execution/issues"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.0",
+    "@theforeman/builder": "^4.14.0",
+    "@theforeman/eslint-plugin-foreman": "^4.14.0",
+    "@theforeman/stories": "^4.14.0",
+    "@theforeman/test": "^4.14.0",
+    "@theforeman/vendor-dev": "^4.14.0",
+    "babel-eslint": "^10.0.0",
+    "eslint": "^6.8.0",
+    "prettier": "^1.19.1",
+    "@patternfly/react-catalog-view-extension": "^4.8.126"
+  },
+  "peerDependencies": {
+    "@theforeman/vendor": "^8.3.0"
+  }
+}

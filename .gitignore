@@ -12,3 +12,6 @@ locale/*/*.pox
 locale/*/*.edit.po
 locale/*/*.po.time_stamp
 Gemfile.lock
+node_modules/
+package-lock.json
+coverage/

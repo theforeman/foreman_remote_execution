@@ -1,13 +1,12 @@
-<%= javascript 'job_templates' %>
-<%= javascript 'lookup_keys' %>
-<%= javascript 'template_input' %>
+<%= javascript 'foreman_remote_execution/job_templates' %>
+<%= javascript 'foreman_remote_execution/template_input' %>
 
 <% title _("Job Templates") %>
 <% title_actions(documentation_button_rex('3.1JobTemplates'),
                  link_to_function(_('Import'), 'show_import_job_template_modal();', :class => 'btn btn-default'),
                  new_link(_("New Job Template"))) %>
 
-<table class="table table-bordered table-striped table-two-pane table-fixed">
+<table class="<%= table_css_classes('table-fixed') %>">
   <thead>
     <tr>
       <th class="col-md-6"><%= sort :name, :as => s_("JobTemplate|Name") %></th>

@@ -1,5 +1,5 @@
-class MigrateToTaskGroups < ActiveRecord::Migration
-  class FakeJobInvocation < ActiveRecord::Base
+class MigrateToTaskGroups < ActiveRecord::Migration[4.2]
+  class FakeJobInvocation < ApplicationRecord
     self.table_name = 'job_invocations'
   end
 

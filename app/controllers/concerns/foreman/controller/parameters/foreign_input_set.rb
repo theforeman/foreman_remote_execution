@@ -5,7 +5,7 @@ module ::Foreman::Controller::Parameters::ForeignInputSet
     def foreign_input_set_params_filter
       Foreman::ParameterFilter.new(::ForeignInputSet).tap do |filter|
         filter.permit_by_context(:id, :_destroy, :template_id, :target_template_id, :include_all, :include, :exclude,
-                                 :nested => true)
+          :nested => true)
       end
     end
   end

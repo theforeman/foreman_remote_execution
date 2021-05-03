@@ -1,20 +1,17 @@
 module ForemanRemoteExecution
   module HostsHelperExtensions
-    extend ActiveSupport::Concern
-
-    included do
-      alias_method_chain(:host_title_actions, :run_button)
-      alias_method_chain :multiple_actions, :remote_execution
+    def host_overview_buttons(host)
+      [
+        { :button => link_to_if_authorized(_("Jobs"), hash_for_job_invocations_path(search: "host=#{host.name}"), :title => _("Job invocations"), :class => 'btn btn-default'), :priority => 200 },
+      ]
     end
 
-    def multiple_actions_with_remote_execution
-      multiple_actions_without_remote_execution + [ [_('Schedule Remote Job'), new_job_invocation_path, false] ]
+    def multiple_actions
+      super + [ [_('Schedule Remote Job'), new_job_invocation_path, false] ]
     end
 
     def schedule_job_multi_button(*args)
-      host_features = RemoteExecutionFeature.with_host_action_button.order(:label).map do |feature|
-        link_to(_('%s') % feature.name, job_invocations_path(:host_ids => [args.first.id], :feature => feature.label), :method => :post)
-      end
+      host_features = rex_host_features(*args)
 
       if host_features.present?
         action_buttons(schedule_job_button(*args), *host_features)
@@ -23,13 +20,28 @@ module ForemanRemoteExecution
       end
     end
 
+    def rex_host_features(*args)
+      RemoteExecutionFeature.with_host_action_button.order(:label).map do |feature|
+        link_to(_('%s') % feature.name, job_invocations_path(:host_ids => [args.first.id], :feature => feature.label), :method => :post)
+      end
+    end
+
     def schedule_job_button(*args)
       link_to(_('Schedule Remote Job'), new_job_invocation_path(:host_ids => [args.first.id]), :id => :run_button, :class => 'btn btn-default')
     end
 
-    def host_title_actions_with_run_button(*args)
-      title_actions(button_group(schedule_job_multi_button(*args)))
-      host_title_actions_without_run_button(*args)
+    def web_console_button(host, *args)
+      return unless authorized_for(permission: 'cockpit_hosts', auth_object: host)
+
+      url = SSHExecutionProvider.cockpit_url_for_host(host.name)
+      url ? link_to(_('Web Console'), url, :class => 'btn btn-default', :id => :'web-console-button', :target => '_new') : nil
+    end
+
+    def host_title_actions(*args)
+      title_actions(button_group(schedule_job_multi_button(*args)),
+        button_group(web_console_button(*args)))
+      super(*args)
     end
   end
+
 end

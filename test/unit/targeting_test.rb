@@ -1,9 +1,9 @@
 require 'test_plugin_helper'
 
-describe Targeting do
-  let(:targeting) { FactoryGirl.build(:targeting) }
+class TargetingTest < ActiveSupport::TestCase
+  let(:targeting) { FactoryBot.build(:targeting) }
   let(:bookmark) { bookmarks(:one) }
-  let(:host) { FactoryGirl.create(:host) }
+  let(:host) { FactoryBot.create(:host) }
 
   before do
     bookmark.query = 'name = bar'
@@ -12,7 +12,7 @@ describe Targeting do
   describe '#resolved?' do
     context 'resolved_at is nil' do
       before { targeting.resolved_at = nil }
-      it { refute targeting.resolved? }
+      it { assert_not targeting.resolved? }
     end
 
     context 'resolved_at is set' do
@@ -51,7 +51,7 @@ describe Targeting do
       targeting.resolve_hosts!
     end
 
-    it { targeting.hosts.must_include(host) }
+    it { _(targeting.hosts).must_include(host) }
   end
 
   context 'can delete a user' do
@@ -74,11 +74,11 @@ describe Targeting do
       host.destroy
     end
 
-    it { targeting.reload.hosts.must_be_empty }
+    it { _(targeting.reload.hosts).must_be_empty }
   end
 
   describe '#build_query_from_hosts(ids)' do
-    let(:second_host) { FactoryGirl.create(:host) }
+    let(:second_host) { FactoryBot.create(:host) }
 
     before do
       host
@@ -88,10 +88,10 @@ describe Targeting do
     context 'for two hosts' do
       let(:query) { Targeting.build_query_from_hosts([ host.id, second_host.id ]) }
 
-      it 'builds query using host names joining with or' do
-        query.must_include "name = #{host.name}"
-        query.must_include "name = #{second_host.name}"
-        query.must_include ' or '
+      it 'builds query using host names joining inside ^' do
+        _(query).must_include host.name
+        _(query).must_include second_host.name
+        _(query).must_include 'name ^'
 
         Host.search_for(query).must_include host
         Host.search_for(query).must_include second_host
@@ -102,7 +102,7 @@ describe Targeting do
       let(:query) { Targeting.build_query_from_hosts([ host.id ]) }
 
       it 'builds query using host name' do
-        query.must_equal "name = #{host.name}"
+        _(query).must_equal "name ^ (#{host.name})"
         Host.search_for(query).must_include host
         Host.search_for(query).wont_include second_host
       end
@@ -115,6 +115,25 @@ describe Targeting do
         Host.search_for(query).must_include host
         Host.search_for(query).must_include second_host
       end
+    end
+  end
+
+  context 'randomized ordering' do
+    let(:targeting) { FactoryBot.build(:targeting, :with_randomized_ordering) }
+    let(:hosts) { (0..4).map { FactoryBot.create(:host) } }
+
+    it 'loads the hosts in random order' do
+      rng = Random.new(4) # Chosen by a fair dice roll
+      Random.stubs(:new).returns(rng)
+      hosts
+      targeting.search_query = 'name ~ host*'
+      targeting.user = users(:admin)
+      targeting.resolve_hosts!
+      randomized_host_ids = targeting.hosts.map(&:id)
+      host_ids = hosts.map(&:id)
+
+      assert_not_equal host_ids, randomized_host_ids
+      assert_equal host_ids, randomized_host_ids.sort
     end
   end
 end

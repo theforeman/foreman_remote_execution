@@ -1,19 +1,9 @@
-class FakeNic < ActiveRecord::Base
-  self.table_name = 'nics'
-
-  def type
-    Nic::Managed
-  end
-end
-
-class AddExecutionToInterface < ActiveRecord::Migration
+class AddExecutionToInterface < ActiveRecord::Migration[4.2]
   def up
     add_column :nics, :execution, :boolean, :default => false
 
-    FakeNic.reset_column_information
-    FakeNic.all.each do |nic|
-      nic.update_column(:execution, true) if nic.primary
-    end
+    Nic::Managed.reset_column_information
+    Nic::Managed.where(primary: true).update_all(execution: true)
   end
 
   def down

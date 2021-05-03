@@ -1,24 +1,30 @@
-
 require 'test_plugin_helper'
+require 'securerandom'
 
 module ForemanRemoteExecution
   class RunHostsJobTest < ActiveSupport::TestCase
     include Dynflow::Testing
 
-    let(:host) { FactoryGirl.create(:host, :with_execution) }
+    let(:host) { FactoryBot.create(:host, :with_execution) }
     let(:proxy) { host.remote_execution_proxies('SSH')[:subnet].first }
-    let(:targeting) { FactoryGirl.create(:targeting, :search_query => "name = #{host.name}", :user => User.current) }
+    let(:targeting) { FactoryBot.create(:targeting, :search_query => "name = #{host.name}", :user => User.current) }
     let(:job_invocation) do
-      FactoryGirl.build(:job_invocation, :with_template).tap do |invocation|
+      FactoryBot.build(:job_invocation, :with_template).tap do |invocation|
         invocation.targeting = targeting
+        invocation.description = 'Some short description'
+        invocation.password = 'changeme'
+        invocation.key_passphrase = 'changemetoo'
+        invocation.effective_user_password = 'sudopassword'
         invocation.save
       end
     end
 
+    let(:uuid) { SecureRandom.uuid }
     let(:task) do
-      OpenStruct.new(:id => '123').tap do |o|
+      OpenStruct.new(:id => uuid).tap do |o|
         o.stubs(:add_missing_task_groups)
         o.stubs(:task_groups).returns([])
+        o.stubs(:pending?).returns(true)
       end
     end
     let(:action) do
@@ -31,26 +37,61 @@ module ForemanRemoteExecution
       plan_action action, job_invocation
     end
 
+    let(:delayed) do
+      action.delay({ :start_at => Time.now.getlocal }, job_invocation)
+      action
+    end
+
     before do
       ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.stubs(:tasks_count).returns(0)
       User.current = users :admin
       action
     end
 
-    it 'resolves the hosts on targeting in plan phase' do
-      planned
-      targeting.hosts.must_include(host)
+    context 'targeting resolving' do
+      it 'resolves dynamic targeting in plan' do
+        targeting.targeting_type = 'dynamic_query'
+        assert_not targeting.resolved?
+        delayed
+        assert_not targeting.resolved?
+        planned
+        _(targeting.hosts).must_include(host)
+      end
+
+      it 'resolves the hosts on static targeting in delay' do
+        assert_not targeting.resolved?
+        delayed
+        _(targeting.hosts).must_include(host)
+        # Verify Targeting#resolve_hosts! won't be hit again
+        targeting.expects(:resolve_hosts!).never
+        planned
+      end
+
+      it 'resolves the hosts on static targeting in plan phase if not resolved yet' do
+        planned
+        _(targeting.hosts).must_include(host)
+      end
     end
 
     it 'triggers the RunHostJob actions on the resolved hosts in run phase' do
-      planned.expects(:output).returns(:planned_count => 0)
-      planned.expects(:trigger).with() { |*args| args[0] == Actions::RemoteExecution::RunHostJob }
+      planned.expects(:output).at_most(5).returns(:planned_count => 0)
+      planned.expects(:trigger).with { |*args| args[0] == Actions::RemoteExecution::RunHostJob }
       planned.create_sub_plans
     end
 
     it 'uses the BindJobInvocation middleware' do
       planned
-      job_invocation.task_id.must_equal '123'
+      _(job_invocation.task_id).must_equal uuid
+    end
+
+    # In plan phase this is handled by #action_subject
+    #   which is expected in tests
+    it 'sets input in delay phase when delayed' do
+      job_invocation_hash = delayed.input[:job_invocation]
+      _(job_invocation_hash['id']).must_equal job_invocation.id
+      _(job_invocation_hash['name']).must_equal job_invocation.job_category
+      _(job_invocation_hash['description']).must_equal job_invocation.description
+      planned # To make the expectations happy
     end
 
     describe 'concurrency control' do
@@ -60,33 +101,37 @@ module ForemanRemoteExecution
       it 'can be disabled' do
         job_invocation.expects(:concurrency_level)
         job_invocation.expects(:time_span)
-        action.expects(:limit_concurrency_level).never
-        action.expects(:distribute_over_time).never
-        planned
+        _(planned.input.key?(:concurrency_control)).must_equal false
       end
 
       it 'can limit concurrency level' do
         job_invocation.expects(:concurrency_level).returns(level).twice
         job_invocation.expects(:time_span)
-        action.expects(:limit_concurrency_level).with(level)
-        action.expects(:distribute_over_time).never
-        planned
+        planned.input[:concurrency_control][:level].wont_be_empty
+        planned.input[:concurrency_control].key?(:time).must_equal false
       end
 
       it 'can distribute tasks over time' do
         job_invocation.expects(:time_span).returns(span).twice
         job_invocation.expects(:concurrency_level)
-        action.expects(:distribute_over_time).with(span)
-        action.expects(:distribute_over_time).never
-        planned
+        planned.input[:concurrency_control][:time].wont_be_empty
+        planned.input[:concurrency_control].key?(:level).must_equal false
       end
 
       it 'can use both' do
         job_invocation.expects(:time_span).returns(span).twice
-        action.expects(:distribute_over_time).with(span)
         job_invocation.expects(:concurrency_level).returns(level).twice
-        action.expects(:limit_concurrency_level).with(level)
-        planned
+        planned.input[:concurrency_control][:time].wont_be_empty
+        planned.input[:concurrency_control][:level].wont_be_empty
+      end
+    end
+
+    describe 'notifications' do
+      it 'creates notification on sucess run' do
+        FactoryBot.create(:notification_blueprint, :name => 'rex_job_succeeded')
+        assert_difference 'NotificationRecipient.where(:user_id => targeting.user.id).count' do
+          finalize_action planned
+        end
       end
     end
   end

@@ -7,9 +7,10 @@ Bookmark.without_auditing do
     { :name => 'recurring', :query => 'recurring = true', :controller => 'job_invocations'},
     { :name => 'recent', :query => 'started_at > "24 hours ago"', :controller => 'job_invocations'},
   ].each do |input|
-    next if Bookmark.where(:controller => 'job_invocations').find_by_name(input[:name])
+    next if Bookmark.where(:controller => 'job_invocations').find_by(name: input[:name])
     # TODO audit should be fixed once core #13109 gets merged
-    next if audit_modified? Bookmark, input[:name]
+    next if SeedHelper.audit_modified? Bookmark, input[:name]
+
     attributes = { :public => true }.merge(input)
     b = Bookmark.where(:name => input[:name], :controller => input[:controller]).first || Bookmark.new
     b.attributes = attributes

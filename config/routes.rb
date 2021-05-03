@@ -16,14 +16,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :job_invocations, :only => [:new, :create, :show, :index] do
+  match 'job_invocations/new', to: 'job_invocations#new', via: [:get, :post], as: 'new_job_invocation'
+  resources :job_invocations, :only => [:create, :show, :index] do
     collection do
       post 'refresh'
+      get 'chart'
       get 'preview_hosts'
       get 'auto_complete_search'
     end
     member do
       get 'rerun'
+      post 'cancel'
     end
   end
 
@@ -36,17 +39,33 @@ Rails.application.routes.draw do
     end
   end
 
+  constraints(:id => %r{[^/]+}) do
+    get 'cockpit/host_ssh_params/:id', to: 'cockpit#host_ssh_params'
+  end
+  get 'cockpit/redirect', to: 'cockpit#redirect'
+  get 'ui_job_wizard/categories', to: 'ui_job_wizard#categories'
+
+  match '/experimental/job_wizard', to: 'react#index', :via => [:get]
+
   namespace :api, :defaults => {:format => 'json'} do
     scope '(:apiv)', :module => :v2, :defaults => {:apiv => 'v2'}, :apiv => /v1|v2/, :constraints => ApiConstraints.new(:version => 2, :default => true) do
       resources :job_invocations, :except => [:new, :edit, :update, :destroy] do
         resources :hosts, :only => :none do
           get '/', :to => 'job_invocations#output'
+          get '/raw', :to => 'job_invocations#raw_output'
+        end
+        member do
+          post 'cancel'
+          post 'rerun'
+          get  'template_invocations', :to => 'template_invocations#template_invocations'
+          get 'outputs'
+          post 'outputs'
         end
       end
 
       resources :job_templates, :except => [:new, :edit] do
-        (resources :locations, :only => [:index, :show]) if SETTINGS[:locations_enabled]
-        (resources :organizations, :only => [:index, :show]) if SETTINGS[:organizations_enabled]
+        resources :locations, :only => [:index, :show]
+        resources :organizations, :only => [:index, :show]
         get :export, :on => :member
         post :clone, :on => :member
         collection do
@@ -55,20 +74,15 @@ Rails.application.routes.draw do
         end
       end
 
-      if SETTINGS[:organizations_enabled]
-        resources :organizations, :only => [:index] do
-          resources :job_templates, :only =>[:index, :show]
-        end
+      resources :organizations, :only => [:index] do
+        resources :job_templates, :only => [:index, :show]
       end
 
-      if SETTINGS[:locations_enabled]
-        resources :locations, :only => [:index] do
-          resources :job_templates, :only =>[:index, :show]
-        end
+      resources :locations, :only => [:index] do
+        resources :job_templates, :only => [:index, :show]
       end
 
       resources :templates, :only => :none do
-        resources :template_inputs, :only => [:index, :show, :create, :destroy, :update]
         resources :foreign_input_sets, :only => [:index, :show, :create, :destroy, :update]
       end
 

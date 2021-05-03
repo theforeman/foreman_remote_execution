@@ -1,0 +1,1 @@
+export const HOST_DETAILS_JOBS = 'HOST_DETAILS_JOBS';

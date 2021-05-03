@@ -1,6 +1,20 @@
-<% title _('Detail of %s run') % @template_invocation.job_invocation.job_category %>
-<% stylesheet 'template_invocation' %>
-<% javascript 'template_invocation' %>
+<% items = [{ :caption => _('Job invocations'), :url => job_invocations_path },
+            { :caption => @template_invocation.job_invocation.description,
+              :url => job_invocation_path(@template_invocation.job_invocation_id) }]
+
+if @host
+  items << { :caption => _('Template Invocation for %s') % @host.name }
+  breadcrumbs(:resource_url => template_invocations_api_job_invocation_path(@template_invocation.job_invocation_id),
+               :name_field => 'host_name',
+               :switcher_item_url => template_invocation_path(':id'),
+               :items => items)
+else
+  breadcrumbs(items: items, switchable: false)
+end
+%>
+
+<% stylesheet 'foreman_remote_execution/foreman_remote_execution' %>
+<% javascript 'foreman_remote_execution/template_invocation' %>
 
 <div id="title_action">
   <div class="btn-toolbar pull-right">
@@ -8,31 +22,34 @@
     <%= button_group(link_to_function(_('Toggle command'), '$("div.preview").toggle()', :class => 'btn btn-default'),
                      link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()', :class => 'btn btn-default'),
                      link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()', :class => 'btn btn-default'),
-                     link_to_function(_('Toggle DEBUG'), '$("div.line.debug").toggle()', :class => 'btn btn-default')) %>
-    <%= button_group(template_invocation_task_buttons(@template_invocation_task)) %>
+                     link_to_function(_('Toggle DEBUG'), '$("div.line.debug").toggle()', :class => 'btn btn-default')) if @host %>
+    <%= button_group(template_invocation_task_buttons(@template_invocation_task, @template_invocation.job_invocation)) %>
   </div>
 </div>
+<% if @host %>
+  <h3><%= _('Target: ') %><%= link_to(@host.name, host_path(@host)) %></h3>
 
-<h3><%= _('Target: ') %><%= link_to(@host.name, host_path(@host)) %></h3>
+  <div class="preview hidden">
+    <%= preview_box(@template_invocation, @host) %>
+  </div>
 
-<div class="preview hidden">
-  <%= preview_box(@template_invocation, @host) %>
-</div>
+  <div class="terminal" data-refresh-url="<%= template_invocation_path(@template_invocation) %>">
+    <% if @error %>
+      <div class="line error"><%= @error %></div>
+    <% else %>
+      <%= link_to_function(_('Scroll to bottom'), '$("html, body").animate({ scrollTop: $(document).height() }, "slow");', :class => 'pull-right scroll-link-bottom') %>
 
-<div class="terminal" data-refresh-url="<%= template_invocation_path(@template_invocation) %>">
-  <% if @error %>
-    <div class="line error"><%= @error %></div>
-  <% else %>
-    <%= link_to_function(_('Scroll to bottom'), '$("html, body").animate({ scrollTop: $(document).height() }, "slow");', :class => 'pull-right scroll-link-bottom') %>
+      <div class="printable">
+        <%= render :partial => 'output_line_set', :collection => normalize_line_sets(@line_sets) %>
+      </div>
 
-    <div class="printable">
-      <%= render :partial => 'output_line_set', :collection => @line_sets %>
-    </div>
+      <%= link_to_function(_('Scroll to top'), '$("html, body").animate({ scrollTop: 0 }, "slow");', :class => 'pull-right scroll-link-top') %>
+    <% end %>
+  </div>
 
-    <%= link_to_function(_('Scroll to top'), '$("html, body").animate({ scrollTop: 0 }, "slow");', :class => 'pull-right scroll-link-top') %>
-  <% end %>
-</div>
-
-<script>
-  <%= render :partial => 'refresh.js' %>
-</script>
+  <script>
+    <%= render :partial => 'refresh.js' %>
+  </script>
+<% else %>
+  <%= _("Could not display data for job invocation.") %>
+<% end %>

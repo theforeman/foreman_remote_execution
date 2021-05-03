@@ -1,55 +1,105 @@
-inherit_from:
-  - .rubocop_todo.yml
+inherit_gem:
+  theforeman-rubocop:
+    - lenient.yml
+    - minitest.yml
+
+inherit_from: .rubocop_todo.yml
+
+inherit_mode:
+  merge:
+    - Exclude
 
 AllCops:
-  RunRailsCops: true # always run the rails cops
+  TargetRubyVersion: 2.5
+  TargetRailsVersion: 5.2
   Exclude:
-    - 'doc/plugins/**'
+    - 'node_modules/**/*'
+    - 'vendor/bundle/**/*'
 
-Rails/Date:
+Bundler/OrderedGems:
   Enabled: false
 
-# Don't enforce documentation
-Style/Documentation:
+Layout/DotPosition:
   Enabled: false
 
-# Force before_filter until upgrade to Rails 4
-Rails/ActionFilter:
-  EnforcedStyle: filter
-
-Metrics/MethodLength:
-  Max: 40
-
-Style/TrailingComma:
+Layout/HashAlignment:
   Enabled: false
 
-Style/AccessorMethodName:
+Layout/LineLength:
   Enabled: false
 
-Style/RedundantSelf:
+Layout/ParameterAlignment:
   Enabled: false
 
-Metrics/ClassLength:
-  Max: 500
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
 
-Style/FileName:
+Lint/BooleanSymbol:
+  Enabled: false
+
+Metrics:
+  Enabled: false
+
+Performance/Casecmp:
+  Enabled: false
+
+Performance/RegexpMatch:
+  Enabled: false
+
+Rails:
   Exclude:
-      - 'db/seeds.d/*'
+    - 'lib/foreman_remote_execution_core/**/*'
+    - 'lib/foreman_remote_execution_core.rb'
 
-Style/WordArray:
+Rails/Blank:
+  UnlessPresent: false
+
+# Won't work with sqlite
+Rails/BulkChangeTable:
   Enabled: false
 
-Style/BracesAroundHashParameters:
+Rails/RefuteMethods:
   Enabled: false
 
-Style/RescueModifier:
+# Don't prefer is_a? over kind_of?
+Style/ClassCheck:
   Enabled: false
 
-Style/ClassAndModuleChildren:
+# Don't enforce certain methods, e.g. detect over find
+Style/CollectionMethods:
   Enabled: false
 
-Style/EachWithObject:
+Style/ConditionalAssignment:
   Enabled: false
 
-Metrics/ParameterLists:
+# Don't enforce frozen string literals
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Support both, Ruby 1.9 hashmap and hash-rocket syntax
+Style/HashSyntax:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/InverseMethods:
+  Enabled: false
+
+Style/MultipleComparison:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/ParenthesesAroundCondition:
+  Enabled: false
+
+Style/PreferredHashMethods:
+  Enabled: false
+
+Style/RaiseArgs:
   Enabled: false

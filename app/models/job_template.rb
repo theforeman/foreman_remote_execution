@@ -1,19 +1,21 @@
 class JobTemplate < ::Template
-  include ForemanRemoteExecution::Exportable
+  audited
+  include ::Exportable
+  include ::TemplateTax
 
   class NonUniqueInputsError < Foreman::Exception
   end
 
-  attr_exportable :name, :job_category, :description_format, :snippet, :template_inputs,
-                  :foreign_input_sets, :provider_type, :kind => ->(template) { template.class.name.underscore }
+  attr_exportable :job_category, :description_format,
+    :foreign_input_sets, :provider_type,
+    { :kind => ->(template) { template.class.name.underscore } }.merge(taxonomy_exportable)
 
   include Authorizable
   extend FriendlyId
   friendly_id :name
   include Parameterizable::ByIdName
 
-  audited :allow_mass_assignment => true
-  has_many :audits, :as => :auditable, :class_name => Audited.audit_class.name
+  has_many :audits, :as => :auditable, :class_name => Audited.audit_class.name, :dependent => :nullify
   has_many :all_template_invocations, :dependent => :destroy, :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
   has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :foreign_key => 'template_id'
   has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :foreign_key => 'template_id', :class_name => 'TemplateInvocation'
@@ -41,54 +43,59 @@ class JobTemplate < ::Template
   validates :provider_type, :presence => true
   validates :name, :uniqueness => true
   validate :provider_type_whitelist
-  validate :inputs_unchanged_when_locked, :if => ->(template) { (template.locked? || template.locked_changed?) && template.persisted? && !Foreman.in_rake? }
-
-  validate do
-    begin
-      validate_unique_inputs!
-    rescue Foreman::Exception => e
-      errors.add :base, e.message
-    end
-  end
   validates_associated :foreign_input_sets
 
   has_one :effective_user, :class_name => 'JobTemplateEffectiveUser', :foreign_key => 'job_template_id', :dependent => :destroy
   accepts_nested_attributes_for :effective_user, :update_only => true
 
-  # we have to override the base_class because polymorphic associations does not detect it correctly, more details at
-  # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_many#1010-Polymorphic-has-many-within-inherited-class-gotcha
-  def self.base_class
-    self
-  end
-  self.table_name = 'templates'
+  class << self
+    # we have to override the base_class because polymorphic associations does not detect it correctly, more details at
+    # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_many#1010-Polymorphic-has-many-within-inherited-class-gotcha
+    def base_class
+      self
+    end
+    table_name = 'templates'
 
-  # Import a template from ERB, with YAML metadata in the first comment.  It
-  # will overwrite (sync) an existing template if options[:update] is true.
-  def self.import(contents, options = {})
-    transaction do
-      metadata = parse_metadata(contents)
-      return if metadata.blank? || metadata.delete('kind') != 'job_template'
+    # Import a template from ERB, with YAML metadata in the first comment.  It
+    # will overwrite (sync) an existing template if options[:update] is true.
+    def import_raw(contents, options = {})
+      metadata = Template.parse_metadata(contents)
+      import_parsed(metadata['name'], contents, metadata, options)
+    end
 
-      # Don't look for existing if we should always create a new template
-      existing = self.find_by_name(metadata['name']) unless options.delete(:build_new)
-      # Don't update if the template already exists, unless we're told to
-      return if !options.delete(:update) && existing
-
-      template = existing || self.new
-      template.sync_inputs(metadata.delete('template_inputs'))
-      template.sync_foreign_input_sets(metadata.delete('foreign_input_sets'))
-      template.sync_feature(metadata.delete('feature'))
-      template.assign_attributes(metadata.merge(:template => contents.gsub(/<%\#.+?.-?%>\n?/m, '').strip).merge(options))
-      template.assign_taxonomies if template.new_record?
-
+    def import_raw!(contents, options = {})
+      template = import_raw(contents, options)
+      template&.save!
       template
+    end
+
+    def import_parsed(name, text, _metadata, options = {})
+      transaction do
+        # Don't look for existing if we should always create a new template
+        existing = self.find_by(:name => name) unless options.delete(:build_new)
+        # Don't update if the template already exists, unless we're told to
+        return if !options.delete(:update) && existing
+
+        template = existing || self.new(:name => name)
+        template.import_without_save(text, options)
+        template
+      end
+    end
+
+    def acceptable_template_input_types
+      [ :user, :fact, :variable, :puppet_parameter ]
+    end
+
+    def default_render_scope_class
+      ForemanRemoteExecution::Renderer::Scope::Input
     end
   end
 
-  def self.import!(template, options = {})
-    template = import(template, options)
-    template.save! if template
-    template
+  def validate_unique_inputs!
+    duplicated_inputs = template_inputs_with_foreign.group_by(&:name).values.select { |values| values.size > 1 }.map(&:first)
+    unless duplicated_inputs.empty?
+      raise NonUniqueInputsError.new(N_('Duplicated inputs detected: %{duplicated_inputs}'), :duplicated_inputs => duplicated_inputs.map(&:name))
+    end
   end
 
   def metadata
@@ -110,18 +117,10 @@ class JobTemplate < ::Template
     []
   end
 
-  def dup
-    dup = super
-    self.template_inputs.each do |input|
-      dup.template_inputs.build input.attributes.except('template_id', 'id', 'created_at', 'updated_at')
-    end
-    dup
-  end
-
   def assign_taxonomies
     if default
-      organizations << Organization.all if SETTINGS[:organizations_enabled]
-      locations << Location.all if SETTINGS[:locations_enabled]
+      organizations << Organization.all
+      locations << Location.all
     end
   end
 
@@ -130,12 +129,12 @@ class JobTemplate < ::Template
   end
 
   def effective_user
-    super || (build_effective_user.tap(&:set_defaults))
+    super || build_effective_user.tap(&:set_defaults)
   end
 
   def generate_description_format
     if description_format.blank?
-      generated_description = '%{job_category}'
+      generated_description = '%{template_name}'
       unless template_inputs_with_foreign.empty?
         inputs = template_inputs_with_foreign.map(&:name).map { |name| %{#{name}="%{#{name}}"} }.join(' ')
         generated_description << " with inputs #{inputs}"
@@ -144,31 +143,6 @@ class JobTemplate < ::Template
     else
       description_format
     end
-  end
-
-  def validate_unique_inputs!
-    duplicated_inputs = template_inputs_with_foreign.group_by(&:name).values.select { |values| values.size > 1 }.map(&:first)
-    unless duplicated_inputs.empty?
-      raise NonUniqueInputsError.new(N_('Duplicated inputs detected: %{duplicated_inputs}'), :duplicated_inputs => duplicated_inputs.map(&:name))
-    end
-  end
-
-  def sync_inputs(inputs)
-    inputs ||= []
-    # Build a hash where keys are input names
-    inputs = inputs.inject({}) { |h, input| h.update(input['name'] => input) }
-
-    # Sync existing inputs
-    template_inputs.each do |existing_input|
-      if inputs.include?(existing_input.name)
-        existing_input.assign_attributes(inputs.delete(existing_input.name))
-      else
-        existing_input.mark_for_destruction
-      end
-    end
-
-    # Create new inputs
-    inputs.values.each { |new_input| template_inputs.build(new_input) }
   end
 
   def sync_foreign_input_sets(input_sets)
@@ -190,7 +164,7 @@ class JobTemplate < ::Template
     end
 
     # Create new input_sets
-    input_sets.values.each { |input_set| self.foreign_input_sets.build(input_set) }
+    input_sets.each_value { |input_set| self.foreign_input_sets.build(input_set) }
   end
 
   def sync_feature(feature_name)
@@ -199,9 +173,28 @@ class JobTemplate < ::Template
     end
   end
 
-  def self.parse_metadata(template)
-    match = template.match(/<%\#(.+?).-?%>/m)
-    match.nil? ? {} : YAML.load(match[1])
+  def import_custom_data(options)
+    super
+    sync_foreign_input_sets(@importing_metadata['foreign_input_sets'])
+    sync_feature(@importing_metadata['feature'])
+
+    %w(job_category description_format provider_type).each do |attribute|
+      value = @importing_metadata[attribute]
+      self.public_send "#{attribute}=", value if @importing_metadata.key?(attribute)
+    end
+
+    # this should be moved to core but meanwhile we support default attribute here
+    # see http://projects.theforeman.org/issues/23426 for more details
+    self.default = options[:default] unless options[:default].nil?
+
+    # job templates have too long metadata, we remove them on parsing until it's stored in separate attribute
+    self.template = self.template.gsub(/<%\#.+?.-?%>\n?/m, '').strip
+  end
+
+  def default_input_values(ignore_keys)
+    result = self.template_inputs_with_foreign.select { |ti| !ti.required? && ti.user_template_input? }.map { |ti| ti.name.to_s }
+    result -= ignore_keys.map(&:to_s)
+    Hash[result.map { |k| [ k, nil ] }]
   end
 
   private
@@ -209,13 +202,5 @@ class JobTemplate < ::Template
   # we can't use standard validator, .provider_names output can change but the validator does not reflect it
   def provider_type_whitelist
     errors.add :provider_type, :uniq unless RemoteExecutionProvider.provider_names.include?(self.provider_type)
-  end
-
-  def inputs_unchanged_when_locked
-    inputs_changed = template_inputs.any? { |input| input.changed? || input.new_record? }
-    foreign_input_sets_changed = foreign_input_sets.any? { |input_set| input_set.changed? || input_set.new_record? }
-    if inputs_changed || foreign_input_sets_changed
-      errors.add(:base, _('This template is locked. Please clone it to a new template to customize.'))
-    end
   end
 end

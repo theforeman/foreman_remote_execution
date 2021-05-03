@@ -1,19 +1,22 @@
-<script type="text/javascript">
-  $(function () {
-    template_change($('select.job_template_selector'));
-  });
-</script>
-
 <%= form_for @composer.job_invocation, :html => {'data-refresh-url' => refresh_job_invocations_path, :id => 'job_invocation_form'} do |f| %>
 
-  <%= selectable_f f, :job_category, @composer.available_job_categories, {}, :label => _('Job category') %>
+  <% unless @composer.rerun_possible? %>
+  <%= alert :text => _('Could not rerun job %{id} because its template could not be found') % { :id => @composer.reruns },
+            :class => 'alert alert-block alert-danger has-error',
+            :close => false %>
+  <% end %>
+
+  <%= selectable_f f, :job_category, @composer.available_job_categories,
+                   { :selected => @composer.job_invocation.job_category, :include_blank => @composer.job_invocation.job_category.nil? },
+                   :label => _('Job category') %>
+  <%= f.hidden_field(:remote_execution_feature_id, :value => @composer.remote_execution_feature_id) %>
 
   <% selected_templates_per_provider = {} %>
   <% @composer.displayed_provider_types.each do |provider_type| %>
     <%= f.fields_for 'providers' do |providers_fields| %>
       <%= providers_fields.fields_for provider_type do |provider_type_fields| %>
         <% templates_for_provider = @composer.templates_for_provider(provider_type) %>
-        <% selected_templates_per_provider[provider_type] = @composer.preselected_template_for_provider(provider_type) || templates_for_provider.first %>
+        <% selected_templates_per_provider[provider_type] = @composer.preselected_template_for_provider(provider_type) || @composer.resolve_job_template(templates_for_provider) %>
 
         <%= selectable_f provider_type_fields, 'job_template_id', templates_for_provider.map { |t| [t.name, t.id] },
                          { :selected => selected_templates_per_provider[provider_type].try(:id) },
@@ -30,7 +33,7 @@
       <% end %>
     </span>
     <%= selectable_f targeting_fields, :bookmark_id, @composer.available_bookmarks.map { |b| [b.name, b.id] }, :selected => @composer.targeting.bookmark_id, :include_blank => true %>
-    <%= textarea_f targeting_fields, :search_query, :value => @composer.displayed_search_query, :rows => 5 %>
+    <%= autocomplete_f targeting_fields, :search_query, :search_query => @composer.displayed_search_query, :full_path => auto_complete_search_hosts_path %>
 
     <div class="form-group ">
       <label class="col-md-2 control-label"><%= _('Resolves to') %></label>
@@ -58,7 +61,7 @@
                     <%= job_template_fields.fields_for :input_values do |input_values_fields| %>
                       <% inputs = job_template.template_inputs_with_foreign.select { |input| input.input_type == 'user' } %>
                       <% inputs.select { |i| i.basic? }.each do |input| %>
-                        <%= render :partial => 'template_inputs/invocation_form', :locals => { :input_values_fields => input_values_fields, :composer => @composer, :job_template => job_template, :input => input } %>
+                        <%= render :partial => 'template_inputs/invocation_form', :locals => { :input_values_fields => input_values_fields, :composer => @composer, :job_template => job_template, :input => input, :onchange => "regenerate_description(this);" } %>
                       <% end %>
 
                       <%= advanced_switch_f _('Display advanced fields'), _('Hide advanced fields') %>
@@ -72,9 +75,13 @@
 
                     <div class="advanced hidden">
                       <% if job_template.effective_user.overridable? %>
-                        <%= text_f job_template_fields, :effective_user, :label => _('Effective user'), :help_inline => N_("A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.") %>
+                        <%= text_f job_template_fields, :effective_user, :value => @composer.template_invocation(job_template).try(:effective_user), :label => _('Effective user'), :label_help => N_("A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.") %>
                       <% end %>
                       <%= render :partial => 'description_fields', :locals => { :f => f, :job_template => job_template, :disabled => job_template != selected_templates_per_provider[provider_type] } %>
+                    </div>
+
+                    <div class="advanced hidden">
+                      <%= number_f job_template_fields, :execution_timeout_interval, :value => f.object.execution_timeout_interval || job_template.execution_timeout_interval, :label => _('Timeout to kill'), :label_help => N_('Time in seconds from the start on the remote host after which the job should be killed.') %>
                     </div>
                   <% end %>
                 </fieldset>
@@ -86,18 +93,32 @@
     <% end %>
 
     <div class="advanced hidden">
-      <%= number_f f, :concurrency_level, :label => _('Concurrency level'), :placeholder => 'N', :min => 1, :help_inline => N_("Run at most N tasks at a time") %>
-      <%= number_f f, :time_span, :label => _('Time span'), :placeholder => 'N', :min => 1, :help_inline => N_("Distribute execution over N seconds")  %>
+      <%= password_f f, :password, :placeholder => '*****', :label => _('Password'), :label_help => N_('Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
+      <%= password_f f, :key_passphrase, :placeholder => '*****', :label => _('Private key passphrase'), :label_help => N_('Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
+      <%= password_f f, :effective_user_password, :placeholder => '*****', :label => _('Effective user password'), :label_help => N_('Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
+    </div>
+
+    <div class="advanced hidden">
+      <%= number_f f, :concurrency_level, :label => _('Concurrency level'), :placeholder => 'N', :min => 1, :label_help => N_("Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.") %>
+      <%= number_f f, :time_span, :label => _('Time span'), :placeholder => 'N', :min => 1, :label_help => N_("Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.") %>
     </div>
 
     <div class="form-group advanced hidden">
-      <%= add_label({ :label => _('Type of query'), :label_help => _("Type has impact on when is the query evaulated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>") }, f, :targetting_type) %>
+      <%= add_label({ :label => _('Execution ordering'), :label_help => _("Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>") }, f, :randomized_ordering) %>
+
+      <div class="col-md-4">
+        <%= radio_button_f targeting_fields, :randomized_ordering, :value => false, :text => _(Targeting::ORDERINGS[Targeting::ORDERED]), :checked => !@composer.targeting.randomized_ordering %>
+        <%= radio_button_f targeting_fields, :randomized_ordering, :value => true, :text => _(Targeting::ORDERINGS[Targeting::RANDOMIZED]) %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= add_label({ :label => _('Type of query'), :label_help => _("Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>") }, f, :targetting_type) %>
 
       <div class="col-md-4">
         <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
         <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::DYNAMIC_TYPE, :text => _(Targeting::TYPES[Targeting::DYNAMIC_TYPE]) %>
       </div>
-
     </div>
   <% end %>
 
@@ -105,5 +126,6 @@
 
   <%= render :partial => 'preview_hosts_modal' %>
 
-  <%= submit_or_cancel f, false, :cancel_path => job_invocations_path %>
+  <%= render partial: 'rerun_taxonomies' if action_name == 'rerun' %>
+  <%= submit_or_cancel f, false, :cancel_path => job_invocations_path, :disabled => !@composer.rerun_possible? %>
 <% end %>
