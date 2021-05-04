@@ -5,6 +5,8 @@ module Actions
       include ::Actions::Helpers::WithDelegatedAction
       include ::Actions::ObservableAction
 
+      execution_plan_hooks.use :emit_feature_event, :on => :success
+
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
       middleware.use Actions::Middleware::HideSecrets
 
@@ -17,7 +19,12 @@ module Actions
       end
 
       def plan(job_invocation, host, template_invocation, proxy_selector = ::RemoteExecutionProxySelector.new, options = {})
-        action_subject(host, :job_category => job_invocation.job_category, :description => job_invocation.description, :job_invocation_id => job_invocation.id)
+        features = template_invocation.templateremote_execution_features.pluck(:label).uniq
+        action_subject(host,
+          :job_category => job_invocation.job_category,
+          :description => job_invocation.description,
+          :job_invocation_id => job_invocation.id,
+          :job_features => features)
 
         template_invocation.host_id = host.id
         template_invocation.run_host_job_task_id = task.id
@@ -56,6 +63,22 @@ module Actions
       def finalize(*args)
         update_host_status
         check_exit_status
+      end
+
+      def self.feature_job_event_name(label, suffix = :success)
+        ::Foreman::Observable.event_name_for("#{::Actions::RemoteExecution::RunHostJob.event_name_base}_#{label}_#{::Actions::RemoteExecution::RunHostJob.event_name_suffix(suffix)}")
+      end
+
+      def emit_feature_event(execution_plan, hook = :success)
+        return unless root_action?
+
+        payload = event_payload(execution_plan)
+        if input["job_features"]&.any?
+          input['job_features'].each do |feature|
+            name = "#{self.class.event_name_base}_#{feature}_#{self.class.event_name_suffix(hook)}"
+            trigger_hook name, payload: payload
+          end
+        end
       end
 
       def secrets(host, job_invocation, provider)
@@ -186,10 +209,13 @@ module Actions
             'All %{count} applicable proxies are down. Tried %{proxy_names}',
             offline_proxies.count) % settings
         elsif proxy == :not_defined
-          settings = { :global_proxy => 'remote_execution_global_proxy',
-                       :fallback_proxy => 'remote_execution_fallback_proxy' }
+          settings = {
+            global_proxy: 'remote_execution_global_proxy',
+            fallback_proxy: 'remote_execution_fallback_proxy',
+            provider: provider,
+          }
 
-          raise _('Could not use any proxy. Consider configuring %{global_proxy}, ' +
+          raise _('Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, ' +
                   '%{fallback_proxy} in settings') % settings
         end
         proxy
