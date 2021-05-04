@@ -173,8 +173,8 @@ module ForemanRemoteExecutionCore
       su_method = @user_method.instance_of?(ForemanRemoteExecutionCore::SuUserMethod)
       # pipe the output to tee while capturing the exit code in a file
       <<-SCRIPT.gsub(/^\s+\| /, '')
-      | sh -c "(#{@user_method.cli_command_prefix}#{su_method ? "'#{@remote_script} < /dev/null '" : "#{@remote_script} < /dev/null"}; echo \\$?>#{@exit_code_path}) | /usr/bin/tee #{@output_path}
-      | exit \\$(cat #{@exit_code_path})"
+      | sh -c "(#{@user_method.cli_command_prefix}#{su_method ? "'#{@remote_script} < /dev/null '" : "#{@remote_script.shellescape.gsub(/"/,'\\\\\\"')} < /dev/null"}; echo \\$?>#{@exit_code_path.shellescape.gsub(/"/,'\\\\\\"')}) | /usr/bin/tee #{@output_path.shellescape.gsub(/"/,'\\\\\\"')}
+      | exit \\$(cat #{@exit_code_path.shellescape.gsub(/"/,'\\\\\\"')})"
       SCRIPT
     end
 
@@ -395,24 +395,23 @@ module ForemanRemoteExecutionCore
     end
 
     def cp_script_to_remote(script = @script, name = 'script')
-      path = remote_command_file(name).gsub(/\s/, '\ ')
+      path = remote_command_file(name)
       @logger.debug("copying script to #{path}:\n#{indent_multiline(script)}")
       upload_data(sanitize_script(script), path, 555)
     end
 
     def upload_data(data, path, permissions = 555)
-      ensure_remote_directory File.dirname(path)
+      ensure_remote_directory File.dirname(path.shellescape)
       # We use tee here to pipe stdin coming from ssh to a file at $path, while silencing its output
       # This is used to write to $path with elevated permissions, solutions using cat and output redirection
       # would not work, because the redirection would happen in the non-elevated shell.
-      command = "tee '#{path}' >/dev/null && chmod '#{permissions}' '#{path}'"
-
-      @logger.debug("Sending data to #{path} on remote host:\n#{data}")
+      command = "tee #{path.shellescape} >/dev/null && chmod #{permissions} #{path.shellescape}"
+      @logger.debug("Sending data to #{path.shellescape} on remote host:\n#{data}")
       status, _out, err = run_sync(command, data)
 
-      @logger.warn("Output on stderr while uploading #{path}:\n#{err}") unless err.empty?
+      @logger.warn("Output on stderr while uploading #{path.shellescape}:\n#{err}") unless err.empty?
       if status != 0
-        raise "Unable to upload file to #{path} on remote system: exit code: #{status}"
+        raise "Unable to upload file to #{path.shellescape} on remote system: exit code: #{status}"
       end
 
       path
