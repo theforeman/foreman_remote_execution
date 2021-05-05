@@ -1,5 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CategoryAndTemplate rendering render with error 1`] = `
+<Fragment>
+  <Title
+    headingLevel="h2"
+  >
+    Category And Template
+  </Title>
+  <Text
+    component="p"
+  >
+    All fields are required.
+  </Text>
+  <Form>
+    <SelectField
+      fieldId="job_category"
+      isDisabled={false}
+      label="Job category"
+      options={Array []}
+      placeholderText=""
+      setValue={[Function]}
+      value={null}
+    />
+    <GroupedSelectField
+      fieldId="job_template"
+      groups={Array []}
+      isDisabled={true}
+      label="Job template"
+      placeholderText="Error"
+      selected={null}
+      setSelected={[MockFunction]}
+    />
+    <Alert
+      title="Errors:"
+      variant="danger"
+    >
+      <span>
+        Templates list failed with:
+         
+        I have an error
+      </span>
+    </Alert>
+  </Form>
+</Fragment>
+`;
+
 exports[`CategoryAndTemplate rendering renders with props 1`] = `
 <Fragment>
   <Title
@@ -15,6 +60,7 @@ exports[`CategoryAndTemplate rendering renders with props 1`] = `
   <Form>
     <SelectField
       fieldId="job_category"
+      isDisabled={false}
       label="Job category"
       options={
         Array [
@@ -24,6 +70,7 @@ exports[`CategoryAndTemplate rendering renders with props 1`] = `
           "Ansible Roles Installation",
         ]
       }
+      placeholderText=""
       setValue={[Function]}
       value="I am a category"
     />
@@ -55,7 +102,9 @@ exports[`CategoryAndTemplate rendering renders with props 1`] = `
           },
         ]
       }
+      isDisabled={false}
       label="Job template"
+      placeholderText=""
       selected="ab Run Command - SSH Default clone"
       setSelected={[MockFunction]}
     />

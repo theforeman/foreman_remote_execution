@@ -14,6 +14,7 @@ export const GroupedSelectField = ({
   groups,
   selected,
   setSelected,
+  ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onSelect = selection => {
@@ -67,6 +68,7 @@ export const GroupedSelectField = ({
         selections={selected}
         className="without_select2"
         onClear={onClear}
+        {...props}
       >
         {options}
       </Select>
