@@ -1,8 +1,14 @@
 import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 import { CategoryAndTemplate } from './CategoryAndTemplate';
 
+const baseProps = {
+  setJobTemplate: jest.fn(),
+  selectedTemplateID: 190,
+  setCategory: jest.fn(),
+};
 const fixtures = {
   'renders with props': {
+    ...baseProps,
     jobCategories: [
       'Commands',
       'Ansible Playbook',
@@ -32,10 +38,11 @@ const fixtures = {
         snippet: false,
       },
     ],
-    setJobTemplate: jest.fn(),
-    selectedTemplateID: 190,
-    setCategory: jest.fn(),
     selectedCategory: 'I am a category',
+  },
+  'render with error': {
+    ...baseProps,
+    errors: { allTemplatesError: 'I have an error' },
   },
 };
 
