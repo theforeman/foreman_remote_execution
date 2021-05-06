@@ -20,7 +20,7 @@ class RemoteExecutionProvider
     end
 
     def proxy_command_options(template_invocation, host)
-      {:proxy_operation_name => proxy_operation_name}
+      {:proxy_operation_name => proxy_operation_name}.merge(proxy_command_provider_inputs(template_invocation))
     end
 
     def secrets(_host)
@@ -100,6 +100,14 @@ class RemoteExecutionProvider
 
     def provider_inputs
       []
+    end
+
+    def provider_inputs_doc
+      {}
+    end
+
+    def proxy_command_provider_inputs(template_invocation)
+      {}
     end
 
     def proxy_action_class
