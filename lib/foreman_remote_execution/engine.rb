@@ -1,5 +1,3 @@
-require 'foreman_remote_execution_core'
-
 module ForemanRemoteExecution
   DYNFLOW_QUEUE = :remote_execution
 
