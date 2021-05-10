@@ -53,14 +53,13 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', before: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
-        register_global_js_file 'global'
         requires_foreman '>= 2.2'
+        register_global_js_file 'global'
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
         ApipieDSL.configuration.dsl_classes_matchers += [
           "#{ForemanRemoteExecution::Engine.root}/app/lib/foreman_remote_execution/renderer/**/*.rb",
         ]
-        register_global_js_file 'global'
         automatic_assets(false)
         precompile_assets(*assets_to_precompile)
 
@@ -165,7 +164,6 @@ module ForemanRemoteExecution
 
         # Extend Registration module
         extend_allowed_registration_vars :remote_execution_interface
-        register_global_js_file 'fills'
         ForemanTasks.dynflow.eager_load_actions!
         extend_observable_events(::Dynflow::Action.descendants.select { |klass| klass <= ::Actions::ObservableAction }.map(&:namespaced_event_names))
       end
