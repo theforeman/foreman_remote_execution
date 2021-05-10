@@ -64,6 +64,10 @@ class JobInvocationComposer
           values.merge(:template_input_id => id)
         end
 
+        provider_values_params = template_base.fetch(:provider_input_values, {})
+        template_base[:provider_input_values] = provider_values_params.map do |key, hash|
+          { :name => key, :value => hash[:value] }
+        end
         template_base
       end
     end
@@ -147,6 +151,7 @@ class JobInvocationComposer
 
     def template_invocations_params
       template_invocation_params = { :template_id => template.id, :effective_user => api_params[:effective_user] }
+      template_invocation_params[:provider_input_values] = filter_provider_inputs api_params
       template_invocation_params[:input_values] = api_params.fetch(:inputs, {}).to_h.map do |name, value|
         input = template.template_inputs_with_foreign.find { |i| i.name == name }
         unless input
@@ -156,6 +161,13 @@ class JobInvocationComposer
         { :template_input_id => input.id, :value => value }
       end
       [template_invocation_params]
+    end
+
+    def filter_provider_inputs(api_params)
+      return [] if template.provider.provider_input_namespace.empty?
+      inputs = api_params[template.provider.provider_input_namespace].to_h
+      provider_input_names = template.provider.provider_inputs.map(&:name)
+      inputs.select { |key, value| provider_input_names.include? key }.map { |key, value| { :name => key, :value => value } }
     end
 
     def template
@@ -503,6 +515,7 @@ class JobInvocationComposer
       input = template_invocation.template.template_inputs_with_foreign.find { |i| i.id.to_s == attributes[:template_input_id].to_s }
       input ? input.template_invocation_input_values.build(attributes) : nil
     end.compact
+    template_invocation.provider_input_values.build job_template_base.fetch('provider_input_values', [])
   end
 
   def build_targeting

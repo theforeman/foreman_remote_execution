@@ -64,6 +64,16 @@ module Api
           param :description_format, String, :required => false, :desc => N_('Override the description format from the template for this invocation only')
           param :execution_timeout_interval, Integer, :required => false, :desc => N_('Override the timeout interval from the template for this invocation only')
           param :feature, String, :required => false, :desc => N_('Remote execution feature label that should be triggered, job template assigned to this feature will be used')
+
+          RemoteExecutionProvider.providers.each_value do |provider|
+            next if !provider.respond_to?(:provider_inputs_doc) || provider.provider_inputs_doc.empty?
+            doc = provider.provider_inputs_doc
+            param doc[:namespace], Hash, doc[:opts] do
+              doc[:children].map do |input|
+                param input[:name], input[:type], input[:opts]
+              end
+            end
+          end
         end
       end
 
@@ -195,7 +205,13 @@ module Api
         end
         job_invocation_params[:inputs] ||= {}
         job_invocation_params[:inputs].permit!
+        permit_provider_inputs job_invocation_params
         @job_invocation_params = job_invocation_params
+      end
+
+      def permit_provider_inputs(invocation_params)
+        providers = RemoteExecutionProvider.providers.values.reject { |provider| !provider.respond_to?(:provider_input_namespace) || provider.provider_input_namespace.empty? }
+        providers.each { |provider| invocation_params[provider.provider_input_namespace]&.permit! }
       end
 
       def composer_for_feature

@@ -74,6 +74,14 @@
                     <% end %>
 
                     <div class="advanced hidden">
+                      <%= job_template_fields.fields_for :provider_input_values do |provider_input_fields| %>
+                        <% job_template.provider.provider_inputs.each do |input| %>
+                            <%= provider_input_fields.fields_for input.name, input do |input_fields| %>
+                              <%= template_input_f(input_fields) %>
+                            <% end %>
+                        <% end %>
+                      <% end %>
+
                       <% if job_template.effective_user.overridable? %>
                         <%= text_f job_template_fields, :effective_user, :value => @composer.template_invocation(job_template).try(:effective_user), :label => _('Effective user'), :label_help => N_("A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.") %>
                       <% end %>
