@@ -15,8 +15,9 @@ class JobInvocation < ApplicationRecord
 
   belongs_to :targeting, :dependent => :destroy
   has_many :all_template_invocations, :inverse_of => :job_invocation, :dependent => :destroy, :class_name => 'TemplateInvocation'
-  has_many :template_invocations, -> { where('host_id IS NOT NULL') }, :inverse_of => :job_invocation
-  has_many :pattern_template_invocations, -> { where('host_id IS NULL') }, :inverse_of => :job_invocation, :class_name => 'TemplateInvocation'
+  has_many :template_invocations, -> { where('template_invocations.host_id IS NOT NULL') }, :inverse_of => :job_invocation
+  has_many :pattern_template_invocations, -> { where('template_invocations.host_id IS NULL') }, :inverse_of => :job_invocation, :class_name => 'TemplateInvocation'
+  has_many :pattern_templates, :through => :pattern_template_invocations, :source => :template
 
   validates :targeting, :presence => true
   validates :job_category, :presence => true
@@ -57,6 +58,13 @@ class JobInvocation < ApplicationRecord
 
   belongs_to :remote_execution_feature
 
+  has_many :targeted_hosts, :through => :targeting, :source => :hosts
+  scoped_search :on => 'targeted_host_id', :rename => 'targeted_host_id', :operators => ['= '],
+    :complete_value => false, :only_explicit => true, :ext_method => :search_by_targeted_host
+
+  scoped_search :on => 'pattern_template_name', :rename => 'pattern_template_name', :operators => ['= '],
+    :complete_value => false, :only_explicit => true, :ext_method => :search_by_pattern_template
+
   scope :with_task, -> { references(:task) }
 
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
@@ -78,6 +86,14 @@ class JobInvocation < ApplicationRecord
 
   class Jail < Safemode::Jail
     allow :sub_task_for_host, :template_invocations_hosts
+  end
+
+  def self.search_by_targeted_host(key, operator, value)
+    { :conditions => sanitize_sql_for_conditions(["hosts.id = ?", value]), :joins => :targeted_hosts }
+  end
+
+  def self.search_by_pattern_template(key, operator, value)
+    { :conditions => sanitize_sql_for_conditions(["templates.name = ?", value]), :joins => :pattern_templates }
   end
 
   def self.search_by_status(key, operator, value)
