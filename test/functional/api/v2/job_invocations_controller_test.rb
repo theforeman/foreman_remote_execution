@@ -128,7 +128,7 @@ module Api
           end
 
           test 'with job_template_id param' do
-            @attrs[:job_template_id] = 12345
+            @attrs[:job_template_id] = 12_345
             post :create, params: { job_invocation: @attrs }
             assert_response :error
           end

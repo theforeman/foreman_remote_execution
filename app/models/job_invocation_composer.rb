@@ -1,6 +1,6 @@
 class JobInvocationComposer
-  class JobTemplateNotFound < StandardError; end;
-  class FeatureNotFound < StandardError; end;
+  class JobTemplateNotFound < StandardError; end
+  class FeatureNotFound < StandardError; end
 
   class UiParams
     attr_reader :ui_params
@@ -273,11 +273,11 @@ class JobInvocationComposer
 
     def initialize(input)
       case input
-      when Bookmark then
+      when Bookmark
         @bookmark = input
-      when Host::Base then
+      when Host::Base
         @hosts = [input]
-      when Array then
+      when Array
         @hosts = input.map do |id|
           Host::Managed.authorized.friendly.find(id)
         end
