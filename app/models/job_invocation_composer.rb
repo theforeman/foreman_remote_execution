@@ -1,4 +1,6 @@
 class JobInvocationComposer
+  class JobTemplateNotFound < StandardError; end;
+  class FeatureNotFound < StandardError; end;
 
   class UiParams
     attr_reader :ui_params
@@ -100,6 +102,17 @@ class JobInvocationComposer
 
     def initialize(api_params)
       @api_params = api_params
+
+      if api_params[:feature]
+        # set a default targeting type for backward compatibility
+        # when `for_feature` was used by the API it automatically set a default
+        api_params[:targeting_type] = Targeting::STATIC_TYPE
+      end
+
+      if api_params[:search_query].blank? && api_params[:host_ids].present?
+        translator = HostIdsTranslator.new(api_params[:host_ids])
+        api_params[:search_query] = translator.scoped_search
+      end
     end
 
     def params
@@ -107,10 +120,14 @@ class JobInvocationComposer
         :targeting => targeting_params,
         :triggering => triggering_params,
         :description_format => api_params[:description_format],
-        :remote_execution_feature_id => api_params[:remote_execution_feature_id],
+        :remote_execution_feature_id => remote_execution_feature_id,
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => api_params[:execution_timeout_interval] || template.execution_timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
+    end
+
+    def remote_execution_feature_id
+      feature&.id || api_params[:remote_execution_feature_id]
     end
 
     def targeting_params
@@ -170,8 +187,20 @@ class JobInvocationComposer
       inputs.select { |key, value| provider_input_names.include? key }.map { |key, value| { :name => key, :value => value } }
     end
 
+    def feature
+      @feature ||= RemoteExecutionFeature.feature(api_params[:feature]) if api_params[:feature]
+    rescue => e
+      raise(FeatureNotFound, e.message)
+    end
+
+    def job_template_id
+      feature&.job_template_id || api_params[:job_template_id]
+    end
+
     def template
-      @template ||= JobTemplate.authorized(:view_job_templates).find(api_params[:job_template_id])
+      @template ||= JobTemplate.authorized(:view_job_templates).find(job_template_id)
+    rescue ActiveRecord::RecordNotFound
+      raise(JobTemplateNotFound, _("Template with id '%{id}' was not found") % { id: job_template_id })
     end
 
     private
@@ -239,25 +268,38 @@ class JobInvocationComposer
     end
   end
 
+  class HostIdsTranslator
+    attr_reader :bookmark, :hosts, :scoped_search, :host_ids
+
+    def initialize(input)
+      case input
+      when Bookmark then
+        @bookmark = input
+      when Host::Base then
+        @hosts = [input]
+      when Array then
+        @hosts = input.map do |id|
+          Host::Managed.authorized.friendly.find(id)
+        end
+      when String
+        @scoped_search = input
+      else
+        @hosts = input
+      end
+
+      @scoped_search ||= Targeting.build_query_from_hosts(hosts.map(&:id)) if @hosts
+    end
+  end
+
   class ParamsForFeature
     attr_reader :feature_label, :feature, :provided_inputs
 
     def initialize(feature_label, hosts, provided_inputs = {})
       @feature = RemoteExecutionFeature.feature(feature_label)
       @provided_inputs = provided_inputs
-      if hosts.is_a? Bookmark
-        @host_bookmark = hosts
-      elsif hosts.is_a? Host::Base
-        @host_objects = [hosts]
-      elsif hosts.is_a? Array
-        @host_objects = hosts.map do |id|
-          Host::Managed.authorized.friendly.find(id)
-        end
-      elsif hosts.is_a? String
-        @host_scoped_search = hosts
-      else
-        @host_objects = hosts
-      end
+      translator = HostIdsTranslator.new(hosts)
+      @host_bookmark = translator.bookmark
+      @host_scoped_search = translator.scoped_search
     end
 
     def params
@@ -275,7 +317,6 @@ class JobInvocationComposer
       ret = {}
       ret['targeting_type'] = Targeting::STATIC_TYPE
       ret['search_query'] = @host_scoped_search if @host_scoped_search
-      ret['search_query'] = Targeting.build_query_from_hosts(@host_objects) if @host_objects
       ret['bookmark_id'] = @host_bookmark.id if @host_bookmark
       ret['user_id'] = User.current.id
       ret

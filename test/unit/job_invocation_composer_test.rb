@@ -622,7 +622,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
     end
   end
 
-  describe '#from_api_params' do
+  describe '.from_api_params' do
     let(:composer) do
       JobInvocationComposer.from_api_params(params)
     end
@@ -754,12 +754,23 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         assert composer.save!
         _(composer.job_invocation.remote_execution_feature).must_equal feature
       end
+
+      it 'sets the remote execution_feature id based on `feature` param' do
+        params[:remote_execution_feature_id] = nil
+        params[:feature] = feature.label
+        params[:job_template_id] = trying_job_template_1.id
+        refute_equal feature.job_template, trying_job_template_1
+
+        assert composer.save!
+        _(composer.job_invocation.remote_execution_feature).must_equal feature
+      end
     end
 
     context 'with invalid targeting' do
       let(:params) do
         { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
+          :targeting_type => 'fake',
           :search_query => 'some hosts',
           :inputs => {input1.name => 'some_value'}}
       end
@@ -862,6 +873,39 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       host_ids = job_invocation.targeting.hosts.pluck(:id)
       composer = JobInvocationComposer.from_job_invocation(job_invocation, :host_ids => host_ids)
       assert composer.job_invocation.targeting.randomized_ordering
+    end
+  end
+
+  describe '.for_feature' do
+    let(:feature) { FactoryBot.create(:remote_execution_feature, job_template: trying_job_template_1) }
+    let(:host) { FactoryBot.create(:host) }
+    let(:bookmark) { Bookmark.create!(:query => 'b', :name => 'bookmark', :public => true, :controller => 'hosts') }
+
+    context 'specifying hosts' do
+      it 'takes a bookmarked search' do
+        composer = JobInvocationComposer.for_feature(feature.label, bookmark, {})
+        assert_equal bookmark.id, composer.params['targeting']['bookmark_id']
+      end
+
+      it 'takes an array of host ids' do
+        composer = JobInvocationComposer.for_feature(feature.label, [host.id], {})
+        assert_match(/#{host.name}/, composer.params['targeting']['search_query'])
+      end
+
+      it 'takes a single host object' do
+        composer = JobInvocationComposer.for_feature(feature.label, host, {})
+        assert_match(/#{host.name}/, composer.params['targeting']['search_query'])
+      end
+
+      it 'takes an array of host FQDNs' do
+        composer = JobInvocationComposer.for_feature(feature.label, [host.fqdn], {})
+        assert_match(/#{host.name}/, composer.params['targeting']['search_query'])
+      end
+
+      it 'takes a search query string' do
+        composer = JobInvocationComposer.for_feature(feature.label, 'host.example.com', {})
+        assert_equal 'host.example.com', composer.search_query
+      end
     end
   end
 
