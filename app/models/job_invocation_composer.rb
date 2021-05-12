@@ -1,5 +1,6 @@
 class JobInvocationComposer
   class JobTemplateNotFound < StandardError; end
+
   class FeatureNotFound < StandardError; end
 
   class UiParams
