@@ -114,10 +114,23 @@ module Api
             assert_response :success
           end
 
-          test 'search_query' do
+          test 'host ids as search_query' do
             @attrs[:host_ids] = 'name = testfqdn'
             post :create, params: { job_invocation: @attrs }
             assert_response :success
+          end
+
+          test 'with search_query param' do
+            @attrs[:targeting_type] = 'static_query'
+            @attrs[:search_query] = 'name = testfqdn'
+            post :create, params: { job_invocation: @attrs }
+            assert_response :success
+          end
+
+          test 'with job_template_id param' do
+            @attrs[:job_template_id] = 12_345
+            post :create, params: { job_invocation: @attrs }
+            assert_response :error
           end
         end
       end

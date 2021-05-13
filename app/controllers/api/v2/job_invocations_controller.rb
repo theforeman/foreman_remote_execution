@@ -80,18 +80,15 @@ module Api
       api :POST, '/job_invocations/', N_('Create a job invocation')
       param_group :job_invocation, :as => :create
       def create
-        if job_invocation_params[:feature].present?
-          composer = composer_for_feature
-        else
-          validate_template
-          composer = JobInvocationComposer.from_api_params(
-            job_invocation_params
-          )
-        end
+        composer = JobInvocationComposer.from_api_params(
+          job_invocation_params
+        )
         composer.trigger!
         @job_invocation = composer.job_invocation
         @hosts = @job_invocation.targeting.hosts
         process_response @job_invocation
+      rescue JobInvocationComposer::JobTemplateNotFound, JobInvocationComposer::FeatureNotFound => e
+        not_found(error: { message: e.message })
       end
 
       api :GET, '/job_invocations/:id/hosts/:host_id', N_('Get output for a host')
@@ -190,19 +187,19 @@ module Api
         not_found({ :error => { :message => (_("Host with id '%{id}' was not found") % { :id => params['host_id'] }) } })
       end
 
-      def validate_template
-        JobTemplate.authorized(:view_job_templates).find(job_invocation_params['job_template_id'])
-      rescue ActiveRecord::RecordNotFound
-        not_found({ :error => { :message => (_("Template with id '%{id}' was not found") % { :id => job_invocation_params['job_template_id'] }) } })
-      end
-
       def job_invocation_params
         return @job_invocation_params if @job_invocation_params.present?
 
         job_invocation_params = params.fetch(:job_invocation, {}).dup
+
+        if job_invocation_params[:feature].present? && job_invocation_params[:job_template_id].present?
+          raise _("Only one of feature or job_template_id can be specified")
+        end
+
         if job_invocation_params.key?(:ssh)
           job_invocation_params.merge!(job_invocation_params.delete(:ssh).permit(:effective_user))
         end
+
         job_invocation_params[:inputs] ||= {}
         job_invocation_params[:inputs].permit!
         permit_provider_inputs job_invocation_params
@@ -212,14 +209,6 @@ module Api
       def permit_provider_inputs(invocation_params)
         providers = RemoteExecutionProvider.providers.values.reject { |provider| !provider.respond_to?(:provider_input_namespace) || provider.provider_input_namespace.empty? }
         providers.each { |provider| invocation_params[provider.provider_input_namespace]&.permit! }
-      end
-
-      def composer_for_feature
-        JobInvocationComposer.for_feature(
-          job_invocation_params[:feature],
-          job_invocation_params[:host_ids],
-          job_invocation_params[:inputs].to_hash
-        )
       end
 
       def output_lines_since(task, time)
