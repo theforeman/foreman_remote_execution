@@ -41,6 +41,7 @@ class InputTemplateRenderer
         preview: @preview,
         invocation: invocation,
         input_values: @template_input_values,
+        provider_input_values: provider_values_from_invocation,
         templates_stack: templates_stack,
         input_template_instance: self,
         current_user: User.current.try(:login),
@@ -62,6 +63,11 @@ class InputTemplateRenderer
   end
 
   private
+
+  def provider_values_from_invocation
+    result = @invocation ? Hash[@invocation.provider_input_values.map { |iv| [iv.name, iv.value] }] : {}
+    result.with_indifferent_access
+  end
 
   def values_from_invocation
     input_values = @invocation ? Hash[@invocation.input_values.map { |iv| [iv.template_input.name, iv.value] }] : {}

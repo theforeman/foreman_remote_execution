@@ -5,7 +5,7 @@ module ForemanRemoteExecution
         include Foreman::Renderer::Scope::Macros::HostTemplate
         extend ApipieDSL::Class
 
-        attr_reader :template, :host, :invocation, :input_template_instance, :current_user
+        attr_reader :template, :host, :invocation, :input_template_instance, :current_user, :provider_input_values
         attr_accessor :error_message
         delegate :input, to: :input_template_instance
 
