@@ -152,6 +152,9 @@ module ForemanRemoteExecution
           ctx.permit :execution
         end
 
+        register_graphql_query_field :job_invocations, '::Types::JobInvocation', :collection_field
+        register_graphql_query_field :job_invocation, '::Types::JobInvocation', :record_field
+
         extend_template_helpers ForemanRemoteExecution::RendererMethods
 
         extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/pubkey'
