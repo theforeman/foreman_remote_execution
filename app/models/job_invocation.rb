@@ -44,13 +44,13 @@ class JobInvocation < ApplicationRecord
                                        :source => 'run_host_job_task'
   has_one :user, through: :task
   scoped_search relation: :user, on: :login, rename: 'user', complete_value: true,
-                value_translation: ->(value) { value == 'current_user' ? User.current.login : value },
-                special_values: [:current_user], aliases: ['owner'], :only_explicit => true
+    value_translation: ->(value) { value == 'current_user' ? User.current.login : value },
+    special_values: [:current_user], aliases: ['owner'], :only_explicit => true
   scoped_search :relation => :task, :on => :started_at, :rename => 'started_at', :complete_value => true
   scoped_search :relation => :task, :on => :start_at, :rename => 'start_at', :complete_value => true
   scoped_search :relation => :task, :on => :ended_at, :rename => 'ended_at', :complete_value => true
   scoped_search :relation => :task, :on => :state, :rename => 'status', :ext_method => :search_by_status,
-                :only_explicit => true, :complete_value => Hash[HostStatus::ExecutionStatus::STATUS_NAMES.values.map { |v| [v, v] }]
+    :only_explicit => true, :complete_value => Hash[HostStatus::ExecutionStatus::STATUS_NAMES.values.map { |v| [v, v] }]
 
   belongs_to :triggering, :class_name => 'ForemanTasks::Triggering'
   has_one :recurring_logic, :through => :triggering, :class_name => 'ForemanTasks::RecurringLogic'
@@ -62,8 +62,8 @@ class JobInvocation < ApplicationRecord
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
 
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring',
-                :ext_method => :search_by_recurring_logic, :only_explicit => true,
-                :complete_value => { :true => true, :false => false }
+    :ext_method => :search_by_recurring_logic, :only_explicit => true,
+    :complete_value => { :true => true, :false => false }
 
   default_scope -> { order('job_invocations.id DESC') }
 

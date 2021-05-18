@@ -595,7 +595,7 @@ class JobInvocationComposer
 
     params[:template_invocations].select { |t| valid_template_ids.include?(t[:template_id].to_i) }.map do |template_invocation_params|
       template_invocation = job_invocation.pattern_template_invocations.build(:template_id => template_invocation_params[:template_id],
-                                                                              :effective_user => build_effective_user(template_invocation_params))
+        :effective_user => build_effective_user(template_invocation_params))
       build_input_values_for(template_invocation, template_invocation_params)
       template_invocation
     end

@@ -56,13 +56,13 @@ end
 
 def send_auth_challenge(challenge)
   send_control({ "command" => "authorize",
-                 "cookie" => "1234", # must be present, but value doesn't matter
-                 "challenge" => challenge})
+    "cookie" => "1234", # must be present, but value doesn't matter
+    "challenge" => challenge})
 end
 
 def send_auth_response(response)
   send_control({ "command" => "authorize",
-                 "response" => response})
+    "response" => response})
 end
 
 def read_auth_reply
@@ -76,9 +76,9 @@ end
 def exit_with_problem(problem, message, auth_methods)
   LOG.error("#{problem} - #{message}")
   send_control({ "command" => "init",
-                 "problem" => problem,
-                 "message" => message,
-                 "auth-method-results" => auth_methods})
+    "problem" => problem,
+    "message" => message,
+    "auth-method-results" => auth_methods})
   exit 1
 end
 

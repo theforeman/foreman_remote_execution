@@ -78,7 +78,7 @@ module Actions
 
       def humanized_input
         N_('%{description} on %{host}') % { :host => input[:host].try(:[], :name),
-                                            :description => input[:description].try(:capitalize) || input[:job_category] }
+          :description => input[:description].try(:capitalize) || input[:job_category] }
       end
 
       def humanized_name

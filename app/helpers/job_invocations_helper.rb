@@ -34,8 +34,8 @@ module JobInvocationsHelper
     hosts.map do |host|
       collapsed_preview(host) +
         render(:partial => 'job_invocations/user_input',
-               :locals => { :template_invocation => template_invocation,
-                            :target => host })
+          :locals => { :template_invocation => template_invocation,
+                       :target => host })
     end.reduce(:+)
   end
 
