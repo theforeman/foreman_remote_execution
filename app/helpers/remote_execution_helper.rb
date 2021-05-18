@@ -27,19 +27,19 @@ module RemoteExecutionHelper
 
     if authorized_for(hash_for_host_path(host).merge(auth_object: host, permission: :view_hosts, authorizer: job_hosts_authorizer))
       links << { title: _('Host detail'),
-                 action: { href: host_path(host), 'data-method': 'get', id: "#{host.name}-actions-detail" } }
+        action: { href: host_path(host), 'data-method': 'get', id: "#{host.name}-actions-detail" } }
     end
 
     if authorized_for(hash_for_rerun_job_invocation_path(id: job_invocation, host_ids: [ host.id ], authorizer: job_hosts_authorizer))
       links << { title: (_('Rerun on %s') % host.name),
-                 action: { href: rerun_job_invocation_path(job_invocation, host_ids: [ host.id ]),
-                           'data-method': 'get', id: "#{host.name}-actions-rerun" } }
+        action: { href: rerun_job_invocation_path(job_invocation, host_ids: [ host.id ]),
+                  'data-method': 'get', id: "#{host.name}-actions-rerun" } }
     end
 
     if host_task.present? && authorized_for(hash_for_foreman_tasks_task_path(host_task).merge(auth_object: host_task, permission: :view_foreman_tasks))
       links << { title: _('Host task'),
-                 action: { href: foreman_tasks_task_path(host_task),
-                           'data-method': 'get', id: "#{host.name}-actions-task" } }
+        action: { href: foreman_tasks_task_path(host_task),
+                  'data-method': 'get', id: "#{host.name}-actions-task" } }
     end
 
     links
@@ -159,11 +159,11 @@ module RemoteExecutionHelper
       content_tag :pre, preview
     elsif target.nil?
       alert :text => _('Could not render the preview because no host matches the search query.'),
-            :class => 'alert alert-block alert-warning base',
-            :close => false
+        :class => 'alert alert-block alert-warning base',
+        :close => false
     else
       alert :class => 'alert-block alert-danger base in fade has-error',
-            :text => renderer.error_message.html_safe # rubocop:disable Rails/OutputSafety
+        :text => renderer.error_message.html_safe # rubocop:disable Rails/OutputSafety
     end
   end
 

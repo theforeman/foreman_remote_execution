@@ -24,10 +24,10 @@ class JobTemplatesController < ::TemplatesController
       render :plain => output
     else
       render status: :not_acceptable,
-             plain: _(
-               'Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it.' %
-               {:error => renderer.error_message}
-             )
+        plain: _(
+          'Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it.' %
+          {:error => renderer.error_message}
+        )
     end
   end
 

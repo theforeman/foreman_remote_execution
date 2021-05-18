@@ -125,7 +125,7 @@ module Api
           render :json => { :cancelled => result, :id => @job_invocation.id }
         else
           render :json => { :message => _('The job could not be cancelled.') },
-                 :status => :unprocessable_entity
+            :status => :unprocessable_entity
         end
       end
 
@@ -140,7 +140,7 @@ module Api
           process_response @job_invocation
         else
           render :json => { :error => _('Could not rerun job %{id} because its template could not be found') % { :id => composer.reruns } },
-                 :status => :not_found
+            :status => :not_found
         end
       end
 

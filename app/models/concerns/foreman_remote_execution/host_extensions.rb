@@ -8,15 +8,15 @@ module ForemanRemoteExecution
         has_many :run_host_job_tasks, :through => :template_invocations
 
         scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_invocation.result',
-                      :ext_method => :search_by_job_invocation,
-                      :only_explicit => true,
-                      :complete_value => TemplateInvocation::TaskResultMap::REVERSE_MAP
+          :ext_method => :search_by_job_invocation,
+          :only_explicit => true,
+          :complete_value => TemplateInvocation::TaskResultMap::REVERSE_MAP
 
         scoped_search :relation => :template_invocations, :on => :job_invocation_id,
-                      :rename => 'job_invocation.id', :only_explicit => true, :ext_method => :search_by_job_invocation
+          :rename => 'job_invocation.id', :only_explicit => true, :ext_method => :search_by_job_invocation
 
         scoped_search :relation => :execution_status_object, :on => :status, :rename => :execution_status,
-                      :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
+          :complete_value => { :ok => HostStatus::ExecutionStatus::OK, :error => HostStatus::ExecutionStatus::ERROR }
 
         def search_by_job_invocation(key, operator, value)
           if key == 'job_invocation.result'
