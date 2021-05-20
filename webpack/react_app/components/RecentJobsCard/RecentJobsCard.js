@@ -7,14 +7,10 @@ import ElipsisWithTooltip from 'react-ellipsis-with-tooltip';
 
 import { Grid, GridItem } from '@patternfly/react-core';
 import {
-  OkIcon,
-  ErrorCircleOIcon,
-} from '@patternfly/react-icons/dist/js/icons';
-import {
   PropertiesSidePanel,
   PropertyItem,
 } from '@patternfly/react-catalog-view-extension';
-import { ArrowIcon } from '@patternfly/react-icons';
+import { ArrowIcon, ErrorCircleOIcon, OkIcon } from '@patternfly/react-icons';
 
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import CardItem from 'foremanReact/components/HostDetails/Templates/CardItem/CardTemplate';
