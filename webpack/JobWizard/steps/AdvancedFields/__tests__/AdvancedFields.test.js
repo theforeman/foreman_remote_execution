@@ -11,7 +11,7 @@ patternfly.FormGroup.mockImplementation(props => (
 ));
 const mockStore = configureMockStore([]);
 const store = mockStore({
-  JOB_TEMPLATE: { effective_user: { overridable: true } },
+  JOB_TEMPLATE: { response: { effective_user: { overridable: true } } },
 });
 describe('AdvancedFields', () => {
   it('rendring', () => {

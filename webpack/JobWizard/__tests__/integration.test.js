@@ -6,8 +6,7 @@ import { render, fireEvent, screen, act } from '@testing-library/react';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../JobWizard';
 import * as selectors from '../JobWizardSelectors';
-import { JOB_TEMPLATE, JOB_TEMPLATES } from '../JobWizardConstants';
-import { jobTemplates, jobTemplate } from './fixtures';
+import { jobTemplates, jobTemplateResponse as jobTemplate } from './fixtures';
 
 jest.spyOn(api, 'get');
 jest.spyOn(selectors, 'selectJobTemplate');
@@ -112,10 +111,6 @@ describe('Job wizard fill', () => {
     selectors.selectJobTemplate.mockRestore();
     selectors.selectJobTemplates.mockRestore();
     selectors.selectJobCategories.mockRestore();
-    const fullStore = mockStore({
-      [JOB_TEMPLATE]: jobTemplate,
-      [JOB_TEMPLATES]: jobTemplates,
-    });
     api.get.mockImplementation(({ handleSuccess, ...action }) => {
       if (action.key === 'JOB_CATEGORIES') {
         handleSuccess &&
@@ -135,7 +130,7 @@ describe('Job wizard fill', () => {
     });
 
     render(
-      <Provider store={fullStore}>
+      <Provider store={store}>
         <JobWizard />
       </Provider>
     );

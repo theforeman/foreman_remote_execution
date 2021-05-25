@@ -16,6 +16,10 @@ class UiJobWizardController < ::Api::V2::BaseController
     }
   end
 
+  def resource_name(nested_resource = nil)
+    nested_resource || 'job_template'
+  end
+
   def resource_class
     JobTemplate
   end

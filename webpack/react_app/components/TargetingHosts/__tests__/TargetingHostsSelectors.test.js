@@ -10,9 +10,12 @@ import {
 
 const state = {
   TARGETING_HOSTS: {
-    hosts: [1, 2],
-    total_hosts: 2,
-    autoRefresh: 'true',
+    status: 'RESOLVED',
+    response: {
+      hosts: [1, 2],
+      total_hosts: 2,
+      autoRefresh: 'true',
+    },
   },
 };
 
