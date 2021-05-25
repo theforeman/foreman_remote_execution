@@ -19,7 +19,7 @@ module Actions
       end
 
       def plan(job_invocation, host, template_invocation, proxy_selector = ::RemoteExecutionProxySelector.new, options = {})
-        features = template_invocation.templateremote_execution_features.pluck(:label).uniq
+        features = template_invocation.template.remote_execution_features.pluck(:label).uniq
         action_subject(host,
           :job_category => job_invocation.job_category,
           :description => job_invocation.description,
