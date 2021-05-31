@@ -1,55 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Wizard } from '@patternfly/react-core';
+import { get } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
 import history from 'foremanReact/history';
 import CategoryAndTemplate from './steps/CategoryAndTemplate/';
+import { AdvancedFields } from './steps/AdvancedFields/AdvancedFields';
+import { JOB_TEMPLATE } from './JobWizardConstants';
+import { selectTemplateError } from './JobWizardSelectors';
 import './JobWizard.scss';
 
 export const JobWizard = () => {
-  const [jobTemplate, setJobTemplate] = useState(null);
+  const [jobTemplateID, setJobTemplateID] = useState(null);
   const [category, setCategory] = useState('');
+  const [advancedValues, setAdvancedValues] = useState({});
+  const dispatch = useDispatch();
+
+  const setDefaults = useCallback(response => {
+    const responseJob = response.data;
+    setAdvancedValues({
+      effectiveUserValue: responseJob.effective_user?.value || '',
+      timeoutToKill: responseJob.job_template.execution_timeout_interval || '',
+    });
+  }, []);
+  useEffect(() => {
+    if (jobTemplateID) {
+      dispatch(
+        get({
+          key: JOB_TEMPLATE,
+          url: `/ui_job_wizard/template/${jobTemplateID}`,
+          handleSuccess: setDefaults,
+        })
+      );
+    }
+  }, [jobTemplateID, setDefaults, dispatch]);
+
+  const templateError = !!useSelector(selectTemplateError);
+  const isTemplate = !templateError && !!jobTemplateID;
   const steps = [
     {
-      name: __('Category and template'),
+      name: __('Category and Template'),
       component: (
         <CategoryAndTemplate
-          jobTemplate={jobTemplate}
-          setJobTemplate={setJobTemplate}
+          jobTemplate={jobTemplateID}
+          setJobTemplate={setJobTemplateID}
           category={category}
           setCategory={setCategory}
         />
       ),
     },
     {
-      name: __('Target hosts'),
-      component: <p>TargetHosts </p>,
-      canJumpTo: !!jobTemplate,
+      name: __('Target Hosts'),
+      component: <p>Target Hosts</p>,
+      canJumpTo: isTemplate,
     },
     {
-      name: __('Advanced fields'),
-      component: <p> AdvancedFields </p>,
-      canJumpTo: !!jobTemplate,
+      name: __('Advanced Fields'),
+      component: (
+        <AdvancedFields
+          advancedValues={advancedValues}
+          setAdvancedValues={newValues => {
+            setAdvancedValues(currentAdvancedValues => ({
+              ...currentAdvancedValues,
+              ...newValues,
+            }));
+          }}
+          jobTemplateID={jobTemplateID}
+        />
+      ),
+      canJumpTo: isTemplate,
     },
     {
       name: __('Schedule'),
       component: <p>Schedule</p>,
-      canJumpTo: !!jobTemplate,
+      canJumpTo: isTemplate,
     },
     {
-      name: __('Review details'),
-      component: <p>ReviewDetails</p>,
+      name: __('Review Details'),
+      component: <p>Review Details</p>,
       nextButtonText: 'Run',
-      canJumpTo: !!jobTemplate,
+      canJumpTo: isTemplate,
     },
   ];
-  const title = __('Run Job');
   return (
     <Wizard
       onClose={() => history.goBack()}
-      navAriaLabel={`${title} steps`}
+      navAriaLabel="Run Job steps"
       steps={steps}
-      height="70vh"
+      height="100%"
       className="job-wizard"
     />
   );
 };
+
+export default JobWizard;

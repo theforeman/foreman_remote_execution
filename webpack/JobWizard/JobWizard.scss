@@ -1,6 +1,5 @@
 .job-wizard {
   .pf-c-wizard__main {
-    overflow: visible;
     z-index: calc(
       var(--pf-c-wizard__footer--ZIndex) + 1
     ); // So the select box can be shown above the wizard footer
@@ -8,5 +7,8 @@
 
   .pf-c-wizard__main-body {
     max-width: 500px;
+    .advanced-fields-title {
+      margin-bottom: 10px;
+    }
   }
 }

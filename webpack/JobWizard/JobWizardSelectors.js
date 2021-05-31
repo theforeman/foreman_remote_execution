@@ -4,7 +4,11 @@ import {
   selectAPIErrorMessage,
 } from 'foremanReact/redux/API/APISelectors';
 
-import { JOB_TEMPLATES, JOB_CATEGORIES } from './JobWizardConstants';
+import {
+  JOB_TEMPLATES,
+  JOB_CATEGORIES,
+  JOB_TEMPLATE,
+} from './JobWizardConstants';
 
 export const selectJobTemplatesStatus = state =>
   selectAPIStatus(state, JOB_TEMPLATES);
@@ -26,3 +30,9 @@ export const selectCategoryError = state =>
 
 export const selectAllTemplatesError = state =>
   selectAPIErrorMessage(state, JOB_TEMPLATES);
+
+export const selectTemplateError = state =>
+  selectAPIErrorMessage(state, JOB_TEMPLATE);
+
+export const selectJobTemplate = state =>
+  selectAPIResponse(state, JOB_TEMPLATE);

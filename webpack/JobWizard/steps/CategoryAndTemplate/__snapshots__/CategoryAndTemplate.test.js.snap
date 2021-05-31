@@ -5,7 +5,7 @@ exports[`CategoryAndTemplate rendering render with error 1`] = `
   <Title
     headingLevel="h2"
   >
-    Category And Template
+    Category and Template
   </Title>
   <Text
     component="p"
@@ -50,7 +50,7 @@ exports[`CategoryAndTemplate rendering renders with props 1`] = `
   <Title
     headingLevel="h2"
   >
-    Category And Template
+    Category and Template
   </Title>
   <Text
     component="p"

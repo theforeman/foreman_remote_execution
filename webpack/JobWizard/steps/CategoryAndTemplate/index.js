@@ -10,6 +10,7 @@ import {
   filterJobTemplates,
   selectCategoryError,
   selectAllTemplatesError,
+  selectTemplateError,
 } from '../../JobWizardSelectors';
 import { CategoryAndTemplate } from './CategoryAndTemplate';
 
@@ -43,7 +44,6 @@ const ConnectedCategoryAndTemplate = ({
   }, [jobCategoriesStatus, dispatch, setCategory]);
 
   const jobCategories = useSelector(selectJobCategories);
-
   useEffect(() => {
     if (category) {
       const templatesUrlObject = new URI(templatesUrl);
@@ -68,6 +68,7 @@ const ConnectedCategoryAndTemplate = ({
   const errors = {
     categoryError: useSelector(selectCategoryError),
     allTemplatesError: useSelector(selectAllTemplatesError),
+    templateError: useSelector(selectTemplateError),
   };
   return (
     <CategoryAndTemplate

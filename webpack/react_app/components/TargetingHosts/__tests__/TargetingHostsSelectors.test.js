@@ -9,9 +9,14 @@ import {
 } from '../TargetingHostsSelectors';
 
 const state = {
-  hosts: [],
-  autoRefresh: 'true',
-  total_hosts: 0,
+  TARGETING_HOSTS: {
+    status: 'RESOLVED',
+    response: {
+      hosts: [1, 2],
+      total_hosts: 2,
+      autoRefresh: 'true',
+    },
+  },
 };
 
 const fixtures = {

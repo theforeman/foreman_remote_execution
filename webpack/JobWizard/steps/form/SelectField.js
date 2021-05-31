@@ -24,6 +24,7 @@ export const SelectField = ({
         isOpen={isOpen}
         className="without_select2"
         maxHeight="45vh"
+        menuAppendTo={() => document.body}
         {...props}
       >
         {options.map((option, index) => (

@@ -1,56 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`JobWizard rendering renders  1`] = `
-<mockConstructor
-  className="job-wizard"
-  height="70vh"
-  navAriaLabel="Run Job steps"
-  onClose={[Function]}
-  steps={
-    Array [
-      Object {
-        "component": <ConnectedCategoryAndTemplate
-          category=""
-          jobTemplate={null}
-          setCategory={[Function]}
-          setJobTemplate={[Function]}
-        />,
-        "name": "Category and template",
-      },
-      Object {
-        "canJumpTo": false,
-        "component": <p>
-          TargetHosts 
-        </p>,
-        "name": "Target hosts",
-      },
-      Object {
-        "canJumpTo": false,
-        "component": <p>
-           AdvancedFields 
-        </p>,
-        "name": "Advanced fields",
-      },
-      Object {
-        "canJumpTo": false,
-        "component": <p>
-          Schedule
-        </p>,
-        "name": "Schedule",
-      },
-      Object {
-        "canJumpTo": false,
-        "component": <p>
-          ReviewDetails
-        </p>,
-        "name": "Review details",
-        "nextButtonText": "Run",
-      },
-    ]
-  }
-/>
-`;
-
 exports[`JobWizardPage rendering renders  1`] = `
 <PageLayout
   breadcrumbOptions={

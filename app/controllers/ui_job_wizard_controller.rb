@@ -8,6 +8,18 @@ class UiJobWizardController < ::Api::V2::BaseController
     render :json => {:job_categories =>job_categories}
   end
 
+  def template
+    job_template = JobTemplate.authorized.find(params[:id])
+    render :json => {
+      :job_template => job_template,
+      :effective_user => job_template.effective_user,
+    }
+  end
+
+  def resource_name(nested_resource = nil)
+    nested_resource || 'job_template'
+  end
+
   def resource_class
     JobTemplate
   end

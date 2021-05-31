@@ -9,6 +9,7 @@ exports[`GroupedSelectField rendering renders with props 1`] = `
     className="without_select2"
     isGrouped={true}
     isOpen={false}
+    menuAppendTo={[Function]}
     onClear={[Function]}
     onFilter={[Function]}
     onSelect={[Function]}

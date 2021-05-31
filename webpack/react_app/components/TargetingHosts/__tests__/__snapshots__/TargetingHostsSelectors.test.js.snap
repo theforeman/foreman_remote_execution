@@ -4,8 +4,13 @@ exports[`TargetingHostsSelectors should return apiStatus 1`] = `"RESOLVED"`;
 
 exports[`TargetingHostsSelectors should return autoRefresh 1`] = `"true"`;
 
-exports[`TargetingHostsSelectors should return hosts 1`] = `Array []`;
+exports[`TargetingHostsSelectors should return hosts 1`] = `
+Array [
+  1,
+  2,
+]
+`;
 
 exports[`TargetingHostsSelectors should return intervalExists 1`] = `false`;
 
-exports[`TargetingHostsSelectors should return totalHosts 1`] = `0`;
+exports[`TargetingHostsSelectors should return totalHosts 1`] = `2`;
