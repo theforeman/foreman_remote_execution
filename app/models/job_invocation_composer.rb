@@ -174,7 +174,7 @@ class JobInvocationComposer
         input = template.template_inputs_with_foreign.find { |i| i.name == name }
         unless input
           raise ::Foreman::Exception, _('Unknown input %{input_name} for template %{template_name}') %
-              { :input_name => name, :template_name => template.name }
+            { :input_name => name, :template_name => template.name }
         end
         { :template_input_id => input.id, :value => value }
       end

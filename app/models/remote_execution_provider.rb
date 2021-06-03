@@ -50,7 +50,7 @@ class RemoteExecutionProvider
       method = host_setting(host, :remote_execution_effective_user_method)
       unless EFFECTIVE_USER_METHODS.include?(method)
         raise _('Effective user method "%{current_value}" is not one of %{valid_methods}') %
-                  { :current_value => method, :valid_methods => EFFECTIVE_USER_METHODS}
+          { :current_value => method, :valid_methods => EFFECTIVE_USER_METHODS}
       end
       method
     end

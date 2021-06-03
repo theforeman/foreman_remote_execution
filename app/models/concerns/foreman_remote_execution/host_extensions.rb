@@ -6,6 +6,8 @@ module ForemanRemoteExecution
         has_many :template_invocations, :dependent => :destroy, :foreign_key => 'host_id'
         has_one :execution_status_object, :class_name => 'HostStatus::ExecutionStatus', :foreign_key => 'host_id', :dependent => :destroy
         has_many :run_host_job_tasks, :through => :template_invocations
+        has_many :host_proxy_invocations, :foreign_key => 'host_id', :dependent => :destroy
+        has_many :executed_through_proxies, :through => :host_proxy_invocations, :source => 'smart_proxy'
 
         scoped_search :relation => :run_host_job_tasks, :on => :result, :rename => 'job_invocation.result',
           :ext_method => :search_by_job_invocation,
