@@ -111,7 +111,7 @@ class RemoteExecutionProvider
     end
 
     def proxy_action_class
-      'ForemanRemoteExecutionCore::Actions::RunScript'
+      'Proxy::RemoteExecution::Ssh::Actions::RunScript'
     end
 
     # Return a specific proxy selector to use for running a given template
