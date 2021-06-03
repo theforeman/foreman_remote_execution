@@ -63,6 +63,7 @@ module ForemanRemoteExecutionCore
   if ForemanTasksCore.dynflow_present?
     require 'foreman_tasks_core/runner'
     require 'foreman_remote_execution_core/log_filter'
+    require 'foreman_remote_execution_core/utils'
     if simulate?
       # Load the fake implementation of the script runner if debug is enabled
       require 'foreman_remote_execution_core/fake_script_runner'
