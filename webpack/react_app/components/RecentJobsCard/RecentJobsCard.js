@@ -1,76 +1,77 @@
-/* eslint-disable camelcase */
-
 import PropTypes from 'prop-types';
-import React from 'react';
-import Skeleton from 'react-loading-skeleton';
-import ElipsisWithTooltip from 'react-ellipsis-with-tooltip';
+import React, { useState } from 'react';
 
-import { Grid, GridItem } from '@patternfly/react-core';
-import {
-  PropertiesSidePanel,
-  PropertyItem,
-} from '@patternfly/react-catalog-view-extension';
-import { ArrowIcon, ErrorCircleOIcon, OkIcon } from '@patternfly/react-icons';
-
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
-import CardItem from 'foremanReact/components/HostDetails/Templates/CardItem/CardTemplate';
-import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
+import { DropdownItem, Tabs, Tab, TabTitleText } from '@patternfly/react-core';
+import CardTemplate from 'foremanReact/components/HostDetails/Templates/CardItem/CardTemplate';
 import { translate as __ } from 'foremanReact/common/I18n';
-import './styles.css';
+import { foremanUrl } from 'foremanReact/common/helpers';
 
-const RecentJobsCard = ({ hostDetails: { name } }) => {
-  const jobsUrl =
-    name && `/api/job_invocations?search=host%3D${name}&per_page=3`;
-  const {
-    response: { results: jobs },
-  } = useAPI('get', jobsUrl);
+import {
+  FINISHED_TAB,
+  RUNNING_TAB,
+  SCHEDULED_TAB,
+  JOB_BASE_URL,
+} from './constants';
+import RecentJobsTable from './RecentJobsTable';
 
-  const iconMarkup = status => {
-    if (status === 1) return <ErrorCircleOIcon color="#C9190B" />;
-    return <OkIcon color="#3E8635" />;
-  };
+const RecentJobsCard = ({ hostDetails: { name, id } }) => {
+  const [activeTab, setActiveTab] = useState(FINISHED_TAB);
+
+  const handleTabClick = (evt, tabIndex) => setActiveTab(tabIndex);
 
   return (
-    <CardItem
-      header={
-        <span>
-          {__('Recent Jobs')}{' '}
-          <a href={`/job_invocations?search=host+%3D+${name}`}>
-            <ArrowIcon />
-          </a>
-        </span>
-      }
+    <CardTemplate
+      header={__('Recent Jobs')}
+      dropdownItems={[
+        <DropdownItem
+          href={foremanUrl(`${JOB_BASE_URL}${name}`)}
+          key="link-to-all"
+        >
+          {__('View All Jobs')}
+        </DropdownItem>,
+        <DropdownItem
+          href={foremanUrl(
+            `${JOB_BASE_URL}${name}+and+status+%3D+failed+or+status%3D+succeeded`
+          )}
+          key="link-to-finished"
+        >
+          {__('View Finished Jobs')}
+        </DropdownItem>,
+        <DropdownItem
+          href={foremanUrl(`${JOB_BASE_URL}${name}+and+status+%3D+running`)}
+          key="link-to-running"
+        >
+          {__('View Running Jobs')}
+        </DropdownItem>,
+        <DropdownItem
+          href={foremanUrl(`${JOB_BASE_URL}${name}+and+status+%3D+queued`)}
+          key="link-to-scheduled"
+        >
+          {__('View Scheduled Jobs')}
+        </DropdownItem>,
+      ]}
     >
-      <PropertiesSidePanel>
-        {jobs?.map(({ status, status_label, id, start_at, description }) => (
-          <PropertyItem
-            key={id}
-            label={
-              description ? (
-                <Grid>
-                  <GridItem span={8}>
-                    <ElipsisWithTooltip>{description}</ElipsisWithTooltip>
-                  </GridItem>
-                  <GridItem span={1}>{iconMarkup(status)}</GridItem>
-                  <GridItem span={3}>{status_label}</GridItem>
-                </Grid>
-              ) : (
-                <Skeleton />
-              )
-            }
-            value={
-              start_at ? (
-                <a href={`/job_invocations/${id}`}>
-                  <RelativeDateTime date={start_at} />
-                </a>
-              ) : (
-                <Skeleton />
-              )
-            }
-          />
-        ))}
-      </PropertiesSidePanel>
-    </CardItem>
+      <Tabs mountOnEnter activeKey={activeTab} onSelect={handleTabClick}>
+        <Tab
+          eventKey={FINISHED_TAB}
+          title={<TabTitleText>{__('Finished')}</TabTitleText>}
+        >
+          <RecentJobsTable hostId={id} status="failed+or+status%3D+succeeded" />
+        </Tab>
+        <Tab
+          eventKey={RUNNING_TAB}
+          title={<TabTitleText>{__('Running')}</TabTitleText>}
+        >
+          <RecentJobsTable hostId={id} status="running" />
+        </Tab>
+        <Tab
+          eventKey={SCHEDULED_TAB}
+          title={<TabTitleText>{__('Scheduled')}</TabTitleText>}
+        >
+          <RecentJobsTable hostId={id} status="queued" />
+        </Tab>
+      </Tabs>
+    </CardTemplate>
   );
 };
 
@@ -79,5 +80,10 @@ export default RecentJobsCard;
 RecentJobsCard.propTypes = {
   hostDetails: PropTypes.shape({
     name: PropTypes.string,
-  }).isRequired,
+    id: PropTypes.number,
+  }),
+};
+
+RecentJobsCard.defaultProps = {
+  hostDetails: {},
 };

@@ -6,6 +6,6 @@ export default () =>
   addGlobalFill(
     'details-cards',
     'rex-host-details-latest-jobs',
-    <RecentJobsCard />,
+    <RecentJobsCard key="rex-host-details-latest-jobs" />,
     1000
   );
