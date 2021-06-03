@@ -122,6 +122,7 @@ module ForemanRemoteExecutionCore
       @local_working_dir = options.fetch(:local_working_dir, settings.fetch(:local_working_dir))
       @remote_working_dir = options.fetch(:remote_working_dir, settings.fetch(:remote_working_dir))
       @cleanup_working_dirs = options.fetch(:cleanup_working_dirs, settings.fetch(:cleanup_working_dirs))
+      @first_execution = options.fetch(:first_execution, false)
       @user_method = user_method
     end
 
@@ -149,6 +150,7 @@ module ForemanRemoteExecutionCore
     end
 
     def start
+      Utils.prune_known_hosts!(@host, @ssh_port, logger) if @first_execution
       prepare_start
       script = initialization_script
       logger.debug("executing script:\n#{indent_multiline(script)}")
