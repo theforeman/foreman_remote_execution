@@ -204,12 +204,10 @@ module ForemanRemoteExecution
 
       Host::Managed.prepend ForemanRemoteExecution::HostExtensions
       Host::Managed.include ForemanTasks::Concerns::HostActionSubject
-      Host::Managed.include ForemanRemoteExecution::Orchestration::SSH
 
       (Nic::Base.descendants + [Nic::Base]).each do |klass|
         klass.send(:include, ForemanRemoteExecution::NicExtensions)
       end
-      Nic::Managed.include ForemanRemoteExecution::Orchestration::SSH
 
       Bookmark.include ForemanRemoteExecution::BookmarkExtensions
       HostsHelper.prepend ForemanRemoteExecution::HostsHelperExtensions
