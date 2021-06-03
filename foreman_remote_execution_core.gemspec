@@ -22,4 +22,5 @@ DESC
   s.add_runtime_dependency('ed25519')
   s.add_runtime_dependency('foreman-tasks-core', '>= 0.3.1')
   s.add_runtime_dependency('net-ssh')
+  s.add_runtime_dependency('smart_proxy_remote_execution_ssh', '>= 0.4.0')
 end

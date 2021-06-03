@@ -1,20 +1,6 @@
-require 'foreman_tasks_core/shareable_action'
-
 module ForemanRemoteExecutionCore
   module Actions
-    class RunScript < ForemanTasksCore::Runner::Action
-      def initiate_runner
-        additional_options = {
-          :step_id => run_step_id,
-          :uuid => execution_plan_id,
-        }
-        ForemanRemoteExecutionCore.runner_class.build(input.merge(additional_options),
-          suspended_action: suspended_action)
-      end
-
-      def runner_dispatcher
-        ForemanRemoteExecutionCore::Dispatcher.instance
-      end
-    end
+    require 'smart_proxy_remote_execution_ssh/actions/run_script'
+    RunScript = Proxy::RemoteExecution::Ssh::Actions::RunScript
   end
 end
