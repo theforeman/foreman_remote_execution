@@ -864,7 +864,9 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
     it 'marks targeting as resolved if static' do
       created = JobInvocationComposer.from_job_invocation(job_invocation).job_invocation
       assert created.targeting.resolved?
-      assert_equal job_invocation.template_invocations_host_ids, created.targeting.host_ids
+      created.targeting.save
+      created.targeting.reload
+      assert_equal job_invocation.template_invocations_host_ids, created.targeting.targeting_hosts.pluck(:host_id)
     end
 
     it 'takes randomized_ordering from the original job invocation when rerunning failed' do
@@ -873,6 +875,17 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       host_ids = job_invocation.targeting.hosts.pluck(:id)
       composer = JobInvocationComposer.from_job_invocation(job_invocation, :host_ids => host_ids)
       assert composer.job_invocation.targeting.randomized_ordering
+    end
+
+    it 'works with invalid hosts' do
+      host = job_invocation.targeting.hosts.first
+      ::Host::Managed.any_instance.stubs(:valid?).returns(false)
+      composer = JobInvocationComposer.from_job_invocation(job_invocation, {})
+      targeting = composer.compose.job_invocation.targeting
+      targeting.save!
+      targeting.reload
+      assert targeting.valid?
+      assert_equal targeting.hosts.pluck(:id), [host.id]
     end
   end
 

@@ -405,7 +405,7 @@ class JobInvocationComposer
     job_invocation.effective_user_password = params[:effective_user_password]
 
     if @reruns && job_invocation.targeting.static?
-      job_invocation.targeting.host_ids = JobInvocation.find(@reruns).targeting.host_ids
+      job_invocation.targeting.assign_host_ids(JobInvocation.find(@reruns).targeting.host_ids)
       job_invocation.targeting.mark_resolved!
     end
 
