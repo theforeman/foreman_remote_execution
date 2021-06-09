@@ -193,11 +193,16 @@ class JobInvocation < ApplicationRecord
   end
 
   def total_hosts_count
+    count = _('N/A')
+
     if targeting.resolved?
-      task&.main_action&.total_count || targeting.hosts.count
-    else
-      _('N/A')
+      count = if task&.main_action.respond_to?(:total_count)
+                task.main_action.total_count
+              else
+                targeting.hosts.count
+              end
     end
+    count
   end
 
   def pattern_template_invocation_for_host(host)
