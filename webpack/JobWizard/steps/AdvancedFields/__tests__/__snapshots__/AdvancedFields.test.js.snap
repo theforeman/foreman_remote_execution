@@ -76,6 +76,7 @@ exports[`AdvancedFields rendring 1`] = `
                   aria-label="open-help-tooltip-button"
                   className="pf-c-form__group-label-help"
                   onClick={[Function]}
+                  type="button"
                 >
                   <HelpIcon
                     color="currentColor"
@@ -107,6 +108,7 @@ exports[`AdvancedFields rendring 1`] = `
                     aria-label="open-help-tooltip-button"
                     className="pf-c-form__group-label-help"
                     onClick={[Function]}
+                    type="button"
                   >
                     <HelpIcon
                       color="currentColor"
@@ -141,6 +143,7 @@ exports[`AdvancedFields rendring 1`] = `
                     aria-label="open-help-tooltip-button"
                     className="pf-c-form__group-label-help"
                     onClick={[Function]}
+                    type="button"
                   >
                     <HelpIcon
                       color="currentColor"
@@ -172,6 +175,7 @@ exports[`AdvancedFields rendring 1`] = `
                   aria-label="open-help-tooltip-button"
                   className="pf-c-form__group-label-help"
                   onClick={[Function]}
+                  type="button"
                 >
                   <HelpIcon
                     color="currentColor"
@@ -202,6 +206,7 @@ exports[`AdvancedFields rendring 1`] = `
                   aria-label="open-help-tooltip-button"
                   className="pf-c-form__group-label-help"
                   onClick={[Function]}
+                  type="button"
                 >
                   <HelpIcon
                     color="currentColor"
@@ -232,6 +237,7 @@ exports[`AdvancedFields rendring 1`] = `
                   aria-label="open-help-tooltip-button"
                   className="pf-c-form__group-label-help"
                   onClick={[Function]}
+                  type="button"
                 >
                   <HelpIcon
                     color="currentColor"
@@ -263,6 +269,7 @@ exports[`AdvancedFields rendring 1`] = `
                     aria-label="open-help-tooltip-button"
                     className="pf-c-form__group-label-help"
                     onClick={[Function]}
+                    type="button"
                   >
                     <HelpIcon
                       color="currentColor"
@@ -299,6 +306,7 @@ exports[`AdvancedFields rendring 1`] = `
                     aria-label="open-help-tooltip-button"
                     className="pf-c-form__group-label-help"
                     onClick={[Function]}
+                    type="button"
                   >
                     <HelpIcon
                       color="currentColor"
@@ -331,6 +339,7 @@ exports[`AdvancedFields rendring 1`] = `
                     aria-label="open-help-tooltip-button"
                     className="pf-c-form__group-label-help"
                     onClick={[Function]}
+                    type="button"
                   >
                     <HelpIcon
                       color="currentColor"
@@ -367,6 +376,7 @@ exports[`AdvancedFields rendring 1`] = `
                     aria-label="open-help-tooltip-button"
                     className="pf-c-form__group-label-help"
                     onClick={[Function]}
+                    type="button"
                   >
                     <HelpIcon
                       color="currentColor"
