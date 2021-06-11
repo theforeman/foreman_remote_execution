@@ -26,7 +26,7 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
       <Title headingLevel="h2" className="advanced-fields-title">
         {__('Advanced Fields')}
       </Title>
-      <Form id="advanced-fields-job-template">
+      <Form id="advanced-fields-job-template" autoComplete="off">
         <TemplateInputsFields
           inputs={templateInputs}
           value={advancedValues.templateValues}

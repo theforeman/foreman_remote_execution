@@ -57,7 +57,6 @@ describe('formatter', () => {
     expect(shallow(formatter(props, {}, jest.fn()))).toMatchSnapshot();
   });
   it('render search input', () => {
-    // patternfly.FormGroup.mockImplementation(props => <div>{props.children}</div>);
     const props = {
       name: 'search adv',
       required: false,
