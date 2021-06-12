@@ -65,8 +65,6 @@ class JobInvocation < ApplicationRecord
   scoped_search :on => 'pattern_template_name', :rename => 'pattern_template_name', :operators => ['= '],
     :complete_value => false, :only_explicit => true, :ext_method => :search_by_pattern_template
 
-  scope :with_task, -> { references(:task) }
-
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
 
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring',
@@ -99,7 +97,7 @@ class JobInvocation < ApplicationRecord
   def self.search_by_status(key, operator, value)
     conditions = HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.sql_conditions_for(value)
     conditions[0] = "NOT (#{conditions[0]})" if operator == '<>'
-    { :conditions => sanitize_sql_for_conditions(conditions), :include => :task }
+    { :conditions => sanitize_sql_for_conditions(conditions), :joins => :task }
   end
 
   def self.search_by_recurring_logic(key, operator, value)

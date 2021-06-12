@@ -67,7 +67,7 @@ class JobInvocationsController < ApplicationController
   end
 
   def index
-    @job_invocations = resource_base_search_and_page.with_task.order('job_invocations.id DESC')
+    @job_invocations = resource_base_search_and_page.preload(:task).order('job_invocations.id DESC')
   end
 
   # refreshes the form

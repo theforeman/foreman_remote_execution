@@ -10,7 +10,7 @@ class JobInvocationTest < ActiveSupport::TestCase
     end
 
     it 'is able to perform search through job invocations' do
-      found_jobs = JobInvocation.search_for(%{job_category = "#{job_invocation.job_category}"}).paginate(:page => 1).with_task.order('job_invocations.id DESC')
+      found_jobs = JobInvocation.search_for(%{job_category = "#{job_invocation.job_category}"}).paginate(:page => 1).order('job_invocations.id DESC')
       _(found_jobs).must_equal [job_invocation]
     end
 

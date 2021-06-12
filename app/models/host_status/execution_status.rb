@@ -64,11 +64,11 @@ class HostStatus::ExecutionStatus < HostStatus::Status
 
       case status
         when OK
-          [ "foreman_tasks_tasks.state = 'stopped' AND result = 'success'" ]
+          [ "foreman_tasks_tasks.state = 'stopped' AND foreman_tasks_tasks.result = 'success'" ]
         when CANCELLED
-          [ "foreman_tasks_tasks.state = 'stopped' AND result = 'cancelled'" ]
+          [ "foreman_tasks_tasks.state = 'stopped' AND foreman_tasks_tasks.result = 'cancelled'" ]
         when ERROR
-          [ "foreman_tasks_tasks.state = 'stopped' AND (result = 'error' OR result = 'warning')" ]
+          [ "foreman_tasks_tasks.state = 'stopped' AND (foreman_tasks_tasks.result = 'error' OR foreman_tasks_tasks.result = 'warning')" ]
         when QUEUED
           [ "foreman_tasks_tasks.state = 'scheduled' OR foreman_tasks_tasks.state IS NULL" ]
         when RUNNING
