@@ -129,7 +129,6 @@ export const ConcurrencyLevelField = ({ value, setValue }) => (
     }}
     inputProps={{
       min: 1,
-      type: 'number',
       autoComplete: 'concurrency-level',
       id: 'concurrency-level',
       placeholder: __('For example: 1, 2, 3, 4, 5...'),
@@ -153,7 +152,6 @@ export const TimeSpanLevelField = ({ value, setValue }) => (
     }}
     inputProps={{
       min: 1,
-      type: 'number',
       autoComplete: 'time-span',
       id: 'time-span',
       placeholder: __('For example: 1, 2, 3, 4, 5...'),

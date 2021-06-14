@@ -287,7 +287,6 @@ exports[`AdvancedFields rendring 1`] = `
                 "min": 1,
                 "onChange": [Function],
                 "placeholder": "For example: 1, 2, 3, 4, 5...",
-                "type": "number",
                 "value": "",
               }
             }
@@ -357,7 +356,6 @@ exports[`AdvancedFields rendring 1`] = `
                 "min": 1,
                 "onChange": [Function],
                 "placeholder": "For example: 1, 2, 3, 4, 5...",
-                "type": "number",
                 "value": "",
               }
             }
