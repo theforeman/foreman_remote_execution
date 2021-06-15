@@ -80,7 +80,7 @@ class RemoteExecutionProvider
 
     def find_ip(host, interfaces)
       if host_setting(host, :remote_execution_connect_by_ip)
-        interfaces.find { |i| i.ip.present? }.try(:ip)
+        interfaces.find { |i| i.ip6.present? }.try(:ip6) || interfaces.find { |i| i.ip.present? }.try(:ip)
       end
     end
 

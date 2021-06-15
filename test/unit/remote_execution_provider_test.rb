@@ -200,6 +200,14 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.interfaces.each(&:save)
         host.reload
         SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip
+
+        # there is an execution interface with both IPv6 and IPv4: IPv6 is being preferred over IPv4
+        execution_interface = FactoryBot.build(:nic_managed,
+          flags.merge(:execution => true, :ip => '10.0.0.4', :ip6 => 'fd00::4'))
+        host.interfaces = [execution_interface]
+        host.interfaces.each(&:save)
+        host.reload
+        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip6
       end
     end
   end

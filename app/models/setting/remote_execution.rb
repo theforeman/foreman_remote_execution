@@ -39,7 +39,7 @@ class Setting::RemoteExecution < Setting
       self.set('remote_execution_connect_by_ip',
         N_('Should the ip addresses on host interfaces be preferred over the fqdn? '\
         'It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. '\
-        'This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true.'),
+        'For dual-stacked hosts, IPv6 will be preferred over IPv4'),
         false,
         N_('Connect by IP')),
       self.set('remote_execution_ssh_password',
