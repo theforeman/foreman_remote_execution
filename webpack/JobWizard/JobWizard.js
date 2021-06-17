@@ -8,6 +8,7 @@ import CategoryAndTemplate from './steps/CategoryAndTemplate/';
 import { AdvancedFields } from './steps/AdvancedFields/AdvancedFields';
 import { JOB_TEMPLATE } from './JobWizardConstants';
 import { selectTemplateError } from './JobWizardSelectors';
+import Schedule from './steps/Schedule/';
 import './JobWizard.scss';
 
 export const JobWizard = () => {
@@ -72,7 +73,7 @@ export const JobWizard = () => {
     },
     {
       name: __('Schedule'),
-      component: <p>Schedule</p>,
+      component: <Schedule />,
       canJumpTo: isTemplate,
     },
     {
