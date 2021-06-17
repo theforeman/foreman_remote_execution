@@ -40,4 +40,14 @@
       }
     }
   }
+
+  .schedule-tab {
+    input[type='radio'],
+    input[type='checkbox'] {
+      margin: 0;
+    }
+    .advanced-scheduling-button {
+      text-align: start;
+    }
+  }
 }
