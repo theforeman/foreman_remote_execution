@@ -5,6 +5,16 @@ module ForemanRemoteExecution
   class RunHostsJobTest < ActiveSupport::TestCase
     include Dynflow::Testing
 
+    # Adding run_step_id wich is needed in RunHostsJob as a quick fix
+    # it will be added to dynflow in the future see https://github.com/Dynflow/dynflow/pull/391
+    # rubocop:disable Style/ClassAndModuleChildren
+    class Dynflow::Testing::DummyPlannedAction
+      def run_step_id
+        Dynflow::Testing.get_id
+      end
+    end
+    # rubocop:enable Style/ClassAndModuleChildren
+
     let(:host) { FactoryBot.create(:host, :with_execution) }
     let(:proxy) { host.remote_execution_proxies('SSH')[:subnet].first }
     let(:targeting) { FactoryBot.create(:targeting, :search_query => "name = #{host.name}", :user => User.current) }
