@@ -9,7 +9,6 @@ module Actions
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
       middleware.use Actions::Middleware::WatchDelegatedProxySubTasks
-      middleware.use Actions::Middleware::ProxyBatchTriggering
 
       class CheckOnProxyActions; end
 
@@ -32,6 +31,9 @@ module Actions
         set_up_concurrency_control job_invocation
         input.update(:job_category => job_invocation.job_category)
         plan_self(:job_invocation_id => job_invocation.id)
+        input[:proxy_batch_size] ||= Setting['foreman_tasks_proxy_batch_size']
+        trigger_action = plan_action(Actions::TriggerProxyBatch, batch_size: proxy_batch_size, total_count: hosts.count)
+        input[:trigger_run_step_id] = trigger_action.run_step_id
       end
 
       def create_sub_plans
@@ -44,6 +46,25 @@ module Actions
           template_invocation.host_id = host.id
           trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector, { :use_concurrency_control => uses_concurrency_control })
         end
+      end
+
+      def spawn_plans
+        super
+      ensure
+        trigger_remote_batch
+      end
+
+      def trigger_remote_batch
+        batches_ready = (output[:planned_count] - output[:remote_triggered_count]) / proxy_batch_size
+        return unless batches_ready > 0
+
+        plan_event(Actions::TriggerProxyBatch::TriggerNextBatch[batches_ready], nil, step_id: input[:trigger_run_step_id])
+        output[:remote_triggered_count] += proxy_batch_size * batches_ready
+      end
+
+      def on_planning_finished
+        plan_event(Actions::TriggerProxyBatch::TriggerLastBatch, nil, step_id: input[:trigger_run_step_id])
+        super
       end
 
       def finalize
@@ -67,6 +88,7 @@ module Actions
 
       def initiate
         output[:host_count] = total_count
+        output[:remote_triggered_count] = 0
         super
       end
 
@@ -94,7 +116,11 @@ module Actions
       end
 
       def run(event = nil)
-        super unless event == Dynflow::Action::Skip
+        if event == Dynflow::Action::Skip
+          plan_event(Dynflow::Action::Skip, nil, step_id: input[:trigger_run_step_id])
+        else
+          super
+        end
       end
 
       def humanized_input
@@ -103,6 +129,10 @@ module Actions
 
       def humanized_name
         '%s:' % _(super)
+      end
+
+      def proxy_batch_size
+        input[:proxy_batch_size]
       end
     end
   end
