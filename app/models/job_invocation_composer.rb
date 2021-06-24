@@ -513,7 +513,7 @@ class JobInvocationComposer
   end
 
   def available_bookmarks
-    Bookmark.authorized(:view_bookmarks).my_bookmarks.where(:controller => ['hosts', 'dashboard'])
+    Bookmark.my_bookmarks.where(:controller => ['hosts', 'dashboard'])
   end
 
   def targeted_hosts
