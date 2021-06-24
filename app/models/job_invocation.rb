@@ -139,6 +139,10 @@ class JobInvocation < ApplicationRecord
     description
   end
 
+  def latest_jobs(limit = 5)
+    JobInvocation.order(id: :desc).limit(limit)
+  end
+
   # returns progress in percents
   def progress(total = nil, done = nil)
     if queued? || !targeting.resolved? || done == 0
