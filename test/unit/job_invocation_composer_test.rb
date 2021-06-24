@@ -350,12 +350,6 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       end
 
       describe '#available_bookmarks' do
-        it 'obeys authorization' do
-          composer
-          Bookmark.expects(:authorized).with(:view_bookmarks).returns(Bookmark.where({}))
-          composer.available_bookmarks
-        end
-
         context 'there are hostgroups and hosts bookmark' do
           let(:hostgroups) { Bookmark.create(:name => 'hostgroups', :query => 'name = x', :controller => 'hostgroups') }
           let(:hosts) { Bookmark.create(:name => 'hosts', :query => 'name = x', :controller => 'hosts') }
