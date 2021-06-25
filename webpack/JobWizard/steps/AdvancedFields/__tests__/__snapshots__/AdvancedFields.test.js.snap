@@ -27,11 +27,38 @@ exports[`AdvancedFields rendring 1`] = `
         Advanced Fields
       </h2>
     </Title>
-    <Form>
+    <Form
+      autoComplete="off"
+      id="advanced-fields-job-template"
+    >
       <form
+        autoComplete="off"
         className="pf-c-form"
+        id="advanced-fields-job-template"
         noValidate={true}
       >
+        <TemplateInputsFields
+          inputs={
+            Array [
+              Object {
+                "advanced": true,
+                "default": "default value advanced",
+                "name": "advanced input1",
+              },
+            ]
+          }
+          setValue={[Function]}
+          value={Object {}}
+        >
+          <mockConstructor
+            fieldId="advanced input1"
+            key="advanced input1"
+            label="advanced input1"
+            labelIcon={null}
+          >
+            <div />
+          </mockConstructor>
+        </TemplateInputsFields>
         <EffectiveUserField
           setValue={[Function]}
           value=""
@@ -49,6 +76,7 @@ exports[`AdvancedFields rendring 1`] = `
                   aria-label="open-help-tooltip-button"
                   className="pf-c-form__group-label-help"
                   onClick={[Function]}
+                  type="button"
                 >
                   <HelpIcon
                     color="currentColor"
@@ -62,42 +90,101 @@ exports[`AdvancedFields rendring 1`] = `
             <div />
           </mockConstructor>
         </EffectiveUserField>
-        <TimeoutToKillField
+        <DescriptionField
+          inputs={Array []}
           setValue={[Function]}
           value=""
         >
           <mockConstructor
-            fieldId="timeout-to-kill"
-            label="Timeout to kill"
-            labelIcon={
-              <Popover
-                aria-label="help-text"
-                bodyContent="Time in seconds from the start on the remote host after which the job should be killed."
-                id="timeout-to-kill-help"
+            fieldId="description"
+            helperText={
+              <Button
+                isInline={true}
+                onClick={[Function]}
+                variant="link"
               >
-                <button
-                  aria-label="open-help-tooltip-button"
-                  className="pf-c-form__group-label-help"
-                  onClick={[Function]}
-                >
-                  <HelpIcon
-                    color="currentColor"
-                    noVerticalAlign={true}
-                    size="sm"
-                  />
-                </button>
-              </Popover>
+                Set the custom job description
+              </Button>
             }
+            label="Description"
           >
             <div />
           </mockConstructor>
+        </DescriptionField>
+        <TimeoutToKillField
+          setValue={[Function]}
+          value=""
+        >
+          <NumberInput
+            formProps={
+              Object {
+                "fieldId": "timeout-to-kill",
+                "label": "Timeout to kill",
+                "labelIcon": <Popover
+                  aria-label="help-text"
+                  bodyContent="Time in seconds from the start on the remote host after which the job should be killed."
+                  id="timeout-to-kill-help"
+                >
+                  <button
+                    aria-label="open-help-tooltip-button"
+                    className="pf-c-form__group-label-help"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <HelpIcon
+                      color="currentColor"
+                      noVerticalAlign={true}
+                      size="sm"
+                    />
+                  </button>
+                </Popover>,
+              }
+            }
+            inputProps={
+              Object {
+                "autoComplete": "timeout-to-kill",
+                "id": "timeout-to-kill",
+                "onChange": [Function],
+                "placeholder": "For example: 1, 2, 3, 4, 5...",
+                "value": "",
+              }
+            }
+          >
+            <mockConstructor
+              fieldId="timeout-to-kill"
+              helperTextInvalid="Has to be a number"
+              label="Timeout to kill"
+              labelIcon={
+                <Popover
+                  aria-label="help-text"
+                  bodyContent="Time in seconds from the start on the remote host after which the job should be killed."
+                  id="timeout-to-kill-help"
+                >
+                  <button
+                    aria-label="open-help-tooltip-button"
+                    className="pf-c-form__group-label-help"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <HelpIcon
+                      color="currentColor"
+                      noVerticalAlign={true}
+                      size="sm"
+                    />
+                  </button>
+                </Popover>
+              }
+            >
+              <div />
+            </mockConstructor>
+          </NumberInput>
         </TimeoutToKillField>
         <PasswordField
           setValue={[Function]}
           value=""
         >
           <mockConstructor
-            fieldId="password"
+            fieldId="job-password"
             label="Password"
             labelIcon={
               <Popover
@@ -109,6 +196,7 @@ exports[`AdvancedFields rendring 1`] = `
                   aria-label="open-help-tooltip-button"
                   className="pf-c-form__group-label-help"
                   onClick={[Function]}
+                  type="button"
                 >
                   <HelpIcon
                     color="currentColor"
@@ -139,6 +227,7 @@ exports[`AdvancedFields rendring 1`] = `
                   aria-label="open-help-tooltip-button"
                   className="pf-c-form__group-label-help"
                   onClick={[Function]}
+                  type="button"
                 >
                   <HelpIcon
                     color="currentColor"
@@ -169,6 +258,7 @@ exports[`AdvancedFields rendring 1`] = `
                   aria-label="open-help-tooltip-button"
                   className="pf-c-form__group-label-help"
                   onClick={[Function]}
+                  type="button"
                 >
                   <HelpIcon
                     color="currentColor"
@@ -186,61 +276,139 @@ exports[`AdvancedFields rendring 1`] = `
           setValue={[Function]}
           value=""
         >
-          <mockConstructor
-            fieldId="concurrency-level"
-            label="Concurrency level"
-            labelIcon={
-              <Popover
-                aria-label="help-text"
-                bodyContent="Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-                id="concurrency-level-help"
-              >
-                <button
-                  aria-label="open-help-tooltip-button"
-                  className="pf-c-form__group-label-help"
-                  onClick={[Function]}
+          <NumberInput
+            formProps={
+              Object {
+                "fieldId": "concurrency-level",
+                "label": "Concurrency level",
+                "labelIcon": <Popover
+                  aria-label="help-text"
+                  bodyContent="Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+                  id="concurrency-level-help"
                 >
-                  <HelpIcon
-                    color="currentColor"
-                    noVerticalAlign={true}
-                    size="sm"
-                  />
-                </button>
-              </Popover>
+                  <button
+                    aria-label="open-help-tooltip-button"
+                    className="pf-c-form__group-label-help"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <HelpIcon
+                      color="currentColor"
+                      noVerticalAlign={true}
+                      size="sm"
+                    />
+                  </button>
+                </Popover>,
+              }
+            }
+            inputProps={
+              Object {
+                "autoComplete": "concurrency-level",
+                "id": "concurrency-level",
+                "min": 1,
+                "onChange": [Function],
+                "placeholder": "For example: 1, 2, 3, 4, 5...",
+                "value": "",
+              }
             }
           >
-            <div />
-          </mockConstructor>
+            <mockConstructor
+              fieldId="concurrency-level"
+              helperTextInvalid="Has to be a number"
+              label="Concurrency level"
+              labelIcon={
+                <Popover
+                  aria-label="help-text"
+                  bodyContent="Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+                  id="concurrency-level-help"
+                >
+                  <button
+                    aria-label="open-help-tooltip-button"
+                    className="pf-c-form__group-label-help"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <HelpIcon
+                      color="currentColor"
+                      noVerticalAlign={true}
+                      size="sm"
+                    />
+                  </button>
+                </Popover>
+              }
+            >
+              <div />
+            </mockConstructor>
+          </NumberInput>
         </ConcurrencyLevelField>
         <TimeSpanLevelField
           setValue={[Function]}
           value=""
         >
-          <mockConstructor
-            fieldId="time-span"
-            label="Time span"
-            labelIcon={
-              <Popover
-                aria-label="help-text"
-                bodyContent="Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-                id="time-span-help"
-              >
-                <button
-                  aria-label="open-help-tooltip-button"
-                  className="pf-c-form__group-label-help"
-                  onClick={[Function]}
+          <NumberInput
+            formProps={
+              Object {
+                "fieldId": "time-span",
+                "label": "Time span",
+                "labelIcon": <Popover
+                  aria-label="help-text"
+                  bodyContent="Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+                  id="time-span-help"
                 >
-                  <HelpIcon
-                    color="currentColor"
-                    noVerticalAlign={true}
-                    size="sm"
-                  />
-                </button>
-              </Popover>
+                  <button
+                    aria-label="open-help-tooltip-button"
+                    className="pf-c-form__group-label-help"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <HelpIcon
+                      color="currentColor"
+                      noVerticalAlign={true}
+                      size="sm"
+                    />
+                  </button>
+                </Popover>,
+              }
+            }
+            inputProps={
+              Object {
+                "autoComplete": "time-span",
+                "id": "time-span",
+                "min": 1,
+                "onChange": [Function],
+                "placeholder": "For example: 1, 2, 3, 4, 5...",
+                "value": "",
+              }
             }
           >
-            <div />
-          </mockConstructor>
+            <mockConstructor
+              fieldId="time-span"
+              helperTextInvalid="Has to be a number"
+              label="Time span"
+              labelIcon={
+                <Popover
+                  aria-label="help-text"
+                  bodyContent="Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+                  id="time-span-help"
+                >
+                  <button
+                    aria-label="open-help-tooltip-button"
+                    className="pf-c-form__group-label-help"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <HelpIcon
+                      color="currentColor"
+                      noVerticalAlign={true}
+                      size="sm"
+                    />
+                  </button>
+                </Popover>
+              }
+            >
+              <div />
+            </mockConstructor>
+          </NumberInput>
         </TimeSpanLevelField>
       </form>
     </Form>

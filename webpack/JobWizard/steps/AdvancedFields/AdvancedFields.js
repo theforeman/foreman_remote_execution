@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Title, Form } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { selectJobTemplate } from '../../JobWizardSelectors';
+import {
+  selectEffectiveUser,
+  selectTemplateInputs,
+} from '../../JobWizardSelectors';
 import {
   EffectiveUserField,
   TimeoutToKillField,
@@ -12,17 +15,30 @@ import {
   EffectiveUserPasswordField,
   ConcurrencyLevelField,
   TimeSpanLevelField,
+  TemplateInputsFields,
 } from './Fields';
+import { DescriptionField } from './DescriptionField';
 
-export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
-  const jobTemplate = useSelector(selectJobTemplate);
-  const effectiveUser = jobTemplate.effective_user;
+export const AdvancedFields = ({
+  advancedValues,
+  setAdvancedValues,
+  templateValues,
+}) => {
+  const effectiveUser = useSelector(selectEffectiveUser);
+  const templateInputs = useSelector(selectTemplateInputs);
   return (
     <>
       <Title headingLevel="h2" className="advanced-fields-title">
         {__('Advanced Fields')}
       </Title>
-      <Form>
+      <Form id="advanced-fields-job-template" autoComplete="off">
+        <TemplateInputsFields
+          inputs={templateInputs}
+          value={advancedValues.templateValues}
+          setValue={newValue =>
+            setAdvancedValues({ ...advancedValues, templateValues: newValue })
+          }
+        />
         {effectiveUser?.overridable && (
           <EffectiveUserField
             value={advancedValues.effectiveUserValue}
@@ -33,6 +49,13 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
             }
           />
         )}
+        <DescriptionField
+          inputValues={{ ...templateValues, ...advancedValues }}
+          value={advancedValues.description}
+          setValue={newValue =>
+            setAdvancedValues({ ...advancedValues, description: newValue })
+          }
+        />
         <TimeoutToKillField
           value={advancedValues.timeoutToKill}
           setValue={newValue =>
@@ -89,5 +112,6 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
 AdvancedFields.propTypes = {
   advancedValues: PropTypes.object.isRequired,
   setAdvancedValues: PropTypes.func.isRequired,
+  templateValues: PropTypes.object.isRequired,
 };
 export default AdvancedFields;

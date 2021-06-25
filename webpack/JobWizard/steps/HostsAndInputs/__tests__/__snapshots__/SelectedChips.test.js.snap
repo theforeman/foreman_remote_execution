@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectedChips rendering renders with props 1`] = `
+<mockConstructor
+  className="hosts-chip-group"
+>
+  <mockConstructor
+    id="host1"
+    key="host1"
+    onClick={[Function]}
+  >
+    host1
+  </mockConstructor>
+</mockConstructor>
+`;

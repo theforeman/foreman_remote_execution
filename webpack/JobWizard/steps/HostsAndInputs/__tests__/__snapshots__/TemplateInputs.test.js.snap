@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TemplateInputs rendering renders with text props 1`] = `
+<Fragment>
+  <FormGroup
+    fieldId="plain adv hidden"
+    isRequired={true}
+    key="plain adv hidden"
+    label="plain adv hidden"
+    labelIcon={
+      <Popover
+        aria-label="help-text"
+        bodyContent="some Description"
+        id="undefined-help"
+      >
+        <button
+          aria-label="open-help-tooltip-button"
+          className="pf-c-form__group-label-help"
+          onClick={[Function]}
+          type="button"
+        >
+          <HelpIcon
+            color="currentColor"
+            noVerticalAlign={true}
+            size="sm"
+          />
+        </button>
+      </Popover>
+    }
+  >
+    <TextArea
+      className="masked-input"
+      id="plain adv hidden"
+      onChange={[Function]}
+      required={true}
+      rows={2}
+    />
+  </FormGroup>
+</Fragment>
+`;
+
+exports[`TemplateInputs rendering renders without simple inputs 1`] = `
+<p
+  className="gray-text"
+>
+  There are no available input fields for the selected template.
+</p>
+`;

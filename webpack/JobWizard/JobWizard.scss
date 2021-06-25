@@ -1,4 +1,8 @@
 .job-wizard {
+  .wizard-title {
+    margin-bottom: 25px;
+  }
+
   .pf-c-wizard__main {
     z-index: calc(
       var(--pf-c-wizard__footer--ZIndex) + 1
@@ -10,5 +14,36 @@
     .advanced-fields-title {
       margin-bottom: 10px;
     }
+    .foreman-search-field {
+      // Giving pf3 search bar a pf4 look
+      .search-bar {
+        display: block;
+      }
+      .input-group-btn {
+        display: none;
+      }
+      li {
+        font-size: 16px;
+      }
+      input {
+        font-size: 16px;
+        height: 36px;
+      }
+      .foreman-autocomplete .autocomplete-focus-shortcut {
+        top: 8px;
+        font-size: 16px;
+      }
+      .foreman-autocomplete .autocomplete-aux {
+        top: 8px;
+        font-size: 16px;
+        .autocomplete-clear-button {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .hosts-chip-group {
+    margin-top: 8px;
   }
 }

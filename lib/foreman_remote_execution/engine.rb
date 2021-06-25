@@ -67,7 +67,7 @@ module ForemanRemoteExecution
                                             :'api/v2/job_templates' => [:index, :show, :revision, :export],
                                             :'api/v2/template_inputs' => [:index, :show],
                                             :'api/v2/foreign_input_sets' => [:index, :show],
-                                            :ui_job_wizard => [:categories, :template]}, :resource_type => 'JobTemplate'
+                                            :ui_job_wizard => [:categories, :template, :map_template_inputs]}, :resource_type => 'JobTemplate'
           permission :create_job_templates, { :job_templates => [:new, :create, :clone_template, :import],
                                               :'api/v2/job_templates' => [:create, :clone, :import] }, :resource_type => 'JobTemplate'
           permission :edit_job_templates, { :job_templates => [:edit, :update],
