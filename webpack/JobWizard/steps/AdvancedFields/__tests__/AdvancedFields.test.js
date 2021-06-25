@@ -4,6 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import * as patternfly from '@patternfly/react-core';
 import { mount } from '@theforeman/test';
 import { AdvancedFields } from '../AdvancedFields';
+import { jobTemplateResponse } from '../../../__tests__/fixtures';
 
 jest.spyOn(patternfly, 'FormGroup');
 patternfly.FormGroup.mockImplementation(props => (
@@ -11,18 +12,7 @@ patternfly.FormGroup.mockImplementation(props => (
 ));
 const mockStore = configureMockStore([]);
 const store = mockStore({
-  JOB_TEMPLATE: {
-    response: {
-      effective_user: { overridable: true },
-      template_inputs_with_foreign: [
-        {
-          name: 'advanced input1',
-          advanced: true,
-          default: 'default value advanced',
-        },
-      ],
-    },
-  },
+  JOB_TEMPLATE: { response: jobTemplateResponse },
 });
 describe('AdvancedFields', () => {
   it('rendring', () => {

@@ -149,7 +149,7 @@ exports[`formatter render text input 1`] = `
       "labelIcon": <Popover
         aria-label="help-text"
         bodyContent="some Description"
-        id="undefined-help"
+        id="plain adv hidden-help"
       >
         <button
           aria-label="open-help-tooltip-button"

@@ -18,21 +18,19 @@ export const JobWizard = () => {
 
   const setDefaults = useCallback(response => {
     const responseJob = response.data;
-    const templateValues = {};
-    const inputs = responseJob.template_inputs_with_foreign;
-    if (inputs) {
-      inputs
-        .filter(input => input.advanced)
-        .forEach(input => {
-          templateValues[input.name] = input?.default || '';
-        });
+    const advancedTemplateValues = {};
+    const advancedInputs = responseJob.advanced_template_inputs;
+    if (advancedInputs) {
+      advancedInputs.forEach(input => {
+        advancedTemplateValues[input.name] = input?.default || '';
+      });
     }
-    setAdvancedValues({
-      ...advancedValues,
+    setAdvancedValues(currentAdvancedValues => ({
+      ...currentAdvancedValues,
       effectiveUserValue: responseJob.effective_user?.value || '',
       timeoutToKill: responseJob.job_template?.executionTimeoutInterval || '',
-      templateValues,
-    });
+      templateValues: advancedTemplateValues,
+    }));
   }, []);
   useEffect(() => {
     if (jobTemplateID) {

@@ -15,6 +15,7 @@ jest.spyOn(selectors, 'selectJobCategories');
 jest.spyOn(selectors, 'selectJobCategoriesStatus');
 jest.spyOn(selectors, 'selectEffectiveUser');
 jest.spyOn(selectors, 'selectTemplateInputs');
+jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
 
 const jobCategories = ['Ansible Commands', 'Puppet', 'Services'];
 
@@ -75,7 +76,11 @@ describe('Job wizard fill', () => {
       () => jobTemplate.effective_user
     );
     selectors.selectTemplateInputs.mockImplementation(
-      () => jobTemplate.template_inputs_with_foreign
+      () => jobTemplate.template_inputs
+    );
+
+    selectors.selectAdvancedTemplateInputs.mockImplementation(
+      () => jobTemplate.advanced_template_inputs
     );
     wrapper.find('.pf-c-button.pf-c-select__toggle-button').simulate('click');
     wrapper.find('.pf-c-select__menu-item').simulate('click');

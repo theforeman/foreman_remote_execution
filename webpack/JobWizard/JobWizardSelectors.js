@@ -40,5 +40,8 @@ export const selectJobTemplate = state =>
 export const selectEffectiveUser = state =>
   selectAPIResponse(state, JOB_TEMPLATE).effective_user;
 
+export const selectAdvancedTemplateInputs = state =>
+  selectAPIResponse(state, JOB_TEMPLATE).advanced_template_inputs || [];
+
 export const selectTemplateInputs = state =>
-  selectAPIResponse(state, JOB_TEMPLATE).template_inputs_with_foreign || [];
+  selectAPIResponse(state, JOB_TEMPLATE).template_inputs || [];

@@ -25,7 +25,7 @@ const TemplateSearchField = ({
   return (
     <FormGroup
       label={name}
-      labelIcon={helpLabel(labelText)}
+      labelIcon={helpLabel(labelText, name)}
       fieldId={name}
       isRequired={required}
       className="foreman-search-field"
@@ -75,7 +75,7 @@ export const formatter = (input, values, setValue) => {
       <FormGroup
         key={name}
         label={name}
-        labelIcon={helpLabel(labelText)}
+        labelIcon={helpLabel(labelText, name)}
         fieldId={name}
         isRequired={required}
       >
@@ -95,7 +95,7 @@ export const formatter = (input, values, setValue) => {
       <FormGroup
         key={name}
         label={name}
-        labelIcon={helpLabel(labelText)}
+        labelIcon={helpLabel(labelText, name)}
         fieldId={name}
         isRequired={required}
       >

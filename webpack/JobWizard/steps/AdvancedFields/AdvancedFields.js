@@ -5,7 +5,7 @@ import { Title, Form } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectEffectiveUser,
-  selectTemplateInputs,
+  selectAdvancedTemplateInputs,
 } from '../../JobWizardSelectors';
 import {
   EffectiveUserField,
@@ -20,7 +20,7 @@ import {
 
 export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
   const effectiveUser = useSelector(selectEffectiveUser);
-  const templateInputs = useSelector(selectTemplateInputs);
+  const templateInputs = useSelector(selectAdvancedTemplateInputs);
   return (
     <>
       <Title headingLevel="h2" className="advanced-fields-title">

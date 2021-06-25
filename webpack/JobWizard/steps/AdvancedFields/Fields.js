@@ -161,11 +161,9 @@ export const TimeSpanLevelField = ({ value, setValue }) => (
   />
 );
 
-export const TemplateInputsFields = ({ inputs, value, setValue }) => {
-  inputs = inputs?.filter(input => input.advanced);
-  return <>{inputs?.map(input => formatter(input, value, setValue))}</>;
-};
-
+export const TemplateInputsFields = ({ inputs, value, setValue }) => (
+  <>{inputs?.map(input => formatter(input, value, setValue))}</>
+);
 EffectiveUserField.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setValue: PropTypes.func.isRequired,

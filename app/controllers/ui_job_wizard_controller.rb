@@ -10,10 +10,12 @@ class UiJobWizardController < ::Api::V2::BaseController
 
   def template
     job_template = JobTemplate.authorized.find(params[:id])
+    advanced_template_inputs, template_inputs = map_template_inputs(job_template.template_inputs_with_foreign).partition { |x| x["advanced"] }
     render :json => {
       :job_template => job_template,
       :effective_user => job_template.effective_user,
-      :template_inputs_with_foreign => map_template_inputs(job_template.template_inputs_with_foreign),
+      :template_inputs => template_inputs,
+      :advanced_template_inputs => advanced_template_inputs,
     }
   end
 

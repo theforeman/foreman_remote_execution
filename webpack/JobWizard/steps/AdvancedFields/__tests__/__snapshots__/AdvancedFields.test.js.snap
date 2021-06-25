@@ -42,8 +42,14 @@ exports[`AdvancedFields rendring 1`] = `
             Array [
               Object {
                 "advanced": true,
-                "default": "default value advanced",
-                "name": "advanced input1",
+                "default": "Default val",
+                "description": "some Description",
+                "hidden_value": true,
+                "input_type": "user",
+                "name": "adv plain hidden",
+                "required": true,
+                "resource_type": "ansible_roles",
+                "value_type": "plain",
               },
             ]
           }
@@ -51,10 +57,30 @@ exports[`AdvancedFields rendring 1`] = `
           value={Object {}}
         >
           <mockConstructor
-            fieldId="advanced input1"
-            key="advanced input1"
-            label="advanced input1"
-            labelIcon={null}
+            fieldId="adv plain hidden"
+            isRequired={true}
+            key="adv plain hidden"
+            label="adv plain hidden"
+            labelIcon={
+              <Popover
+                aria-label="help-text"
+                bodyContent="some Description"
+                id="adv plain hidden-help"
+              >
+                <button
+                  aria-label="open-help-tooltip-button"
+                  className="pf-c-form__group-label-help"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <HelpIcon
+                    color="currentColor"
+                    noVerticalAlign={true}
+                    size="sm"
+                  />
+                </button>
+              </Popover>
+            }
           >
             <div />
           </mockConstructor>
