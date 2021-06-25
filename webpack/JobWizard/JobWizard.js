@@ -31,7 +31,7 @@ export const JobWizard = () => {
         template_inputs,
         advanced_template_inputs,
         effective_user,
-        job_template: { execution_timeout_interval, description_format },
+        job_template: { name, execution_timeout_interval, description_format },
       },
     }) => {
       const advancedTemplateValues = {};
@@ -52,12 +52,21 @@ export const JobWizard = () => {
             advancedTemplateValues[input.name] = input?.default || '';
           });
         }
+        const generateDefaultDescription = () => {
+          if (description_format) return description_format;
+          const allInputs = [...advancedInputs, ...inputs];
+          if (!allInputs) return name;
+          const inputsString = allInputs
+            .map(({ name: inputname }) => `${inputname}="%{${inputname}}"`)
+            .join(' ');
+          return `${name} with inputs ${inputsString}`;
+        };
         return {
           ...currentAdvancedValues,
           effectiveUserValue: effective_user?.value || '',
           timeoutToKill: execution_timeout_interval || '',
           templateValues: advancedTemplateValues,
-          description: description_format || '',
+          description: generateDefaultDescription() || '',
           isRandomizedOrdering: false,
         };
       });
@@ -113,7 +122,7 @@ export const JobWizard = () => {
               ...newValues,
             }));
           }}
-          jobTemplateID={jobTemplateID}
+          templateValues={templateValues}
         />
       ),
       canJumpTo: isTemplate,

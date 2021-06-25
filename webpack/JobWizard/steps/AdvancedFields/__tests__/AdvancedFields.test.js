@@ -155,5 +155,52 @@ describe('AdvancedFields', () => {
         selector: 'input',
       }).value
     ).toBe('2');
+
+    expect(
+      screen.getByLabelText('description preview', {
+        selector: 'input',
+      }).value
+    ).toBe(
+      'template1 with inputs adv plain hidden="Default val" adv plain select="" adv search="" adv date="" plain hidden="Default val"'
+    );
+  });
+  it('DescriptionField', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+    });
+
+    const textField = screen.getByLabelText('adv plain hidden', {
+      selector: 'textarea',
+    });
+    await act(async () => {
+      await fireEvent.change(textField, {
+        target: { value: 'test command' },
+      });
+    });
+    const descriptionValue = 'Run %{adv plain hidden} %{wrong command name}';
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Edit job description template'));
+    });
+
+    const editText = screen.getByLabelText('description edit', {
+      selector: 'input',
+    });
+    await fireEvent.change(editText, {
+      target: { value: descriptionValue },
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByText('Preview job description'));
+    });
+    expect(
+      screen.getByLabelText('description preview', {
+        selector: 'input',
+      }).value
+    ).toBe('Run test command %{wrong command name}');
   });
 });
