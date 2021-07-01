@@ -75,6 +75,8 @@ class JobInvocation < ApplicationRecord
 
   default_scope -> { order('job_invocations.id DESC') }
 
+  scope :latest_jobs, -> { unscoped.joins(:tasks).order('foreman_tasks_tasks.started_at DESC').authorized(:view_job_invocations).limit(5) }
+
   validates_lengths_from_database :only => [:description]
 
   attr_accessor :start_before, :description_format
@@ -137,10 +139,6 @@ class JobInvocation < ApplicationRecord
 
   def to_label
     description
-  end
-
-  def latest_jobs(limit = 5)
-    JobInvocation.order(id: :desc).limit(limit)
   end
 
   # returns progress in percents
