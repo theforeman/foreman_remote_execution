@@ -30,9 +30,7 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
         <TemplateInputsFields
           inputs={templateInputs}
           value={advancedValues.templateValues}
-          setValue={newValue =>
-            setAdvancedValues({ ...advancedValues, templateValues: newValue })
-          }
+          setValue={newValue => setAdvancedValues({ templateValues: newValue })}
         />
         {effectiveUser?.overridable && (
           <EffectiveUserField
