@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Title, Form } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { selectJobTemplate } from '../../JobWizardSelectors';
+import {
+  selectEffectiveUser,
+  selectAdvancedTemplateInputs,
+} from '../../JobWizardSelectors';
 import {
   EffectiveUserField,
   TimeoutToKillField,
@@ -12,17 +15,23 @@ import {
   EffectiveUserPasswordField,
   ConcurrencyLevelField,
   TimeSpanLevelField,
+  TemplateInputsFields,
 } from './Fields';
 
 export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
-  const jobTemplate = useSelector(selectJobTemplate);
-  const effectiveUser = jobTemplate.effective_user;
+  const effectiveUser = useSelector(selectEffectiveUser);
+  const templateInputs = useSelector(selectAdvancedTemplateInputs);
   return (
     <>
       <Title headingLevel="h2" className="advanced-fields-title">
         {__('Advanced Fields')}
       </Title>
-      <Form>
+      <Form id="advanced-fields-job-template" autoComplete="off">
+        <TemplateInputsFields
+          inputs={templateInputs}
+          value={advancedValues.templateValues}
+          setValue={newValue => setAdvancedValues({ templateValues: newValue })}
+        />
         {effectiveUser?.overridable && (
           <EffectiveUserField
             value={advancedValues.effectiveUserValue}

@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formatter render date input 1`] = `
+<div
+  props={
+    Object {
+      "children": <ForwardRef
+        className={null}
+        id="date adv"
+        onChange={[Function]}
+        placeholder="YYYY-mm-dd HH:MM"
+        required={false}
+        type="text"
+      />,
+      "fieldId": "date adv",
+      "isRequired": false,
+      "label": "date adv",
+      "labelIcon": null,
+    }
+  }
+/>
+`;
+
+exports[`formatter render search input 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <TemplateSearchField
+    controller="foreman_tasks/tasks"
+    defaultValue=""
+    key="search adv"
+    labelText={null}
+    name="search adv"
+    required={false}
+    setValue={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "search adv": undefined,
+            },
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    values={Object {}}
+  >
+    <mockConstructor
+      className="foreman-search-field"
+      fieldId="search adv"
+      isRequired={false}
+      label="search adv"
+      labelIcon={null}
+    >
+      <div
+        props={
+          Object {
+            "children": <SearchBar
+              data={
+                Object {
+                  "autocomplete": Object {
+                    "id": "search adv",
+                    "url": "/foreman_tasks/tasks/auto_complete_search",
+                    "useKeyShortcuts": true,
+                  },
+                  "controller": "foreman_tasks/tasks",
+                }
+              }
+              initialQuery=""
+              onSearch={[Function]}
+            />,
+            "className": "foreman-search-field",
+            "fieldId": "search adv",
+            "isRequired": false,
+            "label": "search adv",
+            "labelIcon": null,
+          }
+        }
+      />
+    </mockConstructor>
+  </TemplateSearchField>
+</Provider>
+`;
+
+exports[`formatter render select input 1`] = `
+<mockConstructor
+  fieldId="adv plain search"
+  label="adv plain search"
+>
+  <mockConstructor
+    className="without_select2"
+    isOpen={false}
+    isRequired={false}
+    maxHeight="45vh"
+    menuAppendTo={[Function]}
+    onSelect={[Function]}
+    onToggle={[Function]}
+    selections={null}
+  >
+    <mockConstructor
+      key="0"
+      value="a"
+    />
+    <mockConstructor
+      key="1"
+      value="b"
+    />
+    <mockConstructor
+      key="2"
+      value="c"
+    />
+    <mockConstructor
+      key="3"
+      value="d"
+    />
+  </mockConstructor>
+</mockConstructor>
+`;
+
+exports[`formatter render text input 1`] = `
+<div
+  props={
+    Object {
+      "children": <ForwardRef
+        className="masked-input"
+        id="plain adv hidden"
+        onChange={[Function]}
+        required={true}
+        rows={2}
+      />,
+      "fieldId": "plain adv hidden",
+      "isRequired": true,
+      "label": "plain adv hidden",
+      "labelIcon": <Popover
+        aria-label="help-text"
+        bodyContent="some Description"
+        id="plain adv hidden-help"
+      >
+        <button
+          aria-label="open-help-tooltip-button"
+          className="pf-c-form__group-label-help"
+          onClick={[Function]}
+          type="button"
+        >
+          <HelpIcon
+            color="currentColor"
+            noVerticalAlign={true}
+            size="sm"
+          />
+        </button>
+      </Popover>,
+    }
+  }
+/>
+`;
