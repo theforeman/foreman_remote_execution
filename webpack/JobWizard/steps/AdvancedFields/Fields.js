@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { FormGroup, TextInput } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { helpLabel } from '../form/FormHelpers';
+import { formatter } from '../form/Formatter';
+import { NumberInput } from '../form/NumberInput';
 
 export const EffectiveUserField = ({ value, setValue }) => (
   <FormGroup
@@ -26,25 +28,25 @@ export const EffectiveUserField = ({ value, setValue }) => (
 );
 
 export const TimeoutToKillField = ({ value, setValue }) => (
-  <FormGroup
-    label={__('Timeout to kill')}
-    labelIcon={helpLabel(
-      __(
-        'Time in seconds from the start on the remote host after which the job should be killed.'
+  <NumberInput
+    formProps={{
+      label: __('Timeout to kill'),
+      labelIcon: helpLabel(
+        __(
+          'Time in seconds from the start on the remote host after which the job should be killed.'
+        ),
+        'timeout-to-kill'
       ),
-      'timeout-to-kill'
-    )}
-    fieldId="timeout-to-kill"
-  >
-    <TextInput
-      type="number"
-      value={value}
-      placeholder={__('For example: 1, 2, 3, 4, 5...')}
-      autoComplete="timeout-to-kill"
-      id="timeout-to-kill"
-      onChange={newValue => setValue(newValue)}
-    />
-  </FormGroup>
+      fieldId: 'timeout-to-kill',
+    }}
+    inputProps={{
+      value,
+      placeholder: __('For example: 1, 2, 3, 4, 5...'),
+      autoComplete: 'timeout-to-kill',
+      id: 'timeout-to-kill',
+      onChange: newValue => setValue(newValue),
+    }}
+  />
 );
 
 export const PasswordField = ({ value, setValue }) => (
@@ -56,11 +58,11 @@ export const PasswordField = ({ value, setValue }) => (
       ),
       'password'
     )}
-    fieldId="password"
+    fieldId="job-password"
   >
     <TextInput
-      autoComplete="password"
-      id="password"
+      autoComplete="new-password" // to prevent firefox from autofilling the user password
+      id="job-password"
       type="password"
       placeholder="*****"
       value={value}
@@ -114,51 +116,54 @@ export const EffectiveUserPasswordField = ({ value, setValue }) => (
 );
 
 export const ConcurrencyLevelField = ({ value, setValue }) => (
-  <FormGroup
-    label={__('Concurrency level')}
-    labelIcon={helpLabel(
-      __(
-        'Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.'
+  <NumberInput
+    formProps={{
+      label: __('Concurrency level'),
+      labelIcon: helpLabel(
+        __(
+          'Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.'
+        ),
+        'concurrency-level'
       ),
-      'concurrency-level'
-    )}
-    fieldId="concurrency-level"
-  >
-    <TextInput
-      min={1}
-      type="number"
-      autoComplete="concurrency-level"
-      id="concurrency-level"
-      placeholder={__('For example: 1, 2, 3, 4, 5...')}
-      value={value}
-      onChange={newValue => setValue(newValue)}
-    />
-  </FormGroup>
+      fieldId: 'concurrency-level',
+    }}
+    inputProps={{
+      min: 1,
+      autoComplete: 'concurrency-level',
+      id: 'concurrency-level',
+      placeholder: __('For example: 1, 2, 3, 4, 5...'),
+      value,
+      onChange: newValue => setValue(newValue),
+    }}
+  />
 );
 
 export const TimeSpanLevelField = ({ value, setValue }) => (
-  <FormGroup
-    label={__('Time span')}
-    labelIcon={helpLabel(
-      __(
-        'Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.'
+  <NumberInput
+    formProps={{
+      label: __('Time span'),
+      labelIcon: helpLabel(
+        __(
+          'Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.'
+        ),
+        'time-span'
       ),
-      'time-span'
-    )}
-    fieldId="time-span"
-  >
-    <TextInput
-      min={1}
-      type="number"
-      autoComplete="time-span"
-      id="time-span"
-      placeholder={__('For example: 1, 2, 3, 4, 5...')}
-      value={value}
-      onChange={newValue => setValue(newValue)}
-    />
-  </FormGroup>
+      fieldId: 'time-span',
+    }}
+    inputProps={{
+      min: 1,
+      autoComplete: 'time-span',
+      id: 'time-span',
+      placeholder: __('For example: 1, 2, 3, 4, 5...'),
+      value,
+      onChange: newValue => setValue(newValue),
+    }}
+  />
 );
 
+export const TemplateInputsFields = ({ inputs, value, setValue }) => (
+  <>{inputs?.map(input => formatter(input, value, setValue))}</>
+);
 EffectiveUserField.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setValue: PropTypes.func.isRequired,
@@ -179,3 +184,12 @@ ConcurrencyLevelField.propTypes = EffectiveUserField.propTypes;
 ConcurrencyLevelField.defaultProps = EffectiveUserField.defaultProps;
 TimeSpanLevelField.propTypes = EffectiveUserField.propTypes;
 TimeSpanLevelField.defaultProps = EffectiveUserField.defaultProps;
+TemplateInputsFields.propTypes = {
+  inputs: PropTypes.array.isRequired,
+  value: PropTypes.object,
+  setValue: PropTypes.func.isRequired,
+};
+
+TemplateInputsFields.defaultProps = {
+  value: {},
+};

@@ -13,6 +13,9 @@ jest.spyOn(selectors, 'selectJobTemplate');
 jest.spyOn(selectors, 'selectJobTemplates');
 jest.spyOn(selectors, 'selectJobCategories');
 jest.spyOn(selectors, 'selectJobCategoriesStatus');
+jest.spyOn(selectors, 'selectEffectiveUser');
+jest.spyOn(selectors, 'selectTemplateInputs');
+jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
 
 const jobCategories = ['Ansible Commands', 'Puppet', 'Services'];
 
@@ -69,6 +72,16 @@ describe('Job wizard fill', () => {
     // setup
     selectors.selectJobCategoriesStatus.mockImplementation(() => 'RESOLVED');
     selectors.selectJobTemplate.mockImplementation(() => jobTemplate);
+    selectors.selectEffectiveUser.mockImplementation(
+      () => jobTemplate.effective_user
+    );
+    selectors.selectTemplateInputs.mockImplementation(
+      () => jobTemplate.template_inputs
+    );
+
+    selectors.selectAdvancedTemplateInputs.mockImplementation(
+      () => jobTemplate.advanced_template_inputs
+    );
     wrapper.find('.pf-c-button.pf-c-select__toggle-button').simulate('click');
     wrapper.find('.pf-c-select__menu-item').simulate('click');
 
@@ -81,14 +94,22 @@ describe('Job wizard fill', () => {
       .at(2)
       .simulate('click'); // Advanced step
     const effectiveUserInput = () => wrapper.find('input#effective-user');
+    const advancedTemplateInput = () =>
+      wrapper.find('.pf-c-form__group-control textarea');
     const effectiveUesrValue = 'effective user new value';
+    const advancedTemplateInputValue = 'advanced input new value';
     effectiveUserInput().getDOMNode().value = effectiveUesrValue;
     await act(async () => {
       await effectiveUserInput().simulate('change');
       wrapper.update();
     });
+    advancedTemplateInput().getDOMNode().value = advancedTemplateInputValue;
+    advancedTemplateInput().simulate('change');
 
     expect(effectiveUserInput().prop('value')).toEqual(effectiveUesrValue);
+    expect(advancedTemplateInput().prop('value')).toEqual(
+      advancedTemplateInputValue
+    );
 
     wrapper
       .find('.pf-c-wizard__nav-link')
@@ -104,6 +125,9 @@ describe('Job wizard fill', () => {
       .simulate('click'); // Advanced step
 
     expect(effectiveUserInput().prop('value')).toEqual(effectiveUesrValue);
+    expect(advancedTemplateInput().prop('value')).toEqual(
+      advancedTemplateInputValue
+    );
   });
 
   it('have all steps', async () => {
