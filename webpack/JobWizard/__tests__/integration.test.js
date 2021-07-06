@@ -31,7 +31,7 @@ api.get.mockImplementation(({ handleSuccess, ...action }) => {
   return { type: 'get', ...action };
 });
 
-selectors.selectJobTemplate.mockImplementation(() => null);
+selectors.selectJobTemplate.mockImplementation(() => ({}));
 selectors.selectJobCategories.mockImplementation(() => jobCategories);
 selectors.selectJobCategoriesStatus.mockImplementation(() => null);
 selectors.selectJobTemplates.mockImplementation(() => jobTemplates);
@@ -132,7 +132,6 @@ describe('Job wizard fill', () => {
 
   it('have all steps', async () => {
     selectors.selectJobCategoriesStatus.mockImplementation(() => null);
-    selectors.selectJobTemplate.mockRestore();
     selectors.selectJobTemplates.mockRestore();
     selectors.selectJobCategories.mockRestore();
     api.get.mockImplementation(({ handleSuccess, ...action }) => {
