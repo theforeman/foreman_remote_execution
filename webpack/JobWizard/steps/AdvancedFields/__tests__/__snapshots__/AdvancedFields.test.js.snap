@@ -57,7 +57,7 @@ exports[`AdvancedFields rendring 1`] = `
           value={Object {}}
         >
           <mockConstructor
-            fieldId="adv plain hidden"
+            fieldId="adv-plain-hidden"
             isRequired={true}
             key="adv plain hidden"
             label="adv plain hidden"

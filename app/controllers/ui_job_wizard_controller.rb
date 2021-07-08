@@ -1,11 +1,12 @@
-class UiJobWizardController < ::Api::V2::BaseController
+class UiJobWizardController < ApplicationController
+  include FiltersHelper
   def categories
     job_categories = resource_scope
                      .search_for("job_category ~ \"#{params[:search]}\"")
                      .select(:job_category).distinct
                      .reorder(:job_category)
                      .pluck(:job_category)
-    render :json => {:job_categories =>job_categories}
+    render :json => {:job_categories =>job_categories, :with_katello => with_katello}
   end
 
   def template
@@ -24,7 +25,11 @@ class UiJobWizardController < ::Api::V2::BaseController
   end
 
   def map_template_inputs(template_inputs_with_foreign)
-    template_inputs_with_foreign.map { |input| input.attributes.merge({:resource_type => input.resource_type&.tableize }) }
+    template_inputs_with_foreign.map { |input| input.attributes.merge({:resource_type => input.resource_type&.tableize, :url => search_path(input.resource_type&.tableize) }) }
+  end
+
+  def with_katello
+    defined?(::Katello) ? true : false
   end
 
   def resource_class

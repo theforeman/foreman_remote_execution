@@ -3,6 +3,7 @@
 exports[`CategoryAndTemplate rendering render with error 1`] = `
 <Fragment>
   <Title
+    className="wizard-title"
     headingLevel="h2"
   >
     Category and Template
@@ -48,6 +49,7 @@ exports[`CategoryAndTemplate rendering render with error 1`] = `
 exports[`CategoryAndTemplate rendering renders with props 1`] = `
 <Fragment>
   <Title
+    className="wizard-title"
     headingLevel="h2"
   >
     Category and Template

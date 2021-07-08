@@ -3,12 +3,14 @@ import { useSelector } from 'react-redux';
 import { FormGroup, TextInput, TextArea } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import SearchBar from 'foremanReact/components/SearchBar';
+import { getControllerSearchProps } from 'foremanReact/constants';
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
 
 const TemplateSearchField = ({
   name,
   controller,
+  url,
   labelText,
   required,
   defaultValue,
@@ -22,26 +24,30 @@ const TemplateSearchField = ({
     setValue({ ...values, [name]: searchQuery });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
+  const id = name.replace(/ /g, '-');
+  const props = getControllerSearchProps(controller.replace('/', '_'), name);
   return (
     <FormGroup
       label={name}
       labelIcon={helpLabel(labelText, name)}
-      fieldId={name}
+      fieldId={id}
       isRequired={required}
       className="foreman-search-field"
     >
-      <SearchBar
-        initialQuery={defaultValue}
-        data={{
-          controller,
-          autocomplete: {
-            id: name,
-            url: `/${controller}/auto_complete_search`,
-            useKeyShortcuts: true,
-          },
-        }}
-        onSearch={() => null}
-      />
+      <div className="foreman-search-field">
+        <SearchBar
+          initialQuery={defaultValue}
+          data={{
+            ...props,
+            autocomplete: {
+              id: name,
+              url,
+              useKeyShortcuts: true,
+            },
+          }}
+          onSearch={() => null}
+        />
+      </div>
     </FormGroup>
   );
 };
@@ -54,15 +60,15 @@ export const formatter = (input, values, setValue) => {
   const { name, required, hidden_value: hidden } = input;
   const labelText = input.description;
   const value = values[name];
-
+  const id = name.replace(/ /g, '-');
   if (isSelectType) {
     const options = input.options.split(/\r?\n/).map(option => option.trim());
     return (
       <SelectField
-        key={name}
+        key={id}
         isRequired={required}
         label={name}
-        fieldId={name}
+        fieldId={id}
         options={options}
         labelText={labelText}
         value={value}
@@ -76,14 +82,14 @@ export const formatter = (input, values, setValue) => {
         key={name}
         label={name}
         labelIcon={helpLabel(labelText, name)}
-        fieldId={name}
+        fieldId={id}
         isRequired={required}
       >
         <TextArea
           className={hidden ? 'masked-input' : null}
           required={required}
           rows={2}
-          id={name}
+          id={id}
           value={value}
           onChange={newValue => setValue({ ...values, [name]: newValue })}
         />
@@ -96,14 +102,14 @@ export const formatter = (input, values, setValue) => {
         key={name}
         label={name}
         labelIcon={helpLabel(labelText, name)}
-        fieldId={name}
+        fieldId={id}
         isRequired={required}
       >
         <TextInput
           placeholder="YYYY-mm-dd HH:MM"
           className={hidden ? 'masked-input' : null}
           required={required}
-          id={name}
+          id={id}
           type="text"
           value={value}
           onChange={newValue => setValue({ ...values, [name]: newValue })}
@@ -112,14 +118,15 @@ export const formatter = (input, values, setValue) => {
     );
   }
   if (inputType === 'search') {
-    const controller = input.resource_type;
+    const { url, resource_type: controller } = input;
     // TODO: get text from redux autocomplete
     return (
       <TemplateSearchField
-        key={name}
+        key={id}
         name={name}
         defaultValue={value}
         controller={controller}
+        url={url}
         labelText={labelText}
         required={required}
         setValue={setValue}
@@ -134,6 +141,7 @@ export const formatter = (input, values, setValue) => {
 TemplateSearchField.propTypes = {
   name: PropTypes.string.isRequired,
   controller: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
   labelText: PropTypes.string,
   required: PropTypes.bool.isRequired,
   defaultValue: PropTypes.string,

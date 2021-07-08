@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HostSearch  rendring 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HostSearch
+    setValue={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    value="some query"
+  >
+    <div
+      className="foreman-search-field"
+    >
+      <SearchBar
+        data={
+          Object {
+            "autocomplete": Object {
+              "id": "hostsSearch",
+              "url": "/hosts/auto_complete_search",
+              "useKeyShortcuts": true,
+            },
+            "bookmarks": Object {
+              "canCreate": true,
+              "documentationUrl": "4.1.5Searching",
+              "url": "/api/bookmarks",
+            },
+            "controller": "hosts",
+          }
+        }
+        initialQuery="some query"
+        onSearch={[Function]}
+      >
+        <div>
+          search
+        </div>
+      </SearchBar>
+    </div>
+  </HostSearch>
+</Provider>
+`;

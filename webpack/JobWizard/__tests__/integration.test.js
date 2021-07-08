@@ -117,7 +117,7 @@ describe('Job wizard fill', () => {
       .simulate('click');
 
     expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-current').text()).toEqual(
-      'Target Hosts'
+      'Target hosts and inputs'
     );
     wrapper
       .find('.pf-c-wizard__nav-link')
@@ -159,7 +159,7 @@ describe('Job wizard fill', () => {
       </Provider>
     );
     const steps = [
-      'Target Hosts',
+      'Target hosts and inputs',
       'Advanced Fields',
       'Schedule',
       'Review Details',
