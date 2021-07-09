@@ -253,6 +253,8 @@ module ForemanRemoteExecution
         register_graphql_query_field :job_invocations, '::Types::JobInvocation', :collection_field
         register_graphql_query_field :job_invocation, '::Types::JobInvocation', :record_field
 
+        register_graphql_mutation_field :create_job_invocation, ::Mutations::JobInvocations::Create
+
         extend_template_helpers ForemanRemoteExecution::RendererMethods
 
         extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/pubkey'
