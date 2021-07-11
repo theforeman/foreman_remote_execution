@@ -59,12 +59,13 @@ export const formatter = (input, values, setValue) => {
     const options = input.options.split(/\r?\n/).map(option => option.trim());
     return (
       <SelectField
+        aria-label={name}
         key={name}
         isRequired={required}
         label={name}
         fieldId={name}
         options={options}
-        labelText={labelText}
+        labelIcon={helpLabel(labelText, name)}
         value={value}
         setValue={newValue => setValue({ ...values, [name]: newValue })}
       />
@@ -80,6 +81,7 @@ export const formatter = (input, values, setValue) => {
         isRequired={required}
       >
         <TextArea
+          aria-label={name}
           className={hidden ? 'masked-input' : null}
           required={required}
           rows={2}
@@ -100,6 +102,7 @@ export const formatter = (input, values, setValue) => {
         isRequired={required}
       >
         <TextInput
+          aria-label={name}
           placeholder="YYYY-mm-dd HH:MM"
           className={hidden ? 'masked-input' : null}
           required={required}
