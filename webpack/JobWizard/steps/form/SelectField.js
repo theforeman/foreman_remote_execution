@@ -8,6 +8,8 @@ export const SelectField = ({
   options,
   value,
   setValue,
+  labelIcon,
+  isRequired,
   ...props
 }) => {
   const onSelect = (event, selection) => {
@@ -16,7 +18,12 @@ export const SelectField = ({
   };
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <FormGroup label={label} fieldId={fieldId}>
+    <FormGroup
+      label={label}
+      fieldId={fieldId}
+      labelIcon={labelIcon}
+      isRequired={isRequired}
+    >
       <Select
         selections={value}
         onSelect={onSelect}
@@ -40,9 +47,13 @@ SelectField.propTypes = {
   options: PropTypes.array,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setValue: PropTypes.func.isRequired,
+  labelIcon: PropTypes.node,
+  isRequired: PropTypes.bool,
 };
 
 SelectField.defaultProps = {
   options: [],
+  labelIcon: null,
   value: null,
+  isRequired: false,
 };
