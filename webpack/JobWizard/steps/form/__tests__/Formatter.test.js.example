@@ -47,7 +47,7 @@ describe('formatter', () => {
       name: 'adv plain search',
       required: false,
       input_type: 'user',
-      options: 'a\r\nb\r\nc\r\nd',
+      options: 'option 1\r\noption 2\r\noption 3\r\noption 4',
       advanced: true,
       value_type: 'plain',
       resource_type: 'ansible_roles',
