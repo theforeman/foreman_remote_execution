@@ -32,6 +32,8 @@ module Actions
         set_up_concurrency_control job_invocation
         input.update(:job_category => job_invocation.job_category)
         plan_self(:job_invocation_id => job_invocation.id)
+        trigger_action = plan_action(Actions::TriggerProxyBatch, batch_size: proxy_batch_size)
+        input[:trigger_run_step_id] = trigger_action.run_step_id
       end
 
       def create_sub_plans
@@ -44,6 +46,19 @@ module Actions
           template_invocation.host_id = host.id
           trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector, { :use_concurrency_control => uses_concurrency_control })
         end
+      end
+
+      def spawn_plans
+        super
+        if output[:planned_count] - output[:remote_triggered_count] >= proxy_batch_size
+          plan_event(Actions::TriggerProxyBatch::TriggerNextBatch, nil, step_id: input[:trigger_run_step_id])
+          output[:remote_triggered_count] += proxy_batch_size
+        end
+      end
+
+      def on_planning_finished
+        plan_event(Actions::TriggerProxyBatch::TriggerLastBatch, nil, step_id: input[:trigger_run_step_id])
+        super
       end
 
       def finalize
@@ -67,6 +82,7 @@ module Actions
 
       def initiate
         output[:host_count] = total_count
+        output[:remote_triggered_count] = 0
         super
       end
 
@@ -103,6 +119,10 @@ module Actions
 
       def humanized_name
         '%s:' % _(super)
+      end
+
+      def proxy_batch_size
+        Setting['foreman_tasks_proxy_batch_size']
       end
     end
   end
