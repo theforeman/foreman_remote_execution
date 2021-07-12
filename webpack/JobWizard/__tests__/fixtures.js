@@ -66,6 +66,7 @@ export const jobTemplateResponse = {
       resource_type: 'foreman_tasks/tasks',
       default: '',
       hidden_value: false,
+      url: 'foreman_tasks/tasks',
     },
     {
       name: 'adv date',
@@ -104,6 +105,7 @@ export const testSetup = (selectors, api) => {
 
   jest.spyOn(selectors, 'selectTemplateInputs');
   jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
+  jest.spyOn(selectors, 'selectResponse');
   selectors.selectTemplateInputs.mockImplementation(
     () => jobTemplateResponse.template_inputs
   );
@@ -115,6 +117,25 @@ export const testSetup = (selectors, api) => {
     jobTemplate,
     { ...jobTemplate, id: 2, name: 'template2' },
   ]);
+
+  selectors.selectResponse.mockImplementation((state, key) => {
+    if (key === 'HOSTS') {
+      return {
+        results: [{ name: 'host1' }, { name: 'host2' }, { name: 'host3' }],
+        subtotal: 3,
+      };
+    } else if (key === 'HOST_GROUPS') {
+      return {
+        results: [
+          { name: 'host_group1' },
+          { name: 'host_group2' },
+          { name: 'host_group3' },
+        ],
+        subtotal: 3,
+      };
+    }
+    return {};
+  });
   const mockStore = configureMockStore([]);
   const store = mockStore({
     ForemanTasksTask: {
@@ -130,10 +151,6 @@ export const testSetup = (selectors, api) => {
   return store;
 };
 
-export const mockTemplate = selectors => {
-  selectors.selectJobTemplate.mockImplementation(() => jobTemplate);
-  selectors.selectJobCategoriesStatus.mockImplementation(() => 'RESOLVED');
-};
 export const mockApi = api => {
   api.get.mockImplementation(({ handleSuccess, ...action }) => {
     if (action.key === 'JOB_CATEGORIES') {

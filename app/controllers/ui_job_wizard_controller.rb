@@ -1,11 +1,12 @@
-class UiJobWizardController < ::Api::V2::BaseController
+class UiJobWizardController < ApplicationController
+  include FiltersHelper
   def categories
     job_categories = resource_scope
                      .search_for("job_category ~ \"#{params[:search]}\"")
                      .select(:job_category).distinct
                      .reorder(:job_category)
                      .pluck(:job_category)
-    render :json => {:job_categories =>job_categories}
+    render :json => {:job_categories =>job_categories, :with_katello => with_katello}
   end
 
   def template
@@ -21,6 +22,10 @@ class UiJobWizardController < ::Api::V2::BaseController
 
   def resource_name(nested_resource = nil)
     nested_resource || 'job_template'
+  end
+
+  def with_katello
+    !!defined?(::Katello)
   end
 
   def resource_class

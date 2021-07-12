@@ -13,48 +13,73 @@
       var(--pf-c-wizard__footer--ZIndex) + 1
     ); // So the select box can be shown above the wizard footer
   }
-
+  .pf-c-wizard__nav {
+    z-index: calc(
+      var(--pf-c-wizard__footer--ZIndex) + 2
+    ); // So the navigation box can be shown above the wizard body
+  }
   .pf-c-wizard__main-body {
     max-width: 500px;
     .advanced-fields-title {
       margin-bottom: 10px;
     }
-    #advanced-fields-job-template {
-      .foreman-search-field {
-        .rbt-input-hint input {
-          display: none;
-        }
-        // Giving pf3 search bar a pf4 look
-        .search-bar {
-          display: block;
-        }
-        .input-group-btn {
-          display: none;
-        }
-        li {
+
+    .foreman-search-field {
+      .rbt-input-hint input {
+        display: none;
+      }
+      // Giving pf3 search bar a pf4 look
+      width: 500px;
+      .search-bar {
+        display: block;
+      }
+      .input-group-btn {
+        display: none;
+      }
+      li {
+        font-size: 16px;
+      }
+      input {
+        font-size: 16px;
+        height: 36px;
+      }
+      .foreman-autocomplete .autocomplete-focus-shortcut {
+        top: 8px;
+        font-size: 16px;
+      }
+      .foreman-autocomplete .autocomplete-aux {
+        top: 8px;
+        font-size: 16px;
+        .autocomplete-clear-button {
           font-size: 16px;
-        }
-        input {
-          font-size: 16px;
-          height: 36px;
-        }
-        .foreman-autocomplete .autocomplete-focus-shortcut {
-          top: 8px;
-          font-size: 16px;
-        }
-        .foreman-autocomplete .autocomplete-aux {
-          top: 8px;
-          font-size: 16px;
-          .autocomplete-clear-button {
-            font-size: 16px;
-          }
         }
       }
     }
   }
 
-  .hosts-chip-group {
-    margin-top: 8px;
+  .gray-text {
+    color: var(--pf-global--Color--dark-200);
+  }
+
+  .target-hosts-and-inputs {
+    .hosts-chip-group {
+      margin-top: 8px;
+      float: left;
+      clear: left;
+      display: block;
+    }
+    .clear-chips {
+      margin-top: 8px;
+    }
+    .pf-c-select__toggle-typeahead {
+      border: 0px;
+    }
+
+    .target-method-select {
+      .pf-c-select__toggle-wrapper {
+        flex-wrap: nowrap;
+      }
+    }
   }
   input[type='radio'],
   input[type='checkbox'] {
