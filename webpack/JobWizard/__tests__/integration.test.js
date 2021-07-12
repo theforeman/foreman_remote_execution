@@ -15,9 +15,6 @@ import {
 const store = testSetup(selectors, api);
 
 selectors.selectJobTemplate.mockImplementation(() => {});
-jest.spyOn(selectors, 'selectEffectiveUser');
-jest.spyOn(selectors, 'selectTemplateInputs');
-jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
 
 api.get.mockImplementation(({ handleSuccess, ...action }) => {
   if (action.key === 'JOB_CATEGORIES') {
@@ -41,7 +38,10 @@ describe('Job wizard fill', () => {
     selectors.selectJobTemplate.mockImplementation(() => jobTemplate);
     wrapper.find('.pf-c-button.pf-c-select__toggle-button').simulate('click');
     await act(async () => {
-      await wrapper.find('.pf-c-select__menu-item').simulate('click');
+      await wrapper
+        .find('.pf-c-select__menu-item')
+        .first()
+        .simulate('click');
       await wrapper.update();
     });
     expect(store.getActions().slice(-1)).toMatchSnapshot('select template');
