@@ -16,8 +16,7 @@ Gem::Specification.new do |s|
                   'management functionality with remote management functionality.'
 
   s.files = `git ls-files`.split("\n").reject do |file|
-    file.start_with?('scripts', 'lib/foreman_remote_execution_core') ||
-      file == 'foreman_remote_execution_core.gemspec'
+    file.start_with?('scripts')
   end
 
   s.test_files =       `git ls-files test`.split("\n")
