@@ -14,3 +14,15 @@ export const repeatTypes = {
   daily: __('Daily'),
   hourly: __('Hourly'),
 };
+export const HOSTS = 'HOSTS';
+export const HOST_COLLECTIONS = 'HOST_COLLECTIONS';
+export const HOST_GROUPS = 'HOST_GROUPS';
+export const hostMethods = {
+  hosts: __('Hosts'),
+  hostCollections: __('Host collections'),
+  hostGroups: __('Host groups'),
+  searchQuery: __('Search query'),
+};
+
+export const hostQuerySearchID = 'hostsSearch';
+export const hostsController = 'hosts';

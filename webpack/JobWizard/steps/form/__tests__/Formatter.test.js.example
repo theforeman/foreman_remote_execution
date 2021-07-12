@@ -66,6 +66,7 @@ describe('formatter', () => {
       resource_type: 'foreman_tasks/tasks',
       default: '',
       hidden_value: false,
+      url: '/url/',
     };
     expect(
       mount(

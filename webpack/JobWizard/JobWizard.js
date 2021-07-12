@@ -18,7 +18,12 @@ export const JobWizard = () => {
 
   const [advancedValues, setAdvancedValues] = useState({});
   const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description
-  const [selectedHosts, setSelectedHosts] = useState(['host1', 'host2']);
+  const [selectedTargets, setSelectedTargets] = useState({
+    hosts: [],
+    hostCollections: [],
+    hostGroups: [],
+  });
+  const [hostsSearchQuery, setHostsSearchQuery] = useState('');
   const dispatch = useDispatch();
 
   const setDefaults = useCallback(response => {
@@ -77,8 +82,10 @@ export const JobWizard = () => {
         <HostsAndInputs
           templateValues={templateValues}
           setTemplateValues={setTemplateValues}
-          selectedHosts={selectedHosts}
-          setSelectedHosts={setSelectedHosts}
+          selected={selectedTargets}
+          setSelected={setSelectedTargets}
+          hostsSearchQuery={hostsSearchQuery}
+          setHostsSearchQuery={setHostsSearchQuery}
         />
       ),
       canJumpTo: isTemplate,
