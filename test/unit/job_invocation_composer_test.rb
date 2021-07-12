@@ -925,12 +925,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
     context 'with template in setting present' do
       before do
-        FactoryBot.create(
-          :setting,
-          :name => 'remote_execution_form_job_template',
-          :category => 'Setting::RemoteExecution',
-          :value => setting_template.name
-        )
+        Setting[:remote_execution_form_job_template] = setting_template.name
       end
 
       it 'should resolve category to the setting value' do
