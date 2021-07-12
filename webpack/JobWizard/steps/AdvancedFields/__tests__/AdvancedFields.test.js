@@ -15,18 +15,9 @@ const store = testSetup(selectors, api);
 mockApi(api);
 
 jest.spyOn(selectors, 'selectEffectiveUser');
-jest.spyOn(selectors, 'selectTemplateInputs');
-jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
 
 selectors.selectEffectiveUser.mockImplementation(
   () => jobTemplate.effective_user
-);
-selectors.selectTemplateInputs.mockImplementation(
-  () => jobTemplate.template_inputs
-);
-
-selectors.selectAdvancedTemplateInputs.mockImplementation(
-  () => jobTemplate.advanced_template_inputs
 );
 describe('AdvancedFields', () => {
   it('should save data between steps for advanced fields', async () => {
@@ -72,7 +63,7 @@ describe('AdvancedFields', () => {
       .simulate('click');
 
     expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-current').text()).toEqual(
-      'Target Hosts'
+      'Target hosts and inputs'
     );
     wrapper
       .find('.pf-c-wizard__nav-link')
