@@ -94,7 +94,10 @@ export const testSetup = (selectors, api) => {
   jest.spyOn(selectors, 'selectJobCategoriesStatus');
 
   selectors.selectJobCategories.mockImplementation(() => jobCategories);
-  selectors.selectJobTemplates.mockImplementation(() => jobTemplates);
+  selectors.selectJobTemplates.mockImplementation(() => [
+    jobTemplate,
+    { ...jobTemplate, id: 2, name: 'template2' },
+  ]);
   const mockStore = configureMockStore([]);
   const store = mockStore({});
   return store;

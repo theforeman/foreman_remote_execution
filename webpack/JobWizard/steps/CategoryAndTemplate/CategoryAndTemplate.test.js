@@ -1,42 +1,16 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
 import { fireEvent, screen, render, act } from '@testing-library/react';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../../JobWizard';
 import * as selectors from '../../JobWizardSelectors';
-import { jobTemplate, jobTemplateResponse } from '../../__tests__/fixtures';
+import { testSetup, mockApi } from '../../__tests__/fixtures';
 
-jest.spyOn(api, 'get');
-jest.spyOn(selectors, 'selectJobTemplate');
-jest.spyOn(selectors, 'selectJobTemplates');
-jest.spyOn(selectors, 'selectJobCategories');
+const store = testSetup(selectors, api);
+mockApi(api);
 jest.spyOn(selectors, 'selectCategoryError');
 jest.spyOn(selectors, 'selectAllTemplatesError');
 jest.spyOn(selectors, 'selectTemplateError');
-
-jest.spyOn(api, 'get');
-const jobCategories = ['Ansible Commands', 'Puppet', 'Services'];
-
-selectors.selectJobCategories.mockImplementation(() => jobCategories);
-
-selectors.selectJobTemplates.mockImplementation(() => [
-  jobTemplate,
-  { ...jobTemplate, id: 2, name: 'template2' },
-]);
-
-api.get.mockImplementation(({ handleSuccess, ...action }) => {
-  if (action.key === 'JOB_TEMPLATES') {
-    handleSuccess &&
-      handleSuccess({
-        data: { results: [jobTemplateResponse.job_template] },
-      });
-  }
-  return { type: 'get', ...action };
-});
-
-const mockStore = configureMockStore([]);
-const store = mockStore({});
 
 describe('Category And Template', () => {
   it('should select ', async () => {

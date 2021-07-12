@@ -37,7 +37,10 @@ describe('AdvancedFields', () => {
     );
     // setup
     wrapper.find('.pf-c-button.pf-c-select__toggle-button').simulate('click');
-    wrapper.find('.pf-c-select__menu-item').simulate('click');
+    wrapper
+      .find('.pf-c-select__menu-item')
+      .first()
+      .simulate('click');
 
     // test
     expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(
