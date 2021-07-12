@@ -63,7 +63,7 @@ describe('Job wizard fill', () => {
       </Provider>
     );
     const steps = [
-      'Target Hosts',
+      'Target hosts and inputs',
       'Advanced Fields',
       'Schedule',
       'Review Details',

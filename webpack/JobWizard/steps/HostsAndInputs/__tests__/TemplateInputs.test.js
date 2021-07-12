@@ -1,0 +1,47 @@
+import React from 'react';
+import { Provider } from 'react-redux';
+import { fireEvent, screen, render, act } from '@testing-library/react';
+import * as api from 'foremanReact/redux/API';
+import { JobWizard } from '../../../JobWizard';
+import * as selectors from '../../../JobWizardSelectors';
+import { testSetup, mockApi } from '../../../__tests__/fixtures';
+
+const store = testSetup(selectors, api);
+mockApi(api);
+
+describe('TemplateInputs', () => {
+  it('should save data between steps for template input fields', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText('Target hosts and inputs'));
+    });
+    const textValue = 'I am a plain text';
+    const textField = screen.getByLabelText('plain hidden', {
+      selector: 'textarea',
+    });
+
+    await act(async () => {
+      await fireEvent.change(textField, {
+        target: { value: textValue },
+      });
+    });
+    expect(
+      screen.getByLabelText('plain hidden', {
+        selector: 'textarea',
+      }).value
+    ).toBe(textValue);
+    await act(async () => {
+      fireEvent.click(screen.getByText('Category and Template'));
+    });
+    expect(screen.getAllByText('Category and Template')).toHaveLength(3);
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Target hosts and inputs'));
+    });
+    expect(textField.value).toBe(textValue);
+  });
+});
