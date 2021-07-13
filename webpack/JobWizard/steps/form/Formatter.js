@@ -22,11 +22,12 @@ const TemplateSearchField = ({
     setValue({ ...values, [name]: searchQuery });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
+  const id = name.replace(/ /g, '-');
   return (
     <FormGroup
       label={name}
       labelIcon={helpLabel(labelText, name)}
-      fieldId={name}
+      fieldId={id}
       isRequired={required}
       className="foreman-search-field"
     >
@@ -54,16 +55,16 @@ export const formatter = (input, values, setValue) => {
   const { name, required, hidden_value: hidden } = input;
   const labelText = input.description;
   const value = values[name];
-
+  const id = name.replace(/ /g, '-');
   if (isSelectType) {
     const options = input.options.split(/\r?\n/).map(option => option.trim());
     return (
       <SelectField
         aria-label={name}
-        key={name}
+        key={id}
         isRequired={required}
         label={name}
-        fieldId={name}
+        fieldId={id}
         options={options}
         labelIcon={helpLabel(labelText, name)}
         value={value}
@@ -77,7 +78,7 @@ export const formatter = (input, values, setValue) => {
         key={name}
         label={name}
         labelIcon={helpLabel(labelText, name)}
-        fieldId={name}
+        fieldId={id}
         isRequired={required}
       >
         <TextArea
@@ -85,7 +86,7 @@ export const formatter = (input, values, setValue) => {
           className={hidden ? 'masked-input' : null}
           required={required}
           rows={2}
-          id={name}
+          id={id}
           value={value}
           onChange={newValue => setValue({ ...values, [name]: newValue })}
         />
@@ -98,7 +99,7 @@ export const formatter = (input, values, setValue) => {
         key={name}
         label={name}
         labelIcon={helpLabel(labelText, name)}
-        fieldId={name}
+        fieldId={id}
         isRequired={required}
       >
         <TextInput
@@ -106,7 +107,7 @@ export const formatter = (input, values, setValue) => {
           placeholder="YYYY-mm-dd HH:MM"
           className={hidden ? 'masked-input' : null}
           required={required}
-          id={name}
+          id={id}
           type="text"
           value={value}
           onChange={newValue => setValue({ ...values, [name]: newValue })}
@@ -119,7 +120,7 @@ export const formatter = (input, values, setValue) => {
     // TODO: get text from redux autocomplete
     return (
       <TemplateSearchField
-        key={name}
+        key={id}
         name={name}
         defaultValue={value}
         controller={controller}

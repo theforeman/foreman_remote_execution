@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Title, Button, Form } from '@patternfly/react-core';
+import { Button, Form } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { ScheduleType } from './ScheduleType';
 import { RepeatOn } from './RepeatOn';
 import { QueryType } from './QueryType';
 import { StartEndDates } from './StartEndDates';
-import { repeatTypes } from '../../JobWizardConstants';
+import { repeatTypes, WIZARD_TITLES } from '../../JobWizardConstants';
+import { WizardTitle } from '../form/WizardTitle';
 
 const Schedule = () => {
   const [repeatType, setRepeatType] = useState(repeatTypes.noRepeat);
@@ -14,27 +15,29 @@ const Schedule = () => {
   const [ends, setEnds] = useState('');
 
   return (
-    <Form className="schedule-tab">
-      <Title headingLevel="h2">{__('Schedule')}</Title>
-      <ScheduleType />
+    <>
+      <WizardTitle title={WIZARD_TITLES.schedule} />
+      <Form className="schedule-tab">
+        <ScheduleType />
 
-      <RepeatOn
-        repeatType={repeatType}
-        setRepeatType={setRepeatType}
-        repeatAmount={repeatAmount}
-        setRepeatAmount={setRepeatAmount}
-      />
-      <StartEndDates
-        starts={starts}
-        setStarts={setStarts}
-        ends={ends}
-        setEnds={setEnds}
-      />
-      <Button variant="link" className="advanced-scheduling-button" isInline>
-        {__('Advanced scheduling')}
-      </Button>
-      <QueryType />
-    </Form>
+        <RepeatOn
+          repeatType={repeatType}
+          setRepeatType={setRepeatType}
+          repeatAmount={repeatAmount}
+          setRepeatAmount={setRepeatAmount}
+        />
+        <StartEndDates
+          starts={starts}
+          setStarts={setStarts}
+          ends={ends}
+          setEnds={setEnds}
+        />
+        <Button variant="link" className="advanced-scheduling-button" isInline>
+          {__('Advanced scheduling')}
+        </Button>
+        <QueryType />
+      </Form>
+    </>
   );
 };
 

@@ -10,23 +10,15 @@ import {
   testSetup,
   mockApi,
 } from '../../../__tests__/fixtures';
+import { WIZARD_TITLES } from '../../../JobWizardConstants';
 
 const store = testSetup(selectors, api);
 mockApi(api);
 
 jest.spyOn(selectors, 'selectEffectiveUser');
-jest.spyOn(selectors, 'selectTemplateInputs');
-jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
 
 selectors.selectEffectiveUser.mockImplementation(
   () => jobTemplate.effective_user
-);
-selectors.selectTemplateInputs.mockImplementation(
-  () => jobTemplate.template_inputs
-);
-
-selectors.selectAdvancedTemplateInputs.mockImplementation(
-  () => jobTemplate.advanced_template_inputs
 );
 describe('AdvancedFields', () => {
   it('should save data between steps for advanced fields', async () => {
@@ -72,7 +64,7 @@ describe('AdvancedFields', () => {
       .simulate('click');
 
     expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-current').text()).toEqual(
-      'Target Hosts'
+      'Target hosts and inputs'
     );
     wrapper
       .find('.pf-c-wizard__nav-link')
@@ -91,7 +83,7 @@ describe('AdvancedFields', () => {
       </Provider>
     );
     await act(async () => {
-      fireEvent.click(screen.getByText('Advanced Fields'));
+      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
     });
     const searchValue = 'search test';
     const textValue = 'I am a text';
@@ -108,7 +100,7 @@ describe('AdvancedFields', () => {
     fireEvent.click(selectField);
     await act(async () => {
       await fireEvent.click(screen.getByText('option 2'));
-      fireEvent.click(screen.getAllByText('Advanced Fields')[0]); // to remove focus
+      fireEvent.click(screen.getAllByText(WIZARD_TITLES.advanced)[0]); // to remove focus
       await fireEvent.change(textField, {
         target: { value: textValue },
       });
@@ -128,9 +120,11 @@ describe('AdvancedFields', () => {
     expect(searchField.value).toBe(searchValue);
     expect(dateField.value).toBe(dateValue);
     await act(async () => {
-      fireEvent.click(screen.getByText('Category and Template'));
+      fireEvent.click(screen.getByText(WIZARD_TITLES.categoryAndTemplate));
     });
-    expect(screen.getAllByText('Category and Template')).toHaveLength(3);
+    expect(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)).toHaveLength(
+      3
+    );
 
     await act(async () => {
       fireEvent.click(screen.getByText('Advanced Fields'));

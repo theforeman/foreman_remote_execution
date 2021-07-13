@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Title, Form } from '@patternfly/react-core';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { Form } from '@patternfly/react-core';
 import {
   selectEffectiveUser,
   selectAdvancedTemplateInputs,
@@ -17,15 +16,18 @@ import {
   TimeSpanLevelField,
   TemplateInputsFields,
 } from './Fields';
+import { WIZARD_TITLES } from '../../JobWizardConstants';
+import { WizardTitle } from '../form/WizardTitle';
 
 export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
   const effectiveUser = useSelector(selectEffectiveUser);
   const templateInputs = useSelector(selectAdvancedTemplateInputs);
   return (
     <>
-      <Title headingLevel="h2" className="advanced-fields-title">
-        {__('Advanced Fields')}
-      </Title>
+      <WizardTitle
+        title={WIZARD_TITLES.advanced}
+        className="advanced-fields-title"
+      />
       <Form id="advanced-fields-job-template" autoComplete="off">
         <TemplateInputsFields
           inputs={templateInputs}
