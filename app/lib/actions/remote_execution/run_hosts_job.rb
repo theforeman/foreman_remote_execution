@@ -65,6 +65,19 @@ module Actions
         hosts.offset(from).limit(size)
       end
 
+      def proxy_batch_size
+        provider = job_invocation.pattern_template_invocations.first&.template&.provider
+        provider&.proxy_batch_size
+      end
+
+      # Subtasks planning batch_size needs to be the same or higher then proxy_batch_size
+      # if not, the proxy_batch_size has no meaning, as we would not have enough host tasks
+      # to send to the proxy
+      def batch_size
+        proxy_size = proxy_batch_size || Setting['foreman_tasks_proxy_batch_size']
+        [super, proxy_size].compact.max
+      end
+
       def initiate
         output[:host_count] = total_count
         super

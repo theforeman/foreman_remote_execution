@@ -94,6 +94,36 @@ module ForemanRemoteExecution
       planned # To make the expectations happy
     end
 
+    describe 'ProxyBatchTriggering' do
+      it 'tweaks batch size to the #proxy_batch_size value' do
+        remote_tasks_stub = mock('remote_tasks')
+        remote_tasks_stub.stubs(pending: remote_tasks_stub, order: remote_tasks_stub)
+        Actions::Middleware::ProxyBatchTriggering.any_instance.stubs(:remote_tasks).returns(remote_tasks_stub)
+
+        remote_tasks_stub.expects(:find_in_batches).with(batch_size: 30)
+        run_action(planned) do |action_to_run|
+          action_to_run.stubs(:trigger) # do not run subtasks
+          action_to_run.expects(:proxy_batch_size).returns(30)
+        end
+      end
+    end
+
+    describe '#proxy_batch_size' do
+      it 'defaults to Setting[foreman_tasks_proxy_batch_size]' do
+        planned
+        Setting.expects(:[]).with('foreman_tasks_proxy_batch_size').returns(14)
+        _(planned.proxy_batch_size).must_equal 14
+      end
+
+      it 'gets the provider value' do
+        provider = mock('provider')
+        provider.expects(:proxy_batch_size).returns(15)
+        JobTemplate.any_instance.expects(:provider).returns(provider)
+
+        _(planned.proxy_batch_size).must_equal 15
+      end
+    end
+
     describe 'concurrency control' do
       let(:level) { 5 }
       let(:span) { 60 }
