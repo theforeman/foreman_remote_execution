@@ -25,26 +25,22 @@ export const DescriptionField = ({ inputs, value, setValue }) => {
   const [generatedDesc, setGeneratedDesc] = useState(generateDesc());
   const [isPreview, setIsPreview] = useState(true);
 
-  const togglePreview = newValue => {
+  const togglePreview = () => {
     setGeneratedDesc(generateDesc());
-    setIsPreview(newValue);
+    setIsPreview(v => !v);
   };
 
-  const showPreview = (
-    <Button variant="link" isInline onClick={() => togglePreview(true)}>
-      {__('See the custom job description')}
-    </Button>
-  );
-  const hidePreview = (
-    <Button variant="link" isInline onClick={() => togglePreview(false)}>
-      {__('Set the custom job description')}
-    </Button>
-  );
   return (
     <FormGroup
       label={__('Description')}
       fieldId="description"
-      helperText={isPreview ? hidePreview : showPreview}
+      helperText={
+        <Button variant="link" isInline onClick={togglePreview}>
+          {isPreview
+            ? __('Edit job description template')
+            : __('Preview job description')}
+        </Button>
+      }
     >
       {isPreview ? (
         <TextInput id="description-preview" value={generatedDesc} isDisabled />

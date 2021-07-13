@@ -6,6 +6,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectEffectiveUser,
   selectAdvancedTemplateInputs,
+  selectTemplateInputs,
 } from '../../JobWizardSelectors';
 import {
   EffectiveUserField,
@@ -21,7 +22,8 @@ import { DescriptionField } from './DescriptionField';
 
 export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
   const effectiveUser = useSelector(selectEffectiveUser);
-  const templateInputs = useSelector(selectAdvancedTemplateInputs);
+  const advancedTemplateInputs = useSelector(selectAdvancedTemplateInputs);
+  const templateInputs = useSelector(selectTemplateInputs);
   return (
     <>
       <Title headingLevel="h2" className="advanced-fields-title">
@@ -29,7 +31,7 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
       </Title>
       <Form id="advanced-fields-job-template" autoComplete="off">
         <TemplateInputsFields
-          inputs={templateInputs}
+          inputs={advancedTemplateInputs}
           value={advancedValues.templateValues}
           setValue={newValue => setAdvancedValues({ templateValues: newValue })}
         />
@@ -44,11 +46,9 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
           />
         )}
         <DescriptionField
-          inputs={templateInputs.filter(input => !input.advanced)}
+          inputs={templateInputs}
           value={advancedValues.description}
-          setValue={newValue =>
-            setAdvancedValues({ ...advancedValues, description: newValue })
-          }
+          setValue={newValue => setAdvancedValues({ description: newValue })}
         />
         <TimeoutToKillField
           value={advancedValues.timeoutToKill}
