@@ -1,5 +1,11 @@
 module ForemanRemoteExecution
   module SmartProxyExtensions
+    def self.prepended(base)
+      base.instance_eval do
+        has_many :host_proxy_invocations, :dependent => :destroy
+      end
+    end
+
     def pubkey
       self[:pubkey] || update_pubkey
     end

@@ -47,12 +47,16 @@ module Actions
         script = renderer.render
         raise _('Failed rendering template: %s') % renderer.error_message unless script
 
+        first_execution = host.executed_through_proxies.where(:id => proxy.id).none?
+        host.executed_through_proxies << proxy if first_execution
+
         additional_options = { :hostname => provider.find_ip_or_hostname(host),
                                :script => script,
                                :execution_timeout_interval => job_invocation.execution_timeout_interval,
                                :secrets => secrets(host, job_invocation, provider),
                                :use_batch_triggering => true,
-                               :use_concurrency_control => options[:use_concurrency_control]}
+                               :use_concurrency_control => options[:use_concurrency_control],
+                               :first_execution => first_execution }
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
 
