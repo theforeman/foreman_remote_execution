@@ -5,6 +5,7 @@ import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../../../JobWizard';
 import * as selectors from '../../../JobWizardSelectors';
 import { testSetup, mockApi } from '../../../__tests__/fixtures';
+import { WIZARD_TITLES } from '../../../JobWizardConstants';
 
 const store = testSetup(selectors, api);
 mockApi(api);
@@ -17,7 +18,7 @@ describe('TemplateInputs', () => {
       </Provider>
     );
     await act(async () => {
-      fireEvent.click(screen.getByText('Target hosts and inputs'));
+      fireEvent.click(screen.getByText(WIZARD_TITLES.hostsAndInputs));
     });
     const textValue = 'I am a plain text';
     const textField = screen.getByLabelText('plain hidden', {
@@ -35,12 +36,14 @@ describe('TemplateInputs', () => {
       }).value
     ).toBe(textValue);
     await act(async () => {
-      fireEvent.click(screen.getByText('Category and Template'));
+      fireEvent.click(screen.getByText(WIZARD_TITLES.categoryAndTemplate));
     });
-    expect(screen.getAllByText('Category and Template')).toHaveLength(3);
+    expect(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)).toHaveLength(
+      3
+    );
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Target hosts and inputs'));
+      fireEvent.click(screen.getByText(WIZARD_TITLES.hostsAndInputs));
     });
     expect(textField.value).toBe(textValue);
   });

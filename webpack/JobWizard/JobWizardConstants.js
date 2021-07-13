@@ -14,3 +14,11 @@ export const repeatTypes = {
   daily: __('Daily'),
   hourly: __('Hourly'),
 };
+
+export const WIZARD_TITLES = {
+  categoryAndTemplate: __('Category and Template'),
+  hostsAndInputs: __('Target hosts and inputs'),
+  advanced: __('Advanced Fields'),
+  schedule: __('Schedule'),
+  review: __('Review Details'),
+};

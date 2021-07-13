@@ -10,6 +10,7 @@ import {
   testSetup,
   mockApi,
 } from '../../../__tests__/fixtures';
+import { WIZARD_TITLES } from '../../../JobWizardConstants';
 
 const store = testSetup(selectors, api);
 mockApi(api);
@@ -82,7 +83,7 @@ describe('AdvancedFields', () => {
       </Provider>
     );
     await act(async () => {
-      fireEvent.click(screen.getByText('Advanced Fields'));
+      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
     });
     const searchValue = 'search test';
     const textValue = 'I am a text';
@@ -99,7 +100,7 @@ describe('AdvancedFields', () => {
     fireEvent.click(selectField);
     await act(async () => {
       await fireEvent.click(screen.getByText('option 2'));
-      fireEvent.click(screen.getAllByText('Advanced Fields')[0]); // to remove focus
+      fireEvent.click(screen.getAllByText(WIZARD_TITLES.advanced)[0]); // to remove focus
       await fireEvent.change(textField, {
         target: { value: textValue },
       });
@@ -119,9 +120,11 @@ describe('AdvancedFields', () => {
     expect(searchField.value).toBe(searchValue);
     expect(dateField.value).toBe(dateValue);
     await act(async () => {
-      fireEvent.click(screen.getByText('Category and Template'));
+      fireEvent.click(screen.getByText(WIZARD_TITLES.categoryAndTemplate));
     });
-    expect(screen.getAllByText('Category and Template')).toHaveLength(3);
+    expect(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)).toHaveLength(
+      3
+    );
 
     await act(async () => {
       fireEvent.click(screen.getByText('Advanced Fields'));

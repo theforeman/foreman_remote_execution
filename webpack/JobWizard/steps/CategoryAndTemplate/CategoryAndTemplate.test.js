@@ -5,6 +5,7 @@ import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../../JobWizard';
 import * as selectors from '../../JobWizardSelectors';
 import { testSetup, mockApi } from '../../__tests__/fixtures';
+import { WIZARD_TITLES } from '../../JobWizardConstants';
 
 const store = testSetup(selectors, api);
 mockApi(api);
@@ -32,7 +33,7 @@ describe('Category And Template', () => {
     await act(async () => {
       await fireEvent.click(screen.getByText('Puppet'));
     });
-    fireEvent.click(screen.getAllByText('Category and Template')[0]); // to remove focus
+    fireEvent.click(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)[0]); // to remove focus
     expect(
       screen.queryAllByLabelText('Ansible Commands', { selector: 'button' })
     ).toHaveLength(0);
@@ -47,7 +48,7 @@ describe('Category And Template', () => {
     await act(async () => {
       await fireEvent.click(screen.getByText('template2'));
     });
-    fireEvent.click(screen.getAllByText('Category and Template')[0]); // to remove focus
+    fireEvent.click(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)[0]); // to remove focus
     expect(
       screen.queryAllByDisplayValue('template1', { selector: 'button' })
     ).toHaveLength(0);

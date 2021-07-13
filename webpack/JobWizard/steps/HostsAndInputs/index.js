@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Title, Button, Form, FormGroup } from '@patternfly/react-core';
+import { Button, Form, FormGroup } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { translate as __ } from 'foremanReact/common/I18n';
@@ -7,6 +7,8 @@ import { selectTemplateInputs } from '../../JobWizardSelectors';
 import { SelectField } from '../form/SelectField';
 import { SelectedChips } from './SelectedChips';
 import { TemplateInputs } from './TemplateInputs';
+import { WIZARD_TITLES } from '../../JobWizardConstants';
+import { WizardTitle } from '../form/WizardTitle';
 
 const HostsAndInputs = ({
   templateValues,
@@ -24,9 +26,7 @@ const HostsAndInputs = ({
   const [hostMethod, setHostMethod] = useState(hostMethods[0]);
   return (
     <>
-      <Title headingLevel="h2" className="wizard-title">
-        {__('Target hosts and inputs')}
-      </Title>
+      <WizardTitle title={WIZARD_TITLES.hostsAndInputs} />
       <Form>
         <FormGroup fieldId="host_selection">
           <SelectField
