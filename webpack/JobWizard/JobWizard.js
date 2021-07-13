@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Wizard } from '@patternfly/react-core';
@@ -17,23 +18,31 @@ export const JobWizard = () => {
   const [advancedValues, setAdvancedValues] = useState({});
   const dispatch = useDispatch();
 
-  const setDefaults = useCallback(response => {
-    const responseJob = response.data;
-    const advancedTemplateValues = {};
-    const advancedInputs = responseJob.advanced_template_inputs;
-    if (advancedInputs) {
-      advancedInputs.forEach(input => {
-        advancedTemplateValues[input.name] = input?.default || '';
-      });
-    }
-    setAdvancedValues(currentAdvancedValues => ({
-      ...currentAdvancedValues,
-      effectiveUserValue: responseJob.effective_user?.value || '',
-      timeoutToKill: responseJob.job_template?.executionTimeoutInterval || '',
-      templateValues: advancedTemplateValues,
-      description: responseJob.job_template.description_format || '',
-    }));
-  }, []);
+  const setDefaults = useCallback(
+    ({
+      data: {
+        advanced_template_inputs,
+        effective_user,
+        job_template: { executionTimeoutInterval, description_format },
+      },
+    }) => {
+      const advancedTemplateValues = {};
+      const advancedInputs = advanced_template_inputs;
+      if (advancedInputs) {
+        advancedInputs.forEach(input => {
+          advancedTemplateValues[input.name] = input?.default || '';
+        });
+      }
+      setAdvancedValues(currentAdvancedValues => ({
+        ...currentAdvancedValues,
+        effectiveUserValue: effective_user?.value || '',
+        timeoutToKill: executionTimeoutInterval || '',
+        templateValues: advancedTemplateValues,
+        description: description_format || '',
+      }));
+    },
+    []
+  );
   useEffect(() => {
     if (jobTemplateID) {
       dispatch(

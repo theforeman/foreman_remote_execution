@@ -25,18 +25,18 @@ export const DescriptionField = ({ inputs, value, setValue }) => {
   const [generatedDesc, setGeneratedDesc] = useState(generateDesc());
   const [isPreview, setIsPreview] = useState(true);
 
-  const togglePreview = newValue => {
+  const togglePreview = () => {
     setGeneratedDesc(generateDesc());
-    setIsPreview(newValue);
+    setIsPreview(v => !v);
   };
 
   const showPreview = (
-    <Button variant="link" isInline onClick={() => togglePreview(true)}>
+    <Button variant="link" isInline onClick={togglePreview}>
       {__('See the custom job description')}
     </Button>
   );
   const hidePreview = (
-    <Button variant="link" isInline onClick={() => togglePreview(false)}>
+    <Button variant="link" isInline onClick={togglePreview}>
       {__('Set the custom job description')}
     </Button>
   );
