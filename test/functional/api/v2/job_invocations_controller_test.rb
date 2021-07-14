@@ -181,6 +181,11 @@ module Api
                                  host_id: FactoryBot.create(:host).id }
           assert_response :missing
         end
+
+        test 'should not break when taxonomy parameters are provided' do
+          get :output, params: { :job_invocation_id => @invocation.id, :host_id => host.id, :organization_id => host.organization_id, :location_id => host.location_id }
+          assert_response :success
+        end
       end
 
       describe '#outputs' do
@@ -230,6 +235,11 @@ module Api
           result = ActiveSupport::JSON.decode(@response.body)
           assert_equal result['complete'], true
           assert_equal result['output'], (1..5).map(&:to_s).join("\n") + "\n"
+          assert_response :success
+        end
+
+        test 'should not break when taxonomy parameters are provided' do
+          get :raw_output, params: { :job_invocation_id => @invocation.id, :host_id => host.id, :organization_id => host.organization_id, :location_id => host.location_id }
           assert_response :success
         end
 
