@@ -162,6 +162,15 @@ module Api
         render :json => { :outputs => outputs }
       end
 
+      def resource_name(resource = controller_name)
+        case resource
+        when 'organization', 'location'
+          nil
+        else
+          'job_invocation'
+        end
+      end
+
       private
 
       def allowed_nested_id
