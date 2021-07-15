@@ -92,6 +92,7 @@ export const JobWizard = () => {
       canJumpTo: isTemplate,
     },
   ];
+
   return (
     <Wizard
       onClose={() => history.goBack()}
