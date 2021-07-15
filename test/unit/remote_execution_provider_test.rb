@@ -66,10 +66,6 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     before { User.current = FactoryBot.build(:user, :admin) }
     after { User.current = nil }
 
-    before do
-      Setting::RemoteExecution.load_defaults
-    end
-
     let(:job_invocation) { FactoryBot.create(:job_invocation, :with_template) }
     let(:template_invocation) { job_invocation.pattern_template_invocations.first }
     let(:host) { FactoryBot.create(:host) }

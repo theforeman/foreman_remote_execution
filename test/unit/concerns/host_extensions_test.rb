@@ -1,9 +1,6 @@
 require 'test_plugin_helper'
 
 class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
-  before do
-    Setting::RemoteExecution.load_defaults
-  end
   let(:provider) { 'SSH' }
 
   before { User.current = FactoryBot.build(:user, :admin) }

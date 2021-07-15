@@ -19,10 +19,6 @@ module ForemanRemoteExecution
       end
     assets_to_precompile += %w(foreman_remote_execution/foreman_remote_execution.css)
 
-    initializer 'foreman_remote_execution.load_default_settings', :before => :load_config_initializers do
-      require_dependency File.expand_path('../../../app/models/setting/remote_execution.rb', __FILE__) if (Setting.table_exists? rescue(false))
-    end
-
     # Add any db migrations
     initializer 'foreman_remote_execution.load_app_instance_data' do |app|
       ForemanRemoteExecution::Engine.paths['db/migrate'].existent.each do |path|
@@ -60,6 +56,107 @@ module ForemanRemoteExecution
         ]
         automatic_assets(false)
         precompile_assets(*assets_to_precompile)
+
+        # Add settings to a Remote Execution category
+        settings do
+          category :remote_execution, N_('Remote Execution') do
+            setting 'remote_execution_fallback_proxy',
+              type: :boolean,
+              description: N_('Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy'),
+              default: false,
+              full_name: N_('Fallback to Any Proxy')
+            setting 'remote_execution_global_proxy',
+              type: :boolean,
+              description: N_('Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host\'s organization and location.'),
+              default: true,
+              full_name: N_('Enable Global Proxy')
+            setting 'remote_execution_ssh_user',
+              type: :string,
+              description: N_('Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user.'),
+              default: 'root',
+              full_name: N_('SSH User')
+            setting 'remote_execution_effective_user',
+              type: :string,
+              description: N_('Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user.'),
+              default: 'root',
+              full_name: N_('Efffective User')
+            setting 'remote_execution_effective_user_method',
+              type: :string,
+              description: N_('What command should be used to switch to the effective user. One of %s') % SSHExecutionProvider::EFFECTIVE_USER_METHODS.inspect,
+              default: 'sudo',
+              full_name: N_('Effective User Method'),
+              collection: proc { Hash[SSHExecutionProvider::EFFECTIVE_USER_METHODS.map { |method| [method, method] }] }
+            setting 'remote_execution_effective_user_password',
+              type: :string,
+              description: N_('Effective user password'),
+              default: '',
+              full_name: N_('Effective user password'),
+              encrypted: true
+            setting 'remote_execution_sync_templates',
+              type: :boolean,
+              description: N_('Whether we should sync templates from disk when running db:seed.'),
+              default: true,
+              full_name: N_('Sync Job Templates')
+            setting 'remote_execution_ssh_port',
+              type: :integer,
+              description: N_('Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.'),
+              default: 22,
+              full_name: N_('SSH Port')
+            setting 'remote_execution_connect_by_ip',
+              type: :boolean,
+              description: N_('Should the ip addresses on host interfaces be preferred over the fqdn? '\
+                              'It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. '\
+                              'For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting'),
+              default: false,
+              full_name: N_('Connect by IP')
+            setting 'remote_execution_connect_by_ip_prefer_ipv6',
+              type: :boolean,
+              description: N_('When connecting using ip address, should the IPv6 addresses be preferred? '\
+                              'If no IPv6 address is set, it falls back to IPv4 automatically. You may override this per host by setting a parameter called remote_execution_connect_by_ip_prefer_ipv6. '\
+                              'By default and for compatibility, IPv4 will be preferred over IPv6 by default'),
+              default: false,
+              full_name: N_('Prefer IPv6 over IPv4')
+            setting 'remote_execution_ssh_password',
+              type: :string,
+              description: N_('Default password to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_password'),
+              default: nil,
+              full_name: N_('Default SSH password'),
+              encrypted: true
+            setting 'remote_execution_ssh_key_passphrase',
+              type: :string,
+              description: N_('Default key passphrase to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_key_passphrase'),
+              default: nil,
+              full_name: N_('Default SSH key passphrase'),
+              encrypted: true
+            setting 'remote_execution_workers_pool_size',
+              type: :integer,
+              description: N_('Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required.'),
+              default: 5,
+              full_name: N_('Workers pool size')
+            setting 'remote_execution_cleanup_working_dirs',
+              type: :boolean,
+              description: N_('When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs.'),
+              default: true,
+              full_name: N_('Cleanup working directories')
+            setting 'remote_execution_cockpit_url',
+              type: :string,
+              description: N_('Where to find the Cockpit instance for the Web Console button.  By default, no button is shown.'),
+              default: nil,
+              full_name: N_('Cockpit URL')
+            setting 'remote_execution_form_job_template',
+              type: :string,
+              description: N_('Choose a job template that is pre-selected in job invocation form'),
+              default: 'Run Command - SSH Default',
+              full_name: N_('Form Job Template'),
+              collection: proc { Hash[JobTemplate.unscoped.map { |template| [template.name, template.name] }] }
+            setting 'remote_execution_job_invocation_report_template',
+              type: :string,
+              description: N_('Select a report template used for generating a report for a particular remote execution job'),
+              default: 'Jobs - Invocation report template',
+              full_name: N_('Job Invocation Report Template'),
+              collection: proc { ForemanRemoteExecution.job_invocation_report_templates_select }
+          end
+        end
 
         # Add permissions
         security_block :foreman_remote_execution do
@@ -239,6 +336,10 @@ module ForemanRemoteExecution
       locale_domain = 'foreman_remote_execution'
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
+  end
+
+  def self.job_invocation_report_templates_select
+    Hash[ReportTemplate.unscoped.joins(:template_inputs).where(template_inputs: TemplateInput.where(name: 'job_id')).map { |template| [template.name, template.name] }]
   end
 
   def self.register_rex_feature
