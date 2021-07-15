@@ -2,7 +2,6 @@ require 'test_plugin_helper'
 
 class CockpitControllerTest < ActionController::TestCase
   def setup
-    Setting::RemoteExecution.load_defaults
     as_admin do
       @host = FactoryBot.create(:host)
     end

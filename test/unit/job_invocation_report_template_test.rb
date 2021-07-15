@@ -19,7 +19,7 @@ class JobReportTemplateTest < ActiveSupport::TestCase
       it 'in settings includes only report templates with job_id input' do
         FactoryBot.create(:report_template, name: 'Template 1')
         job_invocation_template
-        templates = Setting::RemoteExecution.job_invocation_report_templates_select
+        templates = ForemanRemoteExecution.job_invocation_report_templates_select
 
         assert_include templates, 'Job Invocation Report Template'
       end

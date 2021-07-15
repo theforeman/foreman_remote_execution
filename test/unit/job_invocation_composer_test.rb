@@ -270,10 +270,6 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           composer.pattern_template_invocations.first
         end
 
-        before do
-          Setting::RemoteExecution.load_defaults
-        end
-
         context 'when overridable and provided' do
           let(:overridable) { true }
           let(:invocation_effective_user) { 'invocation user' }

@@ -4,10 +4,6 @@ class JobTemplateEffectiveUserTest < ActiveSupport::TestCase
   let(:job_template) { FactoryBot.build(:job_template, :job_category => '') }
   let(:effective_user) { job_template.effective_user }
 
-  before do
-    Setting::RemoteExecution.load_defaults
-  end
-
   describe 'by default' do
     it 'is overridable' do
       assert effective_user.overridable?
