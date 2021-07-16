@@ -3,7 +3,7 @@ require 'open3'
 module ForemanRemoteExecutionCore
   module Utils
     class << self
-      def prune_known_hosts(hostname, port, logger = Logger.new($stdout))
+      def prune_known_hosts!(hostname, port, logger = Logger.new($stdout))
         return if Net::SSH::KnownHosts.search_for(hostname).empty?
 
         target = if port == 22
