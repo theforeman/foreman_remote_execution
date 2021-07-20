@@ -22,3 +22,12 @@ export const WIZARD_TITLES = {
   schedule: __('Schedule'),
   review: __('Review Details'),
 };
+
+export const initialScheduleState = {
+  repeatType: repeatTypes.noRepeat,
+  repeatAmount: '',
+  starts: '',
+  ends: '',
+  isFuture: false,
+  isNeverEnds: false,
+};

@@ -50,13 +50,23 @@
     margin-top: 8px;
   }
   .schedule-tab {
-    input[type='radio'],
-    input[type='checkbox'] {
-      margin: 0;
-    }
     .advanced-scheduling-button {
       text-align: start;
     }
+  }
+
+  .pf-c-date-picker {
+    vertical-align: top;
+  }
+
+  .time-picker {
+    width: 150px;
+  }
+
+  input[type='radio'],
+  input[type='checkbox'] {
+    // overwriting bootstrap/_forms.scss margin: 4px 0 0;
+    margin: 0;
   }
   textarea {
     min-height: 40px;

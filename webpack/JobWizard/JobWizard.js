@@ -6,7 +6,11 @@ import { get } from 'foremanReact/redux/API';
 import history from 'foremanReact/history';
 import CategoryAndTemplate from './steps/CategoryAndTemplate/';
 import { AdvancedFields } from './steps/AdvancedFields/AdvancedFields';
-import { JOB_TEMPLATE, WIZARD_TITLES } from './JobWizardConstants';
+import {
+  JOB_TEMPLATE,
+  WIZARD_TITLES,
+  initialScheduleState,
+} from './JobWizardConstants';
 import { selectTemplateError } from './JobWizardSelectors';
 import Schedule from './steps/Schedule/';
 import HostsAndInputs from './steps/HostsAndInputs/';
@@ -18,6 +22,7 @@ export const JobWizard = () => {
   const [advancedValues, setAdvancedValues] = useState({});
   const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description https://github.com/theforeman/foreman_remote_execution/pull/605
   const [selectedHosts, setSelectedHosts] = useState(['host1', 'host2']);
+  const [scheduleValue, setScheduleValue] = useState(initialScheduleState);
   const dispatch = useDispatch();
 
   const setDefaults = useCallback(
@@ -114,7 +119,12 @@ export const JobWizard = () => {
     },
     {
       name: WIZARD_TITLES.schedule,
-      component: <Schedule />,
+      component: (
+        <Schedule
+          scheduleValue={scheduleValue}
+          setScheduleValue={setScheduleValue}
+        />
+      ),
       canJumpTo: isTemplate,
     },
     {

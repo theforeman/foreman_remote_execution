@@ -1,36 +1,82 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Form } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { ScheduleType } from './ScheduleType';
 import { RepeatOn } from './RepeatOn';
 import { QueryType } from './QueryType';
 import { StartEndDates } from './StartEndDates';
-import { repeatTypes, WIZARD_TITLES } from '../../JobWizardConstants';
+import { WIZARD_TITLES } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
 
-const Schedule = () => {
-  const [repeatType, setRepeatType] = useState(repeatTypes.noRepeat);
-  const [repeatAmount, setRepeatAmount] = useState('');
-  const [starts, setStarts] = useState('');
-  const [ends, setEnds] = useState('');
+const Schedule = ({ scheduleValue, setScheduleValue }) => {
+  const { repeatType, repeatAmount, starts, ends, isNeverEnds } = scheduleValue;
 
   return (
     <>
       <WizardTitle title={WIZARD_TITLES.schedule} />
       <Form className="schedule-tab">
-        <ScheduleType />
+        <ScheduleType
+          isFuture={scheduleValue.isFuture}
+          setIsFuture={newValue => {
+            if (!newValue) {
+              // if schedule type is execute now
+              setScheduleValue(current => ({
+                ...current,
+                starts: '',
+              }));
+            }
+            setScheduleValue(current => ({
+              ...current,
+              isFuture: newValue,
+            }));
+          }}
+        />
 
         <RepeatOn
           repeatType={repeatType}
-          setRepeatType={setRepeatType}
+          setRepeatType={newValue => {
+            setScheduleValue(current => ({
+              ...current,
+              repeatType: newValue,
+            }));
+          }}
           repeatAmount={repeatAmount}
-          setRepeatAmount={setRepeatAmount}
+          setRepeatAmount={newValue => {
+            setScheduleValue(current => ({
+              ...current,
+              repeatAmount: newValue,
+            }));
+          }}
         />
         <StartEndDates
           starts={starts}
-          setStarts={setStarts}
+          setStarts={newValue => {
+            if (!scheduleValue.isFuture) {
+              setScheduleValue(current => ({
+                ...current,
+                isFuture: true,
+              }));
+            }
+            setScheduleValue(current => ({
+              ...current,
+              starts: newValue,
+            }));
+          }}
           ends={ends}
-          setEnds={setEnds}
+          setEnds={newValue => {
+            setScheduleValue(current => ({
+              ...current,
+              ends: newValue,
+            }));
+          }}
+          isNeverEnds={isNeverEnds}
+          setIsNeverEnds={newValue => {
+            setScheduleValue(current => ({
+              ...current,
+              isNeverEnds: newValue,
+            }));
+          }}
         />
         <Button variant="link" className="advanced-scheduling-button" isInline>
           {__('Advanced scheduling')}
@@ -39,6 +85,18 @@ const Schedule = () => {
       </Form>
     </>
   );
+};
+
+Schedule.propTypes = {
+  scheduleValue: PropTypes.shape({
+    repeatType: PropTypes.string.isRequired,
+    repeatAmount: PropTypes.string,
+    starts: PropTypes.string,
+    ends: PropTypes.string,
+    isFuture: PropTypes.bool,
+    isNeverEnds: PropTypes.bool,
+  }).isRequired,
+  setScheduleValue: PropTypes.func.isRequired,
 };
 
 export default Schedule;
