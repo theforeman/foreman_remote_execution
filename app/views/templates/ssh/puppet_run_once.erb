@@ -10,6 +10,7 @@ template_inputs:
   description: Additional options to pass to puppet
   input_type: user
   required: false
+feature: puppet_run_host
 %>
 <% if @host.operatingsystem.family == 'Debian' -%>
 export PATH=/opt/puppetlabs/bin:$PATH
