@@ -7,6 +7,10 @@ module RemoteExecutionHelper
     @job_hosts_authorizer ||= Authorizer.new(User.current, :collection => @hosts)
   end
 
+  def host_tasks_authorizer
+    @host_tasks_authorizer ||= Authorizer.new(User.current, :collection => @job_invocation.sub_tasks)
+  end
+
   def host_counter(label, count)
     content_tag(:div, :class => 'host_counter') do
       content_tag(:div, label, :class => 'header') + content_tag(:div, count.to_s, :class => 'count')
@@ -36,7 +40,7 @@ module RemoteExecutionHelper
                   'data-method': 'get', id: "#{host.name}-actions-rerun" } }
     end
 
-    if host_task.present? && authorized_for(hash_for_foreman_tasks_task_path(host_task).merge(auth_object: host_task, permission: :view_foreman_tasks))
+    if host_task.present? && authorized_for(hash_for_foreman_tasks_task_path(host_task).merge(auth_object: host_task, permission: :view_foreman_tasks, authorizer: host_tasks_authorizer))
       links << { title: _('Host task'),
         action: { href: foreman_tasks_task_path(host_task),
                   'data-method': 'get', id: "#{host.name}-actions-task" } }
