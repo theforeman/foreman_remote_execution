@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../JobWizard';
 import * as selectors from '../JobWizardSelectors';
-import { testSetup, mockApi, jobTemplateResponse, qglMock } from './fixtures';
+import { testSetup, mockApi, jobTemplateResponse, gqlMock } from './fixtures';
 import { WIZARD_TITLES } from '../JobWizardConstants';
 
 const store = testSetup(selectors, api);
@@ -30,7 +30,7 @@ describe('Job wizard validation', () => {
   });
   it('requeried', async () => {
     render(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>
@@ -75,7 +75,7 @@ describe('Job wizard validation', () => {
 
   it('advanced number', async () => {
     render(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>

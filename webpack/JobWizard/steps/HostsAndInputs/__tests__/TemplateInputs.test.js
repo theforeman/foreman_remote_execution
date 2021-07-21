@@ -5,7 +5,7 @@ import { MockedProvider } from '@apollo/client/testing';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../../../JobWizard';
 import * as selectors from '../../../JobWizardSelectors';
-import { testSetup, mockApi, qglMock } from '../../../__tests__/fixtures';
+import { testSetup, mockApi, gqlMock } from '../../../__tests__/fixtures';
 import { WIZARD_TITLES } from '../../../JobWizardConstants';
 
 const store = testSetup(selectors, api);
@@ -14,7 +14,7 @@ mockApi(api);
 describe('TemplateInputs', () => {
   it('should save data between steps for template input fields', async () => {
     render(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>

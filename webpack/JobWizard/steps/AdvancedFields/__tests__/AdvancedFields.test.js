@@ -13,7 +13,7 @@ import {
   testSetup,
   mockApi,
   jobCategories,
-  qglMock,
+  gqlMock,
 } from '../../../__tests__/fixtures';
 import { WIZARD_TITLES } from '../../../JobWizardConstants';
 
@@ -28,7 +28,7 @@ selectors.selectEffectiveUser.mockImplementation(
 describe('AdvancedFields', () => {
   it('should save data between steps for advanced fields', async () => {
     const wrapper = mount(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>
@@ -85,7 +85,7 @@ describe('AdvancedFields', () => {
   });
   it('fill template fields', async () => {
     render(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>
@@ -155,7 +155,7 @@ describe('AdvancedFields', () => {
   });
   it('fill defaults into fields', async () => {
     render(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>

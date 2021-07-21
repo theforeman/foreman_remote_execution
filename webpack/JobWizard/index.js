@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Title, Divider } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
@@ -27,6 +28,12 @@ const JobWizardPage = () => {
       </React.Fragment>
     </PageLayout>
   );
+};
+
+JobWizardPage.propTypes = {
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }).isRequired,
 };
 
 export default JobWizardPage;

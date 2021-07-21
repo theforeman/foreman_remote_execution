@@ -15,6 +15,7 @@ import { selectTemplateError, selectJobTemplate } from './JobWizardSelectors';
 import Schedule from './steps/Schedule/';
 import HostsAndInputs from './steps/HostsAndInputs/';
 import { useValidation } from './validation';
+import { useAutoFill } from './autofill';
 import './JobWizard.scss';
 
 export const JobWizard = () => {
@@ -94,6 +95,10 @@ export const JobWizard = () => {
   const [valid, setValid] = useValidation({
     advancedValues,
     templateValues,
+  });
+  useAutoFill({
+    setSelectedTargets,
+    setHostsSearchQuery,
   });
   const templateError = !!useSelector(selectTemplateError);
   const templateResponse = useSelector(selectJobTemplate);

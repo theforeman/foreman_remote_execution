@@ -12,7 +12,7 @@ import {
   mockApi,
   jobCategories,
   jobTemplateResponse as jobTemplate,
-  qglMock,
+  gqlMock,
 } from './fixtures';
 
 const store = testSetup(selectors, api);
@@ -68,7 +68,7 @@ describe('Job wizard fill', () => {
     mockApi(api);
 
     render(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>

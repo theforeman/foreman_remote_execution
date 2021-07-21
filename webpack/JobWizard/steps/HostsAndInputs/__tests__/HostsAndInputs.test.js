@@ -3,9 +3,10 @@ import { Provider } from 'react-redux';
 import { fireEvent, screen, render, act } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import * as api from 'foremanReact/redux/API';
+import * as routerSelectors from 'foremanReact/routes/RouterSelector';
 import { JobWizard } from '../../../JobWizard';
 import * as selectors from '../../../JobWizardSelectors';
-import { testSetup, mockApi, qglMock } from '../../../__tests__/fixtures';
+import { testSetup, mockApi, gqlMock } from '../../../__tests__/fixtures';
 
 const store = testSetup(selectors, api);
 mockApi(api);
@@ -16,7 +17,7 @@ lodash.debounce = fn => fn;
 describe('Hosts', () => {
   it('Host selection chips removal and keep state between steps', async () => {
     render(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>
@@ -87,7 +88,7 @@ describe('Hosts', () => {
   it('Host Collection isnt shown without katello', async () => {
     selectors.selectWithKatello.mockImplementation(() => false);
     render(
-      <MockedProvider mocks={qglMock} addTypename={false}>
+      <MockedProvider mocks={gqlMock} addTypename={false}>
         <Provider store={store}>
           <JobWizard />
         </Provider>
@@ -106,5 +107,45 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('Host groups')).toHaveLength(1);
     expect(screen.queryAllByText('Search query')).toHaveLength(1);
     expect(screen.queryAllByText('Host collections')).toHaveLength(0);
+  });
+  it('Host fill list from url', async () => {
+    routerSelectors.selectRouterLocation.mockImplementation(() => ({
+      search: '?host_ids%5B%5D=host1&host_ids%5B%5D=host3',
+    }));
+    render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText('Target hosts and inputs'));
+    });
+    api.get.mock.calls.forEach(call => {
+      if (call[0].key === 'HOST_IDS') {
+        expect(call[0].params).toEqual({ search: 'id = host1 or id = host3' });
+      }
+    });
+
+    expect(screen.queryAllByText('host1')).toHaveLength(1);
+    expect(screen.queryAllByText('host2')).toHaveLength(0);
+    expect(screen.queryAllByText('host3')).toHaveLength(1);
+  });
+  it('Host fill search from url', async () => {
+    routerSelectors.selectRouterLocation.mockImplementation(() => ({
+      search: 'search=os=gnome',
+    }));
+    render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText('Target hosts and inputs'));
+    });
+    expect(screen.queryAllByText('os=gnome')).toHaveLength(1);
   });
 });
