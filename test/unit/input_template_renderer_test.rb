@@ -446,8 +446,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
           before { User.current = FactoryBot.build(:user, :admin) }
           after { User.current = nil }
 
-          let(:environment) { FactoryBot.create(:environment) }
-          before { renderer.host = FactoryBot.create(:host, :environment => environment) }
+          before { renderer.host = FactoryBot.create(:host) }
 
           describe 'rendering' do
             it 'can\'t render the content without host since we don\'t have variable value in classification' do
@@ -492,93 +491,6 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
         describe 'preview' do
           it 'should render preview' do
             _(renderer.preview).must_equal 'echo $VARIABLE_INPUT[client_key] > /etc/chef/client.pem'
-          end
-        end
-      end
-    end
-  end
-
-  context 'renderer for template with puppet parameter input used' do
-    let(:template) { FactoryBot.build(:job_template, :template => 'echo "This is WebServer with nginx <%= input("nginx_version") -%>" > /etc/motd') }
-    let(:renderer) { InputTemplateRenderer.new(template) }
-
-    context 'with matching input defined' do
-      before do
-        renderer.template.template_inputs<< FactoryBot.build(:template_input,
-          :name => 'nginx_version',
-          :input_type => 'puppet_parameter',
-          :puppet_parameter_name => 'version',
-          :puppet_class_name => 'nginx')
-      end
-      let(:result) { renderer.render }
-
-      describe 'rendering' do
-        it 'can\'t render the content without host since we don\'t have host so no classification' do
-          assert_not result
-        end
-
-        it 'registers an error' do
-          result # let is lazy
-          _(renderer.error_message).wont_be_nil
-          _(renderer.error_message).wont_be_empty
-        end
-
-        context 'with host specified' do
-          let(:environment) { FactoryBot.create(:environment) }
-          before { renderer.host = FactoryBot.create(:host, :environment => environment) }
-
-          describe 'rendering' do
-            it 'can\'t render the content without host since we don\'t have puppet parameter in classification' do
-              assert_not result
-            end
-
-            it 'registers an error' do
-              result # let is lazy
-              _(renderer.error_message).wont_be_nil
-              _(renderer.error_message).wont_be_empty
-            end
-          end
-
-          describe 'preview' do
-            it 'should render preview' do
-              _(renderer.preview).must_equal 'echo "This is WebServer with nginx $PUPPET_PARAMETER_INPUT[nginx_version]" > /etc/motd'
-            end
-          end
-
-          context 'with existing puppet parameter with matching override' do
-            let(:puppet_class) do
-              puppetclass = FactoryBot.create(:puppetclass, :environments => [environment], :name => 'nginx')
-              puppetclass.update_attribute(:hosts, [renderer.host])
-              puppetclass
-            end
-            let(:lookup_key) do
-              FactoryBot.create(:puppetclass_lookup_key, :as_smart_class_param,
-                :key => 'version',
-                :puppetclass => puppet_class,
-                :path => 'fqdn',
-                :override => true,
-                :overrides => {"fqdn=#{renderer.host.fqdn}" => '1.4.7'})
-            end
-
-            describe 'rendering' do
-              it 'renders the value from puppet parameter' do
-                lookup_key
-                _(result).must_equal 'echo "This is WebServer with nginx 1.4.7" > /etc/motd'
-              end
-            end
-
-            describe 'preview' do
-              it 'should render preview' do
-                lookup_key
-                _(renderer.preview).must_equal 'echo "This is WebServer with nginx 1.4.7" > /etc/motd'
-              end
-            end
-          end
-        end
-
-        describe 'preview' do
-          it 'should render preview' do
-            _(renderer.preview).must_equal 'echo "This is WebServer with nginx $PUPPET_PARAMETER_INPUT[nginx_version]" > /etc/motd'
           end
         end
       end
