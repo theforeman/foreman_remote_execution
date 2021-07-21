@@ -131,23 +131,23 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     end
 
     context 'fallback strategy' do
-      let(:host) { FactoryBot.build(:host, :with_puppet) }
+      let(:host) { FactoryBot.build(:host, :with_tftp_subnet) }
 
       context 'enabled' do
         before do
           Setting[:remote_execution_fallback_proxy] = true
-          host.puppet_proxy.features << FactoryBot.create(:feature, :ssh)
+          host.subnet.tftp.features << FactoryBot.create(:feature, :ssh)
         end
 
         it 'returns a fallback proxy' do
-          host.remote_execution_proxies(provider)[:fallback].must_include host.puppet_proxy
+          host.remote_execution_proxies(provider)[:fallback].must_include host.subnet.tftp
         end
       end
 
       context 'disabled' do
         before do
           Setting[:remote_execution_fallback_proxy] = false
-          host.puppet_proxy.features << FactoryBot.create(:feature, :ssh)
+          host.subnet.tftp.features << FactoryBot.create(:feature, :ssh)
         end
 
         it 'returns no proxy' do
