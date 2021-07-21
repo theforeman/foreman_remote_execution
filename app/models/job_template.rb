@@ -83,7 +83,7 @@ class JobTemplate < ::Template
     end
 
     def acceptable_template_input_types
-      [ :user, :fact, :variable, :puppet_parameter ]
+      [ :user, :fact, :variable ]
     end
 
     def default_render_scope_class
