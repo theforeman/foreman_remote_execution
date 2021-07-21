@@ -41,7 +41,11 @@ module Api
             param :effective_user, String,
               :required => false,
               :desc => N_('What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting.')
+            param :effective_user_password, String,
+              :required => false,
+              :desc => N_('Set password for effective user (using sudo-like mechanisms)')
           end
+          param :password, String, :required => false, :desc => N_('Set SSH password')
 
           param :recurrence, Hash, :desc => N_('Create a recurring job') do
             param :cron_line, String, :required => false, :desc => N_('How often the job should occur, in the cron format')
