@@ -160,12 +160,17 @@ export const mockApi = api => {
         handleSuccess({
           data: { results: [jobTemplate] },
         });
+    } else if (action.key === 'HOST_IDS') {
+      handleSuccess &&
+        handleSuccess({
+          data: { results: [{ name: 'host1' }, { name: 'host3' }] },
+        });
     }
     return { type: 'get', ...action };
   });
 };
 
-export const qglMock = [
+export const gqlMock = [
   {
     request: {
       query: hostsQuery,

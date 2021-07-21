@@ -1,9 +1,11 @@
+import URI from 'urijs';
 import {
   selectAPIResponse,
   selectAPIStatus,
   selectAPIErrorMessage,
 } from 'foremanReact/redux/API/APISelectors';
 import { STATUS } from 'foremanReact/constants';
+import { selectRouterLocation } from 'foremanReact/routes/RouterSelector';
 
 import {
   JOB_TEMPLATES,
@@ -65,3 +67,8 @@ export const selectResponse = selectAPIResponse;
 
 export const selectIsLoading = (state, key) =>
   selectAPIStatus(state, key) === STATUS.PENDING;
+
+export const selectRouterSearch = state => {
+  const { search } = selectRouterLocation(state);
+  return URI.parseQuery(search);
+};

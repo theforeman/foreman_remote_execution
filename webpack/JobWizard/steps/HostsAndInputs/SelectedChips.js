@@ -12,9 +12,9 @@ const SelectedChip = ({ selected, setSelected, categoryName }) => {
   };
   return (
     <ChipGroup className="hosts-chip-group" categoryName={categoryName}>
-      {selected.map(({ name, id }) => (
+      {selected.map(({ name, id }, index) => (
         <Chip
-          key={name}
+          key={index}
           id={id}
           onClick={() => deleteItem(id)}
           closeBtnAriaLabel={`Close ${name}`}
