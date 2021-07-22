@@ -65,6 +65,8 @@ class JobInvocation < ApplicationRecord
   scoped_search :on => 'pattern_template_name', :rename => 'pattern_template_name', :operators => ['= '],
     :complete_value => false, :only_explicit => true, :ext_method => :search_by_pattern_template
 
+  scoped_search :relation => :recurring_logic, :on => 'purpose', :rename => 'recurring_logic.purpose'
+
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
 
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring',
