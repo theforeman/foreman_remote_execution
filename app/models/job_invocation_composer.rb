@@ -138,18 +138,11 @@ class JobInvocationComposer
     end
 
     def triggering_params
-      raise ::Foreman::Exception, _('Cannot specify both recurrence and scheduling') if api_params[:recurrence].present? && api_params[:scheduling].present?
-
-      if api_params[:recurrence].present?
-        {
-          :mode => :recurring,
-          :cronline => api_params[:recurrence][:cron_line],
-          :end_time => format_datetime(api_params[:recurrence][:end_time]),
-          :input_type => :cronline,
-          :max_iteration => api_params[:recurrence][:max_iteration],
-          :purpose => api_params[:recurrence][:purpose],
-        }
-      elsif api_params[:scheduling].present?
+      if api_params[:recurrence].present? && api_params[:scheduling].present?
+        recurring_mode_params.merge :start_at_raw => format_datetime(api_params[:scheduling][:start_at])
+      elsif api_params[:recurrence].present? && api_params[:scheduling].empty?
+        recurring_mode_params
+      elsif api_params[:recurrence].empty? && api_params[:scheduling].present?
         {
           :mode => :future,
           :start_at_raw => format_datetime(api_params[:scheduling][:start_at]),
@@ -159,6 +152,17 @@ class JobInvocationComposer
       else
         {}
       end
+    end
+
+    def recurring_mode_params
+      {
+        :mode => :recurring,
+        :cronline => api_params[:recurrence][:cron_line],
+        :end_time => format_datetime(api_params[:recurrence][:end_time]),
+        :input_type => :cronline,
+        :max_iteration => api_params[:recurrence][:max_iteration],
+        :purpose => api_params[:recurrence][:purpose],
+      }
     end
 
     def concurrency_control_params
