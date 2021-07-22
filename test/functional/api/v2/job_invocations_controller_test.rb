@@ -90,6 +90,16 @@ module Api
           assert_response :success
         end
 
+        test 'should create with a scheduled recurrence' do
+          @attrs[:scheduling] = { start_at: (Time.now + 1.hour) }
+          @attrs[:recurrence] = { cron_line: '5 * * * *' }
+          post :create, params: { job_invocation: @attrs }
+          invocation = ActiveSupport::JSON.decode(@response.body)
+          assert_equal 'recurring', invocation['mode']
+          assert invocation['start_at']
+          assert_response :success
+        end
+
         context 'with_feature' do
           setup do
             @feature = FactoryBot.create(:remote_execution_feature,
