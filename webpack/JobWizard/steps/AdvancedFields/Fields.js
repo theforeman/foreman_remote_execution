@@ -165,6 +165,41 @@ export const TimeSpanLevelField = ({ value, setValue }) => (
   />
 );
 
+export const ExecutionOrderingField = ({ isRandomizedOrdering, setValue }) => (
+  <FormGroup
+    label={__('Execution ordering')}
+    fieldId="schedule-type"
+    labelIcon={helpLabel(
+      <div
+        dangerouslySetInnerHTML={{
+          __html: __(
+            'Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>'
+          ),
+        }}
+      />,
+      'effective-user-password'
+    )}
+    isInline
+  >
+    <Radio
+      aria-label="execution order alphabetical"
+      isChecked={!isRandomizedOrdering}
+      name="execution-order"
+      onChange={() => setValue(false)}
+      id="execution-order-alphabetical"
+      label={__('Alphabetical')}
+    />
+    <Radio
+      aria-label="execution order randomized"
+      isChecked={isRandomizedOrdering}
+      name="execution-order"
+      onChange={() => setValue(true)}
+      id="execution-order-randomized"
+      label={__('Randomized')}
+    />
+  </FormGroup>
+);
+
 export const TemplateInputsFields = ({ inputs, value, setValue }) => (
   <>{inputs?.map(input => formatter(input, value, setValue))}</>
 );
@@ -188,6 +223,14 @@ ConcurrencyLevelField.propTypes = EffectiveUserField.propTypes;
 ConcurrencyLevelField.defaultProps = EffectiveUserField.defaultProps;
 TimeSpanLevelField.propTypes = EffectiveUserField.propTypes;
 TimeSpanLevelField.defaultProps = EffectiveUserField.defaultProps;
+ExecutionOrderingField.propTypes = {
+  isRandomizedOrdering: PropTypes.bool,
+  setValue: PropTypes.func.isRequired,
+};
+ExecutionOrderingField.defaultProps = {
+  isRandomizedOrdering: false,
+};
+
 TemplateInputsFields.propTypes = {
   inputs: PropTypes.array.isRequired,
   value: PropTypes.object,

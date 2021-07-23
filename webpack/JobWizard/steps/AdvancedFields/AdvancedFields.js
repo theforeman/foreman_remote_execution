@@ -16,6 +16,7 @@ import {
   ConcurrencyLevelField,
   TimeSpanLevelField,
   TemplateInputsFields,
+  ExecutionOrderingField,
 } from './Fields';
 import { DescriptionField } from './DescriptionField';
 import { WIZARD_TITLES } from '../../JobWizardConstants';
@@ -97,6 +98,14 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
           setValue={newValue =>
             setAdvancedValues({
               timeSpan: newValue,
+            })
+          }
+        />
+        <ExecutionOrderingField
+          isRandomizedOrdering={advancedValues.isRandomizedOrdering}
+          setValue={newValue =>
+            setAdvancedValues({
+              isRandomizedOrdering: newValue,
             })
           }
         />
