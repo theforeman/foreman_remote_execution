@@ -148,4 +148,32 @@ describe('Hosts', () => {
     });
     expect(screen.queryAllByText('os=gnome')).toHaveLength(1);
   });
+
+  it('input fill from url', async () => {
+    const inputText = 'test text';
+    routerSelectors.selectRouterLocation.mockImplementation(() => ({
+      search: `feature=test_feature&inputs[plain hidden]=${inputText}`,
+    }));
+    render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
+    );
+    api.get.mock.calls.forEach(call => {
+      if (call[0].key === 'REX_FEATURE') {
+        expect(call[0].url).toEqual(
+          '/api/remote_execution_features/test_feature'
+        );
+      }
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByText('Target hosts and inputs'));
+    });
+    const textField = screen.getByLabelText('plain hidden', {
+      selector: 'textarea',
+    });
+    expect(textField.value).toBe(inputText);
+  });
 });

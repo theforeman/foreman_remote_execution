@@ -20,6 +20,7 @@ import {
   selectTemplateError,
   selectJobTemplate,
   selectIsSubmitting,
+  selectRouterSearch,
 } from './JobWizardSelectors';
 import Schedule from './steps/Schedule/';
 import HostsAndInputs from './steps/HostsAndInputs/';
@@ -41,6 +42,7 @@ export const JobWizard = () => {
     hostGroups: [],
   });
   const [hostsSearchQuery, setHostsSearchQuery] = useState('');
+  const [fills, setFills] = useState(useSelector(selectRouterSearch));
   const dispatch = useDispatch();
 
   const setDefaults = useCallback(
@@ -49,17 +51,26 @@ export const JobWizard = () => {
         template_inputs,
         advanced_template_inputs,
         effective_user,
-        job_template: { name, execution_timeout_interval, description_format },
+        job_template: {
+          name,
+          execution_timeout_interval,
+          description_format,
+          job_category,
+        },
       },
     }) => {
+      if (!category.length) {
+        setCategory(current => (current.length ? current : job_category));
+      }
       const advancedTemplateValues = {};
       const defaultTemplateValues = {};
       const inputs = template_inputs;
       const advancedInputs = advanced_template_inputs;
       if (inputs) {
-        setTemplateValues(() => {
+        setTemplateValues(prev => {
           inputs.forEach(input => {
-            defaultTemplateValues[input.name] = input?.default || '';
+            defaultTemplateValues[input.name] =
+              prev[input.name] || input?.default || '';
           });
           return defaultTemplateValues;
         });
@@ -67,7 +78,8 @@ export const JobWizard = () => {
       setAdvancedValues(currentAdvancedValues => {
         if (advancedInputs) {
           advancedInputs.forEach(input => {
-            advancedTemplateValues[input.name] = input?.default || '';
+            advancedTemplateValues[input.name] =
+              currentAdvancedValues[input.name] || input?.default || '';
           });
         }
         const generateDefaultDescription = () => {
@@ -89,7 +101,7 @@ export const JobWizard = () => {
         };
       });
     },
-    []
+    [category.length]
   );
   useEffect(() => {
     if (jobTemplateID) {
@@ -108,8 +120,12 @@ export const JobWizard = () => {
     templateValues,
   });
   useAutoFill({
+    fills,
+    setFills,
     setSelectedTargets,
     setHostsSearchQuery,
+    setJobTemplateID,
+    setTemplateValues,
   });
   const templateError = !!useSelector(selectTemplateError);
   const templateResponse = useSelector(selectJobTemplate);
@@ -126,6 +142,7 @@ export const JobWizard = () => {
           setJobTemplate={setJobTemplateID}
           category={category}
           setCategory={setCategory}
+          isFeature={!!fills.feature}
         />
       ),
       enableNext: isTemplate,
