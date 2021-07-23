@@ -165,6 +165,11 @@ export const mockApi = api => {
         handleSuccess({
           data: { results: [{ name: 'host1' }, { name: 'host3' }] },
         });
+    } else if (action.key === 'REX_FEATURE') {
+      handleSuccess &&
+        handleSuccess({
+          data: { job_template_id: 178 },
+        });
     }
     return { type: 'get', ...action };
   });

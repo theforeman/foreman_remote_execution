@@ -25,6 +25,7 @@ const ConnectedCategoryAndTemplate = ({
   setJobTemplate,
   category,
   setCategory,
+  isFeature,
 }) => {
   const dispatch = useDispatch();
 
@@ -36,12 +37,14 @@ const ConnectedCategoryAndTemplate = ({
         get({
           key: JOB_CATEGORIES,
           url: '/ui_job_wizard/categories',
-          handleSuccess: response =>
-            setCategory(response.data.job_categories[0] || ''),
+          handleSuccess: response => {
+            if (!isFeature) setCategory(response.data.job_categories[0] || '');
+          },
         })
       );
     }
-  }, [jobCategoriesStatus, dispatch, setCategory]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [jobCategoriesStatus]);
 
   const jobCategories = useSelector(selectJobCategories);
   useEffect(() => {
@@ -55,14 +58,17 @@ const ConnectedCategoryAndTemplate = ({
             per_page: 'all',
           }),
           handleSuccess: response => {
-            setJobTemplate(
-              Number(filterJobTemplates(response?.data?.results)[0]?.id) || null
-            );
+            if (!jobTemplate)
+              setJobTemplate(
+                Number(filterJobTemplates(response?.data?.results)[0]?.id) ||
+                  null
+              );
           },
         })
       );
     }
-  }, [category, dispatch, setJobTemplate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, dispatch]);
 
   const jobTemplates = useSelector(selectJobTemplates);
 
@@ -89,6 +95,7 @@ ConnectedCategoryAndTemplate.propTypes = {
   setJobTemplate: PropTypes.func.isRequired,
   category: PropTypes.string.isRequired,
   setCategory: PropTypes.func.isRequired,
+  isFeature: PropTypes.bool.isRequired,
 };
 ConnectedCategoryAndTemplate.defaultProps = { jobTemplate: null };
 
