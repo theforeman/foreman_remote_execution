@@ -22,7 +22,12 @@ describe('Job wizard fill', () => {
     api.get.mockImplementation(({ handleSuccess, ...action }) => {
       if (action.key === 'JOB_CATEGORIES') {
         handleSuccess &&
-          handleSuccess({ data: { job_categories: jobCategories } });
+          handleSuccess({
+            data: {
+              job_categories: jobCategories,
+              default_category: 'Ansible Commands',
+            },
+          });
       } else if (action.key === 'JOB_TEMPLATE') {
         handleSuccess &&
           handleSuccess({

@@ -37,8 +37,17 @@ const ConnectedCategoryAndTemplate = ({
         get({
           key: JOB_CATEGORIES,
           url: '/ui_job_wizard/categories',
-          handleSuccess: response => {
-            if (!isFeature) setCategory(response.data.job_categories[0] || '');
+          handleSuccess: ({
+            data: {
+              default_category: defaultCategory,
+              job_categories: jobCategories,
+              default_template: defaultTemplate,
+            },
+          }) => {
+            if (!isFeature) {
+              setCategory(defaultCategory || jobCategories[0] || '');
+              if (defaultTemplate) setJobTemplate(defaultTemplate);
+            }
           },
         })
       );
@@ -60,7 +69,9 @@ const ConnectedCategoryAndTemplate = ({
           handleSuccess: response => {
             if (!jobTemplate)
               setJobTemplate(
-                Number(filterJobTemplates(response?.data?.results)[0]?.id) ||
+                current =>
+                  current ||
+                  Number(filterJobTemplates(response?.data?.results)[0]?.id) ||
                   null
               );
           },

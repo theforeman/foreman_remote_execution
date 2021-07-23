@@ -6,7 +6,7 @@ class UiJobWizardController < ApplicationController
                      .select(:job_category).distinct
                      .reorder(:job_category)
                      .pluck(:job_category)
-    render :json => {:job_categories =>job_categories, :with_katello => with_katello}
+    render :json => {:job_categories => job_categories, :with_katello => with_katello, default_category: default_category, default_template: default_template&.id}
   end
 
   def template
@@ -22,6 +22,16 @@ class UiJobWizardController < ApplicationController
 
   def map_template_inputs(template_inputs_with_foreign)
     template_inputs_with_foreign.map { |input| input.attributes.merge({:resource_type_tableize => input.resource_type&.tableize }) }
+  end
+
+  def default_category
+    default_template&.job_category
+  end
+
+  def default_template
+    if (setting_value = Setting['remote_execution_form_job_template'])
+      JobTemplate.authorized(:view_job_templates).find_by :name => setting_value
+    end
   end
 
   def resource_name(nested_resource = nil)

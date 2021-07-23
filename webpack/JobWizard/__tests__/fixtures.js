@@ -96,7 +96,7 @@ export const jobTemplateResponse = {
   ],
 };
 
-export const jobCategories = ['Ansible Commands', 'Puppet', 'Services'];
+export const jobCategories = ['Services', 'Ansible Commands', 'Puppet'];
 
 export const testSetup = (selectors, api) => {
   jest.spyOn(api, 'get');
@@ -149,7 +149,12 @@ export const mockApi = api => {
   api.get.mockImplementation(({ handleSuccess, ...action }) => {
     if (action.key === 'JOB_CATEGORIES') {
       handleSuccess &&
-        handleSuccess({ data: { job_categories: jobCategories } });
+        handleSuccess({
+          data: {
+            job_categories: jobCategories,
+            default_category: 'Ansible Commands',
+          },
+        });
     } else if (action.key === 'JOB_TEMPLATE') {
       handleSuccess &&
         handleSuccess({
