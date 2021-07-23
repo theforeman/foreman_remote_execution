@@ -40,7 +40,7 @@ jobs:
         node-version: [12]
     steps:
       - run: sudo apt-get update
-      - run: sudo apt-get install build-essential libcurl4-openssl-dev zlib1g-dev libpq-dev
+      - run: sudo apt-get install build-essential libcurl4-openssl-dev zlib1g-dev libpq-dev libsodium23
       - uses: actions/checkout@v2
         with:
           repository: theforeman/foreman
