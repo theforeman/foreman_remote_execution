@@ -23,5 +23,4 @@ DESC
   s.add_runtime_dependency('foreman-tasks-core', '>= 0.3.1')
   s.add_runtime_dependency('net-ssh')
   s.add_runtime_dependency('rbnacl', '>= 3.2', '< 5.0')
-  s.add_runtime_dependency('rbnacl-libsodium')
 end
