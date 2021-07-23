@@ -26,7 +26,7 @@ export const JobWizard = () => {
         template_inputs,
         advanced_template_inputs,
         effective_user,
-        job_template: { executionTimeoutInterval, description_format },
+        job_template: { execution_timeout_interval, description_format },
       },
     }) => {
       const advancedTemplateValues = {};
@@ -50,7 +50,7 @@ export const JobWizard = () => {
         return {
           ...currentAdvancedValues,
           effectiveUserValue: effective_user?.value || '',
-          timeoutToKill: executionTimeoutInterval || '',
+          timeoutToKill: execution_timeout_interval || '',
           templateValues: advancedTemplateValues,
           description: description_format || '',
         };

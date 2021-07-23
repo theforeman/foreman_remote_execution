@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, TextInput } from '@patternfly/react-core';
+import { FormGroup, TextInput, Radio } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { helpLabel } from '../form/FormHelpers';
 import { formatter } from '../form/Formatter';
@@ -18,6 +18,7 @@ export const EffectiveUserField = ({ value, setValue }) => (
     fieldId="effective-user"
   >
     <TextInput
+      aria-label="effective user"
       autoComplete="effective-user"
       id="effective-user"
       type="text"
@@ -61,6 +62,7 @@ export const PasswordField = ({ value, setValue }) => (
     fieldId="job-password"
   >
     <TextInput
+      aria-label="job password"
       autoComplete="new-password" // to prevent firefox from autofilling the user password
       id="job-password"
       type="password"
@@ -83,6 +85,7 @@ export const KeyPassphraseField = ({ value, setValue }) => (
     fieldId="key-passphrase"
   >
     <TextInput
+      aria-label="key passphrase"
       autoComplete="key-passphrase"
       id="key-passphrase"
       type="password"
@@ -105,6 +108,7 @@ export const EffectiveUserPasswordField = ({ value, setValue }) => (
     fieldId="effective-user-password"
   >
     <TextInput
+      aria-label="effective userpassword"
       autoComplete="effective-user-password"
       id="effective-user-password"
       type="password"
