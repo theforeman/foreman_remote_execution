@@ -1,4 +1,5 @@
 require 'foreman_tasks_core'
+require 'foreman_remote_execution_core/rbnacl_extensions'
 
 module ForemanRemoteExecutionCore
   extend ForemanTasksCore::SettingsLoader
