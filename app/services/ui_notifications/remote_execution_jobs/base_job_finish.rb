@@ -20,7 +20,8 @@ module UINotifications
       end
 
       def blueprint
-        @blueprint ||= NotificationBlueprint.unscoped.find_by(:name => 'rex_job_succeeded')
+        blueprint = @subject.status == HostStatus::ExecutionStatus::ERROR ? 'rex_job_failed' : 'rex_job_succeeded'
+        @blueprint ||= NotificationBlueprint.unscoped.find_by(:name => blueprint)
       end
 
       def message

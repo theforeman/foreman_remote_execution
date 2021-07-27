@@ -220,6 +220,7 @@ Naming/FileName:
     - 'db/seeds.d/60-ssh_proxy_feature.rb'
     - 'db/seeds.d/70-job_templates.rb'
     - 'db/seeds.d/90-bookmarks.rb'
+    - 'db/seeds.d/95-mail_notifications.rb'
 
 # Offense count: 1
 # Configuration parameters: ForbiddenDelimiters.
