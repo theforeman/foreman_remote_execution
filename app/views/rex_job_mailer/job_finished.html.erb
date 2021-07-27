@@ -1,0 +1,24 @@
+<p>
+  <%= _("A job '%{job_name}' has %{status} at %{time}") % {
+      :job_name => @job.to_s, :status => @job.status_label, :time => date_time_absolute_value(@job.task.ended_at)
+  } %>
+</p>
+
+<div class="dashboard">
+  <table>
+    <tr>
+      <td width="18%" class="hosts-rows"><b><%= _("Job result") %></b></td>
+      <td width="82%" class="hosts-rows"><%= @job.status_label %></td>
+    </tr>
+    <tr>
+      <td width="18%" class="hosts-rows"><b><%= _("Total hosts") %></b></td>
+      <td width="82%" class="hosts-rows"><%= @job.total_hosts_count %></td>
+    </tr>
+    <tr>
+      <td width="18%" class="hosts-rows"><b><%= _("Failed hosts") %></b></td>
+      <td width="82%" class="hosts-rows"><%= @job.failed_hosts.count %></td>
+    </tr>
+  </table>
+</div>
+
+<%= link_to 'More details', job_invocation_url(@job) %>

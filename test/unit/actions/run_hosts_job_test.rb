@@ -137,10 +137,79 @@ module ForemanRemoteExecution
     end
 
     describe 'notifications' do
-      it 'creates notification on sucess run' do
-        FactoryBot.create(:notification_blueprint, :name => 'rex_job_succeeded')
-        assert_difference 'NotificationRecipient.where(:user_id => targeting.user.id).count' do
-          finalize_action planned
+      it 'creates drawer notification on succeess' do
+        blueprint = planned.job_invocation.build_notification
+        blueprint.expects(:deliver!)
+        planned.job_invocation.expects(:build_notification).returns(blueprint)
+        planned.notify_on_success(nil)
+      end
+
+      it 'creates drawer notification on failure' do
+        blueprint = planned.job_invocation.build_notification
+        blueprint.expects(:deliver!)
+        planned.job_invocation.expects(:build_notification).returns(blueprint)
+        planned.notify_on_failure(nil)
+      end
+
+      describe 'ignoring drawer notification' do
+        before do
+          blueprint = planned.job_invocation.build_notification
+          blueprint.expects(:deliver!)
+          planned.job_invocation.expects(:build_notification).returns(blueprint)
+        end
+
+        let(:mail) do
+          object = mock
+          object.stubs(:deliver_now)
+          object
+        end
+
+        describe 'for user subscribed to all' do
+          before do
+            planned.expects(:mail_notification_preference).returns(UserMailNotification.new(:interval => RexMailNotification::ALL_JOBS))
+          end
+
+          it 'sends the mail notification on success' do
+            RexJobMailer.expects(:job_finished).returns(mail)
+            planned.notify_on_success(nil)
+          end
+
+          it 'sends the mail notification on failure' do
+            RexJobMailer.expects(:job_finished).returns(mail)
+            planned.notify_on_failure(nil)
+          end
+        end
+
+        describe 'for user subscribed to failures' do
+          before do
+            planned.expects(:mail_notification_preference).returns(UserMailNotification.new(:interval => RexMailNotification::FAILED_JOBS))
+          end
+
+          it 'it does not send the mail notification on success' do
+            RexJobMailer.expects(:job_finished).never
+            planned.notify_on_success(nil)
+          end
+
+          it 'sends the mail notification on failure' do
+            RexJobMailer.expects(:job_finished).returns(mail)
+            planned.notify_on_failure(nil)
+          end
+        end
+
+        describe 'for user subscribed to successful jobs' do
+          before do
+            planned.expects(:mail_notification_preference).returns(UserMailNotification.new(:interval => RexMailNotification::SUCCEEDED_JOBS))
+          end
+
+          it 'sends the mail notification on success' do
+            RexJobMailer.expects(:job_finished).returns(mail)
+            planned.notify_on_success(nil)
+          end
+
+          it 'does not send the mail notification on failure' do
+            RexJobMailer.expects(:job_finished).never
+            planned.notify_on_failure(nil)
+          end
         end
       end
     end

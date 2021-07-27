@@ -10,6 +10,9 @@ module Actions
       middleware.use Actions::Middleware::RecurringLogic
       middleware.use Actions::Middleware::WatchDelegatedProxySubTasks
 
+      execution_plan_hooks.use :notify_on_success, :on => :success
+      execution_plan_hooks.use :notify_on_failure, :on => :failure
+
       class CheckOnProxyActions; end
 
       def queue
@@ -73,8 +76,22 @@ module Actions
 
         Rails.logger.debug "cleaning cache for keys that begin with 'job_invocation_#{job_invocation.id}'"
         Rails.cache.delete_matched(/\A#{JobInvocation::CACHE_PREFIX}_#{job_invocation.id}/)
-        # creating the success notification should be the very last thing this tasks do
+      end
+
+      def notify_on_success(_plan)
         job_invocation.build_notification.deliver!
+
+        if [RexMailNotification::SUCCEEDED_JOBS, RexMailNotification::ALL_JOBS].include?(mail_notification_preference&.interval)
+          RexJobMailer.job_finished(job_invocation, subject: _("REX job has succeeded - %s") % job_invocation.to_s).deliver_now
+        end
+      end
+
+      def notify_on_failure(_plan)
+        job_invocation.build_notification.deliver!
+
+        if [RexMailNotification::FAILED_JOBS, RexMailNotification::ALL_JOBS].include?(mail_notification_preference&.interval)
+          RexJobMailer.job_finished(job_invocation, subject: _("REX job has failed - %s") % job_invocation.to_s).deliver_now
+        end
       end
 
       def job_invocation
@@ -133,6 +150,12 @@ module Actions
 
       def proxy_batch_size
         input[:proxy_batch_size]
+      end
+
+      private
+
+      def mail_notification_preference
+        UserMailNotification.where(mail_notification_id: RexMailNotification.first, user_id: User.current.id).first
       end
     end
   end

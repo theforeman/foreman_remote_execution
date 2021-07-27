@@ -1,0 +1,9 @@
+<%= _("A job '%{job_name}' has %{status} at %{time}") % {
+    :job_name => @job.to_s, :status => @job.status_label, :time => date_time_absolute_value(@job.task.ended_at)
+} %>
+
+<%= _('Job result') %>: <%= @job.status_label %>
+<%= _('Total hosts') %>: <%= @job.total_hosts_count %>
+<%= _('Failed hosts') %>: <%= @job.failed_hosts.count %>
+
+<%= _('See more details at %s') % job_invocation_url(@job) %>
