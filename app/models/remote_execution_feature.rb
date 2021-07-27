@@ -20,7 +20,11 @@ class RemoteExecutionFeature < ApplicationRecord
   end
 
   def self.feature(label)
-    self.find_by(label: label) || raise(::Foreman::Exception.new(N_('Unknown remote execution feature %s'), label))
+    self.find_by(label: label)
+  end
+
+  def self.feature!(label)
+    feature(label) || raise(::Foreman::Exception.new(N_('Unknown remote execution feature %s'), label))
   end
 
   def self.register(label, name, options = {})

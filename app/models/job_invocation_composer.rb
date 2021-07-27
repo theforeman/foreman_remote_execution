@@ -296,7 +296,7 @@ class JobInvocationComposer
     attr_reader :feature_label, :feature, :provided_inputs
 
     def initialize(feature_label, hosts, provided_inputs = {})
-      @feature = RemoteExecutionFeature.feature(feature_label)
+      @feature = RemoteExecutionFeature.feature!(feature_label)
       @provided_inputs = provided_inputs
       translator = HostIdsTranslator.new(hosts)
       @host_bookmark = translator.bookmark
