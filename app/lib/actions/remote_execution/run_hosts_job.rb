@@ -72,7 +72,7 @@ module Actions
 
       def total_count
         # For compatibility with already existing tasks
-        return output[:total_count] unless output.has_key?(:host_count) || task.pending?
+        return output[:total_count] || hosts.count unless output.has_key?(:host_count) || task.pending?
 
         output[:host_count] || hosts.count
       end
