@@ -54,10 +54,11 @@ const ConnectedCategoryAndTemplate = ({
             search: `job_category="${category}"`,
             per_page: 'all',
           }),
-          handleSuccess: response =>
+          handleSuccess: response => {
             setJobTemplate(
               Number(filterJobTemplates(response?.data?.results)[0]?.id) || null
-            ),
+            );
+          },
         })
       );
     }

@@ -120,7 +120,7 @@ export const testSetup = (selectors, api) => {
     jobTemplate,
     { ...jobTemplate, id: 2, name: 'template2' },
   ]);
-
+  selectors.selectJobTemplate.mockImplementation(() => jobTemplateResponse);
   const mockStore = configureMockStore([]);
   const store = mockStore({
     ForemanTasksTask: {

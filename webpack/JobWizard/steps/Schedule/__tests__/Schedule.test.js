@@ -286,4 +286,41 @@ describe('Schedule', () => {
     });
     expect(atHourly.value).toBe(newMinutes);
   });
+  it('should show invalid error on start date after end', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      await fireEvent.click(screen.getByText('Schedule'));
+      jest.runAllTimers();
+    });
+    const neverEnds = screen.getByLabelText('Never ends');
+    expect(neverEnds.checked).toBeFalsy();
+
+    const [startsDateField, endsDateField] = screen.getAllByPlaceholderText(
+      'yyyy/mm/dd'
+    );
+
+    expect(
+      screen.queryAllByText('End time needs to be after start time')
+    ).toHaveLength(0);
+    expect(screen.getByText('Review Details').disabled).toBeFalsy();
+    await act(async () => {
+      await fireEvent.change(startsDateField, {
+        target: { value: '2020/10/15' },
+      });
+      await fireEvent.change(endsDateField, {
+        target: { value: '2020/10/14' },
+      });
+      await jest.runOnlyPendingTimers();
+    });
+
+    expect(
+      screen.queryAllByText('End time needs to be after start time')
+    ).toHaveLength(1);
+
+    expect(screen.getByText('Review Details').disabled).toBeTruthy();
+  });
 });

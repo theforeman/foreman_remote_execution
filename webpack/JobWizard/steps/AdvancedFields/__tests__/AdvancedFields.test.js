@@ -226,6 +226,11 @@ describe('AdvancedFields', () => {
 
   it('DescriptionField with no inputs', async () => {
     jest.spyOn(api, 'get');
+
+    jest.spyOn(selectors, 'selectTemplateInputs');
+    jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
+    selectors.selectTemplateInputs.mockImplementation(() => []);
+    selectors.selectAdvancedTemplateInputs.mockImplementation(() => []);
     api.get.mockImplementation(({ handleSuccess, ...action }) => {
       if (action.key === 'JOB_CATEGORIES') {
         handleSuccess &&
@@ -264,6 +269,20 @@ describe('AdvancedFields', () => {
 
   it('DescriptionField with description_format', async () => {
     jest.spyOn(api, 'get');
+    jest.spyOn(selectors, 'selectTemplateInputs');
+    selectors.selectTemplateInputs.mockImplementation(() => [
+      {
+        name: 'command',
+        required: true,
+        input_type: 'user',
+        description: 'some Description',
+        advanced: true,
+        value_type: 'plain',
+        resource_type: 'ansible_roles',
+        default: 'Default val',
+        hidden_value: true,
+      },
+    ]);
     api.get.mockImplementation(({ handleSuccess, ...action }) => {
       if (action.key === 'JOB_CATEGORIES') {
         handleSuccess &&
@@ -317,11 +336,11 @@ describe('AdvancedFields', () => {
   });
 
   it('search resources action', async () => {
-    store.clearActions();
     jest.useFakeTimers();
-
+    mockApi(api);
+    const newStore = testSetup(selectors, api);
     render(
-      <Provider store={store}>
+      <Provider store={newStore}>
         <JobWizard />
       </Provider>
     );
@@ -337,8 +356,8 @@ describe('AdvancedFields', () => {
         target: { value: 'some search' },
       });
 
-      jest.runAllTimers();
+      await jest.runAllTimers();
     });
-    expect(store.getActions()).toMatchSnapshot('resource search');
+    expect(newStore.getActions()).toMatchSnapshot('resource search');
   });
 });
