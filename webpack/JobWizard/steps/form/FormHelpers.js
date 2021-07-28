@@ -18,3 +18,7 @@ export const helpLabel = (text, id) => {
     </Popover>
   );
 };
+
+export const isPositiveNumber = text => parseInt(text, 10) > 0;
+
+export const isValidDate = d => d instanceof Date && !Number.isNaN(d);

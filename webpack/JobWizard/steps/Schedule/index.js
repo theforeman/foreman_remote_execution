@@ -9,7 +9,7 @@ import { StartEndDates } from './StartEndDates';
 import { WIZARD_TITLES } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
 
-const Schedule = ({ scheduleValue, setScheduleValue }) => {
+const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
   const {
     repeatType,
     repeatAmount,
@@ -91,6 +91,7 @@ const Schedule = ({ scheduleValue, setScheduleValue }) => {
               isNeverEnds: newValue,
             }));
           }}
+          setValid={setValid}
         />
         <Button variant="link" className="advanced-scheduling-button" isInline>
           {__('Advanced scheduling')}
@@ -112,6 +113,7 @@ Schedule.propTypes = {
     isNeverEnds: PropTypes.bool,
   }).isRequired,
   setScheduleValue: PropTypes.func.isRequired,
+  setValid: PropTypes.func.isRequired,
 };
 
 export default Schedule;

@@ -4,6 +4,7 @@ import { StartEndDates } from '../StartEndDates';
 
 const setEnds = jest.fn();
 const setIsNeverEnds = jest.fn();
+const setValid = jest.fn();
 const props = {
   starts: '',
   setStarts: jest.fn(),
@@ -11,6 +12,7 @@ const props = {
   setEnds,
   setIsNeverEnds,
   isNeverEnds: false,
+  setValid,
 };
 
 describe('StartEndDates', () => {
@@ -19,5 +21,6 @@ describe('StartEndDates', () => {
     const neverEnds = screen.getByRole('checkbox', { name: 'Never ends' });
     await act(async () => fireEvent.click(neverEnds));
     expect(setIsNeverEnds).toBeCalledWith(true);
+    expect(setValid).toBeCalledWith(true);
   });
 });

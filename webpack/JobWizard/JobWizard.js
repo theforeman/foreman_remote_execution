@@ -11,15 +11,16 @@ import {
   WIZARD_TITLES,
   initialScheduleState,
 } from './JobWizardConstants';
-import { selectTemplateError } from './JobWizardSelectors';
+import { selectTemplateError, selectJobTemplate } from './JobWizardSelectors';
 import Schedule from './steps/Schedule/';
 import HostsAndInputs from './steps/HostsAndInputs/';
+import { useValidation } from './validation';
 import './JobWizard.scss';
 
 export const JobWizard = () => {
   const [jobTemplateID, setJobTemplateID] = useState(null);
   const [category, setCategory] = useState('');
-  const [advancedValues, setAdvancedValues] = useState({});
+  const [advancedValues, setAdvancedValues] = useState({ templateValues: {} });
   const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description https://github.com/theforeman/foreman_remote_execution/pull/605
   const [scheduleValue, setScheduleValue] = useState(initialScheduleState);
   const [selectedTargets, setSelectedTargets] = useState({
@@ -90,8 +91,15 @@ export const JobWizard = () => {
     }
   }, [jobTemplateID, setDefaults, dispatch]);
 
+  const [valid, setValid] = useValidation({
+    advancedValues,
+    templateValues,
+  });
   const templateError = !!useSelector(selectTemplateError);
-  const isTemplate = !templateError && !!jobTemplateID;
+  const templateResponse = useSelector(selectJobTemplate);
+  const isTemplate =
+    !templateError && !!jobTemplateID && templateResponse.job_template;
+
   const steps = [
     {
       name: WIZARD_TITLES.categoryAndTemplate,
@@ -103,6 +111,7 @@ export const JobWizard = () => {
           setCategory={setCategory}
         />
       ),
+      enableNext: isTemplate,
     },
     {
       name: WIZARD_TITLES.hostsAndInputs,
@@ -117,6 +126,7 @@ export const JobWizard = () => {
         />
       ),
       canJumpTo: isTemplate,
+      enableNext: isTemplate && valid.hostsAndInputs,
     },
     {
       name: WIZARD_TITLES.advanced,
@@ -132,7 +142,8 @@ export const JobWizard = () => {
           templateValues={templateValues}
         />
       ),
-      canJumpTo: isTemplate,
+      canJumpTo: isTemplate && valid.hostsAndInputs,
+      enableNext: isTemplate && valid.hostsAndInputs && valid.advanced,
     },
     {
       name: WIZARD_TITLES.schedule,
@@ -140,15 +151,23 @@ export const JobWizard = () => {
         <Schedule
           scheduleValue={scheduleValue}
           setScheduleValue={setScheduleValue}
+          setValid={newValue => {
+            setValid(currentValid => ({ ...currentValid, schedule: newValue }));
+          }}
         />
       ),
-      canJumpTo: isTemplate,
+      canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
+      enableNext:
+        isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,
     },
     {
       name: WIZARD_TITLES.review,
       component: <p>Review Details</p>,
       nextButtonText: 'Run',
-      canJumpTo: isTemplate,
+      canJumpTo:
+        isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,
+      enableNext:
+        isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,
     },
   ];
   return (

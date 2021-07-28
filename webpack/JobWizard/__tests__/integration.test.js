@@ -17,19 +17,26 @@ import {
 
 const store = testSetup(selectors, api);
 
-selectors.selectJobTemplate.mockImplementation(() => {});
-
-api.get.mockImplementation(({ handleSuccess, ...action }) => {
-  if (action.key === 'JOB_CATEGORIES') {
-    handleSuccess && handleSuccess({ data: { job_categories: jobCategories } });
-  }
-  return { type: 'get', ...action };
-});
 describe('Job wizard fill', () => {
   it('should select template', async () => {
+    api.get.mockImplementation(({ handleSuccess, ...action }) => {
+      if (action.key === 'JOB_CATEGORIES') {
+        handleSuccess &&
+          handleSuccess({ data: { job_categories: jobCategories } });
+      } else if (action.key === 'JOB_TEMPLATE') {
+        handleSuccess &&
+          handleSuccess({
+            data: jobTemplate,
+          });
+      }
+      return { type: 'get', ...action };
+    });
+    selectors.selectJobTemplate.mockRestore();
+    jest.spyOn(selectors, 'selectJobTemplate');
+    selectors.selectJobTemplate.mockImplementation(() => ({}));
     const wrapper = mount(
       <Provider store={store}>
-        <JobWizard advancedValues={{}} setAdvancedValues={jest.fn()} />
+        <JobWizard />
       </Provider>
     );
     expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(
@@ -37,7 +44,8 @@ describe('Job wizard fill', () => {
     );
     selectors.selectJobCategoriesStatus.mockImplementation(() => 'RESOLVED');
     expect(store.getActions()).toMatchSnapshot('initial');
-
+    selectors.selectJobTemplate.mockRestore();
+    jest.spyOn(selectors, 'selectJobTemplate');
     selectors.selectJobTemplate.mockImplementation(() => jobTemplate);
     wrapper.find('.pf-c-button.pf-c-select__toggle-button').simulate('click');
     await act(async () => {
@@ -45,9 +53,9 @@ describe('Job wizard fill', () => {
         .find('.pf-c-select__menu-item')
         .first()
         .simulate('click');
-      await wrapper.update();
     });
     expect(store.getActions().slice(-1)).toMatchSnapshot('select template');
+    wrapper.update();
     expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(
       0
     );
@@ -55,7 +63,6 @@ describe('Job wizard fill', () => {
 
   it('have all steps', async () => {
     selectors.selectJobCategoriesStatus.mockImplementation(() => null);
-    selectors.selectJobTemplate.mockRestore();
     selectors.selectJobTemplates.mockRestore();
     selectors.selectJobCategories.mockRestore();
     mockApi(api);
