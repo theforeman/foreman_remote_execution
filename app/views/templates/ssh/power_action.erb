@@ -13,6 +13,8 @@ template_inputs:
   required: true
 %>
 
+PATH="$PATH:/usr/sbin:/sbin"
+
 echo <%= input('action') %> host && sleep 3
 <%= case input('action')
       when 'restart'
