@@ -18,7 +18,8 @@ end
 
 <div id="title_action">
   <div class="btn-toolbar pull-right">
-    <%= link_to(_('Back to Job'), job_invocation_path(@template_invocation.job_invocation), :class => 'btn btn-default') %>
+    <%= button_group(link_to(_('Back to Job'), job_invocation_path(@template_invocation.job_invocation), :class => 'btn btn-default'),
+                    (link_to(_('Rerun'), rerun_job_invocation_path(@template_invocation.job_invocation, :host_ids => [ @host.id ]), :class => 'btn btn-default') if authorized_for(:permission => :create_job_invocations))) %>
     <%= button_group(link_to_function(_('Toggle command'), '$("div.preview").toggle()', :class => 'btn btn-default'),
                      link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()', :class => 'btn btn-default'),
                      link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()', :class => 'btn btn-default'),
