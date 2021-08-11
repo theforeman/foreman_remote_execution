@@ -50,6 +50,18 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     end
   end
 
+  describe '.host_setting' do
+    let(:host) { FactoryBot.create(:host) }
+
+    it 'honors falsey values set as a host parameter' do
+      key = 'remote_execution_connect_by_ip'
+      Setting[key] = true
+      host.parameters << HostParameter.new(name: key, value: false)
+
+      refute RemoteExecutionProvider.host_setting(host, key)
+    end
+  end
+
   describe SSHExecutionProvider do
     before { User.current = FactoryBot.build(:user, :admin) }
     after { User.current = nil }
