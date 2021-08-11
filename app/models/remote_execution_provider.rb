@@ -89,7 +89,8 @@ class RemoteExecutionProvider
     end
 
     def host_setting(host, setting)
-      host.host_param(setting.to_s) || Setting[setting]
+      param_value = host.host_param(setting.to_s)
+      param_value.nil? ? Setting[setting] : param_value
     end
 
     def ssh_password(_host)
