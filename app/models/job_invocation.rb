@@ -73,6 +73,8 @@ class JobInvocation < ApplicationRecord
 
   default_scope -> { order('job_invocations.id DESC') }
 
+  scope :latest_jobs, -> { unscoped.joins(:task).order('foreman_tasks_tasks.start_at DESC').authorized(:view_job_invocations).limit(5) }
+
   validates_lengths_from_database :only => [:description]
 
   attr_accessor :start_before, :description_format
