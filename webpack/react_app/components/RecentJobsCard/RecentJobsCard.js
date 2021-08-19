@@ -21,7 +21,8 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
 
   return (
     <CardTemplate
-      header={__('Recent Jobs')}
+      overrideGridProps={{ xl: 8, lg: 8, md: 12 }}
+      header={__('Recent jobs')}
       dropdownItems={[
         <DropdownItem
           href={foremanUrl(`${JOB_BASE_URL}${name}`)}
