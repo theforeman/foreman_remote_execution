@@ -16,7 +16,7 @@ export const JobWizard = () => {
   const [jobTemplateID, setJobTemplateID] = useState(null);
   const [category, setCategory] = useState('');
   const [advancedValues, setAdvancedValues] = useState({});
-  const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description
+  const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description https://github.com/theforeman/foreman_remote_execution/pull/605
   const [selectedHosts, setSelectedHosts] = useState(['host1', 'host2']);
   const dispatch = useDispatch();
 
@@ -33,24 +33,28 @@ export const JobWizard = () => {
       const defaultTemplateValues = {};
       const inputs = template_inputs;
       const advancedInputs = advanced_template_inputs;
-      if (advancedInputs) {
-        advancedInputs.forEach(input => {
-          advancedTemplateValues[input.name] = input?.default || '';
-        });
-      }
       if (inputs) {
-        inputs.forEach(input => {
-          defaultTemplateValues[input.name] = input?.default || '';
+        setTemplateValues(() => {
+          inputs.forEach(input => {
+            defaultTemplateValues[input.name] = input?.default || '';
+          });
+          return defaultTemplateValues;
         });
       }
-      setTemplateValues(defaultTemplateValues);
-      setAdvancedValues(currentAdvancedValues => ({
-        ...currentAdvancedValues,
-        effectiveUserValue: effective_user?.value || '',
-        timeoutToKill: executionTimeoutInterval || '',
-        templateValues: advancedTemplateValues,
-        description: description_format || '',
-      }));
+      setAdvancedValues(currentAdvancedValues => {
+        if (advancedInputs) {
+          advancedInputs.forEach(input => {
+            advancedTemplateValues[input.name] = input?.default || '';
+          });
+        }
+        return {
+          ...currentAdvancedValues,
+          effectiveUserValue: effective_user?.value || '',
+          timeoutToKill: executionTimeoutInterval || '',
+          templateValues: advancedTemplateValues,
+          description: description_format || '',
+        };
+      });
     },
     []
   );
