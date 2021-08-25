@@ -636,7 +636,7 @@ class JobInvocationComposer
     setting_value = Setting['remote_execution_form_job_template']
     return default_value unless setting_value
 
-    form_template = JobTemplate.find_by :name => setting_value
+    form_template = JobTemplate.authorized(:view_job_templates).find_by :name => setting_value
     return default_value unless form_template
 
     if block_given?
