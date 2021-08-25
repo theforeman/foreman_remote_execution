@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Title, Text, TextVariants, Form, Alert } from '@patternfly/react-core';
+import { Text, TextVariants, Form, Alert } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { SelectField } from '../form/SelectField';
 import { GroupedSelectField } from '../form/GroupedSelectField';
+import { WizardTitle } from '../form/WizardTitle';
+import { WIZARD_TITLES } from '../../JobWizardConstants';
 
 export const CategoryAndTemplate = ({
   jobCategories,
@@ -40,7 +42,7 @@ export const CategoryAndTemplate = ({
   const isError = !!(categoryError || allTemplatesError || templateError);
   return (
     <>
-      <Title headingLevel="h2">{__('Category and Template')}</Title>
+      <WizardTitle title={WIZARD_TITLES.categoryAndTemplate} />
       <Text component={TextVariants.p}>{__('All fields are required.')}</Text>
       <Form>
         <SelectField

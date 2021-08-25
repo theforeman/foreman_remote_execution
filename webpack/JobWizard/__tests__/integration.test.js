@@ -5,6 +5,7 @@ import { render, fireEvent, screen, act } from '@testing-library/react';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../JobWizard';
 import * as selectors from '../JobWizardSelectors';
+import { WIZARD_TITLES } from '../JobWizardConstants';
 import {
   testSetup,
   mockApi,
@@ -62,13 +63,8 @@ describe('Job wizard fill', () => {
         <JobWizard />
       </Provider>
     );
-    const steps = [
-      'Target Hosts',
-      'Advanced Fields',
-      'Schedule',
-      'Review Details',
-      'Category and Template',
-    ];
+    const titles = Object.values(WIZARD_TITLES);
+    const steps = [titles[1], titles[0], ...titles.slice(2)]; // the first title is selected at the beggining
     // eslint-disable-next-line no-unused-vars
     for await (const step of steps) {
       const stepSelector = screen.getByText(step);

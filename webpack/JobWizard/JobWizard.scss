@@ -1,5 +1,10 @@
 .job-wizard {
+  .wizard-title {
+    margin-bottom: 25px;
+  }
+
   .pf-c-wizard__main {
+    overflow: visible;
     z-index: calc(
       var(--pf-c-wizard__footer--ZIndex) + 1
     ); // So the select box can be shown above the wizard footer
@@ -41,6 +46,9 @@
     }
   }
 
+  .hosts-chip-group {
+    margin-top: 8px;
+  }
   .schedule-tab {
     input[type='radio'],
     input[type='checkbox'] {
@@ -49,5 +57,9 @@
     .advanced-scheduling-button {
       text-align: start;
     }
+  }
+  textarea {
+    min-height: 40px;
+    min-width: 100px;
   }
 }
