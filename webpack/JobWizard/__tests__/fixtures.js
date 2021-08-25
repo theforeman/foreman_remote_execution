@@ -93,6 +93,14 @@ export const testSetup = (selectors, api) => {
   jest.spyOn(selectors, 'selectJobCategories');
   jest.spyOn(selectors, 'selectJobCategoriesStatus');
 
+  jest.spyOn(selectors, 'selectTemplateInputs');
+  jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
+  selectors.selectTemplateInputs.mockImplementation(
+    () => jobTemplateResponse.template_inputs
+  );
+  selectors.selectAdvancedTemplateInputs.mockImplementation(
+    () => jobTemplateResponse.advanced_template_inputs
+  );
   selectors.selectJobCategories.mockImplementation(() => jobCategories);
   selectors.selectJobTemplates.mockImplementation(() => [
     jobTemplate,
