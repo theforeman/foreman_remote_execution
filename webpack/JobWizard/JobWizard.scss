@@ -17,6 +17,9 @@
     }
     #advanced-fields-job-template {
       .foreman-search-field {
+        .rbt-input-hint input{
+          display: none;
+        }
         // Giving pf3 search bar a pf4 look
         .search-bar {
           display: block;
