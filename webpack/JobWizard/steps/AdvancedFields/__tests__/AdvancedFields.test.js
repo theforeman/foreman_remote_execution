@@ -135,4 +135,25 @@ describe('AdvancedFields', () => {
     expect(screen.queryAllByText('option 1')).toHaveLength(0);
     expect(screen.queryAllByText('option 2')).toHaveLength(1);
   });
+  it('fill defaults into fields', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText('Advanced Fields'));
+    });
+
+    expect(
+      screen.getByLabelText('effective user', {
+        selector: 'input',
+      }).value
+    ).toBe('default effective user');
+    expect(
+      screen.getByLabelText('timeout to kill', {
+        selector: 'input',
+      }).value
+    ).toBe('2');
+  });
 });

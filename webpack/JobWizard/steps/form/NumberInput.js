@@ -5,6 +5,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
 
 export const NumberInput = ({ formProps, inputProps }) => {
   const [validated, setValidated] = useState();
+  const name = inputProps.id.replace(/-/g, ' ');
   return (
     <FormGroup
       {...formProps}
@@ -12,6 +13,7 @@ export const NumberInput = ({ formProps, inputProps }) => {
       validated={validated}
     >
       <TextInput
+        aria-label={name}
         type="text"
         {...inputProps}
         onChange={newValue => {
