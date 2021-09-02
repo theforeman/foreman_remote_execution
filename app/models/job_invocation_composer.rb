@@ -441,8 +441,11 @@ class JobInvocationComposer
   end
 
   def valid?
-    targeting.valid? & job_invocation.valid? & !pattern_template_invocations.map(&:valid?).include?(false) &
-      triggering.valid?
+    unless triggering.valid?
+      job_invocation.errors.add(:triggering, 'is invalid')
+      return false
+    end
+    targeting.valid? & job_invocation.valid? & !pattern_template_invocations.map(&:valid?).include?(false)
   end
 
   def save
