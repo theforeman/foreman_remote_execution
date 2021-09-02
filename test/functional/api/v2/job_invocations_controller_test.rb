@@ -82,6 +82,14 @@ module Api
           assert_response :success
         end
 
+        test 'should propagate errors from triggering' do
+          @attrs[:recurrence] = { cron_line: 'foo' }
+          post :create, params: { job_invocation: @attrs }
+          invocation = ActiveSupport::JSON.decode(@response.body)
+          assert_match(/foo is not valid format of cron line/, invocation['error']['message'])
+          assert_response 500
+        end
+
         test 'should create with schedule' do
           @attrs[:scheduling] = { start_at: Time.now.to_s }
           post :create, params: { job_invocation: @attrs }
