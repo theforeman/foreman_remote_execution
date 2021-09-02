@@ -47,6 +47,7 @@ module Api
             param :cron_line, String, :required => false, :desc => N_('How often the job should occur, in the cron format')
             param :max_iteration, :number, :required => false, :desc => N_('Repeat a maximum of N times')
             param :end_time, DateTime, :required => false, :desc => N_('Perform no more executions after this time')
+            param :purpose, String, :required => false, :desc => N_('Designation of a special purpose')
           end
 
           param :scheduling, Hash, :desc => N_('Schedule the job to start at a later time') do

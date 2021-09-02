@@ -147,6 +147,7 @@ class JobInvocationComposer
           :end_time => format_datetime(api_params[:recurrence][:end_time]),
           :input_type => :cronline,
           :max_iteration => api_params[:recurrence][:max_iteration],
+          :purpose => api_params[:recurrence][:purpose],
         }
       elsif api_params[:scheduling].present?
         {
