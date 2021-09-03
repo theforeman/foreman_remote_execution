@@ -56,7 +56,8 @@ module Actions
                                :secrets => secrets(host, job_invocation, provider),
                                :use_batch_triggering => true,
                                :use_concurrency_control => options[:use_concurrency_control],
-                               :first_execution => first_execution }
+                               :first_execution => first_execution,
+                               :alternative_names => provider.alternative_names(host) }
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
 
