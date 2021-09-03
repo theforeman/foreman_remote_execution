@@ -131,5 +131,9 @@ class RemoteExecutionProvider
         ::DefaultProxyProxySelector.new
       end
     end
+
+    def alternative_names(host)
+      { :fqdn => find_fqdn(effective_interfaces(host)) }
+    end
   end
 end
