@@ -28,15 +28,16 @@ class JobReportTemplateTest < ActiveSupport::TestCase
     describe 'task reporting' do
       let(:fake_outputs) do
         [
-          { 'output_type' => 'stderr', 'output' => "error", 'timestamp' => Time.new(2020, 12, 1, 0, 0, 0).utc },
-          { 'output_type' => 'stdout', 'output' => "output", 'timestamp' => Time.new(2020, 12, 1, 0, 0, 0).utc },
-          { 'output_type' => 'stdebug', 'output' => "debug", 'timestamp' => Time.new(2020, 12, 1, 0, 0, 0).utc },
+          { 'output_type' => 'stderr', 'output' => "error" },
+          { 'output_type' => 'stdout', 'output' => "output" },
+          { 'output_type' => 'debug', 'output' => "debug" },
         ]
       end
-      let(:fake_task) { FakeTask.new(result: 'success', action_continuous_output: fake_outputs) }
+      let(:fake_task) { FakeTask.new(result: 'success', action_continuous_output: fake_outputs, :ended_at => Time.new(2020, 12, 1, 0, 0, 0).utc) }
+      let(:job_invocation) { FactoryBot.create(:job_invocation, :with_task) }
+      let(:host) { job_invocation.template_invocations.first.host }
 
       it 'should render task outputs' do
-        job_invocation = FactoryBot.create(:job_invocation, :with_task)
         JobInvocation.any_instance.expects(:sub_task_for_host).returns(fake_task)
 
         input = job_invocation_template.template_inputs.first
@@ -44,13 +45,15 @@ class JobReportTemplateTest < ActiveSupport::TestCase
         result = ReportComposer.new(composer_params).render
 
         # parsing the CSV result
-        CSV.parse(result.strip, headers: true).each_with_index do |row, i|
-          row_hash = row.to_h
-          assert_equal 'success', row_hash['result']
-          assert_equal fake_outputs[i]['output_type'], row_hash['type']
-          assert_equal fake_outputs[i]['output'], row_hash['message']
-          assert_kind_of Time, Time.zone.parse(row_hash['time']), 'Parsing of time column failed'
-        end
+        rows = CSV.parse(result.strip, headers: true)
+        assert_equal 1, rows.count
+        row = rows.first
+        assert_equal host.name, row['Host']
+        assert_equal 'success', row['Result']
+        assert_equal 'error', row['stderr']
+        assert_equal 'output', row['stdout']
+        assert_equal 'debug', row['debug']
+        assert_kind_of Time, Time.zone.parse(row['Finished']), 'Parsing of time column failed'
       end
     end
   end
