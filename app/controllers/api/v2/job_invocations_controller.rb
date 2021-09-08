@@ -201,7 +201,7 @@ module Api
         end
 
         if job_invocation_params.key?(:ssh)
-          job_invocation_params.merge!(job_invocation_params.delete(:ssh).permit(:effective_user))
+          job_invocation_params.merge!(job_invocation_params.delete(:ssh).permit(:effective_user, :effective_user_password))
         end
 
         job_invocation_params[:inputs] ||= {}
