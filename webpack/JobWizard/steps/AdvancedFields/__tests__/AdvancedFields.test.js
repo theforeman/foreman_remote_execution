@@ -6,9 +6,11 @@ import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../../../JobWizard';
 import * as selectors from '../../../JobWizardSelectors';
 import {
-  jobTemplateResponse as jobTemplate,
+  jobTemplateResponse,
+  jobTemplate,
   testSetup,
   mockApi,
+  jobCategories,
 } from '../../../__tests__/fixtures';
 import { WIZARD_TITLES } from '../../../JobWizardConstants';
 
@@ -18,13 +20,13 @@ mockApi(api);
 jest.spyOn(selectors, 'selectEffectiveUser');
 
 selectors.selectEffectiveUser.mockImplementation(
-  () => jobTemplate.effective_user
+  () => jobTemplateResponse.effective_user
 );
 describe('AdvancedFields', () => {
   it('should save data between steps for advanced fields', async () => {
     const wrapper = mount(
       <Provider store={store}>
-        <JobWizard advancedValues={{}} setAdvancedValues={jest.fn()} />
+        <JobWizard />
       </Provider>
     );
     // setup
@@ -202,5 +204,97 @@ describe('AdvancedFields', () => {
         selector: 'input',
       }).value
     ).toBe('Run test command %{wrong command name}');
+  });
+
+  it('DescriptionField with no inputs', async () => {
+    jest.spyOn(api, 'get');
+    api.get.mockImplementation(({ handleSuccess, ...action }) => {
+      if (action.key === 'JOB_CATEGORIES') {
+        handleSuccess &&
+          handleSuccess({ data: { job_categories: jobCategories } });
+      } else if (action.key === 'JOB_TEMPLATE') {
+        handleSuccess &&
+          handleSuccess({
+            data: {
+              ...jobTemplateResponse,
+              advanced_template_inputs: [],
+              template_inputs: [],
+            },
+          });
+      } else if (action.key === 'JOB_TEMPLATES') {
+        handleSuccess &&
+          handleSuccess({
+            data: { results: [jobTemplate] },
+          });
+      }
+      return { type: 'get', ...action };
+    });
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+    });
+    expect(
+      screen.getByLabelText('description preview', {
+        selector: 'input',
+      }).value
+    ).toBe('template1');
+  });
+
+  it('DescriptionField with description_format', async () => {
+    jest.spyOn(api, 'get');
+    api.get.mockImplementation(({ handleSuccess, ...action }) => {
+      if (action.key === 'JOB_CATEGORIES') {
+        handleSuccess &&
+          handleSuccess({ data: { job_categories: jobCategories } });
+      } else if (action.key === 'JOB_TEMPLATE') {
+        handleSuccess &&
+          handleSuccess({
+            data: {
+              ...jobTemplateResponse,
+              job_template: {
+                ...jobTemplateResponse.jobTemplate,
+                description_format: 'Run %{command}',
+              },
+
+              template_inputs: [
+                {
+                  name: 'command',
+                  required: true,
+                  input_type: 'user',
+                  description: 'some Description',
+                  advanced: true,
+                  value_type: 'plain',
+                  resource_type: 'ansible_roles',
+                  default: 'Default val',
+                  hidden_value: true,
+                },
+              ],
+            },
+          });
+      } else if (action.key === 'JOB_TEMPLATES') {
+        handleSuccess &&
+          handleSuccess({
+            data: { results: [jobTemplate] },
+          });
+      }
+      return { type: 'get', ...action };
+    });
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+    });
+    expect(
+      screen.getByLabelText('description preview', {
+        selector: 'input',
+      }).value
+    ).toBe('Run Default val');
   });
 });

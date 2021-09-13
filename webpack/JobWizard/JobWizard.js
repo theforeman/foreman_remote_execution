@@ -55,7 +55,7 @@ export const JobWizard = () => {
         const generateDefaultDescription = () => {
           if (description_format) return description_format;
           const allInputs = [...advancedInputs, ...inputs];
-          if (!allInputs) return name;
+          if (!allInputs.length) return name;
           const inputsString = allInputs
             .map(({ name: inputname }) => `${inputname}="%{${inputname}}"`)
             .join(' ');

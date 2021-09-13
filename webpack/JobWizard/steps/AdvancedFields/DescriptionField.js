@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup, TextInput, Tooltip, Button } from '@patternfly/react-core';
@@ -13,7 +13,7 @@ export const DescriptionField = ({ inputValues, value, setValue }) => {
     ...useSelector(selectTemplateInputs),
     ...useSelector(selectAdvancedTemplateInputs),
   ].map(input => input.name);
-  const generateDesc = () => {
+  const generateDesc = useCallback(() => {
     let newDesc = value;
     if (value) {
       const re = new RegExp('%\\{([^\\}]+)\\}', 'gm');
@@ -30,14 +30,13 @@ export const DescriptionField = ({ inputValues, value, setValue }) => {
       });
     }
     return newDesc;
-  };
+  }, [inputs, value, inputValues]);
   const [generatedDesc, setGeneratedDesc] = useState(generateDesc());
   const [isPreview, setIsPreview] = useState(true);
 
   useEffect(() => {
     setGeneratedDesc(generateDesc());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValues]);
+  }, [generateDesc]);
   const togglePreview = () => {
     setGeneratedDesc(generateDesc());
     setIsPreview(v => !v);
