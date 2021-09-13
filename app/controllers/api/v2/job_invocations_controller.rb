@@ -46,6 +46,7 @@ module Api
               :desc => N_('Set password for effective user (using sudo-like mechanisms)')
           end
           param :password, String, :required => false, :desc => N_('Set SSH password')
+          param :key_passphrase, String, :required => false, :desc => N_('Set SSH key passphrase')
 
           param :recurrence, Hash, :desc => N_('Create a recurring job') do
             param :cron_line, String, :required => false, :desc => N_('How often the job should occur, in the cron format')
