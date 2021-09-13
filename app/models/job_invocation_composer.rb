@@ -121,7 +121,10 @@ class JobInvocationComposer
         :targeting => targeting_params,
         :triggering => triggering_params,
         :description_format => api_params[:description_format],
+        :password => api_params[:password],
         :remote_execution_feature_id => remote_execution_feature_id,
+        :effective_user_password => api_params[:effective_user_password],
+        :key_passphrase => api_params[:key_passphrase],
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => api_params[:execution_timeout_interval] || template.execution_timeout_interval,
         :template_invocations => template_invocations_params }.with_indifferent_access
