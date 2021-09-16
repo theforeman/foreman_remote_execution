@@ -9,7 +9,6 @@ export const jobTemplate = {
   default: true,
   job_category: 'Ansible Commands',
   provider_type: 'Ansible',
-  description_format: 'Run %{command}',
   execution_timeout_interval: 2,
   description: null,
 };

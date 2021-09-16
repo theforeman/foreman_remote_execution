@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, TextInput, Button } from '@patternfly/react-core';
+import { FormGroup, TextInput, Tooltip, Button } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import {
+  selectTemplateInputs,
+  selectAdvancedTemplateInputs,
+} from '../../JobWizardSelectors';
 
-export const DescriptionField = ({ inputs, value, setValue }) => {
-  const generateDesc = () => {
+export const DescriptionField = ({ inputValues, value, setValue }) => {
+  const inputs = [
+    ...useSelector(selectTemplateInputs),
+    ...useSelector(selectAdvancedTemplateInputs),
+  ].map(input => input.name);
+  const generateDesc = useCallback(() => {
     let newDesc = value;
     if (value) {
       const re = new RegExp('%\\{([^\\}]+)\\}', 'gm');
@@ -15,16 +24,19 @@ export const DescriptionField = ({ inputs, value, setValue }) => {
       results.forEach(result => {
         newDesc = newDesc.replace(
           result.text,
-          // TODO: Replace with the value of the input from Target Hosts step
-          inputs.find(input => input.name === result.name)?.name || result.text
+          inputValues[result.name] ||
+            (inputs.includes(result.name) ? '' : result.text)
         );
       });
     }
     return newDesc;
-  };
+  }, [inputs, value, inputValues]);
   const [generatedDesc, setGeneratedDesc] = useState(generateDesc());
   const [isPreview, setIsPreview] = useState(true);
 
+  useEffect(() => {
+    setGeneratedDesc(generateDesc());
+  }, [generateDesc]);
   const togglePreview = () => {
     setGeneratedDesc(generateDesc());
     setIsPreview(v => !v);
@@ -43,9 +55,20 @@ export const DescriptionField = ({ inputs, value, setValue }) => {
       }
     >
       {isPreview ? (
-        <TextInput id="description-preview" value={generatedDesc} isDisabled />
+        <Tooltip content={generatedDesc}>
+          <div>
+            {/* div wrapper so the tooltip will be shown in chrome */}
+            <TextInput
+              aria-label="description preview"
+              id="description-preview"
+              value={generatedDesc}
+              isDisabled
+            />
+          </div>
+        </Tooltip>
       ) : (
         <TextInput
+          aria-label="description edit"
           type="text"
           autoComplete="description"
           id="description"
@@ -58,7 +81,7 @@ export const DescriptionField = ({ inputs, value, setValue }) => {
 };
 
 DescriptionField.propTypes = {
-  inputs: PropTypes.array.isRequired,
+  inputValues: PropTypes.object.isRequired,
   value: PropTypes.string,
   setValue: PropTypes.func.isRequired,
 };

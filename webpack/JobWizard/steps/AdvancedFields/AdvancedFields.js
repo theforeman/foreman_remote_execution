@@ -5,7 +5,6 @@ import { Form } from '@patternfly/react-core';
 import {
   selectEffectiveUser,
   selectAdvancedTemplateInputs,
-  selectTemplateInputs,
 } from '../../JobWizardSelectors';
 import {
   EffectiveUserField,
@@ -22,10 +21,13 @@ import { DescriptionField } from './DescriptionField';
 import { WIZARD_TITLES } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
 
-export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
+export const AdvancedFields = ({
+  templateValues,
+  advancedValues,
+  setAdvancedValues,
+}) => {
   const effectiveUser = useSelector(selectEffectiveUser);
   const advancedTemplateInputs = useSelector(selectAdvancedTemplateInputs);
-  const templateInputs = useSelector(selectTemplateInputs);
   return (
     <>
       <WizardTitle
@@ -49,7 +51,7 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
           />
         )}
         <DescriptionField
-          inputs={templateInputs}
+          inputValues={{ ...templateValues, ...advancedValues.templateValues }}
           value={advancedValues.description}
           setValue={newValue => setAdvancedValues({ description: newValue })}
         />
@@ -117,5 +119,6 @@ export const AdvancedFields = ({ advancedValues, setAdvancedValues }) => {
 AdvancedFields.propTypes = {
   advancedValues: PropTypes.object.isRequired,
   setAdvancedValues: PropTypes.func.isRequired,
+  templateValues: PropTypes.object.isRequired,
 };
 export default AdvancedFields;
