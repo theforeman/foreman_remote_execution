@@ -3,6 +3,7 @@ import {
   selectAPIStatus,
   selectAPIErrorMessage,
 } from 'foremanReact/redux/API/APISelectors';
+import { STATUS } from 'foremanReact/constants';
 
 import {
   JOB_TEMPLATES,
@@ -45,3 +46,8 @@ export const selectAdvancedTemplateInputs = state =>
 
 export const selectTemplateInputs = state =>
   selectAPIResponse(state, JOB_TEMPLATE).template_inputs || [];
+
+export const selectResponse = selectAPIResponse;
+
+export const selectIsLoading = (state, key) =>
+  selectAPIStatus(state, key) === STATUS.PENDING;

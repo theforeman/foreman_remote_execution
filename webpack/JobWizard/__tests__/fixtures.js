@@ -48,6 +48,16 @@ export const jobTemplateResponse = {
       hidden_value: false,
     },
     {
+      name: 'adv resource select',
+      required: false,
+      input_type: 'user',
+      value_type: 'resource',
+      advanced: true,
+      resource_type: 'ForemanTasks::Task',
+      default: '',
+      hidden_value: false,
+    },
+    {
       name: 'adv search',
       required: false,
       options: '',
@@ -106,7 +116,17 @@ export const testSetup = (selectors, api) => {
     { ...jobTemplate, id: 2, name: 'template2' },
   ]);
   const mockStore = configureMockStore([]);
-  const store = mockStore({});
+  const store = mockStore({
+    ForemanTasksTask: {
+      response: {
+        subtotal: 10,
+        results: [
+          { id: '1', name: 'resource1' },
+          { id: '2', name: 'resource2' },
+        ],
+      },
+    },
+  });
   return store;
 };
 

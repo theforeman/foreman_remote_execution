@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdvancedFields search resources action: resource search 1`] = `
+Array [
+  Object {
+    "key": "JOB_CATEGORIES",
+    "type": "get",
+    "url": "/ui_job_wizard/categories",
+  },
+  Object {
+    "key": "JOB_TEMPLATES",
+    "type": "get",
+    "url": URI {
+      "_deferred_build": true,
+      "_parts": Object {
+        "duplicateQueryParameters": false,
+        "escapeQuerySpace": true,
+        "fragment": null,
+        "hostname": null,
+        "password": null,
+        "path": "foreman/api/v2/job_templates",
+        "port": null,
+        "preventInvalidHostname": false,
+        "protocol": null,
+        "query": "search=job_category%3D%22Ansible+Commands%22&per_page=all",
+        "urn": null,
+        "username": null,
+      },
+      "_string": "",
+    },
+  },
+  Object {
+    "key": "JOB_TEMPLATE",
+    "type": "get",
+    "url": "/ui_job_wizard/template/178",
+  },
+  Object {
+    "key": "ForemanTasksTask",
+    "type": "get",
+    "url": URI {
+      "_deferred_build": true,
+      "_parts": Object {
+        "duplicateQueryParameters": false,
+        "escapeQuerySpace": true,
+        "fragment": null,
+        "hostname": null,
+        "password": null,
+        "path": "/ui_job_wizard/resources",
+        "port": null,
+        "preventInvalidHostname": false,
+        "protocol": null,
+        "query": "resource=ForemanTasks::Task",
+        "urn": null,
+        "username": null,
+      },
+      "_string": "",
+    },
+  },
+  Object {
+    "key": "ForemanTasksTask",
+    "type": "get",
+    "url": URI {
+      "_deferred_build": true,
+      "_parts": Object {
+        "duplicateQueryParameters": false,
+        "escapeQuerySpace": true,
+        "fragment": null,
+        "hostname": null,
+        "password": null,
+        "path": "/ui_job_wizard/resources",
+        "port": null,
+        "preventInvalidHostname": false,
+        "protocol": null,
+        "query": "resource=ForemanTasks%3A%3ATask&name=some+search&limit=100",
+        "urn": null,
+        "username": null,
+      },
+      "_string": "",
+    },
+  },
+]
+`;
