@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get 'cockpit/redirect', to: 'cockpit#redirect'
   get 'ui_job_wizard/categories', to: 'ui_job_wizard#categories'
   get 'ui_job_wizard/template/:id', to: 'ui_job_wizard#template'
+  get 'ui_job_wizard/resources', to: 'ui_job_wizard#resources'
 
   match '/experimental/job_wizard', to: 'react#index', :via => [:get]
 

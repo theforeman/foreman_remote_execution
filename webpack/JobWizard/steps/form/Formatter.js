@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import SearchBar from 'foremanReact/components/SearchBar';
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
+import { SearchSelect } from './SearchSelect';
 
 const TemplateSearchField = ({
   name,
@@ -52,10 +53,35 @@ export const formatter = (input, values, setValue) => {
   const inputType = input.value_type;
   const isTextType = inputType === 'plain' || !inputType; // null defaults to plain
 
-  const { name, required, hidden_value: hidden } = input;
+  const {
+    name,
+    required,
+    hidden_value: hidden,
+    resource_type: resourceType,
+    value_type: valueType,
+  } = input;
   const labelText = input.description;
   const value = values[name];
   const id = name.replace(/ /g, '-');
+  if (valueType === 'resource') {
+    return (
+      <FormGroup
+        label={name}
+        fieldId={id}
+        labelIcon={helpLabel(labelText, name)}
+        isRequired={required}
+        key={id}
+      >
+        <SearchSelect
+          name={name}
+          apiKey={resourceType.replace('::', '')}
+          url={`/ui_job_wizard/resources?resource=${resourceType}`}
+          selected={value || {}}
+          setSelected={newValue => setValue({ ...values, [name]: newValue })}
+        />
+      </FormGroup>
+    );
+  }
   if (isSelectType) {
     const options = input.options.split(/\r?\n/).map(option => option.trim());
     return (

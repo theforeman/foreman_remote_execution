@@ -10,7 +10,7 @@ class UiJobWizardController < ::Api::V2::BaseController
 
   def template
     job_template = JobTemplate.authorized.find(params[:id])
-    advanced_template_inputs, template_inputs = map_template_inputs(job_template.template_inputs_with_foreign).partition { |x| x["advanced"] }
+    advanced_template_inputs, template_inputs = job_template.template_inputs_with_foreign.partition { |x| x["advanced"] }
     render :json => {
       :job_template => job_template,
       :effective_user => job_template.effective_user,
@@ -23,15 +23,18 @@ class UiJobWizardController < ::Api::V2::BaseController
     nested_resource || 'job_template'
   end
 
-  def map_template_inputs(template_inputs_with_foreign)
-    template_inputs_with_foreign.map { |input| input.attributes.merge({:resource_type => input.resource_type&.tableize }) }
-  end
-
   def resource_class
     JobTemplate
   end
 
   def action_permission
     :view_job_templates
+  end
+
+  def resources
+    resource_type = params[:resource]
+    resource_list = resource_type.constantize.authorized("view_#{resource_type.underscore.pluralize}").all.map { |r| {:name => r.to_s, :id => r.id } }.select { |v| v[:name] =~ /#{params[:name]}/ }
+    render :json => { :results =>
+      resource_list.sort_by { |r| r[:name] }.take(100), :subtotal => resource_list.count}
   end
 end

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from '@theforeman/test';
@@ -94,6 +95,9 @@ describe('AdvancedFields', () => {
       selector: 'textarea',
     });
     const selectField = screen.getByText('option 1');
+    const resourceSelectField = screen.getByLabelText(
+      'adv resource select toggle'
+    );
     const searchField = screen.getByPlaceholderText('Filter...');
     const dateField = screen.getByLabelText('adv date', {
       selector: 'input',
@@ -103,6 +107,10 @@ describe('AdvancedFields', () => {
     await act(async () => {
       await fireEvent.click(screen.getByText('option 2'));
       fireEvent.click(screen.getAllByText(WIZARD_TITLES.advanced)[0]); // to remove focus
+
+      fireEvent.click(resourceSelectField);
+      await fireEvent.click(screen.getByText('resource2'));
+
       await fireEvent.change(textField, {
         target: { value: textValue },
       });
@@ -136,6 +144,8 @@ describe('AdvancedFields', () => {
     expect(dateField.value).toBe(dateValue);
     expect(screen.queryAllByText('option 1')).toHaveLength(0);
     expect(screen.queryAllByText('option 2')).toHaveLength(1);
+    expect(screen.queryAllByDisplayValue('resource1')).toHaveLength(0);
+    expect(screen.queryAllByDisplayValue('resource2')).toHaveLength(1);
   });
   it('fill defaults into fields', async () => {
     render(
@@ -163,7 +173,7 @@ describe('AdvancedFields', () => {
         selector: 'input',
       }).value
     ).toBe(
-      'template1 with inputs adv plain hidden="Default val" adv plain select="" adv search="" adv date="" plain hidden="Default val"'
+      'template1 with inputs adv plain hidden="Default val" adv plain select="" adv resource select="" adv search="" adv date="" plain hidden="Default val"'
     );
   });
   it('DescriptionField', async () => {
@@ -296,5 +306,31 @@ describe('AdvancedFields', () => {
         selector: 'input',
       }).value
     ).toBe('Run Default val');
+  });
+
+  it('search resources action', async () => {
+    store.clearActions();
+    jest.useFakeTimers();
+
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+    });
+    const resourceSelectField = screen.getByLabelText(
+      'adv resource select typeahead input'
+    );
+
+    await act(async () => {
+      await fireEvent.change(resourceSelectField, {
+        target: { value: 'some search' },
+      });
+
+      jest.runAllTimers();
+    });
+    expect(store.getActions()).toMatchSnapshot('resource search');
   });
 });
