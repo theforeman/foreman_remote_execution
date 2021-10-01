@@ -1,4 +1,6 @@
 import configureMockStore from 'redux-mock-store';
+import hostsQuery from '../steps/HostsAndInputs/hosts.gql';
+import hostgroupsQuery from '../steps/HostsAndInputs/hostgroups.gql';
 
 export const jobTemplate = {
   id: 178,
@@ -102,10 +104,11 @@ export const testSetup = (selectors, api) => {
   jest.spyOn(selectors, 'selectJobTemplates');
   jest.spyOn(selectors, 'selectJobCategories');
   jest.spyOn(selectors, 'selectJobCategoriesStatus');
+  jest.spyOn(selectors, 'selectWithKatello');
 
   jest.spyOn(selectors, 'selectTemplateInputs');
   jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
-  jest.spyOn(selectors, 'selectResponse');
+  selectors.selectWithKatello.mockImplementation(() => true);
   selectors.selectTemplateInputs.mockImplementation(
     () => jobTemplateResponse.template_inputs
   );
@@ -118,24 +121,6 @@ export const testSetup = (selectors, api) => {
     { ...jobTemplate, id: 2, name: 'template2' },
   ]);
 
-  selectors.selectResponse.mockImplementation((state, key) => {
-    if (key === 'HOSTS') {
-      return {
-        results: [{ name: 'host1' }, { name: 'host2' }, { name: 'host3' }],
-        subtotal: 3,
-      };
-    } else if (key === 'HOST_GROUPS') {
-      return {
-        results: [
-          { name: 'host_group1' },
-          { name: 'host_group2' },
-          { name: 'host_group3' },
-        ],
-        subtotal: 3,
-      };
-    }
-    return {};
-  });
   const mockStore = configureMockStore([]);
   const store = mockStore({
     ForemanTasksTask: {
@@ -144,6 +129,15 @@ export const testSetup = (selectors, api) => {
         results: [
           { id: '1', name: 'resource1' },
           { id: '2', name: 'resource2' },
+        ],
+      },
+    },
+    HOST_COLLECTIONS: {
+      response: {
+        subtotal: 3,
+        results: [
+          { id: '74', name: 'host_collection1' },
+          { id: '43', name: 'host_collection2' },
         ],
       },
     },
@@ -170,3 +164,43 @@ export const mockApi = api => {
     return { type: 'get', ...action };
   });
 };
+
+export const qglMock = [
+  {
+    request: {
+      query: hostsQuery,
+      variables: {
+        search: 'name~"" and organization_id=1 and location_id=2',
+      },
+    },
+    result: {
+      data: {
+        hosts: {
+          totalCount: 3,
+          nodes: [{ name: 'host1' }, { name: 'host2' }, { name: 'host3' }],
+        },
+      },
+    },
+  },
+
+  {
+    request: {
+      query: hostgroupsQuery,
+      variables: {
+        search: 'name~"" and organization_id=1 and location_id=2',
+      },
+    },
+    result: {
+      data: {
+        hostgroups: {
+          totalCount: 3,
+          nodes: [
+            { name: 'host_group1' },
+            { name: 'host_group2' },
+            { name: 'host_group3' },
+          ],
+        },
+      },
+    },
+  },
+];

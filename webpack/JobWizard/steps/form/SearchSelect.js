@@ -1,63 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  Select,
-  SelectOption,
-  SelectVariant,
-  Spinner,
-} from '@patternfly/react-core';
+import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import Immutable from 'seamless-immutable';
-import URI from 'urijs';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
-import { get } from 'foremanReact/redux/API';
-import { selectResponse, selectIsLoading } from '../../JobWizardSelectors';
 
-const maxResults = 100;
-export const useNameSearchAPI = (url, apiKey) => {
-  const dispatch = useDispatch();
-  const onSearch = search =>
-    dispatch(
-      get({
-        key: apiKey,
-        url: search
-          ? url.addSearch({
-              name: search,
-              limit: maxResults,
-            })
-          : url,
-      })
-    );
-
-  const response = useSelector(state => selectResponse(state, apiKey));
-  const isLoading = useSelector(state => selectIsLoading(state, apiKey));
-  return [onSearch, response, isLoading];
-};
+export const maxResults = 100;
 
 export const SearchSelect = ({
   name,
   selected,
   setSelected,
   placeholderText,
-  url,
+  useNameSearch,
   apiKey,
+  url,
+  variant,
 }) => {
-  const [setSearch, response, isLoading] = useNameSearchAPI(
-    new URI(url),
-    apiKey
-  );
+  const [onSearch, response, isLoading] = useNameSearch(apiKey, url);
   const [isOpen, setIsOpen] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
   const autoSearchDelay = 500;
   useEffect(() => {
-    setSearch(selected.name || '');
+    onSearch(selected.name || '');
     if (typingTimeout) {
       return () => clearTimeout(typingTimeout);
     }
     return undefined;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   let selectOptions = [];
   if (response.subtotal > maxResults) {
     selectOptions = [
@@ -84,19 +54,36 @@ export const SearchSelect = ({
   ];
 
   const onSelect = (event, selection) => {
-    setSelected(response.results.find(r => r.id === selection)); // saving the name and id so we will have access to the name between steps
+    if (variant === SelectVariant.typeahead) {
+      setSelected(response.results.find(r => r.id === selection)); // saving the name and id so we will have access to the name between steps
+    } else if (variant === SelectVariant.typeaheadMulti) {
+      if (selected.map(({ id }) => id).includes(selection)) {
+        setSelected(currentSelected =>
+          currentSelected.filter(({ id }) => id !== selection)
+        );
+      } else {
+        setSelected(currentSelected => [
+          ...currentSelected,
+          response.results.find(r => r.id === selection),
+        ]);
+      }
+    }
   };
   const autoSearch = searchTerm => {
     if (typingTimeout) clearTimeout(typingTimeout);
-    setTypingTimeout(setTimeout(() => setSearch(searchTerm), autoSearchDelay));
+    setTypingTimeout(setTimeout(() => onSearch(searchTerm), autoSearchDelay));
   };
   return (
     <Select
       toggleAriaLabel={`${name} toggle`}
       chipGroupComponent={<></>}
-      variant={SelectVariant.typeahead}
-      selections={selected.id}
-      toggleIcon={isLoading && <Spinner size="sm" />}
+      variant={variant}
+      selections={
+        variant === SelectVariant.typeahead
+          ? selected.id
+          : selected.map(({ id }) => id)
+      }
+      loadingVariant={isLoading ? 'spinner' : null}
       onSelect={onSelect}
       onToggle={setIsOpen}
       isOpen={isOpen}
@@ -106,7 +93,7 @@ export const SearchSelect = ({
         autoSearch(value || '');
       }}
       placeholderText={placeholderText}
-      onFilter={() => null}
+      onFilter={() => null} // https://github.com/patternfly/patternfly-react/issues/6321
       typeAheadAriaLabel={`${name} typeahead input`}
     >
       {selectOptions}
@@ -116,15 +103,19 @@ export const SearchSelect = ({
 
 SearchSelect.propTypes = {
   name: PropTypes.string,
-  selected: PropTypes.object,
+  selected: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   setSelected: PropTypes.func.isRequired,
   placeholderText: PropTypes.string,
   apiKey: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
+  useNameSearch: PropTypes.func.isRequired,
+  variant: PropTypes.string,
 };
 
 SearchSelect.defaultProps = {
   name: 'typeahead select',
   selected: {},
   placeholderText: '',
+  url: '',
+  variant: SelectVariant.typeahead,
 };

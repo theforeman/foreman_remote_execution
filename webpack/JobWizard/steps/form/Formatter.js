@@ -6,7 +6,7 @@ import SearchBar from 'foremanReact/components/SearchBar';
 import { getControllerSearchProps } from 'foremanReact/constants';
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
-import { SearchSelect } from './SearchSelect';
+import { ResourceSelectAPI } from './ResourceSelect';
 
 const TemplateSearchField = ({
   name,
@@ -77,7 +77,7 @@ export const formatter = (input, values, setValue) => {
         isRequired={required}
         key={id}
       >
-        <SearchSelect
+        <ResourceSelectAPI
           name={name}
           apiKey={resourceType.replace('::', '')}
           url={`/ui_job_wizard/resources?resource=${resourceType}`}

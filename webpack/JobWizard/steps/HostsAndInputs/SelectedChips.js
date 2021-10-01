@@ -7,19 +7,19 @@ import { hostMethods } from '../../JobWizardConstants';
 const SelectedChip = ({ selected, setSelected, categoryName }) => {
   const deleteItem = itemToRemove => {
     setSelected(oldSelected =>
-      oldSelected.filter(item => item !== itemToRemove)
+      oldSelected.filter(({ id }) => id !== itemToRemove)
     );
   };
   return (
     <ChipGroup className="hosts-chip-group" categoryName={categoryName}>
-      {selected.map(chip => (
+      {selected.map(({ name, id }) => (
         <Chip
-          key={chip}
-          id={chip}
-          onClick={() => deleteItem(chip)}
-          closeBtnAriaLabel={`Close ${chip}`}
+          key={name}
+          id={id}
+          onClick={() => deleteItem(id)}
+          closeBtnAriaLabel={`Close ${name}`}
         >
-          {chip}
+          {name}
         </Chip>
       ))}
     </ChipGroup>
@@ -65,7 +65,11 @@ export const SelectedChips = ({
         setSelected={setSelectedHostGroups}
       />
       <SelectedChip
-        selected={hostsSearchQuery ? [hostsSearchQuery] : []}
+        selected={
+          hostsSearchQuery
+            ? [{ id: hostsSearchQuery, name: hostsSearchQuery }]
+            : []
+        }
         categoryName={hostMethods.searchQuery}
         setSelected={clearSearch}
       />

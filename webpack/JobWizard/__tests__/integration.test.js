@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from '@theforeman/test';
 import { render, fireEvent, screen, act } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../JobWizard';
 import * as selectors from '../JobWizardSelectors';
@@ -11,6 +12,7 @@ import {
   mockApi,
   jobCategories,
   jobTemplateResponse as jobTemplate,
+  qglMock,
 } from './fixtures';
 
 const store = testSetup(selectors, api);
@@ -59,9 +61,11 @@ describe('Job wizard fill', () => {
     mockApi(api);
 
     render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
+      <MockedProvider mocks={qglMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
     );
     const titles = Object.values(WIZARD_TITLES);
     const steps = [titles[1], titles[0], ...titles.slice(2)]; // the first title is selected at the beggining

@@ -28,8 +28,9 @@ import {
   hostQuerySearchID,
 } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
-import { HostSelect } from './HostSelect';
 import { HostSearch } from './HostSearch';
+import { SelectAPI } from './SelectAPI';
+import { SelectGQL } from './SelectGQL';
 
 const HostsAndInputs = ({
   templateValues,
@@ -72,13 +73,18 @@ const HostsAndInputs = ({
     <div className="target-hosts-and-inputs">
       <WizardTitle title={WIZARD_TITLES.hostsAndInputs} />
       <Form>
-        <FormGroup fieldId="host_selection">
+        <FormGroup fieldId="host_selection" id="host-selection">
           <InputGroup>
             <SelectField
               className="target-method-select"
               toggleIcon={<FilterIcon />}
               fieldId="host_methods"
-              options={Object.values(hostMethods)}
+              options={Object.values(hostMethods).filter(method => {
+                if (method === hostMethods.hostCollections && !withKatello) {
+                  return false;
+                }
+                return true;
+              })}
               setValue={setHostMethod}
               value={hostMethod}
             />
@@ -89,29 +95,30 @@ const HostsAndInputs = ({
               />
             )}
             {hostMethod === hostMethods.hosts && (
-              <HostSelect
-                selectedHosts={selectedHosts}
-                setSelectedHosts={setSelectedHosts}
+              <SelectGQL
+                selected={selectedHosts}
+                setSelected={setSelectedHosts}
                 apiKey={HOSTS}
-                url="/api/hosts?per_page=100"
+                name="hosts"
                 placeholderText={__('Filter by hosts')}
               />
             )}
-            {withKatello && hostMethod === hostMethods.hostCollections && (
-              <HostSelect
-                selectedHosts={selectedHostCollections}
-                setSelectedHosts={setSelectedHostCollections}
+            {hostMethod === hostMethods.hostCollections && (
+              <SelectAPI
+                selected={selectedHostCollections}
+                setSelected={setSelectedHostCollections}
                 apiKey={HOST_COLLECTIONS}
+                name="host collections"
                 url="/katello/api/host_collections?per_page=100"
                 placeholderText={__('Filter by host collections')}
               />
             )}
             {hostMethod === hostMethods.hostGroups && (
-              <HostSelect
-                selectedHosts={selectedHostGroups}
-                setSelectedHosts={setSelectedHostGroups}
+              <SelectGQL
+                selected={selectedHostGroups}
+                setSelected={setSelectedHostGroups}
                 apiKey={HOST_GROUPS}
-                url="/api/hostgroups?per_page=100"
+                name="host groups"
                 placeholderText={__('Filter by host groups')}
               />
             )}

@@ -3,6 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from '@theforeman/test';
 import { fireEvent, screen, render, act } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../../../JobWizard';
 import * as selectors from '../../../JobWizardSelectors';
@@ -12,6 +13,7 @@ import {
   testSetup,
   mockApi,
   jobCategories,
+  qglMock,
 } from '../../../__tests__/fixtures';
 import { WIZARD_TITLES } from '../../../JobWizardConstants';
 
@@ -26,9 +28,11 @@ selectors.selectEffectiveUser.mockImplementation(
 describe('AdvancedFields', () => {
   it('should save data between steps for advanced fields', async () => {
     const wrapper = mount(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
+      <MockedProvider mocks={qglMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
     );
     // setup
     wrapper.find('.pf-c-button.pf-c-select__toggle-button').simulate('click');
@@ -81,9 +85,11 @@ describe('AdvancedFields', () => {
   });
   it('fill template fields', async () => {
     render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
+      <MockedProvider mocks={qglMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
     );
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
@@ -149,9 +155,11 @@ describe('AdvancedFields', () => {
   });
   it('fill defaults into fields', async () => {
     render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
+      <MockedProvider mocks={qglMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
     );
     await act(async () => {
       fireEvent.click(screen.getByText('Advanced Fields'));

@@ -44,3 +44,8 @@ export const hostMethods = {
 
 export const hostQuerySearchID = 'hostsSearch';
 export const hostsController = 'hosts';
+
+export const dataName = {
+  [HOSTS]: 'hosts',
+  [HOST_GROUPS]: 'hostgroups',
+};
