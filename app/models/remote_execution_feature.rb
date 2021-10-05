@@ -50,12 +50,13 @@ class RemoteExecutionFeature < ApplicationRecord
                    :proxy_selector_override => options[:proxy_selector_override],
                    :notification_builder => builder }
     # in case DB does not have the attribute created yet but plugin initializer registers the feature, we need to skip this attribute
-    attrs = [ :host_action_button, :notification_builder ]
-    attrs.each do |attr|
+    [:host_action_button, :notification_builder].each do |attr|
       unless self.attribute_names.include?(attr.to_s)
         attributes.delete(attr)
       end
     end
+    # do not let to set attributes with nil constraint and use default value
+    [:host_action_button].each { |attr| attributes.delete(attr) if attributes[attr].nil? }
 
     self.without_auditing do
       if feature.nil?
