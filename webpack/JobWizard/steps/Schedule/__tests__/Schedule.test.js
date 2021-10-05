@@ -74,7 +74,7 @@ describe('Schedule', () => {
       });
       await fireEvent.change(endsDateField, { target: { value: newEndsDate } });
       await fireEvent.change(endsTimeField, { target: { value: newEndsTime } });
-      jest.runAllTimers(); // to handle pf4 date picket popover useTimer
+      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
     });
     await act(async () => {
       fireEvent.click(screen.getByText('Category and Template'));
@@ -151,5 +151,139 @@ describe('Schedule', () => {
     expect(neverEnds.checked).toBeTruthy();
     expect(endsDateField.disabled).toBeTruthy();
     expect(endsTimeField.disabled).toBeTruthy();
+  });
+
+  it('should change between repeat on states', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText('Schedule'));
+      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+    });
+    expect(
+      screen.getByPlaceholderText('Repeat N times').hasAttribute('disabled')
+    ).toBeTruthy();
+    await act(async () => {
+      fireEvent.click(
+        screen.getByLabelText('Does not repeat', { selector: 'button' })
+      );
+    });
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Cronline'));
+    });
+    fireEvent.click(screen.getAllByText('Schedule')[0]); // to remove focus
+
+    const newRepeatTimes = '3';
+    const repeatNTimes = screen.getByPlaceholderText('Repeat N times');
+    expect(repeatNTimes.value).toBe('');
+    await act(async () => {
+      fireEvent.change(repeatNTimes, {
+        target: { value: newRepeatTimes },
+      });
+    });
+    expect(repeatNTimes.value).toBe(newRepeatTimes);
+
+    const newCronline = '1 2';
+    const cronline = screen.getByLabelText('cronline');
+    expect(cronline.value).toBe('');
+    await act(async () => {
+      fireEvent.change(cronline, {
+        target: { value: newCronline },
+      });
+    });
+    expect(cronline.value).toBe(newCronline);
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Category and Template'));
+    });
+    expect(screen.getAllByText('Category and Template')).toHaveLength(3);
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Schedule'));
+      jest.runAllTimers();
+    });
+    fireEvent.click(screen.getAllByText('Schedule')[0]); // to remove focus
+    expect(screen.queryAllByText('Schedule')).toHaveLength(3);
+    expect(repeatNTimes.value).toBe(newRepeatTimes);
+    expect(cronline.value).toBe(newCronline);
+
+    fireEvent.click(screen.getByText('Cronline'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Monthly'));
+    });
+
+    const newDays = '1,2,3';
+    const days = screen.getByLabelText('days');
+    expect(days.value).toBe('');
+    await act(async () => {
+      fireEvent.change(days, {
+        target: { value: newDays },
+      });
+    });
+    expect(days.value).toBe(newDays);
+
+    const newAt = '13:07';
+    const at = screen.getByLabelText('repeat-at');
+    expect(at.value).toBe('');
+    await act(async () => {
+      fireEvent.change(at, {
+        target: { value: newAt },
+      });
+    });
+    expect(at.value).toBe(newAt);
+
+    fireEvent.click(screen.getByText('Monthly'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Weekly'));
+    });
+    const dayTue = screen.getByLabelText('Tue');
+    const daySat = screen.getByLabelText('Sat');
+    expect(dayTue.checked).toBe(false);
+    expect(daySat.checked).toBe(false);
+    await act(async () => {
+      fireEvent.change(dayTue, {
+        target: { checked: true },
+      });
+
+      fireEvent.change(daySat, {
+        target: { checked: true },
+      });
+    });
+    expect(dayTue.checked).toBe(true);
+    expect(daySat.checked).toBe(true);
+
+    fireEvent.click(screen.getByText('Weekly'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Daily'));
+    });
+
+    const newAtDaily = '17:07';
+    const atDaily = screen.getByLabelText('repeat-at');
+    expect(atDaily.value).toBe(newAt);
+    await act(async () => {
+      fireEvent.change(atDaily, {
+        target: { value: newAtDaily },
+      });
+    });
+    expect(atDaily.value).toBe(newAtDaily);
+
+    fireEvent.click(screen.getByText('Daily'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Hourly'));
+    });
+
+    const newMinutes = '15';
+    const atHourly = screen.getByLabelText('repeat-at-minute-typeahead');
+    expect(atHourly.value).toBe('');
+    await act(async () => {
+      fireEvent.change(atHourly, {
+        target: { value: newMinutes },
+      });
+    });
+    expect(atHourly.value).toBe(newMinutes);
   });
 });
