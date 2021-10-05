@@ -3,6 +3,10 @@
     margin-bottom: 25px;
   }
 
+  .pf-c-wizard__nav.pf-m-expanded {
+    z-index: calc(var(--pf-c-wizard__footer--ZIndex) + 2); // So the small screen navigation can be shown above the select box
+  }
+
   .pf-c-wizard__main {
     overflow: visible;
     z-index: calc(
