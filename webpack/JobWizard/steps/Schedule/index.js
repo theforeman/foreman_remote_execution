@@ -10,14 +10,21 @@ import { WIZARD_TITLES } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
 
 const Schedule = ({ scheduleValue, setScheduleValue }) => {
-  const { repeatType, repeatAmount, starts, ends, isNeverEnds } = scheduleValue;
-
+  const {
+    repeatType,
+    repeatAmount,
+    repeatData,
+    starts,
+    ends,
+    isNeverEnds,
+    isFuture,
+  } = scheduleValue;
   return (
     <>
       <WizardTitle title={WIZARD_TITLES.schedule} />
       <Form className="schedule-tab">
         <ScheduleType
-          isFuture={scheduleValue.isFuture}
+          isFuture={isFuture}
           setIsFuture={newValue => {
             if (!newValue) {
               // if schedule type is execute now
@@ -35,10 +42,17 @@ const Schedule = ({ scheduleValue, setScheduleValue }) => {
 
         <RepeatOn
           repeatType={repeatType}
+          repeatData={repeatData}
           setRepeatType={newValue => {
             setScheduleValue(current => ({
               ...current,
               repeatType: newValue,
+            }));
+          }}
+          setRepeatData={newValue => {
+            setScheduleValue(current => ({
+              ...current,
+              repeatData: newValue,
             }));
           }}
           repeatAmount={repeatAmount}
@@ -52,7 +66,7 @@ const Schedule = ({ scheduleValue, setScheduleValue }) => {
         <StartEndDates
           starts={starts}
           setStarts={newValue => {
-            if (!scheduleValue.isFuture) {
+            if (!isFuture) {
               setScheduleValue(current => ({
                 ...current,
                 isFuture: true,
@@ -91,6 +105,7 @@ Schedule.propTypes = {
   scheduleValue: PropTypes.shape({
     repeatType: PropTypes.string.isRequired,
     repeatAmount: PropTypes.string,
+    repeatData: PropTypes.object,
     starts: PropTypes.string,
     ends: PropTypes.string,
     isFuture: PropTypes.bool,

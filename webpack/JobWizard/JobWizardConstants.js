@@ -26,6 +26,7 @@ export const WIZARD_TITLES = {
 export const initialScheduleState = {
   repeatType: repeatTypes.noRepeat,
   repeatAmount: '',
+  repeatData: {},
   starts: '',
   ends: '',
   isFuture: false,
