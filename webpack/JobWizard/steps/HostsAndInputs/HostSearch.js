@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import SearchBar from 'foremanReact/components/SearchBar';
 import { getControllerSearchProps } from 'foremanReact/constants';
 import { hostsController, hostQuerySearchID } from '../../JobWizardConstants';
+import { noop } from '../../../helpers';
 
 export const HostSearch = ({ value, setValue }) => {
   const searchQuery = useSelector(
@@ -25,7 +26,7 @@ export const HostSearch = ({ value, setValue }) => {
             useKeyShortcuts: true,
           },
         }}
-        onSearch={() => null}
+        onSearch={noop}
         initialQuery={value}
       />
     </div>

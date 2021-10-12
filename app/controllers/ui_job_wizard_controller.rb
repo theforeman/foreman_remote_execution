@@ -11,13 +11,17 @@ class UiJobWizardController < ApplicationController
 
   def template
     job_template = JobTemplate.authorized.find(params[:id])
-    advanced_template_inputs, template_inputs = job_template.template_inputs_with_foreign.partition { |x| x["advanced"] }
+    advanced_template_inputs, template_inputs = map_template_inputs(job_template.template_inputs_with_foreign).partition { |x| x["advanced"] }
     render :json => {
       :job_template => job_template,
       :effective_user => job_template.effective_user,
       :template_inputs => template_inputs,
       :advanced_template_inputs => advanced_template_inputs,
     }
+  end
+
+  def map_template_inputs(template_inputs_with_foreign)
+    template_inputs_with_foreign.map { |input| input.attributes.merge({:resource_type_tableize => input.resource_type&.tableize }) }
   end
 
   def resource_name(nested_resource = nil)

@@ -7,6 +7,7 @@ import { getControllerSearchProps } from 'foremanReact/constants';
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
 import { ResourceSelectAPI } from './ResourceSelect';
+import { noop } from '../../../helpers';
 
 const TemplateSearchField = ({
   name,
@@ -35,20 +36,18 @@ const TemplateSearchField = ({
       isRequired={required}
       className="foreman-search-field"
     >
-      <div className="foreman-search-field">
-        <SearchBar
-          initialQuery={defaultValue}
-          data={{
-            ...props,
-            autocomplete: {
-              id: name,
-              url,
-              useKeyShortcuts: true,
-            },
-          }}
-          onSearch={() => null}
-        />
-      </div>
+      <SearchBar
+        initialQuery={defaultValue}
+        data={{
+          ...props,
+          autocomplete: {
+            id: name,
+            url,
+            useKeyShortcuts: true,
+          },
+        }}
+        onSearch={noop}
+      />
     </FormGroup>
   );
 };
@@ -147,15 +146,14 @@ export const formatter = (input, values, setValue) => {
     );
   }
   if (inputType === 'search') {
-    const { url, resource_type: controller } = input;
-    // TODO: get text from redux autocomplete
+    const controller = input.resource_type_tableize;
     return (
       <TemplateSearchField
         key={id}
         name={name}
         defaultValue={value}
-        controller={controller}
-        url={url}
+        controller={resourceType}
+        url={`/${controller}/auto_complete_search`}
         labelText={labelText}
         required={required}
         setValue={setValue}
