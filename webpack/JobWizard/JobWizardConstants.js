@@ -32,6 +32,7 @@ export const initialScheduleState = {
   isFuture: false,
   isNeverEnds: false,
 };
+export const HOSTS_API = 'HOSTS_API';
 export const HOSTS = 'HOSTS';
 export const HOST_COLLECTIONS = 'HOST_COLLECTIONS';
 export const HOST_GROUPS = 'HOST_GROUPS';
@@ -49,3 +50,6 @@ export const dataName = {
   [HOSTS]: 'hosts',
   [HOST_GROUPS]: 'hostgroups',
 };
+export const HOSTS_TO_PREVIEW_AMOUNT = 20;
+
+export const DEBOUNCE_HOST_COUNT = 700;

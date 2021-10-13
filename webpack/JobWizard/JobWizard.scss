@@ -4,7 +4,9 @@
   }
 
   .pf-c-wizard__nav.pf-m-expanded {
-    z-index: calc(var(--pf-c-wizard__footer--ZIndex) + 2); // So the small screen navigation can be shown above the select box
+    z-index: calc(
+      var(--pf-c-wizard__footer--ZIndex) + 2
+    ); // So the small screen navigation can be shown above the select box
   }
 
   .pf-c-wizard__main {
@@ -96,7 +98,7 @@
     .pf-l-grid {
       gap: var(--pf-c-form--GridGap);
     }
-    #repeat-on-hourly{
+    #repeat-on-hourly {
       max-height: 300px;
       overflow: scroll;
     }
@@ -121,5 +123,9 @@
   }
   #host-selection {
     width: 500px;
+  }
+
+  .pf-c-modal-box {
+    width: auto;
   }
 }

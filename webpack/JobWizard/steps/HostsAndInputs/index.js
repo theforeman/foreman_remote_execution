@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Form,
   FormGroup,
   InputGroup,
   Text,
+  Spinner,
 } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilterIcon } from '@patternfly/react-icons';
+import { debounce } from 'lodash';
+import { get } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { resetData } from 'foremanReact/components/AutoComplete/AutoCompleteActions';
 import {
   selectTemplateInputs,
   selectWithKatello,
+  selectHostCount,
+  selectIsLoadingHosts,
 } from '../../JobWizardSelectors';
 import { SelectField } from '../form/SelectField';
 import { SelectedChips } from './SelectedChips';
 import { TemplateInputs } from './TemplateInputs';
+import { HostSearch } from './HostSearch';
+import { HostPreviewModal } from './HostPreviewModal';
 import {
   WIZARD_TITLES,
   HOSTS,
@@ -26,11 +33,32 @@ import {
   hostMethods,
   hostsController,
   hostQuerySearchID,
+  HOSTS_API,
+  HOSTS_TO_PREVIEW_AMOUNT,
+  DEBOUNCE_HOST_COUNT,
 } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
-import { HostSearch } from './HostSearch';
 import { SelectAPI } from './SelectAPI';
 import { SelectGQL } from './SelectGQL';
+
+const buildQuery = (selected, search) => {
+  const { hosts, hostCollections, hostGroups } = selected;
+  const hostsSearch = `(name ^ (${hosts.map(({ id }) => id).join(',')}))`;
+  const hostCollectionsSearch = `(host_collection_id ^ (${hostCollections
+    .map(({ id }) => id)
+    .join(',')}))`;
+  const hostGroupsSearch = `(hostgroup_id ^ (${hostGroups
+    .map(({ id }) => id)
+    .join(',')}))`;
+  return [
+    hosts.length ? hostsSearch : false,
+    hostCollections.length ? hostCollectionsSearch : false,
+    hostGroups.length ? hostGroupsSearch : false,
+    search.length ? `(${search})` : false,
+  ]
+    .filter(Boolean)
+    .join(' or ');
+};
 
 const HostsAndInputs = ({
   templateValues,
@@ -41,8 +69,32 @@ const HostsAndInputs = ({
   setHostsSearchQuery,
 }) => {
   const [hostMethod, setHostMethod] = useState(hostMethods.hosts);
+  const isLoading = useSelector(selectIsLoadingHosts);
   const templateInputs = useSelector(selectTemplateInputs);
+  const [hostPreviewOpen, setHostPreviewOpen] = useState(false);
+  useEffect(() => {
+    debounce(() => {
+      dispatch(
+        get({
+          key: HOSTS_API,
+          url: '/api/hosts',
+          params: {
+            search: buildQuery(selected, hostsSearchQuery),
+            per_page: HOSTS_TO_PREVIEW_AMOUNT,
+          },
+        })
+      );
+    }, DEBOUNCE_HOST_COUNT)();
+  }, [
+    dispatch,
+    selected,
+    selected.hosts,
+    selected.hostCollections,
+    selected.hostCollections,
+    hostsSearchQuery,
+  ]);
   const withKatello = useSelector(selectWithKatello);
+  const hostCount = useSelector(selectHostCount);
   const dispatch = useDispatch();
 
   const selectedHosts = selected.hosts;
@@ -72,6 +124,13 @@ const HostsAndInputs = ({
   return (
     <div className="target-hosts-and-inputs">
       <WizardTitle title={WIZARD_TITLES.hostsAndInputs} />
+      {hostPreviewOpen && (
+        <HostPreviewModal
+          isOpen={hostPreviewOpen}
+          setIsOpen={setHostPreviewOpen}
+          searchQuery={buildQuery(selected, hostsSearchQuery)}
+        />
+      )}
       <Form>
         <FormGroup fieldId="host_selection" id="host-selection">
           <InputGroup>
@@ -136,9 +195,15 @@ const HostsAndInputs = ({
         />
         <Text>
           {__('Apply to')}{' '}
-          <Button variant="link" isInline>
-            {selectedHosts.length} {__('hosts')}
-          </Button>
+          <Button
+            variant="link"
+            isInline
+            onClick={() => setHostPreviewOpen(true)}
+            isDisabled={isLoading}
+          >
+            {hostCount} {__('hosts')}
+          </Button>{' '}
+          {isLoading && <Spinner size="sm" />}
         </Text>
         <TemplateInputs
           inputs={templateInputs}
