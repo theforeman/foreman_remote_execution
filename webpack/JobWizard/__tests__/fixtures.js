@@ -1,4 +1,6 @@
 import configureMockStore from 'redux-mock-store';
+import hostsQuery from '../steps/HostsAndInputs/hosts.gql';
+import hostgroupsQuery from '../steps/HostsAndInputs/hostgroups.gql';
 
 export const jobTemplate = {
   id: 178,
@@ -66,6 +68,7 @@ export const jobTemplateResponse = {
       resource_type: 'foreman_tasks/tasks',
       default: '',
       hidden_value: false,
+      url: 'foreman_tasks/tasks',
     },
     {
       name: 'adv date',
@@ -101,9 +104,11 @@ export const testSetup = (selectors, api) => {
   jest.spyOn(selectors, 'selectJobTemplates');
   jest.spyOn(selectors, 'selectJobCategories');
   jest.spyOn(selectors, 'selectJobCategoriesStatus');
+  jest.spyOn(selectors, 'selectWithKatello');
 
   jest.spyOn(selectors, 'selectTemplateInputs');
   jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
+  selectors.selectWithKatello.mockImplementation(() => true);
   selectors.selectTemplateInputs.mockImplementation(
     () => jobTemplateResponse.template_inputs
   );
@@ -115,6 +120,7 @@ export const testSetup = (selectors, api) => {
     jobTemplate,
     { ...jobTemplate, id: 2, name: 'template2' },
   ]);
+
   const mockStore = configureMockStore([]);
   const store = mockStore({
     ForemanTasksTask: {
@@ -126,14 +132,19 @@ export const testSetup = (selectors, api) => {
         ],
       },
     },
+    HOST_COLLECTIONS: {
+      response: {
+        subtotal: 3,
+        results: [
+          { id: '74', name: 'host_collection1' },
+          { id: '43', name: 'host_collection2' },
+        ],
+      },
+    },
   });
   return store;
 };
 
-export const mockTemplate = selectors => {
-  selectors.selectJobTemplate.mockImplementation(() => jobTemplate);
-  selectors.selectJobCategoriesStatus.mockImplementation(() => 'RESOLVED');
-};
 export const mockApi = api => {
   api.get.mockImplementation(({ handleSuccess, ...action }) => {
     if (action.key === 'JOB_CATEGORIES') {
@@ -153,3 +164,43 @@ export const mockApi = api => {
     return { type: 'get', ...action };
   });
 };
+
+export const qglMock = [
+  {
+    request: {
+      query: hostsQuery,
+      variables: {
+        search: 'name~"" and organization_id=1 and location_id=2',
+      },
+    },
+    result: {
+      data: {
+        hosts: {
+          totalCount: 3,
+          nodes: [{ name: 'host1' }, { name: 'host2' }, { name: 'host3' }],
+        },
+      },
+    },
+  },
+
+  {
+    request: {
+      query: hostgroupsQuery,
+      variables: {
+        search: 'name~"" and organization_id=1 and location_id=2',
+      },
+    },
+    result: {
+      data: {
+        hostgroups: {
+          totalCount: 3,
+          nodes: [
+            { name: 'host_group1' },
+            { name: 'host_group2' },
+            { name: 'host_group3' },
+          ],
+        },
+      },
+    },
+  },
+];

@@ -21,8 +21,13 @@ export const JobWizard = () => {
   const [category, setCategory] = useState('');
   const [advancedValues, setAdvancedValues] = useState({});
   const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description https://github.com/theforeman/foreman_remote_execution/pull/605
-  const [selectedHosts, setSelectedHosts] = useState(['host1', 'host2']);
   const [scheduleValue, setScheduleValue] = useState(initialScheduleState);
+  const [selectedTargets, setSelectedTargets] = useState({
+    hosts: [],
+    hostCollections: [],
+    hostGroups: [],
+  });
+  const [hostsSearchQuery, setHostsSearchQuery] = useState('');
   const dispatch = useDispatch();
 
   const setDefaults = useCallback(
@@ -105,8 +110,10 @@ export const JobWizard = () => {
         <HostsAndInputs
           templateValues={templateValues}
           setTemplateValues={setTemplateValues}
-          selectedHosts={selectedHosts}
-          setSelectedHosts={setSelectedHosts}
+          selected={selectedTargets}
+          setSelected={setSelectedTargets}
+          hostsSearchQuery={hostsSearchQuery}
+          setHostsSearchQuery={setHostsSearchQuery}
         />
       ),
       canJumpTo: isTemplate,

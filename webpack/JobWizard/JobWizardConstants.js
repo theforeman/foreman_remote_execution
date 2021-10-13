@@ -32,3 +32,20 @@ export const initialScheduleState = {
   isFuture: false,
   isNeverEnds: false,
 };
+export const HOSTS = 'HOSTS';
+export const HOST_COLLECTIONS = 'HOST_COLLECTIONS';
+export const HOST_GROUPS = 'HOST_GROUPS';
+export const hostMethods = {
+  hosts: __('Hosts'),
+  hostCollections: __('Host collections'),
+  hostGroups: __('Host groups'),
+  searchQuery: __('Search query'),
+};
+
+export const hostQuerySearchID = 'hostsSearch';
+export const hostsController = 'hosts';
+
+export const dataName = {
+  [HOSTS]: 'hosts',
+  [HOST_GROUPS]: 'hostgroups',
+};

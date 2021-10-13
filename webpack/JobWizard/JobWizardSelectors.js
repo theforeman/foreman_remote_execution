@@ -23,6 +23,9 @@ export const selectJobTemplates = state =>
 export const selectJobCategories = state =>
   selectAPIResponse(state, JOB_CATEGORIES).job_categories || [];
 
+export const selectWithKatello = state =>
+  selectAPIResponse(state, JOB_CATEGORIES).with_katello || false;
+
 export const selectJobCategoriesStatus = state =>
   selectAPIStatus(state, JOB_CATEGORIES);
 

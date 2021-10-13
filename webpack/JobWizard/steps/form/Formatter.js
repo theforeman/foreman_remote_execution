@@ -3,13 +3,16 @@ import { useSelector } from 'react-redux';
 import { FormGroup, TextInput, TextArea } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import SearchBar from 'foremanReact/components/SearchBar';
+import { getControllerSearchProps } from 'foremanReact/constants';
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
-import { SearchSelect } from './SearchSelect';
+import { ResourceSelectAPI } from './ResourceSelect';
+import { noop } from '../../../helpers';
 
 const TemplateSearchField = ({
   name,
   controller,
+  url,
   labelText,
   required,
   defaultValue,
@@ -24,6 +27,7 @@ const TemplateSearchField = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
   const id = name.replace(/ /g, '-');
+  const props = getControllerSearchProps(controller.replace('/', '_'), name);
   return (
     <FormGroup
       label={name}
@@ -35,14 +39,14 @@ const TemplateSearchField = ({
       <SearchBar
         initialQuery={defaultValue}
         data={{
-          controller,
+          ...props,
           autocomplete: {
             id: name,
-            url: `/${controller}/auto_complete_search`,
+            url,
             useKeyShortcuts: true,
           },
         }}
-        onSearch={() => null}
+        onSearch={noop}
       />
     </FormGroup>
   );
@@ -72,7 +76,7 @@ export const formatter = (input, values, setValue) => {
         isRequired={required}
         key={id}
       >
-        <SearchSelect
+        <ResourceSelectAPI
           name={name}
           apiKey={resourceType.replace('::', '')}
           url={`/ui_job_wizard/resources?resource=${resourceType}`}
@@ -142,14 +146,14 @@ export const formatter = (input, values, setValue) => {
     );
   }
   if (inputType === 'search') {
-    const controller = input.resource_type;
-    // TODO: get text from redux autocomplete
+    const controller = input.resource_type_tableize;
     return (
       <TemplateSearchField
         key={id}
         name={name}
         defaultValue={value}
-        controller={controller}
+        controller={resourceType}
+        url={`/${controller}/auto_complete_search`}
         labelText={labelText}
         required={required}
         setValue={setValue}
@@ -164,6 +168,7 @@ export const formatter = (input, values, setValue) => {
 TemplateSearchField.propTypes = {
   name: PropTypes.string.isRequired,
   controller: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
   labelText: PropTypes.string,
   required: PropTypes.bool.isRequired,
   defaultValue: PropTypes.string,
