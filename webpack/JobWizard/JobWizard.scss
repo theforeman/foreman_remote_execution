@@ -26,37 +26,6 @@
       margin-bottom: 10px;
     }
 
-    .foreman-search-field {
-      .rbt-input-hint input {
-        display: none;
-      }
-      // Giving pf3 search bar a pf4 look
-      width: 500px;
-      .search-bar {
-        display: block;
-      }
-      .input-group-btn {
-        display: none;
-      }
-      li {
-        font-size: 16px;
-      }
-      input {
-        font-size: 16px;
-        height: 36px;
-      }
-      .foreman-autocomplete .autocomplete-focus-shortcut {
-        top: 8px;
-        font-size: 16px;
-      }
-      .foreman-autocomplete .autocomplete-aux {
-        top: 8px;
-        font-size: 16px;
-        .autocomplete-clear-button {
-          font-size: 16px;
-        }
-      }
-    }
   }
 
   .gray-text {
