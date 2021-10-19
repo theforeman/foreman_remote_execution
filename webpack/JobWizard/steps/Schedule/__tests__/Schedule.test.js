@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
@@ -65,6 +66,10 @@ describe('Schedule', () => {
     const [startsTimeField, endsTimeField] = screen.getAllByPlaceholderText(
       'hh:mm'
     );
+
+    const staticQuery = screen.getByLabelText('Static query');
+    const dynamicQuery = screen.getByLabelText('Dynamic query');
+    expect(staticQuery.checked).toBeTruthy();
     await act(async () => {
       await fireEvent.change(startsDateField, {
         target: { value: newStartDate },
@@ -74,6 +79,8 @@ describe('Schedule', () => {
       });
       await fireEvent.change(endsDateField, { target: { value: newEndsDate } });
       await fireEvent.change(endsTimeField, { target: { value: newEndsTime } });
+
+      await fireEvent.click(dynamicQuery);
       jest.runAllTimers(); // to handle pf4 date picker popover useTimer
     });
     await act(async () => {
@@ -89,6 +96,7 @@ describe('Schedule', () => {
     expect(startsTimeField.value).toBe(newStartTime);
     expect(endsDateField.value).toBe(newEndsDate);
     expect(endsTimeField.value).toBe(newEndsTime);
+    expect(dynamicQuery.checked).toBeTruthy();
   });
   it('should remove start date time on execute now', async () => {
     render(

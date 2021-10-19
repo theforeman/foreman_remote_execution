@@ -31,6 +31,7 @@ export const initialScheduleState = {
   ends: '',
   isFuture: false,
   isNeverEnds: false,
+  isTypeStatic: true,
 };
 export const HOSTS_API = 'HOSTS_API';
 export const HOSTS = 'HOSTS';
