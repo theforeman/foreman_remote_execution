@@ -45,6 +45,7 @@ const TemplateSearchField = ({
             url,
             useKeyShortcuts: true,
           },
+          bookmarks: null,
         }}
         onSearch={noop}
       />

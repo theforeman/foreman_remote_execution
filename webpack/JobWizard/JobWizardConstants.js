@@ -42,7 +42,7 @@ export const hostMethods = {
   searchQuery: __('Search query'),
 };
 
-export const hostQuerySearchID = 'hostsSearch';
+export const hostQuerySearchID = 'searchBar'; // until https://projects.theforeman.org/issues/33737 is used
 export const hostsController = 'hosts';
 
 export const dataName = {
