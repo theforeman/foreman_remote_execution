@@ -18,6 +18,7 @@ const Schedule = ({ scheduleValue, setScheduleValue }) => {
     ends,
     isNeverEnds,
     isFuture,
+    isTypeStatic,
   } = scheduleValue;
   return (
     <>
@@ -95,7 +96,15 @@ const Schedule = ({ scheduleValue, setScheduleValue }) => {
         <Button variant="link" className="advanced-scheduling-button" isInline>
           {__('Advanced scheduling')}
         </Button>
-        <QueryType />
+        <QueryType
+          isTypeStatic={isTypeStatic}
+          setIsTypeStatic={newValue => {
+            setScheduleValue(current => ({
+              ...current,
+              isTypeStatic: newValue,
+            }));
+          }}
+        />
       </Form>
     </>
   );
@@ -110,6 +119,7 @@ Schedule.propTypes = {
     ends: PropTypes.string,
     isFuture: PropTypes.bool,
     isNeverEnds: PropTypes.bool,
+    isTypeStatic: PropTypes.bool,
   }).isRequired,
   setScheduleValue: PropTypes.func.isRequired,
 };
