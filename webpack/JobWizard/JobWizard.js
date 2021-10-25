@@ -14,6 +14,7 @@ import {
 import { selectTemplateError, selectJobTemplate } from './JobWizardSelectors';
 import Schedule from './steps/Schedule/';
 import HostsAndInputs from './steps/HostsAndInputs/';
+import ReviewDetails from './steps/ReviewDetails/';
 import { useValidation } from './validation';
 import { useAutoFill } from './autofill';
 import './JobWizard.scss';
@@ -167,7 +168,17 @@ export const JobWizard = () => {
     },
     {
       name: WIZARD_TITLES.review,
-      component: <p>Review Details</p>,
+      component: (
+        <ReviewDetails
+          jobCategory={category}
+          jobTemplateID={jobTemplateID}
+          advancedValues={advancedValues}
+          scheduleValue={scheduleValue}
+          templateValues={templateValues}
+          selectedTargets={selectedTargets}
+          hostsSearchQuery={hostsSearchQuery}
+        />
+      ),
       nextButtonText: 'Run',
       canJumpTo:
         isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,

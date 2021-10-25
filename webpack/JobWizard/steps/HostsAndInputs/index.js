@@ -40,25 +40,7 @@ import {
 import { WizardTitle } from '../form/WizardTitle';
 import { SelectAPI } from './SelectAPI';
 import { SelectGQL } from './SelectGQL';
-
-const buildQuery = (selected, search) => {
-  const { hosts, hostCollections, hostGroups } = selected;
-  const hostsSearch = `(name ^ (${hosts.map(({ id }) => id).join(',')}))`;
-  const hostCollectionsSearch = `(host_collection_id ^ (${hostCollections
-    .map(({ id }) => id)
-    .join(',')}))`;
-  const hostGroupsSearch = `(hostgroup_id ^ (${hostGroups
-    .map(({ id }) => id)
-    .join(',')}))`;
-  return [
-    hosts.length ? hostsSearch : false,
-    hostCollections.length ? hostCollectionsSearch : false,
-    hostGroups.length ? hostGroupsSearch : false,
-    search.length ? `(${search})` : false,
-  ]
-    .filter(Boolean)
-    .join(' or ');
-};
+import { buildHostQuery } from './buildHostQuery';
 
 const HostsAndInputs = ({
   templateValues,
@@ -79,7 +61,7 @@ const HostsAndInputs = ({
           key: HOSTS_API,
           url: '/api/hosts',
           params: {
-            search: buildQuery(selected, hostsSearchQuery),
+            search: buildHostQuery(selected, hostsSearchQuery),
             per_page: HOSTS_TO_PREVIEW_AMOUNT,
           },
         })
@@ -128,7 +110,7 @@ const HostsAndInputs = ({
         <HostPreviewModal
           isOpen={hostPreviewOpen}
           setIsOpen={setHostPreviewOpen}
-          searchQuery={buildQuery(selected, hostsSearchQuery)}
+          searchQuery={buildHostQuery(selected, hostsSearchQuery)}
         />
       )}
       <Form>
