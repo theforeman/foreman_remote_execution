@@ -6,13 +6,18 @@ const setEnds = jest.fn();
 const setIsNeverEnds = jest.fn();
 const setValid = jest.fn();
 const props = {
-  starts: '',
-  setStarts: jest.fn(),
+  startsAt: '',
+  startsBefore: '',
+  setStartsAt: jest.fn(),
+  setStartsBefore: jest.fn(),
   ends: 'some-end-date',
   setEnds,
   setIsNeverEnds,
   isNeverEnds: false,
-  setValid,
+  validEnd: true,
+  setValidEnd: setValid,
+  isFuture: false,
+  isStartBeforeDisabled: false,
 };
 
 describe('StartEndDates', () => {
