@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { DatePicker, TimePicker } from '@patternfly/react-core';
+import {
+  DatePicker,
+  TimePicker,
+  ValidatedOptions,
+} from '@patternfly/react-core';
 import { debounce } from 'lodash';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 
-export const DateTimePicker = ({ dateTime, setDateTime, isDisabled }) => {
+export const DateTimePicker = ({
+  dateTime,
+  setDateTime,
+  isDisabled,
+  ariaLabel,
+  allowEmpty,
+}) => {
+  const [validated, setValidated] = useState();
   const dateFormat = date =>
     `${date.getFullYear()}/${(date.getMonth() + 1)
       .toString()
@@ -36,23 +47,36 @@ export const DateTimePicker = ({ dateTime, setDateTime, isDisabled }) => {
 
   const onDateChange = newDate => {
     const parsedNewDate = new Date(newDate);
-
-    if (isValidDate(parsedNewDate)) {
+    if (!newDate.length && allowEmpty) {
+      setDateTime('');
+      setValidated(ValidatedOptions.noval);
+    } else if (isValidDate(parsedNewDate)) {
       parsedNewDate.setHours(dateObject.getHours());
       parsedNewDate.setMinutes(dateObject.getMinutes());
       setDateTime(parsedNewDate.toString());
+      setValidated(ValidatedOptions.noval);
+    } else {
+      setValidated(ValidatedOptions.error);
     }
   };
 
   const onTimeChange = newTime => {
-    if (isValidTime(newTime)) {
+    if (!newTime.length && allowEmpty) {
+      const parsedNewTime = new Date(`${formattedDate} 00:00`);
+      setDateTime(parsedNewTime.toString());
+      setValidated(ValidatedOptions.noval);
+    } else if (isValidTime(newTime)) {
       const parsedNewTime = new Date(`${formattedDate} ${newTime}`);
       setDateTime(parsedNewTime.toString());
+      setValidated(ValidatedOptions.noval);
+    } else {
+      setValidated(ValidatedOptions.error);
     }
   };
   return (
     <>
       <DatePicker
+        aria-label={`${ariaLabel} datepicker`}
         value={formattedDate}
         placeholder="yyyy/mm/dd"
         onChange={debounce(onDateChange, 1000, {
@@ -62,9 +86,14 @@ export const DateTimePicker = ({ dateTime, setDateTime, isDisabled }) => {
         dateFormat={dateFormat}
         dateParse={dateParse}
         isDisabled={isDisabled}
-        invalidFormatText={__('Invalid date')}
+        locale={documentLocale()}
+        invalidFormatText={
+          validated === ValidatedOptions.error ? __('Invalid date') : ''
+        }
+        inputProps={{ validated }}
       />
       <TimePicker
+        aria-label={`${ariaLabel} timepicker`}
         className="time-picker"
         time={dateTime ? dateObject.toString() : ''}
         inputProps={dateTime ? {} : { value: '' }}
@@ -86,8 +115,12 @@ DateTimePicker.propTypes = {
   dateTime: PropTypes.string,
   setDateTime: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
+  ariaLabel: PropTypes.string,
+  allowEmpty: PropTypes.bool,
 };
 DateTimePicker.defaultProps = {
   dateTime: null,
   isDisabled: false,
+  ariaLabel: '',
+  allowEmpty: true,
 };

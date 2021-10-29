@@ -1,51 +1,77 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, Checkbox } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { DateTimePicker } from '../form/DateTimePicker';
+import { helpLabel } from '../form/FormHelpers';
 
 export const StartEndDates = ({
-  starts,
-  setStarts,
+  startsAt,
+  setStartsAt,
+  startsBefore,
+  setStartsBefore,
   ends,
   setEnds,
   isNeverEnds,
   setIsNeverEnds,
-  setValid,
+  validEnd,
+  setValidEnd,
+  isFuture,
+  isStartBeforeDisabled,
 }) => {
-  const [validEnd, setValidEnd] = useState(true);
   const toggleIsNeverEnds = (checked, event) => {
     const value = event?.target?.checked;
     setIsNeverEnds(value);
   };
   useEffect(() => {
     if (isNeverEnds) setValidEnd(true);
-    else if (!starts || !ends) setValidEnd(true);
-    else if (new Date(starts).getTime() <= new Date(ends).getTime())
+    else if ((!startsAt.length && !startsBefore.length) || !ends)
+      setValidEnd(true);
+    else if (
+      startsAt.length
+        ? new Date(startsAt).getTime() <= new Date(ends).getTime()
+        : new Date(startsBefore).getTime() <= new Date(ends).getTime()
+    )
       setValidEnd(true);
     else setValidEnd(false);
-  }, [starts, ends, isNeverEnds]);
-  useEffect(() => {
-    setValid(validEnd);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validEnd]);
+  }, [startsAt, startsBefore, ends, isNeverEnds, setValidEnd]);
   return (
     <>
+      <FormGroup label={__('Starts at')} fieldId="start-at-date">
+        <DateTimePicker
+          allowEmpty={!isFuture}
+          ariaLabel="starts at"
+          dateTime={startsAt}
+          setDateTime={setStartsAt}
+        />
+      </FormGroup>
+
       <FormGroup
-        className="start-date"
-        label={__('Starts')}
-        fieldId="start-date"
+        label={__('Starts before')}
+        fieldId="start-before-date"
+        labelIcon={helpLabel(
+          __(
+            'Indicates that the action should be cancelled if it cannot be started before this time.'
+          ),
+          'start-before-date'
+        )}
       >
-        <DateTimePicker dateTime={starts} setDateTime={setStarts} />
+        <DateTimePicker
+          isDisabled={isStartBeforeDisabled}
+          allowEmpty={!isFuture}
+          ariaLabel="starts before"
+          dateTime={startsBefore}
+          setDateTime={setStartsBefore}
+        />
       </FormGroup>
       <FormGroup
-        className="end-date"
         label={__('Ends')}
         fieldId="end-date"
         helperTextInvalid={__('End time needs to be after start time')}
         validated={validEnd ? 'success' : 'error'}
       >
         <DateTimePicker
+          ariaLabel="ends"
           dateTime={ends}
           setDateTime={setEnds}
           isDisabled={isNeverEnds}
@@ -63,11 +89,16 @@ export const StartEndDates = ({
 };
 
 StartEndDates.propTypes = {
-  starts: PropTypes.string.isRequired,
-  setStarts: PropTypes.func.isRequired,
+  startsAt: PropTypes.string.isRequired,
+  setStartsAt: PropTypes.func.isRequired,
+  startsBefore: PropTypes.string.isRequired,
+  setStartsBefore: PropTypes.func.isRequired,
   ends: PropTypes.string.isRequired,
   setEnds: PropTypes.func.isRequired,
   isNeverEnds: PropTypes.bool.isRequired,
   setIsNeverEnds: PropTypes.func.isRequired,
-  setValid: PropTypes.func.isRequired,
+  validEnd: PropTypes.bool.isRequired,
+  setValidEnd: PropTypes.func.isRequired,
+  isFuture: PropTypes.bool.isRequired,
+  isStartBeforeDisabled: PropTypes.bool.isRequired,
 };

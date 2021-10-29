@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form } from '@patternfly/react-core';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { Form } from '@patternfly/react-core';
 import { ScheduleType } from './ScheduleType';
 import { RepeatOn } from './RepeatOn';
 import { QueryType } from './QueryType';
 import { StartEndDates } from './StartEndDates';
-import { WIZARD_TITLES } from '../../JobWizardConstants';
+import { WIZARD_TITLES, repeatTypes } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
 
 const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
@@ -14,12 +13,27 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
     repeatType,
     repeatAmount,
     repeatData,
-    starts,
+    startsAt,
+    startsBefore,
     ends,
     isNeverEnds,
     isFuture,
     isTypeStatic,
   } = scheduleValue;
+
+  const [validEnd, setValidEnd] = useState(true);
+  useEffect(() => {
+    if (!validEnd) {
+      setValid(false);
+    } else if (isFuture && (startsAt.length || startsBefore.length)) {
+      setValid(true);
+    } else if (!isFuture) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startsAt, startsBefore, isFuture, validEnd]);
   return (
     <>
       <WizardTitle title={WIZARD_TITLES.schedule} />
@@ -31,13 +45,17 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
               // if schedule type is execute now
               setScheduleValue(current => ({
                 ...current,
-                starts: '',
+                startsAt: '',
+                startsBefore: '',
+                isFuture: newValue,
+              }));
+            } else {
+              setScheduleValue(current => ({
+                ...current,
+                startsAt: new Date().toISOString(),
+                isFuture: newValue,
               }));
             }
-            setScheduleValue(current => ({
-              ...current,
-              isFuture: newValue,
-            }));
           }}
         />
 
@@ -48,6 +66,7 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
             setScheduleValue(current => ({
               ...current,
               repeatType: newValue,
+              startsBefore: '',
             }));
           }}
           setRepeatData={newValue => {
@@ -65,8 +84,8 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
           }}
         />
         <StartEndDates
-          starts={starts}
-          setStarts={newValue => {
+          startsAt={startsAt}
+          setStartsAt={newValue => {
             if (!isFuture) {
               setScheduleValue(current => ({
                 ...current,
@@ -75,7 +94,20 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
             }
             setScheduleValue(current => ({
               ...current,
-              starts: newValue,
+              startsAt: newValue,
+            }));
+          }}
+          startsBefore={startsBefore}
+          setStartsBefore={newValue => {
+            if (!isFuture) {
+              setScheduleValue(current => ({
+                ...current,
+                isFuture: true,
+              }));
+            }
+            setScheduleValue(current => ({
+              ...current,
+              startsBefore: newValue,
             }));
           }}
           ends={ends}
@@ -92,11 +124,11 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
               isNeverEnds: newValue,
             }));
           }}
-          setValid={setValid}
+          validEnd={validEnd}
+          setValidEnd={setValidEnd}
+          isFuture={isFuture}
+          isStartBeforeDisabled={repeatType !== repeatTypes.noRepeat}
         />
-        <Button variant="link" className="advanced-scheduling-button" isInline>
-          {__('Advanced scheduling')}
-        </Button>
         <QueryType
           isTypeStatic={isTypeStatic}
           setIsTypeStatic={newValue => {
@@ -116,7 +148,8 @@ Schedule.propTypes = {
     repeatType: PropTypes.string.isRequired,
     repeatAmount: PropTypes.string,
     repeatData: PropTypes.object,
-    starts: PropTypes.string,
+    startsAt: PropTypes.string,
+    startsBefore: PropTypes.string,
     ends: PropTypes.string,
     isFuture: PropTypes.bool,
     isNeverEnds: PropTypes.bool,

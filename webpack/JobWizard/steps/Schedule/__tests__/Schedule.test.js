@@ -60,12 +60,11 @@ describe('Schedule', () => {
     const newStartTime = '12:03';
     const newEndsDate = '2030/03/12';
     const newEndsTime = '17:34';
-    const [startsDateField, endsDateField] = screen.getAllByPlaceholderText(
-      'yyyy/mm/dd'
-    );
-    const [startsTimeField, endsTimeField] = screen.getAllByPlaceholderText(
-      'hh:mm'
-    );
+    const startsDateField = screen.getByLabelText('starts at datepicker');
+    const endsDateField = screen.getByLabelText('ends datepicker');
+
+    const startsTimeField = screen.getByLabelText('starts at timepicker');
+    const endsTimeField = screen.getByLabelText('ends timepicker');
 
     const staticQuery = screen.getByLabelText('Static query');
     const dynamicQuery = screen.getByLabelText('Dynamic query');
@@ -114,8 +113,8 @@ describe('Schedule', () => {
     expect(executeNow.checked).toBeTruthy();
     const newStartDate = '2020/03/12';
     const newStartTime = '12:03';
-    const [startsDateField] = screen.getAllByPlaceholderText('yyyy/mm/dd');
-    const [startsTimeField] = screen.getAllByPlaceholderText('hh:mm');
+    const startsDateField = screen.getByLabelText('starts at datepicker');
+    const startsTimeField = screen.getByLabelText('starts at timepicker');
     await act(async () => {
       await fireEvent.change(startsDateField, {
         target: { value: newStartDate },
@@ -130,6 +129,7 @@ describe('Schedule', () => {
     expect(executeFuture.checked).toBeTruthy();
     await act(async () => {
       await fireEvent.click(executeNow);
+      jest.runAllTimers();
     });
     expect(executeNow.checked).toBeTruthy();
     expect(startsDateField.value).toBe('');
@@ -149,8 +149,8 @@ describe('Schedule', () => {
     const neverEnds = screen.getByLabelText('Never ends');
     expect(neverEnds.checked).toBeFalsy();
 
-    const [, endsDateField] = screen.getAllByPlaceholderText('yyyy/mm/dd');
-    const [, endsTimeField] = screen.getAllByPlaceholderText('hh:mm');
+    const endsDateField = screen.getByLabelText('ends datepicker');
+    const endsTimeField = screen.getByLabelText('ends timepicker');
     expect(endsDateField.disabled).toBeFalsy();
     expect(endsTimeField.disabled).toBeFalsy();
     await act(async () => {
@@ -307,9 +307,8 @@ describe('Schedule', () => {
     const neverEnds = screen.getByLabelText('Never ends');
     expect(neverEnds.checked).toBeFalsy();
 
-    const [startsDateField, endsDateField] = screen.getAllByPlaceholderText(
-      'yyyy/mm/dd'
-    );
+    const startsDateField = screen.getByLabelText('starts at datepicker');
+    const endsDateField = screen.getByLabelText('ends datepicker');
 
     expect(
       screen.queryAllByText('End time needs to be after start time')
