@@ -62,6 +62,8 @@ class JobInvocation < ApplicationRecord
   scoped_search :on => 'targeted_host_id', :rename => 'targeted_host_id', :operators => ['= '],
     :complete_value => false, :only_explicit => true, :ext_method => :search_by_targeted_host
 
+  scoped_search :relation => :targeting, :on => :search_query, :rename => 'targeting_search_query', :only_explicit => true, :complete_value => false
+
   scoped_search :on => 'pattern_template_name', :rename => 'pattern_template_name', :operators => ['= '],
     :complete_value => false, :only_explicit => true, :ext_method => :search_by_pattern_template
 
