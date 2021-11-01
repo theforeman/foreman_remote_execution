@@ -12,6 +12,7 @@ import {
   JOB_CATEGORIES,
   JOB_TEMPLATE,
   HOSTS_API,
+  JOB_INVOCATION,
 } from './JobWizardConstants';
 
 export const selectJobTemplatesStatus = state =>
@@ -67,6 +68,10 @@ export const selectResponse = selectAPIResponse;
 
 export const selectIsLoading = (state, key) =>
   selectAPIStatus(state, key) === STATUS.PENDING;
+
+export const selectIsSubmitting = state =>
+  selectAPIStatus(state, JOB_INVOCATION) === STATUS.PENDING ||
+  selectAPIStatus(state, JOB_INVOCATION) === STATUS.RESOLVED;
 
 export const selectRouterSearch = state => {
   const { search } = selectRouterLocation(state);
