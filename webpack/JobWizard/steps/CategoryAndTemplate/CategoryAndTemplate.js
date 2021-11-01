@@ -53,6 +53,7 @@ export const CategoryAndTemplate = ({
           value={selectedCategory}
           placeholderText={categoryError ? __('Error') : ''}
           isDisabled={!!categoryError}
+          isRequired
         />
         <GroupedSelectField
           label={__('Job template')}
