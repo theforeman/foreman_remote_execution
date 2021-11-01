@@ -4,6 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Wizard } from '@patternfly/react-core';
 import { get } from 'foremanReact/redux/API';
 import history from 'foremanReact/history';
+
+import {
+  useForemanOrganization,
+  useForemanLocation,
+} from 'foremanReact/Root/Context/ForemanContext';
 import CategoryAndTemplate from './steps/CategoryAndTemplate/';
 import { AdvancedFields } from './steps/AdvancedFields/AdvancedFields';
 import {
@@ -11,12 +16,17 @@ import {
   WIZARD_TITLES,
   initialScheduleState,
 } from './JobWizardConstants';
-import { selectTemplateError, selectJobTemplate } from './JobWizardSelectors';
+import {
+  selectTemplateError,
+  selectJobTemplate,
+  selectIsSubmitting,
+} from './JobWizardSelectors';
 import Schedule from './steps/Schedule/';
 import HostsAndInputs from './steps/HostsAndInputs/';
 import ReviewDetails from './steps/ReviewDetails/';
 import { useValidation } from './validation';
 import { useAutoFill } from './autofill';
+import { submit } from './submit';
 import './JobWizard.scss';
 
 export const JobWizard = () => {
@@ -103,6 +113,7 @@ export const JobWizard = () => {
   });
   const templateError = !!useSelector(selectTemplateError);
   const templateResponse = useSelector(selectJobTemplate);
+  const isSubmitting = useSelector(selectIsSubmitting);
   const isTemplate =
     !templateError && !!jobTemplateID && templateResponse.job_template;
 
@@ -183,9 +194,15 @@ export const JobWizard = () => {
       canJumpTo:
         isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,
       enableNext:
-        isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,
+        isTemplate &&
+        valid.hostsAndInputs &&
+        valid.advanced &&
+        valid.schedule &&
+        !isSubmitting,
     },
   ];
+  const location = useForemanLocation();
+  const organization = useForemanOrganization();
   return (
     <Wizard
       onClose={() => history.goBack()}
@@ -193,6 +210,19 @@ export const JobWizard = () => {
       steps={steps}
       height="100%"
       className="job-wizard"
+      onSave={() => {
+        submit({
+          jobTemplateID,
+          templateValues,
+          advancedValues,
+          scheduleValue,
+          dispatch,
+          selectedTargets,
+          hostsSearchQuery,
+          location,
+          organization,
+        });
+      }}
     />
   );
 };
