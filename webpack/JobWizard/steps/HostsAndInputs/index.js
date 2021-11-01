@@ -135,6 +135,7 @@ const HostsAndInputs = ({
         <FormGroup fieldId="host_selection" id="host-selection">
           <InputGroup>
             <SelectField
+              isRequired
               className="target-method-select"
               toggleIcon={<FilterIcon />}
               fieldId="host_methods"

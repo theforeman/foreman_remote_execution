@@ -17,6 +17,16 @@ export const SelectField = ({
     setIsOpen(false);
   };
   const [isOpen, setIsOpen] = useState(false);
+  const selectOptions = [
+    !isRequired && (
+      <SelectOption key={0} value="">
+        <p> </p>
+      </SelectOption>
+    ),
+    ...options.map((option, index) => (
+      <SelectOption key={index + 1} value={option} />
+    )),
+  ];
   return (
     <FormGroup
       label={label}
@@ -37,9 +47,7 @@ export const SelectField = ({
         toggleAriaLabel={`${label} toggle`}
         {...props}
       >
-        {options.map((option, index) => (
-          <SelectOption key={index} value={option} />
-        ))}
+        {selectOptions.filter(option => option)}
       </Select>
     </FormGroup>
   );

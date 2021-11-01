@@ -56,6 +56,7 @@ export const RepeatOn = ({
       <Grid>
         <GridItem span={6}>
           <SelectField
+            isRequired
             fieldId="repeat-select"
             options={Object.values(repeatTypes)}
             setValue={newValue => {
