@@ -32,6 +32,9 @@ export const SelectField = ({
         className="without_select2"
         maxHeight="45vh"
         menuAppendTo={() => document.body}
+        placeholderText=" " // To prevent showing first option as selected
+        aria-labelledby={fieldId}
+        toggleAriaLabel={`${label} toggle`}
         {...props}
       >
         {options.map((option, index) => (
