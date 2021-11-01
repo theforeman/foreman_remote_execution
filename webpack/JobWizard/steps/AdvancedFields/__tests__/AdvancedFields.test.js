@@ -100,7 +100,7 @@ describe('AdvancedFields', () => {
     const textField = screen.getByLabelText('adv plain hidden', {
       selector: 'textarea',
     });
-    const selectField = screen.getByText('option 1');
+    const selectField = screen.getByLabelText('adv plain select toggle');
     const resourceSelectField = screen.getByLabelText(
       'adv resource select toggle'
     );

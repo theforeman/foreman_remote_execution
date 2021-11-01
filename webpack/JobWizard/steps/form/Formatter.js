@@ -91,7 +91,6 @@ export const formatter = (input, values, setValue) => {
     const options = input.options.split(/\r?\n/).map(option => option.trim());
     return (
       <SelectField
-        aria-label={name}
         key={id}
         isRequired={required}
         label={name}
