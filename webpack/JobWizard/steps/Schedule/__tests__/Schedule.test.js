@@ -234,15 +234,15 @@ describe('Schedule', () => {
     });
     expect(days.value).toBe(newDays);
 
-    const newAt = '13:07';
-    const at = screen.getByLabelText('repeat-at');
-    expect(at.value).toBe('');
+    const newAtMonthly = '13:07';
+    const at = () => screen.getByLabelText('repeat-at');
+    expect(at().value).toBe('');
     await act(async () => {
-      fireEvent.change(at, {
-        target: { value: newAt },
+      fireEvent.change(at(), {
+        target: { value: newAtMonthly },
       });
     });
-    expect(at.value).toBe(newAt);
+    expect(at().value).toBe(newAtMonthly);
 
     fireEvent.click(screen.getByText('Monthly'));
     await act(async () => {
@@ -263,21 +263,27 @@ describe('Schedule', () => {
     });
     expect(dayTue.checked).toBe(true);
     expect(daySat.checked).toBe(true);
-
+    const newAtWeekly = '17:53';
+    expect(at().value).toBe(newAtMonthly);
+    await act(async () => {
+      fireEvent.change(at(), {
+        target: { value: newAtWeekly },
+      });
+    });
+    expect(at().value).toBe(newAtWeekly);
     fireEvent.click(screen.getByText('Weekly'));
     await act(async () => {
       fireEvent.click(screen.getByText('Daily'));
     });
 
     const newAtDaily = '17:07';
-    const atDaily = screen.getByLabelText('repeat-at');
-    expect(atDaily.value).toBe(newAt);
+    expect(at().value).toBe(newAtWeekly);
     await act(async () => {
-      fireEvent.change(atDaily, {
+      fireEvent.change(at(), {
         target: { value: newAtDaily },
       });
     });
-    expect(atDaily.value).toBe(newAtDaily);
+    expect(at().value).toBe(newAtDaily);
 
     fireEvent.click(screen.getByText('Daily'));
     await act(async () => {
