@@ -68,6 +68,8 @@ describe('Schedule', () => {
 
     const staticQuery = screen.getByLabelText('Static query');
     const dynamicQuery = screen.getByLabelText('Dynamic query');
+    const purpose = screen.getByLabelText('purpose');
+    const newPurposeLabel = 'some fun text';
     expect(staticQuery.checked).toBeTruthy();
     await act(async () => {
       await fireEvent.change(startsDateField, {
@@ -75,6 +77,9 @@ describe('Schedule', () => {
       });
       await fireEvent.change(startsTimeField, {
         target: { value: newStartTime },
+      });
+      await fireEvent.change(purpose, {
+        target: { value: newPurposeLabel },
       });
       await fireEvent.change(endsDateField, { target: { value: newEndsDate } });
       await fireEvent.change(endsTimeField, { target: { value: newEndsTime } });
@@ -96,6 +101,7 @@ describe('Schedule', () => {
     expect(endsDateField.value).toBe(newEndsDate);
     expect(endsTimeField.value).toBe(newEndsTime);
     expect(dynamicQuery.checked).toBeTruthy();
+    expect(purpose.value).toBe(newPurposeLabel);
   });
   it('should remove start date time on execute now', async () => {
     render(
