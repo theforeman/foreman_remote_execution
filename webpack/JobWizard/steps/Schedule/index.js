@@ -130,6 +130,7 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
           setValidEnd={setValidEnd}
           isFuture={isFuture}
           isStartBeforeDisabled={repeatType !== repeatTypes.noRepeat}
+          isEndDisabled={repeatType === repeatTypes.noRepeat}
         />
         <QueryType
           isTypeStatic={isTypeStatic}

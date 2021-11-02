@@ -18,6 +18,7 @@ const props = {
   setValidEnd: setValid,
   isFuture: false,
   isStartBeforeDisabled: false,
+  isEndDisabled: false,
 };
 
 describe('StartEndDates', () => {

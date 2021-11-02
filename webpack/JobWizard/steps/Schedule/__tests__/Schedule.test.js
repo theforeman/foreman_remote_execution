@@ -157,6 +157,12 @@ describe('Schedule', () => {
 
     const endsDateField = screen.getByLabelText('ends datepicker');
     const endsTimeField = screen.getByLabelText('ends timepicker');
+    fireEvent.click(
+      screen.getByLabelText('Does not repeat', { selector: 'button' })
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText('Cronline'));
+    });
     expect(endsDateField.disabled).toBeFalsy();
     expect(endsTimeField.disabled).toBeFalsy();
     await act(async () => {
@@ -341,5 +347,34 @@ describe('Schedule', () => {
     ).toHaveLength(1);
 
     expect(screen.getByText('Review Details').disabled).toBeTruthy();
+  });
+  it('purpose and ends should be disabled when no reaccurence ', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    await act(async () => {
+      await fireEvent.click(screen.getByText('Schedule'));
+      jest.runAllTimers();
+    });
+
+    const endsDateField = screen.getByLabelText('ends datepicker');
+    const endsTimeField = screen.getByLabelText('ends timepicker');
+    const purpose = screen.getByLabelText('purpose');
+    expect(endsDateField.disabled).toBeTruthy();
+    expect(endsTimeField.disabled).toBeTruthy();
+    expect(purpose.disabled).toBeTruthy();
+    await act(async () => {
+      fireEvent.click(
+        screen.getByLabelText('Does not repeat', { selector: 'button' })
+      );
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByText('Cronline'));
+    });
+    expect(endsDateField.disabled).toBeFalsy();
+    expect(endsTimeField.disabled).toBeFalsy();
+    expect(purpose.disabled).toBeFalsy();
   });
 });
