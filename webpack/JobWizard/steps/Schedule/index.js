@@ -6,6 +6,7 @@ import { RepeatOn } from './RepeatOn';
 import { QueryType } from './QueryType';
 import { StartEndDates } from './StartEndDates';
 import { WIZARD_TITLES, repeatTypes } from '../../JobWizardConstants';
+import { PurposeField } from './PurposeField';
 import { WizardTitle } from '../form/WizardTitle';
 
 const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
@@ -19,6 +20,7 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
     isNeverEnds,
     isFuture,
     isTypeStatic,
+    purpose,
   } = scheduleValue;
 
   const [validEnd, setValidEnd] = useState(true);
@@ -138,6 +140,16 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
             }));
           }}
         />
+        <PurposeField
+          isDisabled={repeatType === repeatTypes.noRepeat}
+          purpose={purpose}
+          setPurpose={newValue => {
+            setScheduleValue(current => ({
+              ...current,
+              purpose: newValue,
+            }));
+          }}
+        />
       </Form>
     </>
   );
@@ -154,6 +166,7 @@ Schedule.propTypes = {
     isFuture: PropTypes.bool,
     isNeverEnds: PropTypes.bool,
     isTypeStatic: PropTypes.bool,
+    purpose: PropTypes.string,
   }).isRequired,
   setScheduleValue: PropTypes.func.isRequired,
   setValid: PropTypes.func.isRequired,
