@@ -18,6 +18,7 @@ export const StartEndDates = ({
   setValidEnd,
   isFuture,
   isStartBeforeDisabled,
+  isEndDisabled,
 }) => {
   const toggleIsNeverEnds = (checked, event) => {
     const value = event?.target?.checked;
@@ -74,7 +75,7 @@ export const StartEndDates = ({
           ariaLabel="ends"
           dateTime={ends}
           setDateTime={setEnds}
-          isDisabled={isNeverEnds}
+          isDisabled={isNeverEnds || isEndDisabled}
         />
         <Checkbox
           label={__('Never ends')}
@@ -101,4 +102,5 @@ StartEndDates.propTypes = {
   setValidEnd: PropTypes.func.isRequired,
   isFuture: PropTypes.bool.isRequired,
   isStartBeforeDisabled: PropTypes.bool.isRequired,
+  isEndDisabled: PropTypes.bool.isRequired,
 };
