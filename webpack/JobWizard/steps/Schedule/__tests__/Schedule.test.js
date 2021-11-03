@@ -186,6 +186,7 @@ describe('Schedule', () => {
     expect(
       screen.getByPlaceholderText('Repeat N times').hasAttribute('disabled')
     ).toBeTruthy();
+    expect(screen.getByText('Review Details').disabled).toBeFalsy();
     await act(async () => {
       fireEvent.click(
         screen.getByLabelText('Does not repeat', { selector: 'button' })
@@ -195,8 +196,7 @@ describe('Schedule', () => {
     await act(async () => {
       fireEvent.click(screen.getByText('Cronline'));
     });
-    fireEvent.click(screen.getAllByText('Schedule')[0]); // to remove focus
-
+    expect(screen.getByText('Review Details').disabled).toBeTruthy();
     const newRepeatTimes = '3';
     const repeatNTimes = screen.getByPlaceholderText('Repeat N times');
     expect(repeatNTimes.value).toBe('');
@@ -216,6 +216,7 @@ describe('Schedule', () => {
       });
     });
     expect(cronline.value).toBe(newCronline);
+    expect(screen.getByText('Review Details').disabled).toBeFalsy();
 
     await act(async () => {
       fireEvent.click(screen.getByText('Category and Template'));
@@ -226,7 +227,6 @@ describe('Schedule', () => {
       fireEvent.click(screen.getByText('Schedule'));
       jest.runAllTimers();
     });
-    fireEvent.click(screen.getAllByText('Schedule')[0]); // to remove focus
     expect(screen.queryAllByText('Schedule')).toHaveLength(3);
     expect(repeatNTimes.value).toBe(newRepeatTimes);
     expect(cronline.value).toBe(newCronline);
@@ -236,6 +236,7 @@ describe('Schedule', () => {
       fireEvent.click(screen.getByText('Monthly'));
     });
 
+    expect(screen.getByText('Review Details').disabled).toBeTruthy();
     const newDays = '1,2,3';
     const days = screen.getByLabelText('days');
     expect(days.value).toBe('');
@@ -243,9 +244,11 @@ describe('Schedule', () => {
       fireEvent.change(days, {
         target: { value: newDays },
       });
+      fireEvent.click(repeatNTimes);
     });
     expect(days.value).toBe(newDays);
 
+    expect(screen.getByText('Review Details').disabled).toBeTruthy();
     const newAtMonthly = '13:07';
     const at = () => screen.getByLabelText('repeat-at');
     expect(at().value).toBe('');
@@ -256,19 +259,25 @@ describe('Schedule', () => {
     });
     expect(at().value).toBe(newAtMonthly);
 
+    expect(screen.getByText('Review Details').disabled).toBeFalsy();
     fireEvent.click(screen.getByText('Monthly'));
     await act(async () => {
       fireEvent.click(screen.getByText('Weekly'));
     });
-    const dayTue = screen.getByLabelText('Tue');
-    const daySat = screen.getByLabelText('Sat');
+
+    expect(screen.getByText('Review Details').disabled).toBeTruthy();
+    const dayTue = screen.getByLabelText('Tue checkbox');
+    const daySat = screen.getByLabelText('Sat checkbox');
     expect(dayTue.checked).toBe(false);
     expect(daySat.checked).toBe(false);
     await act(async () => {
+      fireEvent.click(dayTue);
       fireEvent.change(dayTue, {
         target: { checked: true },
       });
-
+    });
+    await act(async () => {
+      fireEvent.click(daySat);
       fireEvent.change(daySat, {
         target: { checked: true },
       });
@@ -283,33 +292,46 @@ describe('Schedule', () => {
       });
     });
     expect(at().value).toBe(newAtWeekly);
+
+    expect(screen.getByText('Review Details').disabled).toBeFalsy();
     fireEvent.click(screen.getByText('Weekly'));
     await act(async () => {
       fireEvent.click(screen.getByText('Daily'));
     });
 
+    expect(screen.getByText('Review Details').disabled).toBeFalsy();
+    await act(async () => {
+      fireEvent.change(at(), {
+        target: { value: '' },
+      });
+    });
+    expect(screen.getByText('Review Details').disabled).toBeTruthy();
     const newAtDaily = '17:07';
-    expect(at().value).toBe(newAtWeekly);
+    expect(at().value).toBe('');
     await act(async () => {
       fireEvent.change(at(), {
         target: { value: newAtDaily },
       });
     });
     expect(at().value).toBe(newAtDaily);
+    expect(screen.getByText('Review Details').disabled).toBeFalsy();
 
     fireEvent.click(screen.getByText('Daily'));
     await act(async () => {
       fireEvent.click(screen.getByText('Hourly'));
     });
 
-    const newMinutes = '15';
+    expect(screen.getByText('Review Details').disabled).toBeTruthy();
+    const newMinutes = '6';
     const atHourly = screen.getByLabelText('repeat-at-minute-typeahead');
     expect(atHourly.value).toBe('');
     await act(async () => {
-      fireEvent.change(atHourly, {
-        target: { value: newMinutes },
-      });
+      fireEvent.click(screen.getByLabelText('select minute toggle'));
     });
+    await act(async () => {
+      fireEvent.click(screen.getByText(newMinutes));
+    });
+    expect(screen.getByText('Review Details').disabled).toBeFalsy();
     expect(atHourly.value).toBe(newMinutes);
   });
   it('should show invalid error on start date after end', async () => {

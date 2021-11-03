@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormGroup,
@@ -9,10 +9,19 @@ import {
 import { range } from 'lodash';
 import { translate as __ } from 'foremanReact/common/I18n';
 
-export const RepeatHour = ({ repeatData, setRepeatData }) => {
+export const RepeatHour = ({ repeatData, setRepeatData, setValid }) => {
+  const { minute } = repeatData;
+  useEffect(() => {
+    if (minute) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+    return () => setValid(true);
+  }, [setValid, minute]);
   const [minuteOpen, setMinuteOpen] = useState(false);
   return (
-    <FormGroup label={__('At minute')}>
+    <FormGroup label={__('At minute')} isRequired>
       <Select
         id="repeat-on-hourly"
         variant={SelectVariant.typeahead}
@@ -21,16 +30,18 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
           setRepeatData({ minute: selection });
           setMinuteOpen(false);
         }}
-        selections={repeatData.minute || ''}
+        selections={minute || ''}
         onToggle={toggle => {
           setMinuteOpen(toggle);
         }}
         isOpen={minuteOpen}
         width={85}
         menuAppendTo={() => document.querySelector('.pf-c-form.schedule-tab')}
+        toggleAriaLabel="select minute toggle"
+        validated={minute ? 'success' : 'error'}
       >
-        {range(60).map(minute => (
-          <SelectOption key={minute} value={`${minute}`} />
+        {range(60).map(minuteNumber => (
+          <SelectOption key={minuteNumber} value={`${minuteNumber}`} />
         ))}
       </Select>
     </FormGroup>
@@ -39,4 +50,5 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
 RepeatHour.propTypes = {
   repeatData: PropTypes.object.isRequired,
   setRepeatData: PropTypes.func.isRequired,
+  setValid: PropTypes.func.isRequired,
 };

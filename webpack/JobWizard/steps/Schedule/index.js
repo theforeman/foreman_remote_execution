@@ -22,10 +22,11 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
     isTypeStatic,
     purpose,
   } = scheduleValue;
-
   const [validEnd, setValidEnd] = useState(true);
+  const [repeatValid, setRepeatValid] = useState(true);
+
   useEffect(() => {
-    if (!validEnd) {
+    if (!validEnd || !repeatValid) {
       setValid(false);
     } else if (isFuture && (startsAt.length || startsBefore.length)) {
       setValid(true);
@@ -35,7 +36,7 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
       setValid(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startsAt, startsBefore, isFuture, validEnd]);
+  }, [startsAt, startsBefore, isFuture, validEnd, repeatValid]);
   return (
     <>
       <WizardTitle title={WIZARD_TITLES.schedule} />
@@ -84,6 +85,7 @@ const Schedule = ({ scheduleValue, setScheduleValue, setValid }) => {
               repeatAmount: newValue,
             }));
           }}
+          setValid={setRepeatValid}
         />
         <StartEndDates
           startsAt={startsAt}
