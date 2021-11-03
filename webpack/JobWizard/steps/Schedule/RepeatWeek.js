@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, Checkbox } from '@patternfly/react-core';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { RepeatDaily } from './RepeatDaily';
+import { noop } from '../../../helpers';
 
 const getWeekDays = () => {
   const locale = documentLocale().replace(/-/g, '_');
@@ -19,7 +20,16 @@ const getWeekDays = () => {
   return weekDays;
 };
 
-export const RepeatWeek = ({ repeatData, setRepeatData }) => {
+export const RepeatWeek = ({ repeatData, setRepeatData, setValid }) => {
+  const { daysOfWeek, at } = repeatData;
+  useEffect(() => {
+    if (daysOfWeek && Object.values(daysOfWeek).includes(true) && at) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+    return () => setValid(true);
+  }, [setValid, daysOfWeek, at]);
   const days = getWeekDays();
   const handleChangeDays = (checked, { target: { name } }) => {
     setRepeatData({
@@ -29,12 +39,13 @@ export const RepeatWeek = ({ repeatData, setRepeatData }) => {
   };
   return (
     <>
-      <FormGroup label={__('Days of week')}>
+      <FormGroup label={__('Days of week')} isRequired>
         <div id="repeat-on-weekly">
           {days.map((day, index) => (
             <Checkbox
+              aria-label={`${day} checkbox`}
               key={index}
-              isChecked={repeatData.daysOfWeek?.[index]}
+              isChecked={daysOfWeek?.[index]}
               name={index}
               id={`repeat-on-day-${index}`}
               onChange={handleChangeDays}
@@ -43,11 +54,17 @@ export const RepeatWeek = ({ repeatData, setRepeatData }) => {
           ))}
         </div>
       </FormGroup>
-      <RepeatDaily repeatData={repeatData} setRepeatData={setRepeatData} />
+
+      <RepeatDaily
+        repeatData={repeatData}
+        setRepeatData={setRepeatData}
+        setValid={noop}
+      />
     </>
   );
 };
 RepeatWeek.propTypes = {
   repeatData: PropTypes.object.isRequired,
   setRepeatData: PropTypes.func.isRequired,
+  setValid: PropTypes.func.isRequired,
 };

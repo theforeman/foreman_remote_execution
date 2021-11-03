@@ -17,6 +17,7 @@ export const RepeatOn = ({
   setRepeatAmount,
   repeatData,
   setRepeatData,
+  setValid,
 }) => {
   const [repeatValidated, setRepeatValidated] = useState('default');
   const handleRepeatInputChange = newValue => {
@@ -28,23 +29,43 @@ export const RepeatOn = ({
     switch (repeatType) {
       case repeatTypes.cronline:
         return (
-          <RepeatCron repeatData={repeatData} setRepeatData={setRepeatData} />
+          <RepeatCron
+            repeatData={repeatData}
+            setRepeatData={setRepeatData}
+            setValid={setValid}
+          />
         );
       case repeatTypes.monthly:
         return (
-          <RepeatMonth repeatData={repeatData} setRepeatData={setRepeatData} />
+          <RepeatMonth
+            repeatData={repeatData}
+            setRepeatData={setRepeatData}
+            setValid={setValid}
+          />
         );
       case repeatTypes.weekly:
         return (
-          <RepeatWeek repeatData={repeatData} setRepeatData={setRepeatData} />
+          <RepeatWeek
+            repeatData={repeatData}
+            setRepeatData={setRepeatData}
+            setValid={setValid}
+          />
         );
       case repeatTypes.daily:
         return (
-          <RepeatDaily repeatData={repeatData} setRepeatData={setRepeatData} />
+          <RepeatDaily
+            repeatData={repeatData}
+            setRepeatData={setRepeatData}
+            setValid={setValid}
+          />
         );
       case repeatTypes.hourly:
         return (
-          <RepeatHour repeatData={repeatData} setRepeatData={setRepeatData} />
+          <RepeatHour
+            repeatData={repeatData}
+            setRepeatData={setRepeatData}
+            setValid={setValid}
+          />
         );
       case repeatTypes.noRepeat:
       default:
@@ -99,4 +120,5 @@ RepeatOn.propTypes = {
   setRepeatAmount: PropTypes.func.isRequired,
   repeatData: PropTypes.object.isRequired,
   setRepeatData: PropTypes.func.isRequired,
+  setValid: PropTypes.func.isRequired,
 };
