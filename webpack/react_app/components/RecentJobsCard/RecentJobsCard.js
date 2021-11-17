@@ -13,6 +13,7 @@ import {
   JOB_BASE_URL,
 } from './constants';
 import RecentJobsTable from './RecentJobsTable';
+import NewJobAction from '../../extend/host/NewJobAction';
 
 const RecentJobsCard = ({ hostDetails: { name, id } }) => {
   const [activeTab, setActiveTab] = useState(FINISHED_TAB);
@@ -24,6 +25,7 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
       overrideGridProps={{ xl2: 6, xl: 8, lg: 8, md: 12 }}
       header={__('Recent jobs')}
       dropdownItems={[
+        <NewJobAction key="new-job" />,
         <DropdownItem
           href={foremanUrl(`${JOB_BASE_URL}${name}`)}
           key="link-to-all"
