@@ -1,14 +1,9 @@
 <div class="tab-pane" id="template_job">
 
-  <%= field(f, :job_category, :label => _('Job category')) do %>
-    <%= auto_complete_search(:job_category,
-                             f.object.job_category,
-                             :placeholder => _("Job category") + ' ...',
-                             :name => 'job_template[job_category]',
-                             :id => 'search',
-                             :disabled => @template.locked?) %>
-  <% end %>
-
+  <%= autocomplete_f(f, :job_category,
+        :search_query => '',
+        :placeholder => _("Job category") + ' ...',
+        :disabled => @template.locked?) %>
   <%= text_f f, :description_format,
              :disabled => @template.locked?,
              :label_help => description_format_help %>
