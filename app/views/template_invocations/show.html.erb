@@ -28,7 +28,13 @@ end
   </div>
 </div>
 <% if @host %>
-  <h3><%= _('Target: ') %><%= link_to(@host.name, host_path(@host)) %></h3>
+  <% proxy_id = @template_invocation_task.input[:proxy_id] %>
+  <h3>
+    <%= _('Target: ') %><%= link_to(@host.name, host_path(@host)) %>
+    <% if proxy_id && proxy = SmartProxy.find_by(id: proxy_id) %>
+      <%= _('using Smart Proxy') %> <%= link_to(proxy.name, smart_proxy_path(proxy)) %>
+    <% end %>
+  </h3>
 
   <div class="preview hidden">
     <%= preview_box(@template_invocation, @host) %>
