@@ -42,6 +42,8 @@ module Actions
 
         provider_type = template_invocation.template.provider_type.to_s
         proxy = determine_proxy!(proxy_selector, provider_type, host)
+        link!(proxy)
+        input[:proxy_id] = proxy.id
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render
