@@ -30,7 +30,9 @@
     "eslint": "^6.8.0",
     "prettier": "^1.19.1",
     "@patternfly/react-catalog-view-extension": "^4.8.126",
-    "redux-mock-store": "^1.2.2"
+    "redux-mock-store": "^1.2.2",
+    "graphql-tag": "^2.11.0",
+    "graphql": "^15.5.0"
   },
   "peerDependencies": {
     "@theforeman/vendor": "^8.16.0"
