@@ -192,7 +192,7 @@ class JobTemplate < ::Template
   end
 
   def default_input_values(ignore_keys)
-    result = self.template_inputs_with_foreign.select { |ti| !ti.required? && ti.user_template_input? }.map { |ti| ti.name.to_s }
+    result = self.template_inputs_with_foreign.select { |ti| !ti.required? && ti.input_type == 'user' }.map { |ti| ti.name.to_s }
     result -= ignore_keys.map(&:to_s)
     Hash[result.map { |k| [ k, nil ] }]
   end
