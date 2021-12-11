@@ -61,7 +61,7 @@ class TargetingTest < ActiveSupport::TestCase
       users(:one).destroy
     end
 
-    it { assert targeting.reload.user.nil? }
+    it { assert_nil targeting.reload.user }
     it do
       -> { targeting.resolve_hosts! }.must_raise(Foreman::Exception)
     end

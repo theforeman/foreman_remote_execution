@@ -15,8 +15,10 @@ class JobInvocation < ApplicationRecord
 
   belongs_to :targeting, :dependent => :destroy
   has_many :all_template_invocations, :inverse_of => :job_invocation, :dependent => :destroy, :class_name => 'TemplateInvocation'
+  # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :template_invocations, -> { where('template_invocations.host_id IS NOT NULL') }, :inverse_of => :job_invocation
   has_many :pattern_template_invocations, -> { where('template_invocations.host_id IS NULL') }, :inverse_of => :job_invocation, :class_name => 'TemplateInvocation'
+  # rubocop:enable Rails/HasManyOrHasOneDependent
   has_many :pattern_templates, :through => :pattern_template_invocations, :source => :template
 
   validates :targeting, :presence => true
