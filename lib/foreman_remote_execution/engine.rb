@@ -152,7 +152,7 @@ module ForemanRemoteExecution
             setting 'remote_execution_job_invocation_report_template',
               type: :string,
               description: N_('Select a report template used for generating a report for a particular remote execution job'),
-              default: 'Jobs - Invocation report template',
+              default: 'Job invocation - report template',
               full_name: N_('Job Invocation Report Template'),
               collection: proc { ForemanRemoteExecution.job_invocation_report_templates_select }
           end
