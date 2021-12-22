@@ -69,6 +69,7 @@ export const jobTemplateResponse = {
       default: '',
       hidden_value: false,
       url: 'foreman_tasks/tasks',
+      resource_type_tableize: 'hosts',
     },
     {
       name: 'adv date',

@@ -103,4 +103,9 @@
       margin-left: 10px;
     }
   }
+  .foreman-search-field {
+    .autocomplete-search-btn {
+      display: none;
+    }
+  }
 }

@@ -10,7 +10,7 @@ import { noop } from '../../../helpers';
 
 export const HostSearch = ({ value, setValue }) => {
   const searchQuery = useSelector(
-    state => state.autocomplete?.hostsSearch?.searchQuery
+    state => state.autocomplete?.[hostQuerySearchID]?.searchQuery
   );
   useEffect(() => {
     setValue(searchQuery || '');
