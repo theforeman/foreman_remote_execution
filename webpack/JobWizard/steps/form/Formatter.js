@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormGroup, TextInput, TextArea } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import SearchBar from 'foremanReact/components/SearchBar';
 import { getControllerSearchProps } from 'foremanReact/constants';
+import { TRIGGERS } from 'foremanReact/components/AutoComplete/AutoCompleteConstants';
+import { getResults } from 'foremanReact/components/AutoComplete/AutoCompleteActions';
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
 import { ResourceSelectAPI } from './ResourceSelect';
@@ -22,12 +24,25 @@ const TemplateSearchField = ({
   const searchQuery = useSelector(
     state => state.autocomplete?.[name]?.searchQuery
   );
+  const dispatch = useDispatch();
   useEffect(() => {
     setValue({ ...values, [name]: searchQuery });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
   const id = name.replace(/ /g, '-');
   const props = getControllerSearchProps(controller.replace('/', '_'), name);
+
+  const setSearch = newSearchQuery => {
+    dispatch(
+      getResults({
+        url,
+        searchQuery: newSearchQuery,
+        controller,
+        trigger: TRIGGERS.INPUT_CHANGE,
+        id: name,
+      })
+    );
+  };
   return (
     <FormGroup
       label={name}
@@ -45,9 +60,9 @@ const TemplateSearchField = ({
             url,
             useKeyShortcuts: true,
           },
-          bookmarks: null,
         }}
         onSearch={noop}
+        onBookmarkClick={search => setSearch(search)}
       />
     </FormGroup>
   );
@@ -152,7 +167,7 @@ export const formatter = (input, values, setValue) => {
         key={id}
         name={name}
         defaultValue={value}
-        controller={resourceType}
+        controller={controller}
         url={`/${controller}/auto_complete_search`}
         labelText={labelText}
         required={required}

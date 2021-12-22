@@ -17,6 +17,7 @@ export const getControllerSearchProps = (
     useKeyShortcuts: true,
   },
   bookmarks: {
+    id,
     url: '/api/bookmarks',
     canCreate,
     documentationUrl: `4.1.5Searching`,
