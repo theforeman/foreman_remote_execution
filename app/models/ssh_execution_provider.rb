@@ -45,6 +45,7 @@ class ScriptExecutionProvider < RemoteExecutionProvider
         :ssh_port => ssh_port(host),
         :ssh_password => ssh_password(host),
         :ssh_key_passphrase => ssh_key_passphrase(host),
+        :effective_user_password => effective_user_password(host),
       }
     end
 
