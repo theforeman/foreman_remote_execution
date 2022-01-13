@@ -21,20 +21,19 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": "^8.16.0",
-    "@theforeman/eslint-plugin-foreman": "^8.16.0",
-    "@theforeman/stories": "^8.16.0",
-    "@theforeman/test": "^8.16.0",
-    "@theforeman/vendor-dev": "^8.16.0",
+    "@theforeman/builder": "^10.1.0",
+    "@theforeman/eslint-plugin-foreman": "^10.1.0",
+    "@theforeman/stories": "^10.1.0",
+    "@theforeman/test": "^10.1.0",
+    "@theforeman/vendor-dev": "^10.1.0",
     "babel-eslint": "^10.0.0",
     "eslint": "^6.8.0",
     "prettier": "^1.19.1",
-    "@patternfly/react-catalog-view-extension": "^4.8.126",
     "redux-mock-store": "^1.2.2",
     "graphql-tag": "^2.11.0",
     "graphql": "^15.5.0"
   },
   "peerDependencies": {
-    "@theforeman/vendor": "^8.16.0"
+    "@theforeman/vendor": "^10.1.0"
   }
 }

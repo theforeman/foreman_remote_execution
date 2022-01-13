@@ -19,7 +19,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
 
 import JobStatusIcon from './JobStatusIcon';
-import { JOB_API_URL, JOBS_IN_CARD } from './constants';
+import { JOB_API_URL, JOBS_IN_CARD, RECENT_JOBS_KEY } from './constants';
 
 const RecentJobsTable = ({ status, hostId }) => {
   const jobsUrl =
@@ -30,7 +30,7 @@ const RecentJobsTable = ({ status, hostId }) => {
   const {
     response: { results: jobs },
     status: responseStatus,
-  } = useAPI('get', jobsUrl);
+  } = useAPI('get', jobsUrl, RECENT_JOBS_KEY);
 
   return (
     <DataList aria-label="recent-jobs-table" isCompact>
