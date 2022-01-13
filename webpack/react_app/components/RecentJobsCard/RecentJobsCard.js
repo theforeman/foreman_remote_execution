@@ -52,7 +52,12 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
         </DropdownItem>,
       ]}
     >
-      <Tabs mountOnEnter activeKey={activeTab} onSelect={handleTabClick}>
+      <Tabs
+        mountOnEnter
+        unmountOnExit
+        activeKey={activeTab}
+        onSelect={handleTabClick}
+      >
         <Tab
           eventKey={FINISHED_TAB}
           title={<TabTitleText>{__('Finished')}</TabTitleText>}
