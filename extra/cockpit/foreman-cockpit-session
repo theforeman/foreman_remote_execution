@@ -1,314 +1,375 @@
 #!/usr/bin/env ruby
 
-require "logger"
-require "json"
-require "net/https"
-require "yaml"
+require 'logger'
+require 'json'
+require 'net/http'
+require 'net/https'
+require 'stringio'
+require 'yaml'
+require 'singleton'
 
 # Logging
-
 LOG = Logger.new($stderr)
 LOG.formatter = proc { |severity, datetime, progname, msg| "#{severity}: #{msg}\n" }
 
-def encode_message(payload)
-  data = JSON.dump(payload)
-  "#{data.length + 1}\n\n#{data}"
+class Settings
+  include Singleton
+
+  def initialize
+    @settings = {}
+  end
+
+  def load!
+    settings_path = ENV['FOREMAN_COCKPIT_SETTINGS'] || '/etc/foreman-cockpit/settings.yml'
+    @settings = YAML.safe_load(File.read(settings_path), [Symbol])
+    LOG.level = Logger.const_get(@settings.fetch(:log_level, 'INFO'))
+    LOG.info("Running foreman-cockpit-session with settings from #{settings_path}:\n#{@settings.inspect}")
+  end
+
+  def [](key)
+    @settings[key]
+  end
 end
 
-def safe_log(format_string, data = nil)
-  if data.is_a? Hash
-    data = data.dup
-    data.each do |key, _|
-      if key.to_s =~ /password|passphrase/
-        data[key] = '*******'
+class CockpitError < StandardError
+  attr_reader :additional
+
+  def initialize(message, additional = nil)
+    @additional = additional
+    super message
+  end
+end
+
+class AuthenticationError < CockpitError; end
+class AccessDeniedError < CockpitError; end
+
+class Cockpit
+  class << self
+    def encode_message(payload)
+      data = JSON.dump(payload)
+      "#{data.length + 1}\n\n#{data}"
+    end
+
+    def send_control(io, msg)
+      LOG.debug("Sending control message #{msg}")
+      io.write(encode_message(msg))
+      io.flush
+    end
+
+    def read_control(io, fatal: false)
+      size = io.readline.chomp.to_i
+      raise ArgumentError, 'Invalid frame: invalid size' if size.zero?
+
+      data = io.read(size)
+      LOG.debug("Received control message #{data.lstrip}")
+      raise ArgumentError, 'Invalid frame: too short' if data.nil? || data.length < size
+
+      JSON.parse(data)
+    rescue JSON::ParserError, ArgumentError => e
+      raise e if fatal
+    end
+  end
+end
+
+class Utils
+  class << self
+    def safe_log(format_string, data = nil)
+      if data.is_a? Hash
+        data = data.dup
+        data.each_key do |key|
+          data[key] = '*******' if key.to_s =~ /password|passphrase/
+        end
       end
-    end
-  end
-  format_string % [data]
-end
-
-# Settings
-
-def read_settings
-  settings_path = ENV["FOREMAN_COCKPIT_SETTINGS"] || "/etc/foreman-cockpit/settings.yml"
-  settings = YAML.safe_load(File.read(settings_path), [Symbol])
-  LOG.level = Logger.const_get(settings.fetch(:log_level, "INFO"))
-  LOG.info("Running foreman-cockpit-session with settings from #{settings_path}:\n#{settings.inspect}")
-  settings
-end
-
-# Cockpit protocol, encoding and decoding of control messages.
-
-def send_control(msg)
-  LOG.debug("Sending control message #{msg}")
-  $stdout.write(encode_message(msg))
-  $stdout.flush
-end
-
-def read_control(io, fatal: false)
-  size = io.readline.chomp.to_i
-  raise ArgumentError, "Invalid frame: invalid size" if size.zero?
-
-  data = io.read(size)
-  LOG.debug("Received control message #{data.lstrip}")
-  raise ArgumentError, "Invalid frame: too short" if data.nil? || data.length < size
-
-  JSON.parse(data)
-rescue => e
-  raise e if fatal
-end
-
-# Specific control messages
-
-def send_auth_challenge(challenge)
-  send_control({ "command" => "authorize",
-    "cookie" => "1234", # must be present, but value doesn't matter
-    "challenge" => challenge})
-end
-
-def read_auth_reply
-  cmd = read_control($stdin, fatal: true)
-  response = cmd["response"]
-  raise ArgumentError, "Did not receive a valid authorize command" if cmd["command"] != "authorize" || !response
-
-  response
-end
-
-def exit_with_problem(problem, message, auth_methods)
-  LOG.error("#{problem} - #{message}")
-  send_control({ "command" => "init",
-    "problem" => problem,
-    "message" => message,
-    "auth-method-results" => auth_methods})
-  exit 1
-end
-
-# Talking to Foreman
-
-def get_token_from_auth_data(auth_data)
-  auth_data.split(" ")[1]
-end
-
-def foreman_call(path, token)
-  foreman = SETTINGS[:foreman_url] || "https://localhost/"
-  uri = URI(foreman + "/" + path)
-
-  LOG.debug("Foreman request GET #{uri}")
-
-  http = Net::HTTP.new(uri.hostname, uri.port)
-  if uri.scheme == "https"
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-    http.ca_file = SETTINGS[:ssl_ca_file]
-  end
-
-  req = Net::HTTP::Get.new(uri)
-  req["Cookie"] = "_session_id=#{token}"
-  res = http.request(req)
-
-  LOG.debug do
-    body = JSON.parse(res.body) rescue res.body
-    safe_log("Foreman response #{res.code} - %s", body)
-  end
-
-  case res.code
-  when "200"
-    return JSON.parse(res.body)
-  when "401"
-    exit_with_problem("authentication-failed",
-      "Token was not valid",
-      { "password" => "not-tried", "token" => "denied" })
-  when "404"
-    return nil
-  else
-    LOG.error("Error talking to foreman: #{res.body}\n")
-    exit 1
-  end
-end
-
-# SSH via the smart proxy
-
-def ssh_write_request_header(url, sock, params)
-  data = JSON.dump(params) + "\r\n"
-  sock.write("POST /ssh/session HTTP/1.1\r\nHost: #{url.host}:#{url.port}\r\nConnection: upgrade\r\nUpgrade: raw\r\nContent-Length: #{data.length}\r\n\r\n#{data}")
-  sock.flush
-end
-
-def ssh_read_and_handle_response_header(sock, url, params)
-  header = ""
-  loop do
-    line = sock.readline
-    break unless line && (line != "\r\n")
-
-    header += line
-  end
-
-  status_line, headers_text = header.split("\r\n", 2)
-  status = status_line.split(" ")[1]
-  if status != "101"
-    m = /^Content-Length:[ \t]*([0-9]+)\r?$/i.match(headers_text)
-    expected_len = if m
-      m[1].to_i
-                   else
-      -1
-                   end
-    response = ""
-    while expected_len < 0 || response.length < expected_len
-      begin
-        response += sock.readpartial(4096)
-      rescue EOFError
-        break
-      end
-    end
-    if status == "404"
-      exit_with_problem("access-denied", "The proxy #{url.hostname} does not support web console sessions", nil)
-    elsif status[0] == "4"
-      if response.include? "cockpit-bridge: command not found"
-        exit_with_problem("access-denied", "#{params['hostname']} has no web console", nil)
-      else
-        exit_with_problem("access-denied", response, nil)
-      end
-    else
-      LOG.error("Error talking to smart proxy: #{response}\n")
-      exit 1
+      format_string % [data]
     end
   end
 end
 
-def ssh_read_sock(sock)
-  data = ""
-  begin
-    loop do
-      data += sock.read_nonblock(4096)
-    end
+class ProxyBuffer
+  attr_reader :src_io, :dst_io, :buffer
+
+  def initialize(src_io, dst_io)
+    @src_io = src_io
+    @dst_io = dst_io
+    @buffer = ''
+  end
+
+  def close
+    @src_io.close unless @src_io.closed?
+    @dst_io.close unless @dst_io.closed?
+  end
+
+  def read_available!
+    data = ''
+    loop { data += @src_io.read_nonblock(4096) }
   rescue IO::WaitReadable
-    data
   rescue IO::WaitWritable
     # This might happen with SSL during a renegotiation.  Block a
     # bit to get it over with.
-    IO.select(nil, [sock])
+    IO.select(nil, [@src_io])
     retry
+  rescue EOFError
+    @src_io.close unless @src_io.closed?
+  ensure
+    @buffer += with_data_callback(data)
   end
-  data
-end
 
-def ssh_write_sock(sock, data)
-    sock.write_nonblock(data)
-rescue IO::WaitWritable
+  def with_data_callback(data)
+    if @data_callback
+      @data_callback.call(data)
+    else
+      data
+    end
+  end
+
+  def write_available!
+    count = @dst_io.write_nonblock(@buffer)
+    @buffer = @buffer[count..-1]
+  rescue IO::WaitWritable
     0
-rescue IO::WaitReadable
+  rescue IO::WaitReadable
     # This might happen with SSL during a renegotiation.  Block a
     # bit to get it over with.
-    IO.select([sock])
+    IO.select([@dst_io])
     retry
-end
-
-def ssh_with_proxy(proxy, params)
-  url = URI(proxy)
-  LOG.debug("Connecting to proxy at #{url}")
-  raw_sock = TCPSocket.open(url.hostname, url.port)
-  if url.scheme == 'https'
-    ssl_context = OpenSSL::SSL::SSLContext.new
-    ssl_context.cert = OpenSSL::X509::Certificate.new(File.read(SETTINGS[:ssl_certificate]))
-    ssl_context.key = OpenSSL::PKey.read(File.read(SETTINGS[:ssl_private_key]))
-    sock = OpenSSL::SSL::SSLSocket.new(raw_sock, ssl_context)
-    sock.sync_close = true
-    sock.connect
-  else
-    sock = raw_sock
   end
 
-  ssh_write_request_header(url, sock, params)
-  ssh_read_and_handle_response_header(sock, url, params)
+  def flush_pending_writes!
+    write_available! until @buffer.empty?
+  end
 
-  inp_buf = ""
-  out_buf = ssh_read_sock(sock)
+  def pending_writes?
+    !(@buffer.empty? || @dst_io.closed?)
+  end
 
-  ws_eof = false
-  bridge_eof = false
+  def readable?
+    !@src_io.closed?
+  end
 
-  loop do
-    readers = [ ]
-    writers = [ ]
+  def enqueue(data)
+    @buffer += data
+  end
 
-    readers += [ $stdin ] unless ws_eof
-    readers += [ sock ] unless bridge_eof
-    writers += [ $stdout ] unless out_buf == ""
-    writers += [ sock ] unless inp_buf == ""
-
-    break if readers.length + writers.length == 0
-
-    r, w, x = IO.select(readers, writers)
-
-    if r.include?(sock)
-      begin
-        out_buf += ssh_read_sock(sock)
-        io = StringIO.new(out_buf)
-        message = read_control(io)
-        if message.is_a?(Hash) && message['command'] == 'authorize'
-          response = {
-            "command" => "authorize",
-            "cookie" => message['cookie'],
-            'response' => params['effective_user_password']
-          }
-          inp_buf += encode_message(response)
-          out_buf = out_buf[io.pos..-1]
-        end
-      rescue EOFError
-        bridge_eof = true
-        break if out_buf == ""
-      end
-    end
-
-    if w.include?(sock)
-      begin
-        n = ssh_write_sock(sock, inp_buf)
-        inp_buf = inp_buf[n..-1]
-        raw_sock.close_write if (inp_buf == "") && ws_eof
-      end
-    end
-
-    if r.include?($stdin)
-      begin
-        inp_buf += $stdin.readpartial(4096)
-      rescue EOFError
-        ws_eof = true
-        raw_sock.close_write if inp_buf == ""
-      end
-    end
-
-    next unless w.include?($stdout)
-
-    n = $stdout.write(out_buf)
-    $stdout.flush
-    out_buf = out_buf[n..-1]
-    break if (out_buf == "") && bridge_eof
-
+  def on_data(&block)
+    @data_callback = block
   end
 end
 
-# Main
+class Relay
+  attr_reader :proxy
 
-SETTINGS = read_settings
+  def self.start(proxy, params)
+    new(proxy, params).run
+  end
 
-host = ARGV[0]
+  def run
+    initialize_proxy_connection!
+    proxy_loop
+  end
 
-send_auth_challenge("*")
-token = get_token_from_auth_data(read_auth_reply)
+  def initialize(proxy, params)
+    @proxy = proxy
+    @params = params
+  end
 
-params = foreman_call("cockpit/host_ssh_params/#{host}", token)
-exit_with_problem("access-denied", "Host #{host} is not known", nil) unless params
+  def proxy_loop
+    proxy1 = ProxyBuffer.new($stdin, @sock)
+    proxy2 = ProxyBuffer.new(@sock, $stdout)
+    proxy2.on_data do |data|
+      message = Cockpit.read_control(StringIO.new(data))
+      if message.is_a?(Hash) && message['command'] == 'authorize'
+        response = {
+          'command' => 'authorize',
+          'cookie' => message['cookie'],
+          'response' => @params['effective_user_password'],
+        }
+        proxy1.enqueue(Cockpit.encode_message(response))
+        ''
+      else
+        data
+      end
+    end
 
-LOG.debug(safe_log("SSH parameters %s", params))
+    proxies = [proxy1, proxy2]
 
-params["command"] = "cockpit-bridge"
-case params["proxy"]
-when "not_available"
-  exit_with_problem("access-denied", "A proxy is required to reach #{host} but all of them are down", nil)
-when "not_defined"
-  exit_with_problem("access-denied", "A proxy is required to reach #{host} but none has been configured", nil)
-when "direct"
-  exit_with_problem("access-denied", "Web console sessions require a proxy but none has been configured", nil)
-else
-  ssh_with_proxy(params["proxy"], params)
+    loop do
+      writers = proxies.select(&:pending_writes?)
+      readers = proxies.select(&:readable?)
+
+      break if readers.empty? && writers.empty?
+
+      r, w = select(readers, writers)
+
+      r.each(&:read_available!)
+      w.each(&:flush_pending_writes!)
+    end
+  ensure
+    proxies.each(&:close)
+    @raw_sock.close
+  end
+
+  private
+
+  def select(readers, writers)
+    r_ios, w_ios, = IO.select(readers.map(&:src_io), writers.map(&:dst_io))
+
+    [ r_ios.map { |io| readers.find { |r| r.src_io == io } },
+      w_ios.map { |io| writers.find { |w| w.dst_io == io } } ]
+  end
+
+  def initialize_proxy_connection!
+    url = URI(proxy)
+    LOG.debug("Connecting to proxy at #{url}")
+    @raw_sock = TCPSocket.open(url.hostname, url.port)
+    if url.scheme == 'https'
+      ssl_context = OpenSSL::SSL::SSLContext.new
+      ssl_context.cert = OpenSSL::X509::Certificate.new(File.read(Settings.instance[:ssl_certificate]))
+      ssl_context.key = OpenSSL::PKey.read(File.read(Settings.instance[:ssl_private_key]))
+      @sock = OpenSSL::SSL::SSLSocket.new(@raw_sock, ssl_context)
+      @sock.sync_close = true
+      @sock.connect
+    else
+      @sock = raw_sock
+    end
+
+    upgrade_connection!(url)
+  end
+
+  def upgrade_connection!(url)
+    data = JSON.dump(@params)
+    payload = <<~HTTP
+      POST /ssh/session HTTP/1.1
+      Host: #{url.host}:#{url.port}
+      Connection: upgrade
+      Upgrade: raw
+      Content-Length: #{data.length + 2}
+
+      #{data}
+    HTTP
+
+    @sock.write(payload.gsub("\n", "\r\n"))
+    @sock.flush
+
+    buf_io = Net::BufferedIO.new(@sock)
+
+    # This is ugly, but Net::HTTP doesn't seem to be able to parse upgrade replies properly
+    headers = {}
+    Net::HTTPResponse.send(:each_response_header, buf_io) { |key, value| headers[key] = value }
+
+    status = headers['Status'].to_i
+    body = buf_io.read(headers['Content-Length'].to_i)
+    case status
+    when 101
+      return
+    when 404
+      raise AccessDeniedError, "The proxy #{url.hostname} does not support web console sessions"
+    when (400..499)
+      message = if body.include? 'cockpit-bridge: command not found'
+                  "#{params['hostname']} has no web console"
+                else
+                  body
+                end
+      raise AccessDeniedError, message
+    else
+      raise CockpitError, "Error talking to smart proxy: #{response}"
+    end
+  end
 end
+
+class Session
+  def initialize(host)
+    @host = host
+  end
+
+  def run
+    send_auth_challenge('*')
+    token = read_auth_reply.match(/^Bearer (.*)$/)[1]
+    params = get_host_params(token)
+
+    LOG.debug(Utils.safe_log('SSH parameters %s', params))
+
+    params['command'] = 'cockpit-bridge'
+    case params['proxy']
+    when 'not_available'
+      raise AccessDeniedError, "A proxy is required to reach #{@host} but all of them are down"
+    when 'not_defined'
+      raise AccessDeniedError, "A proxy is required to reach #{@host} but none has been configured"
+    when 'direct'
+      raise AccessDeniedError, 'Web console sessions require a proxy but none has been configured'
+    else
+      Relay.start(params['proxy'], params)
+    end
+  rescue CockpitError => e
+    exit_with_error(e)
+  end
+
+  def exit_with_error(exception)
+    problem = case exception
+              when AuthenticationError
+                'authentication-failed'
+              when AccessDeniedError
+                'access-denied'
+              else
+                'error'
+              end
+
+    Cockpit.send_control($stdout, { 'command' => 'init',
+      'problem' => problem,
+      'message' => exception.message,
+      'auth-method-results' => exception.additional})
+    exit 1
+  end
+
+  def get_host_params(token)
+    foreman = Settings.instance[:foreman_url] || 'https://localhost/'
+    uri = URI(foreman + '/' + 'cockpit/host_ssh_params/' + @host)
+
+    LOG.debug("Foreman request GET #{uri}")
+
+    http = Net::HTTP.new(uri.hostname, uri.port)
+    if uri.scheme == 'https'
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+      http.ca_file = Settings.instance[:ssl_ca_file]
+    end
+
+    req = Net::HTTP::Get.new(uri)
+    req['Cookie'] = "_session_id=#{token}"
+    res = http.request(req)
+
+    LOG.debug do
+      body = JSON.parse(res.body) rescue res.body
+      Utils.safe_log("Foreman response #{res.code} - %s", body)
+    end
+
+    case res.code.to_i
+    when 200
+      return JSON.parse(res.body)
+    when 401
+      raise AuthenticationError, 'Token was not valid', { 'password' => 'not-tried', 'token' => 'denied' }
+    when 404
+      raise AccessDeniedError, "Host #{@host} is not known"
+    else
+      raise CockpitError, "Error talking to Foreman: #{res.body}"
+    end
+  end
+
+  # Specific control messages
+  def send_auth_challenge(challenge)
+    Cockpit.send_control($stdout, { 'command' => 'authorize',
+      'cookie' => '1234', # must be present, but value doesn't matter
+      'challenge' => challenge})
+  end
+
+  def read_auth_reply
+    cmd = Cockpit.read_control($stdin, fatal: true)
+    response = cmd['response']
+    raise ArgumentError, 'Did not receive a valid authorize command' if cmd['command'] != 'authorize' || !response
+
+    response
+  end
+end
+
+# Load the settings
+Settings.instance.load!
+Session.new(ARGV[0]).run
