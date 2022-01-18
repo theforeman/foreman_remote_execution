@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Grid } from 'patternfly-react';
 
 import SearchBar from 'foremanReact/components/SearchBar';
-import Pagination from 'foremanReact/components/Pagination/PaginationWrapper';
+import Pagination from 'foremanReact/components/Pagination';
 import { getControllerSearchProps } from 'foremanReact/constants';
 
 import TargetingHosts from './TargetingHosts';
@@ -15,7 +15,6 @@ const TargetingHostsPage = ({
   apiStatus,
   items,
   totalHosts,
-  pagination,
   handlePagination,
 }) => (
   <div id="targeting_hosts">
@@ -39,11 +38,8 @@ const TargetingHostsPage = ({
     <br />
     <TargetingHosts apiStatus={apiStatus} items={items} />
     <Pagination
-      viewType="table"
       itemCount={totalHosts}
-      pagination={pagination}
       onChange={args => handlePagination(args)}
-      dropdownButtonId="targeting-hosts-pagination-dropdown"
       className="targeting-hosts-pagination"
     />
   </div>
@@ -55,7 +51,6 @@ TargetingHostsPage.propTypes = {
   apiStatus: PropTypes.string,
   items: PropTypes.array.isRequired,
   totalHosts: PropTypes.number.isRequired,
-  pagination: PropTypes.object.isRequired,
   handlePagination: PropTypes.func.isRequired,
 };
 

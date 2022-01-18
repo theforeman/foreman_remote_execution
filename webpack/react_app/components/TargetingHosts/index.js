@@ -30,14 +30,14 @@ const WrappedTargetingHosts = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [pagination, setPagination] = useState({
     page: 1,
-    perPage,
+    per_page: perPage,
     perPageOptions,
   });
   const [apiUrl, setApiUrl] = useState(getApiUrl(searchQuery, pagination));
   const intervalExists = useSelector(selectIntervalExists);
 
   const handleSearch = query => {
-    const defaultPagination = { page: 1, perPage: pagination.perPage };
+    const defaultPagination = { page: 1, per_page: pagination.per_page };
     stopApiInterval();
 
     setApiUrl(getApiUrl(query, defaultPagination));
@@ -88,7 +88,6 @@ const WrappedTargetingHosts = () => {
       apiStatus={apiStatus}
       items={items}
       totalHosts={totalHosts}
-      pagination={pagination}
       handlePagination={handlePagination}
     />
   );
