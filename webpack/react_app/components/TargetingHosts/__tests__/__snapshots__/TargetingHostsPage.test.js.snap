@@ -52,18 +52,10 @@ exports[`TargetingHostsPage renders 1`] = `
       ]
     }
   />
-  <PaginationWrapper
+  <Pagination
     className="targeting-hosts-pagination"
-    dropdownButtonId="targeting-hosts-pagination-dropdown"
     itemCount={1}
     onChange={[Function]}
-    pagination={
-      Object {
-        "page": 1,
-        "perPage": 20,
-      }
-    }
-    viewType="table"
   />
 </div>
 `;
