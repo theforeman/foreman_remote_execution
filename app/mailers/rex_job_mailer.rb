@@ -1,5 +1,5 @@
 class RexJobMailer < ApplicationMailer
-  add_template_helper(ApplicationHelper)
+  helper ApplicationHelper
 
   def job_finished(job, opts = {})
     @job = job
