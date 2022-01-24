@@ -21,6 +21,7 @@ import {
   selectJobTemplate,
   selectIsSubmitting,
   selectRouterSearch,
+  selectIsLoading,
 } from './JobWizardSelectors';
 import Schedule from './steps/Schedule/';
 import HostsAndInputs from './steps/HostsAndInputs/';
@@ -130,9 +131,14 @@ export const JobWizard = () => {
   const templateError = !!useSelector(selectTemplateError);
   const templateResponse = useSelector(selectJobTemplate);
   const isSubmitting = useSelector(selectIsSubmitting);
+  const isTemplatesLoading = useSelector(state =>
+    selectIsLoading(state, JOB_TEMPLATE)
+  );
   const isTemplate =
-    !templateError && !!jobTemplateID && templateResponse.job_template;
-
+    !isTemplatesLoading &&
+    !templateError &&
+    !!jobTemplateID &&
+    templateResponse.job_template;
   const steps = [
     {
       name: WIZARD_TITLES.categoryAndTemplate,
