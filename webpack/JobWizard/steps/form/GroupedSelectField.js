@@ -81,7 +81,11 @@ GroupedSelectField.propTypes = {
   label: PropTypes.string.isRequired,
   fieldId: PropTypes.string.isRequired,
   groups: PropTypes.array,
-  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  selected: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+  ]),
   setSelected: PropTypes.func.isRequired,
 };
 
