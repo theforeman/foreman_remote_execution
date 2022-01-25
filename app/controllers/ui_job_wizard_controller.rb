@@ -3,6 +3,7 @@ class UiJobWizardController < ApplicationController
   def categories
     job_categories = resource_scope
                      .search_for("job_category ~ \"#{params[:search]}\"")
+                     .where(:snippet => false)
                      .select(:job_category).distinct
                      .reorder(:job_category)
                      .pluck(:job_category)
