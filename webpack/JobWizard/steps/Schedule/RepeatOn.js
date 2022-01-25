@@ -21,7 +21,7 @@ export const RepeatOn = ({
 }) => {
   const [repeatValidated, setRepeatValidated] = useState('default');
   const handleRepeatInputChange = newValue => {
-    setRepeatValidated(newValue >= 1 ? 'default' : 'error');
+    setRepeatValidated(!newValue || newValue >= 1 ? 'default' : 'error');
     setRepeatAmount(newValue);
   };
 
