@@ -8,7 +8,7 @@ module ForemanRemoteExecution
 
     def multiple_actions
       res = super
-      res += [ [_('Schedule Remote Job'), new_job_invocation_path, false] ] if authorized_for(controller: :job_invocations, action: :new)
+      res += [ [_('Schedule Remote Job'), new_job_invocation_path, false] ] if can_schedule_jobs?
       res
     end
 
@@ -22,20 +22,20 @@ module ForemanRemoteExecution
       end
     end
 
-    def rex_host_features(*args)
-      return unless authorized_for(controller: :job_invocations, action: :create)
+    def rex_host_features(host, *_rest)
+      return [] unless can_execute_on_host?(host)
       RemoteExecutionFeature.with_host_action_button.order(:label).map do |feature|
-        link_to(_('%s') % feature.name, job_invocations_path(:host_ids => [args.first.id], :feature => feature.label), :method => :post)
+        link_to(_('%s') % feature.name, job_invocations_path(:host_ids => [host.id], :feature => feature.label), :method => :post)
       end
     end
 
-    def schedule_job_button(*args)
-      return unless authorized_for(controller: :job_invocations, action: :new)
-      link_to(_('Schedule Remote Job'), new_job_invocation_path(:host_ids => [args.first.id]), :id => :run_button, :class => 'btn btn-default')
+    def schedule_job_button(host, *_rest)
+      return unless can_execute_on_host?(host)
+      link_to(_('Schedule Remote Job'), new_job_invocation_path(:host_ids => [host.id]), :id => :run_button, :class => 'btn btn-default')
     end
 
     def web_console_button(host, *args)
-      return unless authorized_for(permission: 'cockpit_hosts', auth_object: host)
+      return if !authorized_for(permission: 'cockpit_hosts', auth_object: host) || !can_execute_on_infrastructure_host?(host)
 
       url = SSHExecutionProvider.cockpit_url_for_host(host.name)
       url ? link_to(_('Web Console'), url, :class => 'btn btn-default', :id => :'web-console-button', :target => '_new') : nil
@@ -46,6 +46,17 @@ module ForemanRemoteExecution
         button_group(web_console_button(*args)))
       super(*args)
     end
-  end
 
+    def can_schedule_jobs?
+      authorized_for(controller: :job_invocations, action: :create)
+    end
+
+    def can_execute_on_host?(host)
+      can_schedule_jobs? && can_execute_on_infrastructure_host?(host)
+    end
+
+    def can_execute_on_infrastructure_host?(host)
+      !host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts)
+    end
+  end
 end
