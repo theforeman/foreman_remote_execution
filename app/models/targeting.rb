@@ -67,7 +67,7 @@ class Targeting < ApplicationRecord
     return '' if ids.empty?
 
     hosts = Host.execution_scope.where(:id => ids).distinct.pluck(:name)
-    "name ^ (#{hosts.join(', ')})"
+    hosts.any? ? "name ^ (#{hosts.join(', ')})" : ''
   end
 
   def resolved?
