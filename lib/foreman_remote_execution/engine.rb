@@ -214,7 +214,10 @@ module ForemanRemoteExecution
         role 'Remote Execution User', USER_PERMISSIONS, 'Role with permissions to run remote execution jobs against hosts'
         role 'Remote Execution Manager', MANAGER_PERMISSIONS, 'Role with permissions to manage job templates, remote execution features, cancel jobs and view audit logs'
 
-        add_all_permissions_to_default_roles
+        add_all_permissions_to_default_roles(except: [:execute_jobs_on_infrastructure_hosts])
+        add_permissions_to_default_roles({
+          Role::MANAGER => [:execute_jobs_on_infrastructure_hosts],
+        })
 
         # add menu entry
         menu :top_menu, :job_templates,
