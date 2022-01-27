@@ -121,6 +121,10 @@ module ForemanRemoteExecution
       @cached_rex_host_params_hash = nil
     end
 
+    def infrastructure_host?
+      infrastructure_facet&.foreman_instance || infrastructure_facet&.smart_proxy_id
+    end
+
     private
 
     def extend_host_params_hash(params)
