@@ -217,6 +217,7 @@ module ForemanRemoteExecution
         add_all_permissions_to_default_roles(except: [:execute_jobs_on_infrastructure_hosts])
         add_permissions_to_default_roles({
           Role::MANAGER => [:execute_jobs_on_infrastructure_hosts],
+          Role::SITE_MANAGER => USER_PERMISSIONS + [:execute_jobs_on_infrastructure_hosts],
         })
 
         # add menu entry
