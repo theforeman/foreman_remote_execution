@@ -7,15 +7,3 @@ if view_permission && !default_role.permissions.include?(view_permission)
     filter.filterings.build { |f| f.permission = view_permission }
   end
 end
-
-site_manager_role = Role.find_by(name: 'Site manager')
-Role.without_auditing do
-  Role.skip_permission_check do
-    site_manager_role.ignore_locking do |role|
-      names = ForemanRemoteExecution::Engine::USER_PERMISSIONS.map(&:to_s) + %w(execute_jobs_on_infrastructure_hosts)
-      existing = role.permissions.where(:name => names).pluck(:name)
-      to_add = names - existing
-      role.add_permissions! to_add if to_add.any?
-    end
-  end
-end
