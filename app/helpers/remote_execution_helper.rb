@@ -31,7 +31,7 @@ module RemoteExecutionHelper
 
     if authorized_for(hash_for_host_path(host).merge(auth_object: host, permission: :view_hosts, authorizer: job_hosts_authorizer))
       links << { title: _('Host detail'),
-        action: { href: host_path(host), 'data-method': 'get', id: "#{host.name}-actions-detail" } }
+        action: { href: current_host_details_path(host), 'data-method': 'get', id: "#{host.name}-actions-detail" } }
     end
 
     if authorized_for(hash_for_rerun_job_invocation_path(id: job_invocation, host_ids: [ host.id ], authorizer: job_hosts_authorizer))
