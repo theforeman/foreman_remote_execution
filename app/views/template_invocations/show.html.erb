@@ -28,7 +28,7 @@ end
   </div>
 </div>
 <% if @host %>
-  <h3><%= _('Target: ') %><%= link_to(@host.name, host_path(@host)) %></h3>
+  <h3><%= _('Target: ') %><%= link_to(@host.name, current_host_details_path(@host)) %></h3>
 
   <div class="preview hidden">
     <%= preview_box(@template_invocation, @host) %>
