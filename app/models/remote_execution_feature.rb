@@ -62,7 +62,7 @@ class RemoteExecutionFeature < ApplicationRecord
         feature = self.create!({ :label => label }.merge(attributes))
       else
         feature.attributes = attributes
-        feature.save if feature.changed?
+        feature.save if feature.changed? rescue false
       end
       return feature
     end

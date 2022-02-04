@@ -47,7 +47,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', before: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
-        requires_foreman '>= 3.3'
+        requires_foreman '>= 3.4'
         register_global_js_file 'global'
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
@@ -152,7 +152,7 @@ module ForemanRemoteExecution
             setting 'remote_execution_job_invocation_report_template',
               type: :string,
               description: N_('Select a report template used for generating a report for a particular remote execution job'),
-              default: 'Job invocation - report template',
+              default: 'Job - Invocation Report',
               full_name: N_('Job Invocation Report Template'),
               collection: proc { ForemanRemoteExecution.job_invocation_report_templates_select }
           end
