@@ -147,7 +147,7 @@ module RemoteExecutionHelper
     end
   end
 
-  def invocation_description(invocation, keep_tooltip = true)
+  def invocation_description(invocation, keep_tooltip: true)
     description = invocation.description.try(:capitalize) || invocation.job_category
     description = trunc_with_tooltip(description, 80) if keep_tooltip
     description
