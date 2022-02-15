@@ -3,17 +3,10 @@ module ForemanRemoteExecution
     extend ActiveSupport::Concern
 
     included do
-      before_validation :set_execution_flag
       validate :exclusive_execution_interface
     end
 
     private
-
-    def set_execution_flag
-      return unless primary? && host.present?
-
-      self.execution = true if host.interfaces.detect(&:execution).nil?
-    end
 
     def exclusive_execution_interface
       if host && self.execution?
