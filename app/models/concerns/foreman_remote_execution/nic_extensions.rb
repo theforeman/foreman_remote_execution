@@ -4,9 +4,18 @@ module ForemanRemoteExecution
 
     included do
       validate :exclusive_execution_interface
+      before_validation :move_execution_flag
     end
 
     private
+
+    def move_execution_flag
+      return unless host && self.execution?
+
+      host.interfaces
+          .select { |i| i.execution? && i != self }
+          .each { |i| i.execution = false }
+    end
 
     def exclusive_execution_interface
       if host && self.execution?
