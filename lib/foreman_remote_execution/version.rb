@@ -1,3 +1,3 @@
 module ForemanRemoteExecution
-  VERSION = '5.0.1'.freeze
+  VERSION = '5.0.2'.freeze
 end
