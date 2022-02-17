@@ -24,6 +24,13 @@ management functionality with remote management functionality.
 
 Check the Foreman manual [remote execution section](http://theforeman.org/plugins/foreman_remote_execution/)
 
+## Compatibility
+
+| Foreman Version | Plugin Version |
+| --------------- | -------------- |
+| >= 3.1          | ~> 5.0.0       |
+| >= 3.2          | >= 6.0.0       |
+
 ## Simulated runs
 There is an option to use an alternative `ScriptRunner` implementation. Instead of doing ssh connections it discards any input its given and gives back fake output.
 
