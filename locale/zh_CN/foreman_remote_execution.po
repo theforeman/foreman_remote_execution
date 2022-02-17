@@ -26,6 +26,12 @@ msgstr "%s 前"
 msgid "%{description} on %{host}"
 msgstr "%{host} 中的 %{description} "
 
+msgid ", and %s more"
+msgstr ""
+
+msgid "...and %s more"
+msgstr ""
+
 msgid "...and %{count} more"
 msgid_plural "...and %{count} more"
 msgstr[0] ""
@@ -37,11 +43,23 @@ msgstr "用逗号分开的不包含于外部模板的输入列表名称。"
 msgid "A comma separated list of input names to be included from the foreign template."
 msgstr "包含外部模板中用逗号分开的输入名称列表。"
 
+msgid "A job '%{job_name}' has %{status} at %{time}"
+msgstr ""
+
+msgid "A job '%{subject}' has failed"
+msgstr ""
+
 msgid "A job '%{subject}' has finished successfully"
 msgstr "任务 '%{subject}' 成功完成"
 
+msgid "A notification when a job finishes"
+msgstr ""
+
 msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
 msgstr "为 Foreman 提供远程执行的插件，可使用远程管理功能完成配置管理功能。"
+
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr ""
 
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "用来执行该脚本的用户。如果与 SSH 用户不同，则可使用 su 或者 sudo 切换至该账户。"
@@ -49,14 +67,14 @@ msgstr "用来执行该脚本的用户。如果与 SSH 用户不同，则可使�
 msgid "Abort Job"
 msgstr "中止任务"
 
-msgid "Action with sub plans"
-msgstr "有子计划的操作"
-
 msgid "Actions"
 msgstr "操作"
 
 msgid "Add Foreign Input Set"
 msgstr "添加外部输入集"
+
+msgid "Advanced Fields"
+msgstr ""
 
 msgid "Advanced fields"
 msgstr ""
@@ -79,11 +97,23 @@ msgstr ""
 msgid "Any Organization"
 msgstr ""
 
+msgid "Apply to"
+msgstr ""
+
+msgid "At"
+msgstr ""
+
+msgid "At minute"
+msgstr ""
+
 msgid "Back to Job"
 msgstr "返回任务"
 
 msgid "Bookmark"
 msgstr "收藏"
+
+msgid "Can't find Job Invocation for an id %s"
+msgstr ""
 
 msgid "Cancel Job"
 msgstr "取消任务"
@@ -103,13 +133,10 @@ msgstr "没有用户则无法解析主机"
 msgid "Cannot specify both bookmark_id and search_query"
 msgstr "无法指定 bookmark_id 和 search_query"
 
-msgid "Cannot specify both recurrence and scheduling"
-msgstr "无法指定 recurrence 和 scheduling"
-
-msgid "Category And Template"
+msgid "Categories list failed with:"
 msgstr ""
 
-msgid "Category and template"
+msgid "Category and Template"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -119,6 +146,9 @@ msgid "Circular dependency detected in foreign input set '%{template}' -> '%{tar
 msgstr "在外部输出集中探测到循环相依性  '%{template}' -> '%{target_template}'。模板栈：%{templates_stack}"
 
 msgid "Cleanup working directories"
+msgstr ""
+
+msgid "Clear filters"
 msgstr ""
 
 msgid "Clone a provision template"
@@ -154,11 +184,14 @@ msgstr "无法渲染预览，因为没有符合搜索查询的主机。"
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-msgid "Could not use any proxy. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
+msgid "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "无法使用在任务调用中使用的任意模板"
+
+msgid "Create Report"
+msgstr ""
 
 msgid "Create a foreign input set"
 msgstr "创建外部输入集"
@@ -172,10 +205,31 @@ msgstr "创建任务模板"
 msgid "Create a recurring job"
 msgstr "创建重复任务"
 
+msgid "Create report for this job"
+msgstr ""
+
+msgid "Cron line"
+msgstr ""
+
+msgid "Cron line format 'a b c d e', where:"
+msgstr ""
+
+msgid "Cronline"
+msgstr ""
+
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
 msgstr ""
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
+msgstr ""
+
+msgid "Daily"
+msgstr ""
+
+msgid "Days"
+msgstr ""
+
+msgid "Days of week"
 msgstr ""
 
 msgid "Default SSH key passphrase"
@@ -205,8 +259,14 @@ msgstr "删除任务模板"
 msgid "Description"
 msgstr "描述"
 
+msgid "Description Template"
+msgstr ""
+
 msgid "Description template"
 msgstr "描述模板"
+
+msgid "Designation of a special purpose"
+msgstr ""
 
 msgid "Display advanced fields"
 msgstr "显示高级字段"
@@ -217,11 +277,20 @@ msgstr ""
 msgid "Distribute tasks over N seconds"
 msgstr "N 秒后分配任务"
 
+msgid "Does not repeat"
+msgstr ""
+
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr "探测到重复的输入：%{duplicated_inputs}"
 
+msgid "Dynamic"
+msgstr ""
+
 msgid "Dynamic Query"
 msgstr "动态查询"
+
+msgid "Dynamic query"
+msgstr ""
 
 msgid "Edit %s"
 msgstr "编辑 %s"
@@ -232,8 +301,8 @@ msgstr "编辑任务模板"
 msgid "Edit Remote Execution Feature"
 msgstr "编辑远程执行功能"
 
-msgid "Effective User"
-msgstr "有效用户"
+msgid "Edit job description template"
+msgstr ""
 
 msgid "Effective User Method"
 msgstr "有效用户方法"
@@ -253,14 +322,35 @@ msgstr ""
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
 
+msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Efffective User"
+msgstr ""
+
 msgid "Enable Global Proxy"
 msgstr "启用全局代理服务器"
+
+msgid "End time needs to be after start time"
+msgstr ""
+
+msgid "Ends"
+msgstr ""
+
+msgid "Error"
+msgstr ""
 
 msgid "Error loading data from proxy"
 msgstr "从代理服务器载入数据出错"
 
+msgid "Errors:"
+msgstr ""
+
 msgid "Evaluated at:"
 msgstr "评估于："
+
+msgid "Execute now"
+msgstr ""
 
 msgid "Execute the jobs on hosts in randomized order"
 msgstr ""
@@ -286,6 +376,9 @@ msgstr "导出任务模版到 ERB"
 msgid "Failed"
 msgstr "已失败"
 
+msgid "Failed hosts"
+msgstr ""
+
 msgid "Failed rendering template: %s"
 msgstr "修改模板失败：%s"
 
@@ -294,6 +387,21 @@ msgstr "退回至任何代理服务器"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "模板 %{template_name} 的功能输入 %{input_name} "
+
+msgid "Filter by host collections"
+msgstr ""
+
+msgid "Filter by host groups"
+msgstr ""
+
+msgid "Filter by hosts"
+msgstr ""
+
+msgid "Finished"
+msgstr ""
+
+msgid "For example: 1, 2, 3, 4, 5..."
+msgstr ""
 
 msgid "Foreign input set"
 msgstr "外部输入集"
@@ -313,14 +421,26 @@ msgstr ""
 msgid "Get raw output for a host"
 msgstr ""
 
+msgid "Has to be a positive number"
+msgstr ""
+
 msgid "Hide advanced fields"
 msgstr "隐藏高级字段"
+
+msgid "Hide all advanced fields"
+msgstr ""
 
 msgid "Host"
 msgstr "主机"
 
+msgid "Host collections"
+msgstr ""
+
 msgid "Host detail"
 msgstr "主机详情"
+
+msgid "Host groups"
+msgstr ""
 
 msgid "Host task"
 msgstr ""
@@ -328,7 +448,13 @@ msgstr ""
 msgid "Host with id '%{id}' was not found"
 msgstr "未找到 id 为 '%{id}' 的主机"
 
+msgid "Hosts"
+msgstr ""
+
 msgid "Hosts gone missing"
+msgstr ""
+
+msgid "Hourly"
 msgstr ""
 
 msgid "How often the job should occur, in the cron format"
@@ -340,14 +466,8 @@ msgstr ""
 msgid "Import"
 msgstr "导入"
 
-msgid "Import Puppet classes"
-msgstr "导入 Puppet 分类"
-
 msgid "Import a job template from ERB"
 msgstr "从 ERB 导入任务模版"
-
-msgid "Import facts"
-msgstr "导入详情"
 
 msgid "Include all inputs from the foreign template"
 msgstr "在外部模板中包含所有输入格式"
@@ -370,17 +490,29 @@ msgstr ""
 msgid "Internal proxy selector can only be used if Katello is enabled"
 msgstr ""
 
+msgid "Invalid date"
+msgstr ""
+
+msgid "Invalid time format"
+msgstr ""
+
 msgid "Invocation type, one of %s"
 msgstr "调用类型，%s 之一"
 
 msgid "Job"
 msgstr "工作"
 
+msgid "Job Category"
+msgstr ""
+
 msgid "Job Details"
 msgstr "任务细节"
 
 msgid "Job Invocation"
 msgstr "任务调用"
+
+msgid "Job Invocation Report Template"
+msgstr ""
 
 msgid "Job Invocations"
 msgstr ""
@@ -408,6 +540,9 @@ msgstr "任务调用"
 
 msgid "Job invocations"
 msgstr "任务调用"
+
+msgid "Job result"
+msgstr ""
 
 msgid "Job template"
 msgstr "任务模板"
@@ -439,6 +574,9 @@ msgstr "任务"
 msgid "Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr "密钥口令只适用于 SSH 提供商。其他提供商会忽略此字段。<br>在任务完成之前，都会以加密方式存储在数据库中。对于未来或周期性执行，该密码将在最后一次执行后被删除。"
 
+msgid "Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
 msgid "Label"
 msgstr "标签"
 
@@ -450,6 +588,9 @@ msgstr "上一个执行失败"
 
 msgid "Last execution succeeded"
 msgstr "上一个执行成功"
+
+msgid "Latest Jobs"
+msgstr ""
 
 msgid "Learn more about this in the documentation."
 msgstr "在本文档中了解更多这方面的内容。"
@@ -484,6 +625,9 @@ msgstr ""
 msgid "Manual selection"
 msgstr "手动选择"
 
+msgid "Monthly"
+msgstr ""
+
 msgid "Must select a bookmark or enter a search query"
 msgstr "必须选择书签或输入搜索查询"
 
@@ -493,8 +637,14 @@ msgstr "不适用"
 msgid "Name"
 msgstr "名称"
 
+msgid "Never ends"
+msgstr ""
+
 msgid "New Job Template"
 msgstr "新建任务模板"
+
+msgid "No Target Hosts"
+msgstr ""
 
 msgid "No execution finished yet"
 msgstr "尚未完成任何执行"
@@ -502,11 +652,20 @@ msgstr "尚未完成任何执行"
 msgid "No hosts found."
 msgstr ""
 
+msgid "No jobs available"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
 msgid "No template mapped to feature %{feature_name}"
 msgstr "没有与功能 %{feature_name} 映射的模板"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "没有为所有必填输入分配值。缺少输入：%s"
+
+msgid "Only one of feature or job_template_id can be specified"
+msgstr ""
 
 msgid "Organization"
 msgstr ""
@@ -541,14 +700,23 @@ msgstr ""
 msgid "Perform no more executions after this time"
 msgstr "这个时间后不再执行任何操作"
 
+msgid "Please refine your search."
+msgstr ""
+
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "要用于 SSH 通信的端口。默认端口 22。您可以通过设置名为 remote_execution_ssh_port 的参数来按主机进行覆盖。"
 
-msgid "Preupgrade job"
+msgid "Prefer IPv6 over IPv4"
 msgstr ""
 
 msgid "Preview"
 msgstr "预览"
+
+msgid "Preview Hosts"
+msgstr ""
+
+msgid "Preview job description"
+msgstr ""
 
 msgid "Preview templates"
 msgstr ""
@@ -568,7 +736,28 @@ msgstr "提供者及模板"
 msgid "Proxies"
 msgstr "代理服务器"
 
+msgid "Purpose"
+msgstr ""
+
+msgid "Query type"
+msgstr ""
+
+msgid "REX job has failed - %s"
+msgstr ""
+
+msgid "REX job has finished - %s"
+msgstr ""
+
+msgid "REX job has succeeded - %s"
+msgstr ""
+
 msgid "Randomized"
+msgstr ""
+
+msgid "Recent jobs"
+msgstr ""
+
+msgid "Recurrence"
 msgstr ""
 
 msgid "Recurring logic"
@@ -598,11 +787,20 @@ msgstr "远程执行"
 msgid "Remote execution feature label that should be triggered, job template assigned to this feature will be used"
 msgstr "应触发的远程执行功能标签，将使用分配给此功能的任务模板"
 
-msgid "Remove SSH known hosts for %s"
+msgid "Remote execution job"
+msgstr ""
+
+msgid "Repeat N times"
+msgstr ""
+
+msgid "Repeat On"
 msgstr ""
 
 msgid "Repeat a maximum of N times"
 msgstr "最多重复 N 次"
+
+msgid "Repeat amount can only be a positive number"
+msgstr ""
 
 msgid "Rerun"
 msgstr "重新运行"
@@ -628,7 +826,7 @@ msgstr "解析为"
 msgid "Results"
 msgstr ""
 
-msgid "Review details"
+msgid "Review Details"
 msgstr ""
 
 msgid "Run"
@@ -649,6 +847,9 @@ msgstr ""
 msgid "Run job"
 msgstr ""
 
+msgid "Running"
+msgstr ""
+
 msgid "SSH"
 msgstr "SSH"
 
@@ -667,11 +868,20 @@ msgstr "时间表"
 msgid "Schedule Remote Job"
 msgstr "调度远程任务"
 
+msgid "Schedule for future execution"
+msgstr ""
+
 msgid "Schedule the job for a future time"
 msgstr "将该任务调度为在将来的某个时间开始"
 
 msgid "Schedule the job to start at a later time"
 msgstr "将该任务调度为于稍后开始"
+
+msgid "Schedule type"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
 
 msgid "Scheduled to start at"
 msgstr "计划开始时间"
@@ -691,8 +901,14 @@ msgstr ""
 msgid "Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host's organization and location."
 msgstr ""
 
+msgid "Search query"
+msgstr ""
+
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "为任意有远程执行功能的代理服务器搜索主机，这在主机没有子网或子网没有任何执行代理服务器时很有帮助。"
+
+msgid "See more details at %s"
+msgstr ""
 
 msgid "See the last task details"
 msgstr "查看最新任务详情"
@@ -700,22 +916,37 @@ msgstr "查看最新任务详情"
 msgid "See the task details"
 msgstr "查看任务详情"
 
+msgid "Select a report template used for generating a report for a particular remote execution job"
+msgstr ""
+
 msgid "Select an ERB file to upload in order to import a job template.  The template must contain metadata in the first ERB comment."
 msgstr "选择要上传的 ERB 文件来导入任务模版。这个模版必须包含第一个 ERB 注释里的元数据。"
 
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "为这个子网选择所有可使用的远程执行代理服务器。添加使用同一提供者的多个代理服务器时，会在它们之间均衡操作负载。"
 
+msgid "Set SSH key passphrase"
+msgstr ""
+
+msgid "Set SSH password"
+msgstr ""
+
+msgid "Set password for effective user (using sudo-like mechanisms)"
+msgstr ""
+
 msgid "Set to distribute over"
 msgstr "设置为通过...分配"
 
-msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. This setting only applies to IPv4. When the host has only an IPv6 address on the interface used for remote execution, hostname will be used even if this setting is set to true."
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting"
 msgstr ""
 
 msgid "Should this interface be used for remote execution?"
 msgstr ""
 
 msgid "Show Job status for the hosts"
+msgstr ""
+
+msgid "Show all advanced fields"
 msgstr ""
 
 msgid "Show foreign input set details"
@@ -736,11 +967,38 @@ msgstr "片段"
 msgid "Start"
 msgstr "开始"
 
+msgid "Started"
+msgstr ""
+
+msgid "Starts at"
+msgstr ""
+
+msgid "Starts before"
+msgstr ""
+
+msgid "State"
+msgstr ""
+
+msgid "Static"
+msgstr ""
+
 msgid "Static Query"
 msgstr "静态查询"
 
+msgid "Static query"
+msgstr ""
+
 msgid "Status"
 msgstr "状态"
+
+msgid "Subscribe to all my jobs"
+msgstr ""
+
+msgid "Subscribe to my failed jobs"
+msgstr ""
+
+msgid "Subscribe to my succeeded jobs"
+msgstr ""
 
 msgid "Succeeded"
 msgstr "已成功"
@@ -753,6 +1011,9 @@ msgstr "同步任务模板"
 
 msgid "Target hosts"
 msgstr "没"
+
+msgid "Target hosts and inputs"
+msgstr ""
 
 msgid "Target template ID"
 msgstr "目标模板 ID"
@@ -772,6 +1033,9 @@ msgstr "模版 ERB"
 msgid "Template Invocation for %s"
 msgstr ""
 
+msgid "Template failed with:"
+msgstr ""
+
 msgid "Template name"
 msgstr "模板名称"
 
@@ -780,6 +1044,9 @@ msgstr "模板版本"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "未找到 id 为 '%{id}' 的模板"
+
+msgid "Templates list failed with:"
+msgstr ""
 
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "尚未解析动态查询 '%{query}'。请在 %{here} 查看现在应已被解析的主机列表。"
@@ -809,6 +1076,9 @@ msgstr[1] ""
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
 msgstr "用户无法访问与功能 %{feature_name} 映射的模板 %{template_name}"
+
+msgid "There are no available input fields for the selected template."
+msgstr ""
 
 msgid "There was an error while updating the status, try refreshing the page."
 msgstr "更新状态时发生错误，请尝试刷新此页面。"
@@ -876,11 +1146,17 @@ msgstr "尝试取消该任务"
 msgid "Type"
 msgstr "类型"
 
+msgid "Type has impact on when is the query evaluated to hosts."
+msgstr ""
+
 msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
 msgstr "类型会对何时评估主机查询产生影响。<br><ul><li><b>静态</b> - 提交此表格后立即评估</li><li><b>动态</b> - 开始执行前进行评估，因此，如果以后计划，则目标主机集可能会在它之前发生变化</li></ul>"
 
 msgid "Type of query"
 msgstr "查询类型"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
 
 msgid "Unable to fetch public key"
 msgstr "无法获取公钥"
@@ -918,6 +1194,9 @@ msgstr ""
 msgid "User can not execute job on host %s"
 msgstr "用户无法在主机 %s 中执行任务"
 
+msgid "User can not execute job on infrastructure host %s"
+msgstr ""
+
 msgid "User can not execute this job template"
 msgstr "用户无法执行这个任务模板"
 
@@ -930,7 +1209,22 @@ msgstr "用户输入"
 msgid "Value"
 msgstr "值"
 
+msgid "View All Jobs"
+msgstr ""
+
+msgid "View Finished Jobs"
+msgstr ""
+
+msgid "View Running Jobs"
+msgstr ""
+
+msgid "View Scheduled Jobs"
+msgstr ""
+
 msgid "Web Console"
+msgstr ""
+
+msgid "Weekly"
 msgstr ""
 
 msgid "What command should be used to switch to the effective user. One of %s"
@@ -941,6 +1235,9 @@ msgstr "应由什么用户运行此脚本（使用类似 sudo 的机制）。"
 
 msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
 msgstr "应由什么用户运行此脚本（使用类似 sudo 的机制）。默认为模板参数或全局设置。"
+
+msgid "When connecting using ip address, should the IPv6 addresses be preferred? If no IPv6 address is set, it falls back to IPv4 automatically. You may override this per host by setting a parameter called remote_execution_connect_by_ip_prefer_ipv6. By default and for compatibility, IPv4 will be preferred over IPv6 by default"
+msgstr ""
 
 msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
 msgstr ""
@@ -969,6 +1266,9 @@ msgstr ""
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "不允许您查看当前分配的模板。现在保存该表格则会取消分配该模板。"
 
+msgid "You have %s results to display. Showing first %s results"
+msgstr ""
+
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "为这个模板添加输入以参考不同的模板输入"
 
@@ -986,6 +1286,12 @@ msgstr ""
 
 msgid "error during rendering: %s"
 msgstr "修改时出错：%s"
+
+msgid "evaluates just after you submit this form"
+msgstr ""
+
+msgid "evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it"
+msgstr ""
 
 msgid "failed"
 msgstr "已失败"
@@ -1007,6 +1313,24 @@ msgstr "未找到所包含模板 '%s'"
 
 msgid "input macro with name '%s' used, but no input with such name defined for this template"
 msgstr "名为 '%s' 的输入宏已被使用，但没有为这个模板定义使用这个名称的输入。"
+
+msgid "is day of month (range: 1-31)"
+msgstr ""
+
+msgid "is day of week (range: 0-6)"
+msgstr ""
+
+msgid "is hour (range: 0-23)"
+msgstr ""
+
+msgid "is minute (range: 0-59)"
+msgstr ""
+
+msgid "is month (range: 1-12)"
+msgstr ""
+
+msgid "open-help-tooltip-button"
+msgstr ""
 
 msgid "queued"
 msgstr "已排队"
@@ -1036,4 +1360,16 @@ msgid "unknown status"
 msgstr "未知状态"
 
 msgid "using "
+msgstr ""
+
+msgid "using Smart Proxy"
+msgstr ""
+
+msgid "»Action with sub plans«"
+msgstr ""
+
+msgid "»Import Puppet classes«"
+msgstr ""
+
+msgid "»Import facts«"
 msgstr ""
