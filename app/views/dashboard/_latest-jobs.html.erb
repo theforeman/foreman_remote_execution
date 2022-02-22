@@ -10,7 +10,7 @@
     </tr>
     <% JobInvocation.latest_jobs.each do |invocation| %>
       <tr>
-        <td class="ellipsis"><%= link_to_if_authorized invocation_description(invocation), hash_for_job_invocation_path(invocation).merge(:auth_object => invocation, :permission => :view_job_invocations, :authorizer => authorizer) %></td>
+        <td class="ellipsis"><%= link_to_if_authorized invocation_description(invocation, keep_tooltip: false), hash_for_job_invocation_path(invocation).merge(:auth_object => invocation, :permission => :view_job_invocations, :authorizer => authorizer) %></td>
         <td><%= link_to_invocation_task_if_authorized(invocation) %></td>
         <td><%= time_in_words_span(invocation.start_at) %></td>
       </tr>
