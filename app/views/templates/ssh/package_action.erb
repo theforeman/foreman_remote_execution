@@ -69,8 +69,11 @@ handle_zypp_res_codes () {
 
   if [ "${ZYPP_RES_CODES[$RETVAL]}" != "" ]; then
     echo ${ZYPP_RES_CODES[$RETVAL]}
+  fi
+  if [[ $RETVAL -ge 100 && $RETVAL -le 103 ]]; then
     RETVAL=0
   fi
+
   return $RETVAL
 }
 <% end -%>
