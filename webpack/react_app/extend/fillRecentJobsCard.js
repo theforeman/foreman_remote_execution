@@ -4,7 +4,7 @@ import RecentJobsCard from '../components/RecentJobsCard';
 
 export default () =>
   addGlobalFill(
-    'details-cards',
+    'host-overview-cards',
     'rex-host-details-latest-jobs',
     <RecentJobsCard key="rex-host-details-latest-jobs" />,
     1000
