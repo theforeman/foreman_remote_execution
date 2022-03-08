@@ -13,6 +13,7 @@ module ForemanRemoteExecution
 
       def host_setup_extension
         remote_execution_interface
+        reset_host_known_keys! unless @host.new_record?
         super
       end
 
@@ -20,6 +21,10 @@ module ForemanRemoteExecution
         return unless params['remote_execution_interface'].present?
 
         @host.set_execution_interface(params['remote_execution_interface'])
+      end
+
+      def reset_host_known_keys!
+        @host.host_proxy_invocations.destroy_all
       end
     end
   end
