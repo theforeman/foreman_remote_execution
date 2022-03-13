@@ -46,6 +46,10 @@ module ForemanRemoteExecution
       end
     end
 
+    def cockpit_url
+      SSHExecutionProvider.cockpit_url_for_host(self.name)
+    end
+
     def execution_status(options = {})
       @execution_status ||= get_status(HostStatus::ExecutionStatus).to_status(options)
     end
