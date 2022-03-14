@@ -40,7 +40,7 @@ class UiJobWizardController < ApplicationController
   end
 
   def with_katello
-    !!defined?(::Katello)
+    ::Foreman::Plugin.installed? 'katello'
   end
 
   def resource_class
