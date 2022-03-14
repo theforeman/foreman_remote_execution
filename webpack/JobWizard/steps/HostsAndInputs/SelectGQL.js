@@ -9,6 +9,7 @@ import { HOSTS, HOST_GROUPS, dataName } from '../../JobWizardConstants';
 import { SearchSelect } from '../form/SearchSelect';
 import hostsQuery from './hosts.gql';
 import hostgroupsQuery from './hostgroups.gql';
+import { decodeId } from '../../../globalIdHelper';
 
 export const useNameSearchGQL = apiKey => {
   const org = useForemanOrganization();
@@ -35,7 +36,7 @@ export const useNameSearchGQL = apiKey => {
       subtotal: data?.[dataName[apiKey]]?.totalCount,
       results:
         data?.[dataName[apiKey]]?.nodes.map(node => ({
-          id: node.name,
+          id: decodeId(node.id),
           name: node.name,
         })) || [],
     },

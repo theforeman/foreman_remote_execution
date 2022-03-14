@@ -2,6 +2,7 @@ query($search: String!) {
   hostgroups(first: 100, last: 100, search: $search) {
     totalCount
     nodes {
+      id
       name
     }
   }
