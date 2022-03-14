@@ -193,7 +193,11 @@ export const gqlMock = [
       data: {
         hosts: {
           totalCount: 3,
-          nodes: [{ name: 'host1' }, { name: 'host2' }, { name: 'host3' }],
+          nodes: [
+            { id: 'MDE6SG9zdC0x', name: 'host1' },
+            { id: 'MDE6SG9zdC0y', name: 'host2' },
+            { id: 'MDE6SG9zdC0z', name: 'host3' },
+          ],
         },
       },
     },
@@ -211,9 +215,9 @@ export const gqlMock = [
         hostgroups: {
           totalCount: 3,
           nodes: [
-            { name: 'host_group1' },
-            { name: 'host_group2' },
-            { name: 'host_group3' },
+            { id: 'MDE6SG9zdGdyb3VwLTE=', name: 'host_group1' },
+            { id: 'MDE6SG9zdGdyb3VwLTI=', name: 'host_group2' },
+            { id: 'MDE6SG9zdGdyb3VwLTM=', name: 'host_group3' },
           ],
         },
       },
