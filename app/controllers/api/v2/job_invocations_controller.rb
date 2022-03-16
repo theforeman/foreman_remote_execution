@@ -45,6 +45,7 @@ module Api
               :required => false,
               :desc => N_('Set password for effective user (using sudo-like mechanisms)')
           end
+          param :ssh_user, String, :required => false, :desc => N_('Set SSH user')
           param :password, String, :required => false, :desc => N_('Set SSH password')
           param :key_passphrase, String, :required => false, :desc => N_('Set SSH key passphrase')
 

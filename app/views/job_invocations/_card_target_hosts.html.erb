@@ -32,6 +32,14 @@
         <%= show_job_location(@job_location) %>
       </strong>
     </p>
+    <% if job_invocation[:ssh_user] %>
+      <p>
+        <%= _('SSH User') %>:
+        <strong>
+          <%= job_invocation[:ssh_user] %>
+        </strong>
+      </p>
+    <% end %>
   </div>
   <div class='card-pf-footer'>
     <p>

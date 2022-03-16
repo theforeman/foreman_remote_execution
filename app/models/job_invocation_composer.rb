@@ -16,6 +16,7 @@ class JobInvocationComposer
         :host_ids => ui_params[:host_ids],
         :remote_execution_feature_id => job_invocation_base[:remote_execution_feature_id],
         :description_format => job_invocation_base[:description_format],
+        :ssh_user => blank_to_nil(job_invocation_base[:ssh_user]),
         :password => blank_to_nil(job_invocation_base[:password]),
         :key_passphrase => blank_to_nil(job_invocation_base[:key_passphrase]),
         :effective_user_password => blank_to_nil(job_invocation_base[:effective_user_password]),
@@ -121,6 +122,7 @@ class JobInvocationComposer
         :targeting => targeting_params,
         :triggering => triggering_params,
         :description_format => api_params[:description_format],
+        :ssh_user => api_params[:ssh_user],
         :password => api_params[:password],
         :remote_execution_feature_id => remote_execution_feature_id,
         :effective_user_password => api_params[:effective_user_password],
@@ -237,6 +239,7 @@ class JobInvocationComposer
       { :job_category => job_invocation.job_category,
         :targeting => targeting_params,
         :triggering => triggering_params,
+        :ssh_user => job_invocation.ssh_user,
         :description_format => job_invocation.description_format,
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => job_invocation.execution_timeout_interval,
@@ -399,7 +402,7 @@ class JobInvocationComposer
 
   def compose
     job_invocation.job_category = validate_job_category(params[:job_category])
-    job_invocation.job_category ||= resolve_job_category(available_job_categories.first) { |tempate| template.job_category } if @set_defaults
+    job_invocation.job_category ||= resolve_job_category(available_job_categories.first) { |template| template.job_category } if @set_defaults
     job_invocation.remote_execution_feature_id = params[:remote_execution_feature_id]
     job_invocation.targeting = build_targeting
     job_invocation.triggering = build_triggering
@@ -411,6 +414,7 @@ class JobInvocationComposer
     job_invocation.password = params[:password]
     job_invocation.key_passphrase = params[:key_passphrase]
     job_invocation.effective_user_password = params[:effective_user_password]
+    job_invocation.ssh_user = params[:ssh_user]
 
     if @reruns && job_invocation.targeting.static?
       job_invocation.targeting.assign_host_ids(JobInvocation.find(@reruns).targeting.host_ids)

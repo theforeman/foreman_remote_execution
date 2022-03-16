@@ -1,6 +1,6 @@
 object @job_invocation
 
-attributes :id, :description, :job_category, :targeting_id, :status, :start_at, :status_label
+attributes :id, :description, :job_category, :targeting_id, :status, :start_at, :status_label, :ssh_user
 
 node do |invocation|
   {
