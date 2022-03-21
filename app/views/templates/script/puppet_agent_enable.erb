@@ -1,10 +1,10 @@
 <%#
-name: Puppet Agent Enable - SSH Default
+name: Puppet Agent Enable - Script Default
 model: JobTemplate
 job_category: Puppet
 description_format: Enable Puppet agent
 snippet: false
-provider_type: SSH
+provider_type: script
 kind: job_template
 -%>
 <% if @host.operatingsystem.family == 'Debian' -%>

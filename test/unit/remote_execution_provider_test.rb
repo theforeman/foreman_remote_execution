@@ -6,9 +6,11 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     it { _(providers).must_be_kind_of HashWithIndifferentAccess }
     it 'makes providers accessible using symbol' do
       _(providers[:SSH]).must_equal SSHExecutionProvider
+      _(providers[:script]).must_equal ScriptExecutionProvider
     end
     it 'makes providers accessible using string' do
       _(providers['SSH']).must_equal SSHExecutionProvider
+      _(providers['script']).must_equal ScriptExecutionProvider
     end
   end
 

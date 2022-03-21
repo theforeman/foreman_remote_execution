@@ -1,6 +1,6 @@
 module RemoteExecutionHelper
   def providers_options
-    RemoteExecutionProvider.providers.map { |key, provider| [ key, _(provider.humanized_name) ] }
+    RemoteExecutionProvider.providers.reject { |key, _provider| key == 'SSH' }.map { |key, provider| [ key, _(provider.humanized_name) ] }
   end
 
   def job_hosts_authorizer

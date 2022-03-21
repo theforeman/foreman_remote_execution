@@ -1,4 +1,4 @@
-class SSHExecutionProvider < RemoteExecutionProvider
+class ScriptExecutionProvider < RemoteExecutionProvider
   class << self
     def proxy_command_options(template_invocation, host)
       super.merge(:ssh_user => ssh_user(host),
@@ -9,7 +9,7 @@ class SSHExecutionProvider < RemoteExecutionProvider
     end
 
     def humanized_name
-      _('SSH')
+      _('Script')
     end
 
     def supports_effective_user?
@@ -64,3 +64,5 @@ class SSHExecutionProvider < RemoteExecutionProvider
     end
   end
 end
+
+SSHExecutionProvider = ScriptExecutionProvider

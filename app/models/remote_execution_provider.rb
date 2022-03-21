@@ -4,7 +4,7 @@ class RemoteExecutionProvider
 
   class << self
     def provider_for(type)
-      providers[type.to_s] || providers[:SSH]
+      providers[type.to_s] || providers[:script]
     end
 
     def providers

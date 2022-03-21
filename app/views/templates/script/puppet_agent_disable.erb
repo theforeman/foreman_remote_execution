@@ -1,5 +1,5 @@
 <%#
-name: Puppet Agent Disable - SSH Default
+name: Puppet Agent Disable - Script Default
 model: JobTemplate
 job_category: Puppet
 description_format: Disable Puppet agent
@@ -10,7 +10,7 @@ template_inputs:
   input_type: user
   description: Reason for disabling the Puppet agent
   advanced: false
-provider_type: SSH
+provider_type: script
 kind: job_template
 -%>
 <% if @host.operatingsystem.family == 'Debian' -%>
