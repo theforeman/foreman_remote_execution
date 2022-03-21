@@ -93,7 +93,6 @@ export const SearchSelect = ({
         autoSearch(value || '');
       }}
       placeholderText={placeholderText}
-      onFilter={() => null} // https://github.com/patternfly/patternfly-react/issues/6321
       typeAheadAriaLabel={`${name} typeahead input`}
     >
       {selectOptions}
