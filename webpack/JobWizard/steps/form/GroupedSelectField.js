@@ -69,6 +69,8 @@ export const GroupedSelectField = ({
         className="without_select2"
         onClear={onClear}
         menuAppendTo={() => document.body}
+        aria-labelledby={fieldId}
+        toggleAriaLabel={`${label} toggle`}
         {...props}
       >
         {options}
