@@ -7,6 +7,7 @@ import Pagination from 'foremanReact/components/Pagination';
 import { getControllerSearchProps } from 'foremanReact/constants';
 
 import TargetingHosts from './TargetingHosts';
+import { TARGETING_HOSTS_AUTOCOMPLETE } from './TargetingHostsConsts';
 import './TargetingHostsPage.scss';
 
 const TargetingHostsPage = ({
@@ -16,6 +17,7 @@ const TargetingHostsPage = ({
   items,
   totalHosts,
   handlePagination,
+  page,
 }) => (
   <div id="targeting_hosts">
     <Grid.Row>
@@ -23,24 +25,26 @@ const TargetingHostsPage = ({
         <SearchBar
           onSearch={query => handleSearch(query)}
           data={{
-            ...getControllerSearchProps('hosts'),
+            ...getControllerSearchProps('hosts', TARGETING_HOSTS_AUTOCOMPLETE),
             autocomplete: {
-              id: 'targeting_hosts_search',
+              id: TARGETING_HOSTS_AUTOCOMPLETE,
               searchQuery,
               url: '/hosts/auto_complete_search',
               useKeyShortcuts: true,
             },
-            bookmarks: {},
           }}
+          onBookmarkClick={handleSearch}
         />
       </Grid.Col>
     </Grid.Row>
     <br />
     <TargetingHosts apiStatus={apiStatus} items={items} />
     <Pagination
+      page={page}
       itemCount={totalHosts}
       onChange={args => handlePagination(args)}
       className="targeting-hosts-pagination"
+      updateParamsByUrl={false}
     />
   </div>
 );
@@ -52,6 +56,7 @@ TargetingHostsPage.propTypes = {
   items: PropTypes.array.isRequired,
   totalHosts: PropTypes.number.isRequired,
   handlePagination: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
 };
 
 TargetingHostsPage.defaultProps = {

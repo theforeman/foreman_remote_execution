@@ -23,10 +23,16 @@ exports[`TargetingHostsPage renders 1`] = `
               "url": "/hosts/auto_complete_search",
               "useKeyShortcuts": true,
             },
-            "bookmarks": Object {},
+            "bookmarks": Object {
+              "canCreate": true,
+              "documentationUrl": "4.1.5Searching",
+              "id": "targeting_hosts_search",
+              "url": "/api/bookmarks",
+            },
             "controller": "hosts",
           }
         }
+        onBookmarkClick={[Function]}
         onChange={[Function]}
         onSearch={[Function]}
       />
@@ -56,6 +62,8 @@ exports[`TargetingHostsPage renders 1`] = `
     className="targeting-hosts-pagination"
     itemCount={1}
     onChange={[Function]}
+    page={1}
+    updateParamsByUrl={false}
   />
 </div>
 `;

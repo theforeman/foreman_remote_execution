@@ -89,6 +89,7 @@ const WrappedTargetingHosts = () => {
       items={items}
       totalHosts={totalHosts}
       handlePagination={handlePagination}
+      page={pagination.page}
     />
   );
 };
