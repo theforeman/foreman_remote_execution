@@ -50,10 +50,7 @@ export const TargetingHostsPageFixtures = {
     apiStatus: 'RESOLVED',
     items,
     totalHosts: 1,
-    pagination: {
-      page: 1,
-      perPage: 20,
-    },
+    page: 1,
     handlePagination: () => {},
   },
 };
