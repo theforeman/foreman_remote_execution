@@ -71,8 +71,42 @@
       max-height: 300px;
       overflow: scroll;
     }
+    .schedule-radio label {
+      width: 100%;
+    }
+    .schedule-radio input {
+      align-self: center;
+    }
+    .schedule-radio-repeat-text {
+      width: 100px;
+      display: inline-block;
+      margin-right: 5px;
+      align-self: center;
+    }
+    .schedule-radio-title {
+      width: 80px;
+      display: inline-block;
+      align-self: center;
+    }
+    .schedule-radio-occurences {
+      display: inline-block;
+      align-self: center;
+    }
+    .scheudle-radio-wrapper {
+      display: flex;
+    }
   }
-
+  .future-schedule-tab {
+    .clear-datetime-button {
+      margin-left: 10px;
+      align-self: center;
+      font-size: var(--pf-global--FontSize--md);
+    }
+    .pf-c-form__group-control {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
   .pf-c-date-picker {
     vertical-align: top;
   }
@@ -107,5 +141,8 @@
     .autocomplete-search-btn {
       display: none;
     }
+  }
+  .pf-c-radio__body {
+    font-size: var(--pf-c-radio__label--FontSize);
   }
 }

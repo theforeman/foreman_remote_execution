@@ -4,7 +4,7 @@ import { TextInput, FormGroup } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { helpLabel } from '../form/FormHelpers';
 
-export const PurposeField = ({ isDisabled, purpose, setPurpose }) => (
+export const PurposeField = ({ purpose, setPurpose }) => (
   <FormGroup
     label={__('Purpose')}
     labelIcon={helpLabel(
@@ -14,7 +14,6 @@ export const PurposeField = ({ isDisabled, purpose, setPurpose }) => (
     )}
   >
     <TextInput
-      isDisabled={isDisabled}
       aria-label="purpose"
       type="text"
       value={purpose}
@@ -25,7 +24,6 @@ export const PurposeField = ({ isDisabled, purpose, setPurpose }) => (
   </FormGroup>
 );
 PurposeField.propTypes = {
-  isDisabled: PropTypes.bool.isRequired,
   purpose: PropTypes.string.isRequired,
   setPurpose: PropTypes.func.isRequired,
 };

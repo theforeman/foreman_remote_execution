@@ -5,50 +5,89 @@ import {
   Select,
   SelectOption,
   SelectVariant,
+  Alert,
+  AlertActionCloseButton,
+  ValidatedOptions,
 } from '@patternfly/react-core';
-import { range } from 'lodash';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { helpLabel } from '../form/FormHelpers';
 
-export const RepeatHour = ({ repeatData, setRepeatData, setValid }) => {
+export const RepeatHour = ({ repeatData, setRepeatData }) => {
+  const isValidMinute = newMinute =>
+    Number.isInteger(parseInt(newMinute, 10)) &&
+    newMinute >= 0 &&
+    newMinute < 60;
+
   const { minute } = repeatData;
   useEffect(() => {
-    if (minute) {
-      setValid(true);
-    } else {
-      setValid(false);
+    if (!isValidMinute(minute)) {
+      setRepeatData({ minute: 0 });
     }
-    return () => setValid(true);
-  }, [setValid, minute]);
+  }, [minute, setRepeatData]);
   const [minuteOpen, setMinuteOpen] = useState(false);
+  const [options, setOptions] = useState([0, 15, 30, 45]);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   return (
-    <FormGroup label={__('At minute')} isRequired>
+    <FormGroup
+      label={__('At minute')}
+      labelIcon={helpLabel(<div>{__('range: 0-59')}</div>)}
+      isRequired
+    >
       <Select
         id="repeat-on-hourly"
         variant={SelectVariant.typeahead}
         typeAheadAriaLabel="repeat-at-minute-typeahead"
         onSelect={(event, selection) => {
-          setRepeatData({ minute: selection });
+          setRepeatData({ minute: parseInt(selection, 10) });
           setMinuteOpen(false);
         }}
-        selections={minute || ''}
+        selections={`${minute}` || ''}
         onToggle={toggle => {
           setMinuteOpen(toggle);
         }}
         isOpen={minuteOpen}
-        width={85}
+        width={125}
         menuAppendTo={() => document.querySelector('.pf-c-form.schedule-tab')}
         toggleAriaLabel="select minute toggle"
-        validated={minute ? 'success' : 'error'}
+        validated={
+          isValidMinute(minute)
+            ? ValidatedOptions.noval
+            : ValidatedOptions.error
+        }
+        onCreateOption={newValue => {
+          if (isValidMinute(newValue)) {
+            setOptions(prev => [...prev, parseInt(newValue, 10)].sort());
+            setRepeatData({ minute: parseInt(newValue, 10) });
+            setIsAlertOpen(false);
+          } else {
+            setIsAlertOpen(true);
+          }
+        }}
+        isCreatable
+        createText={__('Create')}
       >
-        {range(60).map(minuteNumber => (
-          <SelectOption key={minuteNumber} value={`${minuteNumber}`} />
+        {options.map(minuteNumber => (
+          <SelectOption
+            key={minuteNumber}
+            value={`${minuteNumber}`}
+            onClick={() => setIsAlertOpen(false)}
+          />
         ))}
       </Select>
+      {isAlertOpen && (
+        <Alert
+          variant="danger"
+          isInline
+          title={__('Minute can only be a number between 0-59')}
+          actionClose={
+            <AlertActionCloseButton onClose={() => setIsAlertOpen(false)} />
+          }
+        />
+      )}
     </FormGroup>
   );
 };
 RepeatHour.propTypes = {
   repeatData: PropTypes.object.isRequired,
   setRepeatData: PropTypes.func.isRequired,
-  setValid: PropTypes.func.isRequired,
 };
