@@ -1,5 +1,5 @@
 <%#
-name: Puppet Module - Install from git - SSH Default
+name: Puppet Module - Install from git - Script Default
 model: JobTemplate
 job_category: Puppet
 description_format: Install Puppet Module "%{puppet_module}" from git
@@ -15,7 +15,7 @@ template_inputs:
   input_type: user
   description: For example, '/etc/puppetlabs/code/environments/production/modules/puppet'.
   advanced: false
-provider_type: SSH
+provider_type: script
 kind: job_template
 -%>
 git clone <%= input('git_repository') %> <%= input('target_dir') %>

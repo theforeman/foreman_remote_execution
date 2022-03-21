@@ -1,10 +1,10 @@
 <%#
 kind: job_template
-name: Package Action - SSH Default
+name: Package Action - Script Default
 model: JobTemplate
 job_category: Packages
 description_format: "%{action} package(s) %{package}"
-provider_type: SSH
+provider_type: script
 template_inputs:
 - name: pre_script
   description: A script to run prior to the package action

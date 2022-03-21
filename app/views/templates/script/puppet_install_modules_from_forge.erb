@@ -1,5 +1,5 @@
 <%#
-name: Puppet Module - Install from forge - SSH Default
+name: Puppet Module - Install from forge - Script Default
 model: JobTemplate
 job_category: Puppet
 description_format: Install Puppet Module "%{puppet_module}" from forge
@@ -30,7 +30,7 @@ template_inputs:
   input_type: user
   description: Do not attempt to install dependencies. Type "true" to ignore dependencies.
   advanced: true
-provider_type: SSH
+provider_type: script
 kind: job_template
 -%>
 <% if @host.operatingsystem.family == 'Debian' -%>

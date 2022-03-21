@@ -146,7 +146,7 @@ module ForemanRemoteExecution
             setting 'remote_execution_form_job_template',
               type: :string,
               description: N_('Choose a job template that is pre-selected in job invocation form'),
-              default: 'Run Command - SSH Default',
+              default: 'Run Command - Script Default',
               full_name: N_('Form Job Template'),
               collection: proc { Hash[JobTemplate.unscoped.map { |template| [template.name, template.name] }] }
             setting 'remote_execution_job_invocation_report_template',
@@ -328,6 +328,7 @@ module ForemanRemoteExecution
       require_dependency 'foreman_tasks/task'
       ForemanTasks::Task.include ForemanRemoteExecution::ForemanTasksTaskExtensions
       ForemanTasks::Cleaner.include ForemanRemoteExecution::ForemanTasksCleanerExtensions
+      RemoteExecutionProvider.register(:script, ::ScriptExecutionProvider)
       RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
 
       ForemanRemoteExecution.register_rex_feature
