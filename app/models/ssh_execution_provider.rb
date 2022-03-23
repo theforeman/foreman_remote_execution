@@ -53,6 +53,10 @@ class ScriptExecutionProvider < RemoteExecutionProvider
       Setting[:remote_execution_cockpit_url] % { :host => host } if Setting[:remote_execution_cockpit_url].present?
     end
 
+    def proxy_feature
+      'SSH'
+    end
+
     private
 
     def ssh_user(host)
