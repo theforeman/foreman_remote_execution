@@ -23,6 +23,7 @@ const FeaturesDropdown = ({ hostId }) => {
     response: { results: features },
     status,
   } = useAPI('get', foremanUrl(REX_FEATURES_API));
+
   const dispatch = useDispatch();
   const dropdownItems = features
     ?.filter(feature => feature.host_action_button)
@@ -64,7 +65,7 @@ const FeaturesDropdown = ({ hostId }) => {
 };
 
 FeaturesDropdown.propTypes = {
-  hostId: PropTypes.string,
+  hostId: PropTypes.number,
 };
 FeaturesDropdown.defaultProps = {
   hostId: undefined,
