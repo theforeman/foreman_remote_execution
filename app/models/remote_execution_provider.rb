@@ -7,6 +7,15 @@ class RemoteExecutionProvider
       providers[type.to_s] || providers[:script]
     end
 
+    def registered_name
+      klass = self
+      providers.key(klass)
+    end
+
+    def proxy_feature
+      registered_name
+    end
+
     def providers
       @providers ||= { }.with_indifferent_access
     end

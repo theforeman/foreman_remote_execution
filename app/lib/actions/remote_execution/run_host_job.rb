@@ -40,7 +40,7 @@ module Actions
         provider = template_invocation.template.provider
         proxy_selector = provider.required_proxy_selector_for(template_invocation.template) || proxy_selector
 
-        provider_type = template_invocation.template.provider_type.to_s
+        provider_type = provider.proxy_feature
         proxy = determine_proxy!(proxy_selector, provider_type, host)
         link!(proxy)
         input[:proxy_id] = proxy.id
