@@ -5,11 +5,11 @@ import {
   useForemanOrganization,
   useForemanLocation,
 } from 'foremanReact/Root/Context/ForemanContext';
+import { decodeId } from 'foremanReact/common/globalIdHelpers';
 import { HOSTS, HOST_GROUPS, dataName } from '../../JobWizardConstants';
 import { SearchSelect } from '../form/SearchSelect';
 import hostsQuery from './hosts.gql';
 import hostgroupsQuery from './hostgroups.gql';
-import { decodeId } from '../../../globalIdHelper';
 
 export const useNameSearchGQL = apiKey => {
   const org = useForemanOrganization();
