@@ -329,8 +329,8 @@ module ForemanRemoteExecution
       require_dependency 'foreman_tasks/task'
       ForemanTasks::Task.include ForemanRemoteExecution::ForemanTasksTaskExtensions
       ForemanTasks::Cleaner.include ForemanRemoteExecution::ForemanTasksCleanerExtensions
+      RemoteExecutionProvider.register(:SSH, ::SSHExecutionProvider)
       RemoteExecutionProvider.register(:script, ::ScriptExecutionProvider)
-      RemoteExecutionProvider.register(:SSH, SSHExecutionProvider)
 
       ForemanRemoteExecution.register_rex_feature
 
