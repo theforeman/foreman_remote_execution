@@ -7,7 +7,7 @@ class DefaultProxyProxySelector < ::RemoteExecutionProxySelector
     super
   end
 
-  def available_proxies(host, provider)
+  def available_proxies(host, provider, capability: nil)
     # TODO: Once we have a internal proxy marker/feature on the proxy, we can
     # swap the implementation
     raise _('default_capsule method missing from SmartProxy') unless ::SmartProxy.respond_to?(:default_capsule)
