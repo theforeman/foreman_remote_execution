@@ -37,8 +37,7 @@ class ScriptExecutionProvider < RemoteExecutionProvider
     end
 
     def ssh_params(host)
-      proxy_selector = ::RemoteExecutionProxySelector.new
-      proxy = proxy_selector.determine_proxy(host, proxy_feature)
+      proxy = proxy_for_cockpit(host)
       {
         :hostname => find_ip_or_hostname(host),
         :proxy => proxy.class == Symbol ? proxy : proxy.url,
@@ -65,6 +64,14 @@ class ScriptExecutionProvider < RemoteExecutionProvider
 
     def ssh_port(host)
       Integer(host_setting(host, :remote_execution_ssh_port))
+    end
+
+    def proxy_for_cockpit(host)
+      proxy_selector = ::RemoteExecutionProxySelector.new
+      proxy = proxy_selector.determine_proxy(host, 'Script', capability: 'cockpit')
+      return proxy unless [:not_defined, :not_available, nil].include?(proxy)
+
+      proxy_selector.determine_proxy(host, 'SSH')
     end
   end
 end
