@@ -102,7 +102,7 @@ module ForemanRemoteExecution
     end
 
     def remote_execution_ssh_keys
-      remote_execution_proxies('SSH', false).values.flatten.uniq.map { |proxy| proxy.pubkey }.compact.uniq
+      remote_execution_proxies(%w(SSH Script), false).values.flatten.uniq.map { |proxy| proxy.pubkey }.compact.uniq
     end
 
     def drop_execution_interface_cache
