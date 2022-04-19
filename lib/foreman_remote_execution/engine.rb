@@ -26,13 +26,15 @@ module ForemanRemoteExecution
       end
     end
 
-    # A workaround for https://projects.theforeman.org/issues/30685
+    # A workaround for https://projects.theforeman.org/issues/30685 and
+    # https://projects.theforeman.org/issues/34526
     initializer 'foreman_remote_execution.rails_loading_workaround' do
       # Without this, in production environment the module gets prepended too
       # late and the extensions do not get applied
       # TODO: Remove this and from config.to_prepare once there is an extension
       # point in Foreman
       ProvisioningTemplatesHelper.prepend ForemanRemoteExecution::JobTemplatesExtensions
+      HostsHelper.prepend ForemanRemoteExecution::HostsHelperExtensions
     end
 
     initializer 'foreman_remote_execution.apipie' do
@@ -316,8 +318,6 @@ module ForemanRemoteExecution
       end
 
       Bookmark.include ForemanRemoteExecution::BookmarkExtensions
-      HostsHelper.prepend ForemanRemoteExecution::HostsHelperExtensions
-      ProvisioningTemplatesHelper.prepend ForemanRemoteExecution::JobTemplatesExtensions
       TemplateInput.include ForemanRemoteExecution::TemplateInputExtensions
 
       SmartProxy.prepend ForemanRemoteExecution::SmartProxyExtensions
