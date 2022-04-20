@@ -5,6 +5,9 @@ module Actions
       include ::Actions::Helpers::WithDelegatedAction
       include ::Actions::ObservableAction
 
+      class ProxySelectionFailure < ::RuntimeError
+      end
+
       execution_plan_hooks.use :emit_feature_event, :on => :success
 
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
@@ -216,7 +219,7 @@ module Actions
         if proxy == :not_available
           offline_proxies = proxy_selector.offline
           settings = { :count => offline_proxies.count, :proxy_names => offline_proxies.map(&:name).join(', ') }
-          raise n_('The only applicable proxy %{proxy_names} is down',
+          raise ProxySelectionFailure, n_('The only applicable proxy %{proxy_names} is down',
             'All %{count} applicable proxies are down. Tried %{proxy_names}',
             offline_proxies.count) % settings
         elsif proxy == :not_defined
@@ -226,7 +229,7 @@ module Actions
             provider: provider,
           }
 
-          raise _('Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, ' +
+          raise ProxySelectionFailure, _('Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, ' +
                   '%{fallback_proxy} in settings') % settings
         end
         proxy

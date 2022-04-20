@@ -27,8 +27,48 @@ end
     <%= button_group(template_invocation_task_buttons(@template_invocation_task, @template_invocation.job_invocation)) %>
   </div>
 </div>
-<% if @host %>
+
+<hr/>
   <% proxy_id = @template_invocation_task.input[:proxy_id] %>
+  <% proxy = SmartProxy.find_by(id: proxy_id) if proxy_id %>
+  <% so = ForemanRemoteExecution::StagedOutput.new(@template_invocation.job_invocation, @host, proxy) %>
+  <% staged_output = so.output %>
+
+<ol class="pf-c-progress-stepper pf-m-center">
+  <% staged_output.each do |stage| %>
+    <% status, icon = case stage.result
+                      when 'done'
+                        ['success', 'fa-check-circle']
+                      when 'error'
+                        ['danger', 'fa-exclamation-circle']
+                      when 'pending'
+                        ['pending', '']
+                      when 'active'
+                        ['info', 'pf-icon-in-progress']
+                      end %>
+    <li
+      class="pf-c-progress-stepper__step pf-m-<%= status %>"
+      aria-label="completed step,"
+    >
+      <div class="pf-c-progress-stepper__step-connector">
+        <span class="pf-c-progress-stepper__step-icon">
+          <i class="fas <%= icon %>" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="pf-c-progress-stepper__step-main">
+        <div class="pf-c-progress-stepper__step-title"><%= stage.name %></div>
+        <% if stage.resource %>
+          <% link = stage.resource.is_a?(::Host::Base) ? current_host_details_path(stage.resource) : smart_proxy_path(stage.resource) %>
+          <div class="pf-c-progress-stepper__step-description">
+            <%= link_to(stage.resource.name, link) %>
+          </div>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ol>
+
+<% if @host %>
   <h3>
     <%= _('Target: ') %><%= link_to(@host.name, current_host_details_path(@host)) %>
     <% if proxy_id && proxy = SmartProxy.find_by(id: proxy_id) %>

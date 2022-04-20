@@ -245,6 +245,7 @@ module RemoteExecutionHelper
 
   def job_report_template
     template = ReportTemplate.where(name: Setting['remote_execution_job_invocation_report_template']).first
+    return if template.nil?
 
     template if template.template_inputs.where(name: 'job_id').exists?
   end
