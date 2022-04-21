@@ -267,7 +267,11 @@ module ForemanRemoteExecution
         extend_rabl_template 'api/v2/subnets/show', 'api/v2/subnets/remote_execution_proxies'
         extend_rabl_template 'api/v2/hosts/main', 'api/v2/host/main'
         parameter_filter ::Subnet, :remote_execution_proxy_ids
-        describe_host { overview_buttons_provider :host_overview_buttons }
+
+        describe_host do
+          multiple_actions_provider :rex_hosts_multiple_actions
+          overview_buttons_provider :rex_host_overview_buttons
+        end
 
         # Extend Registration module
         extend_allowed_registration_vars :remote_execution_interface
@@ -316,7 +320,6 @@ module ForemanRemoteExecution
       end
 
       Bookmark.include ForemanRemoteExecution::BookmarkExtensions
-      HostsHelper.prepend ForemanRemoteExecution::HostsHelperExtensions
       ProvisioningTemplatesHelper.prepend ForemanRemoteExecution::JobTemplatesExtensions
       TemplateInput.include ForemanRemoteExecution::TemplateInputExtensions
 
