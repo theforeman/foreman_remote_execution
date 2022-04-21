@@ -143,7 +143,7 @@ describe('AdvancedFields', () => {
     );
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Advanced Fields'));
+      fireEvent.click(screen.getByText('Advanced fields'));
     });
     expect(textField.value).toBe(textValue);
     expect(searchField.value).toBe(searchValue);
@@ -162,7 +162,7 @@ describe('AdvancedFields', () => {
       </MockedProvider>
     );
     await act(async () => {
-      fireEvent.click(screen.getByText('Advanced Fields'));
+      fireEvent.click(screen.getByText('Advanced fields'));
     });
 
     expect(
