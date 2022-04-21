@@ -72,7 +72,7 @@ const ReviewDetails = ({
   };
   const [isAdvancedShown, setIsAdvancedShown] = useState(false);
   const detailsFirstHalf = [
-    { label: __('Job Category'), value: jobCategory },
+    { label: __('Job category'), value: jobCategory },
     { label: __('Job template'), value: jobTemplate },
     { label: __('Target hosts'), value: stringHosts() },
     ...templateInputs.map(({ name }) => ({

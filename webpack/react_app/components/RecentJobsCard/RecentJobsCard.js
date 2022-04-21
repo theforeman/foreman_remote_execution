@@ -28,7 +28,7 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
           href={foremanUrl(`${JOB_BASE_URL}${name}`)}
           key="link-to-all"
         >
-          {__('View All Jobs')}
+          {__('View all jobs')}
         </DropdownItem>,
         <DropdownItem
           href={foremanUrl(
@@ -36,19 +36,19 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
           )}
           key="link-to-finished"
         >
-          {__('View Finished Jobs')}
+          {__('View finished jobs')}
         </DropdownItem>,
         <DropdownItem
           href={foremanUrl(`${JOB_BASE_URL}${name}+and+status+%3D+running`)}
           key="link-to-running"
         >
-          {__('View Running Jobs')}
+          {__('View running jobs')}
         </DropdownItem>,
         <DropdownItem
           href={foremanUrl(`${JOB_BASE_URL}${name}+and+status+%3D+queued`)}
           key="link-to-scheduled"
         >
-          {__('View Scheduled Jobs')}
+          {__('View scheduled jobs')}
         </DropdownItem>,
       ]}
     >

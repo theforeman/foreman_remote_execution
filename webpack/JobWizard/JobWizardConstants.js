@@ -19,9 +19,9 @@ export const repeatTypes = {
 export const WIZARD_TITLES = {
   categoryAndTemplate: __('Category and Template'),
   hostsAndInputs: __('Target hosts and inputs'),
-  advanced: __('Advanced Fields'),
+  advanced: __('Advanced fields'),
   schedule: __('Schedule'),
-  review: __('Review Details'),
+  review: __('Review details'),
 };
 
 export const initialScheduleState = {
