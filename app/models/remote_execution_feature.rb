@@ -43,8 +43,12 @@ class RemoteExecutionFeature < ApplicationRecord
     feature = self.find_by(label: label)
     builder = options[:notification_builder] ? options[:notification_builder].to_s : nil
 
+    if options[:provided_inputs]
+      provided_inputs = Array(options[:provided_inputs]).join(',')
+    end
+
     attributes = { :name => name,
-                   :provided_input_names => options[:provided_inputs],
+                   :provided_inputs => provided_inputs,
                    :description => options[:description],
                    :host_action_button => options[:host_action_button],
                    :proxy_selector_override => options[:proxy_selector_override],
@@ -58,13 +62,12 @@ class RemoteExecutionFeature < ApplicationRecord
     end
 
     self.without_auditing do
-      if feature.nil?
-        feature = self.create!({ :label => label }.merge(attributes))
-      else
-        feature.attributes = attributes
-        feature.save if feature.changed?
-      end
-      return feature
+      # The only validation we currently have is uniqueness validation, which
+      # the upsert will enforce
+      # rubocop:disable Rails/SkipsModelValidations
+      result = self.upsert({ label: label }.merge(attributes), unique_by: :label)
+      self.find(result.first.to_h['id'])
+      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 end
