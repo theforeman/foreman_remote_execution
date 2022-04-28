@@ -13,7 +13,12 @@ const HostKebabItems = () => {
 
   if (!consoleUrl) return null;
   return (
-    <DropdownItem icon={<CodeIcon />} href={consoleUrl}>
+    <DropdownItem
+      icon={<CodeIcon />}
+      href={consoleUrl}
+      target="_blank"
+      rel="noreferrer"
+    >
       {__('Web Console')}
     </DropdownItem>
   );
