@@ -24,6 +24,9 @@ msgstr "%s"
 msgid "%s ago"
 msgstr "%s前"
 
+msgid "%s job has been invoked"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{host} の %{description}"
 
@@ -68,14 +71,14 @@ msgstr "スクリプトを実行するために使用するユーザー。ユー
 msgid "Abort Job"
 msgstr "ジョブの中断"
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Actions"
 msgstr "アクション"
 
 msgid "Add Foreign Input Set"
 msgstr "外部入力セットを追加"
-
-msgid "Advanced Fields"
-msgstr ""
 
 msgid "Advanced fields"
 msgstr ""
@@ -467,8 +470,14 @@ msgstr ""
 msgid "Import"
 msgstr "インポート"
 
+msgid "Import Puppet classes"
+msgstr ""
+
 msgid "Import a job template from ERB"
 msgstr "ERB からジョブテンプレートをインポート"
+
+msgid "Import facts"
+msgstr ""
 
 msgid "Include all inputs from the foreign template"
 msgstr "外部テンプレートからのすべての入力を含める"
@@ -502,9 +511,6 @@ msgstr "呼び出しタイプ、%s のいずれか"
 
 msgid "Job"
 msgstr "仕事"
-
-msgid "Job Category"
-msgstr ""
 
 msgid "Job Details"
 msgstr "ジョブの詳細"
@@ -827,7 +833,7 @@ msgstr "解決"
 msgid "Results"
 msgstr ""
 
-msgid "Review Details"
+msgid "Review details"
 msgstr ""
 
 msgid "Run"
@@ -851,9 +857,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-msgid "SSH"
-msgstr "SSH"
-
 msgid "SSH Port"
 msgstr "SSH ポート"
 
@@ -868,6 +871,9 @@ msgstr "スケジュール"
 
 msgid "Schedule Remote Job"
 msgstr "リモートジョブのスケジュール"
+
+msgid "Schedule a job"
+msgstr ""
 
 msgid "Schedule for future execution"
 msgstr ""
@@ -888,6 +894,9 @@ msgid "Scheduled to start at"
 msgstr "開始スケジュール"
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Script"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -1210,16 +1219,16 @@ msgstr "ユーザー入力"
 msgid "Value"
 msgstr "値"
 
-msgid "View All Jobs"
+msgid "View all jobs"
 msgstr ""
 
-msgid "View Finished Jobs"
+msgid "View finished jobs"
 msgstr ""
 
-msgid "View Running Jobs"
+msgid "View running jobs"
 msgstr ""
 
-msgid "View Scheduled Jobs"
+msgid "View scheduled jobs"
 msgstr ""
 
 msgid "Web Console"
@@ -1364,13 +1373,4 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
-msgstr ""
-
-msgid "»Action with sub plans«"
-msgstr ""
-
-msgid "»Import Puppet classes«"
-msgstr ""
-
-msgid "»Import facts«"
 msgstr ""

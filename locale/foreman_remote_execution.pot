@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-17 10:41+0100\n"
-"PO-Revision-Date: 2022-02-17 10:41+0100\n"
+"POT-Creation-Date: 2022-05-03 09:40+0200\n"
+"PO-Revision-Date: 2022-05-03 09:40+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -261,7 +261,8 @@ msgstr ""
 #: ../app/controllers/api/v2/job_templates_controller.rb:52
 #: ../app/views/job_invocations/_form.html.erb:11
 #: ../app/views/job_templates/_custom_tabs.html.erb:5
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:49
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:56
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:75
 msgid "Job category"
 msgstr ""
 
@@ -378,7 +379,16 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr ""
 
 #:
-#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:5
+#: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:7
+msgid "Run"
+msgstr ""
+
+#: ../app/helpers/hosts_extensions_helper.rb:5
+#: ../app/helpers/hosts_extensions_helper.rb:41
+msgid "Schedule Remote Job"
+msgstr ""
+
+#: ../app/helpers/hosts_extensions_helper.rb:10
 #: ../db/seeds.d/50-notification_blueprints.rb:3
 #: ../db/seeds.d/50-notification_blueprints.rb:17
 #: ../lib/foreman_remote_execution/engine.rb:237
@@ -386,32 +396,19 @@ msgstr ""
 msgid "Jobs"
 msgstr ""
 
-#:
-#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:5
+#: ../app/helpers/hosts_extensions_helper.rb:10
 #: ../app/views/job_invocations/index.html.erb:2
 #: ../app/views/template_invocations/show.html.erb:1
 msgid "Job invocations"
 msgstr ""
 
-#:
-#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:11
-#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:34
-msgid "Schedule Remote Job"
-msgstr ""
-
-#:
-#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:28
+#: ../app/helpers/hosts_extensions_helper.rb:35
 msgid "%s"
 msgstr ""
 
-#:
-#: ../app/helpers/concerns/foreman_remote_execution/hosts_helper_extensions.rb:41
+#: ../app/helpers/hosts_extensions_helper.rb:48
+#: ../webpack/react_app/components/HostKebab/KebabItems.js:17
 msgid "Web Console"
-msgstr ""
-
-#:
-#: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:7
-msgid "Run"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:18
@@ -493,7 +490,7 @@ msgid "Host task"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:53
-#: ../app/helpers/remote_execution_helper.rb:197
+#: ../app/helpers/remote_execution_helper.rb:198
 #: ../app/models/job_invocation.rb:200
 msgid "N/A"
 msgstr ""
@@ -565,27 +562,27 @@ msgstr ""
 msgid "Try to abort the job on a host without waiting for its result"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:167
+#: ../app/helpers/remote_execution_helper.rb:168
 msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:199
+#: ../app/helpers/remote_execution_helper.rb:200
 msgid "in %s"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:199
+#: ../app/helpers/remote_execution_helper.rb:200
 msgid "%s ago"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:217
+#: ../app/helpers/remote_execution_helper.rb:218
 msgid "Use default description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:222
+#: ../app/helpers/remote_execution_helper.rb:223
 msgid "Description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:232
+#: ../app/helpers/remote_execution_helper.rb:233
 msgid ""
 "This template is used to generate the description.<br/>Input values can be use"
 "d using the syntax %{package}.<br/>You may also include the job category and t"
@@ -694,14 +691,14 @@ msgstr ""
 msgid "Should this interface be used for remote execution?"
 msgstr ""
 
-#: ../app/models/concerns/foreman_remote_execution/host_extensions.rb:69
+#: ../app/models/concerns/foreman_remote_execution/host_extensions.rb:73
 msgid ""
 "Interface with the '%s' identifier was specified as a remote execution interfa"
 "ce, however the interface was not found on the host. If the interface exists, "
 "it needs to be created in Foreman during the registration."
 msgstr ""
 
-#: ../app/models/concerns/foreman_remote_execution/nic_extensions.rb:21
+#: ../app/models/concerns/foreman_remote_execution/nic_extensions.rb:23
 msgid "host already has an execution interface"
 msgstr ""
 
@@ -789,11 +786,11 @@ msgstr ""
 msgid "Unknown remote execution feature %s"
 msgstr ""
 
-#: ../app/models/remote_execution_provider.rb:52
+#: ../app/models/remote_execution_provider.rb:61
 msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
 msgstr ""
 
-#: ../app/models/remote_execution_provider.rb:78
+#: ../app/models/remote_execution_provider.rb:87
 msgid "Could not find any suitable interface for execution"
 msgstr ""
 
@@ -810,7 +807,7 @@ msgid "Subscribe to all my jobs"
 msgstr ""
 
 #: ../app/models/ssh_execution_provider.rb:12
-msgid "SSH"
+msgid "Script"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
@@ -970,7 +967,7 @@ msgid "Description"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:23
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:59
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:66
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:76
 msgid "Job template"
 msgstr ""
@@ -1440,9 +1437,9 @@ msgstr ""
 msgid "Could not display data for job invocation."
 msgstr ""
 
-#: ../app/views/templates/ssh/check_update.erb:5
-#: ../app/views/templates/ssh/module_action.erb:5
-#: ../app/views/templates/ssh/package_action.erb:5
+#: ../app/views/templates/script/check_update.erb:5
+#: ../app/views/templates/script/module_action.erb:5
+#: ../app/views/templates/script/package_action.erb:5
 msgid "Unsupported or no operating system found for this host."
 msgstr ""
 
@@ -1640,11 +1637,11 @@ msgstr ""
 msgid "Job wizard"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:355
+#: ../lib/foreman_remote_execution/engine.rb:360
 msgid "Run Puppet Once"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:356
+#: ../lib/foreman_remote_execution/engine.rb:361
 msgid "Perform a single Puppet run"
 msgstr ""
 
@@ -1681,11 +1678,12 @@ msgid "Target hosts and inputs"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:22
-msgid "Advanced Fields"
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:83
+msgid "Advanced fields"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:24
-msgid "Review Details"
+msgid "Review details"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:44
@@ -1736,28 +1734,28 @@ msgid ""
 "or future or recurring executions, it is removed after the last execution."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:46
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:53
 msgid "All fields are required."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:54
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:65
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:61
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:74
 msgid "Error"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:68
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:77
 msgid "Errors:"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:71
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:80
 msgid "Categories list failed with:"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:76
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:85
 msgid "Templates list failed with:"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:81
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:90
 msgid "Template failed with:"
 msgstr ""
 
@@ -1799,14 +1797,6 @@ msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:69
 msgid ", and %s more"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:75
-msgid "Job Category"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:83
-msgid "Advanced fields"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:92
@@ -1987,35 +1977,43 @@ msgstr ""
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""
 
+#: ../webpack/react_app/components/FeaturesDropdown/actions.js:10
+msgid "%s job has been invoked"
+msgstr ""
+
+#: ../webpack/react_app/components/FeaturesDropdown/index.js:44
+msgid "Schedule a job"
+msgstr ""
+
 #: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:25
 msgid "Recent jobs"
 msgstr ""
 
 #: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:31
-msgid "View All Jobs"
+msgid "View all jobs"
 msgstr ""
 
 #: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:39
-msgid "View Finished Jobs"
+msgid "View finished jobs"
 msgstr ""
 
 #: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:45
-msgid "View Running Jobs"
+msgid "View running jobs"
 msgstr ""
 
 #: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:51
-msgid "View Scheduled Jobs"
+msgid "View scheduled jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:58
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:63
 msgid "Finished"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:64
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:69
 msgid "Running"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:70
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:75
 msgid "Scheduled"
 msgstr ""
 
@@ -2032,15 +2030,15 @@ msgid "Host"
 msgstr ""
 
 #: action_names.rb:3
-msgid "»Import facts«"
+msgid "Import Puppet classes"
 msgstr ""
 
 #: action_names.rb:4
-msgid "»Import Puppet classes«"
+msgid "Import facts"
 msgstr ""
 
 #: action_names.rb:5
-msgid "»Action with sub plans«"
+msgid "Action with sub plans"
 msgstr ""
 
 #: gemspec.rb:2
