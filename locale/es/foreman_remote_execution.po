@@ -23,6 +23,9 @@ msgstr "%s"
 msgid "%s ago"
 msgstr "Hace %s"
 
+msgid "%s job has been invoked"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{description} en %{host}"
 
@@ -67,14 +70,14 @@ msgstr "Un usuario que se debe utilizar para ejecutar el script. Si es distinto 
 msgid "Abort Job"
 msgstr "Abortar trabajo"
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Actions"
 msgstr "Acciones"
 
 msgid "Add Foreign Input Set"
 msgstr "Agregar conjunto de entrada externo"
-
-msgid "Advanced Fields"
-msgstr ""
 
 msgid "Advanced fields"
 msgstr ""
@@ -466,8 +469,14 @@ msgstr ""
 msgid "Import"
 msgstr "Importar"
 
+msgid "Import Puppet classes"
+msgstr ""
+
 msgid "Import a job template from ERB"
 msgstr "Importar una plantilla de trabajo desde ERB"
+
+msgid "Import facts"
+msgstr ""
 
 msgid "Include all inputs from the foreign template"
 msgstr "Incluir todas las entradas de la plantilla externa"
@@ -501,9 +510,6 @@ msgstr "Tipo de invocación, una de %s"
 
 msgid "Job"
 msgstr "Empleo"
-
-msgid "Job Category"
-msgstr ""
 
 msgid "Job Details"
 msgstr "Detalles del trabajo"
@@ -826,7 +832,7 @@ msgstr "Se resuelve en"
 msgid "Results"
 msgstr ""
 
-msgid "Review Details"
+msgid "Review details"
 msgstr ""
 
 msgid "Run"
@@ -850,9 +856,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-msgid "SSH"
-msgstr "SSH"
-
 msgid "SSH Port"
 msgstr "Puerto SSH"
 
@@ -867,6 +870,9 @@ msgstr "Programación"
 
 msgid "Schedule Remote Job"
 msgstr "Programar trabajo remoto"
+
+msgid "Schedule a job"
+msgstr ""
 
 msgid "Schedule for future execution"
 msgstr ""
@@ -887,6 +893,9 @@ msgid "Scheduled to start at"
 msgstr "Programado para comenzar a las"
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Script"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -1209,16 +1218,16 @@ msgstr "Entrada de usuario"
 msgid "Value"
 msgstr "Valor"
 
-msgid "View All Jobs"
+msgid "View all jobs"
 msgstr ""
 
-msgid "View Finished Jobs"
+msgid "View finished jobs"
 msgstr ""
 
-msgid "View Running Jobs"
+msgid "View running jobs"
 msgstr ""
 
-msgid "View Scheduled Jobs"
+msgid "View scheduled jobs"
 msgstr ""
 
 msgid "Web Console"
@@ -1363,13 +1372,4 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
-msgstr ""
-
-msgid "»Action with sub plans«"
-msgstr ""
-
-msgid "»Import Puppet classes«"
-msgstr ""
-
-msgid "»Import facts«"
 msgstr ""

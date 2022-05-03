@@ -23,6 +23,9 @@ msgstr "%s"
 msgid "%s ago"
 msgstr "%s 之前"
 
+msgid "%s job has been invoked"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{description} 於 %{host} 之上"
 
@@ -67,14 +70,14 @@ msgstr "要使用執行這 script 的使用者。如果使用者與 SSH 使用�
 msgid "Abort Job"
 msgstr ""
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Actions"
 msgstr "動作"
 
 msgid "Add Foreign Input Set"
 msgstr "新增外部輸入集"
-
-msgid "Advanced Fields"
-msgstr ""
 
 msgid "Advanced fields"
 msgstr ""
@@ -466,7 +469,13 @@ msgstr ""
 msgid "Import"
 msgstr "匯入"
 
+msgid "Import Puppet classes"
+msgstr ""
+
 msgid "Import a job template from ERB"
+msgstr ""
+
+msgid "Import facts"
 msgstr ""
 
 msgid "Include all inputs from the foreign template"
@@ -501,9 +510,6 @@ msgstr "祈願類型，%s 之一"
 
 msgid "Job"
 msgstr "工作"
-
-msgid "Job Category"
-msgstr ""
 
 msgid "Job Details"
 msgstr ""
@@ -826,7 +832,7 @@ msgstr "解析至"
 msgid "Results"
 msgstr ""
 
-msgid "Review Details"
+msgid "Review details"
 msgstr ""
 
 msgid "Run"
@@ -850,9 +856,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-msgid "SSH"
-msgstr "SSH"
-
 msgid "SSH Port"
 msgstr ""
 
@@ -866,6 +869,9 @@ msgid "Schedule"
 msgstr "排程"
 
 msgid "Schedule Remote Job"
+msgstr ""
+
+msgid "Schedule a job"
 msgstr ""
 
 msgid "Schedule for future execution"
@@ -887,6 +893,9 @@ msgid "Scheduled to start at"
 msgstr ""
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Script"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -1209,16 +1218,16 @@ msgstr "使用者輸入"
 msgid "Value"
 msgstr "值"
 
-msgid "View All Jobs"
+msgid "View all jobs"
 msgstr ""
 
-msgid "View Finished Jobs"
+msgid "View finished jobs"
 msgstr ""
 
-msgid "View Running Jobs"
+msgid "View running jobs"
 msgstr ""
 
-msgid "View Scheduled Jobs"
+msgid "View scheduled jobs"
 msgstr ""
 
 msgid "Web Console"
@@ -1363,13 +1372,4 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
-msgstr ""
-
-msgid "»Action with sub plans«"
-msgstr ""
-
-msgid "»Import Puppet classes«"
-msgstr ""
-
-msgid "»Import facts«"
 msgstr ""

@@ -24,6 +24,9 @@ msgstr "%s"
 msgid "%s ago"
 msgstr "vor %s"
 
+msgid "%s job has been invoked"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{description} auf %{host}"
 
@@ -68,14 +71,14 @@ msgstr "Ein Benutzer, der für die Ausführung des Skripts verwendet werden soll
 msgid "Abort Job"
 msgstr ""
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Actions"
 msgstr "Aktionen"
 
 msgid "Add Foreign Input Set"
 msgstr "Fremdeingabe-Satz hinzufügen"
-
-msgid "Advanced Fields"
-msgstr ""
 
 msgid "Advanced fields"
 msgstr ""
@@ -467,8 +470,14 @@ msgstr ""
 msgid "Import"
 msgstr "Import"
 
+msgid "Import Puppet classes"
+msgstr ""
+
 msgid "Import a job template from ERB"
 msgstr "Job-Vorlage aus ERB importieren"
+
+msgid "Import facts"
+msgstr ""
 
 msgid "Include all inputs from the foreign template"
 msgstr "Alle Eingaben aus Fremdvorlage einschließen"
@@ -502,9 +511,6 @@ msgstr "Jobtyp, einer von %s"
 
 msgid "Job"
 msgstr "Job"
-
-msgid "Job Category"
-msgstr ""
 
 msgid "Job Details"
 msgstr ""
@@ -829,7 +835,7 @@ msgstr "Wird aufgelöst zu"
 msgid "Results"
 msgstr ""
 
-msgid "Review Details"
+msgid "Review details"
 msgstr ""
 
 msgid "Run"
@@ -853,9 +859,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-msgid "SSH"
-msgstr "SSH"
-
 msgid "SSH Port"
 msgstr ""
 
@@ -869,6 +872,9 @@ msgid "Schedule"
 msgstr "Plan"
 
 msgid "Schedule Remote Job"
+msgstr ""
+
+msgid "Schedule a job"
 msgstr ""
 
 msgid "Schedule for future execution"
@@ -890,6 +896,9 @@ msgid "Scheduled to start at"
 msgstr ""
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Script"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -1212,16 +1221,16 @@ msgstr "Benutzereingabe"
 msgid "Value"
 msgstr "Wert"
 
-msgid "View All Jobs"
+msgid "View all jobs"
 msgstr ""
 
-msgid "View Finished Jobs"
+msgid "View finished jobs"
 msgstr ""
 
-msgid "View Running Jobs"
+msgid "View running jobs"
 msgstr ""
 
-msgid "View Scheduled Jobs"
+msgid "View scheduled jobs"
 msgstr ""
 
 msgid "Web Console"
@@ -1366,13 +1375,4 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
-msgstr ""
-
-msgid "»Action with sub plans«"
-msgstr ""
-
-msgid "»Import Puppet classes«"
-msgstr ""
-
-msgid "»Import facts«"
 msgstr ""

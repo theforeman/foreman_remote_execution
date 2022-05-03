@@ -22,6 +22,9 @@ msgstr "%s"
 msgid "%s ago"
 msgstr "%s 전 "
 
+msgid "%s job has been invoked"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{host}에 대한 %{description}"
 
@@ -66,14 +69,14 @@ msgstr "스크립트를 실행하는 데 사용할 사용자입니다. 이 사�
 msgid "Abort Job"
 msgstr ""
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Actions"
 msgstr "작업"
 
 msgid "Add Foreign Input Set"
 msgstr "외부 입력 세트 추가"
-
-msgid "Advanced Fields"
-msgstr ""
 
 msgid "Advanced fields"
 msgstr ""
@@ -465,7 +468,13 @@ msgstr ""
 msgid "Import"
 msgstr "불러오기"
 
+msgid "Import Puppet classes"
+msgstr ""
+
 msgid "Import a job template from ERB"
+msgstr ""
+
+msgid "Import facts"
 msgstr ""
 
 msgid "Include all inputs from the foreign template"
@@ -500,9 +509,6 @@ msgstr "호출 유형(%s 중 하나)"
 
 msgid "Job"
 msgstr "업무"
-
-msgid "Job Category"
-msgstr ""
 
 msgid "Job Details"
 msgstr ""
@@ -825,7 +831,7 @@ msgstr "다음으로 확인"
 msgid "Results"
 msgstr ""
 
-msgid "Review Details"
+msgid "Review details"
 msgstr ""
 
 msgid "Run"
@@ -849,9 +855,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-msgid "SSH"
-msgstr "SSH"
-
 msgid "SSH Port"
 msgstr ""
 
@@ -865,6 +868,9 @@ msgid "Schedule"
 msgstr "스케줄 "
 
 msgid "Schedule Remote Job"
+msgstr ""
+
+msgid "Schedule a job"
 msgstr ""
 
 msgid "Schedule for future execution"
@@ -886,6 +892,9 @@ msgid "Scheduled to start at"
 msgstr ""
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Script"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -1207,16 +1216,16 @@ msgstr "사용자 입력"
 msgid "Value"
 msgstr "값 "
 
-msgid "View All Jobs"
+msgid "View all jobs"
 msgstr ""
 
-msgid "View Finished Jobs"
+msgid "View finished jobs"
 msgstr ""
 
-msgid "View Running Jobs"
+msgid "View running jobs"
 msgstr ""
 
-msgid "View Scheduled Jobs"
+msgid "View scheduled jobs"
 msgstr ""
 
 msgid "Web Console"
@@ -1361,13 +1370,4 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
-msgstr ""
-
-msgid "»Action with sub plans«"
-msgstr ""
-
-msgid "»Import Puppet classes«"
-msgstr ""
-
-msgid "»Import facts«"
 msgstr ""

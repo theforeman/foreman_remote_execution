@@ -26,6 +26,9 @@ msgstr "%s"
 msgid "%s ago"
 msgstr "%s назад"
 
+msgid "%s job has been invoked"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{description} на %{host}"
 
@@ -70,14 +73,14 @@ msgstr "Пользователь, от имени которого должен 
 msgid "Abort Job"
 msgstr ""
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Actions"
 msgstr "Действия"
 
 msgid "Add Foreign Input Set"
 msgstr "Добавить шаблон"
-
-msgid "Advanced Fields"
-msgstr ""
 
 msgid "Advanced fields"
 msgstr ""
@@ -469,8 +472,14 @@ msgstr ""
 msgid "Import"
 msgstr "Импорт"
 
+msgid "Import Puppet classes"
+msgstr ""
+
 msgid "Import a job template from ERB"
 msgstr "Импорт шаблона из ERB"
+
+msgid "Import facts"
+msgstr ""
 
 msgid "Include all inputs from the foreign template"
 msgstr "Добавить все входные параметры из внешнего шаблона"
@@ -504,9 +513,6 @@ msgstr "Тип вызова. Возможные значения: %s"
 
 msgid "Job"
 msgstr "Задание"
-
-msgid "Job Category"
-msgstr ""
 
 msgid "Job Details"
 msgstr ""
@@ -829,7 +835,7 @@ msgstr "Применимо к "
 msgid "Results"
 msgstr ""
 
-msgid "Review Details"
+msgid "Review details"
 msgstr ""
 
 msgid "Run"
@@ -853,9 +859,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-msgid "SSH"
-msgstr "SSH"
-
 msgid "SSH Port"
 msgstr ""
 
@@ -869,6 +872,9 @@ msgid "Schedule"
 msgstr "Расписание"
 
 msgid "Schedule Remote Job"
+msgstr ""
+
+msgid "Schedule a job"
 msgstr ""
 
 msgid "Schedule for future execution"
@@ -890,6 +896,9 @@ msgid "Scheduled to start at"
 msgstr ""
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Script"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -1214,16 +1223,16 @@ msgstr "Ввод пользователя"
 msgid "Value"
 msgstr "Значение"
 
-msgid "View All Jobs"
+msgid "View all jobs"
 msgstr ""
 
-msgid "View Finished Jobs"
+msgid "View finished jobs"
 msgstr ""
 
-msgid "View Running Jobs"
+msgid "View running jobs"
 msgstr ""
 
-msgid "View Scheduled Jobs"
+msgid "View scheduled jobs"
 msgstr ""
 
 msgid "Web Console"
@@ -1368,13 +1377,4 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
-msgstr ""
-
-msgid "»Action with sub plans«"
-msgstr ""
-
-msgid "»Import Puppet classes«"
-msgstr ""
-
-msgid "»Import facts«"
 msgstr ""

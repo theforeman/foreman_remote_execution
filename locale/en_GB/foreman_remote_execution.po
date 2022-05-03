@@ -24,6 +24,9 @@ msgstr ""
 msgid "%s ago"
 msgstr "%s ago"
 
+msgid "%s job has been invoked"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr ""
 
@@ -68,13 +71,13 @@ msgstr ""
 msgid "Abort Job"
 msgstr ""
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Actions"
 msgstr ""
 
 msgid "Add Foreign Input Set"
-msgstr ""
-
-msgid "Advanced Fields"
 msgstr ""
 
 msgid "Advanced fields"
@@ -467,7 +470,13 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
+msgid "Import Puppet classes"
+msgstr ""
+
 msgid "Import a job template from ERB"
+msgstr ""
+
+msgid "Import facts"
 msgstr ""
 
 msgid "Include all inputs from the foreign template"
@@ -501,9 +510,6 @@ msgid "Invocation type, one of %s"
 msgstr ""
 
 msgid "Job"
-msgstr ""
-
-msgid "Job Category"
 msgstr ""
 
 msgid "Job Details"
@@ -827,7 +833,7 @@ msgstr ""
 msgid "Results"
 msgstr ""
 
-msgid "Review Details"
+msgid "Review details"
 msgstr ""
 
 msgid "Run"
@@ -851,9 +857,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-msgid "SSH"
-msgstr ""
-
 msgid "SSH Port"
 msgstr ""
 
@@ -867,6 +870,9 @@ msgid "Schedule"
 msgstr ""
 
 msgid "Schedule Remote Job"
+msgstr ""
+
+msgid "Schedule a job"
 msgstr ""
 
 msgid "Schedule for future execution"
@@ -888,6 +894,9 @@ msgid "Scheduled to start at"
 msgstr ""
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Script"
 msgstr ""
 
 msgid "Scroll to bottom"
@@ -1210,16 +1219,16 @@ msgstr ""
 msgid "Value"
 msgstr "Value"
 
-msgid "View All Jobs"
+msgid "View all jobs"
 msgstr ""
 
-msgid "View Finished Jobs"
+msgid "View finished jobs"
 msgstr ""
 
-msgid "View Running Jobs"
+msgid "View running jobs"
 msgstr ""
 
-msgid "View Scheduled Jobs"
+msgid "View scheduled jobs"
 msgstr ""
 
 msgid "Web Console"
@@ -1364,13 +1373,4 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
-msgstr ""
-
-msgid "»Action with sub plans«"
-msgstr ""
-
-msgid "»Import Puppet classes«"
-msgstr ""
-
-msgid "»Import facts«"
 msgstr ""
