@@ -32,6 +32,8 @@ class JobTemplate < ::Template
   scoped_search :on => :snippet, :complete_value => {:true => true, :false => false}
   scoped_search :on => :provider_type, :complete_value => true
   scoped_search :on => :template
+  scoped_search :relation => :remote_execution_features, :on => :name, :rename => 'feature.name'
+  scoped_search :relation => :remote_execution_features, :on => :label, :rename => 'feature.label'
 
   # with proc support, default_scope can no longer be chained
   # include all default scoping here

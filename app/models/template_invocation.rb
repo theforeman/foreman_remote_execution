@@ -16,6 +16,7 @@ class TemplateInvocation < ApplicationRecord
   belongs_to :host, :class_name => 'Host::Managed', :foreign_key => :host_id
   has_one :host_group, :through => :host, :source => :hostgroup
   belongs_to :run_host_job_task, :class_name => 'ForemanTasks::Task'
+  has_many :remote_execution_features, :through => :template
 
   validates_associated :input_values
   validate :provides_required_input_values
@@ -25,6 +26,7 @@ class TemplateInvocation < ApplicationRecord
   scoped_search :relation => :host_group, :on => :name, :rename => 'host_group.name', :complete_value => true
   scoped_search :relation => :template, :on => :job_category, :complete_value => true
   scoped_search :relation => :template, :on => :name, :complete_value => true
+  scoped_search :relation => :remote_execution_features, :on => :name, :rename => 'feature'
 
   class TaskResultMap
     MAP = {
