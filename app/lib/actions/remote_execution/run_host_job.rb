@@ -172,6 +172,10 @@ module Actions
         @host ||= ::Host.authorized.find(host_id)
       end
 
+      def self.cleanup_after
+        '90d'
+      end
+
       private
 
       def update_host_status
