@@ -52,7 +52,7 @@ const FeaturesDropdown = ({ hostId }) => {
       toggle={
         <DropdownToggle
           splitButtonItems={scheduleJob}
-          toggleVariant="primary"
+          toggleVariant="secondary"
           onToggle={() => setIsOpen(prev => !prev)}
           isDisabled={status === STATUS.PENDING}
           splitButtonVariant="action"
