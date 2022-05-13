@@ -15,7 +15,7 @@ const SelectedChip = ({ selected, setSelected, categoryName }) => {
       {selected.map(({ name, id }, index) => (
         <Chip
           key={index}
-          id={id}
+          id={`${categoryName}-${id}`}
           onClick={() => deleteItem(id)}
           closeBtnAriaLabel={`Close ${name}`}
         >

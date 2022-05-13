@@ -1,6 +1,6 @@
 export const buildHostQuery = (selected, search) => {
   const { hosts, hostCollections, hostGroups } = selected;
-  const hostsSearch = `(name ^ (${hosts.map(({ id }) => id).join(',')}))`;
+  const hostsSearch = `(id ^ (${hosts.map(({ id }) => id).join(',')}))`;
   const hostCollectionsSearch = `(host_collection_id ^ (${hostCollections
     .map(({ id }) => id)
     .join(',')}))`;
