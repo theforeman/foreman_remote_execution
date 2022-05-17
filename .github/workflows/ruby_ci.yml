@@ -18,6 +18,7 @@ jobs:
         with:
           ruby-version: 2.5
           bundler-cache: true
+          cache-version: 1
       - name: Run rubocop
         if: github.event_name != 'push'
         run: bundle exec rubocop --format github
