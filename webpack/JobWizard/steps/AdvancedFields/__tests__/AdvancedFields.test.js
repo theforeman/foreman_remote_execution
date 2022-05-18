@@ -166,6 +166,11 @@ describe('AdvancedFields', () => {
     });
 
     expect(
+      screen.getByLabelText('ssh user', {
+        selector: 'input',
+      }).value
+    ).toBe('');
+    expect(
       screen.getByLabelText('effective user', {
         selector: 'input',
       }).value

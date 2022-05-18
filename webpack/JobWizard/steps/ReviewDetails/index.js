@@ -125,6 +125,7 @@ const ReviewDetails = ({
   ].filter(d => d);
 
   const advancedFields = [
+    { label: __('SSH user'), value: advancedValues.sshUser },
     { label: __('Effective user'), value: advancedValues.effectiveUserValue },
     { label: __('Description Template'), value: advancedValues.description },
     { label: __('Timeout to kill'), value: advancedValues.timeoutToKill },

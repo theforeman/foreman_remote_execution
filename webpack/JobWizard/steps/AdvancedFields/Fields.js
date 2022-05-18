@@ -203,6 +203,24 @@ export const ExecutionOrderingField = ({ isRandomizedOrdering, setValue }) => (
 export const TemplateInputsFields = ({ inputs, value, setValue }) => (
   <>{inputs?.map(input => formatter(input, value, setValue))}</>
 );
+
+export const SSHUserField = ({ value, setValue }) => (
+  <FormGroup
+    label={__('SSH user')}
+    labelIcon={helpLabel(__('A user to be used for SSH.'), 'ssh-user')}
+    fieldId="ssh-user"
+  >
+    <TextInput
+      aria-label="ssh user"
+      autoComplete="ssh-user"
+      id="ssh-user"
+      type="text"
+      value={value}
+      onChange={newValue => setValue(newValue)}
+    />
+  </FormGroup>
+);
+
 EffectiveUserField.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setValue: PropTypes.func.isRequired,
@@ -240,3 +258,6 @@ TemplateInputsFields.propTypes = {
 TemplateInputsFields.defaultProps = {
   value: {},
 };
+
+SSHUserField.propTypes = EffectiveUserField.propTypes;
+SSHUserField.defaultProps = EffectiveUserField.defaultProps;
