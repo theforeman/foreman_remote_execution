@@ -16,6 +16,7 @@ import {
   TimeSpanLevelField,
   TemplateInputsFields,
   ExecutionOrderingField,
+  SSHUserField,
 } from './Fields';
 import { DescriptionField } from './DescriptionField';
 import { WIZARD_TITLES } from '../../JobWizardConstants';
@@ -39,6 +40,14 @@ export const AdvancedFields = ({
           inputs={advancedTemplateInputs}
           value={advancedValues.templateValues}
           setValue={newValue => setAdvancedValues({ templateValues: newValue })}
+        />
+        <SSHUserField
+          value={advancedValues.sshUser}
+          setValue={newValue =>
+            setAdvancedValues({
+              sshUser: newValue,
+            })
+          }
         />
         {effectiveUser?.overridable && (
           <EffectiveUserField

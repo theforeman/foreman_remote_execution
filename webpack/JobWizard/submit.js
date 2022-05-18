@@ -23,6 +23,7 @@ export const submit = ({
     purpose,
   } = scheduleValue;
   const {
+    sshUser,
     effectiveUserValue,
     effectiveUserPassword,
     description,
@@ -64,6 +65,7 @@ export const submit = ({
         : 'dynamic_query',
       randomized_ordering: isRandomizedOrdering,
       inputs: { ...templateValues, ...advancedTemplateValues },
+      ssh_user: sshUser,
       ssh: {
         effective_user: effectiveUserValue,
         effective_user_password: effectiveUserPassword,
