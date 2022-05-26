@@ -10,8 +10,6 @@ import {
   FormSelect,
 } from '@patternfly/react-core';
 
-import { HelpIcon } from '@patternfly/react-icons';
-
 const options = (value = '') => {
   const defaultValue = value ? __('yes') : __('no');
   const defaultLabel = `${__('Inherit from host parameter')} (${defaultValue})`;
@@ -60,12 +58,16 @@ RexPull.propTypes = {
   pluginValues: PropTypes.shape({
     setupRemoteExecutionPull: PropTypes.bool,
   }),
+  configParams: PropTypes.shape({
+    host_registration_remote_execution_pull: PropTypes.bool,
+  }),
 };
 
 RexPull.defaultProps = {
   onChange: undefined,
   isLoading: false,
   pluginValues: {},
+  configParams: {},
 };
 
 export default RexPull;
