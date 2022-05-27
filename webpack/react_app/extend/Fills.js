@@ -17,7 +17,7 @@ const fills = [
     slot: 'host-overview-cards',
     name: 'latest-jobs',
     component: props => <RecentJobsCard {...props} />,
-    weight: 500,
+    weight: 3200,
   },
   {
     slot: 'registrationAdvanced',
