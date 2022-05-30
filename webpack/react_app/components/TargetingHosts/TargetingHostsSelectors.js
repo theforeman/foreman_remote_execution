@@ -18,3 +18,8 @@ export const selectTotalHosts = state =>
 
 export const selectIntervalExists = state =>
   selectDoesIntervalExist(state, TARGETING_HOSTS);
+
+const defaultStatusFilter = {};
+export const selectStatusFilter = state =>
+  state.foremanRemoteExecutionReducers.jobInvocations
+    .jobInvocationStateFilter || defaultStatusFilter;

@@ -26,6 +26,8 @@ export default (state = initialState, action) => {
       return state
         .set('jobInvocations', payload.jobInvocations.job_invocations)
         .set('statuses', payload.jobInvocations.statuses);
+    case 'JOB_INVOCATION_CHART_FILTER':
+      return state.set('jobInvocationStateFilter', payload.filter);
     default:
       return state;
   }
