@@ -76,3 +76,11 @@ export const startJobInvocationsPolling = url => (dispatch, getState) => {
   });
   dispatch(getJobInvocations(url));
 };
+
+export const chartFilter = state => (dispatch, getState) => {
+  const filter = state ? { 'job_invocation.result': state.toLowerCase() } : {};
+  dispatch({
+    type: 'JOB_INVOCATION_CHART_FILTER',
+    payload: { filter },
+  });
+};

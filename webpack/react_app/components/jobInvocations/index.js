@@ -21,7 +21,7 @@ class JobInvocationContainer extends React.Component {
   }
 
   render() {
-    const { jobInvocations, statuses } = this.props;
+    const { jobInvocations, statuses, chartFilter } = this.props;
     const iMax = colIndexOfMaxValue(jobInvocations);
 
     return (
@@ -31,6 +31,9 @@ class JobInvocationContainer extends React.Component {
           title={{
             type: 'percent',
             secondary: (jobInvocations[iMax] || [])[0],
+          }}
+          onclick={(d, element) => {
+            chartFilter(d.name.toLowerCase());
           }}
         />
         <AggregateStatus statuses={statuses} />
@@ -63,10 +66,12 @@ JobInvocationContainer.propTypes = {
     pending: PropTypes.number,
     success: PropTypes.number,
   }),
+  chartFilter: PropTypes.object,
 };
 
 JobInvocationContainer.defaultProps = {
   startJobInvocationsPolling: JobInvocationActions.startJobInvocationsPolling,
+  chartFilter: JobInvocationActions.chartFilter,
   data: {},
   jobInvocations: [['property', 3, 'color']],
   statuses: {},

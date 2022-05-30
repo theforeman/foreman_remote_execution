@@ -38,6 +38,9 @@ exports[`TargetingHostsPage renders 1`] = `
       />
     </Col>
   </Row>
+  <TargetingHostsLabelsRow
+    query={Object {}}
+  />
   <br />
   <TargetingHosts
     apiStatus="RESOLVED"
