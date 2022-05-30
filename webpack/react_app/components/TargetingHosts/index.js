@@ -14,10 +14,23 @@ import {
   selectAutoRefresh,
   selectTotalHosts,
   selectIntervalExists,
+  selectStatusFilter,
 } from './TargetingHostsSelectors';
 import { getApiUrl } from './TargetingHostsHelpers';
 import { TARGETING_HOSTS } from './TargetingHostsConsts';
 import TargetingHostsPage from './TargetingHostsPage';
+import { chartFilter } from '../../redux/actions/jobInvocations';
+
+const buildSearchQuery = (query, stateFilter) => {
+  const filters = Object.entries(stateFilter).map(
+    ([key, value]) => `${key} = ${value}`
+  );
+  return [query, filters]
+    .flat()
+    .filter(x => x)
+    .map(x => `(${x})`)
+    .join(' AND ');
+};
 
 const WrappedTargetingHosts = () => {
   const dispatch = useDispatch();
@@ -27,6 +40,7 @@ const WrappedTargetingHosts = () => {
   const items = useSelector(selectItems);
   const apiStatus = useSelector(selectApiStatus);
   const totalHosts = useSelector(selectTotalHosts);
+  const statusFilter = useSelector(selectStatusFilter);
   const [searchQuery, setSearchQuery] = useState('');
   const [pagination, setPagination] = useState({
     page: 1,
@@ -36,11 +50,11 @@ const WrappedTargetingHosts = () => {
   const [apiUrl, setApiUrl] = useState(getApiUrl(searchQuery, pagination));
   const intervalExists = useSelector(selectIntervalExists);
 
-  const handleSearch = query => {
+  const handleSearch = (query, status) => {
     const defaultPagination = { page: 1, per_page: pagination.per_page };
     stopApiInterval();
 
-    setApiUrl(getApiUrl(query, defaultPagination));
+    setApiUrl(getApiUrl(buildSearchQuery(query, status), defaultPagination));
     setSearchQuery(query);
     setPagination(defaultPagination);
   };
@@ -48,7 +62,7 @@ const WrappedTargetingHosts = () => {
   const handlePagination = args => {
     stopApiInterval();
     setPagination(args);
-    setApiUrl(getApiUrl(searchQuery, args));
+    setApiUrl(getApiUrl(buildSearchQuery(searchQuery, statusFilter), args));
   };
 
   const stopApiInterval = () => {
@@ -81,10 +95,16 @@ const WrappedTargetingHosts = () => {
     };
   }, [dispatch, apiUrl, autoRefresh]);
 
+  useEffect(() => {
+    handleSearch(searchQuery, statusFilter);
+  }, [statusFilter, searchQuery]);
+
   return (
     <TargetingHostsPage
       handleSearch={handleSearch}
       searchQuery={searchQuery}
+      statusFilter={statusFilter}
+      statusFilterReset={_x => chartFilter(null)(dispatch, null)}
       apiStatus={apiStatus}
       items={items}
       totalHosts={totalHosts}
