@@ -25,12 +25,12 @@ const options = (value = '') => {
 
 const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
   <FormGroup
-    label={__('Setup REX pull mode')}
+    label={__('REX pull mode')}
     isRequired
     labelIcon={
       <LabelIcon
         text={__(
-          'Setup remote execution pull mode. If set to `Yes`. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level.'
+          'Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level.'
         )}
       />
     }

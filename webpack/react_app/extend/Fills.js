@@ -29,10 +29,7 @@ const fills = [
   {
     slot: 'registrationAdvanced',
     name: 'pull',
-    component: props => {
-      console.log(props);
-      return <RexPull {...props} />;
-    },
+    component: props => <RexPull {...props} />,
     weight: 500,
   },
   {
