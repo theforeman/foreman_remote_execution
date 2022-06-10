@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormGroup,
@@ -18,31 +18,32 @@ export const ScheduleFuture = ({
   setValid,
 }) => {
   const [error, setError] = useState(null);
+
+  const wrappedSetValid = useCallback(setValid, []);
   useEffect(() => {
     if (!startsBefore?.length && !startsAt?.length) {
-      setValid(false);
+      wrappedSetValid(false);
       setError(
         __(
           "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step."
         )
       );
     } else if (!startsBefore?.length) {
-      setValid(true);
+      wrappedSetValid(true);
       setError(null);
     } else if (
       new Date(startsAt).getTime() >= new Date(startsBefore).getTime()
     ) {
-      setValid(false);
+      wrappedSetValid(false);
       setError(__("'Starts before' date must be after 'Starts at' date"));
     } else if (new Date().getTime() >= new Date(startsBefore).getTime()) {
-      setValid(false);
+      wrappedSetValid(false);
       setError(__("'Starts before' date must in the future"));
     } else {
-      setValid(true);
+      wrappedSetValid(true);
       setError(null);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startsAt, startsBefore]);
+  }, [wrappedSetValid, startsAt, startsBefore]);
 
   return (
     <>

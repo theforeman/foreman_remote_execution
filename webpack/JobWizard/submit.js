@@ -75,7 +75,7 @@ export const submit = ({
           ? {
               cron_line: getCronLine(),
               max_iteration: repeatAmount,
-              end_time: ends.length ? new Date(ends).toISOString() : null,
+              end_time: ends?.length ? new Date(ends).toISOString() : null,
               purpose,
             }
           : null,

@@ -38,7 +38,7 @@ export const ScheduleType = ({
             setValid(true);
           }}
           label={__('Immediate execution')}
-          body={__('Execute job now.')}
+          body={__('Execute the job now.')}
         />
       </FormGroup>
       <FormGroup fieldId="schedule-type-future">
@@ -56,25 +56,25 @@ export const ScheduleType = ({
           name="schedule-type-future"
           id="schedule-type-future"
           label={__('Future execution')}
-          body={__('Plan executing job in the future.')}
+          body={__('Execute the job later, at a scheduled time.')}
         />
       </FormGroup>
-      <FormGroup fieldId="schedule-type-reccuring">
+      <FormGroup fieldId="schedule-type-recurring">
         <Radio
-          isChecked={scheduleType === SCHEDULE_TYPES.RECCURING}
+          isChecked={scheduleType === SCHEDULE_TYPES.RECURRING}
           onChange={() => {
             setScheduleValue(current => ({
               ...current,
-              scheduleType: SCHEDULE_TYPES.RECCURING,
+              scheduleType: SCHEDULE_TYPES.RECURRING,
               repeatType: repeatTypes.daily,
-              repeatData: { at: new Date() },
+              repeatData: { at: '12:00' },
             }));
             setValid(true);
           }}
-          name="schedule-type-reccuring"
-          id="schedule-type-reccuring"
+          name="schedule-type-recurring"
+          id="schedule-type-recurring"
           label={__('Recurring execution')}
-          body={__('Set up a reccuring execution for a job.')}
+          body={__('Execute the job on a repeating schedule.')}
         />
       </FormGroup>
       <Divider component="div" />

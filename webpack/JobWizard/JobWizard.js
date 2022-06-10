@@ -27,7 +27,7 @@ import {
 } from './JobWizardSelectors';
 import { ScheduleType } from './steps/Schedule/ScheduleType';
 import { ScheduleFuture } from './steps/Schedule/ScheduleFuture';
-import { ScheduleReccuring } from './steps/Schedule/ScheduleReccuring';
+import { ScheduleRecurring } from './steps/Schedule/ScheduleRecurring';
 import HostsAndInputs from './steps/HostsAndInputs/';
 import ReviewDetails from './steps/ReviewDetails/';
 import { useValidation } from './validation';
@@ -239,12 +239,12 @@ export const JobWizard = () => {
               },
             ]
           : []),
-        ...(scheduleValue.scheduleType === SCHEDULE_TYPES.RECCURING
+        ...(scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING
           ? [
               {
-                name: SCHEDULE_TYPES.RECCURING,
+                name: SCHEDULE_TYPES.RECURRING,
                 component: (
-                  <ScheduleReccuring
+                  <ScheduleRecurring
                     scheduleValue={scheduleValue}
                     setScheduleValue={setScheduleValue}
                     setValid={newValue => {

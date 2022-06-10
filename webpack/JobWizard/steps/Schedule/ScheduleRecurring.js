@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   Form,
@@ -16,7 +16,7 @@ import { PurposeField } from './PurposeField';
 import { DateTimePicker } from '../form/DateTimePicker';
 import { WizardTitle } from '../form/WizardTitle';
 
-export const ScheduleReccuring = ({
+export const ScheduleRecurring = ({
   scheduleValue,
   setScheduleValue,
   setValid,
@@ -35,7 +35,10 @@ export const ScheduleReccuring = ({
   const [validEnd, setValidEnd] = useState(true);
   const [repeatValidated, setRepeatValidated] = useState('default');
   const handleRepeatInputChange = newValue => {
-    setRepeatValidated(!newValue || newValue >= 1 ? 'default' : 'error');
+    if (!newValue.length) newValue = 0;
+    setRepeatValidated(
+      !newValue || parseInt(newValue, 10) >= 1 ? 'default' : 'error'
+    );
     setScheduleValue(current => ({
       ...current,
       repeatAmount: newValue,
@@ -43,6 +46,7 @@ export const ScheduleReccuring = ({
   };
   const [repeatValid, setRepeatValid] = useState(true);
 
+  const wrappedSetValid = useCallback(setValid, []);
   useEffect(() => {
     if (isNeverEnds) setValidEnd(true);
     else if (!ends) setValidEnd(true);
@@ -58,20 +62,28 @@ export const ScheduleReccuring = ({
     }
 
     if (!validEnd || !repeatValid) {
-      setValid(false);
+      wrappedSetValid(false);
     } else if (isFuture && startsAt.length) {
-      setValid(true);
+      wrappedSetValid(true);
     } else if (!isFuture) {
-      setValid(true);
+      wrappedSetValid(true);
     } else {
-      setValid(false);
+      wrappedSetValid(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startsAt, startsBefore, isFuture, validEnd, repeatValid, ends]);
+  }, [
+    wrappedSetValid,
+    isNeverEnds,
+    startsAt,
+    startsBefore,
+    isFuture,
+    validEnd,
+    repeatValid,
+    ends,
+  ]);
 
   return (
     <>
-      <WizardTitle title={SCHEDULE_TYPES.RECCURING} />
+      <WizardTitle title={SCHEDULE_TYPES.RECURRING} />
       <Form className="schedule-tab">
         <FormGroup label={__('Starts')} fieldId="schedule-starts">
           <div className="pf-c-form">
@@ -204,7 +216,7 @@ export const ScheduleReccuring = ({
             </FormGroup>
             <FormGroup fieldId="ends-after">
               <Radio
-                isChecked={!!repeatAmount}
+                isChecked={repeatAmount === 0 || !!repeatAmount}
                 onChange={() =>
                   setScheduleValue(current => ({
                     ...current,
@@ -231,7 +243,7 @@ export const ScheduleReccuring = ({
                         value={repeatAmount || ''}
                         type="number"
                         onChange={handleRepeatInputChange}
-                        isDisabled={!repeatAmount}
+                        isDisabled={!(repeatAmount === 0 || !!repeatAmount)}
                       />
                     </FormGroup>
                     <div className="schedule-radio-occurences">
@@ -258,7 +270,7 @@ export const ScheduleReccuring = ({
   );
 };
 
-ScheduleReccuring.propTypes = {
+ScheduleRecurring.propTypes = {
   scheduleValue: PropTypes.shape({
     repeatType: PropTypes.string.isRequired,
     repeatAmount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -19,7 +19,7 @@ export const repeatTypes = {
 export const SCHEDULE_TYPES = {
   NOW: __('Immediate execution'),
   FUTURE: __('Future execution'),
-  RECCURING: __('Recurring execution'),
+  RECURRING: __('Recurring execution'),
 };
 
 export const WIZARD_TITLES = {
