@@ -16,23 +16,31 @@ export const repeatTypes = {
   hourly: __('Hourly'),
 };
 
+export const SCHEDULE_TYPES = {
+  NOW: __('Immediate execution'),
+  FUTURE: __('Future execution'),
+  RECURRING: __('Recurring execution'),
+};
+
 export const WIZARD_TITLES = {
   categoryAndTemplate: __('Category and Template'),
   hostsAndInputs: __('Target hosts and inputs'),
   advanced: __('Advanced fields'),
   schedule: __('Schedule'),
   review: __('Review details'),
+  typeOfExecution: __('Type of execution'),
 };
 
 export const initialScheduleState = {
   repeatType: repeatTypes.noRepeat,
+  scheduleType: SCHEDULE_TYPES.NOW,
   repeatAmount: '',
   repeatData: {},
   startsAt: '',
   startsBefore: '',
   ends: '',
   isFuture: false,
-  isNeverEnds: false,
+  isNeverEnds: true,
   isTypeStatic: true,
   purpose: '',
 };

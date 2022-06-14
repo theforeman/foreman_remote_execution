@@ -45,7 +45,7 @@ describe('Job wizard fill', () => {
       </Provider>
     );
     expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(
-      4
+      5
     );
     selectors.selectJobCategoriesStatus.mockImplementation(() => 'RESOLVED');
     expect(store.getActions()).toMatchSnapshot('initial');
@@ -79,8 +79,12 @@ describe('Job wizard fill', () => {
         </Provider>
       </MockedProvider>
     );
-    const titles = Object.values(WIZARD_TITLES);
-    const steps = [titles[1], titles[0], ...titles.slice(2)]; // the first title is selected at the beggining
+    const steps = [
+      WIZARD_TITLES.hostsAndInputs,
+      WIZARD_TITLES.categoryAndTemplate,
+      WIZARD_TITLES.advanced,
+      WIZARD_TITLES.review,
+    ];
     // eslint-disable-next-line no-unused-vars
     for await (const step of steps) {
       const stepSelector = screen.getByText(step);
@@ -92,5 +96,15 @@ describe('Job wizard fill', () => {
       const stepTitles = screen.getAllByText(step);
       expect(stepTitles).toHaveLength(3);
     }
+    const step = WIZARD_TITLES.typeOfExecution;
+    const stepTitle = screen.getAllByText(step);
+    expect(stepTitle).toHaveLength(1);
+    expect(screen.queryAllByText('Select the type of execution')).toHaveLength(
+      0
+    );
+    await act(async () => {
+      await fireEvent.click(stepTitle[0]);
+    });
+    expect(screen.getAllByText('Select the type of execution')).toHaveLength(1);
   });
 });

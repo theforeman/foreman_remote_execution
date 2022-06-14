@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { TextInput, Grid, GridItem, FormGroup } from '@patternfly/react-core';
+import { FormGroup } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { SelectField } from '../form/SelectField';
 import { repeatTypes } from '../../JobWizardConstants';
@@ -13,18 +13,10 @@ import { RepeatWeek } from './RepeatWeek';
 export const RepeatOn = ({
   repeatType,
   setRepeatType,
-  repeatAmount,
-  setRepeatAmount,
   repeatData,
   setRepeatData,
   setValid,
 }) => {
-  const [repeatValidated, setRepeatValidated] = useState('default');
-  const handleRepeatInputChange = newValue => {
-    setRepeatValidated(!newValue || newValue >= 1 ? 'default' : 'error');
-    setRepeatAmount(newValue);
-  };
-
   const getRepeatComponent = () => {
     switch (repeatType) {
       case repeatTypes.cronline:
@@ -61,64 +53,35 @@ export const RepeatOn = ({
         );
       case repeatTypes.hourly:
         return (
-          <RepeatHour
-            repeatData={repeatData}
-            setRepeatData={setRepeatData}
-            setValid={setValid}
-          />
+          <RepeatHour repeatData={repeatData} setRepeatData={setRepeatData} />
         );
-      case repeatTypes.noRepeat:
       default:
         return null;
     }
   };
   return (
-    <FormGroup label={__('Repeat On')}>
-      <Grid>
-        <GridItem span={6}>
-          <SelectField
-            isRequired
-            fieldId="repeat-select"
-            options={Object.values(repeatTypes)}
-            setValue={newValue => {
-              setRepeatType(newValue);
-              if (newValue === repeatTypes.noRepeat) {
-                setRepeatValidated('default');
-              }
-            }}
-            value={repeatType}
-          />
-        </GridItem>
-        <GridItem span={1} />
-        <GridItem span={5}>
-          <FormGroup
-            helperTextInvalid={__(
-              'Repeat amount can only be a positive number'
-            )}
-            validated={repeatValidated}
-          >
-            <TextInput
-              isDisabled={repeatType === repeatTypes.noRepeat}
-              id="repeat-amount"
-              value={repeatAmount}
-              type="text"
-              onChange={newValue => handleRepeatInputChange(newValue)}
-              placeholder={__('Repeat N times')}
-            />
-          </FormGroup>
-        </GridItem>
-        {getRepeatComponent()}
-      </Grid>
-    </FormGroup>
+    <>
+      <FormGroup label={__('Repeats')}>
+        <SelectField
+          isRequired
+          fieldId="repeat-select"
+          options={Object.values(repeatTypes).filter(
+            type => type !== repeatTypes.noRepeat
+          )}
+          setValue={newValue => {
+            setRepeatType(newValue);
+          }}
+          value={repeatType}
+        />
+      </FormGroup>
+      {getRepeatComponent()}
+    </>
   );
 };
 
 RepeatOn.propTypes = {
   repeatType: PropTypes.oneOf(Object.values(repeatTypes)).isRequired,
   setRepeatType: PropTypes.func.isRequired,
-  repeatAmount: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  setRepeatAmount: PropTypes.func.isRequired,
   repeatData: PropTypes.object.isRequired,
   setRepeatData: PropTypes.func.isRequired,
   setValid: PropTypes.func.isRequired,

@@ -108,9 +108,7 @@ const ReviewDetails = ({
   const detailsSecondHalf = [
     {
       label: __('Schedule type'),
-      value: scheduleValue.isFuture
-        ? __('Schedule for future execution')
-        : __('Execute now'),
+      value: scheduleValue.scheduleType,
     },
     {
       label: __('Recurrence'),

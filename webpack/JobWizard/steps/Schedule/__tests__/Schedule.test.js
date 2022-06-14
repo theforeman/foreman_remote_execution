@@ -3,6 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { fireEvent, screen, render, act } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../../../JobWizard';
 import * as selectors from '../../../JobWizardSelectors';
@@ -47,166 +48,232 @@ const store = mockStore({});
 jest.useFakeTimers();
 
 describe('Schedule', () => {
-  it('should save date time between steps ', async () => {
+  it('sub steps appear', () => {
     render(
       <Provider store={store}>
         <JobWizard />
       </Provider>
     );
-    await act(async () => {
-      fireEvent.click(screen.getByText('Schedule'));
+    act(() => {
+      fireEvent.click(screen.getByText('Type of execution'));
     });
-    const newStartDate = '2020/03/12';
-    const newStartTime = '12:03';
-    const newEndsDate = '2030/03/12';
-    const newEndsTime = '17:34';
-    const startsDateField = screen.getByLabelText('starts at datepicker');
-    const endsDateField = screen.getByLabelText('ends datepicker');
+    expect(screen.getAllByText('Future execution')).toHaveLength(1);
+    expect(screen.getAllByText('Recurring execution')).toHaveLength(1);
 
-    const startsTimeField = screen.getByLabelText('starts at timepicker');
-    const endsTimeField = screen.getByLabelText('ends timepicker');
-
-    const staticQuery = screen.getByLabelText('Static query');
-    const dynamicQuery = screen.getByLabelText('Dynamic query');
-    const purpose = screen.getByLabelText('purpose');
-    const newPurposeLabel = 'some fun text';
-    expect(staticQuery.checked).toBeTruthy();
-    await act(async () => {
-      await fireEvent.change(startsDateField, {
-        target: { value: newStartDate },
-      });
-      await fireEvent.change(startsTimeField, {
-        target: { value: newStartTime },
-      });
-      await fireEvent.change(purpose, {
-        target: { value: newPurposeLabel },
-      });
-      await fireEvent.change(endsDateField, { target: { value: newEndsDate } });
-      await fireEvent.change(endsTimeField, { target: { value: newEndsTime } });
-
-      await fireEvent.click(dynamicQuery);
+    act(() => {
+      fireEvent.click(screen.getByText('Future execution'));
+    });
+    expect(screen.getAllByText('Future execution')).toHaveLength(2);
+    expect(screen.getAllByText('Recurring execution')).toHaveLength(1);
+    act(() => {
+      fireEvent.click(screen.getByText('Recurring execution'));
+    });
+    expect(screen.getAllByText('Future execution')).toHaveLength(1);
+    expect(screen.getAllByText('Recurring execution')).toHaveLength(2);
+  });
+  it('Future execution', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    act(() => {
+      fireEvent.click(screen.getByText('Type of execution'));
+    });
+    act(() => {
+      fireEvent.click(screen.getByText('Future execution'));
+    });
+    act(() => {
+      fireEvent.click(screen.getByRole('button', { name: 'Future execution' }));
       jest.runAllTimers(); // to handle pf4 date picker popover useTimer
     });
+
+    const newStartAtDate = '2030/03/12';
+    const newStartBeforeDate = '2030/05/22';
+    const newStartAtTime = '12:46';
+    const newStartBeforeTime = '14:27';
+    const startsAtDateField = () =>
+      screen.getByLabelText('starts at datepicker');
+    const startsAtTimeField = () =>
+      screen.getByLabelText('starts at timepicker');
+
+    const startsBeforeDateField = () =>
+      screen.getByLabelText('starts before datepicker');
+    const startsBeforeTimeField = () =>
+      screen.getByLabelText('starts before timepicker');
+
     await act(async () => {
+      await fireEvent.change(startsAtDateField(), {
+        target: { value: newStartAtDate },
+      });
+      fireEvent.change(startsAtTimeField(), {
+        target: { value: newStartAtTime },
+      });
+      await fireEvent.change(startsBeforeDateField(), {
+        target: { value: newStartBeforeDate },
+      });
+      fireEvent.change(startsBeforeTimeField(), {
+        target: { value: newStartBeforeTime },
+      });
+      jest.runOnlyPendingTimers();
+    });
+
+    act(() => {
       fireEvent.click(screen.getByText('Category and Template'));
     });
-    expect(screen.getAllByText('Category and Template')).toHaveLength(3);
-
-    await act(async () => {
-      fireEvent.click(screen.getByText('Schedule'));
-      jest.runAllTimers();
-    });
-    expect(startsDateField.value).toBe(newStartDate);
-    expect(startsTimeField.value).toBe(newStartTime);
-    expect(endsDateField.value).toBe(newEndsDate);
-    expect(endsTimeField.value).toBe(newEndsTime);
-    expect(dynamicQuery.checked).toBeTruthy();
-    expect(purpose.value).toBe(newPurposeLabel);
-  });
-  it('should remove start date time on execute now', async () => {
-    render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText('Schedule'));
-    });
-    const executeNow = screen.getByLabelText('Execute now');
-    const executeFuture = screen.getByLabelText(
-      'Schedule for future execution'
-    );
-    expect(executeNow.checked).toBeTruthy();
-    const newStartDate = '2020/03/12';
-    const newStartTime = '12:03';
-    const startsDateField = screen.getByLabelText('starts at datepicker');
-    const startsTimeField = screen.getByLabelText('starts at timepicker');
-    await act(async () => {
-      await fireEvent.change(startsDateField, {
-        target: { value: newStartDate },
-      });
-      await fireEvent.change(startsTimeField, {
-        target: { value: newStartTime },
-      });
-      await jest.runOnlyPendingTimers();
-    });
-    expect(startsDateField.value).toBe(newStartDate);
-    expect(startsTimeField.value).toBe(newStartTime);
-    expect(executeFuture.checked).toBeTruthy();
-    await act(async () => {
-      await fireEvent.click(executeNow);
-      jest.runAllTimers();
-    });
-    expect(executeNow.checked).toBeTruthy();
-    expect(startsDateField.value).toBe('');
-    expect(startsTimeField.value).toBe('');
-  });
-
-  it('should disable end date on never ends', async () => {
-    render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      await fireEvent.click(screen.getByText('Schedule'));
-      jest.runAllTimers();
-    });
-    const neverEnds = screen.getByLabelText('Never ends');
-    expect(neverEnds.checked).toBeFalsy();
-
-    const endsDateField = screen.getByLabelText('ends datepicker');
-    const endsTimeField = screen.getByLabelText('ends timepicker');
-    fireEvent.click(
-      screen.getByLabelText('Does not repeat', { selector: 'button' })
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText('Cronline'));
-    });
-    expect(endsDateField.disabled).toBeFalsy();
-    expect(endsTimeField.disabled).toBeFalsy();
-    await act(async () => {
-      fireEvent.click(neverEnds);
-    });
-    expect(neverEnds.checked).toBeTruthy();
-    expect(endsDateField.disabled).toBeTruthy();
-    expect(endsTimeField.disabled).toBeTruthy();
-  });
-
-  it('should change between repeat on states', async () => {
-    render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText('Schedule'));
+    act(() => {
+      fireEvent.click(screen.getByRole('button', { name: 'Future execution' }));
       jest.runAllTimers(); // to handle pf4 date picker popover useTimer
     });
+    expect(startsAtDateField().value).toBe(newStartAtDate);
+    expect(startsAtTimeField().value).toBe(newStartAtTime);
+    expect(startsBeforeDateField().value).toBe(newStartBeforeDate);
+    expect(startsBeforeTimeField().value).toBe(newStartBeforeTime);
+
     expect(
-      screen.getByPlaceholderText('Repeat N times').hasAttribute('disabled')
-    ).toBeTruthy();
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
+      screen.queryAllByText(
+        "'Starts before' date must be after 'Starts at' date"
+      )
+    ).toHaveLength(0);
     await act(async () => {
-      fireEvent.click(
-        screen.getByLabelText('Does not repeat', { selector: 'button' })
-      );
+      await fireEvent.change(startsBeforeDateField(), {
+        target: { value: '2030/03/11' },
+      });
+      await fireEvent.click(startsBeforeTimeField());
+      await jest.runOnlyPendingTimers();
+    });
+    expect(startsBeforeDateField().value).toBe('2030/03/11');
+    expect(
+      screen.getAllByText("'Starts before' date must be after 'Starts at' date")
+    ).toHaveLength(1);
+
+    expect(
+      screen.queryAllByText("'Starts before' date must in the future")
+    ).toHaveLength(0);
+    await act(async () => {
+      await fireEvent.change(startsBeforeDateField(), {
+        target: { value: '2019/03/11' },
+      });
+      await fireEvent.change(startsAtDateField(), {
+        target: { value: '' },
+      });
+      jest.runOnlyPendingTimers();
     });
 
+    expect(startsBeforeDateField().value).toBe('2019/03/11');
+    expect(
+      screen.getAllByText("'Starts before' date must in the future")
+    ).toHaveLength(1);
+  });
+
+  it('Recurring execution - date pickers', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    act(() => {
+      fireEvent.click(screen.getByText('Type of execution'));
+    });
+    act(() => {
+      fireEvent.click(screen.getByText('Recurring execution'));
+    });
+    act(() => {
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Recurring execution' })
+      );
+      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+    });
+
+    const newStartAtDate = '2030/03/12';
+    const newStartAtTime = '12:46';
+    const startsAtDateField = () =>
+      screen.getByLabelText('starts at datepicker');
+    const startsAtTimeField = () =>
+      screen.getByLabelText('starts at timepicker');
+
+    const endsAtDateField = () => screen.getByLabelText('ends on datepicker');
+    const endsAtTimeField = () => screen.getByLabelText('ends on timepicker');
+
+    expect(startsAtDateField().disabled).toBeTruthy();
+    act(() => {
+      fireEvent.click(screen.getAllByText('At')[0]);
+    });
+    expect(startsAtDateField().disabled).toBeFalsy();
+    await act(async () => {
+      await fireEvent.change(startsAtDateField(), {
+        target: { value: newStartAtDate },
+      });
+      fireEvent.change(startsAtTimeField(), {
+        target: { value: newStartAtTime },
+      });
+      jest.runOnlyPendingTimers();
+    });
+
+    expect(endsAtDateField().disabled).toBeTruthy();
+    act(() => {
+      fireEvent.click(screen.getByText('On'));
+    });
+    expect(endsAtDateField().disabled).toBeFalsy();
+    await act(async () => {
+      await fireEvent.change(endsAtDateField(), {
+        target: { value: newStartAtDate },
+      });
+      fireEvent.change(endsAtTimeField(), {
+        target: { value: newStartAtTime },
+      });
+      jest.runOnlyPendingTimers();
+    });
+
+    act(() => {
+      fireEvent.click(screen.getByText('Category and Template'));
+    });
+    act(() => {
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Recurring execution' })
+      );
+      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+    });
+    expect(startsAtDateField().value).toBe(newStartAtDate);
+    expect(startsAtTimeField().value).toBe(newStartAtTime);
+    expect(endsAtDateField().value).toBe(newStartAtDate);
+    expect(endsAtTimeField().value).toBe(newStartAtTime);
+
+    act(() => {
+      fireEvent.click(screen.getByText('Now'));
+      fireEvent.click(screen.getByText('After'));
+    });
+    expect(startsAtDateField().disabled).toBeTruthy();
+    expect(endsAtDateField().disabled).toBeTruthy();
+    expect(startsAtDateField().value).toBe('');
+    expect(startsAtTimeField().value).toBe('');
+    expect(endsAtDateField().value).toBe('');
+    expect(endsAtTimeField().value).toBe('');
+  });
+  it('Recurring execution - repeat', async () => {
+    render(
+      <Provider store={store}>
+        <JobWizard />
+      </Provider>
+    );
+    act(() => {
+      fireEvent.click(screen.getByText('Type of execution'));
+    });
+    act(() => {
+      fireEvent.click(screen.getByText('Recurring execution'));
+    });
+    act(() => {
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Recurring execution' })
+      );
+      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByLabelText('Daily', { selector: 'button' }));
+    });
     await act(async () => {
       fireEvent.click(screen.getByText('Cronline'));
     });
-    expect(screen.getByText('Review details').disabled).toBeTruthy();
-    const newRepeatTimes = '3';
-    const repeatNTimes = screen.getByPlaceholderText('Repeat N times');
-    expect(repeatNTimes.value).toBe('');
-    await act(async () => {
-      fireEvent.change(repeatNTimes, {
-        target: { value: newRepeatTimes },
-      });
-    });
-    expect(repeatNTimes.value).toBe(newRepeatTimes);
-
     const newCronline = '1 2';
     const cronline = screen.getByLabelText('cronline');
     expect(cronline.value).toBe('');
@@ -224,11 +291,12 @@ describe('Schedule', () => {
     expect(screen.getAllByText('Category and Template')).toHaveLength(3);
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Schedule'));
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Recurring execution' })
+      );
       jest.runAllTimers();
     });
-    expect(screen.queryAllByText('Schedule')).toHaveLength(3);
-    expect(repeatNTimes.value).toBe(newRepeatTimes);
+    expect(screen.queryAllByText('Recurring execution')).toHaveLength(3);
     expect(cronline.value).toBe(newCronline);
 
     fireEvent.click(screen.getByText('Cronline'));
@@ -244,7 +312,6 @@ describe('Schedule', () => {
       fireEvent.change(days, {
         target: { value: newDays },
       });
-      fireEvent.click(repeatNTimes);
     });
     expect(days.value).toBe(newDays);
 
@@ -295,12 +362,12 @@ describe('Schedule', () => {
 
     expect(screen.getByText('Review details').disabled).toBeFalsy();
     fireEvent.click(screen.getByText('Weekly'));
-    await act(async () => {
+    act(() => {
       fireEvent.click(screen.getByText('Daily'));
     });
 
     expect(screen.getByText('Review details').disabled).toBeFalsy();
-    await act(async () => {
+    act(() => {
       fireEvent.change(at(), {
         target: { value: '' },
       });
@@ -308,7 +375,7 @@ describe('Schedule', () => {
     expect(screen.getByText('Review details').disabled).toBeTruthy();
     const newAtDaily = '17:07';
     expect(at().value).toBe('');
-    await act(async () => {
+    act(() => {
       fireEvent.change(at(), {
         target: { value: newAtDaily },
       });
@@ -317,86 +384,39 @@ describe('Schedule', () => {
     expect(screen.getByText('Review details').disabled).toBeFalsy();
 
     fireEvent.click(screen.getByText('Daily'));
-    await act(async () => {
+    act(() => {
       fireEvent.click(screen.getByText('Hourly'));
     });
 
-    expect(screen.getByText('Review details').disabled).toBeTruthy();
+    expect(screen.getByText('Review details').disabled).toBeFalsy();
     const newMinutes = '6';
-    const atHourly = screen.getByLabelText('repeat-at-minute-typeahead');
-    expect(atHourly.value).toBe('');
-    await act(async () => {
-      fireEvent.click(screen.getByLabelText('select minute toggle'));
-    });
-    await act(async () => {
-      fireEvent.click(screen.getByText(newMinutes));
-    });
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
-    expect(atHourly.value).toBe(newMinutes);
-  });
-  it('should show invalid error on start date after end', async () => {
-    render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      await fireEvent.click(screen.getByText('Schedule'));
-      jest.runAllTimers();
-    });
-    const neverEnds = screen.getByLabelText('Never ends');
-    expect(neverEnds.checked).toBeFalsy();
-
-    const startsDateField = screen.getByLabelText('starts at datepicker');
-    const endsDateField = screen.getByLabelText('ends datepicker');
-
-    expect(
-      screen.queryAllByText('End time needs to be after start time')
-    ).toHaveLength(0);
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
-    await act(async () => {
-      await fireEvent.change(startsDateField, {
-        target: { value: '2020/10/15' },
+    const atHourly = () => screen.getByLabelText('repeat-at-minute-typeahead');
+    expect(atHourly().value).toBe('0');
+    act(() => {
+      fireEvent.change(atHourly(), {
+        target: { value: '62' },
       });
-      await fireEvent.change(endsDateField, {
-        target: { value: '2020/10/14' },
-      });
-      await jest.runOnlyPendingTimers();
     });
-
+    await act(async () => {
+      await fireEvent.click(screen.getByText('Create "62"'));
+    });
+    expect(atHourly().value).toBe('0');
     expect(
-      screen.queryAllByText('End time needs to be after start time')
+      screen.queryAllByText('Minute can only be a number between 0-59')
     ).toHaveLength(1);
 
-    expect(screen.getByText('Review details').disabled).toBeTruthy();
-  });
-  it('purpose and ends should be disabled when no reaccurence ', async () => {
-    render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      await fireEvent.click(screen.getByText('Schedule'));
-      jest.runAllTimers();
-    });
-
-    const endsDateField = screen.getByLabelText('ends datepicker');
-    const endsTimeField = screen.getByLabelText('ends timepicker');
-    const purpose = screen.getByLabelText('purpose');
-    expect(endsDateField.disabled).toBeTruthy();
-    expect(endsTimeField.disabled).toBeTruthy();
-    expect(purpose.disabled).toBeTruthy();
-    await act(async () => {
-      fireEvent.click(
-        screen.getByLabelText('Does not repeat', { selector: 'button' })
-      );
+    act(() => {
+      fireEvent.change(atHourly(), {
+        target: { value: newMinutes },
+      });
     });
     await act(async () => {
-      fireEvent.click(screen.getByText('Cronline'));
+      await fireEvent.click(screen.getByText(`Create "${newMinutes}"`));
     });
-    expect(endsDateField.disabled).toBeFalsy();
-    expect(endsTimeField.disabled).toBeFalsy();
-    expect(purpose.disabled).toBeFalsy();
+    expect(
+      screen.queryAllByText('Minute can only be a number between 0-59')
+    ).toHaveLength(0);
+    expect(screen.getByText('Review details').disabled).toBeFalsy();
+    expect(atHourly().value).toBe(newMinutes);
   });
 });

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable camelcase */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +15,7 @@ import { AdvancedFields } from './steps/AdvancedFields/AdvancedFields';
 import {
   JOB_TEMPLATE,
   WIZARD_TITLES,
+  SCHEDULE_TYPES,
   initialScheduleState,
 } from './JobWizardConstants';
 import {
@@ -23,7 +25,9 @@ import {
   selectRouterSearch,
   selectIsLoading,
 } from './JobWizardSelectors';
-import Schedule from './steps/Schedule/';
+import { ScheduleType } from './steps/Schedule/ScheduleType';
+import { ScheduleFuture } from './steps/Schedule/ScheduleFuture';
+import { ScheduleRecurring } from './steps/Schedule/ScheduleRecurring';
 import HostsAndInputs from './steps/HostsAndInputs/';
 import ReviewDetails from './steps/ReviewDetails/';
 import { useValidation } from './validation';
@@ -187,18 +191,80 @@ export const JobWizard = () => {
     },
     {
       name: WIZARD_TITLES.schedule,
-      component: (
-        <Schedule
-          scheduleValue={scheduleValue}
-          setScheduleValue={setScheduleValue}
-          setValid={newValue => {
-            setValid(currentValid => ({ ...currentValid, schedule: newValue }));
-          }}
-        />
-      ),
       canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
       enableNext:
         isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,
+      steps: [
+        {
+          name: WIZARD_TITLES.typeOfExecution,
+          component: (
+            <ScheduleType
+              scheduleType={scheduleValue.scheduleType}
+              isTypeStatic={scheduleValue.isTypeStatic}
+              setScheduleValue={setScheduleValue}
+              setValid={newValue => {
+                setValid(currentValid => ({
+                  ...currentValid,
+                  schedule: newValue,
+                }));
+              }}
+            />
+          ),
+          canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
+
+          enableNext: isTemplate && valid.hostsAndInputs && valid.advanced,
+        },
+        ...(scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE
+          ? [
+              {
+                name: SCHEDULE_TYPES.FUTURE,
+                component: (
+                  <ScheduleFuture
+                    scheduleValue={scheduleValue}
+                    setScheduleValue={setScheduleValue}
+                    setValid={newValue => {
+                      setValid(currentValid => ({
+                        ...currentValid,
+                        schedule: newValue,
+                      }));
+                    }}
+                  />
+                ),
+                canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
+                enableNext:
+                  isTemplate &&
+                  valid.hostsAndInputs &&
+                  valid.advanced &&
+                  valid.schedule,
+              },
+            ]
+          : []),
+        ...(scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING
+          ? [
+              {
+                name: SCHEDULE_TYPES.RECURRING,
+                component: (
+                  <ScheduleRecurring
+                    scheduleValue={scheduleValue}
+                    setScheduleValue={setScheduleValue}
+                    setValid={newValue => {
+                      setValid(currentValid => ({
+                        ...currentValid,
+                        schedule: newValue,
+                      }));
+                    }}
+                  />
+                ),
+                canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
+                enableNext:
+                  isTemplate &&
+                  valid.hostsAndInputs &&
+                  valid.advanced &&
+                  valid.schedule,
+              },
+            ]
+          : []),
+      ],
     },
     {
       name: WIZARD_TITLES.review,
