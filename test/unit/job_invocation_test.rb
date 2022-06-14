@@ -95,9 +95,8 @@ class JobInvocationTest < ActiveSupport::TestCase
       end
 
       it 'truncates generated description to 255 characters' do
-        column_limit = 255
+        column_limit = 255 # There is a 255 character limit on the database level
         expected_result = 'a' * column_limit
-        JobInvocation.columns_hash['description'].expects(:limit).returns(column_limit)
         job_invocation.description_format = '%{job_category}'
         job_invocation.job_category = 'a' * 1000
         job_invocation.generate_description

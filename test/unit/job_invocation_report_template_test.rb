@@ -9,7 +9,7 @@ class JobReportTemplateTest < ActiveSupport::TestCase
 
   context 'with valid job invocation report template' do
     let(:job_invocation_template) do
-      file_path = File.read(File.expand_path(Rails.root + "app/views/unattended/report_templates/job_invocation_-_report_template.erb"))
+      file_path = File.read(File.expand_path(Rails.root + "app/views/unattended/report_templates/job_-_invocation_report.erb"))
       template = ReportTemplate.import_without_save("Job Invocation Report Template", file_path)
       template.save!
       template
