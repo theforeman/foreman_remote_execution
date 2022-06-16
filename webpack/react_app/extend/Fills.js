@@ -3,6 +3,7 @@ import { addGlobalFill } from 'foremanReact/components/common/Fill/GlobalFill';
 
 import FeaturesDropdown from '../components/FeaturesDropdown';
 import RexInterface from '../components/RegistrationExtension/RexInterface';
+import RexPull from '../components/RegistrationExtension/RexPull';
 import RecentJobsCard from '../components/RecentJobsCard';
 import KebabItems from '../components/HostKebab/KebabItems';
 
@@ -23,6 +24,12 @@ const fills = [
     slot: 'registrationAdvanced',
     name: 'interface',
     component: props => <RexInterface {...props} />,
+    weight: 500,
+  },
+  {
+    slot: 'registrationAdvanced',
+    name: 'pull',
+    component: props => <RexPull {...props} />,
     weight: 500,
   },
   {
