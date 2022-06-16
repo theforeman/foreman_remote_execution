@@ -153,10 +153,6 @@ module Actions
         input[:proxy_batch_size]
       end
 
-      def self.cleanup_after
-        '90d'
-      end
-
       private
 
       def mail_notification_preference
