@@ -275,6 +275,7 @@ module ForemanRemoteExecution
 
         # Extend Registration module
         extend_allowed_registration_vars :remote_execution_interface
+        extend_allowed_registration_vars :setup_remote_execution_pull
         ForemanTasks.dynflow.eager_load_actions!
         extend_observable_events(
           ::Dynflow::Action.descendants.select do |klass|
