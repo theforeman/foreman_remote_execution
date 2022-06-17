@@ -44,8 +44,13 @@ export const submit = ({
         return repeatData.cronline;
       case repeatTypes.monthly:
         return `${minute} ${hour} ${repeatData.days} * *`;
-      case repeatTypes.weekly:
-        return `${minute} ${hour} * * ${repeatData.daysOfWeek}`;
+      case repeatTypes.weekly: {
+        const daysKeys = Object.keys(repeatData.daysOfWeek).filter(
+          k => repeatData.daysOfWeek[k]
+        );
+        const days = daysKeys.join(',');
+        return `${minute} ${hour} * * ${days}`;
+      }
       case repeatTypes.daily:
         return `${minute} ${hour} * * *`;
       case repeatTypes.hourly:
