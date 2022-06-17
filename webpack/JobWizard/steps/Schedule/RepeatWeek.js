@@ -7,7 +7,7 @@ import { noop } from '../../../helpers';
 
 const getWeekDays = () => {
   const locale = documentLocale().replace(/-/g, '_');
-  const baseDate = new Date(Date.UTC(2017, 0, 2)); // just a Monday
+  const baseDate = new Date(Date.UTC(2017, 0, 1)); // just a Sunday
   const weekDays = [];
   for (let i = 0; i < 7; i++) {
     try {
