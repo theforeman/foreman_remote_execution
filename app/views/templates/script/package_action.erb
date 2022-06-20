@@ -16,6 +16,11 @@ template_inputs:
   input_type: user
   required: true
   options: "install\nupdate\nremove\ngroup install\ngroup remove"
+- name: options
+  description: Additional options for the package manager
+  input_type: user
+  required: false
+  advanced: true
 - name: package
   description: The name of the package, if any
   input_type: user
@@ -87,7 +92,7 @@ handle_zypp_res_codes () {
 
 # Action
 <% if package_manager == 'yum' -%>
-  yum -y <%= action %> <%= input("package") %>
+  yum -y <%= input("options") %> <%= action %> <%= input("package") %>
 <% elsif package_manager == 'apt' -%>
   <%-
     action = 'install' if action == 'group install'
@@ -103,7 +108,7 @@ handle_zypp_res_codes () {
   [ -x "$(command -v subscription-manager)" ] && subscription-manager refresh
   export DEBIAN_FRONTEND=noninteractive
   apt-get -y update
-  apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= action %> <%= input("package") %>
+  apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %>
 <% elsif package_manager == 'zypper' -%>
   <%-
     if action == "group install"
@@ -113,7 +118,7 @@ handle_zypp_res_codes () {
     end
   -%>
   zypper refresh
-  zypper -n <%= action %> <%= input("package") %>
+  zypper -n <%= action %> <%= input("options") %> <%= input("package") %>
   handle_zypp_res_codes $?
 <% end -%>
 RETVAL=$?
