@@ -67,3 +67,5 @@ export const HOSTS_TO_PREVIEW_AMOUNT = 20;
 export const DEBOUNCE_HOST_COUNT = 700;
 export const HOST_IDS = 'HOST_IDS';
 export const REX_FEATURE = 'REX_FEATURE';
+
+export const JOB_API_KEY = 'JOB_API_KEY';

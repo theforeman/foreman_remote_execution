@@ -57,4 +57,19 @@ class UiJobWizardController < ApplicationController
     render :json => { :results =>
       resource_list.sort_by { |r| r[:name] }.take(100), :subtotal => resource_list.count}
   end
+
+  def job_invocation
+    job = JobInvocation.authorized.find(params[:id])
+    composer = JobInvocationComposer.from_job_invocation(job, params).params
+    job_template_inputs = JobTemplate.authorized.find(composer[:template_invocations][0][:template_id]).template_inputs_with_foreign
+    inputs = Hash[job_template_inputs.map{ |input| ["inputs[#{input[:name]}]", (composer[:template_invocations][0][:input_values].select {|value| value[:template_input_id]== input[:id]})[0][:value]] } ]
+    job_organization = Taxonomy.find_by(id: job.task.input[:current_organization_id])
+    job_location = Taxonomy.find_by(id: job.task.input[:current_location_id])
+    render :json => {
+      :job => composer,
+      :job_organization => job_organization,
+      :job_location => job_location,
+      :inputs => inputs,
+    }
+  end
 end

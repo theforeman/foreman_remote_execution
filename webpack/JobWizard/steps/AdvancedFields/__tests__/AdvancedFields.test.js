@@ -23,12 +23,8 @@ lodash.debounce = fn => fn;
 const store = testSetup(selectors, api);
 mockApi(api);
 
-jest.spyOn(selectors, 'selectEffectiveUser');
 jest.useFakeTimers();
 
-selectors.selectEffectiveUser.mockImplementation(
-  () => jobTemplateResponse.effective_user
-);
 describe('AdvancedFields', () => {
   it('should save data between steps for advanced fields', async () => {
     const wrapper = mount(

@@ -106,6 +106,7 @@ export const testSetup = (selectors, api) => {
   jest.spyOn(selectors, 'selectJobCategories');
   jest.spyOn(selectors, 'selectJobCategoriesStatus');
   jest.spyOn(selectors, 'selectWithKatello');
+  jest.spyOn(selectors, 'selectEffectiveUser');
 
   jest.spyOn(selectors, 'selectTemplateInputs');
   jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
@@ -122,6 +123,10 @@ export const testSetup = (selectors, api) => {
     { ...jobTemplate, id: 2, name: 'template2' },
   ]);
   selectors.selectJobTemplate.mockImplementation(() => jobTemplateResponse);
+
+  selectors.selectEffectiveUser.mockImplementation(
+    () => jobTemplateResponse.effective_user
+  );
   const mockStore = configureMockStore([]);
   const store = mockStore({
     ForemanTasksTask: {
@@ -224,3 +229,71 @@ export const gqlMock = [
     },
   },
 ];
+
+export const jobInvocation = {
+  job: {
+    job_category: 'Ansible Commands',
+    targeting: {
+      user_id: 4,
+      search_query: 'name ~ *',
+      bookmark_id: null,
+      targeting_type: 'static_query',
+      randomized_ordering: true,
+    },
+    triggering: {
+      mode: 'immediate',
+      start_at: null,
+      start_before: null,
+    },
+    ssh_user: 'ssh user',
+    description_format: null,
+    concurrency_control: {
+      level: 6,
+      time_span: 4,
+    },
+    execution_timeout_interval: 1,
+    remote_execution_feature_id: null,
+    template_invocations: [
+      {
+        template_id: 263,
+        effective_user: 'Effective user',
+        input_values: [
+          {
+            template_input_id: 162,
+            value: 'test command',
+          },
+        ],
+      },
+    ],
+    reruns: 57,
+  },
+  job_organization: {
+    id: 5,
+    name: 'ana-praley',
+    created_at: '2021-08-26T13:47:35.655+02:00',
+    updated_at: '2021-08-26T13:48:21.435+02:00',
+    ignore_types: [],
+    description: null,
+    label: 'ana-praley',
+    ancestry: null,
+    title: 'ana-praley',
+    manifest_refreshed_at: null,
+    created_in_katello: true,
+  },
+  job_location: {
+    id: 2,
+    name: 'Default Location',
+    created_at: '2021-08-24T15:32:18.830+02:00',
+    updated_at: '2021-08-24T15:32:18.830+02:00',
+    ignore_types: ['ProvisioningTemplate', 'Hostgroup'],
+    description: null,
+    label: null,
+    ancestry: null,
+    title: 'Default Location',
+    manifest_refreshed_at: null,
+    created_in_katello: false,
+  },
+  inputs: {
+    'inputs[plain hidden]': 'test command',
+  },
+};

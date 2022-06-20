@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Wizard } from '@patternfly/react-core';
 import { get } from 'foremanReact/redux/API';
 import history from 'foremanReact/history';
@@ -35,7 +36,7 @@ import { useAutoFill } from './autofill';
 import { submit } from './submit';
 import './JobWizard.scss';
 
-export const JobWizard = () => {
+export const JobWizard = ({ rerunData }) => {
   const [jobTemplateID, setJobTemplateID] = useState(null);
   const [category, setCategory] = useState('');
   const [advancedValues, setAdvancedValues] = useState({ templateValues: {} });
@@ -53,8 +54,8 @@ export const JobWizard = () => {
   const setDefaults = useCallback(
     ({
       data: {
-        template_inputs,
-        advanced_template_inputs,
+        template_inputs = [],
+        advanced_template_inputs = [],
         effective_user,
         job_template: {
           name,
@@ -62,6 +63,9 @@ export const JobWizard = () => {
           description_format,
           job_category,
         },
+        randomized_ordering,
+        ssh_user,
+        concurrency_control = {},
       },
     }) => {
       if (!category.length) {
@@ -102,23 +106,50 @@ export const JobWizard = () => {
           timeoutToKill: execution_timeout_interval || '',
           templateValues: advancedTemplateValues,
           description: generateDefaultDescription() || '',
-          isRandomizedOrdering: false,
+          isRandomizedOrdering: randomized_ordering,
+          sshUser: ssh_user || '',
+          timeSpan: concurrency_control.time_span || '',
+          concurrencyLevel: concurrency_control.level || '',
         };
       });
     },
     [category.length]
   );
   useEffect(() => {
+    if (rerunData) {
+      setCategory(rerunData.job_category);
+      setJobTemplateID(rerunData.template_invocations[0].template_id);
+      setDefaults({
+        data: {
+          effective_user: {
+            value: rerunData.template_invocations[0].effective_user,
+          },
+          job_template: {
+            execution_timeout_interval: rerunData.execution_timeout_interval,
+          },
+          randomized_ordering: rerunData.targeting.randomized_ordering,
+          ssh_user: rerunData.ssh_user,
+          concurrency_control: rerunData.concurrency_control,
+        },
+      });
+      setFills({
+        search: rerunData.targeting.search_query,
+        ...rerunData.inputs,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rerunData]);
+  useEffect(() => {
     if (jobTemplateID) {
       dispatch(
         get({
           key: JOB_TEMPLATE,
           url: `/ui_job_wizard/template/${jobTemplateID}`,
-          handleSuccess: setDefaults,
+          handleSuccess: rerunData ? () => {} : setDefaults,
         })
       );
     }
-  }, [jobTemplateID, setDefaults, dispatch]);
+  }, [rerunData, jobTemplateID, setDefaults, dispatch]);
 
   const [valid, setValid] = useValidation({
     advancedValues,
@@ -131,6 +162,7 @@ export const JobWizard = () => {
     setHostsSearchQuery,
     setJobTemplateID,
     setTemplateValues,
+    setAdvancedValues,
   });
   const templateError = !!useSelector(selectTemplateError);
   const templateResponse = useSelector(selectJobTemplate);
@@ -152,7 +184,7 @@ export const JobWizard = () => {
           setJobTemplate={setJobTemplateID}
           category={category}
           setCategory={setCategory}
-          isFeature={!!fills.feature}
+          isCategoryPreselected={!!rerunData || !!fills.feature}
         />
       ),
       enableNext: isTemplate,
@@ -316,4 +348,37 @@ export const JobWizard = () => {
   );
 };
 
+JobWizard.propTypes = {
+  rerunData: PropTypes.shape({
+    job_category: PropTypes.string,
+    targeting: PropTypes.shape({
+      search_query: PropTypes.string,
+      targeting_type: PropTypes.string,
+      randomized_ordering: PropTypes.bool,
+    }),
+    triggering: PropTypes.shape({
+      mode: PropTypes.string,
+      start_at: PropTypes.string,
+      start_before: PropTypes.string,
+    }),
+    ssh_user: PropTypes.string,
+    concurrency_control: PropTypes.shape({
+      level: PropTypes.number,
+      time_span: PropTypes.number,
+    }),
+    execution_timeout_interval: PropTypes.number,
+    remote_execution_feature_id: PropTypes.string,
+    template_invocations: PropTypes.arrayOf(
+      PropTypes.shape({
+        template_id: PropTypes.number,
+        effective_user: PropTypes.string,
+        input_values: PropTypes.array,
+      })
+    ),
+    inputs: PropTypes.object,
+  }),
+};
+JobWizard.defaultProps = {
+  rerunData: null,
+};
 export default JobWizard;
