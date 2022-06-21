@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import URI from 'urijs';
 import { Alert, Title, Divider, Skeleton } from '@patternfly/react-core';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
@@ -16,10 +17,15 @@ const JobWizardPageRerun = ({
   match: {
     params: { id },
   },
+  location: { search },
 }) => {
+  const uri = new URI(search);
+  const { failed_only: failedOnly } = uri.search(true);
   const { response, status } = useAPI(
     'get',
-    `/ui_job_wizard/job_invocation?id=${id}`,
+    `/ui_job_wizard/job_invocation?id=${id}${
+      failedOnly ? '&failed_only=1' : ''
+    }`,
     JOB_API_KEY
   );
   const title = __('Run job');
@@ -34,6 +40,7 @@ const JobWizardPageRerun = ({
   const jobLocation = response.job_location;
   const currentOrganization = useForemanOrganization();
   const currentLocation = useForemanLocation();
+
   return (
     <PageLayout
       header={title}
@@ -53,7 +60,7 @@ const JobWizardPageRerun = ({
           </div>
         ) : (
           <React.Fragment>
-            {jobOrganization !== currentOrganization && (
+            {jobOrganization?.id !== currentOrganization?.id && (
               <Alert
                 className="job-wizard-alert"
                 variant="warning"
@@ -66,7 +73,7 @@ const JobWizardPageRerun = ({
                 )}
               />
             )}
-            {jobLocation !== currentLocation && (
+            {jobLocation?.id !== currentLocation?.id && (
               <Alert
                 className="job-wizard-alert"
                 variant="warning"
@@ -95,5 +102,11 @@ JobWizardPageRerun.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }),
+};
+JobWizardPageRerun.defaultProps = {
+  location: { search: '' },
 };
 export default JobWizardPageRerun;

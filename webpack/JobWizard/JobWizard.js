@@ -48,7 +48,8 @@ export const JobWizard = ({ rerunData }) => {
     hostGroups: [],
   });
   const [hostsSearchQuery, setHostsSearchQuery] = useState('');
-  const [fills, setFills] = useState(useSelector(selectRouterSearch));
+  const routerSearch = useSelector(selectRouterSearch);
+  const [fills, setFills] = useState(rerunData ? {} : routerSearch);
   const dispatch = useDispatch();
 
   const setDefaults = useCallback(
