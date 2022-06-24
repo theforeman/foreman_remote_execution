@@ -1,10 +1,10 @@
 namespace :foreman_remote_execution do
   desc <<~DESC
-      Explains which proxies can be used for remote execution against HOST using a specified PROVIDER.
+    Explains which proxies can be used for remote execution against HOST using a specified PROVIDER.
 
-        * HOST     : The HOST to find proxies for
-        * PROVIDER : The PROVIDER to scope by
-    DESC
+      * HOST     : The HOST to find proxies for
+      * PROVIDER : The PROVIDER to scope by
+  DESC
   task :explain_proxy_selection => ['environment'] do
     options = {}
     options[:host] = ENV['HOST']
@@ -22,7 +22,7 @@ namespace :foreman_remote_execution do
     determined_proxy = selector.determine_proxy(host, options[:provider])
     counts = selector.instance_variable_get('@tasks')
 
-    selector.strategies.each_with_index do |strategy, index|
+    selector.strategies.each do |strategy|
       puts "==> Strategy #{strategy}"
       if proxies[strategy].empty?
         puts " no proxies available using this strategy"
@@ -49,8 +49,8 @@ namespace :foreman_remote_execution do
       offline_proxies = selector.offline
       settings = { :count => offline_proxies.count, :proxy_names => offline_proxies.map(&:name).join(', ') }
       puts n_('The only applicable proxy %{proxy_names} is down',
-              'All %{count} applicable proxies are down. Tried %{proxy_names}',
-              offline_proxies.count) % settings
+        'All %{count} applicable proxies are down. Tried %{proxy_names}',
+        offline_proxies.count) % settings
     else
       winning_strategy = selector.strategies.find { |strategy| !proxies[strategy].empty? && proxies[strategy].include?(determined_proxy) }
       puts "As of now, #{options[:provider]} job would use proxy #{determined_proxy}, determined by strategy #{winning_strategy}."
