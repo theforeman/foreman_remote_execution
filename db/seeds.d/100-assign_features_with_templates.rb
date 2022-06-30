@@ -9,12 +9,17 @@ User.as_anonymous_admin do
       # kudos to dLobatog
       ForemanRemoteExecution.register_rex_feature
     end
-    JobTemplate.without_auditing do
-      module_template = JobTemplate.find_by(name: 'Puppet Run Once - SSH Default')
-      if module_template && !Rails.env.test? && Setting[:remote_execution_sync_templates]
-        module_template.sync_feature('puppet_run_host')
-        module_template.organizations << Organization.unscoped.all if module_template.organizations.empty?
-        module_template.locations << Location.unscoped.all if module_template.locations.empty?
+    if !Rails.env.test? && Setting[:remote_execution_sync_templates]
+      JobTemplate.without_auditing do
+        names = {'Puppet Run Once - SSH Default' => 'puppet_run_host', 'Update Smart Proxy - Script Default' => 'update_smart_proxy' }
+        names.each do |name, feature|
+          module_template = JobTemplate.find_by(name: name)
+          if module_template
+            module_template.sync_feature(feature)
+            module_template.organizations << Organization.unscoped.all if module_template.organizations.empty?
+            module_template.locations << Location.unscoped.all if module_template.locations.empty?
+          end
+        end
       end
     end
   end

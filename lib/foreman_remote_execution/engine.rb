@@ -322,6 +322,7 @@ module ForemanRemoteExecution
 
       Bookmark.include ForemanRemoteExecution::BookmarkExtensions
       ProvisioningTemplatesHelper.prepend ForemanRemoteExecution::JobTemplatesExtensions
+      SmartProxiesHelper.prepend ForemanRemoteExecution::SmartProxyHelperExtensions
       TemplateInput.include ForemanRemoteExecution::TemplateInputExtensions
 
       SmartProxy.prepend ForemanRemoteExecution::SmartProxyExtensions
@@ -361,6 +362,12 @@ module ForemanRemoteExecution
       N_('Run Puppet Once'),
       :description => N_('Perform a single Puppet run'),
       :host_action_button => true
+    )
+    RemoteExecutionFeature.register(
+      :update_smart_proxy,
+      N_('Update Smart Proxy'),
+      :description => N_('Update a Smart Proxy to match version of Foreman'),
+      :provided_inputs => ['target_version']
     )
   end
 end
