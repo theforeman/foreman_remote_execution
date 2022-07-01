@@ -8,12 +8,20 @@ import {
 import { debounce } from 'lodash';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 
+const formatDateTime = d =>
+  `${d.getFullYear()}-${`0${d.getMonth() + 1}`.slice(
+    -2
+  )}-${`0${d.getDate()}`.slice(-2)} ${`0${d.getHours()}`.slice(
+    -2
+  )}:${`0${d.getMinutes()}`.slice(-2)}:${`0${d.getSeconds()}`.slice(-2)}`;
+
 export const DateTimePicker = ({
   dateTime,
   setDateTime,
   isDisabled,
   ariaLabel,
   allowEmpty,
+  includeSeconds,
 }) => {
   const [validated, setValidated] = useState();
   const dateFormat = date =>
@@ -35,12 +43,18 @@ export const DateTimePicker = ({
     if (!time) return false;
     const split = time.split(':');
     if (!(split[0].length === 2 && split[1].length === 2)) return false;
+    if (includeSeconds) {
+      if (split[2]?.length !== 2) return false;
+    }
     if (isValidDate(new Date(`${formattedDate} ${time}`))) return true;
     if (!formattedDate.length && isValidDate(new Date(`01/01/2020 ${time}`))) {
       const today = new Date();
       today.setHours(split[0]);
       today.setMinutes(split[1]);
-      setDateTime(today.toString());
+      if (includeSeconds) {
+        today.setSeconds(split[2]);
+      }
+      setDateTime(formatDateTime(today));
     }
     return false;
   };
@@ -53,7 +67,7 @@ export const DateTimePicker = ({
     } else if (isValidDate(parsedNewDate)) {
       parsedNewDate.setHours(dateObject.getHours());
       parsedNewDate.setMinutes(dateObject.getMinutes());
-      setDateTime(parsedNewDate.toString());
+      setDateTime(formatDateTime(parsedNewDate));
       setValidated(ValidatedOptions.noval);
     } else {
       setValidated(ValidatedOptions.error);
@@ -63,11 +77,11 @@ export const DateTimePicker = ({
   const onTimeChange = newTime => {
     if (!newTime.length && allowEmpty) {
       const parsedNewTime = new Date(`${formattedDate} 00:00`);
-      setDateTime(parsedNewTime.toString());
+      setDateTime(formatDateTime(parsedNewTime));
       setValidated(ValidatedOptions.noval);
     } else if (isValidTime(newTime)) {
       const parsedNewTime = new Date(`${formattedDate} ${newTime}`);
-      setDateTime(parsedNewTime.toString());
+      setDateTime(formatDateTime(parsedNewTime));
       setValidated(ValidatedOptions.noval);
     } else {
       setValidated(ValidatedOptions.error);
@@ -97,15 +111,16 @@ export const DateTimePicker = ({
         className="time-picker"
         time={dateTime ? dateObject.toString() : ''}
         inputProps={dateTime ? {} : { value: '' }}
-        placeholder="hh:mm"
+        placeholder={includeSeconds ? 'hh:mm:ss' : 'hh:mm'}
         onChange={debounce(onTimeChange, 1000, {
           leading: false,
           trailing: true,
         })}
         is24Hour
-        isDisabled={isDisabled}
+        isDisabled={isDisabled || formattedDate.length === 0}
         invalidFormatErrorMessage={__('Invalid time format')}
         menuAppendTo={() => document.body}
+        includeSeconds={includeSeconds}
       />
     </>
   );
@@ -117,10 +132,12 @@ DateTimePicker.propTypes = {
   isDisabled: PropTypes.bool,
   ariaLabel: PropTypes.string,
   allowEmpty: PropTypes.bool,
+  includeSeconds: PropTypes.bool,
 };
 DateTimePicker.defaultProps = {
   dateTime: null,
   isDisabled: false,
   ariaLabel: '',
   allowEmpty: true,
+  includeSeconds: false,
 };
