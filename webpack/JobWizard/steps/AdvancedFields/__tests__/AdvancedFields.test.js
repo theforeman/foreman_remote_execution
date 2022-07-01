@@ -17,10 +17,14 @@ import {
 } from '../../../__tests__/fixtures';
 import { WIZARD_TITLES } from '../../../JobWizardConstants';
 
+const lodash = require('lodash');
+
+lodash.debounce = fn => fn;
 const store = testSetup(selectors, api);
 mockApi(api);
 
 jest.spyOn(selectors, 'selectEffectiveUser');
+jest.useFakeTimers();
 
 selectors.selectEffectiveUser.mockImplementation(
   () => jobTemplateResponse.effective_user
@@ -49,6 +53,10 @@ describe('AdvancedFields', () => {
       .find('.pf-c-wizard__nav-link')
       .at(2)
       .simulate('click'); // Advanced step
+
+    await act(async () => {
+      jest.runAllTimers(); // to handle pf4 date picker popover
+    });
     const effectiveUserInput = () => wrapper.find('input#effective-user');
     const advancedTemplateInput = () =>
       wrapper.find('.pf-c-form__group-control textarea');
@@ -78,6 +86,9 @@ describe('AdvancedFields', () => {
       .at(2)
       .simulate('click'); // Advanced step
 
+    await act(async () => {
+      jest.runOnlyPendingTimers(); // to handle pf4 date picker popover
+    });
     expect(effectiveUserInput().prop('value')).toEqual(effectiveUesrValue);
     expect(advancedTemplateInput().prop('value')).toEqual(
       advancedTemplateInputValue
@@ -93,10 +104,13 @@ describe('AdvancedFields', () => {
     );
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      jest.runOnlyPendingTimers(); // to handle pf4 date picker popover
     });
+
     const searchValue = 'search test';
     const textValue = 'I am a text';
-    const dateValue = '08/07/2021';
+    const dateValue = '2022/06/24';
+    const timeValue = '12:34:56';
     const textField = screen.getByLabelText('adv plain hidden', {
       selector: 'textarea',
     });
@@ -105,9 +119,8 @@ describe('AdvancedFields', () => {
       'adv resource select toggle'
     );
     const searchField = screen.getByPlaceholderText('Filter...');
-    const dateField = screen.getByLabelText('adv date', {
-      selector: 'input',
-    });
+    const dateField = screen.getByLabelText('adv date datepicker');
+    const timeField = screen.getByLabelText('adv date timepicker');
 
     fireEvent.click(selectField);
     await act(async () => {
@@ -115,18 +128,20 @@ describe('AdvancedFields', () => {
       fireEvent.click(screen.getAllByText(WIZARD_TITLES.advanced)[0]); // to remove focus
 
       fireEvent.click(resourceSelectField);
-      await fireEvent.click(screen.getByText('resource2'));
-
-      await fireEvent.change(textField, {
+      fireEvent.click(screen.getByText('resource2'));
+      fireEvent.change(textField, {
         target: { value: textValue },
       });
-
-      await fireEvent.change(searchField, {
+      fireEvent.change(searchField, {
         target: { value: searchValue },
       });
       await fireEvent.change(dateField, {
         target: { value: dateValue },
       });
+      fireEvent.change(timeField, {
+        target: { value: timeValue },
+      });
+      jest.runAllTimers(); // to handle pf4 date picker popover
     });
     expect(
       screen.getByLabelText('adv plain hidden', {
@@ -134,7 +149,8 @@ describe('AdvancedFields', () => {
       }).value
     ).toBe(textValue);
     expect(searchField.value).toBe(searchValue);
-    expect(dateField.value).toBe(dateValue);
+    expect(screen.getByLabelText('adv date datepicker').value).toBe(dateValue);
+    expect(timeField.value).toBe(timeValue);
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.categoryAndTemplate));
     });
@@ -143,11 +159,13 @@ describe('AdvancedFields', () => {
     );
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Advanced fields'));
+      await fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      jest.runOnlyPendingTimers();
     });
     expect(textField.value).toBe(textValue);
     expect(searchField.value).toBe(searchValue);
     expect(dateField.value).toBe(dateValue);
+    expect(timeField.value).toBe(timeValue);
     expect(screen.queryAllByText('option 1')).toHaveLength(0);
     expect(screen.queryAllByText('option 2')).toHaveLength(1);
     expect(screen.queryAllByDisplayValue('resource1')).toHaveLength(0);
@@ -162,7 +180,8 @@ describe('AdvancedFields', () => {
       </MockedProvider>
     );
     await act(async () => {
-      fireEvent.click(screen.getByText('Advanced fields'));
+      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      jest.runAllTimers(); // to handle pf4 date picker popover
     });
 
     expect(
@@ -197,6 +216,7 @@ describe('AdvancedFields', () => {
     );
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      jest.runAllTimers(); // to handle pf4 date picker popover
     });
 
     const textField = screen.getByLabelText('adv plain hidden', {
@@ -264,6 +284,7 @@ describe('AdvancedFields', () => {
     );
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      jest.runAllTimers(); // to handle pf4 date picker popover
     });
     expect(
       screen.getByLabelText('description preview', {
@@ -332,6 +353,7 @@ describe('AdvancedFields', () => {
     );
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      jest.runAllTimers(); // to handle pf4 date picker popover
     });
     expect(
       screen.getByLabelText('description preview', {
@@ -351,6 +373,7 @@ describe('AdvancedFields', () => {
     );
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      jest.runAllTimers(); // to handle pf4 date picker popover
     });
     const resourceSelectField = screen.getByLabelText(
       'adv resource select typeahead input'
@@ -361,7 +384,7 @@ describe('AdvancedFields', () => {
         target: { value: 'some search' },
       });
 
-      await jest.runAllTimers();
+      jest.runAllTimers();
     });
     expect(newStore.getActions()).toMatchSnapshot('resource search');
   });

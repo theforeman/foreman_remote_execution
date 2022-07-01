@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FormGroup, TextInput, TextArea } from '@patternfly/react-core';
+import { FormGroup, TextArea } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import SearchBar from 'foremanReact/components/SearchBar';
 import { getControllerSearchProps } from 'foremanReact/constants';
@@ -9,6 +9,7 @@ import { getResults } from 'foremanReact/components/AutoComplete/AutoCompleteAct
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
 import { ResourceSelectAPI } from './ResourceSelect';
+import { DateTimePicker } from '../form/DateTimePicker';
 import { noop } from '../../../helpers';
 
 const TemplateSearchField = ({
@@ -147,15 +148,13 @@ export const formatter = (input, values, setValue) => {
         fieldId={id}
         isRequired={required}
       >
-        <TextInput
-          aria-label={name}
-          placeholder="YYYY-mm-dd HH:MM"
+        <DateTimePicker
+          ariaLabel={name}
           className={hidden ? 'masked-input' : null}
-          required={required}
           id={id}
-          type="text"
-          value={value}
-          onChange={newValue => setValue({ ...values, [name]: newValue })}
+          dateTime={value}
+          setDateTime={newValue => setValue({ ...values, [name]: newValue })}
+          includeSeconds
         />
       </FormGroup>
     );
