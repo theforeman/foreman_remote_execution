@@ -37,5 +37,9 @@ class RemoteExecutionHelperTest < ActionView::TestCase
 
       assert_equal template.id, found_template.id
     end
+
+    it 'should not crash if the template cannot be found' do
+      assert_nil job_report_template
+    end
   end
 end
