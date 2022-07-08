@@ -219,7 +219,7 @@ class JobInvocationComposer
     def format_datetime(datetime)
       return datetime if datetime.blank?
 
-      Time.parse(datetime).in_time_zone.strftime('%Y-%m-%d %H:%M')
+      Time.zone.parse(datetime).strftime('%Y-%m-%d %H:%M')
     end
   end
 
