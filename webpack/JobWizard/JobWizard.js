@@ -37,8 +37,10 @@ import { submit } from './submit';
 import './JobWizard.scss';
 
 export const JobWizard = ({ rerunData }) => {
-  const [jobTemplateID, setJobTemplateID] = useState(null);
-  const [category, setCategory] = useState('');
+  const [jobTemplateID, setJobTemplateID] = useState(
+    rerunData?.template_invocations?.[0]?.template_id
+  );
+  const [category, setCategory] = useState(rerunData?.job_category || '');
   const [advancedValues, setAdvancedValues] = useState({ templateValues: {} });
   const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description https://github.com/theforeman/foreman_remote_execution/pull/605
   const [scheduleValue, setScheduleValue] = useState(initialScheduleState);
@@ -49,7 +51,14 @@ export const JobWizard = ({ rerunData }) => {
   });
   const [hostsSearchQuery, setHostsSearchQuery] = useState('');
   const routerSearch = useSelector(selectRouterSearch);
-  const [fills, setFills] = useState(rerunData ? {} : routerSearch);
+  const [fills, setFills] = useState(
+    rerunData
+      ? {
+          search: rerunData?.targeting?.search_query,
+          ...rerunData.inputs,
+        }
+      : routerSearch
+  );
   const dispatch = useDispatch();
 
   const setDefaults = useCallback(
@@ -118,8 +127,6 @@ export const JobWizard = ({ rerunData }) => {
   );
   useEffect(() => {
     if (rerunData) {
-      setCategory(rerunData.job_category);
-      setJobTemplateID(rerunData.template_invocations[0].template_id);
       setDefaults({
         data: {
           effective_user: {
@@ -133,13 +140,8 @@ export const JobWizard = ({ rerunData }) => {
           concurrency_control: rerunData.concurrency_control,
         },
       });
-      setFills({
-        search: rerunData.targeting.search_query,
-        ...rerunData.inputs,
-      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rerunData]);
+  }, [rerunData, setDefaults]);
   useEffect(() => {
     if (jobTemplateID) {
       dispatch(

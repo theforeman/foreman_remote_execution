@@ -66,7 +66,7 @@ const JobWizardPageRerun = ({
                 variant="warning"
                 title={sprintf(
                   __(
-                    "Current organization %s is different from job's organization %s.",
+                    "Current organization %s is different from job's organization %s. This job may run on different hosts than before.",
                     currentOrganization,
                     jobOrganization
                   )
@@ -79,7 +79,7 @@ const JobWizardPageRerun = ({
                 variant="warning"
                 title={sprintf(
                   __(
-                    "Current location %s is different from job's location %s.",
+                    "Current location %s is different from job's location %s. This job may run on different hosts than before.",
                     currentLocation,
                     jobLocation
                   )
