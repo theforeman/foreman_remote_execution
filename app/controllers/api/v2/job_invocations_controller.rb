@@ -161,9 +161,14 @@ module Api
         hosts = hosts.search_for(params['search_query']) if params['search_query']
         raw = ActiveRecord::Type::Boolean.new.cast params['raw']
         default_value = raw ? '' : []
-        outputs = hosts.map do |host|
-          host_output(@job_invocation, host, :default => default_value, :since => params['since'], :raw => raw)
-            .merge(host_id: host.id)
+        outputs = []
+
+        actions = hosts.map { |host| @job_invocation.sub_task_for_host(host) }.compact.map(&:main_action)
+        ::ForemanTasks::ProxyTaskStatusRetriever.with_rails_cache_for(actions) do
+          outputs = hosts.map do |host|
+            host_output(@job_invocation, host, :default => default_value, :since => params['since'], :raw => raw)
+              .merge(host_id: host.id)
+          end
         end
 
         render :json => { :outputs => outputs }
