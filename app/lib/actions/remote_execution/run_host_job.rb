@@ -4,6 +4,7 @@ module Actions
       include ::Actions::Helpers::WithContinuousOutput
       include ::Actions::Helpers::WithDelegatedAction
       include ::Actions::ObservableAction
+      include ::Actions::RemoteExecution::TemplateInvocationProgressLogging
 
       execution_plan_hooks.use :emit_feature_event, :on => :success
 
@@ -19,8 +20,13 @@ module Actions
       end
 
       def plan(job_invocation, host, template_invocation, proxy_selector = ::RemoteExecutionProxySelector.new, options = {})
-        raise _('Could not use any template used in the job invocation') if template_invocation.blank?
+        with_template_invocation_error_logging do
+          inner_plan(job_invocation, host, template_invocation, proxy_selector, options)
+        end
+      end
 
+      def inner_plan(job_invocation, host, template_invocation, proxy_selector, options)
+        raise _('Could not use any template used in the job invocation') if template_invocation.blank?
         features = template_invocation.template.remote_execution_features.pluck(:label).uniq
         action_subject(host,
           :job_category => job_invocation.job_category,
@@ -63,13 +69,15 @@ module Actions
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
 
-        plan_delegated_action(proxy, provider.proxy_action_class, action_options)
-        plan_self
+        plan_delegated_action(proxy, provider.proxy_action_class, action_options, proxy_action_class: ::Actions::RemoteExecution::ProxyAction)
+        plan_self :with_event_logging => true
       end
 
       def finalize(*args)
-        update_host_status
-        check_exit_status
+        with_template_invocation_error_logging do
+          update_host_status
+          check_exit_status
+        end
       end
 
       def self.feature_job_event_name(label, suffix = :success)
@@ -128,6 +136,20 @@ module Actions
       end
 
       def fill_continuous_output(continuous_output)
+        if input[:with_event_logging]
+          # Trigger reload
+          delegated_output unless task.state == 'stopped'
+          task.template_invocation.template_invocation_events.find_each do |output|
+            if output.event_type == 'exit'
+              continuous_output.add_output(_('Exit status: %s') % output.event, 'stdout', output.timestamp)
+            else
+              continuous_output.add_raw_output(output.as_raw_continuous_output)
+            end
+          end
+
+          return
+        end
+
         delegated_output.fetch('result', []).each do |raw_output|
           continuous_output.add_raw_output(raw_output)
         end
@@ -149,7 +171,7 @@ module Actions
       end
 
       def exit_status
-        delegated_output[:exit_status]
+        input[:with_event_logging] ? task.template_invocation.template_invocation_events.find_by(event_type: 'exit').event : delegated_output[:exit_status]
       end
 
       def host_id
