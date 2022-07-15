@@ -7,7 +7,7 @@ class RemoteExecutionProxySelector < ::ForemanTasks::ProxySelector
     return proxies if capability.nil?
 
     proxies.reduce({}) do |acc, (strategy, possible_proxies)|
-      acc.merge(strategy => possible_proxies.select { |proxy| proxy.has_capability?(capability) })
+      acc.merge(strategy => possible_proxies.select { |proxy| proxy.has_capability?(provider, capability) })
     end
   end
 end
