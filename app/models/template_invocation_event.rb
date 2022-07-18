@@ -1,4 +1,4 @@
-class TemplateInvocationEvent < ActiveRecord::Base
+class TemplateInvocationEvent < ::ApplicationRecord
   belongs_to :template_invocation
 
   def as_raw_continuous_output

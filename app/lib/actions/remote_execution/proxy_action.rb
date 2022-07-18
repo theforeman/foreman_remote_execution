@@ -26,7 +26,7 @@ module Actions
           {
             template_invocation_id: template_invocation.id,
             event: update['output'],
-            timestamp: Time.at(update['timestamp']),
+            timestamp: Time.at(update['timestamp']).getlocal,
             event_type: update['output_type'],
           }
         end
@@ -40,7 +40,7 @@ module Actions
         end
         events.select! { |event| newest.nil? || event[:timestamp] > newest }
         events.each_slice(1000) do |batch|
-          TemplateInvocationEvent.insert_all(batch)
+          TemplateInvocationEvent.insert_all(batch) # rubocop:disable Rails/SkipsModelValidations
         end
       end
     end
