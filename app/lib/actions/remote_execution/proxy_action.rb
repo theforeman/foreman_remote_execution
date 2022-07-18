@@ -21,7 +21,6 @@ module Actions
       end
 
       def process_proxy_data(data)
-        newest = template_invocation.template_invocation_events.where.not(event_type: 'debug').last&.timestamp
         events = data['result'].map do |update|
           {
             template_invocation_id: template_invocation.id,
@@ -38,9 +37,8 @@ module Actions
             event_type: 'exit',
           }
         end
-        events.select! { |event| newest.nil? || event[:timestamp] > newest }
         events.each_slice(1000) do |batch|
-          TemplateInvocationEvent.insert_all(batch) # rubocop:disable Rails/SkipsModelValidations
+          TemplateInvocationEvent.upsert_all(batch, unique_by: [:template_invocation_id, :timestamp, :event_type]) # rubocop:disable Rails/SkipsModelValidations
         end
       end
     end
