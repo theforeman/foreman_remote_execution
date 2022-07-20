@@ -16,7 +16,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.5
+          ruby-version: 2.7
           bundler-cache: true
           cache-version: 1
           rubygems: 3.0.0
@@ -38,7 +38,7 @@ jobs:
       fail-fast: false
       matrix:
         foreman-core-branch: [develop]
-        ruby-version: [2.5, 2.7]
+        ruby-version: [2.7]
         node-version: [12]
     steps:
       - run: sudo apt-get update
