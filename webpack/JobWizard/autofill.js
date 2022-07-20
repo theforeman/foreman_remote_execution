@@ -11,6 +11,7 @@ export const useAutoFill = ({
   setHostsSearchQuery,
   setJobTemplateID,
   setTemplateValues,
+  setAdvancedValues,
 }) => {
   const dispatch = useDispatch();
 
@@ -49,15 +50,21 @@ export const useAutoFill = ({
             },
           })
         );
+      }
+      if (rest) {
         Object.keys(rest).forEach(key => {
           const re = /inputs\[(?<input>.*)\]/g;
           const input = re.exec(key)?.groups?.input;
           if (input) {
             setTemplateValues(prev => ({ ...prev, [input]: rest[key] }));
+            setAdvancedValues(prev => ({
+              ...prev,
+              templateValues: { ...prev.templateValues, [input]: rest[key] },
+            }));
           }
         });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fills]);
 };

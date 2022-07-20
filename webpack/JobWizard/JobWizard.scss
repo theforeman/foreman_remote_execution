@@ -146,3 +146,8 @@
     font-size: var(--pf-c-radio__label--FontSize);
   }
 }
+
+.job-wizard-alert.pf-c-alert.pf-m-warning {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}

@@ -25,7 +25,7 @@ const ConnectedCategoryAndTemplate = ({
   setJobTemplate,
   category,
   setCategory,
-  isFeature,
+  isCategoryPreselected,
 }) => {
   const dispatch = useDispatch();
 
@@ -44,7 +44,7 @@ const ConnectedCategoryAndTemplate = ({
               default_template: defaultTemplate,
             },
           }) => {
-            if (!isFeature) {
+            if (!isCategoryPreselected) {
               setCategory(defaultCategory || jobCategories[0] || '');
               if (defaultTemplate) setJobTemplate(defaultTemplate);
             }
@@ -106,7 +106,7 @@ ConnectedCategoryAndTemplate.propTypes = {
   setJobTemplate: PropTypes.func.isRequired,
   category: PropTypes.string.isRequired,
   setCategory: PropTypes.func.isRequired,
-  isFeature: PropTypes.bool.isRequired,
+  isCategoryPreselected: PropTypes.bool.isRequired,
 };
 ConnectedCategoryAndTemplate.defaultProps = { jobTemplate: null };
 
