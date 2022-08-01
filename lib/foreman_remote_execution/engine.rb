@@ -334,7 +334,7 @@ module ForemanRemoteExecution
       ForemanTasks::Task.include ForemanRemoteExecution::ForemanTasksTaskExtensions
       ForemanTasks::Cleaner.include ForemanRemoteExecution::ForemanTasksCleanerExtensions
       RemoteExecutionProvider.register(:SSH, ::SSHExecutionProvider)
-      RemoteExecutionProvider.register(:script, ::ScriptExecutionProvider)
+      RemoteExecutionProvider.register(:Script, ::ScriptExecutionProvider)
 
       ForemanRemoteExecution.register_rex_feature
 
