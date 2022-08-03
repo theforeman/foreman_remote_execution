@@ -1,5 +1,5 @@
 <div class="tab-pane" id="rex_proxies">
   <%= fields_for :subnet do |f| %>
-    <%= multiple_selects f, :remote_execution_proxies, SmartProxy.authorized.with_features(*RemoteExecutionProvider.provider_names).distinct, @subnet.remote_execution_proxy_ids, {:label => _("Proxies"), :help_inline => _("Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them.")} %>
+    <%= multiple_selects f, :remote_execution_proxies, SmartProxy.authorized.with_features(*RemoteExecutionProvider.provider_proxy_features).distinct, @subnet.remote_execution_proxy_ids, {:label => _("Proxies"), :help_inline => _("Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them.")} %>
   <% end %>
 </div>

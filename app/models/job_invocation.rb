@@ -213,7 +213,7 @@ class JobInvocation < ApplicationRecord
     providers = available_providers(host)
     providers.each do |provider|
       pattern_template_invocations.each do |template_invocation|
-        if template_invocation.template.provider_type.downcase == provider.downcase
+        if template_invocation.template.provider_type == provider
           return template_invocation
         end
       end
