@@ -4,7 +4,7 @@ class RemoteExecutionProvider
 
   class << self
     def provider_for(type)
-      providers[type.to_s] || providers[:Script]
+      providers[type.to_s] || providers[:script]
     end
 
     def registered_name
@@ -26,6 +26,10 @@ class RemoteExecutionProvider
 
     def provider_names
       providers.keys.map(&:to_s)
+    end
+
+    def provider_proxy_features
+      providers.values.map(&:proxy_feature).flatten.uniq.compact
     end
 
     def proxy_command_options(template_invocation, host)
