@@ -6,11 +6,11 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     it { _(providers).must_be_kind_of HashWithIndifferentAccess }
     it 'makes providers accessible using symbol' do
       _(providers[:SSH]).must_equal SSHExecutionProvider
-      _(providers[:Script]).must_equal ScriptExecutionProvider
+      _(providers[:script]).must_equal ScriptExecutionProvider
     end
     it 'makes providers accessible using string' do
       _(providers['SSH']).must_equal SSHExecutionProvider
-      _(providers['Script']).must_equal ScriptExecutionProvider
+      _(providers['script']).must_equal ScriptExecutionProvider
     end
   end
 
@@ -53,6 +53,28 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
       it { _(provider_names).must_include 'SSH' }
       it { _(provider_names).must_include 'Custom' }
+    end
+  end
+
+  describe '.provider_proxy_features' do
+    it 'returns correct values' do
+      RemoteExecutionProvider.stubs(:providers).returns(
+        :SSH => SSHExecutionProvider,
+        :script => ScriptExecutionProvider
+      )
+
+      features = RemoteExecutionProvider.provider_proxy_features
+      _(features).must_include 'SSH'
+      _(features).must_include 'Script'
+      RemoteExecutionProvider.unstub(:providers)
+    end
+
+    it 'can deal with non-arrays' do
+      provider = OpenStruct.new(proxy_feature: 'Testing')
+      RemoteExecutionProvider.stubs(:providers).returns(:testing => provider)
+      features = RemoteExecutionProvider.provider_proxy_features
+      _(features).must_include 'Testing'
+      RemoteExecutionProvider.unstub(:providers)
     end
   end
 
