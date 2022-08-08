@@ -107,8 +107,8 @@ handle_zypp_res_codes () {
   -%>
   [ -x "$(command -v subscription-manager)" ] && subscription-manager refresh
   export DEBIAN_FRONTEND=noninteractive
-  apt -y update
-  apt -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %>
+  apt-get -y update
+  apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %>
 <% elsif package_manager == 'zypper' -%>
   <%-
     if action == "group install"
