@@ -62,14 +62,16 @@ class JobInvocation < ApplicationRecord
 
   has_many :targeted_hosts, :through => :targeting, :source => :hosts
   scoped_search :on => 'targeted_host_id', :rename => 'targeted_host_id', :operators => ['= '],
-    :complete_value => false, :only_explicit => true, :ext_method => :search_by_targeted_host
+    :complete_value => false, :only_explicit => true, :ext_method => :search_by_targeted_host,
+    :validator => ScopedSearch::Validators::INTEGER
 
   scoped_search :on => 'pattern_template_name', :rename => 'pattern_template_name', :operators => ['= '],
     :complete_value => false, :only_explicit => true, :ext_method => :search_by_pattern_template
 
   scoped_search :relation => :recurring_logic, :on => 'purpose', :rename => 'recurring_logic.purpose'
 
-  scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id'
+  scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring_logic.id',
+    :validator => ScopedSearch::Validators::INTEGER
 
   scoped_search :relation => :recurring_logic, :on => 'id', :rename => 'recurring',
     :ext_method => :search_by_recurring_logic, :only_explicit => true,
