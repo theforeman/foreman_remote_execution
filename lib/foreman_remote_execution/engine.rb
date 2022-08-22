@@ -155,6 +155,11 @@ module ForemanRemoteExecution
               default: 'Job - Invocation Report',
               full_name: N_('Job Invocation Report Template'),
               collection: proc { ForemanRemoteExecution.job_invocation_report_templates_select }
+            setting 'remote_execution_time_to_pickup',
+              type: :integer,
+              description: N_('Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day.'),
+              default: 24 * 60 * 60,
+              full_name: N_('Time to pickup')
           end
         end
 

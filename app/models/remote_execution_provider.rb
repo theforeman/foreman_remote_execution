@@ -33,7 +33,10 @@ class RemoteExecutionProvider
     end
 
     def proxy_command_options(template_invocation, host)
-      {:proxy_operation_name => proxy_operation_name}.merge(proxy_command_provider_inputs(template_invocation))
+      {
+        :proxy_operation_name => proxy_operation_name,
+        :time_to_pickup => time_to_pickup(template_invocation.job_invocation, host),
+      }.merge(proxy_command_provider_inputs(template_invocation))
     end
 
     def secrets(_host)
@@ -151,6 +154,11 @@ class RemoteExecutionProvider
 
     def alternative_names(host)
       { :fqdn => find_fqdn(effective_interfaces(host)) }
+    end
+
+    def time_to_pickup(job_invocation, host)
+      time = job_invocation.time_to_pickup || host_setting(host, 'remote_execution_time_to_pickup')
+      Integer(time) if time
     end
   end
 end

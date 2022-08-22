@@ -22,6 +22,7 @@ class JobInvocationComposer
         :effective_user_password => blank_to_nil(job_invocation_base[:effective_user_password]),
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => execution_timeout_interval,
+        :time_to_pickup => job_invocation_base[:time_to_pickup],
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -129,6 +130,7 @@ class JobInvocationComposer
         :key_passphrase => api_params[:key_passphrase],
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => api_params[:execution_timeout_interval] || template.execution_timeout_interval,
+        :time_to_pickup => api_params[:time_to_pickup],
         :template_invocations => template_invocations_params }.with_indifferent_access
     end
 
@@ -245,6 +247,7 @@ class JobInvocationComposer
         :execution_timeout_interval => job_invocation.execution_timeout_interval,
         :remote_execution_feature_id => job_invocation.remote_execution_feature_id,
         :template_invocations => template_invocations_params,
+        :time_to_pickup => job_invocation.time_to_pickup,
         :reruns => job_invocation.id }.with_indifferent_access
     end
 
@@ -415,6 +418,7 @@ class JobInvocationComposer
     job_invocation.key_passphrase = params[:key_passphrase]
     job_invocation.effective_user_password = params[:effective_user_password]
     job_invocation.ssh_user = params[:ssh_user]
+    job_invocation.time_to_pickup = params[:time_to_pickup]
 
     if @reruns && job_invocation.targeting.static?
       job_invocation.targeting.assign_host_ids(JobInvocation.find(@reruns).targeting.host_ids)
