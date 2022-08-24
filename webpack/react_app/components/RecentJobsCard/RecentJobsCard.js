@@ -27,6 +27,7 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
         <DropdownItem
           href={foremanUrl(`${JOB_BASE_URL}${name}`)}
           key="link-to-all"
+          ouiaId="link-to-all-dropdown-item"
         >
           {__('View all jobs')}
         </DropdownItem>,
@@ -35,24 +36,28 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
             `${JOB_BASE_URL}${name}+and+status+%3D+failed+or+status%3D+succeeded`
           )}
           key="link-to-finished"
+          ouiaId="link-to-finished-dropdown-item"
         >
           {__('View finished jobs')}
         </DropdownItem>,
         <DropdownItem
           href={foremanUrl(`${JOB_BASE_URL}${name}+and+status+%3D+running`)}
           key="link-to-running"
+          ouiaId="link-to-running-dropdown-item"
         >
           {__('View running jobs')}
         </DropdownItem>,
         <DropdownItem
           href={foremanUrl(`${JOB_BASE_URL}${name}+and+status+%3D+queued`)}
           key="link-to-scheduled"
+          ouiaId="link-to-scheduled-dropdown-item"
         >
           {__('View scheduled jobs')}
         </DropdownItem>,
       ]}
     >
       <Tabs
+        ouiaId="tabs"
         mountOnEnter
         unmountOnExit
         activeKey={activeTab}
