@@ -14,6 +14,7 @@ const HostKebabItems = () => {
   if (!consoleUrl) return null;
   return (
     <DropdownItem
+      ouiaId="web-console-dropdown-item"
       icon={<CodeIcon />}
       href={consoleUrl}
       target="_blank"
