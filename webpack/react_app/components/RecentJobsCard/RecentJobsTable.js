@@ -39,7 +39,11 @@ const RecentJobsTable = ({ status, hostId }) => {
         status={responseStatus || STATUS.PENDING}
         emptyState={
           <Bullseye>
-            <Text style={{ marginTop: '20px' }} component="p">
+            <Text
+              ouiaId="no-results-text"
+              style={{ marginTop: '20px' }}
+              component="p"
+            >
               {__('No results found')}
             </Text>
           </Bullseye>
