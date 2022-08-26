@@ -1,15 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  DataList,
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
-  DataListCell,
-  DataListWrapModifier,
-  Text,
-  Bullseye,
-} from '@patternfly/react-core';
+import { Text, Bullseye } from '@patternfly/react-core';
+import { TableComposable, Tr, Tbody, Td } from '@patternfly/react-table';
 import { STATUS } from 'foremanReact/constants';
 
 import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
@@ -33,59 +25,55 @@ const RecentJobsTable = ({ status, hostId }) => {
   } = useAPI('get', jobsUrl, RECENT_JOBS_KEY);
 
   return (
-    <DataList aria-label="recent-jobs-table" isCompact>
-      <SkeletonLoader
-        skeletonProps={{ count: 3 }}
-        status={responseStatus || STATUS.PENDING}
-        emptyState={
-          <Bullseye>
-            <Text
-              ouiaId="no-results-text"
-              style={{ marginTop: '20px' }}
-              component="p"
-            >
-              {__('No results found')}
-            </Text>
-          </Bullseye>
-        }
-      >
-        {jobs?.length &&
-          jobs.map(
-            ({
-              status: jobStatus,
-              status_label: label,
-              id,
-              start_at: startAt,
-              description,
-            }) => (
-              <DataListItem key={id}>
-                <DataListItemRow>
-                  <DataListItemCells
-                    dataListCells={[
-                      <DataListCell
-                        wrapModifier={DataListWrapModifier.truncate}
-                        key={`name-${id}`}
-                      >
-                        <a href={foremanUrl(`/job_invocations/${id}`)}>
-                          {description}
-                        </a>
-                      </DataListCell>,
-                      <DataListCell key={`date-${id}`}>
-                        <RelativeDateTime date={startAt} />
-                      </DataListCell>,
-                      <DataListCell key={`status-${id}`}>
-                        <JobStatusIcon status={jobStatus}>
-                          {label}
-                        </JobStatusIcon>
-                      </DataListCell>,
-                    ]}
-                  />
-                </DataListItemRow>
-              </DataListItem>
-            )
-          )}
-      </SkeletonLoader>
-    </DataList>
+    <SkeletonLoader
+      skeletonProps={{ count: 3 }}
+      status={responseStatus || STATUS.PENDING}
+      emptyState={
+        <Bullseye>
+          <Text
+            ouiaId="no-results-text"
+            style={{ marginTop: '20px' }}
+            component="p"
+          >
+            {__('No results found')}
+          </Text>
+        </Bullseye>
+      }
+    >
+      {!!jobs?.length && (
+        <TableComposable
+          aria-label="recent-jobs-table"
+          variant="compact"
+          borders="compactBorderless"
+        >
+          <Tbody>
+            {jobs.map(
+              ({
+                status: jobStatus,
+                status_label: label,
+                id,
+                start_at: startAt,
+                description,
+              }) => (
+                <Tr key={id}>
+                  <Td modifier="truncate" key={`name-${id}`}>
+                    <a href={foremanUrl(`/job_invocations/${id}`)}>
+                      {description}
+                    </a>
+                  </Td>
+                  <Td modifier="truncate" key={`date-${id}`}>
+                    <RelativeDateTime date={startAt} />
+                  </Td>
+                  <Td modifier="truncate" key={`status-${id}`}>
+                    <JobStatusIcon status={jobStatus}>{label}</JobStatusIcon>
+                  </Td>
+                </Tr>
+              )
+            )}
+          </Tbody>
+        </TableComposable>
+      )}
+    </SkeletonLoader>
   );
 };
 
