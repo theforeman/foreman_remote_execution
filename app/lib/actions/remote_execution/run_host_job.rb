@@ -19,6 +19,8 @@ module Actions
       end
 
       def plan(job_invocation, host, template_invocation, proxy_selector = ::RemoteExecutionProxySelector.new, options = {})
+        raise _('Could not use any template used in the job invocation') if template_invocation.blank?
+
         features = template_invocation.template.remote_execution_features.pluck(:label).uniq
         action_subject(host,
           :job_category => job_invocation.job_category,
@@ -34,8 +36,6 @@ module Actions
         link!(template_invocation)
 
         verify_permissions(host, template_invocation)
-
-        raise _('Could not use any template used in the job invocation') if template_invocation.blank?
 
         provider = template_invocation.template.provider
         proxy_selector = provider.required_proxy_selector_for(template_invocation.template) || proxy_selector
