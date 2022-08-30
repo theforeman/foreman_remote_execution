@@ -213,13 +213,7 @@ class JobInvocation < ApplicationRecord
 
   def pattern_template_invocation_for_host(host)
     providers = available_providers(host)
-    providers.each do |provider|
-      pattern_template_invocations.each do |template_invocation|
-        if template_invocation.template.provider_type == provider
-          return template_invocation
-        end
-      end
-    end
+    pattern_template_invocations.find { |pti| providers.include? pti.template.provider_type }
   end
 
   # TODO: determine from the host and job_invocation details
