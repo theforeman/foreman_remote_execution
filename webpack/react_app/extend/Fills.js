@@ -23,12 +23,13 @@ const fills = [
   {
     slot: 'registrationAdvanced',
     name: 'interface',
-    component: props => (
-      <>
-        <RexInterface {...props} />
-        <RexPull {...props} />
-      </>
-    ),
+    component: props => <RexInterface {...props} />,
+    weight: 500,
+  },
+  {
+    slot: 'registrationAdvanced',
+    name: 'pull',
+    component: props => <RexPull {...props} />,
     weight: 500,
   },
   {
@@ -40,11 +41,11 @@ const fills = [
 ];
 
 const registerFills = () => {
-  fills.forEach(({ slot, id, component: Component, weight, metadata }) =>
+  fills.forEach(({ slot, name, component: Component, weight, metadata }) =>
     addGlobalFill(
       slot,
-      id,
-      <Component key={`rex-fill-${id}`} />,
+      `rex-${name}`,
+      <Component key={`rex-${name}`} />,
       weight,
       metadata
     )
