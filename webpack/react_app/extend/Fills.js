@@ -23,13 +23,12 @@ const fills = [
   {
     slot: 'registrationAdvanced',
     name: 'interface',
-    component: props => <RexInterface {...props} />,
-    weight: 500,
-  },
-  {
-    slot: 'registrationAdvanced',
-    name: 'pull',
-    component: props => <RexPull {...props} />,
+    component: props => (
+      <>
+        <RexInterface {...props} />
+        <RexPull {...props} />
+      </>
+    ),
     weight: 500,
   },
   {
