@@ -34,7 +34,7 @@ class JobTemplatesController < ::TemplatesController
   def import
     contents = params.fetch(:imported_template, {}).fetch(:template, nil).try(:read)
 
-    @template = JobTemplate.import_raw(contents, :update => Foreman::Cast.to_bool(params[:imported_template][:overwrite]))
+    @template = JobTemplate.import_raw(contents, :update => ActiveRecord::Type::Boolean.new.deserialize(params[:imported_template][:overwrite]))
     if @template&.save
       flash[:success] = _('Job template imported successfully.')
       redirect_to job_templates_path(:search => "name = \"#{@template.name}\"")
