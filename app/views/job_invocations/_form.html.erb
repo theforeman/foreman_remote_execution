@@ -103,6 +103,10 @@
     <% end %>
 
     <div class="advanced hidden">
+      <%= number_f f, :time_to_pickup, :value => f.object.time_to_pickup, :label => _('Time to pickup'), :label_help => N_('Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled.') %>
+    </div>
+
+    <div class="advanced hidden">
       <%= password_f f, :password, :placeholder => '*****', :label => _('Password'), :label_help => N_('Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
       <%= password_f f, :key_passphrase, :placeholder => '*****', :label => _('Private key passphrase'), :label_help => N_('Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
       <%= password_f f, :effective_user_password, :placeholder => '*****', :label => _('Effective user password'), :label_help => N_('Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.') %>
