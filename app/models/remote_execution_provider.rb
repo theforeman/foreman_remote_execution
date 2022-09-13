@@ -9,7 +9,7 @@ class RemoteExecutionProvider
 
     def registered_name
       klass = self
-      providers.key(klass)
+      ::RemoteExecutionProvider.providers.key(klass)
     end
 
     def proxy_feature
