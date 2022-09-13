@@ -56,6 +56,28 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     end
   end
 
+  describe '.proxy_feature' do
+    # rubocop:disable Naming/ConstantName
+    it 'handles provider subclasses properly' do
+      old = ::RemoteExecutionProvider
+
+      class P2 < old
+      end
+      ::RemoteExecutionProvider = P2
+
+      class CustomProvider < ::RemoteExecutionProvider
+      end
+
+      ::RemoteExecutionProvider.register('custom', CustomProvider)
+
+      feature = CustomProvider.proxy_feature
+      _(feature).must_equal 'custom'
+    ensure
+      ::RemoteExecutionProvider = old
+    end
+    # rubocop:enable Naming/ConstantName
+  end
+
   describe '.provider_proxy_features' do
     it 'returns correct values' do
       RemoteExecutionProvider.stubs(:providers).returns(
