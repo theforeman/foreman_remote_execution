@@ -83,6 +83,18 @@ handle_zypp_res_codes () {
 }
 <% end -%>
 
+<% if package_manager == 'apt' && action == 'update' -%>
+get_upgradeable_packages () {
+  packages=""
+  for i in $1; do
+    if [ $(LANG=C dpkg-query -W -f='${db:Status-Status}' "$i") = "installed" ]; then
+      packages="$packages $i"
+    fi
+  done
+  echo $packages
+}
+<% end -%>
+
 <% unless input("pre_script").blank? -%>
   # Pre Script
   <%= input("pre_script") %>
@@ -97,18 +109,27 @@ handle_zypp_res_codes () {
   <%-
     action = 'install' if action == 'group install'
     action = 'remove' if action == 'group remove'
+    is_pkg_upgrade = false
     if action == 'group update' || action == 'update'
       if input('package').blank?
         action = 'upgrade'
       else
         action = '--only-upgrade install'
+        is_pkg_upgrade = true
       end
     end
   -%>
   [ -x "$(command -v subscription-manager)" ] && subscription-manager refresh
   export DEBIAN_FRONTEND=noninteractive
   apt-get -y update
-  apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %>
+
+  PACKAGES="<%= input("package") %>"
+  <% if is_pkg_upgrade -%>
+    PACKAGES="$(get_upgradeable_packages "<%= input("package") %>")"
+    echo "Only try to upgrade packages which are already installed on the system: ${PACKAGES}"
+  <% end -%>
+
+  apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> $PACKAGES
 <% elsif package_manager == 'zypper' -%>
   <%-
     if action == "group install"
