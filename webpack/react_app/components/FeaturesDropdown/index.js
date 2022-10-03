@@ -47,10 +47,12 @@ const FeaturesDropdown = ({ hostId }) => {
 
   return (
     <Dropdown
+      ouiaId="schedule-a-job-dropdown"
       alignments={{ default: 'right' }}
       onSelect={() => setIsOpen(false)}
       toggle={
         <DropdownToggle
+          ouiaId="schedule-a-job-dropdown-toggle"
           splitButtonItems={scheduleJob}
           toggleVariant="secondary"
           onToggle={() => setIsOpen(prev => !prev)}
