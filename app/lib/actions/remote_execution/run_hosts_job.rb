@@ -75,7 +75,7 @@ module Actions
         job_invocation.save!
 
         Rails.logger.debug "cleaning cache for keys that begin with 'job_invocation_#{job_invocation.id}'"
-        Rails.cache.delete_matched(/\A#{JobInvocation::CACHE_PREFIX}_#{job_invocation.id}/)
+        Rails.cache.delete_matched(cache_deletion_query(job_invocation.id))
       end
 
       def notify_on_success(_plan)
@@ -156,6 +156,12 @@ module Actions
 
       def mail_notification_preference
         UserMailNotification.where(mail_notification_id: RexMailNotification.first, user_id: User.current.id).first
+      end
+
+      def cache_deletion_query(job_invocation_id)
+        return "#{JobInvocation::CACHE_PREFIX}_#{job_invocation_id}*" if Rails.cache.kind_of? ActiveSupport::Cache::RedisCacheStore
+
+        /\A#{JobInvocation::CACHE_PREFIX}_#{job_invocation_id}/
       end
     end
   end
