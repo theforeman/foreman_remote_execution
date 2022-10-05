@@ -137,16 +137,7 @@ module Actions
 
       def fill_continuous_output(continuous_output)
         if input[:with_event_logging]
-          # Trigger reload
-          delegated_output unless task.state == 'stopped'
-          task.template_invocation.template_invocation_events.find_each do |output|
-            if output.event_type == 'exit'
-              continuous_output.add_output(_('Exit status: %s') % output.event, 'stdout', output.timestamp)
-            else
-              continuous_output.add_raw_output(output.as_raw_continuous_output)
-            end
-          end
-
+          continuous_output_from_template_invocation_events(continuous_output)
           return
         end
 
@@ -168,6 +159,24 @@ module Actions
         end
       rescue => e
         continuous_output.add_exception(_('Error loading data from proxy'), e)
+      end
+
+      def continuous_output_from_template_invocation_events(continuous_output)
+        begin
+          # Trigger reload
+          delegated_output unless task.state == 'stopped'
+        rescue => e
+          # This is enough, the error will get shown using add_exception at the end of the method
+        end
+
+        task.template_invocation.template_invocation_events.find_each do |output|
+          if output.event_type == 'exit'
+            continuous_output.add_output(_('Exit status: %s') % output.event, 'stdout', output.timestamp)
+          else
+            continuous_output.add_raw_output(output.as_raw_continuous_output)
+          end
+        end
+        continuous_output.add_exception(_('Error loading data from proxy'), e) if e
       end
 
       def exit_status
