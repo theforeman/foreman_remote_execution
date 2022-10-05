@@ -8,6 +8,7 @@ Environment=XDG_CONFIG_DIRS=/etc/foreman/
 Environment=FOREMAN_COCKPIT_SETTINGS=/etc/foreman/cockpit/foreman-cockpit-session.yml
 Environment=FOREMAN_COCKPIT_ADDRESS=127.0.0.1
 Environment=FOREMAN_COCKPIT_PORT=19090
+Environment=COCKPIT_SUPERUSER=any
 ExecStart=/usr/libexec/cockpit-ws --no-tls --address $FOREMAN_COCKPIT_ADDRESS --port $FOREMAN_COCKPIT_PORT
 User=foreman
 Group=foreman
