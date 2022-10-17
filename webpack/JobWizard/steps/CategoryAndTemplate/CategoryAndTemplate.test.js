@@ -43,14 +43,18 @@ describe('Category And Template', () => {
 
     // Template
     fireEvent.click(
-      screen.getByDisplayValue('template1', { selector: 'button' })
+      screen.getByDisplayValue('Puppet Agent Disable - Script Default', {
+        selector: 'button',
+      })
     );
     await act(async () => {
       await fireEvent.click(screen.getByText('template2'));
     });
     fireEvent.click(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)[0]); // to remove focus
     expect(
-      screen.queryAllByDisplayValue('template1', { selector: 'button' })
+      screen.queryAllByDisplayValue('Puppet Agent Disable - Script Default', {
+        selector: 'button',
+      })
     ).toHaveLength(0);
     expect(
       screen.queryAllByDisplayValue('template2', { selector: 'button' })

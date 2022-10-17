@@ -70,7 +70,7 @@ export const submit = ({
         : 'dynamic_query',
       randomized_ordering: isRandomizedOrdering,
       inputs: { ...templateValues, ...advancedTemplateValues },
-      ssh_user: sshUser,
+      ssh_user: sshUser || null,
       ssh: {
         effective_user: effectiveUserValue,
         effective_user_password: effectiveUserPassword,

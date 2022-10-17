@@ -42,8 +42,10 @@ export const CategoryAndTemplate = ({
   )?.name;
 
   const onSelectCategory = newCategory => {
-    setCategory(newCategory);
-    setJobTemplate(null);
+    if (selectedCategory !== newCategory) {
+      setCategory(newCategory);
+      setJobTemplate(null);
+    }
   };
   const { categoryError, allTemplatesError, templateError } = errors;
   const isError = !!(categoryError || allTemplatesError || templateError);

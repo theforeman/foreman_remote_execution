@@ -24,11 +24,17 @@ export const filterJobTemplates = templates =>
 export const selectJobTemplates = state =>
   filterJobTemplates(selectAPIResponse(state, JOB_TEMPLATES)?.results);
 
+export const selectJobTemplatesSearch = state =>
+  selectAPIResponse(state, JOB_TEMPLATES)?.search;
+
+export const selectJobCategoriesResponse = state =>
+  selectAPIResponse(state, JOB_CATEGORIES) || {};
+
 export const selectJobCategories = state =>
-  selectAPIResponse(state, JOB_CATEGORIES).job_categories || [];
+  selectJobCategoriesResponse(state).job_categories || [];
 
 export const selectWithKatello = state =>
-  selectAPIResponse(state, JOB_CATEGORIES).with_katello || false;
+  selectJobCategoriesResponse(state).with_katello || false;
 
 export const selectJobCategoriesStatus = state =>
   selectAPIStatus(state, JOB_CATEGORIES);

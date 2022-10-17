@@ -16,7 +16,11 @@ Rails.application.routes.draw do
     end
   end
 
-  match 'job_invocations/new', to: 'job_invocations#new', via: [:get, :post], as: 'new_job_invocation'
+  match 'job_invocations/new', to: 'react#index', :via => [:get], as: 'new_job_invocation'
+  match 'job_invocations/new', to: 'job_invocations#create', via: [:post], as: 'create_job_invocation'
+  match 'job_invocations/:id/rerun', to: 'react#index', :via => [:get], as: 'rerun_job_invocation'
+  match 'old/job_invocations/new', to: 'job_invocations#new', via: [:get], as: 'form_new_job_invocation'
+  match 'old/job_invocations/:id/rerun', to: 'job_invocations#rerun', via: [:get, :post], as: 'form_rerun_job_invocation'
   resources :job_invocations, :only => [:create, :show, :index] do
     collection do
       post 'refresh'
@@ -25,7 +29,6 @@ Rails.application.routes.draw do
       get 'auto_complete_search'
     end
     member do
-      get 'rerun'
       post 'cancel'
     end
   end
@@ -47,9 +50,6 @@ Rails.application.routes.draw do
   get 'ui_job_wizard/template/:id', to: 'ui_job_wizard#template'
   get 'ui_job_wizard/resources', to: 'ui_job_wizard#resources'
   get 'ui_job_wizard/job_invocation', to: 'ui_job_wizard#job_invocation'
-
-  match '/experimental/job_wizard/new', to: 'react#index', :via => [:get]
-  match '/experimental/job_wizard/:id/rerun', to: 'react#index', :via => [:get]
 
   namespace :api, :defaults => {:format => 'json'} do
     scope '(:apiv)', :module => :v2, :defaults => {:apiv => 'v2'}, :apiv => /v1|v2/, :constraints => ApiConstraints.new(:version => 2, :default => true) do

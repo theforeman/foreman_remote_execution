@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import configureMockStore from 'redux-mock-store';
 import hostsQuery from '../steps/HostsAndInputs/hosts.gql';
 import hostgroupsQuery from '../steps/HostsAndInputs/hostgroups.gql';
@@ -11,6 +12,18 @@ export const jobTemplate = {
   default: true,
   job_category: 'Ansible Commands',
   provider_type: 'Ansible',
+  execution_timeout_interval: 2,
+  description: null,
+};
+export const pupptetJobTemplate = {
+  id: 163,
+  name: 'Puppet Agent Disable - Script Default',
+  template:
+    '<% if @host.operatingsystem.family == \'Debian\' -%>\nexport PATH=/opt/puppetlabs/bin:$PATH\n<% end -%>\npuppet agent --disable "<%= input("comment").present? ? input("comment") : "Disabled using Foreman Remote Execution"  %> - <%= current_user %> - $(date "+%d/%m/%Y %H:%M")"',
+  snippet: false,
+  default: true,
+  job_category: 'Puppet',
+  provider_type: 'script',
   execution_timeout_interval: 2,
   description: null,
 };
@@ -120,6 +133,7 @@ export const testSetup = (selectors, api) => {
   selectors.selectJobCategories.mockImplementation(() => jobCategories);
   selectors.selectJobTemplates.mockImplementation(() => [
     jobTemplate,
+    pupptetJobTemplate,
     { ...jobTemplate, id: 2, name: 'template2' },
   ]);
   selectors.selectJobTemplate.mockImplementation(() => jobTemplateResponse);
@@ -164,12 +178,21 @@ export const mockApi = api => {
     } else if (action.key === 'JOB_TEMPLATE') {
       handleSuccess &&
         handleSuccess({
-          data: jobTemplateResponse,
+          data:
+            action.url === '/ui_job_wizard/template/163'
+              ? { ...jobTemplateResponse, job_template: pupptetJobTemplate }
+              : jobTemplateResponse,
         });
     } else if (action.key === 'JOB_TEMPLATES') {
       handleSuccess &&
         handleSuccess({
-          data: { results: [jobTemplate] },
+          data: {
+            results:
+              action.url.search() ===
+              '?search=job_category%3D%22Puppet%22&per_page=all'
+                ? [pupptetJobTemplate]
+                : [jobTemplate],
+          },
         });
     } else if (action.key === 'HOST_IDS') {
       handleSuccess &&

@@ -45,8 +45,7 @@ class JobInvocationsController < ApplicationController
     if @composer.trigger
       redirect_to job_invocation_path(@composer.job_invocation)
     else
-      @composer.job_invocation.description_format = nil if params.fetch(:job_invocation, {}).key?(:description_override)
-      render :action => 'new'
+      redirect_to new_job_invocation_path({:inputs => params[:inputs], :feature => params[:feature], :host_ids => params[:host_ids]})
     end
   end
 

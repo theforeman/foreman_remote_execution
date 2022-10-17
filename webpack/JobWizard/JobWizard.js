@@ -25,6 +25,7 @@ import {
   selectIsSubmitting,
   selectRouterSearch,
   selectIsLoading,
+  selectJobCategoriesResponse,
 } from './JobWizardSelectors';
 import { ScheduleType } from './steps/Schedule/ScheduleType';
 import { ScheduleFuture } from './steps/Schedule/ScheduleFuture';
@@ -37,10 +38,14 @@ import { submit } from './submit';
 import './JobWizard.scss';
 
 export const JobWizard = ({ rerunData }) => {
+  const jobCategoriesResponse = useSelector(selectJobCategoriesResponse);
   const [jobTemplateID, setJobTemplateID] = useState(
-    rerunData?.template_invocations?.[0]?.template_id
+    rerunData?.template_invocations?.[0]?.template_id ||
+      jobCategoriesResponse?.default_template
   );
-  const [category, setCategory] = useState(rerunData?.job_category || '');
+  const [category, setCategory] = useState(
+    rerunData?.job_category || jobCategoriesResponse?.default_category || ''
+  );
   const [advancedValues, setAdvancedValues] = useState({ templateValues: {} });
   const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description https://github.com/theforeman/foreman_remote_execution/pull/605
   const [scheduleValue, setScheduleValue] = useState(initialScheduleState);
@@ -56,10 +61,25 @@ export const JobWizard = ({ rerunData }) => {
       ? {
           search: rerunData?.targeting?.search_query,
           ...rerunData.inputs,
+          ...routerSearch,
         }
       : routerSearch
   );
   const dispatch = useDispatch();
+  const generateDefaultDescription = ({
+    description_format,
+    advancedInputs,
+    inputs,
+    name,
+  }) => {
+    if (description_format) return description_format;
+    const allInputs = [...advancedInputs, ...inputs];
+    if (!allInputs.length) return name;
+    const inputsString = allInputs
+      .map(({ name: inputname }) => `${inputname}="%{${inputname}}"`)
+      .join(' ');
+    return `${name} with inputs ${inputsString}`;
+  };
 
   const setDefaults = useCallback(
     ({
@@ -78,8 +98,8 @@ export const JobWizard = ({ rerunData }) => {
         concurrency_control = {},
       },
     }) => {
-      if (!category.length) {
-        setCategory(current => (current.length ? current : job_category));
+      if (category !== job_category) {
+        setCategory(job_category);
       }
       const advancedTemplateValues = {};
       const defaultTemplateValues = {};
@@ -101,21 +121,18 @@ export const JobWizard = ({ rerunData }) => {
               currentAdvancedValues[input.name] || input?.default || '';
           });
         }
-        const generateDefaultDescription = () => {
-          if (description_format) return description_format;
-          const allInputs = [...advancedInputs, ...inputs];
-          if (!allInputs.length) return name;
-          const inputsString = allInputs
-            .map(({ name: inputname }) => `${inputname}="%{${inputname}}"`)
-            .join(' ');
-          return `${name} with inputs ${inputsString}`;
-        };
         return {
           ...currentAdvancedValues,
           effectiveUserValue: effective_user?.value || '',
           timeoutToKill: execution_timeout_interval || '',
           templateValues: advancedTemplateValues,
-          description: generateDefaultDescription() || '',
+          description:
+            generateDefaultDescription({
+              description_format,
+              advancedInputs,
+              inputs,
+              name,
+            }) || '',
           isRandomizedOrdering: randomized_ordering,
           sshUser: ssh_user || '',
           timeSpan: concurrency_control.time_span || '',
@@ -123,6 +140,7 @@ export const JobWizard = ({ rerunData }) => {
         };
       });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [category.length]
   );
   useEffect(() => {
@@ -134,6 +152,8 @@ export const JobWizard = ({ rerunData }) => {
           },
           job_template: {
             execution_timeout_interval: rerunData.execution_timeout_interval,
+            description_format: rerunData.description_format,
+            job_category: rerunData.job_category,
           },
           randomized_ordering: rerunData.targeting.randomized_ordering,
           ssh_user: rerunData.ssh_user,
@@ -141,18 +161,39 @@ export const JobWizard = ({ rerunData }) => {
         },
       });
     }
-  }, [rerunData, setDefaults]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rerunData]);
   useEffect(() => {
     if (jobTemplateID) {
       dispatch(
         get({
           key: JOB_TEMPLATE,
           url: `/ui_job_wizard/template/${jobTemplateID}`,
-          handleSuccess: rerunData ? () => {} : setDefaults,
+          handleSuccess: rerunData
+            ? ({
+                data: {
+                  template_inputs = [],
+                  advanced_template_inputs = [],
+                  job_template: { name, description_format },
+                },
+              }) => {
+                setAdvancedValues(currentAdvancedValues => ({
+                  ...currentAdvancedValues,
+                  description:
+                    generateDefaultDescription({
+                      description_format,
+                      advancedInputs: advanced_template_inputs,
+                      inputs: template_inputs,
+                      name,
+                    }) || '',
+                }));
+              }
+            : setDefaults,
         })
       );
     }
-  }, [rerunData, jobTemplateID, setDefaults, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rerunData, jobTemplateID, dispatch]);
 
   const [valid, setValid] = useValidation({
     advancedValues,
@@ -187,7 +228,9 @@ export const JobWizard = ({ rerunData }) => {
           setJobTemplate={setJobTemplateID}
           category={category}
           setCategory={setCategory}
-          isCategoryPreselected={!!rerunData || !!fills.feature}
+          isCategoryPreselected={
+            !!rerunData || !!fills.feature || !!fills.template_id
+          }
         />
       ),
       enableNext: isTemplate,
@@ -379,6 +422,7 @@ JobWizard.propTypes = {
       })
     ),
     inputs: PropTypes.object,
+    description_format: PropTypes.string,
   }),
 };
 JobWizard.defaultProps = {
