@@ -13,13 +13,6 @@ module JobInvocationsHelper
     end
   end
 
-  def job_invocations_buttons
-    [
-      documentation_button_rex('3.2ExecutingaJob'),
-      display_link_if_authorized(_('Run Job'), hash_for_new_job_invocation_path),
-    ]
-  end
-
   def template_name_and_provider_link(template)
     template_name = content_tag(:strong, template.name)
     provider = template.provider.humanized_name

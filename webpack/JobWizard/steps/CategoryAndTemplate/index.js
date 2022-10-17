@@ -11,6 +11,7 @@ import {
   selectCategoryError,
   selectAllTemplatesError,
   selectTemplateError,
+  selectJobTemplatesSearch,
 } from '../../JobWizardSelectors';
 import { CategoryAndTemplate } from './CategoryAndTemplate';
 
@@ -46,7 +47,8 @@ const ConnectedCategoryAndTemplate = ({
           }) => {
             if (!isCategoryPreselected) {
               setCategory(defaultCategory || jobCategories[0] || '');
-              if (defaultTemplate) setJobTemplate(defaultTemplate);
+              if (defaultTemplate)
+                setJobTemplate(current => current || defaultTemplate);
             }
           },
         })
@@ -56,27 +58,33 @@ const ConnectedCategoryAndTemplate = ({
   }, [jobCategoriesStatus]);
 
   const jobCategories = useSelector(selectJobCategories);
+  const jobTemplatesSearch = useSelector(selectJobTemplatesSearch);
   useEffect(() => {
     if (category) {
-      const templatesUrlObject = new URI(templatesUrl);
-      dispatch(
-        get({
-          key: JOB_TEMPLATES,
-          url: templatesUrlObject.addSearch({
-            search: `job_category="${category}"`,
-            per_page: 'all',
-          }),
-          handleSuccess: response => {
-            if (!jobTemplate)
-              setJobTemplate(
-                current =>
-                  current ||
-                  Number(filterJobTemplates(response?.data?.results)[0]?.id) ||
-                  null
-              );
-          },
-        })
-      );
+      const newJobTemplatesSearch = `job_category="${category}"`;
+      if (jobTemplatesSearch !== newJobTemplatesSearch) {
+        const templatesUrlObject = new URI(templatesUrl);
+        dispatch(
+          get({
+            key: JOB_TEMPLATES,
+            url: templatesUrlObject.addSearch({
+              search: newJobTemplatesSearch,
+              per_page: 'all',
+            }),
+            handleSuccess: response => {
+              if (!jobTemplate)
+                setJobTemplate(
+                  current =>
+                    current ||
+                    Number(
+                      filterJobTemplates(response?.data?.results)[0]?.id
+                    ) ||
+                    null
+                );
+            },
+          })
+        );
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, dispatch]);

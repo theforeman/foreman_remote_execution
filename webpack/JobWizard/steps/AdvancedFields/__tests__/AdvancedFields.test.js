@@ -315,7 +315,7 @@ describe('AdvancedFields', () => {
             data: {
               ...jobTemplateResponse,
               job_template: {
-                ...jobTemplateResponse.jobTemplate,
+                ...jobTemplateResponse.job_template,
                 description_format: 'Run %{command}',
               },
 
