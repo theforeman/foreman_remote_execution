@@ -354,6 +354,13 @@ module ForemanRemoteExecution
       locale_domain = 'foreman_remote_execution'
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
+
+    rake_tasks do
+      %w[explain_proxy_selection.rake].each do |rake_file|
+        full_path = File.expand_path("../tasks/#{rake_file}", __FILE__)
+        load full_path if File.exist?(full_path)
+      end
+    end
   end
 
   def self.job_invocation_report_templates_select
