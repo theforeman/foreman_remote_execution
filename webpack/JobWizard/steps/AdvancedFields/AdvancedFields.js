@@ -9,6 +9,7 @@ import {
 import {
   EffectiveUserField,
   TimeoutToKillField,
+  TimeToPickupField,
   PasswordField,
   KeyPassphraseField,
   EffectiveUserPasswordField,
@@ -69,6 +70,14 @@ export const AdvancedFields = ({
           setValue={newValue =>
             setAdvancedValues({
               timeoutToKill: newValue,
+            })
+          }
+        />
+        <TimeToPickupField
+          value={advancedValues.timeToPickup}
+          setValue={newValue =>
+            setAdvancedValues({
+              timeToPickup: newValue,
             })
           }
         />

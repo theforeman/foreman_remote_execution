@@ -34,6 +34,7 @@ export const submit = ({
     templateValues: advancedTemplateValues,
     password,
     keyPassphrase,
+    timeToPickup,
   } = advancedValues;
   const getCronLine = () => {
     const [hour, minute] = repeatData.at
@@ -107,6 +108,7 @@ export const submit = ({
       description_format: description,
       execution_timeout_interval: timeoutToKill,
       feature: '', // TODO add value after https://github.com/theforeman/foreman_remote_execution/pull/629
+      time_to_pickup: timeToPickup,
     },
   };
 

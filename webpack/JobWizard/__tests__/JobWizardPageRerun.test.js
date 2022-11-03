@@ -64,6 +64,11 @@ describe('Job wizard fill', () => {
         selector: 'input',
       }).value
     ).toBe('1');
+    expect(
+      screen.getByLabelText('time to pickup', {
+        selector: 'input',
+      }).value
+    ).toBe('25');
 
     expect(
       screen.getByLabelText('Concurrency level', {
