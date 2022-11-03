@@ -90,6 +90,7 @@ export const JobWizard = ({ rerunData }) => {
         job_template: {
           name,
           execution_timeout_interval,
+          time_to_pickup,
           description_format,
           job_category,
         },
@@ -125,6 +126,7 @@ export const JobWizard = ({ rerunData }) => {
           ...currentAdvancedValues,
           effectiveUserValue: effective_user?.value || '',
           timeoutToKill: execution_timeout_interval || '',
+          timeToPickup: time_to_pickup || '',
           templateValues: advancedTemplateValues,
           description:
             generateDefaultDescription({
@@ -154,6 +156,7 @@ export const JobWizard = ({ rerunData }) => {
             execution_timeout_interval: rerunData.execution_timeout_interval,
             description_format: rerunData.description_format,
             job_category: rerunData.job_category,
+            time_to_pickup: rerunData.time_to_pickup,
           },
           randomized_ordering: rerunData.targeting.randomized_ordering,
           ssh_user: rerunData.ssh_user,
@@ -413,6 +416,7 @@ JobWizard.propTypes = {
       time_span: PropTypes.number,
     }),
     execution_timeout_interval: PropTypes.number,
+    time_to_pickup: PropTypes.number,
     remote_execution_feature_id: PropTypes.string,
     template_invocations: PropTypes.arrayOf(
       PropTypes.shape({

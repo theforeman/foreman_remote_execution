@@ -39,6 +39,7 @@ export const useValidation = ({ advancedValues, templateValues }) => {
     );
     [
       advancedValues.timeoutToKill,
+      advancedValues.timeToPickup,
       advancedValues.concurrencyLevel,
       advancedValues.timeSpan,
     ].forEach(value => {

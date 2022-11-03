@@ -49,6 +49,26 @@ export const TimeoutToKillField = ({ value, setValue }) => (
     }}
   />
 );
+export const TimeToPickupField = ({ value, setValue }) => (
+  <NumberInput
+    formProps={{
+      label: __('Time to pickup'),
+      labelIcon: helpLabel(
+        __(
+          'Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled.'
+        ),
+        'time-to-pickup'
+      ),
+      fieldId: 'time-to-pickup',
+    }}
+    inputProps={{
+      value,
+      autoComplete: 'time-to-pickup',
+      id: 'time-to-pickup',
+      onChange: newValue => setValue(newValue),
+    }}
+  />
+);
 
 export const PasswordField = ({ value, setValue }) => (
   <FormGroup
@@ -231,6 +251,8 @@ EffectiveUserField.defaultProps = {
 
 TimeoutToKillField.propTypes = EffectiveUserField.propTypes;
 TimeoutToKillField.defaultProps = EffectiveUserField.defaultProps;
+TimeToPickupField.propTypes = EffectiveUserField.propTypes;
+TimeToPickupField.defaultProps = EffectiveUserField.defaultProps;
 PasswordField.propTypes = EffectiveUserField.propTypes;
 PasswordField.defaultProps = EffectiveUserField.defaultProps;
 KeyPassphraseField.propTypes = EffectiveUserField.propTypes;

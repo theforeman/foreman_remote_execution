@@ -127,6 +127,7 @@ const ReviewDetails = ({
     { label: __('Effective user'), value: advancedValues.effectiveUserValue },
     { label: __('Description Template'), value: advancedValues.description },
     { label: __('Timeout to kill'), value: advancedValues.timeoutToKill },
+    { label: __('Time to pickup'), value: advancedValues.timeToPickup },
     { label: __('Concurrency level'), value: advancedValues.concurrencyLevel },
     { label: __('Time span'), value: advancedValues.timeSpan },
     {
