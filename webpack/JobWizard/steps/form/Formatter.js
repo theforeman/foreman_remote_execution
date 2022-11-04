@@ -6,7 +6,7 @@ import SearchBar from 'foremanReact/components/SearchBar';
 import { getControllerSearchProps } from 'foremanReact/constants';
 import { TRIGGERS } from 'foremanReact/components/AutoComplete/AutoCompleteConstants';
 import { getResults } from 'foremanReact/components/AutoComplete/AutoCompleteActions';
-import { helpLabel } from './FormHelpers';
+import { helpLabel, ResetDefault } from './FormHelpers';
 import { SelectField } from './SelectField';
 import { ResourceSelect } from './ResourceSelect';
 import { DateTimePicker } from '../form/DateTimePicker';
@@ -48,12 +48,15 @@ const TemplateSearchField = ({
     <FormGroup
       label={name}
       labelIcon={helpLabel(labelText, name)}
+      labelInfo={
+        <ResetDefault defaultValue={defaultValue} setValue={setSearch} />
+      }
       fieldId={id}
       isRequired={required}
       className="foreman-search-field"
     >
       <SearchBar
-        initialQuery={defaultValue}
+        initialQuery={values[name]}
         data={{
           ...props,
           autocomplete: {
@@ -80,10 +83,19 @@ export const formatter = (input, values, setValue) => {
     hidden_value: hidden,
     resource_type: resourceType,
     value_type: valueType,
+    default: defaultValue,
   } = input;
   const labelText = input.description;
   const value = values[name];
   const id = name.replace(/ /g, '-');
+
+  const labelInfo = (
+    <ResetDefault
+      defaultValue={defaultValue}
+      setValue={newValue => setValue({ ...values, [name]: newValue })}
+    />
+  );
+
   if (valueType === 'resource') {
     return (
       <FormGroup
@@ -92,6 +104,7 @@ export const formatter = (input, values, setValue) => {
         labelIcon={helpLabel(labelText, name)}
         isRequired={required}
         key={id}
+        labelInfo={labelInfo}
       >
         <ResourceSelect
           name={name}
@@ -107,6 +120,7 @@ export const formatter = (input, values, setValue) => {
     const options = input.options.split(/\r?\n/).map(option => option.trim());
     return (
       <SelectField
+        labelInfo={labelInfo}
         key={id}
         isRequired={required}
         label={name}
@@ -121,6 +135,7 @@ export const formatter = (input, values, setValue) => {
   if (isTextType) {
     return (
       <FormGroup
+        labelInfo={labelInfo}
         key={name}
         label={name}
         labelIcon={helpLabel(labelText, name)}
@@ -142,6 +157,7 @@ export const formatter = (input, values, setValue) => {
   if (inputType === 'date') {
     return (
       <FormGroup
+        labelInfo={labelInfo}
         key={name}
         label={name}
         labelIcon={helpLabel(labelText, name)}
@@ -165,7 +181,7 @@ export const formatter = (input, values, setValue) => {
       <TemplateSearchField
         key={id}
         name={name}
-        defaultValue={value}
+        defaultValue={defaultValue}
         controller={controller}
         url={`/${controller}/auto_complete_search`}
         labelText={labelText}

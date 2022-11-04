@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, TextInput, Radio } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { helpLabel } from '../form/FormHelpers';
+import { helpLabel, ResetDefault } from '../form/FormHelpers';
 import { formatter } from '../form/Formatter';
 import { NumberInput } from '../form/NumberInput';
 
-export const EffectiveUserField = ({ value, setValue }) => (
+export const EffectiveUserField = ({ value, setValue, defaultValue }) => (
   <FormGroup
     label={__('Effective user')}
     labelIcon={helpLabel(
@@ -16,6 +16,7 @@ export const EffectiveUserField = ({ value, setValue }) => (
       'effective-user'
     )}
     fieldId="effective-user"
+    labelInfo={<ResetDefault setValue={setValue} defaultValue={defaultValue} />}
   >
     <TextInput
       aria-label="effective user"
@@ -28,7 +29,7 @@ export const EffectiveUserField = ({ value, setValue }) => (
   </FormGroup>
 );
 
-export const TimeoutToKillField = ({ value, setValue }) => (
+export const TimeoutToKillField = ({ value, setValue, defaultValue }) => (
   <NumberInput
     formProps={{
       label: __('Timeout to kill'),
@@ -39,6 +40,9 @@ export const TimeoutToKillField = ({ value, setValue }) => (
         'timeout-to-kill'
       ),
       fieldId: 'timeout-to-kill',
+      labelInfo: (
+        <ResetDefault setValue={setValue} defaultValue={defaultValue} />
+      ),
     }}
     inputProps={{
       value,
@@ -119,7 +123,7 @@ export const EffectiveUserPasswordField = ({ value, setValue }) => (
   </FormGroup>
 );
 
-export const ConcurrencyLevelField = ({ value, setValue }) => (
+export const ConcurrencyLevelField = ({ value, setValue, defaultValue }) => (
   <NumberInput
     formProps={{
       label: __('Concurrency level'),
@@ -130,6 +134,9 @@ export const ConcurrencyLevelField = ({ value, setValue }) => (
         'concurrency-level'
       ),
       fieldId: 'concurrency-level',
+      labelInfo: (
+        <ResetDefault setValue={setValue} defaultValue={defaultValue} />
+      ),
     }}
     inputProps={{
       min: 1,
@@ -142,7 +149,7 @@ export const ConcurrencyLevelField = ({ value, setValue }) => (
   />
 );
 
-export const TimeSpanLevelField = ({ value, setValue }) => (
+export const TimeSpanLevelField = ({ value, setValue, defaultValue }) => (
   <NumberInput
     formProps={{
       label: __('Time span'),
@@ -153,6 +160,9 @@ export const TimeSpanLevelField = ({ value, setValue }) => (
         'time-span'
       ),
       fieldId: 'time-span',
+      labelInfo: (
+        <ResetDefault setValue={setValue} defaultValue={defaultValue} />
+      ),
     }}
     inputProps={{
       min: 1,
@@ -204,11 +214,12 @@ export const TemplateInputsFields = ({ inputs, value, setValue }) => (
   <>{inputs?.map(input => formatter(input, value, setValue))}</>
 );
 
-export const SSHUserField = ({ value, setValue }) => (
+export const SSHUserField = ({ value, setValue, defaultValue }) => (
   <FormGroup
     label={__('SSH user')}
     labelIcon={helpLabel(__('A user to be used for SSH.'), 'ssh-user')}
     fieldId="ssh-user"
+    labelInfo={<ResetDefault setValue={setValue} defaultValue={defaultValue} />}
   >
     <TextInput
       aria-label="ssh user"
@@ -224,9 +235,11 @@ export const SSHUserField = ({ value, setValue }) => (
 EffectiveUserField.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setValue: PropTypes.func.isRequired,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 EffectiveUserField.defaultProps = {
   value: '',
+  defaultValue: null,
 };
 
 TimeoutToKillField.propTypes = EffectiveUserField.propTypes;

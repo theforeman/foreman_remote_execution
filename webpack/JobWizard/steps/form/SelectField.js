@@ -3,6 +3,7 @@ import { FormGroup, Select, SelectOption } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 
 export const SelectField = ({
+  labelInfo,
   label,
   fieldId,
   options,
@@ -29,6 +30,7 @@ export const SelectField = ({
   ];
   return (
     <FormGroup
+      labelInfo={labelInfo}
       label={label}
       fieldId={fieldId}
       labelIcon={labelIcon}
@@ -54,6 +56,7 @@ export const SelectField = ({
 };
 SelectField.propTypes = {
   label: PropTypes.string,
+  labelInfo: PropTypes.node,
   fieldId: PropTypes.string.isRequired,
   options: PropTypes.array,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -64,6 +67,7 @@ SelectField.propTypes = {
 
 SelectField.defaultProps = {
   label: null,
+  labelInfo: null,
   options: [],
   labelIcon: null,
   value: null,

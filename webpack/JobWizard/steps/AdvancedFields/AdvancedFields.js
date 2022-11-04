@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
@@ -5,7 +6,9 @@ import { Form } from '@patternfly/react-core';
 import {
   selectEffectiveUser,
   selectAdvancedTemplateInputs,
+  selectJobTemplate,
 } from '../../JobWizardSelectors';
+import { generateDefaultDescription } from '../../JobWizardHelpers';
 import {
   EffectiveUserField,
   TimeoutToKillField,
@@ -29,6 +32,7 @@ export const AdvancedFields = ({
 }) => {
   const effectiveUser = useSelector(selectEffectiveUser);
   const advancedTemplateInputs = useSelector(selectAdvancedTemplateInputs);
+  const jobTemplate = useSelector(selectJobTemplate);
   return (
     <>
       <WizardTitle
@@ -40,9 +44,11 @@ export const AdvancedFields = ({
           inputs={advancedTemplateInputs}
           value={advancedValues.templateValues}
           setValue={newValue => setAdvancedValues({ templateValues: newValue })}
+          defaultValue={jobTemplate}
         />
         <SSHUserField
           value={advancedValues.sshUser}
+          defaultValue={jobTemplate.ssh_user}
           setValue={newValue =>
             setAdvancedValues({
               sshUser: newValue,
@@ -52,6 +58,7 @@ export const AdvancedFields = ({
         {effectiveUser?.overridable && (
           <EffectiveUserField
             value={advancedValues.effectiveUserValue}
+            defaultValue={jobTemplate.effective_user?.value}
             setValue={newValue =>
               setAdvancedValues({
                 effectiveUserValue: newValue,
@@ -63,9 +70,16 @@ export const AdvancedFields = ({
           inputValues={{ ...templateValues, ...advancedValues.templateValues }}
           value={advancedValues.description}
           setValue={newValue => setAdvancedValues({ description: newValue })}
+          defaultValue={generateDefaultDescription({
+            description_format: jobTemplate.job_template.description_format,
+            advancedInputs: jobTemplate.advanced_template_inputs,
+            inputs: jobTemplate.template_inputs,
+            name: jobTemplate.job_template.name,
+          })}
         />
         <TimeoutToKillField
           value={advancedValues.timeoutToKill}
+          defaultValue={jobTemplate.job_template.execution_timeout_interval}
           setValue={newValue =>
             setAdvancedValues({
               timeoutToKill: newValue,
@@ -98,6 +112,7 @@ export const AdvancedFields = ({
         />
         <ConcurrencyLevelField
           value={advancedValues.concurrencyLevel}
+          defaultValue={jobTemplate.concurrency_control?.level}
           setValue={newValue =>
             setAdvancedValues({
               concurrencyLevel: newValue,
@@ -106,6 +121,7 @@ export const AdvancedFields = ({
         />
         <TimeSpanLevelField
           value={advancedValues.timeSpan}
+          defaultValue={jobTemplate.concurrency_control?.time_span}
           setValue={newValue =>
             setAdvancedValues({
               timeSpan: newValue,

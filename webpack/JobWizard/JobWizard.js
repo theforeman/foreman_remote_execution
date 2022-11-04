@@ -35,6 +35,7 @@ import ReviewDetails from './steps/ReviewDetails/';
 import { useValidation } from './validation';
 import { useAutoFill } from './autofill';
 import { submit } from './submit';
+import { generateDefaultDescription } from './JobWizardHelpers';
 import './JobWizard.scss';
 
 export const JobWizard = ({ rerunData }) => {
@@ -66,20 +67,6 @@ export const JobWizard = ({ rerunData }) => {
       : routerSearch
   );
   const dispatch = useDispatch();
-  const generateDefaultDescription = ({
-    description_format,
-    advancedInputs,
-    inputs,
-    name,
-  }) => {
-    if (description_format) return description_format;
-    const allInputs = [...advancedInputs, ...inputs];
-    if (!allInputs.length) return name;
-    const inputsString = allInputs
-      .map(({ name: inputname }) => `${inputname}="%{${inputname}}"`)
-      .join(' ');
-    return `${name} with inputs ${inputsString}`;
-  };
 
   const setDefaults = useCallback(
     ({

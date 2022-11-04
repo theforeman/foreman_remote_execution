@@ -145,6 +145,9 @@
   .pf-c-radio__body {
     font-size: var(--pf-c-radio__label--FontSize);
   }
+  .reset-default{
+    padding-bottom: 0;
+  }
 }
 
 .job-wizard-alert.pf-c-alert.pf-m-warning {

@@ -7,8 +7,14 @@ import {
   selectTemplateInputs,
   selectAdvancedTemplateInputs,
 } from '../../JobWizardSelectors';
+import { ResetDefault } from '../form/FormHelpers';
 
-export const DescriptionField = ({ inputValues, value, setValue }) => {
+export const DescriptionField = ({
+  inputValues,
+  value,
+  setValue,
+  defaultValue,
+}) => {
   const inputs = [
     ...useSelector(selectTemplateInputs),
     ...useSelector(selectAdvancedTemplateInputs),
@@ -45,6 +51,9 @@ export const DescriptionField = ({ inputValues, value, setValue }) => {
   return (
     <FormGroup
       label={__('Description')}
+      labelInfo={
+        <ResetDefault setValue={setValue} defaultValue={defaultValue} />
+      }
       fieldId="description"
       helperText={
         <Button variant="link" isInline onClick={togglePreview}>
@@ -84,7 +93,9 @@ DescriptionField.propTypes = {
   inputValues: PropTypes.object.isRequired,
   value: PropTypes.string,
   setValue: PropTypes.func.isRequired,
+  defaultValue: PropTypes.string,
 };
 DescriptionField.defaultProps = {
   value: '',
+  defaultValue: '',
 };
