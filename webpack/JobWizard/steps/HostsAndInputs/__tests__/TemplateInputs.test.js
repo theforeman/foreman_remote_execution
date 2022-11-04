@@ -50,4 +50,36 @@ describe('TemplateInputs', () => {
     });
     expect(textField.value).toBe(textValue);
   });
+  it('should set back default data', async () => {
+    render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByText(WIZARD_TITLES.hostsAndInputs));
+    });
+    const textValue = 'I am a plain text';
+    const textField = screen.getByLabelText('plain hidden', {
+      selector: 'textarea',
+    });
+
+    await act(async () => {
+      await fireEvent.change(textField, {
+        target: { value: textValue },
+      });
+    });
+    expect(
+      screen.getByLabelText('plain hidden', {
+        selector: 'textarea',
+      }).value
+    ).toBe(textValue);
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Reset to default'));
+    });
+    expect(textField.value).toBe('Default val');
+  });
 });
