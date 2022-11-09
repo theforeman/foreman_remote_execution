@@ -8,7 +8,7 @@ import { TRIGGERS } from 'foremanReact/components/AutoComplete/AutoCompleteConst
 import { getResults } from 'foremanReact/components/AutoComplete/AutoCompleteActions';
 import { helpLabel } from './FormHelpers';
 import { SelectField } from './SelectField';
-import { ResourceSelectAPI } from './ResourceSelect';
+import { ResourceSelect } from './ResourceSelect';
 import { DateTimePicker } from '../form/DateTimePicker';
 import { noop } from '../../../helpers';
 
@@ -93,11 +93,11 @@ export const formatter = (input, values, setValue) => {
         isRequired={required}
         key={id}
       >
-        <ResourceSelectAPI
+        <ResourceSelect
           name={name}
           apiKey={resourceType.replace('::', '')}
           url={`/ui_job_wizard/resources?resource=${resourceType}`}
-          selected={value || {}}
+          selected={value || ''}
           setSelected={newValue => setValue({ ...values, [name]: newValue })}
         />
       </FormGroup>

@@ -35,7 +35,7 @@ import {
   hostQuerySearchID,
   HOSTS_API,
   HOSTS_TO_PREVIEW_AMOUNT,
-  DEBOUNCE_HOST_COUNT,
+  DEBOUNCE_API,
 } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
 import { SelectAPI } from './SelectAPI';
@@ -66,7 +66,7 @@ const HostsAndInputs = ({
           },
         })
       );
-    }, DEBOUNCE_HOST_COUNT)();
+    }, DEBOUNCE_API)();
   }, [
     dispatch,
     selected,
