@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import Immutable from 'seamless-immutable';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
+import { DEBOUNCE_API } from '../../JobWizardConstants';
 
 export const maxResults = 100;
 
@@ -19,7 +20,6 @@ export const SearchSelect = ({
   const [onSearch, response, isLoading] = useNameSearch(apiKey, url);
   const [isOpen, setIsOpen] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
-  const autoSearchDelay = 500;
   useEffect(() => {
     onSearch(selected.name || '');
     if (typingTimeout) {
@@ -71,7 +71,7 @@ export const SearchSelect = ({
   };
   const autoSearch = searchTerm => {
     if (typingTimeout) clearTimeout(typingTimeout);
-    setTypingTimeout(setTimeout(() => onSearch(searchTerm), autoSearchDelay));
+    setTypingTimeout(setTimeout(() => onSearch(searchTerm), DEBOUNCE_API));
   };
   return (
     <Select
