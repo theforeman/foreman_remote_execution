@@ -17,6 +17,7 @@ class TemplateInvocation < ApplicationRecord
   has_one :host_group, :through => :host, :source => :hostgroup
   belongs_to :run_host_job_task, :class_name => 'ForemanTasks::Task'
   has_many :remote_execution_features, :through => :template
+  has_many :template_invocation_events, :dependent => :destroy
 
   validates_associated :input_values
   validate :provides_required_input_values
