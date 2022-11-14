@@ -47,7 +47,7 @@ export const JobWizard = ({ rerunData }) => {
     rerunData?.job_category || jobCategoriesResponse?.default_category || ''
   );
   const [advancedValues, setAdvancedValues] = useState({ templateValues: {} });
-  const [templateValues, setTemplateValues] = useState({}); // TODO use templateValues in advanced fields - description https://github.com/theforeman/foreman_remote_execution/pull/605
+  const [templateValues, setTemplateValues] = useState({});
   const [scheduleValue, setScheduleValue] = useState(initialScheduleState);
   const [selectedTargets, setSelectedTargets] = useState({
     hosts: [],
@@ -391,6 +391,7 @@ export const JobWizard = ({ rerunData }) => {
           hostsSearchQuery,
           location,
           organization,
+          feature: routerSearch?.feature,
         });
       }}
     />
