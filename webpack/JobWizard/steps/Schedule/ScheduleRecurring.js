@@ -117,7 +117,7 @@ export const ScheduleRecurring = ({
                 id="start-at"
                 className="schedule-radio"
                 label={
-                  <div className="scheudle-radio-wrapper">
+                  <div className="schedule-radio-wrapper">
                     <div className="schedule-radio-title">{__('At')}</div>
                     <DateTimePicker
                       ariaLabel="starts at"
@@ -197,7 +197,7 @@ export const ScheduleRecurring = ({
                 id="ends-on"
                 className="schedule-radio"
                 label={
-                  <div className="scheudle-radio-wrapper">
+                  <div className="schedule-radio-wrapper">
                     <div className="schedule-radio-title">{__('On')}</div>
                     <DateTimePicker
                       ariaLabel="ends on"
@@ -229,7 +229,7 @@ export const ScheduleRecurring = ({
                 id="ends-after"
                 className="schedule-radio"
                 label={
-                  <div className="scheudle-radio-wrapper">
+                  <div className="schedule-radio-wrapper">
                     <div className="schedule-radio-title">{__('After')}</div>
                     <FormGroup
                       helperTextInvalid={__(

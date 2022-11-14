@@ -57,9 +57,6 @@
     margin: 0;
   }
   .schedule-tab {
-    .advanced-scheduling-button {
-      text-align: start;
-    }
     #repeat-on-weekly {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -92,7 +89,7 @@
       display: inline-block;
       align-self: center;
     }
-    .scheudle-radio-wrapper {
+    .schedule-radio-wrapper {
       display: flex;
     }
   }

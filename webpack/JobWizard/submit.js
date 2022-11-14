@@ -11,6 +11,7 @@ export const submit = ({
   hostsSearchQuery,
   location,
   organization,
+  feature,
   dispatch,
 }) => {
   const {
@@ -65,7 +66,7 @@ export const submit = ({
     location,
     organization,
     job_invocation: {
-      job_template_id: jobTemplateID,
+      job_template_id: feature ? null : jobTemplateID,
       targeting_type: scheduleValue?.isTypeStatic
         ? 'static_query'
         : 'dynamic_query',
@@ -107,7 +108,7 @@ export const submit = ({
         buildHostQuery(selectedTargets, hostsSearchQuery) || 'name ~ *',
       description_format: description,
       execution_timeout_interval: timeoutToKill,
-      feature: '', // TODO add value after https://github.com/theforeman/foreman_remote_execution/pull/629
+      feature,
       time_to_pickup: timeToPickup,
     },
   };
