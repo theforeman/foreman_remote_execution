@@ -21,8 +21,11 @@ module Actions
       end
 
       def process_proxy_data(data)
-        events = data['result'].map do |update|
+        events = data['result'].each_with_index.map do |update, seq_id|
           {
+            # For N-1 compatibility, we assume that the output provided here is
+            # complete
+            sequence_id: update['sequence_id'] || seq_id,
             template_invocation_id: template_invocation.id,
             event: update['output'],
             timestamp: Time.at(update['timestamp']).getlocal,
@@ -31,14 +34,15 @@ module Actions
         end
         if data['exit_status']
           events << {
+            sequence_id: events.last[:sequence_id] + 1,
             template_invocation_id: template_invocation.id,
             event: data['exit_status'],
-            timestamp: events.last[:timestamp] + 0.0001,
+            timestamp: events.last[:timestamp],
             event_type: 'exit',
           }
         end
         events.each_slice(1000) do |batch|
-          TemplateInvocationEvent.upsert_all(batch, unique_by: [:template_invocation_id, :timestamp, :event_type]) # rubocop:disable Rails/SkipsModelValidations
+          TemplateInvocationEvent.upsert_all(batch, unique_by: [:template_invocation_id, :sequence_id]) # rubocop:disable Rails/SkipsModelValidations
         end
       end
     end
