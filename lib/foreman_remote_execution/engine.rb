@@ -79,7 +79,7 @@ module ForemanRemoteExecution
               type: :string,
               description: N_('Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user.'),
               default: 'root',
-              full_name: N_('Efffective User')
+              full_name: N_('Effective User')
             setting 'remote_execution_effective_user_method',
               type: :string,
               description: N_('What command should be used to switch to the effective user. One of %s') % SSHExecutionProvider::EFFECTIVE_USER_METHODS.inspect,
