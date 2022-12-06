@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import { FormGroup, TextArea } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import SearchBar from 'foremanReact/components/SearchBar';
 import { getControllerSearchProps } from 'foremanReact/constants';
-import { TRIGGERS } from 'foremanReact/components/AutoComplete/AutoCompleteConstants';
-import { getResults } from 'foremanReact/components/AutoComplete/AutoCompleteActions';
 import { helpLabel, ResetDefault } from './FormHelpers';
 import { SelectField } from './SelectField';
 import { ResourceSelect } from './ResourceSelect';
 import { DateTimePicker } from '../form/DateTimePicker';
-import { noop } from '../../../helpers';
 
 const TemplateSearchField = ({
   name,
@@ -22,51 +18,33 @@ const TemplateSearchField = ({
   setValue,
   values,
 }) => {
-  const searchQuery = useSelector(
-    state => state.autocomplete?.[name]?.searchQuery
-  );
-  const dispatch = useDispatch();
-  useEffect(() => {
-    setValue({ ...values, [name]: searchQuery });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery]);
   const id = name.replace(/ /g, '-');
   const props = getControllerSearchProps(controller.replace('/', '_'), name);
-
-  const setSearch = newSearchQuery => {
-    dispatch(
-      getResults({
-        url,
-        searchQuery: newSearchQuery,
-        controller,
-        trigger: TRIGGERS.INPUT_CHANGE,
-        id: name,
-      })
-    );
-  };
   return (
     <FormGroup
       label={name}
       labelIcon={helpLabel(labelText, name)}
       labelInfo={
-        <ResetDefault defaultValue={defaultValue} setValue={setSearch} />
+        <ResetDefault
+          defaultValue={defaultValue}
+          setValue={search => setValue({ ...values, [name]: search })}
+        />
       }
       fieldId={id}
       isRequired={required}
       className="foreman-search-field"
     >
       <SearchBar
-        initialQuery={values[name]}
         data={{
           ...props,
           autocomplete: {
             id: name,
             url,
-            useKeyShortcuts: true,
+            searchQuery: values[name],
           },
         }}
-        onSearch={noop}
-        onBookmarkClick={search => setSearch(search)}
+        onSearch={null}
+        onSearchChange={search => setValue({ ...values, [name]: search })}
       />
     </FormGroup>
   );

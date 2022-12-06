@@ -1,4 +1,5 @@
 .job-wizard {
+  font-size: var(--pf-global--FontSize--md);
   .wizard-title {
     margin-bottom: 25px;
   }
@@ -132,11 +133,6 @@
   .review-details {
     .advanced-fields {
       margin-left: 10px;
-    }
-  }
-  .foreman-search-field {
-    .autocomplete-search-btn {
-      display: none;
     }
   }
   .pf-c-radio__body {
