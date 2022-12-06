@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: sudo apt-get update
+      - run: sudo apt-get install libyaml-dev
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -42,7 +44,7 @@ jobs:
         node-version: [12]
     steps:
       - run: sudo apt-get update
-      - run: sudo apt-get install build-essential libcurl4-openssl-dev zlib1g-dev libpq-dev
+      - run: sudo apt-get install build-essential libcurl4-openssl-dev zlib1g-dev libpq-dev libyaml-dev
       - uses: actions/checkout@v2
         with:
           repository: theforeman/foreman
