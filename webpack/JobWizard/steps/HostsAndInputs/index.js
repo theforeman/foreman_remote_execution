@@ -13,7 +13,6 @@ import { FilterIcon } from '@patternfly/react-icons';
 import { debounce } from 'lodash';
 import { get } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { resetData } from 'foremanReact/components/AutoComplete/AutoCompleteActions';
 import {
   selectTemplateInputs,
   selectWithKatello,
@@ -31,8 +30,6 @@ import {
   HOST_COLLECTIONS,
   HOST_GROUPS,
   hostMethods,
-  hostsController,
-  hostQuerySearchID,
   HOSTS_API,
   HOSTS_TO_PREVIEW_AMOUNT,
   DEBOUNCE_API,
@@ -100,7 +97,6 @@ const HostsAndInputs = ({
   };
 
   const clearSearch = () => {
-    dispatch(resetData(hostsController, hostQuerySearchID));
     setHostsSearchQuery('');
   };
   return (

@@ -49,7 +49,7 @@ Array [
         "port": null,
         "preventInvalidHostname": false,
         "protocol": null,
-        "query": "resource=ForemanTasks%3A%3ATask",
+        "query": "resource=ForemanTasks%3A%3ATask&name=some+search",
         "urn": null,
         "username": null,
       },
