@@ -33,11 +33,12 @@ module Actions
           }
         end
         if data['exit_status']
+          last = events.last || {:sequence_id => -1, :timestamp => Time.zone.now}
           events << {
-            sequence_id: events.last[:sequence_id] + 1,
+            sequence_id: last[:sequence_id] + 1,
             template_invocation_id: template_invocation.id,
             event: data['exit_status'],
-            timestamp: events.last[:timestamp],
+            timestamp: last[:timestamp],
             event_type: 'exit',
           }
         end
