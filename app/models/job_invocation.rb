@@ -253,8 +253,9 @@ class JobInvocation < ApplicationRecord
         acc.merge(key => 0)
       end
     else
-      counts  = task.sub_tasks_counts
-      done    = counts.values_at(*map.results).reduce(:+)
+      counts = task.sub_tasks_counts
+      counts.default = 0
+      done = counts.values_at(*map.results).reduce(:+)
       percent = progress(counts[:total], done)
       counts.merge(:progress => percent, :failed => counts.values_at(*map.status_to_task_result(:failed)).reduce(:+))
     end
