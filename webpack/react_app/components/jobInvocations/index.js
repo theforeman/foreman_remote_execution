@@ -48,7 +48,7 @@ class JobInvocationContainer extends React.Component {
             chartFilter(map[d.name]);
           }}
         />
-        <AggregateStatus statuses={statuses} />
+        <AggregateStatus statuses={statuses} chartFilter={chartFilter} />
       </div>
     );
   }
@@ -78,7 +78,7 @@ JobInvocationContainer.propTypes = {
     pending: PropTypes.number,
     success: PropTypes.number,
   }),
-  chartFilter: PropTypes.object,
+  chartFilter: PropTypes.func,
 };
 
 JobInvocationContainer.defaultProps = {

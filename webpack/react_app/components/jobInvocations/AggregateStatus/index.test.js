@@ -7,7 +7,9 @@ jest.unmock('./index.js');
 describe('AggregateStatus', () => {
   describe('has no data', () => {
     it('renders cards with no data', () => {
-      const chartNumbers = shallow(<AggregateStatus statuses={{}} />);
+      const chartNumbers = shallow(
+        <AggregateStatus statuses={{}} chartFilter={_x => {}} />
+      );
       const success = chartNumbers.find('#success_count').text();
       const failed = chartNumbers.find('#failed_count').text();
       const pending = chartNumbers.find('#pending_count').text();
@@ -25,7 +27,9 @@ describe('AggregateStatus', () => {
         cancelled: 31,
         pending: 3,
       };
-      const chartNumbers = shallow(<AggregateStatus statuses={statuses} />);
+      const chartNumbers = shallow(
+        <AggregateStatus statuses={statuses} chartFilter={_x => {}} />
+      );
       const success = chartNumbers.find('#success_count').text();
       const failed = chartNumbers.find('#failed_count').text();
       const pending = chartNumbers.find('#pending_count').text();

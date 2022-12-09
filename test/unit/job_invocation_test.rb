@@ -130,7 +130,7 @@ class JobInvocationTest < ActiveSupport::TestCase
         :failed    => 0,
         :pending   => 0,
         :progress  => 0,
-        :running   => 0
+        :running   => 0,
       }
     end
     before { job_invocation.task = task }
