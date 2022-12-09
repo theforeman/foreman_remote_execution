@@ -6,10 +6,13 @@ module Actions
       end
 
       def log_template_invocation_exception(exception)
+        last = template_invocation.template_invocation_events.order(:sequence_id).last
+        id = last ? last.sequence_id + 1 : 0
         template_invocation.template_invocation_events.create!(
           :event_type => 'debug',
           :event => "#{exception.class}: #{exception.message}",
-          :timestamp => Time.zone.now
+          :timestamp => Time.zone.now,
+          :sequence_id => id
         )
       end
 
