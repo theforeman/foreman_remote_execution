@@ -10,6 +10,13 @@ import * as JobInvocationActions from '../../redux/actions/jobInvocations';
 const colIndexOfMaxValue = columns =>
   columns.reduce((iMax, x, i, arr) => (x[1] > arr[iMax][1] ? i : iMax), 0);
 
+const colorMap = {
+  '#5CB85C': 'success',
+  '#D9534F': 'failed',
+  '#DEDEDE': 'pending',
+  '#B7312D': 'cancelled',
+};
+
 class JobInvocationContainer extends React.Component {
   componentDidMount() {
     const {
@@ -24,6 +31,11 @@ class JobInvocationContainer extends React.Component {
     const { jobInvocations, statuses, chartFilter } = this.props;
     const iMax = colIndexOfMaxValue(jobInvocations);
 
+    const map = jobInvocations.reduce(
+      (acc, [label, _count, color]) => ({ [label]: colorMap[color], ...acc }),
+      {}
+    );
+
     return (
       <div id="job_invocations_chart_container">
         <DonutChart
@@ -33,7 +45,7 @@ class JobInvocationContainer extends React.Component {
             secondary: (jobInvocations[iMax] || [])[0],
           }}
           onclick={(d, element) => {
-            chartFilter(d.name.toLowerCase());
+            chartFilter(map[d.name]);
           }}
         />
         <AggregateStatus statuses={statuses} />

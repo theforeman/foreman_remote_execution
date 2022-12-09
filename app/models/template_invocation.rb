@@ -34,6 +34,7 @@ class TemplateInvocation < ApplicationRecord
       :cancelled => :cancelled,
       :error     => :failed,
       :pending   => :pending,
+      :running   => :pending,
       :success   => :success,
       :warning   => :failed,
     }.with_indifferent_access
