@@ -5,10 +5,10 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 1.5.3\n"
+"Project-Id-Version: foreman_remote_execution 8.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-06-14 23:10+0000\n"
-"Last-Translator: Dominic Cleal <dominic@cleal.org>\n"
+"PO-Revision-Date: 2016-02-15 13:54+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Korean (http://www.transifex.com/foreman/foreman/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,6 +27,12 @@ msgstr ""
 
 msgid "%{description} on %{host}"
 msgstr "%{host}에 대한 %{description}"
+
+msgid "'Starts before' date must be after 'Starts at' date"
+msgstr ""
+
+msgid "'Starts before' date must in the future"
+msgstr ""
 
 msgid ", and %s more"
 msgstr ""
@@ -63,6 +69,9 @@ msgstr "Foreman으로 원격 실행을 가져오는 플러그인입니다. 원�
 msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
 msgstr ""
 
+msgid "A user to be used for SSH."
+msgstr ""
+
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "스크립트를 실행하는 데 사용할 사용자입니다. 이 사용자가 SSH 사용자와 다른 경우 su 또는 sudo를 사용하여 계정을 전환합니다."
 
@@ -70,7 +79,7 @@ msgid "Abort Job"
 msgstr ""
 
 msgid "Action with sub plans"
-msgstr ""
+msgstr "하위 계획이 있는 작업"
 
 msgid "Actions"
 msgstr "작업"
@@ -79,6 +88,9 @@ msgid "Add Foreign Input Set"
 msgstr "외부 입력 세트 추가"
 
 msgid "Advanced fields"
+msgstr ""
+
+msgid "After"
 msgstr ""
 
 msgid "All fields are required."
@@ -94,16 +106,16 @@ msgid "Another interface is already set as execution. Are you sure you want to u
 msgstr "이미 다른 인터페이스가 실행 인터페이스로 설정되어 있습니다. 이 인터페이스를 대신 사용하시겠습니까?"
 
 msgid "Any Location"
-msgstr ""
+msgstr "모든 위치 "
 
 msgid "Any Organization"
-msgstr ""
+msgstr "모든 조직 "
 
 msgid "Apply to"
 msgstr ""
 
 msgid "At"
-msgstr ""
+msgstr "시간"
 
 msgid "At minute"
 msgstr ""
@@ -153,6 +165,9 @@ msgstr ""
 msgid "Clear filters"
 msgstr ""
 
+msgid "Clear input"
+msgstr ""
+
 msgid "Clone a provision template"
 msgstr "프로비저닝 템플릿 복제"
 
@@ -192,6 +207,9 @@ msgstr ""
 msgid "Could not use any template used in the job invocation"
 msgstr "작업 호출에 사용된 템플릿을 사용할 수 없습니다."
 
+msgid "Create"
+msgstr ""
+
 msgid "Create Report"
 msgstr ""
 
@@ -211,7 +229,7 @@ msgid "Create report for this job"
 msgstr ""
 
 msgid "Cron line"
-msgstr ""
+msgstr "Cron 줄"
 
 msgid "Cron line format 'a b c d e', where:"
 msgstr ""
@@ -219,20 +237,26 @@ msgstr ""
 msgid "Cronline"
 msgstr ""
 
+msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
+msgstr ""
+
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr ""
+
+msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
 msgstr ""
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
 msgstr ""
 
 msgid "Daily"
-msgstr ""
+msgstr "매일"
 
 msgid "Days"
-msgstr ""
+msgstr "일"
 
 msgid "Days of week"
-msgstr ""
+msgstr "요일"
 
 msgid "Default SSH key passphrase"
 msgstr ""
@@ -285,9 +309,6 @@ msgstr ""
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr "중복된 입력이 감지되었습니다: %{duplicated_inputs}"
 
-msgid "Dynamic"
-msgstr ""
-
 msgid "Dynamic Query"
 msgstr "동적 쿼리"
 
@@ -304,6 +325,9 @@ msgid "Edit Remote Execution Feature"
 msgstr "원격 실행 기능 편집"
 
 msgid "Edit job description template"
+msgstr ""
+
+msgid "Effective User"
 msgstr ""
 
 msgid "Effective User Method"
@@ -327,9 +351,6 @@ msgstr ""
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
 
-msgid "Efffective User"
-msgstr ""
-
 msgid "Enable Global Proxy"
 msgstr ""
 
@@ -337,10 +358,10 @@ msgid "End time needs to be after start time"
 msgstr ""
 
 msgid "Ends"
-msgstr ""
+msgstr "종료"
 
 msgid "Error"
-msgstr ""
+msgstr "오류 "
 
 msgid "Error loading data from proxy"
 msgstr "프록시에서 데이터를 로드하는 도중 오류가 발생했습니다."
@@ -351,7 +372,13 @@ msgstr ""
 msgid "Evaluated at:"
 msgstr "평가 시점:"
 
-msgid "Execute now"
+msgid "Execute the job later, at a scheduled time."
+msgstr ""
+
+msgid "Execute the job now."
+msgstr ""
+
+msgid "Execute the job on a repeating schedule."
 msgstr ""
 
 msgid "Execute the jobs on hosts in randomized order"
@@ -400,6 +427,9 @@ msgid "Filter by hosts"
 msgstr ""
 
 msgid "Finished"
+msgstr "완료"
+
+msgid "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step."
 msgstr ""
 
 msgid "For example: 1, 2, 3, 4, 5..."
@@ -412,6 +442,9 @@ msgid "Foreman can run arbitrary commands on remote hosts using different provid
 msgstr ""
 
 msgid "Form Job Template"
+msgstr ""
+
+msgid "Future execution"
 msgstr ""
 
 msgid "Get output for a host"
@@ -442,7 +475,7 @@ msgid "Host detail"
 msgstr "호스트 정보"
 
 msgid "Host groups"
-msgstr ""
+msgstr "호스트 그룹 "
 
 msgid "Host task"
 msgstr ""
@@ -451,7 +484,7 @@ msgid "Host with id '%{id}' was not found"
 msgstr "ID가 '%{id}'인 호스트를 찾을 수 없습니다."
 
 msgid "Hosts"
-msgstr ""
+msgstr "호스트"
 
 msgid "Hosts gone missing"
 msgstr ""
@@ -465,23 +498,29 @@ msgstr "cron 형식으로 설정하는 작업 발생 빈도입니다."
 msgid "Identifier of the Host interface for Remote execution"
 msgstr ""
 
+msgid "Immediate execution"
+msgstr ""
+
 msgid "Import"
 msgstr "불러오기"
 
 msgid "Import Puppet classes"
-msgstr ""
+msgstr "Puppet 클래스 가져오기"
 
 msgid "Import a job template from ERB"
 msgstr ""
 
 msgid "Import facts"
-msgstr ""
+msgstr "팩트 불러오기"
 
 msgid "Include all inputs from the foreign template"
 msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "이 시간 전에 시작할 수 없는 경우 작업을 취소한다는 것을 나타냅니다."
+
+msgid "Inherit from host parameter"
+msgstr ""
 
 msgid "Input"
 msgstr "입력"
@@ -496,6 +535,9 @@ msgid "Interface with the '%s' identifier was specified as a remote execution in
 msgstr ""
 
 msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr ""
+
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
 msgstr ""
 
 msgid "Invalid date"
@@ -561,9 +603,6 @@ msgstr ""
 msgid "Job templates"
 msgstr "작업 템플릿"
 
-msgid "Job wizard"
-msgstr ""
-
 msgid "JobTemplate|Locked"
 msgstr "JobTemplate|잠김"
 
@@ -625,13 +664,16 @@ msgid "List template invocations belonging to job invocation"
 msgstr ""
 
 msgid "Location"
-msgstr ""
+msgstr "위치"
 
 msgid "Manual selection"
 msgstr "수동 선택"
 
-msgid "Monthly"
+msgid "Minute can only be a number between 0-59"
 msgstr ""
+
+msgid "Monthly"
+msgstr "매달"
 
 msgid "Must select a bookmark or enter a search query"
 msgstr "북마크를 선택하거나 검색 쿼리를 입력해야 합니다."
@@ -642,11 +684,14 @@ msgstr "해당 없음 "
 msgid "Name"
 msgstr "이름"
 
-msgid "Never ends"
+msgid "Never"
 msgstr ""
 
 msgid "New Job Template"
 msgstr "새 작업 템플릿"
+
+msgid "No (override)"
+msgstr ""
 
 msgid "No Target Hosts"
 msgstr ""
@@ -655,7 +700,7 @@ msgid "No execution finished yet"
 msgstr "아직 완료된 실행이 없습니다."
 
 msgid "No hosts found."
-msgstr ""
+msgstr "호스트를 찾을 수 없습니다."
 
 msgid "No jobs available"
 msgstr ""
@@ -669,11 +714,20 @@ msgstr "%{feature_name} 기능에 매핑된 템플릿이 없습니다."
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
 
+msgid "Now"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
 
-msgid "Organization"
+msgid "Opening job invocation form"
 msgstr ""
+
+msgid "Organization"
+msgstr "조직 "
 
 msgid "Override the description format from the template for this invocation only"
 msgstr "이 호출에 대한 템플릿에서만 설명 형식 덮어쓰기"
@@ -756,6 +810,9 @@ msgstr ""
 msgid "REX job has succeeded - %s"
 msgstr ""
 
+msgid "REX pull mode"
+msgstr ""
+
 msgid "Randomized"
 msgstr ""
 
@@ -763,6 +820,9 @@ msgid "Recent jobs"
 msgstr ""
 
 msgid "Recurrence"
+msgstr ""
+
+msgid "Recurring execution"
 msgstr ""
 
 msgid "Recurring logic"
@@ -795,16 +855,13 @@ msgstr ""
 msgid "Remote execution job"
 msgstr ""
 
-msgid "Repeat N times"
-msgstr ""
-
-msgid "Repeat On"
-msgstr ""
-
 msgid "Repeat a maximum of N times"
 msgstr "최대 N번 반복"
 
 msgid "Repeat amount can only be a positive number"
+msgstr ""
+
+msgid "Repeats"
 msgstr ""
 
 msgid "Rerun"
@@ -824,6 +881,9 @@ msgstr "실패한 호스트에서 재실행"
 
 msgid "Rerun the job"
 msgstr "작업 재실행"
+
+msgid "Reset to default"
+msgstr ""
 
 msgid "Resolves to"
 msgstr "다음으로 확인"
@@ -853,7 +913,7 @@ msgid "Run job"
 msgstr ""
 
 msgid "Running"
-msgstr ""
+msgstr "실행 중 "
 
 msgid "SSH Port"
 msgstr ""
@@ -864,6 +924,9 @@ msgstr ""
 msgid "SSH provider specific options"
 msgstr "SSH 공급자 관련 옵션"
 
+msgid "SSH user"
+msgstr ""
+
 msgid "Schedule"
 msgstr "스케줄 "
 
@@ -871,9 +934,6 @@ msgid "Schedule Remote Job"
 msgstr ""
 
 msgid "Schedule a job"
-msgstr ""
-
-msgid "Schedule for future execution"
 msgstr ""
 
 msgid "Schedule the job for a future time"
@@ -910,7 +970,7 @@ msgid "Search for remote execution proxy outside of the proxies assigned to the 
 msgstr ""
 
 msgid "Search query"
-msgstr ""
+msgstr "검색 쿼리"
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "원격 실행 기능이 있는 모든 프록시의 호스트를 검색합니다. 호스트에 서브넷이 없거나 서브넷에 실행 프록시가 없는 경우 유용합니다."
@@ -933,16 +993,28 @@ msgstr ""
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "이 서브넷에 적용할 수 있는 원격 실행 프록시를 모두 선택합니다. 공급자가 동일한 프록시를 여러 개 추가한 경우 해당 프록시 간에 작업이 로드 밸런싱됩니다."
 
+msgid "Select the type of execution"
+msgstr ""
+
+msgid "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host"
+msgstr ""
+
 msgid "Set SSH key passphrase"
 msgstr ""
 
 msgid "Set SSH password"
 msgstr ""
 
+msgid "Set SSH user"
+msgstr ""
+
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr ""
 
 msgid "Set to distribute over"
+msgstr ""
+
+msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
 msgstr ""
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting"
@@ -978,6 +1050,9 @@ msgstr "시작"
 msgid "Started"
 msgstr ""
 
+msgid "Starts"
+msgstr ""
+
 msgid "Starts at"
 msgstr ""
 
@@ -985,10 +1060,7 @@ msgid "Starts before"
 msgstr ""
 
 msgid "State"
-msgstr ""
-
-msgid "Static"
-msgstr ""
+msgstr "상태 "
 
 msgid "Static Query"
 msgstr "정적 쿼리"
@@ -1108,8 +1180,14 @@ msgstr ""
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr ""
 
+msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day."
+msgstr ""
+
 msgid "Time span"
 msgstr "기간"
+
+msgid "Time to pickup"
+msgstr ""
 
 msgid "Timeout to kill"
 msgstr ""
@@ -1159,6 +1237,9 @@ msgstr ""
 msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
 msgstr ""
 
+msgid "Type of execution"
+msgstr ""
+
 msgid "Type of query"
 msgstr "쿼리 유형"
 
@@ -1194,6 +1275,15 @@ msgstr "작업 템플릿 업데이트"
 
 msgid "Use default description template"
 msgstr "기본 설명 템플릿 사용"
+
+msgid "Use legacy form"
+msgstr ""
+
+msgid "Use new job wizard"
+msgstr ""
+
+msgid "Use old form"
+msgstr ""
 
 msgid "User Inputs"
 msgstr ""
@@ -1232,7 +1322,7 @@ msgid "Web Console"
 msgstr ""
 
 msgid "Weekly"
-msgstr ""
+msgstr "매주"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "유효 사용자를 전환하는 데 사용할 명령입니다(%s 중 하나)."
@@ -1268,6 +1358,9 @@ msgid "Whether we should sync templates from disk when running db:seed."
 msgstr "db:seed를 실행할 때 디스크의 템플릿을 동기화할지 여부입니다."
 
 msgid "Workers pool size"
+msgstr ""
+
+msgid "Yes (override)"
 msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
@@ -1322,18 +1415,24 @@ msgid "input macro with name '%s' used, but no input with such name defined for 
 msgstr "이름이 '%s'인 입력 매크로를 사용했지만 이 템플릿에 대해 해당 이름의 입력이 정의되지 않았습니다."
 
 msgid "is day of month (range: 1-31)"
-msgstr ""
+msgstr "날짜(범위: 1-31)"
 
 msgid "is day of week (range: 0-6)"
-msgstr ""
+msgstr "요일(범위: 0-6)"
 
 msgid "is hour (range: 0-23)"
-msgstr ""
+msgstr "시간(범위: 0-23)"
 
 msgid "is minute (range: 0-59)"
-msgstr ""
+msgstr "분(범위: 0-59)"
 
 msgid "is month (range: 1-12)"
+msgstr "월(범위: 1-12)"
+
+msgid "no"
+msgstr ""
+
+msgid "occurences"
 msgstr ""
 
 msgid "open-help-tooltip-button"
@@ -1343,6 +1442,9 @@ msgid "queued"
 msgstr "대기열에 추가됨"
 
 msgid "queued to start executing in %{time}"
+msgstr ""
+
+msgid "range: 0-59"
 msgstr ""
 
 msgid "remove template input set"
@@ -1370,4 +1472,7 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
+msgstr ""
+
+msgid "yes"
 msgstr ""

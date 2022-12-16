@@ -5,10 +5,10 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 1.5.3\n"
+"Project-Id-Version: foreman_remote_execution 8.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-06-14 23:10+0000\n"
-"Last-Translator: Dominic Cleal <dominic@cleal.org>\n"
+"PO-Revision-Date: 2016-02-15 13:54+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/foreman/foreman/lang"
 "uage/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,12 @@ msgstr ""
 
 msgid "%{description} on %{host}"
 msgstr "%{description} 於 %{host} 之上"
+
+msgid "'Starts before' date must be after 'Starts at' date"
+msgstr ""
+
+msgid "'Starts before' date must in the future"
+msgstr ""
 
 msgid ", and %s more"
 msgstr ""
@@ -64,6 +70,9 @@ msgstr "將遠端執行帶入 Foreman 的外掛程式，搭配遠端管理功能
 msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
 msgstr ""
 
+msgid "A user to be used for SSH."
+msgstr ""
+
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "要使用執行這 script 的使用者。如果使用者與 SSH 使用者不同，會用 su 或 sudo 來切換使用者。"
 
@@ -71,7 +80,7 @@ msgid "Abort Job"
 msgstr ""
 
 msgid "Action with sub plans"
-msgstr ""
+msgstr "有子計畫的動作"
 
 msgid "Actions"
 msgstr "動作"
@@ -80,6 +89,9 @@ msgid "Add Foreign Input Set"
 msgstr "新增外部輸入集"
 
 msgid "Advanced fields"
+msgstr ""
+
+msgid "After"
 msgstr ""
 
 msgid "All fields are required."
@@ -95,16 +107,16 @@ msgid "Another interface is already set as execution. Are you sure you want to u
 msgstr "另一個介面已設為執行。行您是否確定要使用此介面？"
 
 msgid "Any Location"
-msgstr ""
+msgstr "任何位置"
 
 msgid "Any Organization"
-msgstr ""
+msgstr "任何組織"
 
 msgid "Apply to"
 msgstr ""
 
 msgid "At"
-msgstr ""
+msgstr "於"
 
 msgid "At minute"
 msgstr ""
@@ -154,6 +166,9 @@ msgstr ""
 msgid "Clear filters"
 msgstr ""
 
+msgid "Clear input"
+msgstr ""
+
 msgid "Clone a provision template"
 msgstr "複製佈建範本"
 
@@ -193,6 +208,9 @@ msgstr ""
 msgid "Could not use any template used in the job invocation"
 msgstr "無法使用任何用於這工作祈願的範本"
 
+msgid "Create"
+msgstr ""
+
 msgid "Create Report"
 msgstr ""
 
@@ -212,7 +230,7 @@ msgid "Create report for this job"
 msgstr ""
 
 msgid "Cron line"
-msgstr ""
+msgstr "Cron 行"
 
 msgid "Cron line format 'a b c d e', where:"
 msgstr ""
@@ -220,20 +238,26 @@ msgstr ""
 msgid "Cronline"
 msgstr ""
 
+msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
+msgstr ""
+
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr ""
+
+msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
 msgstr ""
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
 msgstr ""
 
 msgid "Daily"
-msgstr ""
+msgstr "每天"
 
 msgid "Days"
-msgstr ""
+msgstr "天"
 
 msgid "Days of week"
-msgstr ""
+msgstr "星期幾"
 
 msgid "Default SSH key passphrase"
 msgstr ""
@@ -286,9 +310,6 @@ msgstr ""
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr "偵測到重複的輸入：%{duplicated_inputs}"
 
-msgid "Dynamic"
-msgstr ""
-
 msgid "Dynamic Query"
 msgstr "動態查詢"
 
@@ -305,6 +326,9 @@ msgid "Edit Remote Execution Feature"
 msgstr "編輯遠端執行功能"
 
 msgid "Edit job description template"
+msgstr ""
+
+msgid "Effective User"
 msgstr ""
 
 msgid "Effective User Method"
@@ -328,9 +352,6 @@ msgstr ""
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
 
-msgid "Efffective User"
-msgstr ""
-
 msgid "Enable Global Proxy"
 msgstr ""
 
@@ -338,10 +359,10 @@ msgid "End time needs to be after start time"
 msgstr ""
 
 msgid "Ends"
-msgstr ""
+msgstr "結束"
 
 msgid "Error"
-msgstr ""
+msgstr "錯誤"
 
 msgid "Error loading data from proxy"
 msgstr "從代理載入資料時發生錯誤"
@@ -352,7 +373,13 @@ msgstr ""
 msgid "Evaluated at:"
 msgstr "評量於："
 
-msgid "Execute now"
+msgid "Execute the job later, at a scheduled time."
+msgstr ""
+
+msgid "Execute the job now."
+msgstr ""
+
+msgid "Execute the job on a repeating schedule."
 msgstr ""
 
 msgid "Execute the jobs on hosts in randomized order"
@@ -401,6 +428,9 @@ msgid "Filter by hosts"
 msgstr ""
 
 msgid "Finished"
+msgstr "已完成"
+
+msgid "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step."
 msgstr ""
 
 msgid "For example: 1, 2, 3, 4, 5..."
@@ -413,6 +443,9 @@ msgid "Foreman can run arbitrary commands on remote hosts using different provid
 msgstr ""
 
 msgid "Form Job Template"
+msgstr ""
+
+msgid "Future execution"
 msgstr ""
 
 msgid "Get output for a host"
@@ -443,7 +476,7 @@ msgid "Host detail"
 msgstr "主機詳細資料"
 
 msgid "Host groups"
-msgstr ""
+msgstr "主機群組"
 
 msgid "Host task"
 msgstr ""
@@ -452,7 +485,7 @@ msgid "Host with id '%{id}' was not found"
 msgstr "找不到 ID 為 '%{id}' 的主機"
 
 msgid "Hosts"
-msgstr ""
+msgstr "主機"
 
 msgid "Hosts gone missing"
 msgstr ""
@@ -466,23 +499,29 @@ msgstr "工作多常發生，格式同 cron"
 msgid "Identifier of the Host interface for Remote execution"
 msgstr ""
 
+msgid "Immediate execution"
+msgstr ""
+
 msgid "Import"
 msgstr "匯入"
 
 msgid "Import Puppet classes"
-msgstr ""
+msgstr "匯入 Puppet 類別"
 
 msgid "Import a job template from ERB"
 msgstr ""
 
 msgid "Import facts"
-msgstr ""
+msgstr "匯入詳情"
 
 msgid "Include all inputs from the foreign template"
 msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "這表示如果不能在這時間之前開始，就應該取消動作。"
+
+msgid "Inherit from host parameter"
+msgstr ""
 
 msgid "Input"
 msgstr "輸入"
@@ -497,6 +536,9 @@ msgid "Interface with the '%s' identifier was specified as a remote execution in
 msgstr ""
 
 msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr ""
+
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
 msgstr ""
 
 msgid "Invalid date"
@@ -562,9 +604,6 @@ msgstr ""
 msgid "Job templates"
 msgstr "工作範本"
 
-msgid "Job wizard"
-msgstr ""
-
 msgid "JobTemplate|Locked"
 msgstr "JobTemplate|Locked"
 
@@ -626,13 +665,16 @@ msgid "List template invocations belonging to job invocation"
 msgstr ""
 
 msgid "Location"
-msgstr ""
+msgstr "位置"
 
 msgid "Manual selection"
 msgstr "手動選擇"
 
-msgid "Monthly"
+msgid "Minute can only be a number between 0-59"
 msgstr ""
+
+msgid "Monthly"
+msgstr "每個月"
 
 msgid "Must select a bookmark or enter a search query"
 msgstr "必須選擇書籤或輸入搜尋查詢"
@@ -643,11 +685,14 @@ msgstr "N/A"
 msgid "Name"
 msgstr "名稱"
 
-msgid "Never ends"
+msgid "Never"
 msgstr ""
 
 msgid "New Job Template"
 msgstr "新工作範本"
+
+msgid "No (override)"
+msgstr ""
 
 msgid "No Target Hosts"
 msgstr ""
@@ -656,7 +701,7 @@ msgid "No execution finished yet"
 msgstr "尚無執行完成"
 
 msgid "No hosts found."
-msgstr ""
+msgstr "找不到主機。"
 
 msgid "No jobs available"
 msgstr ""
@@ -670,11 +715,20 @@ msgstr "沒有範本定義至功能 %{feature_name}"
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "並不是所需的輸入都有值。缺少的輸入：%s"
 
+msgid "Now"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
 
-msgid "Organization"
+msgid "Opening job invocation form"
 msgstr ""
+
+msgid "Organization"
+msgstr "組織"
 
 msgid "Override the description format from the template for this invocation only"
 msgstr "僅為這祈願從範本覆寫描述格式"
@@ -692,7 +746,7 @@ msgid "Overwrite template if it already exists"
 msgstr ""
 
 msgid "Password"
-msgstr ""
+msgstr "密碼"
 
 msgid "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
@@ -757,6 +811,9 @@ msgstr ""
 msgid "REX job has succeeded - %s"
 msgstr ""
 
+msgid "REX pull mode"
+msgstr ""
+
 msgid "Randomized"
 msgstr ""
 
@@ -764,6 +821,9 @@ msgid "Recent jobs"
 msgstr ""
 
 msgid "Recurrence"
+msgstr ""
+
+msgid "Recurring execution"
 msgstr ""
 
 msgid "Recurring logic"
@@ -796,16 +856,13 @@ msgstr ""
 msgid "Remote execution job"
 msgstr ""
 
-msgid "Repeat N times"
-msgstr ""
-
-msgid "Repeat On"
-msgstr ""
-
 msgid "Repeat a maximum of N times"
 msgstr "重複最多 N 次"
 
 msgid "Repeat amount can only be a positive number"
+msgstr ""
+
+msgid "Repeats"
 msgstr ""
 
 msgid "Rerun"
@@ -825,6 +882,9 @@ msgstr "在失敗的主機上重新執行"
 
 msgid "Rerun the job"
 msgstr "重新執行工作"
+
+msgid "Reset to default"
+msgstr ""
 
 msgid "Resolves to"
 msgstr "解析至"
@@ -854,7 +914,7 @@ msgid "Run job"
 msgstr ""
 
 msgid "Running"
-msgstr ""
+msgstr "執行中"
 
 msgid "SSH Port"
 msgstr ""
@@ -865,6 +925,9 @@ msgstr ""
 msgid "SSH provider specific options"
 msgstr "SSH 供應者特定選項"
 
+msgid "SSH user"
+msgstr ""
+
 msgid "Schedule"
 msgstr "排程"
 
@@ -872,9 +935,6 @@ msgid "Schedule Remote Job"
 msgstr ""
 
 msgid "Schedule a job"
-msgstr ""
-
-msgid "Schedule for future execution"
 msgstr ""
 
 msgid "Schedule the job for a future time"
@@ -911,7 +971,7 @@ msgid "Search for remote execution proxy outside of the proxies assigned to the 
 msgstr ""
 
 msgid "Search query"
-msgstr ""
+msgstr "搜尋查詢"
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "使用遠端執行為代理搜尋主機，這在主機沒有子網路、或子網路沒有執行代理時很有用"
@@ -934,16 +994,28 @@ msgstr ""
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "為此子網路儘可能選擇遠端執行代理。加入有著同樣供應者的多重代理之後，動作就會在這些代理上進行負載平衡。"
 
+msgid "Select the type of execution"
+msgstr ""
+
+msgid "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host"
+msgstr ""
+
 msgid "Set SSH key passphrase"
 msgstr ""
 
 msgid "Set SSH password"
 msgstr ""
 
+msgid "Set SSH user"
+msgstr ""
+
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr ""
 
 msgid "Set to distribute over"
+msgstr ""
+
+msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
 msgstr ""
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting"
@@ -979,6 +1051,9 @@ msgstr "開始"
 msgid "Started"
 msgstr ""
 
+msgid "Starts"
+msgstr ""
+
 msgid "Starts at"
 msgstr ""
 
@@ -986,10 +1061,7 @@ msgid "Starts before"
 msgstr ""
 
 msgid "State"
-msgstr ""
-
-msgid "Static"
-msgstr ""
+msgstr "狀態"
 
 msgid "Static Query"
 msgstr "靜態查詢"
@@ -1110,8 +1182,14 @@ msgstr ""
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr ""
 
+msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day."
+msgstr ""
+
 msgid "Time span"
 msgstr "時間跨度"
+
+msgid "Time to pickup"
+msgstr ""
 
 msgid "Timeout to kill"
 msgstr ""
@@ -1161,6 +1239,9 @@ msgstr ""
 msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
 msgstr ""
 
+msgid "Type of execution"
+msgstr ""
+
 msgid "Type of query"
 msgstr "查詢類型"
 
@@ -1196,6 +1277,15 @@ msgstr "更新工作範本"
 
 msgid "Use default description template"
 msgstr "使用預設的描述範本"
+
+msgid "Use legacy form"
+msgstr ""
+
+msgid "Use new job wizard"
+msgstr ""
+
+msgid "Use old form"
+msgstr ""
 
 msgid "User Inputs"
 msgstr ""
@@ -1234,7 +1324,7 @@ msgid "Web Console"
 msgstr ""
 
 msgid "Weekly"
-msgstr ""
+msgstr "每週"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "該用哪個指令來切換至有效的使用者。%s 之一"
@@ -1270,6 +1360,9 @@ msgid "Whether we should sync templates from disk when running db:seed."
 msgstr "執行 db:seed 時是否要從磁碟同步範本。"
 
 msgid "Workers pool size"
+msgstr ""
+
+msgid "Yes (override)"
 msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
@@ -1324,18 +1417,24 @@ msgid "input macro with name '%s' used, but no input with such name defined for 
 msgstr "使用了名為 '%s' 的輸入巨集，但此範本並未輸入這樣的名稱"
 
 msgid "is day of month (range: 1-31)"
-msgstr ""
+msgstr "是日期（範圍：1-31）"
 
 msgid "is day of week (range: 0-6)"
-msgstr ""
+msgstr "是星期幾（範圍：0-6）"
 
 msgid "is hour (range: 0-23)"
-msgstr ""
+msgstr "是小時（範圍：0-23）"
 
 msgid "is minute (range: 0-59)"
-msgstr ""
+msgstr "是分鐘（範圍：0-59）"
 
 msgid "is month (range: 1-12)"
+msgstr "是月份（範圍：1-12）"
+
+msgid "no"
+msgstr ""
+
+msgid "occurences"
 msgstr ""
 
 msgid "open-help-tooltip-button"
@@ -1345,6 +1444,9 @@ msgid "queued"
 msgstr "已排程"
 
 msgid "queued to start executing in %{time}"
+msgstr ""
+
+msgid "range: 0-59"
 msgstr ""
 
 msgid "remove template input set"
@@ -1372,4 +1474,7 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
+msgstr ""
+
+msgid "yes"
 msgstr ""
