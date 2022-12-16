@@ -3,14 +3,18 @@
 # This file is distributed under the same license as the foreman_remote_execution package.
 #
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2016-2017
-# Paul Puschmann, 2017
+# Crited <Alexander.Stoll@netways.de>, 2019
+# Bernhard Suttner <bernhard.suttner@atix.de>, 2019
+# Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022
+# Patrick Dolinic, 2021
+# Patrick Dolinic, 2021
+# abf90805572190d649c59f7a021d76cb, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 1.5.3\n"
+"Project-Id-Version: foreman_remote_execution 8.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-06-14 23:10+0000\n"
-"Last-Translator: Bryan Kearney <bryan.kearney@gmail.com>\n"
+"PO-Revision-Date: 2016-02-15 13:54+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022\n"
 "Language-Team: German (http://www.transifex.com/foreman/foreman/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,6 +33,12 @@ msgstr ""
 
 msgid "%{description} on %{host}"
 msgstr "%{description} auf %{host}"
+
+msgid "'Starts before' date must be after 'Starts at' date"
+msgstr ""
+
+msgid "'Starts before' date must in the future"
+msgstr ""
 
 msgid ", and %s more"
 msgstr ""
@@ -54,7 +64,7 @@ msgid "A job '%{subject}' has failed"
 msgstr ""
 
 msgid "A job '%{subject}' has finished successfully"
-msgstr ""
+msgstr "Ein Job '%{subject}' wurde erfolgreich beendet"
 
 msgid "A notification when a job finishes"
 msgstr ""
@@ -65,14 +75,17 @@ msgstr "Ein Plugin, das Foreman entfernte Ausführung bietet und die Konfig-Verw
 msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
 msgstr ""
 
+msgid "A user to be used for SSH."
+msgstr ""
+
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "Ein Benutzer, der für die Ausführung des Skripts verwendet werden soll. Wenn dieser sich vom SSH-Benutzer unterscheidet, kann mittels su oder sudo der Account gewechselt werden."
 
 msgid "Abort Job"
-msgstr ""
+msgstr "Job abbrechen"
 
 msgid "Action with sub plans"
-msgstr ""
+msgstr "Aktion mit Unterplänen"
 
 msgid "Actions"
 msgstr "Aktionen"
@@ -81,31 +94,34 @@ msgid "Add Foreign Input Set"
 msgstr "Fremdeingabe-Satz hinzufügen"
 
 msgid "Advanced fields"
+msgstr "Erweiterte Felder"
+
+msgid "After"
 msgstr ""
 
 msgid "All fields are required."
-msgstr ""
+msgstr "Alle Felder sind erforderlich."
 
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alphabetisch"
 
 msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
-msgstr ""
+msgstr "Anzahl der Worker im Pool, die die Ausführung der Remote-Ausführungsjobs verarbeiten. Neustart des Dienstes dynflowd/foreman-tasks ist erforderlich."
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "Es ist bereits eine andere Schnittstelle für die Ausführung bestimmt. Sind Sie sicher, dass Sie stattdessen diese Schnittstelle verwenden möchten?"
 
 msgid "Any Location"
-msgstr ""
+msgstr "Jeder Standort"
 
 msgid "Any Organization"
-msgstr ""
+msgstr "Jede Organisation"
 
 msgid "Apply to"
 msgstr ""
 
 msgid "At"
-msgstr ""
+msgstr "Um"
 
 msgid "At minute"
 msgstr ""
@@ -123,7 +139,7 @@ msgid "Cancel Job"
 msgstr "Job abbrechen"
 
 msgid "Cancel job invocation"
-msgstr ""
+msgstr "Job-Aufruf abbrechen"
 
 msgid "Cancelled"
 msgstr "Abgebrochen"
@@ -144,15 +160,18 @@ msgid "Category and Template"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
-msgstr ""
+msgstr "Wählen Sie eine Jobvorlage, die im Jobaufrufformular vorausgewählt ist"
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
 msgstr "Zirkuläre Abhängigkeit im Fremdeingabe-Satz gefunden '%{template}' -> '%{target_template}'. Vorlagen-Stack: %{templates_stack}"
 
 msgid "Cleanup working directories"
-msgstr ""
+msgstr "Arbeitsverzeichnisse bereinigen"
 
 msgid "Clear filters"
+msgstr ""
+
+msgid "Clear input"
 msgstr ""
 
 msgid "Clone a provision template"
@@ -162,37 +181,40 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Cockpit URL"
-msgstr ""
+msgstr "Cockpit-URL"
 
 msgid "Concurrency level"
 msgstr "Parallelitätsebene"
 
 msgid "Concurrency level limited to"
-msgstr ""
+msgstr "Gleichzeitigkeitsstufe begrenzt auf"
 
 msgid "Connect by IP"
-msgstr ""
+msgstr "Verbindung über IP"
 
 msgid "Control concurrency level and distribution over time"
 msgstr "Parallelitätsebene und zeitliche Verteilung steuern"
 
 msgid "Could not display data for job invocation."
-msgstr ""
+msgstr "Daten für Jobaufruf konnten nicht angezeigt werden."
 
 msgid "Could not find any suitable interface for execution"
-msgstr ""
+msgstr "Konnte keine passende Schnitstelle zum ausführen finden."
 
 msgid "Could not render the preview because no host matches the search query."
-msgstr ""
+msgstr "Vorschau konnte nicht gerendert werden, da kein Host, der Suchanfrage entspricht"
 
 msgid "Could not rerun job %{id} because its template could not be found"
-msgstr ""
+msgstr "Job %{id} konnte nicht erneut aufgerufen werden, da die Vorlage nicht gefunden wurde."
 
 msgid "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
 msgid "Could not use any template used in the job invocation"
 msgstr "Es konnte keine Vorlage aus dem Jobaufruf verwendet werden"
+
+msgid "Create"
+msgstr ""
 
 msgid "Create Report"
 msgstr ""
@@ -213,7 +235,7 @@ msgid "Create report for this job"
 msgstr ""
 
 msgid "Cron line"
-msgstr ""
+msgstr "Cron-Zeile"
 
 msgid "Cron line format 'a b c d e', where:"
 msgstr ""
@@ -221,32 +243,38 @@ msgstr ""
 msgid "Cronline"
 msgstr ""
 
+msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
+msgstr ""
+
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr "Der aktuelle Standort %{loc_c} unterscheidet sich vom Standort des Jobs %{loc_j}."
+
+msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
 msgstr ""
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
-msgstr ""
+msgstr "Die aktuelle Organisation %{org_c} unterscheidet sich von der Organisation des Jobs %{org_j}."
 
 msgid "Daily"
-msgstr ""
+msgstr "Täglich"
 
 msgid "Days"
-msgstr ""
+msgstr "Tage"
 
 msgid "Days of week"
-msgstr ""
+msgstr "Wochentage"
 
 msgid "Default SSH key passphrase"
-msgstr ""
+msgstr "Standard SSH-Key Kennwort"
 
 msgid "Default SSH password"
-msgstr ""
+msgstr "Standard SSH Passwort"
 
 msgid "Default key passphrase to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_key_passphrase"
-msgstr ""
+msgstr "Für SSH zu verwendende Standardschlüssel-Passphrase. Sie können pro Host überschreiben, indem Sie einen Parameter namens remote_execution_ssh_key_passphrase setzen"
 
 msgid "Default password to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_password"
-msgstr ""
+msgstr "Standardkennwort für SSH. Sie können pro Host überschreiben, indem Sie einen Parameter namens remote_execution_ssh_password setzen"
 
 msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
 msgstr "Standardbenutzer für SSH. Kann für jeden Host einzeln überschrieben werden, indem Sie ein Parameter namens remote_execution_ssh_user bestimmen."
@@ -276,7 +304,7 @@ msgid "Display advanced fields"
 msgstr "Erweiterte Felder einblenden"
 
 msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-msgstr ""
+msgstr "Verteilen Sie die Ausführung auf N Sekunden. Wenn dies gesetzt und die Proxy-Batch-Triggerung aktiviert ist, werden Aufgaben auf dem Smart Proxy in Batches der Größe 1 ausgelöst."
 
 msgid "Distribute tasks over N seconds"
 msgstr "Aufgaben über n Sekunden verteilen"
@@ -286,9 +314,6 @@ msgstr ""
 
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr "Doppelte Eingaben gefunden: %{duplicated_inputs}"
-
-msgid "Dynamic"
-msgstr ""
 
 msgid "Dynamic Query"
 msgstr "Dynamische Anfrage"
@@ -308,8 +333,11 @@ msgstr "Entfernte Ausführungsfunktionen bearbeiten"
 msgid "Edit job description template"
 msgstr ""
 
-msgid "Effective User Method"
+msgid "Effective User"
 msgstr ""
+
+msgid "Effective User Method"
+msgstr "Effektive Benutzermethode"
 
 msgid "Effective user"
 msgstr "Effektiver Benutzer"
@@ -321,55 +349,58 @@ msgid "Effective user options"
 msgstr "Effektive Benutzeroptionen"
 
 msgid "Effective user password"
-msgstr ""
+msgstr "Effektives Benutzerpasswort"
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr ""
+msgstr "Das gültige Benutzerkennwort gilt nur für den SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. <br> Das Passwort wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
 
-msgid "Efffective User"
-msgstr ""
-
 msgid "Enable Global Proxy"
-msgstr ""
+msgstr "Globalen Proxy aktivieren"
 
 msgid "End time needs to be after start time"
 msgstr ""
 
 msgid "Ends"
-msgstr ""
+msgstr "Endet"
 
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 msgid "Error loading data from proxy"
 msgstr "Fehler die Daten vom Proxy zu laden."
 
 msgid "Errors:"
-msgstr ""
+msgstr "Fehler:"
 
 msgid "Evaluated at:"
 msgstr "Evaluiert an:"
 
-msgid "Execute now"
+msgid "Execute the job later, at a scheduled time."
+msgstr ""
+
+msgid "Execute the job now."
+msgstr ""
+
+msgid "Execute the job on a repeating schedule."
 msgstr ""
 
 msgid "Execute the jobs on hosts in randomized order"
-msgstr ""
+msgstr "Führe die Jobs auf Hosts in randomisierter Reihenfolge aus"
 
 msgid "Execution"
 msgstr "Ausführung"
 
 msgid "Execution order"
-msgstr ""
+msgstr "Ausführungsreihenfolge"
 
 msgid "Execution ordering"
-msgstr ""
+msgstr "Ausführungsorder"
 
 msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
-msgstr ""
+msgstr "Die Ausführungsreihenfolge legt fest, ob die Jobs auf Hosts in alphabetischer Reihenfolge oder in zufälliger Reihenfolge ausgeführt werden sollen. <br><ul><li><b>Ordered </b>- führt die Jobs auf Hosts in alphabetischer Reihenfolge aus </li><li><b>Randomized </b>- randomisiert die Reihenfolge, in der Jobs auf Hosts ausgeführt werden </li></ul>"
 
 msgid "Exit status: %s"
 msgstr "Exit-Status: %s"
@@ -387,7 +418,7 @@ msgid "Failed rendering template: %s"
 msgstr "Rendern der Vorlage fehlgeschlagen: %s"
 
 msgid "Fallback to Any Proxy"
-msgstr ""
+msgstr "Fallback auf einen beliebigen Proxy"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "Funktionseingabe %{input_name} nicht definiert in Vorlage %{template_name}"
@@ -402,6 +433,9 @@ msgid "Filter by hosts"
 msgstr ""
 
 msgid "Finished"
+msgstr "Fertig"
+
+msgid "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step."
 msgstr ""
 
 msgid "For example: 1, 2, 3, 4, 5..."
@@ -411,19 +445,22 @@ msgid "Foreign input set"
 msgstr "Fremdeingabe-Satz"
 
 msgid "Foreman can run arbitrary commands on remote hosts using different providers, such as SSH or Ansible. Communication goes through the Smart Proxy so Foreman does not have to have direct access to the target hosts and can scale to control many hosts."
-msgstr ""
+msgstr "Foreman kann beliebige Befehle auf entfernten Hosts mit verschiedenen Anbietern wie SSH oder Ansible ausführen. Die Kommunikation läuft über den Smart Proxy, sodass Foreman keinen direkten Zugriff auf die Zielhosts haben muss und skalieren kann, um viele Hosts zu steuern."
 
 msgid "Form Job Template"
+msgstr "Formularauftragsvorlage"
+
+msgid "Future execution"
 msgstr ""
 
 msgid "Get output for a host"
 msgstr "Ausgabe für einen Host abfragen"
 
 msgid "Get outputs of hosts in a job"
-msgstr ""
+msgstr "Besorge dir die Outputs eines Hosts eines Jobs"
 
 msgid "Get raw output for a host"
-msgstr ""
+msgstr "Besorge dir die rohen Outputs eines Hosts"
 
 msgid "Has to be a positive number"
 msgstr ""
@@ -444,19 +481,19 @@ msgid "Host detail"
 msgstr "Hostdetail"
 
 msgid "Host groups"
-msgstr ""
+msgstr "Hostgruppen"
 
 msgid "Host task"
-msgstr ""
+msgstr "Host-Aufgabe"
 
 msgid "Host with id '%{id}' was not found"
 msgstr "Host mit ID '%{id}' nicht gefunden"
 
 msgid "Hosts"
-msgstr ""
+msgstr "Hosts"
 
 msgid "Hosts gone missing"
-msgstr ""
+msgstr "Host verschwunden"
 
 msgid "Hourly"
 msgstr ""
@@ -465,25 +502,31 @@ msgid "How often the job should occur, in the cron format"
 msgstr "Wie oft der Job auftreten soll, in Cron-Format"
 
 msgid "Identifier of the Host interface for Remote execution"
+msgstr "Identifizierer des Host-interfaces für Remote-Ausführung"
+
+msgid "Immediate execution"
 msgstr ""
 
 msgid "Import"
 msgstr "Import"
 
 msgid "Import Puppet classes"
-msgstr ""
+msgstr "Puppet-Klassen importieren"
 
 msgid "Import a job template from ERB"
 msgstr "Job-Vorlage aus ERB importieren"
 
 msgid "Import facts"
-msgstr ""
+msgstr "Fakten importieren"
 
 msgid "Include all inputs from the foreign template"
 msgstr "Alle Eingaben aus Fremdvorlage einschließen"
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Gibt an, dass die Aktion abgebrochen werden soll, wenn sie nicht vor diesem Zeitpunkt gestartet werden kann."
+
+msgid "Inherit from host parameter"
+msgstr ""
 
 msgid "Input"
 msgstr "Eingabe"
@@ -495,9 +538,12 @@ msgid "Inputs to use"
 msgstr "Zu verwendende Eingaben"
 
 msgid "Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration."
-msgstr ""
+msgstr "Schnittstelle mit dem Bezeichner '%s wurde als Remote-Ausführungsschnittstelle angegeben, die Schnittstelle wurde jedoch nicht auf dem Host gefunden. Falls die Schnittstelle vorhanden ist, muss diese bei der Registrierung in Foreman angelegt werden."
 
 msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr "Der interne Proxy-Selektor kann nur verwendet werden, wenn Katello aktiviert ist"
+
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
 msgstr ""
 
 msgid "Invalid date"
@@ -513,7 +559,7 @@ msgid "Job"
 msgstr "Job"
 
 msgid "Job Details"
-msgstr ""
+msgstr "Job Details"
 
 msgid "Job Invocation"
 msgstr "Job-Aufruf"
@@ -522,7 +568,7 @@ msgid "Job Invocation Report Template"
 msgstr ""
 
 msgid "Job Invocations"
-msgstr ""
+msgstr "Job-Aufrufe"
 
 msgid "Job Task"
 msgstr "Aufgaben des Jobs"
@@ -531,13 +577,13 @@ msgid "Job Templates"
 msgstr "Job-Vorlagen"
 
 msgid "Job cancelled by user"
-msgstr ""
+msgstr "Jobabbruch durch Benutzer"
 
 msgid "Job category"
 msgstr "Job-Kategorie"
 
 msgid "Job execution failed"
-msgstr ""
+msgstr "Jobausführung fehlgeschlagen"
 
 msgid "Job finished with error"
 msgstr "Job abgeschlossen mit Fehler"
@@ -563,9 +609,6 @@ msgstr "Job-Vorlage erfolgreich importiert"
 msgid "Job templates"
 msgstr "Job-Vorlagen"
 
-msgid "Job wizard"
-msgstr ""
-
 msgid "JobTemplate|Locked"
 msgstr "Gesperrt"
 
@@ -579,7 +622,7 @@ msgid "Jobs"
 msgstr "Jobs"
 
 msgid "Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr ""
+msgstr "Key passhprase gilt nur für SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. <br> Die Passphrase wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
 
 msgid "Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
@@ -588,7 +631,7 @@ msgid "Label"
 msgstr "Kennung"
 
 msgid "Last execution cancelled"
-msgstr ""
+msgstr "Letzte Ausführung abgebrochen"
 
 msgid "Last execution failed"
 msgstr "Letzte Ausführung fehlgeschlagen"
@@ -618,22 +661,25 @@ msgid "List job templates per organization"
 msgstr "Job-Vorlagen pro Organisation auflisten"
 
 msgid "List of proxy IDs to be used for remote execution"
-msgstr ""
+msgstr "Liste der Proxy-IDs die für Remote-Ausführung benutzt werden können."
 
 msgid "List remote execution features"
 msgstr "Entfernte Ausführungsfunktionen auflisten"
 
 msgid "List template invocations belonging to job invocation"
-msgstr ""
+msgstr "Lasse dir die Template-Invocations ausgeben die zu einer Job-Invocation gehören"
 
 msgid "Location"
-msgstr ""
+msgstr "Standort"
 
 msgid "Manual selection"
 msgstr "Manuelle Auswahl"
 
-msgid "Monthly"
+msgid "Minute can only be a number between 0-59"
 msgstr ""
+
+msgid "Monthly"
+msgstr "Monatlich"
 
 msgid "Must select a bookmark or enter a search query"
 msgstr "Es muss ein Lesezeichen oder eine Suchanfrage ausgewählt werden"
@@ -644,11 +690,14 @@ msgstr "k.A."
 msgid "Name"
 msgstr "Name"
 
-msgid "Never ends"
+msgid "Never"
 msgstr ""
 
 msgid "New Job Template"
 msgstr "Neue Job-Vorlage"
+
+msgid "No (override)"
+msgstr ""
 
 msgid "No Target Hosts"
 msgstr ""
@@ -657,13 +706,13 @@ msgid "No execution finished yet"
 msgstr "Noch keine Ausführung abgeschlossen"
 
 msgid "No hosts found."
-msgstr ""
+msgstr "Keine Hosts gefunden"
 
 msgid "No jobs available"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "Keine Ergebnisse gefunden"
 
 msgid "No template mapped to feature %{feature_name}"
 msgstr "Der Funktion %{feature_name} wurde keine Vorlage zugewiesen"
@@ -671,17 +720,26 @@ msgstr "Der Funktion %{feature_name} wurde keine Vorlage zugewiesen"
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Nicht alle erforderlichen Eingaben haben Werte. Fehlende Eingaben: %s"
 
+msgid "Now"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
 
-msgid "Organization"
+msgid "Opening job invocation form"
 msgstr ""
+
+msgid "Organization"
+msgstr "Organisation"
 
 msgid "Override the description format from the template for this invocation only"
 msgstr "Beschreibungsformat der Vorlage nur für diesen Aufruf außer Kraft setzen "
 
 msgid "Override the timeout interval from the template for this invocation only"
-msgstr ""
+msgstr "Überschreibe das Timeout-Intervall des Templates / Musters nur für diese Invokation / diesen Aufruf"
 
 msgid "Overview"
 msgstr "Überblick"
@@ -696,13 +754,13 @@ msgid "Password"
 msgstr "Passwort"
 
 msgid "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr ""
+msgstr "Das Passwort wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
 
 msgid "Pending"
 msgstr "Ausstehend"
 
 msgid "Perform a single Puppet run"
-msgstr ""
+msgstr "Führe einen einzelnen Puppet-Lauf aus"
 
 msgid "Perform no more executions after this time"
 msgstr "Danach nicht mehr ausführen"
@@ -728,10 +786,10 @@ msgid "Preview job description"
 msgstr ""
 
 msgid "Preview templates"
-msgstr ""
+msgstr "Vorlagen-Vorschau betrachten"
 
 msgid "Private key passphrase"
-msgstr ""
+msgstr "Privat-Key Kennwort"
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "Problem bei Vorlagen-Vorschau: %{error}. Beachten Sie, dass Sie die Änderungen an der Vorlageneingabe speichern müssen, bevor eine Vorschau angezeigt werden kann."
@@ -760,13 +818,19 @@ msgstr ""
 msgid "REX job has succeeded - %s"
 msgstr ""
 
-msgid "Randomized"
+msgid "REX pull mode"
 msgstr ""
+
+msgid "Randomized"
+msgstr "Zufällig"
 
 msgid "Recent jobs"
 msgstr ""
 
 msgid "Recurrence"
+msgstr ""
+
+msgid "Recurring execution"
 msgstr ""
 
 msgid "Recurring logic"
@@ -785,7 +849,7 @@ msgid "Remote Execution Features"
 msgstr "Entfernte Ausführungsfunktionen "
 
 msgid "Remote Execution Interface"
-msgstr ""
+msgstr "Remote-Ausführungsschnittstelle"
 
 msgid "Remote action:"
 msgstr "Entfernte Aktion"
@@ -794,21 +858,18 @@ msgid "Remote execution"
 msgstr "Entfernte Ausführung"
 
 msgid "Remote execution feature label that should be triggered, job template assigned to this feature will be used"
-msgstr ""
+msgstr "Label der Remote-Ausführungsfunktion, die ausgelöst werden soll, die dieser Funktion zugewiesene Jobvorlage wird verwendet"
 
 msgid "Remote execution job"
-msgstr ""
-
-msgid "Repeat N times"
-msgstr ""
-
-msgid "Repeat On"
 msgstr ""
 
 msgid "Repeat a maximum of N times"
 msgstr "Maximal n-mal wiederholen"
 
 msgid "Repeat amount can only be a positive number"
+msgstr ""
+
+msgid "Repeats"
 msgstr ""
 
 msgid "Rerun"
@@ -818,7 +879,7 @@ msgid "Rerun failed"
 msgstr "Erneutes Ausführen fehlgeschlagen"
 
 msgid "Rerun job on failed hosts"
-msgstr ""
+msgstr "Erneut ausführen auf fehlgeschlagenen Hosts"
 
 msgid "Rerun on %s"
 msgstr "Erneut ausführen auf %s"
@@ -829,14 +890,17 @@ msgstr "Erneut ausführen auf fehlgeschlagenen Hosts"
 msgid "Rerun the job"
 msgstr "Job erneut ausführen"
 
+msgid "Reset to default"
+msgstr ""
+
 msgid "Resolves to"
 msgstr "Wird aufgelöst zu"
 
 msgid "Results"
-msgstr ""
+msgstr "Ergebnisse"
 
 msgid "Review details"
-msgstr ""
+msgstr "Bewertungsdetails"
 
 msgid "Run"
 msgstr "Ausführen"
@@ -845,39 +909,39 @@ msgid "Run Job"
 msgstr "Job ausführen"
 
 msgid "Run Puppet Once"
-msgstr ""
+msgstr "Puppet einmal ausführen"
 
 msgid "Run at most N tasks at a time"
 msgstr "Höchstens n Aufgaben gleichzeitig ausführen"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-msgstr ""
+msgstr "Führen Sie höchstens N Aufgaben gleichzeitig aus. Wenn dies gesetzt und die Proxy-Batch-Triggerung aktiviert ist, werden Aufgaben auf dem Smart Proxy in Batches der Größe 1 ausgelöst."
 
 msgid "Run job"
-msgstr ""
+msgstr "Job ausführen"
 
 msgid "Running"
-msgstr ""
+msgstr "Läuft"
 
 msgid "SSH Port"
-msgstr ""
+msgstr "SSH Port"
 
 msgid "SSH User"
-msgstr ""
+msgstr "SSH Benutzer"
 
 msgid "SSH provider specific options"
 msgstr "Besondere Optionen des SSH-Anbieters"
+
+msgid "SSH user"
+msgstr ""
 
 msgid "Schedule"
 msgstr "Plan"
 
 msgid "Schedule Remote Job"
-msgstr ""
+msgstr "Geplante Remote-Jobs"
 
 msgid "Schedule a job"
-msgstr ""
-
-msgid "Schedule for future execution"
 msgstr ""
 
 msgid "Schedule the job for a future time"
@@ -890,16 +954,16 @@ msgid "Schedule type"
 msgstr ""
 
 msgid "Scheduled"
-msgstr ""
+msgstr "Geplant"
 
 msgid "Scheduled to start at"
-msgstr ""
+msgstr "Geplanter Start um"
 
 msgid "Scheduled to start before"
-msgstr ""
+msgstr "Geplanter Start vor"
 
 msgid "Script"
-msgstr ""
+msgstr "Skript"
 
 msgid "Scroll to bottom"
 msgstr "Zum Ende scrollen"
@@ -908,13 +972,13 @@ msgid "Scroll to top"
 msgstr "Zum Anfang scrollen"
 
 msgid "Search Query"
-msgstr ""
+msgstr "Suchanfrage"
 
 msgid "Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host's organization and location."
-msgstr ""
+msgstr "Suchen Sie nach einem Remote-Ausführungsproxy außerhalb der dem Host zugewiesenen Proxys. Die Suche wird auf die Organisation und den Standort des Hosts beschränkt."
 
 msgid "Search query"
-msgstr ""
+msgstr "Suchanfrage"
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "Den Host nach einem Proxy mit entfernter Ausführung durchsuchen. Dies ist nützlich, wenn der Host kein Subnetz hat oder das Subnetz keinen Proxy für die Ausführung hat."
@@ -937,26 +1001,38 @@ msgstr "ERB-Datei zum Hochladen auswählen, um Job-Vorlage zu importieren. Die V
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "Wählen Sie so viele Proxys für entfernte Ausführung aus, wie es für dieses Subnetz zutreffend ist. Wenn mehrere Proxys mit demselben Provider hinzugefügt werden, dann wird die Auslastung unter diesen ausgeglichen."
 
+msgid "Select the type of execution"
+msgstr ""
+
+msgid "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host"
+msgstr ""
+
 msgid "Set SSH key passphrase"
 msgstr ""
 
 msgid "Set SSH password"
 msgstr ""
 
+msgid "Set SSH user"
+msgstr ""
+
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr ""
 
 msgid "Set to distribute over"
+msgstr "Verteilen über"
+
+msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
 msgstr ""
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting"
 msgstr ""
 
 msgid "Should this interface be used for remote execution?"
-msgstr ""
+msgstr "Soll diese Schnittstelle für die Remote-Ausführung verwendet werden?"
 
 msgid "Show Job status for the hosts"
-msgstr ""
+msgstr "Zeige Job status des Hosts"
 
 msgid "Show all advanced fields"
 msgstr ""
@@ -980,6 +1056,9 @@ msgid "Start"
 msgstr "Start"
 
 msgid "Started"
+msgstr "Gestartet"
+
+msgid "Starts"
 msgstr ""
 
 msgid "Starts at"
@@ -989,10 +1068,7 @@ msgid "Starts before"
 msgstr ""
 
 msgid "State"
-msgstr ""
-
-msgid "Static"
-msgstr ""
+msgstr "Status"
 
 msgid "Static Query"
 msgstr "Statische Anfrage"
@@ -1019,7 +1095,7 @@ msgid "Success"
 msgstr "Erfolg"
 
 msgid "Sync Job Templates"
-msgstr ""
+msgstr "Synchronisations Job-Vorlage"
 
 msgid "Target hosts"
 msgstr "Zielhosts"
@@ -1037,13 +1113,13 @@ msgid "Task Details"
 msgstr "Aufgabendetails"
 
 msgid "Task cancelled"
-msgstr ""
+msgstr "Task abgebrochen"
 
 msgid "Template ERB"
 msgstr "Vorlage ERB"
 
 msgid "Template Invocation for %s"
-msgstr ""
+msgstr "Vorlagen-Aufruf für %s"
 
 msgid "Template failed with:"
 msgstr ""
@@ -1070,16 +1146,16 @@ msgid "The final host list may change because the selected query is dynamic.  It
 msgstr "Die endgültige Hostliste kann sich ändern, da die ausgewählte Anfrage dynamisch ist. Sie wird während der Ausführung wiederholt."
 
 msgid "The job cannot be aborted at the moment."
-msgstr ""
+msgstr "Die Aufgabe kann derzeit nicht abgebrochen werden."
 
 msgid "The job cannot be cancelled at the moment."
-msgstr ""
+msgstr "Die Aufgabe kann derzeit nicht abgebrochen werden."
 
 msgid "The job could not be cancelled."
-msgstr ""
+msgstr "Job kann nicht abgebrochen werden"
 
 msgid "The job template to use, parameter is required unless feature was specified"
-msgstr ""
+msgstr "Das Job-Template zum Benutzen, der Parameter wird benötigt ausser das Feature wurde spezifiziert"
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
@@ -1096,7 +1172,7 @@ msgid "There was an error while updating the status, try refreshing the page."
 msgstr "Beim Status-Update ist ein Fehler aufgetreten, versuchen Sie die Seite zu aktualisieren."
 
 msgid "This can happen if the host is removed or moved to another organization or location after the job was started"
-msgstr ""
+msgstr "Dies kann passieren, wenn der Host entfernt oder in eine andere Organisation oder an einen anderen Standort verschoben wird, nachdem der Job gestartet wurde"
 
 msgid "This template is locked for editing."
 msgstr "Diese Vorlage ist schreibgeschützt."
@@ -1108,19 +1184,25 @@ msgid "This template is used to generate the description. Input values can be us
 msgstr "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. Eingabewerte können mittels Syntax %{package} verwendet werden. Sie können auch Job-Kategorie und Vorlagennamen über %{job_category} und %{template_name} einschließen."
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
-msgstr ""
+msgstr "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. <br/>Eingabewerte können mittels Syntax %{package} verwendet werden.<br/> Sie können auch Job-Kategorie und Vorlagennamen <br/>über %{job_category} und %{template_name} einschließen."
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
+msgstr "Zeit in Sekunden ab dem Start auf dem Remote-Host, nach der der Job beendet werden soll."
+
+msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day."
 msgstr ""
 
 msgid "Time span"
 msgstr "Zeitspanne"
 
-msgid "Timeout to kill"
+msgid "Time to pickup"
 msgstr ""
 
+msgid "Timeout to kill"
+msgstr "Timeout zum kill-Befehl"
+
 msgid "Timeout to kill after"
-msgstr ""
+msgstr "Timeout, um danach den kill-Befehl danach"
 
 msgid "Toggle DEBUG"
 msgstr "Umschalt DEBUG"
@@ -1138,10 +1220,10 @@ msgid "Total hosts"
 msgstr "Hosts gesamt"
 
 msgid "Try to abort the job on a host without waiting for its result"
-msgstr ""
+msgstr "Versuche den Job auf den Host abzubrechen ohne auf das Resultat zu warten"
 
 msgid "Try to abort the job without waiting for the results from the remote hosts"
-msgstr ""
+msgstr "Versuche den Job abzubrechen ohne auf das Resultat vom entfernten Host zu warten"
 
 msgid "Try to cancel the job"
 msgstr "Versuche den Job abzubrechen"
@@ -1150,10 +1232,10 @@ msgid "Try to cancel the job on a host"
 msgstr "Versuche den Job auf einem Host abzubrechen"
 
 msgid "Trying to abort the job"
-msgstr ""
+msgstr "Versuche Jobabbruch zu erzwingen"
 
 msgid "Trying to cancel the job"
-msgstr ""
+msgstr "Versuche den Job abzubrechen"
 
 msgid "Type"
 msgstr "Typ"
@@ -1162,19 +1244,22 @@ msgid "Type has impact on when is the query evaluated to hosts."
 msgstr ""
 
 msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
+msgstr "Typ hat Einfluss darauf, wann die Abfrage an Hosts ausgewertet wird. <br><ul><li><b>Statisch </b> – wird direkt nach dem Absenden dieses Formulars ausgewertet </li><li><b>Dynamisch </b> – wird unmittelbar vor dem Start der Ausführung evaluiert , wenn es also in der Zukunft geplant ist, kann das abgezielte Host set sich zuvor ändern </li></ul>"
+
+msgid "Type of execution"
 msgstr ""
 
 msgid "Type of query"
 msgstr "Anfragetyp"
 
 msgid "Unable to create mail notification: %s"
-msgstr ""
+msgstr "Unable to create mail notification: %s"
 
 msgid "Unable to fetch public key"
 msgstr "Öffentlicher Schlüssel konnte nicht abgerufen werden"
 
 msgid "Unable to remove host from known hosts"
-msgstr ""
+msgstr "Host kann nicht von bekannten Hosts entfernt werden"
 
 msgid "Unable to save template. Correct highlighted errors"
 msgstr "Vorlage kann nicht gespeichert werden. Bitte korrigieren Sie die markierten Fehler"
@@ -1200,8 +1285,17 @@ msgstr "Job-Vorlage aktualisieren"
 msgid "Use default description template"
 msgstr "Standardbeschreibungsvorlage verwenden"
 
-msgid "User Inputs"
+msgid "Use legacy form"
 msgstr ""
+
+msgid "Use new job wizard"
+msgstr ""
+
+msgid "Use old form"
+msgstr ""
+
+msgid "User Inputs"
+msgstr "Benutzereingaben"
 
 msgid "User can not execute job on host %s"
 msgstr "Benutzer kann den Job auf Host %s nicht ausführen"
@@ -1234,10 +1328,10 @@ msgid "View scheduled jobs"
 msgstr ""
 
 msgid "Web Console"
-msgstr ""
+msgstr "Web-Konsole"
 
 msgid "Weekly"
-msgstr ""
+msgstr "Wöchentlich"
 
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr "Welcher Befehl für den Wechsel zum effektiven Benutzer verwendet werden soll. Einer von %s"
@@ -1252,10 +1346,10 @@ msgid "When connecting using ip address, should the IPv6 addresses be preferred?
 msgstr ""
 
 msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
-msgstr ""
+msgstr "Wenn diese Option aktiviert ist, werden Arbeitsverzeichnisse nach Abschluss der Aufgabe entfernt. Sie können dies pro Host überschreiben, indem Sie einen Parameter namens remote_execution_cleanup_working_dirs setzen."
 
 msgid "Where to find the Cockpit instance for the Web Console button.  By default, no button is shown."
-msgstr ""
+msgstr "Wo man die Cockpit-Instanz für die Schaltfläche Web Console findet. Standardmäßig wird keine Schaltfläche angezeigt."
 
 msgid "Whether it should be allowed to override the effective user from the invocation form."
 msgstr "Ob es möglich sein soll, den effektiven Benutzer des Aufruf-Formulars außer Kraft zu setzen."
@@ -1273,6 +1367,9 @@ msgid "Whether we should sync templates from disk when running db:seed."
 msgstr "Ob Vorlagen von der Festplatte synchronisiert werden sollten, wenn db:seed ausgeführt wird."
 
 msgid "Workers pool size"
+msgstr "Größe des Arbeiterpools"
+
+msgid "Yes (override)"
 msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
@@ -1288,13 +1385,13 @@ msgid "cancelled"
 msgstr "abgebrochen"
 
 msgid "default_capsule method missing from SmartProxy"
-msgstr ""
+msgstr "default_capsule-Methode fehlt in SmartProxy"
 
 msgid "effective user"
-msgstr ""
+msgstr "Effektiver Benutzer"
 
 msgid "error"
-msgstr ""
+msgstr "Error"
 
 msgid "error during rendering: %s"
 msgstr "Fehler beim Rendern: %s"
@@ -1327,18 +1424,24 @@ msgid "input macro with name '%s' used, but no input with such name defined for 
 msgstr "Es wurde ein Eingabe-Macro namens '%s' verwendet, aber es wurde keine Eingabe mit diesem Namen für diese Vorlage definiert"
 
 msgid "is day of month (range: 1-31)"
-msgstr ""
+msgstr "Tag des Monats (im Bereich: 1-31)"
 
 msgid "is day of week (range: 0-6)"
-msgstr ""
+msgstr "Wochentag (im Bereich: 0-6)"
 
 msgid "is hour (range: 0-23)"
-msgstr ""
+msgstr "Stunde (im Bereich: 0-23)"
 
 msgid "is minute (range: 0-59)"
-msgstr ""
+msgstr "Minute (im Bereich: 0-59)"
 
 msgid "is month (range: 1-12)"
+msgstr "Monat (im Bereich: 1-12)"
+
+msgid "no"
+msgstr ""
+
+msgid "occurences"
 msgstr ""
 
 msgid "open-help-tooltip-button"
@@ -1348,6 +1451,9 @@ msgid "queued"
 msgstr "in der Warteschlange"
 
 msgid "queued to start executing in %{time}"
+msgstr "in der Warteschlange, um in %{time} mit der Ausführung zu beginnen"
+
+msgid "range: 0-59"
 msgstr ""
 
 msgid "remove template input set"
@@ -1363,7 +1469,7 @@ msgid "succeeded"
 msgstr "erfolgreich"
 
 msgid "tasks at a time"
-msgstr ""
+msgstr "Aufgaben gleichzeitig"
 
 msgid "template"
 msgstr "Vorlage"
@@ -1372,7 +1478,10 @@ msgid "unknown status"
 msgstr "unbekannter Status"
 
 msgid "using "
-msgstr ""
+msgstr "verwende"
 
 msgid "using Smart Proxy"
+msgstr ""
+
+msgid "yes"
 msgstr ""
