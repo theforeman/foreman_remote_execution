@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 1.5.3\n"
+"Project-Id-Version: foreman_remote_execution 8.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-03 04:48-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -27,6 +27,12 @@ msgid "%s job has been invoked"
 msgstr ""
 
 msgid "%{description} on %{host}"
+msgstr ""
+
+msgid "'Starts before' date must be after 'Starts at' date"
+msgstr ""
+
+msgid "'Starts before' date must in the future"
 msgstr ""
 
 msgid ", and %s more"
@@ -64,6 +70,9 @@ msgstr ""
 msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
 msgstr ""
 
+msgid "A user to be used for SSH."
+msgstr ""
+
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr ""
 
@@ -80,6 +89,9 @@ msgid "Add Foreign Input Set"
 msgstr ""
 
 msgid "Advanced fields"
+msgstr ""
+
+msgid "After"
 msgstr ""
 
 msgid "All fields are required."
@@ -154,6 +166,9 @@ msgstr ""
 msgid "Clear filters"
 msgstr ""
 
+msgid "Clear input"
+msgstr ""
+
 msgid "Clone a provision template"
 msgstr ""
 
@@ -193,6 +208,9 @@ msgstr ""
 msgid "Could not use any template used in the job invocation"
 msgstr ""
 
+msgid "Create"
+msgstr ""
+
 msgid "Create Report"
 msgstr ""
 
@@ -220,7 +238,13 @@ msgstr ""
 msgid "Cronline"
 msgstr ""
 
+msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
+msgstr ""
+
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr ""
+
+msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
 msgstr ""
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
@@ -286,9 +310,6 @@ msgstr ""
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr ""
 
-msgid "Dynamic"
-msgstr ""
-
 msgid "Dynamic Query"
 msgstr ""
 
@@ -305,6 +326,9 @@ msgid "Edit Remote Execution Feature"
 msgstr ""
 
 msgid "Edit job description template"
+msgstr ""
+
+msgid "Effective User"
 msgstr ""
 
 msgid "Effective User Method"
@@ -328,9 +352,6 @@ msgstr ""
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr ""
 
-msgid "Efffective User"
-msgstr ""
-
 msgid "Enable Global Proxy"
 msgstr ""
 
@@ -352,7 +373,13 @@ msgstr ""
 msgid "Evaluated at:"
 msgstr ""
 
-msgid "Execute now"
+msgid "Execute the job later, at a scheduled time."
+msgstr ""
+
+msgid "Execute the job now."
+msgstr ""
+
+msgid "Execute the job on a repeating schedule."
 msgstr ""
 
 msgid "Execute the jobs on hosts in randomized order"
@@ -403,6 +430,9 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
+msgid "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step."
+msgstr ""
+
 msgid "For example: 1, 2, 3, 4, 5..."
 msgstr ""
 
@@ -413,6 +443,9 @@ msgid "Foreman can run arbitrary commands on remote hosts using different provid
 msgstr ""
 
 msgid "Form Job Template"
+msgstr ""
+
+msgid "Future execution"
 msgstr ""
 
 msgid "Get output for a host"
@@ -466,6 +499,9 @@ msgstr ""
 msgid "Identifier of the Host interface for Remote execution"
 msgstr ""
 
+msgid "Immediate execution"
+msgstr ""
+
 msgid "Import"
 msgstr ""
 
@@ -484,6 +520,9 @@ msgstr ""
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr ""
 
+msgid "Inherit from host parameter"
+msgstr ""
+
 msgid "Input"
 msgstr ""
 
@@ -497,6 +536,9 @@ msgid "Interface with the '%s' identifier was specified as a remote execution in
 msgstr ""
 
 msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr ""
+
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
 msgstr ""
 
 msgid "Invalid date"
@@ -560,9 +602,6 @@ msgid "Job template imported successfully."
 msgstr ""
 
 msgid "Job templates"
-msgstr ""
-
-msgid "Job wizard"
 msgstr ""
 
 msgid "JobTemplate|Locked"
@@ -631,6 +670,9 @@ msgstr ""
 msgid "Manual selection"
 msgstr ""
 
+msgid "Minute can only be a number between 0-59"
+msgstr ""
+
 msgid "Monthly"
 msgstr ""
 
@@ -643,10 +685,13 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-msgid "Never ends"
+msgid "Never"
 msgstr ""
 
 msgid "New Job Template"
+msgstr ""
+
+msgid "No (override)"
 msgstr ""
 
 msgid "No Target Hosts"
@@ -670,7 +715,16 @@ msgstr ""
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr ""
 
+msgid "Now"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
 msgid "Only one of feature or job_template_id can be specified"
+msgstr ""
+
+msgid "Opening job invocation form"
 msgstr ""
 
 msgid "Organization"
@@ -757,6 +811,9 @@ msgstr ""
 msgid "REX job has succeeded - %s"
 msgstr ""
 
+msgid "REX pull mode"
+msgstr ""
+
 msgid "Randomized"
 msgstr ""
 
@@ -764,6 +821,9 @@ msgid "Recent jobs"
 msgstr ""
 
 msgid "Recurrence"
+msgstr ""
+
+msgid "Recurring execution"
 msgstr ""
 
 msgid "Recurring logic"
@@ -796,16 +856,13 @@ msgstr ""
 msgid "Remote execution job"
 msgstr ""
 
-msgid "Repeat N times"
-msgstr ""
-
-msgid "Repeat On"
-msgstr ""
-
 msgid "Repeat a maximum of N times"
 msgstr ""
 
 msgid "Repeat amount can only be a positive number"
+msgstr ""
+
+msgid "Repeats"
 msgstr ""
 
 msgid "Rerun"
@@ -824,6 +881,9 @@ msgid "Rerun on failed hosts"
 msgstr ""
 
 msgid "Rerun the job"
+msgstr ""
+
+msgid "Reset to default"
 msgstr ""
 
 msgid "Resolves to"
@@ -865,6 +925,9 @@ msgstr ""
 msgid "SSH provider specific options"
 msgstr ""
 
+msgid "SSH user"
+msgstr ""
+
 msgid "Schedule"
 msgstr ""
 
@@ -872,9 +935,6 @@ msgid "Schedule Remote Job"
 msgstr ""
 
 msgid "Schedule a job"
-msgstr ""
-
-msgid "Schedule for future execution"
 msgstr ""
 
 msgid "Schedule the job for a future time"
@@ -934,16 +994,28 @@ msgstr ""
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr ""
 
+msgid "Select the type of execution"
+msgstr ""
+
+msgid "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host"
+msgstr ""
+
 msgid "Set SSH key passphrase"
 msgstr ""
 
 msgid "Set SSH password"
 msgstr ""
 
+msgid "Set SSH user"
+msgstr ""
+
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr ""
 
 msgid "Set to distribute over"
+msgstr ""
+
+msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
 msgstr ""
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting"
@@ -979,6 +1051,9 @@ msgstr ""
 msgid "Started"
 msgstr ""
 
+msgid "Starts"
+msgstr ""
+
 msgid "Starts at"
 msgstr ""
 
@@ -986,9 +1061,6 @@ msgid "Starts before"
 msgstr ""
 
 msgid "State"
-msgstr ""
-
-msgid "Static"
 msgstr ""
 
 msgid "Static Query"
@@ -1110,7 +1182,13 @@ msgstr ""
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr ""
 
+msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day."
+msgstr ""
+
 msgid "Time span"
+msgstr ""
+
+msgid "Time to pickup"
 msgstr ""
 
 msgid "Timeout to kill"
@@ -1161,6 +1239,9 @@ msgstr ""
 msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
 msgstr ""
 
+msgid "Type of execution"
+msgstr ""
+
 msgid "Type of query"
 msgstr ""
 
@@ -1195,6 +1276,15 @@ msgid "Update a job template"
 msgstr ""
 
 msgid "Use default description template"
+msgstr ""
+
+msgid "Use legacy form"
+msgstr ""
+
+msgid "Use new job wizard"
+msgstr ""
+
+msgid "Use old form"
 msgstr ""
 
 msgid "User Inputs"
@@ -1272,6 +1362,9 @@ msgstr ""
 msgid "Workers pool size"
 msgstr ""
 
+msgid "Yes (override)"
+msgstr ""
+
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr ""
 
@@ -1338,6 +1431,12 @@ msgstr ""
 msgid "is month (range: 1-12)"
 msgstr ""
 
+msgid "no"
+msgstr ""
+
+msgid "occurences"
+msgstr ""
+
 msgid "open-help-tooltip-button"
 msgstr ""
 
@@ -1345,6 +1444,9 @@ msgid "queued"
 msgstr ""
 
 msgid "queued to start executing in %{time}"
+msgstr ""
+
+msgid "range: 0-59"
 msgstr ""
 
 msgid "remove template input set"
@@ -1372,4 +1474,7 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
+msgstr ""
+
+msgid "yes"
 msgstr ""
