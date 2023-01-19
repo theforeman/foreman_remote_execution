@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -85,6 +85,9 @@ msgstr "Acción con subplanes"
 
 msgid "Actions"
 msgstr "Acciones"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr "Agregar conjunto de entrada externo"
@@ -210,7 +213,7 @@ msgid "Could not use any template used in the job invocation"
 msgstr "No se pudo utilizar ninguna plantilla utilizada en la invocación de trabajo."
 
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 msgid "Create Report"
 msgstr "Crear informe"
@@ -330,7 +333,7 @@ msgid "Edit job description template"
 msgstr "Editar plantilla de descripción de funciones"
 
 msgid "Effective User"
-msgstr ""
+msgstr "Usuario efectivo"
 
 msgid "Effective User Method"
 msgstr "Método de usuario efectivo"
@@ -522,7 +525,7 @@ msgid "Indicates that the action should be cancelled if it cannot be started bef
 msgstr "Indica que la acción se debe cancelar si no se puede iniciar antes de este momento."
 
 msgid "Inherit from host parameter"
-msgstr ""
+msgstr "Heredar del parámetro del anfitrión"
 
 msgid "Input"
 msgstr "Entrada"
@@ -687,13 +690,13 @@ msgid "Name"
 msgstr "Nombre"
 
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 msgid "New Job Template"
 msgstr "Nueva plantilla de trabajo"
 
 msgid "No (override)"
-msgstr ""
+msgstr "No (anulación)"
 
 msgid "No Target Hosts"
 msgstr "No hay hosts de destino"
@@ -720,7 +723,7 @@ msgid "Now"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Activar"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "Sólo se puede especificar uno de feature o job_template_id"
@@ -864,7 +867,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr "El importe de la repetición sólo puede ser un número positivo"
 
 msgid "Repeats"
-msgstr ""
+msgstr "Se repite"
 
 msgid "Rerun"
 msgstr "Volver a ejecutar"
@@ -885,7 +888,7 @@ msgid "Rerun the job"
 msgstr "Volver a ejecutar el trabajo"
 
 msgid "Reset to default"
-msgstr ""
+msgstr "Restablecer valores predeterminados"
 
 msgid "Resolves to"
 msgstr "Se resuelve en"
@@ -1053,7 +1056,7 @@ msgid "Started"
 msgstr "Inició"
 
 msgid "Starts"
-msgstr ""
+msgstr "Comienza"
 
 msgid "Starts at"
 msgstr "Comienza en"
@@ -1365,7 +1368,7 @@ msgid "Workers pool size"
 msgstr "Tamaño del grupo de trabajadores"
 
 msgid "Yes (override)"
-msgstr ""
+msgstr "Sí (anulación)"
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "No puede ver la plantilla actualmente asignada. Si guarda el formulario ahora, se eliminará la asignación de la plantilla."
@@ -1434,7 +1437,7 @@ msgid "is month (range: 1-12)"
 msgstr "es mes (rango: 1-12)"
 
 msgid "no"
-msgstr ""
+msgstr "no"
 
 msgid "occurences"
 msgstr ""
@@ -1479,4 +1482,4 @@ msgid "using Smart Proxy"
 msgstr "utilizando Smart Proxy"
 
 msgid "yes"
-msgstr ""
+msgstr "sí"

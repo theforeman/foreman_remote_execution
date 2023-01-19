@@ -7,7 +7,7 @@
 # elobato <elobatocs@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: elobato <elobatocs@gmail.com>, 2017\n"
@@ -85,6 +85,9 @@ msgstr "サブプランによるアクション"
 
 msgid "Actions"
 msgstr "アクション"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr "外部入力セットを追加"
@@ -210,7 +213,7 @@ msgid "Could not use any template used in the job invocation"
 msgstr "ジョブ呼び出しで使用されるテンプレートを使用できませんでした"
 
 msgid "Create"
-msgstr ""
+msgstr "作成"
 
 msgid "Create Report"
 msgstr "レポートを作成"
@@ -330,7 +333,7 @@ msgid "Edit job description template"
 msgstr "ジョブ説明テンプレートを編集"
 
 msgid "Effective User"
-msgstr ""
+msgstr "実効ユーザー"
 
 msgid "Effective User Method"
 msgstr "実効ユーザーメソッド"
@@ -522,7 +525,7 @@ msgid "Indicates that the action should be cancelled if it cannot be started bef
 msgstr "アクションはこの時刻よりも前に開始できない場合にキャンセルされることを示しています。"
 
 msgid "Inherit from host parameter"
-msgstr ""
+msgstr "ホストパラメーターから継承"
 
 msgid "Input"
 msgstr "入力"
@@ -687,13 +690,13 @@ msgid "Name"
 msgstr "名前"
 
 msgid "Never"
-msgstr ""
+msgstr "なし"
 
 msgid "New Job Template"
 msgstr "新規ジョブテンプレート"
 
 msgid "No (override)"
-msgstr ""
+msgstr "No (上書き)"
 
 msgid "No Target Hosts"
 msgstr "ターゲットホストがありません"
@@ -720,7 +723,7 @@ msgid "Now"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "オン"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "機能または job_template_id の 1 つのみを指定できます"
@@ -864,7 +867,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr "繰り返しの値は正の数でなければなりません"
 
 msgid "Repeats"
-msgstr ""
+msgstr "繰り返し"
 
 msgid "Rerun"
 msgstr "再実行"
@@ -885,7 +888,7 @@ msgid "Rerun the job"
 msgstr "ジョブを再実行"
 
 msgid "Reset to default"
-msgstr ""
+msgstr "デフォルトにリセット"
 
 msgid "Resolves to"
 msgstr "解決:"
@@ -1053,7 +1056,7 @@ msgid "Started"
 msgstr "開始済み"
 
 msgid "Starts"
-msgstr ""
+msgstr "開始"
 
 msgid "Starts at"
 msgstr "開始時刻"
@@ -1071,7 +1074,7 @@ msgid "Static query"
 msgstr "静的クエリー"
 
 msgid "Status"
-msgstr "ステータス"
+msgstr "状態"
 
 msgid "Subscribe to all my jobs"
 msgstr "すべての自分のジョブにサブスクライブする"
@@ -1363,7 +1366,7 @@ msgid "Workers pool size"
 msgstr "ワーカーのプールサイズ"
 
 msgid "Yes (override)"
-msgstr ""
+msgstr "Yes (上書き)"
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "現在割り当てられているテンプレートを参照できません。フォームを保存すると、テンプレートの割り当てが解除されます。"
@@ -1432,7 +1435,7 @@ msgid "is month (range: 1-12)"
 msgstr "月 (範囲: 1 - 12)"
 
 msgid "no"
-msgstr ""
+msgstr "no"
 
 msgid "occurences"
 msgstr ""
@@ -1477,4 +1480,4 @@ msgid "using Smart Proxy"
 msgstr "Smart Proxy を使用"
 
 msgid "yes"
-msgstr ""
+msgstr "yes"

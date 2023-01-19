@@ -11,7 +11,7 @@
 # abf90805572190d649c59f7a021d76cb, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022\n"
@@ -89,6 +89,9 @@ msgstr "Aktion mit Unterplänen"
 
 msgid "Actions"
 msgstr "Aktionen"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr "Fremdeingabe-Satz hinzufügen"
@@ -214,7 +217,7 @@ msgid "Could not use any template used in the job invocation"
 msgstr "Es konnte keine Vorlage aus dem Jobaufruf verwendet werden"
 
 msgid "Create"
-msgstr ""
+msgstr "Erstellen"
 
 msgid "Create Report"
 msgstr ""
@@ -334,7 +337,7 @@ msgid "Edit job description template"
 msgstr ""
 
 msgid "Effective User"
-msgstr ""
+msgstr "Effektiver Benutzer"
 
 msgid "Effective User Method"
 msgstr "Effektive Benutzermethode"
@@ -691,13 +694,13 @@ msgid "Name"
 msgstr "Name"
 
 msgid "Never"
-msgstr ""
+msgstr "Niemals"
 
 msgid "New Job Template"
 msgstr "Neue Job-Vorlage"
 
 msgid "No (override)"
-msgstr ""
+msgstr "Nein (Überschreiben)"
 
 msgid "No Target Hosts"
 msgstr ""
@@ -724,7 +727,7 @@ msgid "Now"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Am"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
@@ -870,7 +873,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr ""
 
 msgid "Repeats"
-msgstr ""
+msgstr "Wiederholungen "
 
 msgid "Rerun"
 msgstr "Erneut ausführen"
@@ -891,7 +894,7 @@ msgid "Rerun the job"
 msgstr "Job erneut ausführen"
 
 msgid "Reset to default"
-msgstr ""
+msgstr "Rücksetzen auf Standardeinstellungen"
 
 msgid "Resolves to"
 msgstr "Wird aufgelöst zu"
@@ -1059,7 +1062,7 @@ msgid "Started"
 msgstr "Gestartet"
 
 msgid "Starts"
-msgstr ""
+msgstr "Beginnt"
 
 msgid "Starts at"
 msgstr ""
@@ -1370,7 +1373,7 @@ msgid "Workers pool size"
 msgstr "Größe des Arbeiterpools"
 
 msgid "Yes (override)"
-msgstr ""
+msgstr "Ja (überschreiben)"
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "Sie haben nicht die Genehmigung, die aktuell zugewiesenen Vorlagen einzusehen. Wenn Sie das Formular jetzt speichern, wird die Zuweisung der Vorlage aufgehoben."
@@ -1439,7 +1442,7 @@ msgid "is month (range: 1-12)"
 msgstr "Monat (im Bereich: 1-12)"
 
 msgid "no"
-msgstr ""
+msgstr "nein"
 
 msgid "occurences"
 msgstr ""
@@ -1484,4 +1487,4 @@ msgid "using Smart Proxy"
 msgstr ""
 
 msgid "yes"
-msgstr ""
+msgstr "ja"

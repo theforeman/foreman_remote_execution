@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -85,6 +85,9 @@ msgstr "Ação com subplanos "
 
 msgid "Actions"
 msgstr "Ações"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr "Adicionar Conjunto de Entradas Externas"
@@ -210,7 +213,7 @@ msgid "Could not use any template used in the job invocation"
 msgstr "Não foi possível usar nenhum modelo utilizado na invocação de trabalho "
 
 msgid "Create"
-msgstr ""
+msgstr "Criar"
 
 msgid "Create Report"
 msgstr "Criar relatório"
@@ -330,7 +333,7 @@ msgid "Edit job description template"
 msgstr "Editar modelo de descrição de cargo"
 
 msgid "Effective User"
-msgstr ""
+msgstr "Usuário efetivo"
 
 msgid "Effective User Method"
 msgstr "Método de usuário efetivo"
@@ -687,7 +690,7 @@ msgid "Name"
 msgstr "Nome"
 
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 msgid "New Job Template"
 msgstr "Novo Modelo de Trabalho "
@@ -720,7 +723,7 @@ msgid "Now"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Ligado"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "Apenas um dos recursos ou job_template_id pode ser especificado"
@@ -864,7 +867,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr "A quantia repetida só pode ser um número positivo"
 
 msgid "Repeats"
-msgstr ""
+msgstr "Repetições "
 
 msgid "Rerun"
 msgstr "Executar novamente"
@@ -885,7 +888,7 @@ msgid "Rerun the job"
 msgstr "Executar novamente o trabalho"
 
 msgid "Reset to default"
-msgstr ""
+msgstr "Reconfigurar como padrão"
 
 msgid "Resolves to"
 msgstr "Resolve para"
@@ -1053,7 +1056,7 @@ msgid "Started"
 msgstr "Iniciado em"
 
 msgid "Starts"
-msgstr ""
+msgstr "Inicia"
 
 msgid "Starts at"
 msgstr "Começa em"
@@ -1434,7 +1437,7 @@ msgid "is month (range: 1-12)"
 msgstr "é o mês (intervalo: 1-12)"
 
 msgid "no"
-msgstr ""
+msgstr "não"
 
 msgid "occurences"
 msgstr ""
@@ -1479,4 +1482,4 @@ msgid "using Smart Proxy"
 msgstr "usando o Smart Proxy"
 
 msgid "yes"
-msgstr ""
+msgstr "sim"
