@@ -6,7 +6,7 @@
 # 0868a4d1af5275b3f70b0a6dac4c99a4, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: 0868a4d1af5275b3f70b0a6dac4c99a4, 2016\n"
@@ -85,6 +85,9 @@ msgstr "Action with sub plans"
 
 msgid "Actions"
 msgstr "Actions"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr ""
@@ -1433,7 +1436,7 @@ msgid "is month (range: 1-12)"
 msgstr ""
 
 msgid "no"
-msgstr ""
+msgstr "no"
 
 msgid "occurences"
 msgstr ""
@@ -1478,4 +1481,4 @@ msgid "using Smart Proxy"
 msgstr ""
 
 msgid "yes"
-msgstr ""
+msgstr "yes"

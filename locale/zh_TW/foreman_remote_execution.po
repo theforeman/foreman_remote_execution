@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -84,6 +84,9 @@ msgstr "有子計畫的動作"
 
 msgid "Actions"
 msgstr "動作"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr "新增外部輸入集"
@@ -209,7 +212,7 @@ msgid "Could not use any template used in the job invocation"
 msgstr "無法使用任何用於這工作祈願的範本"
 
 msgid "Create"
-msgstr ""
+msgstr "建立"
 
 msgid "Create Report"
 msgstr ""
@@ -686,7 +689,7 @@ msgid "Name"
 msgstr "名稱"
 
 msgid "Never"
-msgstr ""
+msgstr "永不"
 
 msgid "New Job Template"
 msgstr "新工作範本"
@@ -719,7 +722,7 @@ msgid "Now"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "開啟"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
@@ -863,7 +866,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr ""
 
 msgid "Repeats"
-msgstr ""
+msgstr "重複"
 
 msgid "Rerun"
 msgstr "重新執行"
@@ -884,7 +887,7 @@ msgid "Rerun the job"
 msgstr "重新執行工作"
 
 msgid "Reset to default"
-msgstr ""
+msgstr "重設為預設值"
 
 msgid "Resolves to"
 msgstr "解析至"
@@ -1052,7 +1055,7 @@ msgid "Started"
 msgstr ""
 
 msgid "Starts"
-msgstr ""
+msgstr "起始"
 
 msgid "Starts at"
 msgstr ""
@@ -1432,7 +1435,7 @@ msgid "is month (range: 1-12)"
 msgstr "是月份（範圍：1-12）"
 
 msgid "no"
-msgstr ""
+msgstr "否"
 
 msgid "occurences"
 msgstr ""
@@ -1477,4 +1480,4 @@ msgid "using Smart Proxy"
 msgstr ""
 
 msgid "yes"
-msgstr ""
+msgstr "是"

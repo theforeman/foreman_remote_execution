@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -83,6 +83,9 @@ msgstr "有子计划的操作"
 
 msgid "Actions"
 msgstr "操作"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr "添加外部输入集"
@@ -208,7 +211,7 @@ msgid "Could not use any template used in the job invocation"
 msgstr "无法使用作业调用中使用的任何模板"
 
 msgid "Create"
-msgstr ""
+msgstr "创建"
 
 msgid "Create Report"
 msgstr "创建报告"
@@ -328,7 +331,7 @@ msgid "Edit job description template"
 msgstr "编辑作业描述模板"
 
 msgid "Effective User"
-msgstr ""
+msgstr "有效用户"
 
 msgid "Effective User Method"
 msgstr "有效用户方法"
@@ -520,7 +523,7 @@ msgid "Indicates that the action should be cancelled if it cannot be started bef
 msgstr "这代表，如果操作无法在这个时间前开始则操作应该被取消。"
 
 msgid "Inherit from host parameter"
-msgstr ""
+msgstr "从主机参数继承"
 
 msgid "Input"
 msgstr "输入"
@@ -685,13 +688,13 @@ msgid "Name"
 msgstr "名称"
 
 msgid "Never"
-msgstr ""
+msgstr "决不"
 
 msgid "New Job Template"
 msgstr "新作业模板"
 
 msgid "No (override)"
-msgstr ""
+msgstr "否（覆盖）"
 
 msgid "No Target Hosts"
 msgstr "没有目标主机"
@@ -718,7 +721,7 @@ msgid "Now"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "上"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "只能指定一个功能或 job_template_id"
@@ -862,7 +865,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr "重复数量只能是一个正数"
 
 msgid "Repeats"
-msgstr ""
+msgstr "重复"
 
 msgid "Rerun"
 msgstr "重新运行"
@@ -883,7 +886,7 @@ msgid "Rerun the job"
 msgstr "重新运行作业"
 
 msgid "Reset to default"
-msgstr ""
+msgstr "重置为默认"
 
 msgid "Resolves to"
 msgstr "解析到"
@@ -1051,7 +1054,7 @@ msgid "Started"
 msgstr "已启动"
 
 msgid "Starts"
-msgstr ""
+msgstr "开始"
 
 msgid "Starts at"
 msgstr "开始于"
@@ -1361,7 +1364,7 @@ msgid "Workers pool size"
 msgstr "工作节点池的大小"
 
 msgid "Yes (override)"
-msgstr ""
+msgstr "是（覆盖）"
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "您没有权限查看当前分配的模板。现在保存表单将取消分配模板。"
@@ -1430,7 +1433,7 @@ msgid "is month (range: 1-12)"
 msgstr "月份（范围：1-12）"
 
 msgid "no"
-msgstr ""
+msgstr "否"
 
 msgid "occurences"
 msgstr ""
@@ -1475,4 +1478,4 @@ msgid "using Smart Proxy"
 msgstr "使用智能代理"
 
 msgid "yes"
-msgstr ""
+msgstr "是"

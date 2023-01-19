@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-16 14:19+0100\n"
-"PO-Revision-Date: 2022-12-16 14:19+0100\n"
+"POT-Creation-Date: 2023-01-19 15:22+0100\n"
+"PO-Revision-Date: 2023-01-19 15:22+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -860,7 +860,7 @@ msgstr ""
 msgid "Input"
 msgstr ""
 
-#: ../app/models/template_invocation.rb:98
+#: ../app/models/template_invocation.rb:99
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr ""
 
@@ -2204,16 +2204,20 @@ msgstr ""
 msgid "Host"
 msgstr ""
 
+#: ../webpack/react_app/components/TargetingHosts/TargetingHostsLabelsRow.js:20
+msgid "Active Filters:"
+msgstr ""
+
 #: action_names.rb:2
 msgid "Action with sub plans"
 msgstr ""
 
 #: action_names.rb:3
-msgid "Import facts"
+msgid "Import Puppet classes"
 msgstr ""
 
 #: action_names.rb:4
-msgid "Import Puppet classes"
+msgid "Import facts"
 msgstr ""
 
 #: gemspec.rb:2
