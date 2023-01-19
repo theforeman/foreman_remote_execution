@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -83,6 +83,9 @@ msgstr "하위 계획이 있는 작업"
 
 msgid "Actions"
 msgstr "작업"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr "외부 입력 세트 추가"
@@ -208,7 +211,7 @@ msgid "Could not use any template used in the job invocation"
 msgstr "작업 호출에 사용된 템플릿을 사용할 수 없습니다."
 
 msgid "Create"
-msgstr ""
+msgstr "생성 "
 
 msgid "Create Report"
 msgstr ""
@@ -685,7 +688,7 @@ msgid "Name"
 msgstr "이름"
 
 msgid "Never"
-msgstr ""
+msgstr "사용 안 함"
 
 msgid "New Job Template"
 msgstr "새 작업 템플릿"
@@ -718,7 +721,7 @@ msgid "Now"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "켜기"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
@@ -862,7 +865,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr ""
 
 msgid "Repeats"
-msgstr ""
+msgstr "반복"
 
 msgid "Rerun"
 msgstr "재실행"
@@ -883,7 +886,7 @@ msgid "Rerun the job"
 msgstr "작업 재실행"
 
 msgid "Reset to default"
-msgstr ""
+msgstr "기본값으로 다시 설정 "
 
 msgid "Resolves to"
 msgstr "다음으로 확인"
@@ -1051,7 +1054,7 @@ msgid "Started"
 msgstr ""
 
 msgid "Starts"
-msgstr ""
+msgstr "시작 "
 
 msgid "Starts at"
 msgstr ""
@@ -1430,7 +1433,7 @@ msgid "is month (range: 1-12)"
 msgstr "월(범위: 1-12)"
 
 msgid "no"
-msgstr ""
+msgstr "no"
 
 msgid "occurences"
 msgstr ""
@@ -1475,4 +1478,4 @@ msgid "using Smart Proxy"
 msgstr ""
 
 msgid "yes"
-msgstr ""
+msgstr "예"

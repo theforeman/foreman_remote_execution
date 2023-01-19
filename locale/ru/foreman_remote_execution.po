@@ -6,7 +6,7 @@
 # Yulia <yulia.poyarkova@redhat.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 8.1.1\n"
+"Project-Id-Version: foreman_remote_execution 9.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Yulia <yulia.poyarkova@redhat.com>, 2016\n"
@@ -87,6 +87,9 @@ msgstr "Действия с подпланами"
 
 msgid "Actions"
 msgstr "Действия"
+
+msgid "Active Filters:"
+msgstr ""
 
 msgid "Add Foreign Input Set"
 msgstr "Добавить шаблон"
@@ -212,7 +215,7 @@ msgid "Could not use any template used in the job invocation"
 msgstr "Не удалось применить ни один из шаблонов, настроенных для этого вызова задания"
 
 msgid "Create"
-msgstr ""
+msgstr "Создать"
 
 msgid "Create Report"
 msgstr ""
@@ -689,7 +692,7 @@ msgid "Name"
 msgstr "Название"
 
 msgid "Never"
-msgstr ""
+msgstr "Никогда"
 
 msgid "New Job Template"
 msgstr "Создать шаблон задания"
@@ -722,7 +725,7 @@ msgid "Now"
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Настроить"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
@@ -866,7 +869,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr ""
 
 msgid "Repeats"
-msgstr ""
+msgstr "Повторяется"
 
 msgid "Rerun"
 msgstr "Повторить"
@@ -887,7 +890,7 @@ msgid "Rerun the job"
 msgstr "Повторно выполнить задание"
 
 msgid "Reset to default"
-msgstr ""
+msgstr "Восстановить исходные"
 
 msgid "Resolves to"
 msgstr "Применимо к "
@@ -1055,7 +1058,7 @@ msgid "Started"
 msgstr ""
 
 msgid "Starts"
-msgstr ""
+msgstr "Начало"
 
 msgid "Starts at"
 msgstr ""
@@ -1437,7 +1440,7 @@ msgid "is month (range: 1-12)"
 msgstr "— месяц (1–12)"
 
 msgid "no"
-msgstr ""
+msgstr "нет"
 
 msgid "occurences"
 msgstr ""
@@ -1482,4 +1485,4 @@ msgid "using Smart Proxy"
 msgstr ""
 
 msgid "yes"
-msgstr ""
+msgstr "да"
