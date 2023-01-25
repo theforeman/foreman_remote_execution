@@ -71,6 +71,7 @@ module Api
           param :description_format, String, :required => false, :desc => N_('Override the description format from the template for this invocation only')
           param :execution_timeout_interval, Integer, :required => false, :desc => N_('Override the timeout interval from the template for this invocation only')
           param :feature, String, :required => false, :desc => N_('Remote execution feature label that should be triggered, job template assigned to this feature will be used')
+          param :time_to_pickup, Integer, :required => false, :desc => N_('Override the global time to pickup interval for this invocation only')
 
           RemoteExecutionProvider.providers.each_value do |provider|
             next if !provider.respond_to?(:provider_inputs_doc) || provider.provider_inputs_doc.empty?
