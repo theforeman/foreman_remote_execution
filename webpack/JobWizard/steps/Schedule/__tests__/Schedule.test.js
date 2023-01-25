@@ -85,7 +85,7 @@ describe('Schedule', () => {
     });
     act(() => {
       fireEvent.click(screen.getByRole('button', { name: 'Future execution' }));
-      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover useTimer
     });
 
     const newStartAtDate = '2030/03/12';
@@ -115,7 +115,7 @@ describe('Schedule', () => {
       fireEvent.change(startsBeforeTimeField(), {
         target: { value: newStartBeforeTime },
       });
-      jest.runOnlyPendingTimers();
+      jest.advanceTimersByTime(1000);
     });
 
     act(() => {
@@ -123,7 +123,7 @@ describe('Schedule', () => {
     });
     act(() => {
       fireEvent.click(screen.getByRole('button', { name: 'Future execution' }));
-      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover useTimer
     });
     expect(startsAtDateField().value).toBe(newStartAtDate);
     expect(startsAtTimeField().value).toBe(newStartAtTime);
@@ -140,7 +140,7 @@ describe('Schedule', () => {
         target: { value: '2030/03/11' },
       });
       await fireEvent.click(startsBeforeTimeField());
-      await jest.runOnlyPendingTimers();
+      await jest.advanceTimersByTime(1000);
     });
     expect(startsBeforeDateField().value).toBe('2030/03/11');
     expect(
@@ -157,13 +157,13 @@ describe('Schedule', () => {
       await fireEvent.change(startsAtDateField(), {
         target: { value: '' },
       });
-      jest.runOnlyPendingTimers();
+      jest.advanceTimersByTime(1000);
     });
 
     expect(startsBeforeDateField().value).toBe('2019/03/11');
     expect(
       screen.getAllByText("'Starts before' date must in the future")
-    ).toHaveLength(1);
+    ).toHaveLength(2);
   });
 
   it('Recurring execution - date pickers', async () => {
@@ -182,7 +182,7 @@ describe('Schedule', () => {
       fireEvent.click(
         screen.getByRole('button', { name: 'Recurring execution' })
       );
-      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover useTimer
     });
 
     const newStartAtDate = '2030/03/12';
@@ -207,7 +207,7 @@ describe('Schedule', () => {
       fireEvent.change(startsAtTimeField(), {
         target: { value: newStartAtTime },
       });
-      jest.runOnlyPendingTimers();
+      jest.advanceTimersByTime(1000);
     });
 
     expect(endsAtDateField().disabled).toBeTruthy();
@@ -222,7 +222,7 @@ describe('Schedule', () => {
       fireEvent.change(endsAtTimeField(), {
         target: { value: newStartAtTime },
       });
-      jest.runOnlyPendingTimers();
+      jest.advanceTimersByTime(1000);
     });
 
     act(() => {
@@ -232,7 +232,7 @@ describe('Schedule', () => {
       fireEvent.click(
         screen.getByRole('button', { name: 'Recurring execution' })
       );
-      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover useTimer
     });
     expect(startsAtDateField().value).toBe(newStartAtDate);
     expect(startsAtTimeField().value).toBe(newStartAtTime);
@@ -266,7 +266,7 @@ describe('Schedule', () => {
       fireEvent.click(
         screen.getByRole('button', { name: 'Recurring execution' })
       );
-      jest.runAllTimers(); // to handle pf4 date picker popover useTimer
+      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover useTimer
     });
     await act(async () => {
       fireEvent.click(screen.getByLabelText('Daily', { selector: 'button' }));
@@ -294,7 +294,7 @@ describe('Schedule', () => {
       fireEvent.click(
         screen.getByRole('button', { name: 'Recurring execution' })
       );
-      jest.runAllTimers();
+      jest.advanceTimersByTime(1000);
     });
     expect(screen.queryAllByText('Recurring execution')).toHaveLength(3);
     expect(cronline.value).toBe(newCronline);
