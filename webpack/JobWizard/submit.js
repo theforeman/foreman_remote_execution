@@ -133,7 +133,7 @@ export const submit = ({
         window.location.href = `/job_invocations/${id}`;
       },
       errorToast: ({ response }) =>
-        response?.date?.error?.message ||
+        response?.data?.error?.message ||
         response?.message ||
         response?.statusText,
     })

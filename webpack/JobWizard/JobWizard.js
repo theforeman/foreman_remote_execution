@@ -36,6 +36,7 @@ import { useValidation } from './validation';
 import { useAutoFill } from './autofill';
 import { submit } from './submit';
 import { generateDefaultDescription } from './JobWizardHelpers';
+import { StartsBeforeErrorAlert } from './StartsBeforeErrorAlert';
 import './JobWizard.scss';
 
 export const JobWizard = ({ rerunData }) => {
@@ -184,6 +185,24 @@ export const JobWizard = ({ rerunData }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rerunData, jobTemplateID, dispatch]);
+
+  const [isStartsBeforeError, setIsStartsBeforeError] = useState(false);
+  useEffect(() => {
+    const updateStartsBeforeError = () => {
+      setIsStartsBeforeError(
+        scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE &&
+          new Date().getTime() >= new Date(scheduleValue.startsBefore).getTime()
+      );
+    };
+    let interval;
+    if (scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE) {
+      updateStartsBeforeError();
+      interval = setInterval(updateStartsBeforeError, 5000);
+    }
+    return () => {
+      interval && clearInterval(interval);
+    };
+  }, [scheduleValue.scheduleType, scheduleValue.startsBefore]);
 
   const [valid, setValid] = useValidation({
     advancedValues,
@@ -395,35 +414,39 @@ export const JobWizard = ({ rerunData }) => {
         areHostsSelected &&
         valid.advanced &&
         valid.schedule &&
-        !isSubmitting,
+        !isSubmitting &&
+        !isStartsBeforeError,
     },
   ];
   const location = useForemanLocation();
   const organization = useForemanOrganization();
   return (
-    <Wizard
-      onClose={() => history.goBack()}
-      navAriaLabel="Run Job steps"
-      steps={steps}
-      height="100%"
-      className="job-wizard"
-      onSave={() => {
-        submit({
-          jobTemplateID,
-          templateValues,
-          advancedValues,
-          scheduleValue,
-          dispatch,
-          selectedTargets,
-          hostsSearchQuery,
-          location,
-          organization,
-          feature: routerSearch?.feature,
-          provider: templateResponse.provider_name,
-          advancedInputs: templateResponse.advanced_template_inputs,
-        });
-      }}
-    />
+    <>
+      {isStartsBeforeError && <StartsBeforeErrorAlert />}
+      <Wizard
+        onClose={() => history.goBack()}
+        navAriaLabel="Run Job steps"
+        steps={steps}
+        height="100%"
+        className="job-wizard"
+        onSave={() => {
+          submit({
+            jobTemplateID,
+            templateValues,
+            advancedValues,
+            scheduleValue,
+            dispatch,
+            selectedTargets,
+            hostsSearchQuery,
+            location,
+            organization,
+            feature: routerSearch?.feature,
+            provider: templateResponse.provider_name,
+            advancedInputs: templateResponse.advanced_template_inputs,
+          });
+        }}
+      />
+    </>
   );
 };
 
