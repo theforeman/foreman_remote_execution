@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   match 'job_invocations/new', to: 'react#index', :via => [:get], as: 'new_job_invocation'
   match 'job_invocations/new', to: 'job_invocations#create', via: [:post], as: 'create_job_invocation'
+  match 'job_invocations/', to: 'job_invocations#legacy_create', via: [:post], as: 'legacy_create_job_invocation'
   match 'job_invocations/:id/rerun', to: 'react#index', :via => [:get], as: 'rerun_job_invocation'
   match 'old/job_invocations/new', to: 'job_invocations#new', via: [:get], as: 'form_new_job_invocation'
   match 'old/job_invocations/:id/rerun', to: 'job_invocations#rerun', via: [:get, :post], as: 'form_rerun_job_invocation'
