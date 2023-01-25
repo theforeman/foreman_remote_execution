@@ -40,6 +40,16 @@ class JobInvocationsController < ApplicationController
     render :action => 'new'
   end
 
+  def legacy_create
+    @composer = prepare_composer
+    if @composer.trigger
+      redirect_to job_invocation_path(@composer.job_invocation)
+    else
+      @composer.job_invocation.description_format = nil if params.fetch(:job_invocation, {}).key?(:description_override)
+      render :action => 'new'
+    end
+  end
+
   def create
     @composer = prepare_composer
     if @composer.trigger

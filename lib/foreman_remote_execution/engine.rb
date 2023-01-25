@@ -181,7 +181,7 @@ module ForemanRemoteExecution
           permission :destroy_job_templates, { :job_templates => [:destroy],
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
-          permission :create_job_invocations, { :job_invocations => [:new, :create, :refresh, :rerun, :preview_hosts],
+          permission :create_job_invocations, { :job_invocations => [:new, :create, :legacy_create, :refresh, :rerun, :preview_hosts],
                                                 'api/v2/job_invocations' => [:create, :rerun] }, :resource_type => 'JobInvocation'
           permission :view_job_invocations, { :job_invocations => [:index, :chart, :show, :auto_complete_search], :template_invocations => [:show],
                                               'api/v2/job_invocations' => [:index, :show, :output, :raw_output, :outputs] }, :resource_type => 'JobInvocation'
