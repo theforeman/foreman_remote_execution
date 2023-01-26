@@ -22,9 +22,11 @@ import {
   HOSTS_API,
   HOSTS_TO_PREVIEW_AMOUNT,
   WIZARD_TITLES,
+  SCHEDULE_TYPES,
 } from '../../JobWizardConstants';
 import { buildHostQuery } from '../HostsAndInputs/buildHostQuery';
 import { WizardTitle } from '../form/WizardTitle';
+import { parseEnd, parseRepeat } from './helpers';
 
 const ReviewDetails = ({
   jobCategory,
@@ -113,6 +115,41 @@ const ReviewDetails = ({
     {
       label: __('Recurrence'),
       value: scheduleValue.repeatType,
+    },
+    scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE &&
+      scheduleValue.startsAt && {
+        label: __('Starts at'),
+        value: new Date(scheduleValue.startsAt).toString(),
+      },
+    scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE &&
+      scheduleValue.startsBefore && {
+        label: __('Starts Before'),
+        value: new Date(scheduleValue.startsBefore).toString(),
+      },
+
+    scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING && {
+      label: __('Starts'),
+      value: scheduleValue.isFuture
+        ? new Date(scheduleValue.startsAt).toString()
+        : __('Now'),
+    },
+
+    scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING && {
+      label: __('Repeats'),
+      value: parseRepeat(scheduleValue.repeatType, scheduleValue.repeatData),
+    },
+    scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING && {
+      label: __('Ends'),
+      value: parseEnd(
+        scheduleValue.ends,
+        scheduleValue.isNeverEnds,
+        scheduleValue.repeatAmount
+      ),
+    },
+
+    scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING && {
+      label: __('Purpose'),
+      value: scheduleValue.purpose,
     },
     {
       label: __('Type of query'),

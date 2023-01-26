@@ -294,7 +294,7 @@ describe('Schedule', () => {
     await act(async () => {
       fireEvent.click(screen.getByText('Cronline'));
     });
-    const newCronline = '1 2';
+    const newCronline = '1 2 3 4 5';
     const cronline = screen.getByLabelText('cronline');
     expect(cronline.value).toBe('');
     await act(async () => {
@@ -318,6 +318,20 @@ describe('Schedule', () => {
     });
     expect(screen.queryAllByText('Recurring execution')).toHaveLength(3);
     expect(cronline.value).toBe(newCronline);
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Review details'));
+    });
+    expect(screen.queryAllByText('Review details')).toHaveLength(3);
+    expect(screen.getAllByText('Cron line - 1 2 3 4 5')).toHaveLength(1);
+
+    await act(async () => {
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Recurring execution' })
+      );
+      jest.runAllTimers();
+    });
+    expect(screen.queryAllByText('Recurring execution')).toHaveLength(3);
 
     fireEvent.click(screen.getByText('Cronline'));
     await act(async () => {

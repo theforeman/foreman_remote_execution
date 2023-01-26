@@ -5,7 +5,7 @@ import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { RepeatDaily } from './RepeatDaily';
 import { noop } from '../../../helpers';
 
-const getWeekDays = () => {
+export const getWeekDays = () => {
   const locale = documentLocale().replace(/-/g, '_');
   const baseDate = new Date(Date.UTC(2017, 0, 1)); // just a Sunday
   const weekDays = [];
