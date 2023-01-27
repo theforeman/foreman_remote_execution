@@ -60,3 +60,6 @@ HostPreviewModal.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
 };
+HostPreviewModal.defaultPropTypes = {
+  searchQuery: '',
+};
