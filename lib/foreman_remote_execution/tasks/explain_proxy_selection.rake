@@ -14,8 +14,16 @@ namespace :foreman_remote_execution do
     options[:host] = ENV['HOST']
     options[:provider] = ENV['PROVIDER']
 
+    providers = ::RemoteExecutionProvider.provider_proxy_features
+
     raise 'Environment variable HOST has to be set' unless options[:host]
-    raise 'Environment variable PROVIDER has to be set' unless options[:provider]
+    unless providers.include?(options[:provider])
+      aliases = providers.group_by { |p| ::RemoteExecutionProvider.provider_for(p) }
+                         .select { |_, names| names.count > 1 }
+                         .values
+                         .map { |a| a.join(' = ') }
+      raise "Environment variable PROVIDER has to be set to one of #{providers.join(', ')}. Note provider aliases #{aliases.join(', ')}."
+    end
 
     if ENV['FOREMAN_USER']
       User.current = User.friendly.find(ENV['FOREMAN_USER'])
@@ -26,11 +34,12 @@ namespace :foreman_remote_execution do
     Organization.current = Organization.friendly.find(ENV['ORGANIZATION']) if ENV['ORGANIZATION']
 
     selector = ::RemoteExecutionProxySelector.new
+    provider = ::RemoteExecutionProvider.provider_for(options[:provider])
 
     results = Host.search_for(options[:host]).map do |host|
       host_base = { :host => host }
-      proxies = selector.available_proxies(host, options[:provider])
-      determined_proxy = selector.determine_proxy(host, options[:provider])
+      proxies = selector.available_proxies(host, provider.proxy_feature)
+      determined_proxy = selector.determine_proxy(host, provider.proxy_feature)
       counts = selector.instance_variable_get('@tasks')
       counts.default = 0
 
