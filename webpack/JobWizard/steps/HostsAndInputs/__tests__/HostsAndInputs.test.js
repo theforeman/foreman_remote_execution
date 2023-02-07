@@ -107,6 +107,13 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('Host groups')).toHaveLength(1);
     expect(screen.queryAllByText('Search query')).toHaveLength(1);
     expect(screen.queryAllByText('Host collections')).toHaveLength(0);
+
+    await act(async () => {
+      fireEvent.click(
+        // Close the select
+        screen.getByText('Hosts', { selector: '.pf-c-select__toggle-text' })
+      );
+    });
   });
   it('Host fill list from url', async () => {
     routerSelectors.selectRouterLocation.mockImplementation(() => ({

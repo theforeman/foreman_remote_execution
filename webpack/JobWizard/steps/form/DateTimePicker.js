@@ -59,7 +59,7 @@ export const DateTimePicker = ({
     return false;
   };
 
-  const onDateChange = newDate => {
+  const onDateChange = (e, newDate) => {
     const parsedNewDate = new Date(newDate);
     if (!newDate.length && allowEmpty) {
       setDateTime('');
