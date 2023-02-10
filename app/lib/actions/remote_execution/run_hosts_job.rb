@@ -5,6 +5,7 @@ module Actions
       include Dynflow::Action::WithBulkSubPlans
       include Dynflow::Action::WithPollingSubPlans
       include Actions::RecurringAction
+      include Actions::ObservableAction
 
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
@@ -12,6 +13,7 @@ module Actions
 
       execution_plan_hooks.use :notify_on_success, :on => :success
       execution_plan_hooks.use :notify_on_failure, :on => :failure
+      execution_plan_hooks.use :emit_event_running, :on => :running
 
       class CheckOnProxyActions; end
 
@@ -94,9 +96,12 @@ module Actions
         end
       end
 
+      def job_invocation_id
+        input[:job_invocation_id] || input.fetch(:job_invocation, {})[:id]
+      end
+
       def job_invocation
-        id = input[:job_invocation_id] || input.fetch(:job_invocation, {})[:id]
-        @job_invocation ||= JobInvocation.find(id)
+        @job_invocation ||= JobInvocation.find(job_invocation_id)
       end
 
       def batch(from, size)
@@ -152,6 +157,14 @@ module Actions
         input[:proxy_batch_size]
       end
 
+      def self.event_names
+        super + [event_name_base + '_' + event_name_suffix('running')]
+      end
+
+      def emit_event_running(plan)
+        emit_event(plan, :running)
+      end
+
       private
 
       def mail_notification_preference
@@ -162,6 +175,19 @@ module Actions
         return "#{JobInvocation::CACHE_PREFIX}_#{job_invocation_id}*" if Rails.cache.kind_of? ActiveSupport::Cache::RedisCacheStore
 
         /\A#{JobInvocation::CACHE_PREFIX}_#{job_invocation_id}/
+      end
+
+      extend ApipieDSL::Class
+      apipie :class, "An action representing execution of a job against a set of hosts" do
+        name 'Actions::RemoteExecution::RunHostsJob'
+        refs 'Actions::RemoteExecution::RunHostsJob'
+        sections only: %w[all webhooks]
+        property :task, object_of: 'Task', desc: 'Returns the task to which this action belongs'
+        property :job_invocation_id, Integer, desc: "Returns the id of the job invocation"
+        property :job_invocation, object_of: 'JobInvocation', desc: "Returns the job invocation"
+      end
+      class Jail < ::Actions::ObservableAction::Jail
+        allow :job_invocation_id, :job_invocation
       end
     end
   end
