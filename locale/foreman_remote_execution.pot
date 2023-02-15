@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-19 15:22+0100\n"
-"PO-Revision-Date: 2023-01-19 15:22+0100\n"
+"POT-Creation-Date: 2023-02-15 19:45+0100\n"
+"PO-Revision-Date: 2023-02-15 19:45+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -184,44 +184,48 @@ msgid ""
 " to this feature will be used"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:87
+#: ../app/controllers/api/v2/job_invocations_controller.rb:74
+msgid "Override the global time to pickup interval for this invocation only"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:88
 msgid "Create a job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:101
+#: ../app/controllers/api/v2/job_invocations_controller.rb:102
 msgid "Get output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:114
+#: ../app/controllers/api/v2/job_invocations_controller.rb:115
 msgid "Get raw output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:126
+#: ../app/controllers/api/v2/job_invocations_controller.rb:127
 msgid "Cancel job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:134
+#: ../app/controllers/api/v2/job_invocations_controller.rb:135
 msgid "The job could not be cancelled."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:139
+#: ../app/controllers/api/v2/job_invocations_controller.rb:140
 msgid "Rerun job on failed hosts"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:149
+#: ../app/controllers/api/v2/job_invocations_controller.rb:150
 #: ../app/views/job_invocations/_form.html.erb:4
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:154
+#: ../app/controllers/api/v2/job_invocations_controller.rb:155
 msgid "Get outputs of hosts in a job"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:203
+#: ../app/controllers/api/v2/job_invocations_controller.rb:204
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:212
+#: ../app/controllers/api/v2/job_invocations_controller.rb:213
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
 
@@ -671,11 +675,11 @@ msgid ""
 "_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_hosts_job.rb:85
+#: ../app/lib/actions/remote_execution/run_hosts_job.rb:87
 msgid "REX job has succeeded - %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_hosts_job.rb:93
+#: ../app/lib/actions/remote_execution/run_hosts_job.rb:95
 msgid "REX job has failed - %s"
 msgstr ""
 
