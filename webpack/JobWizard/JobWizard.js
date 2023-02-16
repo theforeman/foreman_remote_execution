@@ -379,6 +379,8 @@ export const JobWizard = ({ rerunData }) => {
           location,
           organization,
           feature: routerSearch?.feature,
+          provider: templateResponse.provider_name,
+          advancedInputs: templateResponse.advanced_template_inputs,
         });
       }}
     />
