@@ -238,7 +238,7 @@ module RemoteExecutionHelper
 
   def load_template_from_task(template_invocation, target)
     task = template_invocation.job_invocation.sub_task_for_host(target)
-    return if task.nil?
+    return if [nil, 'scheduled', 'planning'].include?(task&.state)
 
     task.execution_plan.actions[1].try(:input).try(:[], 'script')
   end
