@@ -1,6 +1,6 @@
 <% title @job_invocation.description %>
 <% stylesheet 'foreman_remote_execution/foreman_remote_execution' %>
-<% javascript 'charts', 'foreman_remote_execution/template_invocation' %>
+<% javascript 'foreman_remote_execution/template_invocation' %>
 <% javascript *webpack_asset_paths('foreman_remote_execution', :extension => 'js') %>
 <% content_for(:stylesheets) do %>
   <%= webpacked_plugins_css_for :foreman_remote_execution %>
