@@ -12,6 +12,8 @@ export const submit = ({
   location,
   organization,
   feature,
+  provider,
+  advancedInputs,
   dispatch,
 }) => {
   const {
@@ -37,6 +39,13 @@ export const submit = ({
     keyPassphrase,
     timeToPickup,
   } = advancedValues;
+  const providerInputs = advancedInputs.filter(v => v.provider_input);
+  const providerValues = {};
+  providerInputs.forEach(({ name }) => {
+    providerValues[name] = advancedTemplateValues[name];
+    delete advancedTemplateValues[name];
+  });
+
   const getCronLine = () => {
     const [hour, minute] = repeatData.at
       ? repeatData.at.split(':')
@@ -112,6 +121,9 @@ export const submit = ({
       time_to_pickup: timeToPickup,
     },
   };
+  if (Object.keys(providerValues).length) {
+    api.job_invocation[provider] = providerValues;
+  }
 
   dispatch(
     post({
