@@ -158,8 +158,9 @@ describe('Hosts', () => {
 
   it('input fill from url', async () => {
     const inputText = 'test text';
+    const advancedInputText = 'test adv text';
     routerSelectors.selectRouterLocation.mockImplementation(() => ({
-      search: `feature=test_feature&inputs[plain hidden]=${inputText}`,
+      search: `feature=test_feature&inputs[plain hidden]=${inputText}&inputs[adv plain hidden]=${advancedInputText}`,
     }));
     render(
       <MockedProvider mocks={gqlMock} addTypename={false}>
@@ -182,5 +183,13 @@ describe('Hosts', () => {
       selector: 'textarea',
     });
     expect(textField.value).toBe(inputText);
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Advanced fields'));
+    });
+    const advancedTextField = screen.getByLabelText('adv plain hidden', {
+      selector: 'textarea',
+    });
+    expect(advancedTextField.value).toBe(advancedInputText);
   });
 });
