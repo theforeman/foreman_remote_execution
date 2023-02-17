@@ -72,6 +72,7 @@ export const useAutoFill = ({
           if (input) {
             if (typeof rest[key] === 'string') {
               setTemplateValues(prev => ({ ...prev, [input]: rest[key] }));
+              setAdvancedValues(prev => ({ ...prev, [input]: rest[key] }));
             } else {
               const { value, advanced } = rest[key];
               if (advanced) {
