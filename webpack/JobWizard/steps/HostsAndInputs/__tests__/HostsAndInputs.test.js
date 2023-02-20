@@ -32,6 +32,27 @@ describe('Hosts', () => {
     fireEvent.click(select('hosts'));
     await act(async () => {
       fireEvent.click(screen.getByText('host1'));
+      fireEvent.click(select('hosts'));
+    });
+    expect(
+      screen.queryAllByText('Please select at least one host')
+    ).toHaveLength(0);
+    await act(async () => {
+      fireEvent.click(select('hosts'));
+    });
+    await act(async () => {
+      fireEvent.click(
+        screen.getByText('host1', {
+          selector: '.pf-c-select__menu-item',
+        })
+      );
+      fireEvent.blur(select('hosts'));
+    });
+    expect(
+      screen.queryAllByText('Please select at least one host')
+    ).toHaveLength(1);
+    await act(async () => {
+      fireEvent.click(screen.getByText('host1'));
       fireEvent.click(screen.getByText('host2'));
     });
     fireEvent.click(
@@ -153,7 +174,7 @@ describe('Hosts', () => {
     const inputText = 'test text';
     const advancedInputText = 'test adv text';
     routerSelectors.selectRouterLocation.mockImplementation(() => ({
-      search: `feature=test_feature&inputs[plain hidden]=${inputText}&inputs[adv plain hidden]=${advancedInputText}`,
+      search: `host_ids%5B%5D=host1&host_ids%5B%5D=host3&feature=test_feature&inputs[plain hidden]=${inputText}&inputs[adv plain hidden]=${advancedInputText}`,
     }));
     render(
       <MockedProvider mocks={gqlMock} addTypename={false}>

@@ -18,6 +18,15 @@ import {
 const store = testSetup(selectors, api);
 
 describe('Job wizard fill', () => {
+  beforeEach(() => {
+    jest.spyOn(selectors, 'selectRouterSearch');
+    selectors.selectRouterSearch.mockImplementation(() => ({
+      'host_ids[]': ['105', '37'],
+    }));
+  });
+  afterEach(() => {
+    selectors.selectRouterSearch.mockRestore();
+  });
   it('should select template', async () => {
     api.get.mockImplementation(({ handleSuccess, ...action }) => {
       if (action.key === 'JOB_CATEGORIES') {
@@ -33,7 +42,13 @@ describe('Job wizard fill', () => {
           handleSuccess({
             data: jobTemplate,
           });
+      } else if (action.key === 'HOST_IDS') {
+        handleSuccess &&
+          handleSuccess({
+            data: { results: [{ name: 'host1' }, { name: 'host3' }] },
+          });
       }
+
       return { type: 'get', ...action };
     });
     selectors.selectJobTemplate.mockRestore();

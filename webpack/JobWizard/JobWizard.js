@@ -209,6 +209,11 @@ export const JobWizard = ({ rerunData }) => {
     !templateError &&
     !!jobTemplateID &&
     templateResponse.job_template;
+  const areHostsSelected =
+    selectedTargets.hosts.length > 0 ||
+    selectedTargets.hostCollections.length > 0 ||
+    selectedTargets.hostGroups.length > 0 ||
+    hostsSearchQuery.length > 0;
   const steps = [
     {
       name: WIZARD_TITLES.categoryAndTemplate,
@@ -238,7 +243,7 @@ export const JobWizard = ({ rerunData }) => {
         />
       ),
       canJumpTo: isTemplate,
-      enableNext: isTemplate && valid.hostsAndInputs,
+      enableNext: isTemplate && valid.hostsAndInputs && areHostsSelected,
     },
     {
       name: WIZARD_TITLES.advanced,
@@ -254,14 +259,26 @@ export const JobWizard = ({ rerunData }) => {
           templateValues={templateValues}
         />
       ),
-      canJumpTo: isTemplate && valid.hostsAndInputs,
-      enableNext: isTemplate && valid.hostsAndInputs && valid.advanced,
+      canJumpTo: isTemplate && valid.hostsAndInputs && areHostsSelected,
+      enableNext:
+        isTemplate &&
+        valid.hostsAndInputs &&
+        areHostsSelected &&
+        valid.advanced,
     },
     {
       name: WIZARD_TITLES.schedule,
-      canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
+      canJumpTo:
+        isTemplate &&
+        valid.hostsAndInputs &&
+        areHostsSelected &&
+        valid.advanced,
       enableNext:
-        isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,
+        isTemplate &&
+        valid.hostsAndInputs &&
+        areHostsSelected &&
+        valid.advanced &&
+        valid.schedule,
       steps: [
         {
           name: WIZARD_TITLES.typeOfExecution,
@@ -278,9 +295,17 @@ export const JobWizard = ({ rerunData }) => {
               }}
             />
           ),
-          canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
+          canJumpTo:
+            isTemplate &&
+            valid.hostsAndInputs &&
+            areHostsSelected &&
+            valid.advanced,
 
-          enableNext: isTemplate && valid.hostsAndInputs && valid.advanced,
+          enableNext:
+            isTemplate &&
+            valid.hostsAndInputs &&
+            areHostsSelected &&
+            valid.advanced,
         },
         ...(scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE
           ? [
@@ -298,10 +323,15 @@ export const JobWizard = ({ rerunData }) => {
                     }}
                   />
                 ),
-                canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
+                canJumpTo:
+                  isTemplate &&
+                  valid.hostsAndInputs &&
+                  areHostsSelected &&
+                  valid.advanced,
                 enableNext:
                   isTemplate &&
                   valid.hostsAndInputs &&
+                  areHostsSelected &&
                   valid.advanced &&
                   valid.schedule,
               },
@@ -323,10 +353,15 @@ export const JobWizard = ({ rerunData }) => {
                     }}
                   />
                 ),
-                canJumpTo: isTemplate && valid.hostsAndInputs && valid.advanced,
+                canJumpTo:
+                  isTemplate &&
+                  valid.hostsAndInputs &&
+                  areHostsSelected &&
+                  valid.advanced,
                 enableNext:
                   isTemplate &&
                   valid.hostsAndInputs &&
+                  areHostsSelected &&
                   valid.advanced &&
                   valid.schedule,
               },
@@ -349,10 +384,15 @@ export const JobWizard = ({ rerunData }) => {
       ),
       nextButtonText: 'Run',
       canJumpTo:
-        isTemplate && valid.hostsAndInputs && valid.advanced && valid.schedule,
+        isTemplate &&
+        valid.advanced &&
+        valid.hostsAndInputs &&
+        areHostsSelected &&
+        valid.schedule,
       enableNext:
         isTemplate &&
         valid.hostsAndInputs &&
+        areHostsSelected &&
         valid.advanced &&
         valid.schedule &&
         !isSubmitting,
