@@ -161,6 +161,11 @@ export const testSetup = (selectors, api) => {
         ],
       },
     },
+    HOSTS_API: {
+      response: {
+        subtotal: 3,
+      },
+    },
   });
   return store;
 };

@@ -104,8 +104,7 @@ export const submit = ({
         concurrency_level: concurrencyLevel,
       },
       bookmark_id: null,
-      search_query:
-        buildHostQuery(selectedTargets, hostsSearchQuery) || 'name ~ *',
+      search_query: buildHostQuery(selectedTargets, hostsSearchQuery),
       description_format: description,
       execution_timeout_interval: timeoutToKill,
       feature,

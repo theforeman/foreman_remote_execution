@@ -8,6 +8,14 @@ Array [
     "url": "/ui_job_wizard/categories",
   },
   Object {
+    "key": "HOST_IDS",
+    "params": Object {
+      "search": "id = 105 or id = 37",
+    },
+    "type": "get",
+    "url": "/api/hosts",
+  },
+  Object {
     "key": "JOB_TEMPLATES",
     "type": "get",
     "url": URI {
