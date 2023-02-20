@@ -26,6 +26,15 @@ mockApi(api);
 jest.useFakeTimers();
 
 describe('AdvancedFields', () => {
+  beforeEach(() => {
+    jest.spyOn(selectors, 'selectRouterSearch');
+    selectors.selectRouterSearch.mockImplementation(() => ({
+      'host_ids[]': ['105', '37'],
+    }));
+  });
+  afterEach(() => {
+    selectors.selectRouterSearch.mockRestore();
+  });
   it('should save data between steps for advanced fields', async () => {
     const wrapper = mount(
       <MockedProvider mocks={gqlMock} addTypename={false}>
@@ -270,6 +279,11 @@ describe('AdvancedFields', () => {
           handleSuccess({
             data: { results: [jobTemplate] },
           });
+      } else if (action.key === 'HOST_IDS') {
+        handleSuccess &&
+          handleSuccess({
+            data: { results: [{ name: 'host1' }, { name: 'host3' }] },
+          });
       }
       return { type: 'get', ...action };
     });
@@ -338,6 +352,11 @@ describe('AdvancedFields', () => {
         handleSuccess &&
           handleSuccess({
             data: { results: [jobTemplate] },
+          });
+      } else if (action.key === 'HOST_IDS') {
+        handleSuccess &&
+          handleSuccess({
+            data: { results: [{ name: 'host1' }, { name: 'host3' }] },
           });
       }
       return { type: 'get', ...action };

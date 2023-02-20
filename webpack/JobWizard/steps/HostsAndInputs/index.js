@@ -51,6 +51,30 @@ const HostsAndInputs = ({
   const isLoading = useSelector(selectIsLoadingHosts);
   const templateInputs = useSelector(selectTemplateInputs);
   const [hostPreviewOpen, setHostPreviewOpen] = useState(false);
+  const [wasFocus, setWasFocus] = useState(false);
+  const [isError, setIsError] = useState(false);
+  useEffect(() => {
+    if (wasFocus) {
+      if (
+        selected.hosts.length === 0 &&
+        selected.hostCollections.length === 0 &&
+        selected.hostGroups.length === 0 &&
+        hostsSearchQuery.length === 0
+      ) {
+        setIsError(true);
+      } else {
+        setIsError(false);
+      }
+    }
+  }, [
+    hostMethod,
+    hostsSearchQuery.length,
+    selected,
+    selected.hostCollections.length,
+    selected.hostGroups.length,
+    selected.hosts.length,
+    wasFocus,
+  ]);
   useEffect(() => {
     debounce(() => {
       dispatch(
@@ -99,6 +123,9 @@ const HostsAndInputs = ({
   const clearSearch = () => {
     setHostsSearchQuery('');
   };
+  const [errorText, setErrorText] = useState(
+    __('Please select at least one host')
+  );
   return (
     <div className="target-hosts-and-inputs">
       <WizardTitle title={WIZARD_TITLES.hostsAndInputs} />
@@ -110,8 +137,13 @@ const HostsAndInputs = ({
         />
       )}
       <Form>
-        <FormGroup fieldId="host_selection" id="host-selection">
-          <InputGroup>
+        <FormGroup
+          fieldId="host_selection"
+          id="host-selection"
+          helperTextInvalid={errorText}
+          validated={isError ? 'error' : 'default'}
+        >
+          <InputGroup onBlur={() => setWasFocus(true)}>
             <SelectField
               isRequired
               className="target-method-select"
@@ -123,7 +155,23 @@ const HostsAndInputs = ({
                 }
                 return true;
               })}
-              setValue={setHostMethod}
+              setValue={val => {
+                setHostMethod(val);
+                if (val === hostMethods.searchQuery) {
+                  setErrorText(__('Please enter a search query'));
+                }
+                if (val === hostMethods.hosts) {
+                  setErrorText(__('Please select at least one host'));
+                }
+                if (val === hostMethods.hostCollections) {
+                  setErrorText(
+                    __('Please select at least one host collection')
+                  );
+                }
+                if (val === hostMethods.hostGroups) {
+                  setErrorText(__('Please select at least one host group'));
+                }
+              }}
               value={hostMethod}
             />
             {hostMethod === hostMethods.searchQuery && (

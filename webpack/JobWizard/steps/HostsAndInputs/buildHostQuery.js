@@ -13,11 +13,12 @@ export const buildHostQuery = (selected, search) => {
     hostGroups.length ? hostGroupsSearch : false,
     search.length ? search : false,
   ].filter(Boolean);
+
   if (queryParts.length === 0) {
-    return null;
+    return 'name=a AND name=b';
   }
   if (queryParts.length === 1) {
-    return queryParts[0];
+    return queryParts[0] || 'name=a AND name=b';
   }
-  return queryParts.map(p => `(${p})`).join(' or ');
+  return queryParts.map(p => `(${p})`).join(' or ') || 'name=a AND name=b';
 };

@@ -41,11 +41,26 @@ describe('Job wizard validation', () => {
     expect(screen.getByText(WIZARD_TITLES.review)).toBeDisabled();
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.hostsAndInputs));
+      await new Promise(resolve => setTimeout(resolve, 0)); // to resolve gql
     });
+    const select = name =>
+      screen.getByRole('button', { name: `${name} toggle` });
+    fireEvent.click(select('hosts'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('host1'));
+    });
+
+    expect(screen.getByText(WIZARD_TITLES.advanced)).toBeDisabled();
+    expect(screen.getByText(WIZARD_TITLES.schedule)).toBeDisabled();
+    expect(screen.getByText(WIZARD_TITLES.review)).toBeDisabled();
     const textField = screen.getByLabelText('plain hidden', {
       selector: 'textarea',
     });
     await act(async () => {
+      fireEvent.click(
+        // Close the select
+        select('hosts')
+      );
       await fireEvent.change(textField, {
         target: { value: 'text' },
       });
@@ -85,8 +100,20 @@ describe('Job wizard validation', () => {
     // setup
     await act(async () => {
       fireEvent.click(screen.getByText(WIZARD_TITLES.hostsAndInputs));
+      await new Promise(resolve => setTimeout(resolve, 0)); // to resolve gql
+    });
+
+    const select = name =>
+      screen.getByRole('button', { name: `${name} toggle` });
+    fireEvent.click(select('hosts'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('host1'));
     });
     await act(async () => {
+      fireEvent.click(
+        // Close the host select
+        select('hosts')
+      );
       await fireEvent.change(
         screen.getByLabelText('plain hidden', {
           selector: 'textarea',

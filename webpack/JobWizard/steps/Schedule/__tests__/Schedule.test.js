@@ -39,15 +39,35 @@ api.get.mockImplementation(({ handleSuccess, ...action }) => {
       handleSuccess({
         data: { results: [jobTemplateResponse.job_template] },
       });
+  } else if (action.key === 'HOST_IDS') {
+    handleSuccess &&
+      handleSuccess({
+        data: { results: [{ name: 'host1' }, { name: 'host3' }] },
+      });
   }
   return { type: 'get', ...action };
 });
 
 const mockStore = configureMockStore([]);
-const store = mockStore({});
+const store = mockStore({
+  HOSTS_API: {
+    response: {
+      subtotal: 3,
+    },
+  },
+});
 jest.useFakeTimers();
 
 describe('Schedule', () => {
+  beforeEach(() => {
+    jest.spyOn(selectors, 'selectRouterSearch');
+    selectors.selectRouterSearch.mockImplementation(() => ({
+      'host_ids[]': ['105', '37'],
+    }));
+  });
+  afterEach(() => {
+    selectors.selectRouterSearch.mockRestore();
+  });
   it('sub steps appear', () => {
     render(
       <Provider store={store}>
