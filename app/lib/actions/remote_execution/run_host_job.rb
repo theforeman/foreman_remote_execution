@@ -7,6 +7,7 @@ module Actions
       include ::Actions::RemoteExecution::TemplateInvocationProgressLogging
 
       execution_plan_hooks.use :emit_feature_event, :on => :success
+      execution_plan_hooks.use :emit_feature_event_failure, :on => :failure
 
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
       middleware.use Actions::Middleware::HideSecrets
@@ -84,11 +85,18 @@ module Actions
         ::Foreman::Observable.event_name_for("#{::Actions::RemoteExecution::RunHostJob.event_name_base}_#{label}_#{::Actions::RemoteExecution::RunHostJob.event_name_suffix(suffix)}")
       end
 
+      def emit_feature_event_failure(execution_plan, hook = :failure)
+        emit_feature_event(execution_plan, :failure)
+      end
+
       def emit_feature_event(execution_plan, hook = :success)
         return unless root_action?
 
         payload = event_payload(execution_plan)
-        if input["job_features"]&.any?
+        if hook == :failure
+          name = "#{self.class.event_name_base}_#{self.class.event_name_suffix(hook)}"
+          trigger_hook name, payload: payload
+        elsif input["job_features"]&.any?
           input['job_features'].each do |feature|
             name = "#{self.class.event_name_base}_#{feature}_#{self.class.event_name_suffix(hook)}"
             trigger_hook name, payload: payload

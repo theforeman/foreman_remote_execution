@@ -281,7 +281,7 @@ module ForemanRemoteExecution
           end.map(&:namespaced_event_names) +
           RemoteExecutionFeature.all.pluck(:label).map do |label|
             ::Actions::RemoteExecution::RunHostJob.feature_job_event_name(label)
-          end
+          end + ['actions.remote_execution.run_host_job_failed.event.foreman']
         )
       end
     end
