@@ -280,8 +280,10 @@ module ForemanRemoteExecution
           ::Dynflow::Action.descendants.select do |klass|
             klass <= ::Actions::ObservableAction
           end.map(&:namespaced_event_names) +
-          RemoteExecutionFeature.all.pluck(:label).map do |label|
-            ::Actions::RemoteExecution::RunHostJob.feature_job_event_name(label)
+          RemoteExecutionFeature.all.pluck(:label).flat_map do |label|
+            [::Actions::RemoteExecution::RunHostJob, ::Actions::RemoteExecution::RunHostsJob].map do |klass|
+              klass.feature_job_event_names(label)
+            end
           end
         )
       end
