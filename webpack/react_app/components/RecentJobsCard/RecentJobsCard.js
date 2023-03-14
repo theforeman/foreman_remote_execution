@@ -25,7 +25,7 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
       header={__('Recent jobs')}
       dropdownItems={[
         <DropdownItem
-          href={foremanUrl(`${JOB_BASE_URL}${name}`)}
+          href={foremanUrl(`${JOB_BASE_URL}${id}`)}
           key="link-to-all"
           ouiaId="link-to-all-dropdown-item"
         >
@@ -33,7 +33,7 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
         </DropdownItem>,
         <DropdownItem
           href={foremanUrl(
-            `${JOB_BASE_URL}${name}+and+status+%3D+failed+or+status%3D+succeeded`
+            `${JOB_BASE_URL}${id}+and+status+%3D+failed+or+status%3D+succeeded`
           )}
           key="link-to-finished"
           ouiaId="link-to-finished-dropdown-item"
@@ -41,14 +41,14 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
           {__('View finished jobs')}
         </DropdownItem>,
         <DropdownItem
-          href={foremanUrl(`${JOB_BASE_URL}${name}+and+status+%3D+running`)}
+          href={foremanUrl(`${JOB_BASE_URL}${id}+and+status+%3D+running`)}
           key="link-to-running"
           ouiaId="link-to-running-dropdown-item"
         >
           {__('View running jobs')}
         </DropdownItem>,
         <DropdownItem
-          href={foremanUrl(`${JOB_BASE_URL}${name}+and+status+%3D+queued`)}
+          href={foremanUrl(`${JOB_BASE_URL}${id}+and+status+%3D+queued`)}
           key="link-to-scheduled"
           ouiaId="link-to-scheduled-dropdown-item"
         >

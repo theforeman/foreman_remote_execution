@@ -17,10 +17,10 @@ const RecentJobsTable = ({ status, hostId }) => {
   const jobsUrl =
     hostId &&
     foremanUrl(
-      `${JOB_API_URL}${hostId}+and+status%3D${status}&per_page=${JOBS_IN_CARD}`
+      `${JOB_API_URL}${hostId}&status=${status}&limit=${JOBS_IN_CARD}`
     );
   const {
-    response: { results: jobs },
+    response: { job_invocations: jobs },
     status: responseStatus,
   } = useAPI('get', jobsUrl, RECENT_JOBS_KEY);
 
