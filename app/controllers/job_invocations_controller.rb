@@ -130,6 +130,25 @@ class JobInvocationsController < ApplicationController
     redirect_back(:fallback_location => job_invocation_path(@job_invocation))
   end
 
+  def preview_job_invocations_per_host
+    job_invocations = resource_base.search_for("targeted_host_id = #{params[:host_id]} and (status=#{params[:status]})").limit(params[:limit] || 3)
+
+    job_invocations = job_invocations.map do |job|
+      @job_invocation = job
+      template_invocation = job.template_invocations.find { |template_inv| template_inv.host_id == params[:host_id].to_i }
+      task = template_invocation.try(:run_host_job_task)
+      status_mapper = task ? HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.new(task) : job
+      {
+        start_at: job.start_at,
+        description: job.description,
+        id: job.id,
+        status: status_mapper.status,
+        status_label: status_mapper.status_label,
+      }
+    end
+    render :json => {:job_invocations => job_invocations}
+  end
+
   private
 
   def action_permission
@@ -140,7 +159,7 @@ class JobInvocationsController < ApplicationController
         'create'
       when 'cancel'
         'cancel'
-      when 'chart'
+      when 'chart', 'preview_job_invocations_per_host'
         'view'
       else
         super
