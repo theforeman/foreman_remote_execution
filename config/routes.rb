@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   match 'old/job_invocations/:id/rerun', to: 'job_invocations#rerun', via: [:get, :post], as: 'form_rerun_job_invocation'
   resources :job_invocations, :only => [:create, :show, :index] do
     collection do
+      get 'preview_job_invocations_per_host'
       post 'refresh'
       get 'chart'
       get 'preview_hosts'
