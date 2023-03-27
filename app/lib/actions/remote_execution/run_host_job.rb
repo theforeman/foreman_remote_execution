@@ -180,7 +180,7 @@ module Actions
       end
 
       def exit_status
-        input[:with_event_logging] ? task.template_invocation.template_invocation_events.find_by(event_type: 'exit').event : delegated_output[:exit_status]
+        input[:with_event_logging] ? task.template_invocation.template_invocation_events.find_by(event_type: 'exit')&.event : delegated_output[:exit_status]
       end
 
       def host_id
