@@ -6,20 +6,15 @@
 
   .pf-c-wizard__nav.pf-m-expanded {
     z-index: calc(
-      var(--pf-c-wizard__footer--ZIndex) + 2
-    ); // So the small screen navigation can be shown above the select box
+      var(--pf-c-wizard__toggle--ZIndex) + 2
+    ); // So the small screen navigation can be shown above the select box and wizard body
   }
 
   .pf-c-wizard__main {
     overflow: visible;
     z-index: calc(
-      var(--pf-c-wizard__footer--ZIndex) + 1
-    ); // So the select box can be shown above the wizard footer
-  }
-  .pf-c-wizard__nav {
-    z-index: calc(
-      var(--pf-c-wizard__footer--ZIndex) + 2
-    ); // So the navigation box can be shown above the wizard body
+      var(--pf-c-wizard__toggle--ZIndex) + 1
+    ); // So the select box can be shown above the wizard footer and navigation toggle
   }
   .pf-c-wizard__main-body {
     max-width: 500px;
