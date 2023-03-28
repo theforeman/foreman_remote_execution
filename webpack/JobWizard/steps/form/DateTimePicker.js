@@ -119,7 +119,6 @@ export const DateTimePicker = ({
         is24Hour
         isDisabled={isDisabled || formattedDate.length === 0}
         invalidFormatErrorMessage={__('Invalid time format')}
-        menuAppendTo={() => document.body}
         includeSeconds={includeSeconds}
       />
     </>

@@ -47,7 +47,6 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
         }}
         isOpen={minuteOpen}
         width={125}
-        menuAppendTo={() => document.querySelector('.pf-c-form.schedule-tab')}
         toggleAriaLabel="select minute toggle"
         validated={
           isValidMinute(minute)
