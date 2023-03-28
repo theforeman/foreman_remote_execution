@@ -154,6 +154,10 @@ describe('Job wizard validation', () => {
     });
 
     expect(screen.getByText(WIZARD_TITLES.schedule)).toBeDisabled();
+    expect(screen.getByText('Run on selected hosts')).toHaveAttribute(
+      'aria-disabled',
+      'true'
+    );
     expect(screen.getByText(WIZARD_TITLES.review)).toBeDisabled();
 
     await act(async () => {
@@ -162,6 +166,11 @@ describe('Job wizard validation', () => {
       });
     });
 
+    expect(screen.getByText('Run on selected hosts')).toBeEnabled();
+    expect(screen.getByText('Run on selected hosts')).toHaveAttribute(
+      'aria-disabled',
+      'false'
+    );
     expect(screen.getByText(WIZARD_TITLES.schedule)).toBeEnabled();
     expect(screen.getByText(WIZARD_TITLES.review)).toBeEnabled();
   });

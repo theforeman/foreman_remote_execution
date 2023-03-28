@@ -37,6 +37,7 @@ import { useAutoFill } from './autofill';
 import { submit } from './submit';
 import { generateDefaultDescription } from './JobWizardHelpers';
 import { StartsBeforeErrorAlert } from './StartsBeforeErrorAlert';
+import { Footer } from './Footer';
 import './JobWizard.scss';
 
 export const JobWizard = ({ rerunData }) => {
@@ -420,6 +421,22 @@ export const JobWizard = ({ rerunData }) => {
   ];
   const location = useForemanLocation();
   const organization = useForemanOrganization();
+  const onSave = () => {
+    submit({
+      jobTemplateID,
+      templateValues,
+      advancedValues,
+      scheduleValue,
+      dispatch,
+      selectedTargets,
+      hostsSearchQuery,
+      location,
+      organization,
+      feature: routerSearch?.feature,
+      provider: templateResponse.provider_name,
+      advancedInputs: templateResponse.advanced_template_inputs,
+    });
+  };
   return (
     <>
       {isStartsBeforeError && <StartsBeforeErrorAlert />}
@@ -429,22 +446,13 @@ export const JobWizard = ({ rerunData }) => {
         steps={steps}
         height="100%"
         className="job-wizard"
-        onSave={() => {
-          submit({
-            jobTemplateID,
-            templateValues,
-            advancedValues,
-            scheduleValue,
-            dispatch,
-            selectedTargets,
-            hostsSearchQuery,
-            location,
-            organization,
-            feature: routerSearch?.feature,
-            provider: templateResponse.provider_name,
-            advancedInputs: templateResponse.advanced_template_inputs,
-          });
-        }}
+        onSave={onSave}
+        footer={
+          <Footer
+            canSubmit={!!steps[steps.length - 1].enableNext}
+            onSave={onSave}
+          />
+        }
       />
     </>
   );
