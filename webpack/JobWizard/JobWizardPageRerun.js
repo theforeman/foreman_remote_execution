@@ -86,6 +86,7 @@ const JobWizardPageRerun = ({
           <React.Fragment>
             {jobOrganization?.id !== currentOrganization?.id && (
               <Alert
+                isInline
                 className="job-wizard-alert"
                 variant="warning"
                 title={sprintf(
@@ -99,6 +100,7 @@ const JobWizardPageRerun = ({
             )}
             {jobLocation?.id !== currentLocation?.id && (
               <Alert
+                isInline
                 className="job-wizard-alert"
                 variant="warning"
                 title={sprintf(
