@@ -91,7 +91,7 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('host_collection1')).toHaveLength(1);
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Category and Template'));
+      fireEvent.click(screen.getByText('Category and template'));
     });
     await act(async () => {
       fireEvent.click(screen.getByText('Target hosts and inputs'));
