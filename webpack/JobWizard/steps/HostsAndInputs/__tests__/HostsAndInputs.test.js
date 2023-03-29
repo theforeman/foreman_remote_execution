@@ -80,7 +80,7 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('host1')).toHaveLength(1);
     expect(screen.queryAllByText('host2')).toHaveLength(1);
     expect(screen.queryAllByText('host3')).toHaveLength(0);
-    const chip1 = screen.getByRole('button', { name: 'Close host1 host1' });
+    const chip1 = screen.getByRole('button', { name: 'Remove host1 host1' });
     await act(async () => {
       fireEvent.click(chip1);
     });
@@ -100,7 +100,7 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('host_group1')).toHaveLength(1);
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Clear filters'));
+      fireEvent.click(screen.getByText('Clear all filters'));
     });
 
     expect(screen.queryAllByText('host2')).toHaveLength(0);

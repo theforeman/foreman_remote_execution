@@ -34,14 +34,8 @@
   }
 
   .target-hosts-and-inputs {
-    .hosts-chip-group {
-      margin-top: 8px;
-      float: left;
-      clear: left;
-      display: block;
-    }
-    .clear-chips {
-      margin-top: 8px;
+    .pf-c-chip-group.pf-m-category {
+      margin-bottom: 10px;
     }
     .pf-c-select__toggle-typeahead {
       border: 0px;
