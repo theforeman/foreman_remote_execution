@@ -29,6 +29,7 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
               variant="link"
               target="_blank"
               rel="noreferrer"
+              isInline
             >
               {host}
             </Button>
@@ -42,6 +43,7 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
               variant="link"
               target="_blank"
               rel="noreferrer"
+              isInline
             >
               {sprintf(
                 __('...and %s more'),
