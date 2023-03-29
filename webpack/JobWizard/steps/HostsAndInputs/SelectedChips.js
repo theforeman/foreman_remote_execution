@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Chip, ChipGroup, Button } from '@patternfly/react-core';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { hostMethods } from '../../JobWizardConstants';
 
 const SelectedChip = ({ selected, setSelected, categoryName }) => {
@@ -10,19 +10,33 @@ const SelectedChip = ({ selected, setSelected, categoryName }) => {
       oldSelected.filter(({ id }) => id !== itemToRemove)
     );
   };
+  const NUM_CHIPS = 3;
   return (
-    <ChipGroup className="hosts-chip-group" categoryName={categoryName}>
-      {selected.map(({ name, id }, index) => (
-        <Chip
-          key={index}
-          id={`${categoryName}-${id}`}
-          onClick={() => deleteItem(id)}
-          closeBtnAriaLabel={`Close ${name}`}
-        >
-          {name}
-        </Chip>
-      ))}
-    </ChipGroup>
+    <>
+      <ChipGroup
+        className="hosts-chip-group"
+        categoryName={categoryName}
+        isClosable
+        closeBtnAriaLabel="Remove all"
+        collapsedText={sprintf(__('%s more'), selected.length - NUM_CHIPS)}
+        numChips={NUM_CHIPS}
+        onClick={() => {
+          setSelected(() => []);
+        }}
+      >
+        {selected.map(({ name, id }, index) => (
+          <Chip
+            key={index}
+            id={`${categoryName}-${id}`}
+            onClick={() => deleteItem(id)}
+            closeBtnAriaLabel={`Remove ${name}`}
+          >
+            {name}
+          </Chip>
+        ))}
+      </ChipGroup>
+      {selected.length > 0 && <br />}
+    </>
   );
 };
 
@@ -75,7 +89,7 @@ export const SelectedChips = ({
       />
       {showClear && (
         <Button variant="link" className="clear-chips" onClick={clearAll}>
-          {__('Clear filters')}
+          {__('Clear all filters')}
         </Button>
       )}
     </div>
