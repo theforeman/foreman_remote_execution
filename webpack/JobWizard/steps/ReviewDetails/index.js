@@ -8,9 +8,8 @@ import {
 } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import EllipsisWithTooltip from 'react-ellipsis-with-tooltip';
 import { get } from 'foremanReact/redux/API';
-import { translate as __, sprintf } from 'foremanReact/common/I18n';
+import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectJobTemplates,
   selectHosts,
@@ -27,6 +26,7 @@ import {
 import { buildHostQuery } from '../HostsAndInputs/buildHostQuery';
 import { WizardTitle } from '../form/WizardTitle';
 import { parseEnd, parseRepeat } from './helpers';
+import { HostPreviewModal } from '../HostsAndInputs/HostPreviewModal';
 
 const ReviewDetails = ({
   jobCategory,
@@ -60,6 +60,7 @@ const ReviewDetails = ({
   const hosts = useSelector(selectHosts);
 
   const hostsCount = useSelector(selectHostCount);
+  const [hostPreviewOpen, setHostPreviewOpen] = useState(false);
   const stringHosts = () => {
     if (hosts.length === 0) {
       return __('No Target Hosts');
@@ -67,10 +68,18 @@ const ReviewDetails = ({
     if (hosts.length === 1 || hosts.length === 2) {
       return hosts.join(', ');
     }
-    return `${hosts[0]}, ${hosts[1]} ${sprintf(
-      __(', and %s more'),
-      hostsCount - 2
-    )}`;
+    return (
+      <div>
+        {hostsCount} {__('hosts')}{' '}
+        <Button
+          variant="link"
+          isInline
+          onClick={() => setHostPreviewOpen(true)}
+        >
+          {__('view host names')}
+        </Button>
+      </div>
+    );
   };
   const [isAdvancedShown, setIsAdvancedShown] = useState(false);
   const detailsFirstHalf = [
@@ -181,6 +190,11 @@ const ReviewDetails = ({
 
   return (
     <>
+      <HostPreviewModal
+        isOpen={hostPreviewOpen}
+        setIsOpen={setHostPreviewOpen}
+        searchQuery={buildHostQuery(selectedTargets, hostsSearchQuery)}
+      />
       <WizardTitle
         title={WIZARD_TITLES.review}
         className="advanced-fields-title"
@@ -190,7 +204,7 @@ const ReviewDetails = ({
           <DescriptionListGroup key={index}>
             <DescriptionListTerm>{label}</DescriptionListTerm>
             <DescriptionListDescription>
-              <EllipsisWithTooltip>{value || ''}</EllipsisWithTooltip>
+              {value || ''}
             </DescriptionListDescription>
           </DescriptionListGroup>
         ))}
@@ -199,7 +213,7 @@ const ReviewDetails = ({
             <DescriptionListGroup key={index} className="advanced-fields">
               <DescriptionListTerm>{label}</DescriptionListTerm>
               <DescriptionListDescription>
-                <EllipsisWithTooltip>{value || ''}</EllipsisWithTooltip>
+                {value || ''}
               </DescriptionListDescription>
             </DescriptionListGroup>
           ))}
@@ -207,7 +221,7 @@ const ReviewDetails = ({
           <DescriptionListGroup key={index}>
             <DescriptionListTerm>{label}</DescriptionListTerm>
             <DescriptionListDescription>
-              <EllipsisWithTooltip>{value || ''}</EllipsisWithTooltip>
+              {value || ''}
             </DescriptionListDescription>
           </DescriptionListGroup>
         ))}
