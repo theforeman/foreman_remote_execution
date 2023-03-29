@@ -23,7 +23,7 @@ export const SCHEDULE_TYPES = {
 };
 
 export const WIZARD_TITLES = {
-  categoryAndTemplate: __('Category and Template'),
+  categoryAndTemplate: __('Category and template'),
   hostsAndInputs: __('Target hosts and inputs'),
   advanced: __('Advanced fields'),
   schedule: __('Schedule'),

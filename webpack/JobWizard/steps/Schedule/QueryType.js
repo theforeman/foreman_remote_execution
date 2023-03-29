@@ -31,7 +31,7 @@ export const QueryType = ({ isTypeStatic, setIsTypeStatic }) => (
         id="query-type-dynamic"
         label={__('Dynamic query')}
         body={__(
-          "evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it"
+          "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
         )}
       />
     </FormGroup>

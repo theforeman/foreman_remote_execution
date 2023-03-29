@@ -139,7 +139,7 @@ describe('Schedule', () => {
     });
 
     act(() => {
-      fireEvent.click(screen.getByText('Category and Template'));
+      fireEvent.click(screen.getByText('Category and template'));
     });
     act(() => {
       fireEvent.click(screen.getByRole('button', { name: 'Future execution' }));
@@ -246,7 +246,7 @@ describe('Schedule', () => {
     });
 
     act(() => {
-      fireEvent.click(screen.getByText('Category and Template'));
+      fireEvent.click(screen.getByText('Category and template'));
     });
     act(() => {
       fireEvent.click(
@@ -306,9 +306,9 @@ describe('Schedule', () => {
     expect(screen.getByText('Review details').disabled).toBeFalsy();
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Category and Template'));
+      fireEvent.click(screen.getByText('Category and template'));
     });
-    expect(screen.getAllByText('Category and Template')).toHaveLength(3);
+    expect(screen.getAllByText('Category and template')).toHaveLength(3);
 
     await act(async () => {
       fireEvent.click(
