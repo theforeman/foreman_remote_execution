@@ -367,5 +367,10 @@ module ForemanRemoteExecution
       :description => N_('Perform a single Puppet run'),
       :host_action_button => true
     )
+    RemoteExecutionFeature.register(
+      :run_script,
+      N_('Run Script'),
+      :description => N_('Run a script')
+    )
   end
 end
