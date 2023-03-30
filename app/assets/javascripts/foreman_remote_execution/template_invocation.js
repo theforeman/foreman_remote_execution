@@ -31,7 +31,16 @@ function refresh_search_query(value){
 
 function show_preview_hosts_modal() {
   var form = $('form#job_invocation_form');
-  var data = form.serializeArray();
+  var data = form
+    .serializeArray()
+    .filter(item =>
+      [
+        'targeting[search_query]',
+        'targeting[bookmark_id]',
+        'targeting[targeting_type]',
+        'targeting[randomized_ordering]',
+      ].includes(item.name)
+    );
   request = $.ajax({
     data: data,
     type: 'GET',
