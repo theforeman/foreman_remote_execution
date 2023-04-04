@@ -323,6 +323,13 @@ export const jobInvocation = {
     created_in_katello: false,
   },
   inputs: {
-    'inputs[plain hidden]': 'test command',
+    'inputs[adv plain hidden]': {
+      advanced: true,
+      value: 'adv_test_command',
+    },
+    'inputs[plain hidden]': {
+      advanced: false,
+      value: 'test command',
+    },
   },
 };

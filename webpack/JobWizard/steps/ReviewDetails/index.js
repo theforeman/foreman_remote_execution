@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -5,6 +6,7 @@ import {
   DescriptionListTerm,
   DescriptionListGroup,
   DescriptionListDescription,
+  WizardContextConsumer,
 } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,7 +38,20 @@ const ReviewDetails = ({
   templateValues,
   selectedTargets,
   hostsSearchQuery,
+  goToStepByName,
 }) => {
+  // eslint-disable-next-line react/prop-types
+  const StepButton = ({ stepName, children }) => (
+    <Button
+      variant="link"
+      isInline
+      onClick={() => {
+        goToStepByName(stepName);
+      }}
+    >
+      {children}
+    </Button>
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
@@ -74,15 +89,42 @@ const ReviewDetails = ({
   };
   const [isAdvancedShown, setIsAdvancedShown] = useState(false);
   const detailsFirstHalf = [
-    { label: __('Job category'), value: jobCategory },
-    { label: __('Job template'), value: jobTemplate },
-    { label: __('Target hosts'), value: stringHosts() },
+    {
+      label: (
+        <StepButton stepName={WIZARD_TITLES.categoryAndTemplate}>
+          {__('Job category')}
+        </StepButton>
+      ),
+      value: jobCategory,
+    },
+    {
+      label: (
+        <StepButton stepName={WIZARD_TITLES.categoryAndTemplate}>
+          {__('Job template')}
+        </StepButton>
+      ),
+      value: jobTemplate,
+    },
+    {
+      label: (
+        <StepButton stepName={WIZARD_TITLES.hostsAndInputs}>
+          {__('Target hosts')}
+        </StepButton>
+      ),
+      value: stringHosts(),
+    },
     ...templateInputs.map(({ name }) => ({
-      label: name,
+      label: (
+        <StepButton stepName={WIZARD_TITLES.hostsAndInputs}>{name}</StepButton>
+      ),
       value: templateValues[name],
     })),
     {
-      label: __('Advanced fields'),
+      label: (
+        <StepButton stepName={WIZARD_TITLES.advanced}>
+          {__('Advanced fields')}
+        </StepButton>
+      ),
       value: isAdvancedShown ? (
         <Button
           variant="link"
@@ -109,37 +151,77 @@ const ReviewDetails = ({
 
   const detailsSecondHalf = [
     {
-      label: __('Schedule type'),
+      label: (
+        <StepButton stepName={WIZARD_TITLES.typeOfExecution}>
+          {__('Schedule type')}
+        </StepButton>
+      ),
       value: scheduleValue.scheduleType,
     },
     {
-      label: __('Recurrence'),
+      label: (
+        <StepButton
+          stepName={
+            scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING
+              ? SCHEDULE_TYPES.RECURRING
+              : WIZARD_TITLES.typeOfExecution
+          }
+        >
+          {__('Recurrence')}
+        </StepButton>
+      ),
       value: scheduleValue.repeatType,
     },
     scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE &&
       scheduleValue.startsAt && {
-        label: __('Starts at'),
+        label: (
+          <StepButton
+            stepName={
+              scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING
+                ? SCHEDULE_TYPES.RECURRING
+                : SCHEDULE_TYPES.FUTURE
+            }
+          >
+            {__('Starts at')}
+          </StepButton>
+        ),
         value: new Date(scheduleValue.startsAt).toString(),
       },
     scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE &&
       scheduleValue.startsBefore && {
-        label: __('Starts Before'),
+        label: (
+          <StepButton stepName={SCHEDULE_TYPES.FUTURE}>
+            {__('Starts Before')}
+          </StepButton>
+        ),
         value: new Date(scheduleValue.startsBefore).toString(),
       },
 
     scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING && {
-      label: __('Starts'),
+      label: (
+        <StepButton stepName={SCHEDULE_TYPES.RECURRING}>
+          {__('Starts')}
+        </StepButton>
+      ),
       value: scheduleValue.isFuture
         ? new Date(scheduleValue.startsAt).toString()
         : __('Now'),
     },
 
     scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING && {
-      label: __('Repeats'),
+      label: (
+        <StepButton stepName={SCHEDULE_TYPES.RECURRING}>
+          {__('Repeats')}
+        </StepButton>
+      ),
       value: parseRepeat(scheduleValue.repeatType, scheduleValue.repeatData),
     },
     scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING && {
-      label: __('Ends'),
+      label: (
+        <StepButton stepName={SCHEDULE_TYPES.RECURRING}>
+          {__('Ends')}
+        </StepButton>
+      ),
       value: parseEnd(
         scheduleValue.ends,
         scheduleValue.isNeverEnds,
@@ -148,11 +230,19 @@ const ReviewDetails = ({
     },
 
     scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING && {
-      label: __('Purpose'),
+      label: (
+        <StepButton stepName={SCHEDULE_TYPES.RECURRING}>
+          {__('Purpose')}
+        </StepButton>
+      ),
       value: scheduleValue.purpose,
     },
     {
-      label: __('Type of query'),
+      label: (
+        <StepButton stepName={WIZARD_TITLES.typeOfExecution}>
+          {__('Type of query')}
+        </StepButton>
+      ),
       value: scheduleValue.isTypeStatic
         ? __('Static query')
         : __('Dynamic query'),
@@ -224,7 +314,17 @@ ReviewDetails.propTypes = {
   templateValues: PropTypes.object.isRequired,
   selectedTargets: PropTypes.object.isRequired,
   hostsSearchQuery: PropTypes.string.isRequired,
+  goToStepByName: PropTypes.func.isRequired,
 };
 
 ReviewDetails.defaultProps = { jobTemplateID: null };
-export default ReviewDetails;
+
+const WrappedReviewDetails = props => (
+  <WizardContextConsumer>
+    {({ goToStepByName }) => (
+      <ReviewDetails goToStepByName={goToStepByName} {...props} />
+    )}
+  </WizardContextConsumer>
+);
+
+export default WrappedReviewDetails;
