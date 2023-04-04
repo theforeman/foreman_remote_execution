@@ -68,9 +68,6 @@ class UiJobWizardController < ApplicationController
     job_organization = Taxonomy.find_by(id: job.task.input[:current_organization_id])
     job_location = Taxonomy.find_by(id: job.task.input[:current_location_id])
     render :json => {
-      :provider_input_values => composer[:template_invocations][0][:provider_input_values],
-      :provider_input_values1 => job[:provider_input_values],
-      :job2 => composer[:template_invocations][0],
       :job => composer,
       :job_organization => job_organization,
       :job_location => job_location,
