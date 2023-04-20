@@ -26,7 +26,6 @@ const options = (value = '') => {
 const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
   <FormGroup
     label={__('REX pull mode')}
-    isRequired
     labelIcon={
       <LabelIcon
         text={__(
@@ -44,7 +43,6 @@ const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
       className="without_select2"
       id="registration_setup_remote_execution_pull"
       isDisabled={isLoading}
-      isRequired
     >
       {/* eslint-disable-next-line camelcase */
       options(configParams?.host_registration_remote_execution_pull)}
