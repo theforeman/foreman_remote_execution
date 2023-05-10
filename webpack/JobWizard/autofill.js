@@ -48,8 +48,11 @@ export const useAutoFill = ({
           })
         );
       }
-      if (search && !hostIds?.length) {
-        setHostsSearchQuery(search);
+      if ((search || search === '') && !hostIds?.length) {
+        // replace an empty string search with a dummy search query to match all hosts
+        // but only if search query was entered (based on presence of :search parameter)
+        const hostSearch = search === '' ? "name != ''" : search;
+        setHostsSearchQuery(hostSearch);
       }
       if (templateID) {
         setJobTemplateID(+templateID);
