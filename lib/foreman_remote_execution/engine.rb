@@ -47,8 +47,9 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', before: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
-        requires_foreman '>= 3.6'
+        requires_foreman '>= 3.7'
         register_global_js_file 'global'
+        register_gettext
 
         apipie_documented_controllers ["#{ForemanRemoteExecution::Engine.root}/app/controllers/api/v2/*.rb"]
         ApipieDSL.configuration.dsl_classes_matchers += [
@@ -340,12 +341,6 @@ module ForemanRemoteExecution
       ::Api::V2::RegistrationController.prepend ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions
       ::Api::V2::RegistrationController.include ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions::ApipieExtensions
       ::Api::V2::RegistrationCommandsController.include ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationCommandsControllerExtensions::ApipieExtensions
-    end
-
-    initializer 'foreman_remote_execution.register_gettext', after: :load_config_initializers do |_app|
-      locale_dir = File.join(File.expand_path('../../..', __FILE__), 'locale')
-      locale_domain = 'foreman_remote_execution'
-      Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
 
     rake_tasks do
