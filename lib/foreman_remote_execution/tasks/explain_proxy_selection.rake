@@ -17,7 +17,7 @@ namespace :foreman_remote_execution do
     providers = ::RemoteExecutionProvider.provider_proxy_features
 
     raise 'Environment variable HOST has to be set' unless options[:host]
-    unless providers.include?(options[:provider])
+    unless providers.map(&:downcase).include?(options[:provider]&.downcase)
       aliases = providers.group_by { |p| ::RemoteExecutionProvider.provider_for(p) }
                          .select { |_, names| names.count > 1 }
                          .values
