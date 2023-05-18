@@ -1,8 +1,10 @@
 [main]
 host = https://www.transifex.com
 
-[foreman.foreman_remote_execution]
+[o:foreman:p:foreman:r:foreman_remote_execution]
 file_filter = locale/<lang>/foreman_remote_execution.edit.po
 source_file = locale/foreman_remote_execution.pot
 source_lang = en
 type = PO
+minimum_perc = 0
+resource_name = foreman_remote_execution
