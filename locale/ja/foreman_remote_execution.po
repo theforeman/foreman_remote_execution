@@ -28,6 +28,9 @@ msgstr "%s 前"
 msgid "%s job has been invoked"
 msgstr "%s 件のジョブが呼び出されました"
 
+msgid "%s more"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{host} の %{description} "
 
@@ -36,9 +39,6 @@ msgstr ""
 
 msgid "'Starts before' date must in the future"
 msgstr ""
-
-msgid ", and %s more"
-msgstr "さらに %s"
 
 msgid "...and %s more"
 msgstr "...さらに %s"
@@ -98,6 +98,9 @@ msgstr "詳細フィールド"
 msgid "After"
 msgstr ""
 
+msgid "After %s occurences"
+msgstr ""
+
 msgid "All fields are required."
 msgstr "すべてのフィールドは必須です。"
 
@@ -155,8 +158,8 @@ msgstr "bookmark_id と search_query の両方を指定できません"
 msgid "Categories list failed with:"
 msgstr "カテゴリー一覧が以下により失敗:"
 
-msgid "Category and Template"
-msgstr "カテゴリーとテンプレート"
+msgid "Category and template"
+msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr "ジョブ呼び出しフォームで事前に選択されているジョブテンプレートを選択してください"
@@ -167,8 +170,8 @@ msgstr "外部入力セット '%{template}' -> '%{target_template}' で循環依
 msgid "Cleanup working directories"
 msgstr "作業ディレクトリーのクリーンアップ"
 
-msgid "Clear filters"
-msgstr "フィルターをクリア"
+msgid "Clear all filters"
+msgstr ""
 
 msgid "Clear input"
 msgstr ""
@@ -376,6 +379,18 @@ msgstr "エラー:"
 
 msgid "Evaluated at:"
 msgstr "評価済み:"
+
+msgid "Every day at %s"
+msgstr ""
+
+msgid "Every hour at minute %s"
+msgstr ""
+
+msgid "Every month on %s at %s"
+msgstr ""
+
+msgid "Every week on %s at %s"
+msgstr ""
 
 msgid "Execute the job later, at a scheduled time."
 msgstr ""
@@ -737,6 +752,9 @@ msgstr "組織"
 msgid "Override the description format from the template for this invocation only"
 msgstr "この呼び出しに対してのみテンプレートから説明形式を上書き"
 
+msgid "Override the global time to pickup interval for this invocation only"
+msgstr ""
+
 msgid "Override the timeout interval from the template for this invocation only"
 msgstr "この呼び出しに対してのみテンプレートからタイムアウト間隔を上書き"
 
@@ -764,8 +782,23 @@ msgstr "Puppet を 1 回実行"
 msgid "Perform no more executions after this time"
 msgstr "この回数以上は実行されません"
 
+msgid "Please enter a search query"
+msgstr ""
+
+msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
+msgstr ""
+
 msgid "Please refine your search."
 msgstr "検索条件を見直してください。"
+
+msgid "Please select at least one host"
+msgstr ""
+
+msgid "Please select at least one host collection"
+msgstr ""
+
+msgid "Please select at least one host group"
+msgstr ""
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "SSH 通信に使用するポート。デフォルトのポートは 22 です。remote_execution_ssh_port という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
@@ -907,6 +940,12 @@ msgstr "ジョブを実行"
 
 msgid "Run Puppet Once"
 msgstr "Puppet を 1 回実行"
+
+msgid "Run Script"
+msgstr ""
+
+msgid "Run a script"
+msgstr ""
 
 msgid "Run at most N tasks at a time"
 msgstr "一度に最大 N タスクを実行"
@@ -1057,6 +1096,9 @@ msgstr "開始済み"
 
 msgid "Starts"
 msgstr "開始"
+
+msgid "Starts Before"
+msgstr ""
 
 msgid "Starts at"
 msgstr "開始時刻"
@@ -1239,8 +1281,8 @@ msgstr "タイプ"
 msgid "Type has impact on when is the query evaluated to hosts."
 msgstr "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。"
 
-msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
-msgstr "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。<br><ul><li><b>静的</b>: このフォームの送信直後に評価します。</li><li><b>動的</b>: 実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストの設定が評価前に変更される可能性があります。</li></ul>"
+msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
+msgstr ""
 
 msgid "Type of execution"
 msgstr ""
@@ -1395,8 +1437,8 @@ msgstr "レンダリング中のエラー: %s"
 msgid "evaluates just after you submit this form"
 msgstr "このフォームの送信直後に評価します"
 
-msgid "evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it"
-msgstr "実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストのセットが評価前に変更される可能性があります"
+msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
+msgstr ""
 
 msgid "failed"
 msgstr "失敗"
@@ -1478,6 +1520,9 @@ msgstr "使用中 "
 
 msgid "using Smart Proxy"
 msgstr "Smart Proxy を使用"
+
+msgid "view host names"
+msgstr ""
 
 msgid "yes"
 msgstr "yes"

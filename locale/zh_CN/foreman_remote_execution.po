@@ -26,6 +26,9 @@ msgstr "%s 前"
 msgid "%s job has been invoked"
 msgstr "%s 任务已被调用"
 
+msgid "%s more"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{host} 的 %{description}"
 
@@ -34,9 +37,6 @@ msgstr ""
 
 msgid "'Starts before' date must in the future"
 msgstr ""
-
-msgid ", and %s more"
-msgstr ", 和 %s 个更多"
 
 msgid "...and %s more"
 msgstr "...和 %s 个更多"
@@ -96,6 +96,9 @@ msgstr "高级项"
 msgid "After"
 msgstr ""
 
+msgid "After %s occurences"
+msgstr ""
+
 msgid "All fields are required."
 msgstr "各个项都需要。"
 
@@ -153,8 +156,8 @@ msgstr "无法同时指定 bookmark_id 和 search_query"
 msgid "Categories list failed with:"
 msgstr "类别列表失败并带有："
 
-msgid "Category and Template"
-msgstr "类别和模板"
+msgid "Category and template"
+msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr "选择在作业调用表单中预先选择的作业模板"
@@ -165,8 +168,8 @@ msgstr "在外部输入设置中发现了循环的依赖关系 '%{template}' -> 
 msgid "Cleanup working directories"
 msgstr "清理工作目录"
 
-msgid "Clear filters"
-msgstr "清除过滤器"
+msgid "Clear all filters"
+msgstr ""
 
 msgid "Clear input"
 msgstr ""
@@ -374,6 +377,18 @@ msgstr "错误："
 
 msgid "Evaluated at:"
 msgstr "评估于："
+
+msgid "Every day at %s"
+msgstr ""
+
+msgid "Every hour at minute %s"
+msgstr ""
+
+msgid "Every month on %s at %s"
+msgstr ""
+
+msgid "Every week on %s at %s"
+msgstr ""
 
 msgid "Execute the job later, at a scheduled time."
 msgstr ""
@@ -735,6 +750,9 @@ msgstr "机构"
 msgid "Override the description format from the template for this invocation only"
 msgstr "只为此调用覆盖来自模板的描述格式"
 
+msgid "Override the global time to pickup interval for this invocation only"
+msgstr ""
+
 msgid "Override the timeout interval from the template for this invocation only"
 msgstr "只为此调用使用该模板覆盖超时间隔"
 
@@ -762,8 +780,23 @@ msgstr "执行一个单独 Puppet 运行"
 msgid "Perform no more executions after this time"
 msgstr "在此时间后不再执行"
 
+msgid "Please enter a search query"
+msgstr ""
+
+msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
+msgstr ""
+
 msgid "Please refine your search."
 msgstr "请重新调整您的搜索。"
+
+msgid "Please select at least one host"
+msgstr ""
+
+msgid "Please select at least one host collection"
+msgstr ""
+
+msgid "Please select at least one host group"
+msgstr ""
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "要用于 SSH 通信的端口。默认端口 22。您可以通过设置名为 remote_execution_ssh_port 的参数来按主机进行覆盖。"
@@ -905,6 +938,12 @@ msgstr "运行作业"
 
 msgid "Run Puppet Once"
 msgstr "运行 Puppet 一次"
+
+msgid "Run Script"
+msgstr ""
+
+msgid "Run a script"
+msgstr ""
 
 msgid "Run at most N tasks at a time"
 msgstr "一次最多运行 N 个任务"
@@ -1055,6 +1094,9 @@ msgstr "已启动"
 
 msgid "Starts"
 msgstr "开始"
+
+msgid "Starts Before"
+msgstr ""
 
 msgid "Starts at"
 msgstr "开始于"
@@ -1237,8 +1279,8 @@ msgstr "类型"
 msgid "Type has impact on when is the query evaluated to hosts."
 msgstr "类型会影响到什么时候会评估到主机。"
 
-msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
-msgstr "类型会对何时评估主机查询产生影响。<br><ul><li><b>静态</b> - 提交此表格后立即评估</li><li><b>动态</b> - 开始执行前进行评估，因此，如果以后计划，则目标主机集可能会在它之前发生变化</li></ul>"
+msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
+msgstr ""
 
 msgid "Type of execution"
 msgstr ""
@@ -1393,8 +1435,8 @@ msgstr "呈现时出错：%s"
 msgid "evaluates just after you submit this form"
 msgstr "提交此表单后评估"
 
-msgid "evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it"
-msgstr "在执行启动前进行评估，因此如果将来需要它，则目标主机设置可能会在它之前改变。"
+msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
+msgstr ""
 
 msgid "failed"
 msgstr "失败"
@@ -1476,6 +1518,9 @@ msgstr "使用 "
 
 msgid "using Smart Proxy"
 msgstr "使用智能代理"
+
+msgid "view host names"
+msgstr ""
 
 msgid "yes"
 msgstr "是"

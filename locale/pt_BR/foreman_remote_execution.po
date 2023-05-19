@@ -27,6 +27,9 @@ msgstr "%s atrás"
 msgid "%s job has been invoked"
 msgstr "%s trabalho foi invocado"
 
+msgid "%s more"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{description} em %{host}"
 
@@ -35,9 +38,6 @@ msgstr ""
 
 msgid "'Starts before' date must in the future"
 msgstr ""
-
-msgid ", and %s more"
-msgstr ", e %s mais"
 
 msgid "...and %s more"
 msgstr "...e %s mais"
@@ -98,6 +98,9 @@ msgstr "Campos avançados"
 msgid "After"
 msgstr ""
 
+msgid "After %s occurences"
+msgstr ""
+
 msgid "All fields are required."
 msgstr "Todos os campos são obrigatórios."
 
@@ -155,8 +158,8 @@ msgstr "Não é possível especificar tanto bookmark_id quanto search_query"
 msgid "Categories list failed with:"
 msgstr "A lista de categorias falhou:"
 
-msgid "Category and Template"
-msgstr "Categoria e modelo"
+msgid "Category and template"
+msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr "Escolha um template de trabalho pré-selecionado no formulário de invocação de trabalho"
@@ -167,8 +170,8 @@ msgstr "Dependência circular detectada em conjunto de entradas externas '%{temp
 msgid "Cleanup working directories"
 msgstr "Limpeza dos diretórios de trabalho"
 
-msgid "Clear filters"
-msgstr "Filtros transparentes"
+msgid "Clear all filters"
+msgstr ""
 
 msgid "Clear input"
 msgstr ""
@@ -376,6 +379,18 @@ msgstr "Erros:"
 
 msgid "Evaluated at:"
 msgstr "Avaliado(a) em:"
+
+msgid "Every day at %s"
+msgstr ""
+
+msgid "Every hour at minute %s"
+msgstr ""
+
+msgid "Every month on %s at %s"
+msgstr ""
+
+msgid "Every week on %s at %s"
+msgstr ""
 
 msgid "Execute the job later, at a scheduled time."
 msgstr ""
@@ -737,6 +752,9 @@ msgstr "Organização"
 msgid "Override the description format from the template for this invocation only"
 msgstr "Substituir o formato de descrição do template somente para esta invocação"
 
+msgid "Override the global time to pickup interval for this invocation only"
+msgstr ""
+
 msgid "Override the timeout interval from the template for this invocation only"
 msgstr "Substituir o intervalo de tempo limite do limite apenas para esta invocação"
 
@@ -764,8 +782,23 @@ msgstr "Realizar uma única execução de Puppet"
 msgid "Perform no more executions after this time"
 msgstr "Não desempenhar execuções depois deste período"
 
+msgid "Please enter a search query"
+msgstr ""
+
+msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
+msgstr ""
+
 msgid "Please refine your search."
 msgstr "Por favor, refine sua busca."
+
+msgid "Please select at least one host"
+msgstr ""
+
+msgid "Please select at least one host collection"
+msgstr ""
+
+msgid "Please select at least one host group"
+msgstr ""
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "Porta a ser usada para comunicação SSH. Porta padrão 22. Você pode substituir por host configurando um parâmetro chamado remote_execution_ssh_port."
@@ -907,6 +940,12 @@ msgstr "Executar Trabalho"
 
 msgid "Run Puppet Once"
 msgstr "Executar Puppet"
+
+msgid "Run Script"
+msgstr ""
+
+msgid "Run a script"
+msgstr ""
 
 msgid "Run at most N tasks at a time"
 msgstr "Executar no máximo N tarefas de cada vez "
@@ -1057,6 +1096,9 @@ msgstr "Iniciado em"
 
 msgid "Starts"
 msgstr "Inicia"
+
+msgid "Starts Before"
+msgstr ""
 
 msgid "Starts at"
 msgstr "Começa em"
@@ -1241,8 +1283,8 @@ msgstr "Tipo"
 msgid "Type has impact on when is the query evaluated to hosts."
 msgstr "O tipo tem impacto sobre quando a consulta é avaliada para os anfitriões."
 
-msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
-msgstr "O tipo impacta em quando a consulta será avaliada em relação aos hosts. <br><ul><li><b>Estático(a)</b> - avalia logo após o envio deste formulário</li><li><b>Dinâmico(a)</b> - avalia um pouco antes da execução ser iniciada, portanto se for planejada no futuro, os hosts de destino definidos podem ser alterados antes disto</li></ul>"
+msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
+msgstr ""
 
 msgid "Type of execution"
 msgstr ""
@@ -1397,8 +1439,8 @@ msgstr "erro durante renderização: %s"
 msgid "evaluates just after you submit this form"
 msgstr "avalia logo após o envio deste formulário"
 
-msgid "evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it"
-msgstr "avalia pouco antes do início da execução, portanto, se for planejada no futuro, os anfitriões alvo poderão mudar antes"
+msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
+msgstr ""
 
 msgid "failed"
 msgstr "falha"
@@ -1480,6 +1522,9 @@ msgstr "usando "
 
 msgid "using Smart Proxy"
 msgstr "usando o Smart Proxy"
+
+msgid "view host names"
+msgstr ""
 
 msgid "yes"
 msgstr "sim"
