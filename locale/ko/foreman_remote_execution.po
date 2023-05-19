@@ -25,6 +25,9 @@ msgstr "%s 전 "
 msgid "%s job has been invoked"
 msgstr ""
 
+msgid "%s more"
+msgstr ""
+
 msgid "%{description} on %{host}"
 msgstr "%{host}에 대한 %{description}"
 
@@ -32,9 +35,6 @@ msgid "'Starts before' date must be after 'Starts at' date"
 msgstr ""
 
 msgid "'Starts before' date must in the future"
-msgstr ""
-
-msgid ", and %s more"
 msgstr ""
 
 msgid "...and %s more"
@@ -96,6 +96,9 @@ msgstr ""
 msgid "After"
 msgstr ""
 
+msgid "After %s occurences"
+msgstr ""
+
 msgid "All fields are required."
 msgstr ""
 
@@ -153,7 +156,7 @@ msgstr "bookmark_id와 search_query를 모두 지정할 수 없습니다."
 msgid "Categories list failed with:"
 msgstr ""
 
-msgid "Category and Template"
+msgid "Category and template"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -165,7 +168,7 @@ msgstr "외부 입력 세트 '%{template}' -> '%{target_template}'의 순환 종
 msgid "Cleanup working directories"
 msgstr ""
 
-msgid "Clear filters"
+msgid "Clear all filters"
 msgstr ""
 
 msgid "Clear input"
@@ -374,6 +377,18 @@ msgstr ""
 
 msgid "Evaluated at:"
 msgstr "평가 시점:"
+
+msgid "Every day at %s"
+msgstr ""
+
+msgid "Every hour at minute %s"
+msgstr ""
+
+msgid "Every month on %s at %s"
+msgstr ""
+
+msgid "Every week on %s at %s"
+msgstr ""
 
 msgid "Execute the job later, at a scheduled time."
 msgstr ""
@@ -735,6 +750,9 @@ msgstr "조직 "
 msgid "Override the description format from the template for this invocation only"
 msgstr "이 호출에 대한 템플릿에서만 설명 형식 덮어쓰기"
 
+msgid "Override the global time to pickup interval for this invocation only"
+msgstr ""
+
 msgid "Override the timeout interval from the template for this invocation only"
 msgstr ""
 
@@ -762,7 +780,22 @@ msgstr ""
 msgid "Perform no more executions after this time"
 msgstr "이 시간 이후 더 이상 실행을 수행하지 않음"
 
+msgid "Please enter a search query"
+msgstr ""
+
+msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
+msgstr ""
+
 msgid "Please refine your search."
+msgstr ""
+
+msgid "Please select at least one host"
+msgstr ""
+
+msgid "Please select at least one host collection"
+msgstr ""
+
+msgid "Please select at least one host group"
 msgstr ""
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
@@ -904,6 +937,12 @@ msgid "Run Job"
 msgstr "작업 실행"
 
 msgid "Run Puppet Once"
+msgstr ""
+
+msgid "Run Script"
+msgstr ""
+
+msgid "Run a script"
 msgstr ""
 
 msgid "Run at most N tasks at a time"
@@ -1055,6 +1094,9 @@ msgstr ""
 
 msgid "Starts"
 msgstr "시작 "
+
+msgid "Starts Before"
+msgstr ""
 
 msgid "Starts at"
 msgstr ""
@@ -1237,7 +1279,7 @@ msgstr "형태"
 msgid "Type has impact on when is the query evaluated to hosts."
 msgstr ""
 
-msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it</li></ul>"
+msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
 msgstr ""
 
 msgid "Type of execution"
@@ -1393,7 +1435,7 @@ msgstr "렌더링 도중 오류가 발생했습니다: %s"
 msgid "evaluates just after you submit this form"
 msgstr ""
 
-msgid "evaluates just before the execution is started, so if it's planed in future, targeted hosts set may change before it"
+msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
 msgstr ""
 
 msgid "failed"
@@ -1475,6 +1517,9 @@ msgid "using "
 msgstr ""
 
 msgid "using Smart Proxy"
+msgstr ""
+
+msgid "view host names"
 msgstr ""
 
 msgid "yes"

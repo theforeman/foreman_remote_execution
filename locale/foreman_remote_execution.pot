@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-15 19:45+0100\n"
-"PO-Revision-Date: 2023-02-15 19:45+0100\n"
+"POT-Creation-Date: 2023-05-19 12:40+0000\n"
+"PO-Revision-Date: 2023-05-19 12:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -24,7 +24,7 @@ msgid ""
 "is one instead?"
 msgstr ""
 
-#: ../app/assets/javascripts/foreman_remote_execution/template_invocation.js:83
+#: ../app/assets/javascripts/foreman_remote_execution/template_invocation.js:92
 #: ../webpack/react_app/components/TargetingHosts/TargetingHosts.js:12
 msgid "There was an error while updating the status, try refreshing the page."
 msgstr ""
@@ -270,7 +270,7 @@ msgstr ""
 #: ../app/views/job_invocations/_form.html.erb:11
 #: ../app/views/job_templates/_custom_tabs.html.erb:5
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:58
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:75
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:104
 msgid "Job category"
 msgstr ""
 
@@ -364,19 +364,19 @@ msgstr ""
 msgid "List of proxy IDs to be used for remote execution"
 msgstr ""
 
-#: ../app/controllers/job_invocations_controller.rb:109
+#: ../app/controllers/job_invocations_controller.rb:119
 msgid "Trying to abort the job"
 msgstr ""
 
-#: ../app/controllers/job_invocations_controller.rb:111
+#: ../app/controllers/job_invocations_controller.rb:121
 msgid "Trying to cancel the job"
 msgstr ""
 
-#: ../app/controllers/job_invocations_controller.rb:115
+#: ../app/controllers/job_invocations_controller.rb:125
 msgid "The job cannot be aborted at the moment."
 msgstr ""
 
-#: ../app/controllers/job_invocations_controller.rb:117
+#: ../app/controllers/job_invocations_controller.rb:127
 msgid "The job cannot be cancelled at the moment."
 msgstr ""
 
@@ -407,7 +407,7 @@ msgstr ""
 #: ../app/helpers/hosts_extensions_helper.rb:10
 #: ../db/seeds.d/50-notification_blueprints.rb:3
 #: ../db/seeds.d/50-notification_blueprints.rb:17
-#: ../lib/foreman_remote_execution/engine.rb:242
+#: ../lib/foreman_remote_execution/engine.rb:243
 #: ../webpack/JobWizard/JobWizardPageRerun.js:42
 #: ../webpack/JobWizard/index.js:12
 msgid "Jobs"
@@ -838,13 +838,13 @@ msgstr ""
 
 #: ../app/models/targeting.rb:10
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:220
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:137
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:273
 msgid "Alphabetical"
 msgstr ""
 
 #: ../app/models/targeting.rb:10
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:228
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:136
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:272
 msgid "Randomized"
 msgstr ""
 
@@ -881,7 +881,7 @@ msgid "Can't find Job Invocation for an id %s"
 msgstr ""
 
 #: ../app/views/dashboard/_latest-jobs.html.erb:2
-#: ../lib/foreman_remote_execution/engine.rb:249
+#: ../lib/foreman_remote_execution/engine.rb:250
 msgid "Latest Jobs"
 msgstr ""
 
@@ -941,7 +941,7 @@ msgid "Timeout to kill after"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:5
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:77
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:120
 msgid "Target hosts"
 msgstr ""
 
@@ -970,7 +970,7 @@ msgid "Location"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:37
-#: ../lib/foreman_remote_execution/engine.rb:77
+#: ../lib/foreman_remote_execution/engine.rb:78
 msgid "SSH User"
 msgstr ""
 
@@ -991,7 +991,7 @@ msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:23
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:68
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:76
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:112
 msgid "Job template"
 msgstr ""
 
@@ -1000,7 +1000,8 @@ msgid "Resolves to"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:42
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:183
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:231
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:88
 msgid "hosts"
 msgstr ""
 
@@ -1022,7 +1023,7 @@ msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:85
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:239
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:126
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:262
 msgid "SSH user"
 msgstr ""
 
@@ -1034,7 +1035,7 @@ msgstr ""
 #: ../app/views/job_invocations/_form.html.erb:88
 #: ../app/views/job_templates/_custom_tabs.html.erb:26
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:11
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:127
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:263
 msgid "Effective user"
 msgstr ""
 
@@ -1048,7 +1049,7 @@ msgstr ""
 #: ../app/views/job_invocations/_form.html.erb:94
 #: ../app/views/job_templates/_custom_tabs.html.erb:13
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:35
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:129
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:265
 msgid "Timeout to kill"
 msgstr ""
 
@@ -1060,9 +1061,9 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:106
-#: ../lib/foreman_remote_execution/engine.rb:162
+#: ../lib/foreman_remote_execution/engine.rb:163
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:59
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:130
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:266
 msgid "Time to pickup"
 msgstr ""
 
@@ -1098,8 +1099,8 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:112
-#: ../lib/foreman_remote_execution/engine.rb:91
-#: ../lib/foreman_remote_execution/engine.rb:93
+#: ../lib/foreman_remote_execution/engine.rb:92
+#: ../lib/foreman_remote_execution/engine.rb:94
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:125
 msgid "Effective user password"
 msgstr ""
@@ -1114,7 +1115,7 @@ msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:116
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:149
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:131
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:267
 msgid "Concurrency level"
 msgstr ""
 
@@ -1127,7 +1128,7 @@ msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:117
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:175
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:132
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:268
 msgid "Time span"
 msgstr ""
 
@@ -1140,7 +1141,7 @@ msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:121
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:200
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:134
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:270
 msgid "Execution ordering"
 msgstr ""
 
@@ -1154,7 +1155,7 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:130
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:118
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:252
 msgid "Type of query"
 msgstr ""
 
@@ -1162,8 +1163,8 @@ msgstr ""
 msgid ""
 "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static<"
 "/b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evalu"
-"ates just before the execution is started, so if it's planed in future, target"
-"ed hosts set may change before it</li></ul>"
+"ates just before the execution is started, so if it's planned in future, targe"
+"ted hosts set may change before it</li></ul>"
 msgstr ""
 
 #: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
@@ -1379,7 +1380,7 @@ msgid "Remote execution"
 msgstr ""
 
 #: ../app/views/overrides/subnets/_rex_tab.html.erb:1
-#: ../lib/foreman_remote_execution/engine.rb:62
+#: ../lib/foreman_remote_execution/engine.rb:63
 msgid "Remote Execution"
 msgstr ""
 
@@ -1401,7 +1402,7 @@ msgid ""
 msgstr ""
 
 #: ../app/views/remote_execution_features/index.html.erb:1
-#: ../lib/foreman_remote_execution/engine.rb:236
+#: ../lib/foreman_remote_execution/engine.rb:237
 msgid "Remote Execution Features"
 msgstr ""
 
@@ -1521,69 +1522,69 @@ msgstr ""
 msgid "Unable to create mail notification: %s"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:65
+#: ../lib/foreman_remote_execution/engine.rb:66
 msgid ""
 "Search the host for any proxy with Remote Execution, useful when the host has "
 "no subnet or the subnet does not have an execution proxy"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:67
+#: ../lib/foreman_remote_execution/engine.rb:68
 msgid "Fallback to Any Proxy"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:70
+#: ../lib/foreman_remote_execution/engine.rb:71
 msgid ""
 "Search for remote execution proxy outside of the proxies assigned to the host."
 " The search will be limited to the host's organization and location."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:72
+#: ../lib/foreman_remote_execution/engine.rb:73
 msgid "Enable Global Proxy"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:75
+#: ../lib/foreman_remote_execution/engine.rb:76
 msgid ""
 "Default user to use for SSH.  You may override per host by setting a parameter"
 " called remote_execution_ssh_user."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:80
+#: ../lib/foreman_remote_execution/engine.rb:81
 msgid ""
 "Default user to use for executing the script. If the user differs from the SSH"
 " user, su or sudo is used to switch the user."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:82
+#: ../lib/foreman_remote_execution/engine.rb:83
 msgid "Effective User"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:85
+#: ../lib/foreman_remote_execution/engine.rb:86
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:87
+#: ../lib/foreman_remote_execution/engine.rb:88
 msgid "Effective User Method"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:97
+#: ../lib/foreman_remote_execution/engine.rb:98
 msgid "Whether we should sync templates from disk when running db:seed."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:99
+#: ../lib/foreman_remote_execution/engine.rb:100
 msgid "Sync Job Templates"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:102
+#: ../lib/foreman_remote_execution/engine.rb:103
 msgid ""
 "Port to use for SSH communication. Default port 22. You may override per host "
 "by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:104
+#: ../lib/foreman_remote_execution/engine.rb:105
 msgid "SSH Port"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:107
+#: ../lib/foreman_remote_execution/engine.rb:108
 msgid ""
 "Should the ip addresses on host interfaces be preferred over the fqdn? It is u"
 "seful when DNS not resolving the fqdns properly. You may override this per hos"
@@ -1592,11 +1593,11 @@ msgid ""
 "tting"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:111
+#: ../lib/foreman_remote_execution/engine.rb:112
 msgid "Connect by IP"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:114
+#: ../lib/foreman_remote_execution/engine.rb:115
 msgid ""
 "When connecting using ip address, should the IPv6 addresses be preferred? If n"
 "o IPv6 address is set, it falls back to IPv4 automatically. You may override t"
@@ -1605,95 +1606,103 @@ msgid ""
 " default"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:118
+#: ../lib/foreman_remote_execution/engine.rb:119
 msgid "Prefer IPv6 over IPv4"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:121
+#: ../lib/foreman_remote_execution/engine.rb:122
 msgid ""
 "Default password to use for SSH. You may override per host by setting a parame"
 "ter called remote_execution_ssh_password"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:123
+#: ../lib/foreman_remote_execution/engine.rb:124
 msgid "Default SSH password"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:127
+#: ../lib/foreman_remote_execution/engine.rb:128
 msgid ""
 "Default key passphrase to use for SSH. You may override per host by setting a "
 "parameter called remote_execution_ssh_key_passphrase"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:129
+#: ../lib/foreman_remote_execution/engine.rb:130
 msgid "Default SSH key passphrase"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:133
+#: ../lib/foreman_remote_execution/engine.rb:134
 msgid ""
 "Amount of workers in the pool to handle the execution of the remote execution "
 "jobs. Restart of the dynflowd/foreman-tasks service is required."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:135
+#: ../lib/foreman_remote_execution/engine.rb:136
 msgid "Workers pool size"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:138
+#: ../lib/foreman_remote_execution/engine.rb:139
 msgid ""
 "When enabled, working directories will be removed after task completion. You m"
 "ay override this per host by setting a parameter called remote_execution_clean"
 "up_working_dirs."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:140
+#: ../lib/foreman_remote_execution/engine.rb:141
 msgid "Cleanup working directories"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:143
+#: ../lib/foreman_remote_execution/engine.rb:144
 msgid ""
 "Where to find the Cockpit instance for the Web Console button.  By default, no"
 " button is shown."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:145
+#: ../lib/foreman_remote_execution/engine.rb:146
 msgid "Cockpit URL"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:148
+#: ../lib/foreman_remote_execution/engine.rb:149
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:150
+#: ../lib/foreman_remote_execution/engine.rb:151
 msgid "Form Job Template"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:154
+#: ../lib/foreman_remote_execution/engine.rb:155
 msgid ""
 "Select a report template used for generating a report for a particular remote "
 "execution job"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:156
+#: ../lib/foreman_remote_execution/engine.rb:157
 msgid "Job Invocation Report Template"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:160
+#: ../lib/foreman_remote_execution/engine.rb:161
 msgid ""
 "Time in seconds within which the host has to pick up a job. If the job is not "
 "picked up within this limit, the job will be cancelled. Defaults to 1 day."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:231
+#: ../lib/foreman_remote_execution/engine.rb:232
 msgid "Job templates"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:366
+#: ../lib/foreman_remote_execution/engine.rb:361
 msgid "Run Puppet Once"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:367
+#: ../lib/foreman_remote_execution/engine.rb:362
 msgid "Perform a single Puppet run"
+msgstr ""
+
+#: ../lib/foreman_remote_execution/engine.rb:367
+msgid "Run Script"
+msgstr ""
+
+#: ../lib/foreman_remote_execution/engine.rb:368
+msgid "Run a script"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:11
@@ -1736,7 +1745,7 @@ msgid "Recurring execution"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:26
-msgid "Category and Template"
+msgid "Category and template"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:27
@@ -1744,7 +1753,7 @@ msgid "Target hosts and inputs"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:28
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:83
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:134
 msgid "Advanced fields"
 msgstr ""
 
@@ -1791,6 +1800,15 @@ msgstr ""
 msgid ""
 "Current location %s is different from job's location %s. This job may run on d"
 "ifferent hosts than before."
+msgstr ""
+
+#: ../webpack/JobWizard/StartsBeforeErrorAlert.js:9
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:41
+msgid "'Starts before' date must in the future"
+msgstr ""
+
+#: ../webpack/JobWizard/StartsBeforeErrorAlert.js:11
+msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
 msgstr ""
 
 #: ../webpack/JobWizard/index.js:35
@@ -1854,74 +1872,155 @@ msgstr ""
 msgid "Preview Hosts"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/HostPreviewModal.js:47
+#: ../webpack/JobWizard/steps/HostsAndInputs/HostPreviewModal.js:49
 msgid "...and %s more"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/SelectedChips.js:78
-msgid "Clear filters"
+#: ../webpack/JobWizard/steps/HostsAndInputs/SelectedChips.js:21
+msgid "%s more"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/HostsAndInputs/SelectedChips.js:92
+msgid "Clear all filters"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/HostsAndInputs/TemplateInputs.js:11
 msgid "There are no available input fields for the selected template."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:141
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:127
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:164
+msgid "Please select at least one host"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:161
+msgid "Please enter a search query"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:168
+msgid "Please select at least one host collection"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:172
+msgid "Please select at least one host group"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:189
 msgid "Filter by hosts"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:151
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:199
 msgid "Filter by host collections"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:160
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:208
 msgid "Filter by host groups"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:176
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:224
 msgid "Apply to"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:63
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:7
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:175
+msgid "Never"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:13
+msgid "After %s occurences"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:19
+msgid "Every hour at minute %s"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:21
+msgid "Every day at %s"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:29
+msgid "Every week on %s at %s"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:33
+msgid "Every month on %s at %s"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:38
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:19
+msgid "Cron line"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:81
 msgid "No Target Hosts"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:69
-msgid ", and %s more"
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:94
+msgid "view host names"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:92
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:145
 msgid "Hide all advanced fields"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:102
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:155
 msgid "Show all advanced fields"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:110
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:165
 msgid "Schedule type"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:114
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:179
 msgid "Recurrence"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:120
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:194
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:52
+msgid "Starts at"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:203
+msgid "Starts Before"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:212
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:88
+msgid "Starts"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:217
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:103
+msgid "Now"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:223
+#: ../webpack/JobWizard/steps/Schedule/RepeatOn.js:64
+msgid "Repeats"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:231
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:160
+msgid "Ends"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:244
+#: ../webpack/JobWizard/steps/Schedule/PurposeField.js:9
+msgid "Purpose"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:256
 #: ../webpack/JobWizard/steps/Schedule/QueryType.js:22
 msgid "Static query"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:121
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:257
 #: ../webpack/JobWizard/steps/Schedule/QueryType.js:32
 msgid "Dynamic query"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:128
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:264
 msgid "Description Template"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/PurposeField.js:9
-msgid "Purpose"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/PurposeField.js:11
@@ -1944,12 +2043,8 @@ msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/QueryType.js:33
 msgid ""
-"evaluates just before the execution is started, so if it's planed in future, t"
-"argeted hosts set may change before it"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:19
-msgid "Cron line"
+"evaluates just before the execution is started, so if it's planned in future, "
+"targeted hosts set may change before it"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:22
@@ -1994,20 +2089,16 @@ msgstr ""
 msgid "range: 0-59"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:67
+#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:66
 msgid "Create"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:81
+#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:80
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/RepeatMonth.js:20
 msgid "Days"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/RepeatOn.js:64
-msgid "Repeats"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/RepeatWeek.js:42
@@ -2024,14 +2115,6 @@ msgstr ""
 msgid "'Starts before' date must be after 'Starts at' date"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:41
-msgid "'Starts before' date must in the future"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:52
-msgid "Starts at"
-msgstr ""
-
 #: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:74
 #: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:111
 msgid "Clear input"
@@ -2039,22 +2122,6 @@ msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:79
 msgid "Starts before"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:88
-msgid "Starts"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:103
-msgid "Now"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:160
-msgid "Ends"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:175
-msgid "Never"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:183
@@ -2195,7 +2262,7 @@ msgstr ""
 msgid "REX pull mode"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:32
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:31
 msgid ""
 "Setup remote execution pull mode. If set to `Yes`, pull provider client will b"
 "e deployed on the registered host. The inherited value is based on the `host_r"
