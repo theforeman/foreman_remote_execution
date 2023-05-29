@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'foremanReact/redux/API';
-import { HOST_IDS, REX_FEATURE } from './JobWizardConstants';
+import { HOST_IDS, REX_FEATURE, JOB_TEMPLATE } from './JobWizardConstants';
 import './JobWizard.scss';
+import { selectDefaultOutputTemplates } from './JobWizardSelectors';
 
 export const useAutoFill = ({
   fills,
@@ -10,9 +11,11 @@ export const useAutoFill = ({
   setSelectedTargets,
   setHostsSearchQuery,
   setJobTemplateID,
+  setOutputTemplates,
   setTemplateValues,
   setAdvancedValues,
 }) => {
+  const defaultTemplates = useSelector(selectDefaultOutputTemplates);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,6 +56,15 @@ export const useAutoFill = ({
       }
       if (templateID) {
         setJobTemplateID(+templateID);
+        dispatch(
+          get({
+            key: JOB_TEMPLATE,
+            url: `/ui_job_wizard/template/${+templateID}`,
+            handleSuccess: ({ data }) => {
+              if (data) setOutputTemplates(data.default_output_templates || []);
+            },
+          })
+        );
       }
       if (feature) {
         dispatch(
@@ -61,6 +73,18 @@ export const useAutoFill = ({
             url: `/api/remote_execution_features/${feature}`,
             handleSuccess: ({ data }) => {
               setJobTemplateID(data.job_template_id);
+              dispatch(
+                get({
+                  key: JOB_TEMPLATE,
+                  url: `/ui_job_wizard/template/${data.job_template_id}`,
+                  handleSuccess: ({ templateData }) => {
+                    if (templateData)
+                      setOutputTemplates(
+                        templateData.default_output_templates || []
+                      );
+                  },
+                })
+              );
             },
           })
         );
@@ -88,6 +112,7 @@ export const useAutoFill = ({
         });
       }
     }
+    setOutputTemplates(defaultTemplates);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fills]);
 };

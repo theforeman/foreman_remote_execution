@@ -68,9 +68,12 @@ module Actions
                                :alternative_names => provider.alternative_names(host) }
         action_options = provider.proxy_command_options(template_invocation, host)
                                  .merge(additional_options)
-
-        plan_delegated_action(proxy, provider.proxy_action_class, action_options, proxy_action_class: ::Actions::RemoteExecution::ProxyAction)
-        plan_self :with_event_logging => true
+        # Defines the order between planned actions.
+        sequence do
+          plan_delegated_action(proxy, provider.proxy_action_class, action_options, proxy_action_class: ::Actions::RemoteExecution::ProxyAction)
+          plan_self :with_event_logging => true
+          plan_action(::Actions::RemoteExecution::OutputProcessing, template_invocation_id: template_invocation.id)
+        end
       end
 
       def finalize(*args)
@@ -274,9 +277,10 @@ module Actions
         property :host, object_of: 'Host', desc: "Returns the host"
         property :job_invocation_id, Integer, desc: "Returns the id of the job invocation"
         property :job_invocation, object_of: 'JobInvocation', desc: "Returns the job invocation"
+        property :output, String, desc: "Returns the output of the template invocation"
       end
       class Jail < ::Actions::ObservableAction::Jail
-        allow :host_name, :host_id, :host, :job_invocation_id, :job_invocation
+        allow :host_name, :host_id, :host, :job_invocation_id, :job_invocation, :output
       end
     end
   end

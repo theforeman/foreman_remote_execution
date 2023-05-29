@@ -7,12 +7,12 @@ class InputTemplateRenderer
 
   delegate :logger, to: Rails
 
-  attr_accessor :template, :host, :invocation, :template_input_values, :error_message, :templates_stack, :current_user
+  attr_accessor :template, :host, :invocation, :template_input_values, :error_message, :templates_stack, :current_user, :output
 
   # takes template object that should be rendered
   # host and template invocation arguments are optional
   # so we can render values based on parameters, facts or user inputs
-  def initialize(template, host = nil, invocation = nil, input_values = nil, preview = false, templates_stack = [])
+  def initialize(template, host = nil, invocation = nil, input_values = nil, preview = false, templates_stack = [], output = "")
     raise Foreman::Exception, N_('Recursive rendering of templates detected') if templates_stack.include?(template)
 
     @host = host
@@ -21,6 +21,8 @@ class InputTemplateRenderer
     @template_input_values = input_values
     @preview = preview
     @templates_stack = templates_stack + [template]
+    # gives templates the access to the output variable
+    @output = output
   end
 
   def render
@@ -44,6 +46,7 @@ class InputTemplateRenderer
         templates_stack: templates_stack,
         input_template_instance: self,
         current_user: User.current.try(:login),
+        output: output,
       }
     )
     Foreman::Renderer.render(source, @scope)

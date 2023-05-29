@@ -39,3 +39,7 @@
 <div class="tab-pane" id="template_type">
   <%= checkbox_f f, :snippet, :onchange => "snippet_changed(this)", :label=>_('Snippet'), :disabled => @template.locked? %>
 </div>
+
+<div class="tab-pane" id="output_templates">
+  <%= multiple_selects f, :output_template_ids, OutputTemplate, @template.output_templates.try(:map, &:id), :label => _("Default Output Templates") %>
+</div>

@@ -23,6 +23,9 @@ class JobTemplate < ::Template
   # rubocop:enable Rails/HasManyOrHasOneDependent
   has_many :remote_execution_features, :dependent => :nullify
 
+  has_many :job_template_output_templates, dependent: :destroy
+  has_many :output_templates, through: :job_template_output_templates
+
   # these can't be shared in parent class, scoped search can't handle STI properly
   # tested with scoped_search 3.2.0
   include Taxonomix

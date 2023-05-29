@@ -1,0 +1,20 @@
+<% stylesheet 'foreman_remote_execution/foreman_remote_execution' %>
+
+<!-- modal window -->
+<div class="modal fade" id="importOutputTemplateModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" onclick="close_import_output_template_modal(); return false;"><span aria-hidden="true">&times;</span><span class="sr-only"><%= _('Close') %></span></button>
+        <h4 class="modal-title">Import Output Template</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for :imported_template, :url => import_output_templates_path do |f| %>
+          <%= file_field_f f, :template, :size => "col-md-10", :help_block  => _("Select an ERB file to upload in order to import an output template. The template must contain metadata in the first ERB comment.") %>
+          <%= checkbox_f(f, :overwrite, :label => _('Overwrite'), :help_block => _("Whether to overwrite the template if it already exists")) %>
+          <%= submit_or_cancel f, false, :cancel_path => 'javascript:close_import_output_template_modal();' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

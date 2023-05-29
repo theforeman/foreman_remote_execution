@@ -1,0 +1,38 @@
+<%= javascript 'foreman_remote_execution/output_templates' %>
+<%= javascript 'foreman_remote_execution/template_input' %>
+
+<% title _("Output Templates") %>
+<% title_actions(link_to_function(_('Import'), 'show_import_output_template_modal();', :class => 'btn btn-default'),
+                 new_link(_("Create Output Template"))) %>
+
+<table class="<%= table_css_classes('table-fixed') %>">
+  <thead>
+    <tr>
+      <th class="col-md-6"><%= sort :name, :as => s_("OutputTemplate|Name") %></th>
+      <th class="col-md-1"><%= sort :snippet, :as => s_("OutputTemplate|Snippet") %></th>
+      <th class="col-md-1"><%= sort :locked, :as => s_("OutputTemplate|Locked"), :default => "DESC" %></th>
+      <th class="col-md-1"><%= _('Actions') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for output_template in @templates %>
+      <% if !output_template.snippet %>
+        <%# do not show runtime templates %>
+        <tr>
+          <td class="display-two-pane ellipsis"><%= link_to_if_authorized output_template,
+                                                                hash_for_edit_output_template_path(:id => output_template).merge(:auth_object => output_template, :authorizer => authorizer) %></td>
+          <td align='center'><%= checked_icon output_template.snippet %></td>
+          <td align='center'>
+            <%= locked_icon output_template.locked?, _("This template is locked for editing.") %>
+          </td>
+          <td>
+            <%= action_buttons(*permitted_actions(output_template)) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate_with_info @templates %>
+
+<%= render :partial => 'import_output_template_modal' %>

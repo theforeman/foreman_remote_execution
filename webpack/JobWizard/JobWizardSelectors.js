@@ -9,8 +9,10 @@ import { selectRouterLocation } from 'foremanReact/routes/RouterSelector';
 
 import {
   JOB_TEMPLATES,
+  OUTPUT_TEMPLATES,
   JOB_CATEGORIES,
   JOB_TEMPLATE,
+  OUTPUT_TEMPLATE,
   HOSTS_API,
   JOB_INVOCATION,
 } from './JobWizardConstants';
@@ -26,6 +28,19 @@ export const selectJobTemplates = state =>
 
 export const selectJobTemplatesSearch = state =>
   selectAPIResponse(state, JOB_TEMPLATES)?.search;
+
+export const filterOutputTemplates = templates =>
+  templates?.filter(template => !template.snippet) || [];
+
+export const selectOutputTemplates = state =>
+  filterOutputTemplates(selectAPIResponse(state, OUTPUT_TEMPLATES)?.results) ||
+  filterOutputTemplates(selectAPIResponse(state, OUTPUT_TEMPLATES));
+
+export const selectOutputTemplatesStatus = state =>
+  selectAPIStatus(state, OUTPUT_TEMPLATES);
+
+export const selectOutputTemplatesSearch = state =>
+  selectAPIResponse(state, OUTPUT_TEMPLATES)?.search;
 
 export const selectJobCategoriesResponse = state =>
   selectAPIResponse(state, JOB_CATEGORIES) || {};
@@ -48,6 +63,9 @@ export const selectAllTemplatesError = state =>
 export const selectTemplateError = state =>
   selectAPIErrorMessage(state, JOB_TEMPLATE);
 
+export const selectOutputTemplateError = state =>
+  selectAPIErrorMessage(state, OUTPUT_TEMPLATE);
+
 export const selectJobTemplate = state =>
   selectAPIResponse(state, JOB_TEMPLATE);
 
@@ -56,6 +74,9 @@ export const selectEffectiveUser = state =>
 
 export const selectAdvancedTemplateInputs = state =>
   selectAPIResponse(state, JOB_TEMPLATE).advanced_template_inputs || [];
+
+export const selectDefaultOutputTemplates = state =>
+  selectAPIResponse(state, JOB_TEMPLATE).default_output_templates || [];
 
 export const selectTemplateInputs = state =>
   selectAPIResponse(state, JOB_TEMPLATE).template_inputs || [];

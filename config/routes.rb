@@ -16,6 +16,21 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :output_templates, :except => [:show] do
+    member do
+      get 'clone_template'
+      get 'lock'
+      get 'export'
+      get 'unlock'
+      post 'preview'
+    end
+    collection do
+      post 'preview'
+      post 'import'
+      get 'auto_complete_search'
+    end
+  end
+
   match 'job_invocations/new', to: 'react#index', :via => [:get], as: 'new_job_invocation'
   match 'job_invocations/new', to: 'job_invocations#create', via: [:post], as: 'create_job_invocation'
   match 'job_invocations/', to: 'job_invocations#legacy_create', via: [:post], as: 'legacy_create_job_invocation'
@@ -80,12 +95,24 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :output_templates, :except => [:new, :edit] do
+        resources :locations, :only => [:index, :show]
+        resources :organizations, :only => [:index, :show]
+        get :export, :on => :member
+        post :clone, :on => :member
+        collection do
+          post 'import'
+        end
+      end
+
       resources :organizations, :only => [:index] do
         resources :job_templates, :only => [:index, :show]
+        resources :output_templates, :only => [:index, :show]
       end
 
       resources :locations, :only => [:index] do
         resources :job_templates, :only => [:index, :show]
+        resources :output_templates, :only => [:index, :show]
       end
 
       resources :templates, :only => :none do

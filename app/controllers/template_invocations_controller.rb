@@ -15,6 +15,8 @@ class TemplateInvocationsController < ApplicationController
     @since = params[:since].to_f if params[:since].present?
     @line_sets = @template_invocation_task.main_action.live_output
     @line_sets = @line_sets.drop_while { |o| o['timestamp'].to_f <= @since } if @since
+    @template_output_sets = @line_sets.select { |o| o['output_type'] == 'template_output' || o['output_type'] == 'template_output_err' }
+    @line_sets.select! { |o| o['output_type'] != 'template_output' && o['output_type'] != 'template_output_err' }
     @line_counter = params[:line_counter].to_i
   end
 end
