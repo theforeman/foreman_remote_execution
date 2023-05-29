@@ -9,7 +9,7 @@
     <%= field(f, :description) { @remote_execution_feature.description } %>
   </div>
   <div class="row">
-    <%= field(f, :provided_inputs) { @remote_execution_feature.provided_inputs } %>
+    <%= field(f, :provided_inputs) { @remote_execution_feature.provided_inputs || '' } %>
   </div>
   <div class="row">
     <% job_templates = JobTemplate.authorized(:view_job_templates) %>
