@@ -24,6 +24,10 @@
       <% end %>
       <% if job_invocation.execution_timeout_interval.present? %>
         <li><b><%= _("Timeout to kill after") %></b>: <%= job_invocation.execution_timeout_interval %> <%= _('seconds') %><br></li>
+        <% end %>
+      <% if job_invocation.time_to_pickup.present? %>
+        <li><b><%= _("Time to pickup") %></b>: <%= job_invocation.time_to_pickup %> <%= _('seconds') %><br>
+        </li>
       <% end %>
     </ul>
     </p>
