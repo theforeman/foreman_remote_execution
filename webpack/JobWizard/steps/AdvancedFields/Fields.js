@@ -59,7 +59,7 @@ export const TimeToPickupField = ({ value, setValue }) => (
       label: __('Time to pickup'),
       labelIcon: helpLabel(
         __(
-          'Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled.'
+          'Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs'
         ),
         'time-to-pickup'
       ),

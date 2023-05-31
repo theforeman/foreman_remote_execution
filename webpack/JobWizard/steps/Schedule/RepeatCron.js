@@ -1,6 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput, FormGroup, ValidatedOptions } from '@patternfly/react-core';
+import {
+  List,
+  ListItem,
+  ListComponent,
+  OrderType,
+  TextInput,
+  FormGroup,
+  ValidatedOptions,
+} from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { helpLabel } from '../form/FormHelpers';
 
@@ -19,15 +27,15 @@ export const RepeatCron = ({ repeatData, setRepeatData, setValid }) => {
       label={__('Cron line')}
       labelIcon={helpLabel(
         <div>
-          {__("Cron line format 'a b c d e', where:")}
+          {__("Cron line format '1 2 3 4 5', where:")}
           <br />
-          <ol>
-            <li>{__('is minute (range: 0-59)')}</li>
-            <li>{__('is hour (range: 0-23)')}</li>
-            <li>{__('is day of month (range: 1-31)')}</li>
-            <li>{__('is month (range: 1-12)')}</li>
-            <li>{__('is day of week (range: 0-6)')}</li>
-          </ol>
+          <List component={ListComponent.ol} type={OrderType.number}>
+            <ListItem>{__('is minute (range: 0-59)')}</ListItem>
+            <ListItem>{__('is hour (range: 0-23)')}</ListItem>
+            <ListItem>{__('is day of month (range: 1-31)')}</ListItem>
+            <ListItem>{__('is month (range: 1-12)')}</ListItem>
+            <ListItem>{__('is day of week (range: 0-6)')}</ListItem>
+          </List>
         </div>
       )}
       isRequired
