@@ -11,6 +11,12 @@ template_inputs:
   input_type: user
   required: false
   advanced: true
+- name: refresh_subscription
+  description: Refresh subscription-manager state. Default is "false".
+  input_type: user
+  required: false
+  advanced: true
+  options: "false\r\ntrue"
 - name: action
   description: 'The package action: install, update, or remove'
   input_type: user
@@ -90,6 +96,10 @@ handle_zypp_res_codes () {
   [ $RETVAL -eq 0 ] || exit_with_message "Pre script failed" $RETVAL
 <% end -%>
 
+<% if input("refresh_subscription") == "true" -%>
+  [ -x "$(command -v subscription-manager)" ] && subscription-manager refresh
+<% end -%>
+
 # Action
 <% if package_manager == 'yum' -%>
   yum -y <%= input("options") %> <%= action %> <%= input("package") %>
@@ -105,7 +115,6 @@ handle_zypp_res_codes () {
       end
     end
   -%>
-  [ -x "$(command -v subscription-manager)" ] && subscription-manager refresh
   export DEBIAN_FRONTEND=noninteractive
   apt-get -y update
   apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %>
