@@ -33,6 +33,8 @@ import { HostPreviewModal } from '../HostsAndInputs/HostPreviewModal';
 const ReviewDetails = ({
   jobCategory,
   jobTemplateID,
+  selectedOutputTemplates,
+  runtimeTemplate,
   advancedValues,
   scheduleValue,
   templateValues,
@@ -96,6 +98,24 @@ const ReviewDetails = ({
       </div>
     );
   };
+  const stringOutputTemplates = () => {
+    const runtimeTemplateCount = runtimeTemplate === '' ? 0 : 1;
+    const outputTemplatesTotal =
+      selectedOutputTemplates.length + runtimeTemplateCount;
+    if (outputTemplatesTotal === 0) {
+      return __('No Output Templates');
+    }
+    if (
+      (outputTemplatesTotal === 1 || outputTemplatesTotal === 2) &&
+      outputTemplatesTotal === selectedOutputTemplates.length
+    ) {
+      return selectedOutputTemplates.map(t => t.name).join(', ');
+    }
+    if (runtimeTemplateCount === 1 && outputTemplatesTotal === 1) {
+      return runtimeTemplate;
+    }
+    return outputTemplatesTotal + __(' templates selected');
+  };
   const [isAdvancedShown, setIsAdvancedShown] = useState(false);
   const detailsFirstHalf = [
     {
@@ -113,6 +133,14 @@ const ReviewDetails = ({
         </StepButton>
       ),
       value: jobTemplate,
+    },
+    {
+      label: (
+        <StepButton stepName={WIZARD_TITLES.categoryAndTemplate}>
+          {__('Output template')}
+        </StepButton>
+      ),
+      value: stringOutputTemplates(),
     },
     {
       label: (
@@ -323,6 +351,8 @@ const ReviewDetails = ({
 ReviewDetails.propTypes = {
   jobCategory: PropTypes.string.isRequired,
   jobTemplateID: PropTypes.number,
+  selectedOutputTemplates: PropTypes.array.isRequired,
+  runtimeTemplate: PropTypes.string.isRequired,
   advancedValues: PropTypes.object.isRequired,
   scheduleValue: PropTypes.object.isRequired,
   templateValues: PropTypes.object.isRequired,

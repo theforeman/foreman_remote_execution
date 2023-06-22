@@ -2,10 +2,13 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
 
 export const JOB_TEMPLATES = 'JOB_TEMPLATES';
+export const OUTPUT_TEMPLATES = 'OUTPUT_TEMPLATES';
 export const JOB_CATEGORIES = 'JOB_CATEGORIES';
 export const JOB_TEMPLATE = 'JOB_TEMPLATE';
+export const OUTPUT_TEMPLATE = 'OUTPUT_TEMPLATE';
 export const JOB_INVOCATION = 'JOB_INVOCATION';
 export const templatesUrl = foremanUrl('/api/v2/job_templates');
+export const outputTemplatesUrl = foremanUrl('/api/v2/output_templates');
 
 export const repeatTypes = {
   noRepeat: __('Does not repeat'),

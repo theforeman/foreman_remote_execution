@@ -1,23 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { Text, TextVariants, Form, Alert } from '@patternfly/react-core';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  Text,
+  TextVariants,
+  Form,
+  Alert,
+  FormGroup,
+} from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { get } from 'foremanReact/redux/API';
 import { SelectField } from '../form/SelectField';
 import { GroupedSelectField } from '../form/GroupedSelectField';
 import { WizardTitle } from '../form/WizardTitle';
-import { WIZARD_TITLES, JOB_TEMPLATES } from '../../JobWizardConstants';
+import {
+  WIZARD_TITLES,
+  JOB_TEMPLATES,
+  JOB_TEMPLATE,
+  OUTPUT_TEMPLATES,
+  outputTemplatesUrl,
+} from '../../JobWizardConstants';
 import { selectIsLoading } from '../../JobWizardSelectors';
+import { OutputSelect } from './searchOutputTemplates';
+import { SelectedTemplates } from './SelectedTemplates';
+import { OutputTemplateTextField } from './OutputTemplateTextField';
 
 export const CategoryAndTemplate = ({
   jobCategories,
   jobTemplates,
+  selectedOutputTemplates,
+  runtimeTemplate,
   setJobTemplate,
+  setOutputTemplates,
+  setRuntimeTemplate,
   selectedTemplateID,
   selectedCategory,
   setCategory,
   errors,
 }) => {
+  const dispatch = useDispatch();
   const templatesGroups = {};
   const isTemplatesLoading = useSelector(state =>
     selectIsLoading(state, JOB_TEMPLATES)
@@ -44,11 +65,40 @@ export const CategoryAndTemplate = ({
   const onSelectCategory = newCategory => {
     if (selectedCategory !== newCategory) {
       setCategory(newCategory);
-      setJobTemplate(null);
+      onSelectJobTemplate(null);
     }
   };
-  const { categoryError, allTemplatesError, templateError } = errors;
-  const isError = !!(categoryError || allTemplatesError || templateError);
+
+  const onSelectJobTemplate = newJobTemplateID => {
+    if (selectedTemplateID !== newJobTemplateID) {
+      setJobTemplate(newJobTemplateID);
+      if (newJobTemplateID) {
+        dispatch(
+          get({
+            key: JOB_TEMPLATE,
+            url: `/ui_job_wizard/template/${newJobTemplateID}`,
+            handleSuccess: ({ data }) => {
+              if (data) setOutputTemplates(data.default_output_templates || []);
+            },
+          })
+        );
+      }
+    }
+  };
+
+  const {
+    categoryError,
+    allTemplatesError,
+    templateError,
+    outputTemplateError,
+  } = errors;
+  const isError = !!(
+    categoryError ||
+    allTemplatesError ||
+    templateError ||
+    outputTemplateError
+  );
+
   return (
     <>
       <WizardTitle title={WIZARD_TITLES.categoryAndTemplate} />
@@ -68,13 +118,24 @@ export const CategoryAndTemplate = ({
           label={__('Job template')}
           fieldId="job_template"
           groups={Object.values(templatesGroups)}
-          setSelected={setJobTemplate}
+          setSelected={onSelectJobTemplate}
           selected={isTemplatesLoading ? [] : selectedTemplate}
           isDisabled={
             !!(categoryError || allTemplatesError || isTemplatesLoading)
           }
           placeholderText={allTemplatesError ? __('Error') : ''}
         />
+        <FormGroup label={__('Output templates')} fieldId="output_template">
+          <OutputSelect
+            selected={selectedOutputTemplates}
+            setSelected={setOutputTemplates}
+            apiKey={OUTPUT_TEMPLATES}
+            name="output_templates"
+            url={outputTemplatesUrl}
+            placeholderText={__('Output templates')}
+          />
+        </FormGroup>
+
         {isError && (
           <Alert variant="danger" title={__('Errors:')}>
             {categoryError && (
@@ -92,8 +153,23 @@ export const CategoryAndTemplate = ({
                 {__('Template failed with:')} {templateError}
               </span>
             )}
+            {outputTemplateError && (
+              <span>
+                {__('Output template failed with:')} {outputTemplateError}
+              </span>
+            )}
           </Alert>
         )}
+        <OutputTemplateTextField
+          runtimeTemplate={runtimeTemplate}
+          setRuntimeTemplate={setRuntimeTemplate}
+        />
+        <SelectedTemplates
+          selectedOutputTemplates={selectedOutputTemplates}
+          setOutputTemplates={setOutputTemplates}
+          runtimeTemplate={runtimeTemplate}
+          setRuntimeTemplate={setRuntimeTemplate}
+        />
       </Form>
     </>
   );
@@ -102,7 +178,11 @@ export const CategoryAndTemplate = ({
 CategoryAndTemplate.propTypes = {
   jobCategories: PropTypes.array,
   jobTemplates: PropTypes.array,
+  selectedOutputTemplates: PropTypes.array.isRequired,
+  runtimeTemplate: PropTypes.string.isRequired,
   setJobTemplate: PropTypes.func.isRequired,
+  setOutputTemplates: PropTypes.func.isRequired,
+  setRuntimeTemplate: PropTypes.func.isRequired,
   selectedTemplateID: PropTypes.number,
   setCategory: PropTypes.func.isRequired,
   selectedCategory: PropTypes.string,
@@ -110,6 +190,7 @@ CategoryAndTemplate.propTypes = {
     categoryError: PropTypes.string,
     allTemplatesError: PropTypes.string,
     templateError: PropTypes.string,
+    outputTemplateError: PropTypes.string,
   }),
 };
 CategoryAndTemplate.defaultProps = {

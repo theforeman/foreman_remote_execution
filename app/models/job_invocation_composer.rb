@@ -14,6 +14,8 @@ class JobInvocationComposer
         :targeting => targeting(ui_params.fetch(:targeting, {})),
         :triggering => triggering,
         :host_ids => ui_params[:host_ids],
+        :output_template_ids => ui_params[:output_template_ids] || [],
+        :runtime_templates => ui_params[:runtime_templates] || [],
         :remote_execution_feature_id => job_invocation_base[:remote_execution_feature_id],
         :description_format => job_invocation_base[:description_format],
         :ssh_user => blank_to_nil(job_invocation_base[:ssh_user]),
@@ -131,7 +133,9 @@ class JobInvocationComposer
         :concurrency_control => concurrency_control_params,
         :execution_timeout_interval => api_params[:execution_timeout_interval] || template.execution_timeout_interval,
         :time_to_pickup => api_params[:time_to_pickup],
-        :template_invocations => template_invocations_params }.with_indifferent_access
+        :template_invocations => template_invocations_params,
+        :runtime_templates => api_params[:runtime_templates] || [],
+        :output_template_ids => api_params[:output_template_ids] || [] }.with_indifferent_access
     end
 
     def remote_execution_feature_id
@@ -234,6 +238,9 @@ class JobInvocationComposer
         @host_ids = params[:host_ids]
       elsif params[:failed_only]
         @host_ids = job_invocation.failed_host_ids
+      end
+      if params[:output_template_ids]
+        @output_template_ids = params[:output_template_ids]
       end
     end
 
@@ -373,7 +380,7 @@ class JobInvocationComposer
 
   attr_accessor :params, :job_invocation, :host_ids, :search_query
   attr_reader :reruns
-  delegate :job_category, :remote_execution_feature_id, :pattern_template_invocations, :template_invocations, :targeting, :triggering, :to => :job_invocation
+  delegate :job_category, :remote_execution_feature_id, :pattern_template_invocations, :template_invocations, :targeting, :triggering, :output_templates, :to => :job_invocation
 
   def initialize(params, set_defaults = false)
     @params = params
@@ -384,6 +391,7 @@ class JobInvocationComposer
     compose
 
     @host_ids = validate_host_ids(params[:host_ids])
+    @output_templates_ids = params[:output_template_ids]
     @search_query = job_invocation.targeting.search_query if job_invocation.targeting.bookmark_id.blank?
   end
 
@@ -430,8 +438,27 @@ class JobInvocationComposer
     self
   end
 
+  def build_output_templates
+    params[:output_template_ids].map do |output_t|
+      job_invocation.output_templates << OutputTemplate.find(output_t)
+    end
+    params[:runtime_templates].map.with_index do |output_t, index|
+      # Runtime templates need unique name
+      name = DateTime.now.to_i.to_s + " runtime template " + index.to_s
+      # runtime template are not yet saved, they have to be built
+      job_invocation.output_templates.build(:template => output_t, :name => name, :snippet => true)
+    end
+  end
+
   def trigger(raise_on_error = false)
+    # starts the job invocation Dynflow action
     generate_description
+    if raise_on_error
+      save!
+    else
+      return false unless save
+    end
+    build_output_templates
     if raise_on_error
       save!
     else

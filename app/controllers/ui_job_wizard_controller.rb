@@ -20,6 +20,7 @@ class UiJobWizardController < ApplicationController
       :template_inputs => template_inputs,
       :provider_name => job_template.provider.provider_input_namespace,
       :advanced_template_inputs => advanced_template_inputs+provider_inputs,
+      :default_output_templates => job_template.output_templates,
     }
   end
 

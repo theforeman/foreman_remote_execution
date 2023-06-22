@@ -15,6 +15,7 @@ import CategoryAndTemplate from './steps/CategoryAndTemplate/';
 import { AdvancedFields } from './steps/AdvancedFields/AdvancedFields';
 import {
   JOB_TEMPLATE,
+  OUTPUT_TEMPLATE,
   WIZARD_TITLES,
   SCHEDULE_TYPES,
   initialScheduleState,
@@ -46,6 +47,9 @@ export const JobWizard = ({ rerunData }) => {
     rerunData?.template_invocations?.[0]?.template_id ||
       jobCategoriesResponse?.default_template
   );
+  const [selectedOutputTemplates, setOutputTemplates] = useState([]);
+  const [runtimeTemplate, setRuntimeTemplate] = useState('');
+
   const [category, setCategory] = useState(
     rerunData?.job_category || jobCategoriesResponse?.default_category || ''
   );
@@ -215,14 +219,17 @@ export const JobWizard = ({ rerunData }) => {
     setSelectedTargets,
     setHostsSearchQuery,
     setJobTemplateID,
+    setOutputTemplates,
     setTemplateValues,
     setAdvancedValues,
   });
   const templateError = !!useSelector(selectTemplateError);
   const templateResponse = useSelector(selectJobTemplate);
   const isSubmitting = useSelector(selectIsSubmitting);
-  const isTemplatesLoading = useSelector(state =>
-    selectIsLoading(state, JOB_TEMPLATE)
+  const isTemplatesLoading = useSelector(
+    state =>
+      selectIsLoading(state, JOB_TEMPLATE) &&
+      selectIsLoading(state, OUTPUT_TEMPLATE)
   );
   const isTemplate =
     !isTemplatesLoading &&
@@ -241,6 +248,10 @@ export const JobWizard = ({ rerunData }) => {
         <CategoryAndTemplate
           jobTemplate={jobTemplateID}
           setJobTemplate={setJobTemplateID}
+          outputTemplates={selectedOutputTemplates}
+          setOutputTemplates={setOutputTemplates}
+          runtimeTemplate={runtimeTemplate}
+          setRuntimeTemplate={setRuntimeTemplate}
           category={category}
           setCategory={setCategory}
           isCategoryPreselected={
@@ -395,6 +406,8 @@ export const JobWizard = ({ rerunData }) => {
         <ReviewDetails
           jobCategory={category}
           jobTemplateID={jobTemplateID}
+          selectedOutputTemplates={selectedOutputTemplates}
+          runtimeTemplate={runtimeTemplate}
           advancedValues={advancedValues}
           scheduleValue={scheduleValue}
           templateValues={templateValues}
@@ -424,6 +437,8 @@ export const JobWizard = ({ rerunData }) => {
   const onSave = () => {
     submit({
       jobTemplateID,
+      selectedOutputTemplates,
+      runtimeTemplate,
       templateValues,
       advancedValues,
       scheduleValue,
@@ -486,6 +501,7 @@ JobWizard.propTypes = {
         input_values: PropTypes.array,
       })
     ),
+    output_templates: PropTypes.array,
     inputs: PropTypes.object,
     description_format: PropTypes.string,
   }),

@@ -16,42 +16,69 @@ end
 <% stylesheet 'foreman_remote_execution/foreman_remote_execution' %>
 <% javascript 'foreman_remote_execution/template_invocation' %>
 
-<div id="title_action">
-  <div class="btn-toolbar pull-right">
-    <%= button_group(link_to(_('Back to Job'), job_invocation_path(@template_invocation.job_invocation), :class => 'btn btn-default'),
-                    (link_to(_('Rerun'), rerun_job_invocation_path(@template_invocation.job_invocation, :host_ids => [ @host.id ]), :class => 'btn btn-default') if authorized_for(:permission => :create_job_invocations))) %>
-    <%= button_group(link_to_function(_('Toggle command'), '$("div.preview").toggle()', :class => 'btn btn-default'),
-                     link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()', :class => 'btn btn-default'),
-                     link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()', :class => 'btn btn-default'),
-                     link_to_function(_('Toggle DEBUG'), '$("div.line.debug").toggle()', :class => 'btn btn-default')) if @host %>
-    <%= button_group(template_invocation_task_buttons(@template_invocation_task, @template_invocation.job_invocation)) %>
-  </div>
-</div>
-<% if @host %>
-  <% proxy_id = @template_invocation_task.input[:proxy_id] %>
-  <h3>
-    <%= _('Target: ') %><%= link_to(@host.name, current_host_details_path(@host)) %>
-    <% if proxy_id && proxy = SmartProxy.find_by(id: proxy_id) %>
-      <%= _('using Smart Proxy') %> <%= link_to(proxy.name, smart_proxy_path(proxy)) %>
+<div id="template-invocations-show" class="row">
+  <%# add tab to template invocation show page %>
+  <ul id="template-invocations-show-tabs" class="nav nav-tabs">
+    <li class="active"><a href="#results" data-toggle="tab"><%= _('Results') %></a></li>
+    <% unless @template_output_sets.empty? %>
+      <li><a href="#processed" data-toggle="tab"><%= _('Processed') %></a></li>
     <% end %>
-  </h3>
-
-  <div class="preview hidden">
-    <%= preview_box(@template_invocation, @host) %>
-  </div>
-
-  <div class="terminal" data-refresh-url="<%= template_invocation_path(@template_invocation) %>">
-    <% if @error %>
-      <div class="line error"><%= @error %></div>
-    <% else %>
-      <%= link_to_function(_('Scroll to bottom'), '$("html, body").animate({ scrollTop: $(document).height() }, "slow");', :class => 'pull-right scroll-link-bottom') %>
-
-      <div class="printable">
-        <%= render :partial => 'output_line_set', :collection => normalize_line_sets(@line_sets) %>
+  </ul>
+  <div id="host-show-tabs-content" class="tab-content">
+    <div class="tab-pane active" id="results">
+      <div id="title_action">
+        <div class="btn-toolbar pull-right">
+          <%= button_group(link_to(_('Back to Job'), job_invocation_path(@template_invocation.job_invocation), :class => 'btn btn-default'),
+                          (link_to(_('Rerun'), rerun_job_invocation_path(@template_invocation.job_invocation, :host_ids => [ @host.id ]), :class => 'btn btn-default') if authorized_for(:permission => :create_job_invocations))) %>
+          <%= button_group(link_to_function(_('Toggle command'), '$("div.preview").toggle()', :class => 'btn btn-default'),
+                          link_to_function(_('Toggle STDERR'), '$("div.line.stderr").toggle()', :class => 'btn btn-default'),
+                          link_to_function(_('Toggle STDOUT'), '$("div.line.stdout").toggle()', :class => 'btn btn-default'),
+                          link_to_function(_('Toggle DEBUG'), '$("div.line.debug").toggle()', :class => 'btn btn-default')) if @host %>
+          <%= button_group(template_invocation_task_buttons(@template_invocation_task, @template_invocation.job_invocation)) %>
+        </div>
       </div>
+      <% if @host %>
+        <% proxy_id = @template_invocation_task.input[:proxy_id] %>
+        <h3>
+          <%= _('Target: ') %><%= link_to(@host.name, current_host_details_path(@host)) %>
+          <% if proxy_id && proxy = SmartProxy.find_by(id: proxy_id) %>
+            <%= _('using Smart Proxy') %> <%= link_to(proxy.name, smart_proxy_path(proxy)) %>
+          <% end %>
+        </h3>
 
-      <%= link_to_function(_('Scroll to top'), '$("html, body").animate({ scrollTop: 0 }, "slow");', :class => 'pull-right scroll-link-top') %>
-    <% end %>
+        <div class="preview hidden">
+          <%= preview_box(@template_invocation, @host) %>
+        </div>
+        <div class="terminal" data-refresh-url="<%= template_invocation_path(@template_invocation) %>">
+          <% if @error %>
+            <div class="line error"><%= @error %></div>
+          <% else %>
+            <%= link_to_function(_('Scroll to bottom'), '$("html, body").animate({ scrollTop: $(document).height() }, "slow");', :class => 'pull-right scroll-link-bottom') %>
+
+            <div class="printable">
+              <%= render :partial => 'output_line_set', :collection => normalize_line_sets(@line_sets) %>
+            </div>
+
+            <%= link_to_function(_('Scroll to top'), '$("html, body").animate({ scrollTop: 0 }, "slow");', :class => 'pull-right scroll-link-top') %>
+          <% end %>
+        </div>
+      </div>
+      <div class="tab-pane" id="processed">
+        <% for processed_output in @template_output_sets %>
+          <div class="terminal" data-refresh-url="<%= template_invocation_path(@template_invocation) %>">
+            <% if processed_output['output_type'] == "template_output_err" %>
+              <div class="line error">
+            <% else %>
+              <div class="printable">
+            <% end %>
+                <%# separate each processed output and prepend line numbers %>
+                <% @line_counter = 0 %>
+                <%= render :partial => 'output_line_set', :collection => normalize_line_sets([processed_output]) %>
+              </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <script>

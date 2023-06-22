@@ -32,7 +32,7 @@ div.terminal {
     min-height: 50px;
   }
 
-  div.line.stderr, div.line.error, div.line.debug {
+  div.line.stderr, div.line.error, div.line.debug, div.line.output_templates, div.line.output_templates_err {
     color: red;
   }
 

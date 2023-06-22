@@ -4,6 +4,7 @@ module ForemanRemoteExecution
 
     included do
       has_many :job_templates, :through => :taxable_taxonomies, :source => :taxable, :source_type => 'JobTemplate'
+      has_many :output_templates, :through => :taxable_taxonomies, :source => :taxable, :source_type => 'OutputTemplate'
 
       # TODO: on foreman_version_bump
       # workaround for #11805 - use before_create for setting
