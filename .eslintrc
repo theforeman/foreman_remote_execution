@@ -1,5 +1,8 @@
 {
-  "plugins": ["@theforeman/foreman"],
+  "plugins": [
+    "@theforeman/foreman",
+    "@theforeman/rules"
+  ],
   "extends": [
     "plugin:@theforeman/foreman/core",
     "plugin:@theforeman/foreman/plugins"
