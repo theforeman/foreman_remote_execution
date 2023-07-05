@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Title, Divider, Flex, FlexItem, Button } from '@patternfly/react-core';
+import { Title, Flex, FlexItem, Button } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { JobWizard } from './JobWizard';
@@ -18,8 +18,7 @@ const JobWizardPage = ({ location: { search } }) => {
       header={title}
       breadcrumbOptions={breadcrumbOptions}
       searchable={false}
-    >
-      <React.Fragment>
+      beforeToolbarComponent={
         <Flex>
           <FlexItem>
             <Title headingLevel="h2" size="2xl">
@@ -36,7 +35,10 @@ const JobWizardPage = ({ location: { search } }) => {
             </Button>
           </FlexItem>
         </Flex>
-        <Divider component="div" />
+      }
+      pageSectionType="wizard"
+    >
+      <React.Fragment>
         <JobWizard />
       </React.Fragment>
     </PageLayout>
