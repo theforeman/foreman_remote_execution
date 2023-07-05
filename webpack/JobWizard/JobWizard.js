@@ -461,7 +461,6 @@ export const JobWizard = ({ rerunData }) => {
         onClose={() => history.goBack()}
         navAriaLabel="Run Job steps"
         steps={steps}
-        height="100%"
         className="job-wizard"
         onSave={onSave}
         footer={

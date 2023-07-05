@@ -11,7 +11,6 @@
   }
 
   .pf-c-wizard__main {
-    overflow: visible;
     z-index: calc(
       var(--pf-c-wizard__toggle--ZIndex) + 1
     ); // So the select box can be shown above the wizard footer and navigation toggle
@@ -127,7 +126,7 @@
   .pf-c-radio__body {
     font-size: var(--pf-c-radio__label--FontSize);
   }
-  .reset-default{
+  .reset-default {
     padding-bottom: 0;
   }
 }
