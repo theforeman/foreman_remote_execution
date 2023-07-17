@@ -94,6 +94,8 @@ class JobTemplateTest < ActiveSupport::TestCase
       %>
 
       service <%= input("service_name") %> restart
+
+      <%# test comment %>
       END_TEMPLATE
 
       JobTemplate.import_raw!(template, :default => true)
@@ -122,7 +124,7 @@ class JobTemplateTest < ActiveSupport::TestCase
     end
 
     it 'has a template' do
-      _(template.template.squish).must_equal 'service <%= input("service_name") %> restart'
+      _(template.template.squish).must_equal 'service <%= input("service_name") %> restart <%# test comment %>'
     end
 
     it 'imports inputs' do

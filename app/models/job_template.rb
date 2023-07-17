@@ -192,7 +192,7 @@ class JobTemplate < ::Template
     self.default = options[:default] unless options[:default].nil?
 
     # job templates have too long metadata, we remove them on parsing until it's stored in separate attribute
-    self.template = self.template.gsub(/<%\#.+?.-?%>\n?/m, '').strip
+    self.template = self.template.sub(/<%\#.+?.-?%>\n?/m, '').strip
   end
 
   def default_input_values(ignore_keys)
