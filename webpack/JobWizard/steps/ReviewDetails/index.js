@@ -26,6 +26,9 @@ import {
 import { buildHostQuery } from '../HostsAndInputs/buildHostQuery';
 import { WizardTitle } from '../form/WizardTitle';
 
+const maskValue = (isHidden, value) =>
+  isHidden ? '*'.repeat(value.length) : value;
+
 const ReviewDetails = ({
   jobCategory,
   jobTemplateID,
@@ -75,9 +78,9 @@ const ReviewDetails = ({
     { label: __('Job category'), value: jobCategory },
     { label: __('Job template'), value: jobTemplate },
     { label: __('Target hosts'), value: stringHosts() },
-    ...templateInputs.map(({ name }) => ({
+    ...templateInputs.map(({ name, hidden_value: isHidden }) => ({
       label: name,
-      value: templateValues[name],
+      value: maskValue(isHidden, templateValues[name]),
     })),
     {
       label: __('Advanced fields'),
@@ -136,9 +139,9 @@ const ReviewDetails = ({
         ? __('Randomized')
         : __('Alphabetical'),
     },
-    ...advancedTemplateInputs.map(({ name }) => ({
+    ...advancedTemplateInputs.map(({ name, hidden_value: isHidden }) => ({
       label: name,
-      value: advancedValues.templateValues[name],
+      value: maskValue(isHidden, advancedValues.templateValues[name]),
     })),
   ];
 
