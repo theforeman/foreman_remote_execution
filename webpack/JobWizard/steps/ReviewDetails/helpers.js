@@ -23,9 +23,8 @@ export const parseRepeat = (repeatType, repeatData) => {
       const daysKeys = Object.keys(repeatData.daysOfWeek).filter(
         k => repeatData.daysOfWeek[k]
       );
-      const days = getWeekDays()
-        .filter((d, index) => index in daysKeys)
-        .join(', ');
+      const dayNames = getWeekDays();
+      const days = daysKeys.map(day => dayNames[day]).join(', ');
       return sprintf(__('Every week on %s at %s'), days, repeatData.at);
     }
     case repeatTypes.monthly:
