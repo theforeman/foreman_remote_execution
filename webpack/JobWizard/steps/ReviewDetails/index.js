@@ -30,6 +30,9 @@ import { WizardTitle } from '../form/WizardTitle';
 import { parseEnd, parseRepeat } from './helpers';
 import { HostPreviewModal } from '../HostsAndInputs/HostPreviewModal';
 
+const maskValue = (isHidden, value) =>
+  isHidden ? '*'.repeat(value.length) : value;
+
 const ReviewDetails = ({
   jobCategory,
   jobTemplateID,
@@ -122,11 +125,11 @@ const ReviewDetails = ({
       ),
       value: stringHosts(),
     },
-    ...templateInputs.map(({ name }) => ({
+    ...templateInputs.map(({ name, hidden_value: isHidden }) => ({
       label: (
         <StepButton stepName={WIZARD_TITLES.hostsAndInputs}>{name}</StepButton>
       ),
-      value: templateValues[name],
+      value: maskValue(isHidden, templateValues[name]),
     })),
     {
       label: (
@@ -272,9 +275,9 @@ const ReviewDetails = ({
         ? __('Randomized')
         : __('Alphabetical'),
     },
-    ...advancedTemplateInputs.map(({ name }) => ({
+    ...advancedTemplateInputs.map(({ name, hidden_value: isHidden }) => ({
       label: name,
-      value: advancedValues.templateValues[name],
+      value: maskValue(isHidden, advancedValues.templateValues[name]),
     })),
   ];
 
