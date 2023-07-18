@@ -1,7 +1,7 @@
 class UiJobWizardController < ApplicationController
   include FiltersHelper
   def categories
-    job_categories = resource_scope
+    job_categories = resource_scope(permission: action_permission)
                      .search_for("job_category ~ \"#{params[:search]}\"")
                      .where(:snippet => false)
                      .select(:job_category).distinct
