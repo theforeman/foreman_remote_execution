@@ -122,17 +122,14 @@ module ForemanRemoteExecution
 
     describe 'concurrency control' do
       let(:level) { 5 }
-      let(:span) { 60 }
 
       it 'can be disabled' do
-        job_invocation.expects(:concurrency_level)
-        _(planned.input.key?(:concurrency_control)).must_equal false
+        _(planned.concurrency_limit).must_equal nil
       end
 
       it 'can limit concurrency level' do
-        job_invocation.expects(:concurrency_level).returns(level).twice
-        planned.input[:concurrency_control][:level].wont_be_empty
-        planned.input[:concurrency_control].key?(:time).must_equal false
+        job_invocation.expects(:concurrency_level).twice.returns(level)
+        _(planned.concurrency_limit).must_equal level
       end
     end
 
