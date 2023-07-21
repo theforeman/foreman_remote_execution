@@ -1,9 +1,6 @@
 module Actions
   module RemoteExecution
     class RunHostsJob < Actions::ActionWithSubPlans
-
-      include Dynflow::Action::WithBulkSubPlans
-      include Dynflow::Action::WithPollingSubPlans
       include Actions::RecurringAction
       include Actions::ObservableAction
 
@@ -49,7 +46,7 @@ module Actions
           # composer creates just "pattern" for template_invocations because target is evaluated
           # during actual run (here) so we build template invocations from these patterns
           template_invocation = job_invocation.pattern_template_invocation_for_host(host).deep_clone
-          trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector, { :use_concurrency_control => uses_concurrency_control })
+          trigger(RunHostJob, job_invocation, host, template_invocation, proxy_selector)
         end
       end
 
@@ -60,11 +57,19 @@ module Actions
       end
 
       def trigger_remote_batch
-        batches_ready = (output[:planned_count] - output[:remote_triggered_count]) / proxy_batch_size
-        return unless batches_ready > 0
+        remaining = output[:planned_count] - output[:remote_triggered_count]
+        return if remaining.zero?
+        batches_ready = remaining / proxy_batch_size
+        if concurrency_limit
+          count = remaining
+        else
+          return unless batches_ready > 0
+          count = proxy_batch_size * batches_ready
+        end
+        batches_ready = [1, batches_ready].max
 
         plan_event(Actions::TriggerProxyBatch::TriggerNextBatch[batches_ready], nil, step_id: input[:trigger_run_step_id])
-        output[:remote_triggered_count] += proxy_batch_size * batches_ready
+        output[:remote_triggered_count] += count
       end
 
       def on_planning_finished
@@ -126,7 +131,7 @@ module Actions
       end
 
       def set_up_concurrency_control(invocation)
-        limit_concurrency_level invocation.concurrency_level unless invocation.concurrency_level.nil?
+        limit_concurrency_level! invocation.concurrency_level unless invocation.concurrency_level.nil?
       end
 
       def rescue_strategy
