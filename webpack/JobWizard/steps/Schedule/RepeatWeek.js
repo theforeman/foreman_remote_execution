@@ -9,11 +9,12 @@ export const getWeekDays = () => {
   const locale = documentLocale().replace(/-/g, '_');
   const baseDate = new Date(Date.UTC(2017, 0, 1)); // just a Sunday
   const weekDays = [];
+  const formatOptions = { weekday: 'short', timeZone: 'UTC' };
   for (let i = 0; i < 7; i++) {
     try {
-      weekDays.push(baseDate.toLocaleDateString(locale, { weekday: 'short' }));
+      weekDays.push(baseDate.toLocaleDateString(locale, formatOptions));
     } catch {
-      weekDays.push(baseDate.toLocaleDateString('en', { weekday: 'short' }));
+      weekDays.push(baseDate.toLocaleDateString('en', formatOptions));
     }
     baseDate.setDate(baseDate.getDate() + 1);
   }
