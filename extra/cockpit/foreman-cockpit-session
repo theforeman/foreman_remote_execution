@@ -170,24 +170,41 @@ class Relay
   def initialize(proxy, params)
     @proxy = proxy
     @params = params
+    @inject_authorization = @params['ssh_user'] != 'root' && @params['effective_user_password']
   end
 
   def proxy_loop
     proxy1 = ProxyBuffer.new($stdin, @sock)
     proxy2 = ProxyBuffer.new(@sock, $stdout)
     proxy2.on_data do |data|
-      message = Cockpit.read_control(StringIO.new(data))
-      if message.is_a?(Hash) && message['command'] == 'authorize'
-        response = {
-          'command' => 'authorize',
-          'cookie' => message['cookie'],
-          'response' => @params['effective_user_password'],
-        }
-        proxy1.enqueue(Cockpit.encode_message(response))
-        ''
-      else
-        data
+      if @inject_authorization
+        sio = StringIO.new(data)
+        begin
+          message = Cockpit.read_control(sio)
+        rescue StandardError
+          # We're looking for one specific message, but the expectation that one
+          # invocation of this callback processes one message doesn't really
+          # hold. The message we're looking for is sent quite early in the
+          # communication, if at all, so the chance that it will be aligned with
+          # the beginning of the buffer is quite high. If we somehow fail to
+          # process the contents of the buffer, we should just carry on.
+          #
+          # With the authorization injection check in place, this is more of a
+          # precaution so that unexpectedly big message won't bring the entire
+          # thing down.
+        end
+        if message.is_a?(Hash) && message['command'] == 'authorize'
+          response = {
+            'command' => 'authorize',
+            'cookie' => message['cookie'],
+            'response' => @params['effective_user_password'],
+          }
+          proxy1.enqueue(Cockpit.encode_message(response))
+          @inject_authorization = false
+          data = sio.read # Return whatever was left unread after read_control
+        end
       end
+      data
     end
 
     proxies = [proxy1, proxy2]
@@ -271,7 +288,7 @@ class Relay
                 end
       raise AccessDeniedError, message
     else
-      raise CockpitError, "Error talking to smart proxy: #{response}"
+      raise CockpitError, "Error talking to smart proxy: #{body}"
     end
   end
 end
