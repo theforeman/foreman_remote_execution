@@ -169,8 +169,23 @@ export const JobWizard = ({ rerunData }) => {
                   job_template: { name, description_format },
                 },
               }) => {
+                const allowedInputs = template_inputs
+                  .map(({ name: _name }) => _name)
+                  .concat(
+                    advanced_template_inputs.map(({ name: _name }) => _name)
+                  );
+                const prune = inputs =>
+                  allowedInputs.reduce(
+                    (acc, key) =>
+                      inputs.hasOwnProperty(key)
+                        ? { [key]: inputs[key], ...acc }
+                        : acc,
+                    {}
+                  );
+                setTemplateValues(prune);
                 setAdvancedValues(currentAdvancedValues => ({
                   ...currentAdvancedValues,
+                  templateValues: prune(currentAdvancedValues.templateValues),
                   description:
                     generateDefaultDescription({
                       description_format,
