@@ -41,6 +41,8 @@ import { Footer } from './Footer';
 import './JobWizard.scss';
 
 export const JobWizard = ({ rerunData }) => {
+  const routerSearch = useSelector(selectRouterSearch);
+  const [feature, setFeature] = useState(routerSearch.feature);
   const jobCategoriesResponse = useSelector(selectJobCategoriesResponse);
   const [jobTemplateID, setJobTemplateID] = useState(
     rerunData?.template_invocations?.[0]?.template_id ||
@@ -58,7 +60,6 @@ export const JobWizard = ({ rerunData }) => {
     hostGroups: [],
   });
   const [hostsSearchQuery, setHostsSearchQuery] = useState('');
-  const routerSearch = useSelector(selectRouterSearch);
   const [fills, setFills] = useState(
     rerunData
       ? {
@@ -258,6 +259,7 @@ export const JobWizard = ({ rerunData }) => {
           setJobTemplate={setJobTemplateID}
           category={category}
           setCategory={setCategory}
+          setFeature={setFeature}
           isCategoryPreselected={
             !!rerunData || !!fills.feature || !!fills.template_id
           }
@@ -447,7 +449,7 @@ export const JobWizard = ({ rerunData }) => {
       hostsSearchQuery,
       location,
       organization,
-      feature: routerSearch?.feature,
+      feature,
       provider: templateResponse.provider_name,
       advancedInputs: templateResponse.advanced_template_inputs,
     });

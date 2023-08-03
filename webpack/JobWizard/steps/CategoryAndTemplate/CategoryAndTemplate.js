@@ -16,6 +16,7 @@ export const CategoryAndTemplate = ({
   selectedTemplateID,
   selectedCategory,
   setCategory,
+  setFeature,
   errors,
 }) => {
   const templatesGroups = {};
@@ -45,8 +46,16 @@ export const CategoryAndTemplate = ({
     if (selectedCategory !== newCategory) {
       setCategory(newCategory);
       setJobTemplate(null);
+      setFeature(null);
     }
   };
+  const onSelectTemplate = newTemplate => {
+    if (selectedTemplate !== newTemplate) {
+      setJobTemplate(newTemplate);
+      setFeature(null);
+    }
+  };
+
   const { categoryError, allTemplatesError, templateError } = errors;
   const isError = !!(categoryError || allTemplatesError || templateError);
   return (
@@ -68,7 +77,7 @@ export const CategoryAndTemplate = ({
           label={__('Job template')}
           fieldId="job_template"
           groups={Object.values(templatesGroups)}
-          setSelected={setJobTemplate}
+          setSelected={onSelectTemplate}
           selected={isTemplatesLoading ? [] : selectedTemplate}
           isDisabled={
             !!(categoryError || allTemplatesError || isTemplatesLoading)
@@ -103,6 +112,7 @@ CategoryAndTemplate.propTypes = {
   jobCategories: PropTypes.array,
   jobTemplates: PropTypes.array,
   setJobTemplate: PropTypes.func.isRequired,
+  setFeature: PropTypes.func.isRequired,
   selectedTemplateID: PropTypes.number,
   setCategory: PropTypes.func.isRequired,
   selectedCategory: PropTypes.string,
