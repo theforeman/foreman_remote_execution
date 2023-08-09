@@ -21,6 +21,7 @@
     "url": "http://projects.theforeman.org/projects/foreman_remote_execution/issues"
   },
   "devDependencies": {
+    "@adobe/css-tools": "~4.2.0",
     "@babel/core": "^7.7.0",
     "@theforeman/builder": "^12.0.1",
     "@theforeman/eslint-plugin-foreman": "^12.0.1",
