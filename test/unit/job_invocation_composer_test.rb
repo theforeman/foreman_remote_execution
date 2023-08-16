@@ -458,18 +458,16 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         describe 'with concurrency control set' do
           let(:params) do
-            { :job_invocation => { :providers => { :ssh => ssh_params }, :concurrency_level => '5', :time_span => '60' } }.with_indifferent_access
+            { :job_invocation => { :providers => { :ssh => ssh_params }, :concurrency_level => '5' } }.with_indifferent_access
           end
 
           it 'accepts the concurrency options' do
             _(composer.job_invocation.concurrency_level).must_equal 5
-            _(composer.job_invocation.time_span).must_equal 60
           end
         end
 
         it 'can be disabled' do
           _(composer.job_invocation.concurrency_level).must_be_nil
-          _(composer.job_invocation.time_span).must_be_nil
         end
       end
 
@@ -568,7 +566,6 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
             :job_invocation => {
               :providers => { :ssh => ssh_params },
               :concurrency_level => 5,
-              :time_span => 60,
             },
             :targeting => {
               :search_query => "name = #{host.name}",
@@ -607,7 +604,6 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         it 'sets the same concurrency control options' do
           _(new_composer.job_invocation.concurrency_level).must_equal existing.concurrency_level
-          _(new_composer.job_invocation.time_span).must_equal existing.time_span
         end
 
       end
@@ -711,22 +707,19 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
     context 'with concurrency_control' do
       let(:level) { 5 }
-      let(:time_span) { 60 }
       let(:params) do
         { :job_category => trying_job_template_1.job_category,
           :job_template_id => trying_job_template_1.id,
           :concurrency_control => {
             :concurrency_level => level,
-            :time_span => time_span,
           },
           :targeting_type => 'static_query',
           :search_query => 'some hosts',
           :inputs => { input1.name => 'some_value' } }
       end
 
-      it 'sets the concurrency level and time span based on the input' do
+      it 'sets the concurrency level based on the input' do
         assert composer.save!
-        _(composer.job_invocation.time_span).must_equal time_span
         _(composer.job_invocation.concurrency_level).must_equal level
       end
     end

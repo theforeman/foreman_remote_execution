@@ -1,4 +1,4 @@
-<% if job_invocation.concurrency_level || job_invocation.time_span ||
+<% if job_invocation.concurrency_level ||
     (job_invocation.task && (job_invocation.task.delayed? || job_invocation.task.recurring?)) ||
     job_invocation.execution_timeout_interval.present? %>
 <div class="card-pf card-pf-accented">
@@ -12,9 +12,6 @@
     <ul>
       <% if job_invocation.concurrency_level %>
         <li><b><%= _("Concurrency level limited to") %></b>: <%= job_invocation.concurrency_level %> <%= _('tasks at a time') %><br></li>
-      <% end %>
-      <% if job_invocation.time_span %>
-        <li><b><%= _("Set to distribute over") %></b>: <%= job_invocation.time_span %> <%= _('seconds') %><br></li>
       <% end %>
       <% if job_invocation.start_before %>
         <li><b><%= _("Scheduled to start before") %></b>: <%= job_invocation.start_before %><br></li>

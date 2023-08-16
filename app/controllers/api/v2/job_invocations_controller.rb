@@ -62,7 +62,6 @@ module Api
           end
 
           param :concurrency_control, Hash, :desc => N_('Control concurrency level and distribution over time') do
-            param :time_span, Integer, :desc => N_('Distribute tasks over N seconds')
             param :concurrency_level, Integer, :desc => N_('Run at most N tasks at a time')
           end
 

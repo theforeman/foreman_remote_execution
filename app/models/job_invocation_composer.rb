@@ -79,7 +79,6 @@ class JobInvocationComposer
 
     def concurrency_control_params
       {
-        :time_span => job_invocation_base[:time_span],
         :level => job_invocation_base[:concurrency_level],
       }
     end
@@ -175,7 +174,6 @@ class JobInvocationComposer
     def concurrency_control_params
       {
         :level => api_params.fetch(:concurrency_control, {})[:concurrency_level],
-        :time_span => api_params.fetch(:concurrency_control, {})[:time_span],
       }
     end
 
@@ -256,7 +254,6 @@ class JobInvocationComposer
     def concurrency_control_params
       {
         :level => job_invocation.concurrency_level,
-        :time_span => job_invocation.time_span,
       }
     end
 
@@ -411,7 +408,6 @@ class JobInvocationComposer
     job_invocation.triggering = build_triggering
     job_invocation.pattern_template_invocations = build_template_invocations
     job_invocation.description_format = params[:description_format]
-    job_invocation.time_span = params[:concurrency_control][:time_span].to_i if params[:concurrency_control][:time_span].present?
     job_invocation.concurrency_level = params[:concurrency_control][:level].to_i if params[:concurrency_control][:level].present?
     job_invocation.execution_timeout_interval = params[:execution_timeout_interval]
     job_invocation.password = params[:password]

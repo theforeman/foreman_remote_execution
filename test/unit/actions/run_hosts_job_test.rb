@@ -126,29 +126,13 @@ module ForemanRemoteExecution
 
       it 'can be disabled' do
         job_invocation.expects(:concurrency_level)
-        job_invocation.expects(:time_span)
         _(planned.input.key?(:concurrency_control)).must_equal false
       end
 
       it 'can limit concurrency level' do
         job_invocation.expects(:concurrency_level).returns(level).twice
-        job_invocation.expects(:time_span)
         planned.input[:concurrency_control][:level].wont_be_empty
         planned.input[:concurrency_control].key?(:time).must_equal false
-      end
-
-      it 'can distribute tasks over time' do
-        job_invocation.expects(:time_span).returns(span).twice
-        job_invocation.expects(:concurrency_level)
-        planned.input[:concurrency_control][:time].wont_be_empty
-        planned.input[:concurrency_control].key?(:level).must_equal false
-      end
-
-      it 'can use both' do
-        job_invocation.expects(:time_span).returns(span).twice
-        job_invocation.expects(:concurrency_level).returns(level).twice
-        planned.input[:concurrency_control][:time].wont_be_empty
-        planned.input[:concurrency_control][:level].wont_be_empty
       end
     end
 

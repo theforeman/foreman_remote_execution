@@ -127,10 +127,6 @@ module Actions
 
       def set_up_concurrency_control(invocation)
         limit_concurrency_level invocation.concurrency_level unless invocation.concurrency_level.nil?
-        unless invocation.time_span.nil?
-          distribute_over_time(invocation.time_span,
-            invocation.targeting.hosts.count)
-        end
       end
 
       def rescue_strategy

@@ -268,7 +268,6 @@ const ReviewDetails = ({
     { label: __('Timeout to kill'), value: advancedValues.timeoutToKill },
     { label: __('Time to pickup'), value: advancedValues.timeToPickup },
     { label: __('Concurrency level'), value: advancedValues.concurrencyLevel },
-    { label: __('Time span'), value: advancedValues.timeSpan },
     {
       label: __('Execution ordering'),
       value: advancedValues.isRandomizedOrdering
