@@ -32,7 +32,6 @@ export const submit = ({
     description,
     timeoutToKill,
     isRandomizedOrdering,
-    timeSpan,
     concurrencyLevel,
     templateValues: advancedTemplateValues,
     password,
@@ -109,7 +108,6 @@ export const submit = ({
             }
           : null,
       concurrency_control: {
-        time_span: timeSpan,
         concurrency_level: concurrencyLevel,
       },
       bookmark_id: null,

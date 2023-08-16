@@ -75,10 +75,5 @@ describe('Job wizard fill', () => {
         selector: 'input',
       }).value
     ).toBe('6');
-    expect(
-      screen.getByLabelText('Time span', {
-        selector: 'input',
-      }).value
-    ).toBe('4');
   });
 });

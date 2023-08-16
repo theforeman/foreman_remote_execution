@@ -41,7 +41,6 @@ export const useValidation = ({ advancedValues, templateValues }) => {
       advancedValues.timeoutToKill,
       advancedValues.timeToPickup,
       advancedValues.concurrencyLevel,
-      advancedValues.timeSpan,
     ].forEach(value => {
       if (value && !isPositiveNumber(value)) {
         setValid(currValid => ({ ...currValid, advanced: false }));

@@ -277,7 +277,6 @@ export const jobInvocation = {
     description_format: null,
     concurrency_control: {
       level: 6,
-      time_span: 4,
     },
     execution_timeout_interval: 1,
     time_to_pickup: 25,

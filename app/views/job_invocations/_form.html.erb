@@ -114,7 +114,6 @@
 
     <div class="advanced hidden">
       <%= number_f f, :concurrency_level, :label => _('Concurrency level'), :placeholder => 'N', :min => 1, :label_help => N_("Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.") %>
-      <%= number_f f, :time_span, :label => _('Time span'), :placeholder => 'N', :min => 1, :label_help => N_("Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.") %>
     </div>
 
     <div class="form-group advanced hidden">

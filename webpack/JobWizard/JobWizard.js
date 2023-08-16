@@ -127,7 +127,6 @@ export const JobWizard = ({ rerunData }) => {
             }) || '',
           isRandomizedOrdering: randomized_ordering,
           sshUser: ssh_user || '',
-          timeSpan: concurrency_control.time_span || '',
           concurrencyLevel: concurrency_control.level || '',
         };
       });
@@ -491,7 +490,6 @@ JobWizard.propTypes = {
     ssh_user: PropTypes.string,
     concurrency_control: PropTypes.shape({
       level: PropTypes.number,
-      time_span: PropTypes.number,
     }),
     execution_timeout_interval: PropTypes.number,
     time_to_pickup: PropTypes.number,

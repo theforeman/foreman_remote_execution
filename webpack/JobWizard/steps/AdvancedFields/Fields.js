@@ -169,32 +169,6 @@ export const ConcurrencyLevelField = ({ value, setValue, defaultValue }) => (
   />
 );
 
-export const TimeSpanLevelField = ({ value, setValue, defaultValue }) => (
-  <NumberInput
-    formProps={{
-      label: __('Time span'),
-      labelIcon: helpLabel(
-        __(
-          'Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.'
-        ),
-        'time-span'
-      ),
-      fieldId: 'time-span',
-      labelInfo: (
-        <ResetDefault setValue={setValue} defaultValue={defaultValue} />
-      ),
-    }}
-    inputProps={{
-      min: 1,
-      autoComplete: 'time-span',
-      id: 'time-span',
-      placeholder: __('For example: 1, 2, 3, 4, 5...'),
-      value,
-      onChange: newValue => setValue(newValue),
-    }}
-  />
-);
-
 export const ExecutionOrderingField = ({ isRandomizedOrdering, setValue }) => (
   <FormGroup
     label={__('Execution ordering')}
@@ -274,8 +248,6 @@ EffectiveUserPasswordField.propTypes = EffectiveUserField.propTypes;
 EffectiveUserPasswordField.defaultProps = EffectiveUserField.defaultProps;
 ConcurrencyLevelField.propTypes = EffectiveUserField.propTypes;
 ConcurrencyLevelField.defaultProps = EffectiveUserField.defaultProps;
-TimeSpanLevelField.propTypes = EffectiveUserField.propTypes;
-TimeSpanLevelField.defaultProps = EffectiveUserField.defaultProps;
 ExecutionOrderingField.propTypes = {
   isRandomizedOrdering: PropTypes.bool,
   setValue: PropTypes.func.isRequired,

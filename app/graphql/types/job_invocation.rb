@@ -5,7 +5,6 @@ module Types
     global_id_field :id
     field :job_category, String
     field :description, String
-    field :time_span, Integer
     field :start_at, GraphQL::Types::ISO8601DateTime
     field :status_label, String
 

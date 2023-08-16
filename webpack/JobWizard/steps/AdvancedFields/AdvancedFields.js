@@ -17,7 +17,6 @@ import {
   KeyPassphraseField,
   EffectiveUserPasswordField,
   ConcurrencyLevelField,
-  TimeSpanLevelField,
   TemplateInputsFields,
   ExecutionOrderingField,
   SSHUserField,
@@ -125,15 +124,6 @@ export const AdvancedFields = ({
           setValue={newValue =>
             setAdvancedValues({
               concurrencyLevel: newValue,
-            })
-          }
-        />
-        <TimeSpanLevelField
-          value={advancedValues.timeSpan}
-          defaultValue={jobTemplate.concurrency_control?.time_span}
-          setValue={newValue =>
-            setAdvancedValues({
-              timeSpan: newValue,
             })
           }
         />
