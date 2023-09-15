@@ -19,12 +19,18 @@ import { runFeature } from './actions';
 
 const FeaturesDropdown = ({ hostId }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const {
-    response: { results: features },
-    status,
-  } = useAPI('get', foremanUrl(REX_FEATURES_API));
-
+  const { response, status } = useAPI(
+    'get',
+    foremanUrl(REX_FEATURES_API(hostId))
+  );
   const dispatch = useDispatch();
+  // eslint-disable-next-line camelcase
+  const canRunJob = response?.permissions?.can_run_job;
+  if (!canRunJob) {
+    return null;
+  }
+  // eslint-disable-next-line camelcase
+  const features = response?.remote_execution_features;
   const dropdownItems = features
     ?.filter(feature => feature.host_action_button)
     ?.map(({ name, label, id, description }) => (
