@@ -29,6 +29,14 @@ module Api
         process_response @remote_execution_feature.update(remote_execution_feature_params)
       end
 
+      api :GET, '/api/hosts/:id/available_remote_execution_features', N_('List available remote execution features for a host')
+      param :id, :identifier, :required => true
+      def available_remote_execution_features
+        host = Host.find(params[:id])
+        @remote_execution_features = resource_scope
+        @permissions = {:can_run_job => (authorized_for(controller: :job_invocations, action: :create) && (!host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts))) }
+      end
+
       private
 
       def parent_scope

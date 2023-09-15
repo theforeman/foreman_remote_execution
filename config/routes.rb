@@ -92,6 +92,8 @@ Rails.application.routes.draw do
         resources :foreign_input_sets, :only => [:index, :show, :create, :destroy, :update]
       end
 
+      get 'hosts/:id/available_remote_execution_features', to: 'remote_execution_features#available_remote_execution_features'
+
       resources :remote_execution_features, :only => [:show, :index, :update]
     end
   end
