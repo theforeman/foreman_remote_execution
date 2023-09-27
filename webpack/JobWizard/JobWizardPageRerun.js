@@ -1,15 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import URI from 'urijs';
-import {
-  Alert,
-  Title,
-  Divider,
-  Skeleton,
-  Flex,
-  FlexItem,
-  Button,
-} from '@patternfly/react-core';
+import { Alert, Divider, Skeleton, Button } from '@patternfly/react-core';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
@@ -54,25 +46,18 @@ const JobWizardPageRerun = ({
       header={title}
       breadcrumbOptions={breadcrumbOptions}
       searchable={false}
+      toolbarButtons={
+        <Button
+          variant="link"
+          component="a"
+          href={`/old/job_invocations/${id}/rerun${search}`}
+        >
+          {__('Use old form')}
+        </Button>
+      }
     >
       <React.Fragment>
         <React.Fragment>
-          <Flex>
-            <FlexItem>
-              <Title headingLevel="h2" size="2xl">
-                {title}
-              </Title>
-            </FlexItem>
-            <FlexItem align={{ default: 'alignRight' }}>
-              <Button
-                variant="link"
-                component="a"
-                href={`/old/job_invocations/${id}/rerun${search}`}
-              >
-                {__('Use old form')}
-              </Button>
-            </FlexItem>
-          </Flex>
           <Divider component="div" />
         </React.Fragment>
         {!status || status === STATUS.PENDING ? (
