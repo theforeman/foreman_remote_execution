@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Title, Flex, FlexItem, Button } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { JobWizard } from './JobWizard';
@@ -18,23 +18,14 @@ const JobWizardPage = ({ location: { search } }) => {
       header={title}
       breadcrumbOptions={breadcrumbOptions}
       searchable={false}
-      beforeToolbarComponent={
-        <Flex>
-          <FlexItem>
-            <Title headingLevel="h2" size="2xl">
-              {title}
-            </Title>
-          </FlexItem>
-          <FlexItem align={{ default: 'alignRight' }}>
-            <Button
-              variant="link"
-              component="a"
-              href={`/old/job_invocations/new${search}`}
-            >
-              {__('Use legacy form')}
-            </Button>
-          </FlexItem>
-        </Flex>
+      toolbarButtons={
+        <Button
+          variant="link"
+          component="a"
+          href={`/old/job_invocations/new${search}`}
+        >
+          {__('Use legacy form')}
+        </Button>
       }
       pageSectionType="wizard"
     >

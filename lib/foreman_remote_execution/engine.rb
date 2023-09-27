@@ -47,7 +47,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', before: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
-        requires_foreman '>= 3.8'
+        requires_foreman '>= 3.9'
         register_global_js_file 'global'
         register_gettext
 
