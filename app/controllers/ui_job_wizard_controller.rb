@@ -1,13 +1,14 @@
 class UiJobWizardController < ApplicationController
   include FiltersHelper
   def categories
+    can_create_job = authorized_for(controller: :job_invocations, action: :create)
     job_categories = resource_scope(permission: action_permission)
                      .search_for("job_category ~ \"#{params[:search]}\"")
                      .where(:snippet => false)
                      .select(:job_category).distinct
                      .reorder(:job_category)
                      .pluck(:job_category)
-    render :json => {:job_categories => job_categories, :with_katello => with_katello, default_category: default_category, default_template: default_template&.id}
+    render :json => {:can_create_job => can_create_job, :job_categories => job_categories, :with_katello => with_katello, default_category: default_category, default_template: default_template&.id}
   end
 
   def template

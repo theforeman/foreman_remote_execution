@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Title, Flex, FlexItem, Button } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
+import PermissionDenied from 'foremanReact/components/PermissionDenied/PermissionDenied';
+import { STATUS } from 'foremanReact/constants';
+import {
+  selectCanCreateJob,
+  selectJobCategoriesStatus,
+} from './JobWizardSelectors';
 import { JobWizard } from './JobWizard';
 
 const JobWizardPage = ({ location: { search } }) => {
@@ -13,6 +20,14 @@ const JobWizardPage = ({ location: { search } }) => {
       { caption: title },
     ],
   };
+
+  const canCreateJob = useSelector(selectCanCreateJob);
+  const status = useSelector(selectJobCategoriesStatus);
+
+  if (!canCreateJob && status === STATUS.RESOLVED) {
+    return <PermissionDenied missingPermissions={['create_job_invocations']} />;
+  }
+
   return (
     <PageLayout
       header={title}

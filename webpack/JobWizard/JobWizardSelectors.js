@@ -30,6 +30,9 @@ export const selectJobTemplatesSearch = state =>
 export const selectJobCategoriesResponse = state =>
   selectAPIResponse(state, JOB_CATEGORIES) || {};
 
+export const selectCanCreateJob = state =>
+  selectJobCategoriesResponse(state).can_create_job || false;
+
 export const selectJobCategories = state =>
   selectJobCategoriesResponse(state).job_categories || [];
 
