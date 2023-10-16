@@ -1,0 +1,50 @@
+<%#
+name: Convert2RHEL analyze
+snippet: false
+template_inputs:
+  - name: Data telemetry
+    required: false
+    input_type: user
+    options: "yes\r\nno"
+    advanced: false
+    value_type: plain
+    default: 'yes'
+    hidden_value: false
+model: JobTemplate
+job_category: Convert 2 RHEL
+provider_type: script
+kind: job_template
+%>
+<% if @host.operatingsystem.family == 'Redhat' -%>
+if ! [ $(id -u) = 0 ]; then
+  echo "You must run convert2rhel as a root user."
+  exit 1
+fi
+
+if ! rpm -q convert2rhel &> /dev/null; then
+  yum install -y convert2rhel
+fi
+
+<% if input('Data telemetry') != "yes" -%>
+export CONVERT2RHEL_DISABLE_TELEMETRY=1
+<% end -%>
+
+/usr/bin/convert2rhel analyze -y
+
+errors=$(grep -c 'ERROR' '/var/log/convert2rhel/convert2rhel-pre-conversion.json')
+if [ "$errors" -gt 0 ]; then
+    echo "Error: $errors error(s) have been found."
+    echo "Exiting ..."
+    exit 1
+fi
+
+skips=$(grep -c 'SKIP' '/var/log/convert2rhel/convert2rhel-pre-conversion.json')
+if [ "$skips" -gt 0 ]; then
+    echo "Warning: $skips check(s) have been skipped."
+    echo "Exiting ..."
+    exit 1
+fi
+<% else %>
+echo 'Unsupported OS, must be from Red Hat family.'
+exit 1
+<% end -%>
