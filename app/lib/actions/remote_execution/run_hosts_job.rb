@@ -12,8 +12,6 @@ module Actions
       execution_plan_hooks.use :notify_on_success, :on => :success
       execution_plan_hooks.use :notify_on_failure, :on => :failure
       execution_plan_hooks.use :emit_running_event, :on => :running
-      execution_plan_hooks.use :emit_failure_event, :on => :failure
-      execution_plan_hooks.use :emit_success_event, :on => :success
 
       class CheckOnProxyActions; end
 
@@ -164,14 +162,6 @@ module Actions
 
       def self.event_states
         [:success, :failure, :running]
-      end
-
-      def emit_failure_event(plan)
-        emit_event(plan, :failure)
-      end
-
-      def emit_success_event(plan)
-        emit_event(plan, :success)
       end
 
       def emit_running_event(plan)

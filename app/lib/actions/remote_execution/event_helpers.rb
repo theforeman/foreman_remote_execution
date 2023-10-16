@@ -20,8 +20,6 @@ module Actions
       end
 
       def self.included(base)
-        # Added by default by ObservableAction
-        base.execution_plan_hooks.do_not_use :emit_event, :on => :success
         base.extend ClassEventHelpers
       end
 

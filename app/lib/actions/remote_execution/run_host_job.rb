@@ -7,8 +7,6 @@ module Actions
       include ::Actions::RemoteExecution::TemplateInvocationProgressLogging
       include ::Actions::RemoteExecution::EventHelpers
 
-      execution_plan_hooks.use :emit_event, :on => [:success, :failure]
-
       middleware.do_not_use Dynflow::Middleware::Common::Transaction
       middleware.use Actions::Middleware::HideSecrets
 
@@ -82,10 +80,6 @@ module Actions
 
       def self.event_states
         [:success, :failure]
-      end
-
-      def emit_event(plan)
-        super(plan, execution_plan.result == :success ? :success : :failure)
       end
 
       def secrets(host, job_invocation, provider)
