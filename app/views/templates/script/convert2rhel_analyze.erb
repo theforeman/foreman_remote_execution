@@ -38,9 +38,8 @@ if ! grep -q ERROR /var/log/convert2rhel/convert2rhel-pre-conversion.json; then
     exit 1
 fi
 
-skips=$(grep -c 'SKIP' '/var/log/convert2rhel/convert2rhel-pre-conversion.json')
-if [ "$skips" -gt 0 ]; then
-    echo "Warning: $skips check(s) have been skipped."
+if ! grep -q SKIP /var/log/convert2rhel/convert2rhel-pre-conversion.json; then
+    echo "Warning: Some check(s) have been skipped."
     echo "Exiting ..."
     exit 1
 fi
