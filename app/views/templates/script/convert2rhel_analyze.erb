@@ -16,7 +16,7 @@ provider_type: script
 kind: job_template
 %>
 <% if @host.operatingsystem.family == 'Redhat' -%>
-if ! [ $(id -u) = 0 ]; then
+if ! [ $(id -u) -eq 0 ]; then
   echo "You must run convert2rhel as a root user."
   exit 1
 fi
@@ -31,7 +31,6 @@ export CONVERT2RHEL_DISABLE_TELEMETRY=1
 
 /usr/bin/convert2rhel analyze -y
 
-errors=$(grep -c 'ERROR' '/var/log/convert2rhel/convert2rhel-pre-conversion.json')
 if ! grep -q ERROR /var/log/convert2rhel/convert2rhel-pre-conversion.json; then
     echo "Error: Some error(s) have been found."
     echo "Exiting ..."
@@ -44,6 +43,6 @@ if ! grep -q SKIP /var/log/convert2rhel/convert2rhel-pre-conversion.json; then
     exit 1
 fi
 <% else %>
-echo 'Unsupported OS, must be from Red Hat family.'
+echo 'Unsupported OS, it must be from the Red Hat family.'
 exit 1
 <% end -%>
