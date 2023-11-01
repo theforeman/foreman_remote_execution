@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-19 12:40+0000\n"
-"PO-Revision-Date: 2023-05-19 12:40+0000\n"
+"POT-Creation-Date: 2023-11-01 10:36+0100\n"
+"PO-Revision-Date: 2023-11-01 10:36+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -163,69 +163,65 @@ msgid "Control concurrency level and distribution over time"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_invocations_controller.rb:65
-msgid "Distribute tasks over N seconds"
-msgstr ""
-
-#: ../app/controllers/api/v2/job_invocations_controller.rb:66
 msgid "Run at most N tasks at a time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:71
+#: ../app/controllers/api/v2/job_invocations_controller.rb:70
 msgid "Override the description format from the template for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:72
+#: ../app/controllers/api/v2/job_invocations_controller.rb:71
 msgid "Override the timeout interval from the template for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:73
+#: ../app/controllers/api/v2/job_invocations_controller.rb:72
 msgid ""
 "Remote execution feature label that should be triggered, job template assigned"
 " to this feature will be used"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:74
+#: ../app/controllers/api/v2/job_invocations_controller.rb:73
 msgid "Override the global time to pickup interval for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:88
+#: ../app/controllers/api/v2/job_invocations_controller.rb:87
 msgid "Create a job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:102
+#: ../app/controllers/api/v2/job_invocations_controller.rb:101
 msgid "Get output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:115
+#: ../app/controllers/api/v2/job_invocations_controller.rb:114
 msgid "Get raw output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:127
+#: ../app/controllers/api/v2/job_invocations_controller.rb:126
 msgid "Cancel job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:135
+#: ../app/controllers/api/v2/job_invocations_controller.rb:134
 msgid "The job could not be cancelled."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:140
+#: ../app/controllers/api/v2/job_invocations_controller.rb:139
 msgid "Rerun job on failed hosts"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:150
+#: ../app/controllers/api/v2/job_invocations_controller.rb:149
 #: ../app/views/job_invocations/_form.html.erb:4
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:155
+#: ../app/controllers/api/v2/job_invocations_controller.rb:154
 msgid "Get outputs of hosts in a job"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:204
+#: ../app/controllers/api/v2/job_invocations_controller.rb:203
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:213
+#: ../app/controllers/api/v2/job_invocations_controller.rb:212
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
 
@@ -269,8 +265,8 @@ msgstr ""
 #: ../app/controllers/api/v2/job_templates_controller.rb:52
 #: ../app/views/job_invocations/_form.html.erb:11
 #: ../app/views/job_templates/_custom_tabs.html.erb:5
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:58
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:104
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:67
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:107
 msgid "Job category"
 msgstr ""
 
@@ -338,6 +334,10 @@ msgstr ""
 
 #: ../app/controllers/api/v2/remote_execution_features_controller.rb:21
 msgid "Job template ID to be used for the feature"
+msgstr ""
+
+#: ../app/controllers/api/v2/remote_execution_features_controller.rb:32
+msgid "List available remote execution features for a host"
 msgstr ""
 
 #: ../app/controllers/api/v2/template_invocations_controller.rb:10
@@ -613,73 +613,73 @@ msgstr ""
 msgid "Failed rendering template: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:108
+#: ../app/lib/actions/remote_execution/run_host_job.rb:107
 msgid "Task cancelled"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:109
+#: ../app/lib/actions/remote_execution/run_host_job.rb:108
 msgid "Job execution failed"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:118
+#: ../app/lib/actions/remote_execution/run_host_job.rb:117
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:123 action_names.rb:5
+#: ../app/lib/actions/remote_execution/run_host_job.rb:122 action_names.rb:7
 msgid "Remote action:"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:151
+#: ../app/lib/actions/remote_execution/run_host_job.rb:150
 msgid "Job cancelled by user"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:156
-#: ../app/lib/actions/remote_execution/run_host_job.rb:174
+#: ../app/lib/actions/remote_execution/run_host_job.rb:155
+#: ../app/lib/actions/remote_execution/run_host_job.rb:173
 msgid "Exit status: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:158
+#: ../app/lib/actions/remote_execution/run_host_job.rb:157
 msgid "Job finished with error"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:161
-#: ../app/lib/actions/remote_execution/run_host_job.rb:179
+#: ../app/lib/actions/remote_execution/run_host_job.rb:160
+#: ../app/lib/actions/remote_execution/run_host_job.rb:178
 msgid "Error loading data from proxy"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:230
+#: ../app/lib/actions/remote_execution/run_host_job.rb:229
 msgid "User can not execute job on host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:231
+#: ../app/lib/actions/remote_execution/run_host_job.rb:230
 msgid "User can not execute this job template"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:234
+#: ../app/lib/actions/remote_execution/run_host_job.rb:233
 msgid "User can not execute job on infrastructure host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:240
+#: ../app/lib/actions/remote_execution/run_host_job.rb:239
 msgid "User can not execute this job template on %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:250
+#: ../app/lib/actions/remote_execution/run_host_job.rb:249
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:260
+#: ../app/lib/actions/remote_execution/run_host_job.rb:259
 msgid ""
 "Could not use any proxy for the %{provider} job. Consider configuring %{global"
 "_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_hosts_job.rb:87
+#: ../app/lib/actions/remote_execution/run_hosts_job.rb:92
 msgid "REX job has succeeded - %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_hosts_job.rb:95
+#: ../app/lib/actions/remote_execution/run_hosts_job.rb:100
 msgid "REX job has failed - %s"
 msgstr ""
 
@@ -766,27 +766,27 @@ msgstr ""
 msgid "template"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:142
+#: ../app/models/job_invocation_composer.rb:141
 msgid "Cannot specify both bookmark_id and search_query"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:188
+#: ../app/models/job_invocation_composer.rb:186
 msgid "Unknown input %{input_name} for template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:216
+#: ../app/models/job_invocation_composer.rb:214
 msgid "Template with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:351
+#: ../app/models/job_invocation_composer.rb:348
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:360
+#: ../app/models/job_invocation_composer.rb:357
 msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:366
+#: ../app/models/job_invocation_composer.rb:363
 msgid ""
 "The template %{template_name} mapped to feature %{feature_name} is not accessi"
 "ble by the user"
@@ -837,14 +837,14 @@ msgid "Dynamic Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:10
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:220
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:273
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:194
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:275
 msgid "Alphabetical"
 msgstr ""
 
 #: ../app/models/targeting.rb:10
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:228
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:272
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:202
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:274
 msgid "Randomized"
 msgstr ""
 
@@ -920,28 +920,32 @@ msgid "tasks at a time"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:17
-msgid "Set to distribute over"
+msgid "Scheduled to start before"
 msgstr ""
 
-#: ../app/views/job_invocations/_card_schedule.html.erb:17
+#: ../app/views/job_invocations/_card_schedule.html.erb:20
+msgid "Scheduled to start at"
+msgstr ""
+
+#: ../app/views/job_invocations/_card_schedule.html.erb:23
+msgid "Timeout to kill after"
+msgstr ""
+
+#: ../app/views/job_invocations/_card_schedule.html.erb:23
 #: ../app/views/job_invocations/_card_schedule.html.erb:26
 msgid "seconds"
 msgstr ""
 
-#: ../app/views/job_invocations/_card_schedule.html.erb:20
-msgid "Scheduled to start before"
-msgstr ""
-
-#: ../app/views/job_invocations/_card_schedule.html.erb:23
-msgid "Scheduled to start at"
-msgstr ""
-
 #: ../app/views/job_invocations/_card_schedule.html.erb:26
-msgid "Timeout to kill after"
+#: ../app/views/job_invocations/_form.html.erb:106
+#: ../lib/foreman_remote_execution/engine.rb:163
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:59
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:269
+msgid "Time to pickup"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:5
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:120
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:123
 msgid "Target hosts"
 msgstr ""
 
@@ -990,8 +994,8 @@ msgid "Description"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:23
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:68
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:112
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:77
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:115
 msgid "Job template"
 msgstr ""
 
@@ -1001,7 +1005,7 @@ msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:42
 #: ../webpack/JobWizard/steps/HostsAndInputs/index.js:231
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:88
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:91
 msgid "hosts"
 msgstr ""
 
@@ -1022,20 +1026,20 @@ msgid "Hide advanced fields"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:85
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:239
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:262
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:213
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:265
 msgid "SSH user"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:85
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:240
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:214
 msgid "A user to be used for SSH."
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:88
 #: ../app/views/job_templates/_custom_tabs.html.erb:26
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:11
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:263
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:266
 msgid "Effective user"
 msgstr ""
 
@@ -1049,7 +1053,7 @@ msgstr ""
 #: ../app/views/job_invocations/_form.html.erb:94
 #: ../app/views/job_templates/_custom_tabs.html.erb:13
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:35
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:265
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:268
 msgid "Timeout to kill"
 msgstr ""
 
@@ -1061,14 +1065,6 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:106
-#: ../lib/foreman_remote_execution/engine.rb:163
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:59
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:266
-msgid "Time to pickup"
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:106
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:61
 msgid ""
 "Interval in seconds, if the job is not picked up by a client within this inter"
 "val it will be cancelled."
@@ -1115,7 +1111,7 @@ msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:116
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:149
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:267
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:270
 msgid "Concurrency level"
 msgstr ""
 
@@ -1126,27 +1122,14 @@ msgid ""
 "abled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:117
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:175
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:268
-msgid "Time span"
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:117
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:177
-msgid ""
-"Distribute execution over N seconds. If this is set and proxy batch triggering"
-" is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:121
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:200
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:270
+#: ../app/views/job_invocations/_form.html.erb:120
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:174
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:272
 msgid "Execution ordering"
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:121
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:205
+#: ../app/views/job_invocations/_form.html.erb:120
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:179
 msgid ""
 "Execution ordering determines whether the jobs should be executed on hosts in "
 "alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - execute"
@@ -1154,12 +1137,12 @@ msgid ""
 "es the order in which jobs are executed on hosts</li></ul>"
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:130
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:252
+#: ../app/views/job_invocations/_form.html.erb:129
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:255
 msgid "Type of query"
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:130
+#: ../app/views/job_invocations/_form.html.erb:129
 msgid ""
 "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static<"
 "/b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evalu"
@@ -1682,7 +1665,8 @@ msgstr ""
 #: ../lib/foreman_remote_execution/engine.rb:161
 msgid ""
 "Time in seconds within which the host has to pick up a job. If the job is not "
-"picked up within this limit, the job will be cancelled. Defaults to 1 day."
+"picked up within this limit, the job will be cancelled. Defaults to 1 day. App"
+"lies only to pull-mqtt based jobs."
 msgstr ""
 
 #: ../lib/foreman_remote_execution/engine.rb:232
@@ -1703,6 +1687,46 @@ msgstr ""
 
 #: ../lib/foreman_remote_execution/engine.rb:368
 msgid "Run a script"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:35
+msgid "Submit"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:36
+msgid "Next"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:45
+msgid "Back"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:51
+msgid "Start job"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:52
+msgid "Fill all required fields in all the steps"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:62
+msgid "Run on selected hosts"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:69
+msgid "Skip to review step"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:70
+msgid "Fill all required fields in all the steps to start the job"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:82
+msgid "Skip to review"
+msgstr ""
+
+#: ../webpack/JobWizard/Footer.js:86
+msgid "Cancel"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:11
@@ -1753,7 +1777,7 @@ msgid "Target hosts and inputs"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:28
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:134
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:137
 msgid "Advanced fields"
 msgstr ""
 
@@ -1790,13 +1814,13 @@ msgstr ""
 msgid "Use old form"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:92
+#: ../webpack/JobWizard/JobWizardPageRerun.js:93
 msgid ""
 "Current organization %s is different from job's organization %s. This job may "
 "run on different hosts than before."
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:105
+#: ../webpack/JobWizard/JobWizardPageRerun.js:107
 msgid ""
 "Current location %s is different from job's location %s. This job may run on d"
 "ifferent hosts than before."
@@ -1811,7 +1835,7 @@ msgstr ""
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
 msgstr ""
 
-#: ../webpack/JobWizard/index.js:35
+#: ../webpack/JobWizard/index.js:34
 msgid "Use legacy form"
 msgstr ""
 
@@ -1825,8 +1849,13 @@ msgstr ""
 
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:49
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:165
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:191
 msgid "For example: 1, 2, 3, 4, 5..."
+msgstr ""
+
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:61
+msgid ""
+"Interval in seconds, if the job is not picked up by a client within this inter"
+"val it will be cancelled. Applies only to pull-mqtt based jobs"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:104
@@ -1843,28 +1872,28 @@ msgid ""
 "or future or recurring executions, it is removed after the last execution."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:55
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:64
 msgid "All fields are required."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:63
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:76
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:72
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:85
 msgid "Error"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:79
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:88
 msgid "Errors:"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:82
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:91
 msgid "Categories list failed with:"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:87
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:96
 msgid "Templates list failed with:"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:92
+#: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:101
 msgid "Template failed with:"
 msgstr ""
 
@@ -1938,88 +1967,87 @@ msgstr ""
 msgid "Every day at %s"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:29
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:28
 msgid "Every week on %s at %s"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:33
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:32
 msgid "Every month on %s at %s"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:38
-#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:19
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:37
 msgid "Cron line"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:81
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:84
 msgid "No Target Hosts"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:94
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:97
 msgid "view host names"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:145
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:148
 msgid "Hide all advanced fields"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:155
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:158
 msgid "Show all advanced fields"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:165
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:168
 msgid "Schedule type"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:179
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:182
 msgid "Recurrence"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:194
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:197
 #: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:52
 msgid "Starts at"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:203
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:206
 msgid "Starts Before"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:212
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:215
 #: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:88
 msgid "Starts"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:217
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:220
 #: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:103
 msgid "Now"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:223
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:226
 #: ../webpack/JobWizard/steps/Schedule/RepeatOn.js:64
 msgid "Repeats"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:231
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:234
 #: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:160
 msgid "Ends"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:244
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:247
 #: ../webpack/JobWizard/steps/Schedule/PurposeField.js:9
 msgid "Purpose"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:256
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:259
 #: ../webpack/JobWizard/steps/Schedule/QueryType.js:22
 msgid "Static query"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:257
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:260
 #: ../webpack/JobWizard/steps/Schedule/QueryType.js:32
 msgid "Dynamic query"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:264
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:267
 msgid "Description Template"
 msgstr ""
 
@@ -2047,28 +2075,42 @@ msgid ""
 "targeted hosts set may change before it"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:22
-msgid "Cron line format 'a b c d e', where:"
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:43
+msgid "Cron line (extended)"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:25
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:46
+msgid "Cron line format '1 2 3 4 5', where:"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:49
 msgid "is minute (range: 0-59)"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:26
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:50
 msgid "is hour (range: 0-23)"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:27
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:51
 msgid "is day of month (range: 1-31)"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:28
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:52
 msgid "is month (range: 1-12)"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:29
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:53
 msgid "is day of week (range: 0-6)"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:56
+msgid ""
+"The cron line supports extended cron line syntax. For details please refer to "
+"the "
+msgstr ""
+
+#: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:60
+msgid "documentation"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/RepeatDaily.js:17
@@ -2101,7 +2143,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatWeek.js:42
+#: ../webpack/JobWizard/steps/Schedule/RepeatWeek.js:43
 msgid "Days of week"
 msgstr ""
 
@@ -2194,7 +2236,7 @@ msgstr ""
 msgid "%s job has been invoked"
 msgstr ""
 
-#: ../webpack/react_app/components/FeaturesDropdown/index.js:44
+#: ../webpack/react_app/components/FeaturesDropdown/index.js:50
 msgid "Schedule a job"
 msgstr ""
 
@@ -2284,10 +2326,18 @@ msgid "Action with sub plans"
 msgstr ""
 
 #: action_names.rb:3
-msgid "Import Puppet classes"
+msgid "Check for long running tasks"
 msgstr ""
 
 #: action_names.rb:4
+msgid "Deliver notifications about long running tasks"
+msgstr ""
+
+#: action_names.rb:5
+msgid "Import Puppet classes"
+msgstr ""
+
+#: action_names.rb:6
 msgid "Import facts"
 msgstr ""
 

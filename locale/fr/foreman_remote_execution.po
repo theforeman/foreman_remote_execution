@@ -131,6 +131,9 @@ msgstr "À"
 msgid "At minute"
 msgstr "À la minute"
 
+msgid "Back"
+msgstr ""
+
 msgid "Back to Job"
 msgstr "Retour aux job"
 
@@ -139,6 +142,9 @@ msgstr "Signet"
 
 msgid "Can't find Job Invocation for an id %s"
 msgstr "Impossible de trouver l’invocation de job ayant pour id %s"
+
+msgid "Cancel"
+msgstr ""
 
 msgid "Cancel Job"
 msgstr "Annuler la tâche"
@@ -162,6 +168,9 @@ msgid "Categories list failed with:"
 msgstr "La liste de catégories a échoué avec :"
 
 msgid "Category and template"
+msgstr ""
+
+msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -242,8 +251,11 @@ msgstr "Aucun rapport pour ce job"
 msgid "Cron line"
 msgstr "Ligne Cron"
 
-msgid "Cron line format 'a b c d e', where:"
-msgstr "Format de ligne cron 'a b c d' avec :"
+msgid "Cron line (extended)"
+msgstr ""
+
+msgid "Cron line format '1 2 3 4 5', where:"
+msgstr ""
 
 msgid "Cronline"
 msgstr "Cronline"
@@ -293,6 +305,9 @@ msgstr "Supprimer un jeu de données en entrée externe"
 msgid "Delete a job template"
 msgstr "Supprimer un modèle de job"
 
+msgid "Deliver notifications about long running tasks"
+msgstr ""
+
 msgid "Description"
 msgstr "Description"
 
@@ -307,12 +322,6 @@ msgstr "Désignation d’un objectif spécial"
 
 msgid "Display advanced fields"
 msgstr "Afficher les champs avancés"
-
-msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-msgstr "Répartir l'exécution sur N secondes. Si ce paramètre est défini et que le déclenchement par lot du proxy est activé, les tâches sont alors déclenchées sur le proxy intelligent par lots de taille 1."
-
-msgid "Distribute tasks over N seconds"
-msgstr "Distribue les tâches sur N secondes"
 
 msgid "Does not repeat"
 msgstr "Pas de répétition"
@@ -440,6 +449,12 @@ msgstr "Repli sur n'importe quel proxy"
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "Entrée de la caractéristique %{input_name}non définie dans le modèle %{template_name}"
 
+msgid "Fill all required fields in all the steps"
+msgstr ""
+
+msgid "Fill all required fields in all the steps to start the job"
+msgstr ""
+
 msgid "Filter by host collections"
 msgstr "Filtrer les collections d'hôtes"
 
@@ -563,6 +578,9 @@ msgstr "Le sélecteur de proxy interne ne peut être utilisé que si Katello est
 msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
 msgstr ""
 
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs"
+msgstr ""
+
 msgid "Invalid date"
 msgstr "Chemin invalide"
 
@@ -662,6 +680,9 @@ msgstr "Derniers jobs"
 msgid "Learn more about this in the documentation."
 msgstr "Approfondissez ce sujet dans la documentation."
 
+msgid "List available remote execution features for a host"
+msgstr ""
+
 msgid "List foreign input sets"
 msgstr "Afficher les jeux de données en entrée externes"
 
@@ -712,6 +733,9 @@ msgstr "Jamais"
 
 msgid "New Job Template"
 msgstr "Nouveau modèle de job"
+
+msgid "Next"
+msgstr ""
 
 msgid "No (override)"
 msgstr "Non (remplacement)"
@@ -959,6 +983,9 @@ msgstr "Effectuer au maximum N tâches à la fois. Si ce paramètre est défini 
 msgid "Run job"
 msgstr "Lancer le job"
 
+msgid "Run on selected hosts"
+msgstr ""
+
 msgid "Running"
 msgstr "Exécution en cours"
 
@@ -1058,9 +1085,6 @@ msgstr ""
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr "Définir le mot de passe pour l'utilisateur effectif (en utilisant des mécanismes similaires à ceux de Sudo)"
 
-msgid "Set to distribute over"
-msgstr "Défini pour distribuer sur"
-
 msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
 msgstr ""
 
@@ -1088,11 +1112,20 @@ msgstr "Voir les détails d'un modèle de job"
 msgid "Show remote execution feature"
 msgstr "Affiche la capacité d'exécution distante"
 
+msgid "Skip to review"
+msgstr ""
+
+msgid "Skip to review step"
+msgstr ""
+
 msgid "Snippet"
 msgstr "Snippet"
 
 msgid "Start"
 msgstr "Démarrer"
+
+msgid "Start job"
+msgstr ""
 
 msgid "Started"
 msgstr "Démarré"
@@ -1120,6 +1153,9 @@ msgstr "Requête statique"
 
 msgid "Status"
 msgstr "Statut"
+
+msgid "Submit"
+msgstr ""
 
 msgid "Subscribe to all my jobs"
 msgstr "Souscrire à tous mes jobs"
@@ -1178,6 +1214,9 @@ msgstr "Le modèle avec l'ID '%%{id} ' n'a pas été trouvé"
 msgid "Templates list failed with:"
 msgstr "La liste des modèles a échoué avec :"
 
+msgid "The cron line supports extended cron line syntax. For details please refer to the "
+msgstr ""
+
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "La requête dynamique '%{query}' n'a pas encore été résolue. La liste des hôtes actuelle avec lesquels ils pourraient être résolus peut être vue ici %{here}."
 
@@ -1232,11 +1271,8 @@ msgstr "Ce modèle est utilisé pour générer la description. <br/>Les valeurs 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "Durée en secondes depuis le démarrage sur l'hôte distant après laquelle le job doit être supprimé."
 
-msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day."
+msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs."
 msgstr ""
-
-msgid "Time span"
-msgstr "Durée"
 
 msgid "Time to pickup"
 msgstr ""
@@ -1429,6 +1465,9 @@ msgstr "annulé"
 
 msgid "default_capsule method missing from SmartProxy"
 msgstr "méthode default_capsule manquante dans SmartProxy"
+
+msgid "documentation"
+msgstr ""
 
 msgid "effective user"
 msgstr "utilisateur effectif"

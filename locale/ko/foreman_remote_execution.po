@@ -126,6 +126,9 @@ msgstr "시간"
 msgid "At minute"
 msgstr ""
 
+msgid "Back"
+msgstr ""
+
 msgid "Back to Job"
 msgstr "작업으로 돌아가기"
 
@@ -133,6 +136,9 @@ msgid "Bookmark"
 msgstr "북마크 "
 
 msgid "Can't find Job Invocation for an id %s"
+msgstr ""
+
+msgid "Cancel"
 msgstr ""
 
 msgid "Cancel Job"
@@ -157,6 +163,9 @@ msgid "Categories list failed with:"
 msgstr ""
 
 msgid "Category and template"
+msgstr ""
+
+msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -237,7 +246,10 @@ msgstr ""
 msgid "Cron line"
 msgstr "Cron 줄"
 
-msgid "Cron line format 'a b c d e', where:"
+msgid "Cron line (extended)"
+msgstr ""
+
+msgid "Cron line format '1 2 3 4 5', where:"
 msgstr ""
 
 msgid "Cronline"
@@ -288,6 +300,9 @@ msgstr "외부 입력 세트 삭제"
 msgid "Delete a job template"
 msgstr "작업 템플릿 삭제"
 
+msgid "Deliver notifications about long running tasks"
+msgstr ""
+
 msgid "Description"
 msgstr "설명"
 
@@ -302,12 +317,6 @@ msgstr ""
 
 msgid "Display advanced fields"
 msgstr "고급 필드 표시"
-
-msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-msgstr ""
-
-msgid "Distribute tasks over N seconds"
-msgstr "N초에 걸쳐 태스크 배분"
 
 msgid "Does not repeat"
 msgstr ""
@@ -435,6 +444,12 @@ msgstr ""
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "%{template_name} 템플릿에 대한 기능 입력 %{input_name}이(가) 정의되지 않았습니다."
 
+msgid "Fill all required fields in all the steps"
+msgstr ""
+
+msgid "Fill all required fields in all the steps to start the job"
+msgstr ""
+
 msgid "Filter by host collections"
 msgstr ""
 
@@ -558,6 +573,9 @@ msgstr ""
 msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
 msgstr ""
 
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs"
+msgstr ""
+
 msgid "Invalid date"
 msgstr ""
 
@@ -657,6 +675,9 @@ msgstr ""
 msgid "Learn more about this in the documentation."
 msgstr "설명서에서 자세한 내용을 참조하십시오."
 
+msgid "List available remote execution features for a host"
+msgstr ""
+
 msgid "List foreign input sets"
 msgstr "외부 입력 세트 나열"
 
@@ -707,6 +728,9 @@ msgstr "사용 안 함"
 
 msgid "New Job Template"
 msgstr "새 작업 템플릿"
+
+msgid "Next"
+msgstr ""
 
 msgid "No (override)"
 msgstr ""
@@ -954,6 +978,9 @@ msgstr ""
 msgid "Run job"
 msgstr ""
 
+msgid "Run on selected hosts"
+msgstr ""
+
 msgid "Running"
 msgstr "실행 중 "
 
@@ -1053,9 +1080,6 @@ msgstr ""
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr ""
 
-msgid "Set to distribute over"
-msgstr ""
-
 msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
 msgstr ""
 
@@ -1083,11 +1107,20 @@ msgstr "작업 템플릿 정보 표시"
 msgid "Show remote execution feature"
 msgstr "원격 실행 기능 표시"
 
+msgid "Skip to review"
+msgstr ""
+
+msgid "Skip to review step"
+msgstr ""
+
 msgid "Snippet"
 msgstr "조각 모음 "
 
 msgid "Start"
 msgstr "시작"
+
+msgid "Start job"
+msgstr ""
 
 msgid "Started"
 msgstr ""
@@ -1115,6 +1148,9 @@ msgstr ""
 
 msgid "Status"
 msgstr "상태"
+
+msgid "Submit"
+msgstr ""
 
 msgid "Subscribe to all my jobs"
 msgstr ""
@@ -1173,6 +1209,9 @@ msgstr "ID가 '%{id}'인 템플릿을 찾을 수 없습니다."
 msgid "Templates list failed with:"
 msgstr ""
 
+msgid "The cron line supports extended cron line syntax. For details please refer to the "
+msgstr ""
+
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "동적 쿼리 '%{query}'이(가) 아직 확인되지 않았습니다. 확인할 대상 호스트의 목록을 %{here}에서 볼 수 있습니다."
 
@@ -1225,11 +1264,8 @@ msgstr ""
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr ""
 
-msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day."
+msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs."
 msgstr ""
-
-msgid "Time span"
-msgstr "기간"
 
 msgid "Time to pickup"
 msgstr ""
@@ -1421,6 +1457,9 @@ msgid "cancelled"
 msgstr "취소함"
 
 msgid "default_capsule method missing from SmartProxy"
+msgstr ""
+
+msgid "documentation"
 msgstr ""
 
 msgid "effective user"
