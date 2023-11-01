@@ -130,6 +130,9 @@ msgstr "в"
 msgid "At minute"
 msgstr ""
 
+msgid "Back"
+msgstr ""
+
 msgid "Back to Job"
 msgstr "Назад к заданию"
 
@@ -137,6 +140,9 @@ msgid "Bookmark"
 msgstr "Закладка"
 
 msgid "Can't find Job Invocation for an id %s"
+msgstr ""
+
+msgid "Cancel"
 msgstr ""
 
 msgid "Cancel Job"
@@ -161,6 +167,9 @@ msgid "Categories list failed with:"
 msgstr ""
 
 msgid "Category and template"
+msgstr ""
+
+msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -241,7 +250,10 @@ msgstr ""
 msgid "Cron line"
 msgstr "Строка Cron"
 
-msgid "Cron line format 'a b c d e', where:"
+msgid "Cron line (extended)"
+msgstr ""
+
+msgid "Cron line format '1 2 3 4 5', where:"
 msgstr ""
 
 msgid "Cronline"
@@ -292,6 +304,9 @@ msgstr "Удалить набор входных параметров"
 msgid "Delete a job template"
 msgstr "Удалить шаблон задания"
 
+msgid "Deliver notifications about long running tasks"
+msgstr ""
+
 msgid "Description"
 msgstr "Описание"
 
@@ -306,12 +321,6 @@ msgstr ""
 
 msgid "Display advanced fields"
 msgstr "Показать дополнительные параметры"
-
-msgid "Distribute execution over N seconds. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-msgstr ""
-
-msgid "Distribute tasks over N seconds"
-msgstr "Распределить задачи в пределах заданного периода времени (в секундах)"
 
 msgid "Does not repeat"
 msgstr ""
@@ -439,6 +448,12 @@ msgstr ""
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr "Входной параметр %{input_name}, заданный функцией, не определен в шаблоне %{template_name}."
 
+msgid "Fill all required fields in all the steps"
+msgstr ""
+
+msgid "Fill all required fields in all the steps to start the job"
+msgstr ""
+
 msgid "Filter by host collections"
 msgstr ""
 
@@ -562,6 +577,9 @@ msgstr ""
 msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
 msgstr ""
 
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs"
+msgstr ""
+
 msgid "Invalid date"
 msgstr ""
 
@@ -661,6 +679,9 @@ msgstr ""
 msgid "Learn more about this in the documentation."
 msgstr "Обратиться к документации"
 
+msgid "List available remote execution features for a host"
+msgstr ""
+
 msgid "List foreign input sets"
 msgstr "Показать внешние наборы входных параметров"
 
@@ -711,6 +732,9 @@ msgstr "Никогда"
 
 msgid "New Job Template"
 msgstr "Создать шаблон задания"
+
+msgid "Next"
+msgstr ""
 
 msgid "No (override)"
 msgstr ""
@@ -958,6 +982,9 @@ msgstr ""
 msgid "Run job"
 msgstr ""
 
+msgid "Run on selected hosts"
+msgstr ""
+
 msgid "Running"
 msgstr "Работает"
 
@@ -1057,9 +1084,6 @@ msgstr ""
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr ""
 
-msgid "Set to distribute over"
-msgstr ""
-
 msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
 msgstr ""
 
@@ -1087,11 +1111,20 @@ msgstr "Показать информацию о шаблоне"
 msgid "Show remote execution feature"
 msgstr "Показать функцию удаленного выполнения"
 
+msgid "Skip to review"
+msgstr ""
+
+msgid "Skip to review step"
+msgstr ""
+
 msgid "Snippet"
 msgstr "Фрагмент"
 
 msgid "Start"
 msgstr "Начало"
+
+msgid "Start job"
+msgstr ""
 
 msgid "Started"
 msgstr ""
@@ -1119,6 +1152,9 @@ msgstr ""
 
 msgid "Status"
 msgstr "Статус"
+
+msgid "Submit"
+msgstr ""
 
 msgid "Subscribe to all my jobs"
 msgstr ""
@@ -1177,6 +1213,9 @@ msgstr "Шаблон «%{id}» не найден."
 msgid "Templates list failed with:"
 msgstr ""
 
+msgid "The cron line supports extended cron line syntax. For details please refer to the "
+msgstr ""
+
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "Динамический запрос «%{query}» еще не был обработан. Список узлов, к которым он будет применен, можно проверить %{here}."
 
@@ -1232,11 +1271,8 @@ msgstr ""
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr ""
 
-msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day."
+msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs."
 msgstr ""
-
-msgid "Time span"
-msgstr "Интервал"
 
 msgid "Time to pickup"
 msgstr ""
@@ -1428,6 +1464,9 @@ msgid "cancelled"
 msgstr "отменено"
 
 msgid "default_capsule method missing from SmartProxy"
+msgstr ""
+
+msgid "documentation"
 msgstr ""
 
 msgid "effective user"
