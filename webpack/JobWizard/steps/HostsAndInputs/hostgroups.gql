@@ -3,7 +3,7 @@ query($search: String!) {
     totalCount
     nodes {
       id
-      name
+      name: title
     }
   }
 }
