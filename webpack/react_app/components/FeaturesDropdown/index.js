@@ -25,18 +25,19 @@ import './index.scss';
 
 const FeaturesDropdown = ({ hostId, hostSearch, selectedCount }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const rexFeaturesUrl = hostId
+  const isSingleHost = !!hostId; // identifies whether we're on the host details or host overview page
+  const rexFeaturesUrl = isSingleHost
     ? REX_FEATURES_HOST_URL(hostId)
     : ALL_REX_FEATURES_URL;
   const { response, status } = useAPI('get', foremanUrl(rexFeaturesUrl));
   const dispatch = useDispatch();
   // eslint-disable-next-line camelcase
   const canRunJob = response?.permissions?.can_run_job;
-  if (!!hostId && !canRunJob) {
+  if (isSingleHost && !canRunJob) {
     return null;
   }
 
-  const features = hostId
+  const features = isSingleHost
     ? response?.remote_execution_features // eslint-disable-line camelcase
     : response?.results;
   const dropdownItems = features
@@ -62,6 +63,8 @@ const FeaturesDropdown = ({ hostId, hostSearch, selectedCount }) => {
     </DropdownToggleAction>,
   ];
 
+  const disableDropdown = !isSingleHost && selectedCount === 0;
+
   return (
     <Dropdown
       ouiaId="schedule-a-job-dropdown"
@@ -75,7 +78,7 @@ const FeaturesDropdown = ({ hostId, hostSearch, selectedCount }) => {
           splitButtonItems={scheduleJob}
           toggleVariant="secondary"
           onToggle={() => setIsOpen(prev => !prev)}
-          isDisabled={status === STATUS.PENDING || selectedCount === 0}
+          isDisabled={status === STATUS.PENDING || disableDropdown}
           splitButtonVariant="action"
         />
       }
