@@ -23,7 +23,12 @@ import {
 import { runFeature } from './actions';
 import './index.scss';
 
-const FeaturesDropdown = ({ hostId, hostSearch, selectedCount }) => {
+const FeaturesDropdown = ({
+  hostId,
+  hostSearch,
+  hostResponse,
+  selectedCount,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const isSingleHost = !!hostId; // identifies whether we're on the host details or host overview page
   const rexFeaturesUrl = isSingleHost
@@ -31,9 +36,13 @@ const FeaturesDropdown = ({ hostId, hostSearch, selectedCount }) => {
     : ALL_REX_FEATURES_URL;
   const { response, status } = useAPI('get', foremanUrl(rexFeaturesUrl));
   const dispatch = useDispatch();
-  // eslint-disable-next-line camelcase
-  const canRunJob = response?.permissions?.can_run_job;
-  if (isSingleHost && !canRunJob) {
+  const canRunJob = isSingleHost
+    ? // eslint-disable-next-line camelcase
+      response?.permissions?.can_run_job
+    : hostResponse?.response?.results?.some(
+        result => result.can_create_job_invocations
+      );
+  if (!canRunJob) {
     return null;
   }
 
@@ -92,11 +101,21 @@ FeaturesDropdown.propTypes = {
   hostId: PropTypes.number,
   hostSearch: PropTypes.string,
   selectedCount: PropTypes.number,
+  hostResponse: PropTypes.shape({
+    response: PropTypes.shape({
+      results: PropTypes.arrayOf(
+        PropTypes.shape({
+          can_create_job_invocations: PropTypes.bool,
+        })
+      ),
+    }),
+  }),
 };
 FeaturesDropdown.defaultProps = {
   hostId: undefined,
   hostSearch: undefined,
   selectedCount: 0,
+  hostResponse: undefined,
 };
 
 export default FeaturesDropdown;
