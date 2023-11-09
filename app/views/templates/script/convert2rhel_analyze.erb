@@ -31,17 +31,12 @@ export CONVERT2RHEL_DISABLE_TELEMETRY=1
 
 /usr/bin/convert2rhel analyze -y
 
-if ! grep -q ERROR /var/log/convert2rhel/convert2rhel-pre-conversion.json; then
+if grep -q ERROR /var/log/convert2rhel/convert2rhel-pre-conversion.json; then
     echo "Error: Some error(s) have been found."
     echo "Exiting ..."
     exit 1
 fi
 
-if ! grep -q SKIP /var/log/convert2rhel/convert2rhel-pre-conversion.json; then
-    echo "Warning: Some check(s) have been skipped."
-    echo "Exiting ..."
-    exit 1
-fi
 <% else %>
 echo 'Unsupported OS, it must be from the Red Hat family.'
 exit 1
