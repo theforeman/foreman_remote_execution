@@ -11,7 +11,7 @@ import { push } from 'connected-react-router';
 
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { foremanUrl } from 'foremanReact/common/helpers';
+import { foremanUrl, propsToCamelCase } from 'foremanReact/common/helpers';
 import { STATUS } from 'foremanReact/constants';
 
 import {
@@ -36,12 +36,12 @@ const FeaturesDropdown = ({
     : ALL_REX_FEATURES_URL;
   const { response, status } = useAPI('get', foremanUrl(rexFeaturesUrl));
   const dispatch = useDispatch();
+  const permissions = propsToCamelCase(
+    (isSingleHost ? response?.permissions : hostResponse?.response) || {}
+  );
   const canRunJob = isSingleHost
-    ? // eslint-disable-next-line camelcase
-      response?.permissions?.can_run_job
-    : hostResponse?.response?.results?.some(
-        result => result.can_create_job_invocations
-      );
+    ? permissions.canRunJob
+    : permissions.canCreateJobInvocations;
   if (!canRunJob) {
     return null;
   }
