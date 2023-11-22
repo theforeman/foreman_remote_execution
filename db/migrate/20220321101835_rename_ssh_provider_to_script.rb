@@ -6,7 +6,7 @@ class RenameSshProviderToScript < ActiveRecord::Migration[6.0]
     setting = Setting.find_by(:name => 'remote_execution_form_job_template')
     default_template = nil
 
-    Template.where(:provider_type => from).each do |t|
+    Template.where(:provider_type => from).find_each do |t|
       default_template = t if t.name == setting&.value
       t.provider_type = to
       t.name = t.name.gsub(from_re, new_label)

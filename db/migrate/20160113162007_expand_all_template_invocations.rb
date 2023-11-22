@@ -14,7 +14,7 @@ class ExpandAllTemplateInvocations < ActiveRecord::Migration[4.2]
     FakeTemplateInvocation.update_all 'host_id = NULL'
 
     # expand all pattern template invocations and link RunHostJob
-    JobInvocation.joins(:targeting).where("#{Targeting.table_name}.resolved_at IS NOT NULL").includes([:pattern_template_invocations, :targeting]).each do |job_invocation|
+    JobInvocation.joins(:targeting).where("#{Targeting.table_name}.resolved_at IS NOT NULL").includes([:pattern_template_invocations, :targeting]).find_each do |job_invocation|
       job_invocation.pattern_template_invocations.each do |pattern_template_invocation|
         job_invocation.targeting.hosts.each do |host|
           task = job_invocation.sub_tasks.find do |sub_task|
@@ -38,7 +38,7 @@ class ExpandAllTemplateInvocations < ActiveRecord::Migration[4.2]
 
   def down
     # we can't determine the last host for pattern, but keeping template invocations as pattern is safe
-    JobInvocation.joins(:targeting).where("#{Targeting.table_name}.resolved_at IS NOT NULL").includes(:template_invocations).each do |job_invocation|
+    JobInvocation.joins(:targeting).where("#{Targeting.table_name}.resolved_at IS NOT NULL").includes(:template_invocations).find_each do |job_invocation|
       job_invocation.template_invocations.delete_all
     end
   end
