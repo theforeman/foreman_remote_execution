@@ -124,7 +124,7 @@ class ProxyBuffer
 
   def write_available!
     count = @dst_io.write_nonblock(@buffer)
-    @buffer = @buffer[count..-1]
+    @buffer = @buffer[count..]
   rescue IO::WaitWritable
     0
   rescue IO::WaitReadable
