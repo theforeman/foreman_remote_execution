@@ -3,6 +3,7 @@ module Actions
     class RunHostsJob < Actions::ActionWithSubPlans
       include Actions::RecurringAction
       include Actions::ObservableAction
+      include Actions::RemoteExecution::EventHelpers
 
       middleware.use Actions::Middleware::BindJobInvocation
       middleware.use Actions::Middleware::RecurringLogic
@@ -10,7 +11,7 @@ module Actions
 
       execution_plan_hooks.use :notify_on_success, :on => :success
       execution_plan_hooks.use :notify_on_failure, :on => :failure
-      execution_plan_hooks.use :emit_event_running, :on => :running
+      execution_plan_hooks.use :emit_running_event, :on => :running
 
       class CheckOnProxyActions; end
 
@@ -28,7 +29,8 @@ module Actions
       def plan(job_invocation)
         job_invocation.task_group.save! if job_invocation.task_group.try(:new_record?)
         task.add_missing_task_groups(job_invocation.task_group) if job_invocation.task_group
-        action_subject(job_invocation)
+        features = job_invocation.pattern_templates.flat_map { |t| t.remote_execution_features.pluck(:label) }.uniq
+        action_subject(job_invocation, job_features: features)
         job_invocation.targeting.resolve_hosts! if job_invocation.targeting.dynamic? || !job_invocation.targeting.resolved?
         set_up_concurrency_control job_invocation
         input.update(:job_category => job_invocation.job_category)
@@ -158,11 +160,11 @@ module Actions
         input[:proxy_batch_size]
       end
 
-      def self.event_names
-        super + [event_name_base + '_' + event_name_suffix('running')]
+      def self.event_states
+        [:success, :failure, :running]
       end
 
-      def emit_event_running(plan)
+      def emit_running_event(plan)
         emit_event(plan, :running)
       end
 

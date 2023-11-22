@@ -39,7 +39,7 @@ module ForemanRemoteExecution
     end
     let(:action) do
       create_action(Actions::RemoteExecution::RunHostsJob).tap do |action|
-        action.expects(:action_subject).with(job_invocation)
+        action.expects(:action_subject).with(job_invocation, job_features: [])
         ForemanTasks::Task::DynflowTask.stubs(:where).returns(mock.tap { |m| m.stubs(:first! => task) })
       end
     end
