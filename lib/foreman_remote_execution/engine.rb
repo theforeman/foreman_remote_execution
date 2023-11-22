@@ -337,6 +337,7 @@ module ForemanRemoteExecution
 
       ForemanRemoteExecution.register_rex_feature
 
+      ::Api::V2::HostsController.include Api::V2::HostsControllerExtensions
       ::Api::V2::SubnetsController.include ::ForemanRemoteExecution::Concerns::Api::V2::SubnetsControllerExtensions
       ::Api::V2::RegistrationController.prepend ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions
       ::Api::V2::RegistrationController.include ::ForemanRemoteExecution::Concerns::Api::V2::RegistrationControllerExtensions::ApipieExtensions

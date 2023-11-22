@@ -38,6 +38,12 @@ const fills = [
     component: props => <FeaturesDropdown {...props} />,
     weight: 1000,
   },
+  {
+    slot: '_all-hosts-schedule-a-job',
+    name: '_all-hosts-schedule-a-job',
+    component: props => <FeaturesDropdown {...props} />,
+    weight: 1000,
+  },
 ];
 
 const registerFills = () => {
