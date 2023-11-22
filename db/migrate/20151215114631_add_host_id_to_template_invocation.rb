@@ -9,7 +9,7 @@ class AddHostIdToTemplateInvocation < ActiveRecord::Migration[4.2]
     FakeTemplateInvocation.reset_column_information
 
     say 'Migrating existing execution locks to explicit relations, this may take a while'
-    FakeTemplateInvocation.all.each do |template_invocation|
+    FakeTemplateInvocation.all.find_each do |template_invocation|
       task = ForemanTasks::Task.for_action_types('Actions::RemoteExecution::RunHostJob').joins(:locks).where(
         :'foreman_tasks_locks.resource_type' => 'TemplateInvocation',
         :'foreman_tasks_locks.resource_id' => template_invocation.id

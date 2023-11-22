@@ -10,7 +10,7 @@ inherit_mode:
     - Exclude
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
   TargetRailsVersion: 5.2
   Exclude:
     - 'node_modules/**/*'
