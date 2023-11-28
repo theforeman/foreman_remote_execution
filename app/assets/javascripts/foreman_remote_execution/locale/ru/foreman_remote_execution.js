@@ -1565,12 +1565,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "Дополнительный модуль Foreman для удаленного выполнения заданий, объединяющий функции управления конфигурацией и удаленного контроля."
-      ],
-      "Distribute tasks over N seconds": [
-        "Распределить задачи в пределах заданного периода времени (в секундах)"
-      ],
-      "Time span": [
-        "Интервал"
       ]
     }
   }

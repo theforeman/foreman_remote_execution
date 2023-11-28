@@ -1564,21 +1564,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "Un complemento que ofrece ejecución remota a Foreman y completa la funcionalidad de administración de la configuración con la funcionalidad de administración remota."
-      ],
-      "Cron line format 'a b c d e', where:": [
-        "Cron formato de línea 'a b c d e', donde:"
-      ],
-      "#~ \"Distribute execution over N seconds. If this is set and proxy batch triggering\"#~ \" is enabled, then tasks are triggered on the smart proxy in batches of size 1.\"": [
-        "#~ \"Distribuya la ejecución en N segundos. Si esto está configurado y se habilita \"#~ \"la activación por lotes del proxy, entonces las tareas se activarán en el prox\"#~ \"y inteligente en lotes de tamaño 1.\""
-      ],
-      "Distribute tasks over N seconds": [
-        "Distribuir tareas en N segundos"
-      ],
-      "Set to distribute over": [
-        "Definir para distribuir sobre"
-      ],
-      "Time span": [
-        "Período de tiempo"
       ]
     }
   }

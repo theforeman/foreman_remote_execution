@@ -1562,12 +1562,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "Foreman으로 원격 실행을 가져오는 플러그인입니다. 원격 관리 기능으로 구성 관리 기능을 완료합니다."
-      ],
-      "Distribute tasks over N seconds": [
-        "N초에 걸쳐 태스크 배분"
-      ],
-      "Time span": [
-        "기간"
       ]
     }
   }

@@ -1563,12 +1563,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "將遠端執行帶入 Foreman 的外掛程式，搭配遠端管理功能來完成配置管理。"
-      ],
-      "Distribute tasks over N seconds": [
-        "在幾秒間散佈工作"
-      ],
-      "Time span": [
-        "時間跨度"
       ]
     }
   }

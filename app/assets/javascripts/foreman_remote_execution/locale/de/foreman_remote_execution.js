@@ -1563,18 +1563,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "Ein Plugin, das Foreman entfernte Ausführung bietet und die Konfig-Verwaltungsfunktion mit einer entfernten Verwaltungsfunktion ergänzt."
-      ],
-      "#~ \"Distribute execution over N seconds. If this is set and proxy batch triggering\"#~ \" is enabled, then tasks are triggered on the smart proxy in batches of size 1.\"": [
-        "#~ \"Verteilen Sie die Ausführung auf N Sekunden. Wenn dies gesetzt und die Proxy-B\"#~ \"atch-Triggerung aktiviert ist, werden Aufgaben auf dem Smart Proxy in Batches \"#~ \"der Größe 1 ausgelöst.\""
-      ],
-      "Distribute tasks over N seconds": [
-        "Aufgaben über n Sekunden verteilen"
-      ],
-      "Set to distribute over": [
-        "Verteilen über"
-      ],
-      "Time span": [
-        "Zeitspanne"
       ]
     }
   }
