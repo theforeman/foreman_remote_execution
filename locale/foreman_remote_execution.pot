@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 10:36+0100\n"
-"PO-Revision-Date: 2023-11-01 10:36+0100\n"
+"POT-Creation-Date: 2023-11-28 22:23+0100\n"
+"PO-Revision-Date: 2023-11-28 22:23+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -408,7 +408,7 @@ msgstr ""
 #: ../db/seeds.d/50-notification_blueprints.rb:3
 #: ../db/seeds.d/50-notification_blueprints.rb:17
 #: ../lib/foreman_remote_execution/engine.rb:243
-#: ../webpack/JobWizard/JobWizardPageRerun.js:42
+#: ../webpack/JobWizard/JobWizardPageRerun.js:34
 #: ../webpack/JobWizard/index.js:12
 msgid "Jobs"
 msgstr ""
@@ -605,81 +605,81 @@ msgid ""
 "emplate<br/>name using %{job_category} and %{template_name}."
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:29
+#: ../app/lib/actions/remote_execution/run_host_job.rb:28
 msgid "Could not use any template used in the job invocation"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:56
+#: ../app/lib/actions/remote_execution/run_host_job.rb:55
 msgid "Failed rendering template: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:107
+#: ../app/lib/actions/remote_execution/run_host_job.rb:94
 msgid "Task cancelled"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:108
+#: ../app/lib/actions/remote_execution/run_host_job.rb:95
 msgid "Job execution failed"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:117
+#: ../app/lib/actions/remote_execution/run_host_job.rb:104
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:122 action_names.rb:7
+#: ../app/lib/actions/remote_execution/run_host_job.rb:109 action_names.rb:7
 msgid "Remote action:"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:150
+#: ../app/lib/actions/remote_execution/run_host_job.rb:137
 msgid "Job cancelled by user"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:155
-#: ../app/lib/actions/remote_execution/run_host_job.rb:173
+#: ../app/lib/actions/remote_execution/run_host_job.rb:142
+#: ../app/lib/actions/remote_execution/run_host_job.rb:160
 msgid "Exit status: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:157
+#: ../app/lib/actions/remote_execution/run_host_job.rb:144
 msgid "Job finished with error"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:160
-#: ../app/lib/actions/remote_execution/run_host_job.rb:178
+#: ../app/lib/actions/remote_execution/run_host_job.rb:147
+#: ../app/lib/actions/remote_execution/run_host_job.rb:165
 msgid "Error loading data from proxy"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:229
+#: ../app/lib/actions/remote_execution/run_host_job.rb:216
 msgid "User can not execute job on host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:230
+#: ../app/lib/actions/remote_execution/run_host_job.rb:217
 msgid "User can not execute this job template"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:233
+#: ../app/lib/actions/remote_execution/run_host_job.rb:220
 msgid "User can not execute job on infrastructure host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:239
+#: ../app/lib/actions/remote_execution/run_host_job.rb:226
 msgid "User can not execute this job template on %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:249
+#: ../app/lib/actions/remote_execution/run_host_job.rb:236
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:259
+#: ../app/lib/actions/remote_execution/run_host_job.rb:246
 msgid ""
 "Could not use any proxy for the %{provider} job. Consider configuring %{global"
 "_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_hosts_job.rb:92
+#: ../app/lib/actions/remote_execution/run_hosts_job.rb:94
 msgid "REX job has succeeded - %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_hosts_job.rb:100
+#: ../app/lib/actions/remote_execution/run_hosts_job.rb:102
 msgid "REX job has failed - %s"
 msgstr ""
 
@@ -1673,19 +1673,19 @@ msgstr ""
 msgid "Job templates"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:361
+#: ../lib/foreman_remote_execution/engine.rb:364
 msgid "Run Puppet Once"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:362
+#: ../lib/foreman_remote_execution/engine.rb:365
 msgid "Perform a single Puppet run"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:367
+#: ../lib/foreman_remote_execution/engine.rb:370
 msgid "Run Script"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:368
+#: ../lib/foreman_remote_execution/engine.rb:371
 msgid "Run a script"
 msgstr ""
 
@@ -1805,22 +1805,22 @@ msgstr ""
 msgid "Search query"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:39
+#: ../webpack/JobWizard/JobWizardPageRerun.js:31
 #: ../webpack/JobWizard/index.js:9
 msgid "Run job"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:72
+#: ../webpack/JobWizard/JobWizardPageRerun.js:55
 msgid "Use old form"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:93
+#: ../webpack/JobWizard/JobWizardPageRerun.js:78
 msgid ""
 "Current organization %s is different from job's organization %s. This job may "
 "run on different hosts than before."
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:107
+#: ../webpack/JobWizard/JobWizardPageRerun.js:92
 msgid ""
 "Current location %s is different from job's location %s. This job may run on d"
 "ifferent hosts than before."
@@ -1835,7 +1835,7 @@ msgstr ""
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
 msgstr ""
 
-#: ../webpack/JobWizard/index.js:34
+#: ../webpack/JobWizard/index.js:27
 msgid "Use legacy form"
 msgstr ""
 
@@ -2228,15 +2228,15 @@ msgstr ""
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""
 
-#: ../webpack/react_app/components/FeaturesDropdown/actions.js:13
+#: ../webpack/react_app/components/FeaturesDropdown/actions.js:15
 msgid "Opening job invocation form"
 msgstr ""
 
-#: ../webpack/react_app/components/FeaturesDropdown/actions.js:15
+#: ../webpack/react_app/components/FeaturesDropdown/actions.js:17
 msgid "%s job has been invoked"
 msgstr ""
 
-#: ../webpack/react_app/components/FeaturesDropdown/index.js:50
+#: ../webpack/react_app/components/FeaturesDropdown/index.js:71
 msgid "Schedule a job"
 msgstr ""
 

@@ -1561,21 +1561,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "一个将远程执行带到 Foreman 的插件，通过远程管理功能来完成配置管理功能。"
-      ],
-      "Cron line format 'a b c d e', where:": [
-        "Cron 行格式 'a b c d e', 其中："
-      ],
-      "#~ \"Distribute execution over N seconds. If this is set and proxy batch triggering\"#~ \" is enabled, then tasks are triggered on the smart proxy in batches of size 1.\"": [
-        "在 N 秒内分配执行。如果设置了此选项并启用了代理批处理触发，则将在智能代理上以大小为 1 的批处理触发任务。"
-      ],
-      "Distribute tasks over N seconds": [
-        "在 N 秒内分配任务"
-      ],
-      "Set to distribute over": [
-        "设置为通过...分配"
-      ],
-      "Time span": [
-        "时间跨度"
       ]
     }
   }

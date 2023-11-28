@@ -1,0 +1,1567 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_remote_execution package.
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Foreman\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2016-02-15 13:54+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Georgian (http://app.transifex.com/foreman/foreman/language/ka/"
+")\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ka\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "%s"
+msgstr "%s"
+
+msgid "%s ago"
+msgstr "%s-ის წინ"
+
+msgid "%s job has been invoked"
+msgstr "გაშვებულია %s დავალება"
+
+msgid "%s more"
+msgstr ""
+
+msgid "%{description} on %{host}"
+msgstr "%{description} %{host}-ზე"
+
+msgid "'Starts before' date must be after 'Starts at' date"
+msgstr ""
+
+msgid "'Starts before' date must in the future"
+msgstr ""
+
+msgid "...and %s more"
+msgstr "... და კიდევ %s"
+
+msgid "...and %{count} more"
+msgid_plural "...and %{count} more"
+msgstr[0] "... და კიდევ %{count}"
+msgstr[1] "... და კიდევ %{count}"
+
+msgid "A comma separated list of input names to be excluded from the foreign template."
+msgstr ""
+
+msgid "A comma separated list of input names to be included from the foreign template."
+msgstr "მძიმით გამოყოფილი შეყვანილი სახელების სია, რომელიც გარე პროფილიდან გნებავთ, ჩასვათ."
+
+msgid "A job '%{job_name}' has %{status} at %{time}"
+msgstr "დავალების '%{job_name}' სტატუსი %{status} დრო %{time}"
+
+msgid "A job '%{subject}' has failed"
+msgstr "ამოცანის შეცდომა: '%{subject}'"
+
+msgid "A job '%{subject}' has finished successfully"
+msgstr "ამოცანა წარმატებით დასრულდა '%{subject}'"
+
+msgid "A notification when a job finishes"
+msgstr "დავალების დასრულების შეტყობინება"
+
+msgid "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality."
+msgstr ""
+
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr "სპეციალური ჭდე განმეორებადი დავალების ტრკინგისთვის. მოცემული დანიშნულებით შეიძლება მხოლოდ ერთი აქტიური დავალება არსებობდეს."
+
+msgid "A user to be used for SSH."
+msgstr "SSH-ის მომხმარებელი."
+
+msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
+msgstr "სკრიპტის გაშვებისას გამოყენებული მომხმარებელი. თუ ის SSH მომხმარებლისგან განსხვავდება, გადასართველად su ან sudo იქნება გამოყენებული."
+
+msgid "Abort Job"
+msgstr "დავალების გაუქმება"
+
+msgid "Action with sub plans"
+msgstr "ქმედება ქვე-გეგმებით"
+
+msgid "Actions"
+msgstr "ქმედებები"
+
+msgid "Active Filters:"
+msgstr "აქტიური ფილტრები:"
+
+msgid "Add Foreign Input Set"
+msgstr "შემოტანის უცხო სეტის დამატება"
+
+msgid "Advanced fields"
+msgstr "დამატებითი ველები"
+
+msgid "After"
+msgstr "შემდეგ"
+
+msgid "After %s occurences"
+msgstr ""
+
+msgid "All fields are required."
+msgstr "საჭიროა ყველა ველის შევსება."
+
+msgid "Alphabetical"
+msgstr "ანბანით დალაგებული"
+
+msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
+msgstr ""
+
+msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
+msgstr "ზოგიერთი სხვა ინტერფეისი უკვე დაყენებულია როგორც გასაშვები. დარწმუნებული ხართ, რომ გსურთ ამის ნაცვლად გამოიყენოთ?"
+
+msgid "Any Location"
+msgstr "ნებისმიერი მდებარეობა"
+
+msgid "Any Organization"
+msgstr "ნებისმიერი ორგანიზაცია"
+
+msgid "Apply to"
+msgstr "გადატარება"
+
+msgid "At"
+msgstr "დრო"
+
+msgid "At minute"
+msgstr "წუთი"
+
+msgid "Back"
+msgstr "უკან"
+
+msgid "Back to Job"
+msgstr "დავალებაზე გადასვლა"
+
+msgid "Bookmark"
+msgstr "სანიშნი"
+
+msgid "Can't find Job Invocation for an id %s"
+msgstr "დავალების ჩაწოდება ID-ით %s ნაპოვნი არაა"
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cancel Job"
+msgstr "ამოცანის გაუქმება"
+
+msgid "Cancel job invocation"
+msgstr "დავალების ჩაწოდების გაუქმება"
+
+msgid "Cancelled"
+msgstr "შეწყვეტილია"
+
+msgid "Cannot resolve hosts without a bookmark or search query"
+msgstr "ჰოსტების ამოხსნა შეუძლებელია სანიშნის ან საძებნი სტრიქონის გარეშე"
+
+msgid "Cannot resolve hosts without a user"
+msgstr "მომხმარებლის გარეშე ჰოსტებს ვერ ამოვხსნი"
+
+msgid "Cannot specify both bookmark_id and search_query"
+msgstr ""
+
+msgid "Categories list failed with:"
+msgstr "კატეგორიების სიის შეცდომა:"
+
+msgid "Category and template"
+msgstr ""
+
+msgid "Check for long running tasks"
+msgstr ""
+
+msgid "Choose a job template that is pre-selected in job invocation form"
+msgstr ""
+
+msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
+msgstr ""
+
+msgid "Cleanup working directories"
+msgstr "სამუშაო საქაღალდეების გაწმენდა"
+
+msgid "Clear all filters"
+msgstr ""
+
+msgid "Clear input"
+msgstr "შეტანის გასუფთავება"
+
+msgid "Clone a provision template"
+msgstr "შაბლონის კლონირების შაბლონის კლონირება"
+
+msgid "Close"
+msgstr "დახურვა"
+
+msgid "Cockpit URL"
+msgstr "Cockpit-ის URL"
+
+msgid "Concurrency level"
+msgstr "კონკურენტობის დონე"
+
+msgid "Concurrency level limited to"
+msgstr "ერთდროულობის დონის ლიმიტია"
+
+msgid "Connect by IP"
+msgstr "IP-ით მიერთება"
+
+msgid "Control concurrency level and distribution over time"
+msgstr "ერთდროულობის დონისა და დროში განაწილების მართვა"
+
+msgid "Could not display data for job invocation."
+msgstr "ნაჩვენები იქნება თუ არა ამოცანის ჩაწოდების მონაცემები."
+
+msgid "Could not find any suitable interface for execution"
+msgstr ""
+
+msgid "Could not render the preview because no host matches the search query."
+msgstr ""
+
+msgid "Could not rerun job %{id} because its template could not be found"
+msgstr ""
+
+msgid "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
+msgstr ""
+
+msgid "Could not use any template used in the job invocation"
+msgstr "დავალების ჩაწოდებაში შაბლონები ვერ გამოვიყენე"
+
+msgid "Create"
+msgstr "შექმნა"
+
+msgid "Create Report"
+msgstr "ანგარიშის შექმნა"
+
+msgid "Create a foreign input set"
+msgstr "გარედან შეყვანის სეტის შექმნა"
+
+msgid "Create a job invocation"
+msgstr "დავალების ჩაწოდების შექმნა"
+
+msgid "Create a job template"
+msgstr "დავალების შაბლონის შექმნა"
+
+msgid "Create a recurring job"
+msgstr "განეორებადი ლოგიკის დავალების შექმნა"
+
+msgid "Create report for this job"
+msgstr "ამ დავალების ანგარიშის შექმნა"
+
+msgid "Cron line"
+msgstr "Cron-ის სტრიქონი"
+
+msgid "Cron line (extended)"
+msgstr ""
+
+msgid "Cron line format '1 2 3 4 5', where:"
+msgstr ""
+
+msgid "Cronline"
+msgstr "Cron-ის ხაზი"
+
+msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
+msgstr ""
+
+msgid "Current location %{loc_c} is different from job's location %{loc_j}."
+msgstr "მიმდინარე მდებარეობა %{loc_c} დავალების მდებარეობისგან განსხვავდება %{loc_j}."
+
+msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
+msgstr ""
+
+msgid "Current organization %{org_c} is different from job's organization %{org_j}."
+msgstr ""
+
+msgid "Daily"
+msgstr "დღიურად"
+
+msgid "Days"
+msgstr "დღე"
+
+msgid "Days of week"
+msgstr "კვირის დღე"
+
+msgid "Default SSH key passphrase"
+msgstr "SSH გასაღების ნაგულისხმები პაროლი"
+
+msgid "Default SSH password"
+msgstr "ნაგულისხმები SSH პაროლი"
+
+msgid "Default key passphrase to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_key_passphrase"
+msgstr ""
+
+msgid "Default password to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_password"
+msgstr ""
+
+msgid "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user."
+msgstr ""
+
+msgid "Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user."
+msgstr ""
+
+msgid "Delete a foreign input set"
+msgstr "გარედან შეყვანის სეტის წაშლა"
+
+msgid "Delete a job template"
+msgstr "დავალების შაბლონის წაშლა"
+
+msgid "Deliver notifications about long running tasks"
+msgstr ""
+
+msgid "Description"
+msgstr "აღწერილობა"
+
+msgid "Description Template"
+msgstr "აღწერის შაბლონი"
+
+msgid "Description template"
+msgstr "აღწერის შაბლონი"
+
+msgid "Designation of a special purpose"
+msgstr "განსაკუთრებული მიზნის აღნიშვნა"
+
+msgid "Display advanced fields"
+msgstr "დამატებითი ველების ჩვენება"
+
+msgid "Does not repeat"
+msgstr "არ გაიმეორო"
+
+msgid "Duplicated inputs detected: %{duplicated_inputs}"
+msgstr "ნაპოვნია დუბლირებული შეყვანები: %{duplicated_inputs}"
+
+msgid "Dynamic Query"
+msgstr "დინამიკური მოთხოვნა"
+
+msgid "Dynamic query"
+msgstr "დინამიკური მოთხოვნა"
+
+msgid "Edit %s"
+msgstr "%s-ის ჩასწორება"
+
+msgid "Edit Job Template"
+msgstr "დავალების შაბლონის ჩასწოება"
+
+msgid "Edit Remote Execution Feature"
+msgstr "დაშორებული გაშვების ფუნქციების ჩასწორება"
+
+msgid "Edit job description template"
+msgstr "დავალების აღწერის შაბლონის ჩასწორება"
+
+msgid "Effective User"
+msgstr "ეფექტური მომხმარებელი"
+
+msgid "Effective User Method"
+msgstr "ეფექტური მომხმარებლის მეთოდი"
+
+msgid "Effective user"
+msgstr "ეფექტური მომხმარებლის სახელი"
+
+msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
+msgstr ""
+
+msgid "Effective user options"
+msgstr "ეფექტური მომხმარებლის მორგება"
+
+msgid "Effective user password"
+msgstr "ეფექტური მომხმარებლის პაროლი"
+
+msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Enable Global Proxy"
+msgstr "გლობალური პროქსის ჩართვა"
+
+msgid "End time needs to be after start time"
+msgstr "დასრულების დრო დასაწყისის დროის შემდეგ უნდა იყოს"
+
+msgid "Ends"
+msgstr "საბოლოო"
+
+msgid "Error"
+msgstr "შეცდომა"
+
+msgid "Error loading data from proxy"
+msgstr "პროქსიდან მონაცემების ჩატვირთვის შეცდომა"
+
+msgid "Errors:"
+msgstr "შეცდომები:"
+
+msgid "Evaluated at:"
+msgstr "შემოწმების დრო:"
+
+msgid "Every day at %s"
+msgstr ""
+
+msgid "Every hour at minute %s"
+msgstr ""
+
+msgid "Every month on %s at %s"
+msgstr ""
+
+msgid "Every week on %s at %s"
+msgstr ""
+
+msgid "Execute the job later, at a scheduled time."
+msgstr "დავალების მოგვიანებით, დაგეგმილ დროს შესრულება."
+
+msgid "Execute the job now."
+msgstr "დავალების ახლავე შესრულება."
+
+msgid "Execute the job on a repeating schedule."
+msgstr "დავალების განმეორებადი გეგმით გაშვება."
+
+msgid "Execute the jobs on hosts in randomized order"
+msgstr "ჰოსტებზე დავალებების შემთხვევითი მიმდევრობით გაშვება"
+
+msgid "Execution"
+msgstr "შესრულება"
+
+msgid "Execution order"
+msgstr "გაშვების მიმდევრობა"
+
+msgid "Execution ordering"
+msgstr "შესრულების მიმდევრობა"
+
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
+
+msgid "Exit status: %s"
+msgstr "დასრულების სტატუსი: %s"
+
+msgid "Export a job template to ERB"
+msgstr "დავალების შაბლონის ERB-ში გატანა"
+
+msgid "Failed"
+msgstr "შეცდომა"
+
+msgid "Failed hosts"
+msgstr "ავარიული ჰოსტები"
+
+msgid "Failed rendering template: %s"
+msgstr "შაბლონის რენდერის შეცდომა: %s"
+
+msgid "Fallback to Any Proxy"
+msgstr "ავარიისას ნებისმიერ პროქსიზე გადართვა"
+
+msgid "Feature input %{input_name} not defined in template %{template_name}"
+msgstr ""
+
+msgid "Fill all required fields in all the steps"
+msgstr ""
+
+msgid "Fill all required fields in all the steps to start the job"
+msgstr ""
+
+msgid "Filter by host collections"
+msgstr "ჰოსტების კოლექციებით ფილტრი"
+
+msgid "Filter by host groups"
+msgstr "ჰოსტის ჯგფუფით ფილტრი"
+
+msgid "Filter by hosts"
+msgstr "ჰოსტებით ფილტრი"
+
+msgid "Finished"
+msgstr "დასრულებულია"
+
+msgid "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step."
+msgstr ""
+
+msgid "For example: 1, 2, 3, 4, 5..."
+msgstr "მაგალითად, 1, 2, 3, 4, 5..."
+
+msgid "Foreign input set"
+msgstr "შემოტანის უცხო სეტი"
+
+msgid "Foreman can run arbitrary commands on remote hosts using different providers, such as SSH or Ansible. Communication goes through the Smart Proxy so Foreman does not have to have direct access to the target hosts and can scale to control many hosts."
+msgstr ""
+
+msgid "Form Job Template"
+msgstr "დავალების შაბლონიდან"
+
+msgid "Future execution"
+msgstr "მომავალი შესრულება"
+
+msgid "Get output for a host"
+msgstr "ჰოსტის გამოტანის მიღება"
+
+msgid "Get outputs of hosts in a job"
+msgstr "დავალებაში ჰოსტების გამოტანის ჩართვა"
+
+msgid "Get raw output for a host"
+msgstr "ჰოსტის გამოტანის პირდაპირ მიღება"
+
+msgid "Has to be a positive number"
+msgstr "დადებითი რიცხვი უნდა იყოს"
+
+msgid "Hide advanced fields"
+msgstr "დამატებითი ველების დამალვა"
+
+msgid "Hide all advanced fields"
+msgstr "დამატებითი ველების დამალვა"
+
+msgid "Host"
+msgstr "ჰოსტი"
+
+msgid "Host collections"
+msgstr "ჰოსტების კოლექციები"
+
+msgid "Host detail"
+msgstr "ჰოსტის დეტალები"
+
+msgid "Host groups"
+msgstr "ჰოსტის ჯგუფები"
+
+msgid "Host task"
+msgstr "ჰოსტის ამოცანა"
+
+msgid "Host with id '%{id}' was not found"
+msgstr "ჰოსტი ID-ით \"%{id} არ არსებობს"
+
+msgid "Hosts"
+msgstr "ჰოსტები"
+
+msgid "Hosts gone missing"
+msgstr "გამქრალი ჰოსტები"
+
+msgid "Hourly"
+msgstr "საათობრივ"
+
+msgid "How often the job should occur, in the cron format"
+msgstr "რამდენ ხანში ერთხელ გაეშვება ეს დავალება. cron-ის ფორმატში"
+
+msgid "Identifier of the Host interface for Remote execution"
+msgstr "ჰოსტის ინტერფეისის იდენტიფიკატორი დაშორებული გაშვებისთვის"
+
+msgid "Immediate execution"
+msgstr "დაუყოვნებლივი შესრულება"
+
+msgid "Import"
+msgstr "შემოტანა"
+
+msgid "Import Puppet classes"
+msgstr "Puppet-ის კლასების შემოტანა"
+
+msgid "Import a job template from ERB"
+msgstr "დავალების შაბლონის ERB-დან შემოტანა"
+
+msgid "Import facts"
+msgstr "ფაქტების შემოტანა"
+
+msgid "Include all inputs from the foreign template"
+msgstr "შეიცავს გარე შაბლონს ყველა შეყვანას"
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr "მიუთითებს, რომ მოქმედება უნდა გაუქმდეს, თუ მისი დაწყება ამ დრომდე შეუძლებელია."
+
+msgid "Inherit from host parameter"
+msgstr "მემკვიდრეობით ჰოსტის პარამეტრიდან"
+
+msgid "Input"
+msgstr "შეყვანა"
+
+msgid "Input set description"
+msgstr "შეყვანის ნაკრების აღწერა"
+
+msgid "Inputs to use"
+msgstr "გამოყენებული შეყვანები"
+
+msgid "Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration."
+msgstr ""
+
+msgid "Internal proxy selector can only be used if Katello is enabled"
+msgstr "თუ Katello ჩართულია, პროქსის შიდა ამრჩევი იქნება გამოყენებული"
+
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
+msgstr "დრო წამებში. თუ დავალება კლიენტის მიერ აყვანილი არ იქნება, ის გაუქმდება."
+
+msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs"
+msgstr ""
+
+msgid "Invalid date"
+msgstr "არასწორი თარიღი"
+
+msgid "Invalid time format"
+msgstr "დროის არასწორი ფორმატი"
+
+msgid "Invocation type, one of %s"
+msgstr "ჩაწოდების ტიპი. ერთერთი %s-დან"
+
+msgid "Job"
+msgstr "დავალება"
+
+msgid "Job Details"
+msgstr "დავალების დეტალები"
+
+msgid "Job Invocation"
+msgstr "დავალების ჩაწოდება"
+
+msgid "Job Invocation Report Template"
+msgstr "დავალების ჩაწოდების ანგარიშის შაბლონი"
+
+msgid "Job Invocations"
+msgstr "ამოცანის ჩაწოდებები"
+
+msgid "Job Task"
+msgstr "დავალების ამოცანა"
+
+msgid "Job Templates"
+msgstr "დავალების შაბლონები"
+
+msgid "Job cancelled by user"
+msgstr "დავალება შეწყვეტილია მომხმარებლის მიერ"
+
+msgid "Job category"
+msgstr "დავალების კატეგორია"
+
+msgid "Job execution failed"
+msgstr "დავალების შესრულების შეცდომა"
+
+msgid "Job finished with error"
+msgstr "დავალება შეცდომით დასრულდა"
+
+msgid "Job invocation"
+msgstr "დავალების ჩაწოდება"
+
+msgid "Job invocations"
+msgstr "დავალების ჩაწოდებები"
+
+msgid "Job result"
+msgstr "დავალების შედეგი"
+
+msgid "Job template"
+msgstr "დავალების შაბლონი"
+
+msgid "Job template ID to be used for the feature"
+msgstr "ამ ფუნქციისთვის გამოყენებული დავალების შაბლონის ID"
+
+msgid "Job template imported successfully."
+msgstr "დავალების შაბლონის შემოტანა წარმატებულია."
+
+msgid "Job templates"
+msgstr "დავალების შაბლონები"
+
+msgid "JobTemplate|Locked"
+msgstr "დავალებისშაბლონი|დაბლოკილი"
+
+msgid "JobTemplate|Name"
+msgstr "დავალებისშაბლონი|სახელი"
+
+msgid "JobTemplate|Snippet"
+msgstr "დავალებისშაბლონი|ნაწყვეტი"
+
+msgid "Jobs"
+msgstr "დავალებები"
+
+msgid "Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Label"
+msgstr "ჭდე"
+
+msgid "Last execution cancelled"
+msgstr "ბოლო შესრულება გაუქმდა"
+
+msgid "Last execution failed"
+msgstr "ბოლო შესრულება შეცდომით დასრულდა"
+
+msgid "Last execution succeeded"
+msgstr "ბოლო წარმატებული შესრულება"
+
+msgid "Latest Jobs"
+msgstr "უკანასკნელი დავალებები"
+
+msgid "Learn more about this in the documentation."
+msgstr "შეიტყვეთ მეტი ამის შესახებ დოკუმენტაციაში."
+
+msgid "List available remote execution features for a host"
+msgstr ""
+
+msgid "List foreign input sets"
+msgstr "შემოტანის უცხო სეტების სია"
+
+msgid "List job invocations"
+msgstr "დავალების ჩაწოდების სია"
+
+msgid "List job templates"
+msgstr "დავალების შაბლონების სია"
+
+msgid "List job templates per location"
+msgstr "მდებარეობის დავალების შაბლონების სია"
+
+msgid "List job templates per organization"
+msgstr "ორგანიზაციის დავალების შაბლონების სია"
+
+msgid "List of proxy IDs to be used for remote execution"
+msgstr "დაშორებული გაშვებისთვის გამოსაყენებელი პროქსის ID-ების სია"
+
+msgid "List remote execution features"
+msgstr "დაშორებული გაშვების ინტერფეისის ფუნქციები"
+
+msgid "List template invocations belonging to job invocation"
+msgstr ""
+
+msgid "Location"
+msgstr "მდებარეობა"
+
+msgid "Manual selection"
+msgstr "ხელით არჩევა"
+
+msgid "Minute can only be a number between 0-59"
+msgstr "წუთი უნდა იყოს რიცხვი შუალედში 0-59"
+
+msgid "Monthly"
+msgstr "თვეში ერთხელ"
+
+msgid "Must select a bookmark or enter a search query"
+msgstr "აირჩიეთ სანიშნე ან შეიყვანეთ საძებნი სტრიქონი"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name"
+msgstr "სახელი"
+
+msgid "Never"
+msgstr "არასდროს"
+
+msgid "New Job Template"
+msgstr "დავალების ახალი შაბლონი"
+
+msgid "Next"
+msgstr "შემდეგი"
+
+msgid "No (override)"
+msgstr "არა (გადაფარვა)"
+
+msgid "No Target Hosts"
+msgstr "სამიზნე ჰოსტების გარეშე"
+
+msgid "No execution finished yet"
+msgstr "შესრულება არ დამთავრებულა"
+
+msgid "No hosts found."
+msgstr "ჰოსტები ნაპოვნი არაა."
+
+msgid "No jobs available"
+msgstr "დავალებების გარეშე"
+
+msgid "No results found"
+msgstr "შედეგების გარეშე"
+
+msgid "No template mapped to feature %{feature_name}"
+msgstr ""
+
+msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr ""
+
+msgid "Now"
+msgstr "ახლა"
+
+msgid "On"
+msgstr "ჩართული"
+
+msgid "Only one of feature or job_template_id can be specified"
+msgstr ""
+
+msgid "Opening job invocation form"
+msgstr "დავალების ჩაწოდების ფორმის გახსნა"
+
+msgid "Organization"
+msgstr "ორგანიზაცია"
+
+msgid "Override the description format from the template for this invocation only"
+msgstr ""
+
+msgid "Override the global time to pickup interval for this invocation only"
+msgstr ""
+
+msgid "Override the timeout interval from the template for this invocation only"
+msgstr ""
+
+msgid "Overview"
+msgstr "მიმოხილვა"
+
+msgid "Overwrite"
+msgstr "თავზე გადაწერა"
+
+msgid "Overwrite template if it already exists"
+msgstr "გადააწერე შაბლონი, თუ ის უკვე არსებობს"
+
+msgid "Password"
+msgstr "პაროლი"
+
+msgid "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Pending"
+msgstr "დარჩენილი"
+
+msgid "Perform a single Puppet run"
+msgstr "Puppet-ის ერთხელ გაშვება"
+
+msgid "Perform no more executions after this time"
+msgstr "ამ დროის შემდეგ გაშვებები აღარ მოხდება"
+
+msgid "Please enter a search query"
+msgstr ""
+
+msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
+msgstr ""
+
+msgid "Please refine your search."
+msgstr "შეიყვანეთ ძებნის უკეთესი პირობა."
+
+msgid "Please select at least one host"
+msgstr ""
+
+msgid "Please select at least one host collection"
+msgstr ""
+
+msgid "Please select at least one host group"
+msgstr ""
+
+msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
+msgstr ""
+
+msgid "Prefer IPv6 over IPv4"
+msgstr "IPv6-ის უპირატესობა"
+
+msgid "Preview"
+msgstr "მინიატურა"
+
+msgid "Preview Hosts"
+msgstr "ჰოსტების გადახედვა"
+
+msgid "Preview job description"
+msgstr "დავალების აღწერის გადახედვა"
+
+msgid "Preview templates"
+msgstr "შაბლონების გადახედვა"
+
+msgid "Private key passphrase"
+msgstr "პირადი გასაღების პაროლი"
+
+msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
+msgstr ""
+
+msgid "Provider type"
+msgstr "მომწოდებლის წიპი"
+
+msgid "Providers and templates"
+msgstr "მომწოდებლები და შაბლონები"
+
+msgid "Proxies"
+msgstr "პროქსები"
+
+msgid "Purpose"
+msgstr "მიზანი"
+
+msgid "Query type"
+msgstr "მოთხოვნის ტიპი"
+
+msgid "REX job has failed - %s"
+msgstr "REX დავალების შეცდომა - %s"
+
+msgid "REX job has finished - %s"
+msgstr "REX დავალება დასრულდა - %s"
+
+msgid "REX job has succeeded - %s"
+msgstr "REX დავალება წარმატებულია - %s"
+
+msgid "REX pull mode"
+msgstr "REX pull რეჟიმი"
+
+msgid "Randomized"
+msgstr "შემთხვევით"
+
+msgid "Recent jobs"
+msgstr "ახლახანს გაშვებული დავალებები"
+
+msgid "Recurrence"
+msgstr "გამეორებადობა"
+
+msgid "Recurring execution"
+msgstr "განმეორებად შესრულება"
+
+msgid "Recurring logic"
+msgstr "განეორებადი ლოგიკა"
+
+msgid "Recursive rendering of templates detected"
+msgstr ""
+
+msgid "Refresh"
+msgstr "განახლება"
+
+msgid "Remote Execution"
+msgstr "დაშორებული გაშვება"
+
+msgid "Remote Execution Features"
+msgstr "დაშორებული გაშვების ფუნქციები"
+
+msgid "Remote Execution Interface"
+msgstr "დაშორებული გაშვების ინტერფეისი"
+
+msgid "Remote action:"
+msgstr "დაშორებული ქმედება:"
+
+msgid "Remote execution"
+msgstr "დაშორებული გაშვება"
+
+msgid "Remote execution feature label that should be triggered, job template assigned to this feature will be used"
+msgstr ""
+
+msgid "Remote execution job"
+msgstr "დაშორებული გაშვების დავალება"
+
+msgid "Repeat a maximum of N times"
+msgstr "მაქსიმუმ N-ჯერ გამეორება"
+
+msgid "Repeat amount can only be a positive number"
+msgstr "გამეორების რაოდენობა მხოლოდ დადებით რიცხვი შეიძლება იყოს"
+
+msgid "Repeats"
+msgstr "გამეორება"
+
+msgid "Rerun"
+msgstr "თავიდან გაშვება"
+
+msgid "Rerun failed"
+msgstr "თავიდან გაშვების შეცდომა"
+
+msgid "Rerun job on failed hosts"
+msgstr "წარუმატებელ ჰოსტებზე დავალების თავიდან გაშვება"
+
+msgid "Rerun on %s"
+msgstr "%s-ზე თავიდან გაშვება"
+
+msgid "Rerun on failed hosts"
+msgstr "ავარიულ ჰოსტებზე თავიდან გაშვება"
+
+msgid "Rerun the job"
+msgstr "დავალების თავიდან გაშვება"
+
+msgid "Reset to default"
+msgstr "ნაგულისხმებ მნიშვნელობაზე დაბრუნება"
+
+msgid "Resolves to"
+msgstr "ამოიხსნება"
+
+msgid "Results"
+msgstr "შედეგები"
+
+msgid "Review details"
+msgstr "დეტალების გადახედვა"
+
+msgid "Run"
+msgstr "გაშვება"
+
+msgid "Run Job"
+msgstr "დავალების გაშვება"
+
+msgid "Run Puppet Once"
+msgstr "Puppet-ის ერთხელ გაშვება"
+
+msgid "Run Script"
+msgstr ""
+
+msgid "Run a script"
+msgstr ""
+
+msgid "Run at most N tasks at a time"
+msgstr "ერთდროულად მაქსიმუმ N დავალების გაშვება"
+
+msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
+
+msgid "Run job"
+msgstr "დავალების გაშვება"
+
+msgid "Run on selected hosts"
+msgstr ""
+
+msgid "Running"
+msgstr "მიმდინარეობს შესრულება"
+
+msgid "SSH Port"
+msgstr "SSH პორტი"
+
+msgid "SSH User"
+msgstr "SSH-ის მომხმარებლის სახელი"
+
+msgid "SSH provider specific options"
+msgstr "SSH-ის მომწოდებლის სპეციფიკური პარამეტრები"
+
+msgid "SSH user"
+msgstr "SSH-ის მომხმარებლის სახელი"
+
+msgid "Schedule"
+msgstr "განრიგი"
+
+msgid "Schedule Remote Job"
+msgstr "დაშორებული დავალების დაგეგმვა"
+
+msgid "Schedule a job"
+msgstr "დავალების დაგეგმვა"
+
+msgid "Schedule the job for a future time"
+msgstr "დავალების მომავალში გაშვების დაგეგმვა"
+
+msgid "Schedule the job to start at a later time"
+msgstr "დავალების მოგვიანებით გაშვების დაგეგმვა"
+
+msgid "Schedule type"
+msgstr "განრიგის ტიპი"
+
+msgid "Scheduled"
+msgstr "დაგეგმილია"
+
+msgid "Scheduled to start at"
+msgstr "დაგეგმილი გაშვების დრო"
+
+msgid "Scheduled to start before"
+msgstr "გაეშვება მითითებულ დრომდე"
+
+msgid "Script"
+msgstr "სკრიპტი"
+
+msgid "Scroll to bottom"
+msgstr "ბოლომდე ჩამოქაჩვა"
+
+msgid "Scroll to top"
+msgstr "ბოლომდე აქაჩვა"
+
+msgid "Search Query"
+msgstr "საძებნი სტრიქონი"
+
+msgid "Search for remote execution proxy outside of the proxies assigned to the host. The search will be limited to the host's organization and location."
+msgstr ""
+
+msgid "Search query"
+msgstr "საძებნი სტრიქონი"
+
+msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
+msgstr ""
+
+msgid "See more details at %s"
+msgstr "მეტი დეტალები იხილეთ %s"
+
+msgid "See the last task details"
+msgstr "ბოლო ამოცანის დეტალების ნახვა"
+
+msgid "See the task details"
+msgstr "ამოცანის დეტალების ნახვა"
+
+msgid "Select a report template used for generating a report for a particular remote execution job"
+msgstr ""
+
+msgid "Select an ERB file to upload in order to import a job template.  The template must contain metadata in the first ERB comment."
+msgstr ""
+
+msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
+msgstr ""
+
+msgid "Select the type of execution"
+msgstr "აირჩიეთ შესრულების ტიპი"
+
+msgid "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host"
+msgstr ""
+
+msgid "Set SSH key passphrase"
+msgstr "SSH გასაღების პაროლის დაყენება"
+
+msgid "Set SSH password"
+msgstr "SSH პაროლის დაყენება"
+
+msgid "Set SSH user"
+msgstr "დააყენეთ SSH-ის მომხმარებელი"
+
+msgid "Set password for effective user (using sudo-like mechanisms)"
+msgstr ""
+
+msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
+msgstr ""
+
+msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting"
+msgstr ""
+
+msgid "Should this interface be used for remote execution?"
+msgstr "გამოვიყენო ეს ინტერფეისი დაშორებული გაშვებისთვის?"
+
+msgid "Show Job status for the hosts"
+msgstr "ჰოსტების დავალების სტატუსის ჩვენება"
+
+msgid "Show all advanced fields"
+msgstr "დამატებითი ველების ჩვენება"
+
+msgid "Show foreign input set details"
+msgstr "შემოტანის უცხო სეტების დეტალების ჩვენება"
+
+msgid "Show job invocation"
+msgstr "დავალების ჩაწოდების ჩვენება"
+
+msgid "Show job template details"
+msgstr "დავალების შაბლონის დეტალების ჩვენება"
+
+msgid "Show remote execution feature"
+msgstr "დაშორებული გაშვების ინტერფეისის ჩვენება"
+
+msgid "Skip to review"
+msgstr ""
+
+msgid "Skip to review step"
+msgstr ""
+
+msgid "Snippet"
+msgstr "ნაწყვეტი"
+
+msgid "Start"
+msgstr "დაწყება"
+
+msgid "Start job"
+msgstr ""
+
+msgid "Started"
+msgstr "დაიწყო"
+
+msgid "Starts"
+msgstr "საწყისი"
+
+msgid "Starts Before"
+msgstr ""
+
+msgid "Starts at"
+msgstr "დაწყების დრო"
+
+msgid "Starts before"
+msgstr "მითითებულ დრომდე"
+
+msgid "State"
+msgstr "State"
+
+msgid "Static Query"
+msgstr "სტატიკური მოთხოვნა"
+
+msgid "Static query"
+msgstr "სტატიკური მოთხოვნა"
+
+msgid "Status"
+msgstr "სტატუსი"
+
+msgid "Submit"
+msgstr "გაგზავნა"
+
+msgid "Subscribe to all my jobs"
+msgstr "ყველა ჩემი დავალების გამოწერა"
+
+msgid "Subscribe to my failed jobs"
+msgstr "ყველა ჩემი წარუმატებელი დავალების გამოწერა"
+
+msgid "Subscribe to my succeeded jobs"
+msgstr "ყველა ჩემი წარმატებული დავალების გამოწერა"
+
+msgid "Succeeded"
+msgstr "წარმატებულია"
+
+msgid "Success"
+msgstr "წარმატება"
+
+msgid "Sync Job Templates"
+msgstr "სინქრონიზაციის დავალების შაბლონები"
+
+msgid "Target hosts"
+msgstr "სამიზნე ჰოსტები"
+
+msgid "Target hosts and inputs"
+msgstr "სამიზნე ჰოსტები და შეყვანა"
+
+msgid "Target template ID"
+msgstr "სამიზნე შაბლონის ID"
+
+msgid "Target: "
+msgstr "სამიზნე: "
+
+msgid "Task Details"
+msgstr "ამოცანის დეტალები"
+
+msgid "Task cancelled"
+msgstr "ამოცანა გაუქმდა"
+
+msgid "Template ERB"
+msgstr "ERB შაბლონი"
+
+msgid "Template Invocation for %s"
+msgstr "შაბლონის ჩაწოდება %s-სთვის"
+
+msgid "Template failed with:"
+msgstr "შაბლონის შეცდომა:"
+
+msgid "Template name"
+msgstr "შაბლონის სახელი"
+
+msgid "Template version"
+msgstr "შაბლონის ვერსია"
+
+msgid "Template with id '%{id}' was not found"
+msgstr "შაბლონი ID-ით %{id} ნაპოვნი არაა"
+
+msgid "Templates list failed with:"
+msgstr "შაბლონების სიის შეცდომა:"
+
+msgid "The cron line supports extended cron line syntax. For details please refer to the "
+msgstr ""
+
+msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
+msgstr ""
+
+msgid "The execution interface is used for remote execution"
+msgstr "გაშვების ინტერფეისი ბრძანებების დაშორებული გაშვებისთვის გამოიყენება"
+
+msgid "The final host list may change because the selected query is dynamic.  It will be rerun during execution."
+msgstr ""
+
+msgid "The job cannot be aborted at the moment."
+msgstr "ამჟამად დავალების შეწყვეტა შეუძლებელია."
+
+msgid "The job cannot be cancelled at the moment."
+msgstr "ამჟამად დავალების გაუქმება შეუძლებელია."
+
+msgid "The job could not be cancelled."
+msgstr "ამოცანის შეწყვეტა შეუძლებელია."
+
+msgid "The job template to use, parameter is required unless feature was specified"
+msgstr ""
+
+msgid "The only applicable proxy %{proxy_names} is down"
+msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
+msgstr ""
+
+msgid "There are no available input fields for the selected template."
+msgstr ""
+
+msgid "There was an error while updating the status, try refreshing the page."
+msgstr "შეცდომა სტატუსის განახლებისას. სცადეთ, განაახლოთ ეს გვერდი."
+
+msgid "This can happen if the host is removed or moved to another organization or location after the job was started"
+msgstr ""
+
+msgid "This template is locked for editing."
+msgstr "შაბლონი დაბლოკილია."
+
+msgid "This template is locked. Please clone it to a new template to customize."
+msgstr "შაბლონი დაბლოკილია. მოსარგებად საჭიროა მისი კლონირება."
+
+msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
+msgstr ""
+
+msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
+msgstr ""
+
+msgid "Time in seconds from the start on the remote host after which the job should be killed."
+msgstr "დრო წამებში, რამდენ ხანში მოკვდება დაშორებულ ჰოსტზე გაშვებული დავალება."
+
+msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs."
+msgstr ""
+
+msgid "Time to pickup"
+msgstr "აყვანის დრო"
+
+msgid "Timeout to kill"
+msgstr "პროცესის ვადა"
+
+msgid "Timeout to kill after"
+msgstr "პროცესის დასრულების ვადა"
+
+msgid "Toggle DEBUG"
+msgstr "DEBUG-ის გადართვა"
+
+msgid "Toggle STDERR"
+msgstr "STDERR-ის გადართვა"
+
+msgid "Toggle STDOUT"
+msgstr "STDOUT-ის გადართვა"
+
+msgid "Toggle command"
+msgstr "ბრძანების გადართვა"
+
+msgid "Total hosts"
+msgstr "ჰოსტების ჯამური რაოდენობა"
+
+msgid "Try to abort the job on a host without waiting for its result"
+msgstr ""
+
+msgid "Try to abort the job without waiting for the results from the remote hosts"
+msgstr ""
+
+msgid "Try to cancel the job"
+msgstr "დავალების"
+
+msgid "Try to cancel the job on a host"
+msgstr "ჰოსტზე დავალების გაუქმების ცდა"
+
+msgid "Trying to abort the job"
+msgstr "დავალების შეწყვეტის მცდელობა"
+
+msgid "Trying to cancel the job"
+msgstr "დავალების გაუქმების მცდელობა"
+
+msgid "Type"
+msgstr "ტიპი"
+
+msgid "Type has impact on when is the query evaluated to hosts."
+msgstr ""
+
+msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
+msgstr ""
+
+msgid "Type of execution"
+msgstr "შესრულების ტიპი"
+
+msgid "Type of query"
+msgstr "მოთხოვნის ტიპი"
+
+msgid "Unable to create mail notification: %s"
+msgstr "ელფოსტის შეტყობინების შექმნის შეცდომა: %s"
+
+msgid "Unable to fetch public key"
+msgstr "საჯარო გასაღების გამოთხოვის შეცდომა"
+
+msgid "Unable to remove host from known hosts"
+msgstr "ჰოსტის სანდო ჰოსტების სიიდან წაშლის შეცდომა"
+
+msgid "Unable to save template. Correct highlighted errors"
+msgstr "შაბლონის შენახვის შეცდომა. შეასწორეთ გამოკვეთილი შეცდომები"
+
+msgid "Unknown execution status"
+msgstr "შეცდომის უცნობი სტატუსი"
+
+msgid "Unknown input %{input_name} for template %{template_name}"
+msgstr ""
+
+msgid "Unknown remote execution feature %s"
+msgstr "დაშორებული გაშვების უცნობ ფუნქცია %s"
+
+msgid "Unsupported or no operating system found for this host."
+msgstr "ამ ჰოსტისთვის ოპერაციული სისტემა არასწორია ან არ არსებობს."
+
+msgid "Update a foreign input set"
+msgstr "გარედან შეყვანის სეტის განახლება"
+
+msgid "Update a job template"
+msgstr "დავალების შაბლონის განახლება"
+
+msgid "Use default description template"
+msgstr "აღწერის ნაგულისხმები შაბლონის გამოყენება"
+
+msgid "Use legacy form"
+msgstr "მოძველებული ფორმის გამოყენება"
+
+msgid "Use new job wizard"
+msgstr "ახალი დავალების ოსტატი"
+
+msgid "Use old form"
+msgstr "ძველი ფორმის გამოყენება"
+
+msgid "User Inputs"
+msgstr "მომხმარებლის შეყვანა"
+
+msgid "User can not execute job on host %s"
+msgstr "მომხმარებელს ჰოსტზე (%s) დავალების შესრულება არ შეუძლია"
+
+msgid "User can not execute job on infrastructure host %s"
+msgstr ""
+
+msgid "User can not execute this job template"
+msgstr "მომხმარებელს დავალების ამ შაბლონის შესრულება არ შეუძლია"
+
+msgid "User can not execute this job template on %s"
+msgstr ""
+
+msgid "User input"
+msgstr "მომხმარებლის შეყვანილი"
+
+msgid "Value"
+msgstr "მნიშვნელობა"
+
+msgid "View all jobs"
+msgstr "ყველა დავალების ნახვა"
+
+msgid "View finished jobs"
+msgstr "დასრულებული დავალებების ნახვა"
+
+msgid "View running jobs"
+msgstr "გაშვებული დავალებების ნახვა"
+
+msgid "View scheduled jobs"
+msgstr "დაგეგმილი ამოცანების ნახვა"
+
+msgid "Web Console"
+msgstr "ვებ კონსოლი"
+
+msgid "Weekly"
+msgstr "კვირაში ერთხელ"
+
+msgid "What command should be used to switch to the effective user. One of %s"
+msgstr ""
+
+msgid "What user should be used to run the script (using sudo-like mechanisms)"
+msgstr ""
+
+msgid "What user should be used to run the script (using sudo-like mechanisms). Defaults to a template parameter or global setting."
+msgstr ""
+
+msgid "When connecting using ip address, should the IPv6 addresses be preferred? If no IPv6 address is set, it falls back to IPv4 automatically. You may override this per host by setting a parameter called remote_execution_connect_by_ip_prefer_ipv6. By default and for compatibility, IPv4 will be preferred over IPv6 by default"
+msgstr ""
+
+msgid "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs."
+msgstr ""
+
+msgid "Where to find the Cockpit instance for the Web Console button.  By default, no button is shown."
+msgstr ""
+
+msgid "Whether it should be allowed to override the effective user from the invocation form."
+msgstr ""
+
+msgid "Whether or not the template is locked for editing"
+msgstr "დაიბლოკება თუ არა შაბლონი მისი ჩასწორებისას"
+
+msgid "Whether the current user login should be used as the effective user"
+msgstr ""
+
+msgid "Whether to overwrite the template if it already exists"
+msgstr "გადავაწერო თუ არა შაბლონს, თუ ის უკვე არსებობს"
+
+msgid "Whether we should sync templates from disk when running db:seed."
+msgstr ""
+
+msgid "Workers pool size"
+msgstr "დამხმარე პროცესის პულის ზომა"
+
+msgid "Yes (override)"
+msgstr "დიახ (გადაფარვა)"
+
+msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
+msgstr ""
+
+msgid "You have %s results to display. Showing first %s results"
+msgstr "საჩვენებელია %s შედეგი. ნაჩვენებია პირველი %s შედეგი"
+
+msgid "add an input set for this template to reference a different template inputs"
+msgstr ""
+
+msgid "cancelled"
+msgstr "შეწყვეტილია"
+
+msgid "default_capsule method missing from SmartProxy"
+msgstr "ჭკვიან პროქსის აკლია მეთოდი default_capsule"
+
+msgid "documentation"
+msgstr "დოკუმენტაცია"
+
+msgid "effective user"
+msgstr "ეფექტური მომხმარებლის სახელი"
+
+msgid "error"
+msgstr "შეცდომა"
+
+msgid "error during rendering: %s"
+msgstr "შეცდომა რენდერის დროს: %s"
+
+msgid "evaluates just after you submit this form"
+msgstr ""
+
+msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
+msgstr ""
+
+msgid "failed"
+msgstr "შეცდომა"
+
+msgid "here"
+msgstr "აქ"
+
+msgid "host already has an execution interface"
+msgstr "ჰოსტს დაშორებული გაშვების ინტერფეისი უკვე გააჩნია"
+
+msgid "hosts"
+msgstr "ჰოსტი"
+
+msgid "in %s"
+msgstr "%s-ში"
+
+msgid "included template '%s' not found"
+msgstr "ჩასმული შაბლონი '%s' ვერ ვიპოვე"
+
+msgid "input macro with name '%s' used, but no input with such name defined for this template"
+msgstr ""
+
+msgid "is day of month (range: 1-31)"
+msgstr "თვის დღე (1-31)"
+
+msgid "is day of week (range: 0-6)"
+msgstr "კვირის დღე (0-6)"
+
+msgid "is hour (range: 0-23)"
+msgstr "საათი (0-23)"
+
+msgid "is minute (range: 0-59)"
+msgstr "წუთი (0-59)"
+
+msgid "is month (range: 1-12)"
+msgstr "თვე (1-120)"
+
+msgid "no"
+msgstr "არა"
+
+msgid "occurences"
+msgstr "გამოჩენები"
+
+msgid "open-help-tooltip-button"
+msgstr "open-help-tooltip-button"
+
+msgid "queued"
+msgstr "რიგში"
+
+msgid "queued to start executing in %{time}"
+msgstr "გასაშვებ რიგშია %{time}"
+
+msgid "range: 0-59"
+msgstr "დიაპაზონი: 0-59"
+
+msgid "remove template input set"
+msgstr "შაბლონების შეყვანის სეტის წაშლა"
+
+msgid "running %{percent}%%"
+msgstr "გაშვებულია %{percent}%%"
+
+msgid "seconds"
+msgstr "წამი"
+
+msgid "succeeded"
+msgstr "წარმატებული"
+
+msgid "tasks at a time"
+msgstr "ერთდროული ამოცანები"
+
+msgid "template"
+msgstr "შაბლონი"
+
+msgid "unknown status"
+msgstr "უცნობი სტატუსი"
+
+msgid "using "
+msgstr "გამოყენებით "
+
+msgid "using Smart Proxy"
+msgstr "ჭკვიანი პროქსის გამოყენება"
+
+msgid "view host names"
+msgstr ""
+
+msgid "yes"
+msgstr "დიახ"
