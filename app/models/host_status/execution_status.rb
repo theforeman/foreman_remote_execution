@@ -13,7 +13,7 @@ class HostStatus::ExecutionStatus < HostStatus::Status
   STATUS_NAMES = { OK => 'succeeded', ERROR => 'failed', QUEUED => 'queued', RUNNING => 'running', CANCELLED => 'cancelled' }.freeze
 
   def relevant?(*args)
-    execution_tasks.present?
+    host.get_status(HostStatus::ExecutionStatus).present?
   end
 
   def to_status(options = {})
@@ -39,7 +39,7 @@ class HostStatus::ExecutionStatus < HostStatus::Status
   def to_label(options = {})
     case to_status(options)
       when OK
-        execution_tasks.present? ? N_('Last execution succeeded') : N_('No execution finished yet')
+        N_('Last execution succeeded')
       when CANCELLED
         N_('Last execution cancelled')
       when ERROR
