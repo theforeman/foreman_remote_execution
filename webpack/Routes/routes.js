@@ -1,6 +1,7 @@
 import React from 'react';
 import JobWizardPage from '../JobWizard';
 import JobWizardPageRerun from '../JobWizard/JobWizardPageRerun';
+import JobInvocationDetailPage from '../JobInvocationDetail';
 
 const ForemanREXRoutes = [
   {
@@ -12,6 +13,11 @@ const ForemanREXRoutes = [
     path: '/job_invocations/:id/rerun',
     exact: true,
     render: props => <JobWizardPageRerun {...props} />,
+  },
+  {
+    path: '/experimental/job_invocations_detail/:id',
+    exact: true,
+    render: props => <JobInvocationDetailPage {...props} />,
   },
 ];
 

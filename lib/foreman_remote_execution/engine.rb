@@ -244,6 +244,12 @@ module ForemanRemoteExecution
           parent: :monitor_menu,
           after: :audits
 
+        menu :labs_menu, :job_invocations_detail,
+          url_hash: { controller: :job_invocations, action: :show },
+          caption: N_('Job invocations detail'),
+          parent: :lab_features_menu,
+          url: '/experimental/job_invocations_detail/1'
+
         register_custom_status HostStatus::ExecutionStatus
         # add dashboard widget
         # widget 'foreman_remote_execution_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
