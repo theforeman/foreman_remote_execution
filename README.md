@@ -61,6 +61,8 @@ Auto correct can be executed directly too:
 
 ## Release Process
 
+### Please refer to the [rel-eng notebook](rel-eng/gem_release.ipynb)
+
 ### Pull Translations from Transifex
 
 As part of the release process, localization must be synced from Transifex. See the [wiki](http://projects.theforeman.org/projects/foreman/wiki/How_to_Create_a_Plugin#Pulling-translations-from-Transifex) for more information.
@@ -69,6 +71,7 @@ As part of the release process, localization must be synced from Transifex. See 
 
 The [community-templates](https://github.com/theforeman/community-templates.git) repo is the source for our job templates.  Prior to release, use the script/sync_templates.sh script to pull in any changes.
 
+### Release changes are available in [release notes](release_notes.md)
 
 ## Copyright
 
