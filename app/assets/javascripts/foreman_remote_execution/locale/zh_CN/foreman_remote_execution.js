@@ -383,6 +383,12 @@
       "Try to abort the job without waiting for the results from the remote hosts": [
         "尝试在不等待远程主机的结果情况下终止作业"
       ],
+      "New UI": [
+        ""
+      ],
+      "Switch to the new job invocation detail UI": [
+        ""
+      ],
       "Task Details": [
         "任务详情"
       ],
@@ -1094,6 +1100,9 @@
       "Job templates": [
         "作业模板"
       ],
+      "Job invocations detail": [
+        ""
+      ],
       "Run Puppet Once": [
         "运行 Puppet 一次"
       ],
@@ -1104,6 +1113,21 @@
         ""
       ],
       "Run a script": [
+        ""
+      ],
+      "Not yet": [
+        ""
+      ],
+      "Effective user:": [
+        ""
+      ],
+      "Started at:": [
+        ""
+      ],
+      "SSH user:": [
+        ""
+      ],
+      "Template:": [
         ""
       ],
       "Submit": [
@@ -1544,23 +1568,17 @@
       "Active Filters:": [
         ""
       ],
+      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
+        "一个将远程执行带到 Foreman 的插件，通过远程管理功能来完成配置管理功能。"
+      ],
       "Action with sub plans": [
         "有子计划的操作"
-      ],
-      "Check for long running tasks": [
-        ""
-      ],
-      "Deliver notifications about long running tasks": [
-        ""
       ],
       "Import Puppet classes": [
         "导入 Puppet 类"
       ],
       "Import facts": [
         "导入事实"
-      ],
-      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
-        "一个将远程执行带到 Foreman 的插件，通过远程管理功能来完成配置管理功能。"
       ]
     }
   }

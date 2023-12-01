@@ -82,9 +82,6 @@ msgstr "Пользователь, от имени которого должен 
 msgid "Abort Job"
 msgstr ""
 
-msgid "Action with sub plans"
-msgstr "Действия с подпланами"
-
 msgid "Actions"
 msgstr "Действия"
 
@@ -167,9 +164,6 @@ msgid "Categories list failed with:"
 msgstr ""
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -304,9 +298,6 @@ msgstr "Удалить набор входных параметров"
 msgid "Delete a job template"
 msgstr "Удалить шаблон задания"
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "Описание"
 
@@ -368,6 +359,9 @@ msgid "Effective user password is only applicable for SSH provider. Other provid
 msgstr ""
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Effective user:"
 msgstr ""
 
 msgid "Enable Global Proxy"
@@ -541,14 +535,8 @@ msgstr ""
 msgid "Import"
 msgstr "Импорт"
 
-msgid "Import Puppet classes"
-msgstr "Импорт классов Puppet"
-
 msgid "Import a job template from ERB"
 msgstr "Импорт шаблона из ERB"
-
-msgid "Import facts"
-msgstr "Импорт фактов"
 
 msgid "Include all inputs from the foreign template"
 msgstr "Добавить все входные параметры из внешнего шаблона"
@@ -627,6 +615,9 @@ msgstr "Вызов задания"
 
 msgid "Job invocations"
 msgstr "Вызовы заданий"
+
+msgid "Job invocations detail"
+msgstr ""
 
 msgid "Job result"
 msgstr ""
@@ -733,6 +724,9 @@ msgstr "Никогда"
 msgid "New Job Template"
 msgstr "Создать шаблон задания"
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr ""
 
@@ -759,6 +753,9 @@ msgstr "С %{feature_name} не связан ни один шаблон."
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Отсутствуют значения некоторых обязательных входных данных: %s"
+
+msgid "Not yet"
+msgstr ""
 
 msgid "Now"
 msgstr ""
@@ -1000,6 +997,9 @@ msgstr "Параметры провайдера SSH"
 msgid "SSH user"
 msgstr ""
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr "Расписание"
 
@@ -1129,6 +1129,9 @@ msgstr ""
 msgid "Started"
 msgstr ""
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr "Начало"
 
@@ -1171,6 +1174,9 @@ msgstr "Успешно"
 msgid "Success"
 msgstr "Успешно"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr ""
 
@@ -1209,6 +1215,9 @@ msgstr "Версия шаблона"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "Шаблон «%{id}» не найден."
+
+msgid "Template:"
+msgstr ""
 
 msgid "Templates list failed with:"
 msgstr ""

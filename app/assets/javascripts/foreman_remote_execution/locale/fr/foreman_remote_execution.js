@@ -383,6 +383,12 @@
       "Try to abort the job without waiting for the results from the remote hosts": [
         "Essayer d'abandonner le job sans attendre les résultats des hôtes distants"
       ],
+      "New UI": [
+        ""
+      ],
+      "Switch to the new job invocation detail UI": [
+        ""
+      ],
       "Task Details": [
         "Détails de la tâche"
       ],
@@ -1098,6 +1104,9 @@
       "Job templates": [
         "Modèles de job"
       ],
+      "Job invocations detail": [
+        ""
+      ],
       "Run Puppet Once": [
         "Lancer Puppet"
       ],
@@ -1108,6 +1117,21 @@
         ""
       ],
       "Run a script": [
+        ""
+      ],
+      "Not yet": [
+        ""
+      ],
+      "Effective user:": [
+        ""
+      ],
+      "Started at:": [
+        ""
+      ],
+      "SSH user:": [
+        ""
+      ],
+      "Template:": [
         ""
       ],
       "Submit": [
@@ -1548,23 +1572,17 @@
       "Active Filters:": [
         ""
       ],
+      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
+        "Un greffon qui apporte l'exécution distante à Foreman, complétant la fonction de gestion de configuration avec la fonction d'exécution distante."
+      ],
       "Action with sub plans": [
         "Action avec sous-plans"
-      ],
-      "Check for long running tasks": [
-        ""
-      ],
-      "Deliver notifications about long running tasks": [
-        ""
       ],
       "Import Puppet classes": [
         "Importer des classes Puppet"
       ],
       "Import facts": [
         "Importer des faits"
-      ],
-      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
-        "Un greffon qui apporte l'exécution distante à Foreman, complétant la fonction de gestion de configuration avec la fonction d'exécution distante."
       ]
     }
   }

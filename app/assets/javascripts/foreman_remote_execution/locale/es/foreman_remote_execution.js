@@ -383,6 +383,12 @@
       "Try to abort the job without waiting for the results from the remote hosts": [
         "Intentar abortar el trabajo sin esperar los resultados de hosts remotos"
       ],
+      "New UI": [
+        ""
+      ],
+      "Switch to the new job invocation detail UI": [
+        ""
+      ],
       "Task Details": [
         "Detalles de tareas"
       ],
@@ -1097,6 +1103,9 @@
       "Job templates": [
         "Plantillas de trabajo"
       ],
+      "Job invocations detail": [
+        ""
+      ],
       "Run Puppet Once": [
         "Ejecutar Puppet una vez"
       ],
@@ -1107,6 +1116,21 @@
         ""
       ],
       "Run a script": [
+        ""
+      ],
+      "Not yet": [
+        ""
+      ],
+      "Effective user:": [
+        ""
+      ],
+      "Started at:": [
+        ""
+      ],
+      "SSH user:": [
+        ""
+      ],
+      "Template:": [
         ""
       ],
       "Submit": [
@@ -1547,23 +1571,17 @@
       "Active Filters:": [
         ""
       ],
+      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
+        "Un complemento que ofrece ejecución remota a Foreman y completa la funcionalidad de administración de la configuración con la funcionalidad de administración remota."
+      ],
       "Action with sub plans": [
         "Acción con subplanes"
-      ],
-      "Check for long running tasks": [
-        ""
-      ],
-      "Deliver notifications about long running tasks": [
-        ""
       ],
       "Import Puppet classes": [
         "Importar clases Puppet"
       ],
       "Import facts": [
         "Importar datos"
-      ],
-      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
-        "Un complemento que ofrece ejecución remota a Foreman y completa la funcionalidad de administración de la configuración con la funcionalidad de administración remota."
       ]
     }
   }

@@ -80,9 +80,6 @@ msgstr "Un usuario que se debe utilizar para ejecutar el script. Si es distinto 
 msgid "Abort Job"
 msgstr "Abortar trabajo"
 
-msgid "Action with sub plans"
-msgstr "Acción con subplanes"
-
 msgid "Actions"
 msgstr "Acciones"
 
@@ -165,9 +162,6 @@ msgid "Categories list failed with:"
 msgstr "La lista de categorías falló con:"
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -302,9 +296,6 @@ msgstr "Eliminar un conjunto de entrada externo"
 msgid "Delete a job template"
 msgstr "Eliminar una plantilla de trabajo"
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "Descripción"
 
@@ -367,6 +358,9 @@ msgstr "La contraseña de usuario efectiva sólo es aplicable al proveedor SSH. 
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr "La contraseña de usuario efectiva sólo es aplicable al proveedor SSH. Otros proveedores ignoran este campo. La contraseña se almacena encriptada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina después de la última ejecución."
+
+msgid "Effective user:"
+msgstr ""
 
 msgid "Enable Global Proxy"
 msgstr "Activar proxy global"
@@ -539,14 +533,8 @@ msgstr ""
 msgid "Import"
 msgstr "Importar"
 
-msgid "Import Puppet classes"
-msgstr "Importar clases Puppet"
-
 msgid "Import a job template from ERB"
 msgstr "Importar una plantilla de trabajo desde ERB"
-
-msgid "Import facts"
-msgstr "Importar datos"
 
 msgid "Include all inputs from the foreign template"
 msgstr "Incluir todas las entradas de la plantilla externa"
@@ -625,6 +613,9 @@ msgstr "Invocación de trabajo"
 
 msgid "Job invocations"
 msgstr "Invocaciones de trabajo"
+
+msgid "Job invocations detail"
+msgstr ""
 
 msgid "Job result"
 msgstr "Resultado del trabajo"
@@ -731,6 +722,9 @@ msgstr "Nunca"
 msgid "New Job Template"
 msgstr "Nueva plantilla de trabajo"
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr ""
 
@@ -757,6 +751,9 @@ msgstr "No hay ninguna plantilla mapeada a la funcionalidad %{feature_name}."
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "No todas las entradas requeridas tienen valores. Entradas que faltan: %s"
+
+msgid "Not yet"
+msgstr ""
 
 msgid "Now"
 msgstr ""
@@ -998,6 +995,9 @@ msgstr "Opciones específicas del proveedor SSH"
 msgid "SSH user"
 msgstr ""
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr "Programa"
 
@@ -1127,6 +1127,9 @@ msgstr ""
 msgid "Started"
 msgstr "Inició"
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr "Comienza"
 
@@ -1169,6 +1172,9 @@ msgstr "exitoso"
 msgid "Success"
 msgstr "Éxito"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr "Sincronizar plantillas de trabajo"
 
@@ -1207,6 +1213,9 @@ msgstr "versión de plantilla"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "No se encontró la plantilla con ID '%{id}'."
+
+msgid "Template:"
+msgstr ""
 
 msgid "Templates list failed with:"
 msgstr "Lista de plantillas falló con:"

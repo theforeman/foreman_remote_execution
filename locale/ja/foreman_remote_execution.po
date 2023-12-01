@@ -80,9 +80,6 @@ msgstr "スクリプトを実行するために使用するユーザー。ユー
 msgid "Abort Job"
 msgstr "ジョブの中断"
 
-msgid "Action with sub plans"
-msgstr "サブプランによるアクション"
-
 msgid "Actions"
 msgstr "アクション"
 
@@ -165,9 +162,6 @@ msgid "Categories list failed with:"
 msgstr "カテゴリー一覧が以下により失敗:"
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -302,9 +296,6 @@ msgstr "外部入力セットを削除"
 msgid "Delete a job template"
 msgstr "ジョブテンプレートの削除"
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "説明"
 
@@ -367,6 +358,9 @@ msgstr "実効ユーザーパスワードは、SSH プロバイダーにのみ�
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr "実効ユーザーパスワードは、SSH プロバイダーにのみ適用されます。他のプロバイダーは、このフィールドを無視します。パスワードは、ジョブが完了するまで暗号化されて DB に保存されます。将来の実行または繰り返しの実行の場合、最後の実行後に削除されます。"
+
+msgid "Effective user:"
+msgstr ""
 
 msgid "Enable Global Proxy"
 msgstr "グローバルプロキシーを有効にする"
@@ -539,14 +533,8 @@ msgstr ""
 msgid "Import"
 msgstr "インポート"
 
-msgid "Import Puppet classes"
-msgstr "Puppet クラスのインポート"
-
 msgid "Import a job template from ERB"
 msgstr "ERB からジョブテンプレートをインポート"
-
-msgid "Import facts"
-msgstr "ファクトのインポート"
 
 msgid "Include all inputs from the foreign template"
 msgstr "外部テンプレートからのすべての入力を含める"
@@ -625,6 +613,9 @@ msgstr "ジョブ呼び出し"
 
 msgid "Job invocations"
 msgstr "ジョブ呼び出し"
+
+msgid "Job invocations detail"
+msgstr ""
 
 msgid "Job result"
 msgstr "ジョブの結果"
@@ -731,6 +722,9 @@ msgstr "なし"
 msgid "New Job Template"
 msgstr "新規ジョブテンプレート"
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr ""
 
@@ -757,6 +751,9 @@ msgstr "機能 %{feature_name} にマッピングされたテンプレートが�
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "入力が必須のすべての項目に値があるとは限りません。足りない入力: %s"
+
+msgid "Not yet"
+msgstr ""
 
 msgid "Now"
 msgstr ""
@@ -998,6 +995,9 @@ msgstr "SSH プロバイダー固有オプション"
 msgid "SSH user"
 msgstr ""
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr "スケジュール"
 
@@ -1127,6 +1127,9 @@ msgstr ""
 msgid "Started"
 msgstr "開始済み"
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr "開始"
 
@@ -1169,6 +1172,9 @@ msgstr "成功"
 msgid "Success"
 msgstr "成功"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr "ジョブテンプレートの同期"
 
@@ -1207,6 +1213,9 @@ msgstr "テンプレートのバージョン"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "id '%{id}' のテンプレートが見つかりませんでした"
+
+msgid "Template:"
+msgstr ""
 
 msgid "Templates list failed with:"
 msgstr "テンプレート一覧が以下により失敗:"

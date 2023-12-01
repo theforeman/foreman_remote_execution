@@ -383,6 +383,12 @@
       "Try to abort the job without waiting for the results from the remote hosts": [
         ""
       ],
+      "New UI": [
+        ""
+      ],
+      "Switch to the new job invocation detail UI": [
+        ""
+      ],
       "Task Details": [
         "Описание задачи"
       ],
@@ -1098,6 +1104,9 @@
       "Job templates": [
         "Шаблоны заданий"
       ],
+      "Job invocations detail": [
+        ""
+      ],
       "Run Puppet Once": [
         ""
       ],
@@ -1108,6 +1117,21 @@
         ""
       ],
       "Run a script": [
+        ""
+      ],
+      "Not yet": [
+        ""
+      ],
+      "Effective user:": [
+        ""
+      ],
+      "Started at:": [
+        ""
+      ],
+      "SSH user:": [
+        ""
+      ],
+      "Template:": [
         ""
       ],
       "Submit": [
@@ -1548,23 +1572,17 @@
       "Active Filters:": [
         ""
       ],
+      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
+        "Дополнительный модуль Foreman для удаленного выполнения заданий, объединяющий функции управления конфигурацией и удаленного контроля."
+      ],
       "Action with sub plans": [
         "Действия с подпланами"
-      ],
-      "Check for long running tasks": [
-        ""
-      ],
-      "Deliver notifications about long running tasks": [
-        ""
       ],
       "Import Puppet classes": [
         "Импорт классов Puppet"
       ],
       "Import facts": [
         "Импорт фактов"
-      ],
-      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
-        "Дополнительный модуль Foreman для удаленного выполнения заданий, объединяющий функции управления конфигурацией и удаленного контроля."
       ]
     }
   }

@@ -383,6 +383,12 @@
       "Try to abort the job without waiting for the results from the remote hosts": [
         "リモートホストからの結果を待たずにジョブを中断しようとしています"
       ],
+      "New UI": [
+        ""
+      ],
+      "Switch to the new job invocation detail UI": [
+        ""
+      ],
       "Task Details": [
         "タスクの詳細"
       ],
@@ -1094,6 +1100,9 @@
       "Job templates": [
         "ジョブテンプレート"
       ],
+      "Job invocations detail": [
+        ""
+      ],
       "Run Puppet Once": [
         "Puppet を 1 回実行"
       ],
@@ -1104,6 +1113,21 @@
         ""
       ],
       "Run a script": [
+        ""
+      ],
+      "Not yet": [
+        ""
+      ],
+      "Effective user:": [
+        ""
+      ],
+      "Started at:": [
+        ""
+      ],
+      "SSH user:": [
+        ""
+      ],
+      "Template:": [
         ""
       ],
       "Submit": [
@@ -1544,23 +1568,17 @@
       "Active Filters:": [
         ""
       ],
+      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
+        "リモート実行を Foreman で実現するプラグイン。設定管理機能にリモート管理機能を補完します。"
+      ],
       "Action with sub plans": [
         "サブプランによるアクション"
-      ],
-      "Check for long running tasks": [
-        ""
-      ],
-      "Deliver notifications about long running tasks": [
-        ""
       ],
       "Import Puppet classes": [
         "Puppet クラスのインポート"
       ],
       "Import facts": [
         "ファクトのインポート"
-      ],
-      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
-        "リモート実行を Foreman で実現するプラグイン。設定管理機能にリモート管理機能を補完します。"
       ]
     }
   }

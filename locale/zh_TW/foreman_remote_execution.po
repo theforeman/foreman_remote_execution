@@ -79,9 +79,6 @@ msgstr "要使用執行這 script 的使用者。如果使用者與 SSH 使用�
 msgid "Abort Job"
 msgstr ""
 
-msgid "Action with sub plans"
-msgstr "有子計畫的動作"
-
 msgid "Actions"
 msgstr "動作"
 
@@ -164,9 +161,6 @@ msgid "Categories list failed with:"
 msgstr ""
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -301,9 +295,6 @@ msgstr "刪除外部輸入集"
 msgid "Delete a job template"
 msgstr "刪除工作範本"
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "說明"
 
@@ -365,6 +356,9 @@ msgid "Effective user password is only applicable for SSH provider. Other provid
 msgstr ""
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Effective user:"
 msgstr ""
 
 msgid "Enable Global Proxy"
@@ -538,14 +532,8 @@ msgstr ""
 msgid "Import"
 msgstr "匯入"
 
-msgid "Import Puppet classes"
-msgstr "匯入 Puppet 類別"
-
 msgid "Import a job template from ERB"
 msgstr ""
-
-msgid "Import facts"
-msgstr "匯入詳情"
 
 msgid "Include all inputs from the foreign template"
 msgstr ""
@@ -624,6 +612,9 @@ msgstr "工作祈願"
 
 msgid "Job invocations"
 msgstr "工作祈願"
+
+msgid "Job invocations detail"
+msgstr ""
 
 msgid "Job result"
 msgstr ""
@@ -730,6 +721,9 @@ msgstr "永不"
 msgid "New Job Template"
 msgstr "新工作範本"
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr ""
 
@@ -756,6 +750,9 @@ msgstr "沒有範本定義至功能 %{feature_name}"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "並不是所需的輸入都有值。缺少的輸入：%s"
+
+msgid "Not yet"
+msgstr ""
 
 msgid "Now"
 msgstr ""
@@ -997,6 +994,9 @@ msgstr "SSH 供應者特定選項"
 msgid "SSH user"
 msgstr ""
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr "排程"
 
@@ -1126,6 +1126,9 @@ msgstr ""
 msgid "Started"
 msgstr ""
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr "起始"
 
@@ -1168,6 +1171,9 @@ msgstr "已成功"
 msgid "Success"
 msgstr "成功"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr ""
 
@@ -1206,6 +1212,9 @@ msgstr "範本版本"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "找不到 ID 為 '%{id}' 的範本"
+
+msgid "Template:"
+msgstr ""
 
 msgid "Templates list failed with:"
 msgstr ""

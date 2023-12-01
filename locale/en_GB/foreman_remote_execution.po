@@ -80,9 +80,6 @@ msgstr ""
 msgid "Abort Job"
 msgstr ""
 
-msgid "Action with sub plans"
-msgstr "Action with sub plans"
-
 msgid "Actions"
 msgstr "Actions"
 
@@ -165,9 +162,6 @@ msgid "Categories list failed with:"
 msgstr ""
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -302,9 +296,6 @@ msgstr ""
 msgid "Delete a job template"
 msgstr ""
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "Description"
 
@@ -366,6 +357,9 @@ msgid "Effective user password is only applicable for SSH provider. Other provid
 msgstr ""
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Effective user:"
 msgstr ""
 
 msgid "Enable Global Proxy"
@@ -539,14 +533,8 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-msgid "Import Puppet classes"
-msgstr "Import Puppet classes"
-
 msgid "Import a job template from ERB"
 msgstr ""
-
-msgid "Import facts"
-msgstr "Import facts"
 
 msgid "Include all inputs from the foreign template"
 msgstr ""
@@ -624,6 +612,9 @@ msgid "Job invocation"
 msgstr ""
 
 msgid "Job invocations"
+msgstr ""
+
+msgid "Job invocations detail"
 msgstr ""
 
 msgid "Job result"
@@ -731,6 +722,9 @@ msgstr ""
 msgid "New Job Template"
 msgstr ""
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr ""
 
@@ -756,6 +750,9 @@ msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
 msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr ""
+
+msgid "Not yet"
 msgstr ""
 
 msgid "Now"
@@ -998,6 +995,9 @@ msgstr ""
 msgid "SSH user"
 msgstr ""
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr ""
 
@@ -1127,6 +1127,9 @@ msgstr ""
 msgid "Started"
 msgstr ""
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr ""
 
@@ -1169,6 +1172,9 @@ msgstr ""
 msgid "Success"
 msgstr "Success"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr ""
 
@@ -1206,6 +1212,9 @@ msgid "Template version"
 msgstr ""
 
 msgid "Template with id '%{id}' was not found"
+msgstr ""
+
+msgid "Template:"
 msgstr ""
 
 msgid "Templates list failed with:"

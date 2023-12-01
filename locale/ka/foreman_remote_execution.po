@@ -79,9 +79,6 @@ msgstr "სკრიპტის გაშვებისას გამოყ�
 msgid "Abort Job"
 msgstr "დავალების გაუქმება"
 
-msgid "Action with sub plans"
-msgstr "ქმედება ქვე-გეგმებით"
-
 msgid "Actions"
 msgstr "ქმედებები"
 
@@ -164,9 +161,6 @@ msgid "Categories list failed with:"
 msgstr "კატეგორიების სიის შეცდომა:"
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -301,9 +295,6 @@ msgstr "გარედან შეყვანის სეტის წაშ
 msgid "Delete a job template"
 msgstr "დავალების შაბლონის წაშლა"
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "აღწერილობა"
 
@@ -365,6 +356,9 @@ msgid "Effective user password is only applicable for SSH provider. Other provid
 msgstr ""
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Effective user:"
 msgstr ""
 
 msgid "Enable Global Proxy"
@@ -538,14 +532,8 @@ msgstr "დაუყოვნებლივი შესრულება"
 msgid "Import"
 msgstr "შემოტანა"
 
-msgid "Import Puppet classes"
-msgstr "Puppet-ის კლასების შემოტანა"
-
 msgid "Import a job template from ERB"
 msgstr "დავალების შაბლონის ERB-დან შემოტანა"
-
-msgid "Import facts"
-msgstr "ფაქტების შემოტანა"
 
 msgid "Include all inputs from the foreign template"
 msgstr "შეიცავს გარე შაბლონს ყველა შეყვანას"
@@ -624,6 +612,9 @@ msgstr "დავალების ჩაწოდება"
 
 msgid "Job invocations"
 msgstr "დავალების ჩაწოდებები"
+
+msgid "Job invocations detail"
+msgstr ""
 
 msgid "Job result"
 msgstr "დავალების შედეგი"
@@ -730,6 +721,9 @@ msgstr "არასდროს"
 msgid "New Job Template"
 msgstr "დავალების ახალი შაბლონი"
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr "შემდეგი"
 
@@ -755,6 +749,9 @@ msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
 msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr ""
+
+msgid "Not yet"
 msgstr ""
 
 msgid "Now"
@@ -997,6 +994,9 @@ msgstr "SSH-ის მომწოდებლის სპეციფიკუ
 msgid "SSH user"
 msgstr "SSH-ის მომხმარებლის სახელი"
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr "განრიგი"
 
@@ -1126,6 +1126,9 @@ msgstr ""
 msgid "Started"
 msgstr "დაიწყო"
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr "საწყისი"
 
@@ -1168,6 +1171,9 @@ msgstr "წარმატებულია"
 msgid "Success"
 msgstr "წარმატება"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr "სინქრონიზაციის დავალების შაბლონები"
 
@@ -1206,6 +1212,9 @@ msgstr "შაბლონის ვერსია"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "შაბლონი ID-ით %{id} ნაპოვნი არაა"
+
+msgid "Template:"
+msgstr ""
 
 msgid "Templates list failed with:"
 msgstr "შაბლონების სიის შეცდომა:"

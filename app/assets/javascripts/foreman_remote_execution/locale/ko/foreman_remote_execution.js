@@ -383,6 +383,12 @@
       "Try to abort the job without waiting for the results from the remote hosts": [
         ""
       ],
+      "New UI": [
+        ""
+      ],
+      "Switch to the new job invocation detail UI": [
+        ""
+      ],
       "Task Details": [
         "작업 자세히"
       ],
@@ -1095,6 +1101,9 @@
       "Job templates": [
         "작업 템플릿"
       ],
+      "Job invocations detail": [
+        ""
+      ],
       "Run Puppet Once": [
         ""
       ],
@@ -1105,6 +1114,21 @@
         ""
       ],
       "Run a script": [
+        ""
+      ],
+      "Not yet": [
+        ""
+      ],
+      "Effective user:": [
+        ""
+      ],
+      "Started at:": [
+        ""
+      ],
+      "SSH user:": [
+        ""
+      ],
+      "Template:": [
         ""
       ],
       "Submit": [
@@ -1545,23 +1569,17 @@
       "Active Filters:": [
         ""
       ],
+      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
+        "Foreman으로 원격 실행을 가져오는 플러그인입니다. 원격 관리 기능으로 구성 관리 기능을 완료합니다."
+      ],
       "Action with sub plans": [
         "하위 계획이 있는 작업"
-      ],
-      "Check for long running tasks": [
-        ""
-      ],
-      "Deliver notifications about long running tasks": [
-        ""
       ],
       "Import Puppet classes": [
         "Puppet 클래스 가져오기"
       ],
       "Import facts": [
         "팩트 불러오기"
-      ],
-      "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
-        "Foreman으로 원격 실행을 가져오는 플러그인입니다. 원격 관리 기능으로 구성 관리 기능을 완료합니다."
       ]
     }
   }

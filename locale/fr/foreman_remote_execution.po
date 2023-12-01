@@ -83,9 +83,6 @@ msgstr "L'utilisateur choisi pour l'exécution du script. Si l'utilisateur est d
 msgid "Abort Job"
 msgstr "Abandonner le job"
 
-msgid "Action with sub plans"
-msgstr "Action avec sous-plans"
-
 msgid "Actions"
 msgstr "Actions"
 
@@ -168,9 +165,6 @@ msgid "Categories list failed with:"
 msgstr "La liste de catégories a échoué avec :"
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -305,9 +299,6 @@ msgstr "Supprimer un jeu de données en entrée externe"
 msgid "Delete a job template"
 msgstr "Supprimer un modèle de job"
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "Description"
 
@@ -370,6 +361,9 @@ msgstr "Le mot de passe Sudo est uniquement applicable au fournisseur SSH. D'aut
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr "Le mot de passe Sudo est uniquement applicable au fournisseur SSH. D'autres fournisseurs ignorent ce champ. Le mot de passe est stocké chiffré dans la base de données jusqu'à la fin du job. Pour les exécutions futures ou récurrentes, il est supprimé après la dernière exécution."
+
+msgid "Effective user:"
+msgstr ""
 
 msgid "Enable Global Proxy"
 msgstr "Activer le proxy global"
@@ -542,14 +536,8 @@ msgstr ""
 msgid "Import"
 msgstr "Importation"
 
-msgid "Import Puppet classes"
-msgstr "Importer des classes Puppet"
-
 msgid "Import a job template from ERB"
 msgstr "Importe un modèle de job depuis ERB"
-
-msgid "Import facts"
-msgstr "Importer des faits"
 
 msgid "Include all inputs from the foreign template"
 msgstr "Inclut toutes les entrées du modèle étranger"
@@ -628,6 +616,9 @@ msgstr "Invocation de job"
 
 msgid "Job invocations"
 msgstr "Lancement de jobs"
+
+msgid "Job invocations detail"
+msgstr ""
 
 msgid "Job result"
 msgstr "Résultat Job"
@@ -734,6 +725,9 @@ msgstr "Jamais"
 msgid "New Job Template"
 msgstr "Nouveau modèle de job"
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr ""
 
@@ -760,6 +754,9 @@ msgstr "Aucun modèle n'est en relation avec la fonction %{feature_name}"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Les entrées n'ont pas toutes des valeurs associées. Les entrées demandant de l'attention : %s"
+
+msgid "Not yet"
+msgstr ""
 
 msgid "Now"
 msgstr ""
@@ -1001,6 +998,9 @@ msgstr "Options spécifiques au fournisseur SSH"
 msgid "SSH user"
 msgstr ""
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr "Programmer"
 
@@ -1130,6 +1130,9 @@ msgstr ""
 msgid "Started"
 msgstr "Démarré"
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr "Démarrage"
 
@@ -1172,6 +1175,9 @@ msgstr "Réussie"
 msgid "Success"
 msgstr "Réussi"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr "Modèles de job synchronisés"
 
@@ -1210,6 +1216,9 @@ msgstr "Version de modèle"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "Le modèle avec l'ID '%%{id} ' n'a pas été trouvé"
+
+msgid "Template:"
+msgstr ""
 
 msgid "Templates list failed with:"
 msgstr "La liste des modèles a échoué avec :"

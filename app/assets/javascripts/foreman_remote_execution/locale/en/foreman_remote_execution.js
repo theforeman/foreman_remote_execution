@@ -383,6 +383,12 @@
       "Try to abort the job without waiting for the results from the remote hosts": [
         ""
       ],
+      "New UI": [
+        ""
+      ],
+      "Switch to the new job invocation detail UI": [
+        ""
+      ],
       "Task Details": [
         ""
       ],
@@ -1096,6 +1102,9 @@
       "Job templates": [
         ""
       ],
+      "Job invocations detail": [
+        ""
+      ],
       "Run Puppet Once": [
         ""
       ],
@@ -1106,6 +1115,21 @@
         ""
       ],
       "Run a script": [
+        ""
+      ],
+      "Not yet": [
+        ""
+      ],
+      "Effective user:": [
+        ""
+      ],
+      "Started at:": [
+        ""
+      ],
+      "SSH user:": [
+        ""
+      ],
+      "Template:": [
         ""
       ],
       "Submit": [
@@ -1544,21 +1568,6 @@
         ""
       ],
       "Active Filters:": [
-        ""
-      ],
-      "Action with sub plans": [
-        ""
-      ],
-      "Check for long running tasks": [
-        ""
-      ],
-      "Deliver notifications about long running tasks": [
-        ""
-      ],
-      "Import Puppet classes": [
-        ""
-      ],
-      "Import facts": [
         ""
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [

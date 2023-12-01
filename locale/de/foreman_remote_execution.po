@@ -84,9 +84,6 @@ msgstr "Ein Benutzer, der für die Ausführung des Skripts verwendet werden soll
 msgid "Abort Job"
 msgstr "Job abbrechen"
 
-msgid "Action with sub plans"
-msgstr "Aktion mit Unterplänen"
-
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -169,9 +166,6 @@ msgid "Categories list failed with:"
 msgstr ""
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -306,9 +300,6 @@ msgstr "Fremdeingabe-Satz löschen"
 msgid "Delete a job template"
 msgstr "Job-Vorlage löschen"
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -370,6 +361,9 @@ msgid "Effective user password is only applicable for SSH provider. Other provid
 msgstr "Das gültige Benutzerkennwort gilt nur für den SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. <br> Das Passwort wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Effective user:"
 msgstr ""
 
 msgid "Enable Global Proxy"
@@ -543,14 +537,8 @@ msgstr ""
 msgid "Import"
 msgstr "Import"
 
-msgid "Import Puppet classes"
-msgstr "Puppet-Klassen importieren"
-
 msgid "Import a job template from ERB"
 msgstr "Job-Vorlage aus ERB importieren"
-
-msgid "Import facts"
-msgstr "Fakten importieren"
 
 msgid "Include all inputs from the foreign template"
 msgstr "Alle Eingaben aus Fremdvorlage einschließen"
@@ -629,6 +617,9 @@ msgstr "Job-Aufrufe "
 
 msgid "Job invocations"
 msgstr "Job-Aufrufe "
+
+msgid "Job invocations detail"
+msgstr ""
 
 msgid "Job result"
 msgstr ""
@@ -735,6 +726,9 @@ msgstr "Niemals"
 msgid "New Job Template"
 msgstr "Neue Job-Vorlage"
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr ""
 
@@ -761,6 +755,9 @@ msgstr "Der Funktion %{feature_name} wurde keine Vorlage zugewiesen"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Nicht alle erforderlichen Eingaben haben Werte. Fehlende Eingaben: %s"
+
+msgid "Not yet"
+msgstr ""
 
 msgid "Now"
 msgstr ""
@@ -1004,6 +1001,9 @@ msgstr "Besondere Optionen des SSH-Anbieters"
 msgid "SSH user"
 msgstr ""
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr "Plan"
 
@@ -1133,6 +1133,9 @@ msgstr ""
 msgid "Started"
 msgstr "Gestartet"
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr "Beginnt"
 
@@ -1175,6 +1178,9 @@ msgstr "Erfolgreich"
 msgid "Success"
 msgstr "Erfolg"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr "Synchronisations Job-Vorlage"
 
@@ -1213,6 +1219,9 @@ msgstr "Vorlagenversion"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "Vorlage mit ID '%{id}' nicht gefunden"
+
+msgid "Template:"
+msgstr ""
 
 msgid "Templates list failed with:"
 msgstr ""

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 22:23+0100\n"
-"PO-Revision-Date: 2023-11-28 22:23+0100\n"
+"POT-Creation-Date: 2023-12-01 18:46+0100\n"
+"PO-Revision-Date: 2023-12-01 18:46+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -408,6 +408,7 @@ msgstr ""
 #: ../db/seeds.d/50-notification_blueprints.rb:3
 #: ../db/seeds.d/50-notification_blueprints.rb:17
 #: ../lib/foreman_remote_execution/engine.rb:243
+#: ../webpack/JobInvocationDetail/index.js:38
 #: ../webpack/JobWizard/JobWizardPageRerun.js:34
 #: ../webpack/JobWizard/index.js:12
 msgid "Jobs"
@@ -501,7 +502,7 @@ msgid "Host task"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:53
-#: ../app/helpers/remote_execution_helper.rb:198
+#: ../app/helpers/remote_execution_helper.rb:203
 #: ../app/models/job_invocation.rb:202
 msgid "N/A"
 msgstr ""
@@ -545,7 +546,7 @@ msgid "See the last task details"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:90
-#: ../app/helpers/remote_execution_helper.rb:112
+#: ../app/helpers/remote_execution_helper.rb:117
 msgid "Cancel Job"
 msgstr ""
 
@@ -554,7 +555,7 @@ msgid "Try to cancel the job"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:95
-#: ../app/helpers/remote_execution_helper.rb:118
+#: ../app/helpers/remote_execution_helper.rb:123
 msgid "Abort Job"
 msgstr ""
 
@@ -562,43 +563,51 @@ msgstr ""
 msgid "Try to abort the job without waiting for the results from the remote hosts"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:107
+#: ../app/helpers/remote_execution_helper.rb:102
+msgid "New UI"
+msgstr ""
+
+#: ../app/helpers/remote_execution_helper.rb:104
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
+#: ../app/helpers/remote_execution_helper.rb:112
 msgid "Task Details"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:109
+#: ../app/helpers/remote_execution_helper.rb:114
 msgid "See the task details"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:114
+#: ../app/helpers/remote_execution_helper.rb:119
 msgid "Try to cancel the job on a host"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:120
+#: ../app/helpers/remote_execution_helper.rb:125
 msgid "Try to abort the job on a host without waiting for its result"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:168
+#: ../app/helpers/remote_execution_helper.rb:173
 msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:200
+#: ../app/helpers/remote_execution_helper.rb:205
 msgid "in %s"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:200
+#: ../app/helpers/remote_execution_helper.rb:205
 msgid "%s ago"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:218
+#: ../app/helpers/remote_execution_helper.rb:223
 msgid "Use default description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:223
+#: ../app/helpers/remote_execution_helper.rb:228
 msgid "Description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:233
+#: ../app/helpers/remote_execution_helper.rb:238
 msgid ""
 "This template is used to generate the description.<br/>Input values can be use"
 "d using the syntax %{package}.<br/>You may also include the job category and t"
@@ -625,7 +634,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:109 action_names.rb:7
+#: ../app/lib/actions/remote_execution/run_host_job.rb:109 action_names.rb:2
 msgid "Remote action:"
 msgstr ""
 
@@ -881,7 +890,7 @@ msgid "Can't find Job Invocation for an id %s"
 msgstr ""
 
 #: ../app/views/dashboard/_latest-jobs.html.erb:2
-#: ../lib/foreman_remote_execution/engine.rb:250
+#: ../lib/foreman_remote_execution/engine.rb:256
 msgid "Latest Jobs"
 msgstr ""
 
@@ -1673,20 +1682,44 @@ msgstr ""
 msgid "Job templates"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:364
-msgid "Run Puppet Once"
-msgstr ""
-
-#: ../lib/foreman_remote_execution/engine.rb:365
-msgid "Perform a single Puppet run"
+#: ../lib/foreman_remote_execution/engine.rb:249
+msgid "Job invocations detail"
 msgstr ""
 
 #: ../lib/foreman_remote_execution/engine.rb:370
-msgid "Run Script"
+msgid "Run Puppet Once"
 msgstr ""
 
 #: ../lib/foreman_remote_execution/engine.rb:371
+msgid "Perform a single Puppet run"
+msgstr ""
+
+#: ../lib/foreman_remote_execution/engine.rb:376
+msgid "Run Script"
+msgstr ""
+
+#: ../lib/foreman_remote_execution/engine.rb:377
 msgid "Run a script"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:34
+msgid "Not yet"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:58
+msgid "Effective user:"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:64
+msgid "Started at:"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:70
+msgid "SSH user:"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:76
+msgid "Template:"
 msgstr ""
 
 #: ../webpack/JobWizard/Footer.js:35
@@ -2319,26 +2352,6 @@ msgstr ""
 
 #: ../webpack/react_app/components/TargetingHosts/TargetingHostsLabelsRow.js:20
 msgid "Active Filters:"
-msgstr ""
-
-#: action_names.rb:2
-msgid "Action with sub plans"
-msgstr ""
-
-#: action_names.rb:3
-msgid "Check for long running tasks"
-msgstr ""
-
-#: action_names.rb:4
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
-#: action_names.rb:5
-msgid "Import Puppet classes"
-msgstr ""
-
-#: action_names.rb:6
-msgid "Import facts"
 msgstr ""
 
 #: gemspec.rb:2

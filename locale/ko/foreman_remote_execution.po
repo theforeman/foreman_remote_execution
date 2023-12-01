@@ -78,9 +78,6 @@ msgstr "스크립트를 실행하는 데 사용할 사용자입니다. 이 사�
 msgid "Abort Job"
 msgstr ""
 
-msgid "Action with sub plans"
-msgstr "하위 계획이 있는 작업"
-
 msgid "Actions"
 msgstr "작업"
 
@@ -163,9 +160,6 @@ msgid "Categories list failed with:"
 msgstr ""
 
 msgid "Category and template"
-msgstr ""
-
-msgid "Check for long running tasks"
 msgstr ""
 
 msgid "Choose a job template that is pre-selected in job invocation form"
@@ -300,9 +294,6 @@ msgstr "외부 입력 세트 삭제"
 msgid "Delete a job template"
 msgstr "작업 템플릿 삭제"
 
-msgid "Deliver notifications about long running tasks"
-msgstr ""
-
 msgid "Description"
 msgstr "설명"
 
@@ -364,6 +355,9 @@ msgid "Effective user password is only applicable for SSH provider. Other provid
 msgstr ""
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+msgid "Effective user:"
 msgstr ""
 
 msgid "Enable Global Proxy"
@@ -537,14 +531,8 @@ msgstr ""
 msgid "Import"
 msgstr "불러오기"
 
-msgid "Import Puppet classes"
-msgstr "Puppet 클래스 가져오기"
-
 msgid "Import a job template from ERB"
 msgstr ""
-
-msgid "Import facts"
-msgstr "팩트 불러오기"
 
 msgid "Include all inputs from the foreign template"
 msgstr ""
@@ -623,6 +611,9 @@ msgstr "작업 호출"
 
 msgid "Job invocations"
 msgstr "작업 호출"
+
+msgid "Job invocations detail"
+msgstr ""
 
 msgid "Job result"
 msgstr ""
@@ -729,6 +720,9 @@ msgstr "사용 안 함"
 msgid "New Job Template"
 msgstr "새 작업 템플릿"
 
+msgid "New UI"
+msgstr ""
+
 msgid "Next"
 msgstr ""
 
@@ -755,6 +749,9 @@ msgstr "%{feature_name} 기능에 매핑된 템플릿이 없습니다."
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
+
+msgid "Not yet"
+msgstr ""
 
 msgid "Now"
 msgstr ""
@@ -996,6 +993,9 @@ msgstr "SSH 공급자 관련 옵션"
 msgid "SSH user"
 msgstr ""
 
+msgid "SSH user:"
+msgstr ""
+
 msgid "Schedule"
 msgstr "스케줄 "
 
@@ -1125,6 +1125,9 @@ msgstr ""
 msgid "Started"
 msgstr ""
 
+msgid "Started at:"
+msgstr ""
+
 msgid "Starts"
 msgstr "시작 "
 
@@ -1167,6 +1170,9 @@ msgstr "성공"
 msgid "Success"
 msgstr "성공"
 
+msgid "Switch to the new job invocation detail UI"
+msgstr ""
+
 msgid "Sync Job Templates"
 msgstr ""
 
@@ -1205,6 +1211,9 @@ msgstr "템플릿 버전"
 
 msgid "Template with id '%{id}' was not found"
 msgstr "ID가 '%{id}'인 템플릿을 찾을 수 없습니다."
+
+msgid "Template:"
+msgstr ""
 
 msgid "Templates list failed with:"
 msgstr ""
