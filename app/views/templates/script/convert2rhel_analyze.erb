@@ -31,6 +31,9 @@ export CONVERT2RHEL_DISABLE_TELEMETRY=1
 
 /usr/bin/convert2rhel analyze -y
 
+# Workaround for https://issues.redhat.com/browse/RHELC-1280
+subscription-manager facts --update
+
 if grep -q ERROR /var/log/convert2rhel/convert2rhel-pre-conversion.json; then
     echo "Error: Some error(s) have been found."
     echo "Exiting ..."
