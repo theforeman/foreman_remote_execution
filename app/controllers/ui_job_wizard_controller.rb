@@ -64,7 +64,10 @@ class UiJobWizardController < ApplicationController
     job = JobInvocation.authorized.find(params[:id])
     composer = JobInvocationComposer.from_job_invocation(job, params).params
     job_template_inputs = JobTemplate.authorized.find(composer[:template_invocations][0][:template_id]).template_inputs_with_foreign
-    inputs = Hash[job_template_inputs.map { |input| ["inputs[#{input[:name]}]", {:advanced => input[:advanced], :value => (composer[:template_invocations][0][:input_values].find { |value| value[:template_input_id] == input[:id] }).try(:[], :value)}] }]
+    job_template_inputs_hash = Hash[job_template_inputs.map { |input| ["inputs[#{input[:name]}]", {:advanced => input[:advanced], :value => (composer[:template_invocations][0][:input_values].find { |value| value[:template_input_id] == input[:id] }).try(:[], :value)}] }]
+    provider_inputs = composer[:template_invocations][0][:provider_input_values]
+    provider_inputs_hash = Hash[provider_inputs.map { |input| ["inputs[#{input[:name]}]", {:advanced => true, :value => input[:value]}] }]
+    inputs = job_template_inputs_hash.merge(provider_inputs_hash)
     job_organization = Taxonomy.find_by(id: job.task.input[:current_organization_id])
     job_location = Taxonomy.find_by(id: job.task.input[:current_location_id])
     render :json => {
