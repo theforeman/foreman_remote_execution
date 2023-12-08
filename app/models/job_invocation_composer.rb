@@ -271,6 +271,7 @@ class JobInvocationComposer
       job_invocation.pattern_template_invocations.map do |template_invocation|
         params = template_invocation.attributes.slice('template_id', 'effective_user')
         params['input_values'] = template_invocation.input_values.map { |v| v.attributes.slice('template_input_id', 'value') }
+        params['provider_input_values'] = template_invocation.provider_input_values.map { |v| v.attributes.slice('name', 'value') }
         params
       end
     end
