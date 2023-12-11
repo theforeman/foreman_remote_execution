@@ -1,13 +1,17 @@
 import React from 'react';
+import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Text, TextVariants, Form, Alert } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import {
+  selectJobCategoriesMissingPermissions,
+  selectIsLoading,
+} from '../../JobWizardSelectors';
 import { SelectField } from '../form/SelectField';
 import { GroupedSelectField } from '../form/GroupedSelectField';
 import { WizardTitle } from '../form/WizardTitle';
 import { WIZARD_TITLES, JOB_TEMPLATES } from '../../JobWizardConstants';
-import { selectIsLoading } from '../../JobWizardSelectors';
 
 export const CategoryAndTemplate = ({
   jobCategories,
@@ -57,7 +61,13 @@ export const CategoryAndTemplate = ({
   };
 
   const { categoryError, allTemplatesError, templateError } = errors;
-  const isError = !!(categoryError || allTemplatesError || templateError);
+  const missingPermissions = useSelector(selectJobCategoriesMissingPermissions);
+  const isError = !!(
+    (categoryError && isEmpty(missingPermissions)) ||
+    allTemplatesError ||
+    templateError
+  );
+
   return (
     <>
       <WizardTitle title={WIZARD_TITLES.categoryAndTemplate} />
@@ -69,7 +79,7 @@ export const CategoryAndTemplate = ({
           options={jobCategories}
           setValue={onSelectCategory}
           value={selectedCategory}
-          placeholderText={categoryError ? __('Error') : ''}
+          placeholderText={categoryError ? __('Not available') : ''}
           isDisabled={!!categoryError}
           isRequired
         />
@@ -82,11 +92,22 @@ export const CategoryAndTemplate = ({
           isDisabled={
             !!(categoryError || allTemplatesError || isTemplatesLoading)
           }
-          placeholderText={allTemplatesError ? __('Error') : ''}
+          placeholderText={allTemplatesError ? __('Not available') : ''}
         />
+        {!isEmpty(missingPermissions) && (
+          <Alert variant="warning" title={__('Access denied')}>
+            <span>
+              {__(
+                `Missing the required permissions: ${missingPermissions.join(
+                  ', '
+                )}`
+              )}
+            </span>
+          </Alert>
+        )}
         {isError && (
           <Alert variant="danger" title={__('Errors:')}>
-            {categoryError && (
+            {categoryError && isEmpty(missingPermissions) && (
               <span>
                 {__('Categories list failed with:')} {categoryError}
               </span>

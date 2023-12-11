@@ -1,4 +1,5 @@
 import URI from 'urijs';
+import { get } from 'lodash';
 import {
   selectAPIResponse,
   selectAPIStatus,
@@ -42,6 +43,18 @@ export const selectJobCategoriesStatus = state =>
 export const selectCategoryError = state =>
   selectAPIErrorMessage(state, JOB_CATEGORIES);
 
+export const selectJobCategoriesMissingPermissions = state => {
+  const jobCategoriesResponse = selectJobCategoriesResponse(state);
+  return (
+    get(jobCategoriesResponse, [
+      'response',
+      'data',
+      'error',
+      'missing_permissions',
+    ]) || []
+  );
+};
+
 export const selectAllTemplatesError = state =>
   selectAPIErrorMessage(state, JOB_TEMPLATES);
 
@@ -60,11 +73,21 @@ export const selectAdvancedTemplateInputs = state =>
 export const selectTemplateInputs = state =>
   selectAPIResponse(state, JOB_TEMPLATE).template_inputs || [];
 
+export const selectHostsResponse = state => selectAPIResponse(state, HOSTS_API);
+
 export const selectHostCount = state =>
-  selectAPIResponse(state, HOSTS_API).subtotal || 0;
+  selectHostsResponse(state).subtotal || 0;
 
 export const selectHosts = state =>
-  (selectAPIResponse(state, HOSTS_API).results || []).map(host => host.name);
+  (selectHostsResponse(state).results || []).map(host => host.name);
+
+export const selectHostsMissingPermissions = state => {
+  const hostsResponse = selectHostsResponse(state);
+  return (
+    get(hostsResponse, ['response', 'data', 'error', 'missing_permissions']) ||
+    []
+  );
+};
 
 export const selectIsLoadingHosts = state =>
   !selectAPIStatus(state, HOSTS_API) ||
