@@ -177,8 +177,11 @@ module ForemanRemoteExecution
                                             :'api/v2/job_templates' => [:update],
                                             :'api/v2/template_inputs' => [:create, :update, :destroy],
                                             :'api/v2/foreign_input_sets' => [:create, :update, :destroy]}, :resource_type => 'JobTemplate'
-          permission :edit_remote_execution_features, { :remote_execution_features => [:index, :show, :update],
-                                                        :'api/v2/remote_execution_features' => [:index, :show, :update, :available_remote_execution_features]}, :resource_type => 'RemoteExecutionFeature'
+          permission :view_remote_execution_features, { :remote_execution_features => [:index, :show],
+                                                        :'api/v2/remote_execution_features' => [:index, :show, :available_remote_execution_features]},
+            :resource_type => 'RemoteExecutionFeature'
+          permission :edit_remote_execution_features, { :remote_execution_features => [:update],
+                                                        :'api/v2/remote_execution_features' => [:update ]}, :resource_type => 'RemoteExecutionFeature'
           permission :destroy_job_templates, { :job_templates => [:destroy],
                                                :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
           permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
@@ -204,6 +207,7 @@ module ForemanRemoteExecution
           :create_template_invocations,
           :view_hosts,
           :view_smart_proxies,
+          :view_remote_execution_features,
         ].freeze
         MANAGER_PERMISSIONS = USER_PERMISSIONS + [
           :cancel_job_invocations,
