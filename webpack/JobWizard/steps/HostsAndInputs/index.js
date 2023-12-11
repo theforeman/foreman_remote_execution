@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { isEmpty, debounce } from 'lodash';
 import {
+  Alert,
   Button,
   Form,
   FormGroup,
@@ -10,13 +12,13 @@ import {
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilterIcon } from '@patternfly/react-icons';
-import { debounce } from 'lodash';
 import { get } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectTemplateInputs,
   selectWithKatello,
   selectHostCount,
+  selectHostsMissingPermissions,
   selectIsLoadingHosts,
 } from '../../JobWizardSelectors';
 import { SelectField } from '../form/SelectField';
@@ -98,6 +100,7 @@ const HostsAndInputs = ({
   ]);
   const withKatello = useSelector(selectWithKatello);
   const hostCount = useSelector(selectHostCount);
+  const missingPermissions = useSelector(selectHostsMissingPermissions);
   const dispatch = useDispatch();
 
   const selectedHosts = selected.hosts;
@@ -126,6 +129,7 @@ const HostsAndInputs = ({
   const [errorText, setErrorText] = useState(
     __('Please select at least one host')
   );
+
   return (
     <div className="target-hosts-and-inputs">
       <WizardTitle title={WIZARD_TITLES.hostsAndInputs} />
@@ -237,6 +241,17 @@ const HostsAndInputs = ({
           value={templateValues}
           setValue={setTemplateValues}
         />
+        {!isEmpty(missingPermissions) && (
+          <Alert variant="warning" title={__('Access denied')}>
+            <span>
+              {__(
+                `Missing the required permissions: ${missingPermissions.join(
+                  ', '
+                )}`
+              )}
+            </span>
+          </Alert>
+        )}
       </Form>
     </div>
   );
