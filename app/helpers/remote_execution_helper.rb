@@ -33,8 +33,7 @@ module RemoteExecutionHelper
       links << { title: _('Host detail'),
         action: { href: current_host_details_path(host), 'data-method': 'get', id: "#{host.name}-actions-detail" } }
     end
-
-    if authorized_for(hash_for_rerun_job_invocation_path(id: job_invocation, host_ids: [ host.id ], authorizer: job_hosts_authorizer))
+    if authorized_for(controller: :job_invocations, action: :create) && (!host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts))
       links << { title: (_('Rerun on %s') % host.name),
         action: { href: rerun_job_invocation_path(job_invocation, host_ids: [ host.id ]),
                   'data-method': 'get', id: "#{host.name}-actions-rerun" } }
@@ -56,7 +55,7 @@ module RemoteExecutionHelper
   def job_invocations_buttons
     [
       documentation_button_rex('3.2ExecutingaJob'),
-      display_link_if_authorized(_('Run Job'), hash_for_new_job_invocation_path, {:class => "btn btn-primary"}),
+      authorized_for(controller: :job_invocations, action: :create) ? link_to(_('Run Job'), hash_for_new_job_invocation_path, {:class => "btn btn-primary"}) : '',
     ]
   end
 
@@ -70,12 +69,12 @@ module RemoteExecutionHelper
         title: _('Create report for this job'),
         disabled: task.pending?)
     end
-    if authorized_for(hash_for_new_job_invocation_path)
+    if authorized_for(controller: :job_invocations, action: :create)
       buttons << link_to(_('Rerun'), rerun_job_invocation_path(:id => job_invocation.id),
         :class => 'btn btn-default',
         :title => _('Rerun the job'))
     end
-    if authorized_for(hash_for_new_job_invocation_path)
+    if authorized_for(controller: :job_invocations, action: :create)
       buttons << link_to(_('Rerun failed'), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
         :class => 'btn btn-default',
         :disabled => job_invocation.failed_hosts.none?,
