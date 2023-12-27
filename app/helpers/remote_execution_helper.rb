@@ -207,9 +207,7 @@ module RemoteExecutionHelper
   end
 
   def documentation_button_rex(section = '')
-    url = 'http://theforeman.org/plugins/foreman_remote_execution/' +
-      "#{ForemanRemoteExecution::VERSION.split('.').take(2).join('.')}/index.html#"
-    documentation_button section, :root_url => url
+    documentation_button section, type: 'plugin_manual', name: 'foreman_remote_execution', version: rex_doc_version, section: "##{section}"
   end
 
   def description_checkbox_f(f, job_template, disabled)
@@ -279,5 +277,9 @@ module RemoteExecutionHelper
         status: template_invocation_status(task, job_invocation.task),
         actions: template_invocation_actions(task, host, job_invocation, template_invocation) }
     end
+  end
+
+  def rex_doc_version
+    ForemanRemoteExecution::VERSION.split('.').take(2).join('.')
   end
 end
