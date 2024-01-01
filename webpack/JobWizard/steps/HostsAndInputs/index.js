@@ -104,6 +104,7 @@ const HostsAndInputs = ({
   const dispatch = useDispatch();
 
   const selectedHosts = selected.hosts;
+  const setLabel = result => result.displayName || result.name;
   const setSelectedHosts = newSelected =>
     setSelected(prevSelected => ({
       ...prevSelected,
@@ -191,6 +192,7 @@ const HostsAndInputs = ({
                 apiKey={HOSTS}
                 name="hosts"
                 placeholderText={__('Filter by hosts')}
+                setLabel={setLabel}
               />
             )}
             {hostMethod === hostMethods.hostCollections && (
@@ -201,6 +203,7 @@ const HostsAndInputs = ({
                 name="host collections"
                 url="/katello/api/host_collections?per_page=100"
                 placeholderText={__('Filter by host collections')}
+                setLabel={setLabel}
               />
             )}
             {hostMethod === hostMethods.hostGroups && (
@@ -210,6 +213,7 @@ const HostsAndInputs = ({
                 apiKey={HOST_GROUPS}
                 name="host groups"
                 placeholderText={__('Filter by host groups')}
+                setLabel={setLabel}
               />
             )}
           </InputGroup>
@@ -223,6 +227,7 @@ const HostsAndInputs = ({
           setSelectedHostGroups={setSelectedHostGroups}
           hostsSearchQuery={hostsSearchQuery}
           clearSearch={clearSearch}
+          setLabel={setLabel}
         />
         <Text>
           {__('Apply to')}{' '}

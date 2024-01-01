@@ -78,8 +78,13 @@ export const selectHostsResponse = state => selectAPIResponse(state, HOSTS_API);
 export const selectHostCount = state =>
   selectHostsResponse(state).subtotal || 0;
 
-export const selectHosts = state =>
-  (selectHostsResponse(state).results || []).map(host => host.name);
+export const selectHosts = state => {
+  const hosts = selectHostsResponse(state).results || [];
+  return hosts.map(host => ({
+    name: host.name,
+    display_name: host.display_name,
+  }));
+};
 
 export const selectHostsMissingPermissions = state => {
   const hostsResponse = selectHostsResponse(state);

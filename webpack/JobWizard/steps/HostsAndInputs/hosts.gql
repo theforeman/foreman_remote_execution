@@ -4,6 +4,7 @@ query($search: String!) {
     nodes {
       id
       name
+      displayName
     }
   }
 }

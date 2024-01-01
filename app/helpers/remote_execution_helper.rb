@@ -34,7 +34,7 @@ module RemoteExecutionHelper
         action: { href: current_host_details_path(host), 'data-method': 'get', id: "#{host.name}-actions-detail" } }
     end
     if authorized_for(controller: :job_invocations, action: :create) && (!host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts))
-      links << { title: (_('Rerun on %s') % host.name),
+      links << { title: (_('Rerun on %s') % host),
         action: { href: rerun_job_invocation_path(job_invocation, host_ids: [ host.id ]),
                   'data-method': 'get', id: "#{host.name}-actions-rerun" } }
     end
@@ -274,7 +274,7 @@ module RemoteExecutionHelper
       task = template_invocation.try(:run_host_job_task)
       link_authorized = !task.nil? && authorized_for(hash_for_template_invocation_path(:id => template_invocation).merge(:auth_object => host, :permission => :view_hosts, :authorizer => job_hosts_authorizer))
 
-      { name: host.name,
+      { name: host.to_label,
         link: link_authorized ? template_invocation_path(:id => template_invocation) : '',
         status: template_invocation_status(task, job_invocation.task),
         actions: template_invocation_actions(task, host, job_invocation, template_invocation) }

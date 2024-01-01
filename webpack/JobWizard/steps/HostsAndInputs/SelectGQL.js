@@ -38,6 +38,7 @@ export const useNameSearchGQL = apiKey => {
         data?.[dataName[apiKey]]?.nodes.map(node => ({
           id: decodeId(node.id),
           name: node.name,
+          displayName: node.displayName,
         })) || [],
     },
     loading,

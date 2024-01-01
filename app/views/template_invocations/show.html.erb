@@ -3,7 +3,7 @@
               :url => job_invocation_path(@template_invocation.job_invocation_id) }]
 
 if @host
-  items << { :caption => _('Template Invocation for %s') % @host.name }
+  items << { :caption => _('Template Invocation for %s') % @host }
   breadcrumbs(:resource_url => template_invocations_api_job_invocation_path(@template_invocation.job_invocation_id),
                :name_field => 'host_name',
                :switcher_item_url => template_invocation_path(':id'),
@@ -30,7 +30,7 @@ end
 <% if @host %>
   <% proxy_id = @template_invocation_task.input[:proxy_id] %>
   <h3>
-    <%= _('Target: ') %><%= link_to(@host.name, current_host_details_path(@host)) %>
+    <%= _('Target: ') %><%= link_to(@host, current_host_details_path(@host)) %>
     <% if proxy_id && proxy = SmartProxy.find_by(id: proxy_id) %>
       <%= _('using Smart Proxy') %> <%= link_to(proxy.name, smart_proxy_path(proxy)) %>
     <% end %>

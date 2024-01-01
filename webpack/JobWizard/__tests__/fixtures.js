@@ -227,9 +227,9 @@ export const gqlMock = [
         hosts: {
           totalCount: 3,
           nodes: [
-            { id: 'MDE6SG9zdC0x', name: 'host1' },
-            { id: 'MDE6SG9zdC0y', name: 'host2' },
-            { id: 'MDE6SG9zdC0z', name: 'host3' },
+            { id: 'MDE6SG9zdC0x', name: 'host1', displayName: 'host1' },
+            { id: 'MDE6SG9zdC0y', name: 'host2', displayName: 'host2' },
+            { id: 'MDE6SG9zdC0z', name: 'host3', displayName: 'host3' },
           ],
         },
       },

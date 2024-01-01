@@ -7,7 +7,7 @@
 <% if @hosts.any? -%>
   <ul>
     <% @hosts.each do |host| -%>
-        <li><%= link_to h(host.name), current_host_details_path(host), :target => '_blank' %></li>
+        <li><%= link_to h(host), current_host_details_path(host), :target => '_blank' %></li>
     <% end -%>
 
     <% if @additional > 0 -%>
