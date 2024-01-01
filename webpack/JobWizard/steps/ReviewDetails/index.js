@@ -79,12 +79,13 @@ const ReviewDetails = ({
 
   const hostsCount = useSelector(selectHostCount);
   const [hostPreviewOpen, setHostPreviewOpen] = useState(false);
+  const NUM_CHIPS = 3;
   const stringHosts = () => {
     if (hosts.length === 0) {
       return __('No Target Hosts');
     }
-    if (hosts.length === 1 || hosts.length === 2) {
-      return hosts.join(', ');
+    if (hosts.length < NUM_CHIPS) {
+      return hosts.map(host => host.display_name).join(', ');
     }
     return (
       <div>

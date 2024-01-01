@@ -22,16 +22,16 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
     >
       <List isPlain>
         {hosts.map(host => (
-          <ListItem key={host}>
+          <ListItem key={host.name}>
             <Button
               component="a"
-              href={foremanUrl(`/hosts/${host}`)}
+              href={foremanUrl(`/hosts/${host.name}`)}
               variant="link"
               target="_blank"
               rel="noreferrer"
               isInline
             >
-              {host}
+              {host.display_name}
             </Button>
           </ListItem>
         ))}

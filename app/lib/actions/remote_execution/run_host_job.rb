@@ -28,6 +28,7 @@ module Actions
         raise _('Could not use any template used in the job invocation') if template_invocation.blank?
         features = template_invocation.template.remote_execution_features.pluck(:label).uniq
         action_subject(host,
+          :host_display_name => host.to_label,
           :job_category => job_invocation.job_category,
           :description => job_invocation.description,
           :job_invocation_id => job_invocation.id,
@@ -101,8 +102,12 @@ module Actions
       end
 
       def humanized_input
-        N_('%{description} on %{host}') % { :host => input[:host].try(:[], :name),
-          :description => input[:description].try(:capitalize) || input[:job_category] }
+        return unless input.present?
+
+        N_('%{description} on %{host}') % {
+          host: input[:host_display_name],
+          description: input[:description].try(:capitalize) || input[:job_category],
+        }
       end
 
       def humanized_name

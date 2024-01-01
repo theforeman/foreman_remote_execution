@@ -7,6 +7,7 @@ const apiKey = 'HOSTS_KEY';
 describe('SearchSelect', () => {
   it('too many', () => {
     const onSearch = jest.fn();
+    const setLabel = jest.fn();
     render(
       <SearchSelect
         selected={['hosts1,host2']}
@@ -19,6 +20,7 @@ describe('SearchSelect', () => {
           { results: ['host1', 'host2', 'host3'], subtotal: 101 },
           false,
         ]}
+        setLabel={setLabel}
       />
     );
     const openSelectbutton = screen.getByRole('button', {

@@ -33,7 +33,7 @@ module JobInvocationsHelper
   end
 
   def collapsed_preview(target)
-    title = target.try(:name) || 'N/A'
+    title = target || 'N/A'
     content_tag(:h5,
       :class => "expander collapsed out",
       :data => { :toggle => 'collapse',

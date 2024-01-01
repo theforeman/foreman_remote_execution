@@ -16,6 +16,7 @@ export const SearchSelect = ({
   apiKey,
   url,
   variant,
+  setLabel,
 }) => {
   const [onSearch, response, isLoading] = useNameSearch(apiKey, url);
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +49,7 @@ export const SearchSelect = ({
     ...selectOptions,
     ...Immutable.asMutable(response?.results || [])?.map((result, index) => (
       <SelectOption key={index + 1} value={result.id}>
-        {result.name}
+        {setLabel(result)}
       </SelectOption>
     )),
   ];
@@ -104,6 +105,7 @@ SearchSelect.propTypes = {
   name: PropTypes.string,
   selected: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   setSelected: PropTypes.func.isRequired,
+  setLabel: PropTypes.func.isRequired,
   placeholderText: PropTypes.string,
   apiKey: PropTypes.string.isRequired,
   url: PropTypes.string,

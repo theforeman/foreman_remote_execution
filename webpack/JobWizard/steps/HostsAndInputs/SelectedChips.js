@@ -4,7 +4,7 @@ import { Chip, ChipGroup, Button } from '@patternfly/react-core';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { hostMethods } from '../../JobWizardConstants';
 
-const SelectedChip = ({ selected, setSelected, categoryName }) => {
+const SelectedChip = ({ selected, setSelected, categoryName, setLabel }) => {
   const deleteItem = itemToRemove => {
     setSelected(oldSelected =>
       oldSelected.filter(({ id }) => id !== itemToRemove)
@@ -24,14 +24,14 @@ const SelectedChip = ({ selected, setSelected, categoryName }) => {
           setSelected(() => []);
         }}
       >
-        {selected.map(({ name, id }, index) => (
+        {selected.map((result, index) => (
           <Chip
             key={index}
-            id={`${categoryName}-${id}`}
-            onClick={() => deleteItem(id)}
-            closeBtnAriaLabel={`Remove ${name}`}
+            id={`${categoryName}-${result.id}`}
+            onClick={() => deleteItem(result.id)}
+            closeBtnAriaLabel={`Remove ${result.name}`}
           >
-            {name}
+            {setLabel(result)}
           </Chip>
         ))}
       </ChipGroup>
@@ -49,6 +49,7 @@ export const SelectedChips = ({
   setSelectedHostGroups,
   hostsSearchQuery,
   clearSearch,
+  setLabel,
 }) => {
   const clearAll = () => {
     setSelectedHosts(() => []);
@@ -67,16 +68,19 @@ export const SelectedChips = ({
         selected={selectedHosts}
         categoryName={hostMethods.hosts}
         setSelected={setSelectedHosts}
+        setLabel={setLabel}
       />
       <SelectedChip
         selected={selectedHostCollections}
         categoryName={hostMethods.hostCollections}
         setSelected={setSelectedHostCollections}
+        setLabel={setLabel}
       />
       <SelectedChip
         selected={selectedHostGroups}
         categoryName={hostMethods.hostGroups}
         setSelected={setSelectedHostGroups}
+        setLabel={setLabel}
       />
       <SelectedChip
         selected={
@@ -86,6 +90,7 @@ export const SelectedChips = ({
         }
         categoryName={hostMethods.searchQuery}
         setSelected={clearSearch}
+        setLabel={setLabel}
       />
       {showClear && (
         <Button variant="link" className="clear-chips" onClick={clearAll}>
@@ -105,10 +110,12 @@ SelectedChips.propTypes = {
   setSelectedHostGroups: PropTypes.func.isRequired,
   hostsSearchQuery: PropTypes.string.isRequired,
   clearSearch: PropTypes.func.isRequired,
+  setLabel: PropTypes.func.isRequired,
 };
 
 SelectedChip.propTypes = {
   categoryName: PropTypes.string.isRequired,
   selected: PropTypes.array.isRequired,
   setSelected: PropTypes.func.isRequired,
+  setLabel: PropTypes.func.isRequired,
 };

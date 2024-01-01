@@ -39,10 +39,14 @@ export const useAutoFill = ({
             handleSuccess: ({ data }) => {
               setSelectedTargets(currentTargets => ({
                 ...currentTargets,
-                hosts: (data.results || []).map(({ id, name }) => ({
-                  id,
-                  name,
-                })),
+                hosts: (data.results || []).map(
+                  // eslint-disable-next-line camelcase
+                  ({ id, name, display_name }) => ({
+                    id,
+                    // eslint-disable-next-line camelcase
+                    name: display_name || name,
+                  })
+                ),
               }));
             },
           })
