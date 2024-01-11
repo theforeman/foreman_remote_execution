@@ -77,6 +77,11 @@ class JobInvocation < ApplicationRecord
     :ext_method => :search_by_recurring_logic, :only_explicit => true,
     :complete_value => { :true => true, :false => false }
 
+  validates :concurrency_level, :numericality => {
+    :allow_nil => true,
+    :greater_than => 0,
+  }
+
   default_scope -> { order('job_invocations.id DESC') }
 
   scope :latest_jobs, -> { unscoped.joins(:task).order('foreman_tasks_tasks.start_at DESC').authorized(:view_job_invocations).limit(5) }
