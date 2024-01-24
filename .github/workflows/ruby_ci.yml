@@ -19,4 +19,4 @@ jobs:
       plugin: foreman_remote_execution
       # https://github.com/theforeman/foreman/pull/9871
       foreman_repository: ofedoren/foreman
-      foreman_version: feat-36849-add-ruby-3-ga
+      foreman_version: foreman-on-ruby-3-letsgooo
