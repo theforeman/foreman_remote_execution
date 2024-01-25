@@ -65,13 +65,13 @@ module ForemanRemoteExecution
         delayed
         assert_not targeting.resolved?
         planned
-        _(targeting.hosts).must_include(host)
+        assert_includes targeting.hosts, host
       end
 
       it 'resolves the hosts on static targeting in delay' do
         assert_not targeting.resolved?
         delayed
-        _(targeting.hosts).must_include(host)
+        assert_includes targeting.hosts, host
         # Verify Targeting#resolve_hosts! won't be hit again
         targeting.expects(:resolve_hosts!).never
         planned
@@ -79,7 +79,7 @@ module ForemanRemoteExecution
 
       it 'resolves the hosts on static targeting in plan phase if not resolved yet' do
         planned
-        _(targeting.hosts).must_include(host)
+        assert_includes targeting.hosts, host
       end
     end
 
@@ -91,16 +91,16 @@ module ForemanRemoteExecution
 
     it 'uses the BindJobInvocation middleware' do
       planned
-      _(job_invocation.task_id).must_equal uuid
+      assert_equal job_invocation.task_id, uuid
     end
 
     # In plan phase this is handled by #action_subject
     #   which is expected in tests
     it 'sets input in delay phase when delayed' do
       job_invocation_hash = delayed.input[:job_invocation]
-      _(job_invocation_hash['id']).must_equal job_invocation.id
-      _(job_invocation_hash['name']).must_equal job_invocation.job_category
-      _(job_invocation_hash['description']).must_equal job_invocation.description
+      assert_equal job_invocation_hash['id'], job_invocation.id
+      assert_equal job_invocation_hash['name'], job_invocation.job_category
+      assert_equal job_invocation_hash['description'], job_invocation.description
       planned # To make the expectations happy
     end
 
@@ -108,7 +108,7 @@ module ForemanRemoteExecution
       it 'defaults to Setting[foreman_tasks_proxy_batch_size]' do
         Setting.expects(:[]).with('foreman_tasks_proxy_batch_size').returns(14)
         planned
-        _(planned.proxy_batch_size).must_equal 14
+        assert_equal 14, planned.proxy_batch_size
       end
 
       it 'gets the provider value' do
@@ -116,7 +116,7 @@ module ForemanRemoteExecution
         provider.expects(:proxy_batch_size).returns(15)
         JobTemplate.any_instance.expects(:provider).returns(provider)
 
-        _(planned.proxy_batch_size).must_equal 15
+        assert_equal 15, planned.proxy_batch_size
       end
     end
 
@@ -124,12 +124,12 @@ module ForemanRemoteExecution
       let(:level) { 5 }
 
       it 'can be disabled' do
-        _(planned.concurrency_limit).must_equal nil
+        assert_nil planned.concurrency_limit
       end
 
       it 'can limit concurrency level' do
         job_invocation.expects(:concurrency_level).twice.returns(level)
-        _(planned.concurrency_limit).must_equal level
+        assert_equal level, planned.concurrency_limit
       end
     end
 

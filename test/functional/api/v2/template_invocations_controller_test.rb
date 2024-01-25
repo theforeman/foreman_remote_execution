@@ -13,8 +13,8 @@ module Api
       test 'should get template invocations belonging to job invocation' do
         get :template_invocations, params: { :id => @job.id }
         invocations = ActiveSupport::JSON.decode(@response.body)
-        _(invocations['results'].count).must_equal @job.template_invocations.count
-        _(invocations['total']).must_equal @job.template_invocations.count
+        assert_equal @job.template_invocations.count, invocations['results'].count
+        assert_equal @job.template_invocations.count, invocations['total']
 
         expected_result = {
           'id'                   => @template_invocation.id,
@@ -25,7 +25,7 @@ module Api
           'job_invocation_id'    => @job.id,
           'run_host_job_task_id' => @template_invocation.run_host_job_task_id,
         }
-        _(invocations['results']).must_equal [expected_result]
+        assert_equal [expected_result], invocations['results']
         assert_response :success
       end
     end

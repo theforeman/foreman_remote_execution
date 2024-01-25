@@ -11,12 +11,12 @@ class JobInvocationTest < ActiveSupport::TestCase
 
     it 'is able to perform search through job invocations' do
       found_jobs = JobInvocation.search_for(%{job_category = "#{job_invocation.job_category}"}).paginate(:page => 1).order('job_invocations.id DESC')
-      _(found_jobs).must_equal [job_invocation]
+      assert_equal [job_invocation], found_jobs
     end
 
     it 'is able to auto complete description' do
       expected = 'description =  "A text with \"quotes\""'
-      JobInvocation.complete_for('description = ').must_equal [expected]
+      assert_equal [expected], JobInvocation.complete_for('description = ')
     end
   end
 
@@ -40,7 +40,7 @@ class JobInvocationTest < ActiveSupport::TestCase
       job_invocation.save!
       host.destroy
       job_invocation.reload
-      _(job_invocation.template_invocations).must_be_empty
+      assert_empty job_invocation.template_invocations
     end
   end
 
@@ -85,13 +85,13 @@ class JobInvocationTest < ActiveSupport::TestCase
       it 'generates description from input values' do
         job_invocation.description_format = '%{job_category} - %{foo}'
         job_invocation.generate_description
-        _(job_invocation.description).must_equal "#{job_invocation.job_category} - #{@input_value.value}"
+        assert_equal "#{job_invocation.job_category} - #{@input_value.value}", job_invocation.description
       end
 
       it 'handles missing keys correctly' do
         job_invocation.description_format = '%{job_category} - %{missing_key}'
         job_invocation.generate_description
-        _(job_invocation.description).must_equal "#{job_invocation.job_category} - ''"
+        assert_equal "#{job_invocation.job_category} - ''", job_invocation.description
       end
 
       it 'truncates generated description to 255 characters' do
@@ -100,22 +100,22 @@ class JobInvocationTest < ActiveSupport::TestCase
         job_invocation.description_format = '%{job_category}'
         job_invocation.job_category = 'a' * 1000
         job_invocation.generate_description
-        _(job_invocation.description).must_equal expected_result
+        assert_equal expected_result, job_invocation.description
       end
     end
   end
 
   context 'future execution' do
     it 'can report host count' do
-      _(job_invocation.total_hosts_count).must_equal 'N/A'
+      assert_equal 'N/A', job_invocation.total_hosts_count
       job_invocation.targeting.expects(:resolved_at).returns(Time.now.getlocal)
-      _(job_invocation.total_hosts_count).must_equal 0
+      assert_equal 0, job_invocation.total_hosts_count
     end
 
     # task does not exist
-    specify { _(job_invocation.status).must_equal HostStatus::ExecutionStatus::QUEUED }
-    specify { _(job_invocation.status_label).must_equal HostStatus::ExecutionStatus::STATUS_NAMES[HostStatus::ExecutionStatus::QUEUED] }
-    specify { _(job_invocation.progress).must_equal 0 }
+    specify { assert_equal HostStatus::ExecutionStatus::QUEUED, job_invocation.status }
+    specify { assert_equal HostStatus::ExecutionStatus::STATUS_NAMES[HostStatus::ExecutionStatus::QUEUED], job_invocation.status_label }
+    specify { assert_equal 0, job_invocation.progress }
   end
 
   context 'with task' do
@@ -138,10 +138,10 @@ class JobInvocationTest < ActiveSupport::TestCase
     context 'which is scheduled' do
       before { task.state = 'scheduled' }
 
-      specify { _(job_invocation.status).must_equal HostStatus::ExecutionStatus::QUEUED }
-      specify { _(job_invocation.queued?).must_equal true }
-      specify { _(job_invocation.progress).must_equal 0 }
-      specify { _(job_invocation.progress_report).must_equal progress_report_without_sub_tasks }
+      specify { assert_equal HostStatus::ExecutionStatus::QUEUED, job_invocation.status }
+      specify { assert_equal true, job_invocation.queued? }
+      specify { assert_equal 0, job_invocation.progress }
+      specify { assert_equal progress_report_without_sub_tasks, job_invocation.progress_report }
     end
 
     context 'with cancelled task' do
@@ -153,7 +153,7 @@ class JobInvocationTest < ActiveSupport::TestCase
       it 'calculates the progress correctly' do
         job_invocation.targeting.stubs(:resolved?).returns(true)
         task.expects(:sub_tasks_counts).never
-        _(job_invocation.progress_report).must_equal progress_report_without_sub_tasks
+        assert_equal progress_report_without_sub_tasks, job_invocation.progress_report
       end
     end
 
@@ -163,8 +163,8 @@ class JobInvocationTest < ActiveSupport::TestCase
         task.result = 'success'
       end
 
-      specify { _(job_invocation.status).must_equal HostStatus::ExecutionStatus::OK }
-      specify { _(job_invocation.queued?).must_equal false }
+      specify { assert_equal HostStatus::ExecutionStatus::OK, job_invocation.status }
+      specify { assert_equal false, job_invocation.queued? }
 
       it 'calculates the progress correctly' do
         sub_tasks = [ForemanTasks::Task.new]
@@ -173,7 +173,7 @@ class JobInvocationTest < ActiveSupport::TestCase
         sub_tasks.expects(:where).with(:result => %w(success warning error)).returns(sub_tasks)
         job_invocation.stubs(:sub_tasks).returns(sub_tasks)
 
-        _(job_invocation.progress).must_equal 100
+        assert_equal 100, job_invocation.progress
       end
     end
   end
@@ -203,29 +203,29 @@ class JobInvocationTest < ActiveSupport::TestCase
 
     it 'returns only failed hosts when not #finished?' do
       invocation.stubs(:finished?).returns(false)
-      _(invocation.failed_hosts.count).must_equal 1
+      assert_equal 1, invocation.failed_hosts.count
     end
 
     it 'returns failed hosts and hosts without task when #finished?' do
       invocation.stubs(:finished?).returns(true)
-      _(invocation.failed_hosts.count).must_equal 2
+      assert_equal 2, invocation.failed_hosts.count
     end
 
     describe '#failed_template_invocations' do
       it 'finds only failed template invocations' do
         template_invocations = invocation.send(:failed_template_invocations)
-        _(template_invocations.count).must_equal 1
+        assert_equal 1, template_invocations.count
         template_invocation = template_invocations.first
-        _(template_invocation.run_host_job_task.result).must_equal 'error'
+        assert_equal 'error', template_invocation.run_host_job_task.result
       end
     end
 
     describe '#not_failed_template_invocations' do
       it 'finds only non-failed template invocations' do
         template_invocations = invocation.send(:not_failed_template_invocations)
-        _(template_invocations.count).must_equal 1
+        assert_equal 1, template_invocations.count
         template_invocation = template_invocations.first
-        _(template_invocation.run_host_job_task.result).must_equal 'success'
+        assert_equal 'success', template_invocation.run_host_job_task.result
       end
     end
   end

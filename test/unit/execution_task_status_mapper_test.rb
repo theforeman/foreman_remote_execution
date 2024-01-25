@@ -5,11 +5,11 @@ class ExecutionTaskStatusMapperTest < ActiveSupport::TestCase
     let(:subject) { HostStatus::ExecutionStatus::ExecutionTaskStatusMapper }
 
     it 'accepts status number as well as string representation' do
-      _(subject.sql_conditions_for(HostStatus::ExecutionStatus::ERROR)).must_equal subject.sql_conditions_for('failed')
+      assert_equal subject.sql_conditions_for(HostStatus::ExecutionStatus::ERROR), subject.sql_conditions_for('failed')
     end
 
     it 'does not find any task for unknown state' do
-      _(subject.sql_conditions_for(-1)).must_equal [ '1 = 0' ]
+      assert_equal subject.sql_conditions_for(-1), [ '1 = 0' ]
     end
   end
 
@@ -22,12 +22,12 @@ class ExecutionTaskStatusMapperTest < ActiveSupport::TestCase
     describe 'is queued' do
       context 'when there is no task' do
         before { subject.task = nil }
-        specify { _(subject.status).must_equal HostStatus::ExecutionStatus::QUEUED }
+        specify { assert_equal subject.status, HostStatus::ExecutionStatus::QUEUED }
       end
 
       context 'when the task is scheduled in future' do
         before { subject.task.state = 'scheduled' }
-        specify { _(subject.status).must_equal HostStatus::ExecutionStatus::QUEUED }
+        specify { assert_equal subject.status, HostStatus::ExecutionStatus::QUEUED }
       end
     end
 
@@ -37,19 +37,19 @@ class ExecutionTaskStatusMapperTest < ActiveSupport::TestCase
       describe 'is succeeded' do
         context 'without error' do
           before { subject.task.result = 'success' }
-          specify { _(subject.status).must_equal HostStatus::ExecutionStatus::OK }
+          specify { assert_equal subject.status, HostStatus::ExecutionStatus::OK }
         end
       end
 
       describe 'is failed' do
         context 'with error' do
           before { subject.task.result = 'error' }
-          specify { _(subject.status).must_equal HostStatus::ExecutionStatus::ERROR }
+          specify { assert_equal subject.status, HostStatus::ExecutionStatus::ERROR }
         end
 
         context 'without error but just with warning (sub task failed)' do
           before { subject.task.result = 'warning' }
-          specify { _(subject.status).must_equal HostStatus::ExecutionStatus::ERROR }
+          specify { assert_equal subject.status, HostStatus::ExecutionStatus::ERROR }
         end
       end
     end
@@ -58,7 +58,7 @@ class ExecutionTaskStatusMapperTest < ActiveSupport::TestCase
       before { subject.task.state = 'running' }
 
       describe 'is pending' do
-        specify { _(subject.status).must_equal HostStatus::ExecutionStatus::RUNNING }
+        specify { assert_equal subject.status, HostStatus::ExecutionStatus::RUNNING }
       end
     end
   end
@@ -73,7 +73,7 @@ class ExecutionTaskStatusMapperTest < ActiveSupport::TestCase
       end
 
       it 'returns ok label' do
-        _(subject).must_equal HostStatus::ExecutionStatus::STATUS_NAMES[HostStatus::ExecutionStatus::OK]
+        assert_equal subject, HostStatus::ExecutionStatus::STATUS_NAMES[HostStatus::ExecutionStatus::OK]
       end
     end
 
@@ -84,7 +84,7 @@ class ExecutionTaskStatusMapperTest < ActiveSupport::TestCase
       end
 
       it 'returns failed label' do
-        _(subject).must_equal HostStatus::ExecutionStatus::STATUS_NAMES[HostStatus::ExecutionStatus::ERROR]
+        assert_equal subject, HostStatus::ExecutionStatus::STATUS_NAMES[HostStatus::ExecutionStatus::ERROR]
       end
     end
   end

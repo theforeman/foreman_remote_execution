@@ -13,17 +13,17 @@ class ForemanRemoteExecutionForemanTasksCleanerExtensionsTest < ActiveSupport::T
   it 'tries to delete associated job invocations' do
     job = FactoryBot.create(:job_invocation, :with_task)
     ForemanTasks::Cleaner.new(:filter => "id = #{job.task.id}").delete
-    JobInvocation.where(:id => job.id).must_be :empty?
+    assert_empty JobInvocation.where(:id => job.id)
   end
 
   it 'removes orphaned job invocations' do
     job = FactoryBot.create(:job_invocation, :with_task)
-    _(JobInvocation.where(:id => job.id).count).must_equal 1
+    assert_equal 1, JobInvocation.where(:id => job.id).count
     job.task.delete
     job.reload
-    _(job.task).must_be :nil?
-    _(job.task_id).wont_be :nil?
+    assert_nil job.task
+    refute_nil job.task_id
     ForemanTasks::Cleaner.new(:filter => '').delete
-    JobInvocation.where(:id => job.id).must_be :empty?
+    assert_empty JobInvocation.where(:id => job.id)
   end
 end

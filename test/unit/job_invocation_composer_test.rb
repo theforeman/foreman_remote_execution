@@ -75,13 +75,13 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       describe '#available_templates_for(job_category)' do
         it 'find the templates only for a given job name' do
           results = composer.available_templates_for(trying_job_template_1.job_category)
-          _(results).must_include trying_job_template_1
-          _(results).wont_include trying_job_template_2
+          assert_includes results, trying_job_template_1
+          refute_includes results, trying_job_template_2
         end
 
         it 'it respects view permissions' do
           results = composer.available_templates_for(trying_job_template_1.job_category)
-          _(results).wont_include unauthorized_job_template_1
+          refute_includes results, unauthorized_job_template_1
         end
       end
 
@@ -89,13 +89,13 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         let(:job_categories) { composer.available_job_categories }
 
         it 'find only job names that user is granted to view' do
-          _(job_categories).must_include trying_job_template_1.job_category
-          _(job_categories).must_include trying_job_template_2.job_category
-          _(job_categories).wont_include unauthorized_job_template_2.job_category
+          assert_includes job_categories, trying_job_template_1.job_category
+          assert_includes job_categories, trying_job_template_2.job_category
+          refute_includes job_categories, unauthorized_job_template_2.job_category
         end
 
         it 'every job name is listed just once' do
-          _(job_categories.uniq).must_equal job_categories
+          assert_equal job_categories.uniq, job_categories
         end
       end
 
@@ -104,13 +104,13 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         it 'finds only providers which user is granted to view' do
           composer.job_invocation.job_category = 'trying_job_template_1'
-          _(provider_types).must_include 'SSH'
-          _(provider_types).wont_include 'Mcollective'
-          _(provider_types).wont_include 'Ansible'
+          assert_includes provider_types, 'SSH'
+          refute_includes provider_types, 'Mcollective'
+          refute_includes provider_types, 'Ansible'
         end
 
         it 'every provider type is listed just once' do
-          _(provider_types.uniq).must_equal provider_types
+          assert_equal provider_types.uniq, provider_types
         end
       end
 
@@ -122,9 +122,9 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         end
 
         it 'returns only authorized inputs based on templates' do
-          _(composer.available_template_inputs).must_include(input1)
-          _(composer.available_template_inputs).must_include(input2)
-          _(composer.available_template_inputs).wont_include(unauthorized_input1)
+          assert_includes composer.available_template_inputs, input1
+          assert_includes composer.available_template_inputs, input2
+          refute_includes composer.available_template_inputs, unauthorized_input1
         end
 
         context 'params contains job template ids' do
@@ -134,9 +134,9 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           let(:params) { { :job_invocation => providers_params }.with_indifferent_access }
 
           it 'finds the inputs only specified job templates' do
-            _(composer.available_template_inputs).must_include(input1)
-            _(composer.available_template_inputs).wont_include(input2)
-            _(composer.available_template_inputs).wont_include(unauthorized_input1)
+            assert_includes composer.available_template_inputs, input1
+            refute_includes composer.available_template_inputs, input2
+            refute_includes composer.available_template_inputs, unauthorized_input1
           end
         end
       end
@@ -149,7 +149,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         it 'returns false if there is one provider' do
           composer.stubs(:available_provider_types => [ 'SSH' ])
-          assert_not composer.needs_provider_type_selection?
+          refute composer.needs_provider_type_selection?
         end
       end
 
@@ -161,40 +161,40 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         it 'returns all templates for a given provider respecting template permissions' do
           trying_job_template_4 = FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying4', :provider_type => 'Ansible')
           result = composer.templates_for_provider('SSH')
-          _(result).must_include trying_job_template_1
-          _(result).must_include trying_job_template_3
-          _(result).wont_include unauthorized_job_template_1
-          _(result).wont_include trying_job_template_4
+          assert_includes result, trying_job_template_1
+          assert_includes result, trying_job_template_3
+          refute_includes result, unauthorized_job_template_1
+          refute_includes result, trying_job_template_4
 
           result = composer.templates_for_provider('Ansible')
-          _(result).wont_include trying_job_template_1
-          _(result).wont_include trying_job_template_3
-          _(result).wont_include unauthorized_job_template_2
-          _(result).must_include trying_job_template_4
+          refute_includes result, trying_job_template_1
+          refute_includes result, trying_job_template_3
+          refute_includes result, unauthorized_job_template_2
+          assert_includes result, trying_job_template_4
         end
       end
 
       describe '#rerun_possible?' do
         it 'is true when not rerunning' do
-          _(composer).must_be :rerun_possible?
+          assert composer.rerun_possible?
         end
 
         it 'is true when rerunning with pattern tempalte invocations' do
           composer.expects(:reruns).returns(1)
           composer.job_invocation.expects(:pattern_template_invocations).returns([1])
-          _(composer).must_be :rerun_possible?
+          assert composer.rerun_possible?
         end
 
         it 'is false when rerunning without pattern template invocations' do
           composer.expects(:reruns).returns(1)
           composer.job_invocation.expects(:pattern_template_invocations).returns([])
-          _(composer).wont_be :rerun_possible?
+          refute composer.rerun_possible?
         end
       end
 
       describe '#selected_job_templates' do
         it 'returns no template if none was selected through params' do
-          _(composer.selected_job_templates).must_be_empty
+          assert_empty composer.selected_job_templates
         end
 
         context 'extra unavailable templates id were selected' do
@@ -207,14 +207,14 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
           it 'ignores unauthorized template' do
             unauthorized # make sure unautorized exists
-            _(composer.selected_job_templates).wont_include unauthorized
+            refute_includes composer.selected_job_templates, unauthorized
           end
 
           it 'contains only authorized template specified in params' do
             mcollective_authorized # make sure mcollective_authorized exists
-            _(composer.selected_job_templates).must_include trying_job_template_1
-            _(composer.selected_job_templates).must_include mcollective_authorized
-            _(composer.selected_job_templates).wont_include trying_job_template_3
+            assert_includes composer.selected_job_templates, trying_job_template_1
+            assert_includes composer.selected_job_templates, mcollective_authorized
+            refute_includes composer.selected_job_templates, trying_job_template_3
           end
         end
       end
@@ -222,7 +222,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       describe '#preselected_template_for_provider(provider_type)' do
         context 'none template was selected through params' do
           it 'returns nil' do
-            _(composer.preselected_template_for_provider('SSH')).must_be_nil
+            assert_nil composer.preselected_template_for_provider('SSH')
           end
         end
 
@@ -231,7 +231,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           let(:params) { { :job_invocation => providers_params }.with_indifferent_access }
 
           it 'returns the selected template because it is available for provider' do
-            _(composer.preselected_template_for_provider('SSH')).must_equal trying_job_template_1
+            assert_equal trying_job_template_1, composer.preselected_template_for_provider('SSH')
           end
         end
       end
@@ -249,9 +249,9 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         let(:invocations) { composer.pattern_template_invocations }
 
         it 'builds pattern template invocations based on passed params and it filters out wrong inputs' do
-          _(invocations.size).must_equal 1
-          _(invocations.first.input_values.size).must_equal 1
-          _(invocations.first.input_values.first.value).must_equal 'value1'
+          assert_equal 1, invocations.size
+          assert_equal 1, invocations.first.input_values.size
+          assert_equal 'value1', invocations.first.input_values.first.value
         end
       end
 
@@ -275,7 +275,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           let(:invocation_effective_user) { 'invocation user' }
 
           it 'takes the value from the template invocation' do
-            _(template_invocation.effective_user).must_equal 'invocation user'
+            assert_equal 'invocation user', template_invocation.effective_user
           end
         end
 
@@ -284,7 +284,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           let(:invocation_effective_user) { '' }
 
           it 'takes the value from the job template' do
-            _(template_invocation.effective_user).must_equal 'template user'
+            assert_equal 'template user', template_invocation.effective_user
           end
         end
 
@@ -293,14 +293,14 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           let(:invocation_effective_user) { 'invocation user' }
 
           it 'takes the value from the job template' do
-            _(template_invocation.effective_user).must_equal 'template user'
+            assert_equal 'template user', template_invocation.effective_user
           end
         end
       end
 
       describe '#displayed_search_query' do
         it 'is empty by default' do
-          _(composer.displayed_search_query).must_be_empty
+          assert_empty composer.displayed_search_query
         end
 
         let(:host) { FactoryBot.create(:host) }
@@ -310,7 +310,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           let(:params) { { :targeting => { :search_query => 'a', :bookmark_id => bookmark.id }, :host_ids => [ host.id ] }.with_indifferent_access }
 
           it 'explicit search query has highest priority' do
-            _(composer.displayed_search_query).must_equal 'a'
+            assert_equal 'a', composer.displayed_search_query
           end
         end
 
@@ -318,7 +318,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           let(:params) { { :targeting => { :bookmark_id => bookmark.id }, :host_ids => [ host.id ] }.with_indifferent_access }
 
           it 'hosts will be used instead of a bookmark' do
-            _(composer.displayed_search_query).must_include host.name
+            assert_includes composer.displayed_search_query, host.name
           end
         end
 
@@ -327,20 +327,20 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
           it 'bookmark query is used if it is available for the user' do
             bookmark.update_attribute :public, false
-            _(composer.displayed_search_query).must_equal bookmark.query
+            assert_equal bookmark.query, composer.displayed_search_query
           end
 
           it 'bookmark query is used if the bookmark is public' do
             bookmark.owner = nil
             bookmark.save(:validate => false) # skip validations so owner remains nil
-            _(composer.displayed_search_query).must_equal bookmark.query
+            assert_equal bookmark.query, composer.displayed_search_query
           end
 
           it 'empty search is returned if bookmark is not owned by the user and is not public' do
             bookmark.public = false
             bookmark.owner = nil
             bookmark.save(:validate => false) # skip validations so owner remains nil
-            _(composer.displayed_search_query).must_be_empty
+            assert_empty composer.displayed_search_query
           end
         end
       end
@@ -355,9 +355,9 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
             hosts
             dashboard
             hostgroups
-            _(composer.available_bookmarks).must_include hosts
-            _(composer.available_bookmarks).must_include dashboard
-            _(composer.available_bookmarks).wont_include hostgroups
+            assert_includes composer.available_bookmarks, hosts
+            assert_includes composer.available_bookmarks, dashboard
+            refute_includes composer.available_bookmarks, hostgroups
           end
         end
       end
@@ -375,17 +375,17 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         it 'searches hosts based on displayed_search_query' do
           composer.stubs(:displayed_search_query => "name = #{host.name}")
-          _(composer.targeted_hosts_count).must_equal 1
+          assert_equal 1, composer.targeted_hosts_count
         end
 
         it 'returns 0 for queries with syntax errors' do
           composer.stubs(:displayed_search_query => 'name = ')
-          _(composer.targeted_hosts_count).must_equal 0
+          assert_equal 0, composer.targeted_hosts_count
         end
 
         it 'returns 0 when no query is present' do
           composer.stubs(:displayed_search_query => '')
-          _(composer.targeted_hosts_count).must_equal 0
+          assert_equal 0, composer.targeted_hosts_count
         end
       end
 
@@ -393,7 +393,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         let(:value1) { composer.input_value_for(input1) }
         it 'returns new empty input value if there is no invocation' do
           assert value1.new_record?
-          _(value1.value).must_be_empty
+          assert_empty value1.value
         end
 
         context 'there are invocations without input values for a given input' do
@@ -409,7 +409,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
           it 'returns new empty input value' do
             assert value1.new_record?
-            _(value1.value).must_be_empty
+            assert_empty value1.value
           end
         end
 
@@ -425,7 +425,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           let(:params) { { :job_invocation => { :providers => { :ssh => ssh_params } } }.with_indifferent_access }
 
           it 'finds the value among template invocations' do
-            _(value1.value).must_equal 'value1'
+            assert_equal 'value1', value1.value
           end
         end
       end
@@ -462,12 +462,12 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
           end
 
           it 'accepts the concurrency options' do
-            _(composer.job_invocation.concurrency_level).must_equal 5
+            assert_equal 5, composer.job_invocation.concurrency_level
           end
         end
 
         it 'can be disabled' do
-          _(composer.job_invocation.concurrency_level).must_be_nil
+          assert_nil composer.job_invocation.concurrency_level
         end
       end
 
@@ -477,11 +477,11 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         end
 
         it 'accepts the triggering params' do
-          _(composer.job_invocation.triggering.mode).must_equal :future
+          assert_equal :future, composer.job_invocation.triggering.mode
         end
 
         it 'formats the triggering end time when its unordered' do
-          _(composer.job_invocation.triggering.end_time).must_equal Time.local(3,2,1,4,5)
+          assert_equal Time.local(3,2,1,4,5), composer.job_invocation.triggering.end_time
         end
       end
 
@@ -515,7 +515,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         it 'sets the password properly' do
           composer
-          _(composer.job_invocation.password).must_equal password
+          assert_equal password, composer.job_invocation.password
         end
       end
 
@@ -527,7 +527,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         it 'sets the key passphrase properly' do
           composer
-          _(composer.job_invocation.key_passphrase).must_equal key_passphrase
+          assert_equal key_passphrase, composer.job_invocation.key_passphrase
         end
       end
 
@@ -539,7 +539,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
         it 'sets the effective_user_password password properly' do
           composer
-          _(composer.job_invocation.effective_user_password).must_equal effective_user_password
+          assert_equal effective_user_password, composer.job_invocation.effective_user_password
         end
       end
 
@@ -581,29 +581,29 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         end
 
         it 'sets the same job name' do
-          _(new_composer.job_category).must_equal existing.job_category
+          assert_equal existing.job_category, new_composer.job_category
         end
 
         it 'accepts additional host ids' do
           new_composer = JobInvocationComposer.from_job_invocation(composer.job_invocation, { :host_ids => [host.id] })
-          _(new_composer.search_query).must_equal("name ^ (#{host.name})")
+          assert_equal "name ^ (#{host.name})", new_composer.search_query
         end
 
         it 'builds new targeting object which keeps search query' do
-          _(new_composer.targeting).wont_equal existing.targeting
-          _(new_composer.search_query).must_equal existing.targeting.search_query
+          refute_equal existing.targeting, new_composer.targeting
+          assert_equal existing.targeting.search_query, new_composer.search_query
         end
 
         it 'keeps job template ids' do
-          _(new_composer.job_template_ids).must_equal existing.pattern_template_invocations.map(&:template_id)
+          assert_equal existing.pattern_template_invocations.map(&:template_id), new_composer.job_template_ids
         end
 
         it 'keeps template invocations and their values' do
-          _(new_composer.pattern_template_invocations.size).must_equal existing.pattern_template_invocations.size
+          assert_equal existing.pattern_template_invocations.size, new_composer.pattern_template_invocations.size
         end
 
         it 'sets the same concurrency control options' do
-          _(new_composer.job_invocation.concurrency_level).must_equal existing.concurrency_level
+          assert_equal existing.concurrency_level, new_composer.job_invocation.concurrency_level
         end
 
       end
@@ -701,7 +701,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       it 'sets the effective user based on the input' do
         assert composer.save!
-        _(template_invocation.effective_user).must_equal 'invocation user'
+        assert_equal 'invocation user', template_invocation.effective_user
       end
     end
 
@@ -720,7 +720,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       it 'sets the concurrency level based on the input' do
         assert composer.save!
-        _(composer.job_invocation.concurrency_level).must_equal level
+        assert_equal level, composer.job_invocation.concurrency_level
       end
     end
 
@@ -737,7 +737,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       it 'sets the remote execution feature based on the input' do
         assert composer.save!
-        _(composer.job_invocation.remote_execution_feature).must_equal feature
+        assert_equal feature, composer.job_invocation.remote_execution_feature
       end
 
       it 'sets the remote execution_feature id based on `feature` param' do
@@ -747,7 +747,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         refute_equal feature.job_template, trying_job_template_1
 
         assert composer.save!
-        _(composer.job_invocation.remote_execution_feature).must_equal feature
+        assert_equal feature, composer.job_invocation.remote_execution_feature
       end
     end
 
@@ -797,7 +797,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
         error = assert_raises(ActiveRecord::RecordNotSaved) do
           composer.save!
         end
-        _(error.message).must_include "Template #{trying_job_template_1.name}: Input #{input3.name.downcase}: Value can't be blank"
+        assert_includes error.message, "Template #{trying_job_template_1.name}: Input #{input3.name.downcase}: Value can't be blank"
       end
     end
 
@@ -826,13 +826,13 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       end
 
       it 'handles errors' do
-        _(input3).must_be :required
+        assert input3.required
 
         error = assert_raises(ActiveRecord::RecordNotSaved) do
           composer.save!
         end
 
-        _(error.message).must_include "Template #{trying_job_template_1.name}: Not all required inputs have values. Missing inputs: #{input3.name}"
+        assert_includes error.message, "Template #{trying_job_template_1.name}: Not all required inputs have values. Missing inputs: #{input3.name}"
       end
     end
   end

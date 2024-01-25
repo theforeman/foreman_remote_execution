@@ -53,7 +53,7 @@ module ForemanRemoteExecution
         exception = assert_raises do
           action.send(:verify_permissions, template_invocation.host, template_invocation)
         end
-        _(exception.message).must_include "infrastructure host #{template_invocation.host.name}"
+        assert_includes exception.message, "infrastructure host #{template_invocation.host.name}"
       end
     end
 

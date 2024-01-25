@@ -13,15 +13,15 @@ class RendererScopeInputTest < ActiveSupport::TestCase
     it 'caches the value under given key' do
       i = 1
       result = input.cached('some_key') { i }
-      _(result).must_equal 1
+      assert_equal 1, result
 
       i += 1
       result = input.cached('some_key') { i }
-      _(result).must_equal 1
+      assert_equal 1, result
 
       i += 1
       result = input.cached('different_key') { i }
-      _(result).must_equal 3
+      assert_equal 3, result
     end
   end
 
@@ -35,15 +35,15 @@ class RendererScopeInputTest < ActiveSupport::TestCase
     it 'does not cache the value' do
       i = 1
       result = input.cached('some_key') { i }
-      _(result).must_equal 1
+      assert_equal 1, result
 
       i += 1
       result = input.cached('some_key') { i }
-      _(result).must_equal 2
+      assert_equal 2, result
 
       i += 1
       result = input.cached('different_key') { i }
-      _(result).must_equal 3
+      assert_equal 3, result
     end
   end
 end
