@@ -176,19 +176,19 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       describe '#rerun_possible?' do
         it 'is true when not rerunning' do
-          assert composer.rerun_possible?
+          assert_predicate composer, :rerun_possible?
         end
 
         it 'is true when rerunning with pattern tempalte invocations' do
           composer.expects(:reruns).returns(1)
           composer.job_invocation.expects(:pattern_template_invocations).returns([1])
-          assert composer.rerun_possible?
+          assert_predicate composer, :rerun_possible?
         end
 
         it 'is false when rerunning without pattern template invocations' do
           composer.expects(:reruns).returns(1)
           composer.job_invocation.expects(:pattern_template_invocations).returns([])
-          refute composer.rerun_possible?
+          refute_predicate composer, :rerun_possible?
         end
       end
 
@@ -826,7 +826,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
       end
 
       it 'handles errors' do
-        assert input3.required
+        assert_predicate input3, :required
 
         error = assert_raises(ActiveRecord::RecordNotSaved) do
           composer.save!

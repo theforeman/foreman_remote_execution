@@ -57,7 +57,7 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
   describe '.register' do
     it "creates a feature if it's missing" do
       feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist', 'name')
-      assert feature.persisted?
+      assert_predicate feature, :persisted?
       assert_equal 'new_feature_that_does_not_exist', feature.label
       assert_equal 'name', feature.name
       assert_not feature.host_action_button
@@ -65,7 +65,7 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
 
     it 'creates a feature with host action flag' do
       feature = RemoteExecutionFeature.register('new_feature_that_does_not_exist_button', 'name', :host_action_button => true)
-      assert feature.persisted?
+      assert_predicate feature, :persisted?
       assert feature.host_action_button
     end
 
@@ -78,7 +78,7 @@ class RemoteExecutionFeatureTest < ActiveSupport::TestCase
     it 'updates a feature if it exists' do
       existing = FactoryBot.create(:remote_execution_feature, :name => 'existing_feature_withou_action_button')
       feature = RemoteExecutionFeature.register(existing.label, existing.name, :host_action_button => true)
-      assert feature.persisted?
+      assert_predicate feature, :persisted?
       existing.reload
       assert existing.host_action_button
     end

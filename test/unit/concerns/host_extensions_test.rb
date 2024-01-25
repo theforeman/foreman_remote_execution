@@ -67,7 +67,7 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     it 'should only have one execution interface' do
       host.interfaces << FactoryBot.build(:nic_managed)
       host.interfaces.each { |interface| interface.execution = true }
-      assert host.valid?
+      assert_predicate host, :valid?
       assert_equal 1, host.interfaces.count(&:execution?)
     end
 
