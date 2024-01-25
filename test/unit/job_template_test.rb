@@ -30,7 +30,7 @@ class JobTemplateTest < ActiveSupport::TestCase
       job_template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => template_with_inputs)
       job_template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => template_with_inputs)
       assert_not job_template.valid?
-      refute_nil job_template.errors.full_messages.first&.include?('Duplicated inputs detected: ["command"]')
+      assert_includes job_template.errors.full_messages.first, 'Duplicated inputs detected: ["command"]'
     end
   end
 
