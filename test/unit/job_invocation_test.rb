@@ -139,7 +139,7 @@ class JobInvocationTest < ActiveSupport::TestCase
       before { task.state = 'scheduled' }
 
       specify { assert_equal HostStatus::ExecutionStatus::QUEUED, job_invocation.status }
-      specify { assert_equal true, job_invocation.queued? }
+      specify { assert job_invocation.queued? }
       specify { assert_equal 0, job_invocation.progress }
       specify { assert_equal progress_report_without_sub_tasks, job_invocation.progress_report }
     end
@@ -164,7 +164,7 @@ class JobInvocationTest < ActiveSupport::TestCase
       end
 
       specify { assert_equal HostStatus::ExecutionStatus::OK, job_invocation.status }
-      specify { assert_equal false, job_invocation.queued? }
+      specify { refute job_invocation.queued? }
 
       it 'calculates the progress correctly' do
         sub_tasks = [ForemanTasks::Task.new]

@@ -15,13 +15,13 @@ class RemoteExecutionHelperTest < ActionView::TestCase
     it 'ensures the line sets end with new line' do
       new_line_sets = normalize_line_sets(line_sets)
       expected_output = ["one\r\n",
-                 "two\r\n",
-                 "\r\nthree\r\n",
-                 "four\r\n",
-                 "\r\n\r\n",
-                 "five\r\n",
-                 "Exit status: 0"]
-      assert_equal expected_output, new_line_sets.map { |s| s['output'] }
+                         "two\r\n",
+                         "\r\nthree\r\n",
+                         "four\r\n",
+                         "\r\n\r\n",
+                         "five\r\n",
+                         "Exit status: 0"]
+      assert_equal(expected_output, new_line_sets.map { |s| s['output'] })
     end
   end
 

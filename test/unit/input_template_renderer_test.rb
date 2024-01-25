@@ -29,7 +29,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       describe 'rendering' do
         let(:result) { renderer.render }
         it 'should return false' do
-          assert_equal false, result
+          refute result
         end
 
         it 'should register an error' do
@@ -42,7 +42,7 @@ class InputTemplateRendererTest < ActiveSupport::TestCase
       describe 'preview' do
         let(:result) { renderer.preview }
         it 'should return false' do
-          assert_equal false, result
+          refute result
         end
 
         it 'should register an error' do
