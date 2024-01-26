@@ -4,6 +4,6 @@ class ForemanRemoteExecutionNicExtensionsTest < ActiveSupport::TestCase
   let(:host) { FactoryBot.create(:host) }
 
   it 'sets the first primary interface as the execution interface' do
-    _(host.execution_interface).must_equal host.interfaces.first
+    assert_equal host.interfaces.first, host.execution_interface
   end
 end

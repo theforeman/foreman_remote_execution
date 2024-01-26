@@ -30,7 +30,7 @@ class JobTemplateTest < ActiveSupport::TestCase
       job_template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => template_with_inputs)
       job_template.foreign_input_sets << FactoryBot.build(:foreign_input_set, :target_template => template_with_inputs)
       assert_not job_template.valid?
-      _(job_template.errors.full_messages.first).must_include 'Duplicated inputs detected: ["command"]'
+      assert_includes job_template.errors.full_messages.first, 'Duplicated inputs detected: ["command"]'
     end
   end
 
@@ -40,21 +40,21 @@ class JobTemplateTest < ActiveSupport::TestCase
     let(:minimal_template) { FactoryBot.build(:job_template) }
 
     it 'uses the description_format attribute if set' do
-      _(template_with_description.generate_description_format).must_equal template_with_description.description_format
+      assert_equal template_with_description.generate_description_format, template_with_description.description_format
     end
 
     it 'uses the job name as description_format if not set or blank and has no inputs' do
-      _(minimal_template.generate_description_format).must_equal '%{template_name}'
+      assert_equal minimal_template.generate_description_format, '%{template_name}'
       minimal_template.description_format = ''
-      _(minimal_template.generate_description_format).must_equal '%{template_name}'
+      assert_equal minimal_template.generate_description_format, '%{template_name}'
     end
 
     it 'generates the description_format if not set or blank and has inputs' do
       input_name = template.template_inputs.first.name
       expected_result = %(%{template_name} with inputs #{input_name}="%{#{input_name}}")
-      _(template.generate_description_format).must_equal expected_result
+      assert_equal template.generate_description_format, expected_result
       template.description_format = ''
-      _(template.generate_description_format).must_equal expected_result
+      assert_equal template.generate_description_format, expected_result
     end
   end
 
@@ -64,10 +64,10 @@ class JobTemplateTest < ActiveSupport::TestCase
     describe '#dup' do
       it 'duplicates also template inputs' do
         duplicate = job_template.dup
-        _(duplicate).wont_equal job_template
-        _(duplicate.template_inputs).wont_be_empty
-        _(duplicate.template_inputs.first).wont_equal job_template.template_inputs.first
-        _(duplicate.template_inputs.first.name).must_equal job_template.template_inputs.first.name
+        refute_equal duplicate, job_template
+        refute_empty duplicate.template_inputs
+        refute_equal duplicate.template_inputs.first, job_template.template_inputs.first
+        assert_equal duplicate.template_inputs.first.name, job_template.template_inputs.first.name
       end
     end
   end
@@ -120,30 +120,30 @@ class JobTemplateTest < ActiveSupport::TestCase
     end
 
     it 'sets the name' do
-      _(template.name).must_equal 'Service Restart'
+      assert_equal template.name, 'Service Restart'
     end
 
     it 'has a template' do
-      _(template.template.squish).must_equal 'service <%= input("service_name") %> restart <%# test comment %>'
+      assert_equal template.template.squish, 'service <%= input("service_name") %> restart <%# test comment %>'
     end
 
     it 'imports inputs' do
-      _(template.template_inputs.first.name).must_equal 'service_name'
+      assert_equal template.template_inputs.first.name, 'service_name'
     end
 
     it 'imports input sets' do
-      _(template_with_input_sets.foreign_input_sets.first.target_template).must_equal template
-      _(template_with_input_sets.template_inputs_with_foreign.map(&:name)).must_equal ['service_name']
+      assert_equal template_with_input_sets.foreign_input_sets.first.target_template, template
+      assert_equal template_with_input_sets.template_inputs_with_foreign.map(&:name), ['service_name']
     end
 
     it 'imports feature' do
       template # let is lazy
       remote_execution_feature.reload
-      _(remote_execution_feature.job_template).must_equal template
+      assert_equal remote_execution_feature.job_template, template
     end
 
     it 'sets additional options' do
-      _(template.default).must_equal true
+      assert_equal template.default, true
     end
   end
 
@@ -226,16 +226,16 @@ class JobTemplateTest < ActiveSupport::TestCase
 
     it 'syncs inputs' do
       hostname = synced_template.template_inputs.find { |input| input.name == 'hostname' }
-      _(hostname.options).must_equal 'www.redhat.com'
+      assert_equal hostname.options, 'www.redhat.com'
     end
 
     it 'syncs content' do
-      _(synced_template.template).must_match(/ping -c <%= input\('count'\) %> <%= input\('hostname'\) %>/m)
+      assert_match(/ping -c <%= input\('count'\) %> <%= input\('hostname'\) %>/m, synced_template.template)
     end
 
     it 'syncs input sets' do
-      _(synced_template.foreign_input_sets.first.target_template).must_equal included
-      _(synced_template.template_inputs_with_foreign.map(&:name)).must_equal ['hostname', 'count']
+      assert_equal synced_template.foreign_input_sets.first.target_template, included
+      assert_equal synced_template.template_inputs_with_foreign.map(&:name), ['hostname', 'count']
     end
   end
 
@@ -249,15 +249,15 @@ class JobTemplateTest < ActiveSupport::TestCase
     end
 
     it 'exports name' do
-      _(erb).must_match(/^name: #{exportable_template.name}$/)
+      assert_match(/^name: #{exportable_template.name}$/, erb)
     end
 
     it 'includes template inputs' do
-      _(erb).must_match(/^template_inputs:$/)
+      assert_match(/^template_inputs:$/, erb)
     end
 
     it 'includes template contents' do
-      _(erb).must_include exportable_template.template
+      assert_includes erb, exportable_template.template
     end
 
     it 'is importable' do
@@ -266,8 +266,8 @@ class JobTemplateTest < ActiveSupport::TestCase
       exportable_template.update(:name => "#{old_name}_renamed")
 
       imported = JobTemplate.import_raw!(erb)
-      _(imported.name).must_equal old_name
-      _(imported.template_inputs.first.to_export).must_equal exportable_template.template_inputs.first.to_export
+      assert_equal imported.name, old_name
+      assert_equal imported.template_inputs.first.to_export, exportable_template.template_inputs.first.to_export
     end
 
     it 'has taxonomies in metadata' do
@@ -282,7 +282,7 @@ class JobTemplateTest < ActiveSupport::TestCase
 
     describe 'job template deletion' do
       it 'succeeds' do
-        _(job_template.pattern_template_invocations).wont_be_empty
+        refute_empty job_template.pattern_template_invocations
         assert job_template.destroy
       end
     end
@@ -310,7 +310,7 @@ class JobTemplateTest < ActiveSupport::TestCase
         template_invocation.host,
         template_invocation
       result = renderer.render
-      _(result).must_equal "<wrap>#{inner.template}</wrap>"
+      assert_equal result, "<wrap>#{inner.template}</wrap>"
     end
   end
 end

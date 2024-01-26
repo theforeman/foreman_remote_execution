@@ -51,7 +51,7 @@ class TargetingTest < ActiveSupport::TestCase
       targeting.resolve_hosts!
     end
 
-    it { _(targeting.hosts).must_include(host) }
+    it { assert_includes targeting.hosts, host }
   end
 
   context 'can delete a user' do
@@ -63,7 +63,7 @@ class TargetingTest < ActiveSupport::TestCase
 
     it { assert_nil targeting.reload.user }
     it do
-      -> { targeting.resolve_hosts! }.must_raise(Foreman::Exception)
+      assert_raises(Foreman::Exception) { targeting.resolve_hosts! }
     end
   end
 
@@ -74,7 +74,7 @@ class TargetingTest < ActiveSupport::TestCase
       host.destroy
     end
 
-    it { _(targeting.reload.hosts).must_be_empty }
+    it { assert_empty targeting.reload.hosts }
   end
 
   describe '#resolve_hosts!' do
@@ -100,9 +100,9 @@ class TargetingTest < ActiveSupport::TestCase
         targeting.user = User.current
         targeting.resolve_hosts!
 
-        targeting.hosts.must_include host
-        targeting.hosts.must_include second_host
-        targeting.hosts.must_include infra_host
+        assert_includes targeting.hosts, host
+        assert_includes targeting.hosts, second_host
+        assert_includes targeting.hosts, infra_host
       end
     end
 
@@ -115,9 +115,9 @@ class TargetingTest < ActiveSupport::TestCase
         targeting.user = User.current
         targeting.resolve_hosts!
 
-        targeting.hosts.must_include host
-        targeting.hosts.must_include second_host
-        targeting.hosts.wont_include infra_host
+        assert_includes targeting.hosts, host
+        assert_includes targeting.hosts, second_host
+        refute_includes targeting.hosts, infra_host
       end
     end
   end
@@ -136,14 +136,14 @@ class TargetingTest < ActiveSupport::TestCase
       let(:query) { Targeting.build_query_from_hosts([ host.id, second_host.id, infra_host.id ]) }
 
       it 'builds query using host names joining inside ^' do
-        _(query).must_include host.name
-        _(query).must_include second_host.name
-        _(query).must_include infra_host.name
-        _(query).must_include 'name ^'
+        assert_includes query, host.name
+        assert_includes query, second_host.name
+        assert_includes query, infra_host.name
+        assert_includes query, 'name ^'
 
-        Host.search_for(query).must_include host
-        Host.search_for(query).must_include second_host
-        Host.search_for(query).must_include infra_host
+        assert_includes Host.search_for(query), host
+        assert_includes Host.search_for(query), second_host
+        assert_includes Host.search_for(query), infra_host
       end
     end
 
@@ -151,10 +151,10 @@ class TargetingTest < ActiveSupport::TestCase
       let(:query) { Targeting.build_query_from_hosts([ host.id ]) }
 
       it 'builds query using host name' do
-        _(query).must_equal "name ^ (#{host.name})"
-        Host.search_for(query).must_include host
-        Host.search_for(query).wont_include second_host
-        Host.search_for(query).wont_include infra_host
+        assert_equal "name ^ (#{host.name})", query
+        assert_includes Host.search_for(query), host
+        refute_includes Host.search_for(query), second_host
+        refute_includes Host.search_for(query), infra_host
       end
     end
 
@@ -162,9 +162,9 @@ class TargetingTest < ActiveSupport::TestCase
       let(:query) { Targeting.build_query_from_hosts([]) }
 
       it 'builds query to find all hosts' do
-        Host.search_for(query).must_include host
-        Host.search_for(query).must_include second_host
-        Host.search_for(query).must_include infra_host
+        assert_includes Host.search_for(query), host
+        assert_includes Host.search_for(query), second_host
+        assert_includes Host.search_for(query), infra_host
       end
     end
 
@@ -173,14 +173,14 @@ class TargetingTest < ActiveSupport::TestCase
 
       it 'ignores the infrastructure host' do
         query = Targeting.build_query_from_hosts([host.id, second_host.id, infra_host.id])
-        _(query).must_include host.name
-        _(query).must_include second_host.name
-        _(query).wont_include infra_host.name
-        _(query).must_include 'name ^'
+        assert_includes query, host.name
+        assert_includes query, second_host.name
+        refute_includes query, infra_host.name
+        assert_includes query, 'name ^'
 
-        Host.search_for(query).must_include host
-        Host.search_for(query).must_include second_host
-        Host.search_for(query).wont_include infra_host
+        assert_includes Host.search_for(query), host
+        assert_includes Host.search_for(query), second_host
+        refute_includes Host.search_for(query), infra_host
       end
     end
   end

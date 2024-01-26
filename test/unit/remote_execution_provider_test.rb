@@ -3,39 +3,39 @@ require 'test_plugin_helper'
 class RemoteExecutionProviderTest < ActiveSupport::TestCase
   describe '.providers' do
     let(:providers) { RemoteExecutionProvider.providers }
-    it { _(providers).must_be_kind_of HashWithIndifferentAccess }
+    it { assert_kind_of HashWithIndifferentAccess, providers }
     it 'makes providers accessible using symbol' do
-      _(providers[:SSH]).must_equal SSHExecutionProvider
-      _(providers[:script]).must_equal ScriptExecutionProvider
+      assert_equal SSHExecutionProvider, providers[:SSH]
+      assert_equal ScriptExecutionProvider, providers[:script]
     end
     it 'makes providers accessible using string' do
-      _(providers['SSH']).must_equal SSHExecutionProvider
-      _(providers['script']).must_equal ScriptExecutionProvider
+      assert_equal SSHExecutionProvider, providers['SSH']
+      assert_equal ScriptExecutionProvider, providers['script']
     end
   end
 
   describe '.register_provider' do
     before { RemoteExecutionProvider.providers.delete(:new) }
     let(:new_provider) { RemoteExecutionProvider.providers[:new] }
-    it { _(new_provider).must_be_nil }
+    it { assert_nil new_provider }
 
     context 'registers a provider under key :new' do
       before { RemoteExecutionProvider.register(:new, String) }
-      it { _(new_provider).must_equal String }
+      it { assert_equal String, new_provider }
     end
   end
 
   describe '.provider_for' do
     it 'accepts symbols' do
-      RemoteExecutionProvider.provider_for(:SSH).must_equal SSHExecutionProvider
+      assert_equal SSHExecutionProvider, RemoteExecutionProvider.provider_for(:SSH)
     end
 
     it 'accepts strings' do
-      RemoteExecutionProvider.provider_for('SSH').must_equal SSHExecutionProvider
+      assert_equal SSHExecutionProvider, RemoteExecutionProvider.provider_for('SSH')
     end
 
     it 'returns a default one if unknown value is provided' do
-      RemoteExecutionProvider.provider_for('WinRM').must_equal ScriptExecutionProvider
+      assert_equal ScriptExecutionProvider, RemoteExecutionProvider.provider_for('WinRM')
     end
   end
 
@@ -44,15 +44,15 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
     it 'returns only strings' do
       provider_names.each do |name|
-        _(name).must_be_kind_of String
+        assert_kind_of String, name
       end
     end
 
     context 'provider is registetered under :custom symbol' do
       before { RemoteExecutionProvider.register(:Custom, String) }
 
-      it { _(provider_names).must_include 'SSH' }
-      it { _(provider_names).must_include 'Custom' }
+      it { assert_includes provider_names, 'SSH' }
+      it { assert_includes provider_names, 'Custom' }
     end
   end
 
@@ -71,7 +71,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       ::RemoteExecutionProvider.register('custom', CustomProvider)
 
       feature = CustomProvider.proxy_feature
-      _(feature).must_equal 'custom'
+      assert_equal 'custom', feature
     ensure
       ::RemoteExecutionProvider = old
     end
@@ -86,8 +86,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       )
 
       features = RemoteExecutionProvider.provider_proxy_features
-      _(features).must_include 'SSH'
-      _(features).must_include 'Script'
+      assert_includes features, 'SSH'
+      assert_includes features, 'Script'
       RemoteExecutionProvider.unstub(:providers)
     end
 
@@ -95,7 +95,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       provider = OpenStruct.new(proxy_feature: 'Testing')
       RemoteExecutionProvider.stubs(:providers).returns(:testing => provider)
       features = RemoteExecutionProvider.provider_proxy_features
-      _(features).must_include 'Testing'
+      assert_includes features, 'Testing'
       RemoteExecutionProvider.unstub(:providers)
     end
   end
@@ -125,14 +125,14 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     describe 'effective user' do
       it 'takes the effective user from value from the template invocation' do
         template_invocation.effective_user = 'my user'
-        _(proxy_options[:effective_user]).must_equal 'my user'
+        assert_equal 'my user', proxy_options[:effective_user]
       end
     end
 
     describe 'ssh user' do
       it 'uses the remote_execution_ssh_user on the host param' do
         host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_user', :value => 'my user')
-        _(proxy_options[:ssh_user]).must_equal 'my user'
+        assert_equal 'my user', proxy_options[:ssh_user]
       end
     end
 
@@ -140,8 +140,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       it 'uses the remote_execution_effective_user_password on the host param' do
         host.params['remote_execution_effective_user_password'] = 'mypassword'
         host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_password', :value => 'mypassword')
-        assert_not proxy_options.key?(:effective_user_password)
-        _(secrets[:effective_user_password]).must_equal 'mypassword'
+        assert_nil proxy_options[:effective_user_password]
+        assert_equal 'mypassword', secrets[:effective_user_password]
       end
     end
 
@@ -150,15 +150,15 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.params['remote_execution_effective_user_method'] = 'sudo'
         method_param = FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_effective_user_method', :value => 'sudo')
         host.host_parameters << method_param
-        _(proxy_options[:effective_user_method]).must_equal 'sudo'
+        assert_equal 'sudo', proxy_options[:effective_user_method]
         method_param.update!(:value => 'su')
         host.clear_host_parameters_cache!
         proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
-        _(proxy_options[:effective_user_method]).must_equal 'su'
+        assert_equal 'su', proxy_options[:effective_user_method]
         method_param.update!(:value => 'dzdo')
         host.clear_host_parameters_cache!
         proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
-        _(proxy_options[:effective_user_method]).must_equal 'dzdo'
+        assert_equal 'dzdo', proxy_options[:effective_user_method]
       end
     end
 
@@ -168,8 +168,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       end
 
       it 'has ssh port changed in settings and check return type' do
-        _(proxy_options[:ssh_port]).must_be_kind_of Integer
-        _(proxy_options[:ssh_port]).must_equal 66
+        assert_kind_of Integer, proxy_options[:ssh_port]
+        assert_equal 66, proxy_options[:ssh_port]
       end
     end
 
@@ -178,8 +178,8 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.params['remote_execution_ssh_port'] = '30'
         host.host_parameters << FactoryBot.build(:host_parameter, :name => 'remote_execution_ssh_port', :value => '30')
         host.clear_host_parameters_cache!
-        _(proxy_options[:ssh_port]).must_be_kind_of Integer
-        _(proxy_options[:ssh_port]).must_equal 30
+        assert_kind_of Integer, proxy_options[:ssh_port]
+        assert_equal 30, proxy_options[:ssh_port]
       end
     end
 
@@ -189,7 +189,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       end
 
       it 'updates the value via settings' do
-        _(proxy_options[:cleanup_working_dirs]).must_equal false
+        refute proxy_options[:cleanup_working_dirs]
       end
     end
 
@@ -198,7 +198,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.params['remote_execution_cleanup_working_dirs'] = 'false'
         host.host_parameters << FactoryBot.build(:host_parameter, :name => 'remote_execution_cleanup_working_dirs', :value => 'false')
         host.clear_host_parameters_cache!
-        _(proxy_options[:cleanup_working_dirs]).must_equal false
+        refute proxy_options[:cleanup_working_dirs]
       end
     end
 
@@ -219,7 +219,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
       it 'gets fqdn from flagged interfaces if not preferring ips' do
         # falling to primary interface
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal 'somehost.somedomain.org'
+        assert_equal 'somehost.somedomain.org', SSHExecutionProvider.find_ip_or_hostname(host)
 
         # execution wins if present
         execution_interface = FactoryBot.build(:nic_managed,
@@ -228,13 +228,13 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.primary_interface.update(:execution => false)
         host.interfaces.each(&:save)
         host.reload
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.fqdn
+        assert_equal execution_interface.fqdn, SSHExecutionProvider.find_ip_or_hostname(host)
       end
 
       it 'gets ip from flagged interfaces' do
         host.host_params['remote_execution_connect_by_ip'] = true
         # no ip address set on relevant interface - fallback to fqdn
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal 'somehost.somedomain.org'
+        assert_equal 'somehost.somedomain.org', SSHExecutionProvider.find_ip_or_hostname(host)
 
         # provision interface with ip while primary without
         provision_interface = FactoryBot.build(:nic_managed,
@@ -243,12 +243,12 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.primary_interface.update(:provision => false)
         host.interfaces.each(&:save)
         host.reload
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal provision_interface.ip
+        assert_equal provision_interface.ip, SSHExecutionProvider.find_ip_or_hostname(host)
 
         # both primary and provision interface have IPs: the primary wins
         host.primary_interface.update(:ip => '10.0.0.2', :execution => false)
         host.reload
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal host.primary_interface.ip
+        assert_equal host.primary_interface.ip, SSHExecutionProvider.find_ip_or_hostname(host)
 
         # there is an execution interface with IP: it wins
         execution_interface = FactoryBot.build(:nic_managed,
@@ -257,7 +257,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.primary_interface.update(:execution => false)
         host.interfaces.each(&:save)
         host.reload
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip
+        assert_equal execution_interface.ip, SSHExecutionProvider.find_ip_or_hostname(host)
 
         # there is an execution interface with both IPv6 and IPv4: IPv4 is being preferred over IPv6 by default
         execution_interface = FactoryBot.build(:nic_managed,
@@ -265,7 +265,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.interfaces = [execution_interface]
         host.interfaces.each(&:save)
         host.reload
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip
+        assert_equal execution_interface.ip, SSHExecutionProvider.find_ip_or_hostname(host)
       end
 
       it 'gets ipv6 from flagged interfaces with IPv6 preference' do
@@ -278,7 +278,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.interfaces = [execution_interface]
         host.interfaces.each(&:save)
         host.reload
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip6
+        assert_equal execution_interface.ip6, SSHExecutionProvider.find_ip_or_hostname(host)
       end
 
       it 'gets ipv6 from flagged interfaces with IPv4 preference but without IPv4 address' do
@@ -291,7 +291,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.interfaces = [execution_interface]
         host.interfaces.each(&:save)
         host.reload
-        SSHExecutionProvider.find_ip_or_hostname(host).must_equal execution_interface.ip6
+        assert_equal execution_interface.ip6, SSHExecutionProvider.find_ip_or_hostname(host)
       end
     end
   end

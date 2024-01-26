@@ -272,7 +272,7 @@ module Api
           assert_equal result['complete'], false
           assert_equal result['delayed'], true
           assert_nil result['output']
-          _(Time.parse(result['start_at']).to_f).must_be_close_to start_time.to_f
+          assert_in_delta start_time.to_f, Time.parse(result['start_at']).to_f, 0.001
           assert_response :success
         end
 
@@ -334,8 +334,8 @@ module Api
         assert_response :success
         result = ActiveSupport::JSON.decode(@response.body)
         targeting = Targeting.find(result['targeting_id'])
-        _(targeting.user_id).must_equal users(:admin).id
-        _(targeting.search_query).must_equal @invocation.targeting.search_query
+        assert_equal users(:admin).id, targeting.user_id
+        assert_equal @invocation.targeting.search_query, targeting.search_query
       end
 
       test 'should not raise an exception when reruning failed has no hosts' do
@@ -350,8 +350,8 @@ module Api
         assert_response :success
         result = ActiveSupport::JSON.decode(@response.body)
         targeting = Targeting.find(result['targeting_id'])
-        _(targeting.user_id).must_equal users(:admin).id
-        _(targeting.search_query).must_equal 'name ^ ()'
+        assert_equal users(:admin).id, targeting.user_id
+        assert_equal 'name ^ ()', targeting.search_query
       end
 
       test 'should rerun failed only' do
@@ -369,8 +369,8 @@ module Api
         result = ActiveSupport::JSON.decode(@response.body)
         targeting = Targeting.find(result['targeting_id'])
         hostnames = @invocation.template_invocations.map { |ti| ti.host.name }
-        _(targeting.user_id).must_equal users(:admin).id
-        _(targeting.search_query).must_equal "name ^ (#{hostnames.join(',')})"
+        assert_equal users(:admin).id, targeting.user_id
+        assert_equal "name ^ (#{hostnames.join(',')})", targeting.search_query
       end
 
       test 'should return 404 if template is not found' do
