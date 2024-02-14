@@ -1,6 +1,16 @@
+.job-invocation-breadcrumb-page-section {
+  padding-top: 24px;
+}
+ 
+.job-invocation-header-page-section {
+  padding-top: 24px;
+}
+ 
 .job-invocation-detail-page-section {
   $chart_size: 105px;
-  
+  padding-top: 0px;
+  padding-left: 35px;
+
   .chart-donut {
     height: $chart_size;
     width: $chart_size;
@@ -36,3 +46,4 @@
     height: $chart_size;
   }
 }
+  
