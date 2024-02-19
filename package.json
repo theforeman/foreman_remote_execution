@@ -8,10 +8,7 @@
     "test": "tfm-test --plugin",
     "test:watch": "tfm-test --plugin --watchAll",
     "test:current": "tfm-test --plugin --watch",
-    "publish-coverage": "tfm-publish-coverage",
-    "stories": "tfm-stories --plugin",
-    "stories:build": "tfm-build-stories --plugin",
-    "stories:deploy": "surge --project .storybook-dist"
+    "publish-coverage": "tfm-publish-coverage"
   },
   "repository": {
     "type": "git",
