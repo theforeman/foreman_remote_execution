@@ -1,9 +1,9 @@
 <% title @job_invocation.description %>
-<% stylesheet 'foreman_remote_execution/foreman_remote_execution' %>
-<% javascript 'foreman_remote_execution/template_invocation' %>
-<% javascript *webpack_asset_paths('foreman_remote_execution', :extension => 'js') %>
+<%= webpacked_plugins_js_for :foreman_remote_execution %>
+<% content_for(:javascripts) do -%>
+  <% javascript 'foreman_remote_execution/template_invocation' %><% end %>
 <% content_for(:stylesheets) do %>
-  <%= webpacked_plugins_css_for :foreman_remote_execution %>
+  <% stylesheet 'foreman_remote_execution/foreman_remote_execution' %>
 <% end %>
 
 <%= breadcrumbs name_field: 'description' %>
@@ -47,6 +47,13 @@
 
 <script id="job_invocation_refresh" data-refresh-url="<%= job_invocation_path(@job_invocation) %>">
   <% if @auto_refresh %>
-    delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), {});
+    if(window.allJsLoaded){
+      delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), {})
+    }
+    else {
+      $(document).on('loadJS', function() {
+        delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), {})
+      });
+    }
   <% end %>
 </script>

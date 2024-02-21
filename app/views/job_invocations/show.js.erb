@@ -1,5 +1,12 @@
 $('div#title_action div.btn-group').html('<%= button_group(job_invocation_task_buttons(@job_invocation.task)).html_safe %>');
 
 <% if @auto_refresh %>
-  delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), job_invocation_refresh_data());
+  if(window.allJsLoaded){
+    delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), job_invocation_refresh_data())
+  }
+  else {
+    $(document).on('loadJS', function() {
+      delayed_refresh($('script#job_invocation_refresh').data('refresh-url'), job_invocation_refresh_data())
+    });
+  }
 <% end %>
