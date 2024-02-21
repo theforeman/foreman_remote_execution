@@ -1,7 +1,13 @@
 <% if @auto_refresh %>
-$(function() {
-  delayed_refresh($("div.terminal").data('refresh-url'),
-          {"since": "<%= @line_sets.last.try(:[], 'timestamp') || @since %>", "line_counter": $("div.terminal div.line").size()});
-});
+   if(window.allJsLoaded){
+    delayed_refresh($("div.terminal").data('refresh-url'),
+          {"since": "<%= @line_sets.last.try(:[], 'timestamp') || @since %>", "line_counter": $("div.terminal div.line").size()})
+  }
+  else {
+    $(document).on('loadJS', function() {
+      delayed_refresh($("div.terminal").data('refresh-url'),
+          {"since": "<%= @line_sets.last.try(:[], 'timestamp') || @since %>", "line_counter": $("div.terminal div.line").size()})
+    });
+  }
 <% end %>
 
