@@ -200,7 +200,9 @@ module Actions
         host = Host.find(input[:host][:id])
         status = host.execution_status_object || host.build_execution_status_object
         status.status = exit_status.to_s == "0" ? HostStatus::ExecutionStatus::OK : HostStatus::ExecutionStatus::ERROR
+        status.refresh unless status.new_record?
         status.save!
+        host.refresh_global_status!
       end
 
       def delegated_output
