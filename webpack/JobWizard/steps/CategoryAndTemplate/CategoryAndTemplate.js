@@ -71,7 +71,12 @@ export const CategoryAndTemplate = ({
   return (
     <>
       <WizardTitle title={WIZARD_TITLES.categoryAndTemplate} />
-      <Text component={TextVariants.p}>{__('All fields are required.')}</Text>
+      <Text
+        ouiaId="category-and-template-required-fields"
+        component={TextVariants.p}
+      >
+        {__('All fields are required.')}
+      </Text>
       <Form>
         <SelectField
           label={__('Job category')}
@@ -95,7 +100,11 @@ export const CategoryAndTemplate = ({
           placeholderText={allTemplatesError ? __('Not available') : ''}
         />
         {!isEmpty(missingPermissions) && (
-          <Alert variant="warning" title={__('Access denied')}>
+          <Alert
+            ouiaId="category-and-template-access-denied"
+            variant="warning"
+            title={__('Access denied')}
+          >
             <span>
               {__(
                 `Missing the required permissions: ${missingPermissions.join(
@@ -106,7 +115,11 @@ export const CategoryAndTemplate = ({
           </Alert>
         )}
         {isError && (
-          <Alert variant="danger" title={__('Errors:')}>
+          <Alert
+            variant="danger"
+            title={__('Errors:')}
+            ouiaId="category-and-template-errors"
+          >
             {categoryError && isEmpty(missingPermissions) && (
               <span>
                 {__('Categories list failed with:')} {categoryError}

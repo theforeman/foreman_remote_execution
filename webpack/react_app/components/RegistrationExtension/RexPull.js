@@ -36,6 +36,7 @@ const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
     fieldId="registration_setup_remote_execution_pull"
   >
     <FormSelect
+      ouiaId="registration_setup_remote_execution_pull"
       value={pluginValues.setupRemoteExecutionPull}
       onChange={setupRemoteExecutionPull =>
         onChange({ setupRemoteExecutionPull })

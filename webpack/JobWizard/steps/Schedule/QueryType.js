@@ -15,6 +15,7 @@ export const QueryType = ({ isTypeStatic, setIsTypeStatic }) => (
       )}
     >
       <Radio
+        ouiaId="query-type-static"
         isChecked={isTypeStatic}
         name="query-type"
         onChange={() => setIsTypeStatic(true)}
@@ -25,6 +26,7 @@ export const QueryType = ({ isTypeStatic, setIsTypeStatic }) => (
     </FormGroup>
     <FormGroup fieldId="query-type-dynamic">
       <Radio
+        ouiaId="query-type-dynamic"
         isChecked={!isTypeStatic}
         name="query-type"
         onChange={() => setIsTypeStatic(false)}

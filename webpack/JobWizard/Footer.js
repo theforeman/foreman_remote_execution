@@ -26,6 +26,7 @@ export const Footer = ({ canSubmit, onSave }) => {
           return (
             <>
               <Button
+                ouiaId="next-footer"
                 variant="primary"
                 type="submit"
                 onClick={onNext}
@@ -36,6 +37,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                   : __('Next')}
               </Button>
               <Button
+                ouiaId="back-footer"
                 variant="secondary"
                 onClick={onBack}
                 isDisabled={
@@ -54,6 +56,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                 }
               >
                 <Button
+                  ouiaId="run-on-selected-hosts-footer"
                   variant="tertiary"
                   onClick={onSave}
                   isAriaDisabled={!canSubmit}
@@ -74,6 +77,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                 }
               >
                 <Button
+                  ouiaId="skip-to-review-footer"
                   variant="tertiary"
                   onClick={() => goToStepByName(WIZARD_TITLES.review)}
                   isAriaDisabled={!canSubmit}
@@ -82,7 +86,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                   {__('Skip to review')}
                 </Button>
               </Tooltip>
-              <Button variant="link" onClick={onClose}>
+              <Button ouiaId="cancel-footer" variant="link" onClick={onClose}>
                 {__('Cancel')}
               </Button>
               {isSubmitting && (

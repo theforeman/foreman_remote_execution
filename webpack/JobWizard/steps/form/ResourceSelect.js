@@ -78,6 +78,7 @@ export const ResourceSelect = ({
   };
   return (
     <Select
+      ouiaId={name}
       toggleAriaLabel={`${name} toggle`}
       chipGroupComponent={<></>}
       variant={SelectVariant.typeahead}

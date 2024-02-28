@@ -64,18 +64,21 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
         onSelect={handleTabClick}
       >
         <Tab
+          ouiaId="finished-tab"
           eventKey={FINISHED_TAB}
           title={<TabTitleText>{__('Finished')}</TabTitleText>}
         >
           <RecentJobsTable hostId={id} status="failed+or+status%3D+succeeded" />
         </Tab>
         <Tab
+          ouiaId="running-tab"
           eventKey={RUNNING_TAB}
           title={<TabTitleText>{__('Running')}</TabTitleText>}
         >
           <RecentJobsTable hostId={id} status="running" />
         </Tab>
         <Tab
+          ouiaId="scheduled-tab"
           eventKey={SCHEDULED_TAB}
           title={<TabTitleText>{__('Scheduled')}</TabTitleText>}
         >

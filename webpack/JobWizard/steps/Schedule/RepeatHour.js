@@ -34,6 +34,7 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
       isRequired
     >
       <Select
+        ouiaId="repeat-on-hourly"
         id="repeat-on-hourly"
         variant={SelectVariant.typeahead}
         typeAheadAriaLabel="repeat-at-minute-typeahead"
@@ -75,6 +76,7 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
       </Select>
       {isAlertOpen && (
         <Alert
+          ouiaId="repeat-on-hourly-alert"
           variant="danger"
           isInline
           title={__('Minute can only be a number between 0-59')}

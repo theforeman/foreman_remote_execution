@@ -44,6 +44,7 @@ export const RepeatWeek = ({ repeatData, setRepeatData, setValid }) => {
         <div id="repeat-on-weekly">
           {days.map((day, index) => (
             <Checkbox
+              ouiaId={`repeat-on-day-${index}`}
               aria-label={`${day} checkbox`}
               key={index}
               isChecked={daysOfWeek?.[index]}

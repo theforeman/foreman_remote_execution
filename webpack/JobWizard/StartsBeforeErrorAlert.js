@@ -5,6 +5,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
 export const StartsBeforeErrorAlert = () => (
   <>
     <Alert
+      ouiaId="starts-before-error-alert"
       variant="danger"
       title={__("'Starts before' date must in the future")}
     >

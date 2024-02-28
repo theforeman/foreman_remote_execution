@@ -65,6 +65,7 @@ export const RepeatCron = ({ repeatData, setRepeatData, setValid }) => {
       isRequired
     >
       <TextInput
+        ouiaId="cronline"
         isRequired
         validated={cronline ? ValidatedOptions.noval : ValidatedOptions.error}
         aria-label="cronline"

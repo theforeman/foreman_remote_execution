@@ -19,6 +19,7 @@ export const EffectiveUserField = ({ value, setValue, defaultValue }) => (
     labelInfo={<ResetDefault setValue={setValue} defaultValue={defaultValue} />}
   >
     <TextInput
+      ouiaId="effective-user"
       aria-label="effective user"
       autoComplete="effective-user"
       id="effective-user"
@@ -86,6 +87,7 @@ export const PasswordField = ({ value, setValue }) => (
     fieldId="job-password"
   >
     <TextInput
+      ouiaId="job-password"
       aria-label="job password"
       autoComplete="new-password" // to prevent firefox from autofilling the user password
       id="job-password"
@@ -109,6 +111,7 @@ export const KeyPassphraseField = ({ value, setValue }) => (
     fieldId="key-passphrase"
   >
     <TextInput
+      ouiaId="key-passphrase"
       aria-label="key passphrase"
       autoComplete="key-passphrase"
       id="key-passphrase"
@@ -132,6 +135,7 @@ export const EffectiveUserPasswordField = ({ value, setValue }) => (
     fieldId="effective-user-password"
   >
     <TextInput
+      ouiaId="effective-user-password"
       aria-label="effective userpassword"
       autoComplete="effective-user-password"
       id="effective-user-password"
@@ -186,6 +190,7 @@ export const ExecutionOrderingField = ({ isRandomizedOrdering, setValue }) => (
     isInline
   >
     <Radio
+      ouiaId="execution-order-alphabetical"
       aria-label="execution order alphabetical"
       isChecked={!isRandomizedOrdering}
       name="execution-order"
@@ -194,6 +199,7 @@ export const ExecutionOrderingField = ({ isRandomizedOrdering, setValue }) => (
       label={__('Alphabetical')}
     />
     <Radio
+      ouiaId="execution-order-randomized"
       aria-label="execution order randomized"
       isChecked={isRandomizedOrdering}
       name="execution-order"
@@ -216,6 +222,7 @@ export const SSHUserField = ({ value, setValue, defaultValue }) => (
     labelInfo={<ResetDefault setValue={setValue} defaultValue={defaultValue} />}
   >
     <TextInput
+      ouiaId="ssh-user"
       aria-label="ssh user"
       autoComplete="ssh-user"
       id="ssh-user"
