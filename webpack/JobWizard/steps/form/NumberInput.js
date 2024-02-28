@@ -14,6 +14,7 @@ export const NumberInput = ({ formProps, inputProps }) => {
       validated={validated}
     >
       <TextInput
+        ouiaId={name}
         aria-label={name}
         type="text"
         {...inputProps}

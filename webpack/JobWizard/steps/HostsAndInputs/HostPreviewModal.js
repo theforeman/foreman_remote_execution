@@ -15,6 +15,7 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
 
   return (
     <Modal
+      ouiaId="host-preview-modal"
       title={__('Preview Hosts')}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
@@ -24,6 +25,7 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
         {hosts.map(host => (
           <ListItem key={host.name}>
             <Button
+              ouiaId={`host-preview-${host}`}
               component="a"
               href={foremanUrl(`/hosts/${host.name}`)}
               variant="link"
@@ -38,6 +40,7 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
         {hostsCount > HOSTS_TO_PREVIEW_AMOUNT && (
           <ListItem>
             <Button
+              ouiaId="host-preview-more"
               component="a"
               href={url.addSearch({ search: searchQuery })}
               variant="link"

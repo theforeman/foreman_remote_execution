@@ -53,6 +53,7 @@ const FeaturesDropdown = ({
     ?.filter(feature => feature.host_action_button)
     ?.map(({ name, label, id, description }) => (
       <DropdownItem
+        ouiaId={`schedule-a-job-dropdown-item-${id}`}
         onClick={() => dispatch(runFeature(hostId, label, name, hostSearch))}
         key={id}
         description={description}

@@ -19,6 +19,7 @@ export const RepeatMonth = ({ repeatData, setRepeatData, setValid }) => {
     <>
       <FormGroup label={__('Days')} isRequired>
         <TextInput
+          ouiaId="repeat-on-monthly-days"
           isRequired
           validated={days ? ValidatedOptions.noval : ValidatedOptions.error}
           aria-label="days"

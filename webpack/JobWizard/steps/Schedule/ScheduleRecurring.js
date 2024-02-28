@@ -89,6 +89,7 @@ export const ScheduleRecurring = ({
           <div className="pf-c-form">
             <FormGroup fieldId="schedule-starts-now">
               <Radio
+                ouiaId="schedule-start-now"
                 isChecked={!isFuture}
                 onChange={() =>
                   setScheduleValue(current => ({
@@ -105,6 +106,7 @@ export const ScheduleRecurring = ({
             </FormGroup>
             <FormGroup fieldId="start-at-date">
               <Radio
+                ouiaId="schedule-start-at-date"
                 isChecked={isFuture}
                 onChange={() =>
                   setScheduleValue(current => ({
@@ -161,6 +163,7 @@ export const ScheduleRecurring = ({
           <div className="pf-c-form">
             <FormGroup fieldId="schedule-ends-never">
               <Radio
+                ouiaId="schedule-never-ends"
                 isChecked={isNeverEnds}
                 onChange={() =>
                   setScheduleValue(current => ({
@@ -184,6 +187,7 @@ export const ScheduleRecurring = ({
               helperTextInvalidIcon={<ExclamationCircleIcon />}
             >
               <Radio
+                ouiaId="schedule-ends-on-date"
                 isChecked={!!ends}
                 onChange={() =>
                   setScheduleValue(current => ({
@@ -216,6 +220,7 @@ export const ScheduleRecurring = ({
             </FormGroup>
             <FormGroup fieldId="ends-after">
               <Radio
+                ouiaId="schedule-ends-after"
                 isChecked={repeatAmount === 0 || !!repeatAmount}
                 onChange={() =>
                   setScheduleValue(current => ({
@@ -239,6 +244,7 @@ export const ScheduleRecurring = ({
                       className="schedule-radio-repeat-text"
                     >
                       <TextInput
+                        ouiaId="repeat-amount"
                         id="repeat-amount"
                         value={repeatAmount || ''}
                         type="number"

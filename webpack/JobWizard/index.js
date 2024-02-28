@@ -59,6 +59,7 @@ const JobWizardPage = ({ location: { search } }) => {
       searchable={false}
       toolbarButtons={
         <Button
+          ouiaId="legacy-form"
           variant="link"
           component="a"
           href={`/old/job_invocations/new${search}`}

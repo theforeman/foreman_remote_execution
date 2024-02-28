@@ -29,6 +29,7 @@ exports[`RexInterface renders 1`] = `
     id="reg_rex_interface_input"
     isDisabled={false}
     onBlur={[Function]}
+    ouiaId="reg_rex_interface_input"
     type="text"
   />
 </FormGroup>

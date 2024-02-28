@@ -37,6 +37,7 @@ export const SelectField = ({
       isRequired={isRequired}
     >
       <Select
+        ouiaId={fieldId}
         selections={value}
         onSelect={onSelect}
         onToggle={setIsOpen}

@@ -76,6 +76,7 @@ export const SearchSelect = ({
   };
   return (
     <Select
+      ouiaId={name}
       toggleAriaLabel={`${name} toggle`}
       chipGroupComponent={<></>}
       variant={variant}

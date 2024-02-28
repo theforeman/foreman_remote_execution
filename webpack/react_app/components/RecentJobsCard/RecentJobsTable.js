@@ -42,6 +42,7 @@ const RecentJobsTable = ({ status, hostId }) => {
     >
       {!!jobs?.length && (
         <TableComposable
+          ouiaId="recent-jobs-table"
           aria-label="recent-jobs-table"
           variant="compact"
           borders="compactBorderless"
@@ -55,7 +56,7 @@ const RecentJobsTable = ({ status, hostId }) => {
                 start_at: startAt,
                 description,
               }) => (
-                <Tr key={id}>
+                <Tr ouiaId="recent-jobs-table-row" key={id}>
                   <Td modifier="truncate" key={`name-${id}`}>
                     <a href={foremanUrl(`/job_invocations/${id}`)}>
                       {description}

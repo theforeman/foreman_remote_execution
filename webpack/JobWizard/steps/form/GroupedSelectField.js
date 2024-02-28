@@ -59,6 +59,7 @@ export const GroupedSelectField = ({
   return (
     <FormGroup label={label} fieldId={fieldId}>
       <Select
+        ouiaId={fieldId}
         isGrouped
         variant={SelectVariant.typeahead}
         onToggle={setIsOpen}
