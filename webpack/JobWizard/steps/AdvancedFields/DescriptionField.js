@@ -56,7 +56,12 @@ export const DescriptionField = ({
       }
       fieldId="description"
       helperText={
-        <Button variant="link" isInline onClick={togglePreview}>
+        <Button
+          ouiaId="description-preview-button"
+          variant="link"
+          isInline
+          onClick={togglePreview}
+        >
           {isPreview
             ? __('Edit job description template')
             : __('Preview job description')}
@@ -68,6 +73,7 @@ export const DescriptionField = ({
           <div>
             {/* div wrapper so the tooltip will be shown in chrome */}
             <TextInput
+              ouiaId="description-preview"
               aria-label="description preview"
               id="description-preview"
               value={generatedDesc}
@@ -77,6 +83,7 @@ export const DescriptionField = ({
         </Tooltip>
       ) : (
         <TextInput
+          ouiaId="description-edit"
           aria-label="description edit"
           type="text"
           autoComplete="description"

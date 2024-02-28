@@ -6,5 +6,8 @@
   "extends": [
     "plugin:@theforeman/foreman/core",
     "plugin:@theforeman/foreman/plugins"
-  ]
+  ],
+  "rules":{
+    "@theforeman/rules/require-ouiaid": ["error"]
+  }
 }

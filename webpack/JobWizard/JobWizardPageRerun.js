@@ -48,6 +48,7 @@ const JobWizardPageRerun = ({
       searchable={false}
       toolbarButtons={
         <Button
+          ouiaId="job-wizard-rerun-old-form-button"
           variant="link"
           component="a"
           href={`/old/job_invocations/${id}/rerun${search}`}
@@ -71,6 +72,7 @@ const JobWizardPageRerun = ({
           <React.Fragment>
             {jobOrganization?.id !== currentOrganization?.id && (
               <Alert
+                ouiaId="job-wizard-alert-organization"
                 isInline
                 className="job-wizard-alert"
                 variant="warning"
@@ -85,6 +87,7 @@ const JobWizardPageRerun = ({
             )}
             {jobLocation?.id !== currentLocation?.id && (
               <Alert
+                ouiaId="job-wizard-alert-location"
                 isInline
                 className="job-wizard-alert"
                 variant="warning"

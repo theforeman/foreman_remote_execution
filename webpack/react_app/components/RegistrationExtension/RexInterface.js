@@ -29,6 +29,7 @@ const RexInterface = ({ isLoading, onChange }) => (
     }
   >
     <TextInput
+      ouiaId="reg_rex_interface_input"
       type="text"
       onBlur={e => onChange({ remoteExecutionInterface: e.target.value })}
       id="reg_rex_interface_input"

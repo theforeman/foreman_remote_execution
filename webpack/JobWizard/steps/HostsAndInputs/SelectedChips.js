@@ -14,6 +14,7 @@ const SelectedChip = ({ selected, setSelected, categoryName, setLabel }) => {
   return (
     <>
       <ChipGroup
+        ouiaId="hosts-chip-group"
         className="hosts-chip-group"
         categoryName={categoryName}
         isClosable
@@ -26,6 +27,7 @@ const SelectedChip = ({ selected, setSelected, categoryName, setLabel }) => {
       >
         {selected.map((result, index) => (
           <Chip
+            ouiaId={`${categoryName}-${result.id}`}
             key={index}
             id={`${categoryName}-${result.id}`}
             onClick={() => deleteItem(result.id)}
@@ -93,7 +95,12 @@ export const SelectedChips = ({
         setLabel={setLabel}
       />
       {showClear && (
-        <Button variant="link" className="clear-chips" onClick={clearAll}>
+        <Button
+          ouiaId="clear-chips"
+          variant="link"
+          className="clear-chips"
+          onClick={clearAll}
+        >
           {__('Clear all filters')}
         </Button>
       )}

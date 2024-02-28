@@ -229,9 +229,10 @@ const HostsAndInputs = ({
           clearSearch={clearSearch}
           setLabel={setLabel}
         />
-        <Text>
+        <Text ouiaId="host-preview-label">
           {__('Apply to')}{' '}
           <Button
+            ouiaId="host-preview-open-button"
             variant="link"
             isInline
             onClick={() => setHostPreviewOpen(true)}
@@ -247,7 +248,11 @@ const HostsAndInputs = ({
           setValue={setTemplateValues}
         />
         {!isEmpty(missingPermissions) && (
-          <Alert variant="warning" title={__('Access denied')}>
+          <Alert
+            ouiaId="host-access-denied"
+            variant="warning"
+            title={__('Access denied')}
+          >
             <span>
               {__(
                 `Missing the required permissions: ${missingPermissions.join(
