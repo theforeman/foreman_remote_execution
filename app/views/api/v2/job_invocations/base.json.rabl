@@ -8,11 +8,13 @@ node do |invocation|
     :template_id => pattern_template&.template_id,
     :template_name => pattern_template&.template_name,
     :effective_user => pattern_template&.effective_user,
-    :succeeded => invocation_count(invocation, :output_key => :success_count),
-    :failed    => invocation_count(invocation, :output_key => :failed_count),
-    :pending   => invocation_count(invocation, :output_key => :pending_count),
+    :succeeded => invocation.progress_report[:success],
+    :failed    => invocation.progress_report[:error],
+    :pending   => invocation.progress_report[:pending],
+    :cancelled => invocation.progress_report[:cancelled],
     :total     => invocation_count(invocation, :output_key => :total_count),
     :missing   => invocation.missing_hosts_count,
+    :total_hosts => invocation.total_hosts_count,
   }
 end
 

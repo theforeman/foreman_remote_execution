@@ -1,0 +1,38 @@
+.job-invocation-detail-page-section {
+  $chart_size: 105px;
+  
+  .chart-donut {
+    height: $chart_size;
+    width: $chart_size;
+    margin-bottom: 10px;
+  }
+
+  .chart-legend {
+    height: $chart_size;
+    min-width: 270px;
+
+    .legend-title {
+      font-weight: bold;
+      font-size: var(--pf-global--FontSize--sm);
+      margin-left: 8px;
+      margin-bottom: 0;
+    }
+
+    .pf-c-description-list {
+      margin-left: 8px;
+      margin-top: 8px;
+
+      .pf-c-description-list__term .pf-c-description-list__text {
+        font-weight: normal;
+      }
+    }
+  }
+
+  .pf-c-divider {
+    max-height: $chart_size;
+  }
+
+  .job-overview {
+    height: $chart_size;
+  }
+}
