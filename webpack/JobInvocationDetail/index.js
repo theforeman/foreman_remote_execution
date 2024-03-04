@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Divider, PageSection, Flex, FlexItem } from '@patternfly/react-core';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { Divider, PageSection, Flex } from '@patternfly/react-core';
+import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
 import { getData } from './JobInvocationActions';
 import { selectItems } from './JobInvocationSelectors';
 import JobInvocationOverview from './JobInvocationOverview';
-import { JOB_INVOCATION_KEY, STATUS } from './JobInvocationConstants';
+import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
+import {
+  JOB_INVOCATION_KEY,
+  STATUS,
+  DATE_OPTIONS,
+} from './JobInvocationConstants';
+import './JobInvocationDetail.scss';
 
 const JobInvocationDetailPage = ({
   match: {
@@ -17,10 +23,27 @@ const JobInvocationDetailPage = ({
 }) => {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
-  const { description, status_label: statusLabel, task } = items;
+  const {
+    description,
+    status_label: statusLabel,
+    task,
+    start_at: startAt,
+  } = items;
   const finished =
     statusLabel === STATUS.FAILED || statusLabel === STATUS.SUCCEEDED;
   const autoRefresh = task?.state === STATUS.PENDING || false;
+
+  let isAlreadyStarted = false;
+  let formattedStartDate;
+  if (startAt) {
+    // Ensures date string compatibility across browsers
+    const convertedDate = new Date(startAt.replace(/[-.]/g, '/'));
+    isAlreadyStarted = convertedDate.getTime() <= new Date().getTime();
+    formattedStartDate = convertedDate.toLocaleString(
+      documentLocale(),
+      DATE_OPTIONS
+    );
+  }
 
   useEffect(() => {
     dispatch(getData(`/api/job_invocations/${id}`));
@@ -48,17 +71,32 @@ const JobInvocationDetailPage = ({
       searchable={false}
     >
       <React.Fragment>
-        <PageSection isFilled variant="light">
-          <Flex>
-            <FlexItem> </FlexItem>
+        <PageSection
+          className="job-invocation-detail-page-section"
+          isFilled
+          variant="light"
+        >
+          <Flex alignItems={{ default: 'alignItemsFlexStart' }}>
+            <JobInvocationSystemStatusChart
+              data={items}
+              isAlreadyStarted={isAlreadyStarted}
+              formattedStartDate={formattedStartDate}
+            />
             <Divider
               orientation={{
                 default: 'vertical',
               }}
             />
-            <FlexItem>
-              <JobInvocationOverview data={items} />
-            </FlexItem>
+            <Flex
+              className="job-overview"
+              alignItems={{ default: 'alignItemsCenter' }}
+            >
+              <JobInvocationOverview
+                data={items}
+                isAlreadyStarted={isAlreadyStarted}
+                formattedStartDate={formattedStartDate}
+              />
+            </Flex>
           </Flex>
         </PageSection>
       </React.Fragment>

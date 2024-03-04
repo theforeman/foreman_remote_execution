@@ -7,12 +7,15 @@ import {
   DescriptionListGroup,
   DescriptionListDescription,
 } from '@patternfly/react-core';
+import { translate as __ } from 'foremanReact/common/I18n';
 import DefaultLoaderEmptyState from 'foremanReact/components/HostDetails/DetailsCard/DefaultLoaderEmptyState';
-import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 
-const JobInvocationOverview = ({ data }) => {
+const JobInvocationOverview = ({
+  data,
+  isAlreadyStarted,
+  formattedStartDate,
+}) => {
   const {
-    start_at: startAt,
     ssh_user: sshUser,
     template_id: templateId,
     template_name: templateName,
@@ -22,27 +25,6 @@ const JobInvocationOverview = ({ data }) => {
   const canEditJobTemplates = permissions
     ? permissions.edit_job_templates
     : false;
-  const dateOptions = {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-    timeZoneName: 'short',
-  };
-  let formattedStartDate = __('Not yet');
-
-  if (startAt) {
-    // Ensures date string compatibility across browsers
-    const convertedDate = new Date(startAt.replace(/[-.]/g, '/'));
-    if (convertedDate.getTime() <= new Date().getTime()) {
-      formattedStartDate = convertedDate.toLocaleString(
-        documentLocale(),
-        dateOptions
-      );
-    }
-  }
 
   return (
     <DescriptionList
@@ -63,7 +45,7 @@ const JobInvocationOverview = ({ data }) => {
       <DescriptionListGroup>
         <DescriptionListTerm>{__('Started at:')}</DescriptionListTerm>
         <DescriptionListDescription>
-          {formattedStartDate}
+          {isAlreadyStarted ? formattedStartDate : __('Not yet')}
         </DescriptionListDescription>
       </DescriptionListGroup>
       <DescriptionListGroup>
@@ -99,6 +81,12 @@ const JobInvocationOverview = ({ data }) => {
 
 JobInvocationOverview.propTypes = {
   data: PropTypes.object.isRequired,
+  isAlreadyStarted: PropTypes.bool.isRequired,
+  formattedStartDate: PropTypes.string,
+};
+
+JobInvocationOverview.defaultProps = {
+  formattedStartDate: undefined,
 };
 
 export default JobInvocationOverview;
