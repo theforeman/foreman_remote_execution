@@ -79,6 +79,9 @@ msgstr ""
 msgid "Abort Job"
 msgstr ""
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr ""
 
@@ -122,6 +125,9 @@ msgid "At"
 msgstr ""
 
 msgid "At minute"
+msgstr ""
+
+msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
@@ -368,9 +374,6 @@ msgid "End time needs to be after start time"
 msgstr ""
 
 msgid "Ends"
-msgstr ""
-
-msgid "Error"
 msgstr ""
 
 msgid "Error loading data from proxy"
@@ -703,6 +706,9 @@ msgstr ""
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr ""
 
@@ -733,9 +739,6 @@ msgstr ""
 msgid "No Target Hosts"
 msgstr ""
 
-msgid "No execution finished yet"
-msgstr ""
-
 msgid "No hosts found."
 msgstr ""
 
@@ -749,6 +752,9 @@ msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
 msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr ""
+
+msgid "Not available"
 msgstr ""
 
 msgid "Not yet"
@@ -802,6 +808,9 @@ msgstr ""
 msgid "Perform no more executions after this time"
 msgstr ""
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -809,6 +818,9 @@ msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix
 msgstr ""
 
 msgid "Please refine your search."
+msgstr ""
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
 msgstr ""
 
 msgid "Please select at least one host"
@@ -842,6 +854,9 @@ msgid "Private key passphrase"
 msgstr ""
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
+msgstr ""
+
+msgid "Proceed Anyway"
 msgstr ""
 
 msgid "Provider type"
@@ -1456,6 +1471,9 @@ msgid "Yes (override)"
 msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
+msgstr ""
+
+msgid "You are not authorized to perform this action."
 msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"

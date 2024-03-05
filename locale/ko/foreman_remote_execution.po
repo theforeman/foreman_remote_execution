@@ -78,6 +78,9 @@ msgstr "스크립트를 실행하는 데 사용할 사용자입니다. 이 사�
 msgid "Abort Job"
 msgstr ""
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr "작업"
 
@@ -121,6 +124,9 @@ msgid "At"
 msgstr "시간"
 
 msgid "At minute"
+msgstr ""
+
+msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
@@ -368,9 +374,6 @@ msgstr ""
 
 msgid "Ends"
 msgstr "종료"
-
-msgid "Error"
-msgstr "오류 "
 
 msgid "Error loading data from proxy"
 msgstr "프록시에서 데이터를 로드하는 도중 오류가 발생했습니다."
@@ -702,6 +705,9 @@ msgstr "수동 선택"
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr "매달"
 
@@ -732,9 +738,6 @@ msgstr ""
 msgid "No Target Hosts"
 msgstr ""
 
-msgid "No execution finished yet"
-msgstr "아직 완료된 실행이 없습니다."
-
 msgid "No hosts found."
 msgstr "호스트를 찾을 수 없습니다."
 
@@ -749,6 +752,9 @@ msgstr "%{feature_name} 기능에 매핑된 템플릿이 없습니다."
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
+
+msgid "Not available"
+msgstr ""
 
 msgid "Not yet"
 msgstr ""
@@ -801,6 +807,9 @@ msgstr ""
 msgid "Perform no more executions after this time"
 msgstr "이 시간 이후 더 이상 실행을 수행하지 않음"
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -808,6 +817,9 @@ msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix
 msgstr ""
 
 msgid "Please refine your search."
+msgstr ""
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
 msgstr ""
 
 msgid "Please select at least one host"
@@ -842,6 +854,9 @@ msgstr ""
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "템플릿을 미리 보는 도중 문제가 발생했습니다: %{error}. 미리 보기 전에 템플릿 입력 변경 내용을 저장해야 합니다."
+
+msgid "Proceed Anyway"
+msgstr ""
 
 msgid "Provider type"
 msgstr "공급자 유형"
@@ -1455,6 +1470,9 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "현재 할당된 템플릿을 볼 수 없습니다. 지금 양식을 저장하면 템플릿의 할당이 취소됩니다."
+
+msgid "You are not authorized to perform this action."
+msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""

@@ -329,6 +329,9 @@
       "Any Location": [
         "모든 위치 "
       ],
+      "Awaiting start": [
+        ""
+      ],
       "error": [
         ""
       ],
@@ -508,9 +511,6 @@
       ],
       "Last execution succeeded": [
         "성공한 마지막 실행"
-      ],
-      "No execution finished yet": [
-        "아직 완료된 실행이 없습니다."
       ],
       "Last execution cancelled": [
         ""
@@ -1227,6 +1227,18 @@
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
       ],
+      "You are not authorized to perform this action.": [
+        ""
+      ],
+      "Please request the required permissions listed below from a Foreman administrator:": [
+        ""
+      ],
+      "Permission Denied": [
+        ""
+      ],
+      "Proceed Anyway": [
+        ""
+      ],
       "'Starts before' date must in the future": [
         ""
       ],
@@ -1257,8 +1269,14 @@
       "All fields are required.": [
         ""
       ],
-      "Error": [
-        "오류 "
+      "Not available": [
+        ""
+      ],
+      "Access denied": [
+        ""
+      ],
+      "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
+        ""
       ],
       "Errors:": [
         ""
@@ -1571,15 +1589,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "Foreman으로 원격 실행을 가져오는 플러그인입니다. 원격 관리 기능으로 구성 관리 기능을 완료합니다."
-      ],
-      "Action with sub plans": [
-        "하위 계획이 있는 작업"
-      ],
-      "Import Puppet classes": [
-        "Puppet 클래스 가져오기"
-      ],
-      "Import facts": [
-        "팩트 불러오기"
       ]
     }
   }

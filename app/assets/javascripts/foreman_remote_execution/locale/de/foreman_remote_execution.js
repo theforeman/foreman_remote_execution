@@ -329,6 +329,9 @@
       "Any Location": [
         "Jeder Standort"
       ],
+      "Awaiting start": [
+        ""
+      ],
       "error": [
         "Error"
       ],
@@ -509,9 +512,6 @@
       ],
       "Last execution succeeded": [
         "Letzte Ausführung erfolgreich"
-      ],
-      "No execution finished yet": [
-        "Noch keine Ausführung abgeschlossen"
       ],
       "Last execution cancelled": [
         "Letzte Ausführung abgebrochen"
@@ -1228,6 +1228,18 @@
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
       ],
+      "You are not authorized to perform this action.": [
+        ""
+      ],
+      "Please request the required permissions listed below from a Foreman administrator:": [
+        ""
+      ],
+      "Permission Denied": [
+        ""
+      ],
+      "Proceed Anyway": [
+        ""
+      ],
       "'Starts before' date must in the future": [
         ""
       ],
@@ -1258,8 +1270,14 @@
       "All fields are required.": [
         "Alle Felder sind erforderlich."
       ],
-      "Error": [
-        "Fehler"
+      "Not available": [
+        ""
+      ],
+      "Access denied": [
+        ""
+      ],
+      "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
+        ""
       ],
       "Errors:": [
         "Fehler:"
@@ -1572,15 +1590,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "Ein Plugin, das Foreman entfernte Ausführung bietet und die Konfig-Verwaltungsfunktion mit einer entfernten Verwaltungsfunktion ergänzt."
-      ],
-      "Action with sub plans": [
-        "Aktion mit Unterplänen"
-      ],
-      "Import Puppet classes": [
-        "Puppet-Klassen importieren"
-      ],
-      "Import facts": [
-        "Fakten importieren"
       ]
     }
   }

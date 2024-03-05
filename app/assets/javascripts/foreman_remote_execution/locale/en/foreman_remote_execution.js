@@ -329,6 +329,9 @@
       "Any Location": [
         ""
       ],
+      "Awaiting start": [
+        ""
+      ],
       "error": [
         ""
       ],
@@ -508,9 +511,6 @@
         ""
       ],
       "Last execution succeeded": [
-        ""
-      ],
-      "No execution finished yet": [
         ""
       ],
       "Last execution cancelled": [
@@ -1228,6 +1228,18 @@
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
       ],
+      "You are not authorized to perform this action.": [
+        ""
+      ],
+      "Please request the required permissions listed below from a Foreman administrator:": [
+        ""
+      ],
+      "Permission Denied": [
+        ""
+      ],
+      "Proceed Anyway": [
+        ""
+      ],
       "'Starts before' date must in the future": [
         ""
       ],
@@ -1258,7 +1270,13 @@
       "All fields are required.": [
         ""
       ],
-      "Error": [
+      "Not available": [
+        ""
+      ],
+      "Access denied": [
+        ""
+      ],
+      "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         ""
       ],
       "Errors:": [

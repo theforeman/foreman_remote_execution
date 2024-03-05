@@ -80,6 +80,9 @@ msgstr "Usuário a ser usado para a execução de script. Se ele for diferente d
 msgid "Abort Job"
 msgstr "Sobre o trabalho"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr "Ações"
 
@@ -124,6 +127,9 @@ msgstr "No(a)"
 
 msgid "At minute"
 msgstr "Em minuto"
+
+msgid "Awaiting start"
+msgstr ""
 
 msgid "Back"
 msgstr ""
@@ -370,9 +376,6 @@ msgstr "O tempo final precisa ser após a hora de início"
 
 msgid "Ends"
 msgstr "Finais"
-
-msgid "Error"
-msgstr "Erro"
 
 msgid "Error loading data from proxy"
 msgstr "Erro ao carregar dados do proxy"
@@ -704,6 +707,9 @@ msgstr "Seleção manual"
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr "Mensal"
 
@@ -734,9 +740,6 @@ msgstr ""
 msgid "No Target Hosts"
 msgstr "Sem anfitriões alvo"
 
-msgid "No execution finished yet"
-msgstr "Nenhuma execução concluída ainda "
-
 msgid "No hosts found."
 msgstr "Nenhum host localizado."
 
@@ -751,6 +754,9 @@ msgstr "Nenhum template mapeado para o recurso %{feature_name}"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Nem todas as entradas necessárias possuem valores. Entradas ausentes: %s"
+
+msgid "Not available"
+msgstr ""
 
 msgid "Not yet"
 msgstr ""
@@ -803,6 +809,9 @@ msgstr "Realizar uma única execução de Puppet"
 msgid "Perform no more executions after this time"
 msgstr "Não desempenhar execuções depois deste período"
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -811,6 +820,9 @@ msgstr ""
 
 msgid "Please refine your search."
 msgstr "Por favor, refine sua busca."
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
+msgstr ""
 
 msgid "Please select at least one host"
 msgstr ""
@@ -844,6 +856,9 @@ msgstr "Senha da chave privada"
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "Problemas com a visualização do modelo: %{error}. Observe que você deve salvar as alterações das entradas do modelo antes de tentar visualizá-las."
+
+msgid "Proceed Anyway"
+msgstr ""
 
 msgid "Provider type"
 msgstr "Tipo de provedor"
@@ -1459,6 +1474,9 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "Você não tem permissão para visualizar o modelo atualmente atribuído. Salvar o formulário agora cancelaria a atribuição do modelo. "
+
+msgid "You are not authorized to perform this action."
+msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr "Você tem %s resultados para exibir. Mostrando primeiro %s resultados"
