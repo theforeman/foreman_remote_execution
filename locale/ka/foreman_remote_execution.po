@@ -79,6 +79,9 @@ msgstr "სკრიპტის გაშვებისას გამოყ�
 msgid "Abort Job"
 msgstr "დავალების გაუქმება"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr "ქმედებები"
 
@@ -123,6 +126,9 @@ msgstr "დრო"
 
 msgid "At minute"
 msgstr "წუთი"
+
+msgid "Awaiting start"
+msgstr ""
 
 msgid "Back"
 msgstr "უკან"
@@ -369,9 +375,6 @@ msgstr "დასრულების დრო დასაწყისის 
 
 msgid "Ends"
 msgstr "საბოლოო"
-
-msgid "Error"
-msgstr "შეცდომა"
 
 msgid "Error loading data from proxy"
 msgstr "პროქსიდან მონაცემების ჩატვირთვის შეცდომა"
@@ -703,6 +706,9 @@ msgstr "ხელით არჩევა"
 msgid "Minute can only be a number between 0-59"
 msgstr "წუთი უნდა იყოს რიცხვი შუალედში 0-59"
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr "თვეში ერთხელ"
 
@@ -733,9 +739,6 @@ msgstr "არა (გადაფარვა)"
 msgid "No Target Hosts"
 msgstr "სამიზნე ჰოსტების გარეშე"
 
-msgid "No execution finished yet"
-msgstr "შესრულება არ დამთავრებულა"
-
 msgid "No hosts found."
 msgstr "ჰოსტები ნაპოვნი არაა."
 
@@ -749,6 +752,9 @@ msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
 msgid "Not all required inputs have values. Missing inputs: %s"
+msgstr ""
+
+msgid "Not available"
 msgstr ""
 
 msgid "Not yet"
@@ -802,6 +808,9 @@ msgstr "Puppet-ის ერთხელ გაშვება"
 msgid "Perform no more executions after this time"
 msgstr "ამ დროის შემდეგ გაშვებები აღარ მოხდება"
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -810,6 +819,9 @@ msgstr ""
 
 msgid "Please refine your search."
 msgstr "შეიყვანეთ ძებნის უკეთესი პირობა."
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
+msgstr ""
 
 msgid "Please select at least one host"
 msgstr ""
@@ -842,6 +854,9 @@ msgid "Private key passphrase"
 msgstr "პირადი გასაღების პაროლი"
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
+msgstr ""
+
+msgid "Proceed Anyway"
 msgstr ""
 
 msgid "Provider type"
@@ -1456,6 +1471,9 @@ msgid "Yes (override)"
 msgstr "დიახ (გადაფარვა)"
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
+msgstr ""
+
+msgid "You are not authorized to perform this action."
 msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"

@@ -80,6 +80,9 @@ msgstr "スクリプトを実行するために使用するユーザー。ユー
 msgid "Abort Job"
 msgstr "ジョブの中断"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr "アクション"
 
@@ -124,6 +127,9 @@ msgstr "場所"
 
 msgid "At minute"
 msgstr "分"
+
+msgid "Awaiting start"
+msgstr ""
 
 msgid "Back"
 msgstr ""
@@ -370,9 +376,6 @@ msgstr "終了時刻は開始時刻の後でなければなりません"
 
 msgid "Ends"
 msgstr "終了"
-
-msgid "Error"
-msgstr "エラー"
 
 msgid "Error loading data from proxy"
 msgstr "プロキシーからデータをロードするときにエラーが発生しました"
@@ -704,6 +707,9 @@ msgstr "手動選択"
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr "毎月"
 
@@ -734,9 +740,6 @@ msgstr "No (上書き)"
 msgid "No Target Hosts"
 msgstr "ターゲットホストがありません"
 
-msgid "No execution finished yet"
-msgstr "完了した実行はまだありません"
-
 msgid "No hosts found."
 msgstr "ホストが見つかりません。"
 
@@ -751,6 +754,9 @@ msgstr "機能 %{feature_name} にマッピングされたテンプレートが�
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "入力が必須のすべての項目に値があるとは限りません。足りない入力: %s"
+
+msgid "Not available"
+msgstr ""
 
 msgid "Not yet"
 msgstr ""
@@ -803,6 +809,9 @@ msgstr "Puppet を 1 回実行"
 msgid "Perform no more executions after this time"
 msgstr "この回数以上は実行されません"
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -811,6 +820,9 @@ msgstr ""
 
 msgid "Please refine your search."
 msgstr "検索条件を見直してください。"
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
+msgstr ""
 
 msgid "Please select at least one host"
 msgstr ""
@@ -844,6 +856,9 @@ msgstr "秘密鍵のパスフレーズ"
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "テンプレートのプレビューでの問題: %{error}。プレビューを表示する前に、テンプレート入力の変更を保存する必要があることに注意してください。"
+
+msgid "Proceed Anyway"
+msgstr ""
 
 msgid "Provider type"
 msgstr "プロバイダータイプ"
@@ -1457,6 +1472,9 @@ msgstr "Yes (上書き)"
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "現在割り当てられているテンプレートを参照できません。フォームを保存すると、テンプレートの割り当てが解除されます。"
+
+msgid "You are not authorized to perform this action."
+msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr "表示する結果が %s 件あります。最初の %s 件の結果を表示しています"

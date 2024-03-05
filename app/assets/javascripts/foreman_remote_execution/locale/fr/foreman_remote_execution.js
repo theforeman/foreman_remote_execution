@@ -329,6 +329,9 @@
       "Any Location": [
         "Tout emplacement"
       ],
+      "Awaiting start": [
+        ""
+      ],
       "error": [
         "erreur"
       ],
@@ -510,9 +513,6 @@
       ],
       "Last execution succeeded": [
         "La dernière exécution a réussi"
-      ],
-      "No execution finished yet": [
-        "Aucune exécution n'est encore terminée"
       ],
       "Last execution cancelled": [
         "La dernière exécution a été annulée"
@@ -1230,6 +1230,18 @@
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
       ],
+      "You are not authorized to perform this action.": [
+        ""
+      ],
+      "Please request the required permissions listed below from a Foreman administrator:": [
+        ""
+      ],
+      "Permission Denied": [
+        ""
+      ],
+      "Proceed Anyway": [
+        ""
+      ],
       "'Starts before' date must in the future": [
         ""
       ],
@@ -1260,8 +1272,14 @@
       "All fields are required.": [
         "Tous les champs sont obligatoires."
       ],
-      "Error": [
-        "Erreur"
+      "Not available": [
+        ""
+      ],
+      "Access denied": [
+        ""
+      ],
+      "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
+        ""
       ],
       "Errors:": [
         "Erreurs :"
@@ -1574,15 +1592,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "Un greffon qui apporte l'exécution distante à Foreman, complétant la fonction de gestion de configuration avec la fonction d'exécution distante."
-      ],
-      "Action with sub plans": [
-        "Action avec sous-plans"
-      ],
-      "Import Puppet classes": [
-        "Importer des classes Puppet"
-      ],
-      "Import facts": [
-        "Importer des faits"
       ]
     }
   }

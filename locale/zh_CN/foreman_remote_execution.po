@@ -78,6 +78,9 @@ msgstr "要使用執行這 script 的使用者。如果使用者與 SSH 使用�
 msgid "Abort Job"
 msgstr "终止作业"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr "操作"
 
@@ -122,6 +125,9 @@ msgstr "位于"
 
 msgid "At minute"
 msgstr "于分钟"
+
+msgid "Awaiting start"
+msgstr ""
 
 msgid "Back"
 msgstr ""
@@ -368,9 +374,6 @@ msgstr "结束时间需要在开始时间后"
 
 msgid "Ends"
 msgstr "结束"
-
-msgid "Error"
-msgstr "错误"
 
 msgid "Error loading data from proxy"
 msgstr "从代理加载数据时出错"
@@ -702,6 +705,9 @@ msgstr "手动选择"
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr "每月"
 
@@ -732,9 +738,6 @@ msgstr "否（覆盖）"
 msgid "No Target Hosts"
 msgstr "没有目标主机"
 
-msgid "No execution finished yet"
-msgstr "尚未执行完毕"
-
 msgid "No hosts found."
 msgstr "找不到主机。"
 
@@ -749,6 +752,9 @@ msgstr "没有映射到功能 %{feature_name} 的模板"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "並不是所有需要的輸入都有值。缺少的输入：%s"
+
+msgid "Not available"
+msgstr ""
 
 msgid "Not yet"
 msgstr ""
@@ -801,6 +807,9 @@ msgstr "执行一个单独 Puppet 运行"
 msgid "Perform no more executions after this time"
 msgstr "在此时间后不再执行"
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -809,6 +818,9 @@ msgstr ""
 
 msgid "Please refine your search."
 msgstr "请重新调整您的搜索。"
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
+msgstr ""
 
 msgid "Please select at least one host"
 msgstr ""
@@ -842,6 +854,9 @@ msgstr "私钥密码口令"
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "预览模板有问题：%{error}。请注意，在预览前需要保存模板输入的改变。"
+
+msgid "Proceed Anyway"
+msgstr ""
 
 msgid "Provider type"
 msgstr "供应商类型"
@@ -1455,6 +1470,9 @@ msgstr "是（覆盖）"
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "您没有权限查看当前分配的模板。现在保存表单将取消分配模板。"
+
+msgid "You are not authorized to perform this action."
+msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr "您有 %s 个结果现实。显示前 %s 个结果"

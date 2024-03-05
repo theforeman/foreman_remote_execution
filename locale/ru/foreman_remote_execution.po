@@ -82,6 +82,9 @@ msgstr "Пользователь, от имени которого должен 
 msgid "Abort Job"
 msgstr ""
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr "Действия"
 
@@ -125,6 +128,9 @@ msgid "At"
 msgstr "в"
 
 msgid "At minute"
+msgstr ""
+
+msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
@@ -372,9 +378,6 @@ msgstr ""
 
 msgid "Ends"
 msgstr "Заканчивается"
-
-msgid "Error"
-msgstr "Ошибка"
 
 msgid "Error loading data from proxy"
 msgstr "Не удалось загрузить данные с прокси"
@@ -706,6 +709,9 @@ msgstr "Ручной выбор"
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr "Ежемесячный"
 
@@ -736,9 +742,6 @@ msgstr ""
 msgid "No Target Hosts"
 msgstr ""
 
-msgid "No execution finished yet"
-msgstr "Ни один цикл выполнения не завершился"
-
 msgid "No hosts found."
 msgstr "Нет узлов."
 
@@ -753,6 +756,9 @@ msgstr "С %{feature_name} не связан ни один шаблон."
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Отсутствуют значения некоторых обязательных входных данных: %s"
+
+msgid "Not available"
+msgstr ""
 
 msgid "Not yet"
 msgstr ""
@@ -805,6 +811,9 @@ msgstr ""
 msgid "Perform no more executions after this time"
 msgstr "Остановить после указанного числа повторений"
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -812,6 +821,9 @@ msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix
 msgstr ""
 
 msgid "Please refine your search."
+msgstr ""
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
 msgstr ""
 
 msgid "Please select at least one host"
@@ -846,6 +858,9 @@ msgstr ""
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "Не удалось открыть шаблон для предварительного просмотра: %{error}. Прежде чем повторить попытку, сохраните изменения входных параметров."
+
+msgid "Proceed Anyway"
+msgstr ""
 
 msgid "Provider type"
 msgstr "Тип провайдера"
@@ -1462,6 +1477,9 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "У вас нет доступа к используемому шаблону. При сохранении формы он будет автоматически отключен."
+
+msgid "You are not authorized to perform this action."
+msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""

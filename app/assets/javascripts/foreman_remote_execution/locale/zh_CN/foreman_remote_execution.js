@@ -329,6 +329,9 @@
       "Any Location": [
         "任意位置"
       ],
+      "Awaiting start": [
+        ""
+      ],
       "error": [
         "错误"
       ],
@@ -508,9 +511,6 @@
       ],
       "Last execution succeeded": [
         "最后成功的执行"
-      ],
-      "No execution finished yet": [
-        "尚未执行完毕"
       ],
       "Last execution cancelled": [
         "最后的执行已取消"
@@ -1226,6 +1226,18 @@
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
       ],
+      "You are not authorized to perform this action.": [
+        ""
+      ],
+      "Please request the required permissions listed below from a Foreman administrator:": [
+        ""
+      ],
+      "Permission Denied": [
+        ""
+      ],
+      "Proceed Anyway": [
+        ""
+      ],
       "'Starts before' date must in the future": [
         ""
       ],
@@ -1256,8 +1268,14 @@
       "All fields are required.": [
         "各个项都需要。"
       ],
-      "Error": [
-        "错误"
+      "Not available": [
+        ""
+      ],
+      "Access denied": [
+        ""
+      ],
+      "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
+        ""
       ],
       "Errors:": [
         "错误："
@@ -1570,15 +1588,6 @@
       ],
       "A plugin bringing remote execution to the Foreman, completing the config management functionality with remote management functionality.": [
         "一个将远程执行带到 Foreman 的插件，通过远程管理功能来完成配置管理功能。"
-      ],
-      "Action with sub plans": [
-        "有子计划的操作"
-      ],
-      "Import Puppet classes": [
-        "导入 Puppet 类"
-      ],
-      "Import facts": [
-        "导入事实"
       ]
     }
   }

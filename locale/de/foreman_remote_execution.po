@@ -84,6 +84,9 @@ msgstr "Ein Benutzer, der für die Ausführung des Skripts verwendet werden soll
 msgid "Abort Job"
 msgstr "Job abbrechen"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -127,6 +130,9 @@ msgid "At"
 msgstr "Um"
 
 msgid "At minute"
+msgstr ""
+
+msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
@@ -374,9 +380,6 @@ msgstr ""
 
 msgid "Ends"
 msgstr "Endet"
-
-msgid "Error"
-msgstr "Fehler"
 
 msgid "Error loading data from proxy"
 msgstr "Fehler die Daten vom Proxy zu laden."
@@ -708,6 +711,9 @@ msgstr "Manuelle Auswahl"
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr "Monatlich"
 
@@ -738,9 +744,6 @@ msgstr "Nein (Überschreiben)"
 msgid "No Target Hosts"
 msgstr ""
 
-msgid "No execution finished yet"
-msgstr "Noch keine Ausführung abgeschlossen"
-
 msgid "No hosts found."
 msgstr "Keine Hosts gefunden"
 
@@ -755,6 +758,9 @@ msgstr "Der Funktion %{feature_name} wurde keine Vorlage zugewiesen"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Nicht alle erforderlichen Eingaben haben Werte. Fehlende Eingaben: %s"
+
+msgid "Not available"
+msgstr ""
 
 msgid "Not yet"
 msgstr ""
@@ -807,6 +813,9 @@ msgstr "Führe einen einzelnen Puppet-Lauf aus"
 msgid "Perform no more executions after this time"
 msgstr "Danach nicht mehr ausführen"
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -814,6 +823,9 @@ msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix
 msgstr ""
 
 msgid "Please refine your search."
+msgstr ""
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
 msgstr ""
 
 msgid "Please select at least one host"
@@ -850,6 +862,9 @@ msgstr "Privat-Key Kennwort"
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "Problem bei Vorlagen-Vorschau: %{error}. Beachten Sie, dass Sie die Änderungen an der Vorlageneingabe speichern müssen, bevor eine Vorschau angezeigt werden kann."
+
+msgid "Proceed Anyway"
+msgstr ""
 
 msgid "Provider type"
 msgstr "Providertyp"
@@ -1464,6 +1479,9 @@ msgstr "Ja (überschreiben)"
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "Sie haben nicht die Genehmigung, die aktuell zugewiesenen Vorlagen einzusehen. Wenn Sie das Formular jetzt speichern, wird die Zuweisung der Vorlage aufgehoben."
+
+msgid "You are not authorized to perform this action."
+msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""

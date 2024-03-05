@@ -79,6 +79,9 @@ msgstr "要使用執行這 script 的使用者。如果使用者與 SSH 使用�
 msgid "Abort Job"
 msgstr ""
 
+msgid "Access denied"
+msgstr ""
+
 msgid "Actions"
 msgstr "動作"
 
@@ -122,6 +125,9 @@ msgid "At"
 msgstr "於"
 
 msgid "At minute"
+msgstr ""
+
+msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
@@ -369,9 +375,6 @@ msgstr ""
 
 msgid "Ends"
 msgstr "結束"
-
-msgid "Error"
-msgstr "錯誤"
 
 msgid "Error loading data from proxy"
 msgstr "從代理載入資料時發生錯誤"
@@ -703,6 +706,9 @@ msgstr "手動選擇"
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
+msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
+msgstr ""
+
 msgid "Monthly"
 msgstr "每個月"
 
@@ -733,9 +739,6 @@ msgstr ""
 msgid "No Target Hosts"
 msgstr ""
 
-msgid "No execution finished yet"
-msgstr "尚無執行完成"
-
 msgid "No hosts found."
 msgstr "找不到主機。"
 
@@ -750,6 +753,9 @@ msgstr "沒有範本定義至功能 %{feature_name}"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "並不是所需的輸入都有值。缺少的輸入：%s"
+
+msgid "Not available"
+msgstr ""
 
 msgid "Not yet"
 msgstr ""
@@ -802,6 +808,9 @@ msgstr ""
 msgid "Perform no more executions after this time"
 msgstr "此時間之後不再進行任何執行"
 
+msgid "Permission Denied"
+msgstr ""
+
 msgid "Please enter a search query"
 msgstr ""
 
@@ -809,6 +818,9 @@ msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix
 msgstr ""
 
 msgid "Please refine your search."
+msgstr ""
+
+msgid "Please request the required permissions listed below from a Foreman administrator:"
 msgstr ""
 
 msgid "Please select at least one host"
@@ -843,6 +855,9 @@ msgstr ""
 
 msgid "Problem with previewing the template: %{error}. Note that you must save template input changes before you try to preview it."
 msgstr "預覽範本時發生問題：%{error}。請注意，您必須在預覽範本前，先儲存範本輸入的變更。"
+
+msgid "Proceed Anyway"
+msgstr ""
 
 msgid "Provider type"
 msgstr "供應商種類"
@@ -1457,6 +1472,9 @@ msgstr ""
 
 msgid "You are not allowed to see the currently assigned template. Saving the form now would unassign the template."
 msgstr "您不能看到目前指定的範本。現在儲存表單會取消指定範本。"
+
+msgid "You are not authorized to perform this action."
+msgstr ""
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""
