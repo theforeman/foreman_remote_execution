@@ -98,7 +98,6 @@ module Actions
 
       def live_output
         continuous_output.sort!
-        continuous_output.raw_outputs
       end
 
       def humanized_input
