@@ -43,7 +43,7 @@ module Actions
           }
         end
         events.each_slice(1000) do |batch|
-          TemplateInvocationEvent.upsert_all(batch, unique_by: [:template_invocation_id, :sequence_id]) # rubocop:disable Rails/SkipsModelValidations
+          TemplateInvocationEvent.insert_all(batch, unique_by: [:template_invocation_id, :sequence_id]) # rubocop:disable Rails/SkipsModelValidations
         end
       end
     end
