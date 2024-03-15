@@ -27,6 +27,7 @@ export const isValidDate = d => d instanceof Date && !Number.isNaN(d);
 export const ResetDefault = ({ setValue, defaultValue }) =>
   defaultValue && (
     <Button
+      ouiaId="reset-default"
       className="reset-default"
       component="a"
       variant="link"

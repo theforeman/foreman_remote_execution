@@ -46,6 +46,7 @@ const ReviewDetails = ({
   // eslint-disable-next-line react/prop-types
   const StepButton = ({ stepName, children }) => (
     <Button
+      ouiaId={`step-button-${stepName}`}
       variant="link"
       isInline
       onClick={() => {
@@ -91,6 +92,7 @@ const ReviewDetails = ({
       <div>
         {hostsCount} {__('hosts')}{' '}
         <Button
+          ouiaId="view-host-names"
           variant="link"
           isInline
           onClick={() => setHostPreviewOpen(true)}
@@ -140,6 +142,7 @@ const ReviewDetails = ({
       ),
       value: isAdvancedShown ? (
         <Button
+          ouiaId="hide-advanced-fields"
           variant="link"
           isInline
           onClick={() => {
@@ -150,6 +153,7 @@ const ReviewDetails = ({
         </Button>
       ) : (
         <Button
+          ouiaId="show-advanced-fields"
           variant="link"
           isInline
           onClick={() => {

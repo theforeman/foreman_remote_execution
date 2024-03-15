@@ -14,6 +14,7 @@ export const PurposeField = ({ purpose, setPurpose }) => (
     )}
   >
     <TextInput
+      ouiaId="purpose"
       aria-label="purpose"
       type="text"
       value={purpose}

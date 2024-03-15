@@ -61,6 +61,7 @@ export const ScheduleFuture = ({
             }
           />
           <Button
+            ouiaId="clear-datetime-start-button"
             variant="link"
             isInline
             className="clear-datetime-button"
@@ -101,6 +102,7 @@ export const ScheduleFuture = ({
             variant="link"
             isInline
             className="clear-datetime-button"
+            ouiaId="clear-datetime-end-button"
             onClick={() =>
               setScheduleValue(current => ({
                 ...current,

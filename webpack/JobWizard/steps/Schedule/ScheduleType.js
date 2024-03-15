@@ -24,6 +24,7 @@ export const ScheduleType = ({
         label={__('Select the type of execution')}
       >
         <Radio
+          ouiaId="schedule-type-now"
           isChecked={scheduleType === SCHEDULE_TYPES.NOW}
           name="schedule-type-now"
           id="schedule-type-now"
@@ -43,6 +44,7 @@ export const ScheduleType = ({
       </FormGroup>
       <FormGroup fieldId="schedule-type-future">
         <Radio
+          ouiaId="schedule-type-future"
           isChecked={scheduleType === SCHEDULE_TYPES.FUTURE}
           onChange={() => {
             setScheduleValue(current => ({
@@ -61,6 +63,7 @@ export const ScheduleType = ({
       </FormGroup>
       <FormGroup fieldId="schedule-type-recurring">
         <Radio
+          ouiaId="schedule-type-recurring"
           isChecked={scheduleType === SCHEDULE_TYPES.RECURRING}
           onChange={() => {
             setScheduleValue(current => ({
