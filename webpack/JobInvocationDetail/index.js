@@ -1,20 +1,35 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Divider, PageSection, Flex } from '@patternfly/react-core';
-import { translate as __, documentLocale } from 'foremanReact/common/I18n';
-import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
-import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
-import { getData } from './JobInvocationActions';
-import { selectItems } from './JobInvocationSelectors';
-import JobInvocationOverview from './JobInvocationOverview';
-import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+  Divider,
+  Flex,
+  FlexItem,
+  Grid,
+  GridItem,
+  PageSection,
+  PageSectionVariants,
+  Title,
+  Truncate,
+} from '@patternfly/react-core';
+import { translate as __, documentLocale } from 'foremanReact/common/I18n';
+import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
+import BreadcrumbBar from 'foremanReact/components/BreadcrumbBar';
+import Head from 'foremanReact/components/Head';
+import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
+import { getData, getTask } from './JobInvocationActions';
+import {
+  CURRENT_PERMISSIONS,
+  DATE_OPTIONS,
   JOB_INVOCATION_KEY,
   STATUS,
-  DATE_OPTIONS,
+  currentPermissionsUrl,
 } from './JobInvocationConstants';
 import './JobInvocationDetail.scss';
+import JobInvocationOverview from './JobInvocationOverview';
+import { selectItems } from './JobInvocationSelectors';
+import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
+import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
 
 const JobInvocationDetailPage = ({
   match: {
@@ -30,8 +45,15 @@ const JobInvocationDetailPage = ({
     start_at: startAt,
   } = items;
   const finished =
-    statusLabel === STATUS.FAILED || statusLabel === STATUS.SUCCEEDED;
+    statusLabel === STATUS.FAILED ||
+    statusLabel === STATUS.SUCCEEDED ||
+    statusLabel === STATUS.CANCELLED;
   const autoRefresh = task?.state === STATUS.PENDING || false;
+  const { response, status } = useAPI(
+    'get',
+    currentPermissionsUrl,
+    CURRENT_PERMISSIONS
+  );
 
   let isAlreadyStarted = false;
   let formattedStartDate;
@@ -56,6 +78,12 @@ const JobInvocationDetailPage = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, id, finished, autoRefresh]);
 
+  useEffect(() => {
+    if (task?.id !== undefined) {
+      dispatch(getTask(`${task?.id}`));
+    }
+  }, [dispatch, task]);
+
   const breadcrumbOptions = {
     breadcrumbItems: [
       { caption: __('Jobs'), url: `/job_invocations` },
@@ -65,42 +93,72 @@ const JobInvocationDetailPage = ({
   };
 
   return (
-    <PageLayout
-      header={description}
-      breadcrumbOptions={breadcrumbOptions}
-      searchable={false}
-    >
-      <React.Fragment>
-        <PageSection
-          className="job-invocation-detail-page-section"
-          isFilled
-          variant="light"
-        >
-          <Flex alignItems={{ default: 'alignItemsFlexStart' }}>
-            <JobInvocationSystemStatusChart
+    <React.Fragment>
+      <Head>
+        <title>{description}</title>
+      </Head>
+      <PageSection
+        className="job-invocation-breadcrumb-page-section"
+        variant={PageSectionVariants.light}
+        type="breadcrumb"
+      >
+        <div id="breadcrumb">
+          <BreadcrumbBar {...breadcrumbOptions} />
+        </div>
+      </PageSection>
+      <PageSection
+        className="job-invocation-header-page-section"
+        variant={PageSectionVariants.light}
+      >
+        <Grid className="hostname-skeleton-rapper">
+          <GridItem span={8}>
+            <Title ouiaId="job-invocation-title" headingLevel="h1">
+              <Truncate content={description} />
+            </Title>
+          </GridItem>
+          <GridItem span={4}>
+            <Flex>
+              <FlexItem align={{ default: 'alignRight' }}>
+                <JobInvocationToolbarButtons
+                  jobId={id}
+                  data={items}
+                  currentPermissions={response.results}
+                  permissionsStatus={status}
+                />
+              </FlexItem>
+            </Flex>
+          </GridItem>
+        </Grid>
+      </PageSection>
+      <PageSection
+        className="job-invocation-detail-page-section"
+        isFilled
+        variant={PageSectionVariants.light}
+      >
+        <Flex alignItems={{ default: 'alignItemsFlexStart' }}>
+          <JobInvocationSystemStatusChart
+            data={items}
+            isAlreadyStarted={isAlreadyStarted}
+            formattedStartDate={formattedStartDate}
+          />
+          <Divider
+            orientation={{
+              default: 'vertical',
+            }}
+          />
+          <Flex
+            className="job-overview"
+            alignItems={{ default: 'alignItemsCenter' }}
+          >
+            <JobInvocationOverview
               data={items}
               isAlreadyStarted={isAlreadyStarted}
               formattedStartDate={formattedStartDate}
             />
-            <Divider
-              orientation={{
-                default: 'vertical',
-              }}
-            />
-            <Flex
-              className="job-overview"
-              alignItems={{ default: 'alignItemsCenter' }}
-            >
-              <JobInvocationOverview
-                data={items}
-                isAlreadyStarted={isAlreadyStarted}
-                formattedStartDate={formattedStartDate}
-              />
-            </Flex>
           </Flex>
-        </PageSection>
-      </React.Fragment>
-    </PageLayout>
+        </Flex>
+      </PageSection>
+    </React.Fragment>
   );
 };
 

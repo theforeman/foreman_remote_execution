@@ -1,9 +1,24 @@
+import { foremanUrl } from 'foremanReact/common/helpers';
+
 export const JOB_INVOCATION_KEY = 'JOB_INVOCATION_KEY';
+export const CURRENT_PERMISSIONS = 'CURRENT_PERMISSIONS';
+export const UPDATE_JOB = 'UPDATE_JOB';
+export const CANCEL_JOB = 'CANCEL_JOB';
+export const GET_TASK = 'GET_TASK';
+export const CHANGE_ENABLED_RECURRING_LOGICS =
+  'CHANGE_ENABLED_RECURRING_LOGICS';
+export const CANCEL_RECURRING_LOGICS = 'CANCEL_RECURRING_LOGICS';
+export const GET_REPORT_TEMPLATES = 'GET_REPORT_TEMPLATES';
+export const GET_REPORT_TEMPLATE_INPUTS = 'GET_REPORT_TEMPLATE_INPUTS';
+export const currentPermissionsUrl = foremanUrl(
+  '/api/v2/permissions/current_permissions'
+);
 
 export const STATUS = {
   PENDING: 'pending',
   SUCCEEDED: 'succeeded',
   FAILED: 'failed',
+  CANCELLED: 'cancelled',
 };
 
 export const DATE_OPTIONS = {
