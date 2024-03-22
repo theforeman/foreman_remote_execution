@@ -115,9 +115,19 @@ handle_zypp_res_codes () {
       end
     end
   -%>
+  OUTFILE=$(mktemp)
+  trap "rm -f $OUTFILE" EXIT
+  set -o pipefail
   export DEBIAN_FRONTEND=noninteractive
   apt-get -y update
-  apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %>
+  LANG=C apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %> 2>&1 | tee $OUTFILE
+  RETVAL=$?
+  if grep -q "Unable to locate" $OUTFILE; then
+    true
+  else
+    setReturnValue() { RETVAL=$1; return $RETVAL; }
+    setReturnValue $RETVAL
+  fi
 <% elsif package_manager == 'zypper' -%>
   <%-
     if action == "group install"
