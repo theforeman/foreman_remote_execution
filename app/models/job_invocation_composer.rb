@@ -569,9 +569,10 @@ class JobInvocationComposer
   # builds input values for a given templates id based on params
   # omits inputs that belongs to unavailable templates
   def build_input_values_for(template_invocation, job_template_base)
-    template_invocation.input_values = job_template_base.fetch('input_values', {}).map do |attributes|
-      input = template_invocation.template.template_inputs_with_foreign.find { |i| i.id.to_s == attributes[:template_input_id].to_s }
-      input ? input.template_invocation_input_values.build(attributes) : nil
+    template_invocation.input_values = template_invocation.template.template_inputs_with_foreign.map do |input|
+      attributes = job_template_base.fetch('input_values', {}).find { |i| i[:template_input_id].to_s == input.id.to_s }
+      attributes = { "template_input_id" => input.id, "value" => input.default } if attributes.nil? && input.default
+      attributes ? input.template_invocation_input_values.build(attributes) : nil
     end.compact
     template_invocation.provider_input_values.build job_template_base.fetch('provider_input_values', [])
   end
