@@ -35,6 +35,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
   let(:trying_job_template_1) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying1', :provider_type => 'SSH') }
   let(:trying_job_template_2) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_2', :name => 'trying2', :provider_type => 'Mcollective') }
   let(:trying_job_template_3) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'trying3', :provider_type => 'SSH') }
+  let(:trying_job_template_5) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_5', :name => 'trying5', :provider_type => 'SSH') }
   let(:unauthorized_job_template_1) { FactoryBot.create(:job_template, :job_category => 'trying_job_template_1', :name => 'unauth1', :provider_type => 'SSH') }
   let(:unauthorized_job_template_2) { FactoryBot.create(:job_template, :job_category => 'unauthorized_job_template_2', :name => 'unauth2', :provider_type => 'Ansible') }
 
@@ -44,6 +45,7 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
   let(:input2) { FactoryBot.create(:template_input, :template => trying_job_template_3, :input_type => 'user') }
   let(:input3) { FactoryBot.create(:template_input, :template => trying_job_template_1, :input_type => 'user', :required => true) }
   let(:input4) { FactoryBot.create(:template_input, :template => provider_inputs_job_template, :input_type => 'user') }
+  let(:input5) { FactoryBot.create(:template_input, :template => trying_job_template_5, :input_type => 'user', :default => 'value') }
   let(:unauthorized_input1) { FactoryBot.create(:template_input, :template => unauthorized_job_template_1, :input_type => 'user') }
 
   let(:ansible_params) { { } }
@@ -654,14 +656,30 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
     context 'with with inputs' do
       let(:params) do
-        { :job_category => trying_job_template_1.job_category,
-          :job_template_id => trying_job_template_1.id,
+        { :job_category => trying_job_template_5.job_category,
+          :job_template_id => trying_job_template_5.id,
           :targeting_type => 'static_query',
           :search_query => 'some hosts',
-          :inputs => {input1.name => 'some_value'}}
+          :inputs => {input5.name => 'some_value'}}
       end
 
       it 'finds the inputs by name' do
+        assert composer.save!
+        assert_equal 1, composer.pattern_template_invocations.first.input_values.collect.count
+      end
+    end
+
+    context 'with inputs and default values' do
+      let(:params) do
+        { :job_category => trying_job_template_5.job_category,
+          :job_template_id => trying_job_template_5.id,
+          :targeting_type => 'static_query',
+          :search_query => 'some hosts',
+          :inputs => {}}
+      end
+
+      it 'uses the default input values' do
+        input5 # Force the factory to be materialized
         assert composer.save!
         assert_equal 1, composer.pattern_template_invocations.first.input_values.collect.count
       end
