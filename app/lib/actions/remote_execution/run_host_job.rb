@@ -204,20 +204,6 @@ module Actions
         host.refresh_global_status!
       end
 
-      def delegated_output
-        if input[:delegated_action_id]
-          super
-        elsif phase?(Present)
-          # for compatibility with old actions
-          old_action = all_planned_actions.first
-          if old_action
-            old_action.output.fetch('proxy_output', {})
-          else
-            {}
-          end
-        end
-      end
-
       def verify_permissions(host, template_invocation)
         raise _('User can not execute job on host %s') % host.name unless User.current.can?(:view_hosts, host)
         raise _('User can not execute this job template') unless User.current.can?(:view_job_templates, template_invocation.template)
