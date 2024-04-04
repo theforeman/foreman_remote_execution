@@ -62,7 +62,6 @@ module Actions
                                :script => script,
                                :execution_timeout_interval => job_invocation.execution_timeout_interval,
                                :secrets => secrets(host, job_invocation, provider),
-                               :use_batch_triggering => true,
                                :first_execution => first_execution,
                                :alternative_names => provider.alternative_names(host) }
         action_options = provider.proxy_command_options(template_invocation, host)
