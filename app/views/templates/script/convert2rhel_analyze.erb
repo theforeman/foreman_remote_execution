@@ -1,15 +1,6 @@
 <%#
 name: Convert2RHEL analyze
 snippet: false
-template_inputs:
-  - name: Data telemetry
-    required: false
-    input_type: user
-    options: "yes\r\nno"
-    advanced: false
-    value_type: plain
-    default: 'yes'
-    hidden_value: false
 model: JobTemplate
 job_category: Convert 2 RHEL
 provider_type: script
@@ -24,10 +15,6 @@ fi
 if ! rpm -q convert2rhel &> /dev/null; then
   yum install -y convert2rhel
 fi
-
-<% if input('Data telemetry') != "yes" -%>
-export CONVERT2RHEL_DISABLE_TELEMETRY=1
-<% end -%>
 
 /usr/bin/convert2rhel analyze -y
 
