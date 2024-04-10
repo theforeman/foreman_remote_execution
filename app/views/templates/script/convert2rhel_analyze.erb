@@ -25,6 +25,8 @@ if ! rpm -q convert2rhel &> /dev/null; then
   yum install -y convert2rhel
 fi
 
+export CONVERT2RHEL_THROUGH_FOREMAN=1
+
 <% if input('Data telemetry') != "yes" -%>
 export CONVERT2RHEL_DISABLE_TELEMETRY=1
 <% end -%>
