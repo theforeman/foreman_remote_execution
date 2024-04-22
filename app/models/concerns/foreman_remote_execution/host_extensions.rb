@@ -152,3 +152,11 @@ module ForemanRemoteExecution
     end
   end
 end
+
+module Host
+  class Managed
+    class Jail < Safemode::Jail
+      allow :execution_interface
+    end
+  end
+end
