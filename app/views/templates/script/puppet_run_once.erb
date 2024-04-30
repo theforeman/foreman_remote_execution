@@ -12,7 +12,7 @@ template_inputs:
   required: false
 feature: puppet_run_host
 %>
-<% if @host.operatingsystem.family == 'Debian' -%>
-export PATH=/opt/puppetlabs/bin:$PATH
-<% end -%>
+if [ -f /etc/profile.d/puppet-agent.sh ]; then
+  . /etc/profile.d/puppet-agent.sh
+fi
 puppet agent --onetime --no-usecacheonfailure --no-daemonize <%= input("puppet_options") %>
