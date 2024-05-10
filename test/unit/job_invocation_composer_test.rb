@@ -665,7 +665,17 @@ class JobInvocationComposerTest < ActiveSupport::TestCase
 
       it 'finds the inputs by name' do
         assert composer.save!
-        assert_equal 1, composer.pattern_template_invocations.first.input_values.collect.count
+        values = composer.pattern_template_invocations.first.input_values
+        assert_equal 1, values.count
+        assert_equal 'some_value', values.first.value
+      end
+
+      it 'can be forced to be empty' do
+        params[:inputs] = {input5.name => ''}
+        assert composer.save!
+        values = composer.pattern_template_invocations.first.input_values
+        assert_equal 1, values.count
+        assert_equal '', values.first.value
       end
     end
 
