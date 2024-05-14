@@ -47,7 +47,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.register_plugin', before: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_remote_execution do
-        requires_foreman '>= 3.10'
+        requires_foreman '>= 3.12'
         register_global_js_file 'global'
         register_gettext
 
@@ -83,10 +83,10 @@ module ForemanRemoteExecution
               full_name: N_('Effective User')
             setting 'remote_execution_effective_user_method',
               type: :string,
-              description: N_('What command should be used to switch to the effective user. One of %s') % SSHExecutionProvider::EFFECTIVE_USER_METHODS.inspect,
+              description: N_('What command should be used to switch to the effective user. One of %s') % ::SSHExecutionProvider::EFFECTIVE_USER_METHODS.inspect,
               default: 'sudo',
               full_name: N_('Effective User Method'),
-              collection: proc { Hash[SSHExecutionProvider::EFFECTIVE_USER_METHODS.map { |method| [method, method] }] }
+              collection: proc { Hash[::SSHExecutionProvider::EFFECTIVE_USER_METHODS.map { |method| [method, method] }] }
             setting 'remote_execution_effective_user_password',
               type: :string,
               description: N_('Effective user password'),

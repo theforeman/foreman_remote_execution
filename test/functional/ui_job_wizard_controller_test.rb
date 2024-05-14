@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-class UiJobWizardControllerTest < ActionController::TestCase
+class UIJobWizardControllerTest < ActionController::TestCase
   def setup
     FactoryBot.create(:job_template, :job_category => 'cat1')
     FactoryBot.create(:job_template, :job_category => 'cat2')
