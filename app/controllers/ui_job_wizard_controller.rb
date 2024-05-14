@@ -1,4 +1,4 @@
-class UiJobWizardController < Api::V2::BaseController
+class UIJobWizardController < Api::V2::BaseController
   include FiltersHelper
   def categories
     job_categories = resource_scope(permission: action_permission)
