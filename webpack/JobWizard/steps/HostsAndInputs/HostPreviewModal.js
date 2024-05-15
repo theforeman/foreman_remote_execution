@@ -5,6 +5,7 @@ import URI from 'urijs';
 import { List, ListItem, Modal, Button } from '@patternfly/react-core';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
+import { HOSTS_PATH } from 'foremanReact/routes/Hosts/constants';
 import { selectHosts, selectHostCount } from '../../JobWizardSelectors';
 import { HOSTS_TO_PREVIEW_AMOUNT } from '../../JobWizardConstants';
 
@@ -27,7 +28,7 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
             <Button
               ouiaId={`host-preview-${host}`}
               component="a"
-              href={foremanUrl(`/hosts/${host.name}`)}
+              href={foremanUrl(`${HOSTS_PATH}/${host.name}`)}
               variant="link"
               target="_blank"
               rel="noreferrer"
