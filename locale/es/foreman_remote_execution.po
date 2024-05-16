@@ -18,6 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 :"
 " 2;\n"
 
+msgid "${d.title} ${d.count} hosts"
+msgstr ""
+
 msgid "%s"
 msgstr "%s"
 
@@ -151,6 +154,9 @@ msgstr "Cancelar tarea"
 
 msgid "Cancel job invocation"
 msgstr "Cancelar invocación de trabajo"
+
+msgid "Canceled:"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "Cancelado"
@@ -437,6 +443,9 @@ msgstr "Anfitriones fallidos"
 msgid "Failed rendering template: %s"
 msgstr "Falló la reproducción de la plantilla: %s."
 
+msgid "Failed:"
+msgstr ""
+
 msgid "Fallback to Any Proxy"
 msgstr "Acción de reserva en cualquier proxy"
 
@@ -538,6 +547,9 @@ msgstr "Importar"
 
 msgid "Import a job template from ERB"
 msgstr "Importar una plantilla de trabajo desde ERB"
+
+msgid "In Progress:"
+msgstr ""
 
 msgid "Include all inputs from the foreign template"
 msgstr "Incluir todas las entradas de la plantilla externa"
@@ -1034,11 +1046,17 @@ msgstr "Tipo de horario"
 msgid "Scheduled"
 msgstr "Programado"
 
+msgid "Scheduled at:"
+msgstr ""
+
 msgid "Scheduled to start at"
 msgstr "Programado para comenzar a las"
 
 msgid "Scheduled to start before"
 msgstr "Programado para iniciar antes"
+
+msgid "Scheduled: ${totalHosts} hosts"
+msgstr ""
 
 msgid "Script"
 msgstr "Guión"
@@ -1184,6 +1202,9 @@ msgstr "Suscríbase a mis trabajos con éxito"
 msgid "Succeeded"
 msgstr "exitoso"
 
+msgid "Succeeded:"
+msgstr ""
+
 msgid "Success"
 msgstr "Éxito"
 
@@ -1192,6 +1213,12 @@ msgstr ""
 
 msgid "Sync Job Templates"
 msgstr "Sincronizar plantillas de trabajo"
+
+msgid "System status"
+msgstr ""
+
+msgid "Systems"
+msgstr ""
 
 msgid "Target hosts"
 msgstr "Hosts de destino"

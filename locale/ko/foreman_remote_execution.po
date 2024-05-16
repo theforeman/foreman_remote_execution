@@ -16,6 +16,9 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+msgid "${d.title} ${d.count} hosts"
+msgstr ""
+
 msgid "%s"
 msgstr "%s"
 
@@ -148,6 +151,9 @@ msgid "Cancel Job"
 msgstr "작업 취소 "
 
 msgid "Cancel job invocation"
+msgstr ""
+
+msgid "Canceled:"
 msgstr ""
 
 msgid "Cancelled"
@@ -435,6 +441,9 @@ msgstr ""
 msgid "Failed rendering template: %s"
 msgstr "템플릿 렌더링 실패: %s"
 
+msgid "Failed:"
+msgstr ""
+
 msgid "Fallback to Any Proxy"
 msgstr ""
 
@@ -535,6 +544,9 @@ msgid "Import"
 msgstr "불러오기"
 
 msgid "Import a job template from ERB"
+msgstr ""
+
+msgid "In Progress:"
 msgstr ""
 
 msgid "Include all inputs from the foreign template"
@@ -1032,10 +1044,16 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
+msgid "Scheduled at:"
+msgstr ""
+
 msgid "Scheduled to start at"
 msgstr ""
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Scheduled: ${totalHosts} hosts"
 msgstr ""
 
 msgid "Script"
@@ -1182,6 +1200,9 @@ msgstr ""
 msgid "Succeeded"
 msgstr "성공"
 
+msgid "Succeeded:"
+msgstr ""
+
 msgid "Success"
 msgstr "성공"
 
@@ -1189,6 +1210,12 @@ msgid "Switch to the new job invocation detail UI"
 msgstr ""
 
 msgid "Sync Job Templates"
+msgstr ""
+
+msgid "System status"
+msgstr ""
+
+msgid "Systems"
 msgstr ""
 
 msgid "Target hosts"

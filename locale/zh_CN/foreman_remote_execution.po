@@ -17,6 +17,9 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+msgid "${d.title} ${d.count} hosts"
+msgstr ""
+
 msgid "%s"
 msgstr "%s"
 
@@ -149,6 +152,9 @@ msgstr "取消作业"
 
 msgid "Cancel job invocation"
 msgstr "取消作业调用"
+
+msgid "Canceled:"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "已取消"
@@ -435,6 +441,9 @@ msgstr "失败的主机"
 msgid "Failed rendering template: %s"
 msgstr "呈现模板失败：%s"
 
+msgid "Failed:"
+msgstr ""
+
 msgid "Fallback to Any Proxy"
 msgstr "退回至任何代理服务器"
 
@@ -536,6 +545,9 @@ msgstr "导入"
 
 msgid "Import a job template from ERB"
 msgstr "从 ERB 导入作业模版"
+
+msgid "In Progress:"
+msgstr ""
 
 msgid "Include all inputs from the foreign template"
 msgstr "在外部模板中包含所有输入格式"
@@ -1032,11 +1044,17 @@ msgstr "调度类型"
 msgid "Scheduled"
 msgstr "调度的"
 
+msgid "Scheduled at:"
+msgstr ""
+
 msgid "Scheduled to start at"
 msgstr "调度开始于"
 
 msgid "Scheduled to start before"
 msgstr "调度在这个时间前开始"
+
+msgid "Scheduled: ${totalHosts} hosts"
+msgstr ""
 
 msgid "Script"
 msgstr "脚本"
@@ -1182,6 +1200,9 @@ msgstr "订阅到我成功的作业"
 msgid "Succeeded"
 msgstr "已成功"
 
+msgid "Succeeded:"
+msgstr ""
+
 msgid "Success"
 msgstr "成功"
 
@@ -1190,6 +1211,12 @@ msgstr ""
 
 msgid "Sync Job Templates"
 msgstr "同步作业模板"
+
+msgid "System status"
+msgstr ""
+
+msgid "Systems"
+msgstr ""
 
 msgid "Target hosts"
 msgstr "目标主机"

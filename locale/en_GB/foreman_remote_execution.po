@@ -18,6 +18,9 @@ msgstr ""
 "Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "${d.title} ${d.count} hosts"
+msgstr ""
+
 msgid "%s"
 msgstr ""
 
@@ -150,6 +153,9 @@ msgid "Cancel Job"
 msgstr ""
 
 msgid "Cancel job invocation"
+msgstr ""
+
+msgid "Canceled:"
 msgstr ""
 
 msgid "Cancelled"
@@ -437,6 +443,9 @@ msgstr ""
 msgid "Failed rendering template: %s"
 msgstr ""
 
+msgid "Failed:"
+msgstr ""
+
 msgid "Fallback to Any Proxy"
 msgstr ""
 
@@ -537,6 +546,9 @@ msgid "Import"
 msgstr ""
 
 msgid "Import a job template from ERB"
+msgstr ""
+
+msgid "In Progress:"
 msgstr ""
 
 msgid "Include all inputs from the foreign template"
@@ -1034,10 +1046,16 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
+msgid "Scheduled at:"
+msgstr ""
+
 msgid "Scheduled to start at"
 msgstr ""
 
 msgid "Scheduled to start before"
+msgstr ""
+
+msgid "Scheduled: ${totalHosts} hosts"
 msgstr ""
 
 msgid "Script"
@@ -1184,6 +1202,9 @@ msgstr ""
 msgid "Succeeded"
 msgstr ""
 
+msgid "Succeeded:"
+msgstr ""
+
 msgid "Success"
 msgstr "Success"
 
@@ -1191,6 +1212,12 @@ msgid "Switch to the new job invocation detail UI"
 msgstr ""
 
 msgid "Sync Job Templates"
+msgstr ""
+
+msgid "System status"
+msgstr ""
+
+msgid "Systems"
 msgstr ""
 
 msgid "Target hosts"
