@@ -53,7 +53,7 @@ const JobWizardPageRerun = ({
           component="a"
           href={`/old/job_invocations/${id}/rerun${search}`}
         >
-          {__('Use old form')}
+          {__('Use legacy form')}
         </Button>
       }
     >
