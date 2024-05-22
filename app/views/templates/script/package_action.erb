@@ -66,6 +66,7 @@ exit_with_message () {
 <% if package_manager == 'zypper' -%>
 handle_zypp_res_codes () {
   RETVAL=$1
+  ACTION=$2
 
   # See https://github.com/openSUSE/zypper/blob/master/src/main.h
   declare -A ZYPP_RES_CODES
@@ -82,6 +83,8 @@ handle_zypp_res_codes () {
     echo ${ZYPP_RES_CODES[$RETVAL]}
   fi
   if [[ $RETVAL -ge 100 && $RETVAL -le 103 ]]; then
+    RETVAL=0
+  elif [ "$ACTION" = "remove" ] && [ "$RETVAL" -eq 104 ]; then
     RETVAL=0
   fi
 
@@ -122,7 +125,7 @@ handle_zypp_res_codes () {
   apt-get -y update
   LANG=C apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %> 2>&1 | tee $OUTFILE
   RETVAL=$?
-  if grep -q "Unable to locate" $OUTFILE; then
+  if grep -q "Unable to locate" $OUTFILE && [ "$action" = "remove" ]; then
     true
   else
     setReturnValue() { RETVAL=$1; return $RETVAL; }
@@ -138,7 +141,7 @@ handle_zypp_res_codes () {
   -%>
   zypper refresh
   zypper -n <%= action %> <%= input("options") %> <%= input("package") %>
-  handle_zypp_res_codes $?
+  handle_zypp_res_codes $? $action
 <% end -%>
 RETVAL=$?
 [ $RETVAL -eq 0 ] || exit_with_message "Package action failed" $RETVAL
