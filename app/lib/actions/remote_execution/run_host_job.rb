@@ -49,7 +49,10 @@ module Actions
         provider_type = provider.proxy_feature
         proxy = determine_proxy!(proxy_selector, provider_type, host)
         link!(proxy)
+        # TODO: Remove this for Foreman 3.16
         input[:proxy_id] = proxy.id
+        template_invocation.smart_proxy_id = proxy.id
+        template_invocation.save!
 
         renderer = InputTemplateRenderer.new(template_invocation.template, host, template_invocation)
         script = renderer.render
