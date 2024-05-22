@@ -4,16 +4,18 @@ import { useSelector } from 'react-redux';
 import URI from 'urijs';
 import { List, ListItem, Modal, Button } from '@patternfly/react-core';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import { foremanUrl } from 'foremanReact/common/helpers';
-import { HOSTS_PATH } from 'foremanReact/routes/Hosts/constants';
+import {
+  useForemanHostsPageUrl,
+  useForemanHostDetailsPageUrl,
+} from 'foremanReact/Root/Context/ForemanContext';
 import { selectHosts, selectHostCount } from '../../JobWizardSelectors';
 import { HOSTS_TO_PREVIEW_AMOUNT } from '../../JobWizardConstants';
 
 export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
   const hosts = useSelector(selectHosts);
   const hostsCount = useSelector(selectHostCount);
-  const url = new URI(foremanUrl('/hosts'));
-
+  const hostsUrl = new URI(useForemanHostsPageUrl());
+  const hostUrl = useForemanHostDetailsPageUrl();
   return (
     <Modal
       ouiaId="host-preview-modal"
@@ -28,7 +30,7 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
             <Button
               ouiaId={`host-preview-${host}`}
               component="a"
-              href={foremanUrl(`${HOSTS_PATH}/${host.name}`)}
+              href={`${hostUrl}${host.name}`}
               variant="link"
               target="_blank"
               rel="noreferrer"
@@ -43,7 +45,7 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
             <Button
               ouiaId="host-preview-more"
               component="a"
-              href={url.addSearch({ search: searchQuery })}
+              href={hostsUrl.addSearch({ search: searchQuery })}
               variant="link"
               target="_blank"
               rel="noreferrer"
