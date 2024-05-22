@@ -3,6 +3,7 @@ module ForemanRemoteExecution
     def self.prepended(base)
       base.instance_eval do
         has_many :host_proxy_invocations, :dependent => :destroy
+        has_many :template_invocations, :dependent => :nullify
       end
     end
 

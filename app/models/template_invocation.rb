@@ -18,6 +18,7 @@ class TemplateInvocation < ApplicationRecord
   belongs_to :run_host_job_task, :class_name => 'ForemanTasks::Task'
   has_many :remote_execution_features, :through => :template
   has_many :template_invocation_events, :dependent => :destroy
+  belongs_to :smart_proxy, :class_name => '::SmartProxy', :inverse_of => :template_invocations
 
   validates_associated :input_values
   validate :provides_required_input_values
