@@ -34,11 +34,16 @@ module Actions
         end
         if data['exit_status']
           last = events.last || {:timestamp => Time.zone.now}
+          exit_timestamp = if data['exit_status_timestamp']
+                             Time.at(data['exit_status_timestamp']).getlocal
+                           else
+                             last[:timestamp] + 1
+                           end
           events << {
             external_id: 'exit',
             template_invocation_id: template_invocation.id,
             event: data['exit_status'],
-            timestamp: data['exit_status_timestamp'] || last[:timestamp] + 1,
+            timestamp: exit_timestamp,
             event_type: 'exit',
           }
         end
