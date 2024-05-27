@@ -14,7 +14,14 @@ import {
   JOB_TEMPLATE,
   HOSTS_API,
   JOB_INVOCATION,
+  JOB_API_KEY,
 } from './JobWizardConstants';
+
+export const selectRerunJobInvocationResponse = state =>
+  selectAPIResponse(state, JOB_API_KEY) || {};
+
+export const selectRerunJobInvocationStatus = state =>
+  selectAPIStatus(state, JOB_API_KEY);
 
 export const selectJobTemplatesStatus = state =>
   selectAPIStatus(state, JOB_TEMPLATES);

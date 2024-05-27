@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import URI from 'urijs';
+import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Divider, Skeleton, Button } from '@patternfly/react-core';
+import { get } from 'foremanReact/redux/API';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { STATUS } from 'foremanReact/constants';
 import {
@@ -11,6 +12,10 @@ import {
   useForemanLocation,
 } from 'foremanReact/Root/Context/ForemanContext';
 import { JobWizard } from './JobWizard';
+import {
+  selectRerunJobInvocationResponse,
+  selectRerunJobInvocationStatus,
+} from './JobWizardSelectors';
 import { JOB_API_KEY } from './JobWizardConstants';
 
 const JobWizardPageRerun = ({
@@ -19,15 +24,9 @@ const JobWizardPageRerun = ({
   },
   location: { search },
 }) => {
+  const dispatch = useDispatch();
   const uri = new URI(search);
   const { failed_only: failedOnly } = uri.search(true);
-  const { response, status } = useAPI(
-    'get',
-    `/ui_job_wizard/job_invocation?id=${id}${
-      failedOnly ? '&failed_only=1' : ''
-    }`,
-    JOB_API_KEY
-  );
   const title = __('Run job');
   const breadcrumbOptions = {
     breadcrumbItems: [
@@ -36,10 +35,35 @@ const JobWizardPageRerun = ({
     ],
   };
 
-  const jobOrganization = response.job_organization;
-  const jobLocation = response.job_location;
+  const [errorMessage, setErrorMessage] = useState('');
+  const jobInvocationResponse = useSelector(selectRerunJobInvocationResponse);
+  const jobInvocationStatus = useSelector(selectRerunJobInvocationStatus);
+  const jobOrganization = jobInvocationResponse.job_organization;
+  const jobLocation = jobInvocationResponse.job_location;
   const currentOrganization = useForemanOrganization();
   const currentLocation = useForemanLocation();
+
+  useEffect(() => {
+    let isMounted = true;
+    if (id !== undefined) {
+      dispatch(
+        get({
+          key: JOB_API_KEY,
+          url: `/ui_job_wizard/job_invocation?id=${id}${
+            failedOnly ? '&failed_only=1' : ''
+          }`,
+          handleError: ({ response }) => {
+            if (isMounted) {
+              setErrorMessage(response?.data?.error?.message);
+            }
+          },
+        })
+      );
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, id, failedOnly]);
 
   return (
     <PageLayout
@@ -61,14 +85,22 @@ const JobWizardPageRerun = ({
         <React.Fragment>
           <Divider component="div" />
         </React.Fragment>
-        {!status || status === STATUS.PENDING ? (
+        {jobInvocationStatus === STATUS.ERROR && (
+          <Alert
+            ouiaId="job-wizard-alert-error"
+            variant="danger"
+            title={sprintf(errorMessage)}
+          />
+        )}
+        {(!jobInvocationStatus || jobInvocationStatus === STATUS.PENDING) && (
           <div style={{ height: '400px' }}>
             <Skeleton
               height="100%"
               screenreaderText="Loading large rectangle contents"
             />
           </div>
-        ) : (
+        )}
+        {jobInvocationStatus === STATUS.RESOLVED && (
           <React.Fragment>
             {jobOrganization?.id !== currentOrganization?.id && (
               <Alert
@@ -102,7 +134,12 @@ const JobWizardPageRerun = ({
             )}
             <Divider component="div" />
             <JobWizard
-              rerunData={{ ...response?.job, inputs: response?.inputs } || null}
+              rerunData={
+                {
+                  ...jobInvocationResponse?.job,
+                  inputs: jobInvocationResponse?.inputs,
+                } || null
+              }
             />
           </React.Fragment>
         )}
