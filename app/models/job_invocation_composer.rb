@@ -232,6 +232,8 @@ class JobInvocationComposer
         @host_ids = params[:host_ids]
       elsif params[:failed_only]
         @host_ids = job_invocation.failed_host_ids
+      elsif params[:succeeded_only]
+        @host_ids = job_invocation.succeeded_host_ids
       end
     end
 

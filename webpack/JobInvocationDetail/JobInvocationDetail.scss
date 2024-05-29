@@ -1,6 +1,8 @@
-.job-invocation-detail-page-section {
+.job-invocation-detail-flex {
   $chart_size: 105px;
-  
+  padding-top: 0px;
+  padding-left: 10px;
+
   .chart-donut {
     height: $chart_size;
     width: $chart_size;
@@ -36,3 +38,4 @@
     height: $chart_size;
   }
 }
+  

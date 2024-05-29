@@ -25,9 +25,10 @@ end
 if params.key?(:include_permissions)
   node :permissions do |invocation|
     authorizer = Authorizer.new(User.current)
-    edit_job_templates_permission = Permission.where(name: "edit_job_templates", resource_type: "JobTemplate").first
     {
-      "edit_job_templates" => (edit_job_templates_permission && authorizer.can?("edit_job_templates", invocation, false)),
+      "edit_job_templates" => authorizer.can?("edit_job_templates", invocation, false),
+      "view_foreman_tasks" => authorizer.can?("view_foreman_tasks", invocation.task, false),
+      "edit_recurring_logics" => authorizer.can?("edit_recurring_logics", invocation.recurring_logic, false),
     }
   end
 end

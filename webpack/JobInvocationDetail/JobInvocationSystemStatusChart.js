@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
+import DefaultLoaderEmptyState from 'foremanReact/components/HostDetails/DetailsCard/DefaultLoaderEmptyState';
 import {
   ChartDonut,
   ChartLabel,
@@ -9,20 +10,19 @@ import {
 } from '@patternfly/react-charts';
 import {
   DescriptionList,
-  DescriptionListTerm,
-  DescriptionListGroup,
   DescriptionListDescription,
+  DescriptionListGroup,
+  DescriptionListTerm,
   FlexItem,
   Text,
 } from '@patternfly/react-core';
 import {
-  global_palette_green_500 as successedColor,
-  global_palette_red_100 as failedColor,
-  global_palette_blue_300 as inProgressColor,
   global_palette_black_600 as canceledColor,
   global_palette_black_500 as emptyChartDonut,
+  global_palette_red_100 as failedColor,
+  global_palette_blue_300 as inProgressColor,
+  global_palette_green_500 as successedColor,
 } from '@patternfly/react-tokens';
-import DefaultLoaderEmptyState from 'foremanReact/components/HostDetails/DetailsCard/DefaultLoaderEmptyState';
 import './JobInvocationDetail.scss';
 
 const JobInvocationSystemStatusChart = ({
@@ -35,9 +35,9 @@ const JobInvocationSystemStatusChart = ({
     failed,
     pending,
     cancelled,
-    total,
     total_hosts: totalHosts, // includes scheduled
   } = data;
+  const total = succeeded + failed + pending + cancelled;
   const chartData = [
     { title: __('Succeeded:'), count: succeeded, color: successedColor.value },
     { title: __('Failed:'), count: failed, color: failedColor.value },
@@ -82,7 +82,11 @@ const JobInvocationSystemStatusChart = ({
             total > 0 ? chartData.map(d => d.color) : [emptyChartDonut.value]
           }
           labelComponent={
-            <ChartTooltip pointerLength={0} constrainToVisibleArea />
+            <ChartTooltip
+              pointerLength={0}
+              constrainToVisibleArea
+              renderInPortal={false}
+            />
           }
           title={chartDonutTitle}
           titleComponent={
