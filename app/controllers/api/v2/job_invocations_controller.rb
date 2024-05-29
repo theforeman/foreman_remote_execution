@@ -139,6 +139,7 @@ module Api
       api :POST, '/job_invocations/:id/rerun', N_('Rerun job on failed hosts')
       param :id, :identifier, :required => true
       param :failed_only, :bool
+      param :succeeded_only, :bool
       def rerun
         composer = JobInvocationComposer.from_job_invocation(@job_invocation, params)
         if composer.rerun_possible?

@@ -1,15 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import URI from 'urijs';
-import { Alert, Divider, Skeleton, Button } from '@patternfly/react-core';
-import { sprintf, translate as __ } from 'foremanReact/common/I18n';
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
-import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
-import { STATUS } from 'foremanReact/constants';
+import { Alert, Button, Divider, Skeleton } from '@patternfly/react-core';
 import {
-  useForemanOrganization,
   useForemanLocation,
+  useForemanOrganization,
 } from 'foremanReact/Root/Context/ForemanContext';
+import { translate as __, sprintf } from 'foremanReact/common/I18n';
+import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
+import { STATUS } from 'foremanReact/constants';
+import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { JobWizard } from './JobWizard';
 import { JOB_API_KEY } from './JobWizardConstants';
 
@@ -21,11 +21,16 @@ const JobWizardPageRerun = ({
 }) => {
   const uri = new URI(search);
   const { failed_only: failedOnly } = uri.search(true);
+  const { succeeded_only: succeededOnly } = uri.search(true);
+  let queryParams = '';
+  if (failedOnly) {
+    queryParams = '&failed_only=1';
+  } else if (succeededOnly) {
+    queryParams = '&succeeded_only=1';
+  }
   const { response, status } = useAPI(
     'get',
-    `/ui_job_wizard/job_invocation?id=${id}${
-      failedOnly ? '&failed_only=1' : ''
-    }`,
+    `/ui_job_wizard/job_invocation?id=${id}${queryParams}`,
     JOB_API_KEY
   );
   const title = __('Run job');
