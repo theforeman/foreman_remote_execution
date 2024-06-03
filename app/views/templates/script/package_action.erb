@@ -125,7 +125,7 @@ handle_zypp_res_codes () {
   apt-get -y update
   LANG=C apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %> 2>&1 | tee $OUTFILE
   RETVAL=$?
-  if grep -q "Unable to locate" $OUTFILE && [ "$action" = "remove" ]; then
+  if grep -q "Unable to locate" $OUTFILE && [ "<%= action %>" = "remove" ]; then
     true
   else
     setReturnValue() { RETVAL=$1; return $RETVAL; }
@@ -141,7 +141,7 @@ handle_zypp_res_codes () {
   -%>
   zypper refresh
   zypper -n <%= action %> <%= input("options") %> <%= input("package") %>
-  handle_zypp_res_codes $? $action
+  handle_zypp_res_codes $? "<%= action %>"
 <% end -%>
 RETVAL=$?
 [ $RETVAL -eq 0 ] || exit_with_message "Package action failed" $RETVAL
