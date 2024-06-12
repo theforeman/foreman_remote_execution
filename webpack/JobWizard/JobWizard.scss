@@ -16,7 +16,17 @@
     ); // So the select box can be shown above the wizard footer and navigation toggle
   }
   .pf-c-wizard__main-body {
-    max-width: 500px;
+    @media (max-width: 600px) {
+      max-width: 100%;
+    }
+  
+    @media (min-width: 601px) and (max-width: 1300px) {
+      max-width: 65vw;
+    }
+    @media (min-width: 1301px) {
+      max-width: 50vw;
+    }
+  
     .advanced-fields-title {
       margin-bottom: 10px;
     }
@@ -39,6 +49,9 @@
       .pf-c-select__toggle-wrapper {
         flex-wrap: nowrap;
       }
+    }
+    .foreman-search-field {
+      width: 100%;
     }
   }
   input[type='radio'],
@@ -110,10 +123,6 @@
     min-height: 40px;
     min-width: 100px;
   }
-  #host-selection {
-    width: 500px;
-  }
-
   .pf-c-modal-box {
     width: auto;
   }
