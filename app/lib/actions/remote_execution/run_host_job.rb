@@ -159,7 +159,7 @@ module Actions
           # This is enough, the error will get shown using add_exception at the end of the method
         end
 
-        task.template_invocation.template_invocation_events.order(:sequence_id).find_each do |output|
+        task.template_invocation.template_invocation_events.order(:timestamp).find_each do |output|
           if output.event_type == 'exit'
             continuous_output.add_output(_('Exit status: %s') % output.event, 'stdout', output.timestamp)
           else
