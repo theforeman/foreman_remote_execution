@@ -49,7 +49,10 @@ const HostsAndInputs = ({
   hostsSearchQuery,
   setHostsSearchQuery,
 }) => {
-  const [hostMethod, setHostMethod] = useState(hostMethods.hosts);
+  const defaultHostMethod = hostsSearchQuery.length
+    ? hostMethods.searchQuery
+    : hostMethods.hosts;
+  const [hostMethod, setHostMethod] = useState(defaultHostMethod);
   const isLoading = useSelector(selectIsLoadingHosts);
   const templateInputs = useSelector(selectTemplateInputs);
   const [hostPreviewOpen, setHostPreviewOpen] = useState(false);
