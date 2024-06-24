@@ -28,10 +28,10 @@ end
   </div>
 </div>
 <% if @host %>
-  <% proxy_id = @template_invocation_task.input[:proxy_id] %>
+  <% proxy = @template_invocation.smart_proxy %>
   <h3>
     <%= _('Target: ') %><%= link_to(@host, current_host_details_path(@host)) %>
-    <% if proxy_id && proxy = SmartProxy.find_by(id: proxy_id) %>
+    <% if proxy %>
       <%= _('using Smart Proxy') %> <%= link_to(proxy.name, smart_proxy_path(proxy)) %>
     <% end %>
   </h3>
