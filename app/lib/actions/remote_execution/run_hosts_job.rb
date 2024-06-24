@@ -75,6 +75,7 @@ module Actions
       end
 
       def on_planning_finished
+        trigger_remote_batch
         plan_event(Actions::TriggerProxyBatch::TriggerLastBatch, nil, step_id: input[:trigger_run_step_id])
         super
       end
