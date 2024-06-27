@@ -14,6 +14,14 @@ module Actions
 
       private
 
+      def check_task_status
+        response = proxy.status_of_task(proxy_task_id)
+        get_proxy_data(response)
+        suspend unless %w[stopped paused].include? response['state']
+      rescue RestClient::NotFound
+        on_proxy_action_missing
+      end
+
       def get_proxy_data(response)
         data = super
         process_proxy_data(data)
