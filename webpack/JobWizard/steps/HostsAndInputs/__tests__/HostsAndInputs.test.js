@@ -61,14 +61,20 @@ describe('Hosts', () => {
     await act(async () => {
       fireEvent.click(screen.getByText('Host groups'));
     });
-    fireEvent.click(select('host groups'));
+    await act(async () => {
+      fireEvent.click(select('host groups'));
+    });
     await act(async () => {
       fireEvent.click(screen.getByText('host_group1'));
     });
 
-    fireEvent.click(
-      screen.getByText('Host groups', { selector: '.pf-c-select__toggle-text' })
-    );
+    await act(async () => {
+      fireEvent.click(
+        screen.getByText('Host groups', {
+          selector: '.pf-c-select__toggle-text',
+        })
+      );
+    });
     await act(async () => {
       fireEvent.click(screen.getByText('Host collections'));
     });
