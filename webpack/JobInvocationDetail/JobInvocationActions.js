@@ -15,7 +15,7 @@ import {
   UPDATE_JOB,
 } from './JobInvocationConstants';
 
-export const getData = url => dispatch => {
+export const getJobInvocation = url => dispatch => {
   const fetchData = withInterval(
     get({
       key: JOB_INVOCATION_KEY,

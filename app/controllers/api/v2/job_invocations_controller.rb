@@ -6,7 +6,7 @@ module Api
 
       before_action :find_optional_nested_object, :only => %w{output raw_output}
       before_action :find_host, :only => %w{output raw_output}
-      before_action :find_resource, :only => %w{show update destroy clone cancel rerun outputs}
+      before_action :find_resource, :only => %w{show update destroy clone cancel rerun outputs hosts}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -111,6 +111,31 @@ module Api
         render :json => host_output(@nested_obj, @host, :default => [], :since => params[:since])
       end
 
+      api :GET, '/job_invocations/:id/hosts', N_('List hosts belonging to job invocation')
+      param :include, ['parameters', 'all_parameters'], :desc => N_("Array of extra information types to include")
+      param_group :search_and_pagination, ::Api::V2::BaseController
+      add_scoped_search_description_for(JobInvocation)
+      param :id, :identifier, :required => true
+      def hosts
+        Rails.logger.info "Params: #{params.inspect}"
+        @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+        @total = @job_invocation.targeting.hosts.size
+        @template_invocations = @job_invocation.template_invocations
+                                               .where(host: @hosts)
+                                               .includes(:input_values)
+        template_invocations = @template_invocations.includes(:run_host_job_task).to_a
+        @host_statuses = Hash[template_invocations.map { |ti| [ti.host_id, template_invocation_status(ti)] }]
+        # @smart_proxy_id = Hash[template_invocations.map { |ti| [ti.host_id, ti.smart_proxy_id] }]
+        # @smart_proxy_name = Hash[template_invocations.map { |ti| [ti.host_id, ti.smart_proxy_name] }]
+
+        if params[:include].present?
+          @parameters = params[:include].include?('parameters')
+          @all_parameters = params[:include].include?('all_parameters')
+        end
+        @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
+        render :hosts, :layout => 'api/v2/layouts/index_layout'
+      end
+
       api :GET, '/job_invocations/:id/hosts/:host_id/raw', N_('Get raw output for a host')
       param :id, :identifier, :required => true
       param :host_id, :identifier, :required => true
@@ -187,7 +212,7 @@ module Api
 
       def action_permission
         case params[:action]
-        when 'output', 'raw_output', 'outputs'
+        when 'output', 'raw_output', 'outputs', 'hosts'
           :view
         when 'cancel'
           :cancel

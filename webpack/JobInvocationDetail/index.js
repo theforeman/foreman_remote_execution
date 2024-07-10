@@ -6,7 +6,7 @@ import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
-import { getData, getTask } from './JobInvocationActions';
+import { getJobInvocation, getTask } from './JobInvocationActions';
 import {
   CURRENT_PERMISSIONS,
   DATE_OPTIONS,
@@ -19,6 +19,7 @@ import JobInvocationOverview from './JobInvocationOverview';
 import { selectItems } from './JobInvocationSelectors';
 import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
+import JobInvocationHostTable from './JobInvocationHostTable';
 
 const JobInvocationDetailPage = ({
   match: {
@@ -57,7 +58,7 @@ const JobInvocationDetailPage = ({
   }
 
   useEffect(() => {
-    dispatch(getData(`/api/job_invocations/${id}`));
+    dispatch(getJobInvocation(`/api/job_invocations/${id}?host_status=true`));
     if (finished && !autoRefresh) {
       dispatch(stopInterval(JOB_INVOCATION_KEY));
     }
@@ -120,6 +121,7 @@ const JobInvocationDetailPage = ({
           />
         </Flex>
       </Flex>
+      {items.id !== undefined && <JobInvocationHostTable data={items} />}
     </PageLayout>
   );
 };
