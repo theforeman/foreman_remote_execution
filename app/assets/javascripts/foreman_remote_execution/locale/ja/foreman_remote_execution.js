@@ -77,6 +77,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "スクリプトを実行するために使用するユーザー。ユーザーが SSH ユーザーと異なる場合は、su または sudo を使用してアカウントを切り替えます。"
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         "ジョブの中断"
       ],
@@ -152,6 +155,9 @@
       "Cancel job invocation": [
         "ジョブ呼び出しをキャンセル"
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -209,8 +215,23 @@
       "Control concurrency level and distribution over time": [
         "同時実行レベルと分散を制御"
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
         "ジョブ呼び出しのデータを表示できませんでした。"
+      ],
+      "Could not enable recurring logic %s: ${response}": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "実行に適したインターフェースを見つけることができませんでした"
@@ -244,6 +265,9 @@
       ],
       "Create a recurring job": [
         "繰り返されるジョブを作成"
+      ],
+      "Create report": [
+        ""
       ],
       "Create report for this job": [
         "このジョブのレポートを作成"
@@ -317,6 +341,9 @@
       "Designation of a special purpose": [
         "特別な目的の指定"
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         "詳細フィールドを表示"
       ],
@@ -373,6 +400,9 @@
       ],
       "Enable Global Proxy": [
         "グローバルプロキシーを有効にする"
+      ],
+      "Enable recurring": [
+        ""
       ],
       "End time needs to be after start time": [
         "終了時刻は開始時刻の後でなければなりません"
@@ -680,6 +710,9 @@
       "Learn more about this in the documentation.": [
         "詳細についてはドキュメントを参照してください。"
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -911,6 +944,15 @@
       "Recurring logic": [
         "再帰論理"
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         "検出されたテンプレートの再帰的なレンダリング"
       ],
@@ -950,6 +992,9 @@
       "Rerun": [
         "再実行"
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         "再実行に失敗しました"
       ],
@@ -961,6 +1006,9 @@
       ],
       "Rerun on failed hosts": [
         "失敗したホストでの再実行"
+      ],
+      "Rerun successful": [
+        ""
       ],
       "Rerun the job": [
         "ジョブを再実行"
@@ -1355,8 +1403,14 @@
       "Trying to abort the job": [
         "ジョブを中断しようとしています"
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
         "ジョブをキャンセルしようとしています"
+      ],
+      "Trying to cancel the job %s.": [
+        ""
       ],
       "Type": [
         "タイプ"
@@ -1412,9 +1466,6 @@
       "Use new job wizard": [
         ""
       ],
-      "Use old form": [
-        ""
-      ],
       "User Inputs": [
         "ユーザー入力"
       ],
@@ -1447,6 +1498,9 @@
       ],
       "View scheduled jobs": [
         "スケジュール済みのジョブを表示"
+      ],
+      "View task": [
+        ""
       ],
       "Web Console": [
         "Web コンソール"

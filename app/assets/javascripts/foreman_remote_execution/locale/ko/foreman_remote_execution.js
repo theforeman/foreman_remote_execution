@@ -78,6 +78,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "스크립트를 실행하는 데 사용할 사용자입니다. 이 사용자가 SSH 사용자와 다른 경우 su 또는 sudo를 사용하여 계정을 전환합니다."
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         ""
       ],
@@ -153,6 +156,9 @@
       "Cancel job invocation": [
         ""
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -210,7 +216,22 @@
       "Control concurrency level and distribution over time": [
         "동시 실행 레벨 및 기간별 배분 제어"
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
+        ""
+      ],
+      "Could not enable recurring logic %s: ${response}": [
         ""
       ],
       "Could not find any suitable interface for execution": [
@@ -245,6 +266,9 @@
       ],
       "Create a recurring job": [
         "반복 작업 생성"
+      ],
+      "Create report": [
+        ""
       ],
       "Create report for this job": [
         ""
@@ -318,6 +342,9 @@
       "Designation of a special purpose": [
         ""
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         "고급 필드 표시"
       ],
@@ -373,6 +400,9 @@
         ""
       ],
       "Enable Global Proxy": [
+        ""
+      ],
+      "Enable recurring": [
         ""
       ],
       "End time needs to be after start time": [
@@ -681,6 +711,9 @@
       "Learn more about this in the documentation.": [
         "설명서에서 자세한 내용을 참조하십시오."
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -912,6 +945,15 @@
       "Recurring logic": [
         "반복 로직"
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         "템플릿의 반복 렌더링이 감지되었습니다."
       ],
@@ -951,6 +993,9 @@
       "Rerun": [
         "재실행"
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         "재실행 실패"
       ],
@@ -962,6 +1007,9 @@
       ],
       "Rerun on failed hosts": [
         "실패한 호스트에서 재실행"
+      ],
+      "Rerun successful": [
+        ""
       ],
       "Rerun the job": [
         "작업 재실행"
@@ -1356,7 +1404,13 @@
       "Trying to abort the job": [
         ""
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
+        ""
+      ],
+      "Trying to cancel the job %s.": [
         ""
       ],
       "Type": [
@@ -1413,9 +1467,6 @@
       "Use new job wizard": [
         ""
       ],
-      "Use old form": [
-        ""
-      ],
       "User Inputs": [
         ""
       ],
@@ -1447,6 +1498,9 @@
         ""
       ],
       "View scheduled jobs": [
+        ""
+      ],
+      "View task": [
         ""
       ],
       "Web Console": [

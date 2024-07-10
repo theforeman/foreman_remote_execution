@@ -78,6 +78,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "სკრიპტის გაშვებისას გამოყენებული მომხმარებელი. თუ ის SSH მომხმარებლისგან განსხვავდება, გადასართველად su ან sudo იქნება გამოყენებული."
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         "დავალების გაუქმება"
       ],
@@ -153,6 +156,9 @@
       "Cancel job invocation": [
         "დავალების ჩაწოდების გაუქმება"
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -210,8 +216,23 @@
       "Control concurrency level and distribution over time": [
         "ერთდროულობის დონისა და დროში განაწილების მართვა"
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
         "ნაჩვენები იქნება თუ არა ამოცანის ჩაწოდების მონაცემები."
+      ],
+      "Could not enable recurring logic %s: ${response}": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         ""
@@ -245,6 +266,9 @@
       ],
       "Create a recurring job": [
         "განეორებადი ლოგიკის დავალების შექმნა"
+      ],
+      "Create report": [
+        ""
       ],
       "Create report for this job": [
         "ამ დავალების ანგარიშის შექმნა"
@@ -318,6 +342,9 @@
       "Designation of a special purpose": [
         "განსაკუთრებული მიზნის აღნიშვნა"
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         "დამატებითი ველების ჩვენება"
       ],
@@ -374,6 +401,9 @@
       ],
       "Enable Global Proxy": [
         "გლობალური პროქსის ჩართვა"
+      ],
+      "Enable recurring": [
+        ""
       ],
       "End time needs to be after start time": [
         "დასრულების დრო დასაწყისის დროის შემდეგ უნდა იყოს"
@@ -681,6 +711,9 @@
       "Learn more about this in the documentation.": [
         "შეიტყვეთ მეტი ამის შესახებ დოკუმენტაციაში."
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -912,6 +945,15 @@
       "Recurring logic": [
         "განეორებადი ლოგიკა"
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         ""
       ],
@@ -951,6 +993,9 @@
       "Rerun": [
         "თავიდან გაშვება"
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         "თავიდან გაშვების შეცდომა"
       ],
@@ -962,6 +1007,9 @@
       ],
       "Rerun on failed hosts": [
         "ავარიულ ჰოსტებზე თავიდან გაშვება"
+      ],
+      "Rerun successful": [
+        ""
       ],
       "Rerun the job": [
         "დავალების თავიდან გაშვება"
@@ -1357,8 +1405,14 @@
       "Trying to abort the job": [
         "დავალების შეწყვეტის მცდელობა"
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
         "დავალების გაუქმების მცდელობა"
+      ],
+      "Trying to cancel the job %s.": [
+        ""
       ],
       "Type": [
         "ტიპი"
@@ -1414,9 +1468,6 @@
       "Use new job wizard": [
         "ახალი დავალების ოსტატი"
       ],
-      "Use old form": [
-        "ძველი ფორმის გამოყენება"
-      ],
       "User Inputs": [
         "მომხმარებლის შეყვანა"
       ],
@@ -1449,6 +1500,9 @@
       ],
       "View scheduled jobs": [
         "დაგეგმილი ამოცანების ნახვა"
+      ],
+      "View task": [
+        ""
       ],
       "Web Console": [
         "ვებ კონსოლი"

@@ -77,6 +77,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "要使用執行這 script 的使用者。如果使用者與 SSH 使用者不同，會用 su 或 sudo 來切換使用者。"
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         "终止作业"
       ],
@@ -152,6 +155,9 @@
       "Cancel job invocation": [
         "取消作业调用"
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -209,8 +215,23 @@
       "Control concurrency level and distribution over time": [
         "控制并发级别和时间分布"
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
         "无法显示用于作业调用的数据。"
+      ],
+      "Could not enable recurring logic %s: ${response}": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "无法找到适合执行的接口"
@@ -244,6 +265,9 @@
       ],
       "Create a recurring job": [
         "创建一个重复运行的作业"
+      ],
+      "Create report": [
+        ""
       ],
       "Create report for this job": [
         "为这个作业创建报告"
@@ -317,6 +341,9 @@
       "Designation of a special purpose": [
         "设计特殊目的"
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         "显示高级字段"
       ],
@@ -373,6 +400,9 @@
       ],
       "Enable Global Proxy": [
         "启用全局代理服务器"
+      ],
+      "Enable recurring": [
+        ""
       ],
       "End time needs to be after start time": [
         "结束时间需要在开始时间后"
@@ -680,6 +710,9 @@
       "Learn more about this in the documentation.": [
         "如需了解更多信息，请参阅文档。"
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -911,6 +944,15 @@
       "Recurring logic": [
         "重复逻辑"
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         "检测到递归的模板呈现"
       ],
@@ -950,6 +992,9 @@
       "Rerun": [
         "重新运行"
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         "重新运行失败"
       ],
@@ -961,6 +1006,9 @@
       ],
       "Rerun on failed hosts": [
         "在失败的主机上重新运行"
+      ],
+      "Rerun successful": [
+        ""
       ],
       "Rerun the job": [
         "重新运行作业"
@@ -1355,8 +1403,14 @@
       "Trying to abort the job": [
         "尝试中止作业"
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
         "尝试取消作业"
+      ],
+      "Trying to cancel the job %s.": [
+        ""
       ],
       "Type": [
         "类型"
@@ -1412,9 +1466,6 @@
       "Use new job wizard": [
         ""
       ],
-      "Use old form": [
-        ""
-      ],
       "User Inputs": [
         "用户输入"
       ],
@@ -1447,6 +1498,9 @@
       ],
       "View scheduled jobs": [
         "查看调度的作业"
+      ],
+      "View task": [
+        ""
       ],
       "Web Console": [
         "Web 控制台"

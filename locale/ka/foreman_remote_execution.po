@@ -79,6 +79,9 @@ msgstr "SSH-ის მომხმარებელი."
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "სკრიპტის გაშვებისას გამოყენებული მომხმარებელი. თუ ის SSH მომხმარებლისგან განსხვავდება, გადასართველად su ან sudo იქნება გამოყენებული."
 
+msgid "Abort"
+msgstr ""
+
 msgid "Abort Job"
 msgstr "დავალების გაუქმება"
 
@@ -154,6 +157,9 @@ msgstr "ამოცანის გაუქმება"
 msgid "Cancel job invocation"
 msgstr "დავალების ჩაწოდების გაუქმება"
 
+msgid "Cancel recurring"
+msgstr ""
+
 msgid "Canceled:"
 msgstr ""
 
@@ -211,8 +217,23 @@ msgstr "IP-ით მიერთება"
 msgid "Control concurrency level and distribution over time"
 msgstr "ერთდროულობის დონისა და დროში განაწილების მართვა"
 
+msgid "Could not abort the job %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel recurring logic %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel the job %s: ${response}"
+msgstr ""
+
+msgid "Could not disable recurring logic %s: ${response}"
+msgstr ""
+
 msgid "Could not display data for job invocation."
 msgstr "ნაჩვენები იქნება თუ არა ამოცანის ჩაწოდების მონაცემები."
+
+msgid "Could not enable recurring logic %s: ${response}"
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr ""
@@ -246,6 +267,9 @@ msgstr "დავალების შაბლონის შექმნა"
 
 msgid "Create a recurring job"
 msgstr "განეორებადი ლოგიკის დავალების შექმნა"
+
+msgid "Create report"
+msgstr ""
 
 msgid "Create report for this job"
 msgstr "ამ დავალების ანგარიშის შექმნა"
@@ -319,6 +343,9 @@ msgstr "აღწერის შაბლონი"
 msgid "Designation of a special purpose"
 msgstr "განსაკუთრებული მიზნის აღნიშვნა"
 
+msgid "Disable recurring"
+msgstr ""
+
 msgid "Display advanced fields"
 msgstr "დამატებითი ველების ჩვენება"
 
@@ -375,6 +402,9 @@ msgstr ""
 
 msgid "Enable Global Proxy"
 msgstr "გლობალური პროქსის ჩართვა"
+
+msgid "Enable recurring"
+msgstr ""
 
 msgid "End time needs to be after start time"
 msgstr "დასრულების დრო დასაწყისის დროის შემდეგ უნდა იყოს"
@@ -682,6 +712,9 @@ msgstr "უკანასკნელი დავალებები"
 msgid "Learn more about this in the documentation."
 msgstr "შეიტყვეთ მეტი ამის შესახებ დოკუმენტაციაში."
 
+msgid "Legacy UI"
+msgstr ""
+
 msgid "List available remote execution features for a host"
 msgstr ""
 
@@ -913,6 +946,15 @@ msgstr "განმეორებად შესრულება"
 msgid "Recurring logic"
 msgstr "განეორებადი ლოგიკა"
 
+msgid "Recurring logic %s cancelled successfully."
+msgstr ""
+
+msgid "Recurring logic %s disabled successfully."
+msgstr ""
+
+msgid "Recurring logic %s enabled successfully."
+msgstr ""
+
 msgid "Recursive rendering of templates detected"
 msgstr ""
 
@@ -952,6 +994,9 @@ msgstr "გამეორება"
 msgid "Rerun"
 msgstr "თავიდან გაშვება"
 
+msgid "Rerun all"
+msgstr ""
+
 msgid "Rerun failed"
 msgstr "თავიდან გაშვების შეცდომა"
 
@@ -963,6 +1008,9 @@ msgstr "%s-ზე თავიდან გაშვება"
 
 msgid "Rerun on failed hosts"
 msgstr "ავარიულ ჰოსტებზე თავიდან გაშვება"
+
+msgid "Rerun successful"
+msgstr ""
 
 msgid "Rerun the job"
 msgstr "დავალების თავიდან გაშვება"
@@ -1359,8 +1407,14 @@ msgstr "ჰოსტზე დავალების გაუქმები�
 msgid "Trying to abort the job"
 msgstr "დავალების შეწყვეტის მცდელობა"
 
+msgid "Trying to abort the job %s."
+msgstr ""
+
 msgid "Trying to cancel the job"
 msgstr "დავალების გაუქმების მცდელობა"
+
+msgid "Trying to cancel the job %s."
+msgstr ""
 
 msgid "Type"
 msgstr "ტიპი"
@@ -1416,9 +1470,6 @@ msgstr "მოძველებული ფორმის გამოყე�
 msgid "Use new job wizard"
 msgstr "ახალი დავალების ოსტატი"
 
-msgid "Use old form"
-msgstr "ძველი ფორმის გამოყენება"
-
 msgid "User Inputs"
 msgstr "მომხმარებლის შეყვანა"
 
@@ -1451,6 +1502,9 @@ msgstr "გაშვებული დავალებების ნახ�
 
 msgid "View scheduled jobs"
 msgstr "დაგეგმილი ამოცანების ნახვა"
+
+msgid "View task"
+msgstr ""
 
 msgid "Web Console"
 msgstr "ვებ კონსოლი"

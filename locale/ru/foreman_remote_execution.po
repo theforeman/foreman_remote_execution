@@ -82,6 +82,9 @@ msgstr ""
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "Пользователь, от имени которого должен запускаться сценарий. Если отличается от пользователя SSH, для делегирования прав используется su или sudo."
 
+msgid "Abort"
+msgstr ""
+
 msgid "Abort Job"
 msgstr ""
 
@@ -157,6 +160,9 @@ msgstr "Отменить"
 msgid "Cancel job invocation"
 msgstr ""
 
+msgid "Cancel recurring"
+msgstr ""
+
 msgid "Canceled:"
 msgstr ""
 
@@ -214,7 +220,22 @@ msgstr ""
 msgid "Control concurrency level and distribution over time"
 msgstr "Контроль параллельного выполнения и распределения во времени"
 
+msgid "Could not abort the job %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel recurring logic %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel the job %s: ${response}"
+msgstr ""
+
+msgid "Could not disable recurring logic %s: ${response}"
+msgstr ""
+
 msgid "Could not display data for job invocation."
+msgstr ""
+
+msgid "Could not enable recurring logic %s: ${response}"
 msgstr ""
 
 msgid "Could not find any suitable interface for execution"
@@ -249,6 +270,9 @@ msgstr "Создать шаблон задания"
 
 msgid "Create a recurring job"
 msgstr "Периодическое выполнение"
+
+msgid "Create report"
+msgstr ""
 
 msgid "Create report for this job"
 msgstr ""
@@ -322,6 +346,9 @@ msgstr "Шаблон описания"
 msgid "Designation of a special purpose"
 msgstr ""
 
+msgid "Disable recurring"
+msgstr ""
+
 msgid "Display advanced fields"
 msgstr "Показать дополнительные параметры"
 
@@ -377,6 +404,9 @@ msgid "Effective user:"
 msgstr ""
 
 msgid "Enable Global Proxy"
+msgstr ""
+
+msgid "Enable recurring"
 msgstr ""
 
 msgid "End time needs to be after start time"
@@ -685,6 +715,9 @@ msgstr ""
 msgid "Learn more about this in the documentation."
 msgstr "Обратиться к документации"
 
+msgid "Legacy UI"
+msgstr ""
+
 msgid "List available remote execution features for a host"
 msgstr ""
 
@@ -916,6 +949,15 @@ msgstr ""
 msgid "Recurring logic"
 msgstr "Регулярное выполнение"
 
+msgid "Recurring logic %s cancelled successfully."
+msgstr ""
+
+msgid "Recurring logic %s disabled successfully."
+msgstr ""
+
+msgid "Recurring logic %s enabled successfully."
+msgstr ""
+
 msgid "Recursive rendering of templates detected"
 msgstr "Обнаружена рекурсия при обработке шаблонов"
 
@@ -955,6 +997,9 @@ msgstr "Повторяется"
 msgid "Rerun"
 msgstr "Повторить"
 
+msgid "Rerun all"
+msgstr ""
+
 msgid "Rerun failed"
 msgstr "Повторить неудавшиеся"
 
@@ -966,6 +1011,9 @@ msgstr "Повторить на %s"
 
 msgid "Rerun on failed hosts"
 msgstr "Повторить на узлах с ошибками"
+
+msgid "Rerun successful"
+msgstr ""
 
 msgid "Rerun the job"
 msgstr "Повторно выполнить задание"
@@ -1364,7 +1412,13 @@ msgstr "Попытаться отменить задание на узле"
 msgid "Trying to abort the job"
 msgstr ""
 
+msgid "Trying to abort the job %s."
+msgstr ""
+
 msgid "Trying to cancel the job"
+msgstr ""
+
+msgid "Trying to cancel the job %s."
 msgstr ""
 
 msgid "Type"
@@ -1421,9 +1475,6 @@ msgstr ""
 msgid "Use new job wizard"
 msgstr ""
 
-msgid "Use old form"
-msgstr ""
-
 msgid "User Inputs"
 msgstr ""
 
@@ -1455,6 +1506,9 @@ msgid "View running jobs"
 msgstr ""
 
 msgid "View scheduled jobs"
+msgstr ""
+
+msgid "View task"
 msgstr ""
 
 msgid "Web Console"

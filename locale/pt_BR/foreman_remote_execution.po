@@ -80,6 +80,9 @@ msgstr ""
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "Usuário a ser usado para a execução de script. Se ele for diferente do usuário SSH, su ou sudo pode ser utilizado para a troca de contas. "
 
+msgid "Abort"
+msgstr ""
+
 msgid "Abort Job"
 msgstr "Sobre o trabalho"
 
@@ -155,6 +158,9 @@ msgstr "Cancelar trabalho"
 msgid "Cancel job invocation"
 msgstr "Cancelar invocação de trabalho"
 
+msgid "Cancel recurring"
+msgstr ""
+
 msgid "Canceled:"
 msgstr ""
 
@@ -212,8 +218,23 @@ msgstr "Conectar por IP"
 msgid "Control concurrency level and distribution over time"
 msgstr "Controlar nível de simultaneidade e distribuição ao longo do tempo"
 
+msgid "Could not abort the job %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel recurring logic %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel the job %s: ${response}"
+msgstr ""
+
+msgid "Could not disable recurring logic %s: ${response}"
+msgstr ""
+
 msgid "Could not display data for job invocation."
 msgstr "Não foi possível exibir dados para a invocação de empregos."
+
+msgid "Could not enable recurring logic %s: ${response}"
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "Não foi possível encontrar uma interface adequada para execução"
@@ -247,6 +268,9 @@ msgstr "Criar um modelo de trabalho"
 
 msgid "Create a recurring job"
 msgstr "Criar um trabalho recorrente "
+
+msgid "Create report"
+msgstr ""
 
 msgid "Create report for this job"
 msgstr "Criar relatório para este trabalho"
@@ -320,6 +344,9 @@ msgstr "Modelo de descrição"
 msgid "Designation of a special purpose"
 msgstr "Designação de um propósito especial"
 
+msgid "Disable recurring"
+msgstr ""
+
 msgid "Display advanced fields"
 msgstr "Exibir campos avançados"
 
@@ -376,6 +403,9 @@ msgstr ""
 
 msgid "Enable Global Proxy"
 msgstr "Ativar o proxy global"
+
+msgid "Enable recurring"
+msgstr ""
 
 msgid "End time needs to be after start time"
 msgstr "O tempo final precisa ser após a hora de início"
@@ -683,6 +713,9 @@ msgstr "Últimos empregos"
 msgid "Learn more about this in the documentation."
 msgstr "Para saber mais sobre isto, acesse a documentação."
 
+msgid "Legacy UI"
+msgstr ""
+
 msgid "List available remote execution features for a host"
 msgstr ""
 
@@ -914,6 +947,15 @@ msgstr ""
 msgid "Recurring logic"
 msgstr "Lógica recorrente"
 
+msgid "Recurring logic %s cancelled successfully."
+msgstr ""
+
+msgid "Recurring logic %s disabled successfully."
+msgstr ""
+
+msgid "Recurring logic %s enabled successfully."
+msgstr ""
+
 msgid "Recursive rendering of templates detected"
 msgstr "Renderização recursiva de modelos detectada "
 
@@ -953,6 +995,9 @@ msgstr "Repetições "
 msgid "Rerun"
 msgstr "Executar novamente"
 
+msgid "Rerun all"
+msgstr ""
+
 msgid "Rerun failed"
 msgstr "Falha em nova execução "
 
@@ -964,6 +1009,9 @@ msgstr "Repetição %s"
 
 msgid "Rerun on failed hosts"
 msgstr "Executar novamente em hosts com falha "
+
+msgid "Rerun successful"
+msgstr ""
 
 msgid "Rerun the job"
 msgstr "Executar novamente o trabalho"
@@ -1361,8 +1409,14 @@ msgstr "Tentar cancelar o trabalho em um host "
 msgid "Trying to abort the job"
 msgstr "Tentando anular o trabalho"
 
+msgid "Trying to abort the job %s."
+msgstr ""
+
 msgid "Trying to cancel the job"
 msgstr "Tentando cancelar o trabalho"
+
+msgid "Trying to cancel the job %s."
+msgstr ""
 
 msgid "Type"
 msgstr "Tipo"
@@ -1418,9 +1472,6 @@ msgstr ""
 msgid "Use new job wizard"
 msgstr ""
 
-msgid "Use old form"
-msgstr ""
-
 msgid "User Inputs"
 msgstr "Entradas de usuário"
 
@@ -1453,6 +1504,9 @@ msgstr "Ver trabalhos em andamento"
 
 msgid "View scheduled jobs"
 msgstr "Ver empregos programados"
+
+msgid "View task"
+msgstr ""
 
 msgid "Web Console"
 msgstr "Console web"

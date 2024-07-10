@@ -79,6 +79,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "L'utilisateur choisi pour l'exécution du script. Si l'utilisateur est différent de celui utilisé pour SSH, su ou sudo sera mis en œuvre pour changer d'utilisateur."
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         "Abandonner le job"
       ],
@@ -154,6 +157,9 @@
       "Cancel job invocation": [
         "Annuler le lancement du job"
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -211,8 +217,23 @@
       "Control concurrency level and distribution over time": [
         "Contrôle le niveau de parallélisme et la distribution dans le temps"
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
         "Impossible d'afficher les données pour le lancement du job."
+      ],
+      "Could not enable recurring logic %s: ${response}": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "Impossible de trouver une interface qui convient pour l'exécution"
@@ -246,6 +267,9 @@
       ],
       "Create a recurring job": [
         "Créer un job récurrent"
+      ],
+      "Create report": [
+        ""
       ],
       "Create report for this job": [
         "Aucun rapport pour ce job"
@@ -319,6 +343,9 @@
       "Designation of a special purpose": [
         "Désignation d’un objectif spécial"
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         "Afficher les champs avancés"
       ],
@@ -375,6 +402,9 @@
       ],
       "Enable Global Proxy": [
         "Activer le proxy global"
+      ],
+      "Enable recurring": [
+        ""
       ],
       "End time needs to be after start time": [
         "Heure de fin doit être après l’heure de départ"
@@ -682,6 +712,9 @@
       "Learn more about this in the documentation.": [
         "Approfondissez ce sujet dans la documentation."
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -913,6 +946,15 @@
       "Recurring logic": [
         "Logique récurrente"
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         "Détection de récursion dans le rendu des modèles"
       ],
@@ -952,6 +994,9 @@
       "Rerun": [
         "Relancer"
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         "Échec du relancement"
       ],
@@ -963,6 +1008,9 @@
       ],
       "Rerun on failed hosts": [
         "Relancer sur les hôtes où le job a échoué"
+      ],
+      "Rerun successful": [
+        ""
       ],
       "Rerun the job": [
         "Relancer le job"
@@ -1359,8 +1407,14 @@
       "Trying to abort the job": [
         "Tentative d'abandon du job"
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
         "Tentative d'annulation du job"
+      ],
+      "Trying to cancel the job %s.": [
+        ""
       ],
       "Type": [
         "Type"
@@ -1416,9 +1470,6 @@
       "Use new job wizard": [
         ""
       ],
-      "Use old form": [
-        ""
-      ],
       "User Inputs": [
         "Entrées utilisateur"
       ],
@@ -1451,6 +1502,9 @@
       ],
       "View scheduled jobs": [
         "Vois les jobs programmés"
+      ],
+      "View task": [
+        ""
       ],
       "Web Console": [
         "Console Web"
