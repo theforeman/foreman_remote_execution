@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-16 11:13+0200\n"
-"PO-Revision-Date: 2024-05-16 11:13+0200\n"
+"POT-Creation-Date: 2024-07-10 20:01+0200\n"
+"PO-Revision-Date: 2024-07-10 20:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -208,20 +208,20 @@ msgstr ""
 msgid "Rerun job on failed hosts"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:149
+#: ../app/controllers/api/v2/job_invocations_controller.rb:150
 #: ../app/views/job_invocations/_form.html.erb:4
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:154
+#: ../app/controllers/api/v2/job_invocations_controller.rb:155
 msgid "Get outputs of hosts in a job"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:203
+#: ../app/controllers/api/v2/job_invocations_controller.rb:204
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:212
+#: ../app/controllers/api/v2/job_invocations_controller.rb:213
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
 
@@ -408,8 +408,8 @@ msgstr ""
 #: ../db/seeds.d/50-notification_blueprints.rb:3
 #: ../db/seeds.d/50-notification_blueprints.rb:17
 #: ../lib/foreman_remote_execution/engine.rb:247
-#: ../webpack/JobInvocationDetail/index.js:61
-#: ../webpack/JobWizard/JobWizardPageRerun.js:34
+#: ../webpack/JobInvocationDetail/index.js:78
+#: ../webpack/JobWizard/JobWizardPageRerun.js:39
 #: ../webpack/JobWizard/index.js:20
 msgid "Jobs"
 msgstr ""
@@ -507,7 +507,7 @@ msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:52
 #: ../app/helpers/remote_execution_helper.rb:202
-#: ../app/models/job_invocation.rb:207
+#: ../app/models/job_invocation.rb:220
 msgid "N/A"
 msgstr ""
 
@@ -534,6 +534,7 @@ msgid "Rerun the job"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:78
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:159
 msgid "Rerun failed"
 msgstr ""
 
@@ -622,77 +623,77 @@ msgstr ""
 msgid "Could not use any template used in the job invocation"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:56
+#: ../app/lib/actions/remote_execution/run_host_job.rb:57
 msgid "Failed rendering template: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:95
+#: ../app/lib/actions/remote_execution/run_host_job.rb:96
 msgid "Task cancelled"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:96
+#: ../app/lib/actions/remote_execution/run_host_job.rb:97
 msgid "Job execution failed"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:106
+#: ../app/lib/actions/remote_execution/run_host_job.rb:107
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:113 action_names.rb:2
+#: ../app/lib/actions/remote_execution/run_host_job.rb:114 action_names.rb:2
 msgid "Remote action:"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:141
+#: ../app/lib/actions/remote_execution/run_host_job.rb:142
 msgid "Job cancelled by user"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:146
-#: ../app/lib/actions/remote_execution/run_host_job.rb:164
+#: ../app/lib/actions/remote_execution/run_host_job.rb:147
+#: ../app/lib/actions/remote_execution/run_host_job.rb:165
 msgid "Exit status: %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:148
+#: ../app/lib/actions/remote_execution/run_host_job.rb:149
 msgid "Job finished with error"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:151
-#: ../app/lib/actions/remote_execution/run_host_job.rb:169
+#: ../app/lib/actions/remote_execution/run_host_job.rb:152
+#: ../app/lib/actions/remote_execution/run_host_job.rb:170
 msgid "Error loading data from proxy"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:208
+#: ../app/lib/actions/remote_execution/run_host_job.rb:209
 msgid "User can not execute job on host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:209
+#: ../app/lib/actions/remote_execution/run_host_job.rb:210
 msgid "User can not execute this job template"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:212
+#: ../app/lib/actions/remote_execution/run_host_job.rb:213
 msgid "User can not execute job on infrastructure host %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:218
+#: ../app/lib/actions/remote_execution/run_host_job.rb:219
 msgid "User can not execute this job template on %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:228
+#: ../app/lib/actions/remote_execution/run_host_job.rb:229
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:238
+#: ../app/lib/actions/remote_execution/run_host_job.rb:239
 msgid ""
 "Could not use any proxy for the %{provider} job. Consider configuring %{global"
 "_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_hosts_job.rb:94
+#: ../app/lib/actions/remote_execution/run_hosts_job.rb:95
 msgid "REX job has succeeded - %s"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_hosts_job.rb:102
+#: ../app/lib/actions/remote_execution/run_hosts_job.rb:103
 msgid "REX job has failed - %s"
 msgstr ""
 
@@ -787,15 +788,15 @@ msgstr ""
 msgid "Template with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:349
+#: ../app/models/job_invocation_composer.rb:351
 msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:358
+#: ../app/models/job_invocation_composer.rb:360
 msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
-#: ../app/models/job_invocation_composer.rb:364
+#: ../app/models/job_invocation_composer.rb:366
 msgid ""
 "The template %{template_name} mapped to feature %{feature_name} is not accessi"
 "ble by the user"
@@ -873,7 +874,7 @@ msgstr ""
 msgid "Input"
 msgstr ""
 
-#: ../app/models/template_invocation.rb:99
+#: ../app/models/template_invocation.rb:100
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr ""
 
@@ -1013,7 +1014,7 @@ msgid "Resolves to"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:42
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:241
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:244
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:93
 msgid "hosts"
 msgstr ""
@@ -1702,6 +1703,46 @@ msgstr ""
 msgid "Run a script"
 msgstr ""
 
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:47
+msgid "Trying to abort the job %s."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:48
+msgid "Trying to cancel the job %s."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:51
+msgid "Could not abort the job %s: ${response}"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:52
+msgid "Could not cancel the job %s: ${response}"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:98
+msgid "Recurring logic %s disabled successfully."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:99
+msgid "Recurring logic %s enabled successfully."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:103
+msgid "Could not disable recurring logic %s: ${response}"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:107
+msgid "Could not enable recurring logic %s: ${response}"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:131
+msgid "Recurring logic %s cancelled successfully."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationActions.js:134
+msgid "Could not cancel recurring logic %s: ${response}"
+msgstr ""
+
 #: ../webpack/JobInvocationDetail/JobInvocationOverview.js:40
 msgid "Effective user:"
 msgstr ""
@@ -1746,16 +1787,57 @@ msgstr ""
 msgid "Scheduled: ${totalHosts} hosts"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:92
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:96
 msgid "Systems"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:111
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:115
 msgid "System status"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:131
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:135
 msgid "Scheduled at:"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:124
+msgid "Disable recurring"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:124
+msgid "Enable recurring"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:137
+msgid "Cancel recurring"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:150
+msgid "Rerun successful"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:168
+msgid "View task"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:179
+#: ../webpack/JobWizard/Footer.js:90
+msgid "Cancel"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:189
+msgid "Abort"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:198
+msgid "Legacy UI"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:220
+msgid "Create report"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:241
+msgid "Rerun all"
 msgstr ""
 
 #: ../webpack/JobWizard/Footer.js:36
@@ -1792,10 +1874,6 @@ msgstr ""
 
 #: ../webpack/JobWizard/Footer.js:86
 msgid "Skip to review"
-msgstr ""
-
-#: ../webpack/JobWizard/Footer.js:90
-msgid "Cancel"
 msgstr ""
 
 #: ../webpack/JobWizard/JobWizardConstants.js:15
@@ -1874,22 +1952,23 @@ msgstr ""
 msgid "Search query"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:31
+#: ../webpack/JobWizard/JobWizardPageRerun.js:36
 #: ../webpack/JobWizard/index.js:17
 msgid "Run job"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:56
-msgid "Use old form"
+#: ../webpack/JobWizard/JobWizardPageRerun.js:61
+#: ../webpack/JobWizard/index.js:67
+msgid "Use legacy form"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:80
+#: ../webpack/JobWizard/JobWizardPageRerun.js:85
 msgid ""
 "Current organization %s is different from job's organization %s. This job may "
 "run on different hosts than before."
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:95
+#: ../webpack/JobWizard/JobWizardPageRerun.js:100
 msgid ""
 "Current location %s is different from job's location %s. This job may run on d"
 "ifferent hosts than before."
@@ -1920,10 +1999,6 @@ msgstr ""
 
 #: ../webpack/JobWizard/StartsBeforeErrorAlert.js:12
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
-msgstr ""
-
-#: ../webpack/JobWizard/index.js:67
-msgid "Use legacy form"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/AdvancedFields/DescriptionField.js:66
@@ -1965,16 +2040,17 @@ msgstr ""
 
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:87
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:100
+#: ../webpack/__mocks__/foremanReact/components/HostDetails/DetailsCard/DefaultLoaderEmptyState.js:5
 msgid "Not available"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:106
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:254
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:257
 msgid "Access denied"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:109
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:257
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:260
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr ""
 
@@ -1994,11 +2070,11 @@ msgstr ""
 msgid "Template failed with:"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/HostPreviewModal.js:20
+#: ../webpack/JobWizard/steps/HostsAndInputs/HostPreviewModal.js:22
 msgid "Preview Hosts"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/HostPreviewModal.js:53
+#: ../webpack/JobWizard/steps/HostsAndInputs/HostPreviewModal.js:55
 msgid "...and %s more"
 msgstr ""
 
@@ -2014,36 +2090,36 @@ msgstr ""
 msgid "There are no available input fields for the selected template."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:131
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:169
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:134
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:172
 msgid "Please select at least one host"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:166
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:169
 msgid "Please enter a search query"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:173
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:176
 msgid "Please select at least one host collection"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:177
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:180
 msgid "Please select at least one host group"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:194
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:197
 msgid "Filter by hosts"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:205
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:208
 msgid "Filter by host collections"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:215
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:218
 msgid "Filter by host groups"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:233
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:236
 msgid "Apply to"
 msgstr ""
 

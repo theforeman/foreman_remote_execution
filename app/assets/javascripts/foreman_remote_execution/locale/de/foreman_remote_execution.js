@@ -78,6 +78,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "Ein Benutzer, der für die Ausführung des Skripts verwendet werden soll. Wenn dieser sich vom SSH-Benutzer unterscheidet, kann mittels su oder sudo der Account gewechselt werden."
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         "Job abbrechen"
       ],
@@ -153,6 +156,9 @@
       "Cancel job invocation": [
         "Job-Aufruf abbrechen"
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -210,8 +216,23 @@
       "Control concurrency level and distribution over time": [
         "Parallelitätsebene und zeitliche Verteilung steuern"
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
         "Daten für Jobaufruf konnten nicht angezeigt werden."
+      ],
+      "Could not enable recurring logic %s: ${response}": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "Konnte keine passende Schnitstelle zum ausführen finden."
@@ -245,6 +266,9 @@
       ],
       "Create a recurring job": [
         "Wiederholten Job erstellen"
+      ],
+      "Create report": [
+        ""
       ],
       "Create report for this job": [
         ""
@@ -318,6 +342,9 @@
       "Designation of a special purpose": [
         ""
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         "Erweiterte Felder einblenden"
       ],
@@ -374,6 +401,9 @@
       ],
       "Enable Global Proxy": [
         "Globalen Proxy aktivieren"
+      ],
+      "Enable recurring": [
+        ""
       ],
       "End time needs to be after start time": [
         ""
@@ -681,6 +711,9 @@
       "Learn more about this in the documentation.": [
         "Mehr dazu in der Dokumentation."
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -912,6 +945,15 @@
       "Recurring logic": [
         "Wiederholungslogik"
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         "Rekursives Rendern von Vorlagen festgestellt"
       ],
@@ -951,6 +993,9 @@
       "Rerun": [
         "Erneut ausführen"
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         "Erneutes Ausführen fehlgeschlagen"
       ],
@@ -962,6 +1007,9 @@
       ],
       "Rerun on failed hosts": [
         "Erneut ausführen auf fehlgeschlagenen Hosts"
+      ],
+      "Rerun successful": [
+        ""
       ],
       "Rerun the job": [
         "Job erneut ausführen"
@@ -1357,8 +1405,14 @@
       "Trying to abort the job": [
         "Versuche Jobabbruch zu erzwingen"
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
         "Versuche den Job abzubrechen"
+      ],
+      "Trying to cancel the job %s.": [
+        ""
       ],
       "Type": [
         "Typ"
@@ -1414,9 +1468,6 @@
       "Use new job wizard": [
         ""
       ],
-      "Use old form": [
-        ""
-      ],
       "User Inputs": [
         "Benutzereingaben"
       ],
@@ -1448,6 +1499,9 @@
         ""
       ],
       "View scheduled jobs": [
+        ""
+      ],
+      "View task": [
         ""
       ],
       "Web Console": [

@@ -78,6 +78,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         ""
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         ""
       ],
@@ -153,6 +156,9 @@
       "Cancel job invocation": [
         ""
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -210,7 +216,22 @@
       "Control concurrency level and distribution over time": [
         ""
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
+        ""
+      ],
+      "Could not enable recurring logic %s: ${response}": [
         ""
       ],
       "Could not find any suitable interface for execution": [
@@ -244,6 +265,9 @@
         ""
       ],
       "Create a recurring job": [
+        ""
+      ],
+      "Create report": [
         ""
       ],
       "Create report for this job": [
@@ -318,6 +342,9 @@
       "Designation of a special purpose": [
         ""
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         ""
       ],
@@ -373,6 +400,9 @@
         ""
       ],
       "Enable Global Proxy": [
+        ""
+      ],
+      "Enable recurring": [
         ""
       ],
       "End time needs to be after start time": [
@@ -681,6 +711,9 @@
       "Learn more about this in the documentation.": [
         "Learn more about this in the documentation."
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -912,6 +945,15 @@
       "Recurring logic": [
         ""
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         ""
       ],
@@ -951,6 +993,9 @@
       "Rerun": [
         ""
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         ""
       ],
@@ -961,6 +1006,9 @@
         ""
       ],
       "Rerun on failed hosts": [
+        ""
+      ],
+      "Rerun successful": [
         ""
       ],
       "Rerun the job": [
@@ -1357,7 +1405,13 @@
       "Trying to abort the job": [
         ""
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
+        ""
+      ],
+      "Trying to cancel the job %s.": [
         ""
       ],
       "Type": [
@@ -1414,9 +1468,6 @@
       "Use new job wizard": [
         ""
       ],
-      "Use old form": [
-        ""
-      ],
       "User Inputs": [
         ""
       ],
@@ -1448,6 +1499,9 @@
         ""
       ],
       "View scheduled jobs": [
+        ""
+      ],
+      "View task": [
         ""
       ],
       "Web Console": [

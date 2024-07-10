@@ -78,6 +78,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "Un usuario que se debe utilizar para ejecutar el script. Si es distinto del usuario SSH, se utiliza su o sudo para cambiar las cuentas."
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         "Abortar trabajo"
       ],
@@ -153,6 +156,9 @@
       "Cancel job invocation": [
         "Cancelar invocación de trabajo"
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -210,8 +216,23 @@
       "Control concurrency level and distribution over time": [
         "Controlar el nivel de concurrencia y la distribución en el tiempo"
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
         "No se han podido mostrar los datos para la invocación del trabajo."
+      ],
+      "Could not enable recurring logic %s: ${response}": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "No se pudo hallar una interfaz adecuada para la ejecución"
@@ -245,6 +266,9 @@
       ],
       "Create a recurring job": [
         "Crear un trabajo recurrente"
+      ],
+      "Create report": [
+        ""
       ],
       "Create report for this job": [
         "Crear informe para este trabajo"
@@ -318,6 +342,9 @@
       "Designation of a special purpose": [
         "Designación de un objetivo especial"
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         "Mostrar campos avanzados"
       ],
@@ -374,6 +401,9 @@
       ],
       "Enable Global Proxy": [
         "Activar proxy global"
+      ],
+      "Enable recurring": [
+        ""
       ],
       "End time needs to be after start time": [
         "La hora de finalización debe ser posterior a la de inicio"
@@ -681,6 +711,9 @@
       "Learn more about this in the documentation.": [
         "Consulte la documentación para obtener más información."
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -912,6 +945,15 @@
       "Recurring logic": [
         "Lógica recurrente"
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         "Se detectó una reproducción recursiva de plantillas."
       ],
@@ -951,6 +993,9 @@
       "Rerun": [
         "Volver a ejecutar"
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         "Error al volver a ejecutar"
       ],
@@ -962,6 +1007,9 @@
       ],
       "Rerun on failed hosts": [
         "Volver a ejecutar en hosts con error"
+      ],
+      "Rerun successful": [
+        ""
       ],
       "Rerun the job": [
         "Volver a ejecutar el trabajo"
@@ -1358,8 +1406,14 @@
       "Trying to abort the job": [
         "Intentando abortar el trabajo"
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
         "Intentando cancelar el trabajo"
+      ],
+      "Trying to cancel the job %s.": [
+        ""
       ],
       "Type": [
         "Tipo"
@@ -1415,9 +1469,6 @@
       "Use new job wizard": [
         ""
       ],
-      "Use old form": [
-        ""
-      ],
       "User Inputs": [
         "Entradas del usuario"
       ],
@@ -1450,6 +1501,9 @@
       ],
       "View scheduled jobs": [
         "Ver trabajos programados"
+      ],
+      "View task": [
+        ""
       ],
       "Web Console": [
         "Consola web"

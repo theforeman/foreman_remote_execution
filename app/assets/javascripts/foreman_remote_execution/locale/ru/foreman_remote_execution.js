@@ -78,6 +78,9 @@
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "Пользователь, от имени которого должен запускаться сценарий. Если отличается от пользователя SSH, для делегирования прав используется su или sudo."
       ],
+      "Abort": [
+        ""
+      ],
       "Abort Job": [
         ""
       ],
@@ -153,6 +156,9 @@
       "Cancel job invocation": [
         ""
       ],
+      "Cancel recurring": [
+        ""
+      ],
       "Canceled:": [
         ""
       ],
@@ -210,7 +216,22 @@
       "Control concurrency level and distribution over time": [
         "Контроль параллельного выполнения и распределения во времени"
       ],
+      "Could not abort the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel recurring logic %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not disable recurring logic %s: ${response}": [
+        ""
+      ],
       "Could not display data for job invocation.": [
+        ""
+      ],
+      "Could not enable recurring logic %s: ${response}": [
         ""
       ],
       "Could not find any suitable interface for execution": [
@@ -245,6 +266,9 @@
       ],
       "Create a recurring job": [
         "Периодическое выполнение"
+      ],
+      "Create report": [
+        ""
       ],
       "Create report for this job": [
         ""
@@ -318,6 +342,9 @@
       "Designation of a special purpose": [
         ""
       ],
+      "Disable recurring": [
+        ""
+      ],
       "Display advanced fields": [
         "Показать дополнительные параметры"
       ],
@@ -373,6 +400,9 @@
         ""
       ],
       "Enable Global Proxy": [
+        ""
+      ],
+      "Enable recurring": [
         ""
       ],
       "End time needs to be after start time": [
@@ -681,6 +711,9 @@
       "Learn more about this in the documentation.": [
         "Обратиться к документации"
       ],
+      "Legacy UI": [
+        ""
+      ],
       "List available remote execution features for a host": [
         ""
       ],
@@ -912,6 +945,15 @@
       "Recurring logic": [
         "Регулярное выполнение"
       ],
+      "Recurring logic %s cancelled successfully.": [
+        ""
+      ],
+      "Recurring logic %s disabled successfully.": [
+        ""
+      ],
+      "Recurring logic %s enabled successfully.": [
+        ""
+      ],
       "Recursive rendering of templates detected": [
         "Обнаружена рекурсия при обработке шаблонов"
       ],
@@ -951,6 +993,9 @@
       "Rerun": [
         "Повторить"
       ],
+      "Rerun all": [
+        ""
+      ],
       "Rerun failed": [
         "Повторить неудавшиеся"
       ],
@@ -962,6 +1007,9 @@
       ],
       "Rerun on failed hosts": [
         "Повторить на узлах с ошибками"
+      ],
+      "Rerun successful": [
+        ""
       ],
       "Rerun the job": [
         "Повторно выполнить задание"
@@ -1359,7 +1407,13 @@
       "Trying to abort the job": [
         ""
       ],
+      "Trying to abort the job %s.": [
+        ""
+      ],
       "Trying to cancel the job": [
+        ""
+      ],
+      "Trying to cancel the job %s.": [
         ""
       ],
       "Type": [
@@ -1416,9 +1470,6 @@
       "Use new job wizard": [
         ""
       ],
-      "Use old form": [
-        ""
-      ],
       "User Inputs": [
         ""
       ],
@@ -1450,6 +1501,9 @@
         ""
       ],
       "View scheduled jobs": [
+        ""
+      ],
+      "View task": [
         ""
       ],
       "Web Console": [

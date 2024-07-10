@@ -78,6 +78,9 @@ msgstr ""
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "要使用執行這 script 的使用者。如果使用者與 SSH 使用者不同，會用 su 或 sudo 來切換使用者。"
 
+msgid "Abort"
+msgstr ""
+
 msgid "Abort Job"
 msgstr "终止作业"
 
@@ -153,6 +156,9 @@ msgstr "取消作业"
 msgid "Cancel job invocation"
 msgstr "取消作业调用"
 
+msgid "Cancel recurring"
+msgstr ""
+
 msgid "Canceled:"
 msgstr ""
 
@@ -210,8 +216,23 @@ msgstr "按 IP 连接"
 msgid "Control concurrency level and distribution over time"
 msgstr "控制并发级别和时间分布"
 
+msgid "Could not abort the job %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel recurring logic %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel the job %s: ${response}"
+msgstr ""
+
+msgid "Could not disable recurring logic %s: ${response}"
+msgstr ""
+
 msgid "Could not display data for job invocation."
 msgstr "无法显示用于作业调用的数据。"
+
+msgid "Could not enable recurring logic %s: ${response}"
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "无法找到适合执行的接口"
@@ -245,6 +266,9 @@ msgstr "创建作业模板"
 
 msgid "Create a recurring job"
 msgstr "创建一个重复运行的作业"
+
+msgid "Create report"
+msgstr ""
 
 msgid "Create report for this job"
 msgstr "为这个作业创建报告"
@@ -318,6 +342,9 @@ msgstr "描述模板"
 msgid "Designation of a special purpose"
 msgstr "设计特殊目的"
 
+msgid "Disable recurring"
+msgstr ""
+
 msgid "Display advanced fields"
 msgstr "显示高级字段"
 
@@ -374,6 +401,9 @@ msgstr ""
 
 msgid "Enable Global Proxy"
 msgstr "启用全局代理服务器"
+
+msgid "Enable recurring"
+msgstr ""
 
 msgid "End time needs to be after start time"
 msgstr "结束时间需要在开始时间后"
@@ -681,6 +711,9 @@ msgstr "最新的作业"
 msgid "Learn more about this in the documentation."
 msgstr "如需了解更多信息，请参阅文档。"
 
+msgid "Legacy UI"
+msgstr ""
+
 msgid "List available remote execution features for a host"
 msgstr ""
 
@@ -912,6 +945,15 @@ msgstr ""
 msgid "Recurring logic"
 msgstr "重复逻辑"
 
+msgid "Recurring logic %s cancelled successfully."
+msgstr ""
+
+msgid "Recurring logic %s disabled successfully."
+msgstr ""
+
+msgid "Recurring logic %s enabled successfully."
+msgstr ""
+
 msgid "Recursive rendering of templates detected"
 msgstr "检测到递归的模板呈现"
 
@@ -951,6 +993,9 @@ msgstr "重复"
 msgid "Rerun"
 msgstr "重新运行"
 
+msgid "Rerun all"
+msgstr ""
+
 msgid "Rerun failed"
 msgstr "重新运行失败"
 
@@ -962,6 +1007,9 @@ msgstr "在 %s 重新运行"
 
 msgid "Rerun on failed hosts"
 msgstr "在失败的主机上重新运行"
+
+msgid "Rerun successful"
+msgstr ""
 
 msgid "Rerun the job"
 msgstr "重新运行作业"
@@ -1357,8 +1405,14 @@ msgstr "尝试取消主机上的作业"
 msgid "Trying to abort the job"
 msgstr "尝试中止作业"
 
+msgid "Trying to abort the job %s."
+msgstr ""
+
 msgid "Trying to cancel the job"
 msgstr "尝试取消作业"
+
+msgid "Trying to cancel the job %s."
+msgstr ""
 
 msgid "Type"
 msgstr "类型"
@@ -1414,9 +1468,6 @@ msgstr ""
 msgid "Use new job wizard"
 msgstr ""
 
-msgid "Use old form"
-msgstr ""
-
 msgid "User Inputs"
 msgstr "用户输入"
 
@@ -1449,6 +1500,9 @@ msgstr "查看运行的作业"
 
 msgid "View scheduled jobs"
 msgstr "查看调度的作业"
+
+msgid "View task"
+msgstr ""
 
 msgid "Web Console"
 msgstr "Web 控制台"

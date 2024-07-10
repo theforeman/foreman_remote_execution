@@ -80,6 +80,9 @@ msgstr ""
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "スクリプトを実行するために使用するユーザー。ユーザーが SSH ユーザーと異なる場合は、su または sudo を使用してアカウントを切り替えます。"
 
+msgid "Abort"
+msgstr ""
+
 msgid "Abort Job"
 msgstr "ジョブの中断"
 
@@ -155,6 +158,9 @@ msgstr "ジョブのキャンセル"
 msgid "Cancel job invocation"
 msgstr "ジョブ呼び出しをキャンセル"
 
+msgid "Cancel recurring"
+msgstr ""
+
 msgid "Canceled:"
 msgstr ""
 
@@ -212,8 +218,23 @@ msgstr "IP で接続"
 msgid "Control concurrency level and distribution over time"
 msgstr "同時実行レベルと分散を制御"
 
+msgid "Could not abort the job %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel recurring logic %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel the job %s: ${response}"
+msgstr ""
+
+msgid "Could not disable recurring logic %s: ${response}"
+msgstr ""
+
 msgid "Could not display data for job invocation."
 msgstr "ジョブ呼び出しのデータを表示できませんでした。"
+
+msgid "Could not enable recurring logic %s: ${response}"
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "実行に適したインターフェースを見つけることができませんでした"
@@ -247,6 +268,9 @@ msgstr "ジョブテンプレートの作成"
 
 msgid "Create a recurring job"
 msgstr "繰り返されるジョブを作成"
+
+msgid "Create report"
+msgstr ""
 
 msgid "Create report for this job"
 msgstr "このジョブのレポートを作成"
@@ -320,6 +344,9 @@ msgstr "説明テンプレート"
 msgid "Designation of a special purpose"
 msgstr "特別な目的の指定"
 
+msgid "Disable recurring"
+msgstr ""
+
 msgid "Display advanced fields"
 msgstr "詳細フィールドを表示"
 
@@ -376,6 +403,9 @@ msgstr ""
 
 msgid "Enable Global Proxy"
 msgstr "グローバルプロキシーを有効にする"
+
+msgid "Enable recurring"
+msgstr ""
 
 msgid "End time needs to be after start time"
 msgstr "終了時刻は開始時刻の後でなければなりません"
@@ -683,6 +713,9 @@ msgstr "最新のジョブ"
 msgid "Learn more about this in the documentation."
 msgstr "詳細についてはドキュメントを参照してください。"
 
+msgid "Legacy UI"
+msgstr ""
+
 msgid "List available remote execution features for a host"
 msgstr ""
 
@@ -914,6 +947,15 @@ msgstr ""
 msgid "Recurring logic"
 msgstr "再帰論理"
 
+msgid "Recurring logic %s cancelled successfully."
+msgstr ""
+
+msgid "Recurring logic %s disabled successfully."
+msgstr ""
+
+msgid "Recurring logic %s enabled successfully."
+msgstr ""
+
 msgid "Recursive rendering of templates detected"
 msgstr "検出されたテンプレートの再帰的なレンダリング"
 
@@ -953,6 +995,9 @@ msgstr "繰り返し"
 msgid "Rerun"
 msgstr "再実行"
 
+msgid "Rerun all"
+msgstr ""
+
 msgid "Rerun failed"
 msgstr "再実行に失敗しました"
 
@@ -964,6 +1009,9 @@ msgstr "%s での再実行"
 
 msgid "Rerun on failed hosts"
 msgstr "失敗したホストでの再実行"
+
+msgid "Rerun successful"
+msgstr ""
 
 msgid "Rerun the job"
 msgstr "ジョブを再実行"
@@ -1359,8 +1407,14 @@ msgstr "ホストでのジョブのキャンセルを試行"
 msgid "Trying to abort the job"
 msgstr "ジョブを中断しようとしています"
 
+msgid "Trying to abort the job %s."
+msgstr ""
+
 msgid "Trying to cancel the job"
 msgstr "ジョブをキャンセルしようとしています"
+
+msgid "Trying to cancel the job %s."
+msgstr ""
 
 msgid "Type"
 msgstr "タイプ"
@@ -1416,9 +1470,6 @@ msgstr ""
 msgid "Use new job wizard"
 msgstr ""
 
-msgid "Use old form"
-msgstr ""
-
 msgid "User Inputs"
 msgstr "ユーザー入力"
 
@@ -1451,6 +1502,9 @@ msgstr "実行中のジョブを表示"
 
 msgid "View scheduled jobs"
 msgstr "スケジュール済みのジョブを表示"
+
+msgid "View task"
+msgstr ""
 
 msgid "Web Console"
 msgstr "Web コンソール"
