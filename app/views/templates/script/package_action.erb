@@ -148,7 +148,7 @@ handle_zypp_res_codes () {
     end
   -%>
   zypper refresh
-  zypper -n <%= action %> <%= input("options") %> <%= input("package") %>
+  zypper -n --gpg-auto-import-keys <%= action %> <%= input("options") %> <%= input("package") %>
   handle_zypp_res_codes $? "<%= action %>"
 <% end -%>
 RETVAL=$?
