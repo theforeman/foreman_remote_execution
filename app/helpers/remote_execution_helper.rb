@@ -73,12 +73,14 @@ module RemoteExecutionHelper
       buttons << link_to(_('Rerun'), rerun_job_invocation_path(:id => job_invocation.id),
         :class => 'btn btn-default',
         :title => _('Rerun the job'))
-    end
-    if authorized_for(controller: :job_invocations, action: :create)
       buttons << link_to(_('Rerun failed'), rerun_job_invocation_path(:id => job_invocation.id, :failed_only => 1),
         :class => 'btn btn-default',
         :disabled => job_invocation.failed_hosts.none?,
         :title => _('Rerun on failed hosts'))
+      buttons << link_to(_('Rerun succeeded'), rerun_job_invocation_path(:id => job_invocation.id, :succeeded_only => 1),
+        :class => 'btn btn-default',
+        :disabled => job_invocation.succeeded_hosts.none?,
+        :title => _('Rerun on succeeded hosts'))
     end
     if authorized_for(:permission => :view_foreman_tasks, :auth_object => task, :authorizer => task_authorizer)
       buttons << link_to(_('Job Task'), foreman_tasks_task_path(task),
