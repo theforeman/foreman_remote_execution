@@ -209,9 +209,8 @@ module RemoteExecutionHelper
   end
 
   def documentation_button_rex(section = '')
-    url = 'http://theforeman.org/plugins/foreman_remote_execution/' +
-      "#{ForemanRemoteExecution::VERSION.split('.').take(2).join('.')}/index.html#"
-    documentation_button section, :root_url => url
+    version = ForemanRemoteExecution::VERSION.split('.').take(2).join('.')
+    documentation_button section, type: 'plugin_manual', name: 'foreman_remote_execution', version: version, section: "##{section}"
   end
 
   def description_checkbox_f(f, job_template, disabled)
