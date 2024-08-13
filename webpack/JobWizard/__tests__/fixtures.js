@@ -114,6 +114,8 @@ export const jobCategories = ['Services', 'Ansible Commands', 'Puppet'];
 
 export const testSetup = (selectors, api) => {
   jest.spyOn(api, 'get');
+  jest.spyOn(selectors, 'selectRerunJobInvocationResponse');
+  jest.spyOn(selectors, 'selectRerunJobInvocationStatus');
   jest.spyOn(selectors, 'selectJobTemplate');
   jest.spyOn(selectors, 'selectJobTemplates');
   jest.spyOn(selectors, 'selectJobCategories');
@@ -123,6 +125,10 @@ export const testSetup = (selectors, api) => {
 
   jest.spyOn(selectors, 'selectTemplateInputs');
   jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
+  selectors.selectRerunJobInvocationResponse.mockImplementation(
+    () => jobInvocation
+  );
+  selectors.selectRerunJobInvocationStatus.mockImplementation(() => 'RESOLVED');
   selectors.selectWithKatello.mockImplementation(() => true);
   selectors.selectTemplateInputs.mockImplementation(
     () => jobTemplateResponse.template_inputs
