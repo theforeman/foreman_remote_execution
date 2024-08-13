@@ -14,16 +14,17 @@ import {
   jobInvocation,
 } from '../../__tests__/fixtures';
 
+jest.useFakeTimers();
 const store = testSetup(selectors, api);
 mockApi(api);
 jest.spyOn(APIHooks, 'useAPI');
+store.dispatch = jest.fn();
 APIHooks.useAPI.mockImplementation((action, url) => {
   if (url === '/ui_job_wizard/job_invocation?id=57') {
     return { response: jobInvocation, status: 'RESOLVED' };
   }
   return {};
 });
-jest.useFakeTimers();
 
 describe('ReviewDetails', () => {
   it('should call goToStepByName function when StepButton is clicked', async () => {

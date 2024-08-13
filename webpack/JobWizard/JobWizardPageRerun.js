@@ -1,16 +1,33 @@
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 import URI from 'urijs';
-import { Alert, Button, Divider, Skeleton } from '@patternfly/react-core';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Alert,
+  Divider,
+  Skeleton,
+  Button,
+  Title,
+  EmptyState,
+  EmptyStateVariant,
+  EmptyStateIcon,
+  EmptyStateBody,
+} from '@patternfly/react-core';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import { global_palette_red_200 as exclamationColor } from '@patternfly/react-tokens';
+import { get } from 'foremanReact/redux/API';
+import { sprintf, translate as __ } from 'foremanReact/common/I18n';
+import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
+import { STATUS } from 'foremanReact/constants';
 import {
   useForemanLocation,
   useForemanOrganization,
 } from 'foremanReact/Root/Context/ForemanContext';
-import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
-import { STATUS } from 'foremanReact/constants';
-import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { JobWizard } from './JobWizard';
+import {
+  selectRerunJobInvocationResponse,
+  selectRerunJobInvocationStatus,
+} from './JobWizardSelectors';
 import { JOB_API_KEY } from './JobWizardConstants';
 
 const JobWizardPageRerun = ({
@@ -19,6 +36,7 @@ const JobWizardPageRerun = ({
   },
   location: { search },
 }) => {
+  const dispatch = useDispatch();
   const uri = new URI(search);
   const { failed_only: failedOnly } = uri.search(true);
   const { succeeded_only: succeededOnly } = uri.search(true);
@@ -28,11 +46,6 @@ const JobWizardPageRerun = ({
   } else if (succeededOnly) {
     queryParams = '&succeeded_only=1';
   }
-  const { response, status } = useAPI(
-    'get',
-    `/ui_job_wizard/job_invocation?id=${id}${queryParams}`,
-    JOB_API_KEY
-  );
   const title = __('Run job');
   const breadcrumbOptions = {
     breadcrumbItems: [
@@ -41,10 +54,54 @@ const JobWizardPageRerun = ({
     ],
   };
 
-  const jobOrganization = response.job_organization;
-  const jobLocation = response.job_location;
+  const [errorMessage, setErrorMessage] = useState('');
+  const jobInvocationResponse = useSelector(selectRerunJobInvocationResponse);
+  const jobInvocationStatus = useSelector(selectRerunJobInvocationStatus);
+  const jobOrganization = jobInvocationResponse.job_organization;
+  const jobLocation = jobInvocationResponse.job_location;
   const currentOrganization = useForemanOrganization();
   const currentLocation = useForemanLocation();
+
+  const emptyStateLarge = (
+    <EmptyState variant={EmptyStateVariant.large}>
+      <EmptyStateIcon
+        icon={ExclamationCircleIcon}
+        color={exclamationColor.value}
+      />
+      <Title ouiaId="job-wizard-empty-state-header" headingLevel="h4" size="lg">
+        {__('Unable to run job')}
+      </Title>
+      <EmptyStateBody>{sprintf(errorMessage)}</EmptyStateBody>
+      <Button
+        ouiaId="job-wizard-run-job-button"
+        component="a"
+        href="/job_invocations/new"
+        variant="primary"
+      >
+        {__('Create job')}
+      </Button>
+    </EmptyState>
+  );
+
+  useEffect(() => {
+    let isMounted = true;
+    if (id !== undefined) {
+      dispatch(
+        get({
+          key: JOB_API_KEY,
+          url: `/ui_job_wizard/job_invocation?id=${id}${queryParams}`,
+          handleError: ({ response }) => {
+            if (isMounted) {
+              setErrorMessage(response?.data?.error?.message);
+            }
+          },
+        })
+      );
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, id, failedOnly, queryParams]);
 
   return (
     <PageLayout
@@ -66,14 +123,16 @@ const JobWizardPageRerun = ({
         <React.Fragment>
           <Divider component="div" />
         </React.Fragment>
-        {!status || status === STATUS.PENDING ? (
+        {jobInvocationStatus === STATUS.ERROR && emptyStateLarge}
+        {(!jobInvocationStatus || jobInvocationStatus === STATUS.PENDING) && (
           <div style={{ height: '400px' }}>
             <Skeleton
               height="100%"
               screenreaderText="Loading large rectangle contents"
             />
           </div>
-        ) : (
+        )}
+        {jobInvocationStatus === STATUS.RESOLVED && (
           <React.Fragment>
             {jobOrganization?.id !== currentOrganization?.id && (
               <Alert
@@ -107,7 +166,12 @@ const JobWizardPageRerun = ({
             )}
             <Divider component="div" />
             <JobWizard
-              rerunData={{ ...response?.job, inputs: response?.inputs } || null}
+              rerunData={
+                {
+                  ...jobInvocationResponse?.job,
+                  inputs: jobInvocationResponse?.inputs,
+                } || null
+              }
             />
           </React.Fragment>
         )}
