@@ -11,11 +11,11 @@ class CockpitController < ApplicationController
     redir_url = URI.parse(params[:redirect_uri])
 
     cockpit_url = SSHExecutionProvider.cockpit_url_for_host('')
-    redir_url.query = if redir_url.hostname == URI.join(Setting[:foreman_url], cockpit_url).hostname
-                        "access_token=#{request.session_options[:id]}"
-                      else
-                        "error_description=Sorry"
-                      end
+    redir_url.fragment = if redir_url.hostname == URI.join(Setting[:foreman_url], cockpit_url).hostname
+                           "access_token=#{request.session_options[:id]}"
+                         else
+                           "error_description=Sorry"
+                         end
     redirect_to(redir_url.to_s)
   end
 
