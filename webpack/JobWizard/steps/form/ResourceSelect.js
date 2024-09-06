@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption,
+	SelectVariant
+} from '@patternfly/react-core/deprecated';
 import Immutable from 'seamless-immutable';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { useSelector, useDispatch } from 'react-redux';
@@ -85,7 +89,7 @@ export const ResourceSelect = ({
       selections={selected}
       loadingVariant={isLoading ? 'spinner' : null}
       onSelect={onSelect}
-      onToggle={setIsOpen}
+      onToggle={(_event, val) => setIsOpen(val)}
       isOpen={isOpen}
       className="without_select2"
       maxHeight="45vh"
