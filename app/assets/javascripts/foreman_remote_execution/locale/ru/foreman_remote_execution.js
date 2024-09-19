@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Yulia <yulia.poyarkova@redhat.com>, 2016",
-        "Language-Team": "Russian (http://www.transifex.com/foreman/foreman/language/ru/)",
+        "Language-Team": "Russian (http://app.transifex.com/foreman/foreman/language/ru/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -85,7 +85,7 @@
         ""
       ],
       "Access denied": [
-        ""
+        "Доступ запрещен"
       ],
       "Actions": [
         "Действия"
@@ -136,7 +136,7 @@
         ""
       ],
       "Back": [
-        ""
+        "Назад"
       ],
       "Back to Job": [
         "Назад к заданию"
@@ -775,7 +775,7 @@
         ""
       ],
       "Next": [
-        ""
+        "Далее"
       ],
       "No (override)": [
         ""
@@ -1555,7 +1555,7 @@
         "У вас нет доступа к используемому шаблону. При сохранении формы он будет автоматически отключен."
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "Недостаточно полномочий для выполнения операции"
       ],
       "You have %s results to display. Showing first %s results": [
         ""
@@ -1570,7 +1570,7 @@
         ""
       ],
       "documentation": [
-        ""
+        "документация"
       ],
       "effective user": [
         ""

@@ -7,11 +7,11 @@
 # elobato <elobatocs@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 9.0.1\n"
+"Project-Id-Version: foreman_remote_execution 14.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: elobato <elobatocs@gmail.com>, 2017\n"
-"Language-Team: Japanese (http://www.transifex.com/foreman/foreman/language/ja/"
+"Language-Team: Japanese (http://app.transifex.com/foreman/foreman/language/ja/"
 ")\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "${d.title} ${d.count} hosts"
-msgstr ""
+msgstr "${d.title} ${d.count} ホスト"
 
 msgid "%s"
 msgstr "%s"
@@ -32,16 +32,16 @@ msgid "%s job has been invoked"
 msgstr "%s 件のジョブが呼び出されました"
 
 msgid "%s more"
-msgstr ""
+msgstr "さらに %s"
 
 msgid "%{description} on %{host}"
 msgstr "%{host} の %{description} "
 
 msgid "'Starts before' date must be after 'Starts at' date"
-msgstr ""
+msgstr "「次の時刻よりも前に開始」の日付は、「開始時刻」の日付よりも後でなければなりません"
 
 msgid "'Starts before' date must in the future"
-msgstr ""
+msgstr "「次の時刻よりも前に開始」の日付は、未来の日付でなければなりません"
 
 msgid "...and %s more"
 msgstr "...さらに %s"
@@ -57,7 +57,7 @@ msgid "A comma separated list of input names to be included from the foreign tem
 msgstr "外部テンプレートから含める入力名のコンマ区切り一覧。"
 
 msgid "A job '%{job_name}' has %{status} at %{time}"
-msgstr "ジョブ '%{job_name}' のステータスは %%{status} です (%%{time} 時点)"
+msgstr "ジョブ '%%{job_name}' のステータスは %%{status} です (%%{time} 時点)"
 
 msgid "A job '%{subject}' has failed"
 msgstr "ジョブ '%%{subject}' が失敗しました"
@@ -75,25 +75,25 @@ msgid "A special label for tracking a recurring job. There can be only one activ
 msgstr "繰り返しジョブを追跡するための特別なラベル。特定の目的で一度にアクティブにできるジョブは 1 つだけです。"
 
 msgid "A user to be used for SSH."
-msgstr ""
+msgstr "SSH に使用するユーザー。"
 
 msgid "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts."
 msgstr "スクリプトを実行するために使用するユーザー。ユーザーが SSH ユーザーと異なる場合は、su または sudo を使用してアカウントを切り替えます。"
 
 msgid "Abort"
-msgstr ""
+msgstr "中断"
 
 msgid "Abort Job"
 msgstr "ジョブの中断"
 
 msgid "Access denied"
-msgstr ""
+msgstr "アクセスは拒否されました"
 
 msgid "Actions"
 msgstr "アクション"
 
 msgid "Active Filters:"
-msgstr ""
+msgstr "アクティブなフィルター:"
 
 msgid "Add Foreign Input Set"
 msgstr "外部入力セットを追加"
@@ -102,10 +102,10 @@ msgid "Advanced fields"
 msgstr "詳細フィールド"
 
 msgid "After"
-msgstr ""
+msgstr "次の時刻よりも後に開始"
 
 msgid "After %s occurences"
-msgstr ""
+msgstr "%s のオカレンス後"
 
 msgid "All fields are required."
 msgstr "すべてのフィールドは必須です。"
@@ -135,10 +135,10 @@ msgid "At minute"
 msgstr "分"
 
 msgid "Awaiting start"
-msgstr ""
+msgstr "開始待ち"
 
 msgid "Back"
-msgstr ""
+msgstr "戻る"
 
 msgid "Back to Job"
 msgstr "ジョブに戻る"
@@ -150,7 +150,7 @@ msgid "Can't find Job Invocation for an id %s"
 msgstr "ID %s のジョブ呼び出しが見つかりません"
 
 msgid "Cancel"
-msgstr ""
+msgstr "取り消し"
 
 msgid "Cancel Job"
 msgstr "ジョブのキャンセル"
@@ -159,10 +159,10 @@ msgid "Cancel job invocation"
 msgstr "ジョブ呼び出しをキャンセル"
 
 msgid "Cancel recurring"
-msgstr ""
+msgstr "繰り返しのキャンセル"
 
 msgid "Canceled:"
-msgstr ""
+msgstr "キャンセル済み:"
 
 msgid "Cancelled"
 msgstr "キャンセル済み"
@@ -180,22 +180,22 @@ msgid "Categories list failed with:"
 msgstr "カテゴリー一覧が以下により失敗:"
 
 msgid "Category and template"
-msgstr ""
+msgstr "カテゴリーとテンプレート"
 
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr "ジョブ呼び出しフォームで事前に選択されているジョブテンプレートを選択してください"
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
-msgstr "外部入力セット '%{template}' -> '%{target_template}' で循環依存が検出されました。テンプレートスタック: %{templates_stack}"
+msgstr "外部入力セット '%%{template}' -> '%%{target_template}' で循環依存が検出されました。テンプレートスタック: %%{templates_stack}"
 
 msgid "Cleanup working directories"
 msgstr "作業ディレクトリーのクリーンアップ"
 
 msgid "Clear all filters"
-msgstr ""
+msgstr "全フィルターの消去"
 
 msgid "Clear input"
-msgstr ""
+msgstr "入力のクリア"
 
 msgid "Clone a provision template"
 msgstr "プロビジョンテンプレートのクローン"
@@ -219,22 +219,22 @@ msgid "Control concurrency level and distribution over time"
 msgstr "同時実行レベルと分散を制御"
 
 msgid "Could not abort the job %s: ${response}"
-msgstr ""
+msgstr "ジョブ %s を中止できませんでした: ${response}"
 
 msgid "Could not cancel recurring logic %s: ${response}"
-msgstr ""
+msgstr "再帰論理 %s をキャンセルできませんでした: ${response}"
 
 msgid "Could not cancel the job %s: ${response}"
-msgstr ""
+msgstr "ジョブ %s をキャンセルできませんでした: ${response}"
 
 msgid "Could not disable recurring logic %s: ${response}"
-msgstr ""
+msgstr "再帰論理 %s を無効にできませんでした: ${response}"
 
 msgid "Could not display data for job invocation."
 msgstr "ジョブ呼び出しのデータを表示できませんでした。"
 
 msgid "Could not enable recurring logic %s: ${response}"
-msgstr ""
+msgstr "再帰論理 %s を有効にできませんでした: ${response}"
 
 msgid "Could not find any suitable interface for execution"
 msgstr "実行に適したインターフェースを見つけることができませんでした"
@@ -246,7 +246,7 @@ msgid "Could not rerun job %{id} because its template could not be found"
 msgstr "テンプレートが見つからないのでジョブ %{id} を返すことができませんでした"
 
 msgid "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
-msgstr "%{provider} ジョブにプロキシーを使用できませんでした。設定で {global_proxy} または {fallback_proxy} を指定することを検討してください"
+msgstr "%{provider} ジョブにプロキシーを使用できませんでした。設定で %{global_proxy} または %{fallback_proxy} を指定することを検討してください"
 
 msgid "Could not use any template used in the job invocation"
 msgstr "ジョブ呼び出しで使用されるテンプレートを使用できませんでした"
@@ -270,7 +270,7 @@ msgid "Create a recurring job"
 msgstr "繰り返されるジョブを作成"
 
 msgid "Create report"
-msgstr ""
+msgstr "レポートの作成"
 
 msgid "Create report for this job"
 msgstr "このジョブのレポートを作成"
@@ -279,25 +279,25 @@ msgid "Cron line"
 msgstr "cron 行"
 
 msgid "Cron line (extended)"
-msgstr ""
+msgstr "Cron 行 (拡張)"
 
 msgid "Cron line format '1 2 3 4 5', where:"
-msgstr ""
+msgstr "Cron 行の形式は '1 2 3 4 5' です。各部分の説明:"
 
 msgid "Cronline"
 msgstr "cron 行"
 
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
-msgstr ""
+msgstr "現在の場所 %s は、ジョブの場所 %s とは異なります。このジョブは、以前とは異なるホストで実行できます。"
 
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
-msgstr "現在のロケーション %{loc_c} はジョブのロケーション %{loc_j} とは異なります。"
+msgstr "現在のロケーション %%{loc_c} はジョブのロケーション %%{loc_j} とは異なります。"
 
 msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
-msgstr ""
+msgstr "現在の組織 %s は、ジョブの組織 %s とは異なります。このジョブは、以前とは異なるホストで実行できます。"
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
-msgstr "現在の組織「%{org_c}」はジョブの組織「％{org_j}」とは異なります。"
+msgstr "現在の組織「%%{org_c}」はジョブの組織「％%{org_j}」とは異なります。"
 
 msgid "Daily"
 msgstr "毎日"
@@ -345,7 +345,7 @@ msgid "Designation of a special purpose"
 msgstr "特別な目的の指定"
 
 msgid "Disable recurring"
-msgstr ""
+msgstr "繰り返しの無効化"
 
 msgid "Display advanced fields"
 msgstr "詳細フィールドを表示"
@@ -354,7 +354,7 @@ msgid "Does not repeat"
 msgstr "繰り返さない"
 
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
-msgstr "重複した入力が検出されました: ％{duplicated_inputs}"
+msgstr "重複した入力が検出されました: ％%{duplicated_inputs}"
 
 msgid "Dynamic Query"
 msgstr "動的クエリー"
@@ -384,7 +384,7 @@ msgid "Effective user"
 msgstr "実効ユーザー"
 
 msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
-msgstr "実効ユーザーメソッド\"%{current_value}\" は %{valid_methods} の 1 つではありません"
+msgstr "実効ユーザーメソッド\"%%{current_value}\" は %%{valid_methods} の 1 つではありません"
 
 msgid "Effective user options"
 msgstr "実効ユーザーオプション"
@@ -399,13 +399,13 @@ msgid "Effective user password is only applicable for SSH provider. Other provid
 msgstr "実効ユーザーパスワードは、SSH プロバイダーにのみ適用されます。他のプロバイダーは、このフィールドを無視します。パスワードは、ジョブが完了するまで暗号化されて DB に保存されます。将来の実行または繰り返しの実行の場合、最後の実行後に削除されます。"
 
 msgid "Effective user:"
-msgstr ""
+msgstr "実効ユーザー:"
 
 msgid "Enable Global Proxy"
 msgstr "グローバルプロキシーを有効にする"
 
 msgid "Enable recurring"
-msgstr ""
+msgstr "繰り返しの有効化"
 
 msgid "End time needs to be after start time"
 msgstr "終了時刻は開始時刻の後でなければなりません"
@@ -423,25 +423,25 @@ msgid "Evaluated at:"
 msgstr "評価済み:"
 
 msgid "Every day at %s"
-msgstr ""
+msgstr "毎日 %s"
 
 msgid "Every hour at minute %s"
-msgstr ""
+msgstr "毎時 %s 分"
 
 msgid "Every month on %s at %s"
-msgstr ""
+msgstr "毎月 %s の %s"
 
 msgid "Every week on %s at %s"
-msgstr ""
+msgstr "毎週 %s の %s"
 
 msgid "Execute the job later, at a scheduled time."
-msgstr ""
+msgstr "スケジュールされた時間に、後でジョブを実行します。"
 
 msgid "Execute the job now."
-msgstr ""
+msgstr "今すぐジョブを実行します。"
 
 msgid "Execute the job on a repeating schedule."
-msgstr ""
+msgstr "繰り返し実行されるスケジュールでジョブを実行します。"
 
 msgid "Execute the jobs on hosts in randomized order"
 msgstr "ホスト上でジョブを順不同で実行します"
@@ -474,19 +474,19 @@ msgid "Failed rendering template: %s"
 msgstr "テンプレートのレンダリングに失敗しました: %s"
 
 msgid "Failed:"
-msgstr ""
+msgstr "失敗:"
 
 msgid "Fallback to Any Proxy"
 msgstr "プロキシーへのフォールバック"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
-msgstr "テンプレート %{template_name} に機能入力 %{input_name} が定義されていません"
+msgstr "テンプレート %%{template_name} に機能入力 %%{input_name} が定義されていません"
 
 msgid "Fill all required fields in all the steps"
-msgstr ""
+msgstr "すべてのステップの必須フィールドをすべて入力してください"
 
 msgid "Fill all required fields in all the steps to start the job"
-msgstr ""
+msgstr "ジョブを開始するには、すべてのステップの必須フィールドをすべて入力してください"
 
 msgid "Filter by host collections"
 msgstr "ホストコレクションでフィルター"
@@ -501,7 +501,7 @@ msgid "Finished"
 msgstr "終了"
 
 msgid "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step."
-msgstr ""
+msgstr "後で実行の場合は、「開始時刻」または「次の時刻よりも前に開始」の日付を選択する必要があります。以前の手順で直ぐに実行を選択できます。"
 
 msgid "For example: 1, 2, 3, 4, 5..."
 msgstr "たとえば、1、2、3、4、5..."
@@ -516,7 +516,7 @@ msgid "Form Job Template"
 msgstr "ジョブテンプレートの形成"
 
 msgid "Future execution"
-msgstr ""
+msgstr "将来の実行"
 
 msgid "Get output for a host"
 msgstr "ホストの出力を取得"
@@ -570,7 +570,7 @@ msgid "Identifier of the Host interface for Remote execution"
 msgstr "リモート実行用のホストインターフェイスの識別子"
 
 msgid "Immediate execution"
-msgstr ""
+msgstr "即時実行"
 
 msgid "Import"
 msgstr "インポート"
@@ -579,7 +579,7 @@ msgid "Import a job template from ERB"
 msgstr "ERB からジョブテンプレートをインポート"
 
 msgid "In Progress:"
-msgstr ""
+msgstr "処理中:"
 
 msgid "Include all inputs from the foreign template"
 msgstr "外部テンプレートからのすべての入力を含める"
@@ -606,10 +606,10 @@ msgid "Internal proxy selector can only be used if Katello is enabled"
 msgstr "内部プロキシーセレクターは、Katello が有効になっている場合にのみ使用できます"
 
 msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled."
-msgstr ""
+msgstr "間隔 (秒)。この間隔内にクライアントによりジョブが取得されなかった場合は、ジョブがキャンセルされます。"
 
 msgid "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs"
-msgstr ""
+msgstr "間隔 (秒)。この間隔内にクライアントによりジョブが取得されなかった場合、ジョブはキャンセルされます。pull-mqtt ベースのジョブにのみ適用されます"
 
 msgid "Invalid date"
 msgstr "無効な日付"
@@ -660,7 +660,7 @@ msgid "Job invocations"
 msgstr "ジョブ呼び出し"
 
 msgid "Job invocations detail"
-msgstr ""
+msgstr "ジョブ呼び出し詳細"
 
 msgid "Job result"
 msgstr "ジョブの結果"
@@ -714,10 +714,10 @@ msgid "Learn more about this in the documentation."
 msgstr "詳細についてはドキュメントを参照してください。"
 
 msgid "Legacy UI"
-msgstr ""
+msgstr "レガシー UI"
 
 msgid "List available remote execution features for a host"
-msgstr ""
+msgstr "ホストで利用可能なリモート実行機能の一覧表示"
 
 msgid "List foreign input sets"
 msgstr "外部入力セットを一覧表示"
@@ -750,10 +750,10 @@ msgid "Manual selection"
 msgstr "手動選択"
 
 msgid "Minute can only be a number between 0-59"
-msgstr ""
+msgstr "分は 0-59 の間の数字のみ指定できます。"
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
-msgstr ""
+msgstr "必須パーミッションがありません: ${missingPermissions.join( ', ' )}"
 
 msgid "Monthly"
 msgstr "毎月"
@@ -774,10 +774,10 @@ msgid "New Job Template"
 msgstr "新規ジョブテンプレート"
 
 msgid "New UI"
-msgstr ""
+msgstr "新規 UI"
 
 msgid "Next"
-msgstr ""
+msgstr "次へ"
 
 msgid "No (override)"
 msgstr "No (上書き)"
@@ -795,28 +795,28 @@ msgid "No results found"
 msgstr "結果は見つかりませんでした"
 
 msgid "No template mapped to feature %{feature_name}"
-msgstr "機能 %{feature_name} にマッピングされたテンプレートがありません"
+msgstr "機能 %%{feature_name} にマッピングされたテンプレートがありません"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "入力が必須のすべての項目に値があるとは限りません。足りない入力: %s"
 
 msgid "Not available"
-msgstr ""
+msgstr "利用できません"
 
 msgid "Not yet"
-msgstr ""
+msgstr "実行前"
 
 msgid "Now"
-msgstr ""
+msgstr "今すぐ"
 
 msgid "On"
-msgstr "オン"
+msgstr "次の時刻に開始"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "機能または job_template_id の 1 つのみを指定できます"
 
 msgid "Opening job invocation form"
-msgstr ""
+msgstr "ジョブ呼び出しフォームを開く"
 
 msgid "Organization"
 msgstr "組織"
@@ -825,7 +825,7 @@ msgid "Override the description format from the template for this invocation onl
 msgstr "この呼び出しに対してのみテンプレートから説明形式を上書き"
 
 msgid "Override the global time to pickup interval for this invocation only"
-msgstr ""
+msgstr "グローバル時間をこの呼び出しだけの取得間隔に上書きする"
 
 msgid "Override the timeout interval from the template for this invocation only"
 msgstr "この呼び出しに対してのみテンプレートからタイムアウト間隔を上書き"
@@ -855,28 +855,28 @@ msgid "Perform no more executions after this time"
 msgstr "この回数以上は実行されません"
 
 msgid "Permission Denied"
-msgstr ""
+msgstr "パーミッションが拒否されました"
 
 msgid "Please enter a search query"
-msgstr ""
+msgstr "検索クエリーを入力してください"
 
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
-msgstr ""
+msgstr "「スケジュール」- 「将来の実行」の手順に戻り、エラーを修正してください"
 
 msgid "Please refine your search."
 msgstr "検索条件を見直してください。"
 
 msgid "Please request the required permissions listed below from a Foreman administrator:"
-msgstr ""
+msgstr "以下に一覧表示されている必須パーミッションを Foreman 管理者に要求してください:"
 
 msgid "Please select at least one host"
-msgstr ""
+msgstr "ホストを 1 つ以上選択してください"
 
 msgid "Please select at least one host collection"
-msgstr ""
+msgstr "ホストコレクションを少なくとも 1 つ選択してください。"
 
 msgid "Please select at least one host group"
-msgstr ""
+msgstr "少なくとも 1 つのホストグループを選択してください"
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "SSH 通信に使用するポート。デフォルトのポートは 22 です。remote_execution_ssh_port という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
@@ -903,7 +903,7 @@ msgid "Problem with previewing the template: %{error}. Note that you must save t
 msgstr "テンプレートのプレビューでの問題: %{error}。プレビューを表示する前に、テンプレート入力の変更を保存する必要があることに注意してください。"
 
 msgid "Proceed Anyway"
-msgstr ""
+msgstr "このまま続行"
 
 msgid "Provider type"
 msgstr "プロバイダータイプ"
@@ -930,7 +930,7 @@ msgid "REX job has succeeded - %s"
 msgstr "REX ジョブが成功しました: %s"
 
 msgid "REX pull mode"
-msgstr ""
+msgstr "REX プルモード"
 
 msgid "Randomized"
 msgstr "順不同"
@@ -942,19 +942,19 @@ msgid "Recurrence"
 msgstr "繰り返し"
 
 msgid "Recurring execution"
-msgstr ""
+msgstr "繰り返し実行"
 
 msgid "Recurring logic"
 msgstr "再帰論理"
 
 msgid "Recurring logic %s cancelled successfully."
-msgstr ""
+msgstr "再帰論理 %s が正常にキャンセルされました。"
 
 msgid "Recurring logic %s disabled successfully."
-msgstr ""
+msgstr "再帰論理 %s が正常に無効になりました。"
 
 msgid "Recurring logic %s enabled successfully."
-msgstr ""
+msgstr "再帰論理 %s が正常に有効になりました。"
 
 msgid "Recursive rendering of templates detected"
 msgstr "検出されたテンプレートの再帰的なレンダリング"
@@ -996,7 +996,7 @@ msgid "Rerun"
 msgstr "再実行"
 
 msgid "Rerun all"
-msgstr ""
+msgstr "すべて再実行"
 
 msgid "Rerun failed"
 msgstr "再実行に失敗しました"
@@ -1011,7 +1011,7 @@ msgid "Rerun on failed hosts"
 msgstr "失敗したホストでの再実行"
 
 msgid "Rerun successful"
-msgstr ""
+msgstr "正常に再実行されました"
 
 msgid "Rerun the job"
 msgstr "ジョブを再実行"
@@ -1038,10 +1038,10 @@ msgid "Run Puppet Once"
 msgstr "Puppet を 1 回実行"
 
 msgid "Run Script"
-msgstr ""
+msgstr "スクリプトの実行"
 
 msgid "Run a script"
-msgstr ""
+msgstr "スクリプトの実行"
 
 msgid "Run at most N tasks at a time"
 msgstr "一度に最大 N タスクを実行"
@@ -1053,7 +1053,7 @@ msgid "Run job"
 msgstr "ジョブを実行"
 
 msgid "Run on selected hosts"
-msgstr ""
+msgstr "選択したホストで実行"
 
 msgid "Running"
 msgstr "実行中"
@@ -1068,10 +1068,10 @@ msgid "SSH provider specific options"
 msgstr "SSH プロバイダー固有オプション"
 
 msgid "SSH user"
-msgstr ""
+msgstr "SSH ユーザー"
 
 msgid "SSH user:"
-msgstr ""
+msgstr "SSH ユーザー:"
 
 msgid "Schedule"
 msgstr "スケジュール"
@@ -1095,7 +1095,7 @@ msgid "Scheduled"
 msgstr "スケジュール済み"
 
 msgid "Scheduled at:"
-msgstr ""
+msgstr "スケジュール時刻:"
 
 msgid "Scheduled to start at"
 msgstr "開始スケジュール:"
@@ -1104,7 +1104,7 @@ msgid "Scheduled to start before"
 msgstr "次の時刻よりも前に開始するようにスケジュール"
 
 msgid "Scheduled: ${totalHosts} hosts"
-msgstr ""
+msgstr "スケジュール済み: ${totalHosts} ホスト"
 
 msgid "Script"
 msgstr "スクリプト"
@@ -1146,25 +1146,25 @@ msgid "Select as many remote execution proxies as applicable for this subnet.  W
 msgstr "このサブネットに適用可能なすべてのリモート実行プロキシーを選択します。同じプロバイダーを使用するプロキシーが複数追加された場合は、プロキシー間で負荷が分散されます。"
 
 msgid "Select the type of execution"
-msgstr ""
+msgstr "実行の種類の選択"
 
 msgid "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host"
-msgstr ""
+msgstr "このホストの 'host_registration_remote_execution_pull' パラメーターを設定します。True に設定されている場合には、ぷるプロバイダーのクライアントはホストにデプロイされます。"
 
 msgid "Set SSH key passphrase"
 msgstr "SSH 鍵パスフレーズを設定"
 
 msgid "Set SSH password"
-msgstr "SSH パスワードを設定"
+msgstr "SSH パスワードの設定"
 
 msgid "Set SSH user"
-msgstr ""
+msgstr "SSH ユーザーの設定"
 
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr "実行ユーザーのパスワードを設定 (sudo と同様のメカニズムを使用)"
 
 msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level."
-msgstr ""
+msgstr "リモート実行のプルモードを設定します。「はい」に設定すると、登録したホストにプルプロパイダークライアントがデプロイされます。継承される値は、「host_registration_remote_execution」パラメーターに基づきます。これは、ホストグループ、オペレーティングシステム、組織などから継承できます。上書きされると、選択した値がホストパラメーターレベルで保存されます。"
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting"
 msgstr "ホストインターフェースの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれを上書きすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
@@ -1191,10 +1191,10 @@ msgid "Show remote execution feature"
 msgstr "リモート実行機能の表示"
 
 msgid "Skip to review"
-msgstr ""
+msgstr "確認までスキップ"
 
 msgid "Skip to review step"
-msgstr ""
+msgstr "確認ステップまでスキップ"
 
 msgid "Snippet"
 msgstr "スニペット"
@@ -1203,19 +1203,19 @@ msgid "Start"
 msgstr "開始"
 
 msgid "Start job"
-msgstr ""
+msgstr "ジョブの開始"
 
 msgid "Started"
 msgstr "開始済み"
 
 msgid "Started at:"
-msgstr ""
+msgstr "開始時刻:"
 
 msgid "Starts"
 msgstr "開始"
 
 msgid "Starts Before"
-msgstr ""
+msgstr "次の時刻よりも前に開始"
 
 msgid "Starts at"
 msgstr "開始時刻"
@@ -1236,7 +1236,7 @@ msgid "Status"
 msgstr "状態"
 
 msgid "Submit"
-msgstr ""
+msgstr "送信"
 
 msgid "Subscribe to all my jobs"
 msgstr "すべての自分のジョブにサブスクライブする"
@@ -1251,22 +1251,22 @@ msgid "Succeeded"
 msgstr "成功"
 
 msgid "Succeeded:"
-msgstr ""
+msgstr "成功:"
 
 msgid "Success"
 msgstr "成功"
 
 msgid "Switch to the new job invocation detail UI"
-msgstr ""
+msgstr "新しいジョブ呼び出し詳細 UI への切り替え"
 
 msgid "Sync Job Templates"
 msgstr "ジョブテンプレートの同期"
 
 msgid "System status"
-msgstr ""
+msgstr "システムステータス"
 
 msgid "Systems"
-msgstr ""
+msgstr "システム"
 
 msgid "Target hosts"
 msgstr "ターゲットホスト"
@@ -1305,13 +1305,13 @@ msgid "Template with id '%{id}' was not found"
 msgstr "id '%{id}' のテンプレートが見つかりませんでした"
 
 msgid "Template:"
-msgstr ""
+msgstr "テンプレート:"
 
 msgid "Templates list failed with:"
 msgstr "テンプレート一覧が以下により失敗:"
 
 msgid "The cron line supports extended cron line syntax. For details please refer to the "
-msgstr ""
+msgstr "cron 行は、拡張 cron 行構文をサポートしています。詳細は、以下を参照してください "
 
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "動的クエリー '%{query}' が解決されませんでした。解決するホストの一覧は %{here} に表示されます。"
@@ -1336,10 +1336,10 @@ msgstr "使用するジョブテンプレート。機能が指定されていな
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] "適用可能な唯一のプロキシー %{proxy_names} がダウンしています。"
+msgstr[0] "適用可能な唯一のプロキシー %%{proxy_names} がダウンしています。"
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
-msgstr "ユーザーは機能 %{template_name} にマッピングされたテンプレート %{feature_name} にアクセスできません"
+msgstr "ユーザーは機能 %%{template_name} にマッピングされたテンプレート %%{feature_name} にアクセスできません"
 
 msgid "There are no available input fields for the selected template."
 msgstr "選択したテンプレートで使用可能な入力フィールドはありません。"
@@ -1357,19 +1357,19 @@ msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "このテンプレートはロックされています。カスタマイズするには、このクローンを新規テンプレートに作成してください。"
 
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "このテンプレートは、記述の生成に使用します。入力値には、構文 %{package} を使用できます。%{job_category} と %{template_name} を使用してジョブカテゴリーとテンプレート名を追加することもできます。"
+msgstr "このテンプレートは、記述の生成に使用します。入力値は、構文 %%{package} を使用して使用できます。%%{job_category} と %%{template_name} を使用してジョブカテゴリーとテンプレート名を追加することもできます。"
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
-msgstr "このテンプレートは記述の生成に使用します。<br/>入力値には、%{package} 構文を使用できますあ。<br/>ジョブカテゴリーとテンプレート<br/>名は、%{job_category} と %{template_name} を使用して追加することもできます。"
+msgstr "このテンプレートは記述の生成に使用します。<br/>入力値は、構文 %%{package} を使用して使用できます。%%{job_category} と %%{template_name} を使用して、<br/> ジョブカテゴリーとテンプレート <br/> 名を追加することもできます。"
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "リモートホストで開始してからジョブを強制終了するまでの時間 (秒単位)"
 
 msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs."
-msgstr ""
+msgstr "ホストがジョブを取得しなければならない時間 (秒単位)。この制限内にジョブが取得されなかった場合、ジョブはキャンセルされます。デフォルトは 1 日です。pull-mqtt ベースのジョブにのみ適用されます。"
 
 msgid "Time to pickup"
-msgstr ""
+msgstr "取得する時間"
 
 msgid "Timeout to kill"
 msgstr "強制終了までのタイムアウト"
@@ -1408,13 +1408,13 @@ msgid "Trying to abort the job"
 msgstr "ジョブを中断しようとしています"
 
 msgid "Trying to abort the job %s."
-msgstr ""
+msgstr "ジョブ %s を中断しようとしています。"
 
 msgid "Trying to cancel the job"
 msgstr "ジョブをキャンセルしようとしています"
 
 msgid "Trying to cancel the job %s."
-msgstr ""
+msgstr "ジョブ %s をキャンセルしようとしています。"
 
 msgid "Type"
 msgstr "タイプ"
@@ -1423,10 +1423,10 @@ msgid "Type has impact on when is the query evaluated to hosts."
 msgstr "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。"
 
 msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
-msgstr ""
+msgstr "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。<br><ul><li><b>静的</b>: このフォームの送信直後に評価します。</li><li><b>動的</b>: 実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストの設定が評価前に変更される可能性があります。</li></ul>"
 
 msgid "Type of execution"
-msgstr ""
+msgstr "実行のタイプ"
 
 msgid "Type of query"
 msgstr "クエリーのタイプ"
@@ -1447,7 +1447,7 @@ msgid "Unknown execution status"
 msgstr "不明な実行ステータス"
 
 msgid "Unknown input %{input_name} for template %{template_name}"
-msgstr "テンプレート %{template_name} での不明な入力 %{input_name}"
+msgstr "テンプレート %%{template_name} での不明な入力 %%{input_name}"
 
 msgid "Unknown remote execution feature %s"
 msgstr "不明なリモート実行機能 %s"
@@ -1465,10 +1465,10 @@ msgid "Use default description template"
 msgstr "デフォルトの説明テンプレートを使用"
 
 msgid "Use legacy form"
-msgstr ""
+msgstr "レガシーフォームの使用"
 
 msgid "Use new job wizard"
-msgstr ""
+msgstr "新規ジョブウィザードの使用"
 
 msgid "User Inputs"
 msgstr "ユーザー入力"
@@ -1504,7 +1504,7 @@ msgid "View scheduled jobs"
 msgstr "スケジュール済みのジョブを表示"
 
 msgid "View task"
-msgstr ""
+msgstr "タスクの表示"
 
 msgid "Web Console"
 msgstr "Web コンソール"
@@ -1555,7 +1555,7 @@ msgid "You are not allowed to see the currently assigned template. Saving the fo
 msgstr "現在割り当てられているテンプレートを参照できません。フォームを保存すると、テンプレートの割り当てが解除されます。"
 
 msgid "You are not authorized to perform this action."
-msgstr ""
+msgstr "このアクションを実行する権限がありません。"
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr "表示する結果が %s 件あります。最初の %s 件の結果を表示しています"
@@ -1570,7 +1570,7 @@ msgid "default_capsule method missing from SmartProxy"
 msgstr "SmartProxy に default_capsule メソッドがありません"
 
 msgid "documentation"
-msgstr ""
+msgstr "ドキュメント"
 
 msgid "effective user"
 msgstr "実効ユーザー"
@@ -1585,7 +1585,7 @@ msgid "evaluates just after you submit this form"
 msgstr "このフォームの送信直後に評価します"
 
 msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
-msgstr ""
+msgstr "実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストのセットが評価前に変更される可能性があります"
 
 msgid "failed"
 msgstr "失敗"
@@ -1627,10 +1627,10 @@ msgid "no"
 msgstr "no"
 
 msgid "occurences"
-msgstr ""
+msgstr "オカレンス"
 
 msgid "open-help-tooltip-button"
-msgstr "open-help-tooltip-button"
+msgstr "ヘルプのヒントボタン"
 
 msgid "queued"
 msgstr "キューに登録済み"
@@ -1639,7 +1639,7 @@ msgid "queued to start executing in %{time}"
 msgstr "キューに追加して %{time} 後に実行を開始する"
 
 msgid "range: 0-59"
-msgstr ""
+msgstr "範囲: 0-59"
 
 msgid "remove template input set"
 msgstr "テンプレート入力セットの削除"
@@ -1669,7 +1669,7 @@ msgid "using Smart Proxy"
 msgstr "Smart Proxy を使用"
 
 msgid "view host names"
-msgstr ""
+msgstr "ホスト名の表示"
 
 msgid "yes"
 msgstr "yes"

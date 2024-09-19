@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "Foreman",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -30,7 +30,7 @@
         "გაშვებულია %s დავალება"
       ],
       "%s more": [
-        ""
+        "კიდევ %s"
       ],
       "%{description} on %{host}": [
         "%{description} %{host}-ზე"
@@ -39,7 +39,7 @@
         ""
       ],
       "'Starts before' date must in the future": [
-        ""
+        "'გაშვება თარიღამდეს' თარიღი მომავალში უნდა იყოს"
       ],
       "...and %s more": [
         "... და კიდევ %s"
@@ -85,7 +85,7 @@
         "დავალების გაუქმება"
       ],
       "Access denied": [
-        ""
+        "წვდომა აკრძალულია"
       ],
       "Actions": [
         "ქმედებები"
@@ -103,7 +103,7 @@
         "შემდეგ"
       ],
       "After %s occurences": [
-        ""
+        "%s მოხდენის შემდეგ"
       ],
       "All fields are required.": [
         "საჭიროა ყველა ველის შევსება."
@@ -148,7 +148,7 @@
         "დავალების ჩაწოდება ID-ით %s ნაპოვნი არაა"
       ],
       "Cancel": [
-        ""
+        "გაუქმება"
       ],
       "Cancel Job": [
         "ამოცანის გაუქმება"
@@ -178,7 +178,7 @@
         "კატეგორიების სიის შეცდომა:"
       ],
       "Category and template": [
-        ""
+        "კატეგორია და შაბლონი"
       ],
       "Choose a job template that is pre-selected in job invocation form": [
         ""
@@ -190,7 +190,7 @@
         "სამუშაო საქაღალდეების გაწმენდა"
       ],
       "Clear all filters": [
-        ""
+        "ყველა ფილტრის გასუფთავება"
       ],
       "Clear input": [
         "შეტანის გასუფთავება"
@@ -277,10 +277,10 @@
         "Cron-ის სტრიქონი"
       ],
       "Cron line (extended)": [
-        ""
+        "Cron-ის სტრიქონი (გაფართოებული)"
       ],
       "Cron line format '1 2 3 4 5', where:": [
-        ""
+        "Cron-ის ხაზის ფორმატია '1 2 3 4 5', სადაც:"
       ],
       "Cronline": [
         "Cron-ის ხაზი"
@@ -397,7 +397,7 @@
         ""
       ],
       "Effective user:": [
-        ""
+        "ეფექტური მომხმარებელი:"
       ],
       "Enable Global Proxy": [
         "გლობალური პროქსის ჩართვა"
@@ -421,16 +421,16 @@
         "შემოწმების დრო:"
       ],
       "Every day at %s": [
-        ""
+        "ყოველდღე, დრო: %s"
       ],
       "Every hour at minute %s": [
-        ""
+        "ყოველ საათს, %s-ე წუთზე"
       ],
       "Every month on %s at %s": [
-        ""
+        "ყოველთვე: დღე %s. დრო %s"
       ],
       "Every week on %s at %s": [
-        ""
+        "ყოველკვირა. დღე: %s დრო: %s"
       ],
       "Execute the job later, at a scheduled time.": [
         "დავალების მოგვიანებით, დაგეგმილ დროს შესრულება."
@@ -481,10 +481,10 @@
         ""
       ],
       "Fill all required fields in all the steps": [
-        ""
+        "შეავსეთ ყველა აუცილებელი ველი ყველა ნაბიჯზე"
       ],
       "Fill all required fields in all the steps to start the job": [
-        ""
+        "დავალების გასაშვებად შეავსეთ ყველა აუცილებელი ველი ყველა ნაბიჯზე"
       ],
       "Filter by host collections": [
         "ჰოსტების კოლექციებით ფილტრი"
@@ -658,7 +658,7 @@
         "დავალების ჩაწოდებები"
       ],
       "Job invocations detail": [
-        ""
+        "დავალების ჩაწოდებების დეტალი"
       ],
       "Job result": [
         "დავალების შედეგი"
@@ -712,7 +712,7 @@
         "შეიტყვეთ მეტი ამის შესახებ დოკუმენტაციაში."
       ],
       "Legacy UI": [
-        ""
+        "მოძველებული UI"
       ],
       "List available remote execution features for a host": [
         ""
@@ -772,7 +772,7 @@
         "დავალების ახალი შაბლონი"
       ],
       "New UI": [
-        ""
+        "ახალი UI"
       ],
       "Next": [
         "შემდეგი"
@@ -799,10 +799,10 @@
         ""
       ],
       "Not available": [
-        ""
+        "ხელმიუწვდომელია"
       ],
       "Not yet": [
-        ""
+        "ჯერ არა"
       ],
       "Now": [
         "ახლა"
@@ -853,10 +853,10 @@
         "ამ დროის შემდეგ გაშვებები აღარ მოხდება"
       ],
       "Permission Denied": [
-        ""
+        "წვდომა აკრძალულია"
       ],
       "Please enter a search query": [
-        ""
+        "შეიყვანეთ საძებნი სტრიქონი"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
         ""
@@ -868,13 +868,13 @@
         ""
       ],
       "Please select at least one host": [
-        ""
+        "აირჩიეთ ერთი ჰოსტი მაინც"
       ],
       "Please select at least one host collection": [
-        ""
+        "აირჩიეთ ერთი ჰოსტის კოლექცია მაინც"
       ],
       "Please select at least one host group": [
-        ""
+        "აირჩიეთ ერთი ჰოსტების ჯგუფი მაინც"
       ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         ""
@@ -1036,10 +1036,10 @@
         "Puppet-ის ერთხელ გაშვება"
       ],
       "Run Script": [
-        ""
+        "სკრიპტის გაშვება"
       ],
       "Run a script": [
-        ""
+        "სკრიპტის გაშვება"
       ],
       "Run at most N tasks at a time": [
         "ერთდროულად მაქსიმუმ N დავალების გაშვება"
@@ -1051,7 +1051,7 @@
         "დავალების გაშვება"
       ],
       "Run on selected hosts": [
-        ""
+        "გაშვება მონიშნულ ჰოსტებზე"
       ],
       "Running": [
         "მიმდინარეობს შესრულება"
@@ -1069,7 +1069,7 @@
         "SSH-ის მომხმარებლის სახელი"
       ],
       "SSH user:": [
-        ""
+        "SSH-ის მომხმარებლი:"
       ],
       "Schedule": [
         "განრიგი"
@@ -1189,10 +1189,10 @@
         "დაშორებული გაშვების ინტერფეისის ჩვენება"
       ],
       "Skip to review": [
-        ""
+        "მიმოხილვაზე გადასვლა"
       ],
       "Skip to review step": [
-        ""
+        "მიმოხილვის ნაბიჯის გამოტოვება"
       ],
       "Snippet": [
         "ნაწყვეტი"
@@ -1201,19 +1201,19 @@
         "დაწყება"
       ],
       "Start job": [
-        ""
+        "დავალების გაშვება"
       ],
       "Started": [
         "დაიწყო"
       ],
       "Started at:": [
-        ""
+        "გაშვების დრო:"
       ],
       "Starts": [
         "საწყისი"
       ],
       "Starts Before": [
-        ""
+        "გაშვება თარიღამდე"
       ],
       "Starts at": [
         "დაწყების დრო"
@@ -1303,7 +1303,7 @@
         "შაბლონი ID-ით %{id} ნაპოვნი არაა"
       ],
       "Template:": [
-        ""
+        "შაბლონი:"
       ],
       "Templates list failed with:": [
         "შაბლონების სიის შეცდომა:"
@@ -1667,7 +1667,7 @@
         "ჭკვიანი პროქსის გამოყენება"
       ],
       "view host names": [
-        ""
+        "ჰოსტის სახელების ნახვა"
       ],
       "yes": [
         "დიახ"

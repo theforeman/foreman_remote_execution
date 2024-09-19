@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Foreman\n"
+"Project-Id-Version: foreman_remote_execution 14.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -30,7 +30,7 @@ msgid "%s job has been invoked"
 msgstr "გაშვებულია %s დავალება"
 
 msgid "%s more"
-msgstr ""
+msgstr "კიდევ %s"
 
 msgid "%{description} on %{host}"
 msgstr "%{description} %{host}-ზე"
@@ -39,7 +39,7 @@ msgid "'Starts before' date must be after 'Starts at' date"
 msgstr ""
 
 msgid "'Starts before' date must in the future"
-msgstr ""
+msgstr "'გაშვება თარიღამდეს' თარიღი მომავალში უნდა იყოს"
 
 msgid "...and %s more"
 msgstr "... და კიდევ %s"
@@ -86,7 +86,7 @@ msgid "Abort Job"
 msgstr "დავალების გაუქმება"
 
 msgid "Access denied"
-msgstr ""
+msgstr "წვდომა აკრძალულია"
 
 msgid "Actions"
 msgstr "ქმედებები"
@@ -104,7 +104,7 @@ msgid "After"
 msgstr "შემდეგ"
 
 msgid "After %s occurences"
-msgstr ""
+msgstr "%s მოხდენის შემდეგ"
 
 msgid "All fields are required."
 msgstr "საჭიროა ყველა ველის შევსება."
@@ -149,7 +149,7 @@ msgid "Can't find Job Invocation for an id %s"
 msgstr "დავალების ჩაწოდება ID-ით %s ნაპოვნი არაა"
 
 msgid "Cancel"
-msgstr ""
+msgstr "გაუქმება"
 
 msgid "Cancel Job"
 msgstr "ამოცანის გაუქმება"
@@ -179,7 +179,7 @@ msgid "Categories list failed with:"
 msgstr "კატეგორიების სიის შეცდომა:"
 
 msgid "Category and template"
-msgstr ""
+msgstr "კატეგორია და შაბლონი"
 
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr ""
@@ -191,7 +191,7 @@ msgid "Cleanup working directories"
 msgstr "სამუშაო საქაღალდეების გაწმენდა"
 
 msgid "Clear all filters"
-msgstr ""
+msgstr "ყველა ფილტრის გასუფთავება"
 
 msgid "Clear input"
 msgstr "შეტანის გასუფთავება"
@@ -278,10 +278,10 @@ msgid "Cron line"
 msgstr "Cron-ის სტრიქონი"
 
 msgid "Cron line (extended)"
-msgstr ""
+msgstr "Cron-ის სტრიქონი (გაფართოებული)"
 
 msgid "Cron line format '1 2 3 4 5', where:"
-msgstr ""
+msgstr "Cron-ის ხაზის ფორმატია '1 2 3 4 5', სადაც:"
 
 msgid "Cronline"
 msgstr "Cron-ის ხაზი"
@@ -398,7 +398,7 @@ msgid "Effective user password is only applicable for SSH provider. Other provid
 msgstr ""
 
 msgid "Effective user:"
-msgstr ""
+msgstr "ეფექტური მომხმარებელი:"
 
 msgid "Enable Global Proxy"
 msgstr "გლობალური პროქსის ჩართვა"
@@ -422,16 +422,16 @@ msgid "Evaluated at:"
 msgstr "შემოწმების დრო:"
 
 msgid "Every day at %s"
-msgstr ""
+msgstr "ყოველდღე, დრო: %s"
 
 msgid "Every hour at minute %s"
-msgstr ""
+msgstr "ყოველ საათს, %s-ე წუთზე"
 
 msgid "Every month on %s at %s"
-msgstr ""
+msgstr "ყოველთვე: დღე %s. დრო %s"
 
 msgid "Every week on %s at %s"
-msgstr ""
+msgstr "ყოველკვირა. დღე: %s დრო: %s"
 
 msgid "Execute the job later, at a scheduled time."
 msgstr "დავალების მოგვიანებით, დაგეგმილ დროს შესრულება."
@@ -482,10 +482,10 @@ msgid "Feature input %{input_name} not defined in template %{template_name}"
 msgstr ""
 
 msgid "Fill all required fields in all the steps"
-msgstr ""
+msgstr "შეავსეთ ყველა აუცილებელი ველი ყველა ნაბიჯზე"
 
 msgid "Fill all required fields in all the steps to start the job"
-msgstr ""
+msgstr "დავალების გასაშვებად შეავსეთ ყველა აუცილებელი ველი ყველა ნაბიჯზე"
 
 msgid "Filter by host collections"
 msgstr "ჰოსტების კოლექციებით ფილტრი"
@@ -659,7 +659,7 @@ msgid "Job invocations"
 msgstr "დავალების ჩაწოდებები"
 
 msgid "Job invocations detail"
-msgstr ""
+msgstr "დავალების ჩაწოდებების დეტალი"
 
 msgid "Job result"
 msgstr "დავალების შედეგი"
@@ -713,7 +713,7 @@ msgid "Learn more about this in the documentation."
 msgstr "შეიტყვეთ მეტი ამის შესახებ დოკუმენტაციაში."
 
 msgid "Legacy UI"
-msgstr ""
+msgstr "მოძველებული UI"
 
 msgid "List available remote execution features for a host"
 msgstr ""
@@ -773,7 +773,7 @@ msgid "New Job Template"
 msgstr "დავალების ახალი შაბლონი"
 
 msgid "New UI"
-msgstr ""
+msgstr "ახალი UI"
 
 msgid "Next"
 msgstr "შემდეგი"
@@ -800,10 +800,10 @@ msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr ""
 
 msgid "Not available"
-msgstr ""
+msgstr "ხელმიუწვდომელია"
 
 msgid "Not yet"
-msgstr ""
+msgstr "ჯერ არა"
 
 msgid "Now"
 msgstr "ახლა"
@@ -854,10 +854,10 @@ msgid "Perform no more executions after this time"
 msgstr "ამ დროის შემდეგ გაშვებები აღარ მოხდება"
 
 msgid "Permission Denied"
-msgstr ""
+msgstr "წვდომა აკრძალულია"
 
 msgid "Please enter a search query"
-msgstr ""
+msgstr "შეიყვანეთ საძებნი სტრიქონი"
 
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
 msgstr ""
@@ -869,13 +869,13 @@ msgid "Please request the required permissions listed below from a Foreman admin
 msgstr ""
 
 msgid "Please select at least one host"
-msgstr ""
+msgstr "აირჩიეთ ერთი ჰოსტი მაინც"
 
 msgid "Please select at least one host collection"
-msgstr ""
+msgstr "აირჩიეთ ერთი ჰოსტის კოლექცია მაინც"
 
 msgid "Please select at least one host group"
-msgstr ""
+msgstr "აირჩიეთ ერთი ჰოსტების ჯგუფი მაინც"
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
@@ -1037,10 +1037,10 @@ msgid "Run Puppet Once"
 msgstr "Puppet-ის ერთხელ გაშვება"
 
 msgid "Run Script"
-msgstr ""
+msgstr "სკრიპტის გაშვება"
 
 msgid "Run a script"
-msgstr ""
+msgstr "სკრიპტის გაშვება"
 
 msgid "Run at most N tasks at a time"
 msgstr "ერთდროულად მაქსიმუმ N დავალების გაშვება"
@@ -1052,7 +1052,7 @@ msgid "Run job"
 msgstr "დავალების გაშვება"
 
 msgid "Run on selected hosts"
-msgstr ""
+msgstr "გაშვება მონიშნულ ჰოსტებზე"
 
 msgid "Running"
 msgstr "მიმდინარეობს შესრულება"
@@ -1070,7 +1070,7 @@ msgid "SSH user"
 msgstr "SSH-ის მომხმარებლის სახელი"
 
 msgid "SSH user:"
-msgstr ""
+msgstr "SSH-ის მომხმარებლი:"
 
 msgid "Schedule"
 msgstr "განრიგი"
@@ -1190,10 +1190,10 @@ msgid "Show remote execution feature"
 msgstr "დაშორებული გაშვების ინტერფეისის ჩვენება"
 
 msgid "Skip to review"
-msgstr ""
+msgstr "მიმოხილვაზე გადასვლა"
 
 msgid "Skip to review step"
-msgstr ""
+msgstr "მიმოხილვის ნაბიჯის გამოტოვება"
 
 msgid "Snippet"
 msgstr "ნაწყვეტი"
@@ -1202,19 +1202,19 @@ msgid "Start"
 msgstr "დაწყება"
 
 msgid "Start job"
-msgstr ""
+msgstr "დავალების გაშვება"
 
 msgid "Started"
 msgstr "დაიწყო"
 
 msgid "Started at:"
-msgstr ""
+msgstr "გაშვების დრო:"
 
 msgid "Starts"
 msgstr "საწყისი"
 
 msgid "Starts Before"
-msgstr ""
+msgstr "გაშვება თარიღამდე"
 
 msgid "Starts at"
 msgstr "დაწყების დრო"
@@ -1304,7 +1304,7 @@ msgid "Template with id '%{id}' was not found"
 msgstr "შაბლონი ID-ით %{id} ნაპოვნი არაა"
 
 msgid "Template:"
-msgstr ""
+msgstr "შაბლონი:"
 
 msgid "Templates list failed with:"
 msgstr "შაბლონების სიის შეცდომა:"
@@ -1669,7 +1669,7 @@ msgid "using Smart Proxy"
 msgstr "ჭკვიანი პროქსის გამოყენება"
 
 msgid "view host names"
-msgstr ""
+msgstr "ჰოსტის სახელების ნახვა"
 
 msgid "yes"
 msgstr "დიახ"

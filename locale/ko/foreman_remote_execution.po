@@ -5,11 +5,11 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 9.0.1\n"
+"Project-Id-Version: foreman_remote_execution 14.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Korean (http://www.transifex.com/foreman/foreman/language/ko/)\n"
+"Language-Team: Korean (http://app.transifex.com/foreman/foreman/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -85,7 +85,7 @@ msgid "Abort Job"
 msgstr ""
 
 msgid "Access denied"
-msgstr ""
+msgstr "접근 거부됨"
 
 msgid "Actions"
 msgstr "작업"
@@ -127,7 +127,7 @@ msgid "Apply to"
 msgstr ""
 
 msgid "At"
-msgstr "시간"
+msgstr "At"
 
 msgid "At minute"
 msgstr ""
@@ -136,7 +136,7 @@ msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "뒤로"
 
 msgid "Back to Job"
 msgstr "작업으로 돌아가기"
@@ -148,7 +148,7 @@ msgid "Can't find Job Invocation for an id %s"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 msgid "Cancel Job"
 msgstr "작업 취소 "
@@ -619,7 +619,7 @@ msgid "Invocation type, one of %s"
 msgstr "호출 유형(%s 중 하나)"
 
 msgid "Job"
-msgstr "업무"
+msgstr "Job"
 
 msgid "Job Details"
 msgstr ""
@@ -676,13 +676,13 @@ msgid "Job templates"
 msgstr "작업 템플릿"
 
 msgid "JobTemplate|Locked"
-msgstr "JobTemplate|잠김"
+msgstr "JobTemplate|Locked"
 
 msgid "JobTemplate|Name"
-msgstr "JobTemplate|이름"
+msgstr "JobTemplate|Name"
 
 msgid "JobTemplate|Snippet"
-msgstr "JobTemplate|조각 모음"
+msgstr "JobTemplate|Snippet"
 
 msgid "Jobs"
 msgstr "작업"
@@ -760,7 +760,7 @@ msgid "Must select a bookmark or enter a search query"
 msgstr "북마크를 선택하거나 검색 쿼리를 입력해야 합니다."
 
 msgid "N/A"
-msgstr "해당 없음 "
+msgstr "N/A"
 
 msgid "Name"
 msgstr "이름"
@@ -772,10 +772,10 @@ msgid "New Job Template"
 msgstr "새 작업 템플릿"
 
 msgid "New UI"
-msgstr ""
+msgstr "새 UI"
 
 msgid "Next"
-msgstr ""
+msgstr "다음"
 
 msgid "No (override)"
 msgstr ""
@@ -799,7 +799,7 @@ msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
 
 msgid "Not available"
-msgstr ""
+msgstr "사용할 수 없음"
 
 msgid "Not yet"
 msgstr ""
@@ -1234,7 +1234,7 @@ msgid "Status"
 msgstr "상태"
 
 msgid "Submit"
-msgstr ""
+msgstr "제출"
 
 msgid "Subscribe to all my jobs"
 msgstr ""
@@ -1553,7 +1553,7 @@ msgid "You are not allowed to see the currently assigned template. Saving the fo
 msgstr "현재 할당된 템플릿을 볼 수 없습니다. 지금 양식을 저장하면 템플릿의 할당이 취소됩니다."
 
 msgid "You are not authorized to perform this action."
-msgstr ""
+msgstr "이 작업을 수행할 권한이 없습니다."
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""

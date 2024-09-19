@@ -5,17 +5,18 @@
 # Translators:
 # Crited <Alexander.Stoll@netways.de>, 2019
 # Bernhard Suttner <bernhard.suttner@atix.de>, 2019
-# Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022
-# Patrick Dolinic, 2021
-# Patrick Dolinic, 2021
+# Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022-2023
+# pdolinic, 2021
+# pdolinic, 2021
 # abf90805572190d649c59f7a021d76cb, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 9.0.1\n"
+"Project-Id-Version: foreman_remote_execution 14.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022\n"
-"Language-Team: German (http://www.transifex.com/foreman/foreman/language/de/)\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022-20"
+"23\n"
+"Language-Team: German (http://app.transifex.com/foreman/foreman/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -67,7 +68,7 @@ msgid "A job '%{subject}' has failed"
 msgstr ""
 
 msgid "A job '%{subject}' has finished successfully"
-msgstr "Ein Job '%{subject}' wurde erfolgreich beendet"
+msgstr "Ein Auftrag '%{subject}' wurde erfolgreich beendet"
 
 msgid "A notification when a job finishes"
 msgstr ""
@@ -88,7 +89,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Abort Job"
-msgstr "Job abbrechen"
+msgstr "Auftrag abbrechen"
 
 msgid "Access denied"
 msgstr ""
@@ -97,7 +98,7 @@ msgid "Actions"
 msgstr "Aktionen"
 
 msgid "Active Filters:"
-msgstr ""
+msgstr "Aktive Filter:"
 
 msgid "Add Foreign Input Set"
 msgstr "Fremdeingabe-Satz hinzufügen"
@@ -142,10 +143,10 @@ msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
 msgid "Back to Job"
-msgstr "Zurück zum Job"
+msgstr "Zurück zum Auftrag"
 
 msgid "Bookmark"
 msgstr "Lesezeichen"
@@ -157,10 +158,10 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Cancel Job"
-msgstr "Job abbrechen"
+msgstr "Auftrag abbrechen"
 
 msgid "Cancel job invocation"
-msgstr "Job-Aufruf abbrechen"
+msgstr "Auftragsaufruf abbrechen"
 
 msgid "Cancel recurring"
 msgstr ""
@@ -184,7 +185,7 @@ msgid "Categories list failed with:"
 msgstr ""
 
 msgid "Category and template"
-msgstr ""
+msgstr "Kategorie und Vorlage"
 
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr "Wählen Sie eine Jobvorlage, die im Jobaufrufformular vorausgewählt ist"
@@ -247,13 +248,13 @@ msgid "Could not render the preview because no host matches the search query."
 msgstr "Vorschau konnte nicht gerendert werden, da kein Host, der Suchanfrage entspricht"
 
 msgid "Could not rerun job %{id} because its template could not be found"
-msgstr "Job %{id} konnte nicht erneut aufgerufen werden, da die Vorlage nicht gefunden wurde."
+msgstr "Auftrag %{id} konnte nicht erneut aufgerufen werden, da die Vorlage nicht gefunden wurde."
 
 msgid "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
 msgstr ""
 
 msgid "Could not use any template used in the job invocation"
-msgstr "Es konnte keine Vorlage aus dem Jobaufruf verwendet werden"
+msgstr "Es konnte keine Vorlage aus dem Auftragsaufruf verwendet werden"
 
 msgid "Create"
 msgstr "Erstellen"
@@ -265,13 +266,13 @@ msgid "Create a foreign input set"
 msgstr "Fremdeingabe-Satz erstellen"
 
 msgid "Create a job invocation"
-msgstr "Neuen Job-Aufruf erstellen"
+msgstr "Neuen Auftragsaufruf erstellen"
 
 msgid "Create a job template"
-msgstr "Job-Vorlage erstellen"
+msgstr "Auftragsvorlage erstellen"
 
 msgid "Create a recurring job"
-msgstr "Wiederholten Job erstellen"
+msgstr "Wiederkehrenden Auftrag erstellen"
 
 msgid "Create report"
 msgstr ""
@@ -334,7 +335,7 @@ msgid "Delete a foreign input set"
 msgstr "Fremdeingabe-Satz löschen"
 
 msgid "Delete a job template"
-msgstr "Job-Vorlage löschen"
+msgstr "Auftragsvorlage löschen"
 
 msgid "Description"
 msgstr "Beschreibung"
@@ -370,7 +371,7 @@ msgid "Edit %s"
 msgstr "%s bearbeiten"
 
 msgid "Edit Job Template"
-msgstr "Job-Vorlage bearbeiten"
+msgstr "Auftragsvorlage bearbeiten"
 
 msgid "Edit Remote Execution Feature"
 msgstr "Entfernte Ausführungsfunktionen bearbeiten"
@@ -448,7 +449,7 @@ msgid "Execute the job on a repeating schedule."
 msgstr ""
 
 msgid "Execute the jobs on hosts in randomized order"
-msgstr "Führe die Jobs auf Hosts in randomisierter Reihenfolge aus"
+msgstr "Führe die Aufträge auf Hosts in zufälliger Reihenfolge aus"
 
 msgid "Execution"
 msgstr "Ausführung"
@@ -460,13 +461,13 @@ msgid "Execution ordering"
 msgstr "Ausführungsorder"
 
 msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
-msgstr "Die Ausführungsreihenfolge legt fest, ob die Jobs auf Hosts in alphabetischer Reihenfolge oder in zufälliger Reihenfolge ausgeführt werden sollen. <br><ul><li><b>Ordered </b>- führt die Jobs auf Hosts in alphabetischer Reihenfolge aus </li><li><b>Randomized </b>- randomisiert die Reihenfolge, in der Jobs auf Hosts ausgeführt werden </li></ul>"
+msgstr "Die Ausführungsreihenfolge legt fest, ob die Aufträge auf Hosts in alphabetischer Reihenfolge oder in zufälliger Reihenfolge ausgeführt werden sollen. <br><ul><li><b>Ordered </b>- führt die Aufträge auf Hosts in alphabetischer Reihenfolge aus </li><li><b>Randomized </b>- randomisiert die Reihenfolge, in der Jobs auf Hosts ausgeführt werden </li></ul>"
 
 msgid "Exit status: %s"
 msgstr "Exit-Status: %s"
 
 msgid "Export a job template to ERB"
-msgstr "Job-Vorlage nach ERB exportieren"
+msgstr "Auftragsvorlage nach ERB exportieren"
 
 msgid "Failed"
 msgstr "Fehlgeschlagen"
@@ -568,7 +569,7 @@ msgid "Hourly"
 msgstr ""
 
 msgid "How often the job should occur, in the cron format"
-msgstr "Wie oft der Job auftreten soll, in Cron-Format"
+msgstr "Wie oft der Auftrag auftreten soll, in Cron-Format"
 
 msgid "Identifier of the Host interface for Remote execution"
 msgstr "Identifizierer des Host-interfaces für Remote-Ausführung"
@@ -580,7 +581,7 @@ msgid "Import"
 msgstr "Import"
 
 msgid "Import a job template from ERB"
-msgstr "Job-Vorlage aus ERB importieren"
+msgstr "Auftragsvorlage aus ERB importieren"
 
 msgid "In Progress:"
 msgstr ""
@@ -625,43 +626,43 @@ msgid "Invocation type, one of %s"
 msgstr "Jobtyp, einer von %s"
 
 msgid "Job"
-msgstr "Job"
+msgstr "Auftrag"
 
 msgid "Job Details"
-msgstr "Job Details"
+msgstr "Auftragsdetails"
 
 msgid "Job Invocation"
-msgstr "Job-Aufruf"
+msgstr "Auftragsaufruf"
 
 msgid "Job Invocation Report Template"
 msgstr ""
 
 msgid "Job Invocations"
-msgstr "Job-Aufrufe"
+msgstr "Auftragsaufrufe"
 
 msgid "Job Task"
-msgstr "Aufgaben des Jobs"
+msgstr "Auftragsaufgabe"
 
 msgid "Job Templates"
-msgstr "Job-Vorlagen"
+msgstr "Auftragsvorlagen"
 
 msgid "Job cancelled by user"
-msgstr "Jobabbruch durch Benutzer"
+msgstr "Auftragsabbruch durch Benutzer"
 
 msgid "Job category"
-msgstr "Job-Kategorie"
+msgstr "Auftragskategorie"
 
 msgid "Job execution failed"
-msgstr "Jobausführung fehlgeschlagen"
+msgstr "Auftragsausführung fehlgeschlagen"
 
 msgid "Job finished with error"
-msgstr "Job abgeschlossen mit Fehler"
+msgstr "Auftrag abgeschlossen mit Fehler"
 
 msgid "Job invocation"
-msgstr "Job-Aufrufe "
+msgstr "Auftragsaufruf"
 
 msgid "Job invocations"
-msgstr "Job-Aufrufe "
+msgstr "Auftragsaufrufe"
 
 msgid "Job invocations detail"
 msgstr ""
@@ -670,28 +671,28 @@ msgid "Job result"
 msgstr ""
 
 msgid "Job template"
-msgstr "Job-Vorlage "
+msgstr "Auftragsvorlage "
 
 msgid "Job template ID to be used for the feature"
-msgstr "Zukünftig zu verwendende ID der Job-Vorlage"
+msgstr "Zukünftig zu verwendende Kennung der Auftragsvorlage"
 
 msgid "Job template imported successfully."
-msgstr "Job-Vorlage erfolgreich importiert"
+msgstr "Auftragsvorlage erfolgreich importiert"
 
 msgid "Job templates"
-msgstr "Job-Vorlagen"
+msgstr "Auftragsvorlagen"
 
 msgid "JobTemplate|Locked"
 msgstr "Gesperrt"
 
 msgid "JobTemplate|Name"
-msgstr "JobVorlage|Name"
+msgstr "Auftragsvorlage|Name"
 
 msgid "JobTemplate|Snippet"
 msgstr "Snippet"
 
 msgid "Jobs"
-msgstr "Jobs"
+msgstr "Aufträge"
 
 msgid "Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
 msgstr "Key passhprase gilt nur für SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. <br> Die Passphrase wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
@@ -727,16 +728,16 @@ msgid "List foreign input sets"
 msgstr "Fremdeingabe-Sätze auflisten"
 
 msgid "List job invocations"
-msgstr "Job-Aufrufe auflisten"
+msgstr "Auftragsaufrufe auflisten"
 
 msgid "List job templates"
-msgstr "Job-Vorlagen auflisten"
+msgstr "Auftragsvorlagen auflisten"
 
 msgid "List job templates per location"
-msgstr "Job-Vorlagen pro Standort auflisten"
+msgstr "Auftragsvorlagen pro Standort auflisten"
 
 msgid "List job templates per organization"
-msgstr "Job-Vorlagen pro Organisation auflisten"
+msgstr "Auftragsvorlagen pro Organisation auflisten"
 
 msgid "List of proxy IDs to be used for remote execution"
 msgstr "Liste der Proxy-IDs die für Remote-Ausführung benutzt werden können."
@@ -745,7 +746,7 @@ msgid "List remote execution features"
 msgstr "Entfernte Ausführungsfunktionen auflisten"
 
 msgid "List template invocations belonging to job invocation"
-msgstr "Lasse dir die Template-Invocations ausgeben die zu einer Job-Invocation gehören"
+msgstr "Vorlagenaufrufe, die zum Auftragsaufruf gehören, auflisten"
 
 msgid "Location"
 msgstr "Standort"
@@ -775,13 +776,13 @@ msgid "Never"
 msgstr "Niemals"
 
 msgid "New Job Template"
-msgstr "Neue Job-Vorlage"
+msgstr "Neue Auftragsvorlage"
 
 msgid "New UI"
 msgstr ""
 
 msgid "Next"
-msgstr ""
+msgstr "Weiter"
 
 msgid "No (override)"
 msgstr "Nein (Überschreiben)"
@@ -805,7 +806,7 @@ msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Nicht alle erforderlichen Eingaben haben Werte. Fehlende Eingaben: %s"
 
 msgid "Not available"
-msgstr ""
+msgstr "Nicht verfügbar"
 
 msgid "Not yet"
 msgstr ""
@@ -847,7 +848,7 @@ msgid "Password"
 msgstr "Passwort"
 
 msgid "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr "Das Passwort wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
+msgstr "Das Passwort wird verschlüsselt in der DB gespeichert, bis der Auftrag abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
 
 msgid "Pending"
 msgstr "Ausstehend"
@@ -1020,7 +1021,7 @@ msgid "Rerun successful"
 msgstr ""
 
 msgid "Rerun the job"
-msgstr "Job erneut ausführen"
+msgstr "Auftrag erneut ausführen"
 
 msgid "Reset to default"
 msgstr "Rücksetzen auf Standardeinstellungen"
@@ -1038,7 +1039,7 @@ msgid "Run"
 msgstr "Ausführen"
 
 msgid "Run Job"
-msgstr "Job ausführen"
+msgstr "Auftrag ausführen"
 
 msgid "Run Puppet Once"
 msgstr "Puppet einmal ausführen"
@@ -1083,16 +1084,16 @@ msgid "Schedule"
 msgstr "Plan"
 
 msgid "Schedule Remote Job"
-msgstr "Geplante Remote-Jobs"
+msgstr "Geplante Remote-Aufträge"
 
 msgid "Schedule a job"
 msgstr ""
 
 msgid "Schedule the job for a future time"
-msgstr "Job zu einem zukünftigen Zeitpunkt starten lassen"
+msgstr "Auftrag zu einem zukünftigen Zeitpunkt starten lassen"
 
 msgid "Schedule the job to start at a later time"
-msgstr "Job zu einer späteren Zeit starten lassen"
+msgstr "Auftrag zu einer späteren Zeit starten lassen"
 
 msgid "Schedule type"
 msgstr ""
@@ -1146,7 +1147,7 @@ msgid "Select a report template used for generating a report for a particular re
 msgstr ""
 
 msgid "Select an ERB file to upload in order to import a job template.  The template must contain metadata in the first ERB comment."
-msgstr "ERB-Datei zum Hochladen auswählen, um Job-Vorlage zu importieren. Die Vorlage muss Metadaten im ersten ERB Kommentar enthalten."
+msgstr "ERB-Datei zum Hochladen auswählen, um Auftragsvorlage zu importieren. Die Vorlage muss Metadaten im ersten ERB Kommentar enthalten."
 
 msgid "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them."
 msgstr "Wählen Sie so viele Proxys für entfernte Ausführung aus, wie es für dieses Subnetz zutreffend ist. Wenn mehrere Proxys mit demselben Provider hinzugefügt werden, dann wird die Auslastung unter diesen ausgeglichen."
@@ -1188,10 +1189,10 @@ msgid "Show foreign input set details"
 msgstr " Details zu Fremdeingabe-Satz anzeigen"
 
 msgid "Show job invocation"
-msgstr "Job-Aufrufe anzeigen"
+msgstr "Auftragsaufrufe anzeigen"
 
 msgid "Show job template details"
-msgstr "Details der Job-Vorlage anzeigen"
+msgstr "Details der Auftragsvorlage anzeigen"
 
 msgid "Show remote execution feature"
 msgstr "Entfernte Ausführungsfunktionen anzeigen"
@@ -1266,7 +1267,7 @@ msgid "Switch to the new job invocation detail UI"
 msgstr ""
 
 msgid "Sync Job Templates"
-msgstr "Synchronisations Job-Vorlage"
+msgstr "Synchronisierungsauftragvorlagen"
 
 msgid "System status"
 msgstr ""
@@ -1290,7 +1291,7 @@ msgid "Task Details"
 msgstr "Aufgabendetails"
 
 msgid "Task cancelled"
-msgstr "Task abgebrochen"
+msgstr "Aufgabe abgebrochen"
 
 msgid "Template ERB"
 msgstr "Vorlage ERB"
@@ -1329,13 +1330,13 @@ msgid "The final host list may change because the selected query is dynamic.  It
 msgstr "Die endgültige Hostliste kann sich ändern, da die ausgewählte Anfrage dynamisch ist. Sie wird während der Ausführung wiederholt."
 
 msgid "The job cannot be aborted at the moment."
-msgstr "Die Aufgabe kann derzeit nicht abgebrochen werden."
+msgstr "Der Auftrag kann derzeit nicht abgebrochen werden."
 
 msgid "The job cannot be cancelled at the moment."
-msgstr "Die Aufgabe kann derzeit nicht abgebrochen werden."
+msgstr "Der Auftrag kann derzeit nicht abgebrochen werden."
 
 msgid "The job could not be cancelled."
-msgstr "Job kann nicht abgebrochen werden"
+msgstr "Auftrag kann nicht abgebrochen werden"
 
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr "Das Job-Template zum Benutzen, der Parameter wird benötigt ausser das Feature wurde spezifiziert"
@@ -1367,10 +1368,10 @@ msgid "This template is used to generate the description. Input values can be us
 msgstr "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. Eingabewerte können mittels Syntax %{package} verwendet werden. Sie können auch Job-Kategorie und Vorlagennamen über %{job_category} und %{template_name} einschließen."
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
-msgstr "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. <br/>Eingabewerte können mittels Syntax %{package} verwendet werden.<br/> Sie können auch Job-Kategorie und Vorlagennamen <br/>über %{job_category} und %{template_name} einschließen."
+msgstr "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. <br/>Eingabewerte können mittels Syntax %{package} verwendet werden.<br/> Sie können auch Auftragskategorie und Vorlagennamen <br/>über %{job_category} und %{template_name} einschließen."
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
-msgstr "Zeit in Sekunden ab dem Start auf dem Remote-Host, nach der der Job beendet werden soll."
+msgstr "Zeit in Sekunden ab dem Start auf dem Remote-Host, nach der der Auftrag beendet werden soll."
 
 msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs."
 msgstr ""
@@ -1400,25 +1401,25 @@ msgid "Total hosts"
 msgstr "Hosts gesamt"
 
 msgid "Try to abort the job on a host without waiting for its result"
-msgstr "Versuche den Job auf den Host abzubrechen ohne auf das Resultat zu warten"
+msgstr "Versuche, den Auftrag auf den Host abzubrechen, ohne auf das Resultat zu warten"
 
 msgid "Try to abort the job without waiting for the results from the remote hosts"
-msgstr "Versuche den Job abzubrechen ohne auf das Resultat vom entfernten Host zu warten"
+msgstr "Versuche, den Auftrag abzubrechen ohne auf das Resultat vom entfernten Host zu warten"
 
 msgid "Try to cancel the job"
-msgstr "Versuche den Job abzubrechen"
+msgstr "Versuche, den Auftrag abzubrechen"
 
 msgid "Try to cancel the job on a host"
-msgstr "Versuche den Job auf einem Host abzubrechen"
+msgstr "Versuche, den Auftrag auf einem Host abzubrechen"
 
 msgid "Trying to abort the job"
-msgstr "Versuche Jobabbruch zu erzwingen"
+msgstr "Versuche Auftragsabbruch zu erzwingen"
 
 msgid "Trying to abort the job %s."
 msgstr ""
 
 msgid "Trying to cancel the job"
-msgstr "Versuche den Job abzubrechen"
+msgstr "Versuche, den Auftrag abzubrechen"
 
 msgid "Trying to cancel the job %s."
 msgstr ""
@@ -1466,7 +1467,7 @@ msgid "Update a foreign input set"
 msgstr "Fremdeingabe-Satz aktualisieren"
 
 msgid "Update a job template"
-msgstr "Job-Vorlage aktualisieren"
+msgstr "Auftragsvorlage aktualisieren"
 
 msgid "Use default description template"
 msgstr "Standardbeschreibungsvorlage verwenden"
@@ -1481,16 +1482,16 @@ msgid "User Inputs"
 msgstr "Benutzereingaben"
 
 msgid "User can not execute job on host %s"
-msgstr "Benutzer kann den Job auf Host %s nicht ausführen"
+msgstr "Benutzer kann den Auftrag auf Host %s nicht ausführen"
 
 msgid "User can not execute job on infrastructure host %s"
 msgstr ""
 
 msgid "User can not execute this job template"
-msgstr "Benutzer kann diese Job-Vorlage nicht ausführen"
+msgstr "Benutzer kann diese Auftragsvorlage nicht ausführen"
 
 msgid "User can not execute this job template on %s"
-msgstr "Benutzer kann diese Job-Vorlage nicht auf %s ausführen"
+msgstr "Benutzer kann diese Auftragsvorlage nicht auf %s ausführen"
 
 msgid "User input"
 msgstr "Benutzereingabe"
@@ -1562,7 +1563,7 @@ msgid "You are not allowed to see the currently assigned template. Saving the fo
 msgstr "Sie haben nicht die Genehmigung, die aktuell zugewiesenen Vorlagen einzusehen. Wenn Sie das Formular jetzt speichern, wird die Zuweisung der Vorlage aufgehoben."
 
 msgid "You are not authorized to perform this action."
-msgstr ""
+msgstr "Sie sind nicht berechtigt, diese Aktion durchzuführen."
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""
@@ -1577,7 +1578,7 @@ msgid "default_capsule method missing from SmartProxy"
 msgstr "default_capsule-Methode fehlt in SmartProxy"
 
 msgid "documentation"
-msgstr ""
+msgstr "Dokumentation"
 
 msgid "effective user"
 msgstr "Effektiver Benutzer"

@@ -5,11 +5,11 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 9.0.1\n"
+"Project-Id-Version: foreman_remote_execution 14.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/foreman/foreman/lang"
+"Language-Team: Chinese (Taiwan) (http://app.transifex.com/foreman/foreman/lang"
 "uage/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,7 +86,7 @@ msgid "Abort Job"
 msgstr ""
 
 msgid "Access denied"
-msgstr ""
+msgstr "拒絕存取"
 
 msgid "Actions"
 msgstr "動作"
@@ -137,7 +137,7 @@ msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "上一步"
 
 msgid "Back to Job"
 msgstr "回到工作"
@@ -776,7 +776,7 @@ msgid "New UI"
 msgstr ""
 
 msgid "Next"
-msgstr ""
+msgstr "下一步"
 
 msgid "No (override)"
 msgstr ""
@@ -1555,7 +1555,7 @@ msgid "You are not allowed to see the currently assigned template. Saving the fo
 msgstr "您不能看到目前指定的範本。現在儲存表單會取消指定範本。"
 
 msgid "You are not authorized to perform this action."
-msgstr ""
+msgstr "您未經許可執行這項動作。"
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""

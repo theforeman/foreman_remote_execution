@@ -6,11 +6,11 @@
 # 0868a4d1af5275b3f70b0a6dac4c99a4, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 9.0.1\n"
+"Project-Id-Version: foreman_remote_execution 14.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: 0868a4d1af5275b3f70b0a6dac4c99a4, 2016\n"
-"Language-Team: English (United Kingdom) (http://www.transifex.com/foreman/fore"
+"Language-Team: English (United Kingdom) (http://app.transifex.com/foreman/fore"
 "man/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,7 +138,7 @@ msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 msgid "Back to Job"
 msgstr ""
@@ -777,7 +777,7 @@ msgid "New UI"
 msgstr ""
 
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 msgid "No (override)"
 msgstr ""
@@ -801,7 +801,7 @@ msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr ""
 
 msgid "Not available"
-msgstr ""
+msgstr "Not available"
 
 msgid "Not yet"
 msgstr ""
@@ -1556,7 +1556,7 @@ msgid "You are not allowed to see the currently assigned template. Saving the fo
 msgstr ""
 
 msgid "You are not authorized to perform this action."
-msgstr ""
+msgstr "You are not authorised to perform this action."
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""
@@ -1571,7 +1571,7 @@ msgid "default_capsule method missing from SmartProxy"
 msgstr ""
 
 msgid "documentation"
-msgstr ""
+msgstr "documentation"
 
 msgid "effective user"
 msgstr ""

@@ -5,11 +5,11 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 9.0.1\n"
+"Project-Id-Version: foreman_remote_execution 14.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Spanish (http://www.transifex.com/foreman/foreman/language/es/)"
+"Language-Team: Spanish (http://app.transifex.com/foreman/foreman/language/es/)"
 "\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid "%s more"
 msgstr ""
 
 msgid "%{description} on %{host}"
-msgstr "%{description} en %{host}"
+msgstr "activo"
 
 msgid "'Starts before' date must be after 'Starts at' date"
 msgstr ""
@@ -87,13 +87,13 @@ msgid "Abort Job"
 msgstr "Abortar trabajo"
 
 msgid "Access denied"
-msgstr ""
+msgstr "Acceso denegado"
 
 msgid "Actions"
 msgstr "Acciones"
 
 msgid "Active Filters:"
-msgstr ""
+msgstr "Filtros activos:"
 
 msgid "Add Foreign Input Set"
 msgstr "Agregar conjunto de entrada externo"
@@ -138,7 +138,7 @@ msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Atrás"
 
 msgid "Back to Job"
 msgstr "Volver al trabajo"
@@ -150,7 +150,7 @@ msgid "Can't find Job Invocation for an id %s"
 msgstr "No se puede encontrar la Invocación de Empleo para un id %s"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 msgid "Cancel Job"
 msgstr "Cancelar tarea"
@@ -186,7 +186,7 @@ msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr "Elija una plantilla de tarea que esté preseleccionada en el formulario de invocación de tarea"
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
-msgstr "Dependencia circular detectada en el conjunto de entrada externo '%{template}' -> '%{target_template}'. Pila de plantillas: %{templates_stack}"
+msgstr "Dependencia circular detectada en el conjunto de entrada externo '%{template}' -> '%%{target_template}'. Pila de plantillas: %%{templates_stack}"
 
 msgid "Cleanup working directories"
 msgstr "Directorios de limpieza en ejecución"
@@ -291,13 +291,13 @@ msgid "Current location %s is different from job's location %s. This job may run
 msgstr ""
 
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
-msgstr "La ubicación actual %{loc_c} es diferente de la ubicación de la tarea %{loc_j}."
+msgstr "La ubicación actual %%{loc_c} es diferente de la ubicación de la tarea %%{loc_j}."
 
 msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
 msgstr ""
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
-msgstr "La organización actual %{org_c} es diferente de la organización de la tarea %{org_j}."
+msgstr "La organización actual %%{org_c} es diferente de la organización de la tarea %%{org_j}."
 
 msgid "Daily"
 msgstr "Diariamente"
@@ -336,7 +336,7 @@ msgid "Description"
 msgstr "Descripción"
 
 msgid "Description Template"
-msgstr "Descripción Plantilla"
+msgstr "Plantilla de descripción"
 
 msgid "Description template"
 msgstr "Plantilla de descripción"
@@ -363,7 +363,7 @@ msgid "Dynamic query"
 msgstr "Consulta dinámica"
 
 msgid "Edit %s"
-msgstr "Editar %s"
+msgstr "Editar"
 
 msgid "Edit Job Template"
 msgstr "Editar plantilla de trabajo"
@@ -393,10 +393,10 @@ msgid "Effective user password"
 msgstr "Contraseña de usuario efectiva"
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr "La contraseña de usuario efectiva sólo es aplicable al proveedor SSH. Otros proveedores ignoran este campo. <br> La contraseña se almacena encriptada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina después de la última ejecución."
+msgstr "La contraseña sudo solo se aplica para el proveedor de SSH. Otros proveedores ignoran este campo. <br> La contraseña se guarda de forma cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina tras la última ejecución."
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr "La contraseña de usuario efectiva sólo es aplicable al proveedor SSH. Otros proveedores ignoran este campo. La contraseña se almacena encriptada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina después de la última ejecución."
+msgstr "La contraseña sudo solo se aplica para el proveedor de SSH. Otros proveedores ignoran este campo.  La contraseña se guarda de forma cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina tras la última ejecución."
 
 msgid "Effective user:"
 msgstr ""
@@ -540,7 +540,7 @@ msgid "Host"
 msgstr "host"
 
 msgid "Host collections"
-msgstr "Colecciones de acogida"
+msgstr "colecciones de hosts"
 
 msgid "Host detail"
 msgstr "Detalle del host"
@@ -693,7 +693,7 @@ msgid "Key passhprase is only applicable for SSH provider. Other providers ignor
 msgstr "La frase de contraseña de la clave solo se aplica para el proveedor de SSH. Otros proveedores ignoran este campo. <br> La frase de contraseña se guarda de forma cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina tras la última ejecución."
 
 msgid "Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr "La frase de contraseña sólo es aplicable al proveedor SSH. Otros proveedores ignoran este campo. La frase de contraseña se almacena cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina después de la última ejecución."
+msgstr "La frase de contraseña de la clave solo se aplica para el proveedor de SSH. Otros proveedores ignoran este campo.  La frase de contraseña se guarda de forma cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina tras la última ejecución."
 
 msgid "Label"
 msgstr "Etiqueta"
@@ -714,7 +714,7 @@ msgid "Learn more about this in the documentation."
 msgstr "Consulte la documentación para obtener más información."
 
 msgid "Legacy UI"
-msgstr ""
+msgstr "La interfaz de usuario heredada"
 
 msgid "List available remote execution features for a host"
 msgstr ""
@@ -774,10 +774,10 @@ msgid "New Job Template"
 msgstr "Nueva plantilla de trabajo"
 
 msgid "New UI"
-msgstr ""
+msgstr "Nueva interfaz de usuario"
 
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 msgid "No (override)"
 msgstr "No (anulación)"
@@ -795,13 +795,13 @@ msgid "No results found"
 msgstr "No se han encontrado resultados"
 
 msgid "No template mapped to feature %{feature_name}"
-msgstr "No hay ninguna plantilla mapeada a la funcionalidad %{feature_name}."
+msgstr "No hay ninguna plantilla mapeada a la funcionalidad %%{feature_name}."
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "No todas las entradas requeridas tienen valores. Entradas que faltan: %s"
 
 msgid "Not available"
-msgstr ""
+msgstr "No disponible"
 
 msgid "Not yet"
 msgstr ""
@@ -1236,7 +1236,7 @@ msgid "Status"
 msgstr "Estado"
 
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
 
 msgid "Subscribe to all my jobs"
 msgstr "Suscribirse a todos mis trabajos"
@@ -1336,12 +1336,12 @@ msgstr "La plantilla de trabajo que se debe utilizar; se requiere el parámetro 
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] "El único proxy aplicable %{proxy_names} está inactivo."
-msgstr[1] "Todos los proxies aplicables %{count} están inactivos. Se intentó %{proxy_names}"
-msgstr[2] "Todos los proxies aplicables %{count} están inactivos. Se intentó %{proxy_names}"
+msgstr[0] "El único proxy aplicable %%{proxy_names} está inactivo."
+msgstr[1] "Todos los proxies aplicables %{count} están inactivos. Se intentó %%{proxy_names}"
+msgstr[2] "Todos los proxies aplicables %{count} están inactivos. Se intentó %%{proxy_names}"
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
-msgstr "El usuario no puede acceder a la plantilla %{template_name} mapeada a la funcionalidad %{feature_name}."
+msgstr "El usuario no puede acceder a la plantilla %%{template_name} mapeada a la funcionalidad %%{feature_name}."
 
 msgid "There are no available input fields for the selected template."
 msgstr "No hay campos de entrada disponibles para la plantilla seleccionada."
@@ -1359,10 +1359,10 @@ msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "La plantilla está bloqueada. Cópiela en una nueva para personalizarla."
 
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis %{package}. También puede incluir la categoría de trabajo y el nombre de la plantilla con %{job_category} y %{template_name}."
+msgstr "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis %{package}. También puede incluir la categoría de trabajo y el nombre de la plantilla con %%{job_category} y %%{template_name}."
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
-msgstr "Esta plantilla se utiliza para generar la descripción.<br/>Los valores de entrada pueden utilizarse utilizando la sintaxis %{package}.<br/>También puede incluir la categoría de trabajo y el nombre de la plantilla<br/>utilizando %{job_category} y %{template_name}."
+msgstr "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis <br/>. También puede incluir la categoría de trabajo y el nombre de la plantilla con %%{package} y %<br/>."
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "Tiempo en segundos desde el comienzo en el host remoto tras lo cual debe eliminarse el trabajo."
@@ -1434,7 +1434,7 @@ msgid "Type of query"
 msgstr "Tipo de consulta"
 
 msgid "Unable to create mail notification: %s"
-msgstr "No se puede crear una notificación de correo: %s"
+msgstr "No se pudo crear la notificación de correo: %s"
 
 msgid "Unable to fetch public key"
 msgstr "No se pudo extraer la llave pública."
@@ -1557,7 +1557,7 @@ msgid "You are not allowed to see the currently assigned template. Saving the fo
 msgstr "No puede ver la plantilla actualmente asignada. Si guarda el formulario ahora, se eliminará la asignación de la plantilla."
 
 msgid "You are not authorized to perform this action."
-msgstr ""
+msgstr "No está autorizado para realizar esta acción."
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr "Tienes %s resultados para mostrar. Mostrando primeros resultados %s "
@@ -1572,7 +1572,7 @@ msgid "default_capsule method missing from SmartProxy"
 msgstr "Falta el método default_capsule en SmartProxy"
 
 msgid "documentation"
-msgstr ""
+msgstr "documentación"
 
 msgid "effective user"
 msgstr "usuario efectivo"
@@ -1602,7 +1602,7 @@ msgid "hosts"
 msgstr "Hosts"
 
 msgid "in %s"
-msgstr "en %s"
+msgstr "in %s"
 
 msgid "included template '%s' not found"
 msgstr "no se encontró la plantilla incluida '%s'."
@@ -1647,7 +1647,7 @@ msgid "remove template input set"
 msgstr "eliminar el conjunto de entrada de la plantilla"
 
 msgid "running %{percent}%%"
-msgstr "corriendo %{percent}%%"
+msgstr "Ejecutando"
 
 msgid "seconds"
 msgstr "segundos"

@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
-        "Language-Team": "Portuguese (Brazil) (http://www.transifex.com/foreman/foreman/language/pt_BR/)",
+        "Language-Team": "Portuguese (Brazil) (http://app.transifex.com/foreman/foreman/language/pt_BR/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -33,7 +33,7 @@
         ""
       ],
       "%{description} on %{host}": [
-        "%{description} em %{host}"
+        "sim"
       ],
       "'Starts before' date must be after 'Starts at' date": [
         ""
@@ -85,13 +85,13 @@
         "Sobre o trabalho"
       ],
       "Access denied": [
-        ""
+        "Acesso negado"
       ],
       "Actions": [
         "Ações"
       ],
       "Active Filters:": [
-        ""
+        "Filtros ativos:"
       ],
       "Add Foreign Input Set": [
         "Adicionar Conjunto de Entradas Externas"
@@ -136,7 +136,7 @@
         ""
       ],
       "Back": [
-        ""
+        "Retornar"
       ],
       "Back to Job": [
         "Voltar ao Trabalho "
@@ -148,7 +148,7 @@
         "Não consigo encontrar um emprego para uma identificação %s"
       ],
       "Cancel": [
-        ""
+        "Cancelar"
       ],
       "Cancel Job": [
         "Cancelar trabalho"
@@ -184,7 +184,7 @@
         "Escolha um template de trabalho pré-selecionado no formulário de invocação de trabalho"
       ],
       "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}": [
-        "Dependência circular detectada em conjunto de entradas externas '%{template}' -> '%{target_template}'. Pilha de templates: %{templates_stack}"
+        "Dependência circular detectada em conjunto de entradas externas '%{template}' -> '%%{target_template}'. Pilha de templates: %%{templates_stack}"
       ],
       "Cleanup working directories": [
         "Limpeza dos diretórios de trabalho"
@@ -289,13 +289,13 @@
         ""
       ],
       "Current location %{loc_c} is different from job's location %{loc_j}.": [
-        "O local atual %{loc_c} é diferente do local do trabalho %{loc_j}."
+        "O local atual %%{loc_c} é diferente do local do trabalho %%{loc_j}."
       ],
       "Current organization %s is different from job's organization %s. This job may run on different hosts than before.": [
         ""
       ],
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
-        "A organização atual %{org_c} é diferente da organização do trabalho %{org_j}."
+        "A organização atual %%{org_c} é diferente da organização do trabalho %%{org_j}."
       ],
       "Daily": [
         "Diário"
@@ -334,7 +334,7 @@
         "Descrição"
       ],
       "Description Template": [
-        "Descrição Modelo"
+        "Modelo de descrição"
       ],
       "Description template": [
         "Modelo de descrição"
@@ -358,10 +358,10 @@
         "Consulta Dinâmica"
       ],
       "Dynamic query": [
-        "Consulta dinâmica"
+        "Consulta Dinâmica"
       ],
       "Edit %s": [
-        "Editar %s"
+        "Editar"
       ],
       "Edit Job Template": [
         "Editar Modelo de Trabalho"
@@ -391,10 +391,10 @@
         "Senha efetiva do usuário"
       ],
       "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        "A senha efetiva do usuário só é aplicável para o provedor SSH. Outros provedores ignoram este campo. <br> A senha é armazenada criptografada no DB até que o trabalho termine. Para execuções futuras ou recorrentes, ela é removida após a última execução."
+        "A senha sudo só é aplicável ao fornecedor SSH. Outros fornecedores ignoram esse campo. <br> A senha é armazenada criptografada no banco de dados até que o trabalho seja concluído. Para execuções futuras ou recorrentes, ela é removida após a última execução."
       ],
       "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        "A senha efetiva do usuário só é aplicável para o provedor SSH. Outros provedores ignoram este campo. A senha é armazenada criptografada no DB até que o trabalho termine. Para execuções futuras ou recorrentes, ela é removida após a última execução."
+        "A senha sudo só é aplicável ao fornecedor SSH. Outros fornecedores ignoram esse campo.  A senha é armazenada criptografada no banco de dados até que o trabalho seja concluído. Para execuções futuras ou recorrentes, ela é removida após a última execução."
       ],
       "Effective user:": [
         ""
@@ -538,7 +538,7 @@
         "Máquina"
       ],
       "Host collections": [
-        "Coleções de anfitriões"
+        "Coleções de Host"
       ],
       "Host detail": [
         "Detalhes do host"
@@ -691,7 +691,7 @@
         "A senha da chave só é aplicável ao fornecedor SSH. Outros fornecedores ignoram esse campo. <br> A senha é armazenada criptografada no banco de dados até que o trabalho seja concluído. Para execuções futuras ou recorrentes, ela é removida após a última execução."
       ],
       "Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        "A frase-chave só é aplicável ao fornecedor de SSH. Outros provedores ignoram este campo. A frase-chave é armazenada criptografada no DB até o término do trabalho. Para execuções futuras ou recorrentes, ela é removida após a última execução."
+        "A senha da chave só é aplicável ao fornecedor SSH. Outros fornecedores ignoram esse campo.  A senha é armazenada criptografada no banco de dados até que o trabalho seja concluído. Para execuções futuras ou recorrentes, ela é removida após a última execução."
       ],
       "Label": [
         "Rótulo"
@@ -775,7 +775,7 @@
         ""
       ],
       "Next": [
-        ""
+        "Próximo"
       ],
       "No (override)": [
         ""
@@ -793,13 +793,13 @@
         "Nenhum resultado encontrado"
       ],
       "No template mapped to feature %{feature_name}": [
-        "Nenhum template mapeado para o recurso %{feature_name}"
+        "Nenhum template mapeado para o recurso %%{feature_name}"
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "Nem todas as entradas necessárias possuem valores. Entradas ausentes: %s"
       ],
       "Not available": [
-        ""
+        "Não disponível"
       ],
       "Not yet": [
         ""
@@ -1048,7 +1048,7 @@
         "Executar no máximo N tarefas de cada vez. Se essa opção estiver definida, e o acionamento em lote de proxy estiver desabilitado, então, as tarefas serão acionadas no proxy inteligente em lotes de tamanho 1."
       ],
       "Run job": [
-        "Executar trabalho"
+        "Executar Trabalho"
       ],
       "Run on selected hosts": [
         ""
@@ -1228,13 +1228,13 @@
         "Consulta Estática "
       ],
       "Static query": [
-        "Consulta estática"
+        "Consulta Estática"
       ],
       "Status": [
         "Estado"
       ],
       "Submit": [
-        ""
+        "Submeter"
       ],
       "Subscribe to all my jobs": [
         "Inscrever-me em todos os meus empregos"
@@ -1333,12 +1333,12 @@
         "O modelo de trabalho a ser usado. O parâmetro é obrigatórios, a não ser que o recurso seja especificado."
       ],
       "The only applicable proxy %{proxy_names} is down": [
-        "O único proxy aplicável %{proxy_names} está inoperante",
-        "Todos os %{count} proxies aplicáveis estão inoperantes. Tentados: %{proxy_names}",
-        "Todos os %{count} proxies aplicáveis estão inoperantes. Tentados: %{proxy_names}"
+        "O único proxy aplicável %%{proxy_names} está inoperante",
+        "Todos os %{count} proxies aplicáveis estão inoperantes. Tentados: %%{proxy_names}",
+        "Todos os %{count} proxies aplicáveis estão inoperantes. Tentados: %%{proxy_names}"
       ],
       "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user": [
-        "O modelo %{template_name} mapeado para o recurso %{feature_name} não é acessível pelo usuário"
+        "O modelo %%{template_name} mapeado para o recurso %%{feature_name} não é acessível pelo usuário"
       ],
       "There are no available input fields for the selected template.": [
         "Não há campos de entrada disponíveis para o modelo selecionado."
@@ -1356,10 +1356,10 @@
         "Este modelo está travado. Clone-o para um novo modelo para padronizar."
       ],
       "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}.": [
-        "Este modelo é usado para gerar a descrição. Os valores de entrada podem ser usados com a sintaxe %{package}. Você pode incluir também a categoria de trabalho e o nome do modelo usando %{job_category} e %{template_name}."
+        "Este modelo é usado para gerar a descrição. Os valores de entrada podem ser usados com a sintaxe %{package}. Você pode incluir também a categoria de trabalho e o nome do modelo usando %%{job_category} e %%{template_name}."
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        "Este modelo é usado para gerar a descrição.<br/>Os valores de entrada podem ser usados usando a sintaxe %{package}.<br/>Você também pode incluir a categoria de trabalho e o nome do modelo<br/>usando %{job_category} e %{template_name}."
+        "Este modelo é usado para gerar a descrição. Os valores de entrada podem ser usados com a sintaxe <br/>. Você pode incluir também a categoria de trabalho e o nome do modelo usando %%{package} e %<br/>."
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Tempo em segundos do início no host remoto após o qual o trabalho deve ser encerrado."
@@ -1431,7 +1431,7 @@
         "Tipo de consulta"
       ],
       "Unable to create mail notification: %s": [
-        "Incapaz de criar notificação por correio: %s"
+        "Não é possível criar a notificação de e-mail: %s"
       ],
       "Unable to fetch public key": [
         "Não é possível capturar chave pública "
@@ -1554,7 +1554,7 @@
         "Você não tem permissão para visualizar o modelo atualmente atribuído. Salvar o formulário agora cancelaria a atribuição do modelo. "
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "Você não está autorizado a executar essa ação."
       ],
       "You have %s results to display. Showing first %s results": [
         "Você tem %s resultados para exibir. Mostrando primeiro %s resultados"
@@ -1569,7 +1569,7 @@
         "método_capsule padrão faltando no SmartProxy"
       ],
       "documentation": [
-        ""
+        "documentação"
       ],
       "effective user": [
         "usuário efetivo"
@@ -1644,7 +1644,7 @@
         "remover conjunto de entrada de modelo"
       ],
       "running %{percent}%%": [
-        "funcionando %{percent}%%"
+        "Executando"
       ],
       "seconds": [
         "segundos"
