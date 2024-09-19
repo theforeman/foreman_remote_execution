@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "elobato <elobatocs@gmail.com>, 2017",
-        "Language-Team": "Japanese (http://www.transifex.com/foreman/foreman/language/ja/)",
+        "Language-Team": "Japanese (http://app.transifex.com/foreman/foreman/language/ja/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -18,7 +18,7 @@
         "plural_forms": "nplurals=1; plural=0;"
       },
       "${d.title} ${d.count} hosts": [
-        ""
+        "${d.title} ${d.count} ホスト"
       ],
       "%s": [
         "%s"
@@ -30,16 +30,16 @@
         "%s 件のジョブが呼び出されました"
       ],
       "%s more": [
-        ""
+        "さらに %s"
       ],
       "%{description} on %{host}": [
         "%{host} の %{description} "
       ],
       "'Starts before' date must be after 'Starts at' date": [
-        ""
+        "「次の時刻よりも前に開始」の日付は、「開始時刻」の日付よりも後でなければなりません"
       ],
       "'Starts before' date must in the future": [
-        ""
+        "「次の時刻よりも前に開始」の日付は、未来の日付でなければなりません"
       ],
       "...and %s more": [
         "...さらに %s"
@@ -54,7 +54,7 @@
         "外部テンプレートから含める入力名のコンマ区切り一覧。"
       ],
       "A job '%{job_name}' has %{status} at %{time}": [
-        "ジョブ '%{job_name}' のステータスは %%{status} です (%%{time} 時点)"
+        "ジョブ '%%{job_name}' のステータスは %%{status} です (%%{time} 時点)"
       ],
       "A job '%{subject}' has failed": [
         "ジョブ '%%{subject}' が失敗しました"
@@ -72,25 +72,25 @@
         "繰り返しジョブを追跡するための特別なラベル。特定の目的で一度にアクティブにできるジョブは 1 つだけです。"
       ],
       "A user to be used for SSH.": [
-        ""
+        "SSH に使用するユーザー。"
       ],
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "スクリプトを実行するために使用するユーザー。ユーザーが SSH ユーザーと異なる場合は、su または sudo を使用してアカウントを切り替えます。"
       ],
       "Abort": [
-        ""
+        "中断"
       ],
       "Abort Job": [
         "ジョブの中断"
       ],
       "Access denied": [
-        ""
+        "アクセスは拒否されました"
       ],
       "Actions": [
         "アクション"
       ],
       "Active Filters:": [
-        ""
+        "アクティブなフィルター:"
       ],
       "Add Foreign Input Set": [
         "外部入力セットを追加"
@@ -99,10 +99,10 @@
         "詳細フィールド"
       ],
       "After": [
-        ""
+        "次の時刻よりも後に開始"
       ],
       "After %s occurences": [
-        ""
+        "%s のオカレンス後"
       ],
       "All fields are required.": [
         "すべてのフィールドは必須です。"
@@ -132,10 +132,10 @@
         "分"
       ],
       "Awaiting start": [
-        ""
+        "開始待ち"
       ],
       "Back": [
-        ""
+        "戻る"
       ],
       "Back to Job": [
         "ジョブに戻る"
@@ -147,7 +147,7 @@
         "ID %s のジョブ呼び出しが見つかりません"
       ],
       "Cancel": [
-        ""
+        "取り消し"
       ],
       "Cancel Job": [
         "ジョブのキャンセル"
@@ -156,10 +156,10 @@
         "ジョブ呼び出しをキャンセル"
       ],
       "Cancel recurring": [
-        ""
+        "繰り返しのキャンセル"
       ],
       "Canceled:": [
-        ""
+        "キャンセル済み:"
       ],
       "Cancelled": [
         "キャンセル済み"
@@ -177,22 +177,22 @@
         "カテゴリー一覧が以下により失敗:"
       ],
       "Category and template": [
-        ""
+        "カテゴリーとテンプレート"
       ],
       "Choose a job template that is pre-selected in job invocation form": [
         "ジョブ呼び出しフォームで事前に選択されているジョブテンプレートを選択してください"
       ],
       "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}": [
-        "外部入力セット '%{template}' -> '%{target_template}' で循環依存が検出されました。テンプレートスタック: %{templates_stack}"
+        "外部入力セット '%%{template}' -> '%%{target_template}' で循環依存が検出されました。テンプレートスタック: %%{templates_stack}"
       ],
       "Cleanup working directories": [
         "作業ディレクトリーのクリーンアップ"
       ],
       "Clear all filters": [
-        ""
+        "全フィルターの消去"
       ],
       "Clear input": [
-        ""
+        "入力のクリア"
       ],
       "Clone a provision template": [
         "プロビジョンテンプレートのクローン"
@@ -216,22 +216,22 @@
         "同時実行レベルと分散を制御"
       ],
       "Could not abort the job %s: ${response}": [
-        ""
+        "ジョブ %s を中止できませんでした: ${response}"
       ],
       "Could not cancel recurring logic %s: ${response}": [
-        ""
+        "再帰論理 %s をキャンセルできませんでした: ${response}"
       ],
       "Could not cancel the job %s: ${response}": [
-        ""
+        "ジョブ %s をキャンセルできませんでした: ${response}"
       ],
       "Could not disable recurring logic %s: ${response}": [
-        ""
+        "再帰論理 %s を無効にできませんでした: ${response}"
       ],
       "Could not display data for job invocation.": [
         "ジョブ呼び出しのデータを表示できませんでした。"
       ],
       "Could not enable recurring logic %s: ${response}": [
-        ""
+        "再帰論理 %s を有効にできませんでした: ${response}"
       ],
       "Could not find any suitable interface for execution": [
         "実行に適したインターフェースを見つけることができませんでした"
@@ -243,7 +243,7 @@
         "テンプレートが見つからないのでジョブ %{id} を返すことができませんでした"
       ],
       "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings": [
-        "%{provider} ジョブにプロキシーを使用できませんでした。設定で {global_proxy} または {fallback_proxy} を指定することを検討してください"
+        "%{provider} ジョブにプロキシーを使用できませんでした。設定で %{global_proxy} または %{fallback_proxy} を指定することを検討してください"
       ],
       "Could not use any template used in the job invocation": [
         "ジョブ呼び出しで使用されるテンプレートを使用できませんでした"
@@ -267,7 +267,7 @@
         "繰り返されるジョブを作成"
       ],
       "Create report": [
-        ""
+        "レポートの作成"
       ],
       "Create report for this job": [
         "このジョブのレポートを作成"
@@ -276,25 +276,25 @@
         "cron 行"
       ],
       "Cron line (extended)": [
-        ""
+        "Cron 行 (拡張)"
       ],
       "Cron line format '1 2 3 4 5', where:": [
-        ""
+        "Cron 行の形式は '1 2 3 4 5' です。各部分の説明:"
       ],
       "Cronline": [
         "cron 行"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
-        ""
+        "現在の場所 %s は、ジョブの場所 %s とは異なります。このジョブは、以前とは異なるホストで実行できます。"
       ],
       "Current location %{loc_c} is different from job's location %{loc_j}.": [
-        "現在のロケーション %{loc_c} はジョブのロケーション %{loc_j} とは異なります。"
+        "現在のロケーション %%{loc_c} はジョブのロケーション %%{loc_j} とは異なります。"
       ],
       "Current organization %s is different from job's organization %s. This job may run on different hosts than before.": [
-        ""
+        "現在の組織 %s は、ジョブの組織 %s とは異なります。このジョブは、以前とは異なるホストで実行できます。"
       ],
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
-        "現在の組織「%{org_c}」はジョブの組織「％{org_j}」とは異なります。"
+        "現在の組織「%%{org_c}」はジョブの組織「％%{org_j}」とは異なります。"
       ],
       "Daily": [
         "毎日"
@@ -342,7 +342,7 @@
         "特別な目的の指定"
       ],
       "Disable recurring": [
-        ""
+        "繰り返しの無効化"
       ],
       "Display advanced fields": [
         "詳細フィールドを表示"
@@ -351,7 +351,7 @@
         "繰り返さない"
       ],
       "Duplicated inputs detected: %{duplicated_inputs}": [
-        "重複した入力が検出されました: ％{duplicated_inputs}"
+        "重複した入力が検出されました: ％%{duplicated_inputs}"
       ],
       "Dynamic Query": [
         "動的クエリー"
@@ -381,7 +381,7 @@
         "実効ユーザー"
       ],
       "Effective user method \\\"%{current_value}\\\" is not one of %{valid_methods}": [
-        "実効ユーザーメソッド\\\"%{current_value}\\\" は %{valid_methods} の 1 つではありません"
+        "実効ユーザーメソッド\\\"%%{current_value}\\\" は %%{valid_methods} の 1 つではありません"
       ],
       "Effective user options": [
         "実効ユーザーオプション"
@@ -396,13 +396,13 @@
         "実効ユーザーパスワードは、SSH プロバイダーにのみ適用されます。他のプロバイダーは、このフィールドを無視します。パスワードは、ジョブが完了するまで暗号化されて DB に保存されます。将来の実行または繰り返しの実行の場合、最後の実行後に削除されます。"
       ],
       "Effective user:": [
-        ""
+        "実効ユーザー:"
       ],
       "Enable Global Proxy": [
         "グローバルプロキシーを有効にする"
       ],
       "Enable recurring": [
-        ""
+        "繰り返しの有効化"
       ],
       "End time needs to be after start time": [
         "終了時刻は開始時刻の後でなければなりません"
@@ -420,25 +420,25 @@
         "評価済み:"
       ],
       "Every day at %s": [
-        ""
+        "毎日 %s"
       ],
       "Every hour at minute %s": [
-        ""
+        "毎時 %s 分"
       ],
       "Every month on %s at %s": [
-        ""
+        "毎月 %s の %s"
       ],
       "Every week on %s at %s": [
-        ""
+        "毎週 %s の %s"
       ],
       "Execute the job later, at a scheduled time.": [
-        ""
+        "スケジュールされた時間に、後でジョブを実行します。"
       ],
       "Execute the job now.": [
-        ""
+        "今すぐジョブを実行します。"
       ],
       "Execute the job on a repeating schedule.": [
-        ""
+        "繰り返し実行されるスケジュールでジョブを実行します。"
       ],
       "Execute the jobs on hosts in randomized order": [
         "ホスト上でジョブを順不同で実行します"
@@ -471,19 +471,19 @@
         "テンプレートのレンダリングに失敗しました: %s"
       ],
       "Failed:": [
-        ""
+        "失敗:"
       ],
       "Fallback to Any Proxy": [
         "プロキシーへのフォールバック"
       ],
       "Feature input %{input_name} not defined in template %{template_name}": [
-        "テンプレート %{template_name} に機能入力 %{input_name} が定義されていません"
+        "テンプレート %%{template_name} に機能入力 %%{input_name} が定義されていません"
       ],
       "Fill all required fields in all the steps": [
-        ""
+        "すべてのステップの必須フィールドをすべて入力してください"
       ],
       "Fill all required fields in all the steps to start the job": [
-        ""
+        "ジョブを開始するには、すべてのステップの必須フィールドをすべて入力してください"
       ],
       "Filter by host collections": [
         "ホストコレクションでフィルター"
@@ -498,7 +498,7 @@
         "終了"
       ],
       "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step.": [
-        ""
+        "後で実行の場合は、「開始時刻」または「次の時刻よりも前に開始」の日付を選択する必要があります。以前の手順で直ぐに実行を選択できます。"
       ],
       "For example: 1, 2, 3, 4, 5...": [
         "たとえば、1、2、3、4、5..."
@@ -513,7 +513,7 @@
         "ジョブテンプレートの形成"
       ],
       "Future execution": [
-        ""
+        "将来の実行"
       ],
       "Get output for a host": [
         "ホストの出力を取得"
@@ -567,7 +567,7 @@
         "リモート実行用のホストインターフェイスの識別子"
       ],
       "Immediate execution": [
-        ""
+        "即時実行"
       ],
       "Import": [
         "インポート"
@@ -576,7 +576,7 @@
         "ERB からジョブテンプレートをインポート"
       ],
       "In Progress:": [
-        ""
+        "処理中:"
       ],
       "Include all inputs from the foreign template": [
         "外部テンプレートからのすべての入力を含める"
@@ -603,10 +603,10 @@
         "内部プロキシーセレクターは、Katello が有効になっている場合にのみ使用できます"
       ],
       "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled.": [
-        ""
+        "間隔 (秒)。この間隔内にクライアントによりジョブが取得されなかった場合は、ジョブがキャンセルされます。"
       ],
       "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs": [
-        ""
+        "間隔 (秒)。この間隔内にクライアントによりジョブが取得されなかった場合、ジョブはキャンセルされます。pull-mqtt ベースのジョブにのみ適用されます"
       ],
       "Invalid date": [
         "無効な日付"
@@ -657,7 +657,7 @@
         "ジョブ呼び出し"
       ],
       "Job invocations detail": [
-        ""
+        "ジョブ呼び出し詳細"
       ],
       "Job result": [
         "ジョブの結果"
@@ -711,10 +711,10 @@
         "詳細についてはドキュメントを参照してください。"
       ],
       "Legacy UI": [
-        ""
+        "レガシー UI"
       ],
       "List available remote execution features for a host": [
-        ""
+        "ホストで利用可能なリモート実行機能の一覧表示"
       ],
       "List foreign input sets": [
         "外部入力セットを一覧表示"
@@ -747,10 +747,10 @@
         "手動選択"
       ],
       "Minute can only be a number between 0-59": [
-        ""
+        "分は 0-59 の間の数字のみ指定できます。"
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
-        ""
+        "必須パーミッションがありません: ${missingPermissions.join( ', ' )}"
       ],
       "Monthly": [
         "毎月"
@@ -771,10 +771,10 @@
         "新規ジョブテンプレート"
       ],
       "New UI": [
-        ""
+        "新規 UI"
       ],
       "Next": [
-        ""
+        "次へ"
       ],
       "No (override)": [
         "No (上書き)"
@@ -792,28 +792,28 @@
         "結果は見つかりませんでした"
       ],
       "No template mapped to feature %{feature_name}": [
-        "機能 %{feature_name} にマッピングされたテンプレートがありません"
+        "機能 %%{feature_name} にマッピングされたテンプレートがありません"
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "入力が必須のすべての項目に値があるとは限りません。足りない入力: %s"
       ],
       "Not available": [
-        ""
+        "利用できません"
       ],
       "Not yet": [
-        ""
+        "実行前"
       ],
       "Now": [
-        ""
+        "今すぐ"
       ],
       "On": [
-        "オン"
+        "次の時刻に開始"
       ],
       "Only one of feature or job_template_id can be specified": [
         "機能または job_template_id の 1 つのみを指定できます"
       ],
       "Opening job invocation form": [
-        ""
+        "ジョブ呼び出しフォームを開く"
       ],
       "Organization": [
         "組織"
@@ -822,7 +822,7 @@
         "この呼び出しに対してのみテンプレートから説明形式を上書き"
       ],
       "Override the global time to pickup interval for this invocation only": [
-        ""
+        "グローバル時間をこの呼び出しだけの取得間隔に上書きする"
       ],
       "Override the timeout interval from the template for this invocation only": [
         "この呼び出しに対してのみテンプレートからタイムアウト間隔を上書き"
@@ -852,28 +852,28 @@
         "この回数以上は実行されません"
       ],
       "Permission Denied": [
-        ""
+        "パーミッションが拒否されました"
       ],
       "Please enter a search query": [
-        ""
+        "検索クエリーを入力してください"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
-        ""
+        "「スケジュール」- 「将来の実行」の手順に戻り、エラーを修正してください"
       ],
       "Please refine your search.": [
         "検索条件を見直してください。"
       ],
       "Please request the required permissions listed below from a Foreman administrator:": [
-        ""
+        "以下に一覧表示されている必須パーミッションを Foreman 管理者に要求してください:"
       ],
       "Please select at least one host": [
-        ""
+        "ホストを 1 つ以上選択してください"
       ],
       "Please select at least one host collection": [
-        ""
+        "ホストコレクションを少なくとも 1 つ選択してください。"
       ],
       "Please select at least one host group": [
-        ""
+        "少なくとも 1 つのホストグループを選択してください"
       ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         "SSH 通信に使用するポート。デフォルトのポートは 22 です。remote_execution_ssh_port という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
@@ -900,7 +900,7 @@
         "テンプレートのプレビューでの問題: %{error}。プレビューを表示する前に、テンプレート入力の変更を保存する必要があることに注意してください。"
       ],
       "Proceed Anyway": [
-        ""
+        "このまま続行"
       ],
       "Provider type": [
         "プロバイダータイプ"
@@ -927,7 +927,7 @@
         "REX ジョブが成功しました: %s"
       ],
       "REX pull mode": [
-        ""
+        "REX プルモード"
       ],
       "Randomized": [
         "順不同"
@@ -939,19 +939,19 @@
         "繰り返し"
       ],
       "Recurring execution": [
-        ""
+        "繰り返し実行"
       ],
       "Recurring logic": [
         "再帰論理"
       ],
       "Recurring logic %s cancelled successfully.": [
-        ""
+        "再帰論理 %s が正常にキャンセルされました。"
       ],
       "Recurring logic %s disabled successfully.": [
-        ""
+        "再帰論理 %s が正常に無効になりました。"
       ],
       "Recurring logic %s enabled successfully.": [
-        ""
+        "再帰論理 %s が正常に有効になりました。"
       ],
       "Recursive rendering of templates detected": [
         "検出されたテンプレートの再帰的なレンダリング"
@@ -993,7 +993,7 @@
         "再実行"
       ],
       "Rerun all": [
-        ""
+        "すべて再実行"
       ],
       "Rerun failed": [
         "再実行に失敗しました"
@@ -1008,7 +1008,7 @@
         "失敗したホストでの再実行"
       ],
       "Rerun successful": [
-        ""
+        "正常に再実行されました"
       ],
       "Rerun the job": [
         "ジョブを再実行"
@@ -1035,10 +1035,10 @@
         "Puppet を 1 回実行"
       ],
       "Run Script": [
-        ""
+        "スクリプトの実行"
       ],
       "Run a script": [
-        ""
+        "スクリプトの実行"
       ],
       "Run at most N tasks at a time": [
         "一度に最大 N タスクを実行"
@@ -1050,7 +1050,7 @@
         "ジョブを実行"
       ],
       "Run on selected hosts": [
-        ""
+        "選択したホストで実行"
       ],
       "Running": [
         "実行中"
@@ -1065,10 +1065,10 @@
         "SSH プロバイダー固有オプション"
       ],
       "SSH user": [
-        ""
+        "SSH ユーザー"
       ],
       "SSH user:": [
-        ""
+        "SSH ユーザー:"
       ],
       "Schedule": [
         "スケジュール"
@@ -1092,7 +1092,7 @@
         "スケジュール済み"
       ],
       "Scheduled at:": [
-        ""
+        "スケジュール時刻:"
       ],
       "Scheduled to start at": [
         "開始スケジュール:"
@@ -1101,7 +1101,7 @@
         "次の時刻よりも前に開始するようにスケジュール"
       ],
       "Scheduled: ${totalHosts} hosts": [
-        ""
+        "スケジュール済み: ${totalHosts} ホスト"
       ],
       "Script": [
         "スクリプト"
@@ -1143,25 +1143,25 @@
         "このサブネットに適用可能なすべてのリモート実行プロキシーを選択します。同じプロバイダーを使用するプロキシーが複数追加された場合は、プロキシー間で負荷が分散されます。"
       ],
       "Select the type of execution": [
-        ""
+        "実行の種類の選択"
       ],
       "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host": [
-        ""
+        "このホストの 'host_registration_remote_execution_pull' パラメーターを設定します。True に設定されている場合には、ぷるプロバイダーのクライアントはホストにデプロイされます。"
       ],
       "Set SSH key passphrase": [
         "SSH 鍵パスフレーズを設定"
       ],
       "Set SSH password": [
-        "SSH パスワードを設定"
+        "SSH パスワードの設定"
       ],
       "Set SSH user": [
-        ""
+        "SSH ユーザーの設定"
       ],
       "Set password for effective user (using sudo-like mechanisms)": [
         "実行ユーザーのパスワードを設定 (sudo と同様のメカニズムを使用)"
       ],
       "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level.": [
-        ""
+        "リモート実行のプルモードを設定します。「はい」に設定すると、登録したホストにプルプロパイダークライアントがデプロイされます。継承される値は、「host_registration_remote_execution」パラメーターに基づきます。これは、ホストグループ、オペレーティングシステム、組織などから継承できます。上書きされると、選択した値がホストパラメーターレベルで保存されます。"
       ],
       "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting": [
         "ホストインターフェースの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれを上書きすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
@@ -1188,10 +1188,10 @@
         "リモート実行機能の表示"
       ],
       "Skip to review": [
-        ""
+        "確認までスキップ"
       ],
       "Skip to review step": [
-        ""
+        "確認ステップまでスキップ"
       ],
       "Snippet": [
         "スニペット"
@@ -1200,19 +1200,19 @@
         "開始"
       ],
       "Start job": [
-        ""
+        "ジョブの開始"
       ],
       "Started": [
         "開始済み"
       ],
       "Started at:": [
-        ""
+        "開始時刻:"
       ],
       "Starts": [
         "開始"
       ],
       "Starts Before": [
-        ""
+        "次の時刻よりも前に開始"
       ],
       "Starts at": [
         "開始時刻"
@@ -1233,7 +1233,7 @@
         "状態"
       ],
       "Submit": [
-        ""
+        "送信"
       ],
       "Subscribe to all my jobs": [
         "すべての自分のジョブにサブスクライブする"
@@ -1248,22 +1248,22 @@
         "成功"
       ],
       "Succeeded:": [
-        ""
+        "成功:"
       ],
       "Success": [
         "成功"
       ],
       "Switch to the new job invocation detail UI": [
-        ""
+        "新しいジョブ呼び出し詳細 UI への切り替え"
       ],
       "Sync Job Templates": [
         "ジョブテンプレートの同期"
       ],
       "System status": [
-        ""
+        "システムステータス"
       ],
       "Systems": [
-        ""
+        "システム"
       ],
       "Target hosts": [
         "ターゲットホスト"
@@ -1302,13 +1302,13 @@
         "id '%{id}' のテンプレートが見つかりませんでした"
       ],
       "Template:": [
-        ""
+        "テンプレート:"
       ],
       "Templates list failed with:": [
         "テンプレート一覧が以下により失敗:"
       ],
       "The cron line supports extended cron line syntax. For details please refer to the ": [
-        ""
+        "cron 行は、拡張 cron 行構文をサポートしています。詳細は、以下を参照してください "
       ],
       "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}.": [
         "動的クエリー '%{query}' が解決されませんでした。解決するホストの一覧は %{here} に表示されます。"
@@ -1332,10 +1332,10 @@
         "使用するジョブテンプレート。機能が指定されていなければ、パラメーターが必要です"
       ],
       "The only applicable proxy %{proxy_names} is down": [
-        "適用可能な唯一のプロキシー %{proxy_names} がダウンしています。"
+        "適用可能な唯一のプロキシー %%{proxy_names} がダウンしています。"
       ],
       "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user": [
-        "ユーザーは機能 %{template_name} にマッピングされたテンプレート %{feature_name} にアクセスできません"
+        "ユーザーは機能 %%{template_name} にマッピングされたテンプレート %%{feature_name} にアクセスできません"
       ],
       "There are no available input fields for the selected template.": [
         "選択したテンプレートで使用可能な入力フィールドはありません。"
@@ -1353,19 +1353,19 @@
         "このテンプレートはロックされています。カスタマイズするには、このクローンを新規テンプレートに作成してください。"
       ],
       "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}.": [
-        "このテンプレートは、記述の生成に使用します。入力値には、構文 %{package} を使用できます。%{job_category} と %{template_name} を使用してジョブカテゴリーとテンプレート名を追加することもできます。"
+        "このテンプレートは、記述の生成に使用します。入力値は、構文 %%{package} を使用して使用できます。%%{job_category} と %%{template_name} を使用してジョブカテゴリーとテンプレート名を追加することもできます。"
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        "このテンプレートは記述の生成に使用します。<br/>入力値には、%{package} 構文を使用できますあ。<br/>ジョブカテゴリーとテンプレート<br/>名は、%{job_category} と %{template_name} を使用して追加することもできます。"
+        "このテンプレートは記述の生成に使用します。<br/>入力値は、構文 %%{package} を使用して使用できます。%%{job_category} と %%{template_name} を使用して、<br/> ジョブカテゴリーとテンプレート <br/> 名を追加することもできます。"
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "リモートホストで開始してからジョブを強制終了するまでの時間 (秒単位)"
       ],
       "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs.": [
-        ""
+        "ホストがジョブを取得しなければならない時間 (秒単位)。この制限内にジョブが取得されなかった場合、ジョブはキャンセルされます。デフォルトは 1 日です。pull-mqtt ベースのジョブにのみ適用されます。"
       ],
       "Time to pickup": [
-        ""
+        "取得する時間"
       ],
       "Timeout to kill": [
         "強制終了までのタイムアウト"
@@ -1404,13 +1404,13 @@
         "ジョブを中断しようとしています"
       ],
       "Trying to abort the job %s.": [
-        ""
+        "ジョブ %s を中断しようとしています。"
       ],
       "Trying to cancel the job": [
         "ジョブをキャンセルしようとしています"
       ],
       "Trying to cancel the job %s.": [
-        ""
+        "ジョブ %s をキャンセルしようとしています。"
       ],
       "Type": [
         "タイプ"
@@ -1419,10 +1419,10 @@
         "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。"
       ],
       "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>": [
-        ""
+        "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。<br><ul><li><b>静的</b>: このフォームの送信直後に評価します。</li><li><b>動的</b>: 実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストの設定が評価前に変更される可能性があります。</li></ul>"
       ],
       "Type of execution": [
-        ""
+        "実行のタイプ"
       ],
       "Type of query": [
         "クエリーのタイプ"
@@ -1443,7 +1443,7 @@
         "不明な実行ステータス"
       ],
       "Unknown input %{input_name} for template %{template_name}": [
-        "テンプレート %{template_name} での不明な入力 %{input_name}"
+        "テンプレート %%{template_name} での不明な入力 %%{input_name}"
       ],
       "Unknown remote execution feature %s": [
         "不明なリモート実行機能 %s"
@@ -1461,10 +1461,10 @@
         "デフォルトの説明テンプレートを使用"
       ],
       "Use legacy form": [
-        ""
+        "レガシーフォームの使用"
       ],
       "Use new job wizard": [
-        ""
+        "新規ジョブウィザードの使用"
       ],
       "User Inputs": [
         "ユーザー入力"
@@ -1500,7 +1500,7 @@
         "スケジュール済みのジョブを表示"
       ],
       "View task": [
-        ""
+        "タスクの表示"
       ],
       "Web Console": [
         "Web コンソール"
@@ -1551,7 +1551,7 @@
         "現在割り当てられているテンプレートを参照できません。フォームを保存すると、テンプレートの割り当てが解除されます。"
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "このアクションを実行する権限がありません。"
       ],
       "You have %s results to display. Showing first %s results": [
         "表示する結果が %s 件あります。最初の %s 件の結果を表示しています"
@@ -1566,7 +1566,7 @@
         "SmartProxy に default_capsule メソッドがありません"
       ],
       "documentation": [
-        ""
+        "ドキュメント"
       ],
       "effective user": [
         "実効ユーザー"
@@ -1581,7 +1581,7 @@
         "このフォームの送信直後に評価します"
       ],
       "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it": [
-        ""
+        "実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストのセットが評価前に変更される可能性があります"
       ],
       "failed": [
         "失敗"
@@ -1623,10 +1623,10 @@
         "no"
       ],
       "occurences": [
-        ""
+        "オカレンス"
       ],
       "open-help-tooltip-button": [
-        "open-help-tooltip-button"
+        "ヘルプのヒントボタン"
       ],
       "queued": [
         "キューに登録済み"
@@ -1635,7 +1635,7 @@
         "キューに追加して %{time} 後に実行を開始する"
       ],
       "range: 0-59": [
-        ""
+        "範囲: 0-59"
       ],
       "remove template input set": [
         "テンプレート入力セットの削除"
@@ -1665,7 +1665,7 @@
         "Smart Proxy を使用"
       ],
       "view host names": [
-        ""
+        "ホスト名の表示"
       ],
       "yes": [
         "yes"
