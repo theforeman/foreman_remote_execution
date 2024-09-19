@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
-        "Language-Team": "Korean (http://www.transifex.com/foreman/foreman/language/ko/)",
+        "Language-Team": "Korean (http://app.transifex.com/foreman/foreman/language/ko/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -85,7 +85,7 @@
         ""
       ],
       "Access denied": [
-        ""
+        "접근 거부됨"
       ],
       "Actions": [
         "작업"
@@ -127,7 +127,7 @@
         ""
       ],
       "At": [
-        "시간"
+        "At"
       ],
       "At minute": [
         ""
@@ -136,7 +136,7 @@
         ""
       ],
       "Back": [
-        ""
+        "뒤로"
       ],
       "Back to Job": [
         "작업으로 돌아가기"
@@ -148,7 +148,7 @@
         ""
       ],
       "Cancel": [
-        ""
+        "취소"
       ],
       "Cancel Job": [
         "작업 취소 "
@@ -619,7 +619,7 @@
         "호출 유형(%s 중 하나)"
       ],
       "Job": [
-        "업무"
+        "Job"
       ],
       "Job Details": [
         ""
@@ -676,13 +676,13 @@
         "작업 템플릿"
       ],
       "JobTemplate|Locked": [
-        "JobTemplate|잠김"
+        "JobTemplate|Locked"
       ],
       "JobTemplate|Name": [
-        "JobTemplate|이름"
+        "JobTemplate|Name"
       ],
       "JobTemplate|Snippet": [
-        "JobTemplate|조각 모음"
+        "JobTemplate|Snippet"
       ],
       "Jobs": [
         "작업"
@@ -760,7 +760,7 @@
         "북마크를 선택하거나 검색 쿼리를 입력해야 합니다."
       ],
       "N/A": [
-        "해당 없음 "
+        "N/A"
       ],
       "Name": [
         "이름"
@@ -772,10 +772,10 @@
         "새 작업 템플릿"
       ],
       "New UI": [
-        ""
+        "새 UI"
       ],
       "Next": [
-        ""
+        "다음"
       ],
       "No (override)": [
         ""
@@ -799,7 +799,7 @@
         "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
       ],
       "Not available": [
-        ""
+        "사용할 수 없음"
       ],
       "Not yet": [
         ""
@@ -1234,7 +1234,7 @@
         "상태"
       ],
       "Submit": [
-        ""
+        "제출"
       ],
       "Subscribe to all my jobs": [
         ""
@@ -1552,7 +1552,7 @@
         "현재 할당된 템플릿을 볼 수 없습니다. 지금 양식을 저장하면 템플릿의 할당이 취소됩니다."
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "이 작업을 수행할 권한이 없습니다."
       ],
       "You have %s results to display. Showing first %s results": [
         ""

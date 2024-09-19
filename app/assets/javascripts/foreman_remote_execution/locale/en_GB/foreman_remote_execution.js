@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "0868a4d1af5275b3f70b0a6dac4c99a4, 2016",
-        "Language-Team": "English (United Kingdom) (http://www.transifex.com/foreman/foreman/language/en_GB/)",
+        "Language-Team": "English (United Kingdom) (http://app.transifex.com/foreman/foreman/language/en_GB/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -136,7 +136,7 @@
         ""
       ],
       "Back": [
-        ""
+        "Back"
       ],
       "Back to Job": [
         ""
@@ -775,7 +775,7 @@
         ""
       ],
       "Next": [
-        ""
+        "Next"
       ],
       "No (override)": [
         ""
@@ -799,7 +799,7 @@
         ""
       ],
       "Not available": [
-        ""
+        "Not available"
       ],
       "Not yet": [
         ""
@@ -1553,7 +1553,7 @@
         ""
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "You are not authorised to perform this action."
       ],
       "You have %s results to display. Showing first %s results": [
         ""
@@ -1568,7 +1568,7 @@
         ""
       ],
       "documentation": [
-        ""
+        "documentation"
       ],
       "effective user": [
         ""

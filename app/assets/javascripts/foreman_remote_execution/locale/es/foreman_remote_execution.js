@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
-        "Language-Team": "Spanish (http://www.transifex.com/foreman/foreman/language/es/)",
+        "Language-Team": "Spanish (http://app.transifex.com/foreman/foreman/language/es/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -33,7 +33,7 @@
         ""
       ],
       "%{description} on %{host}": [
-        "%{description} en %{host}"
+        "activo"
       ],
       "'Starts before' date must be after 'Starts at' date": [
         ""
@@ -85,13 +85,13 @@
         "Abortar trabajo"
       ],
       "Access denied": [
-        ""
+        "Acceso denegado"
       ],
       "Actions": [
         "Acciones"
       ],
       "Active Filters:": [
-        ""
+        "Filtros activos:"
       ],
       "Add Foreign Input Set": [
         "Agregar conjunto de entrada externo"
@@ -136,7 +136,7 @@
         ""
       ],
       "Back": [
-        ""
+        "Atrás"
       ],
       "Back to Job": [
         "Volver al trabajo"
@@ -148,7 +148,7 @@
         "No se puede encontrar la Invocación de Empleo para un id %s"
       ],
       "Cancel": [
-        ""
+        "Cancelar"
       ],
       "Cancel Job": [
         "Cancelar tarea"
@@ -184,7 +184,7 @@
         "Elija una plantilla de tarea que esté preseleccionada en el formulario de invocación de tarea"
       ],
       "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}": [
-        "Dependencia circular detectada en el conjunto de entrada externo '%{template}' -> '%{target_template}'. Pila de plantillas: %{templates_stack}"
+        "Dependencia circular detectada en el conjunto de entrada externo '%{template}' -> '%%{target_template}'. Pila de plantillas: %%{templates_stack}"
       ],
       "Cleanup working directories": [
         "Directorios de limpieza en ejecución"
@@ -289,13 +289,13 @@
         ""
       ],
       "Current location %{loc_c} is different from job's location %{loc_j}.": [
-        "La ubicación actual %{loc_c} es diferente de la ubicación de la tarea %{loc_j}."
+        "La ubicación actual %%{loc_c} es diferente de la ubicación de la tarea %%{loc_j}."
       ],
       "Current organization %s is different from job's organization %s. This job may run on different hosts than before.": [
         ""
       ],
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
-        "La organización actual %{org_c} es diferente de la organización de la tarea %{org_j}."
+        "La organización actual %%{org_c} es diferente de la organización de la tarea %%{org_j}."
       ],
       "Daily": [
         "Diariamente"
@@ -334,7 +334,7 @@
         "Descripción"
       ],
       "Description Template": [
-        "Descripción Plantilla"
+        "Plantilla de descripción"
       ],
       "Description template": [
         "Plantilla de descripción"
@@ -361,7 +361,7 @@
         "Consulta dinámica"
       ],
       "Edit %s": [
-        "Editar %s"
+        "Editar"
       ],
       "Edit Job Template": [
         "Editar plantilla de trabajo"
@@ -391,10 +391,10 @@
         "Contraseña de usuario efectiva"
       ],
       "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        "La contraseña de usuario efectiva sólo es aplicable al proveedor SSH. Otros proveedores ignoran este campo. <br> La contraseña se almacena encriptada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina después de la última ejecución."
+        "La contraseña sudo solo se aplica para el proveedor de SSH. Otros proveedores ignoran este campo. <br> La contraseña se guarda de forma cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina tras la última ejecución."
       ],
       "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        "La contraseña de usuario efectiva sólo es aplicable al proveedor SSH. Otros proveedores ignoran este campo. La contraseña se almacena encriptada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina después de la última ejecución."
+        "La contraseña sudo solo se aplica para el proveedor de SSH. Otros proveedores ignoran este campo.  La contraseña se guarda de forma cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina tras la última ejecución."
       ],
       "Effective user:": [
         ""
@@ -538,7 +538,7 @@
         "host"
       ],
       "Host collections": [
-        "Colecciones de acogida"
+        "colecciones de hosts"
       ],
       "Host detail": [
         "Detalle del host"
@@ -691,7 +691,7 @@
         "La frase de contraseña de la clave solo se aplica para el proveedor de SSH. Otros proveedores ignoran este campo. <br> La frase de contraseña se guarda de forma cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina tras la última ejecución."
       ],
       "Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        "La frase de contraseña sólo es aplicable al proveedor SSH. Otros proveedores ignoran este campo. La frase de contraseña se almacena cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina después de la última ejecución."
+        "La frase de contraseña de la clave solo se aplica para el proveedor de SSH. Otros proveedores ignoran este campo.  La frase de contraseña se guarda de forma cifrada en la base de datos hasta que finaliza el trabajo. Para ejecuciones futuras o recurrentes, se elimina tras la última ejecución."
       ],
       "Label": [
         "Etiqueta"
@@ -712,7 +712,7 @@
         "Consulte la documentación para obtener más información."
       ],
       "Legacy UI": [
-        ""
+        "La interfaz de usuario heredada"
       ],
       "List available remote execution features for a host": [
         ""
@@ -772,10 +772,10 @@
         "Nueva plantilla de trabajo"
       ],
       "New UI": [
-        ""
+        "Nueva interfaz de usuario"
       ],
       "Next": [
-        ""
+        "Siguiente"
       ],
       "No (override)": [
         "No (anulación)"
@@ -793,13 +793,13 @@
         "No se han encontrado resultados"
       ],
       "No template mapped to feature %{feature_name}": [
-        "No hay ninguna plantilla mapeada a la funcionalidad %{feature_name}."
+        "No hay ninguna plantilla mapeada a la funcionalidad %%{feature_name}."
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "No todas las entradas requeridas tienen valores. Entradas que faltan: %s"
       ],
       "Not available": [
-        ""
+        "No disponible"
       ],
       "Not yet": [
         ""
@@ -1234,7 +1234,7 @@
         "Estado"
       ],
       "Submit": [
-        ""
+        "Enviar"
       ],
       "Subscribe to all my jobs": [
         "Suscribirse a todos mis trabajos"
@@ -1333,12 +1333,12 @@
         "La plantilla de trabajo que se debe utilizar; se requiere el parámetro a menos que se haya especificado la funcionalidad"
       ],
       "The only applicable proxy %{proxy_names} is down": [
-        "El único proxy aplicable %{proxy_names} está inactivo.",
-        "Todos los proxies aplicables %{count} están inactivos. Se intentó %{proxy_names}",
-        "Todos los proxies aplicables %{count} están inactivos. Se intentó %{proxy_names}"
+        "El único proxy aplicable %%{proxy_names} está inactivo.",
+        "Todos los proxies aplicables %{count} están inactivos. Se intentó %%{proxy_names}",
+        "Todos los proxies aplicables %{count} están inactivos. Se intentó %%{proxy_names}"
       ],
       "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user": [
-        "El usuario no puede acceder a la plantilla %{template_name} mapeada a la funcionalidad %{feature_name}."
+        "El usuario no puede acceder a la plantilla %%{template_name} mapeada a la funcionalidad %%{feature_name}."
       ],
       "There are no available input fields for the selected template.": [
         "No hay campos de entrada disponibles para la plantilla seleccionada."
@@ -1356,10 +1356,10 @@
         "La plantilla está bloqueada. Cópiela en una nueva para personalizarla."
       ],
       "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}.": [
-        "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis %{package}. También puede incluir la categoría de trabajo y el nombre de la plantilla con %{job_category} y %{template_name}."
+        "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis %{package}. También puede incluir la categoría de trabajo y el nombre de la plantilla con %%{job_category} y %%{template_name}."
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        "Esta plantilla se utiliza para generar la descripción.<br/>Los valores de entrada pueden utilizarse utilizando la sintaxis %{package}.<br/>También puede incluir la categoría de trabajo y el nombre de la plantilla<br/>utilizando %{job_category} y %{template_name}."
+        "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis <br/>. También puede incluir la categoría de trabajo y el nombre de la plantilla con %%{package} y %<br/>."
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Tiempo en segundos desde el comienzo en el host remoto tras lo cual debe eliminarse el trabajo."
@@ -1431,7 +1431,7 @@
         "Tipo de consulta"
       ],
       "Unable to create mail notification: %s": [
-        "No se puede crear una notificación de correo: %s"
+        "No se pudo crear la notificación de correo: %s"
       ],
       "Unable to fetch public key": [
         "No se pudo extraer la llave pública."
@@ -1554,7 +1554,7 @@
         "No puede ver la plantilla actualmente asignada. Si guarda el formulario ahora, se eliminará la asignación de la plantilla."
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "No está autorizado para realizar esta acción."
       ],
       "You have %s results to display. Showing first %s results": [
         "Tienes %s resultados para mostrar. Mostrando primeros resultados %s "
@@ -1569,7 +1569,7 @@
         "Falta el método default_capsule en SmartProxy"
       ],
       "documentation": [
-        ""
+        "documentación"
       ],
       "effective user": [
         "usuario efectivo"
@@ -1599,7 +1599,7 @@
         "Hosts"
       ],
       "in %s": [
-        "en %s"
+        "in %s"
       ],
       "included template '%s' not found": [
         "no se encontró la plantilla incluida '%s'."
@@ -1644,7 +1644,7 @@
         "eliminar el conjunto de entrada de la plantilla"
       ],
       "running %{percent}%%": [
-        "corriendo %{percent}%%"
+        "Ejecutando"
       ],
       "seconds": [
         "segundos"

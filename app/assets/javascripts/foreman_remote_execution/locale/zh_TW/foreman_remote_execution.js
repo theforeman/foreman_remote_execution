@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
-        "Language-Team": "Chinese (Taiwan) (http://www.transifex.com/foreman/foreman/language/zh_TW/)",
+        "Language-Team": "Chinese (Taiwan) (http://app.transifex.com/foreman/foreman/language/zh_TW/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -85,7 +85,7 @@
         ""
       ],
       "Access denied": [
-        ""
+        "拒絕存取"
       ],
       "Actions": [
         "動作"
@@ -136,7 +136,7 @@
         ""
       ],
       "Back": [
-        ""
+        "上一步"
       ],
       "Back to Job": [
         "回到工作"
@@ -775,7 +775,7 @@
         ""
       ],
       "Next": [
-        ""
+        "下一步"
       ],
       "No (override)": [
         ""
@@ -1553,7 +1553,7 @@
         "您不能看到目前指定的範本。現在儲存表單會取消指定範本。"
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "您未經許可執行這項動作。"
       ],
       "You have %s results to display. Showing first %s results": [
         ""

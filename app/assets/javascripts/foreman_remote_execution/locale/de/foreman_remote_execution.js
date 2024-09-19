@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
-        "Last-Translator": "Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022",
-        "Language-Team": "German (http://www.transifex.com/foreman/foreman/language/de/)",
+        "Last-Translator": "Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022-2023",
+        "Language-Team": "German (http://app.transifex.com/foreman/foreman/language/de/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -61,7 +61,7 @@
         ""
       ],
       "A job '%{subject}' has finished successfully": [
-        "Ein Job '%{subject}' wurde erfolgreich beendet"
+        "Ein Auftrag '%{subject}' wurde erfolgreich beendet"
       ],
       "A notification when a job finishes": [
         ""
@@ -82,7 +82,7 @@
         ""
       ],
       "Abort Job": [
-        "Job abbrechen"
+        "Auftrag abbrechen"
       ],
       "Access denied": [
         ""
@@ -91,7 +91,7 @@
         "Aktionen"
       ],
       "Active Filters:": [
-        ""
+        "Aktive Filter:"
       ],
       "Add Foreign Input Set": [
         "Fremdeingabe-Satz hinzufügen"
@@ -136,10 +136,10 @@
         ""
       ],
       "Back": [
-        ""
+        "Zurück"
       ],
       "Back to Job": [
-        "Zurück zum Job"
+        "Zurück zum Auftrag"
       ],
       "Bookmark": [
         "Lesezeichen"
@@ -151,10 +151,10 @@
         ""
       ],
       "Cancel Job": [
-        "Job abbrechen"
+        "Auftrag abbrechen"
       ],
       "Cancel job invocation": [
-        "Job-Aufruf abbrechen"
+        "Auftragsaufruf abbrechen"
       ],
       "Cancel recurring": [
         ""
@@ -178,7 +178,7 @@
         ""
       ],
       "Category and template": [
-        ""
+        "Kategorie und Vorlage"
       ],
       "Choose a job template that is pre-selected in job invocation form": [
         "Wählen Sie eine Jobvorlage, die im Jobaufrufformular vorausgewählt ist"
@@ -241,13 +241,13 @@
         "Vorschau konnte nicht gerendert werden, da kein Host, der Suchanfrage entspricht"
       ],
       "Could not rerun job %{id} because its template could not be found": [
-        "Job %{id} konnte nicht erneut aufgerufen werden, da die Vorlage nicht gefunden wurde."
+        "Auftrag %{id} konnte nicht erneut aufgerufen werden, da die Vorlage nicht gefunden wurde."
       ],
       "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings": [
         ""
       ],
       "Could not use any template used in the job invocation": [
-        "Es konnte keine Vorlage aus dem Jobaufruf verwendet werden"
+        "Es konnte keine Vorlage aus dem Auftragsaufruf verwendet werden"
       ],
       "Create": [
         "Erstellen"
@@ -259,13 +259,13 @@
         "Fremdeingabe-Satz erstellen"
       ],
       "Create a job invocation": [
-        "Neuen Job-Aufruf erstellen"
+        "Neuen Auftragsaufruf erstellen"
       ],
       "Create a job template": [
-        "Job-Vorlage erstellen"
+        "Auftragsvorlage erstellen"
       ],
       "Create a recurring job": [
-        "Wiederholten Job erstellen"
+        "Wiederkehrenden Auftrag erstellen"
       ],
       "Create report": [
         ""
@@ -328,7 +328,7 @@
         "Fremdeingabe-Satz löschen"
       ],
       "Delete a job template": [
-        "Job-Vorlage löschen"
+        "Auftragsvorlage löschen"
       ],
       "Description": [
         "Beschreibung"
@@ -364,7 +364,7 @@
         "%s bearbeiten"
       ],
       "Edit Job Template": [
-        "Job-Vorlage bearbeiten"
+        "Auftragsvorlage bearbeiten"
       ],
       "Edit Remote Execution Feature": [
         "Entfernte Ausführungsfunktionen bearbeiten"
@@ -442,7 +442,7 @@
         ""
       ],
       "Execute the jobs on hosts in randomized order": [
-        "Führe die Jobs auf Hosts in randomisierter Reihenfolge aus"
+        "Führe die Aufträge auf Hosts in zufälliger Reihenfolge aus"
       ],
       "Execution": [
         "Ausführung"
@@ -454,13 +454,13 @@
         "Ausführungsorder"
       ],
       "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>": [
-        "Die Ausführungsreihenfolge legt fest, ob die Jobs auf Hosts in alphabetischer Reihenfolge oder in zufälliger Reihenfolge ausgeführt werden sollen. <br><ul><li><b>Ordered </b>- führt die Jobs auf Hosts in alphabetischer Reihenfolge aus </li><li><b>Randomized </b>- randomisiert die Reihenfolge, in der Jobs auf Hosts ausgeführt werden </li></ul>"
+        "Die Ausführungsreihenfolge legt fest, ob die Aufträge auf Hosts in alphabetischer Reihenfolge oder in zufälliger Reihenfolge ausgeführt werden sollen. <br><ul><li><b>Ordered </b>- führt die Aufträge auf Hosts in alphabetischer Reihenfolge aus </li><li><b>Randomized </b>- randomisiert die Reihenfolge, in der Jobs auf Hosts ausgeführt werden </li></ul>"
       ],
       "Exit status: %s": [
         "Exit-Status: %s"
       ],
       "Export a job template to ERB": [
-        "Job-Vorlage nach ERB exportieren"
+        "Auftragsvorlage nach ERB exportieren"
       ],
       "Failed": [
         "Fehlgeschlagen"
@@ -562,7 +562,7 @@
         ""
       ],
       "How often the job should occur, in the cron format": [
-        "Wie oft der Job auftreten soll, in Cron-Format"
+        "Wie oft der Auftrag auftreten soll, in Cron-Format"
       ],
       "Identifier of the Host interface for Remote execution": [
         "Identifizierer des Host-interfaces für Remote-Ausführung"
@@ -574,7 +574,7 @@
         "Import"
       ],
       "Import a job template from ERB": [
-        "Job-Vorlage aus ERB importieren"
+        "Auftragsvorlage aus ERB importieren"
       ],
       "In Progress:": [
         ""
@@ -619,43 +619,43 @@
         "Jobtyp, einer von %s"
       ],
       "Job": [
-        "Job"
+        "Auftrag"
       ],
       "Job Details": [
-        "Job Details"
+        "Auftragsdetails"
       ],
       "Job Invocation": [
-        "Job-Aufruf"
+        "Auftragsaufruf"
       ],
       "Job Invocation Report Template": [
         ""
       ],
       "Job Invocations": [
-        "Job-Aufrufe"
+        "Auftragsaufrufe"
       ],
       "Job Task": [
-        "Aufgaben des Jobs"
+        "Auftragsaufgabe"
       ],
       "Job Templates": [
-        "Job-Vorlagen"
+        "Auftragsvorlagen"
       ],
       "Job cancelled by user": [
-        "Jobabbruch durch Benutzer"
+        "Auftragsabbruch durch Benutzer"
       ],
       "Job category": [
-        "Job-Kategorie"
+        "Auftragskategorie"
       ],
       "Job execution failed": [
-        "Jobausführung fehlgeschlagen"
+        "Auftragsausführung fehlgeschlagen"
       ],
       "Job finished with error": [
-        "Job abgeschlossen mit Fehler"
+        "Auftrag abgeschlossen mit Fehler"
       ],
       "Job invocation": [
-        "Job-Aufrufe "
+        "Auftragsaufruf"
       ],
       "Job invocations": [
-        "Job-Aufrufe "
+        "Auftragsaufrufe"
       ],
       "Job invocations detail": [
         ""
@@ -664,28 +664,28 @@
         ""
       ],
       "Job template": [
-        "Job-Vorlage "
+        "Auftragsvorlage "
       ],
       "Job template ID to be used for the feature": [
-        "Zukünftig zu verwendende ID der Job-Vorlage"
+        "Zukünftig zu verwendende Kennung der Auftragsvorlage"
       ],
       "Job template imported successfully.": [
-        "Job-Vorlage erfolgreich importiert"
+        "Auftragsvorlage erfolgreich importiert"
       ],
       "Job templates": [
-        "Job-Vorlagen"
+        "Auftragsvorlagen"
       ],
       "JobTemplate|Locked": [
         "Gesperrt"
       ],
       "JobTemplate|Name": [
-        "JobVorlage|Name"
+        "Auftragsvorlage|Name"
       ],
       "JobTemplate|Snippet": [
         "Snippet"
       ],
       "Jobs": [
-        "Jobs"
+        "Aufträge"
       ],
       "Key passhprase is only applicable for SSH provider. Other providers ignore this field. <br> Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
         "Key passhprase gilt nur für SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. <br> Die Passphrase wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
@@ -721,16 +721,16 @@
         "Fremdeingabe-Sätze auflisten"
       ],
       "List job invocations": [
-        "Job-Aufrufe auflisten"
+        "Auftragsaufrufe auflisten"
       ],
       "List job templates": [
-        "Job-Vorlagen auflisten"
+        "Auftragsvorlagen auflisten"
       ],
       "List job templates per location": [
-        "Job-Vorlagen pro Standort auflisten"
+        "Auftragsvorlagen pro Standort auflisten"
       ],
       "List job templates per organization": [
-        "Job-Vorlagen pro Organisation auflisten"
+        "Auftragsvorlagen pro Organisation auflisten"
       ],
       "List of proxy IDs to be used for remote execution": [
         "Liste der Proxy-IDs die für Remote-Ausführung benutzt werden können."
@@ -739,7 +739,7 @@
         "Entfernte Ausführungsfunktionen auflisten"
       ],
       "List template invocations belonging to job invocation": [
-        "Lasse dir die Template-Invocations ausgeben die zu einer Job-Invocation gehören"
+        "Vorlagenaufrufe, die zum Auftragsaufruf gehören, auflisten"
       ],
       "Location": [
         "Standort"
@@ -769,13 +769,13 @@
         "Niemals"
       ],
       "New Job Template": [
-        "Neue Job-Vorlage"
+        "Neue Auftragsvorlage"
       ],
       "New UI": [
         ""
       ],
       "Next": [
-        ""
+        "Weiter"
       ],
       "No (override)": [
         "Nein (Überschreiben)"
@@ -799,7 +799,7 @@
         "Nicht alle erforderlichen Eingaben haben Werte. Fehlende Eingaben: %s"
       ],
       "Not available": [
-        ""
+        "Nicht verfügbar"
       ],
       "Not yet": [
         ""
@@ -841,7 +841,7 @@
         "Passwort"
       ],
       "Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        "Das Passwort wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
+        "Das Passwort wird verschlüsselt in der DB gespeichert, bis der Auftrag abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
       ],
       "Pending": [
         "Ausstehend"
@@ -1012,7 +1012,7 @@
         ""
       ],
       "Rerun the job": [
-        "Job erneut ausführen"
+        "Auftrag erneut ausführen"
       ],
       "Reset to default": [
         "Rücksetzen auf Standardeinstellungen"
@@ -1030,7 +1030,7 @@
         "Ausführen"
       ],
       "Run Job": [
-        "Job ausführen"
+        "Auftrag ausführen"
       ],
       "Run Puppet Once": [
         "Puppet einmal ausführen"
@@ -1075,16 +1075,16 @@
         "Plan"
       ],
       "Schedule Remote Job": [
-        "Geplante Remote-Jobs"
+        "Geplante Remote-Aufträge"
       ],
       "Schedule a job": [
         ""
       ],
       "Schedule the job for a future time": [
-        "Job zu einem zukünftigen Zeitpunkt starten lassen"
+        "Auftrag zu einem zukünftigen Zeitpunkt starten lassen"
       ],
       "Schedule the job to start at a later time": [
-        "Job zu einer späteren Zeit starten lassen"
+        "Auftrag zu einer späteren Zeit starten lassen"
       ],
       "Schedule type": [
         ""
@@ -1138,7 +1138,7 @@
         ""
       ],
       "Select an ERB file to upload in order to import a job template.  The template must contain metadata in the first ERB comment.": [
-        "ERB-Datei zum Hochladen auswählen, um Job-Vorlage zu importieren. Die Vorlage muss Metadaten im ersten ERB Kommentar enthalten."
+        "ERB-Datei zum Hochladen auswählen, um Auftragsvorlage zu importieren. Die Vorlage muss Metadaten im ersten ERB Kommentar enthalten."
       ],
       "Select as many remote execution proxies as applicable for this subnet.  When multiple proxies with the same provider are added, actions will be load balanced among them.": [
         "Wählen Sie so viele Proxys für entfernte Ausführung aus, wie es für dieses Subnetz zutreffend ist. Wenn mehrere Proxys mit demselben Provider hinzugefügt werden, dann wird die Auslastung unter diesen ausgeglichen."
@@ -1180,10 +1180,10 @@
         " Details zu Fremdeingabe-Satz anzeigen"
       ],
       "Show job invocation": [
-        "Job-Aufrufe anzeigen"
+        "Auftragsaufrufe anzeigen"
       ],
       "Show job template details": [
-        "Details der Job-Vorlage anzeigen"
+        "Details der Auftragsvorlage anzeigen"
       ],
       "Show remote execution feature": [
         "Entfernte Ausführungsfunktionen anzeigen"
@@ -1258,7 +1258,7 @@
         ""
       ],
       "Sync Job Templates": [
-        "Synchronisations Job-Vorlage"
+        "Synchronisierungsauftragvorlagen"
       ],
       "System status": [
         ""
@@ -1282,7 +1282,7 @@
         "Aufgabendetails"
       ],
       "Task cancelled": [
-        "Task abgebrochen"
+        "Aufgabe abgebrochen"
       ],
       "Template ERB": [
         "Vorlage ERB"
@@ -1321,13 +1321,13 @@
         "Die endgültige Hostliste kann sich ändern, da die ausgewählte Anfrage dynamisch ist. Sie wird während der Ausführung wiederholt."
       ],
       "The job cannot be aborted at the moment.": [
-        "Die Aufgabe kann derzeit nicht abgebrochen werden."
+        "Der Auftrag kann derzeit nicht abgebrochen werden."
       ],
       "The job cannot be cancelled at the moment.": [
-        "Die Aufgabe kann derzeit nicht abgebrochen werden."
+        "Der Auftrag kann derzeit nicht abgebrochen werden."
       ],
       "The job could not be cancelled.": [
-        "Job kann nicht abgebrochen werden"
+        "Auftrag kann nicht abgebrochen werden"
       ],
       "The job template to use, parameter is required unless feature was specified": [
         "Das Job-Template zum Benutzen, der Parameter wird benötigt ausser das Feature wurde spezifiziert"
@@ -1358,10 +1358,10 @@
         "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. Eingabewerte können mittels Syntax %{package} verwendet werden. Sie können auch Job-Kategorie und Vorlagennamen über %{job_category} und %{template_name} einschließen."
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. <br/>Eingabewerte können mittels Syntax %{package} verwendet werden.<br/> Sie können auch Job-Kategorie und Vorlagennamen <br/>über %{job_category} und %{template_name} einschließen."
+        "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. <br/>Eingabewerte können mittels Syntax %{package} verwendet werden.<br/> Sie können auch Auftragskategorie und Vorlagennamen <br/>über %{job_category} und %{template_name} einschließen."
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
-        "Zeit in Sekunden ab dem Start auf dem Remote-Host, nach der der Job beendet werden soll."
+        "Zeit in Sekunden ab dem Start auf dem Remote-Host, nach der der Auftrag beendet werden soll."
       ],
       "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs.": [
         ""
@@ -1391,25 +1391,25 @@
         "Hosts gesamt"
       ],
       "Try to abort the job on a host without waiting for its result": [
-        "Versuche den Job auf den Host abzubrechen ohne auf das Resultat zu warten"
+        "Versuche, den Auftrag auf den Host abzubrechen, ohne auf das Resultat zu warten"
       ],
       "Try to abort the job without waiting for the results from the remote hosts": [
-        "Versuche den Job abzubrechen ohne auf das Resultat vom entfernten Host zu warten"
+        "Versuche, den Auftrag abzubrechen ohne auf das Resultat vom entfernten Host zu warten"
       ],
       "Try to cancel the job": [
-        "Versuche den Job abzubrechen"
+        "Versuche, den Auftrag abzubrechen"
       ],
       "Try to cancel the job on a host": [
-        "Versuche den Job auf einem Host abzubrechen"
+        "Versuche, den Auftrag auf einem Host abzubrechen"
       ],
       "Trying to abort the job": [
-        "Versuche Jobabbruch zu erzwingen"
+        "Versuche Auftragsabbruch zu erzwingen"
       ],
       "Trying to abort the job %s.": [
         ""
       ],
       "Trying to cancel the job": [
-        "Versuche den Job abzubrechen"
+        "Versuche, den Auftrag abzubrechen"
       ],
       "Trying to cancel the job %s.": [
         ""
@@ -1457,7 +1457,7 @@
         "Fremdeingabe-Satz aktualisieren"
       ],
       "Update a job template": [
-        "Job-Vorlage aktualisieren"
+        "Auftragsvorlage aktualisieren"
       ],
       "Use default description template": [
         "Standardbeschreibungsvorlage verwenden"
@@ -1472,16 +1472,16 @@
         "Benutzereingaben"
       ],
       "User can not execute job on host %s": [
-        "Benutzer kann den Job auf Host %s nicht ausführen"
+        "Benutzer kann den Auftrag auf Host %s nicht ausführen"
       ],
       "User can not execute job on infrastructure host %s": [
         ""
       ],
       "User can not execute this job template": [
-        "Benutzer kann diese Job-Vorlage nicht ausführen"
+        "Benutzer kann diese Auftragsvorlage nicht ausführen"
       ],
       "User can not execute this job template on %s": [
-        "Benutzer kann diese Job-Vorlage nicht auf %s ausführen"
+        "Benutzer kann diese Auftragsvorlage nicht auf %s ausführen"
       ],
       "User input": [
         "Benutzereingabe"
@@ -1553,7 +1553,7 @@
         "Sie haben nicht die Genehmigung, die aktuell zugewiesenen Vorlagen einzusehen. Wenn Sie das Formular jetzt speichern, wird die Zuweisung der Vorlage aufgehoben."
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "Sie sind nicht berechtigt, diese Aktion durchzuführen."
       ],
       "You have %s results to display. Showing first %s results": [
         ""
@@ -1568,7 +1568,7 @@
         "default_capsule-Methode fehlt in SmartProxy"
       ],
       "documentation": [
-        ""
+        "Dokumentation"
       ],
       "effective user": [
         "Effektiver Benutzer"

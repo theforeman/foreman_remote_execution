@@ -5,11 +5,11 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 9.0.1\n"
+"Project-Id-Version: foreman_remote_execution 14.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/foreman/foreman/l"
+"Language-Team: Portuguese (Brazil) (http://app.transifex.com/foreman/foreman/l"
 "anguage/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid "%s more"
 msgstr ""
 
 msgid "%{description} on %{host}"
-msgstr "%{description} em %{host}"
+msgstr "sim"
 
 msgid "'Starts before' date must be after 'Starts at' date"
 msgstr ""
@@ -87,13 +87,13 @@ msgid "Abort Job"
 msgstr "Sobre o trabalho"
 
 msgid "Access denied"
-msgstr ""
+msgstr "Acesso negado"
 
 msgid "Actions"
 msgstr "Ações"
 
 msgid "Active Filters:"
-msgstr ""
+msgstr "Filtros ativos:"
 
 msgid "Add Foreign Input Set"
 msgstr "Adicionar Conjunto de Entradas Externas"
@@ -138,7 +138,7 @@ msgid "Awaiting start"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Retornar"
 
 msgid "Back to Job"
 msgstr "Voltar ao Trabalho "
@@ -150,7 +150,7 @@ msgid "Can't find Job Invocation for an id %s"
 msgstr "Não consigo encontrar um emprego para uma identificação %s"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 msgid "Cancel Job"
 msgstr "Cancelar trabalho"
@@ -186,7 +186,7 @@ msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr "Escolha um template de trabalho pré-selecionado no formulário de invocação de trabalho"
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
-msgstr "Dependência circular detectada em conjunto de entradas externas '%{template}' -> '%{target_template}'. Pilha de templates: %{templates_stack}"
+msgstr "Dependência circular detectada em conjunto de entradas externas '%{template}' -> '%%{target_template}'. Pilha de templates: %%{templates_stack}"
 
 msgid "Cleanup working directories"
 msgstr "Limpeza dos diretórios de trabalho"
@@ -291,13 +291,13 @@ msgid "Current location %s is different from job's location %s. This job may run
 msgstr ""
 
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
-msgstr "O local atual %{loc_c} é diferente do local do trabalho %{loc_j}."
+msgstr "O local atual %%{loc_c} é diferente do local do trabalho %%{loc_j}."
 
 msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
 msgstr ""
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
-msgstr "A organização atual %{org_c} é diferente da organização do trabalho %{org_j}."
+msgstr "A organização atual %%{org_c} é diferente da organização do trabalho %%{org_j}."
 
 msgid "Daily"
 msgstr "Diário"
@@ -336,7 +336,7 @@ msgid "Description"
 msgstr "Descrição"
 
 msgid "Description Template"
-msgstr "Descrição Modelo"
+msgstr "Modelo de descrição"
 
 msgid "Description template"
 msgstr "Modelo de descrição"
@@ -360,10 +360,10 @@ msgid "Dynamic Query"
 msgstr "Consulta Dinâmica"
 
 msgid "Dynamic query"
-msgstr "Consulta dinâmica"
+msgstr "Consulta Dinâmica"
 
 msgid "Edit %s"
-msgstr "Editar %s"
+msgstr "Editar"
 
 msgid "Edit Job Template"
 msgstr "Editar Modelo de Trabalho"
@@ -393,10 +393,10 @@ msgid "Effective user password"
 msgstr "Senha efetiva do usuário"
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. <br> Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr "A senha efetiva do usuário só é aplicável para o provedor SSH. Outros provedores ignoram este campo. <br> A senha é armazenada criptografada no DB até que o trabalho termine. Para execuções futuras ou recorrentes, ela é removida após a última execução."
+msgstr "A senha sudo só é aplicável ao fornecedor SSH. Outros fornecedores ignoram esse campo. <br> A senha é armazenada criptografada no banco de dados até que o trabalho seja concluído. Para execuções futuras ou recorrentes, ela é removida após a última execução."
 
 msgid "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr "A senha efetiva do usuário só é aplicável para o provedor SSH. Outros provedores ignoram este campo. A senha é armazenada criptografada no DB até que o trabalho termine. Para execuções futuras ou recorrentes, ela é removida após a última execução."
+msgstr "A senha sudo só é aplicável ao fornecedor SSH. Outros fornecedores ignoram esse campo.  A senha é armazenada criptografada no banco de dados até que o trabalho seja concluído. Para execuções futuras ou recorrentes, ela é removida após a última execução."
 
 msgid "Effective user:"
 msgstr ""
@@ -540,7 +540,7 @@ msgid "Host"
 msgstr "Máquina"
 
 msgid "Host collections"
-msgstr "Coleções de anfitriões"
+msgstr "Coleções de Host"
 
 msgid "Host detail"
 msgstr "Detalhes do host"
@@ -693,7 +693,7 @@ msgid "Key passhprase is only applicable for SSH provider. Other providers ignor
 msgstr "A senha da chave só é aplicável ao fornecedor SSH. Outros fornecedores ignoram esse campo. <br> A senha é armazenada criptografada no banco de dados até que o trabalho seja concluído. Para execuções futuras ou recorrentes, ela é removida após a última execução."
 
 msgid "Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution."
-msgstr "A frase-chave só é aplicável ao fornecedor de SSH. Outros provedores ignoram este campo. A frase-chave é armazenada criptografada no DB até o término do trabalho. Para execuções futuras ou recorrentes, ela é removida após a última execução."
+msgstr "A senha da chave só é aplicável ao fornecedor SSH. Outros fornecedores ignoram esse campo.  A senha é armazenada criptografada no banco de dados até que o trabalho seja concluído. Para execuções futuras ou recorrentes, ela é removida após a última execução."
 
 msgid "Label"
 msgstr "Rótulo"
@@ -777,7 +777,7 @@ msgid "New UI"
 msgstr ""
 
 msgid "Next"
-msgstr ""
+msgstr "Próximo"
 
 msgid "No (override)"
 msgstr ""
@@ -795,13 +795,13 @@ msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
 msgid "No template mapped to feature %{feature_name}"
-msgstr "Nenhum template mapeado para o recurso %{feature_name}"
+msgstr "Nenhum template mapeado para o recurso %%{feature_name}"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Nem todas as entradas necessárias possuem valores. Entradas ausentes: %s"
 
 msgid "Not available"
-msgstr ""
+msgstr "Não disponível"
 
 msgid "Not yet"
 msgstr ""
@@ -1050,7 +1050,7 @@ msgid "Run at most N tasks at a time. If this is set and proxy batch triggering 
 msgstr "Executar no máximo N tarefas de cada vez. Se essa opção estiver definida, e o acionamento em lote de proxy estiver desabilitado, então, as tarefas serão acionadas no proxy inteligente em lotes de tamanho 1."
 
 msgid "Run job"
-msgstr "Executar trabalho"
+msgstr "Executar Trabalho"
 
 msgid "Run on selected hosts"
 msgstr ""
@@ -1230,13 +1230,13 @@ msgid "Static Query"
 msgstr "Consulta Estática "
 
 msgid "Static query"
-msgstr "Consulta estática"
+msgstr "Consulta Estática"
 
 msgid "Status"
 msgstr "Estado"
 
 msgid "Submit"
-msgstr ""
+msgstr "Submeter"
 
 msgid "Subscribe to all my jobs"
 msgstr "Inscrever-me em todos os meus empregos"
@@ -1336,12 +1336,12 @@ msgstr "O modelo de trabalho a ser usado. O parâmetro é obrigatórios, a não 
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] "O único proxy aplicável %{proxy_names} está inoperante"
-msgstr[1] "Todos os %{count} proxies aplicáveis estão inoperantes. Tentados: %{proxy_names}"
-msgstr[2] "Todos os %{count} proxies aplicáveis estão inoperantes. Tentados: %{proxy_names}"
+msgstr[0] "O único proxy aplicável %%{proxy_names} está inoperante"
+msgstr[1] "Todos os %{count} proxies aplicáveis estão inoperantes. Tentados: %%{proxy_names}"
+msgstr[2] "Todos os %{count} proxies aplicáveis estão inoperantes. Tentados: %%{proxy_names}"
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
-msgstr "O modelo %{template_name} mapeado para o recurso %{feature_name} não é acessível pelo usuário"
+msgstr "O modelo %%{template_name} mapeado para o recurso %%{feature_name} não é acessível pelo usuário"
 
 msgid "There are no available input fields for the selected template."
 msgstr "Não há campos de entrada disponíveis para o modelo selecionado."
@@ -1359,10 +1359,10 @@ msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "Este modelo está travado. Clone-o para um novo modelo para padronizar."
 
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "Este modelo é usado para gerar a descrição. Os valores de entrada podem ser usados com a sintaxe %{package}. Você pode incluir também a categoria de trabalho e o nome do modelo usando %{job_category} e %{template_name}."
+msgstr "Este modelo é usado para gerar a descrição. Os valores de entrada podem ser usados com a sintaxe %{package}. Você pode incluir também a categoria de trabalho e o nome do modelo usando %%{job_category} e %%{template_name}."
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
-msgstr "Este modelo é usado para gerar a descrição.<br/>Os valores de entrada podem ser usados usando a sintaxe %{package}.<br/>Você também pode incluir a categoria de trabalho e o nome do modelo<br/>usando %{job_category} e %{template_name}."
+msgstr "Este modelo é usado para gerar a descrição. Os valores de entrada podem ser usados com a sintaxe <br/>. Você pode incluir também a categoria de trabalho e o nome do modelo usando %%{package} e %<br/>."
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "Tempo em segundos do início no host remoto após o qual o trabalho deve ser encerrado."
@@ -1434,7 +1434,7 @@ msgid "Type of query"
 msgstr "Tipo de consulta"
 
 msgid "Unable to create mail notification: %s"
-msgstr "Incapaz de criar notificação por correio: %s"
+msgstr "Não é possível criar a notificação de e-mail: %s"
 
 msgid "Unable to fetch public key"
 msgstr "Não é possível capturar chave pública "
@@ -1557,7 +1557,7 @@ msgid "You are not allowed to see the currently assigned template. Saving the fo
 msgstr "Você não tem permissão para visualizar o modelo atualmente atribuído. Salvar o formulário agora cancelaria a atribuição do modelo. "
 
 msgid "You are not authorized to perform this action."
-msgstr ""
+msgstr "Você não está autorizado a executar essa ação."
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr "Você tem %s resultados para exibir. Mostrando primeiro %s resultados"
@@ -1572,7 +1572,7 @@ msgid "default_capsule method missing from SmartProxy"
 msgstr "método_capsule padrão faltando no SmartProxy"
 
 msgid "documentation"
-msgstr ""
+msgstr "documentação"
 
 msgid "effective user"
 msgstr "usuário efetivo"
@@ -1647,7 +1647,7 @@ msgid "remove template input set"
 msgstr "remover conjunto de entrada de modelo"
 
 msgid "running %{percent}%%"
-msgstr "funcionando %{percent}%%"
+msgstr "Executando"
 
 msgid "seconds"
 msgstr "segundos"

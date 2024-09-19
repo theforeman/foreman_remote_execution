@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
-        "Language-Team": "French (http://www.transifex.com/foreman/foreman/language/fr/)",
+        "Language-Team": "French (http://app.transifex.com/foreman/foreman/language/fr/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -18,7 +18,7 @@
         "plural_forms": "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
       },
       "${d.title} ${d.count} hosts": [
-        ""
+        "${d.title} ${d.count} hôtes"
       ],
       "%s": [
         "%s"
@@ -30,16 +30,16 @@
         "%s job a été invoqué"
       ],
       "%s more": [
-        ""
+        "%s de plus"
       ],
       "%{description} on %{host}": [
         "%{description} sur %{host}"
       ],
       "'Starts before' date must be after 'Starts at' date": [
-        ""
+        "La date \\\"Démarrage avant\\\" doit être postérieure à la date \\\"Démarrage à\\\"."
       ],
       "'Starts before' date must in the future": [
-        ""
+        "La date \\\"commence avant\\\" doit se situer dans le futur"
       ],
       "...and %s more": [
         "...et %s de plus"
@@ -56,7 +56,7 @@
         "Une liste des entrées du modèle externe à inclure, séparées par des virgules."
       ],
       "A job '%{job_name}' has %{status} at %{time}": [
-        "Un job '%{job_name}' a %{status} à %{time}"
+        "Un job '%%{job_name}' a %{status} à %{time}"
       ],
       "A job '%{subject}' has failed": [
         "Un job '%{subject}' a échoué"
@@ -74,25 +74,25 @@
         "Une balise spéciale pour le suivi d'un travail récurrent. Il ne peut y avoir qu'un seul job actif avec un objectif donné."
       ],
       "A user to be used for SSH.": [
-        ""
+        "Utilisateur pour SSH."
       ],
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "L'utilisateur choisi pour l'exécution du script. Si l'utilisateur est différent de celui utilisé pour SSH, su ou sudo sera mis en œuvre pour changer d'utilisateur."
       ],
       "Abort": [
-        ""
+        "Abandonner"
       ],
       "Abort Job": [
         "Abandonner le job"
       ],
       "Access denied": [
-        ""
+        "Accès refusé"
       ],
       "Actions": [
         "Actions"
       ],
       "Active Filters:": [
-        ""
+        "Filtres actifs :"
       ],
       "Add Foreign Input Set": [
         "Ajout d'un jeu de données en entrée externes"
@@ -101,10 +101,10 @@
         "Champs avancés"
       ],
       "After": [
-        ""
+        "Après"
       ],
       "After %s occurences": [
-        ""
+        "Après %s occurrences"
       ],
       "All fields are required.": [
         "Tous les champs sont obligatoires."
@@ -134,10 +134,10 @@
         "À la minute"
       ],
       "Awaiting start": [
-        ""
+        "En attente du démarrage"
       ],
       "Back": [
-        ""
+        "Précédent"
       ],
       "Back to Job": [
         "Retour aux job"
@@ -149,7 +149,7 @@
         "Impossible de trouver l’invocation de job ayant pour id %s"
       ],
       "Cancel": [
-        ""
+        "Annuler"
       ],
       "Cancel Job": [
         "Annuler la tâche"
@@ -158,10 +158,10 @@
         "Annuler le lancement du job"
       ],
       "Cancel recurring": [
-        ""
+        "Annuler la logique récurrente"
       ],
       "Canceled:": [
-        ""
+        "Annulé :"
       ],
       "Cancelled": [
         "Annulé"
@@ -179,22 +179,22 @@
         "La liste de catégories a échoué avec :"
       ],
       "Category and template": [
-        ""
+        "Catégorie et modèle"
       ],
       "Choose a job template that is pre-selected in job invocation form": [
         "Choisissez un modèle qui soit présélectionné dans le formulaire de requête du job"
       ],
       "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}": [
-        "Dépendance circulaire détectée dans l'ensemble d'entrées externes '%%{template}' -> '%{target_template}'. Pile de modèles : %{templates_stack}"
+        "Dépendance circulaire détectée dans l'ensemble d'entrées externes '%%{template}' -> '%%{target_template}'. Pile de modèles : %%{templates_stack}"
       ],
       "Cleanup working directories": [
         "Nettoyage des répertoires de travail"
       ],
       "Clear all filters": [
-        ""
+        "Effacer tous les filtres"
       ],
       "Clear input": [
-        ""
+        "Effacer l'entrée"
       ],
       "Clone a provision template": [
         "Cloner un modèle de job"
@@ -218,22 +218,22 @@
         "Contrôle le niveau de parallélisme et la distribution dans le temps"
       ],
       "Could not abort the job %s: ${response}": [
-        ""
+        "Impossible d'annuler le job %s :${response}"
       ],
       "Could not cancel recurring logic %s: ${response}": [
-        ""
+        "Impossible d'annuler la logique récurrente%s :${response}"
       ],
       "Could not cancel the job %s: ${response}": [
-        ""
+        "Impossible d'annuler le job %s :${response}"
       ],
       "Could not disable recurring logic %s: ${response}": [
-        ""
+        "Impossible de désactiver la logique récurrente%s :${response}"
       ],
       "Could not display data for job invocation.": [
         "Impossible d'afficher les données pour le lancement du job."
       ],
       "Could not enable recurring logic %s: ${response}": [
-        ""
+        "Impossible d’activer la logique récurrente%s :${response}"
       ],
       "Could not find any suitable interface for execution": [
         "Impossible de trouver une interface qui convient pour l'exécution"
@@ -245,7 +245,7 @@
         "Impossible de relancer le job %{id} parce que son modèle n'a pas pu être trouvé"
       ],
       "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings": [
-        "N’a pas pu utiliser de proxy pour le job %{provider}. Considérer configurer %{global_proxy}, %{fallback_proxy}dans les paramètres de configuration"
+        "N’a pas pu utiliser de proxy pour le job %{provider}. Considérer configurer %%{global_proxy}, %%{fallback_proxy}dans les paramètres de configuration"
       ],
       "Could not use any template used in the job invocation": [
         "Impossible d'utiliser un modèle qui est utilisé pour un lancement de job"
@@ -269,7 +269,7 @@
         "Créer un job récurrent"
       ],
       "Create report": [
-        ""
+        "Créer un rapport"
       ],
       "Create report for this job": [
         "Aucun rapport pour ce job"
@@ -278,25 +278,25 @@
         "Ligne Cron"
       ],
       "Cron line (extended)": [
-        ""
+        "Ligne Cron (étendue)"
       ],
       "Cron line format '1 2 3 4 5', where:": [
-        ""
+        "Format de ligne Cron '1 2 3 4 5', où :"
       ],
       "Cronline": [
         "Cronline"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
-        ""
+        "L'emplacement actuel %s est différent de l'emplacement du job %s. Ce job peut être exécuté sur des hôtes différents."
       ],
       "Current location %{loc_c} is different from job's location %{loc_j}.": [
-        "L’emplacement actuel %{loc_c} est différent de l’emplacement du job %{loc_j}."
+        "L’emplacement actuel %%{loc_c} est différent de l’emplacement du job %%{loc_j}."
       ],
       "Current organization %s is different from job's organization %s. This job may run on different hosts than before.": [
-        ""
+        "L'organisation actuelle %s est différente de l'organisation du job %s. Ce job peut être exécuté sur des hôtes différents."
       ],
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
-        "L'organisation actuelle %{org_c} est différente de l'organisation du job %{org_j}."
+        "L'organisation actuelle %%{org_c} est différente de l'organisation du job %%{org_j}."
       ],
       "Daily": [
         "Quotidien"
@@ -344,7 +344,7 @@
         "Désignation d’un objectif spécial"
       ],
       "Disable recurring": [
-        ""
+        "Désactiver les récurrents"
       ],
       "Display advanced fields": [
         "Afficher les champs avancés"
@@ -353,7 +353,7 @@
         "Pas de répétition"
       ],
       "Duplicated inputs detected: %{duplicated_inputs}": [
-        "Entrées dupliquées détectées : %{duplicated_inputs}"
+        "Entrées dupliquées détectées : %%{duplicated_inputs}"
       ],
       "Dynamic Query": [
         "Requête dynamique"
@@ -383,7 +383,7 @@
         "Utilisateur effectif"
       ],
       "Effective user method \\\"%{current_value}\\\" is not one of %{valid_methods}": [
-        "La méthode de l'utilisateur effectif \\\"%{current_value}\\\" n'est pas l'une des méthodes de %{valid_methods}"
+        "La méthode de l'utilisateur effectif \\\"%%{current_value}\\\" n'est pas l'une des méthodes de %%{valid_methods}"
       ],
       "Effective user options": [
         "Options pour l'utilisateur effectif"
@@ -398,13 +398,13 @@
         "Le mot de passe Sudo est uniquement applicable au fournisseur SSH. D'autres fournisseurs ignorent ce champ. Le mot de passe est stocké chiffré dans la base de données jusqu'à la fin du job. Pour les exécutions futures ou récurrentes, il est supprimé après la dernière exécution."
       ],
       "Effective user:": [
-        ""
+        "Utilisateur effectif :"
       ],
       "Enable Global Proxy": [
         "Activer le proxy global"
       ],
       "Enable recurring": [
-        ""
+        "Activer les récurrents"
       ],
       "End time needs to be after start time": [
         "Heure de fin doit être après l’heure de départ"
@@ -422,25 +422,25 @@
         "Évalue le :"
       ],
       "Every day at %s": [
-        ""
+        "Tous les jours à %s"
       ],
       "Every hour at minute %s": [
-        ""
+        "Toutes les heures à la minute %s"
       ],
       "Every month on %s at %s": [
-        ""
+        "Tous les mois sur %s à l'adresse suivante %s"
       ],
       "Every week on %s at %s": [
-        ""
+        "Chaque semaine sur %s à l'adresse %s"
       ],
       "Execute the job later, at a scheduled time.": [
-        ""
+        "Exécuter le job plus tard, à une heure programmée."
       ],
       "Execute the job now.": [
-        ""
+        "Exécutez le job maintenant."
       ],
       "Execute the job on a repeating schedule.": [
-        ""
+        "Exécuter le job selon un calendrier répétitif."
       ],
       "Execute the jobs on hosts in randomized order": [
         "Exécuter les jobs sur les hôtes dans un ordre aléatoire"
@@ -473,19 +473,19 @@
         "Echec de rendu du modèle : %s"
       ],
       "Failed:": [
-        ""
+        "Échec :"
       ],
       "Fallback to Any Proxy": [
         "Repli sur n'importe quel proxy"
       ],
       "Feature input %{input_name} not defined in template %{template_name}": [
-        "Entrée de la caractéristique %{input_name}non définie dans le modèle %{template_name}"
+        "Entrée de la caractéristique %%{input_name}non définie dans le modèle %%{template_name}"
       ],
       "Fill all required fields in all the steps": [
-        ""
+        "Saisissez tous les champs requis dans toutes les étapes"
       ],
       "Fill all required fields in all the steps to start the job": [
-        ""
+        "Remplissez tous les champs obligatoires à toutes les étapes pour démarrer le job"
       ],
       "Filter by host collections": [
         "Filtrer les collections d'hôtes"
@@ -500,7 +500,7 @@
         "Terminé"
       ],
       "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step.": [
-        ""
+        "Pour une exécution future, il faut sélectionner une date ’Démarrage à’ ou une date ’Démarrage avant’. L'exécution immédiate peut être sélectionnée à l'étape précédente."
       ],
       "For example: 1, 2, 3, 4, 5...": [
         "Par exemple: 1, 2, 3, 4, 5..."
@@ -515,7 +515,7 @@
         "Nouveau modèle de job"
       ],
       "Future execution": [
-        ""
+        "Exécution prochaine"
       ],
       "Get output for a host": [
         "Récupérer la sortie standard d'un hôte"
@@ -569,7 +569,7 @@
         "Identifiant de l'interface de l'hôte pour l'exécution à distance"
       ],
       "Immediate execution": [
-        ""
+        "Exécution immédiate"
       ],
       "Import": [
         "Importation"
@@ -578,7 +578,7 @@
         "Importe un modèle de job depuis ERB"
       ],
       "In Progress:": [
-        ""
+        "En cours :"
       ],
       "Include all inputs from the foreign template": [
         "Inclut toutes les entrées du modèle étranger"
@@ -605,10 +605,10 @@
         "Le sélecteur de proxy interne ne peut être utilisé que si Katello est activé"
       ],
       "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled.": [
-        ""
+        "Intervalle en secondes; si le travail n'est pas récupéré par un client dans cet intervalle, il sera annulé."
       ],
       "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs": [
-        ""
+        "Intervalle en secondes, si le travail n'est pas récupéré par un client dans cet intervalle, il sera annulé. S'applique uniquement aux tâches basées sur pull-mqtt"
       ],
       "Invalid date": [
         "Chemin invalide"
@@ -659,7 +659,7 @@
         "Lancement de jobs"
       ],
       "Job invocations detail": [
-        ""
+        "Détails des appels de job"
       ],
       "Job result": [
         "Résultat Job"
@@ -713,10 +713,10 @@
         "Approfondissez ce sujet dans la documentation."
       ],
       "Legacy UI": [
-        ""
+        "UI héritée"
       ],
       "List available remote execution features for a host": [
-        ""
+        "Répertorier les fonctionnalités d'exécution à distance disponibles pour un hôte"
       ],
       "List foreign input sets": [
         "Afficher les jeux de données en entrée externes"
@@ -749,10 +749,10 @@
         "Sélection manuelle"
       ],
       "Minute can only be a number between 0-59": [
-        ""
+        "La minute doit être un nombre compris entre 0 et 59"
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
-        ""
+        "Il manque les autorisations requises : ${missingPermissions.join( ', ' )}"
       ],
       "Monthly": [
         "Mensuel"
@@ -773,10 +773,10 @@
         "Nouveau modèle de job"
       ],
       "New UI": [
-        ""
+        "Nouvel UI"
       ],
       "Next": [
-        ""
+        "Suivant"
       ],
       "No (override)": [
         "Non (remplacement)"
@@ -794,19 +794,19 @@
         "Aucun résultat"
       ],
       "No template mapped to feature %{feature_name}": [
-        "Aucun modèle n'est en relation avec la fonction %{feature_name}"
+        "Aucun modèle n'est en relation avec la fonction %%{feature_name}"
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "Les entrées n'ont pas toutes des valeurs associées. Les entrées demandant de l'attention : %s"
       ],
       "Not available": [
-        ""
+        "Non disponible"
       ],
       "Not yet": [
-        ""
+        "Pas encore"
       ],
       "Now": [
-        ""
+        "Maintenant"
       ],
       "On": [
         "Activé"
@@ -815,7 +815,7 @@
         "Seule une fonctionnalité ou un job_template_id ne peuvent être spécifiés"
       ],
       "Opening job invocation form": [
-        ""
+        "Ouverture du formulaire de lancement du job"
       ],
       "Organization": [
         "Organisation"
@@ -824,7 +824,7 @@
         "Remplacer le format de description du modèle pour ce lancement uniquement"
       ],
       "Override the global time to pickup interval for this invocation only": [
-        ""
+        "Remplacer l'intervalle global entre les appropriations de tâches pour cette invocation uniquement."
       ],
       "Override the timeout interval from the template for this invocation only": [
         "Remplacer l'intervalle d'expiration du modèle pour ce lancement uniquement"
@@ -854,28 +854,28 @@
         "Ne pas lancer d'autres exécutions après cette date"
       ],
       "Permission Denied": [
-        ""
+        "Permission non accordée"
       ],
       "Please enter a search query": [
-        ""
+        "Veuillez saisir une requête de recherche"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
-        ""
+        "Veuillez retourner à l'étape \\\\\\\"Programme\\\"\\\\ - \\\\\\\"Exécution future\\\"\\\\ pour corriger l'erreur."
       ],
       "Please refine your search.": [
         "Veuillez raffiner votre recherche."
       ],
       "Please request the required permissions listed below from a Foreman administrator:": [
-        ""
+        "Merci de demander une des permissions requises listées ci-dessous à un administrateur de Foreman :"
       ],
       "Please select at least one host": [
-        ""
+        "Veuillez sélectionner au moins un hôte"
       ],
       "Please select at least one host collection": [
-        ""
+        "Veuillez sélectionner au moins une collection d'hôte"
       ],
       "Please select at least one host group": [
-        ""
+        "Veuillez sélectionner au moins un groupe d'hôtes"
       ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         "Port à utiliser pour la communication SSH. Le port par défaut est 22. Vous pouvez le remplacer selon les hôtes en définissant un paramètre appelé remote_execution_ssh_port."
@@ -902,7 +902,7 @@
         "Problème de prévisualisation du modèle : %{error}. Remarquez que vous devez avoir sauvé les changements du modèle d'entrée avant de pouvoir le prévisualiser."
       ],
       "Proceed Anyway": [
-        ""
+        "Continuer malgré tout"
       ],
       "Provider type": [
         "Type de fournisseur"
@@ -929,7 +929,7 @@
         "Job REX a réussi - %s"
       ],
       "REX pull mode": [
-        ""
+        "REX pull mode"
       ],
       "Randomized": [
         "Randomisé"
@@ -941,19 +941,19 @@
         "Récurrence"
       ],
       "Recurring execution": [
-        ""
+        "Exécution périodique"
       ],
       "Recurring logic": [
         "Logique récurrente"
       ],
       "Recurring logic %s cancelled successfully.": [
-        ""
+        "Logique récurrente%s activée avec succès."
       ],
       "Recurring logic %s disabled successfully.": [
-        ""
+        "Logique récurrente%s désactivé avec succès."
       ],
       "Recurring logic %s enabled successfully.": [
-        ""
+        "Logique récurrente%s activée avec succès."
       ],
       "Recursive rendering of templates detected": [
         "Détection de récursion dans le rendu des modèles"
@@ -995,7 +995,7 @@
         "Relancer"
       ],
       "Rerun all": [
-        ""
+        "Tout réexécuter"
       ],
       "Rerun failed": [
         "Échec du relancement"
@@ -1010,7 +1010,7 @@
         "Relancer sur les hôtes où le job a échoué"
       ],
       "Rerun successful": [
-        ""
+        "Réexécution réussie"
       ],
       "Rerun the job": [
         "Relancer le job"
@@ -1037,10 +1037,10 @@
         "Lancer Puppet"
       ],
       "Run Script": [
-        ""
+        "Exécuter Script"
       ],
       "Run a script": [
-        ""
+        "Exécuter un script"
       ],
       "Run at most N tasks at a time": [
         "Lance un maximum de N tâches simultanément"
@@ -1052,7 +1052,7 @@
         "Lancer le job"
       ],
       "Run on selected hosts": [
-        ""
+        "Lancer sur les hôtes sélectionnés"
       ],
       "Running": [
         "Exécution en cours"
@@ -1067,10 +1067,10 @@
         "Options spécifiques au fournisseur SSH"
       ],
       "SSH user": [
-        ""
+        "Utilisateur SSH"
       ],
       "SSH user:": [
-        ""
+        "Utilisateur SSH :"
       ],
       "Schedule": [
         "Programmer"
@@ -1091,10 +1091,10 @@
         "Type de programmation"
       ],
       "Scheduled": [
-        "Prévu"
+        "Programmé"
       ],
       "Scheduled at:": [
-        ""
+        "Prévu à :"
       ],
       "Scheduled to start at": [
         "Programmé pour démarrer à"
@@ -1103,7 +1103,7 @@
         "Programmé pour démarrer avant"
       ],
       "Scheduled: ${totalHosts} hosts": [
-        ""
+        "Prévu: ${totalHosts} hôtes"
       ],
       "Script": [
         "Script"
@@ -1145,10 +1145,10 @@
         "Choisir tous les proxies d'exécution distante applicables pour ce sous-réseau. Quand plusieurs proxies avec un même fournisseur sont ajoutés, les actions seront réparties sur chacun d'entre eux."
       ],
       "Select the type of execution": [
-        ""
+        "Sélectionner le type d'exécution"
       ],
       "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host": [
-        ""
+        "Définit le paramètre 'host_registration_remote_execution_pull' pour l'hôte. S'il est défini à true, le client fournisseur d’extraction (pull) sera déployé sur l'hôte."
       ],
       "Set SSH key passphrase": [
         "Définir Phrase de passe de clé SSH"
@@ -1157,13 +1157,13 @@
         "Définir Mot de passe SSH"
       ],
       "Set SSH user": [
-        ""
+        "Définir Utilisateur SSH"
       ],
       "Set password for effective user (using sudo-like mechanisms)": [
         "Définir le mot de passe pour l'utilisateur effectif (en utilisant des mécanismes similaires à ceux de Sudo)"
       ],
       "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level.": [
-        ""
+        "Configuration de l’exécution à distance. Si la valeur est \\\"Oui\\\", le client fournisseur d’extraction (pull) sera installé sur l'hôte enregistré. La valeur héritée est basée sur le paramètre `host_registration_remote_execution`. Elle peut être héritée, par exemple, du groupe d'hôtes, du système d'exploitation, de l'organisation. Lorsqu'elle est remplacée, la valeur sélectionnée sera stockée au niveau du paramètre de l'hôte."
       ],
       "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting": [
         "Les adresses IP sur les interfaces hôtes doivent-elles être préférées au nom fqdn ? Cela est utile lorsque DNS ne résout pas les noms fqdn correctement. Vous pouvez les remplacer selon les hôtes en définissant un paramètre appelé remote_execution_connect_by_ip. Pour les hôtes à double empilement, vous devez prendre en compte le paramètre remote_execution_connect_by_ip_prefer_ipv6"
@@ -1190,10 +1190,10 @@
         "Affiche la capacité d'exécution distante"
       ],
       "Skip to review": [
-        ""
+        "Passer à la révision"
       ],
       "Skip to review step": [
-        ""
+        "Passer à l'étape de révision"
       ],
       "Snippet": [
         "Snippet"
@@ -1202,19 +1202,19 @@
         "Démarrer"
       ],
       "Start job": [
-        ""
+        "Démarrer la tâche"
       ],
       "Started": [
         "Démarré"
       ],
       "Started at:": [
-        ""
+        "Commencé à :"
       ],
       "Starts": [
         "Démarrage"
       ],
       "Starts Before": [
-        ""
+        "Démarre avant"
       ],
       "Starts at": [
         "Démarrage à"
@@ -1235,7 +1235,7 @@
         "Statut"
       ],
       "Submit": [
-        ""
+        "Envoyer"
       ],
       "Subscribe to all my jobs": [
         "Souscrire à tous mes jobs"
@@ -1250,22 +1250,22 @@
         "Réussie"
       ],
       "Succeeded:": [
-        ""
+        "Réussi :"
       ],
       "Success": [
         "Réussi"
       ],
       "Switch to the new job invocation detail UI": [
-        ""
+        "Basculer vers la nouvelle interface utilisateur détaillée des appels de tâches"
       ],
       "Sync Job Templates": [
         "Modèles de job synchronisés"
       ],
       "System status": [
-        ""
+        "Statut du système"
       ],
       "Systems": [
-        ""
+        "Systèmes"
       ],
       "Target hosts": [
         "Hôtes cibles"
@@ -1304,13 +1304,13 @@
         "Le modèle avec l'ID '%%{id} ' n'a pas été trouvé"
       ],
       "Template:": [
-        ""
+        "Modèle :"
       ],
       "Templates list failed with:": [
         "La liste des modèles a échoué avec :"
       ],
       "The cron line supports extended cron line syntax. For details please refer to the ": [
-        ""
+        "La ligne cron prend en charge la syntaxe de ligne cron étendue. Pour plus de détails, veuillez vous référer au "
       ],
       "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}.": [
         "La requête dynamique '%{query}' n'a pas encore été résolue. La liste des hôtes actuelle avec lesquels ils pourraient être résolus peut être vue ici %{here}."
@@ -1334,12 +1334,12 @@
         "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
       ],
       "The only applicable proxy %{proxy_names} is down": [
-        "Le seul proxy applicable %{proxy_names} est indisponible",
-        "Tous les proxys %{count} applicables sont hors service. %{proxy_names} tenté",
-        "Tous les proxys %{count} applicables sont hors service. %{proxy_names} tenté"
+        "Le seul proxy applicable %%{proxy_names} est indisponible",
+        "Tous les proxys %{count} applicables sont hors service. %%{proxy_names} tenté",
+        "Tous les proxys %{count} applicables sont hors service. %%{proxy_names} tenté"
       ],
       "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user": [
-        "Le modèle %{template_name} en relation avec la fonction %{feature_name} n'est pas accessible par l'utilisateur"
+        "Le modèle %%{template_name} en relation avec la fonction %%{feature_name} n'est pas accessible par l'utilisateur"
       ],
       "There are no available input fields for the selected template.": [
         "Il n’y a pas de champs d’entrées disponibles pour le modèle sélectionné."
@@ -1357,19 +1357,19 @@
         "Ce modèle est verrouillé. Veuillez le cloner vers un nouveau modèle pour personnaliser ce dernier."
       ],
       "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}.": [
-        "Ce modèle est utilisé pour générer la description. Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %{job_category} and %{template_name}."
+        "Ce modèle est utilisé pour générer la description. Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %%{job_category} and %%{template_name}."
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %{job_category} et %{template_name}."
+        "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %%{job_category} et %%{template_name}."
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Durée en secondes depuis le démarrage sur l'hôte distant après laquelle le job doit être supprimé."
       ],
       "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs.": [
-        ""
+        "Délai en secondes pendant lequel l'hôte doit récupérer une tâche. Si la tâche n'est pas récupérée dans ce délai, elle est annulée. La valeur par défaut est 1 jour. S'applique seulement aux jobs basés sur pull-mqtt."
       ],
       "Time to pickup": [
-        ""
+        "Heure d’appropriation de tâche(s)"
       ],
       "Timeout to kill": [
         "Délai avant suppression"
@@ -1408,13 +1408,13 @@
         "Tentative d'abandon du job"
       ],
       "Trying to abort the job %s.": [
-        ""
+        "J’essaie d'abandonner le job %s ."
       ],
       "Trying to cancel the job": [
         "Tentative d'annulation du job"
       ],
       "Trying to cancel the job %s.": [
-        ""
+        "J'essaie d'annuler le travail%s ."
       ],
       "Type": [
         "Type"
@@ -1423,10 +1423,10 @@
         "Le type a un impact sur le moment où la requête est évaluée par les hôtes."
       ],
       "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>": [
-        ""
+        "Le type est important lors de l'évaluation de la requête sur les hôtes. <br><ul><li><b>Statique</b> - évalue juste après la validation de ce formulaire </li><li><b>Dynamique</b> - évalué juste avant le début de l'exécution, donc si l'action est planifiée ultérieurement, la liste des systèmes cibles peut changer avant l'exécution</li></ul>"
       ],
       "Type of execution": [
-        ""
+        "Type d'exécution"
       ],
       "Type of query": [
         "Type de requête"
@@ -1447,7 +1447,7 @@
         "État d'exécution inconnu"
       ],
       "Unknown input %{input_name} for template %{template_name}": [
-        "Entrée inconnue %{input_name} pour le modèle %{template_name}"
+        "Entrée inconnue %%{input_name} pour le modèle %%{template_name}"
       ],
       "Unknown remote execution feature %s": [
         "Fonction d'exécution distante inconnue %s"
@@ -1465,10 +1465,10 @@
         "Utiliser le modèle de description par défaut"
       ],
       "Use legacy form": [
-        ""
+        "Utiliser l'ancien formulaire"
       ],
       "Use new job wizard": [
-        ""
+        "Utiliser Assistant Job"
       ],
       "User Inputs": [
         "Entrées utilisateur"
@@ -1504,7 +1504,7 @@
         "Vois les jobs programmés"
       ],
       "View task": [
-        ""
+        "Voir les tâches "
       ],
       "Web Console": [
         "Console Web"
@@ -1555,7 +1555,7 @@
         "Vous n'êtes pas autorisé à afficher le modèle affecté en cours. La Sauvegarde du formulaire en cours supprimerait l'affectation au modèle."
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "Vous n'êtes pas autorisé à effectuer cette action."
       ],
       "You have %s results to display. Showing first %s results": [
         "Vous avez %s résultats à afficher. Afficher les %s premiers résultats"
@@ -1570,7 +1570,7 @@
         "méthode default_capsule manquante dans SmartProxy"
       ],
       "documentation": [
-        ""
+        "documentation"
       ],
       "effective user": [
         "utilisateur effectif"
@@ -1585,7 +1585,7 @@
         "évalue dès que vous soumettez ce formulaire"
       ],
       "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it": [
-        ""
+        "évalue juste avant que l’exécution ne commence, donc, si c’est prévu dans le futur, le groupe d’hôtes ciblés peut changer avant"
       ],
       "failed": [
         "échec"
@@ -1627,7 +1627,7 @@
         "non"
       ],
       "occurences": [
-        ""
+        "occurrences"
       ],
       "open-help-tooltip-button": [
         "open-help-tooltip-button"
@@ -1639,7 +1639,7 @@
         "ajouté en file d'attente pour lancer l'exécution dans %{time}"
       ],
       "range: 0-59": [
-        ""
+        "plage de valeurs : 0-59"
       ],
       "remove template input set": [
         "supprimer un modèles des données en entrée"
@@ -1669,7 +1669,7 @@
         "Créer un proxy Smart"
       ],
       "view host names": [
-        ""
+        "afficher les noms d'hôtes"
       ],
       "yes": [
         "oui"

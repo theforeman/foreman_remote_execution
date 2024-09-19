@@ -3,11 +3,11 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 9.0.1",
+        "Project-Id-Version": "foreman_remote_execution 14.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
-        "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
-        "Language-Team": "Chinese (China) (http://www.transifex.com/foreman/foreman/language/zh_CN/)",
+        "Last-Translator": "Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2024",
+        "Language-Team": "Chinese (China) (http://app.transifex.com/foreman/foreman/language/zh_CN/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
         "Content-Transfer-Encoding": "8bit",
@@ -18,7 +18,7 @@
         "plural_forms": "nplurals=1; plural=0;"
       },
       "${d.title} ${d.count} hosts": [
-        ""
+        "${d.title} ${d.count} 主机"
       ],
       "%s": [
         "%s"
@@ -30,16 +30,16 @@
         "%s 任务已被调用"
       ],
       "%s more": [
-        ""
+        "%s 更多"
       ],
       "%{description} on %{host}": [
-        "%{host} 的 %{description}"
+        "%{host} 中的 %{host}"
       ],
       "'Starts before' date must be after 'Starts at' date": [
-        ""
+        "'Starts before' 的日期需要在 'Starts at' 日期之后"
       ],
       "'Starts before' date must in the future": [
-        ""
+        "'Starts before' 日期需要是一个未来的时间"
       ],
       "...and %s more": [
         "...和 %s 个更多"
@@ -54,7 +54,7 @@
         "要从外部模板中包含的输入名称的列表，以逗号分隔。"
       ],
       "A job '%{job_name}' has %{status} at %{time}": [
-        "作业 '%{job_name}' 的 %%{status}（在 %%{time}）"
+        "作业 '%%{job_name}' 的 %%{status}（在 %%{time}）"
       ],
       "A job '%{subject}' has failed": [
         "作业 '%%{subject}' 已失败"
@@ -72,25 +72,25 @@
         "用于跟踪周期性作业的特殊标签。一次只能有一个具有给定目的的活跃作业。"
       ],
       "A user to be used for SSH.": [
-        ""
+        "用于 SSH 的用户。"
       ],
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "要使用執行這 script 的使用者。如果使用者與 SSH 使用者不同，會用 su 或 sudo 來切換使用者。"
       ],
       "Abort": [
-        ""
+        "终止"
       ],
       "Abort Job": [
         "终止作业"
       ],
       "Access denied": [
-        ""
+        "拒绝访问"
       ],
       "Actions": [
         "操作"
       ],
       "Active Filters:": [
-        ""
+        "活跃的过滤器："
       ],
       "Add Foreign Input Set": [
         "添加外部输入集"
@@ -99,10 +99,10 @@
         "高级项"
       ],
       "After": [
-        ""
+        "之后"
       ],
       "After %s occurences": [
-        ""
+        "在 %s 发生后"
       ],
       "All fields are required.": [
         "各个项都需要。"
@@ -132,10 +132,10 @@
         "于分钟"
       ],
       "Awaiting start": [
-        ""
+        "等待开始"
       ],
       "Back": [
-        ""
+        "返回"
       ],
       "Back to Job": [
         "回到作业"
@@ -147,7 +147,7 @@
         "无法为 ID %s 找到作业调用"
       ],
       "Cancel": [
-        ""
+        "取消"
       ],
       "Cancel Job": [
         "取消作业"
@@ -156,10 +156,10 @@
         "取消作业调用"
       ],
       "Cancel recurring": [
-        ""
+        "取消重复"
       ],
       "Canceled:": [
-        ""
+        "取消："
       ],
       "Cancelled": [
         "已取消"
@@ -177,22 +177,22 @@
         "类别列表失败并带有："
       ],
       "Category and template": [
-        ""
+        "类别和模板"
       ],
       "Choose a job template that is pre-selected in job invocation form": [
         "选择在作业调用表单中预先选择的作业模板"
       ],
       "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}": [
-        "在外部输入设置中发现了循环的依赖关系 '%{template}' -> '%{target_template}'。模板堆栈：%{templates_stack}"
+        "在外部输入设置中发现了循环的依赖关系 '%%{template}' -> '%%{target_template}'。模板堆栈：%%{templates_stack}"
       ],
       "Cleanup working directories": [
         "清理工作目录"
       ],
       "Clear all filters": [
-        ""
+        "清除所有过滤器"
       ],
       "Clear input": [
-        ""
+        "清除输入"
       ],
       "Clone a provision template": [
         "克隆置备模板"
@@ -216,22 +216,22 @@
         "控制并发级别和时间分布"
       ],
       "Could not abort the job %s: ${response}": [
-        ""
+        "无法中止作业 %s: ${response}"
       ],
       "Could not cancel recurring logic %s: ${response}": [
-        ""
+        "无法取消重复逻辑 %s：${response}"
       ],
       "Could not cancel the job %s: ${response}": [
-        ""
+        "无法取消作业 %s: ${response}"
       ],
       "Could not disable recurring logic %s: ${response}": [
-        ""
+        "无法禁用重复逻辑 %s：${response}"
       ],
       "Could not display data for job invocation.": [
         "无法显示用于作业调用的数据。"
       ],
       "Could not enable recurring logic %s: ${response}": [
-        ""
+        "无法启用重复逻辑 %s：${response}"
       ],
       "Could not find any suitable interface for execution": [
         "无法找到适合执行的接口"
@@ -243,7 +243,7 @@
         "无法重新运行作业 %{id}，因为它的模板没有找到"
       ],
       "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings": [
-        "无法为 %%{provider} 作业使用任何代理。考虑在设置中配置 %{global_proxy} 和 %{fallback_proxy}"
+        "无法为 %%{provider} 作业使用任何代理。考虑在设置中配置 %%{global_proxy} 和 %%{fallback_proxy}"
       ],
       "Could not use any template used in the job invocation": [
         "无法使用作业调用中使用的任何模板"
@@ -267,7 +267,7 @@
         "创建一个重复运行的作业"
       ],
       "Create report": [
-        ""
+        "创建报告"
       ],
       "Create report for this job": [
         "为这个作业创建报告"
@@ -276,25 +276,25 @@
         "Cron 行"
       ],
       "Cron line (extended)": [
-        ""
+        "Cron 行（扩展）"
       ],
       "Cron line format '1 2 3 4 5', where:": [
-        ""
+        "Cron 行格式 '1 2 3 4 5'，其中："
       ],
       "Cronline": [
         "Cronline"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
-        ""
+        "当前位置 %s 与作业的位置 %s 不同。此作业可能会在与以前不同的主机上运行。"
       ],
       "Current location %{loc_c} is different from job's location %{loc_j}.": [
-        "当前位置 ％{loc_c} 与作业位置 ％{loc_j} 不同。"
+        "当前位置 ％%{loc_c} 与作业位置 ％%{loc_j} 不同。"
       ],
       "Current organization %s is different from job's organization %s. This job may run on different hosts than before.": [
-        ""
+        "当前机构 %s 与作业的机构 %s 不同。此作业可能会在与以前不同的主机上运行。"
       ],
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
-        "当前机构 ％{org_c} 与作业机构 ％{org_j} 不同。"
+        "当前机构 ％%{org_c} 与作业机构 ％%{org_j} 不同。"
       ],
       "Daily": [
         "每日"
@@ -318,7 +318,7 @@
         "SSH 默认使用的密码。可通过设置名为 remote_execution_ssh_password 的参数来按主机覆盖"
       ],
       "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user.": [
-        "SSH 默认使用的用户。可通过设置名为 remote_execution_ssh_user 的参数来按主机覆盖"
+        "SSH 默认使用的用户。可通过设置名为 remote_execution_ssh_user 的参数来按主机覆盖。"
       ],
       "Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user.": [
         "用于执行脚本的默认用户。如果用户与 SSH 用户不同，则使用 su 或 sudo 切换用户。"
@@ -342,7 +342,7 @@
         "设计特殊目的"
       ],
       "Disable recurring": [
-        ""
+        "禁用重复"
       ],
       "Display advanced fields": [
         "显示高级字段"
@@ -351,7 +351,7 @@
         "没有创建"
       ],
       "Duplicated inputs detected: %{duplicated_inputs}": [
-        "检测到重复的输入：％{duplicated_inputs}"
+        "检测到重复的输入：%{duplicated_inputs}"
       ],
       "Dynamic Query": [
         "动态查询"
@@ -381,7 +381,7 @@
         "有效的用户"
       ],
       "Effective user method \\\"%{current_value}\\\" is not one of %{valid_methods}": [
-        "有效的用户方法 \\\"%{current_value}\\\" 不是 %{valid_methods} 之一"
+        "有效的用户方法 \\\"%%{current_value}\\\" 不是 %%{valid_methods} 之一"
       ],
       "Effective user options": [
         "有效的用户选项"
@@ -396,13 +396,13 @@
         "有效用户密码只适用于 SSH 提供商。其他提供商会忽略此字段。在任务完成之前，密码会以加密方式存储在数据库中。对于未来或周期性执行，该密码将在最后一次执行后删除。"
       ],
       "Effective user:": [
-        ""
+        "有效用户："
       ],
       "Enable Global Proxy": [
         "启用全局代理服务器"
       ],
       "Enable recurring": [
-        ""
+        "启用重复"
       ],
       "End time needs to be after start time": [
         "结束时间需要在开始时间后"
@@ -420,25 +420,25 @@
         "评估于："
       ],
       "Every day at %s": [
-        ""
+        "每天的 %s"
       ],
       "Every hour at minute %s": [
-        ""
+        "每个小时的分钟 %s"
       ],
       "Every month on %s at %s": [
-        ""
+        "每个月的 %s %s"
       ],
       "Every week on %s at %s": [
-        ""
+        "每周的 %s %s"
       ],
       "Execute the job later, at a scheduled time.": [
-        ""
+        "在以后的一个调度的时间执行作业。"
       ],
       "Execute the job now.": [
-        ""
+        "现在执行作业。"
       ],
       "Execute the job on a repeating schedule.": [
-        ""
+        "在一个重复调度中执行作业。"
       ],
       "Execute the jobs on hosts in randomized order": [
         "以随机顺序在主机上执行作业"
@@ -471,19 +471,19 @@
         "呈现模板失败：%s"
       ],
       "Failed:": [
-        ""
+        "失败："
       ],
       "Fallback to Any Proxy": [
         "退回至任何代理服务器"
       ],
       "Feature input %{input_name} not defined in template %{template_name}": [
-        "功能输入％{input_name} 未在模板％{template_name} 中定义"
+        "功能输入％%{input_name} 未在模板％%{template_name} 中定义"
       ],
       "Fill all required fields in all the steps": [
-        ""
+        "在所有步骤中填写所有必填字段"
       ],
       "Fill all required fields in all the steps to start the job": [
-        ""
+        "在启动作业的所有步骤中填写所有必填字段"
       ],
       "Filter by host collections": [
         "按主机集过滤"
@@ -498,7 +498,7 @@
         "完成"
       ],
       "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step.": [
-        ""
+        "对于未来执行，需要设置 'Starts at' 日期或 'Starts before' 日期。立即执行可以在前一步中选择。"
       ],
       "For example: 1, 2, 3, 4, 5...": [
         "例如：1, 2, 3, 4, 5..."
@@ -513,7 +513,7 @@
         "来自作业模板"
       ],
       "Future execution": [
-        ""
+        "在未来执行"
       ],
       "Get output for a host": [
         "获取主机的输出"
@@ -567,7 +567,7 @@
         "主机接口的标识符，用于远程执行"
       ],
       "Immediate execution": [
-        ""
+        "立即执行"
       ],
       "Import": [
         "导入"
@@ -576,7 +576,7 @@
         "从 ERB 导入作业模版"
       ],
       "In Progress:": [
-        ""
+        "进行中："
       ],
       "Include all inputs from the foreign template": [
         "在外部模板中包含所有输入格式"
@@ -603,10 +603,10 @@
         "如果启用了Katello，则只能使用内部代理选择器"
       ],
       "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled.": [
-        ""
+        "间隔时间（以秒为单位），如果一个作业在这个间隔时间内没有被一个客户端抓取，这个作业被取消。"
       ],
       "Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs": [
-        ""
+        "间隔（以秒为单位），如果作业没有由此间隔内的客户端获取，它将被取消。只适用于基于 pull-mqtt 的作业"
       ],
       "Invalid date": [
         "无效的日期"
@@ -657,7 +657,7 @@
         "作业调用"
       ],
       "Job invocations detail": [
-        ""
+        "作业调用详情"
       ],
       "Job result": [
         "作业结果"
@@ -711,10 +711,10 @@
         "如需了解更多信息，请参阅文档。"
       ],
       "Legacy UI": [
-        ""
+        "旧 UI"
       ],
       "List available remote execution features for a host": [
-        ""
+        "列出主机的可用远程执行功能"
       ],
       "List foreign input sets": [
         "列出外部输入集"
@@ -747,10 +747,10 @@
         "手动选择"
       ],
       "Minute can only be a number between 0-59": [
-        ""
+        "分钟只能是一个 0-59 之间的数字"
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
-        ""
+        "缺少所需的权限：${missingPermissions.join( ', ' )}"
       ],
       "Monthly": [
         "每月"
@@ -771,10 +771,10 @@
         "新作业模板"
       ],
       "New UI": [
-        ""
+        "新 UI"
       ],
       "Next": [
-        ""
+        "下一个"
       ],
       "No (override)": [
         "否（覆盖）"
@@ -792,19 +792,19 @@
         "没有找到结果"
       ],
       "No template mapped to feature %{feature_name}": [
-        "没有映射到功能 %{feature_name} 的模板"
+        "没有映射到功能 %%{feature_name} 的模板"
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "並不是所有需要的輸入都有值。缺少的输入：%s"
       ],
       "Not available": [
-        ""
+        "不可用"
       ],
       "Not yet": [
-        ""
+        "还没有"
       ],
       "Now": [
-        ""
+        "现在"
       ],
       "On": [
         "上"
@@ -813,7 +813,7 @@
         "只能指定一个功能或 job_template_id"
       ],
       "Opening job invocation form": [
-        ""
+        "打开作业调用表单"
       ],
       "Organization": [
         "机构"
@@ -822,7 +822,7 @@
         "只为此调用覆盖来自模板的描述格式"
       ],
       "Override the global time to pickup interval for this invocation only": [
-        ""
+        "只为此调用覆盖获取间隔的全局时间"
       ],
       "Override the timeout interval from the template for this invocation only": [
         "只为此调用使用该模板覆盖超时间隔"
@@ -852,34 +852,34 @@
         "在此时间后不再执行"
       ],
       "Permission Denied": [
-        ""
+        "没有足够权限"
       ],
       "Please enter a search query": [
-        ""
+        "请输入搜索查询"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
-        ""
+        "请返回 \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" 步骤来修复错误"
       ],
       "Please refine your search.": [
         "请重新调整您的搜索。"
       ],
       "Please request the required permissions listed below from a Foreman administrator:": [
-        ""
+        "请从 Foreman 管理员请求下面列出所需的权限："
       ],
       "Please select at least one host": [
-        ""
+        "请至少选择一个主机"
       ],
       "Please select at least one host collection": [
-        ""
+        "请至少选择一个主机集合"
       ],
       "Please select at least one host group": [
-        ""
+        "请至少选择一个主机组"
       ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         "要用于 SSH 通信的端口。默认端口 22。您可以通过设置名为 remote_execution_ssh_port 的参数来按主机进行覆盖。"
       ],
       "Prefer IPv6 over IPv4": [
-        "首选 IPv6 而不是 IPv4 "
+        "首选 IPv6 而不是 IPv4"
       ],
       "Preview": [
         "预览"
@@ -900,7 +900,7 @@
         "预览模板有问题：%{error}。请注意，在预览前需要保存模板输入的改变。"
       ],
       "Proceed Anyway": [
-        ""
+        "继续操作"
       ],
       "Provider type": [
         "供应商类型"
@@ -927,7 +927,7 @@
         "REX 作业已成功 - %s"
       ],
       "REX pull mode": [
-        ""
+        "REX 拉取模式"
       ],
       "Randomized": [
         "随机化"
@@ -939,19 +939,19 @@
         "重复发生"
       ],
       "Recurring execution": [
-        ""
+        "重复执行"
       ],
       "Recurring logic": [
         "重复逻辑"
       ],
       "Recurring logic %s cancelled successfully.": [
-        ""
+        "成功取消重复逻辑 %s。"
       ],
       "Recurring logic %s disabled successfully.": [
-        ""
+        "成功禁用重复逻辑 %s。"
       ],
       "Recurring logic %s enabled successfully.": [
-        ""
+        "成功启用重复逻辑 %s。"
       ],
       "Recursive rendering of templates detected": [
         "检测到递归的模板呈现"
@@ -993,7 +993,7 @@
         "重新运行"
       ],
       "Rerun all": [
-        ""
+        "重新运行所有"
       ],
       "Rerun failed": [
         "重新运行失败"
@@ -1008,7 +1008,7 @@
         "在失败的主机上重新运行"
       ],
       "Rerun successful": [
-        ""
+        "重新运行成功"
       ],
       "Rerun the job": [
         "重新运行作业"
@@ -1035,10 +1035,10 @@
         "运行 Puppet 一次"
       ],
       "Run Script": [
-        ""
+        "运行脚本"
       ],
       "Run a script": [
-        ""
+        "运行脚本"
       ],
       "Run at most N tasks at a time": [
         "一次最多运行 N 个任务"
@@ -1050,7 +1050,7 @@
         "运行作业"
       ],
       "Run on selected hosts": [
-        ""
+        "在所选主机上运行"
       ],
       "Running": [
         "執行中"
@@ -1065,10 +1065,10 @@
         "SSH 供应商特定的选项"
       ],
       "SSH user": [
-        ""
+        "SSH 用户"
       ],
       "SSH user:": [
-        ""
+        "SSH 用户："
       ],
       "Schedule": [
         "调度"
@@ -1089,10 +1089,10 @@
         "调度类型"
       ],
       "Scheduled": [
-        "调度的"
+        "调度"
       ],
       "Scheduled at:": [
-        ""
+        "调度于："
       ],
       "Scheduled to start at": [
         "调度开始于"
@@ -1101,7 +1101,7 @@
         "调度在这个时间前开始"
       ],
       "Scheduled: ${totalHosts} hosts": [
-        ""
+        "调度：${totalHosts} 主机"
       ],
       "Script": [
         "脚本"
@@ -1143,10 +1143,10 @@
         "选择适用于该子网的尽可能多的远程执行代理。当添加具有相同提供者的多个代理时，将在它们之间平衡操作。"
       ],
       "Select the type of execution": [
-        ""
+        "选择执行类型"
       ],
       "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host": [
-        ""
+        "为主机设置 'host_registration_remote_execution_pull' 参数。如果设置为 true, 拉取提供程序客户端将在主机上部署"
       ],
       "Set SSH key passphrase": [
         "设置 SSH 密钥口令"
@@ -1155,13 +1155,13 @@
         "设置 SSH 密码"
       ],
       "Set SSH user": [
-        ""
+        "设置 SSH 用户"
       ],
       "Set password for effective user (using sudo-like mechanisms)": [
         "为有效用户设置密码（使用类似 sudo 的机制）"
       ],
       "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level.": [
-        ""
+        "设置远程执行拉取模式。如果设置为 `Yes`，则拉取提供程序客户端将被部署在注册的主机上。继承的值基于 `host_registration_remote_execution_pull` 参数。它可以被继承，例如来自主机组，操作系统，组织。。被覆盖时，所选值将存储在主机参数级别。"
       ],
       "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting": [
         "相比 fqdn，是否应优先使用主机接口上的 ip 地址？当 DNS 未能成功解析 fqdns 时，它很有用。您可以通过设置参数 remote_execution_connect_by_ip 来覆盖每个主机的这个地址。对于多堆栈的主机，您应该考虑 remote_execution_connect_by_ip_prefer_ipv6 设置"
@@ -1188,10 +1188,10 @@
         "显示远程执行功能"
       ],
       "Skip to review": [
-        ""
+        "跳过来进行检查"
       ],
       "Skip to review step": [
-        ""
+        "跳过检查步骤"
       ],
       "Snippet": [
         "程序代码片段"
@@ -1200,19 +1200,19 @@
         "开始"
       ],
       "Start job": [
-        ""
+        "启动作业"
       ],
       "Started": [
         "已启动"
       ],
       "Started at:": [
-        ""
+        "起始于："
       ],
       "Starts": [
         "开始"
       ],
       "Starts Before": [
-        ""
+        "开始前"
       ],
       "Starts at": [
         "开始于"
@@ -1233,7 +1233,7 @@
         "状态"
       ],
       "Submit": [
-        ""
+        "提交"
       ],
       "Subscribe to all my jobs": [
         "订阅到所有主机"
@@ -1248,22 +1248,22 @@
         "已成功"
       ],
       "Succeeded:": [
-        ""
+        "成功："
       ],
       "Success": [
         "成功"
       ],
       "Switch to the new job invocation detail UI": [
-        ""
+        "切换到新作业调用详情 UI"
       ],
       "Sync Job Templates": [
         "同步作业模板"
       ],
       "System status": [
-        ""
+        "系统状态"
       ],
       "Systems": [
-        ""
+        "系统"
       ],
       "Target hosts": [
         "目标主机"
@@ -1302,13 +1302,13 @@
         "找不到 id 为 '%{id}' 的模板"
       ],
       "Template:": [
-        ""
+        "模板："
       ],
       "Templates list failed with:": [
         "模板列表失败并带有："
       ],
       "The cron line supports extended cron line syntax. For details please refer to the ": [
-        ""
+        "cron 行支持扩展 cron 行语法。有关详细信息，请参阅 "
       ],
       "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}.": [
         "动态查询 '%{query}' 还没有解析。现在应该解析的主机列表可在 %{here} 查看。"
@@ -1332,7 +1332,7 @@
         "要使用的任务模板，除非已指定功能，否则参数是必需的"
       ],
       "The only applicable proxy %{proxy_names} is down": [
-        "唯一可用的代理 %{proxy_names} 已停机"
+        "唯一可用的代理 %%{proxy_names} 已停机"
       ],
       "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user": [
         "用户无法访问映射到功能 %{feature_name} 的模板 %{template_name}"
@@ -1353,19 +1353,19 @@
         "此模板已锁定。请将它克隆到一个新的模板进行定制。"
       ],
       "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}.": [
-        "这个模块用来生成描述。输入值可以使用语法 %{package}。您可以使用 %{job_category} 和 %{template_name} 来包括作业类型和模板名称。"
+        "这个模块用来生成描述。输入值可以使用语法 %%{package}。您可以使用 %%{job_category} 和 %%{template_name} 来包括作业类型和模板名称。"
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        "这个模块用来生成描述。<br/>输入值可以使用语法%{package}。<br/>您可以使用 {job_category} 和 {template_name} 来<br/>包括作业类型和模板名称。"
+        "这个模块用来生成描述。<br/>输入值可以使用语法%%{package}。<br/>您可以使用 <br/> %{job_category}和 %{template_name} 来包括作业类型和模板名称。"
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "在远程主机上开始后，以秒计算时间，之后结束作业。"
       ],
       "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs.": [
-        ""
+        "主机必须在此时间内（以秒为单位）获取一个作业。如果在这个时间限制内没有获取该作业，则将取消该作业。默认为 1 天。仅适用于基于 pull-mqtt 的作用。"
       ],
       "Time to pickup": [
-        ""
+        "抓取时间"
       ],
       "Timeout to kill": [
         "超时至结束"
@@ -1404,13 +1404,13 @@
         "尝试中止作业"
       ],
       "Trying to abort the job %s.": [
-        ""
+        "尝试中止作业 %s。"
       ],
       "Trying to cancel the job": [
         "尝试取消作业"
       ],
       "Trying to cancel the job %s.": [
-        ""
+        "尝试取消作业 %s。"
       ],
       "Type": [
         "类型"
@@ -1419,10 +1419,10 @@
         "类型会影响到什么时候会评估到主机。"
       ],
       "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>": [
-        ""
+        "类型会对何时评估主机查询产生影响。<br><ul><li><b>静态</b> - 提交此表格后立即评估</li><li><b>动态</b> - 开始执行前进行评估，因此，如果以后计划，则目标主机集可能会在它之前发生变化</li></ul>"
       ],
       "Type of execution": [
-        ""
+        "执行类型"
       ],
       "Type of query": [
         "查询类型"
@@ -1437,13 +1437,13 @@
         "无法从已知主机中删除主机"
       ],
       "Unable to save template. Correct highlighted errors": [
-        "无法保存模版。纠正高亮显示的错误。"
+        "无法保存模版。纠正高亮显示的错误"
       ],
       "Unknown execution status": [
         "未知的执行状态"
       ],
       "Unknown input %{input_name} for template %{template_name}": [
-        "未知输入％{input_name}模板用于模板％{template_name}"
+        "未知输入％%{input_name}模板用于模板％%{template_name}"
       ],
       "Unknown remote execution feature %s": [
         "未知的远程执行功能 %s"
@@ -1461,10 +1461,10 @@
         "使用默认描述模板"
       ],
       "Use legacy form": [
-        ""
+        "使用传统形式"
       ],
       "Use new job wizard": [
-        ""
+        "使用新的作业向导"
       ],
       "User Inputs": [
         "用户输入"
@@ -1500,7 +1500,7 @@
         "查看调度的作业"
       ],
       "View task": [
-        ""
+        "查看任务"
       ],
       "Web Console": [
         "Web 控制台"
@@ -1518,7 +1518,7 @@
         "应该使用什么用户来运行脚本（使用类似于 sudo 的机制）。默认为模板参数或全局设置。"
       ],
       "When connecting using ip address, should the IPv6 addresses be preferred? If no IPv6 address is set, it falls back to IPv4 automatically. You may override this per host by setting a parameter called remote_execution_connect_by_ip_prefer_ipv6. By default and for compatibility, IPv4 will be preferred over IPv6 by default": [
-        "使用 ip 地址进行连接时，是否应该首选 IPv6 地址？如果没有设置 IPv6 地址，它会自动回退到使用 IPv4。您可以通过设置名为remote_execution_connect_by_ip_prefer_prefer_ipv6 的参数来针对单个主机进行覆盖。默认情况下，为了实现兼容的目的，IPv4 将优先于 IPv6。"
+        "使用 ip 地址进行连接时，是否应该首选 IPv6 地址？如果没有设置 IPv6 地址，它会自动回退到使用 IPv4。您可以通过设置名为remote_execution_connect_by_ip_prefer_prefer_ipv6 的参数来针对单个主机进行覆盖。默认情况下，为了实现兼容的目的，IPv4 将优先于 IPv6"
       ],
       "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs.": [
         "如果启用，工作目录会在任务完成后被删除。使用名为 remote_execution_cleanup_working_dirs 的参数可以在相关主机上覆盖这个设置。"
@@ -1551,7 +1551,7 @@
         "您没有权限查看当前分配的模板。现在保存表单将取消分配模板。"
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "您没有执行这个操作的授权。"
       ],
       "You have %s results to display. Showing first %s results": [
         "您有 %s 个结果现实。显示前 %s 个结果"
@@ -1566,7 +1566,7 @@
         "SmartProxy 中缺少 default_capsule 方法"
       ],
       "documentation": [
-        ""
+        "文档"
       ],
       "effective user": [
         "有效用户"
@@ -1581,7 +1581,7 @@
         "提交此表单后评估"
       ],
       "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it": [
-        ""
+        "在执行启动前进行评估，因此如果将来需要它，则目标主机设置可能会在它之前改变"
       ],
       "failed": [
         "失败"
@@ -1623,7 +1623,7 @@
         "否"
       ],
       "occurences": [
-        ""
+        "发生"
       ],
       "open-help-tooltip-button": [
         "open-help-tooltip-button"
@@ -1635,7 +1635,7 @@
         "已排队，在 %{time} 开始实施"
       ],
       "range: 0-59": [
-        ""
+        "范围：0-59"
       ],
       "remove template input set": [
         "删除模板输入集"
@@ -1665,7 +1665,7 @@
         "使用智能代理"
       ],
       "view host names": [
-        ""
+        "查看主机名"
       ],
       "yes": [
         "是"
