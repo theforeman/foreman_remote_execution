@@ -55,7 +55,7 @@ end
   </div>
 
   <script>
-    <%= render :partial => 'refresh.js' %>
+    <%= render partial: 'refresh', formats: :js %>
   </script>
 <% else %>
   <%= _("Could not display data for job invocation.") %>
