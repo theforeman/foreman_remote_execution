@@ -4,10 +4,6 @@ module ForemanRemoteExecution
   class Engine < ::Rails::Engine
     engine_name 'foreman_remote_execution'
 
-    config.autoload_paths += Dir["#{config.root}/app/controllers/concerns"]
-    config.autoload_paths += Dir["#{config.root}/app/helpers/concerns"]
-    config.autoload_paths += Dir["#{config.root}/app/models/concerns"]
-
     # Precompile any JS or CSS files under app/assets/
     # If requiring files from each other, list them explicitly here to avoid precompiling the same
     # content twice.
