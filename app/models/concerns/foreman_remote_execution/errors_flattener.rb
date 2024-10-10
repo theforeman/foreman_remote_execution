@@ -7,7 +7,7 @@ module ForemanRemoteExecution
     def flattened_errors
       errors = Hash.new { |h, k| h[k] = [] }
       # self.errors is ActiveModel::Errors, not Hash and doesn't have the #each_key method
-      self.errors.keys.each do |key|
+      self.errors.attribute_names.each do |key|
         messages = self.errors[key]
         invalid_objects = invalid_objects_for_attribute(key)
         if invalid_objects.blank?
