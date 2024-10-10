@@ -18,9 +18,9 @@ module RemoteExecutionHelper
   end
 
   def template_invocation_status(task, parent_task)
-    return(parent_task.result == 'cancelled' ? _('cancelled') : _('Awaiting start')) if task.nil?
+    return(parent_task.result == 'cancelled' ? 'cancelled' : 'N/A') if task.nil?
     return task.state if task.state == 'running' || task.state == 'planned'
-    return _('error') if task.result == 'warning'
+    return 'error' if task.result == 'warning'
 
     task.result
   end
