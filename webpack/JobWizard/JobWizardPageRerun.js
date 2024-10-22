@@ -7,11 +7,10 @@ import {
   Divider,
   Skeleton,
   Button,
-  Title,
   EmptyState,
   EmptyStateVariant,
   EmptyStateIcon,
-  EmptyStateBody,
+  EmptyStateBody, EmptyStateHeader, EmptyStateFooter,
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { global_palette_red_200 as exclamationColor } from '@patternfly/react-tokens';
@@ -63,15 +62,12 @@ const JobWizardPageRerun = ({
   const currentLocation = useForemanLocation();
 
   const emptyStateLarge = (
-    <EmptyState variant={EmptyStateVariant.large}>
-      <EmptyStateIcon
+    <EmptyState variant={EmptyStateVariant.lg}>
+      <EmptyStateHeader titleText={<>{__('Unable to run job')}</>} icon={<EmptyStateIcon
         icon={ExclamationCircleIcon}
         color={exclamationColor.value}
-      />
-      <Title ouiaId="job-wizard-empty-state-header" headingLevel="h4" size="lg">
-        {__('Unable to run job')}
-      </Title>
-      <EmptyStateBody>{sprintf(errorMessage)}</EmptyStateBody>
+      />} headingLevel="h4" />
+      <EmptyStateBody>{sprintf(errorMessage)}</EmptyStateBody><EmptyStateFooter>
       <Button
         ouiaId="job-wizard-run-job-button"
         component="a"
@@ -80,7 +76,7 @@ const JobWizardPageRerun = ({
       >
         {__('Create job')}
       </Button>
-    </EmptyState>
+    </EmptyStateFooter></EmptyState>
   );
 
   useEffect(() => {
