@@ -64,6 +64,7 @@ class JobTemplate < ::Template
     # will overwrite (sync) an existing template if options[:update] is true.
     def import_raw(contents, options = {})
       metadata = Template.parse_metadata(contents)
+      return unless SeedHelper.test_template_requirements(metadata['name'], metadata['require'] || [])
       import_parsed(metadata['name'], contents, metadata, options)
     end
 
