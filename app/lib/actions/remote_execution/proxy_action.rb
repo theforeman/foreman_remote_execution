@@ -33,7 +33,7 @@ module Actions
           {
             # For N-1 compatibility, we assume that the output provided here is
             # complete
-            sequence_id: update['sequence_id'] || seq_id,
+            external_id: update['id'] || seq_id,
             template_invocation_id: template_invocation.id,
             event: update['output'],
             timestamp: Time.at(update['timestamp']).getlocal,
@@ -41,17 +41,22 @@ module Actions
           }
         end
         if data['exit_status']
-          last = events.last || {:sequence_id => -1, :timestamp => Time.zone.now}
+          last = events.last || {:timestamp => Time.zone.now}
+          exit_timestamp = if data['exit_status_timestamp']
+                             Time.at(data['exit_status_timestamp']).getlocal
+                           else
+                             last[:timestamp] + 1
+                           end
           events << {
-            sequence_id: last[:sequence_id] + 1,
+            external_id: 'exit',
             template_invocation_id: template_invocation.id,
             event: data['exit_status'],
-            timestamp: last[:timestamp],
+            timestamp: exit_timestamp,
             event_type: 'exit',
           }
         end
         events.each_slice(1000) do |batch|
-          TemplateInvocationEvent.insert_all(batch, unique_by: [:template_invocation_id, :sequence_id]) # rubocop:disable Rails/SkipsModelValidations
+          TemplateInvocationEvent.insert_all(batch, unique_by: [:template_invocation_id, :external_id]) # rubocop:disable Rails/SkipsModelValidations
         end
       end
     end
