@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Divider, Flex } from '@patternfly/react-core';
+import {
+  Divider,
+  Flex,
+  PageSection,
+  PageSectionVariants,
+} from '@patternfly/react-core';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
-import { getData, getTask } from './JobInvocationActions';
+import { getJobInvocation, getTask } from './JobInvocationActions';
 import {
   CURRENT_PERMISSIONS,
   DATE_OPTIONS,
@@ -19,6 +24,7 @@ import JobInvocationOverview from './JobInvocationOverview';
 import { selectItems } from './JobInvocationSelectors';
 import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
+import JobInvocationHostTable from './JobInvocationHostTable';
 
 const JobInvocationDetailPage = ({
   match: {
@@ -32,6 +38,7 @@ const JobInvocationDetailPage = ({
     status_label: statusLabel,
     task,
     start_at: startAt,
+    targeting,
   } = items;
   const finished =
     statusLabel === STATUS.FAILED ||
@@ -57,7 +64,7 @@ const JobInvocationDetailPage = ({
   }
 
   useEffect(() => {
-    dispatch(getData(`/api/job_invocations/${id}`));
+    dispatch(getJobInvocation(`/api/job_invocations/${id}?host_status=true`));
     if (finished && !autoRefresh) {
       dispatch(stopInterval(JOB_INVOCATION_KEY));
     }
@@ -82,45 +89,60 @@ const JobInvocationDetailPage = ({
   };
 
   return (
-    <PageLayout
-      header={description}
-      breadcrumbOptions={breadcrumbOptions}
-      toolbarButtons={
-        <JobInvocationToolbarButtons
-          jobId={id}
-          data={items}
-          currentPermissions={response.results}
-          permissionsStatus={status}
-        />
-      }
-      searchable={false}
-    >
-      <Flex
-        className="job-invocation-detail-flex"
-        alignItems={{ default: 'alignItemsFlexStart' }}
+    <>
+      <PageLayout
+        header={description}
+        breadcrumbOptions={breadcrumbOptions}
+        toolbarButtons={
+          <JobInvocationToolbarButtons
+            jobId={id}
+            data={items}
+            currentPermissions={response.results}
+            permissionsStatus={status}
+          />
+        }
+        searchable={false}
       >
-        <JobInvocationSystemStatusChart
-          data={items}
-          isAlreadyStarted={isAlreadyStarted}
-          formattedStartDate={formattedStartDate}
-        />
-        <Divider
-          orientation={{
-            default: 'vertical',
-          }}
-        />
         <Flex
-          className="job-overview"
-          alignItems={{ default: 'alignItemsCenter' }}
+          className="job-invocation-detail-flex"
+          alignItems={{ default: 'alignItemsFlexStart' }}
         >
-          <JobInvocationOverview
+          <JobInvocationSystemStatusChart
             data={items}
             isAlreadyStarted={isAlreadyStarted}
             formattedStartDate={formattedStartDate}
           />
+          <Divider
+            orientation={{
+              default: 'vertical',
+            }}
+          />
+          <Flex
+            className="job-overview"
+            alignItems={{ default: 'alignItemsCenter' }}
+          >
+            <JobInvocationOverview
+              data={items}
+              isAlreadyStarted={isAlreadyStarted}
+              formattedStartDate={formattedStartDate}
+            />
+          </Flex>
         </Flex>
-      </Flex>
-    </PageLayout>
+      </PageLayout>
+      <PageSection
+        variant={PageSectionVariants.light}
+        className="table-section"
+      >
+        {items.id !== undefined && (
+          <JobInvocationHostTable
+            id={id}
+            targeting={targeting}
+            finished={finished}
+            autoRefresh={autoRefresh}
+          />
+        )}
+      </PageSection>
+    </>
   );
 };
 

@@ -1,4 +1,7 @@
 export const jobInvocationData = {
+  search: '',
+  per_page: 20,
+  page: 1,
   id: 123,
   description: 'Description',
   job_category: 'Commands',
@@ -40,6 +43,9 @@ export const jobInvocationData = {
 };
 
 export const jobInvocationDataScheduled = {
+  search: '',
+  per_page: 20,
+  page: 1,
   id: 456,
   description: 'Description',
   job_category: 'Commands',
@@ -62,6 +68,9 @@ export const jobInvocationDataScheduled = {
 };
 
 export const jobInvocationDataRecurring = {
+  search: '',
+  per_page: 20,
+  page: 1,
   id: 789,
   description: 'Description',
   job_category: 'Commands',
