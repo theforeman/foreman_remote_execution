@@ -76,6 +76,10 @@ api.get.mockImplementation(({ handleSuccess, ...action }) => {
   return { type: 'get', ...action };
 });
 
+jest.mock('../JobInvocationHostTable.js', () => () => (
+  <div data-testid="mock-table">Mock Table</div>
+));
+
 const reportTemplateJobId = mockReportTemplatesResponse.results[0].id;
 
 const mockStore = configureMockStore([thunk]);
@@ -207,7 +211,7 @@ describe('JobInvocationDetailPage', () => {
       { key: GET_REPORT_TEMPLATES, url: '/api/report_templates' },
       {
         key: JOB_INVOCATION_KEY,
-        url: `/api/job_invocations/${jobId}`,
+        url: `/api/job_invocations/${jobId}?host_status=true`,
       },
       {
         key: GET_REPORT_TEMPLATE_INPUTS,

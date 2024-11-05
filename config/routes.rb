@@ -63,6 +63,7 @@ Rails.application.routes.draw do
           get '/raw', :to => 'job_invocations#raw_output'
         end
         member do
+          get 'hosts'
           post 'cancel'
           post 'rerun'
           get  'template_invocations', :to => 'template_invocations#template_invocations'

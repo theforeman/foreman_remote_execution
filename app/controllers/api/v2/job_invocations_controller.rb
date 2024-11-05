@@ -3,10 +3,11 @@ module Api
     class JobInvocationsController < ::Api::V2::BaseController
       include ::Api::Version2
       include ::Foreman::Renderer
+      include RemoteExecutionHelper
 
       before_action :find_optional_nested_object, :only => %w{output raw_output}
       before_action :find_host, :only => %w{output raw_output}
-      before_action :find_resource, :only => %w{show update destroy clone cancel rerun outputs}
+      before_action :find_resource, :only => %w{show update destroy clone cancel rerun outputs hosts}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -20,14 +21,9 @@ module Api
       param :id, :identifier, :required => true
       param :host_status, :bool, required: false, desc: N_('Show Job status for the hosts')
       def show
-        @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
-        @template_invocations = @job_invocation.template_invocations
-                                               .where(host: @hosts)
-                                               .includes(:input_values)
-
+        set_hosts_and_template_invocations
         if params[:host_status] == 'true'
-          template_invocations = @template_invocations.includes(:run_host_job_task).to_a
-          @host_statuses = Hash[template_invocations.map { |ti| [ti.host_id, template_invocation_status(ti)] }]
+          set_statuses_and_smart_proxies
         end
       end
 
@@ -111,6 +107,19 @@ module Api
         render :json => host_output(@nested_obj, @host, :default => [], :since => params[:since])
       end
 
+      api :GET, '/job_invocations/:id/hosts', N_('List hosts belonging to job invocation')
+      param_group :search_and_pagination, ::Api::V2::BaseController
+      add_scoped_search_description_for(JobInvocation)
+      param :id, :identifier, :required => true
+      def hosts
+        set_hosts_and_template_invocations
+        set_statuses_and_smart_proxies
+        @total = @job_invocation.targeting.hosts.size
+        @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
+        @subtotal = @hosts.respond_to?(:total_entries) ? @hosts.total_entries : @hosts.sizes
+        render :hosts, :layout => 'api/v2/layouts/index_layout'
+      end
+
       api :GET, '/job_invocations/:id/hosts/:host_id/raw', N_('Get raw output for a host')
       param :id, :identifier, :required => true
       param :host_id, :identifier, :required => true
@@ -187,7 +196,7 @@ module Api
 
       def action_permission
         case params[:action]
-        when 'output', 'raw_output', 'outputs'
+        when 'output', 'raw_output', 'outputs', 'hosts'
           :view
         when 'cancel'
           :cancel
@@ -256,15 +265,23 @@ module Api
         resource_class.where(nil)
       end
 
-      def template_invocation_status(template_invocation)
-        task = template_invocation.try(:run_host_job_task)
-        parent_task = @job_invocation.task
+      def set_hosts_and_template_invocations
+        @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+        @template_invocations = @job_invocation.template_invocations
+                                               .where(host: @hosts)
+                                               .includes(:input_values)
+      end
 
-        return(parent_task.result == 'cancelled' ? 'cancelled' : 'N/A') if task.nil?
-        return task.state if task.state == 'running' || task.state == 'planned'
-        return 'error' if task.result == 'warning'
-
-        task.result
+      def set_statuses_and_smart_proxies
+        template_invocations = @template_invocations.includes(:run_host_job_task).to_a
+        hosts = @hosts.to_a
+        @host_statuses = Hash[hosts.map do |host|
+          template_invocation = template_invocations.find { |ti| ti.host_id == host.id }
+          task = template_invocation.try(:run_host_job_task)
+          [host.id, template_invocation_status(task, @job_invocation.task)]
+        end]
+        @smart_proxy_id = Hash[template_invocations.map { |ti| [ti.host_id, ti.smart_proxy_id] }]
+        @smart_proxy_name = Hash[template_invocations.map { |ti| [ti.host_id, ti.smart_proxy_name] }]
       end
     end
   end
