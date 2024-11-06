@@ -17,6 +17,9 @@ namespace :test do
     t.pattern = "#{test_dir}/**/*_test.rb"
     t.verbose = true
     t.warning = false
+    t.test_files = [
+      Rails.root.join('test/unit/foreman/access_permissions_test.rb'),
+    ]
   end
 end
 
