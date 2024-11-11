@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.description = 'A plugin bringing remote execution to the Foreman, completing the config ' +
                   'management functionality with remote management functionality.'
 
-  s.files = Dir['{app,config,db,extra,lib,locale,webpack}/**/*'] + ['LICENSE', 'Rakefile', 'README.md', 'package.json']
+  s.files = Dir['{app,config,db,extra,lib,locale,test,webpack}/**/*'] + ['LICENSE', 'Rakefile', 'README.md', 'package.json']
   s.extra_rdoc_files = Dir['README.md', 'LICENSE']
 
   s.required_ruby_version = '>= 2.7', '< 4'
