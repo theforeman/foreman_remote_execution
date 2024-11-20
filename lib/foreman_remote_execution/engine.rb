@@ -28,7 +28,7 @@ module ForemanRemoteExecution
 
     initializer 'foreman_remote_execution.require_dynflow', :before => 'foreman_tasks.initialize_dynflow' do |app|
       ForemanTasks.dynflow.require!
-      ForemanTasks.dynflow.config.queues.add(DYNFLOW_QUEUE, :pool_size => Setting['remote_execution_workers_pool_size']) if Setting.table_exists? rescue(false)
+      ForemanTasks.dynflow.config.queues.add(DYNFLOW_QUEUE)
       ForemanTasks.dynflow.config.eager_load_paths << File.join(ForemanRemoteExecution::Engine.root, 'app/lib/actions')
     end
 
@@ -117,11 +117,6 @@ module ForemanRemoteExecution
                 default: nil,
                 full_name: N_('Default SSH key passphrase'),
                 encrypted: true
-              setting 'remote_execution_workers_pool_size',
-                type: :integer,
-                description: N_('Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required.'),
-                default: 5,
-                full_name: N_('Workers pool size')
               setting 'remote_execution_cleanup_working_dirs',
                 type: :boolean,
                 description: N_('When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs.'),
