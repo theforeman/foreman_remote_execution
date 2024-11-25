@@ -9,7 +9,7 @@ var target = $("div.terminal div.printable");
   target.html(lines);
 <% end %>
 
-<%= render :partial => 'refresh.js' %>
+<%= render partial: 'refresh', formats: :js %>
 
 if (scrolledToBottom) {
   $("html, body").animate({ scrollTop: $(document).height() }, "slow");
