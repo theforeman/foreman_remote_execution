@@ -70,7 +70,7 @@ module Actions
                                  .merge(additional_options)
 
         plan_delegated_action(proxy, provider.proxy_action_class, action_options, proxy_action_class: ::Actions::RemoteExecution::ProxyAction)
-        plan_self :with_event_logging => true
+        plan_self
       end
 
       def finalize(*args)
@@ -127,32 +127,6 @@ module Actions
       end
 
       def fill_continuous_output(continuous_output)
-        if input[:with_event_logging]
-          continuous_output_from_template_invocation_events(continuous_output)
-          return
-        end
-
-        delegated_output.fetch('result', []).each do |raw_output|
-          continuous_output.add_raw_output(raw_output)
-        end
-
-        final_timestamp = (continuous_output.last_timestamp || task.ended_at).to_f + 1
-
-        if task.state == 'stopped' && task.result == 'cancelled'
-          continuous_output.add_output(_('Job cancelled by user'), 'debug', final_timestamp)
-        else
-          fill_planning_errors_to_continuous_output(continuous_output) unless exit_status
-        end
-        if exit_status
-          continuous_output.add_output(_('Exit status: %s') % exit_status, 'stdout', final_timestamp)
-        elsif run_step&.error
-          continuous_output.add_output(_('Job finished with error') + ": #{run_step.error.exception_class} - #{run_step.error.message}", 'debug', final_timestamp)
-        end
-      rescue => e
-        continuous_output.add_exception(_('Error loading data from proxy'), e)
-      end
-
-      def continuous_output_from_template_invocation_events(continuous_output)
         begin
           # Trigger reload
           delegated_output unless task.state == 'stopped'
@@ -160,6 +134,7 @@ module Actions
           # This is enough, the error will get shown using add_exception at the end of the method
         end
 
+        # Show the outputs which are already stored in the database
         task.template_invocation.template_invocation_events.order(:timestamp).find_each do |output|
           if output.event_type == 'exit'
             continuous_output.add_output(_('Exit status: %s') % output.event, 'stdout', output.timestamp)
@@ -167,11 +142,13 @@ module Actions
             continuous_output.add_raw_output(output.as_raw_continuous_output)
           end
         end
+
+        # Attach the exception at the end
         continuous_output.add_exception(_('Error loading data from proxy'), e) if e
       end
 
       def exit_status
-        input[:with_event_logging] ? task.template_invocation.template_invocation_events.find_by(event_type: 'exit')&.event : delegated_output[:exit_status]
+        task.template_invocation.template_invocation_events.find_by(event_type: 'exit')&.event
       end
 
       def host_id
