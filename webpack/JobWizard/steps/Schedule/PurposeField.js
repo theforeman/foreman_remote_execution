@@ -18,7 +18,7 @@ export const PurposeField = ({ purpose, setPurpose }) => (
       aria-label="purpose"
       type="text"
       value={purpose}
-      onChange={newPurpose => {
+      onChange={(_event, newPurpose) => {
         setPurpose(newPurpose);
       }}
     />

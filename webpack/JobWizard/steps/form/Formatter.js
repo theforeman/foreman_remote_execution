@@ -127,7 +127,9 @@ export const formatter = (input, values, setValue) => {
           rows={2}
           id={id}
           value={value}
-          onChange={newValue => setValue({ ...values, [name]: newValue })}
+          onChange={(_event, newValue) =>
+            setValue({ ...values, [name]: newValue })
+          }
         />
       </FormGroup>
     );
