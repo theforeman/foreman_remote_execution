@@ -329,7 +329,7 @@ describe('Schedule', () => {
       fireEvent.click(
         screen.getByRole('button', { name: 'Recurring execution' })
       );
-      jest.runAllTimers();
+      jest.advanceTimersByTime(1000);
     });
     expect(screen.queryAllByText('Recurring execution')).toHaveLength(3);
 

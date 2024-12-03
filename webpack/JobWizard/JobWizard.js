@@ -36,7 +36,10 @@ import { useValidation } from './validation';
 import { useAutoFill } from './autofill';
 import { submit } from './submit';
 import { generateDefaultDescription } from './JobWizardHelpers';
-import { StartsBeforeErrorAlert } from './StartsBeforeErrorAlert';
+import {
+  StartsBeforeErrorAlert,
+  StartsAtErrorAlert,
+} from './StartsBeforeErrorAlert';
 import { Footer } from './Footer';
 import './JobWizard.scss';
 
@@ -203,22 +206,37 @@ export const JobWizard = ({ rerunData }) => {
   }, [rerunData, jobTemplateID, dispatch]);
 
   const [isStartsBeforeError, setIsStartsBeforeError] = useState(false);
+  const [isStartsAtError, setIsStartsAtError] = useState(false);
   useEffect(() => {
-    const updateStartsBeforeError = () => {
-      setIsStartsBeforeError(
-        scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE &&
-          new Date().getTime() >= new Date(scheduleValue.startsBefore).getTime()
-      );
+    const updateStartsError = () => {
+      if (scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE) {
+        setIsStartsAtError(
+          !!scheduleValue?.startsAt?.length &&
+            new Date().getTime() >= new Date(scheduleValue.startsAt).getTime()
+        );
+        setIsStartsBeforeError(
+          !!scheduleValue?.startsBefore?.length &&
+            new Date().getTime() >=
+              new Date(scheduleValue.startsBefore).getTime()
+        );
+      } else if (scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING) {
+        setIsStartsAtError(
+          !!scheduleValue?.startsAt?.length &&
+            new Date().getTime() >= new Date(scheduleValue.startsAt).getTime()
+        );
+        setIsStartsBeforeError(false);
+      } else {
+        setIsStartsAtError(false);
+        setIsStartsBeforeError(false);
+      }
     };
-    let interval;
-    if (scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE) {
-      updateStartsBeforeError();
-      interval = setInterval(updateStartsBeforeError, 5000);
-    }
+    updateStartsError();
+    const interval = setInterval(updateStartsError, 5000);
+
     return () => {
       interval && clearInterval(interval);
     };
-  }, [scheduleValue.scheduleType, scheduleValue.startsBefore]);
+  }, [scheduleValue]);
 
   const [valid, setValid] = useValidation({
     advancedValues,
@@ -432,7 +450,8 @@ export const JobWizard = ({ rerunData }) => {
         valid.advanced &&
         valid.schedule &&
         !isSubmitting &&
-        !isStartsBeforeError,
+        !isStartsBeforeError &&
+        !isStartsAtError,
     },
   ];
   const location = useForemanLocation();
@@ -456,6 +475,7 @@ export const JobWizard = ({ rerunData }) => {
   return (
     <>
       {isStartsBeforeError && <StartsBeforeErrorAlert />}
+      {isStartsAtError && <StartsAtErrorAlert />}
       <Wizard
         onClose={() => history.goBack()}
         navAriaLabel="Run Job steps"

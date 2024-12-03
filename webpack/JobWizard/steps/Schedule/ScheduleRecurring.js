@@ -51,7 +51,7 @@ export const ScheduleRecurring = ({
     if (isNeverEnds) setValidEnd(true);
     else if (!ends) setValidEnd(true);
     else if (
-      !startsAt.length &&
+      !startsAt?.length &&
       new Date().getTime() <= new Date(ends).getTime()
     )
       setValidEnd(true);
@@ -63,7 +63,7 @@ export const ScheduleRecurring = ({
 
     if (!validEnd || !repeatValid) {
       wrappedSetValid(false);
-    } else if (isFuture && startsAt.length) {
+    } else if (isFuture && startsAt?.length) {
       wrappedSetValid(true);
     } else if (!isFuture) {
       wrappedSetValid(true);
@@ -111,7 +111,9 @@ export const ScheduleRecurring = ({
                 onChange={() =>
                   setScheduleValue(current => ({
                     ...current,
-                    startsAt: new Date().toISOString(),
+                    startsAt: new Date(
+                      new Date().getTime() + 60000
+                    ).toISOString(), // 1 minute in the future
                     isFuture: true,
                   }))
                 }
