@@ -143,6 +143,7 @@ export const formatter = (input, values, setValue) => {
         isRequired={required}
       >
         <DateTimePicker
+          isFutureOnly={false}
           ariaLabel={name}
           className={hidden ? 'masked-input' : null}
           id={id}

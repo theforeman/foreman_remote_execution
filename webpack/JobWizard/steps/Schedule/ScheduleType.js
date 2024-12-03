@@ -49,7 +49,7 @@ export const ScheduleType = ({
           onChange={() => {
             setScheduleValue(current => ({
               ...current,
-              startsAt: new Date().toISOString(),
+              startsAt: new Date(new Date().getTime() + 60000).toISOString(), // 1 minute in the future
               scheduleType: SCHEDULE_TYPES.FUTURE,
               repeatType: repeatTypes.noRepeat,
             }));

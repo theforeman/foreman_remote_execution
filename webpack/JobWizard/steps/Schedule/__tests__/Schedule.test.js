@@ -168,7 +168,7 @@ describe('Schedule', () => {
     ).toHaveLength(1);
 
     expect(
-      screen.queryAllByText("'Starts before' date must in the future")
+      screen.queryAllByText("'Starts before' date must be in the future")
     ).toHaveLength(0);
     await act(async () => {
       await fireEvent.change(startsBeforeDateField(), {
@@ -182,7 +182,7 @@ describe('Schedule', () => {
 
     expect(startsBeforeDateField().value).toBe('2019/03/11');
     expect(
-      screen.getAllByText("'Starts before' date must in the future")
+      screen.getAllByText("'Starts before' date must be in the future")
     ).toHaveLength(2);
   });
 
@@ -329,7 +329,7 @@ describe('Schedule', () => {
       fireEvent.click(
         screen.getByRole('button', { name: 'Recurring execution' })
       );
-      jest.runAllTimers();
+      jest.advanceTimersByTime(1000);
     });
     expect(screen.queryAllByText('Recurring execution')).toHaveLength(3);
 
