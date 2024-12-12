@@ -21,10 +21,11 @@ export const currentPermissionsUrl = foremanUrl(
 );
 
 export const STATUS = {
-  PENDING: 'pending',
-  SUCCEEDED: 'succeeded',
-  FAILED: 'failed',
-  CANCELLED: 'cancelled',
+  ALL_STATUSES: { id: 'all_statuses', title: __('All statuses') },
+  SUCCESS: { id: 'success', title: __('Succeeded') },
+  FAILED: { id: 'failed', title: __('Failed') },
+  PENDING: { id: 'pending', title: __('In Progress') },
+  CANCELLED: { id: 'cancelled', title: __('Canceled') },
 };
 
 export const STATUS_UPPERCASE = {
@@ -70,13 +71,15 @@ const Columns = () => {
       wrapper: ({ name }) => (
         <a href={`${hostDetailsPageUrl}${name}`}>{name}</a>
       ),
+      isSorted: true,
       weight: 1,
     },
-    groups: {
+    hostgroup: {
       title: __('Host group'),
       wrapper: ({ hostgroup_id, hostgroup_name }) => (
         <a href={`/hostgroups/${hostgroup_id}/edit`}>{hostgroup_name}</a>
       ),
+      isSorted: true,
       weight: 2,
     },
     os: {
@@ -86,6 +89,7 @@ const Columns = () => {
           {operatingsystem_name}
         </a>
       ),
+      isSorted: true,
       weight: 3,
     },
     smart_proxy: {
@@ -93,6 +97,7 @@ const Columns = () => {
       wrapper: ({ smart_proxy_name, smart_proxy_id }) => (
         <a href={`/smart_proxies/${smart_proxy_id}`}>{smart_proxy_name}</a>
       ),
+      isSorted: true,
       weight: 4,
     },
     status: {
