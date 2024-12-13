@@ -25,7 +25,7 @@ const TargetingHostsPage = ({
 }) => (
   <div id="targeting_hosts">
     <Grid.Row>
-      <Grid.Col md={6} className="title_filter">
+      <Grid.Col md={6}>
         <SearchBar
           onSearch={query => handleSearch(query, statusFilter)}
           data={{

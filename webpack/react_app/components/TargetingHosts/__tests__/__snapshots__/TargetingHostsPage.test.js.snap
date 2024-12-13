@@ -10,7 +10,6 @@ exports[`TargetingHostsPage renders 1`] = `
   >
     <Col
       bsClass="col"
-      className="title_filter"
       componentClass="div"
       md={6}
     >
