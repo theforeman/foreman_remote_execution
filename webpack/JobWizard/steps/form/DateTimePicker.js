@@ -22,6 +22,7 @@ export const DateTimePicker = ({
   ariaLabel,
   allowEmpty,
   includeSeconds,
+  isFutureOnly,
 }) => {
   const [validated, setValidated] = useState();
   const dateFormat = date =>
@@ -87,6 +88,15 @@ export const DateTimePicker = ({
       setValidated(ValidatedOptions.error);
     }
   };
+  const validateFuture = date => {
+    if (
+      isFutureOnly &&
+      date.setHours(1, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)
+    ) {
+      return __('Date must be in the future');
+    }
+    return '';
+  };
   return (
     <>
       <DatePicker
@@ -105,6 +115,7 @@ export const DateTimePicker = ({
           validated === ValidatedOptions.error ? __('Invalid date') : ''
         }
         inputProps={{ validated }}
+        validators={[validateFuture]}
       />
       <TimePicker
         aria-label={`${ariaLabel} timepicker`}
@@ -132,6 +143,7 @@ DateTimePicker.propTypes = {
   ariaLabel: PropTypes.string,
   allowEmpty: PropTypes.bool,
   includeSeconds: PropTypes.bool,
+  isFutureOnly: PropTypes.bool,
 };
 DateTimePicker.defaultProps = {
   dateTime: null,
@@ -139,4 +151,5 @@ DateTimePicker.defaultProps = {
   ariaLabel: '',
   allowEmpty: true,
   includeSeconds: false,
+  isFutureOnly: true,
 };

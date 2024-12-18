@@ -399,7 +399,7 @@ describe('AdvancedFields', () => {
         target: { value: 'some search' },
       });
 
-      jest.runAllTimers();
+      jest.advanceTimersByTime(10000);
     });
     expect(newStore.getActions()).toMatchSnapshot('resource search');
   });

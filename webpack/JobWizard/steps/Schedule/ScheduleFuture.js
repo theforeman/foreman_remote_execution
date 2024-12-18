@@ -38,7 +38,7 @@ export const ScheduleFuture = ({
       setError(__("'Starts before' date must be after 'Starts at' date"));
     } else if (new Date().getTime() >= new Date(startsBefore).getTime()) {
       wrappedSetValid(false);
-      setError(__("'Starts before' date must in the future"));
+      setError(__("'Starts before' date must be in the future"));
     } else {
       wrappedSetValid(true);
       setError(null);
