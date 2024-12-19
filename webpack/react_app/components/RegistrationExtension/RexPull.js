@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 import LabelIcon from 'foremanReact/components/common/LabelIcon';
+import { Alert } from 'patternfly-react';
 
 import {
   FormGroup,
@@ -21,6 +22,24 @@ const options = (value = '') => {
       <FormSelectOption key={2} value={false} label={__('No (override)')} />
     </>
   );
+};
+
+const showPullWarning = (defaultValue, currentValue) => {
+  if (currentValue === 'false') {
+    return;
+  }
+
+  if (defaultValue === true || currentValue === 'true') {
+    return (
+      <div style={{ marginTop: '1em' }}>
+        <Alert type="warning">
+          {__(
+            'Please make sure that the Smart Proxy is configured correctly for the Pull provider.'
+          )}
+        </Alert>
+      </div>
+    );
+  }
 };
 
 const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
@@ -48,6 +67,10 @@ const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
       {/* eslint-disable-next-line camelcase */
       options(configParams?.host_registration_remote_execution_pull)}
     </FormSelect>
+    {showPullWarning(
+      configParams?.host_registration_remote_execution_pull,
+      pluginValues?.setupRemoteExecutionPull
+    )}
   </FormGroup>
 );
 
