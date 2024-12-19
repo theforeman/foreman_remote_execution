@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 import LabelIcon from 'foremanReact/components/common/LabelIcon';
+import { Alert } from 'patternfly-react';
 
 import {
   FormGroup,
@@ -48,6 +49,12 @@ const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
       {/* eslint-disable-next-line camelcase */
       options(configParams?.host_registration_remote_execution_pull)}
     </FormSelect>
+
+    <Alert type="info" isInline style={{ marginTop: '10px' }}>
+      {__(
+        'Please make sure that the Smart Proxy is configured correctly for the Pull provider.'
+      )}
+    </Alert>
   </FormGroup>
 );
 
