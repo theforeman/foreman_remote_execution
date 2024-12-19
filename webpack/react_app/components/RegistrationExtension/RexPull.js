@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 import LabelIcon from 'foremanReact/components/common/LabelIcon';
+import { Alert } from 'patternfly-react';
 
 import {
   FormGroup,
@@ -22,6 +24,25 @@ const options = (value = '') => {
     </>
   );
 };
+
+const pullWarning = (
+  <Alert type="info" isInline style={{ marginTop: '10px' }}>
+    {__(
+      'Please make sure that the Smart Proxy is configured correctly for the Pull provider.'
+    )}
+  </Alert>
+);
+
+function showPullWarning(valueFromParam, value) {
+  if (value === 'true') {
+    return pullWarning;
+  }
+  if (valueFromParam && (value === undefined || value === '')) {
+    return pullWarning;
+  }
+
+  return null;
+}
 
 const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
   <FormGroup
@@ -45,9 +66,13 @@ const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
       id="registration_setup_remote_execution_pull"
       isDisabled={isLoading}
     >
-      {/* eslint-disable-next-line camelcase */
-      options(configParams?.host_registration_remote_execution_pull)}
+      {options(configParams?.host_registration_remote_execution_pull)}
     </FormSelect>
+
+    {showPullWarning(
+      configParams?.host_registration_remote_execution_pull,
+      pluginValues.setupRemoteExecutionPull
+    )}
   </FormGroup>
 );
 
