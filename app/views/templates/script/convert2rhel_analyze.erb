@@ -7,17 +7,17 @@ provider_type: script
 kind: job_template
 template_inputs:
 - name: ELS
-  required: true
+  required: false
   input_type: user
   description: Use an Extended Lifecycle Support (ELS) add-on subscription
   advanced: false
   value_type: plain
-  options: "true\nfalse"
-  default: "true"
+  options: "yes\r\nno"
+  default: "no"
   hidden_value: false
 %>
 <%-
-  els = input('ELS') == "true" ? "--els" : ""
+  els = input('ELS') == "yes" ? "--els" : ""
 -%>
 <% if @host.operatingsystem.family == 'Redhat' -%>
 if ! [ $(id -u) -eq 0 ]; then
