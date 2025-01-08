@@ -52,7 +52,7 @@ const RexPull = ({ isLoading, onChange, pluginValues, configParams }) => (
 
     <Alert type="info" isInline style={{ marginTop: '10px' }}>
       {__(
-        'Please make sure that the Smart Proxy is configured correctly for the Pull provider.'
+        'Please make sure that Smart Proxy is configured for pull-based remote execution.'
       )}
     </Alert>
   </FormGroup>
