@@ -1,4 +1,5 @@
 <% template_invocations = job_invocation.pattern_template_invocations %>
+<%= job_invocation.pattern_template_invocations[0].input_values.inspect %>
 <div class='row'>
   <div class="col-xs-6 col-sm-6 col-md-6">
     <%= render :partial => 'card_results', :locals => { :job_invocation => job_invocation } %>

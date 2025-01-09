@@ -25,6 +25,7 @@ import { selectItems } from './JobInvocationSelectors';
 import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
 import JobInvocationHostTable from './JobInvocationHostTable';
+import { JobAdditionInfo } from './JobAdditionInfo';
 
 const JobInvocationDetailPage = ({
   match: {
@@ -129,6 +130,9 @@ const JobInvocationDetailPage = ({
           </Flex>
         </Flex>
       </PageLayout>
+      <PageSection variant={PageSectionVariants.light}>
+        {items.id !== undefined && <JobAdditionInfo data={items} />}
+      </PageSection>
       <PageSection
         variant={PageSectionVariants.light}
         className="table-section"
