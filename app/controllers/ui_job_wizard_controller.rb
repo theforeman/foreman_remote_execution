@@ -55,7 +55,7 @@ class UIJobWizardController < Api::V2::BaseController
 
   def resources
     resource_type = params[:resource]
-    resource_list = resource_type.constantize.authorized("view_#{resource_type.underscore.pluralize}").all.map { |r| {:name => r.to_s, :id => r.id } }.select { |v| v[:name] =~ /#{params[:name]}/ }
+    resource_list = resource_type.constantize.authorized("view_#{resource_type.underscore.pluralize}").all.map { |r| {:name => r.to_s, :id => r.id } }.select { |v| v[:name].include?(params[:name].to_s) }
     render :json => { :results =>
       resource_list.sort_by { |r| r[:name] }.take(100), :subtotal => resource_list.count}
   end
