@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, TextInput, Tooltip, Button } from '@patternfly/react-core';
+import {
+  FormGroup,
+  TextInput,
+  Tooltip,
+  Button,
+  FormHelperText,
+  HelperText,
+  HelperTextItem,
+} from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectTemplateInputs,
@@ -55,18 +63,6 @@ export const DescriptionField = ({
         <ResetDefault setValue={setValue} defaultValue={defaultValue} />
       }
       fieldId="description"
-      helperText={
-        <Button
-          ouiaId="description-preview-button"
-          variant="link"
-          isInline
-          onClick={togglePreview}
-        >
-          {isPreview
-            ? __('Edit job description template')
-            : __('Preview job description')}
-        </Button>
-      }
     >
       {isPreview ? (
         <Tooltip content={generatedDesc}>
@@ -89,9 +85,25 @@ export const DescriptionField = ({
           autoComplete="description"
           id="description"
           value={value}
-          onChange={newValue => setValue(newValue)}
+          onChange={(_event, newValue) => setValue(newValue)}
         />
       )}
+      <FormHelperText>
+        <HelperText>
+          <HelperTextItem>
+            <Button
+              ouiaId="description-preview-button"
+              variant="link"
+              isInline
+              onClick={togglePreview}
+            >
+              {isPreview
+                ? __('Edit job description template')
+                : __('Preview job description')}
+            </Button>
+          </HelperTextItem>
+        </HelperText>
+      </FormHelperText>
     </FormGroup>
   );
 };
