@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import Immutable from 'seamless-immutable';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
+import { useForemanSettings } from 'foremanReact/Root/Context/ForemanContext';
 import { useSelector, useDispatch } from 'react-redux';
 import URI from 'urijs';
 import { get } from 'foremanReact/redux/API';
@@ -17,7 +18,8 @@ export const ResourceSelect = ({
   apiKey,
   url,
 }) => {
-  const maxResults = 100;
+  const { perPage } = useForemanSettings();
+  const maxResults = perPage;
   const dispatch = useDispatch();
   const uri = new URI(url);
   const onSearch = search => {
@@ -50,8 +52,7 @@ export const ResourceSelect = ({
         description={__('Please refine your search.')}
       >
         {sprintf(
-          __('You have %s results to display. Showing first %s results'),
-          response.subtotal,
+          __('You have more results to display. Showing first %s results'),
           maxResults
         )}
       </SelectOption>,
@@ -59,16 +60,34 @@ export const ResourceSelect = ({
   }
   selectOptions = [
     ...selectOptions,
-    ...Immutable.asMutable(response?.results || [])?.map((result, index) => (
-      <SelectOption key={index + 1} value={result.id}>
-        {result.name}
-      </SelectOption>
-    )),
+    ...Immutable.asMutable(response?.results || [])
+      ?.slice(0, maxResults)
+      ?.map((result, index) => (
+        <SelectOption key={index + 1} value={result.id}>
+          {result.name}
+        </SelectOption>
+      )),
   ];
 
   const onSelect = (event, selection) => {
     setSelected(selection);
     setIsOpen(false);
+  };
+  const onFilter = (_, value) => {
+    if (!value) {
+      return selectOptions;
+    }
+    return selectOptions.filter(
+      o =>
+        typeof o.props.children === 'string' &&
+        o.props.children.toLowerCase().indexOf(value.toLowerCase()) > -1
+    );
+  };
+  const onClear = () => {
+    setSelected(null);
+    setIsOpen(false);
+    if (typingTimeout) clearTimeout(typingTimeout);
+    onSearch({});
   };
   const autoSearch = searchTerm => {
     if (typingTimeout) clearTimeout(typingTimeout);
@@ -86,11 +105,17 @@ export const ResourceSelect = ({
       loadingVariant={isLoading ? 'spinner' : null}
       onSelect={onSelect}
       onToggle={setIsOpen}
+      onFilter={onFilter}
+      onClear={onClear}
       isOpen={isOpen}
       className="without_select2"
       maxHeight="45vh"
       onTypeaheadInputChanged={value => {
-        autoSearch(value || '');
+        if (value) {
+          autoSearch(value);
+        } else {
+          onClear();
+        }
       }}
       placeholderText={placeholderText}
       typeAheadAriaLabel={`${name} typeahead input`}
