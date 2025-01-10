@@ -138,7 +138,7 @@ export const TemplateActionButtons = ({
       {rerun.permission && (
         <FlexItem spacer={{ default: 'spacerXs' }}>
           <Button
-            isSmall
+            size="sm"
             variant="secondary"
             isInline
             ouiaId={rerun.name}
@@ -153,7 +153,7 @@ export const TemplateActionButtons = ({
       {details.permission && (
         <FlexItem spacer={{ default: 'spacerXs' }}>
           <Button
-            isSmall
+            size="sm"
             variant="secondary"
             isInline
             ouiaId={details.name}
@@ -168,7 +168,7 @@ export const TemplateActionButtons = ({
       {cancel.permission && (
         <FlexItem spacer={{ default: 'spacerXs' }}>
           <Button
-            isSmall
+            size="sm"
             variant="danger"
             isInline
             ouiaId={cancel.name}
@@ -182,7 +182,7 @@ export const TemplateActionButtons = ({
       {abort.permission && (
         <FlexItem spacer={{ default: 'spacerXs' }}>
           <Button
-            isSmall
+            size="sm"
             variant="danger"
             isInline
             ouiaId={abort.name}
