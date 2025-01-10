@@ -1,6 +1,6 @@
 object @job_invocation
 
-attributes :id, :description, :job_category, :targeting_id, :status, :start_at, :status_label, :ssh_user, :time_to_pickup
+attributes :id, :description, :job_category, :targeting_id, :status, :start_at, :status_label, :ssh_user, :time_to_pickup, :concurrency_level, :execution_timeout_interval
 
 node do |invocation|
   pattern_template = invocation.pattern_template_invocations.first

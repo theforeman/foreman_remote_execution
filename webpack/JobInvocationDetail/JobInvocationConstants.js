@@ -113,3 +113,15 @@ const Columns = () => {
 };
 
 export default Columns;
+
+const STATIC_TYPE = 'static_query';
+const DYNAMIC_TYPE = 'dynamic_query';
+export const TARGETING_TYPES = {
+  [STATIC_TYPE]: __('Static Query'),
+  [DYNAMIC_TYPE]: __('Dynamic Query'),
+};
+
+export const ORDERINGS = {
+  ORDERED: __('Alphabetical'),
+  RANDOMIZED: __('Randomized'),
+};
