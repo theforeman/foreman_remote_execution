@@ -1,13 +1,15 @@
 /* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react';
 import {
-  Button,
-  DescriptionList,
-  DescriptionListTerm,
-  DescriptionListGroup,
-  DescriptionListDescription,
-  WizardContextConsumer,
+	Button,
+	DescriptionList,
+	DescriptionListTerm,
+	DescriptionListGroup,
+	DescriptionListDescription
 } from '@patternfly/react-core';
+import {
+	WizardContextConsumer
+} from '@patternfly/react-core/deprecated';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'foremanReact/redux/API';

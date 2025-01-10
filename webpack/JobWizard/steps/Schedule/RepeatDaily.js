@@ -20,7 +20,7 @@ export const RepeatDaily = ({ repeatData, setRepeatData, setValid }) => {
         className="time-picker"
         time={repeatData.at}
         placeholder="hh:mm"
-        onChange={newTime => {
+        onChange={(e, newTime) => {
           setRepeatData({ ...repeatData, at: newTime });
         }}
         is24Hour
