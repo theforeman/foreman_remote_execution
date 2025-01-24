@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   match 'old/job_invocations/new', to: 'job_invocations#new', via: [:get], as: 'form_new_job_invocation'
   match 'old/job_invocations/:id/rerun', to: 'job_invocations#rerun', via: [:get, :post], as: 'form_rerun_job_invocation'
   match 'experimental/job_invocations_detail/:id', to: 'react#index', :via => [:get], as: 'new_job_invocation_detail'
+  match 'job_invocations_detail/:id/host_invocation/:host_id', to: 'react#index', :via => [:get], as: 'new_job_invocation_detail_by_host'
+  get 'show_template_invocation_by_host/:host_id/job_invocation/:id', to: 'template_invocations#show_template_invocation_by_host'
 
   resources :job_invocations, :only => [:create, :show, :index] do
     collection do

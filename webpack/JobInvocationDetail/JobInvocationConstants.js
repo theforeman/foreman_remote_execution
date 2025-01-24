@@ -19,6 +19,15 @@ export const JOB_INVOCATION_HOSTS = 'JOB_INVOCATION_HOSTS';
 export const currentPermissionsUrl = foremanUrl(
   '/api/v2/permissions/current_permissions'
 );
+export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
+export const showTemplateInvocationUrl = (hostID, jobID) =>
+  `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;
+
+export const templateInvocationPageUrl = (hostID, jobID) =>
+  `/job_invocations_detail/${jobID}/host_invocation/${hostID}`;
+
+export const jobInvocationDetailsUrl = id =>
+  `/experimental/job_invocations_detail/${id}`;
 
 export const STATUS = {
   PENDING: 'pending',
@@ -65,6 +74,11 @@ const Columns = () => {
   const hostDetailsPageUrl = useForemanHostDetailsPageUrl();
 
   return {
+    expand: {
+      title: '',
+      weight: 0,
+      wrapper: () => null,
+    },
     name: {
       title: __('Name'),
       wrapper: ({ name }) => (
@@ -108,6 +122,11 @@ const Columns = () => {
         );
       },
       weight: 5,
+    },
+    actions: {
+      title: '',
+      weight: 6,
+      wrapper: () => null,
     },
   };
 };

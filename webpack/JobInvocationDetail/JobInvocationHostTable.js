@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import PropTypes from 'prop-types';
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { Icon } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { FormattedMessage } from 'react-intl';
-import { Tr, Td } from '@patternfly/react-table';
+import { Tr, Td, Tbody, ExpandableRowContent } from '@patternfly/react-table';
 import {
   Title,
   EmptyState,
@@ -26,6 +26,9 @@ import Columns, {
   JOB_INVOCATION_HOSTS,
   STATUS_UPPERCASE,
 } from './JobInvocationConstants';
+import { TemplateInvocation } from './TemplateInvocation';
+import { OpenAlInvocations, PopupAlert } from './OpenAlInvocations';
+import { RowActions } from './TemplateInvocationComponents/TemplateActionButtons';
 
 const JobInvocationHostTable = ({ id, targeting, finished, autoRefresh }) => {
   const columns = Columns();
@@ -39,11 +42,18 @@ const JobInvocationHostTable = ({ id, targeting, finished, autoRefresh }) => {
   const defaultParams = { search: urlSearchQuery };
   if (urlPage) defaultParams.page = Number(urlPage);
   if (urlPerPage) defaultParams.per_page = Number(urlPerPage);
+  const [expandedHost, setExpandedHost] = useState([]);
   const { response, status, setAPIOptions } = useAPI(
     'get',
     `/api/job_invocations/${id}/hosts`,
     {
-      params: { ...defaultParams, key: JOB_INVOCATION_HOSTS },
+      params: {
+        ...defaultParams,
+      },
+      key: JOB_INVOCATION_HOSTS,
+      handleSuccess: ({ data }) => {
+        if (data?.results?.length === 1) setExpandedHost([data.results[0].id]);
+      },
     }
   );
 
@@ -153,48 +163,102 @@ const JobInvocationHostTable = ({ id, targeting, finished, autoRefresh }) => {
     </Tr>
   );
 
+  const { results = [] } = response;
+
+  const isHostExpanded = host => expandedHost.includes(host);
+  const setHostExpanded = (host, isExpanding = true) =>
+    setExpandedHost(prevExpanded => {
+      const otherExpandedHosts = prevExpanded.filter(h => h !== host);
+      return isExpanding ? [...otherExpandedHosts, host] : otherExpandedHosts;
+    });
+  const [showAlert, setShowAlert] = useState(false);
   return (
-    <TableIndexPage
-      apiUrl=""
-      apiOptions={apiOptions}
-      customSearchProps={memoDefaultSearchProps}
-      controller="hosts"
-      creatable={false}
-      replacementResponse={combinedResponse}
-      updateSearchQuery={updateSearchQuery}
-    >
-      <Table
-        ouiaId="job-invocation-hosts-table"
-        columns={columns}
-        customEmptyState={
-          status === STATUS_UPPERCASE.RESOLVED && !response?.results?.length
-            ? customEmptyState
-            : null
+    <>
+      {showAlert && <PopupAlert setShowAlert={setShowAlert} />}
+      <TableIndexPage
+        apiUrl=""
+        apiOptions={apiOptions}
+        customSearchProps={memoDefaultSearchProps}
+        controller="hosts"
+        creatable={false}
+        replacementResponse={combinedResponse}
+        updateSearchQuery={updateSearchQuery}
+        customToolbarItems={
+          <OpenAlInvocations
+            setShowAlert={setShowAlert}
+            results={results}
+            id={id}
+          />
         }
-        params={params}
-        setParams={setParamsAndAPI}
-        itemCount={response?.subtotal}
-        results={response?.results}
-        url=""
-        refreshData={() => {}}
-        errorMessage={
-          status === STATUS_UPPERCASE.ERROR && response?.message
-            ? response.message
-            : null
-        }
-        isPending={status === STATUS_UPPERCASE.PENDING}
-        isDeleteable={false}
-        bottomPagination={bottomPagination}
       >
-        {response?.results?.map((result, rowIndex) => (
-          <Tr key={rowIndex} ouiaId={`table-row-${rowIndex}`}>
-            {columnNamesKeys.map(k => (
-              <Td key={k}>{columns[k].wrapper(result)}</Td>
-            ))}
-          </Tr>
-        ))}
-      </Table>
-    </TableIndexPage>
+        <Table
+          ouiaId="job-invocation-hosts-table"
+          columns={columns}
+          customEmptyState={
+            status === STATUS_UPPERCASE.RESOLVED && !results?.length
+              ? customEmptyState
+              : null
+          }
+          params={params}
+          setParams={setParamsAndAPI}
+          itemCount={response?.subtotal}
+          results={results}
+          url=""
+          refreshData={() => {}}
+          errorMessage={
+            status === STATUS_UPPERCASE.ERROR && response?.message
+              ? response.message
+              : null
+          }
+          isPending={status === STATUS_UPPERCASE.PENDING}
+          isDeleteable={false}
+          bottomPagination={bottomPagination}
+          childrenOutsideTbody
+        >
+          {results?.map((result, rowIndex) => (
+            <Tbody key={rowIndex}>
+              <Tr ouiaId={`table-row-${rowIndex}`}>
+                <Td
+                  expand={{
+                    rowIndex,
+                    isExpanded: isHostExpanded(result.id),
+                    onToggle: () =>
+                      setHostExpanded(result.id, !isHostExpanded(result.id)),
+                    expandId: 'host-expandable',
+                  }}
+                />
+                {columnNamesKeys.slice(1).map(k => (
+                  <Td key={k}>{columns[k].wrapper(result)}</Td>
+                ))}
+                <Td isActionCell>
+                  <RowActions hostID={result.id} jobID={id} />
+                </Td>
+              </Tr>
+              <Tr
+                isExpanded={isHostExpanded(result.id)}
+                ouiaId="table-row-expanded-sections"
+              >
+                <Td
+                  dataLabel={`${result.id}-expandable-content`}
+                  colSpan={columnNamesKeys.length + 1}
+                >
+                  <ExpandableRowContent>
+                    {result.job_status === 'cancelled' ||
+                    result.job_status === 'N/A' ? (
+                      <div>
+                        {__('A task for this host has not been started')}
+                      </div>
+                    ) : (
+                      <TemplateInvocation hostID={result.id} jobID={id} />
+                    )}
+                  </ExpandableRowContent>
+                </Td>
+              </Tr>
+            </Tbody>
+          ))}
+        </Table>
+      </TableIndexPage>
+    </>
   );
 };
 
