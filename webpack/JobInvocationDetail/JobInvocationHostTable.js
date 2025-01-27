@@ -47,16 +47,16 @@ const JobInvocationHostTable = ({
     filter = selectedFilter,
     search = urlSearchQuery
   ) => {
-    const baseFilter = `job_invocation.id = ${id}`;
     const dropdownFilterClause =
       filter && filter !== 'all_statuses'
-        ? `and job_invocation.result = ${filter}`
-        : '';
-    const searchQueryClause = search ? `and (${search})` : '';
-    return `${baseFilter} ${dropdownFilterClause} ${searchQueryClause}`;
+        ? `job_invocation.result = ${filter}`
+        : null;
+    const parts = [dropdownFilterClause, search];
+    return parts.filter((x) => x).map((fragment) => `(${fragment}})`).join(' AND ');
   };
 
-  const defaultParams = { search: constructFilter() };
+  const filter = constructFilter();
+  const defaultParams = filter != '' ? { search: filter } : {};
   if (urlPage) defaultParams.page = Number(urlPage);
   if (urlPerPage) defaultParams.per_page = Number(urlPerPage);
   const { response, status, setAPIOptions } = useAPI(
