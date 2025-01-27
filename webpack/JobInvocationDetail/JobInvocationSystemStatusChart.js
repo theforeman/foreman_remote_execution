@@ -17,18 +17,20 @@ import {
   Text,
 } from '@patternfly/react-core';
 import {
-  global_palette_black_600 as canceledColor,
+  global_palette_black_600 as cancelledColor,
   global_palette_black_500 as emptyChartDonut,
   global_palette_red_100 as failedColor,
   global_palette_blue_300 as inProgressColor,
   global_palette_green_500 as successedColor,
 } from '@patternfly/react-tokens';
+import { STATUS_TITLES } from './JobInvocationConstants';
 import './JobInvocationDetail.scss';
 
 const JobInvocationSystemStatusChart = ({
   data,
   isAlreadyStarted,
   formattedStartDate,
+  onFilterChange,
 }) => {
   const {
     succeeded,
@@ -42,7 +44,7 @@ const JobInvocationSystemStatusChart = ({
     { title: __('Succeeded:'), count: succeeded, color: successedColor.value },
     { title: __('Failed:'), count: failed, color: failedColor.value },
     { title: __('In Progress:'), count: pending, color: inProgressColor.value },
-    { title: __('Canceled:'), count: cancelled, color: canceledColor.value },
+    { title: __('Cancelled:'), count: cancelled, color: cancelledColor.value },
   ];
   const chartDonutTitle = () => {
     if (total > 0) return `${succeeded.toString()}/${total}`;
@@ -51,6 +53,7 @@ const JobInvocationSystemStatusChart = ({
   };
   const chartSize = 105;
   const [legendWidth, setLegendWidth] = useState(270);
+  const [cursor, setCursor] = useState('default');
 
   // Calculates chart legend width based on its content
   useEffect(() => {
@@ -64,9 +67,19 @@ const JobInvocationSystemStatusChart = ({
     }
   }, [isAlreadyStarted, data]);
 
+  const onChartClick = (_evt, { index }) => {
+    const statusKeys = Object.keys(STATUS_TITLES);
+    const selectedKey = statusKeys[index + 1]; // first status is ALL_STATUSES
+    const selectedFilter = selectedKey ? STATUS_TITLES[selectedKey]?.id : null;
+
+    if (onFilterChange && selectedFilter) {
+      onFilterChange(selectedFilter);
+    }
+  };
+
   return (
     <>
-      <FlexItem className="chart-donut">
+      <FlexItem className="chart-donut" style={{ cursor }}>
         <ChartDonut
           allowTooltip
           constrainToVisibleArea
@@ -78,15 +91,25 @@ const JobInvocationSystemStatusChart = ({
                 }))
               : [{ label: sprintf(__(`Scheduled: ${totalHosts} hosts`)), y: 1 }]
           }
+          events={[
+            {
+              target: 'data',
+              eventHandlers: {
+                onClick: onChartClick,
+                onMouseOver: () => {
+                  setCursor('pointer');
+                },
+                onMouseOut: () => {
+                  setCursor('default');
+                },
+              },
+            },
+          ]}
           colorScale={
             total > 0 ? chartData.map(d => d.color) : [emptyChartDonut.value]
           }
           labelComponent={
-            <ChartTooltip
-              pointerLength={0}
-              constrainToVisibleArea
-              renderInPortal={false}
-            />
+            <ChartTooltip pointerLength={0} renderInPortal={false} />
           }
           title={chartDonutTitle}
           titleComponent={
@@ -97,7 +120,7 @@ const JobInvocationSystemStatusChart = ({
           subTitleComponent={
             // inline style overrides PatternFly default styling
             <ChartLabel
-              style={{ fontSize: '12px', fill: canceledColor.value }}
+              style={{ fontSize: '12px', fill: cancelledColor.value }}
             />
           }
           padding={{
@@ -110,7 +133,7 @@ const JobInvocationSystemStatusChart = ({
           height={chartSize}
         />
       </FlexItem>
-      <FlexItem className="chart-legend">
+      <FlexItem className="chart-legend" style={{ cursor }}>
         <Text ouiaId="legend-title" className="legend-title">
           {__('System status')}
         </Text>
@@ -128,6 +151,32 @@ const JobInvocationSystemStatusChart = ({
             colorScale={chartData.map(d => d.color)}
             width={legendWidth}
             height={chartSize}
+            events={[
+              {
+                target: 'data',
+                eventHandlers: {
+                  onClick: onChartClick,
+                  onMouseOver: () => {
+                    setCursor('pointer');
+                  },
+                  onMouseOut: () => {
+                    setCursor('default');
+                  },
+                },
+              },
+              {
+                target: 'labels',
+                eventHandlers: {
+                  onClick: onChartClick,
+                  onMouseOver: () => {
+                    setCursor('pointer');
+                  },
+                  onMouseOut: () => {
+                    setCursor('default');
+                  },
+                },
+              },
+            ]}
           />
         ) : (
           <DescriptionList>
@@ -148,6 +197,7 @@ JobInvocationSystemStatusChart.propTypes = {
   data: PropTypes.object.isRequired,
   isAlreadyStarted: PropTypes.bool.isRequired,
   formattedStartDate: PropTypes.string,
+  onFilterChange: PropTypes.func.isRequired,
 };
 
 JobInvocationSystemStatusChart.defaultProps = {

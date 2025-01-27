@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Divider,
@@ -51,6 +51,11 @@ const JobInvocationDetailPage = ({
     currentPermissionsUrl,
     CURRENT_PERMISSIONS
   );
+  const [selectedFilter, setSelectedFilter] = useState('');
+
+  const handleFilterChange = filter => {
+    setSelectedFilter(filter);
+  };
 
   let isAlreadyStarted = false;
   let formattedStartDate;
@@ -79,7 +84,8 @@ const JobInvocationDetailPage = ({
     if (task?.id !== undefined) {
       dispatch(getTask(`${task?.id}`));
     }
-  }, [dispatch, task]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, task?.id]);
 
   const breadcrumbOptions = {
     breadcrumbItems: [
@@ -113,6 +119,7 @@ const JobInvocationDetailPage = ({
               data={items}
               isAlreadyStarted={isAlreadyStarted}
               formattedStartDate={formattedStartDate}
+              onFilterChange={handleFilterChange}
             />
             <Divider
               orientation={{
@@ -148,6 +155,7 @@ const JobInvocationDetailPage = ({
             targeting={targeting}
             finished={finished}
             autoRefresh={autoRefresh}
+            initialFilter={selectedFilter}
           />
         )}
       </PageSection>
