@@ -1,3 +1,20 @@
+const targeting = {
+  bookmark_id: null,
+  bookmark_name: null,
+  search_query: 'id ^ (50)',
+  targeting_type: 'static_query',
+  user_id: 4,
+  randomized_ordering: null,
+  hosts: [
+    {
+      name: 'alton-bennette.iris-starley.kari-stadtler.example.net',
+      id: 50,
+      display_name: 'alton-bennette.iris-starley.kari-stadtler.example.net',
+      job_status: 'N/A',
+    },
+  ],
+};
+
 export const jobInvocationData = {
   search: '',
   per_page: 20,
@@ -40,6 +57,7 @@ export const jobInvocationData = {
       ],
     },
   ],
+  targeting,
 };
 
 export const jobInvocationDataScheduled = {
@@ -65,6 +83,7 @@ export const jobInvocationDataScheduled = {
   total: 6,
   missing: 5,
   total_hosts: 6,
+  targeting,
 };
 
 export const jobInvocationDataRecurring = {
@@ -109,6 +128,7 @@ export const jobInvocationDataRecurring = {
     last_occurence: null,
     next_occurence: '3000-01-01 12:00:00 +0100',
   },
+  targeting,
 };
 
 export const mockPermissionsData = {

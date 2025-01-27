@@ -25,6 +25,7 @@ import { selectItems } from './JobInvocationSelectors';
 import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
 import JobInvocationHostTable from './JobInvocationHostTable';
+import { JobAdditionInfo } from './JobAdditionInfo';
 
 const JobInvocationDetailPage = ({
   match: {
@@ -90,45 +91,53 @@ const JobInvocationDetailPage = ({
 
   return (
     <>
-      <PageLayout
-        header={description}
-        breadcrumbOptions={breadcrumbOptions}
-        toolbarButtons={
-          <JobInvocationToolbarButtons
-            jobId={id}
-            data={items}
-            currentPermissions={response.results}
-            permissionsStatus={status}
-          />
-        }
-        searchable={false}
-      >
-        <Flex
-          className="job-invocation-detail-flex"
-          alignItems={{ default: 'alignItemsFlexStart' }}
+      <div className="job-invocation-details">
+        <PageLayout
+          header={description}
+          breadcrumbOptions={breadcrumbOptions}
+          toolbarButtons={
+            <JobInvocationToolbarButtons
+              jobId={id}
+              data={items}
+              currentPermissions={response.results}
+              permissionsStatus={status}
+            />
+          }
+          searchable={false}
         >
-          <JobInvocationSystemStatusChart
-            data={items}
-            isAlreadyStarted={isAlreadyStarted}
-            formattedStartDate={formattedStartDate}
-          />
-          <Divider
-            orientation={{
-              default: 'vertical',
-            }}
-          />
           <Flex
-            className="job-overview"
-            alignItems={{ default: 'alignItemsCenter' }}
+            className="job-invocation-detail-flex"
+            alignItems={{ default: 'alignItemsFlexStart' }}
           >
-            <JobInvocationOverview
+            <JobInvocationSystemStatusChart
               data={items}
               isAlreadyStarted={isAlreadyStarted}
               formattedStartDate={formattedStartDate}
             />
+            <Divider
+              orientation={{
+                default: 'vertical',
+              }}
+            />
+            <Flex
+              className="job-overview"
+              alignItems={{ default: 'alignItemsCenter' }}
+            >
+              <JobInvocationOverview
+                data={items}
+                isAlreadyStarted={isAlreadyStarted}
+                formattedStartDate={formattedStartDate}
+              />
+            </Flex>
           </Flex>
-        </Flex>
-      </PageLayout>
+        </PageLayout>
+      </div>
+      <PageSection
+        variant={PageSectionVariants.light}
+        className="job-additional-info"
+      >
+        {items.id !== undefined && <JobAdditionInfo data={items} />}
+      </PageSection>
       <PageSection
         variant={PageSectionVariants.light}
         className="table-section"

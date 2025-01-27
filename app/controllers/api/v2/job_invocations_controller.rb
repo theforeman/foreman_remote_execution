@@ -22,6 +22,8 @@ module Api
       param :host_status, :bool, required: false, desc: N_('Show Job status for the hosts')
       def show
         set_hosts_and_template_invocations
+        @job_organization = Taxonomy.find_by(id: @job_invocation.task.input[:current_organization_id])
+        @job_location = Taxonomy.find_by(id: @job_invocation.task.input[:current_location_id])
         if params[:host_status] == 'true'
           set_statuses_and_smart_proxies
         end
@@ -266,6 +268,7 @@ module Api
       end
 
       def set_hosts_and_template_invocations
+        @pattern_template_invocations = @job_invocation.pattern_template_invocations.includes(:input_values)
         @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
         @template_invocations = @job_invocation.template_invocations
                                                .where(host: @hosts)
