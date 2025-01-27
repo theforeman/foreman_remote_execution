@@ -38,3 +38,10 @@
     height: $chart_size;
   }
 }
+.job-additional-info {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.job-invocation-details section:nth-child(3) {
+  padding-bottom: 0;
+}

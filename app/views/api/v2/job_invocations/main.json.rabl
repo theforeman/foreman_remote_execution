@@ -16,7 +16,7 @@ node do |invocation|
 end
 
 child :targeting do
-  attributes :bookmark_id, :search_query, :targeting_type, :user_id, :status, :status_label,
+  attributes :bookmark_id, :bookmark_name, :search_query, :targeting_type, :user_id, :status, :status_label,
     :randomized_ordering
 
   child @hosts => :hosts do
