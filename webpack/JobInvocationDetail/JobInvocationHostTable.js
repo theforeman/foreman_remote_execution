@@ -70,13 +70,7 @@ const JobInvocationHostTable = ({
     'get',
     `/api/job_invocations/${id}/hosts`,
     {
-      params: {
-        ...defaultParams,
-      },
-      key: JOB_INVOCATION_HOSTS,
-      handleSuccess: ({ data }) => {
-        if (data?.results?.length === 1) setExpandedHost([data.results[0].id]);
-      },
+      params: defaultParams,
     }
   );
 
