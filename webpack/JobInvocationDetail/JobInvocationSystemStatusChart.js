@@ -197,11 +197,12 @@ JobInvocationSystemStatusChart.propTypes = {
   data: PropTypes.object.isRequired,
   isAlreadyStarted: PropTypes.bool.isRequired,
   formattedStartDate: PropTypes.string,
-  onFilterChange: PropTypes.func.isRequired,
+  onFilterChange: PropTypes.func,
 };
 
 JobInvocationSystemStatusChart.defaultProps = {
   formattedStartDate: undefined,
+  onFilterChange: undefined,
 };
 
 export default JobInvocationSystemStatusChart;
