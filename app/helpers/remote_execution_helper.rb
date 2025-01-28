@@ -99,12 +99,11 @@ module RemoteExecutionHelper
         :disabled => !task.cancellable?,
         :method => :post)
     end
-    if Setting[:lab_features]
-      buttons << link_to(_('New UI'), new_job_invocation_detail_path(:id => job_invocation.id),
-        class: 'btn btn-default',
-        title: _('Switch to the new job invocation detail UI'))
-    end
-    return buttons
+    buttons << link_to(_('New UI'), new_job_invocation_detail_path(:id => job_invocation.id),
+      class: 'btn btn-default',
+      title: _('Switch to the new job invocation detail UI'))
+
+    buttons
   end
 
   def template_invocation_task_buttons(task, invocation)
