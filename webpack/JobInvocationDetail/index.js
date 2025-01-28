@@ -146,6 +146,8 @@ const JobInvocationDetailPage = ({
             targeting={targeting}
             finished={finished}
             autoRefresh={autoRefresh}
+            currentPermissions={response.results}
+            permissionsStatus={status}
           />
         )}
       </PageSection>
