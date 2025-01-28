@@ -105,7 +105,7 @@ describe('JobInvocationDetailPage', () => {
     expect(screen.getByText('Succeeded: 2')).toBeInTheDocument();
     expect(screen.getByText('Failed: 4')).toBeInTheDocument();
     expect(screen.getByText('In Progress: 0')).toBeInTheDocument();
-    expect(screen.getByText('Canceled: 0')).toBeInTheDocument();
+    expect(screen.getByText('Cancelled: 0')).toBeInTheDocument();
 
     const informationToCheck = {
       'Effective user:': jobInvocationData.effective_user,

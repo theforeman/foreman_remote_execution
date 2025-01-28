@@ -270,6 +270,11 @@ module Api
       def set_hosts_and_template_invocations
         @pattern_template_invocations = @job_invocation.pattern_template_invocations.includes(:input_values)
         @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+
+        unless params[:search].nil?
+          @hosts = @hosts.joins(:template_invocations)
+                         .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
+        end
         @template_invocations = @job_invocation.template_invocations
                                                .where(host: @hosts)
                                                .includes(:input_values)
