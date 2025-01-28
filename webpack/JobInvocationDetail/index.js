@@ -91,56 +91,54 @@ const JobInvocationDetailPage = ({
 
   return (
     <>
-      <div className="job-invocation-details">
-        <PageLayout
-          header={description}
-          breadcrumbOptions={breadcrumbOptions}
-          toolbarButtons={
-            <JobInvocationToolbarButtons
-              jobId={id}
-              data={items}
-              currentPermissions={response.results}
-              permissionsStatus={status}
-            />
-          }
-          searchable={false}
+      <PageLayout
+        header={description}
+        breadcrumbOptions={breadcrumbOptions}
+        toolbarButtons={
+          <JobInvocationToolbarButtons
+            jobId={id}
+            data={items}
+            currentPermissions={response.results}
+            permissionsStatus={status}
+          />
+        }
+        searchable={false}
+      >
+        <Flex
+          className="job-invocation-detail-flex"
+          alignItems={{ default: 'alignItemsFlexStart' }}
         >
+          <JobInvocationSystemStatusChart
+            data={items}
+            isAlreadyStarted={isAlreadyStarted}
+            formattedStartDate={formattedStartDate}
+          />
+          <Divider
+            orientation={{
+              default: 'vertical',
+            }}
+          />
           <Flex
-            className="job-invocation-detail-flex"
-            alignItems={{ default: 'alignItemsFlexStart' }}
+            className="job-overview"
+            alignItems={{ default: 'alignItemsCenter' }}
           >
-            <JobInvocationSystemStatusChart
+            <JobInvocationOverview
               data={items}
               isAlreadyStarted={isAlreadyStarted}
               formattedStartDate={formattedStartDate}
             />
-            <Divider
-              orientation={{
-                default: 'vertical',
-              }}
-            />
-            <Flex
-              className="job-overview"
-              alignItems={{ default: 'alignItemsCenter' }}
-            >
-              <JobInvocationOverview
-                data={items}
-                isAlreadyStarted={isAlreadyStarted}
-                formattedStartDate={formattedStartDate}
-              />
-            </Flex>
           </Flex>
-        </PageLayout>
-      </div>
+        </Flex>
+        <PageSection
+          variant={PageSectionVariants.light}
+          className="job-additional-info"
+        >
+          {items.id !== undefined && <JobAdditionInfo data={items} />}
+        </PageSection>
+      </PageLayout>
       <PageSection
         variant={PageSectionVariants.light}
-        className="job-additional-info"
-      >
-        {items.id !== undefined && <JobAdditionInfo data={items} />}
-      </PageSection>
-      <PageSection
-        variant={PageSectionVariants.light}
-        className="table-section"
+        className="job-details-table-section table-section"
       >
         {items.id !== undefined && (
           <JobInvocationHostTable
