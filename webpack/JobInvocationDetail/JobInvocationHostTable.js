@@ -66,7 +66,7 @@ const JobInvocationHostTable = ({
     'get',
     `/api/job_invocations/${id}/hosts`,
     {
-      params: { ...defaultParams, key: JOB_INVOCATION_HOSTS },
+      params: defaultParams,
     }
   );
 
