@@ -1,6 +1,6 @@
 collection @hosts
 
-attribute :name, :operatingsystem_id, :operatingsystem_name, :hostgroup_id, :hostgroup_name
+attribute :id, :name, :operatingsystem_id, :operatingsystem_name, :hostgroup_id, :hostgroup_name
 
 node :job_status do |host|
   @host_statuses[host.id]

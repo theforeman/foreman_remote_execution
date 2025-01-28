@@ -3,6 +3,7 @@ import React from 'react';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { useForemanHostDetailsPageUrl } from 'foremanReact/Root/Context/ForemanContext';
+import { STATUS as APIStatus } from 'foremanReact/constants';
 import JobStatusIcon from '../react_app/components/RecentJobsCard/JobStatusIcon';
 
 export const JOB_INVOCATION_KEY = 'JOB_INVOCATION_KEY';
@@ -50,6 +51,17 @@ export const DATE_OPTIONS = {
   hour12: false,
   timeZoneName: 'short',
 };
+
+export const hasPermission = (
+  currentPermissions,
+  permissionsStatus,
+  permissionRequired
+) =>
+  permissionsStatus === APIStatus.RESOLVED
+    ? currentPermissions?.some(
+        permission => permission.name === permissionRequired
+      )
+    : false;
 
 const Columns = () => {
   const getColumnsStatus = ({ hostJobStatus }) => {
