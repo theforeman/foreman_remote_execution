@@ -54,7 +54,7 @@ const JobInvocationHostTable = ({
     const parts = [dropdownFilterClause, search];
     return parts
       .filter(x => x)
-      .map(fragment => `(${fragment}})`)
+      .map(fragment => `(${fragment})`)
       .join(' AND ');
   };
 
