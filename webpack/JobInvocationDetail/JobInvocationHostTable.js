@@ -52,11 +52,14 @@ const JobInvocationHostTable = ({
         ? `job_invocation.result = ${filter}`
         : null;
     const parts = [dropdownFilterClause, search];
-    return parts.filter((x) => x).map((fragment) => `(${fragment}})`).join(' AND ');
+    return parts
+      .filter(x => x)
+      .map(fragment => `(${fragment}})`)
+      .join(' AND ');
   };
 
-  const filter = constructFilter();
-  const defaultParams = filter != '' ? { search: filter } : {};
+  const search = constructFilter();
+  const defaultParams = search !== '' ? { search } : {};
   if (urlPage) defaultParams.page = Number(urlPage);
   if (urlPerPage) defaultParams.per_page = Number(urlPerPage);
   const { response, status, setAPIOptions } = useAPI(
