@@ -1,4 +1,9 @@
-import React from 'react';
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
@@ -55,6 +60,48 @@ export const OutputCodeBlock = ({ code, showOutputType, scrollElement }) => {
   const filteredCode = code.filter(
     ({ output_type: outputType }) => showOutputType[outputType]
   );
+
+  const scrollElementSelected = useCallback(
+    () => document.querySelector(scrollElement),
+    [scrollElement]
+  );
+  const onClickScrollToTop = useCallback(() => {
+    if (scrollElementSelected()) scrollElementSelected().scrollTo(0, 0);
+  }, [scrollElementSelected]);
+
+  const onClickScrollToBottom = useCallback(() => {
+    if (scrollElementSelected())
+      scrollElementSelected().scrollTo(0, scrollElementSelected().scrollHeight);
+  }, [scrollElementSelected]);
+
+  const [isScrolledBottom, setIsScrolledBottom] = useState(true);
+  useEffect(() => {
+    const element = scrollElementSelected();
+    const onScroll = () => {
+      if (
+        Math.abs(
+          element.scrollHeight - element.scrollTop - element.clientHeight
+        ) < 1
+      )
+        setIsScrolledBottom(true);
+      else setIsScrolledBottom(false);
+    };
+    if (element) {
+      element.addEventListener('scroll', onScroll);
+    }
+    return () => {
+      if (element) {
+        element.removeEventListener('scroll', onScroll);
+      }
+    };
+  }, [scrollElementSelected]);
+
+  useLayoutEffect(() => {
+    if (isScrolledBottom) {
+      onClickScrollToBottom();
+    }
+  }, [code.length, isScrolledBottom, onClickScrollToBottom]);
+
   if (!filteredCode.length) {
     return <div>{__('No output for the selected filters')}</div>;
   }
@@ -81,13 +128,7 @@ export const OutputCodeBlock = ({ code, showOutputType, scrollElement }) => {
       );
     });
   });
-  const scrollElementSeleceted = () => document.querySelector(scrollElement);
-  const onClickScrollToTop = () => {
-    scrollElementSeleceted().scrollTo(0, 0);
-  };
-  const onClickScrollToBottom = () => {
-    scrollElementSeleceted().scrollTo(0, scrollElementSeleceted().scrollHeight);
-  };
+
   return (
     <div className="invocation-output">
       <Button
