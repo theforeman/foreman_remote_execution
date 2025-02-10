@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 14.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -35,10 +35,13 @@
       "%{description} on %{host}": [
         "%{description} 於 %{host} 之上"
       ],
+      "'Starts at' date must be in the future": [
+        ""
+      ],
       "'Starts before' date must be after 'Starts at' date": [
         ""
       ],
-      "'Starts before' date must in the future": [
+      "'Starts before' date must be in the future": [
         ""
       ],
       "...and %s more": [
@@ -72,6 +75,9 @@
       "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time.": [
         ""
       ],
+      "A task for this host has not been started": [
+        ""
+      ],
       "A user to be used for SSH.": [
         ""
       ],
@@ -84,8 +90,14 @@
       "Abort Job": [
         ""
       ],
+      "Abort task": [
+        ""
+      ],
       "Access denied": [
         "拒絕存取"
+      ],
+      "Action": [
+        ""
       ],
       "Actions": [
         "動作"
@@ -108,10 +120,13 @@
       "All fields are required.": [
         ""
       ],
+      "All statuses": [
+        ""
+      ],
       "Alphabetical": [
         ""
       ],
-      "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required.": [
+      "An error occurred while fetching the template invocation details.": [
         ""
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
@@ -123,7 +138,16 @@
       "Any Organization": [
         "任何組織"
       ],
+      "Any location": [
+        ""
+      ],
+      "Any organization": [
+        ""
+      ],
       "Apply to": [
+        ""
+      ],
+      "Are you sure you want to open all invocations in new tabs?": [
         ""
       ],
       "At": [
@@ -153,17 +177,20 @@
       "Cancel Job": [
         "取消工作"
       ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel job invocation": [
         ""
       ],
       "Cancel recurring": [
         ""
       ],
-      "Canceled:": [
-        ""
-      ],
       "Cancelled": [
         "已取消"
+      ],
+      "Cancelled:": [
+        ""
       ],
       "Cannot resolve hosts without a bookmark or search query": [
         "沒有書籤或搜尋查詢，就無法解析主機"
@@ -204,6 +231,9 @@
       "Cockpit URL": [
         ""
       ],
+      "Command": [
+        ""
+      ],
       "Concurrency level": [
         "同步等級"
       ],
@@ -215,6 +245,9 @@
       ],
       "Control concurrency level and distribution over time": [
         "隨時間控制週期等級並散佈"
+      ],
+      "Copy to clipboard": [
+        ""
       ],
       "Could not abort the job %s: ${response}": [
         ""
@@ -267,6 +300,9 @@
       "Create a recurring job": [
         "建立週期性工作"
       ],
+      "Create job": [
+        ""
+      ],
       "Create report": [
         ""
       ],
@@ -285,6 +321,9 @@
       "Cronline": [
         ""
       ],
+      "Current iteration": [
+        ""
+      ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
       ],
@@ -297,8 +336,14 @@
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
         ""
       ],
+      "DEBUG": [
+        ""
+      ],
       "Daily": [
         "每天"
+      ],
+      "Date must be in the future": [
+        ""
       ],
       "Days": [
         "天"
@@ -543,6 +588,9 @@
       "Host detail": [
         "主機詳細資料"
       ],
+      "Host group": [
+        ""
+      ],
       "Host groups": [
         "主機群組"
       ],
@@ -564,6 +612,9 @@
       "How often the job should occur, in the cron format": [
         "工作多常發生，格式同 cron"
       ],
+      "ID": [
+        ""
+      ],
       "Identifier of the Host interface for Remote execution": [
         ""
       ],
@@ -574,6 +625,9 @@
         "匯入"
       ],
       "Import a job template from ERB": [
+        ""
+      ],
+      "In Progress": [
         ""
       ],
       "In Progress:": [
@@ -617,6 +671,9 @@
       ],
       "Invocation type, one of %s": [
         "祈願類型，%s 之一"
+      ],
+      "Iteration limit": [
+        ""
       ],
       "Job": [
         "工作"
@@ -675,6 +732,9 @@
       "Job templates": [
         "工作範本"
       ],
+      "Job with id '%{id}' was not found": [
+        ""
+      ],
       "JobTemplate|Locked": [
         "JobTemplate|Locked"
       ],
@@ -705,6 +765,9 @@
       "Last execution succeeded": [
         "最後的執行成功"
       ],
+      "Last occurrence": [
+        ""
+      ],
       "Latest Jobs": [
         ""
       ],
@@ -719,6 +782,9 @@
       ],
       "List foreign input sets": [
         "列出外部輸入集"
+      ],
+      "List hosts belonging to job invocation": [
+        ""
       ],
       "List job invocations": [
         "列出工作祈願"
@@ -777,10 +843,19 @@
       "Next": [
         "下一步"
       ],
+      "Next occurrence": [
+        ""
+      ],
       "No (override)": [
         ""
       ],
+      "No Results": [
+        ""
+      ],
       "No Target Hosts": [
+        ""
+      ],
+      "No hosts found": [
         ""
       ],
       "No hosts found.": [
@@ -789,11 +864,17 @@
       "No jobs available": [
         ""
       ],
+      "No output for the selected filters": [
+        ""
+      ],
       "No results found": [
         ""
       ],
       "No template mapped to feature %{feature_name}": [
         "沒有範本定義至功能 %{feature_name}"
+      ],
+      "No user input": [
+        ""
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "並不是所需的輸入都有值。缺少的輸入：%s"
@@ -807,10 +888,22 @@
       "Now": [
         ""
       ],
+      "OS": [
+        ""
+      ],
       "On": [
         "開啟"
       ],
       "Only one of feature or job_template_id can be specified": [
+        ""
+      ],
+      "Open all in new tabs": [
+        ""
+      ],
+      "Open all invocations in new tabs": [
+        ""
+      ],
+      "Open in new tab": [
         ""
       ],
       "Opening job invocation form": [
@@ -858,7 +951,13 @@
       "Please enter a search query": [
         ""
       ],
+      "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" or \\\\\\\"Recurring execution\\\\\\\" step to fix the error": [
+        ""
+      ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
+        ""
+      ],
+      "Please make sure that the Smart Proxy is configured correctly for the Pull provider.": [
         ""
       ],
       "Please refine your search.": [
@@ -876,6 +975,9 @@
       "Please select at least one host group": [
         ""
       ],
+      "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs.": [
+        ""
+      ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         ""
       ],
@@ -886,6 +988,9 @@
         "預覽"
       ],
       "Preview Hosts": [
+        ""
+      ],
+      "Preview Template": [
         ""
       ],
       "Preview job description": [
@@ -987,6 +1092,9 @@
       "Repeat amount can only be a positive number": [
         ""
       ],
+      "Repeat until": [
+        ""
+      ],
       "Repeats": [
         "重複"
       ],
@@ -1007,6 +1115,12 @@
       ],
       "Rerun on failed hosts": [
         "在失敗的主機上重新執行"
+      ],
+      "Rerun on succeeded hosts": [
+        ""
+      ],
+      "Rerun succeeded": [
+        ""
       ],
       "Rerun successful": [
         ""
@@ -1069,6 +1183,12 @@
         ""
       ],
       "SSH user:": [
+        ""
+      ],
+      "STDERR": [
+        ""
+      ],
+      "STDOUT": [
         ""
       ],
       "Schedule": [
@@ -1194,6 +1314,9 @@
       "Skip to review step": [
         ""
       ],
+      "Smart proxy": [
+        ""
+      ],
       "Snippet": [
         "程式碼片段"
       ],
@@ -1254,6 +1377,9 @@
       "Success": [
         "成功"
       ],
+      "Successfully copied to clipboard!": [
+        ""
+      ],
       "Switch to the new job invocation detail UI": [
         ""
       ],
@@ -1266,6 +1392,9 @@
       "Systems": [
         ""
       ],
+      "Target Hosts": [
+        ""
+      ],
       "Target hosts": [
         "目標主機"
       ],
@@ -1274,6 +1403,9 @@
       ],
       "Target template ID": [
         "目標範本 ID"
+      ],
+      "Target:": [
+        ""
       ],
       "Target: ": [
         "目標："
@@ -1284,6 +1416,12 @@
       "Task cancelled": [
         ""
       ],
+      "Task count": [
+        ""
+      ],
+      "Task for the host cancelled succesfully": [
+        ""
+      ],
       "Template ERB": [
         ""
       ],
@@ -1291,6 +1429,9 @@
         ""
       ],
       "Template failed with:": [
+        ""
+      ],
+      "Template invocation not found": [
         ""
       ],
       "Template name": [
@@ -1314,6 +1455,9 @@
       "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}.": [
         "動態查詢 '%{query}' 尚未被解析。該解析的主機清單可以在 %{here} 找到。"
       ],
+      "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
+        ""
+      ],
       "The execution interface is used for remote execution": [
         "用來遠端執行的執行介面"
       ],
@@ -1330,6 +1474,9 @@
         ""
       ],
       "The job template to use, parameter is required unless feature was specified": [
+        ""
+      ],
+      "The number of invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1358,6 +1505,9 @@
         "這範本是用來產生描述。輸入值可以使用 %{package} 語法。您也可以使用 %{job_category} 與 %{template_name} 來包括工作類別與範本名稱。"
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
+        ""
+      ],
+      "This will open a new tab for each invocation.": [
         ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
@@ -1408,10 +1558,16 @@
       "Trying to abort the job %s.": [
         ""
       ],
+      "Trying to abort the task for the host": [
+        ""
+      ],
       "Trying to cancel the job": [
         ""
       ],
       "Trying to cancel the job %s.": [
+        ""
+      ],
+      "Trying to cancel the task for the host": [
         ""
       ],
       "Type": [
@@ -1438,7 +1594,13 @@
       "Unable to remove host from known hosts": [
         ""
       ],
+      "Unable to run job": [
+        ""
+      ],
       "Unable to save template. Correct highlighted errors": [
+        ""
+      ],
+      "Unknown": [
         ""
       ],
       "Unknown execution status": [
@@ -1543,9 +1705,6 @@
       "Whether we should sync templates from disk when running db:seed.": [
         "執行 db:seed 時是否要從磁碟同步範本。"
       ],
-      "Workers pool size": [
-        ""
-      ],
       "Yes (override)": [
         ""
       ],
@@ -1556,6 +1715,9 @@
         "您未經許可執行這項動作。"
       ],
       "You have %s results to display. Showing first %s results": [
+        ""
+      ],
+      "You have more results to display. Showing first %s results": [
         ""
       ],
       "add an input set for this template to reference a different template inputs": [
@@ -1571,9 +1733,6 @@
         ""
       ],
       "effective user": [
-        ""
-      ],
-      "error": [
         ""
       ],
       "error during rendering: %s": [
@@ -1651,6 +1810,9 @@
       "succeeded": [
         "已成功"
       ],
+      "task aborted succesfully": [
+        ""
+      ],
       "tasks at a time": [
         ""
       ],
@@ -1667,6 +1829,9 @@
         ""
       ],
       "view host names": [
+        ""
+      ],
+      "view the hosts": [
         ""
       ],
       "yes": [

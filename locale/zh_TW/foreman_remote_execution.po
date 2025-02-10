@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 14.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -35,10 +35,13 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr "%{description} 於 %{host} 之上"
 
+msgid "'Starts at' date must be in the future"
+msgstr ""
+
 msgid "'Starts before' date must be after 'Starts at' date"
 msgstr ""
 
-msgid "'Starts before' date must in the future"
+msgid "'Starts before' date must be in the future"
 msgstr ""
 
 msgid "...and %s more"
@@ -73,6 +76,9 @@ msgstr "將遠端執行帶入 Foreman 的外掛程式，搭配遠端管理功能
 msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
 msgstr ""
 
+msgid "A task for this host has not been started"
+msgstr ""
+
 msgid "A user to be used for SSH."
 msgstr ""
 
@@ -85,8 +91,14 @@ msgstr ""
 msgid "Abort Job"
 msgstr ""
 
+msgid "Abort task"
+msgstr ""
+
 msgid "Access denied"
 msgstr "拒絕存取"
+
+msgid "Action"
+msgstr ""
 
 msgid "Actions"
 msgstr "動作"
@@ -109,10 +121,13 @@ msgstr ""
 msgid "All fields are required."
 msgstr ""
 
+msgid "All statuses"
+msgstr ""
+
 msgid "Alphabetical"
 msgstr ""
 
-msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
+msgid "An error occurred while fetching the template invocation details."
 msgstr ""
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
@@ -124,7 +139,16 @@ msgstr "任何位置"
 msgid "Any Organization"
 msgstr "任何組織"
 
+msgid "Any location"
+msgstr ""
+
+msgid "Any organization"
+msgstr ""
+
 msgid "Apply to"
+msgstr ""
+
+msgid "Are you sure you want to open all invocations in new tabs?"
 msgstr ""
 
 msgid "At"
@@ -154,17 +178,20 @@ msgstr ""
 msgid "Cancel Job"
 msgstr "取消工作"
 
+msgid "Cancel Task"
+msgstr ""
+
 msgid "Cancel job invocation"
 msgstr ""
 
 msgid "Cancel recurring"
 msgstr ""
 
-msgid "Canceled:"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "已取消"
+
+msgid "Cancelled:"
+msgstr ""
 
 msgid "Cannot resolve hosts without a bookmark or search query"
 msgstr "沒有書籤或搜尋查詢，就無法解析主機"
@@ -205,6 +232,9 @@ msgstr "關閉"
 msgid "Cockpit URL"
 msgstr ""
 
+msgid "Command"
+msgstr ""
+
 msgid "Concurrency level"
 msgstr "同步等級"
 
@@ -216,6 +246,9 @@ msgstr ""
 
 msgid "Control concurrency level and distribution over time"
 msgstr "隨時間控制週期等級並散佈"
+
+msgid "Copy to clipboard"
+msgstr ""
 
 msgid "Could not abort the job %s: ${response}"
 msgstr ""
@@ -268,6 +301,9 @@ msgstr "建立工作範本"
 msgid "Create a recurring job"
 msgstr "建立週期性工作"
 
+msgid "Create job"
+msgstr ""
+
 msgid "Create report"
 msgstr ""
 
@@ -286,6 +322,9 @@ msgstr ""
 msgid "Cronline"
 msgstr ""
 
+msgid "Current iteration"
+msgstr ""
+
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr ""
 
@@ -298,8 +337,14 @@ msgstr ""
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
 msgstr ""
 
+msgid "DEBUG"
+msgstr ""
+
 msgid "Daily"
 msgstr "每天"
+
+msgid "Date must be in the future"
+msgstr ""
 
 msgid "Days"
 msgstr "天"
@@ -544,6 +589,9 @@ msgstr ""
 msgid "Host detail"
 msgstr "主機詳細資料"
 
+msgid "Host group"
+msgstr ""
+
 msgid "Host groups"
 msgstr "主機群組"
 
@@ -565,6 +613,9 @@ msgstr ""
 msgid "How often the job should occur, in the cron format"
 msgstr "工作多常發生，格式同 cron"
 
+msgid "ID"
+msgstr ""
+
 msgid "Identifier of the Host interface for Remote execution"
 msgstr ""
 
@@ -575,6 +626,9 @@ msgid "Import"
 msgstr "匯入"
 
 msgid "Import a job template from ERB"
+msgstr ""
+
+msgid "In Progress"
 msgstr ""
 
 msgid "In Progress:"
@@ -618,6 +672,9 @@ msgstr ""
 
 msgid "Invocation type, one of %s"
 msgstr "祈願類型，%s 之一"
+
+msgid "Iteration limit"
+msgstr ""
 
 msgid "Job"
 msgstr "工作"
@@ -676,6 +733,9 @@ msgstr ""
 msgid "Job templates"
 msgstr "工作範本"
 
+msgid "Job with id '%{id}' was not found"
+msgstr ""
+
 msgid "JobTemplate|Locked"
 msgstr "JobTemplate|Locked"
 
@@ -706,6 +766,9 @@ msgstr "最後的執行失敗"
 msgid "Last execution succeeded"
 msgstr "最後的執行成功"
 
+msgid "Last occurrence"
+msgstr ""
+
 msgid "Latest Jobs"
 msgstr ""
 
@@ -720,6 +783,9 @@ msgstr ""
 
 msgid "List foreign input sets"
 msgstr "列出外部輸入集"
+
+msgid "List hosts belonging to job invocation"
+msgstr ""
 
 msgid "List job invocations"
 msgstr "列出工作祈願"
@@ -778,10 +844,19 @@ msgstr ""
 msgid "Next"
 msgstr "下一步"
 
+msgid "Next occurrence"
+msgstr ""
+
 msgid "No (override)"
 msgstr ""
 
+msgid "No Results"
+msgstr ""
+
 msgid "No Target Hosts"
+msgstr ""
+
+msgid "No hosts found"
 msgstr ""
 
 msgid "No hosts found."
@@ -790,11 +865,17 @@ msgstr "找不到主機。"
 msgid "No jobs available"
 msgstr ""
 
+msgid "No output for the selected filters"
+msgstr ""
+
 msgid "No results found"
 msgstr ""
 
 msgid "No template mapped to feature %{feature_name}"
 msgstr "沒有範本定義至功能 %{feature_name}"
+
+msgid "No user input"
+msgstr ""
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "並不是所需的輸入都有值。缺少的輸入：%s"
@@ -808,10 +889,22 @@ msgstr ""
 msgid "Now"
 msgstr ""
 
+msgid "OS"
+msgstr ""
+
 msgid "On"
 msgstr "開啟"
 
 msgid "Only one of feature or job_template_id can be specified"
+msgstr ""
+
+msgid "Open all in new tabs"
+msgstr ""
+
+msgid "Open all invocations in new tabs"
+msgstr ""
+
+msgid "Open in new tab"
 msgstr ""
 
 msgid "Opening job invocation form"
@@ -859,7 +952,13 @@ msgstr ""
 msgid "Please enter a search query"
 msgstr ""
 
+msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" or \\\"Recurring execution\\\" step to fix the error"
+msgstr ""
+
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
+msgstr ""
+
+msgid "Please make sure that the Smart Proxy is configured correctly for the Pull provider."
 msgstr ""
 
 msgid "Please refine your search."
@@ -877,6 +976,9 @@ msgstr ""
 msgid "Please select at least one host group"
 msgstr ""
 
+msgid "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs."
+msgstr ""
+
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
@@ -887,6 +989,9 @@ msgid "Preview"
 msgstr "預覽"
 
 msgid "Preview Hosts"
+msgstr ""
+
+msgid "Preview Template"
 msgstr ""
 
 msgid "Preview job description"
@@ -988,6 +1093,9 @@ msgstr "重複最多 N 次"
 msgid "Repeat amount can only be a positive number"
 msgstr ""
 
+msgid "Repeat until"
+msgstr ""
+
 msgid "Repeats"
 msgstr "重複"
 
@@ -1008,6 +1116,12 @@ msgstr "傳回於 %s"
 
 msgid "Rerun on failed hosts"
 msgstr "在失敗的主機上重新執行"
+
+msgid "Rerun on succeeded hosts"
+msgstr ""
+
+msgid "Rerun succeeded"
+msgstr ""
 
 msgid "Rerun successful"
 msgstr ""
@@ -1070,6 +1184,12 @@ msgid "SSH user"
 msgstr ""
 
 msgid "SSH user:"
+msgstr ""
+
+msgid "STDERR"
+msgstr ""
+
+msgid "STDOUT"
 msgstr ""
 
 msgid "Schedule"
@@ -1195,6 +1315,9 @@ msgstr ""
 msgid "Skip to review step"
 msgstr ""
 
+msgid "Smart proxy"
+msgstr ""
+
 msgid "Snippet"
 msgstr "程式碼片段"
 
@@ -1255,6 +1378,9 @@ msgstr ""
 msgid "Success"
 msgstr "成功"
 
+msgid "Successfully copied to clipboard!"
+msgstr ""
+
 msgid "Switch to the new job invocation detail UI"
 msgstr ""
 
@@ -1267,6 +1393,9 @@ msgstr ""
 msgid "Systems"
 msgstr ""
 
+msgid "Target Hosts"
+msgstr ""
+
 msgid "Target hosts"
 msgstr "目標主機"
 
@@ -1275,6 +1404,9 @@ msgstr ""
 
 msgid "Target template ID"
 msgstr "目標範本 ID"
+
+msgid "Target:"
+msgstr ""
 
 msgid "Target: "
 msgstr "目標："
@@ -1285,6 +1417,12 @@ msgstr "工作詳細資料"
 msgid "Task cancelled"
 msgstr ""
 
+msgid "Task count"
+msgstr ""
+
+msgid "Task for the host cancelled succesfully"
+msgstr ""
+
 msgid "Template ERB"
 msgstr ""
 
@@ -1292,6 +1430,9 @@ msgid "Template Invocation for %s"
 msgstr ""
 
 msgid "Template failed with:"
+msgstr ""
+
+msgid "Template invocation not found"
 msgstr ""
 
 msgid "Template name"
@@ -1315,6 +1456,9 @@ msgstr ""
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "動態查詢 '%{query}' 尚未被解析。該解析的主機清單可以在 %{here} 找到。"
 
+msgid "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query."
+msgstr ""
+
 msgid "The execution interface is used for remote execution"
 msgstr "用來遠端執行的執行介面"
 
@@ -1331,6 +1475,9 @@ msgid "The job could not be cancelled."
 msgstr ""
 
 msgid "The job template to use, parameter is required unless feature was specified"
+msgstr ""
+
+msgid "The number of invocations is:"
 msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
@@ -1360,6 +1507,9 @@ msgid "This template is used to generate the description. Input values can be us
 msgstr "這範本是用來產生描述。輸入值可以使用 %{package} 語法。您也可以使用 %{job_category} 與 %{template_name} 來包括工作類別與範本名稱。"
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
+msgstr ""
+
+msgid "This will open a new tab for each invocation."
 msgstr ""
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
@@ -1410,10 +1560,16 @@ msgstr ""
 msgid "Trying to abort the job %s."
 msgstr ""
 
+msgid "Trying to abort the task for the host"
+msgstr ""
+
 msgid "Trying to cancel the job"
 msgstr ""
 
 msgid "Trying to cancel the job %s."
+msgstr ""
+
+msgid "Trying to cancel the task for the host"
 msgstr ""
 
 msgid "Type"
@@ -1440,7 +1596,13 @@ msgstr "無法取得公開金鑰"
 msgid "Unable to remove host from known hosts"
 msgstr ""
 
+msgid "Unable to run job"
+msgstr ""
+
 msgid "Unable to save template. Correct highlighted errors"
+msgstr ""
+
+msgid "Unknown"
 msgstr ""
 
 msgid "Unknown execution status"
@@ -1545,9 +1707,6 @@ msgstr ""
 msgid "Whether we should sync templates from disk when running db:seed."
 msgstr "執行 db:seed 時是否要從磁碟同步範本。"
 
-msgid "Workers pool size"
-msgstr ""
-
 msgid "Yes (override)"
 msgstr ""
 
@@ -1558,6 +1717,9 @@ msgid "You are not authorized to perform this action."
 msgstr "您未經許可執行這項動作。"
 
 msgid "You have %s results to display. Showing first %s results"
+msgstr ""
+
+msgid "You have more results to display. Showing first %s results"
 msgstr ""
 
 msgid "add an input set for this template to reference a different template inputs"
@@ -1573,9 +1735,6 @@ msgid "documentation"
 msgstr ""
 
 msgid "effective user"
-msgstr ""
-
-msgid "error"
 msgstr ""
 
 msgid "error during rendering: %s"
@@ -1653,6 +1812,9 @@ msgstr "秒"
 msgid "succeeded"
 msgstr "已成功"
 
+msgid "task aborted succesfully"
+msgstr ""
+
 msgid "tasks at a time"
 msgstr ""
 
@@ -1669,6 +1831,9 @@ msgid "using Smart Proxy"
 msgstr ""
 
 msgid "view host names"
+msgstr ""
+
+msgid "view the hosts"
 msgstr ""
 
 msgid "yes"

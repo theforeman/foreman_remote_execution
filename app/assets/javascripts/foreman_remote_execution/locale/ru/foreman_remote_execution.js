@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 14.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Yulia <yulia.poyarkova@redhat.com>, 2016",
@@ -35,10 +35,13 @@
       "%{description} on %{host}": [
         "%{description} на %{host}"
       ],
+      "'Starts at' date must be in the future": [
+        ""
+      ],
       "'Starts before' date must be after 'Starts at' date": [
         ""
       ],
-      "'Starts before' date must in the future": [
+      "'Starts before' date must be in the future": [
         ""
       ],
       "...and %s more": [
@@ -72,6 +75,9 @@
       "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time.": [
         ""
       ],
+      "A task for this host has not been started": [
+        ""
+      ],
       "A user to be used for SSH.": [
         ""
       ],
@@ -84,8 +90,14 @@
       "Abort Job": [
         ""
       ],
+      "Abort task": [
+        ""
+      ],
       "Access denied": [
         "Доступ запрещен"
+      ],
+      "Action": [
+        ""
       ],
       "Actions": [
         "Действия"
@@ -108,10 +120,13 @@
       "All fields are required.": [
         ""
       ],
+      "All statuses": [
+        ""
+      ],
       "Alphabetical": [
         ""
       ],
-      "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required.": [
+      "An error occurred while fetching the template invocation details.": [
         ""
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
@@ -123,7 +138,16 @@
       "Any Organization": [
         "Любая организация"
       ],
+      "Any location": [
+        ""
+      ],
+      "Any organization": [
+        ""
+      ],
       "Apply to": [
+        ""
+      ],
+      "Are you sure you want to open all invocations in new tabs?": [
         ""
       ],
       "At": [
@@ -153,17 +177,20 @@
       "Cancel Job": [
         "Отменить"
       ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel job invocation": [
         ""
       ],
       "Cancel recurring": [
         ""
       ],
-      "Canceled:": [
-        ""
-      ],
       "Cancelled": [
         "Отменено"
+      ],
+      "Cancelled:": [
+        ""
       ],
       "Cannot resolve hosts without a bookmark or search query": [
         "Невозможно сформировать список узлов, не выбрав закладку или не указав запрос поиска"
@@ -204,6 +231,9 @@
       "Cockpit URL": [
         ""
       ],
+      "Command": [
+        ""
+      ],
       "Concurrency level": [
         "Параллелизм"
       ],
@@ -215,6 +245,9 @@
       ],
       "Control concurrency level and distribution over time": [
         "Контроль параллельного выполнения и распределения во времени"
+      ],
+      "Copy to clipboard": [
+        ""
       ],
       "Could not abort the job %s: ${response}": [
         ""
@@ -267,6 +300,9 @@
       "Create a recurring job": [
         "Периодическое выполнение"
       ],
+      "Create job": [
+        ""
+      ],
       "Create report": [
         ""
       ],
@@ -285,6 +321,9 @@
       "Cronline": [
         ""
       ],
+      "Current iteration": [
+        ""
+      ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
       ],
@@ -297,8 +336,14 @@
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
         ""
       ],
+      "DEBUG": [
+        ""
+      ],
       "Daily": [
         "Ежедневный"
+      ],
+      "Date must be in the future": [
+        ""
       ],
       "Days": [
         "Дни"
@@ -543,6 +588,9 @@
       "Host detail": [
         "Свойства узла"
       ],
+      "Host group": [
+        ""
+      ],
       "Host groups": [
         "Группы узлов"
       ],
@@ -564,6 +612,9 @@
       "How often the job should occur, in the cron format": [
         "Частота выполнения задания, в формате cron"
       ],
+      "ID": [
+        ""
+      ],
       "Identifier of the Host interface for Remote execution": [
         ""
       ],
@@ -575,6 +626,9 @@
       ],
       "Import a job template from ERB": [
         "Импорт шаблона из ERB"
+      ],
+      "In Progress": [
+        ""
       ],
       "In Progress:": [
         ""
@@ -617,6 +671,9 @@
       ],
       "Invocation type, one of %s": [
         "Тип вызова. Возможные значения: %s"
+      ],
+      "Iteration limit": [
+        ""
       ],
       "Job": [
         "Задание"
@@ -675,6 +732,9 @@
       "Job templates": [
         "Шаблоны заданий"
       ],
+      "Job with id '%{id}' was not found": [
+        ""
+      ],
       "JobTemplate|Locked": [
         "Заблокирован"
       ],
@@ -705,6 +765,9 @@
       "Last execution succeeded": [
         "Выполнено успешно"
       ],
+      "Last occurrence": [
+        ""
+      ],
       "Latest Jobs": [
         ""
       ],
@@ -719,6 +782,9 @@
       ],
       "List foreign input sets": [
         "Показать внешние наборы входных параметров"
+      ],
+      "List hosts belonging to job invocation": [
+        ""
       ],
       "List job invocations": [
         "Список вызовов заданий"
@@ -777,10 +843,19 @@
       "Next": [
         "Далее"
       ],
+      "Next occurrence": [
+        ""
+      ],
       "No (override)": [
         ""
       ],
+      "No Results": [
+        ""
+      ],
       "No Target Hosts": [
+        ""
+      ],
+      "No hosts found": [
         ""
       ],
       "No hosts found.": [
@@ -789,11 +864,17 @@
       "No jobs available": [
         ""
       ],
+      "No output for the selected filters": [
+        ""
+      ],
       "No results found": [
         ""
       ],
       "No template mapped to feature %{feature_name}": [
         "С %{feature_name} не связан ни один шаблон."
+      ],
+      "No user input": [
+        ""
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "Отсутствуют значения некоторых обязательных входных данных: %s"
@@ -807,10 +888,22 @@
       "Now": [
         ""
       ],
+      "OS": [
+        ""
+      ],
       "On": [
         "Настроить"
       ],
       "Only one of feature or job_template_id can be specified": [
+        ""
+      ],
+      "Open all in new tabs": [
+        ""
+      ],
+      "Open all invocations in new tabs": [
+        ""
+      ],
+      "Open in new tab": [
         ""
       ],
       "Opening job invocation form": [
@@ -858,7 +951,13 @@
       "Please enter a search query": [
         ""
       ],
+      "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" or \\\\\\\"Recurring execution\\\\\\\" step to fix the error": [
+        ""
+      ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
+        ""
+      ],
+      "Please make sure that the Smart Proxy is configured correctly for the Pull provider.": [
         ""
       ],
       "Please refine your search.": [
@@ -876,6 +975,9 @@
       "Please select at least one host group": [
         ""
       ],
+      "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs.": [
+        ""
+      ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         ""
       ],
@@ -886,6 +988,9 @@
         "Просмотр"
       ],
       "Preview Hosts": [
+        ""
+      ],
+      "Preview Template": [
         ""
       ],
       "Preview job description": [
@@ -987,6 +1092,9 @@
       "Repeat amount can only be a positive number": [
         ""
       ],
+      "Repeat until": [
+        ""
+      ],
       "Repeats": [
         "Повторяется"
       ],
@@ -1007,6 +1115,12 @@
       ],
       "Rerun on failed hosts": [
         "Повторить на узлах с ошибками"
+      ],
+      "Rerun on succeeded hosts": [
+        ""
+      ],
+      "Rerun succeeded": [
+        ""
       ],
       "Rerun successful": [
         ""
@@ -1069,6 +1183,12 @@
         ""
       ],
       "SSH user:": [
+        ""
+      ],
+      "STDERR": [
+        ""
+      ],
+      "STDOUT": [
         ""
       ],
       "Schedule": [
@@ -1194,6 +1314,9 @@
       "Skip to review step": [
         ""
       ],
+      "Smart proxy": [
+        ""
+      ],
       "Snippet": [
         "Фрагмент"
       ],
@@ -1254,6 +1377,9 @@
       "Success": [
         "Успешно"
       ],
+      "Successfully copied to clipboard!": [
+        ""
+      ],
       "Switch to the new job invocation detail UI": [
         ""
       ],
@@ -1266,6 +1392,9 @@
       "Systems": [
         ""
       ],
+      "Target Hosts": [
+        ""
+      ],
       "Target hosts": [
         "Узлы"
       ],
@@ -1274,6 +1403,9 @@
       ],
       "Target template ID": [
         "Идентификатор подключаемого шаблона"
+      ],
+      "Target:": [
+        ""
       ],
       "Target: ": [
         "Узел:"
@@ -1284,6 +1416,12 @@
       "Task cancelled": [
         ""
       ],
+      "Task count": [
+        ""
+      ],
+      "Task for the host cancelled succesfully": [
+        ""
+      ],
       "Template ERB": [
         "ERB"
       ],
@@ -1291,6 +1429,9 @@
         ""
       ],
       "Template failed with:": [
+        ""
+      ],
+      "Template invocation not found": [
         ""
       ],
       "Template name": [
@@ -1314,6 +1455,9 @@
       "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}.": [
         "Динамический запрос «%{query}» еще не был обработан. Список узлов, к которым он будет применен, можно проверить %{here}."
       ],
+      "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
+        ""
+      ],
       "The execution interface is used for remote execution": [
         "Интерфейс используется для удаленного исполнения заданий"
       ],
@@ -1330,6 +1474,9 @@
         ""
       ],
       "The job template to use, parameter is required unless feature was specified": [
+        ""
+      ],
+      "The number of invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1360,6 +1507,9 @@
         "Это шаблон для генерации описания. Для того чтобы добавить переменную, используйте синтаксис %{package}; категорию задания — %{job_category}; название шаблона — %{template_name}."
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
+        ""
+      ],
+      "This will open a new tab for each invocation.": [
         ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
@@ -1410,10 +1560,16 @@
       "Trying to abort the job %s.": [
         ""
       ],
+      "Trying to abort the task for the host": [
+        ""
+      ],
       "Trying to cancel the job": [
         ""
       ],
       "Trying to cancel the job %s.": [
+        ""
+      ],
+      "Trying to cancel the task for the host": [
         ""
       ],
       "Type": [
@@ -1440,8 +1596,14 @@
       "Unable to remove host from known hosts": [
         ""
       ],
+      "Unable to run job": [
+        ""
+      ],
       "Unable to save template. Correct highlighted errors": [
         "Не удалось сохранить шаблон. Исправьте выделенные ошибки."
+      ],
+      "Unknown": [
+        ""
       ],
       "Unknown execution status": [
         "Статус выполнения неизвестен"
@@ -1545,9 +1707,6 @@
       "Whether we should sync templates from disk when running db:seed.": [
         "Разрешает синхронизацию шаблонов с диска во время выполнения db:seed."
       ],
-      "Workers pool size": [
-        ""
-      ],
       "Yes (override)": [
         ""
       ],
@@ -1558,6 +1717,9 @@
         "Недостаточно полномочий для выполнения операции"
       ],
       "You have %s results to display. Showing first %s results": [
+        ""
+      ],
+      "You have more results to display. Showing first %s results": [
         ""
       ],
       "add an input set for this template to reference a different template inputs": [
@@ -1573,9 +1735,6 @@
         "документация"
       ],
       "effective user": [
-        ""
-      ],
-      "error": [
         ""
       ],
       "error during rendering: %s": [
@@ -1653,6 +1812,9 @@
       "succeeded": [
         "завершено"
       ],
+      "task aborted succesfully": [
+        ""
+      ],
       "tasks at a time": [
         ""
       ],
@@ -1669,6 +1831,9 @@
         ""
       ],
       "view host names": [
+        ""
+      ],
+      "view the hosts": [
         ""
       ],
       "yes": [
