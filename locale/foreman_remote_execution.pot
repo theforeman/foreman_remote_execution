@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 17:11+0200\n"
-"PO-Revision-Date: 2024-07-17 17:11+0200\n"
+"POT-Creation-Date: 2025-02-10 20:06+0100\n"
+"PO-Revision-Date: 2025-02-10 20:06+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -69,159 +69,164 @@ msgstr ""
 msgid "Update a foreign input set"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:13
+#: ../app/controllers/api/v2/job_invocations_controller.rb:14
 msgid "List job invocations"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:19
+#: ../app/controllers/api/v2/job_invocations_controller.rb:20
 msgid "Show job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:21
+#: ../app/controllers/api/v2/job_invocations_controller.rb:22
 msgid "Show Job status for the hosts"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:36
+#: ../app/controllers/api/v2/job_invocations_controller.rb:34
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:37
+#: ../app/controllers/api/v2/job_invocations_controller.rb:35
 msgid "Invocation type, one of %s"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:38
+#: ../app/controllers/api/v2/job_invocations_controller.rb:36
 msgid "Execute the jobs on hosts in randomized order"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:39
+#: ../app/controllers/api/v2/job_invocations_controller.rb:37
 msgid "Inputs to use"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:40
+#: ../app/controllers/api/v2/job_invocations_controller.rb:38
 msgid "SSH provider specific options"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:43
+#: ../app/controllers/api/v2/job_invocations_controller.rb:41
 msgid ""
 "What user should be used to run the script (using sudo-like mechanisms). Defau"
 "lts to a template parameter or global setting."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:46
+#: ../app/controllers/api/v2/job_invocations_controller.rb:44
 msgid "Set password for effective user (using sudo-like mechanisms)"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:48
+#: ../app/controllers/api/v2/job_invocations_controller.rb:46
 msgid "Set SSH user"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:49
+#: ../app/controllers/api/v2/job_invocations_controller.rb:47
 msgid "Set SSH password"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:50
+#: ../app/controllers/api/v2/job_invocations_controller.rb:48
 msgid "Set SSH key passphrase"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:52
+#: ../app/controllers/api/v2/job_invocations_controller.rb:50
 msgid "Create a recurring job"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:53
+#: ../app/controllers/api/v2/job_invocations_controller.rb:51
 msgid "How often the job should occur, in the cron format"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:54
+#: ../app/controllers/api/v2/job_invocations_controller.rb:52
 msgid "Repeat a maximum of N times"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:55
+#: ../app/controllers/api/v2/job_invocations_controller.rb:53
 msgid "Perform no more executions after this time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:56
+#: ../app/controllers/api/v2/job_invocations_controller.rb:54
 msgid "Designation of a special purpose"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:59
+#: ../app/controllers/api/v2/job_invocations_controller.rb:57
 msgid "Schedule the job to start at a later time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:60
+#: ../app/controllers/api/v2/job_invocations_controller.rb:58
 msgid "Schedule the job for a future time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:61
+#: ../app/controllers/api/v2/job_invocations_controller.rb:59
 #: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:83
 msgid ""
 "Indicates that the action should be cancelled if it cannot be started before t"
 "his time."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:64
+#: ../app/controllers/api/v2/job_invocations_controller.rb:62
 msgid "Control concurrency level and distribution over time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:65
+#: ../app/controllers/api/v2/job_invocations_controller.rb:63
 msgid "Run at most N tasks at a time"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:70
+#: ../app/controllers/api/v2/job_invocations_controller.rb:68
 msgid "Override the description format from the template for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:71
+#: ../app/controllers/api/v2/job_invocations_controller.rb:69
 msgid "Override the timeout interval from the template for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:72
+#: ../app/controllers/api/v2/job_invocations_controller.rb:70
 msgid ""
 "Remote execution feature label that should be triggered, job template assigned"
 " to this feature will be used"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:73
+#: ../app/controllers/api/v2/job_invocations_controller.rb:71
 msgid "Override the global time to pickup interval for this invocation only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:87
+#: ../app/controllers/api/v2/job_invocations_controller.rb:85
 msgid "Create a job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:101
+#: ../app/controllers/api/v2/job_invocations_controller.rb:99
 msgid "Get output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:114
+#: ../app/controllers/api/v2/job_invocations_controller.rb:112
+msgid "List hosts belonging to job invocation"
+msgstr ""
+
+#: ../app/controllers/api/v2/job_invocations_controller.rb:125
 msgid "Get raw output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:126
+#: ../app/controllers/api/v2/job_invocations_controller.rb:137
 msgid "Cancel job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:134
+#: ../app/controllers/api/v2/job_invocations_controller.rb:145
 msgid "The job could not be cancelled."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:139
+#: ../app/controllers/api/v2/job_invocations_controller.rb:150
 msgid "Rerun job on failed hosts"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:150
+#: ../app/controllers/api/v2/job_invocations_controller.rb:161
 #: ../app/views/job_invocations/_form.html.erb:4
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:155
+#: ../app/controllers/api/v2/job_invocations_controller.rb:166
 msgid "Get outputs of hosts in a job"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:204
+#: ../app/controllers/api/v2/job_invocations_controller.rb:215
+#: ../app/controllers/template_invocations_controller.rb:63
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:213
+#: ../app/controllers/api/v2/job_invocations_controller.rb:224
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
 
@@ -394,6 +399,14 @@ msgstr ""
 msgid "Unable to save template. Correct highlighted errors"
 msgstr ""
 
+#: ../app/controllers/template_invocations_controller.rb:29
+msgid "Template invocation not found"
+msgstr ""
+
+#: ../app/controllers/template_invocations_controller.rb:57
+msgid "Job with id '%{id}' was not found"
+msgstr ""
+
 #:
 #: ../app/helpers/concerns/foreman_remote_execution/job_templates_extensions.rb:7
 msgid "Run"
@@ -407,9 +420,10 @@ msgstr ""
 #: ../app/helpers/hosts_extensions_helper.rb:10
 #: ../db/seeds.d/50-notification_blueprints.rb:3
 #: ../db/seeds.d/50-notification_blueprints.rb:17
-#: ../lib/foreman_remote_execution/engine.rb:247
-#: ../webpack/JobInvocationDetail/index.js:78
-#: ../webpack/JobWizard/JobWizardPageRerun.js:39
+#: ../lib/foreman_remote_execution/engine.rb:230
+#: ../webpack/JobInvocationDetail/TemplateInvocationPage.js:22
+#: ../webpack/JobInvocationDetail/index.js:92
+#: ../webpack/JobWizard/JobWizardPageRerun.js:52
 #: ../webpack/JobWizard/index.js:20
 msgid "Jobs"
 msgstr ""
@@ -435,15 +449,23 @@ msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:19
 #: ../app/views/job_invocations/index.html.erb:13
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:48
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:69
+#: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:36
 msgid "Failed"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:20
 #: ../app/views/job_invocations/index.html.erb:14
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:73
+#: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:23
 msgid "Pending"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:21
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:50
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:75
+#: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:11
 msgid "Cancelled"
 msgstr ""
 
@@ -464,12 +486,10 @@ msgid "succeeded"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:41
-#: ../app/helpers/remote_execution_helper.rb:21
 msgid "cancelled"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:43
-#: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:36
 msgid "failed"
 msgstr ""
 
@@ -485,14 +505,6 @@ msgstr ""
 msgid "Any Location"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:21
-msgid "Awaiting start"
-msgstr ""
-
-#: ../app/helpers/remote_execution_helper.rb:23
-msgid "error"
-msgstr ""
-
 #: ../app/helpers/remote_execution_helper.rb:33
 msgid "Host detail"
 msgstr ""
@@ -506,7 +518,7 @@ msgid "Host task"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:52
-#: ../app/helpers/remote_execution_helper.rb:202
+#: ../app/helpers/remote_execution_helper.rb:203
 #: ../app/models/job_invocation.rb:220
 msgid "N/A"
 msgstr ""
@@ -526,6 +538,7 @@ msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:73
 #: ../app/views/template_invocations/show.html.erb:22
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:23
 msgid "Rerun"
 msgstr ""
 
@@ -533,86 +546,95 @@ msgstr ""
 msgid "Rerun the job"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:78
+#: ../app/helpers/remote_execution_helper.rb:76
 #: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:159
 msgid "Rerun failed"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:81
+#: ../app/helpers/remote_execution_helper.rb:79
 msgid "Rerun on failed hosts"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:84
-msgid "Job Task"
+#: ../app/helpers/remote_execution_helper.rb:80
+msgid "Rerun succeeded"
+msgstr ""
+
+#: ../app/helpers/remote_execution_helper.rb:83
+msgid "Rerun on succeeded hosts"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:86
+msgid "Job Task"
+msgstr ""
+
+#: ../app/helpers/remote_execution_helper.rb:88
 msgid "See the last task details"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:89
-#: ../app/helpers/remote_execution_helper.rb:116
+#: ../app/helpers/remote_execution_helper.rb:91
+#: ../app/helpers/remote_execution_helper.rb:117
 msgid "Cancel Job"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:91
+#: ../app/helpers/remote_execution_helper.rb:93
 msgid "Try to cancel the job"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:94
-#: ../app/helpers/remote_execution_helper.rb:122
+#: ../app/helpers/remote_execution_helper.rb:96
+#: ../app/helpers/remote_execution_helper.rb:123
 msgid "Abort Job"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:96
+#: ../app/helpers/remote_execution_helper.rb:98
 msgid "Try to abort the job without waiting for the results from the remote hosts"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:101
+#: ../app/helpers/remote_execution_helper.rb:102
 msgid "New UI"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:103
+#: ../app/helpers/remote_execution_helper.rb:104
 msgid "Switch to the new job invocation detail UI"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:111
+#: ../app/helpers/remote_execution_helper.rb:112
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:30
 msgid "Task Details"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:113
+#: ../app/helpers/remote_execution_helper.rb:114
 msgid "See the task details"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:118
+#: ../app/helpers/remote_execution_helper.rb:119
 msgid "Try to cancel the job on a host"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:124
+#: ../app/helpers/remote_execution_helper.rb:125
 msgid "Try to abort the job on a host without waiting for its result"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:172
+#: ../app/helpers/remote_execution_helper.rb:173
 msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:204
+#: ../app/helpers/remote_execution_helper.rb:205
 msgid "in %s"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:204
+#: ../app/helpers/remote_execution_helper.rb:205
 msgid "%s ago"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:222
+#: ../app/helpers/remote_execution_helper.rb:223
 msgid "Use default description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:227
+#: ../app/helpers/remote_execution_helper.rb:228
 msgid "Description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:237
+#: ../app/helpers/remote_execution_helper.rb:238
 msgid ""
 "This template is used to generate the description.<br/>Input values can be use"
 "d using the syntax %{package}.<br/>You may also include the job category and t"
@@ -639,7 +661,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:114 action_names.rb:2
+#: ../app/lib/actions/remote_execution/run_host_job.rb:114
 msgid "Remote action:"
 msgstr ""
 
@@ -705,6 +727,10 @@ msgstr ""
 msgid ""
 "input macro with name '%s' used, but no input with such name defined for this "
 "template"
+msgstr ""
+
+#: ../app/lib/foreman_remote_execution/renderer_methods.rb:11
+msgid "Can't find Job Invocation for an id %s"
 msgstr ""
 
 #: ../app/lib/proxy_api/remote_execution_ssh.rb:11
@@ -806,7 +832,7 @@ msgstr ""
 msgid "Job Invocation"
 msgstr ""
 
-#: ../app/models/job_template.rb:101
+#: ../app/models/job_template.rb:102
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
 msgstr ""
 
@@ -839,20 +865,24 @@ msgid "Script"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:151
 msgid "Static Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:152
 msgid "Dynamic Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:10
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:146
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:199
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:280
 msgid "Alphabetical"
 msgstr ""
 
 #: ../app/models/targeting.rb:10
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:145
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:208
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:279
 msgid "Randomized"
@@ -886,21 +916,19 @@ msgstr ""
 msgid "default_capsule method missing from SmartProxy"
 msgstr ""
 
-#: ../app/services/renderer_methods.rb:10
-msgid "Can't find Job Invocation for an id %s"
-msgstr ""
-
 #: ../app/views/dashboard/_latest-jobs.html.erb:2
-#: ../lib/foreman_remote_execution/engine.rb:260
+#: ../lib/foreman_remote_execution/engine.rb:243
 msgid "Latest Jobs"
 msgstr ""
 
 #: ../app/views/dashboard/_latest-jobs.html.erb:7
 #: ../app/views/remote_execution_features/index.html.erb:7
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:91
 msgid "Name"
 msgstr ""
 
 #: ../app/views/dashboard/_latest-jobs.html.erb:8
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:103
 msgid "State"
 msgstr ""
 
@@ -917,11 +945,13 @@ msgid "Results"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:7
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:71
 #: ../webpack/JobWizard/JobWizardConstants.js:33
 msgid "Schedule"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:14
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:55
 msgid "Concurrency level limited to"
 msgstr ""
 
@@ -930,25 +960,31 @@ msgid "tasks at a time"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:17
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:56
 msgid "Scheduled to start before"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:20
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:57
 msgid "Scheduled to start at"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:23
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:59
 msgid "Timeout to kill after"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:23
 #: ../app/views/job_invocations/_card_schedule.html.erb:26
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:61
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:66
 msgid "seconds"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:26
 #: ../app/views/job_invocations/_form.html.erb:106
-#: ../lib/foreman_remote_execution/engine.rb:163
+#: ../lib/foreman_remote_execution/engine.rb:146
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:64
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:60
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:274
 msgid "Time to pickup"
@@ -960,31 +996,37 @@ msgid "Target hosts"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:11
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:128
 msgid "Bookmark"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:13
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:129
 msgid "Manual selection"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:15
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:157
 msgid "using "
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:21
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:142
 msgid "Execution order"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:24
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:132
 msgid "Organization"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:30
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:137
 msgid "Location"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:37
-#: ../lib/foreman_remote_execution/engine.rb:78
+#: ../lib/foreman_remote_execution/engine.rb:66
 msgid "SSH User"
 msgstr ""
 
@@ -993,6 +1035,7 @@ msgid "Evaluated at:"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_user_input.html.erb:4
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:175
 msgid "User Inputs"
 msgstr ""
 
@@ -1105,8 +1148,8 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:112
-#: ../lib/foreman_remote_execution/engine.rb:92
-#: ../lib/foreman_remote_execution/engine.rb:94
+#: ../lib/foreman_remote_execution/engine.rb:80
+#: ../lib/foreman_remote_execution/engine.rb:82
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:128
 msgid "Effective user password"
 msgstr ""
@@ -1226,10 +1269,12 @@ msgid "Providers and templates"
 msgstr ""
 
 #: ../app/views/job_invocations/_user_input.html.erb:7
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:22
 msgid "User input"
 msgstr ""
 
 #: ../app/views/job_invocations/_user_input.html.erb:8
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:23
 msgid "Value"
 msgstr ""
 
@@ -1238,11 +1283,15 @@ msgid "Search Query"
 msgstr ""
 
 #: ../app/views/job_invocations/index.html.erb:11
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:125
 #: ../webpack/react_app/components/TargetingHosts/TargetingHosts.js:42
 msgid "Status"
 msgstr ""
 
 #: ../app/views/job_invocations/index.html.erb:12
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:47
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:67
+#: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:42
 msgid "Succeeded"
 msgstr ""
 
@@ -1268,6 +1317,7 @@ msgid "Preview templates"
 msgstr ""
 
 #: ../app/views/job_invocations/show.html.erb:23
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:109
 msgid "Recurring logic"
 msgstr ""
 
@@ -1373,7 +1423,7 @@ msgid "Remote execution"
 msgstr ""
 
 #: ../app/views/overrides/subnets/_rex_tab.html.erb:1
-#: ../lib/foreman_remote_execution/engine.rb:63
+#: ../lib/foreman_remote_execution/engine.rb:51
 msgid "Remote Execution"
 msgstr ""
 
@@ -1395,7 +1445,7 @@ msgid ""
 msgstr ""
 
 #: ../app/views/remote_execution_features/index.html.erb:1
-#: ../lib/foreman_remote_execution/engine.rb:241
+#: ../lib/foreman_remote_execution/engine.rb:224
 msgid "Remote Execution Features"
 msgstr ""
 
@@ -1441,6 +1491,7 @@ msgid ""
 msgstr ""
 
 #: ../app/views/template_invocations/show.html.erb:6
+#: ../webpack/JobInvocationDetail/TemplateInvocationPage.js:19
 msgid "Template Invocation for %s"
 msgstr ""
 
@@ -1473,10 +1524,12 @@ msgid "using Smart Proxy"
 msgstr ""
 
 #: ../app/views/template_invocations/show.html.erb:47
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputCodeBlock.js:102
 msgid "Scroll to bottom"
 msgstr ""
 
 #: ../app/views/template_invocations/show.html.erb:53
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputCodeBlock.js:114
 msgid "Scroll to top"
 msgstr ""
 
@@ -1515,69 +1568,69 @@ msgstr ""
 msgid "Unable to create mail notification: %s"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:66
+#: ../lib/foreman_remote_execution/engine.rb:54
 msgid ""
 "Search the host for any proxy with Remote Execution, useful when the host has "
 "no subnet or the subnet does not have an execution proxy"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:68
+#: ../lib/foreman_remote_execution/engine.rb:56
 msgid "Fallback to Any Proxy"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:71
+#: ../lib/foreman_remote_execution/engine.rb:59
 msgid ""
 "Search for remote execution proxy outside of the proxies assigned to the host."
 " The search will be limited to the host's organization and location."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:73
+#: ../lib/foreman_remote_execution/engine.rb:61
 msgid "Enable Global Proxy"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:76
+#: ../lib/foreman_remote_execution/engine.rb:64
 msgid ""
 "Default user to use for SSH.  You may override per host by setting a parameter"
 " called remote_execution_ssh_user."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:81
+#: ../lib/foreman_remote_execution/engine.rb:69
 msgid ""
 "Default user to use for executing the script. If the user differs from the SSH"
 " user, su or sudo is used to switch the user."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:83
+#: ../lib/foreman_remote_execution/engine.rb:71
 msgid "Effective User"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:86
+#: ../lib/foreman_remote_execution/engine.rb:74
 msgid "What command should be used to switch to the effective user. One of %s"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:88
+#: ../lib/foreman_remote_execution/engine.rb:76
 msgid "Effective User Method"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:98
+#: ../lib/foreman_remote_execution/engine.rb:86
 msgid "Whether we should sync templates from disk when running db:seed."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:100
+#: ../lib/foreman_remote_execution/engine.rb:88
 msgid "Sync Job Templates"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:103
+#: ../lib/foreman_remote_execution/engine.rb:91
 msgid ""
 "Port to use for SSH communication. Default port 22. You may override per host "
 "by setting a parameter called remote_execution_ssh_port."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:105
+#: ../lib/foreman_remote_execution/engine.rb:93
 msgid "SSH Port"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:108
+#: ../lib/foreman_remote_execution/engine.rb:96
 msgid ""
 "Should the ip addresses on host interfaces be preferred over the fqdn? It is u"
 "seful when DNS not resolving the fqdns properly. You may override this per hos"
@@ -1586,11 +1639,11 @@ msgid ""
 "tting"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:112
+#: ../lib/foreman_remote_execution/engine.rb:100
 msgid "Connect by IP"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:115
+#: ../lib/foreman_remote_execution/engine.rb:103
 msgid ""
 "When connecting using ip address, should the IPv6 addresses be preferred? If n"
 "o IPv6 address is set, it falls back to IPv4 automatically. You may override t"
@@ -1599,108 +1652,153 @@ msgid ""
 " default"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:119
+#: ../lib/foreman_remote_execution/engine.rb:107
 msgid "Prefer IPv6 over IPv4"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:122
+#: ../lib/foreman_remote_execution/engine.rb:110
 msgid ""
 "Default password to use for SSH. You may override per host by setting a parame"
 "ter called remote_execution_ssh_password"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:124
+#: ../lib/foreman_remote_execution/engine.rb:112
 msgid "Default SSH password"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:128
+#: ../lib/foreman_remote_execution/engine.rb:116
 msgid ""
 "Default key passphrase to use for SSH. You may override per host by setting a "
 "parameter called remote_execution_ssh_key_passphrase"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:130
+#: ../lib/foreman_remote_execution/engine.rb:118
 msgid "Default SSH key passphrase"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:134
-msgid ""
-"Amount of workers in the pool to handle the execution of the remote execution "
-"jobs. Restart of the dynflowd/foreman-tasks service is required."
-msgstr ""
-
-#: ../lib/foreman_remote_execution/engine.rb:136
-msgid "Workers pool size"
-msgstr ""
-
-#: ../lib/foreman_remote_execution/engine.rb:139
+#: ../lib/foreman_remote_execution/engine.rb:122
 msgid ""
 "When enabled, working directories will be removed after task completion. You m"
 "ay override this per host by setting a parameter called remote_execution_clean"
 "up_working_dirs."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:141
+#: ../lib/foreman_remote_execution/engine.rb:124
 msgid "Cleanup working directories"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:144
+#: ../lib/foreman_remote_execution/engine.rb:127
 msgid ""
 "Where to find the Cockpit instance for the Web Console button.  By default, no"
 " button is shown."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:146
+#: ../lib/foreman_remote_execution/engine.rb:129
 msgid "Cockpit URL"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:149
+#: ../lib/foreman_remote_execution/engine.rb:132
 msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:151
+#: ../lib/foreman_remote_execution/engine.rb:134
 msgid "Form Job Template"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:155
+#: ../lib/foreman_remote_execution/engine.rb:138
 msgid ""
 "Select a report template used for generating a report for a particular remote "
 "execution job"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:157
+#: ../lib/foreman_remote_execution/engine.rb:140
 msgid "Job Invocation Report Template"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:161
+#: ../lib/foreman_remote_execution/engine.rb:144
 msgid ""
 "Time in seconds within which the host has to pick up a job. If the job is not "
 "picked up within this limit, the job will be cancelled. Defaults to 1 day. App"
 "lies only to pull-mqtt based jobs."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:236
+#: ../lib/foreman_remote_execution/engine.rb:219
 msgid "Job templates"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:253
+#: ../lib/foreman_remote_execution/engine.rb:236
 msgid "Job invocations detail"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:374
+#: ../lib/foreman_remote_execution/engine.rb:358
 msgid "Run Puppet Once"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:375
+#: ../lib/foreman_remote_execution/engine.rb:359
 msgid "Perform a single Puppet run"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:380
+#: ../lib/foreman_remote_execution/engine.rb:364
 msgid "Run Script"
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:381
+#: ../lib/foreman_remote_execution/engine.rb:365
 msgid "Run a script"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:88
+msgid "ID"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:96
+#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:37
+msgid "Cron line"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:97
+msgid "Action"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:98
+msgid "Last occurrence"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:99
+msgid "Next occurrence"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:100
+msgid "Current iteration"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:101
+msgid "Iteration limit"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:102
+msgid "Repeat until"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:104
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:252
+#: ../webpack/JobWizard/steps/Schedule/PurposeField.js:9
+msgid "Purpose"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:105
+msgid "Task count"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:134
+msgid "Any organization"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:139
+msgid "Any location"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:151
+msgid "Target Hosts"
 msgstr ""
 
 #: ../webpack/JobInvocationDetail/JobInvocationActions.js:47
@@ -1743,6 +1841,64 @@ msgstr ""
 msgid "Could not cancel recurring logic %s: ${response}"
 msgstr ""
 
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:46
+#: ../webpack/JobInvocationDetail/JobInvocationHostTableToolbar.js:28
+msgid "All statuses"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:49
+msgid "In Progress"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:71
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:83
+#: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:29
+msgid "Scheduled"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:77
+#: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:17
+msgid "Awaiting start"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:99
+msgid "Host group"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:107
+msgid "OS"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:117
+msgid "Smart proxy"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:132
+msgid "Unknown"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:167
+msgid "No Results"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:174
+msgid ""
+"The dynamic query is still being processed. You can {viewTheHosts} targeted by"
+" the query."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:180
+msgid "view the hosts"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:186
+msgid "No hosts found"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:281
+msgid "A task for this host has not been started"
+msgstr ""
+
 #: ../webpack/JobInvocationDetail/JobInvocationOverview.js:40
 msgid "Effective user:"
 msgstr ""
@@ -1763,39 +1919,39 @@ msgstr ""
 msgid "Template:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:42
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:44
 msgid "Succeeded:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:43
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:45
 msgid "Failed:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:44
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:46
 msgid "In Progress:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:45
-msgid "Canceled:"
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:47
+msgid "Cancelled:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:76
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:89
 msgid "${d.title} ${d.count} hosts"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:79
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:92
 msgid "Scheduled: ${totalHosts} hosts"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:96
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:119
 msgid "Systems"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:115
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:138
 msgid "System status"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:135
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:184
 msgid "Scheduled at:"
 msgstr ""
 
@@ -1820,6 +1976,7 @@ msgid "View task"
 msgstr ""
 
 #: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:179
+#: ../webpack/JobInvocationDetail/OpenAlInvocations.js:84
 #: ../webpack/JobWizard/Footer.js:90
 msgid "Cancel"
 msgstr ""
@@ -1838,6 +1995,118 @@ msgstr ""
 
 #: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:241
 msgid "Rerun all"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/OpenAlInvocations.js:19
+msgid ""
+"Popups are blocked by your browser. Please allow popups for this site to open "
+"all invocations in new tabs."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/OpenAlInvocations.js:59
+msgid "Open all invocations in new tabs"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/OpenAlInvocations.js:76
+msgid "Open all in new tabs"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/OpenAlInvocations.js:88
+msgid "Are you sure you want to open all invocations in new tabs?"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/OpenAlInvocations.js:90
+msgid "This will open a new tab for each invocation."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/OpenAlInvocations.js:92
+msgid "The number of invocations is:"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/TemplateInvocation.js:45
+msgid "Successfully copied to clipboard!"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/TemplateInvocation.js:46
+msgid "Copy to clipboard"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/TemplateInvocation.js:111
+msgid "An error occurred while fetching the template invocation details."
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/TemplateInvocation.js:154
+msgid "Target:"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputCodeBlock.js:59
+msgid "No output for the selected filters"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:59
+msgid "STDERR"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:65
+msgid "STDOUT"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:71
+msgid "DEBUG"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:77
+msgid "Preview Template"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:83
+msgid "Command"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:119
+msgid "Open in new tab"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:41
+msgid "No user input"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:35
+msgid "Cancel Task"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:42
+msgid "Trying to cancel the task for the host"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:50
+msgid "Task for the host cancelled succesfully"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:58
+msgid "Abort task"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:65
+msgid "Trying to abort the task for the host"
+msgstr ""
+
+#:
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:73
+msgid "task aborted succesfully"
 msgstr ""
 
 #: ../webpack/JobWizard/Footer.js:36
@@ -1952,23 +2221,31 @@ msgstr ""
 msgid "Search query"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:36
+#: ../webpack/JobWizard/JobWizardPageRerun.js:49
 #: ../webpack/JobWizard/index.js:17
 msgid "Run job"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:61
+#: ../webpack/JobWizard/JobWizardPageRerun.js:72
+msgid "Unable to run job"
+msgstr ""
+
+#: ../webpack/JobWizard/JobWizardPageRerun.js:81
+msgid "Create job"
+msgstr ""
+
+#: ../webpack/JobWizard/JobWizardPageRerun.js:118
 #: ../webpack/JobWizard/index.js:67
 msgid "Use legacy form"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:85
+#: ../webpack/JobWizard/JobWizardPageRerun.js:144
 msgid ""
 "Current organization %s is different from job's organization %s. This job may "
 "run on different hosts than before."
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:100
+#: ../webpack/JobWizard/JobWizardPageRerun.js:159
 msgid ""
 "Current location %s is different from job's location %s. This job may run on d"
 "ifferent hosts than before."
@@ -1992,13 +2269,23 @@ msgstr ""
 msgid "Proceed Anyway"
 msgstr ""
 
-#: ../webpack/JobWizard/StartsBeforeErrorAlert.js:10
+#: ../webpack/JobWizard/StartsErrorAlert.js:10
 #: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:41
-msgid "'Starts before' date must in the future"
+msgid "'Starts before' date must be in the future"
 msgstr ""
 
-#: ../webpack/JobWizard/StartsBeforeErrorAlert.js:12
+#: ../webpack/JobWizard/StartsErrorAlert.js:12
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
+msgstr ""
+
+#: ../webpack/JobWizard/StartsErrorAlert.js:25
+msgid "'Starts at' date must be in the future"
+msgstr ""
+
+#: ../webpack/JobWizard/StartsErrorAlert.js:27
+msgid ""
+"Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" or \\\"Recurring execution"
+"\\\" step to fix the error"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/AdvancedFields/DescriptionField.js:66
@@ -2040,7 +2327,6 @@ msgstr ""
 
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:87
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:100
-#: ../webpack/__mocks__/foremanReact/components/HostDetails/DetailsCard/DefaultLoaderEmptyState.js:5
 msgid "Not available"
 msgstr ""
 
@@ -2124,7 +2410,7 @@ msgid "Apply to"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:7
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:178
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:180
 msgid "Never"
 msgstr ""
 
@@ -2146,10 +2432,6 @@ msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:32
 msgid "Every month on %s at %s"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:37
-msgid "Cron line"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:86
@@ -2201,13 +2483,8 @@ msgid "Repeats"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:239
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:162
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:164
 msgid "Ends"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:252
-#: ../webpack/JobWizard/steps/Schedule/PurposeField.js:9
-msgid "Purpose"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:264
@@ -2287,12 +2564,12 @@ msgid "documentation"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/RepeatDaily.js:17
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:123
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:125
 msgid "At"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/RepeatDaily.js:27
-#: ../webpack/JobWizard/steps/form/DateTimePicker.js:121
+#: ../webpack/JobWizard/steps/form/DateTimePicker.js:132
 msgid "Invalid time format"
 msgstr ""
 
@@ -2339,23 +2616,23 @@ msgstr ""
 msgid "Starts before"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:186
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:188
 msgid "End time needs to be after start time"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:205
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:207
 msgid "On"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:238
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:240
 msgid "After"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:240
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:242
 msgid "Repeat amount can only be a positive number"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:256
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:258
 msgid "occurences"
 msgstr ""
 
@@ -2375,7 +2652,11 @@ msgstr ""
 msgid "Execute the job on a repeating schedule."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/DateTimePicker.js:105
+#: ../webpack/JobWizard/steps/form/DateTimePicker.js:96
+msgid "Date must be in the future"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/form/DateTimePicker.js:115
 msgid "Invalid date"
 msgstr ""
 
@@ -2391,12 +2672,15 @@ msgstr ""
 msgid "Has to be a positive number"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/ResourceSelect.js:50
+#: ../webpack/JobWizard/steps/form/ResourceSelect.js:52
 #: ../webpack/JobWizard/steps/form/SearchSelect.js:38
 msgid "Please refine your search."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/ResourceSelect.js:53
+#: ../webpack/JobWizard/steps/form/ResourceSelect.js:55
+msgid "You have more results to display. Showing first %s results"
+msgstr ""
+
 #: ../webpack/JobWizard/steps/form/SearchSelect.js:41
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""
@@ -2441,10 +2725,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:83
-msgid "Scheduled"
-msgstr ""
-
 #: ../webpack/react_app/components/RecentJobsCard/RecentJobsTable.js:38
 msgid "No results found"
 msgstr ""
@@ -2453,31 +2733,37 @@ msgstr ""
 msgid "Remote Execution Interface"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:14
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:16
 msgid "yes"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:14
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:16
 msgid "no"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:15
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:17
 msgid "Inherit from host parameter"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:20
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:22
 msgid "Yes (override)"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:21
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:23
 msgid "No (override)"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:28
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:30
+msgid ""
+"Please make sure that the Smart Proxy is configured correctly for the Pull pro"
+"vider."
+msgstr ""
+
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:49
 msgid "REX pull mode"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:31
+#: ../webpack/react_app/components/RegistrationExtension/RexPull.js:52
 msgid ""
 "Setup remote execution pull mode. If set to `Yes`, pull provider client will b"
 "e deployed on the registered host. The inherited value is based on the `host_r"

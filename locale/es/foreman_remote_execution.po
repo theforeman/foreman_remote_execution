@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 14.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -36,10 +36,13 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr "activo"
 
+msgid "'Starts at' date must be in the future"
+msgstr ""
+
 msgid "'Starts before' date must be after 'Starts at' date"
 msgstr ""
 
-msgid "'Starts before' date must in the future"
+msgid "'Starts before' date must be in the future"
 msgstr ""
 
 msgid "...and %s more"
@@ -74,6 +77,9 @@ msgstr "Un complemento que ofrece ejecución remota a Foreman y completa la func
 msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
 msgstr "Una etiqueta especial para el seguimiento de un trabajo recurrente. Sólo puede haber un trabajo activo con un propósito determinado a la vez."
 
+msgid "A task for this host has not been started"
+msgstr ""
+
 msgid "A user to be used for SSH."
 msgstr ""
 
@@ -86,8 +92,14 @@ msgstr ""
 msgid "Abort Job"
 msgstr "Abortar trabajo"
 
+msgid "Abort task"
+msgstr ""
+
 msgid "Access denied"
 msgstr "Acceso denegado"
+
+msgid "Action"
+msgstr ""
 
 msgid "Actions"
 msgstr "Acciones"
@@ -110,11 +122,14 @@ msgstr ""
 msgid "All fields are required."
 msgstr "Todos los campos son obligatorios."
 
+msgid "All statuses"
+msgstr ""
+
 msgid "Alphabetical"
 msgstr "Alfabético"
 
-msgid "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required."
-msgstr "Cantidad de trabajadores en el grupo para manejar la ejecución de tareas de ejecución remota. Se requiere el reinicio del servicio dynflowd/foreman-tasks."
+msgid "An error occurred while fetching the template invocation details."
+msgstr ""
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "Ya hay otra interfaz establecida como ejecución. ¿Está seguro de que desea utilizar esta en cambio?"
@@ -125,8 +140,17 @@ msgstr "Cualquier Lugar"
 msgid "Any Organization"
 msgstr "Cualquier organización"
 
+msgid "Any location"
+msgstr ""
+
+msgid "Any organization"
+msgstr ""
+
 msgid "Apply to"
 msgstr "Solicitar"
+
+msgid "Are you sure you want to open all invocations in new tabs?"
+msgstr ""
 
 msgid "At"
 msgstr "En"
@@ -155,17 +179,20 @@ msgstr "Cancelar"
 msgid "Cancel Job"
 msgstr "Cancelar tarea"
 
+msgid "Cancel Task"
+msgstr ""
+
 msgid "Cancel job invocation"
 msgstr "Cancelar invocación de trabajo"
 
 msgid "Cancel recurring"
 msgstr ""
 
-msgid "Canceled:"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "Cancelado"
+
+msgid "Cancelled:"
+msgstr ""
 
 msgid "Cannot resolve hosts without a bookmark or search query"
 msgstr "No se pueden determinar los hosts sin un marcador o una consulta de búsqueda."
@@ -206,6 +233,9 @@ msgstr "Cerrar"
 msgid "Cockpit URL"
 msgstr "URL de Cockpit"
 
+msgid "Command"
+msgstr ""
+
 msgid "Concurrency level"
 msgstr "Nivel de concurrencia"
 
@@ -217,6 +247,9 @@ msgstr "Conectar por IP"
 
 msgid "Control concurrency level and distribution over time"
 msgstr "Controlar el nivel de concurrencia y la distribución en el tiempo"
+
+msgid "Copy to clipboard"
+msgstr ""
 
 msgid "Could not abort the job %s: ${response}"
 msgstr ""
@@ -269,6 +302,9 @@ msgstr "Crear una plantilla de trabajo"
 msgid "Create a recurring job"
 msgstr "Crear un trabajo recurrente"
 
+msgid "Create job"
+msgstr ""
+
 msgid "Create report"
 msgstr ""
 
@@ -287,6 +323,9 @@ msgstr ""
 msgid "Cronline"
 msgstr "Cronline"
 
+msgid "Current iteration"
+msgstr ""
+
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr ""
 
@@ -299,8 +338,14 @@ msgstr ""
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
 msgstr "La organización actual %%{org_c} es diferente de la organización de la tarea %%{org_j}."
 
+msgid "DEBUG"
+msgstr ""
+
 msgid "Daily"
 msgstr "Diariamente"
+
+msgid "Date must be in the future"
+msgstr ""
 
 msgid "Days"
 msgstr "Días"
@@ -545,6 +590,9 @@ msgstr "colecciones de hosts"
 msgid "Host detail"
 msgstr "Detalle del host"
 
+msgid "Host group"
+msgstr ""
+
 msgid "Host groups"
 msgstr "Grupo del host"
 
@@ -566,6 +614,9 @@ msgstr "Por hora"
 msgid "How often the job should occur, in the cron format"
 msgstr "Con qué frecuencia debe ocurrir el trabajo, en formato programado"
 
+msgid "ID"
+msgstr ""
+
 msgid "Identifier of the Host interface for Remote execution"
 msgstr "Identificador de la interfaz del host para la ejecución remota"
 
@@ -577,6 +628,9 @@ msgstr "Importar"
 
 msgid "Import a job template from ERB"
 msgstr "Importar una plantilla de trabajo desde ERB"
+
+msgid "In Progress"
+msgstr ""
 
 msgid "In Progress:"
 msgstr ""
@@ -619,6 +673,9 @@ msgstr "Formato de hora no válido"
 
 msgid "Invocation type, one of %s"
 msgstr "Tipo de invocación, una de %s"
+
+msgid "Iteration limit"
+msgstr ""
 
 msgid "Job"
 msgstr "Tarea"
@@ -677,6 +734,9 @@ msgstr "Se importó correctamente una plantilla de trabajo"
 msgid "Job templates"
 msgstr "Plantillas de trabajo"
 
+msgid "Job with id '%{id}' was not found"
+msgstr ""
+
 msgid "JobTemplate|Locked"
 msgstr "Plantilla de trabajo|Bloqueada"
 
@@ -707,6 +767,9 @@ msgstr "Falló la última ejecución."
 msgid "Last execution succeeded"
 msgstr "La última ejecución se realizó correctamente."
 
+msgid "Last occurrence"
+msgstr ""
+
 msgid "Latest Jobs"
 msgstr "Últimos empleos"
 
@@ -721,6 +784,9 @@ msgstr ""
 
 msgid "List foreign input sets"
 msgstr "Listar conjuntos de entrada externos"
+
+msgid "List hosts belonging to job invocation"
+msgstr ""
 
 msgid "List job invocations"
 msgstr "Listar invocaciones de trabajo"
@@ -779,11 +845,20 @@ msgstr "Nueva interfaz de usuario"
 msgid "Next"
 msgstr "Siguiente"
 
+msgid "Next occurrence"
+msgstr ""
+
 msgid "No (override)"
 msgstr "No (anulación)"
 
+msgid "No Results"
+msgstr ""
+
 msgid "No Target Hosts"
 msgstr "No hay hosts de destino"
+
+msgid "No hosts found"
+msgstr ""
 
 msgid "No hosts found."
 msgstr "No se encontraron hosts."
@@ -791,11 +866,17 @@ msgstr "No se encontraron hosts."
 msgid "No jobs available"
 msgstr "No hay empleos disponibles"
 
+msgid "No output for the selected filters"
+msgstr ""
+
 msgid "No results found"
 msgstr "No se han encontrado resultados"
 
 msgid "No template mapped to feature %{feature_name}"
 msgstr "No hay ninguna plantilla mapeada a la funcionalidad %%{feature_name}."
+
+msgid "No user input"
+msgstr ""
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "No todas las entradas requeridas tienen valores. Entradas que faltan: %s"
@@ -809,11 +890,23 @@ msgstr ""
 msgid "Now"
 msgstr ""
 
+msgid "OS"
+msgstr ""
+
 msgid "On"
 msgstr "Activar"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "Sólo se puede especificar uno de feature o job_template_id"
+
+msgid "Open all in new tabs"
+msgstr ""
+
+msgid "Open all invocations in new tabs"
+msgstr ""
+
+msgid "Open in new tab"
+msgstr ""
 
 msgid "Opening job invocation form"
 msgstr ""
@@ -860,7 +953,13 @@ msgstr ""
 msgid "Please enter a search query"
 msgstr ""
 
+msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" or \\\"Recurring execution\\\" step to fix the error"
+msgstr ""
+
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
+msgstr ""
+
+msgid "Please make sure that the Smart Proxy is configured correctly for the Pull provider."
 msgstr ""
 
 msgid "Please refine your search."
@@ -878,6 +977,9 @@ msgstr ""
 msgid "Please select at least one host group"
 msgstr ""
 
+msgid "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs."
+msgstr ""
+
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "Puerto para usar para la comunicación SSH. Puerto predeterminado: 22. Puede sustituir por host al establecer un parámetro llamado remote_execution_ssh_port."
 
@@ -889,6 +991,9 @@ msgstr "Previsualizar"
 
 msgid "Preview Hosts"
 msgstr "Vista previa de los anfitriones"
+
+msgid "Preview Template"
+msgstr ""
 
 msgid "Preview job description"
 msgstr "Vista previa de la descripción del puesto"
@@ -989,6 +1094,9 @@ msgstr "Repetir un máximo de N veces"
 msgid "Repeat amount can only be a positive number"
 msgstr "El importe de la repetición sólo puede ser un número positivo"
 
+msgid "Repeat until"
+msgstr ""
+
 msgid "Repeats"
 msgstr "Se repite"
 
@@ -1009,6 +1117,12 @@ msgstr "Volver a ejecutar en %s"
 
 msgid "Rerun on failed hosts"
 msgstr "Volver a ejecutar en hosts con error"
+
+msgid "Rerun on succeeded hosts"
+msgstr ""
+
+msgid "Rerun succeeded"
+msgstr ""
 
 msgid "Rerun successful"
 msgstr ""
@@ -1071,6 +1185,12 @@ msgid "SSH user"
 msgstr ""
 
 msgid "SSH user:"
+msgstr ""
+
+msgid "STDERR"
+msgstr ""
+
+msgid "STDOUT"
 msgstr ""
 
 msgid "Schedule"
@@ -1196,6 +1316,9 @@ msgstr ""
 msgid "Skip to review step"
 msgstr ""
 
+msgid "Smart proxy"
+msgstr ""
+
 msgid "Snippet"
 msgstr "Snippet"
 
@@ -1256,6 +1379,9 @@ msgstr ""
 msgid "Success"
 msgstr "Éxito"
 
+msgid "Successfully copied to clipboard!"
+msgstr ""
+
 msgid "Switch to the new job invocation detail UI"
 msgstr ""
 
@@ -1268,6 +1394,9 @@ msgstr ""
 msgid "Systems"
 msgstr ""
 
+msgid "Target Hosts"
+msgstr ""
+
 msgid "Target hosts"
 msgstr "Hosts de destino"
 
@@ -1276,6 +1405,9 @@ msgstr "Anfitriones objetivo y entradas"
 
 msgid "Target template ID"
 msgstr "ID de la plantilla de destino"
+
+msgid "Target:"
+msgstr ""
 
 msgid "Target: "
 msgstr "Destino: "
@@ -1286,6 +1418,12 @@ msgstr "Detalles de tareas"
 msgid "Task cancelled"
 msgstr "Tarea cancelada"
 
+msgid "Task count"
+msgstr ""
+
+msgid "Task for the host cancelled succesfully"
+msgstr ""
+
 msgid "Template ERB"
 msgstr "Plantilla ERB"
 
@@ -1294,6 +1432,9 @@ msgstr "Invocación de plantilla para %s"
 
 msgid "Template failed with:"
 msgstr "Plantilla falló con:"
+
+msgid "Template invocation not found"
+msgstr ""
 
 msgid "Template name"
 msgstr "nombre de plantilla"
@@ -1316,6 +1457,9 @@ msgstr ""
 msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}."
 msgstr "La consulta dinámica '%{query}' aún no se resolvió. La lista de hosts en los que se resolverá ahora se puede ver %{here}."
 
+msgid "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query."
+msgstr ""
+
 msgid "The execution interface is used for remote execution"
 msgstr "La interfaz de ejecución se utiliza para la ejecución remota."
 
@@ -1333,6 +1477,9 @@ msgstr "No se pudo cancelar el trabajo."
 
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr "La plantilla de trabajo que se debe utilizar; se requiere el parámetro a menos que se haya especificado la funcionalidad"
+
+msgid "The number of invocations is:"
+msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
@@ -1363,6 +1510,9 @@ msgstr "Esta plantilla se utiliza para generar la descripción. Los valores de e
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis <br/>. También puede incluir la categoría de trabajo y el nombre de la plantilla con %%{package} y %<br/>."
+
+msgid "This will open a new tab for each invocation."
+msgstr ""
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "Tiempo en segundos desde el comienzo en el host remoto tras lo cual debe eliminarse el trabajo."
@@ -1412,10 +1562,16 @@ msgstr "Intentando abortar el trabajo"
 msgid "Trying to abort the job %s."
 msgstr ""
 
+msgid "Trying to abort the task for the host"
+msgstr ""
+
 msgid "Trying to cancel the job"
 msgstr "Intentando cancelar el trabajo"
 
 msgid "Trying to cancel the job %s."
+msgstr ""
+
+msgid "Trying to cancel the task for the host"
 msgstr ""
 
 msgid "Type"
@@ -1442,8 +1598,14 @@ msgstr "No se pudo extraer la llave pública."
 msgid "Unable to remove host from known hosts"
 msgstr "No se puede eliminar el host de los hosts conocidos"
 
+msgid "Unable to run job"
+msgstr ""
+
 msgid "Unable to save template. Correct highlighted errors"
 msgstr "No se puede guardar plantilla. Corrija los errores resaltados."
+
+msgid "Unknown"
+msgstr ""
 
 msgid "Unknown execution status"
 msgstr "Estado de ejecución desconocido"
@@ -1547,9 +1709,6 @@ msgstr "Sobrescribir o no la plantilla si ya existe"
 msgid "Whether we should sync templates from disk when running db:seed."
 msgstr "Si debemos sincronizar las plantillas del disco al ejecutar db:seed."
 
-msgid "Workers pool size"
-msgstr "Tamaño del grupo de trabajadores"
-
 msgid "Yes (override)"
 msgstr "Sí (anulación)"
 
@@ -1561,6 +1720,9 @@ msgstr "No está autorizado para realizar esta acción."
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr "Tienes %s resultados para mostrar. Mostrando primeros resultados %s "
+
+msgid "You have more results to display. Showing first %s results"
+msgstr ""
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "agregar un conjunto de entrada para esta plantilla para hacer referencia a entradas de una plantilla diferente"
@@ -1576,9 +1738,6 @@ msgstr "documentación"
 
 msgid "effective user"
 msgstr "usuario efectivo"
-
-msgid "error"
-msgstr "error"
 
 msgid "error during rendering: %s"
 msgstr "error durante la reproducción: %s"
@@ -1655,6 +1814,9 @@ msgstr "segundos"
 msgid "succeeded"
 msgstr "exitoso"
 
+msgid "task aborted succesfully"
+msgstr ""
+
 msgid "tasks at a time"
 msgstr "tareas a la vez"
 
@@ -1671,6 +1833,9 @@ msgid "using Smart Proxy"
 msgstr "utilizando Smart Proxy"
 
 msgid "view host names"
+msgstr ""
+
+msgid "view the hosts"
 msgstr ""
 
 msgid "yes"

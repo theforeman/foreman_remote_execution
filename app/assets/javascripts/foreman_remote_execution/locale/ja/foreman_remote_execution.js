@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 14.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "elobato <elobatocs@gmail.com>, 2017",
@@ -35,11 +35,14 @@
       "%{description} on %{host}": [
         "%{host} の %{description} "
       ],
+      "'Starts at' date must be in the future": [
+        ""
+      ],
       "'Starts before' date must be after 'Starts at' date": [
         "「次の時刻よりも前に開始」の日付は、「開始時刻」の日付よりも後でなければなりません"
       ],
-      "'Starts before' date must in the future": [
-        "「次の時刻よりも前に開始」の日付は、未来の日付でなければなりません"
+      "'Starts before' date must be in the future": [
+        ""
       ],
       "...and %s more": [
         "...さらに %s"
@@ -71,6 +74,9 @@
       "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time.": [
         "繰り返しジョブを追跡するための特別なラベル。特定の目的で一度にアクティブにできるジョブは 1 つだけです。"
       ],
+      "A task for this host has not been started": [
+        ""
+      ],
       "A user to be used for SSH.": [
         "SSH に使用するユーザー。"
       ],
@@ -83,8 +89,14 @@
       "Abort Job": [
         "ジョブの中断"
       ],
+      "Abort task": [
+        ""
+      ],
       "Access denied": [
         "アクセスは拒否されました"
+      ],
+      "Action": [
+        ""
       ],
       "Actions": [
         "アクション"
@@ -107,11 +119,14 @@
       "All fields are required.": [
         "すべてのフィールドは必須です。"
       ],
+      "All statuses": [
+        ""
+      ],
       "Alphabetical": [
         "アルファベット順"
       ],
-      "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required.": [
-        "リモート実行ジョブの実行を処理するプールに含まれるワーカーの数量。dynflowd/foreman-tasks サービスの再起動が必要です。"
+      "An error occurred while fetching the template invocation details.": [
+        ""
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "別のインターフェースがすでに実行として設定されています。代わりにこのインターフェースを使用しもよろしいでしょうか?"
@@ -122,8 +137,17 @@
       "Any Organization": [
         "任意の組織"
       ],
+      "Any location": [
+        ""
+      ],
+      "Any organization": [
+        ""
+      ],
       "Apply to": [
         "適用対象"
+      ],
+      "Are you sure you want to open all invocations in new tabs?": [
+        ""
       ],
       "At": [
         "場所"
@@ -152,17 +176,20 @@
       "Cancel Job": [
         "ジョブのキャンセル"
       ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel job invocation": [
         "ジョブ呼び出しをキャンセル"
       ],
       "Cancel recurring": [
         "繰り返しのキャンセル"
       ],
-      "Canceled:": [
-        "キャンセル済み:"
-      ],
       "Cancelled": [
         "キャンセル済み"
+      ],
+      "Cancelled:": [
+        ""
       ],
       "Cannot resolve hosts without a bookmark or search query": [
         "ブックマークまたは検索クエリーなしでホストを解決できません"
@@ -203,6 +230,9 @@
       "Cockpit URL": [
         "Cockpit URL"
       ],
+      "Command": [
+        ""
+      ],
       "Concurrency level": [
         "同時実行レベル"
       ],
@@ -214,6 +244,9 @@
       ],
       "Control concurrency level and distribution over time": [
         "同時実行レベルと分散を制御"
+      ],
+      "Copy to clipboard": [
+        ""
       ],
       "Could not abort the job %s: ${response}": [
         "ジョブ %s を中止できませんでした: ${response}"
@@ -266,6 +299,9 @@
       "Create a recurring job": [
         "繰り返されるジョブを作成"
       ],
+      "Create job": [
+        ""
+      ],
       "Create report": [
         "レポートの作成"
       ],
@@ -284,6 +320,9 @@
       "Cronline": [
         "cron 行"
       ],
+      "Current iteration": [
+        ""
+      ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         "現在の場所 %s は、ジョブの場所 %s とは異なります。このジョブは、以前とは異なるホストで実行できます。"
       ],
@@ -296,8 +335,14 @@
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
         "現在の組織「%%{org_c}」はジョブの組織「％%{org_j}」とは異なります。"
       ],
+      "DEBUG": [
+        ""
+      ],
       "Daily": [
         "毎日"
+      ],
+      "Date must be in the future": [
+        ""
       ],
       "Days": [
         "日"
@@ -542,6 +587,9 @@
       "Host detail": [
         "ホストの詳細"
       ],
+      "Host group": [
+        ""
+      ],
       "Host groups": [
         "ホストグループ"
       ],
@@ -563,6 +611,9 @@
       "How often the job should occur, in the cron format": [
         "ジョブを実行する頻度 (cron 形式)"
       ],
+      "ID": [
+        ""
+      ],
       "Identifier of the Host interface for Remote execution": [
         "リモート実行用のホストインターフェイスの識別子"
       ],
@@ -574,6 +625,9 @@
       ],
       "Import a job template from ERB": [
         "ERB からジョブテンプレートをインポート"
+      ],
+      "In Progress": [
+        ""
       ],
       "In Progress:": [
         "処理中:"
@@ -616,6 +670,9 @@
       ],
       "Invocation type, one of %s": [
         "呼び出しタイプ、%s のいずれか"
+      ],
+      "Iteration limit": [
+        ""
       ],
       "Job": [
         "ジョブ"
@@ -674,6 +731,9 @@
       "Job templates": [
         "ジョブテンプレート"
       ],
+      "Job with id '%{id}' was not found": [
+        ""
+      ],
       "JobTemplate|Locked": [
         "ロック済み"
       ],
@@ -704,6 +764,9 @@
       "Last execution succeeded": [
         "成功した最後の実行"
       ],
+      "Last occurrence": [
+        ""
+      ],
       "Latest Jobs": [
         "最新のジョブ"
       ],
@@ -718,6 +781,9 @@
       ],
       "List foreign input sets": [
         "外部入力セットを一覧表示"
+      ],
+      "List hosts belonging to job invocation": [
+        ""
       ],
       "List job invocations": [
         "ジョブ呼び出しを一覧表示"
@@ -776,11 +842,20 @@
       "Next": [
         "次へ"
       ],
+      "Next occurrence": [
+        ""
+      ],
       "No (override)": [
         "No (上書き)"
       ],
+      "No Results": [
+        ""
+      ],
       "No Target Hosts": [
         "ターゲットホストがありません"
+      ],
+      "No hosts found": [
+        ""
       ],
       "No hosts found.": [
         "ホストが見つかりません。"
@@ -788,11 +863,17 @@
       "No jobs available": [
         "利用可能なジョブがありません"
       ],
+      "No output for the selected filters": [
+        ""
+      ],
       "No results found": [
         "結果は見つかりませんでした"
       ],
       "No template mapped to feature %{feature_name}": [
         "機能 %%{feature_name} にマッピングされたテンプレートがありません"
+      ],
+      "No user input": [
+        ""
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "入力が必須のすべての項目に値があるとは限りません。足りない入力: %s"
@@ -806,11 +887,23 @@
       "Now": [
         "今すぐ"
       ],
+      "OS": [
+        ""
+      ],
       "On": [
         "次の時刻に開始"
       ],
       "Only one of feature or job_template_id can be specified": [
         "機能または job_template_id の 1 つのみを指定できます"
+      ],
+      "Open all in new tabs": [
+        ""
+      ],
+      "Open all invocations in new tabs": [
+        ""
+      ],
+      "Open in new tab": [
+        ""
       ],
       "Opening job invocation form": [
         "ジョブ呼び出しフォームを開く"
@@ -857,8 +950,14 @@
       "Please enter a search query": [
         "検索クエリーを入力してください"
       ],
+      "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" or \\\\\\\"Recurring execution\\\\\\\" step to fix the error": [
+        ""
+      ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
         "「スケジュール」- 「将来の実行」の手順に戻り、エラーを修正してください"
+      ],
+      "Please make sure that the Smart Proxy is configured correctly for the Pull provider.": [
+        ""
       ],
       "Please refine your search.": [
         "検索条件を見直してください。"
@@ -875,6 +974,9 @@
       "Please select at least one host group": [
         "少なくとも 1 つのホストグループを選択してください"
       ],
+      "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs.": [
+        ""
+      ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         "SSH 通信に使用するポート。デフォルトのポートは 22 です。remote_execution_ssh_port という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
       ],
@@ -886,6 +988,9 @@
       ],
       "Preview Hosts": [
         "ホストのプレビュー"
+      ],
+      "Preview Template": [
+        ""
       ],
       "Preview job description": [
         "ジョブ説明をプレビュー"
@@ -986,6 +1091,9 @@
       "Repeat amount can only be a positive number": [
         "繰り返しの値は正の数でなければなりません"
       ],
+      "Repeat until": [
+        ""
+      ],
       "Repeats": [
         "繰り返し"
       ],
@@ -1006,6 +1114,12 @@
       ],
       "Rerun on failed hosts": [
         "失敗したホストでの再実行"
+      ],
+      "Rerun on succeeded hosts": [
+        ""
+      ],
+      "Rerun succeeded": [
+        ""
       ],
       "Rerun successful": [
         "正常に再実行されました"
@@ -1069,6 +1183,12 @@
       ],
       "SSH user:": [
         "SSH ユーザー:"
+      ],
+      "STDERR": [
+        ""
+      ],
+      "STDOUT": [
+        ""
       ],
       "Schedule": [
         "スケジュール"
@@ -1193,6 +1313,9 @@
       "Skip to review step": [
         "確認ステップまでスキップ"
       ],
+      "Smart proxy": [
+        ""
+      ],
       "Snippet": [
         "スニペット"
       ],
@@ -1253,6 +1376,9 @@
       "Success": [
         "成功"
       ],
+      "Successfully copied to clipboard!": [
+        ""
+      ],
       "Switch to the new job invocation detail UI": [
         "新しいジョブ呼び出し詳細 UI への切り替え"
       ],
@@ -1265,6 +1391,9 @@
       "Systems": [
         "システム"
       ],
+      "Target Hosts": [
+        ""
+      ],
       "Target hosts": [
         "ターゲットホスト"
       ],
@@ -1273,6 +1402,9 @@
       ],
       "Target template ID": [
         "ターゲットテンプレート ID"
+      ],
+      "Target:": [
+        ""
       ],
       "Target: ": [
         "ターゲット: "
@@ -1283,6 +1415,12 @@
       "Task cancelled": [
         "タスクはキャンセルされました"
       ],
+      "Task count": [
+        ""
+      ],
+      "Task for the host cancelled succesfully": [
+        ""
+      ],
       "Template ERB": [
         "テンプレート ERB"
       ],
@@ -1291,6 +1429,9 @@
       ],
       "Template failed with:": [
         "テンプレートが以下により失敗:"
+      ],
+      "Template invocation not found": [
+        ""
       ],
       "Template name": [
         "テンプレート名"
@@ -1313,6 +1454,9 @@
       "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}.": [
         "動的クエリー '%{query}' が解決されませんでした。解決するホストの一覧は %{here} に表示されます。"
       ],
+      "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
+        ""
+      ],
       "The execution interface is used for remote execution": [
         "リモート実行には実行インターフェースが使用されます"
       ],
@@ -1330,6 +1474,9 @@
       ],
       "The job template to use, parameter is required unless feature was specified": [
         "使用するジョブテンプレート。機能が指定されていなければ、パラメーターが必要です"
+      ],
+      "The number of invocations is:": [
+        ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "適用可能な唯一のプロキシー %%{proxy_names} がダウンしています。"
@@ -1357,6 +1504,9 @@
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "このテンプレートは記述の生成に使用します。<br/>入力値は、構文 %%{package} を使用して使用できます。%%{job_category} と %%{template_name} を使用して、<br/> ジョブカテゴリーとテンプレート <br/> 名を追加することもできます。"
+      ],
+      "This will open a new tab for each invocation.": [
+        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "リモートホストで開始してからジョブを強制終了するまでの時間 (秒単位)"
@@ -1406,11 +1556,17 @@
       "Trying to abort the job %s.": [
         "ジョブ %s を中断しようとしています。"
       ],
+      "Trying to abort the task for the host": [
+        ""
+      ],
       "Trying to cancel the job": [
         "ジョブをキャンセルしようとしています"
       ],
       "Trying to cancel the job %s.": [
         "ジョブ %s をキャンセルしようとしています。"
+      ],
+      "Trying to cancel the task for the host": [
+        ""
       ],
       "Type": [
         "タイプ"
@@ -1436,8 +1592,14 @@
       "Unable to remove host from known hosts": [
         "既知のホストからホストを削除できません"
       ],
+      "Unable to run job": [
+        ""
+      ],
       "Unable to save template. Correct highlighted errors": [
         "テンプレートを保存できません。強調表示されたエラーを修正してください"
+      ],
+      "Unknown": [
+        ""
       ],
       "Unknown execution status": [
         "不明な実行ステータス"
@@ -1541,9 +1703,6 @@
       "Whether we should sync templates from disk when running db:seed.": [
         "db:seed を実行するときにディスクからテンプレートを同期するかどうか。"
       ],
-      "Workers pool size": [
-        "ワーカーのプールサイズ"
-      ],
       "Yes (override)": [
         "Yes (上書き)"
       ],
@@ -1555,6 +1714,9 @@
       ],
       "You have %s results to display. Showing first %s results": [
         "表示する結果が %s 件あります。最初の %s 件の結果を表示しています"
+      ],
+      "You have more results to display. Showing first %s results": [
+        ""
       ],
       "add an input set for this template to reference a different template inputs": [
         "異なるテンプレート入力を参照するためにこのテンプレートの入力セットを追加"
@@ -1570,9 +1732,6 @@
       ],
       "effective user": [
         "実効ユーザー"
-      ],
-      "error": [
-        "エラー"
       ],
       "error during rendering: %s": [
         "レンダリング中のエラー: %s"
@@ -1649,6 +1808,9 @@
       "succeeded": [
         "成功"
       ],
+      "task aborted succesfully": [
+        ""
+      ],
       "tasks at a time": [
         "1 度に実行されるタスク"
       ],
@@ -1666,6 +1828,9 @@
       ],
       "view host names": [
         "ホスト名の表示"
+      ],
+      "view the hosts": [
+        ""
       ],
       "yes": [
         "yes"

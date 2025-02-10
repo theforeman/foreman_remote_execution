@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 14.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
@@ -35,11 +35,14 @@
       "%{description} on %{host}": [
         "%{description} sur %{host}"
       ],
+      "'Starts at' date must be in the future": [
+        ""
+      ],
       "'Starts before' date must be after 'Starts at' date": [
         "La date \\\"Démarrage avant\\\" doit être postérieure à la date \\\"Démarrage à\\\"."
       ],
-      "'Starts before' date must in the future": [
-        "La date \\\"commence avant\\\" doit se situer dans le futur"
+      "'Starts before' date must be in the future": [
+        ""
       ],
       "...and %s more": [
         "...et %s de plus"
@@ -73,6 +76,9 @@
       "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time.": [
         "Une balise spéciale pour le suivi d'un travail récurrent. Il ne peut y avoir qu'un seul job actif avec un objectif donné."
       ],
+      "A task for this host has not been started": [
+        ""
+      ],
       "A user to be used for SSH.": [
         "Utilisateur pour SSH."
       ],
@@ -85,8 +91,14 @@
       "Abort Job": [
         "Abandonner le job"
       ],
+      "Abort task": [
+        ""
+      ],
       "Access denied": [
         "Accès refusé"
+      ],
+      "Action": [
+        ""
       ],
       "Actions": [
         "Actions"
@@ -109,11 +121,14 @@
       "All fields are required.": [
         "Tous les champs sont obligatoires."
       ],
+      "All statuses": [
+        ""
+      ],
       "Alphabetical": [
         "Alphabétique"
       ],
-      "Amount of workers in the pool to handle the execution of the remote execution jobs. Restart of the dynflowd/foreman-tasks service is required.": [
-        "Nombre de workers dans le pool permettant de gérer l'exécution des jobs d'exécution à distance. Le redémarrage du service dynflowd/foreman-tasks est requis."
+      "An error occurred while fetching the template invocation details.": [
+        ""
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "Une autre interface est déjà définie pour l'exécution distante. Êtes-vous sûrs de vouloir utiliser celle-ci à la place ?"
@@ -124,8 +139,17 @@
       "Any Organization": [
         "Toute Organisation"
       ],
+      "Any location": [
+        ""
+      ],
+      "Any organization": [
+        ""
+      ],
       "Apply to": [
         "Appliquer à"
+      ],
+      "Are you sure you want to open all invocations in new tabs?": [
+        ""
       ],
       "At": [
         "À"
@@ -154,17 +178,20 @@
       "Cancel Job": [
         "Annuler la tâche"
       ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel job invocation": [
         "Annuler le lancement du job"
       ],
       "Cancel recurring": [
         "Annuler la logique récurrente"
       ],
-      "Canceled:": [
-        "Annulé :"
-      ],
       "Cancelled": [
         "Annulé"
+      ],
+      "Cancelled:": [
+        ""
       ],
       "Cannot resolve hosts without a bookmark or search query": [
         "Impossible de résoudre les hôtes sans un marque page ou une recherche"
@@ -205,6 +232,9 @@
       "Cockpit URL": [
         "URL Cockpit"
       ],
+      "Command": [
+        ""
+      ],
       "Concurrency level": [
         "Niveau de parallélisme"
       ],
@@ -216,6 +246,9 @@
       ],
       "Control concurrency level and distribution over time": [
         "Contrôle le niveau de parallélisme et la distribution dans le temps"
+      ],
+      "Copy to clipboard": [
+        ""
       ],
       "Could not abort the job %s: ${response}": [
         "Impossible d'annuler le job %s :${response}"
@@ -268,6 +301,9 @@
       "Create a recurring job": [
         "Créer un job récurrent"
       ],
+      "Create job": [
+        ""
+      ],
       "Create report": [
         "Créer un rapport"
       ],
@@ -286,6 +322,9 @@
       "Cronline": [
         "Cronline"
       ],
+      "Current iteration": [
+        ""
+      ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         "L'emplacement actuel %s est différent de l'emplacement du job %s. Ce job peut être exécuté sur des hôtes différents."
       ],
@@ -298,8 +337,14 @@
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
         "L'organisation actuelle %%{org_c} est différente de l'organisation du job %%{org_j}."
       ],
+      "DEBUG": [
+        ""
+      ],
       "Daily": [
         "Quotidien"
+      ],
+      "Date must be in the future": [
+        ""
       ],
       "Days": [
         "Jours"
@@ -544,6 +589,9 @@
       "Host detail": [
         "Détails de l'hôte"
       ],
+      "Host group": [
+        ""
+      ],
       "Host groups": [
         "Groupes d'hôtes"
       ],
@@ -565,6 +613,9 @@
       "How often the job should occur, in the cron format": [
         "La fréquence d'exécution du job, au format cron"
       ],
+      "ID": [
+        ""
+      ],
       "Identifier of the Host interface for Remote execution": [
         "Identifiant de l'interface de l'hôte pour l'exécution à distance"
       ],
@@ -576,6 +627,9 @@
       ],
       "Import a job template from ERB": [
         "Importe un modèle de job depuis ERB"
+      ],
+      "In Progress": [
+        ""
       ],
       "In Progress:": [
         "En cours :"
@@ -618,6 +672,9 @@
       ],
       "Invocation type, one of %s": [
         "Type d'invocation, l'un des suivants %s"
+      ],
+      "Iteration limit": [
+        ""
       ],
       "Job": [
         "Tâche"
@@ -676,6 +733,9 @@
       "Job templates": [
         "Modèles de job"
       ],
+      "Job with id '%{id}' was not found": [
+        ""
+      ],
       "JobTemplate|Locked": [
         "Verrouillé"
       ],
@@ -706,6 +766,9 @@
       "Last execution succeeded": [
         "La dernière exécution a réussi"
       ],
+      "Last occurrence": [
+        ""
+      ],
       "Latest Jobs": [
         "Derniers jobs"
       ],
@@ -720,6 +783,9 @@
       ],
       "List foreign input sets": [
         "Afficher les jeux de données en entrée externes"
+      ],
+      "List hosts belonging to job invocation": [
+        ""
       ],
       "List job invocations": [
         "Affiche les jobs lancés"
@@ -778,11 +844,20 @@
       "Next": [
         "Suivant"
       ],
+      "Next occurrence": [
+        ""
+      ],
       "No (override)": [
         "Non (remplacement)"
       ],
+      "No Results": [
+        ""
+      ],
       "No Target Hosts": [
         "Aucun Hôte cible"
+      ],
+      "No hosts found": [
+        ""
       ],
       "No hosts found.": [
         "Aucun hôte trouvé."
@@ -790,11 +865,17 @@
       "No jobs available": [
         "Aucun job disponible"
       ],
+      "No output for the selected filters": [
+        ""
+      ],
       "No results found": [
         "Aucun résultat"
       ],
       "No template mapped to feature %{feature_name}": [
         "Aucun modèle n'est en relation avec la fonction %%{feature_name}"
+      ],
+      "No user input": [
+        ""
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "Les entrées n'ont pas toutes des valeurs associées. Les entrées demandant de l'attention : %s"
@@ -808,11 +889,23 @@
       "Now": [
         "Maintenant"
       ],
+      "OS": [
+        ""
+      ],
       "On": [
         "Activé"
       ],
       "Only one of feature or job_template_id can be specified": [
         "Seule une fonctionnalité ou un job_template_id ne peuvent être spécifiés"
+      ],
+      "Open all in new tabs": [
+        ""
+      ],
+      "Open all invocations in new tabs": [
+        ""
+      ],
+      "Open in new tab": [
+        ""
       ],
       "Opening job invocation form": [
         "Ouverture du formulaire de lancement du job"
@@ -859,8 +952,14 @@
       "Please enter a search query": [
         "Veuillez saisir une requête de recherche"
       ],
+      "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" or \\\\\\\"Recurring execution\\\\\\\" step to fix the error": [
+        ""
+      ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
         "Veuillez retourner à l'étape \\\\\\\"Programme\\\"\\\\ - \\\\\\\"Exécution future\\\"\\\\ pour corriger l'erreur."
+      ],
+      "Please make sure that the Smart Proxy is configured correctly for the Pull provider.": [
+        ""
       ],
       "Please refine your search.": [
         "Veuillez raffiner votre recherche."
@@ -877,6 +976,9 @@
       "Please select at least one host group": [
         "Veuillez sélectionner au moins un groupe d'hôtes"
       ],
+      "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs.": [
+        ""
+      ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         "Port à utiliser pour la communication SSH. Le port par défaut est 22. Vous pouvez le remplacer selon les hôtes en définissant un paramètre appelé remote_execution_ssh_port."
       ],
@@ -888,6 +990,9 @@
       ],
       "Preview Hosts": [
         "Prévisualisation des hôtes"
+      ],
+      "Preview Template": [
+        ""
       ],
       "Preview job description": [
         "Prévisualisation de la description du job"
@@ -988,6 +1093,9 @@
       "Repeat amount can only be a positive number": [
         "Le montant répété ne peut correspondre qu’à un nombre positif"
       ],
+      "Repeat until": [
+        ""
+      ],
       "Repeats": [
         "Répétitions"
       ],
@@ -1008,6 +1116,12 @@
       ],
       "Rerun on failed hosts": [
         "Relancer sur les hôtes où le job a échoué"
+      ],
+      "Rerun on succeeded hosts": [
+        ""
+      ],
+      "Rerun succeeded": [
+        ""
       ],
       "Rerun successful": [
         "Réexécution réussie"
@@ -1071,6 +1185,12 @@
       ],
       "SSH user:": [
         "Utilisateur SSH :"
+      ],
+      "STDERR": [
+        ""
+      ],
+      "STDOUT": [
+        ""
       ],
       "Schedule": [
         "Programmer"
@@ -1195,6 +1315,9 @@
       "Skip to review step": [
         "Passer à l'étape de révision"
       ],
+      "Smart proxy": [
+        ""
+      ],
       "Snippet": [
         "Snippet"
       ],
@@ -1255,6 +1378,9 @@
       "Success": [
         "Réussi"
       ],
+      "Successfully copied to clipboard!": [
+        ""
+      ],
       "Switch to the new job invocation detail UI": [
         "Basculer vers la nouvelle interface utilisateur détaillée des appels de tâches"
       ],
@@ -1267,6 +1393,9 @@
       "Systems": [
         "Systèmes"
       ],
+      "Target Hosts": [
+        ""
+      ],
       "Target hosts": [
         "Hôtes cibles"
       ],
@@ -1275,6 +1404,9 @@
       ],
       "Target template ID": [
         "ID de modèle cible"
+      ],
+      "Target:": [
+        ""
       ],
       "Target: ": [
         "Cible :"
@@ -1285,6 +1417,12 @@
       "Task cancelled": [
         "Tâche annulée"
       ],
+      "Task count": [
+        ""
+      ],
+      "Task for the host cancelled succesfully": [
+        ""
+      ],
       "Template ERB": [
         "Modèle ERB"
       ],
@@ -1293,6 +1431,9 @@
       ],
       "Template failed with:": [
         "Le modèle à échoué avec :"
+      ],
+      "Template invocation not found": [
+        ""
       ],
       "Template name": [
         "Nom de modèle"
@@ -1315,6 +1456,9 @@
       "The dynamic query '%{query}' was not resolved yet. The list of hosts to which it would resolve now can be seen %{here}.": [
         "La requête dynamique '%{query}' n'a pas encore été résolue. La liste des hôtes actuelle avec lesquels ils pourraient être résolus peut être vue ici %{here}."
       ],
+      "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
+        ""
+      ],
       "The execution interface is used for remote execution": [
         "L'interface d'exécution est celle utilisée pour l'exécution distante"
       ],
@@ -1332,6 +1476,9 @@
       ],
       "The job template to use, parameter is required unless feature was specified": [
         "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
+      ],
+      "The number of invocations is:": [
+        ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "Le seul proxy applicable %%{proxy_names} est indisponible",
@@ -1361,6 +1508,9 @@
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %%{job_category} et %%{template_name}."
+      ],
+      "This will open a new tab for each invocation.": [
+        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Durée en secondes depuis le démarrage sur l'hôte distant après laquelle le job doit être supprimé."
@@ -1410,11 +1560,17 @@
       "Trying to abort the job %s.": [
         "J’essaie d'abandonner le job %s ."
       ],
+      "Trying to abort the task for the host": [
+        ""
+      ],
       "Trying to cancel the job": [
         "Tentative d'annulation du job"
       ],
       "Trying to cancel the job %s.": [
         "J'essaie d'annuler le travail%s ."
+      ],
+      "Trying to cancel the task for the host": [
+        ""
       ],
       "Type": [
         "Type"
@@ -1440,8 +1596,14 @@
       "Unable to remove host from known hosts": [
         "Impossible de retirer l'hôte des hôtes connus"
       ],
+      "Unable to run job": [
+        ""
+      ],
       "Unable to save template. Correct highlighted errors": [
         "Impossible de sauver le modèle. Merci de corriger les erreurs en surbrillance"
+      ],
+      "Unknown": [
+        ""
       ],
       "Unknown execution status": [
         "État d'exécution inconnu"
@@ -1545,9 +1707,6 @@
       "Whether we should sync templates from disk when running db:seed.": [
         "Défini si nous devons synchroniser les modèles depuis le disque lors de l'exécution de db:seed."
       ],
-      "Workers pool size": [
-        "Taille du pool de workers"
-      ],
       "Yes (override)": [
         "Oui (remplacement)"
       ],
@@ -1559,6 +1718,9 @@
       ],
       "You have %s results to display. Showing first %s results": [
         "Vous avez %s résultats à afficher. Afficher les %s premiers résultats"
+      ],
+      "You have more results to display. Showing first %s results": [
+        ""
       ],
       "add an input set for this template to reference a different template inputs": [
         "Ajout d'un jeu d'entrées pour ce modèle pour faire référence à des entrées sur un modèle différent"
@@ -1574,9 +1736,6 @@
       ],
       "effective user": [
         "utilisateur effectif"
-      ],
-      "error": [
-        "erreur"
       ],
       "error during rendering: %s": [
         "Erreurs pendant le rendu : %s"
@@ -1653,6 +1812,9 @@
       "succeeded": [
         "réussi"
       ],
+      "task aborted succesfully": [
+        ""
+      ],
       "tasks at a time": [
         "tâches à la fois"
       ],
@@ -1670,6 +1832,9 @@
       ],
       "view host names": [
         "afficher les noms d'hôtes"
+      ],
+      "view the hosts": [
+        ""
       ],
       "yes": [
         "oui"
