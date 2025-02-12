@@ -171,7 +171,7 @@ class JobInvocationsController < ApplicationController
       inputs = params[:inputs].permit!.to_hash if params.include?(:inputs)
       JobInvocationComposer.for_feature(
         params[:feature],
-        params[:host_ids],
+        params[:search].presence || params[:host_ids],
         inputs
       )
     else
