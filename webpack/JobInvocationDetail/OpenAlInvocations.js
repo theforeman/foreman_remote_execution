@@ -40,6 +40,7 @@ export const OpenAlInvocations = ({ results, id, setShowAlert }) => {
       isInline
       aria-label="open all template invocations in a new tab"
       ouiaId="template-invocation-new-tab-button"
+      className="open-all-button"
       onClick={() => {
         if (results.length <= 3) {
           results.forEach(result => {
