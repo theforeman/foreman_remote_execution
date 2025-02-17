@@ -96,18 +96,15 @@ export const RowActions = ({ hostID, jobID }) => {
     permissions,
     dispatch,
   });
+
   const rowActions = Object.values(getActions)
-    .map(({ text, onClick, href, permission, isDisabled }) =>
+    .map(({ text, href, permission, isDisabled }) =>
       permission
         ? {
-            title: href ? (
-              <a href={href} target="_blank" rel="noreferrer">
-                {text}
-              </a>
-            ) : (
-              text
-            ),
-            onClick,
+            title: text,
+            onClick: () => {
+              window.open(href, '_blank');
+            },
             isDisabled,
           }
         : null
