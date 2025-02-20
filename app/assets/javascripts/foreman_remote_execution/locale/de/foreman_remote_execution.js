@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022-2023",
@@ -232,7 +232,7 @@
         "Cockpit-URL"
       ],
       "Command": [
-        ""
+        "Befehl"
       ],
       "Concurrency level": [
         "Parallelitätsebene"
@@ -322,7 +322,7 @@
         ""
       ],
       "Current iteration": [
-        ""
+        "Aktuelle Wiederholung "
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
@@ -613,7 +613,7 @@
         "Wie oft der Auftrag auftreten soll, in Cron-Format"
       ],
       "ID": [
-        ""
+        "ID"
       ],
       "Identifier of the Host interface for Remote execution": [
         "Identifizierer des Host-interfaces für Remote-Ausführung"
@@ -673,7 +673,7 @@
         "Jobtyp, einer von %s"
       ],
       "Iteration limit": [
-        ""
+        "Wiederholungslimit"
       ],
       "Job": [
         "Auftrag"
@@ -766,7 +766,7 @@
         "Letzte Ausführung erfolgreich"
       ],
       "Last occurrence": [
-        ""
+        "Zuletzt vorgekommen"
       ],
       "Latest Jobs": [
         ""
@@ -844,13 +844,13 @@
         "Weiter"
       ],
       "Next occurrence": [
-        ""
+        "Nächstes Vorkommen"
       ],
       "No (override)": [
         "Nein (Überschreiben)"
       ],
       "No Results": [
-        ""
+        "Keine Ergebnisse"
       ],
       "No Target Hosts": [
         ""
@@ -1093,7 +1093,7 @@
         ""
       ],
       "Repeat until": [
-        ""
+        "Wiederholen bis"
       ],
       "Repeats": [
         "Wiederholungen "
@@ -1315,7 +1315,7 @@
         ""
       ],
       "Smart proxy": [
-        ""
+        "Smart Proxy"
       ],
       "Snippet": [
         "Snippet"
@@ -1417,7 +1417,7 @@
         "Aufgabe abgebrochen"
       ],
       "Task count": [
-        ""
+        "Anzahl der Aufgaben"
       ],
       "Task for the host cancelled succesfully": [
         ""
@@ -1601,7 +1601,7 @@
         "Vorlage kann nicht gespeichert werden. Bitte korrigieren Sie die markierten Fehler"
       ],
       "Unknown": [
-        ""
+        "Unbekannt"
       ],
       "Unknown execution status": [
         "Unbekannter Ausführungsstatus"

@@ -11,7 +11,7 @@
 # abf90805572190d649c59f7a021d76cb, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022-20"
@@ -239,7 +239,7 @@ msgid "Cockpit URL"
 msgstr "Cockpit-URL"
 
 msgid "Command"
-msgstr ""
+msgstr "Befehl"
 
 msgid "Concurrency level"
 msgstr "Parallelitätsebene"
@@ -329,7 +329,7 @@ msgid "Cronline"
 msgstr ""
 
 msgid "Current iteration"
-msgstr ""
+msgstr "Aktuelle Wiederholung "
 
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr ""
@@ -620,7 +620,7 @@ msgid "How often the job should occur, in the cron format"
 msgstr "Wie oft der Auftrag auftreten soll, in Cron-Format"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Identifier of the Host interface for Remote execution"
 msgstr "Identifizierer des Host-interfaces für Remote-Ausführung"
@@ -680,7 +680,7 @@ msgid "Invocation type, one of %s"
 msgstr "Jobtyp, einer von %s"
 
 msgid "Iteration limit"
-msgstr ""
+msgstr "Wiederholungslimit"
 
 msgid "Job"
 msgstr "Auftrag"
@@ -773,7 +773,7 @@ msgid "Last execution succeeded"
 msgstr "Letzte Ausführung erfolgreich"
 
 msgid "Last occurrence"
-msgstr ""
+msgstr "Zuletzt vorgekommen"
 
 msgid "Latest Jobs"
 msgstr ""
@@ -851,13 +851,13 @@ msgid "Next"
 msgstr "Weiter"
 
 msgid "Next occurrence"
-msgstr ""
+msgstr "Nächstes Vorkommen"
 
 msgid "No (override)"
 msgstr "Nein (Überschreiben)"
 
 msgid "No Results"
-msgstr ""
+msgstr "Keine Ergebnisse"
 
 msgid "No Target Hosts"
 msgstr ""
@@ -1102,7 +1102,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr ""
 
 msgid "Repeat until"
-msgstr ""
+msgstr "Wiederholen bis"
 
 msgid "Repeats"
 msgstr "Wiederholungen "
@@ -1324,7 +1324,7 @@ msgid "Skip to review step"
 msgstr ""
 
 msgid "Smart proxy"
-msgstr ""
+msgstr "Smart Proxy"
 
 msgid "Snippet"
 msgstr "Snippet"
@@ -1426,7 +1426,7 @@ msgid "Task cancelled"
 msgstr "Aufgabe abgebrochen"
 
 msgid "Task count"
-msgstr ""
+msgstr "Anzahl der Aufgaben"
 
 msgid "Task for the host cancelled succesfully"
 msgstr ""
@@ -1611,7 +1611,7 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr "Vorlage kann nicht gespeichert werden. Bitte korrigieren Sie die markierten Fehler"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 msgid "Unknown execution status"
 msgstr "Unbekannter Ausführungsstatus"
