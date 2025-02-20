@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -232,7 +232,7 @@
         "URL de cockpit"
       ],
       "Command": [
-        ""
+        "Comando"
       ],
       "Concurrency level": [
         "Nível de simultaneidade"
@@ -322,7 +322,7 @@
         "Cronline"
       ],
       "Current iteration": [
-        ""
+        "Iteração atual"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
@@ -673,7 +673,7 @@
         "Tipo de invocação, um dos %s"
       ],
       "Iteration limit": [
-        ""
+        "Limite de iteração"
       ],
       "Job": [
         "Trabalho"
@@ -766,7 +766,7 @@
         "Última execução bem-sucedida "
       ],
       "Last occurrence": [
-        ""
+        "Ocorrência mais recente"
       ],
       "Latest Jobs": [
         "Últimos empregos"
@@ -844,13 +844,13 @@
         "Próximo"
       ],
       "Next occurrence": [
-        ""
+        "Próxima ocorrência"
       ],
       "No (override)": [
         ""
       ],
       "No Results": [
-        ""
+        "Sem resultados"
       ],
       "No Target Hosts": [
         "Sem anfitriões alvo"
@@ -1093,7 +1093,7 @@
         "A quantia repetida só pode ser um número positivo"
       ],
       "Repeat until": [
-        ""
+        "Repetir até"
       ],
       "Repeats": [
         "Repetições "
@@ -1417,7 +1417,7 @@
         "Tarefa cancelada"
       ],
       "Task count": [
-        ""
+        "Contagem de Tarefas"
       ],
       "Task for the host cancelled succesfully": [
         ""
@@ -1602,7 +1602,7 @@
         "Não foi possível salvar o template. Corrija os erros em destaque "
       ],
       "Unknown": [
-        ""
+        "Desconhecido"
       ],
       "Unknown execution status": [
         "Status de execução desconhecido"

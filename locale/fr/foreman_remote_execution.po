@@ -8,7 +8,7 @@
 # Pierre-Emmanuel Dutang <dutangp@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Claer <transiblu@claer.hammock.fr>, 2016\n"
@@ -39,13 +39,13 @@ msgid "%{description} on %{host}"
 msgstr "%{description} sur %{host}"
 
 msgid "'Starts at' date must be in the future"
-msgstr ""
+msgstr "La date « Commence à » doit être dans le futur"
 
 msgid "'Starts before' date must be after 'Starts at' date"
 msgstr "La date \"Démarrage avant\" doit être postérieure à la date \"Démarrage à\"."
 
 msgid "'Starts before' date must be in the future"
-msgstr ""
+msgstr "La date « Commence avant » doit être dans le futur"
 
 msgid "...and %s more"
 msgstr "...et %s de plus"
@@ -63,7 +63,7 @@ msgid "A comma separated list of input names to be included from the foreign tem
 msgstr "Une liste des entrées du modèle externe à inclure, séparées par des virgules."
 
 msgid "A job '%{job_name}' has %{status} at %{time}"
-msgstr "Un job '%%{job_name}' a %{status} à %{time}"
+msgstr "Un job '%{job_name}' a %{status} à %{time}"
 
 msgid "A job '%{subject}' has failed"
 msgstr "Un job '%{subject}' a échoué"
@@ -81,7 +81,7 @@ msgid "A special label for tracking a recurring job. There can be only one activ
 msgstr "Une balise spéciale pour le suivi d'un travail récurrent. Il ne peut y avoir qu'un seul job actif avec un objectif donné."
 
 msgid "A task for this host has not been started"
-msgstr ""
+msgstr "Une tâche pour cet hôte n'a pas été démarrée"
 
 msgid "A user to be used for SSH."
 msgstr "Utilisateur pour SSH."
@@ -96,13 +96,13 @@ msgid "Abort Job"
 msgstr "Abandonner le job"
 
 msgid "Abort task"
-msgstr ""
+msgstr "Abandonner la tâche"
 
 msgid "Access denied"
 msgstr "Accès refusé"
 
 msgid "Action"
-msgstr ""
+msgstr "Action"
 
 msgid "Actions"
 msgstr "Actions"
@@ -126,13 +126,13 @@ msgid "All fields are required."
 msgstr "Tous les champs sont obligatoires."
 
 msgid "All statuses"
-msgstr ""
+msgstr "Tous les statuts"
 
 msgid "Alphabetical"
 msgstr "Alphabétique"
 
 msgid "An error occurred while fetching the template invocation details."
-msgstr ""
+msgstr "Une erreur s'est produite lors de la récupération des détails d'invocation du modèle."
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "Une autre interface est déjà définie pour l'exécution distante. Êtes-vous sûrs de vouloir utiliser celle-ci à la place ?"
@@ -144,16 +144,16 @@ msgid "Any Organization"
 msgstr "Toute Organisation"
 
 msgid "Any location"
-msgstr ""
+msgstr "Tout emplacement"
 
 msgid "Any organization"
-msgstr ""
+msgstr "Toute organisation"
 
 msgid "Apply to"
 msgstr "Appliquer à"
 
 msgid "Are you sure you want to open all invocations in new tabs?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir ouvrir toutes les invocations dans de nouveaux onglets ?"
 
 msgid "At"
 msgstr "À"
@@ -183,7 +183,7 @@ msgid "Cancel Job"
 msgstr "Annuler la tâche"
 
 msgid "Cancel Task"
-msgstr ""
+msgstr "Annuler la tâche"
 
 msgid "Cancel job invocation"
 msgstr "Annuler le lancement du job"
@@ -195,7 +195,7 @@ msgid "Cancelled"
 msgstr "Annulé"
 
 msgid "Cancelled:"
-msgstr ""
+msgstr "Annulé:"
 
 msgid "Cannot resolve hosts without a bookmark or search query"
 msgstr "Impossible de résoudre les hôtes sans un marque page ou une recherche"
@@ -216,7 +216,7 @@ msgid "Choose a job template that is pre-selected in job invocation form"
 msgstr "Choisissez un modèle qui soit présélectionné dans le formulaire de requête du job"
 
 msgid "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}"
-msgstr "Dépendance circulaire détectée dans l'ensemble d'entrées externes '%%{template}' -> '%%{target_template}'. Pile de modèles : %%{templates_stack}"
+msgstr "Dépendance circulaire détectée dans l'ensemble d'entrées externes '%{template}' -> '%{target_template}'. Pile de modèles : %{templates_stack}"
 
 msgid "Cleanup working directories"
 msgstr "Nettoyage des répertoires de travail"
@@ -237,7 +237,7 @@ msgid "Cockpit URL"
 msgstr "URL Cockpit"
 
 msgid "Command"
-msgstr ""
+msgstr "Commande"
 
 msgid "Concurrency level"
 msgstr "Niveau de parallélisme"
@@ -252,7 +252,7 @@ msgid "Control concurrency level and distribution over time"
 msgstr "Contrôle le niveau de parallélisme et la distribution dans le temps"
 
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Copier dans le presse-papiers"
 
 msgid "Could not abort the job %s: ${response}"
 msgstr "Impossible d'annuler le job %s :${response}"
@@ -282,7 +282,7 @@ msgid "Could not rerun job %{id} because its template could not be found"
 msgstr "Impossible de relancer le job %{id} parce que son modèle n'a pas pu être trouvé"
 
 msgid "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings"
-msgstr "N’a pas pu utiliser de proxy pour le job %{provider}. Considérer configurer %%{global_proxy}, %%{fallback_proxy}dans les paramètres de configuration"
+msgstr "N’a pas pu utiliser de proxy pour le job %{provider}. Considérer configurer %{global_proxy}, %{fallback_proxy}dans les paramètres de configuration"
 
 msgid "Could not use any template used in the job invocation"
 msgstr "Impossible d'utiliser un modèle qui est utilisé pour un lancement de job"
@@ -306,7 +306,7 @@ msgid "Create a recurring job"
 msgstr "Créer un job récurrent"
 
 msgid "Create job"
-msgstr ""
+msgstr "Créer un job"
 
 msgid "Create report"
 msgstr "Créer un rapport"
@@ -327,28 +327,28 @@ msgid "Cronline"
 msgstr "Cronline"
 
 msgid "Current iteration"
-msgstr ""
+msgstr "Itération actuelle"
 
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr "L'emplacement actuel %s est différent de l'emplacement du job %s. Ce job peut être exécuté sur des hôtes différents."
 
 msgid "Current location %{loc_c} is different from job's location %{loc_j}."
-msgstr "L’emplacement actuel %%{loc_c} est différent de l’emplacement du job %%{loc_j}."
+msgstr "L’emplacement actuel %{loc_c} est différent de l’emplacement du job %{loc_j}."
 
 msgid "Current organization %s is different from job's organization %s. This job may run on different hosts than before."
 msgstr "L'organisation actuelle %s est différente de l'organisation du job %s. Ce job peut être exécuté sur des hôtes différents."
 
 msgid "Current organization %{org_c} is different from job's organization %{org_j}."
-msgstr "L'organisation actuelle %%{org_c} est différente de l'organisation du job %%{org_j}."
+msgstr "L'organisation actuelle %{org_c} est différente de l'organisation du job %{org_j}."
 
 msgid "DEBUG"
-msgstr ""
+msgstr "DEBUG"
 
 msgid "Daily"
 msgstr "Quotidien"
 
 msgid "Date must be in the future"
-msgstr ""
+msgstr "La date doit être dans le futur"
 
 msgid "Days"
 msgstr "Jours"
@@ -402,7 +402,7 @@ msgid "Does not repeat"
 msgstr "Pas de répétition"
 
 msgid "Duplicated inputs detected: %{duplicated_inputs}"
-msgstr "Entrées dupliquées détectées : %%{duplicated_inputs}"
+msgstr "Entrées dupliquées détectées : %{duplicated_inputs}"
 
 msgid "Dynamic Query"
 msgstr "Requête dynamique"
@@ -432,7 +432,7 @@ msgid "Effective user"
 msgstr "Utilisateur effectif"
 
 msgid "Effective user method \"%{current_value}\" is not one of %{valid_methods}"
-msgstr "La méthode de l'utilisateur effectif \"%%{current_value}\" n'est pas l'une des méthodes de %%{valid_methods}"
+msgstr "La méthode de l'utilisateur effectif \"%{current_value}\" n'est pas l'une des méthodes de %{valid_methods}"
 
 msgid "Effective user options"
 msgstr "Options pour l'utilisateur effectif"
@@ -528,10 +528,10 @@ msgid "Fallback to Any Proxy"
 msgstr "Repli sur n'importe quel proxy"
 
 msgid "Feature input %{input_name} not defined in template %{template_name}"
-msgstr "Entrée de la caractéristique %%{input_name}non définie dans le modèle %%{template_name}"
+msgstr "Entrée de la caractéristique %{input_name}non définie dans le modèle %{template_name}"
 
 msgid "Fill all required fields in all the steps"
-msgstr "Saisissez tous les champs requis dans toutes les étapes"
+msgstr "Remplissez tous les champs obligatoires à toutes les étapes"
 
 msgid "Fill all required fields in all the steps to start the job"
 msgstr "Remplissez tous les champs obligatoires à toutes les étapes pour démarrer le job"
@@ -594,7 +594,7 @@ msgid "Host detail"
 msgstr "Détails de l'hôte"
 
 msgid "Host group"
-msgstr ""
+msgstr "Groupe d'hôtes"
 
 msgid "Host groups"
 msgstr "Groupes d'hôtes"
@@ -618,7 +618,7 @@ msgid "How often the job should occur, in the cron format"
 msgstr "La fréquence d'exécution du job, au format cron"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Identifier of the Host interface for Remote execution"
 msgstr "Identifiant de l'interface de l'hôte pour l'exécution à distance"
@@ -633,7 +633,7 @@ msgid "Import a job template from ERB"
 msgstr "Importe un modèle de job depuis ERB"
 
 msgid "In Progress"
-msgstr ""
+msgstr "En cours"
 
 msgid "In Progress:"
 msgstr "En cours :"
@@ -678,7 +678,7 @@ msgid "Invocation type, one of %s"
 msgstr "Type d'invocation, l'un des suivants %s"
 
 msgid "Iteration limit"
-msgstr ""
+msgstr "Limite de l'itération"
 
 msgid "Job"
 msgstr "Tâche"
@@ -738,7 +738,7 @@ msgid "Job templates"
 msgstr "Modèles de job"
 
 msgid "Job with id '%{id}' was not found"
-msgstr ""
+msgstr "Job avec l'identifiant '%{id} ' n'a pas été trouvé"
 
 msgid "JobTemplate|Locked"
 msgstr "Verrouillé"
@@ -771,7 +771,7 @@ msgid "Last execution succeeded"
 msgstr "La dernière exécution a réussi"
 
 msgid "Last occurrence"
-msgstr ""
+msgstr "Dernière occurrence"
 
 msgid "Latest Jobs"
 msgstr "Derniers jobs"
@@ -789,7 +789,7 @@ msgid "List foreign input sets"
 msgstr "Afficher les jeux de données en entrée externes"
 
 msgid "List hosts belonging to job invocation"
-msgstr ""
+msgstr "Lister les hôtes appartenant à l'invocation de tâche"
 
 msgid "List job invocations"
 msgstr "Affiche les jobs lancés"
@@ -849,19 +849,19 @@ msgid "Next"
 msgstr "Suivant"
 
 msgid "Next occurrence"
-msgstr ""
+msgstr "Prochaine occurrence"
 
 msgid "No (override)"
 msgstr "Non (remplacement)"
 
 msgid "No Results"
-msgstr ""
+msgstr "Aucun résultat"
 
 msgid "No Target Hosts"
 msgstr "Aucun Hôte cible"
 
 msgid "No hosts found"
-msgstr ""
+msgstr "Aucun hôte trouvé."
 
 msgid "No hosts found."
 msgstr "Aucun hôte trouvé."
@@ -870,16 +870,16 @@ msgid "No jobs available"
 msgstr "Aucun job disponible"
 
 msgid "No output for the selected filters"
-msgstr ""
+msgstr "Aucune sortie pour les filtres sélectionnés"
 
 msgid "No results found"
 msgstr "Aucun résultat"
 
 msgid "No template mapped to feature %{feature_name}"
-msgstr "Aucun modèle n'est en relation avec la fonction %%{feature_name}"
+msgstr "Aucun modèle n'est en relation avec la fonction %{feature_name}"
 
 msgid "No user input"
-msgstr ""
+msgstr "Aucune saisie utilisateur"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr "Les entrées n'ont pas toutes des valeurs associées. Les entrées demandant de l'attention : %s"
@@ -894,7 +894,7 @@ msgid "Now"
 msgstr "Maintenant"
 
 msgid "OS"
-msgstr ""
+msgstr "OS"
 
 msgid "On"
 msgstr "Activé"
@@ -903,13 +903,13 @@ msgid "Only one of feature or job_template_id can be specified"
 msgstr "Seule une fonctionnalité ou un job_template_id ne peuvent être spécifiés"
 
 msgid "Open all in new tabs"
-msgstr ""
+msgstr "Ouvrir tout dans de nouveaux onglets"
 
 msgid "Open all invocations in new tabs"
-msgstr ""
+msgstr "Ouvrir toutes les invocations dans de nouveaux onglets"
 
 msgid "Open in new tab"
-msgstr ""
+msgstr "Ouvrir dans un nouvel onglet"
 
 msgid "Opening job invocation form"
 msgstr "Ouverture du formulaire de lancement du job"
@@ -957,13 +957,13 @@ msgid "Please enter a search query"
 msgstr "Veuillez saisir une requête de recherche"
 
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" or \\\"Recurring execution\\\" step to fix the error"
-msgstr ""
+msgstr "Veuillez revenir à l'étape « Planification » - « Exécution future » ou « Exécution récurrente » pour corriger l'erreur"
 
 msgid "Please go back to \\\"Schedule\\\" - \\\"Future execution\\\" step to fix the error"
 msgstr "Veuillez retourner à l'étape \\\"Programme\"\\ - \\\"Exécution future\"\\ pour corriger l'erreur."
 
 msgid "Please make sure that the Smart Proxy is configured correctly for the Pull provider."
-msgstr ""
+msgstr "Veuillez vous assurer que le Smart Proxy est correctement configuré pour le fournisseur Pull."
 
 msgid "Please refine your search."
 msgstr "Veuillez raffiner votre recherche."
@@ -981,7 +981,7 @@ msgid "Please select at least one host group"
 msgstr "Veuillez sélectionner au moins un groupe d'hôtes"
 
 msgid "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs."
-msgstr ""
+msgstr "Les pop-ups sont bloqués par votre navigateur. Veuillez autoriser les pop-ups pour que ce site ouvre toutes les invocations dans de nouveaux onglets."
 
 msgid "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port."
 msgstr "Port à utiliser pour la communication SSH. Le port par défaut est 22. Vous pouvez le remplacer selon les hôtes en définissant un paramètre appelé remote_execution_ssh_port."
@@ -996,7 +996,7 @@ msgid "Preview Hosts"
 msgstr "Prévisualisation des hôtes"
 
 msgid "Preview Template"
-msgstr ""
+msgstr "Modèles de prévisualisation"
 
 msgid "Preview job description"
 msgstr "Prévisualisation de la description du job"
@@ -1098,7 +1098,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr "Le montant répété ne peut correspondre qu’à un nombre positif"
 
 msgid "Repeat until"
-msgstr ""
+msgstr "Répéter jusqu'à"
 
 msgid "Repeats"
 msgstr "Répétitions"
@@ -1122,10 +1122,10 @@ msgid "Rerun on failed hosts"
 msgstr "Relancer sur les hôtes où le job a échoué"
 
 msgid "Rerun on succeeded hosts"
-msgstr ""
+msgstr "Réexécution sur les hôtes ayant réussi"
 
 msgid "Rerun succeeded"
-msgstr ""
+msgstr "La réexécution a réussi"
 
 msgid "Rerun successful"
 msgstr "Réexécution réussie"
@@ -1170,7 +1170,7 @@ msgid "Run job"
 msgstr "Lancer le job"
 
 msgid "Run on selected hosts"
-msgstr "Lancer sur les hôtes sélectionnés"
+msgstr "Exécuter sur des hôtes sélectionnés"
 
 msgid "Running"
 msgstr "Exécution en cours"
@@ -1191,10 +1191,10 @@ msgid "SSH user:"
 msgstr "Utilisateur SSH :"
 
 msgid "STDERR"
-msgstr ""
+msgstr "STDERR"
 
 msgid "STDOUT"
-msgstr ""
+msgstr "STDOUT"
 
 msgid "Schedule"
 msgstr "Programmer"
@@ -1320,7 +1320,7 @@ msgid "Skip to review step"
 msgstr "Passer à l'étape de révision"
 
 msgid "Smart proxy"
-msgstr ""
+msgstr "Smart proxy"
 
 msgid "Snippet"
 msgstr "Snippet"
@@ -1329,7 +1329,7 @@ msgid "Start"
 msgstr "Démarrer"
 
 msgid "Start job"
-msgstr "Démarrer la tâche"
+msgstr "Commencer le travail"
 
 msgid "Started"
 msgstr "Démarré"
@@ -1383,7 +1383,7 @@ msgid "Success"
 msgstr "Réussi"
 
 msgid "Successfully copied to clipboard!"
-msgstr ""
+msgstr "Copié dans le presse-papiers"
 
 msgid "Switch to the new job invocation detail UI"
 msgstr "Basculer vers la nouvelle interface utilisateur détaillée des appels de tâches"
@@ -1398,7 +1398,7 @@ msgid "Systems"
 msgstr "Systèmes"
 
 msgid "Target Hosts"
-msgstr ""
+msgstr "Hôtes cibles"
 
 msgid "Target hosts"
 msgstr "Hôtes cibles"
@@ -1410,7 +1410,7 @@ msgid "Target template ID"
 msgstr "ID de modèle cible"
 
 msgid "Target:"
-msgstr ""
+msgstr "Cible :"
 
 msgid "Target: "
 msgstr "Cible :"
@@ -1422,10 +1422,10 @@ msgid "Task cancelled"
 msgstr "Tâche annulée"
 
 msgid "Task count"
-msgstr ""
+msgstr "Nombre de tâches"
 
 msgid "Task for the host cancelled succesfully"
-msgstr ""
+msgstr "Tâche pour l'hôte annulée avec succès"
 
 msgid "Template ERB"
 msgstr "Modèle ERB"
@@ -1437,7 +1437,7 @@ msgid "Template failed with:"
 msgstr "Le modèle à échoué avec :"
 
 msgid "Template invocation not found"
-msgstr ""
+msgstr "Invocation de modèle non trouvée"
 
 msgid "Template name"
 msgstr "Nom de modèle"
@@ -1446,7 +1446,7 @@ msgid "Template version"
 msgstr "Version de modèle"
 
 msgid "Template with id '%{id}' was not found"
-msgstr "Le modèle avec l'ID '%%{id} ' n'a pas été trouvé"
+msgstr "Le modèle avec l'ID '%{id} ' n'a pas été trouvé"
 
 msgid "Template:"
 msgstr "Modèle :"
@@ -1461,7 +1461,7 @@ msgid "The dynamic query '%{query}' was not resolved yet. The list of hosts to w
 msgstr "La requête dynamique '%{query}' n'a pas encore été résolue. La liste des hôtes actuelle avec lesquels ils pourraient être résolus peut être vue ici %{here}."
 
 msgid "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query."
-msgstr ""
+msgstr "La requête dynamique est toujours en cours de traitement. Vous pouvez{viewTheHosts} ciblé par la requête."
 
 msgid "The execution interface is used for remote execution"
 msgstr "L'interface d'exécution est celle utilisée pour l'exécution distante"
@@ -1482,16 +1482,16 @@ msgid "The job template to use, parameter is required unless feature was specifi
 msgstr "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
 
 msgid "The number of invocations is:"
-msgstr ""
+msgstr "Le nombre d'invocations est :"
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] "Le seul proxy applicable %%{proxy_names} est indisponible"
-msgstr[1] "Tous les proxys %{count} applicables sont hors service. %%{proxy_names} tenté"
-msgstr[2] "Tous les proxys %{count} applicables sont hors service. %%{proxy_names} tenté"
+msgstr[0] "Le seul proxy applicable %{proxy_names} est indisponible"
+msgstr[1] "Tous les proxys %{count} applicables sont hors service. %{proxy_names} tenté"
+msgstr[2] "Tous les proxys %{count} applicables sont hors service. %{proxy_names} tenté"
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
-msgstr "Le modèle %%{template_name} en relation avec la fonction %%{feature_name} n'est pas accessible par l'utilisateur"
+msgstr "Le modèle %{template_name} en relation avec la fonction %{feature_name} n'est pas accessible par l'utilisateur"
 
 msgid "There are no available input fields for the selected template."
 msgstr "Il n’y a pas de champs d’entrées disponibles pour le modèle sélectionné."
@@ -1509,19 +1509,19 @@ msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "Ce modèle est verrouillé. Veuillez le cloner vers un nouveau modèle pour personnaliser ce dernier."
 
 msgid "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}."
-msgstr "Ce modèle est utilisé pour générer la description. Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %%{job_category} and %%{template_name}."
+msgstr "Ce modèle est utilisé pour générer la description. Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %{job_category} and %{template_name}."
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
-msgstr "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %%{job_category} et %%{template_name}."
+msgstr "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %{job_category} et %{template_name}."
 
 msgid "This will open a new tab for each invocation."
-msgstr ""
+msgstr "Cela ouvrira un nouvel onglet pour chaque invocation."
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "Durée en secondes depuis le démarrage sur l'hôte distant après laquelle le job doit être supprimé."
 
 msgid "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs."
-msgstr "Délai en secondes pendant lequel l'hôte doit récupérer une tâche. Si la tâche n'est pas récupérée dans ce délai, elle est annulée. La valeur par défaut est 1 jour. S'applique seulement aux jobs basés sur pull-mqtt."
+msgstr "Délai en secondes pendant lequel l'hôte doit récupérer une tâche. Si la tâche n'est pas récupérée dans ce délai, elle sera annulée. La valeur par défaut est de 1 jour. S'applique uniquement aux tâches basées sur le pull-mqtt."
 
 msgid "Time to pickup"
 msgstr "Heure d’appropriation de tâche(s)"
@@ -1566,7 +1566,7 @@ msgid "Trying to abort the job %s."
 msgstr "J’essaie d'abandonner le job %s ."
 
 msgid "Trying to abort the task for the host"
-msgstr ""
+msgstr "Tentative d'annulation de la tâche pour l'hôte"
 
 msgid "Trying to cancel the job"
 msgstr "Tentative d'annulation du job"
@@ -1575,7 +1575,7 @@ msgid "Trying to cancel the job %s."
 msgstr "J'essaie d'annuler le travail%s ."
 
 msgid "Trying to cancel the task for the host"
-msgstr ""
+msgstr "Tentative d'annulation de la tâche pour l'hôte"
 
 msgid "Type"
 msgstr "Type"
@@ -1602,19 +1602,19 @@ msgid "Unable to remove host from known hosts"
 msgstr "Impossible de retirer l'hôte des hôtes connus"
 
 msgid "Unable to run job"
-msgstr ""
+msgstr "Impossible d'exécuter la tâche"
 
 msgid "Unable to save template. Correct highlighted errors"
 msgstr "Impossible de sauver le modèle. Merci de corriger les erreurs en surbrillance"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 msgid "Unknown execution status"
 msgstr "État d'exécution inconnu"
 
 msgid "Unknown input %{input_name} for template %{template_name}"
-msgstr "Entrée inconnue %%{input_name} pour le modèle %%{template_name}"
+msgstr "Entrée inconnue %{input_name} pour le modèle %{template_name}"
 
 msgid "Unknown remote execution feature %s"
 msgstr "Fonction d'exécution distante inconnue %s"
@@ -1725,7 +1725,7 @@ msgid "You have %s results to display. Showing first %s results"
 msgstr "Vous avez %s résultats à afficher. Afficher les %s premiers résultats"
 
 msgid "You have more results to display. Showing first %s results"
-msgstr ""
+msgstr "Vous avez plus de résultats à afficher. Affichage en premier des résultats %s"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "Ajout d'un jeu d'entrées pour ce modèle pour faire référence à des entrées sur un modèle différent"
@@ -1818,7 +1818,7 @@ msgid "succeeded"
 msgstr "réussi"
 
 msgid "task aborted succesfully"
-msgstr ""
+msgstr "tâche abandonnée avec succès"
 
 msgid "tasks at a time"
 msgstr "tâches à la fois"
@@ -1839,7 +1839,7 @@ msgid "view host names"
 msgstr "afficher les noms d'hôtes"
 
 msgid "view the hosts"
-msgstr ""
+msgstr "voir les hôtes"
 
 msgid "yes"
 msgstr "oui"

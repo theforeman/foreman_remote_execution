@@ -6,7 +6,7 @@
 # 0868a4d1af5275b3f70b0a6dac4c99a4, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: 0868a4d1af5275b3f70b0a6dac4c99a4, 2016\n"
@@ -234,7 +234,7 @@ msgid "Cockpit URL"
 msgstr ""
 
 msgid "Command"
-msgstr ""
+msgstr "Command"
 
 msgid "Concurrency level"
 msgstr ""
@@ -1317,7 +1317,7 @@ msgid "Skip to review step"
 msgstr ""
 
 msgid "Smart proxy"
-msgstr ""
+msgstr "Smart proxy"
 
 msgid "Snippet"
 msgstr ""
