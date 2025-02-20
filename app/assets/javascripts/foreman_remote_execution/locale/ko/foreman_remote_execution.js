@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -36,13 +36,13 @@
         "%{host}에 대한 %{description}"
       ],
       "'Starts at' date must be in the future": [
-        ""
+        "'시작일'은 미래의 날짜여야 합니다."
       ],
       "'Starts before' date must be after 'Starts at' date": [
         "'이전 시작' 날짜는 '시작일' 날짜 이후여야 합니다."
       ],
       "'Starts before' date must be in the future": [
-        ""
+        "'시작 전' 날짜는 미래 날짜여야 합니다."
       ],
       "...and %s more": [
         "...및 %s개 더"
@@ -75,7 +75,7 @@
         "반복되는 작업을 추적하기 위한 특수 레이블입니다. 주어진 목적을 가진 활성 작업은 한 번에 하나만 있을 수 있습니다."
       ],
       "A task for this host has not been started": [
-        ""
+        "이 호스트에 대한 작업이 시작되지 않았습니다."
       ],
       "A user to be used for SSH.": [
         "SSH에 사용되는 사용자입니다."
@@ -90,16 +90,16 @@
         "작업 중단"
       ],
       "Abort task": [
-        ""
+        "작업 중단"
       ],
       "Access denied": [
         "액세스 거부됨"
       ],
       "Action": [
-        ""
+        "동작 "
       ],
       "Actions": [
-        "작업"
+        "동작 "
       ],
       "Active Filters:": [
         "활성 필터:"
@@ -120,13 +120,13 @@
         "모든 필드는 필수 입력입니다."
       ],
       "All statuses": [
-        ""
+        "모든 상태"
       ],
       "Alphabetical": [
         "알파벳순"
       ],
       "An error occurred while fetching the template invocation details.": [
-        ""
+        "템플릿 호출 세부 정보를 가져오는 동안 오류가 발생했습니다."
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "이미 다른 인터페이스가 실행 인터페이스로 설정되어 있습니다. 이 인터페이스를 대신 사용하시겠습니까?"
@@ -138,16 +138,16 @@
         "모든 조직 "
       ],
       "Any location": [
-        ""
+        "모든 위치"
       ],
       "Any organization": [
-        ""
+        "모든 조직"
       ],
       "Apply to": [
         "적용"
       ],
       "Are you sure you want to open all invocations in new tabs?": [
-        ""
+        "모든 호출을 새 탭에서 여시겠습니까?"
       ],
       "At": [
         "At"
@@ -159,7 +159,7 @@
         "시작 대기 중"
       ],
       "Back": [
-        "뒤로"
+        "뒤로 "
       ],
       "Back to Job": [
         "작업으로 돌아가기"
@@ -171,13 +171,13 @@
         "ID %s에 대한 작업 호출을 찾을 수 없습니다."
       ],
       "Cancel": [
-        "취소"
+        "취소 "
       ],
       "Cancel Job": [
         "작업 취소 "
       ],
       "Cancel Task": [
-        ""
+        "작업 취소"
       ],
       "Cancel job invocation": [
         "작업 호출 취소"
@@ -189,7 +189,7 @@
         "취소함"
       ],
       "Cancelled:": [
-        ""
+        "취소됨:"
       ],
       "Cannot resolve hosts without a bookmark or search query": [
         "북마크 또는 검색 쿼리가 없는 호스트를 확인할 수 없습니다."
@@ -225,13 +225,13 @@
         "프로비저닝 템플릿 복제"
       ],
       "Close": [
-        "종료"
+        "종료 "
       ],
       "Cockpit URL": [
         "Cockpit URL"
       ],
       "Command": [
-        ""
+        "명령어"
       ],
       "Concurrency level": [
         "동시 실행 레벨"
@@ -246,7 +246,7 @@
         "동시 실행 레벨 및 기간별 배분 제어"
       ],
       "Copy to clipboard": [
-        ""
+        "클립보드에 복사"
       ],
       "Could not abort the job %s: ${response}": [
         "%s 작업을 중단할 수 없습니다: ${response}"
@@ -300,7 +300,7 @@
         "반복 작업 생성"
       ],
       "Create job": [
-        ""
+        "작업 생성"
       ],
       "Create report": [
         "보고서 생성"
@@ -321,7 +321,7 @@
         "Cronline"
       ],
       "Current iteration": [
-        ""
+        "현재 반복"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         "현재 위치%s은/는 작업의 위치와 다릅니다%s 이 작업은 이전과 다른 호스트에서 실행될 수 있습니다."
@@ -336,13 +336,13 @@
         "현재 조직 %{org_c}은/는 작업의 조직%{org_j}과는 다릅니다."
       ],
       "DEBUG": [
-        ""
+        "DEBUG"
       ],
       "Daily": [
         "매일"
       ],
       "Date must be in the future": [
-        ""
+        "날짜는 미래여야 합니다."
       ],
       "Days": [
         "일"
@@ -375,7 +375,7 @@
         "작업 템플릿 삭제"
       ],
       "Description": [
-        "설명"
+        "설명 "
       ],
       "Description Template": [
         "설명 템플릿"
@@ -507,7 +507,7 @@
         "ERB로 작업 템플릿 내보내기"
       ],
       "Failed": [
-        "실패"
+        "실패 "
       ],
       "Failed hosts": [
         "실패한 호스트"
@@ -540,7 +540,7 @@
         "호스트로 필터링"
       ],
       "Finished": [
-        "완료"
+        "마쳤음"
       ],
       "For Future execution a 'Starts at' date or 'Starts before' date must be selected. Immediate execution can be selected in the previous step.": [
         "미래 실행의 경우 '시작일' 또는 '시작일 이전' 날짜를 선택해야 합니다. 즉시 실행은 이전 단계에서 선택할 수 있습니다."
@@ -579,7 +579,7 @@
         "모든 고급 필드 숨기기"
       ],
       "Host": [
-        "호스트"
+        "호스트 "
       ],
       "Host collections": [
         "호스트 컬렉션"
@@ -588,7 +588,7 @@
         "호스트 정보"
       ],
       "Host group": [
-        ""
+        "호스트 그룹 "
       ],
       "Host groups": [
         "호스트 그룹 "
@@ -612,7 +612,7 @@
         "cron 형식으로 설정하는 작업 발생 빈도입니다."
       ],
       "ID": [
-        ""
+        "ID"
       ],
       "Identifier of the Host interface for Remote execution": [
         "원격 실행을 위한 호스트 인터페이스 식별자"
@@ -627,7 +627,7 @@
         "ERB에서 작업 템플릿 가져오기"
       ],
       "In Progress": [
-        ""
+        "진행 중 "
       ],
       "In Progress:": [
         "진행 중:"
@@ -672,7 +672,7 @@
         "호출 유형(%s 중 하나)"
       ],
       "Iteration limit": [
-        ""
+        "반복 제한"
       ],
       "Job": [
         "Job"
@@ -732,7 +732,7 @@
         "작업 템플릿"
       ],
       "Job with id '%{id}' was not found": [
-        ""
+        "ID '%{id}'가 있는 작업을 찾을 수 없음"
       ],
       "JobTemplate|Locked": [
         "JobTemplate|Locked"
@@ -765,7 +765,7 @@
         "성공한 마지막 실행"
       ],
       "Last occurrence": [
-        ""
+        "마지막 반복"
       ],
       "Latest Jobs": [
         "최신 작업"
@@ -783,7 +783,7 @@
         "외부 입력 세트 나열"
       ],
       "List hosts belonging to job invocation": [
-        ""
+        "작업 호출에 속하는 호스트 목록 나열"
       ],
       "List job invocations": [
         "작업 호출 나열"
@@ -825,10 +825,10 @@
         "북마크를 선택하거나 검색 쿼리를 입력해야 합니다."
       ],
       "N/A": [
-        "N/A"
+        "해당 없음 "
       ],
       "Name": [
-        "이름"
+        "이름 "
       ],
       "Never": [
         "사용 안 함"
@@ -843,19 +843,19 @@
         "다음"
       ],
       "Next occurrence": [
-        ""
+        "다음 반복"
       ],
       "No (override)": [
         "아니요 (덮어쓰기)"
       ],
       "No Results": [
-        ""
+        "결과 없음"
       ],
       "No Target Hosts": [
         "대상 호스트 없음"
       ],
       "No hosts found": [
-        ""
+        "호스트를 찾을 수 없습니다"
       ],
       "No hosts found.": [
         "호스트를 찾을 수 없습니다."
@@ -864,7 +864,7 @@
         "사용 가능한 작업이 없음"
       ],
       "No output for the selected filters": [
-        ""
+        "선택한 필터에 대한 출력이 없음"
       ],
       "No results found": [
         "검색 결과가 없습니다"
@@ -873,7 +873,7 @@
         "%{feature_name} 기능에 매핑된 템플릿이 없습니다."
       ],
       "No user input": [
-        ""
+        "사용자 입력 없음"
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "값이 없는 필수 입력이 있습니다. 누락된 입력: %s"
@@ -888,7 +888,7 @@
         "지금"
       ],
       "OS": [
-        ""
+        "OS"
       ],
       "On": [
         "켜기"
@@ -897,13 +897,13 @@
         "feature 또는 job_template_id 중 하나만 지정할 수 있습니다."
       ],
       "Open all in new tabs": [
-        ""
+        "새 탭에서 모두 열기"
       ],
       "Open all invocations in new tabs": [
-        ""
+        "새 탭에서 모든 호출을 엽니다."
       ],
       "Open in new tab": [
-        ""
+        "새 탭에서 열기"
       ],
       "Opening job invocation form": [
         "작업 호출 양식 열기"
@@ -951,13 +951,13 @@
         "검색어를 입력해주세요"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" or \\\\\\\"Recurring execution\\\\\\\" step to fix the error": [
-        ""
+        "오류를 해결하려면 \\\\\\\"스케줄\\\\\\\" - \\\\\\\"향후 실행\\\\\\\" 또는 \\\\\\\"반복 실행\\\\\\\" 단계로 돌아가십시오."
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
         "오류를 수정하려면 \\\\\\\"일정\\\\\\\" - \\\\\\\"향후 실행\\\\\\\" 단계로 돌아가세요."
       ],
       "Please make sure that the Smart Proxy is configured correctly for the Pull provider.": [
-        ""
+        "Pull 공급자에 대해 Smart Proxy가 올바르게 구성되어 있는지 확인하십시오."
       ],
       "Please refine your search.": [
         "검색을 구체화해 주세요."
@@ -975,7 +975,7 @@
         "최소한 하나의 호스트 그룹을 선택하세요"
       ],
       "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs.": [
-        ""
+        "팝업은 브라우저에서 차단됩니다. 이 사이트의 팝업이 새 탭에서 모든 호출을 열 수 있도록 허용하십시오."
       ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         "SSH 통신에 사용할 포트. 기본 포트 22. remote_execution_ssh_port라는 매개변수를 설정하여 호스트별로 재정의할 수 있습니다."
@@ -990,7 +990,7 @@
         "호스트 미리보기"
       ],
       "Preview Template": [
-        ""
+        "템플릿 프리뷰"
       ],
       "Preview job description": [
         "작업 설명 미리보기"
@@ -1092,7 +1092,7 @@
         "반복 횟수는 양수만 가능합니다."
       ],
       "Repeat until": [
-        ""
+        "반복 기한"
       ],
       "Repeats": [
         "반복"
@@ -1116,10 +1116,10 @@
         "실패한 호스트에서 재실행"
       ],
       "Rerun on succeeded hosts": [
-        ""
+        "성공한 호스트에서 재실행"
       ],
       "Rerun succeeded": [
-        ""
+        "재실행 성공"
       ],
       "Rerun successful": [
         "재실행 성공"
@@ -1167,7 +1167,7 @@
         "선택한 호스트에서 실행"
       ],
       "Running": [
-        "실행 중 "
+        "실행 중"
       ],
       "SSH Port": [
         "SSH 포트"
@@ -1185,10 +1185,10 @@
         "SSH 사용자:"
       ],
       "STDERR": [
-        ""
+        "STDERR"
       ],
       "STDOUT": [
-        ""
+        "STDOUT"
       ],
       "Schedule": [
         "스케줄 "
@@ -1314,7 +1314,7 @@
         "검토 단계로 건너뛰기"
       ],
       "Smart proxy": [
-        ""
+        "스마트 프록시"
       ],
       "Snippet": [
         "조각 모음 "
@@ -1353,10 +1353,10 @@
         "정적 쿼리"
       ],
       "Status": [
-        "상태"
+        "상태 "
       ],
       "Submit": [
-        "제출"
+        "보내기"
       ],
       "Subscribe to all my jobs": [
         "내 모든 작업 구독하기"
@@ -1374,10 +1374,10 @@
         "성공:"
       ],
       "Success": [
-        "성공"
+        "성공 "
       ],
       "Successfully copied to clipboard!": [
-        ""
+        "클립보드에 성공적으로 복사되었습니다!"
       ],
       "Switch to the new job invocation detail UI": [
         "새로운 작업 호출 세부 정보 UI로 전환"
@@ -1392,7 +1392,7 @@
         "시스템"
       ],
       "Target Hosts": [
-        ""
+        "대상 호스트"
       ],
       "Target hosts": [
         "대상 호스트"
@@ -1404,22 +1404,22 @@
         "대상 템플릿 ID"
       ],
       "Target:": [
-        ""
+        "대상:"
       ],
       "Target: ": [
         "대상: "
       ],
       "Task Details": [
-        "작업 자세히"
+        "작업 상세 정보 "
       ],
       "Task cancelled": [
         "작업이 취소되었습니다"
       ],
       "Task count": [
-        ""
+        "태스크 수"
       ],
       "Task for the host cancelled succesfully": [
-        ""
+        "호스트의 작업이 취소되었습니다"
       ],
       "Template ERB": [
         "템플릿 ERB"
@@ -1431,7 +1431,7 @@
         "템플릿이 실패했습니다:"
       ],
       "Template invocation not found": [
-        ""
+        "템플릿 호출을 찾을 수 없음"
       ],
       "Template name": [
         "템플릿 이름"
@@ -1455,7 +1455,7 @@
         "동적 쿼리 '%{query}'이(가) 아직 확인되지 않았습니다. 확인할 대상 호스트의 목록을 %{here}에서 볼 수 있습니다."
       ],
       "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
-        ""
+        "동적 쿼리가 계속 처리되고 있습니다. 쿼리에 의해 {viewTheHosts}가 대상이 될 수 있습니다."
       ],
       "The execution interface is used for remote execution": [
         "원격 실행에 사용되는 실행 인터페이스입니다."
@@ -1476,7 +1476,7 @@
         "사용할 작업 템플릿, 기능이 지정되지 않은 경우 매개변수가 필요합니다."
       ],
       "The number of invocations is:": [
-        ""
+        "호출 횟수는 다음과 같습니다:"
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "적용 가능한 유일한 프록시인 %{proxy_names}이(가) 작동하지 않습니다."
@@ -1506,7 +1506,7 @@
         "이 템플릿은 설명을 생성하는 데 사용됩니다.<br/> 입력 값은 %{package} 구문을 사용하여 사용할 수 있습니다.<br/> 또한 %{job_category} 및 %{template_name}을 사용하여 작업 범주와 템플릿 <br/> 이름을 포함할 수도 있습니다."
       ],
       "This will open a new tab for each invocation.": [
-        ""
+        "그러면 각 호출에 대한 새 탭이 열립니다."
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "원격 호스트에서 작업이 시작된 후 종료되어야 하는 시간(초)입니다."
@@ -1557,7 +1557,7 @@
         "작업 %s을 중단하려고 합니다"
       ],
       "Trying to abort the task for the host": [
-        ""
+        "호스트에 대한 작업 중단 시도"
       ],
       "Trying to cancel the job": [
         "작업을 취소하려고 합니다"
@@ -1566,10 +1566,10 @@
         "작업 %s을 취소하려고 합니다"
       ],
       "Trying to cancel the task for the host": [
-        ""
+        "호스트에 대한 작업 취소 시도"
       ],
       "Type": [
-        "형태"
+        "유형 "
       ],
       "Type has impact on when is the query evaluated to hosts.": [
         "유형은 쿼리가 호스트로 평가되는 시기에 영향을 미칩니다."
@@ -1593,13 +1593,13 @@
         "알려진 호스트에서 호스트를 제거할 수 없습니다."
       ],
       "Unable to run job": [
-        ""
+        "작업을 실행할 수 없음"
       ],
       "Unable to save template. Correct highlighted errors": [
         "템플릿을 저장할 수 없습니다. 강조된 오류를 수정합니다."
       ],
       "Unknown": [
-        ""
+        "알 수 없음 "
       ],
       "Unknown execution status": [
         "알 수 없는 실행 상태"
@@ -1713,10 +1713,10 @@
         "이 작업을 수행할 권한이 없습니다."
       ],
       "You have %s results to display. Showing first %s results": [
-        "표시할 결과과 %s개 있습니다. 첫 번째 %s 결과 표시"
+        "표시할 결과과 %s개 있습니다. 처음 %s 개의 결과 표시"
       ],
       "You have more results to display. Showing first %s results": [
-        ""
+        "더 많은 결과가 표시됩니다. 처음 %s개의 결과 표시"
       ],
       "add an input set for this template to reference a different template inputs": [
         "이 템플릿에서 다른 템플릿 입력을 참조하기 위한 입력 세트를 추가합니다."
@@ -1746,7 +1746,7 @@
         "실패함"
       ],
       "here": [
-        "여기 "
+        "여기"
       ],
       "host already has an execution interface": [
         "호스트에 실행 인터페이스가 이미 있습니다."
@@ -1809,7 +1809,7 @@
         "성공"
       ],
       "task aborted succesfully": [
-        ""
+        "작업이 일시 중지됨"
       ],
       "tasks at a time": [
         "한 번에 작업"
@@ -1830,7 +1830,7 @@
         "호스트 이름 보기"
       ],
       "view the hosts": [
-        ""
+        "호스트 보기"
       ],
       "yes": [
         "예"

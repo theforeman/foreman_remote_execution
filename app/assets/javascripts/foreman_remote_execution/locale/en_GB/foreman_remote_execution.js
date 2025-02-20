@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "0868a4d1af5275b3f70b0a6dac4c99a4, 2016",
@@ -232,7 +232,7 @@
         ""
       ],
       "Command": [
-        ""
+        "Command"
       ],
       "Concurrency level": [
         ""
@@ -1315,7 +1315,7 @@
         ""
       ],
       "Smart proxy": [
-        ""
+        "Smart proxy"
       ],
       "Snippet": [
         ""

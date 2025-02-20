@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -99,7 +99,7 @@ msgid "Access denied"
 msgstr "Acceso denegado"
 
 msgid "Action"
-msgstr ""
+msgstr "Acció"
 
 msgid "Actions"
 msgstr "Acciones"
@@ -234,7 +234,7 @@ msgid "Cockpit URL"
 msgstr "URL de Cockpit"
 
 msgid "Command"
-msgstr ""
+msgstr "Comando"
 
 msgid "Concurrency level"
 msgstr "Nivel de concurrencia"
@@ -324,7 +324,7 @@ msgid "Cronline"
 msgstr "Cronline"
 
 msgid "Current iteration"
-msgstr ""
+msgstr "Iteración actual"
 
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr ""
@@ -675,7 +675,7 @@ msgid "Invocation type, one of %s"
 msgstr "Tipo de invocación, una de %s"
 
 msgid "Iteration limit"
-msgstr ""
+msgstr "Límite de iteración"
 
 msgid "Job"
 msgstr "Tarea"
@@ -768,7 +768,7 @@ msgid "Last execution succeeded"
 msgstr "La última ejecución se realizó correctamente."
 
 msgid "Last occurrence"
-msgstr ""
+msgstr "Última ocurrencia"
 
 msgid "Latest Jobs"
 msgstr "Últimos empleos"
@@ -846,13 +846,13 @@ msgid "Next"
 msgstr "Siguiente"
 
 msgid "Next occurrence"
-msgstr ""
+msgstr "Siguiente ocurrencia"
 
 msgid "No (override)"
 msgstr "No (anulación)"
 
 msgid "No Results"
-msgstr ""
+msgstr "No hay resultados"
 
 msgid "No Target Hosts"
 msgstr "No hay hosts de destino"
@@ -1095,7 +1095,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr "El importe de la repetición sólo puede ser un número positivo"
 
 msgid "Repeat until"
-msgstr ""
+msgstr "Repetir hasta"
 
 msgid "Repeats"
 msgstr "Se repite"
@@ -1419,7 +1419,7 @@ msgid "Task cancelled"
 msgstr "Tarea cancelada"
 
 msgid "Task count"
-msgstr ""
+msgstr "Conteo de tareas"
 
 msgid "Task for the host cancelled succesfully"
 msgstr ""
@@ -1605,7 +1605,7 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr "No se puede guardar plantilla. Corrija los errores resaltados."
 
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 msgid "Unknown execution status"
 msgstr "Estado de ejecución desconocido"

@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -140,10 +140,10 @@ msgid "Any Organization"
 msgstr "ნებისმიერი ორგანიზაცია"
 
 msgid "Any location"
-msgstr ""
+msgstr "ნებისმიერი მდებარეობა"
 
 msgid "Any organization"
-msgstr ""
+msgstr "ნებისმიერი ორგანიზაცია"
 
 msgid "Apply to"
 msgstr "გადატარება"
@@ -248,7 +248,7 @@ msgid "Control concurrency level and distribution over time"
 msgstr "ერთდროულობის დონისა და დროში განაწილების მართვა"
 
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "ბუფერში კოპირება"
 
 msgid "Could not abort the job %s: ${response}"
 msgstr ""
@@ -323,7 +323,7 @@ msgid "Cronline"
 msgstr "Cron-ის ხაზი"
 
 msgid "Current iteration"
-msgstr ""
+msgstr "მიმდინარე იტერაცია"
 
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr ""
@@ -614,7 +614,7 @@ msgid "How often the job should occur, in the cron format"
 msgstr "რამდენ ხანში ერთხელ გაეშვება ეს დავალება. cron-ის ფორმატში"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Identifier of the Host interface for Remote execution"
 msgstr "ჰოსტის ინტერფეისის იდენტიფიკატორი დაშორებული გაშვებისთვის"
@@ -674,7 +674,7 @@ msgid "Invocation type, one of %s"
 msgstr "ჩაწოდების ტიპი. ერთერთი %s-დან"
 
 msgid "Iteration limit"
-msgstr ""
+msgstr "იტერაციის ლიმიტი"
 
 msgid "Job"
 msgstr "დავალება"
@@ -767,7 +767,7 @@ msgid "Last execution succeeded"
 msgstr "ბოლო წარმატებული შესრულება"
 
 msgid "Last occurrence"
-msgstr ""
+msgstr "წინა შედეგი"
 
 msgid "Latest Jobs"
 msgstr "უკანასკნელი დავალებები"
@@ -845,13 +845,13 @@ msgid "Next"
 msgstr "შემდეგი"
 
 msgid "Next occurrence"
-msgstr ""
+msgstr "შემდეგი შედეგი"
 
 msgid "No (override)"
 msgstr "არა (გადაფარვა)"
 
 msgid "No Results"
-msgstr ""
+msgstr "შედეგების გარეშე"
 
 msgid "No Target Hosts"
 msgstr "სამიზნე ჰოსტების გარეშე"
@@ -1094,7 +1094,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr "გამეორების რაოდენობა მხოლოდ დადებით რიცხვი შეიძლება იყოს"
 
 msgid "Repeat until"
-msgstr ""
+msgstr "გამეორება, სანამ"
 
 msgid "Repeats"
 msgstr "გამეორება"
@@ -1316,7 +1316,7 @@ msgid "Skip to review step"
 msgstr "მიმოხილვის ნაბიჯის გამოტოვება"
 
 msgid "Smart proxy"
-msgstr ""
+msgstr "ჭკვიანი პროქსი"
 
 msgid "Snippet"
 msgstr "ნაწყვეტი"
@@ -1418,7 +1418,7 @@ msgid "Task cancelled"
 msgstr "ამოცანა გაუქმდა"
 
 msgid "Task count"
-msgstr ""
+msgstr "ამოცანების რიცხვი"
 
 msgid "Task for the host cancelled succesfully"
 msgstr ""

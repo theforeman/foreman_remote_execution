@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -232,7 +232,7 @@
         ""
       ],
       "Command": [
-        ""
+        "指令"
       ],
       "Concurrency level": [
         "同步等級"
@@ -322,7 +322,7 @@
         ""
       ],
       "Current iteration": [
-        ""
+        "現有重述"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
@@ -673,7 +673,7 @@
         "祈願類型，%s 之一"
       ],
       "Iteration limit": [
-        ""
+        "重述限制"
       ],
       "Job": [
         "工作"
@@ -766,7 +766,7 @@
         "最後的執行成功"
       ],
       "Last occurrence": [
-        ""
+        "最後一次發生"
       ],
       "Latest Jobs": [
         ""
@@ -844,7 +844,7 @@
         "下一步"
       ],
       "Next occurrence": [
-        ""
+        "下次發生"
       ],
       "No (override)": [
         ""
@@ -1093,7 +1093,7 @@
         ""
       ],
       "Repeat until": [
-        ""
+        "重複直到"
       ],
       "Repeats": [
         "重複"
@@ -1315,7 +1315,7 @@
         ""
       ],
       "Smart proxy": [
-        ""
+        "智慧代理"
       ],
       "Snippet": [
         "程式碼片段"
@@ -1417,7 +1417,7 @@
         ""
       ],
       "Task count": [
-        ""
+        "工作數量"
       ],
       "Task for the host cancelled succesfully": [
         ""
@@ -1601,7 +1601,7 @@
         ""
       ],
       "Unknown": [
-        ""
+        "不明"
       ],
       "Unknown execution status": [
         "未知的執行狀態"

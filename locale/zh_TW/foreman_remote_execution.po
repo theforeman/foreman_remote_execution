@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -233,7 +233,7 @@ msgid "Cockpit URL"
 msgstr ""
 
 msgid "Command"
-msgstr ""
+msgstr "指令"
 
 msgid "Concurrency level"
 msgstr "同步等級"
@@ -323,7 +323,7 @@ msgid "Cronline"
 msgstr ""
 
 msgid "Current iteration"
-msgstr ""
+msgstr "現有重述"
 
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr ""
@@ -674,7 +674,7 @@ msgid "Invocation type, one of %s"
 msgstr "祈願類型，%s 之一"
 
 msgid "Iteration limit"
-msgstr ""
+msgstr "重述限制"
 
 msgid "Job"
 msgstr "工作"
@@ -767,7 +767,7 @@ msgid "Last execution succeeded"
 msgstr "最後的執行成功"
 
 msgid "Last occurrence"
-msgstr ""
+msgstr "最後一次發生"
 
 msgid "Latest Jobs"
 msgstr ""
@@ -845,7 +845,7 @@ msgid "Next"
 msgstr "下一步"
 
 msgid "Next occurrence"
-msgstr ""
+msgstr "下次發生"
 
 msgid "No (override)"
 msgstr ""
@@ -1094,7 +1094,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr ""
 
 msgid "Repeat until"
-msgstr ""
+msgstr "重複直到"
 
 msgid "Repeats"
 msgstr "重複"
@@ -1316,7 +1316,7 @@ msgid "Skip to review step"
 msgstr ""
 
 msgid "Smart proxy"
-msgstr ""
+msgstr "智慧代理"
 
 msgid "Snippet"
 msgstr "程式碼片段"
@@ -1418,7 +1418,7 @@ msgid "Task cancelled"
 msgstr ""
 
 msgid "Task count"
-msgstr ""
+msgstr "工作數量"
 
 msgid "Task for the host cancelled succesfully"
 msgstr ""
@@ -1603,7 +1603,7 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr ""
 
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 msgid "Unknown execution status"
 msgstr "未知的執行狀態"

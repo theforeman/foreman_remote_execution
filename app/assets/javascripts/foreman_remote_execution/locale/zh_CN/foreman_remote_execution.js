@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2024",
@@ -36,13 +36,13 @@
         "%{host} 中的 %{host}"
       ],
       "'Starts at' date must be in the future": [
-        ""
+        "'Starts at' 日期需要是未来的日期"
       ],
       "'Starts before' date must be after 'Starts at' date": [
         "'Starts before' 的日期需要在 'Starts at' 日期之后"
       ],
       "'Starts before' date must be in the future": [
-        ""
+        "'Starts before' 日期需要是一个未来的日期"
       ],
       "...and %s more": [
         "...和 %s 个更多"
@@ -57,10 +57,10 @@
         "要从外部模板中包含的输入名称的列表，以逗号分隔。"
       ],
       "A job '%{job_name}' has %{status} at %{time}": [
-        "作业 '%%{job_name}' 的 %%{status}（在 %%{time}）"
+        "作业 '%{job_name}' 为 %%{status}（在 %{time}）"
       ],
       "A job '%{subject}' has failed": [
-        "作业 '%%{subject}' 已失败"
+        "作业 '%{subject}' 已失败"
       ],
       "A job '%{subject}' has finished successfully": [
         "作业 '%{subject}' 已成功完成"
@@ -75,7 +75,7 @@
         "用于跟踪周期性作业的特殊标签。一次只能有一个具有给定目的的活跃作业。"
       ],
       "A task for this host has not been started": [
-        ""
+        "此主机的一个任务尚未启动"
       ],
       "A user to be used for SSH.": [
         "用于 SSH 的用户。"
@@ -90,13 +90,13 @@
         "终止作业"
       ],
       "Abort task": [
-        ""
+        "中止任务"
       ],
       "Access denied": [
         "拒绝访问"
       ],
       "Action": [
-        ""
+        "操作"
       ],
       "Actions": [
         "操作"
@@ -120,13 +120,13 @@
         "各个项都需要。"
       ],
       "All statuses": [
-        ""
+        "所有状态"
       ],
       "Alphabetical": [
         "按字母"
       ],
       "An error occurred while fetching the template invocation details.": [
-        ""
+        "在获取模板调用详情时出错。"
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "已经将另一个接口设置为执行。您确定要改用这个吗？"
@@ -138,16 +138,16 @@
         "任意机构"
       ],
       "Any location": [
-        ""
+        "任意位置"
       ],
       "Any organization": [
-        ""
+        "任意机构"
       ],
       "Apply to": [
         "应用到"
       ],
       "Are you sure you want to open all invocations in new tabs?": [
-        ""
+        "您确定要在新标签页中打开所有调用吗？"
       ],
       "At": [
         "位于"
@@ -177,7 +177,7 @@
         "取消作业"
       ],
       "Cancel Task": [
-        ""
+        "取消任务"
       ],
       "Cancel job invocation": [
         "取消作业调用"
@@ -189,7 +189,7 @@
         "已取消"
       ],
       "Cancelled:": [
-        ""
+        "取消："
       ],
       "Cannot resolve hosts without a bookmark or search query": [
         "无法解析没有书签或搜索查询的主机"
@@ -210,7 +210,7 @@
         "选择在作业调用表单中预先选择的作业模板"
       ],
       "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}": [
-        "在外部输入设置中发现了循环的依赖关系 '%%{template}' -> '%%{target_template}'。模板堆栈：%%{templates_stack}"
+        "在外部输入设置中发现了循环的依赖关系 '%{template}' -> '%{target_template}'。模板堆栈：%{templates_stack}"
       ],
       "Cleanup working directories": [
         "清理工作目录"
@@ -231,7 +231,7 @@
         "Cockpit URL"
       ],
       "Command": [
-        ""
+        "命令"
       ],
       "Concurrency level": [
         "并发等級"
@@ -246,7 +246,7 @@
         "控制并发级别和时间分布"
       ],
       "Copy to clipboard": [
-        ""
+        "复制到剪贴板"
       ],
       "Could not abort the job %s: ${response}": [
         "无法中止作业 %s: ${response}"
@@ -276,7 +276,7 @@
         "无法重新运行作业 %{id}，因为它的模板没有找到"
       ],
       "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings": [
-        "无法为 %%{provider} 作业使用任何代理。考虑在设置中配置 %%{global_proxy} 和 %%{fallback_proxy}"
+        "无法为 %{provider} 作业使用任何代理。考虑在设置中配置 %{global_proxy} 和 %{fallback_proxy}"
       ],
       "Could not use any template used in the job invocation": [
         "无法使用作业调用中使用的任何模板"
@@ -300,7 +300,7 @@
         "创建一个重复运行的作业"
       ],
       "Create job": [
-        ""
+        "创建作业"
       ],
       "Create report": [
         "创建报告"
@@ -321,28 +321,28 @@
         "Cronline"
       ],
       "Current iteration": [
-        ""
+        "現有重述"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         "当前位置 %s 与作业的位置 %s 不同。此作业可能会在与以前不同的主机上运行。"
       ],
       "Current location %{loc_c} is different from job's location %{loc_j}.": [
-        "当前位置 ％%{loc_c} 与作业位置 ％%{loc_j} 不同。"
+        "当前位置 %{loc_c} 与作业的位置 %{loc_j} 不同。"
       ],
       "Current organization %s is different from job's organization %s. This job may run on different hosts than before.": [
         "当前机构 %s 与作业的机构 %s 不同。此作业可能会在与以前不同的主机上运行。"
       ],
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
-        "当前机构 ％%{org_c} 与作业机构 ％%{org_j} 不同。"
+        "当前机构 %{org_c} 与作业的机构 %{org_j} 不同。"
       ],
       "DEBUG": [
-        ""
+        "DEBUG"
       ],
       "Daily": [
         "每日"
       ],
       "Date must be in the future": [
-        ""
+        "日期必须是未来的日期"
       ],
       "Days": [
         "天"
@@ -426,7 +426,7 @@
         "有效的用户"
       ],
       "Effective user method \\\"%{current_value}\\\" is not one of %{valid_methods}": [
-        "有效的用户方法 \\\"%%{current_value}\\\" 不是 %%{valid_methods} 之一"
+        "有效的用户方法 \\\"%{current_value}\\\" 不是 %{valid_methods} 之一"
       ],
       "Effective user options": [
         "有效的用户选项"
@@ -522,7 +522,7 @@
         "退回至任何代理服务器"
       ],
       "Feature input %{input_name} not defined in template %{template_name}": [
-        "功能输入％%{input_name} 未在模板％%{template_name} 中定义"
+        "功能输入 %{input_name} 未在模板 %{template_name} 中定义"
       ],
       "Fill all required fields in all the steps": [
         "在所有步骤中填写所有必填字段"
@@ -588,7 +588,7 @@
         "主机详情"
       ],
       "Host group": [
-        ""
+        "主机组"
       ],
       "Host groups": [
         "主机组"
@@ -612,7 +612,7 @@
         "作业运行的频率，使用 cron 格式"
       ],
       "ID": [
-        ""
+        "ID"
       ],
       "Identifier of the Host interface for Remote execution": [
         "主机接口的标识符，用于远程执行"
@@ -627,7 +627,7 @@
         "从 ERB 导入作业模版"
       ],
       "In Progress": [
-        ""
+        "进行中"
       ],
       "In Progress:": [
         "进行中："
@@ -672,7 +672,7 @@
         "调用类型，%s 其中之一"
       ],
       "Iteration limit": [
-        ""
+        "重述限制"
       ],
       "Job": [
         "任务"
@@ -732,7 +732,7 @@
         "作业模板"
       ],
       "Job with id '%{id}' was not found": [
-        ""
+        "未找到 ID 为 '%{id}' 的作业"
       ],
       "JobTemplate|Locked": [
         "JobTemplate|Locked"
@@ -765,7 +765,7 @@
         "最后成功的执行"
       ],
       "Last occurrence": [
-        ""
+        "最后一次发生"
       ],
       "Latest Jobs": [
         "最新的作业"
@@ -783,7 +783,7 @@
         "列出外部输入集"
       ],
       "List hosts belonging to job invocation": [
-        ""
+        "列出属于作业调用的主机"
       ],
       "List job invocations": [
         "列出作业调用"
@@ -843,19 +843,19 @@
         "下一个"
       ],
       "Next occurrence": [
-        ""
+        "下次发生"
       ],
       "No (override)": [
         "否（覆盖）"
       ],
       "No Results": [
-        ""
+        "没有结果"
       ],
       "No Target Hosts": [
         "没有目标主机"
       ],
       "No hosts found": [
-        ""
+        "没有找到主机"
       ],
       "No hosts found.": [
         "找不到主机。"
@@ -864,16 +864,16 @@
         "没有可用的作业"
       ],
       "No output for the selected filters": [
-        ""
+        "所选过滤没有输出"
       ],
       "No results found": [
         "没有找到结果"
       ],
       "No template mapped to feature %{feature_name}": [
-        "没有映射到功能 %%{feature_name} 的模板"
+        "没有映射到功能 %{feature_name} 的模板"
       ],
       "No user input": [
-        ""
+        "没有用户输入"
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "並不是所有需要的輸入都有值。缺少的输入：%s"
@@ -888,7 +888,7 @@
         "现在"
       ],
       "OS": [
-        ""
+        "OS"
       ],
       "On": [
         "上"
@@ -897,13 +897,13 @@
         "只能指定一个功能或 job_template_id"
       ],
       "Open all in new tabs": [
-        ""
+        "在新标签页中打开所有"
       ],
       "Open all invocations in new tabs": [
-        ""
+        "在新标签页中打开所有调用"
       ],
       "Open in new tab": [
-        ""
+        "在新标签页中打开"
       ],
       "Opening job invocation form": [
         "打开作业调用表单"
@@ -951,13 +951,13 @@
         "请输入搜索查询"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" or \\\\\\\"Recurring execution\\\\\\\" step to fix the error": [
-        ""
+        "请转至 \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" 或 \\\\\\\"Recurring execution\\\\\\\" 步骤来修复错误"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
         "请返回 \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" 步骤来修复错误"
       ],
       "Please make sure that the Smart Proxy is configured correctly for the Pull provider.": [
-        ""
+        "请确定为 Pull 供应商正确配置了 Smart Proxy。"
       ],
       "Please refine your search.": [
         "请重新调整您的搜索。"
@@ -975,7 +975,7 @@
         "请至少选择一个主机组"
       ],
       "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs.": [
-        ""
+        "您的浏览器阻止了弹出窗口。请允许这个网站的弹出窗口在新的标签页中打开所有调用。"
       ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         "要用于 SSH 通信的端口。默认端口 22。您可以通过设置名为 remote_execution_ssh_port 的参数来按主机进行覆盖。"
@@ -990,7 +990,7 @@
         "预览主机"
       ],
       "Preview Template": [
-        ""
+        "预览模板"
       ],
       "Preview job description": [
         "预览作业描述"
@@ -1092,7 +1092,7 @@
         "重复数量只能是一个正数"
       ],
       "Repeat until": [
-        ""
+        "重复直到"
       ],
       "Repeats": [
         "重复"
@@ -1116,10 +1116,10 @@
         "在失败的主机上重新运行"
       ],
       "Rerun on succeeded hosts": [
-        ""
+        "在成功的主机上重新运行"
       ],
       "Rerun succeeded": [
-        ""
+        "重新运行成功"
       ],
       "Rerun successful": [
         "重新运行成功"
@@ -1185,10 +1185,10 @@
         "SSH 用户："
       ],
       "STDERR": [
-        ""
+        "STDERR"
       ],
       "STDOUT": [
-        ""
+        "STDOUT"
       ],
       "Schedule": [
         "调度"
@@ -1314,7 +1314,7 @@
         "跳过检查步骤"
       ],
       "Smart proxy": [
-        ""
+        "智能代理"
       ],
       "Snippet": [
         "程序代码片段"
@@ -1377,7 +1377,7 @@
         "成功"
       ],
       "Successfully copied to clipboard!": [
-        ""
+        "成功复制到剪贴板！"
       ],
       "Switch to the new job invocation detail UI": [
         "切换到新作业调用详情 UI"
@@ -1392,7 +1392,7 @@
         "系统"
       ],
       "Target Hosts": [
-        ""
+        "目标主机"
       ],
       "Target hosts": [
         "目标主机"
@@ -1404,7 +1404,7 @@
         "目标模板 ID"
       ],
       "Target:": [
-        ""
+        "目标："
       ],
       "Target: ": [
         "目标："
@@ -1416,10 +1416,10 @@
         "任务被取消"
       ],
       "Task count": [
-        ""
+        "任务计数"
       ],
       "Task for the host cancelled succesfully": [
-        ""
+        "主机任务已成功取消"
       ],
       "Template ERB": [
         "模版 ERB"
@@ -1431,7 +1431,7 @@
         "模板失败并带有："
       ],
       "Template invocation not found": [
-        ""
+        "未找到模板调用"
       ],
       "Template name": [
         "模板名称"
@@ -1455,7 +1455,7 @@
         "动态查询 '%{query}' 还没有解析。现在应该解析的主机列表可在 %{here} 查看。"
       ],
       "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
-        ""
+        "动态查询仍在处理中。您可以 {viewTheHosts} 查询的目标。"
       ],
       "The execution interface is used for remote execution": [
         "用于远程执行的执行接口"
@@ -1476,10 +1476,10 @@
         "要使用的任务模板，除非已指定功能，否则参数是必需的"
       ],
       "The number of invocations is:": [
-        ""
+        "调用数量为："
       ],
       "The only applicable proxy %{proxy_names} is down": [
-        "唯一可用的代理 %%{proxy_names} 已停机"
+        "唯一可用的代理 %{proxy_names} 已停机"
       ],
       "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user": [
         "用户无法访问映射到功能 %{feature_name} 的模板 %{template_name}"
@@ -1500,13 +1500,13 @@
         "此模板已锁定。请将它克隆到一个新的模板进行定制。"
       ],
       "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}.": [
-        "这个模块用来生成描述。输入值可以使用语法 %%{package}。您可以使用 %%{job_category} 和 %%{template_name} 来包括作业类型和模板名称。"
+        "这个模块用来生成描述。输入值可以使用语法 %{package}。您可以使用 %{job_category} 和 %{template_name} 来包括作业类型和模板名称。"
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "这个模块用来生成描述。<br/>输入值可以使用语法%%{package}。<br/>您可以使用 <br/> %{job_category}和 %{template_name} 来包括作业类型和模板名称。"
       ],
       "This will open a new tab for each invocation.": [
-        ""
+        "这会为每个调用打开一个新标签页。"
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "在远程主机上开始后，以秒计算时间，之后结束作业。"
@@ -1557,7 +1557,7 @@
         "尝试中止作业 %s。"
       ],
       "Trying to abort the task for the host": [
-        ""
+        "试图中止主机的任务"
       ],
       "Trying to cancel the job": [
         "尝试取消作业"
@@ -1566,7 +1566,7 @@
         "尝试取消作业 %s。"
       ],
       "Trying to cancel the task for the host": [
-        ""
+        "尝试取消主机的任务"
       ],
       "Type": [
         "类型"
@@ -1593,19 +1593,19 @@
         "无法从已知主机中删除主机"
       ],
       "Unable to run job": [
-        ""
+        "无法运行作业"
       ],
       "Unable to save template. Correct highlighted errors": [
         "无法保存模版。纠正高亮显示的错误"
       ],
       "Unknown": [
-        ""
+        "未知"
       ],
       "Unknown execution status": [
         "未知的执行状态"
       ],
       "Unknown input %{input_name} for template %{template_name}": [
-        "未知输入％%{input_name}模板用于模板％%{template_name}"
+        "未知的输入%{input_name} 用于模板 %{template_name}"
       ],
       "Unknown remote execution feature %s": [
         "未知的远程执行功能 %s"
@@ -1716,7 +1716,7 @@
         "您有 %s 个结果现实。显示前 %s 个结果"
       ],
       "You have more results to display. Showing first %s results": [
-        ""
+        "有更多显示的结果。显示第一 %s 结果"
       ],
       "add an input set for this template to reference a different template inputs": [
         "为此模板添加一个输入集，以引用其他模板输入"
@@ -1809,7 +1809,7 @@
         "已成功"
       ],
       "task aborted succesfully": [
-        ""
+        "任务被成功终止"
       ],
       "tasks at a time": [
         "在一个时间点的任务"
@@ -1830,7 +1830,7 @@
         "查看主机名"
       ],
       "view the hosts": [
-        ""
+        "查看主机"
       ],
       "yes": [
         "是"

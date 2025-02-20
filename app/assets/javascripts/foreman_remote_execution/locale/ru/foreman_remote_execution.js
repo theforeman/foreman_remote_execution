@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Yulia <yulia.poyarkova@redhat.com>, 2016",
@@ -97,7 +97,7 @@
         "Доступ запрещен"
       ],
       "Action": [
-        ""
+        "Действие"
       ],
       "Actions": [
         "Действия"
@@ -232,7 +232,7 @@
         ""
       ],
       "Command": [
-        ""
+        "Команда"
       ],
       "Concurrency level": [
         "Параллелизм"
@@ -322,7 +322,7 @@
         ""
       ],
       "Current iteration": [
-        ""
+        "Текущая итерация"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
@@ -613,7 +613,7 @@
         "Частота выполнения задания, в формате cron"
       ],
       "ID": [
-        ""
+        "Код"
       ],
       "Identifier of the Host interface for Remote execution": [
         ""
@@ -673,7 +673,7 @@
         "Тип вызова. Возможные значения: %s"
       ],
       "Iteration limit": [
-        ""
+        "Максимальное число итераций"
       ],
       "Job": [
         "Задание"
@@ -766,7 +766,7 @@
         "Выполнено успешно"
       ],
       "Last occurrence": [
-        ""
+        "Последнее событие"
       ],
       "Latest Jobs": [
         ""
@@ -844,7 +844,7 @@
         "Далее"
       ],
       "Next occurrence": [
-        ""
+        "Следующее событие"
       ],
       "No (override)": [
         ""
@@ -1093,7 +1093,7 @@
         ""
       ],
       "Repeat until": [
-        ""
+        "Повторять до"
       ],
       "Repeats": [
         "Повторяется"
@@ -1315,7 +1315,7 @@
         ""
       ],
       "Smart proxy": [
-        ""
+        "Смарт прокси"
       ],
       "Snippet": [
         "Фрагмент"
@@ -1417,7 +1417,7 @@
         ""
       ],
       "Task count": [
-        ""
+        "Количество задач"
       ],
       "Task for the host cancelled succesfully": [
         ""
@@ -1603,7 +1603,7 @@
         "Не удалось сохранить шаблон. Исправьте выделенные ошибки."
       ],
       "Unknown": [
-        ""
+        "Неизвестно"
       ],
       "Unknown execution status": [
         "Статус выполнения неизвестен"
