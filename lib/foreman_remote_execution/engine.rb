@@ -216,7 +216,7 @@ module ForemanRemoteExecution
           # add menu entry
           menu :top_menu, :job_templates,
             url_hash: { controller: :job_templates, action: :index },
-            caption: N_('Job templates'),
+            caption: N_('Job Templates'),
             parent: :hosts_menu,
             after: :provisioning_templates
           menu :admin_menu, :remote_execution_features,
