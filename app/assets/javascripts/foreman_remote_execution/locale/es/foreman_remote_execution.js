@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -97,7 +97,7 @@
         "Acceso denegado"
       ],
       "Action": [
-        ""
+        "Acció"
       ],
       "Actions": [
         "Acciones"
@@ -232,7 +232,7 @@
         "URL de Cockpit"
       ],
       "Command": [
-        ""
+        "Comando"
       ],
       "Concurrency level": [
         "Nivel de concurrencia"
@@ -322,7 +322,7 @@
         "Cronline"
       ],
       "Current iteration": [
-        ""
+        "Iteración actual"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
@@ -673,7 +673,7 @@
         "Tipo de invocación, una de %s"
       ],
       "Iteration limit": [
-        ""
+        "Límite de iteración"
       ],
       "Job": [
         "Tarea"
@@ -766,7 +766,7 @@
         "La última ejecución se realizó correctamente."
       ],
       "Last occurrence": [
-        ""
+        "Última ocurrencia"
       ],
       "Latest Jobs": [
         "Últimos empleos"
@@ -844,13 +844,13 @@
         "Siguiente"
       ],
       "Next occurrence": [
-        ""
+        "Siguiente ocurrencia"
       ],
       "No (override)": [
         "No (anulación)"
       ],
       "No Results": [
-        ""
+        "No hay resultados"
       ],
       "No Target Hosts": [
         "No hay hosts de destino"
@@ -1093,7 +1093,7 @@
         "El importe de la repetición sólo puede ser un número positivo"
       ],
       "Repeat until": [
-        ""
+        "Repetir hasta"
       ],
       "Repeats": [
         "Se repite"
@@ -1417,7 +1417,7 @@
         "Tarea cancelada"
       ],
       "Task count": [
-        ""
+        "Conteo de tareas"
       ],
       "Task for the host cancelled succesfully": [
         ""
@@ -1602,7 +1602,7 @@
         "No se puede guardar plantilla. Corrija los errores resaltados."
       ],
       "Unknown": [
-        ""
+        "Desconocido"
       ],
       "Unknown execution status": [
         "Estado de ejecución desconocido"

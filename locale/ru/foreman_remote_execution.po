@@ -6,7 +6,7 @@
 # Yulia <yulia.poyarkova@redhat.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Yulia <yulia.poyarkova@redhat.com>, 2016\n"
@@ -101,7 +101,7 @@ msgid "Access denied"
 msgstr "Доступ запрещен"
 
 msgid "Action"
-msgstr ""
+msgstr "Действие"
 
 msgid "Actions"
 msgstr "Действия"
@@ -236,7 +236,7 @@ msgid "Cockpit URL"
 msgstr ""
 
 msgid "Command"
-msgstr ""
+msgstr "Команда"
 
 msgid "Concurrency level"
 msgstr "Параллелизм"
@@ -326,7 +326,7 @@ msgid "Cronline"
 msgstr ""
 
 msgid "Current iteration"
-msgstr ""
+msgstr "Текущая итерация"
 
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr ""
@@ -617,7 +617,7 @@ msgid "How often the job should occur, in the cron format"
 msgstr "Частота выполнения задания, в формате cron"
 
 msgid "ID"
-msgstr ""
+msgstr "Код"
 
 msgid "Identifier of the Host interface for Remote execution"
 msgstr ""
@@ -677,7 +677,7 @@ msgid "Invocation type, one of %s"
 msgstr "Тип вызова. Возможные значения: %s"
 
 msgid "Iteration limit"
-msgstr ""
+msgstr "Максимальное число итераций"
 
 msgid "Job"
 msgstr "Задание"
@@ -770,7 +770,7 @@ msgid "Last execution succeeded"
 msgstr "Выполнено успешно"
 
 msgid "Last occurrence"
-msgstr ""
+msgstr "Последнее событие"
 
 msgid "Latest Jobs"
 msgstr ""
@@ -848,7 +848,7 @@ msgid "Next"
 msgstr "Далее"
 
 msgid "Next occurrence"
-msgstr ""
+msgstr "Следующее событие"
 
 msgid "No (override)"
 msgstr ""
@@ -1097,7 +1097,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr ""
 
 msgid "Repeat until"
-msgstr ""
+msgstr "Повторять до"
 
 msgid "Repeats"
 msgstr "Повторяется"
@@ -1319,7 +1319,7 @@ msgid "Skip to review step"
 msgstr ""
 
 msgid "Smart proxy"
-msgstr ""
+msgstr "Смарт прокси"
 
 msgid "Snippet"
 msgstr "Фрагмент"
@@ -1421,7 +1421,7 @@ msgid "Task cancelled"
 msgstr ""
 
 msgid "Task count"
-msgstr ""
+msgstr "Количество задач"
 
 msgid "Task for the host cancelled succesfully"
 msgstr ""
@@ -1608,7 +1608,7 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr "Не удалось сохранить шаблон. Исправьте выделенные ошибки."
 
 msgid "Unknown"
-msgstr ""
+msgstr "Неизвестно"
 
 msgid "Unknown execution status"
 msgstr "Статус выполнения неизвестен"

@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -139,10 +139,10 @@
         "ნებისმიერი ორგანიზაცია"
       ],
       "Any location": [
-        ""
+        "ნებისმიერი მდებარეობა"
       ],
       "Any organization": [
-        ""
+        "ნებისმიერი ორგანიზაცია"
       ],
       "Apply to": [
         "გადატარება"
@@ -247,7 +247,7 @@
         "ერთდროულობის დონისა და დროში განაწილების მართვა"
       ],
       "Copy to clipboard": [
-        ""
+        "ბუფერში კოპირება"
       ],
       "Could not abort the job %s: ${response}": [
         ""
@@ -322,7 +322,7 @@
         "Cron-ის ხაზი"
       ],
       "Current iteration": [
-        ""
+        "მიმდინარე იტერაცია"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         ""
@@ -613,7 +613,7 @@
         "რამდენ ხანში ერთხელ გაეშვება ეს დავალება. cron-ის ფორმატში"
       ],
       "ID": [
-        ""
+        "ID"
       ],
       "Identifier of the Host interface for Remote execution": [
         "ჰოსტის ინტერფეისის იდენტიფიკატორი დაშორებული გაშვებისთვის"
@@ -673,7 +673,7 @@
         "ჩაწოდების ტიპი. ერთერთი %s-დან"
       ],
       "Iteration limit": [
-        ""
+        "იტერაციის ლიმიტი"
       ],
       "Job": [
         "დავალება"
@@ -766,7 +766,7 @@
         "ბოლო წარმატებული შესრულება"
       ],
       "Last occurrence": [
-        ""
+        "წინა შედეგი"
       ],
       "Latest Jobs": [
         "უკანასკნელი დავალებები"
@@ -844,13 +844,13 @@
         "შემდეგი"
       ],
       "Next occurrence": [
-        ""
+        "შემდეგი შედეგი"
       ],
       "No (override)": [
         "არა (გადაფარვა)"
       ],
       "No Results": [
-        ""
+        "შედეგების გარეშე"
       ],
       "No Target Hosts": [
         "სამიზნე ჰოსტების გარეშე"
@@ -1093,7 +1093,7 @@
         "გამეორების რაოდენობა მხოლოდ დადებით რიცხვი შეიძლება იყოს"
       ],
       "Repeat until": [
-        ""
+        "გამეორება, სანამ"
       ],
       "Repeats": [
         "გამეორება"
@@ -1315,7 +1315,7 @@
         "მიმოხილვის ნაბიჯის გამოტოვება"
       ],
       "Smart proxy": [
-        ""
+        "ჭკვიანი პროქსი"
       ],
       "Snippet": [
         "ნაწყვეტი"
@@ -1417,7 +1417,7 @@
         "ამოცანა გაუქმდა"
       ],
       "Task count": [
-        ""
+        "ამოცანების რიცხვი"
       ],
       "Task for the host cancelled succesfully": [
         ""

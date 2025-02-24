@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.0",
+        "Project-Id-Version": "foreman_remote_execution 15.0.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
@@ -36,13 +36,13 @@
         "%{description} sur %{host}"
       ],
       "'Starts at' date must be in the future": [
-        ""
+        "La date « Commence à » doit être dans le futur"
       ],
       "'Starts before' date must be after 'Starts at' date": [
         "La date \\\"Démarrage avant\\\" doit être postérieure à la date \\\"Démarrage à\\\"."
       ],
       "'Starts before' date must be in the future": [
-        ""
+        "La date « Commence avant » doit être dans le futur"
       ],
       "...and %s more": [
         "...et %s de plus"
@@ -59,7 +59,7 @@
         "Une liste des entrées du modèle externe à inclure, séparées par des virgules."
       ],
       "A job '%{job_name}' has %{status} at %{time}": [
-        "Un job '%%{job_name}' a %{status} à %{time}"
+        "Un job '%{job_name}' a %{status} à %{time}"
       ],
       "A job '%{subject}' has failed": [
         "Un job '%{subject}' a échoué"
@@ -77,7 +77,7 @@
         "Une balise spéciale pour le suivi d'un travail récurrent. Il ne peut y avoir qu'un seul job actif avec un objectif donné."
       ],
       "A task for this host has not been started": [
-        ""
+        "Une tâche pour cet hôte n'a pas été démarrée"
       ],
       "A user to be used for SSH.": [
         "Utilisateur pour SSH."
@@ -92,13 +92,13 @@
         "Abandonner le job"
       ],
       "Abort task": [
-        ""
+        "Abandonner la tâche"
       ],
       "Access denied": [
         "Accès refusé"
       ],
       "Action": [
-        ""
+        "Action"
       ],
       "Actions": [
         "Actions"
@@ -122,13 +122,13 @@
         "Tous les champs sont obligatoires."
       ],
       "All statuses": [
-        ""
+        "Tous les statuts"
       ],
       "Alphabetical": [
         "Alphabétique"
       ],
       "An error occurred while fetching the template invocation details.": [
-        ""
+        "Une erreur s'est produite lors de la récupération des détails d'invocation du modèle."
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "Une autre interface est déjà définie pour l'exécution distante. Êtes-vous sûrs de vouloir utiliser celle-ci à la place ?"
@@ -140,16 +140,16 @@
         "Toute Organisation"
       ],
       "Any location": [
-        ""
+        "Tout emplacement"
       ],
       "Any organization": [
-        ""
+        "Toute organisation"
       ],
       "Apply to": [
         "Appliquer à"
       ],
       "Are you sure you want to open all invocations in new tabs?": [
-        ""
+        "Êtes-vous sûr de vouloir ouvrir toutes les invocations dans de nouveaux onglets ?"
       ],
       "At": [
         "À"
@@ -179,7 +179,7 @@
         "Annuler la tâche"
       ],
       "Cancel Task": [
-        ""
+        "Annuler la tâche"
       ],
       "Cancel job invocation": [
         "Annuler le lancement du job"
@@ -191,7 +191,7 @@
         "Annulé"
       ],
       "Cancelled:": [
-        ""
+        "Annulé:"
       ],
       "Cannot resolve hosts without a bookmark or search query": [
         "Impossible de résoudre les hôtes sans un marque page ou une recherche"
@@ -212,7 +212,7 @@
         "Choisissez un modèle qui soit présélectionné dans le formulaire de requête du job"
       ],
       "Circular dependency detected in foreign input set '%{template}' -> '%{target_template}'. Templates stack: %{templates_stack}": [
-        "Dépendance circulaire détectée dans l'ensemble d'entrées externes '%%{template}' -> '%%{target_template}'. Pile de modèles : %%{templates_stack}"
+        "Dépendance circulaire détectée dans l'ensemble d'entrées externes '%{template}' -> '%{target_template}'. Pile de modèles : %{templates_stack}"
       ],
       "Cleanup working directories": [
         "Nettoyage des répertoires de travail"
@@ -233,7 +233,7 @@
         "URL Cockpit"
       ],
       "Command": [
-        ""
+        "Commande"
       ],
       "Concurrency level": [
         "Niveau de parallélisme"
@@ -248,7 +248,7 @@
         "Contrôle le niveau de parallélisme et la distribution dans le temps"
       ],
       "Copy to clipboard": [
-        ""
+        "Copier dans le presse-papiers"
       ],
       "Could not abort the job %s: ${response}": [
         "Impossible d'annuler le job %s :${response}"
@@ -278,7 +278,7 @@
         "Impossible de relancer le job %{id} parce que son modèle n'a pas pu être trouvé"
       ],
       "Could not use any proxy for the %{provider} job. Consider configuring %{global_proxy}, %{fallback_proxy} in settings": [
-        "N’a pas pu utiliser de proxy pour le job %{provider}. Considérer configurer %%{global_proxy}, %%{fallback_proxy}dans les paramètres de configuration"
+        "N’a pas pu utiliser de proxy pour le job %{provider}. Considérer configurer %{global_proxy}, %{fallback_proxy}dans les paramètres de configuration"
       ],
       "Could not use any template used in the job invocation": [
         "Impossible d'utiliser un modèle qui est utilisé pour un lancement de job"
@@ -302,7 +302,7 @@
         "Créer un job récurrent"
       ],
       "Create job": [
-        ""
+        "Créer un job"
       ],
       "Create report": [
         "Créer un rapport"
@@ -323,28 +323,28 @@
         "Cronline"
       ],
       "Current iteration": [
-        ""
+        "Itération actuelle"
       ],
       "Current location %s is different from job's location %s. This job may run on different hosts than before.": [
         "L'emplacement actuel %s est différent de l'emplacement du job %s. Ce job peut être exécuté sur des hôtes différents."
       ],
       "Current location %{loc_c} is different from job's location %{loc_j}.": [
-        "L’emplacement actuel %%{loc_c} est différent de l’emplacement du job %%{loc_j}."
+        "L’emplacement actuel %{loc_c} est différent de l’emplacement du job %{loc_j}."
       ],
       "Current organization %s is different from job's organization %s. This job may run on different hosts than before.": [
         "L'organisation actuelle %s est différente de l'organisation du job %s. Ce job peut être exécuté sur des hôtes différents."
       ],
       "Current organization %{org_c} is different from job's organization %{org_j}.": [
-        "L'organisation actuelle %%{org_c} est différente de l'organisation du job %%{org_j}."
+        "L'organisation actuelle %{org_c} est différente de l'organisation du job %{org_j}."
       ],
       "DEBUG": [
-        ""
+        "DEBUG"
       ],
       "Daily": [
         "Quotidien"
       ],
       "Date must be in the future": [
-        ""
+        "La date doit être dans le futur"
       ],
       "Days": [
         "Jours"
@@ -398,7 +398,7 @@
         "Pas de répétition"
       ],
       "Duplicated inputs detected: %{duplicated_inputs}": [
-        "Entrées dupliquées détectées : %%{duplicated_inputs}"
+        "Entrées dupliquées détectées : %{duplicated_inputs}"
       ],
       "Dynamic Query": [
         "Requête dynamique"
@@ -428,7 +428,7 @@
         "Utilisateur effectif"
       ],
       "Effective user method \\\"%{current_value}\\\" is not one of %{valid_methods}": [
-        "La méthode de l'utilisateur effectif \\\"%%{current_value}\\\" n'est pas l'une des méthodes de %%{valid_methods}"
+        "La méthode de l'utilisateur effectif \\\"%{current_value}\\\" n'est pas l'une des méthodes de %{valid_methods}"
       ],
       "Effective user options": [
         "Options pour l'utilisateur effectif"
@@ -524,10 +524,10 @@
         "Repli sur n'importe quel proxy"
       ],
       "Feature input %{input_name} not defined in template %{template_name}": [
-        "Entrée de la caractéristique %%{input_name}non définie dans le modèle %%{template_name}"
+        "Entrée de la caractéristique %{input_name}non définie dans le modèle %{template_name}"
       ],
       "Fill all required fields in all the steps": [
-        "Saisissez tous les champs requis dans toutes les étapes"
+        "Remplissez tous les champs obligatoires à toutes les étapes"
       ],
       "Fill all required fields in all the steps to start the job": [
         "Remplissez tous les champs obligatoires à toutes les étapes pour démarrer le job"
@@ -590,7 +590,7 @@
         "Détails de l'hôte"
       ],
       "Host group": [
-        ""
+        "Groupe d'hôtes"
       ],
       "Host groups": [
         "Groupes d'hôtes"
@@ -614,7 +614,7 @@
         "La fréquence d'exécution du job, au format cron"
       ],
       "ID": [
-        ""
+        "ID"
       ],
       "Identifier of the Host interface for Remote execution": [
         "Identifiant de l'interface de l'hôte pour l'exécution à distance"
@@ -629,7 +629,7 @@
         "Importe un modèle de job depuis ERB"
       ],
       "In Progress": [
-        ""
+        "En cours"
       ],
       "In Progress:": [
         "En cours :"
@@ -674,7 +674,7 @@
         "Type d'invocation, l'un des suivants %s"
       ],
       "Iteration limit": [
-        ""
+        "Limite de l'itération"
       ],
       "Job": [
         "Tâche"
@@ -734,7 +734,7 @@
         "Modèles de job"
       ],
       "Job with id '%{id}' was not found": [
-        ""
+        "Job avec l'identifiant '%{id} ' n'a pas été trouvé"
       ],
       "JobTemplate|Locked": [
         "Verrouillé"
@@ -767,7 +767,7 @@
         "La dernière exécution a réussi"
       ],
       "Last occurrence": [
-        ""
+        "Dernière occurrence"
       ],
       "Latest Jobs": [
         "Derniers jobs"
@@ -785,7 +785,7 @@
         "Afficher les jeux de données en entrée externes"
       ],
       "List hosts belonging to job invocation": [
-        ""
+        "Lister les hôtes appartenant à l'invocation de tâche"
       ],
       "List job invocations": [
         "Affiche les jobs lancés"
@@ -845,19 +845,19 @@
         "Suivant"
       ],
       "Next occurrence": [
-        ""
+        "Prochaine occurrence"
       ],
       "No (override)": [
         "Non (remplacement)"
       ],
       "No Results": [
-        ""
+        "Aucun résultat"
       ],
       "No Target Hosts": [
         "Aucun Hôte cible"
       ],
       "No hosts found": [
-        ""
+        "Aucun hôte trouvé."
       ],
       "No hosts found.": [
         "Aucun hôte trouvé."
@@ -866,16 +866,16 @@
         "Aucun job disponible"
       ],
       "No output for the selected filters": [
-        ""
+        "Aucune sortie pour les filtres sélectionnés"
       ],
       "No results found": [
         "Aucun résultat"
       ],
       "No template mapped to feature %{feature_name}": [
-        "Aucun modèle n'est en relation avec la fonction %%{feature_name}"
+        "Aucun modèle n'est en relation avec la fonction %{feature_name}"
       ],
       "No user input": [
-        ""
+        "Aucune saisie utilisateur"
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         "Les entrées n'ont pas toutes des valeurs associées. Les entrées demandant de l'attention : %s"
@@ -890,7 +890,7 @@
         "Maintenant"
       ],
       "OS": [
-        ""
+        "OS"
       ],
       "On": [
         "Activé"
@@ -899,13 +899,13 @@
         "Seule une fonctionnalité ou un job_template_id ne peuvent être spécifiés"
       ],
       "Open all in new tabs": [
-        ""
+        "Ouvrir tout dans de nouveaux onglets"
       ],
       "Open all invocations in new tabs": [
-        ""
+        "Ouvrir toutes les invocations dans de nouveaux onglets"
       ],
       "Open in new tab": [
-        ""
+        "Ouvrir dans un nouvel onglet"
       ],
       "Opening job invocation form": [
         "Ouverture du formulaire de lancement du job"
@@ -953,13 +953,13 @@
         "Veuillez saisir une requête de recherche"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" or \\\\\\\"Recurring execution\\\\\\\" step to fix the error": [
-        ""
+        "Veuillez revenir à l'étape « Planification » - « Exécution future » ou « Exécution récurrente » pour corriger l'erreur"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
         "Veuillez retourner à l'étape \\\\\\\"Programme\\\"\\\\ - \\\\\\\"Exécution future\\\"\\\\ pour corriger l'erreur."
       ],
       "Please make sure that the Smart Proxy is configured correctly for the Pull provider.": [
-        ""
+        "Veuillez vous assurer que le Smart Proxy est correctement configuré pour le fournisseur Pull."
       ],
       "Please refine your search.": [
         "Veuillez raffiner votre recherche."
@@ -977,7 +977,7 @@
         "Veuillez sélectionner au moins un groupe d'hôtes"
       ],
       "Popups are blocked by your browser. Please allow popups for this site to open all invocations in new tabs.": [
-        ""
+        "Les pop-ups sont bloqués par votre navigateur. Veuillez autoriser les pop-ups pour que ce site ouvre toutes les invocations dans de nouveaux onglets."
       ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
         "Port à utiliser pour la communication SSH. Le port par défaut est 22. Vous pouvez le remplacer selon les hôtes en définissant un paramètre appelé remote_execution_ssh_port."
@@ -992,7 +992,7 @@
         "Prévisualisation des hôtes"
       ],
       "Preview Template": [
-        ""
+        "Modèles de prévisualisation"
       ],
       "Preview job description": [
         "Prévisualisation de la description du job"
@@ -1094,7 +1094,7 @@
         "Le montant répété ne peut correspondre qu’à un nombre positif"
       ],
       "Repeat until": [
-        ""
+        "Répéter jusqu'à"
       ],
       "Repeats": [
         "Répétitions"
@@ -1118,10 +1118,10 @@
         "Relancer sur les hôtes où le job a échoué"
       ],
       "Rerun on succeeded hosts": [
-        ""
+        "Réexécution sur les hôtes ayant réussi"
       ],
       "Rerun succeeded": [
-        ""
+        "La réexécution a réussi"
       ],
       "Rerun successful": [
         "Réexécution réussie"
@@ -1166,7 +1166,7 @@
         "Lancer le job"
       ],
       "Run on selected hosts": [
-        "Lancer sur les hôtes sélectionnés"
+        "Exécuter sur des hôtes sélectionnés"
       ],
       "Running": [
         "Exécution en cours"
@@ -1187,10 +1187,10 @@
         "Utilisateur SSH :"
       ],
       "STDERR": [
-        ""
+        "STDERR"
       ],
       "STDOUT": [
-        ""
+        "STDOUT"
       ],
       "Schedule": [
         "Programmer"
@@ -1316,7 +1316,7 @@
         "Passer à l'étape de révision"
       ],
       "Smart proxy": [
-        ""
+        "Smart proxy"
       ],
       "Snippet": [
         "Snippet"
@@ -1325,7 +1325,7 @@
         "Démarrer"
       ],
       "Start job": [
-        "Démarrer la tâche"
+        "Commencer le travail"
       ],
       "Started": [
         "Démarré"
@@ -1379,7 +1379,7 @@
         "Réussi"
       ],
       "Successfully copied to clipboard!": [
-        ""
+        "Copié dans le presse-papiers"
       ],
       "Switch to the new job invocation detail UI": [
         "Basculer vers la nouvelle interface utilisateur détaillée des appels de tâches"
@@ -1394,7 +1394,7 @@
         "Systèmes"
       ],
       "Target Hosts": [
-        ""
+        "Hôtes cibles"
       ],
       "Target hosts": [
         "Hôtes cibles"
@@ -1406,7 +1406,7 @@
         "ID de modèle cible"
       ],
       "Target:": [
-        ""
+        "Cible :"
       ],
       "Target: ": [
         "Cible :"
@@ -1418,10 +1418,10 @@
         "Tâche annulée"
       ],
       "Task count": [
-        ""
+        "Nombre de tâches"
       ],
       "Task for the host cancelled succesfully": [
-        ""
+        "Tâche pour l'hôte annulée avec succès"
       ],
       "Template ERB": [
         "Modèle ERB"
@@ -1433,7 +1433,7 @@
         "Le modèle à échoué avec :"
       ],
       "Template invocation not found": [
-        ""
+        "Invocation de modèle non trouvée"
       ],
       "Template name": [
         "Nom de modèle"
@@ -1442,7 +1442,7 @@
         "Version de modèle"
       ],
       "Template with id '%{id}' was not found": [
-        "Le modèle avec l'ID '%%{id} ' n'a pas été trouvé"
+        "Le modèle avec l'ID '%{id} ' n'a pas été trouvé"
       ],
       "Template:": [
         "Modèle :"
@@ -1457,7 +1457,7 @@
         "La requête dynamique '%{query}' n'a pas encore été résolue. La liste des hôtes actuelle avec lesquels ils pourraient être résolus peut être vue ici %{here}."
       ],
       "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
-        ""
+        "La requête dynamique est toujours en cours de traitement. Vous pouvez{viewTheHosts} ciblé par la requête."
       ],
       "The execution interface is used for remote execution": [
         "L'interface d'exécution est celle utilisée pour l'exécution distante"
@@ -1478,15 +1478,15 @@
         "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
       ],
       "The number of invocations is:": [
-        ""
+        "Le nombre d'invocations est :"
       ],
       "The only applicable proxy %{proxy_names} is down": [
-        "Le seul proxy applicable %%{proxy_names} est indisponible",
-        "Tous les proxys %{count} applicables sont hors service. %%{proxy_names} tenté",
-        "Tous les proxys %{count} applicables sont hors service. %%{proxy_names} tenté"
+        "Le seul proxy applicable %{proxy_names} est indisponible",
+        "Tous les proxys %{count} applicables sont hors service. %{proxy_names} tenté",
+        "Tous les proxys %{count} applicables sont hors service. %{proxy_names} tenté"
       ],
       "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user": [
-        "Le modèle %%{template_name} en relation avec la fonction %%{feature_name} n'est pas accessible par l'utilisateur"
+        "Le modèle %{template_name} en relation avec la fonction %{feature_name} n'est pas accessible par l'utilisateur"
       ],
       "There are no available input fields for the selected template.": [
         "Il n’y a pas de champs d’entrées disponibles pour le modèle sélectionné."
@@ -1504,19 +1504,19 @@
         "Ce modèle est verrouillé. Veuillez le cloner vers un nouveau modèle pour personnaliser ce dernier."
       ],
       "This template is used to generate the description. Input values can be used using the syntax %{package}. You may also include the job category and template name using %{job_category} and %{template_name}.": [
-        "Ce modèle est utilisé pour générer la description. Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %%{job_category} and %%{template_name}."
+        "Ce modèle est utilisé pour générer la description. Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}. Vous pouvez aussi inclure la catégorie du job et le nom du modèle avec %{job_category} and %{template_name}."
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %%{job_category} et %%{template_name}."
+        "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %{job_category} et %{template_name}."
       ],
       "This will open a new tab for each invocation.": [
-        ""
+        "Cela ouvrira un nouvel onglet pour chaque invocation."
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Durée en secondes depuis le démarrage sur l'hôte distant après laquelle le job doit être supprimé."
       ],
       "Time in seconds within which the host has to pick up a job. If the job is not picked up within this limit, the job will be cancelled. Defaults to 1 day. Applies only to pull-mqtt based jobs.": [
-        "Délai en secondes pendant lequel l'hôte doit récupérer une tâche. Si la tâche n'est pas récupérée dans ce délai, elle est annulée. La valeur par défaut est 1 jour. S'applique seulement aux jobs basés sur pull-mqtt."
+        "Délai en secondes pendant lequel l'hôte doit récupérer une tâche. Si la tâche n'est pas récupérée dans ce délai, elle sera annulée. La valeur par défaut est de 1 jour. S'applique uniquement aux tâches basées sur le pull-mqtt."
       ],
       "Time to pickup": [
         "Heure d’appropriation de tâche(s)"
@@ -1561,7 +1561,7 @@
         "J’essaie d'abandonner le job %s ."
       ],
       "Trying to abort the task for the host": [
-        ""
+        "Tentative d'annulation de la tâche pour l'hôte"
       ],
       "Trying to cancel the job": [
         "Tentative d'annulation du job"
@@ -1570,7 +1570,7 @@
         "J'essaie d'annuler le travail%s ."
       ],
       "Trying to cancel the task for the host": [
-        ""
+        "Tentative d'annulation de la tâche pour l'hôte"
       ],
       "Type": [
         "Type"
@@ -1597,19 +1597,19 @@
         "Impossible de retirer l'hôte des hôtes connus"
       ],
       "Unable to run job": [
-        ""
+        "Impossible d'exécuter la tâche"
       ],
       "Unable to save template. Correct highlighted errors": [
         "Impossible de sauver le modèle. Merci de corriger les erreurs en surbrillance"
       ],
       "Unknown": [
-        ""
+        "Inconnu"
       ],
       "Unknown execution status": [
         "État d'exécution inconnu"
       ],
       "Unknown input %{input_name} for template %{template_name}": [
-        "Entrée inconnue %%{input_name} pour le modèle %%{template_name}"
+        "Entrée inconnue %{input_name} pour le modèle %{template_name}"
       ],
       "Unknown remote execution feature %s": [
         "Fonction d'exécution distante inconnue %s"
@@ -1720,7 +1720,7 @@
         "Vous avez %s résultats à afficher. Afficher les %s premiers résultats"
       ],
       "You have more results to display. Showing first %s results": [
-        ""
+        "Vous avez plus de résultats à afficher. Affichage en premier des résultats %s"
       ],
       "add an input set for this template to reference a different template inputs": [
         "Ajout d'un jeu d'entrées pour ce modèle pour faire référence à des entrées sur un modèle différent"
@@ -1813,7 +1813,7 @@
         "réussi"
       ],
       "task aborted succesfully": [
-        ""
+        "tâche abandonnée avec succès"
       ],
       "tasks at a time": [
         "tâches à la fois"
@@ -1834,7 +1834,7 @@
         "afficher les noms d'hôtes"
       ],
       "view the hosts": [
-        ""
+        "voir les hôtes"
       ],
       "yes": [
         "oui"

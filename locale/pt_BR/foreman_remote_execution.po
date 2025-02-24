@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.0\n"
+"Project-Id-Version: foreman_remote_execution 15.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -234,7 +234,7 @@ msgid "Cockpit URL"
 msgstr "URL de cockpit"
 
 msgid "Command"
-msgstr ""
+msgstr "Comando"
 
 msgid "Concurrency level"
 msgstr "Nível de simultaneidade"
@@ -324,7 +324,7 @@ msgid "Cronline"
 msgstr "Cronline"
 
 msgid "Current iteration"
-msgstr ""
+msgstr "Iteração atual"
 
 msgid "Current location %s is different from job's location %s. This job may run on different hosts than before."
 msgstr ""
@@ -675,7 +675,7 @@ msgid "Invocation type, one of %s"
 msgstr "Tipo de invocação, um dos %s"
 
 msgid "Iteration limit"
-msgstr ""
+msgstr "Limite de iteração"
 
 msgid "Job"
 msgstr "Trabalho"
@@ -768,7 +768,7 @@ msgid "Last execution succeeded"
 msgstr "Última execução bem-sucedida "
 
 msgid "Last occurrence"
-msgstr ""
+msgstr "Ocorrência mais recente"
 
 msgid "Latest Jobs"
 msgstr "Últimos empregos"
@@ -846,13 +846,13 @@ msgid "Next"
 msgstr "Próximo"
 
 msgid "Next occurrence"
-msgstr ""
+msgstr "Próxima ocorrência"
 
 msgid "No (override)"
 msgstr ""
 
 msgid "No Results"
-msgstr ""
+msgstr "Sem resultados"
 
 msgid "No Target Hosts"
 msgstr "Sem anfitriões alvo"
@@ -1095,7 +1095,7 @@ msgid "Repeat amount can only be a positive number"
 msgstr "A quantia repetida só pode ser um número positivo"
 
 msgid "Repeat until"
-msgstr ""
+msgstr "Repetir até"
 
 msgid "Repeats"
 msgstr "Repetições "
@@ -1419,7 +1419,7 @@ msgid "Task cancelled"
 msgstr "Tarefa cancelada"
 
 msgid "Task count"
-msgstr ""
+msgstr "Contagem de Tarefas"
 
 msgid "Task for the host cancelled succesfully"
 msgstr ""
@@ -1605,7 +1605,7 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr "Não foi possível salvar o template. Corrija os erros em destaque "
 
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 msgid "Unknown execution status"
 msgstr "Status de execução desconhecido"
