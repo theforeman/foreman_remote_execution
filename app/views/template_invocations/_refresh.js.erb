@@ -1,12 +1,12 @@
 <% if @auto_refresh %>
    if(window.allJsLoaded){
     delayed_refresh($("div.terminal").data('refresh-url'),
-          {"since": "<%= @line_sets.last.try(:[], 'timestamp') || @since %>", "line_counter": $("div.terminal div.line").size()})
+          {"since": "<%= @line_sets.last.try(:[], 'timestamp') || @since %>", "line_counter": $("div.terminal div.line").length})
   }
   else {
     $(document).on('loadJS', function() {
       delayed_refresh($("div.terminal").data('refresh-url'),
-          {"since": "<%= @line_sets.last.try(:[], 'timestamp') || @since %>", "line_counter": $("div.terminal div.line").size()})
+          {"since": "<%= @line_sets.last.try(:[], 'timestamp') || @since %>", "line_counter": $("div.terminal div.line").length})
     });
   }
 <% end %>
