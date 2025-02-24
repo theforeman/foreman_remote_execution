@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 
-import { FormGroup, TextInput, Popover } from '@patternfly/react-core';
+import { FormGroup, TextInput, Popover, Icon } from '@patternfly/react-core';
 
 import { HelpIcon } from '@patternfly/react-icons';
 
@@ -20,10 +20,12 @@ const RexInterface = ({ isLoading, onChange }) => (
         }
       >
         <button
-          className="pf-c-form__group-label-help"
+          className="pf-v5-cform__group-label-help"
           onClick={e => e.preventDefault()}
         >
-          <HelpIcon noVerticalAlign />
+          <Icon isInline>
+            <HelpIcon />
+          </Icon>
         </button>
       </Popover>
     }

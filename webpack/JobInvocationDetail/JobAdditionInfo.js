@@ -69,7 +69,7 @@ const Schedule = ({ data }) => {
   return (
     <ExpandableSection
       toggleText={__('Schedule')}
-      onToggle={setIsExpanded}
+      onToggle={(_event, val) => setIsExpanded(val)}
       isExpanded={isExpanded}
     >
       <DataList isCompact>
@@ -107,7 +107,7 @@ const Recurring = ({ data }) => {
   return (
     <ExpandableSection
       toggleText={__('Recurring logic')}
-      onToggle={setIsExpanded}
+      onToggle={(_event, val) => setIsExpanded(val)}
       isExpanded={isExpanded}
     >
       <DataList isCompact>
@@ -149,7 +149,7 @@ const TargetHosts = ({ data }) => {
   return (
     <ExpandableSection
       toggleText={__('Target Hosts')}
-      onToggle={setIsExpanded}
+      onToggle={(_event, val) => setIsExpanded(val)}
       isExpanded={isExpanded}
     >
       <span>{targetingSelectioning}</span>{' '}
@@ -173,7 +173,7 @@ const Inputs = ({ data }) => {
   return (
     <ExpandableSection
       toggleText={__('User Inputs')}
-      onToggle={setIsExpanded}
+      onToggle={(_event, val) => setIsExpanded(val)}
       isExpanded={isExpanded}
     >
       <DataList isCompact>
