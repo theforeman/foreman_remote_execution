@@ -117,7 +117,7 @@
     </div>
 
     <div class="form-group advanced hidden">
-      <%= add_label({ :label => _('Execution ordering'), :label_help => _("Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>") }, f, :randomized_ordering) %>
+      <%= add_label({ :label => _('Execution ordering'), :label_help => _("Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>") }, f, :randomized_ordering) %>
 
       <div class="col-md-4">
         <%= radio_button_f targeting_fields, :randomized_ordering, :value => false, :text => _(Targeting::ORDERINGS[Targeting::ORDERED]), :checked => !@composer.targeting.randomized_ordering %>
@@ -126,7 +126,7 @@
     </div>
 
     <div class="form-group">
-      <%= add_label({ :label => _('Type of query'), :label_help => _("Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>") }, f, :targetting_type) %>
+      <%= add_label({ :label => _('Type of query'), :label_help => _("Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>") }, f, :targetting_type) %>
 
       <div class="col-md-4">
         <%= radio_button_f targeting_fields, :targeting_type, :value => Targeting::STATIC_TYPE, :text => _(Targeting::TYPES[Targeting::STATIC_TYPE]) %>
