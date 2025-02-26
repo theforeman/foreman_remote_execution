@@ -103,8 +103,8 @@ export const RowActions = ({ hostID, jobID }) => {
       permission
         ? {
             title: text,
-            component: "a",
-            className: "jobs-table-action-item",
+            component: 'a',
+            className: 'jobs-table-action-item',
             href,
             onClick,
             isDisabled,
