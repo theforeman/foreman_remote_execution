@@ -10,7 +10,7 @@ export const QueryType = ({ isTypeStatic, setIsTypeStatic }) => (
       label={__('Query type')}
       fieldId="query-type-static"
       labelIcon={helpLabel(
-        __('Type has impact on when is the query evaluated to hosts.'),
+        __('Type determines when the query is evaluated to hosts.'),
         'query-type'
       )}
     >
@@ -33,7 +33,7 @@ export const QueryType = ({ isTypeStatic, setIsTypeStatic }) => (
         id="query-type-dynamic"
         label={__('Dynamic query')}
         body={__(
-          "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list."
+          'Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.'
         )}
       />
     </FormGroup>

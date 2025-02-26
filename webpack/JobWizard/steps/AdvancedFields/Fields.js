@@ -181,7 +181,7 @@ export const ExecutionOrderingField = ({ isRandomizedOrdering, setValue }) => (
       <div
         dangerouslySetInnerHTML={{
           __html: __(
-            'Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>'
+            'Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>'
           ),
         }}
       />,
