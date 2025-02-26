@@ -26,7 +26,7 @@ export const RepeatMonth = ({ repeatData, setRepeatData, setValid }) => {
           placeholder="1,2..."
           type="text"
           value={repeatData.days || ''}
-          onChange={newTime => {
+          onChange={(_event, newTime) => {
             setRepeatData({ ...repeatData, days: newTime });
           }}
         />

@@ -1,18 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  TableComposable,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-} from '@patternfly/react-table';
+import { Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 export const PreviewTemplate = ({ inputValues }) =>
   inputValues.length ? (
-    <TableComposable
+    <Table
       ouiaId="template-invocation-preview-table"
       isStriped
       variant="compact"
@@ -36,7 +29,7 @@ export const PreviewTemplate = ({ inputValues }) =>
           </Tr>
         ))}
       </Tbody>
-    </TableComposable>
+    </Table>
   ) : (
     <span>{__('No user input')}</span>
   );

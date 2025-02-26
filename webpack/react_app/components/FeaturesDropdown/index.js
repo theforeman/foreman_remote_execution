@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  DropdownItem,
-  Dropdown,
-  DropdownToggle,
-  DropdownToggleAction,
-} from '@patternfly/react-core';
+	DropdownItem,
+	Dropdown,
+	DropdownToggle,
+	DropdownToggleAction
+} from '@patternfly/react-core/deprecated';
 import { push } from 'connected-react-router';
 
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
