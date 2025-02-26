@@ -7,6 +7,7 @@ import { APIActions } from 'foremanReact/redux/API';
 import { addToast } from 'foremanReact/components/ToastsList';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { selectTemplateInvocation } from '../JobInvocationSelectors';
+import './index.scss';
 
 const actions = ({
   taskID,
@@ -55,7 +56,7 @@ const actions = ({
   },
   abort: {
     name: 'template-invocation-abort-job',
-    text: __('Abort task'),
+    text: __('Abort Task'),
     permission: permissions.cancel_job_invocations,
     onClick: () => {
       dispatch(
@@ -96,17 +97,15 @@ export const RowActions = ({ hostID, jobID }) => {
     permissions,
     dispatch,
   });
+
   const rowActions = Object.values(getActions)
-    .map(({ text, onClick, href, permission, isDisabled }) =>
+    .map(({ text, href, onClick, permission, isDisabled }) =>
       permission
         ? {
-            title: href ? (
-              <a href={href} target="_blank" rel="noreferrer">
-                {text}
-              </a>
-            ) : (
-              text
-            ),
+            title: text,
+            component: 'a',
+            className: 'jobs-table-action-item',
+            href,
             onClick,
             isDisabled,
           }
