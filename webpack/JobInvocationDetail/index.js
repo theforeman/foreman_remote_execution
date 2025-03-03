@@ -1,32 +1,33 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   Divider,
   Flex,
   PageSection,
   PageSectionVariants,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
-import { translate as __, documentLocale } from 'foremanReact/common/I18n';
-import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
+import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
+import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { JobAdditionInfo } from './JobAdditionInfo';
 import { getJobInvocation, getTask } from './JobInvocationActions';
 import {
   CURRENT_PERMISSIONS,
+  currentPermissionsUrl,
   DATE_OPTIONS,
   JOB_INVOCATION_KEY,
   STATUS,
-  currentPermissionsUrl,
 } from './JobInvocationConstants';
-import './JobInvocationDetail.scss';
+import JobInvocationHostTable from './JobInvocationHostTable';
 import JobInvocationOverview from './JobInvocationOverview';
 import { selectItems } from './JobInvocationSelectors';
 import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
-import JobInvocationHostTable from './JobInvocationHostTable';
-import { JobAdditionInfo } from './JobAdditionInfo';
+
+import './JobInvocationDetail.scss';
 
 const JobInvocationDetailPage = ({
   match: {
@@ -69,6 +70,7 @@ const JobInvocationDetailPage = ({
   let formattedStartDate;
   if (startAt) {
     const convertedStartAt = getConvertedDate(startAt);
+    // eslint-disable-next-line camelcase
     const convertedResolvedAt = targeting?.resolved_at
       ? getConvertedDate(targeting.resolved_at)
       : new Date();
