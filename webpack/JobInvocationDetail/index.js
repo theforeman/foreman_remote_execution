@@ -7,6 +7,7 @@ import {
   PageSection,
   PageSectionVariants,
 } from '@patternfly/react-core';
+import React, { useEffect, useState } from 'react';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
@@ -56,14 +57,24 @@ const JobInvocationDetailPage = ({
   const handleFilterChange = filter => {
     setSelectedFilter(filter);
   };
+  const getConvertedDate = date =>
+    new Date(
+      date
+        .replace(' ', 'T')
+        .replace(/(-\d{2})(\d{2})$/, '$1:$2')
+        .replace(' ', '')
+    );
 
   let isAlreadyStarted = false;
   let formattedStartDate;
   if (startAt) {
-    // Ensures date string compatibility across browsers
-    const convertedDate = new Date(startAt.replace(/[-.]/g, '/'));
-    isAlreadyStarted = convertedDate.getTime() <= new Date().getTime();
-    formattedStartDate = convertedDate.toLocaleString(
+    const convertedStartAt = getConvertedDate(startAt);
+    const convertedResolvedAt = targeting?.resolved_at
+      ? getConvertedDate(targeting.resolved_at)
+      : new Date();
+    isAlreadyStarted =
+      convertedStartAt.getTime() <= convertedResolvedAt.getTime();
+    formattedStartDate = convertedStartAt.toLocaleString(
       documentLocale(),
       DATE_OPTIONS
     );
