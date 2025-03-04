@@ -13,7 +13,6 @@ import {
 } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
-import { STATUS as APIStatus } from 'foremanReact/constants';
 import { get } from 'foremanReact/redux/API';
 import {
   cancelJob,
@@ -24,6 +23,7 @@ import {
   STATUS,
   GET_REPORT_TEMPLATES,
   GET_REPORT_TEMPLATE_INPUTS,
+  hasPermission,
 } from './JobInvocationConstants';
 import { selectTaskCancelable } from './JobInvocationSelectors';
 
@@ -60,12 +60,6 @@ const JobInvocationToolbarButtons = ({
     setIsActionOpen(false);
     onActionFocus();
   };
-  const hasPermission = permissionRequired =>
-    permissionsStatus === APIStatus.RESOLVED
-      ? currentPermissions?.some(
-          permission => permission.name === permissionRequired
-        )
-      : false;
 
   useEffect(() => {
     dispatch(
@@ -144,7 +138,14 @@ const JobInvocationToolbarButtons = ({
       ouiaId="rerun-succeeded-dropdown-item"
       href={foremanUrl(`/job_invocations/${jobId}/rerun?succeeded_only=1`)}
       key="rerun-succeeded"
-      isDisabled={!(succeeded > 0) || !hasPermission('create_job_invocations')}
+      isDisabled={
+        !(succeeded > 0) ||
+        !hasPermission(
+          currentPermissions,
+          permissionsStatus,
+          'create_job_invocations'
+        )
+      }
       description="Rerun job on successful hosts"
     >
       {__('Rerun successful')}
@@ -153,7 +154,14 @@ const JobInvocationToolbarButtons = ({
       ouiaId="rerun-failed-dropdown-item"
       href={foremanUrl(`/job_invocations/${jobId}/rerun?failed_only=1`)}
       key="rerun-failed"
-      isDisabled={!(failed > 0) || !hasPermission('create_job_invocations')}
+      isDisabled={
+        !(failed > 0) ||
+        !hasPermission(
+          currentPermissions,
+          permissionsStatus,
+          'create_job_invocations'
+        )
+      }
       description="Rerun job on failed hosts"
     >
       {__('Rerun failed')}
@@ -173,7 +181,14 @@ const JobInvocationToolbarButtons = ({
       onClick={() => dispatch(cancelJob(jobId, false))}
       key="cancel"
       component="button"
-      isDisabled={!isTaskCancelable || !hasPermission('cancel_job_invocations')}
+      isDisabled={
+        !isTaskCancelable ||
+        !hasPermission(
+          currentPermissions,
+          permissionsStatus,
+          'cancel_job_invocations'
+        )
+      }
       description="Cancel job gracefully"
     >
       {__('Cancel')}
@@ -183,7 +198,14 @@ const JobInvocationToolbarButtons = ({
       onClick={() => dispatch(cancelJob(jobId, true))}
       key="abort"
       component="button"
-      isDisabled={!isTaskCancelable || !hasPermission('cancel_job_invocations')}
+      isDisabled={
+        !isTaskCancelable ||
+        !hasPermission(
+          currentPermissions,
+          permissionsStatus,
+          'cancel_job_invocations'
+        )
+      }
       description="Cancel job immediately"
     >
       {__('Abort')}
@@ -214,7 +236,11 @@ const JobInvocationToolbarButtons = ({
             isDisabled={
               task?.state === STATUS.PENDING ||
               templateInputId === undefined ||
-              !hasPermission('generate_report_templates')
+              !hasPermission(
+                currentPermissions,
+                permissionsStatus,
+                'generate_report_templates'
+              )
             }
           >
             {__(`Create report`)}
@@ -236,7 +262,13 @@ const JobInvocationToolbarButtons = ({
                     key="rerun"
                     href={foremanUrl(`/job_invocations/${jobId}/rerun`)}
                     variant="control"
-                    isDisabled={!hasPermission('create_job_invocations')}
+                    isDisabled={
+                      !hasPermission(
+                        currentPermissions,
+                        permissionsStatus,
+                        'create_job_invocations'
+                      )
+                    }
                   >
                     {__(`Rerun all`)}
                   </Button>,
@@ -261,7 +293,7 @@ JobInvocationToolbarButtons.propTypes = {
   permissionsStatus: PropTypes.string,
 };
 JobInvocationToolbarButtons.defaultProps = {
-  currentPermissions: undefined,
+  currentPermissions: [],
   permissionsStatus: undefined,
 };
 

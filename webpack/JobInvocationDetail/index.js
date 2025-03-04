@@ -154,6 +154,8 @@ const JobInvocationDetailPage = ({
             finished={finished}
             autoRefresh={autoRefresh}
             initialFilter={selectedFilter}
+            currentPermissions={response.results}
+            permissionsStatus={status}
           />
         )}
       </PageSection>
