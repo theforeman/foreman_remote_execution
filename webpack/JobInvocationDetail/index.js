@@ -58,25 +58,13 @@ const JobInvocationDetailPage = ({
   const handleFilterChange = filter => {
     setSelectedFilter(filter);
   };
-  const getConvertedDate = date =>
-    new Date(
-      date
-        .replace(' ', 'T')
-        .replace(/(-\d{2})(\d{2})$/, '$1:$2')
-        .replace(' ', '')
-    );
 
   let isAlreadyStarted = false;
   let formattedStartDate;
   if (startAt) {
-    const convertedStartAt = getConvertedDate(startAt);
     // eslint-disable-next-line camelcase
-    const convertedResolvedAt = targeting?.resolved_at
-      ? getConvertedDate(targeting.resolved_at)
-      : new Date();
-    isAlreadyStarted =
-      convertedStartAt.getTime() <= convertedResolvedAt.getTime();
-    formattedStartDate = convertedStartAt.toLocaleString(
+    isAlreadyStarted = !!task?.started_at;
+    formattedStartDate = new Date(startAt).toLocaleString(
       documentLocale(),
       DATE_OPTIONS
     );

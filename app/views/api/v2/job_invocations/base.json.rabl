@@ -19,7 +19,7 @@ node do |invocation|
 end
 
 child :task => :dynflow_task do
-  attributes :id, :state
+  attributes :id, :state, :started_at
 end
 
 if params.key?(:include_permissions)
