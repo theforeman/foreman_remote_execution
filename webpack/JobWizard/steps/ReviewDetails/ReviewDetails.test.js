@@ -76,7 +76,7 @@ describe('ReviewDetails', () => {
     expect(screen.getAllByText('Review details')).toHaveLength(3);
     fireEvent.click(
       screen.getByText('Job template', {
-        selector: '.pf-c-button',
+        selector: '.pf-v5-c-button',
       })
     );
     expect(screen.getAllByText('Category and template')).toHaveLength(3);
@@ -88,7 +88,7 @@ describe('ReviewDetails', () => {
     act(() => {
       fireEvent.click(
         screen.getByText('Target hosts', {
-          selector: '.pf-c-button',
+          selector: '.pf-v5-c-button',
         })
       );
       jest.advanceTimersByTime(1000); // to handle pf4 date picker popover useTimer
@@ -100,7 +100,7 @@ describe('ReviewDetails', () => {
     act(() => {
       fireEvent.click(
         screen.getByText('Advanced fields', {
-          selector: '.pf-c-button',
+          selector: '.pf-v5-c-button',
         })
       );
       jest.advanceTimersByTime(1000);

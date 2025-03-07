@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import URI from 'urijs';
-import { SelectVariant } from '@patternfly/react-core';
+import { SelectVariant } from '@patternfly/react-core/deprecated';
 import { get } from 'foremanReact/redux/API';
 import { selectResponse, selectIsLoading } from '../../JobWizardSelectors';
 import { SearchSelect } from '../form/SearchSelect';

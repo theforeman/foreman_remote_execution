@@ -6,8 +6,8 @@ import {
   DescriptionListTerm,
   DescriptionListGroup,
   DescriptionListDescription,
-  WizardContextConsumer,
 } from '@patternfly/react-core';
+import { WizardContextConsumer } from '@patternfly/react-core/deprecated';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'foremanReact/redux/API';

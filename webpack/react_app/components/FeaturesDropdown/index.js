@@ -6,7 +6,7 @@ import {
   Dropdown,
   DropdownToggle,
   DropdownToggleAction,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 import { push } from 'connected-react-router';
 
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';

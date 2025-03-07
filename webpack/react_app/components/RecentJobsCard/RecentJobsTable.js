@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, Bullseye } from '@patternfly/react-core';
-import { TableComposable, Tr, Tbody, Td } from '@patternfly/react-table';
+import { Table, Tr, Tbody, Td } from '@patternfly/react-table';
 import { STATUS } from 'foremanReact/constants';
 
 import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
@@ -41,7 +41,7 @@ const RecentJobsTable = ({ status, hostId }) => {
       }
     >
       {!!jobs?.length && (
-        <TableComposable
+        <Table
           ouiaId="recent-jobs-table"
           aria-label="recent-jobs-table"
           variant="compact"
@@ -72,7 +72,7 @@ const RecentJobsTable = ({ status, hostId }) => {
               )
             )}
           </Tbody>
-        </TableComposable>
+        </Table>
       )}
     </SkeletonLoader>
   );

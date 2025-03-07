@@ -1,13 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Button, Tooltip, Spinner } from '@patternfly/react-core';
 import {
-  Button,
   WizardFooter,
   WizardContextConsumer,
-  Tooltip,
-  Spinner,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { WIZARD_TITLES } from './JobWizardConstants';
 import { selectIsSubmitting } from './JobWizardSelectors';
