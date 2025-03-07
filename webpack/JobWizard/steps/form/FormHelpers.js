@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover, Button } from '@patternfly/react-core';
+import { Popover, Button, Icon } from '@patternfly/react-core';
 import { HelpIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
+import styles from '@patternfly/react-styles/css/components/Form/form';
 
 export const helpLabel = (text, id) => {
   if (!text) return null;
@@ -12,9 +13,11 @@ export const helpLabel = (text, id) => {
         type="button"
         aria-label={__('open-help-tooltip-button')}
         onClick={e => e.preventDefault()}
-        className="pf-c-form__group-label-help"
+        className={styles.formGroupLabelHelp}
       >
-        <HelpIcon noVerticalAlign />
+        <Icon isInline>
+          <HelpIcon />
+        </Icon>
       </button>
     </Popover>
   );
@@ -31,7 +34,7 @@ export const ResetDefault = ({ setValue, defaultValue }) =>
       className="reset-default"
       component="a"
       variant="link"
-      isSmall
+      size="sm"
       onClick={() => setValue(defaultValue)}
     >
       {__('Reset to default')}

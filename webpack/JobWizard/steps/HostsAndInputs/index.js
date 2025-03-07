@@ -8,6 +8,9 @@ import {
   InputGroup,
   Text,
   Spinner,
+  InputGroupItem,
+  FormHelperText,
+  HelperText,
 } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -145,43 +148,40 @@ const HostsAndInputs = ({
         />
       )}
       <Form>
-        <FormGroup
-          fieldId="host_selection"
-          id="host-selection"
-          helperTextInvalid={errorText}
-          validated={isError ? 'error' : 'default'}
-        >
+        <FormGroup fieldId="host_selection" id="host-selection">
           <InputGroup onBlur={() => setWasFocus(true)}>
-            <SelectField
-              isRequired
-              className="target-method-select"
-              toggleIcon={<FilterIcon />}
-              fieldId="host_methods"
-              options={Object.values(hostMethods).filter(method => {
-                if (method === hostMethods.hostCollections && !withKatello) {
-                  return false;
-                }
-                return true;
-              })}
-              setValue={val => {
-                setHostMethod(val);
-                if (val === hostMethods.searchQuery) {
-                  setErrorText(__('Please enter a search query'));
-                }
-                if (val === hostMethods.hosts) {
-                  setErrorText(__('Please select at least one host'));
-                }
-                if (val === hostMethods.hostCollections) {
-                  setErrorText(
-                    __('Please select at least one host collection')
-                  );
-                }
-                if (val === hostMethods.hostGroups) {
-                  setErrorText(__('Please select at least one host group'));
-                }
-              }}
-              value={hostMethod}
-            />
+            <InputGroupItem>
+              <SelectField
+                isRequired
+                className="target-method-select"
+                toggleIcon={<FilterIcon />}
+                fieldId="host_methods"
+                options={Object.values(hostMethods).filter(method => {
+                  if (method === hostMethods.hostCollections && !withKatello) {
+                    return false;
+                  }
+                  return true;
+                })}
+                setValue={val => {
+                  setHostMethod(val);
+                  if (val === hostMethods.searchQuery) {
+                    setErrorText(__('Please enter a search query'));
+                  }
+                  if (val === hostMethods.hosts) {
+                    setErrorText(__('Please select at least one host'));
+                  }
+                  if (val === hostMethods.hostCollections) {
+                    setErrorText(
+                      __('Please select at least one host collection')
+                    );
+                  }
+                  if (val === hostMethods.hostGroups) {
+                    setErrorText(__('Please select at least one host group'));
+                  }
+                }}
+                value={hostMethod}
+              />
+            </InputGroupItem>
             {hostMethod === hostMethods.searchQuery && (
               <HostSearch
                 setValue={setHostsSearchQuery}
@@ -220,6 +220,11 @@ const HostsAndInputs = ({
               />
             )}
           </InputGroup>
+          {isError && (
+            <FormHelperText>
+              <HelperText>{errorText}</HelperText>
+            </FormHelperText>
+          )}
         </FormGroup>
         <SelectedChips
           selectedHosts={selectedHosts}

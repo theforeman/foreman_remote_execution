@@ -32,7 +32,7 @@ export const RepeatWeek = ({ repeatData, setRepeatData, setValid }) => {
     return () => setValid(true);
   }, [setValid, daysOfWeek, at]);
   const days = getWeekDays();
-  const handleChangeDays = (checked, { target: { name } }) => {
+  const handleChangeDays = ({ target: { name } }, checked) => {
     setRepeatData({
       ...repeatData,
       daysOfWeek: { ...repeatData.daysOfWeek, [name]: checked },

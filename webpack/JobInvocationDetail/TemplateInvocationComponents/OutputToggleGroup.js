@@ -97,7 +97,7 @@ export const OutputToggleGroup = ({
                 text={text}
                 buttonId={id}
                 isSelected={isSelected}
-                onChange={onClick}
+                onChange={(_event, val) => onClick(val)}
               />
             )
           )}

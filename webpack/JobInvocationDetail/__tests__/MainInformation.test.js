@@ -97,7 +97,7 @@ describe('JobInvocationDetailPage', () => {
 
     expect(screen.getByText('Description')).toBeInTheDocument();
     expect(
-      container.querySelector('.chart-donut .pf-c-chart')
+      container.querySelector('.chart-donut .pf-c-chart') // todo: change to pf5 once we update @patternfly/react-charts to v7
     ).toBeInTheDocument();
     expect(screen.getByText('2/6')).toBeInTheDocument();
     expect(screen.getByText('Systems')).toBeInTheDocument();
@@ -116,22 +116,22 @@ describe('JobInvocationDetailPage', () => {
 
     Object.entries(informationToCheck).forEach(([term, expectedText]) => {
       const termContainers = container.querySelectorAll(
-        '.pf-c-description-list__term .pf-c-description-list__text'
+        '.pf-v5-c-description-list__term .pf-v5-c-description-list__text'
       );
       termContainers.forEach(termContainer => {
         if (termContainer.textContent.includes(term)) {
           let descriptionContainer;
           if (term === 'SSH user:') {
             descriptionContainer = termContainer
-              .closest('.pf-c-description-list__group')
+              .closest('.pf-v5-c-description-list__group')
               .querySelector(
-                '.pf-c-description-list__description .pf-c-description-list__text .disabled-text'
+                '.pf-v5-c-description-list__description .pf-v5-c-description-list__text .disabled-text'
               );
           } else {
             descriptionContainer = termContainer
-              .closest('.pf-c-description-list__group')
+              .closest('.pf-v5-c-description-list__group')
               .querySelector(
-                '.pf-c-description-list__description .pf-c-description-list__text'
+                '.pf-v5-c-description-list__description .pf-v5-c-description-list__text'
               );
           }
           expect(descriptionContainer.textContent).toContain(expectedText);

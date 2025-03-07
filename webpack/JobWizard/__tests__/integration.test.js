@@ -59,26 +59,28 @@ describe('Job wizard fill', () => {
         <JobWizard />
       </Provider>
     );
-    expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(
-      5
-    );
+    expect(
+      wrapper.find('.pf-v5-c-wizard__nav-link.pf-m-disabled')
+    ).toHaveLength(5);
     selectors.selectJobCategoriesStatus.mockImplementation(() => 'RESOLVED');
     expect(store.getActions()).toMatchSnapshot('initial');
     selectors.selectJobTemplate.mockRestore();
     jest.spyOn(selectors, 'selectJobTemplate');
     selectors.selectJobTemplate.mockImplementation(() => jobTemplate);
-    wrapper.find('.pf-c-button.pf-c-select__toggle-button').simulate('click');
+    wrapper
+      .find('.pf-v5-c-button.pf-v5-c-select__toggle-button')
+      .simulate('click');
     await act(async () => {
       await wrapper
-        .find('.pf-c-select__menu-item')
+        .find('.pf-v5-c-select__menu-item')
         .first()
         .simulate('click');
     });
     expect(store.getActions().slice(-1)).toMatchSnapshot('select template');
     wrapper.update();
-    expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(
-      0
-    );
+    expect(
+      wrapper.find('.pf-v5-c-wizard__nav-link.pf-m-disabled')
+    ).toHaveLength(0);
   });
 
   it('have all steps', async () => {

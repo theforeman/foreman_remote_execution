@@ -126,6 +126,6 @@ describe('TemplateInvocation', () => {
       />
     );
 
-    expect(document.querySelectorAll('.pf-c-skeleton')).toHaveLength(1);
+    expect(document.querySelectorAll('.pf-v5-c-skeleton')).toHaveLength(1);
   });
 });

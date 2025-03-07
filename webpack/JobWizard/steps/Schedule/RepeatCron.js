@@ -72,7 +72,7 @@ export const RepeatCron = ({ repeatData, setRepeatData, setValid }) => {
         placeholder="* * * * *"
         type="text"
         value={cronline || ''}
-        onChange={newTime => {
+        onChange={(_event, newTime) => {
           setRepeatData({ cronline: newTime });
         }}
       />

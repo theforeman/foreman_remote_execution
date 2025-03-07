@@ -6,10 +6,10 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import { FormattedMessage } from 'react-intl';
 import { Tr, Td, Tbody, ExpandableRowContent } from '@patternfly/react-table';
 import {
-  Title,
   EmptyState,
   EmptyStateVariant,
   EmptyStateBody,
+  EmptyStateHeader,
 } from '@patternfly/react-core';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
@@ -163,9 +163,10 @@ const JobInvocationHostTable = ({
           <span className="empty-state-icon">
             <Icon name="add-circle-o" type="pf" size="2x" />
           </span>
-          <Title ouiaId="empty-state-header" headingLevel="h5" size="4xl">
-            {__('No Results')}
-          </Title>
+          <EmptyStateHeader
+            titleText={<>{__('No Results')}</>}
+            headingLevel="h5"
+          />
           <EmptyStateBody>
             <div className="empty-state-description">
               {targeting?.targeting_type === 'dynamic_query' ? (
@@ -217,10 +218,12 @@ const JobInvocationHostTable = ({
             setShowAlert={setShowAlert}
             results={results}
             id={id}
+            key="OpenAlInvocations"
           />,
           <JobInvocationHostTableToolbar
             dropdownFilter={selectedFilter}
             setDropdownFilter={wrapSetSelectedFilter}
+            key="JobInvocationHostTableToolbar"
           />,
         ]}
       >

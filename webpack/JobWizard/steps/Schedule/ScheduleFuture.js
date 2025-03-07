@@ -4,7 +4,9 @@ import {
   FormGroup,
   Form,
   Button,
-  ValidatedOptions,
+  FormHelperText,
+  HelperText,
+  HelperTextItem,
 } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { DateTimePicker } from '../form/DateTimePicker';
@@ -85,8 +87,6 @@ export const ScheduleFuture = ({
             ),
             'start-before-date'
           )}
-          validated={error ? ValidatedOptions.error : ValidatedOptions.noval}
-          helperTextInvalid={error}
         >
           <DateTimePicker
             ariaLabel="starts before"
@@ -112,6 +112,13 @@ export const ScheduleFuture = ({
           >
             {__('Clear input')}
           </Button>
+          {error && (
+            <FormHelperText>
+              <HelperText>
+                <HelperTextItem variant="error">{error}</HelperTextItem>
+              </HelperText>
+            </FormHelperText>
+          )}
         </FormGroup>
       </Form>
     </>

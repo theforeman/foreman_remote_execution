@@ -44,18 +44,20 @@ describe('AdvancedFields', () => {
       </MockedProvider>
     );
     // setup
-    wrapper.find('.pf-c-button.pf-c-select__toggle-button').simulate('click');
     wrapper
-      .find('.pf-c-select__menu-item')
+      .find('.pf-v5-c-button.pf-v5-c-select__toggle-button')
+      .simulate('click');
+    wrapper
+      .find('.pf-v5-c-select__menu-item')
       .first()
       .simulate('click');
 
     // test
-    expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(
-      0
-    );
+    expect(
+      wrapper.find('.pf-v5-c-wizard__nav-link.pf-m-disabled')
+    ).toHaveLength(0);
     wrapper
-      .find('.pf-c-wizard__nav-link')
+      .find('.pf-v5-c-wizard__nav-link')
       .at(2)
       .simulate('click'); // Advanced step
 
@@ -64,7 +66,7 @@ describe('AdvancedFields', () => {
     });
     const effectiveUserInput = () => wrapper.find('input#effective-user');
     const advancedTemplateInput = () =>
-      wrapper.find('.pf-c-form__group-control textarea');
+      wrapper.find('.pf-v5-c-form__group-control textarea');
     const effectiveUesrValue = 'effective user new value';
     const advancedTemplateInputValue = 'advanced input new value';
     effectiveUserInput().getDOMNode().value = effectiveUesrValue;
@@ -79,15 +81,15 @@ describe('AdvancedFields', () => {
     );
 
     wrapper
-      .find('.pf-c-wizard__nav-link')
+      .find('.pf-v5-c-wizard__nav-link')
       .at(1)
       .simulate('click');
 
-    expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-current').text()).toEqual(
-      'Target hosts and inputs'
-    );
+    expect(
+      wrapper.find('.pf-v5-c-wizard__nav-link.pf-m-current').text()
+    ).toEqual('Target hosts and inputs');
     wrapper
-      .find('.pf-c-wizard__nav-link')
+      .find('.pf-v5-c-wizard__nav-link')
       .at(2)
       .simulate('click'); // Advanced step
 

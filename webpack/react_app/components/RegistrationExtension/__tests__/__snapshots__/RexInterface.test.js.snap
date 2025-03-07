@@ -13,14 +13,14 @@ exports[`RexInterface renders 1`] = `
       }
     >
       <button
-        className="pf-c-form__group-label-help"
+        className="pf-v5-cform__group-label-help"
         onClick={[Function]}
       >
-        <HelpIcon
-          color="currentColor"
-          noVerticalAlign={true}
-          size="sm"
-        />
+        <Icon
+          isInline={true}
+        >
+          <HelpIcon />
+        </Icon>
       </button>
     </Popover>
   }
