@@ -5,8 +5,10 @@ import {
   FormGroup,
   Radio,
   TextInput,
-  ValidatedOptions,
   Divider,
+  FormHelperText,
+  HelperText,
+  HelperTextItem,
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
@@ -86,7 +88,7 @@ export const ScheduleRecurring = ({
       <WizardTitle title={SCHEDULE_TYPES.RECURRING} />
       <Form className="schedule-tab">
         <FormGroup label={__('Starts')} fieldId="schedule-starts">
-          <div className="pf-c-form">
+          <div className="pf-v5-cform">
             <FormGroup fieldId="schedule-starts-now">
               <Radio
                 ouiaId="schedule-start-now"
@@ -162,7 +164,7 @@ export const ScheduleRecurring = ({
         />
         <Divider component="div" />
         <FormGroup label={__('Ends')} fieldId="schedule-ends">
-          <div className="pf-c-form">
+          <div className="pf-v5-cform">
             <FormGroup fieldId="schedule-ends-never">
               <Radio
                 ouiaId="schedule-never-ends"
@@ -180,14 +182,7 @@ export const ScheduleRecurring = ({
                 label={__('Never')}
               />
             </FormGroup>
-            <FormGroup
-              fieldId="ends-on-date"
-              validated={
-                validEnd ? ValidatedOptions.noval : ValidatedOptions.error
-              }
-              helperTextInvalid={__('End time needs to be after start time')}
-              helperTextInvalidIcon={<ExclamationCircleIcon />}
-            >
+            <FormGroup fieldId="ends-on-date">
               <Radio
                 ouiaId="schedule-ends-on-date"
                 isChecked={!!ends}
@@ -219,6 +214,18 @@ export const ScheduleRecurring = ({
                   </div>
                 }
               />
+              {!validEnd && (
+                <FormHelperText>
+                  <HelperText>
+                    <HelperTextItem
+                      icon={<ExclamationCircleIcon />}
+                      variant="error"
+                    >
+                      {__('End time needs to be after start time')}
+                    </HelperTextItem>
+                  </HelperText>
+                </FormHelperText>
+              )}
             </FormGroup>
             <FormGroup fieldId="ends-after">
               <Radio
@@ -238,21 +245,24 @@ export const ScheduleRecurring = ({
                 label={
                   <div className="schedule-radio-wrapper">
                     <div className="schedule-radio-title">{__('After')}</div>
-                    <FormGroup
-                      helperTextInvalid={__(
-                        'Repeat amount can only be a positive number'
-                      )}
-                      validated={repeatValidated}
-                      className="schedule-radio-repeat-text"
-                    >
+                    <FormGroup className="schedule-radio-repeat-text">
                       <TextInput
                         ouiaId="repeat-amount"
                         id="repeat-amount"
                         value={repeatAmount || ''}
                         type="number"
-                        onChange={handleRepeatInputChange}
+                        onChange={(_event, newValue) =>
+                          handleRepeatInputChange(newValue)
+                        }
                         isDisabled={!(repeatAmount === 0 || !!repeatAmount)}
                       />
+                      {repeatValidated === 'error' && (
+                        <HelperText>
+                          <HelperTextItem variant="error">
+                            {__('Repeat amount can only be a positive number')}
+                          </HelperTextItem>
+                        </HelperText>
+                      )}
                     </FormGroup>
                     <div className="schedule-radio-occurences">
                       {__('occurences')}

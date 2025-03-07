@@ -15,22 +15,22 @@
 
     .legend-title {
       font-weight: bold;
-      font-size: var(--pf-global--FontSize--sm);
+      font-size: var(--pf-v5-global--FontSize--sm);
       margin-left: 8px;
       margin-bottom: 0;
     }
 
-    .pf-c-description-list {
+    .pf-v5-c-description-list {
       margin-left: 8px;
       margin-top: 8px;
 
-      .pf-c-description-list__term .pf-c-description-list__text {
+      .pf-v5-c-description-list__term .pf-v5-c-description-list__text {
         font-weight: normal;
       }
     }
   }
 
-  .pf-c-divider {
+  .pf-v5-c-divider {
     max-height: $chart_size;
   }
 
@@ -104,7 +104,7 @@
     margin-top: 10px;
   }
 
-  .pf-c-toggle-group {
+  .pf-v5-c-toggle-group {
     margin-bottom: 10px;
   }
 }

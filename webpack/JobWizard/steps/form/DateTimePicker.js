@@ -75,7 +75,7 @@ export const DateTimePicker = ({
     }
   };
 
-  const onTimeChange = newTime => {
+  const onTimeChange = (e, newTime) => {
     if (!newTime.length && allowEmpty) {
       const parsedNewTime = new Date(`${formattedDate} 00:00`);
       setDateTime(formatDateTime(parsedNewTime));

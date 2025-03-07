@@ -25,7 +25,7 @@ export const EffectiveUserField = ({ value, setValue, defaultValue }) => (
       id="effective-user"
       type="text"
       value={value}
-      onChange={newValue => setValue(newValue)}
+      onChange={(_event, newValue) => setValue(newValue)}
     />
   </FormGroup>
 );
@@ -94,7 +94,7 @@ export const PasswordField = ({ value, setValue }) => (
       type="password"
       placeholder="*****"
       value={value}
-      onChange={newValue => setValue(newValue)}
+      onChange={(_event, newValue) => setValue(newValue)}
     />
   </FormGroup>
 );
@@ -118,7 +118,7 @@ export const KeyPassphraseField = ({ value, setValue }) => (
       type="password"
       placeholder="*****"
       value={value}
-      onChange={newValue => setValue(newValue)}
+      onChange={(_event, newValue) => setValue(newValue)}
     />
   </FormGroup>
 );
@@ -142,7 +142,7 @@ export const EffectiveUserPasswordField = ({ value, setValue }) => (
       type="password"
       placeholder="*****"
       value={value}
-      onChange={newValue => setValue(newValue)}
+      onChange={(_event, newValue) => setValue(newValue)}
     />
   </FormGroup>
 );
@@ -228,7 +228,7 @@ export const SSHUserField = ({ value, setValue, defaultValue }) => (
       id="ssh-user"
       type="text"
       value={value}
-      onChange={newValue => setValue(newValue)}
+      onChange={(_event, newValue) => setValue(newValue)}
     />
   </FormGroup>
 );

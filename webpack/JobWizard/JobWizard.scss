@@ -1,21 +1,21 @@
 .job-wizard {
-  font-size: var(--pf-global--FontSize--md);
+  font-size: var(--pf-v5-global--FontSize--md);
   .wizard-title {
     margin-bottom: 25px;
   }
 
-  .pf-c-wizard__nav.pf-m-expanded {
+  .pf-v5-c-wizard__nav.pf-m-expanded {
     z-index: calc(
-      var(--pf-c-wizard__toggle--ZIndex) + 2
+      var(--pf-v5-cwizard__toggle--ZIndex) + 2
     ); // So the small screen navigation can be shown above the select box and wizard body
   }
 
-  .pf-c-wizard__main {
+  .pf-v5-c-wizard__main {
     z-index: calc(
-      var(--pf-c-wizard__toggle--ZIndex) + 1
+      var(--pf-v5-cwizard__toggle--ZIndex) + 1
     ); // So the select box can be shown above the wizard footer and navigation toggle
   }
-  .pf-c-wizard__main-body {
+  .pf-v5-c-wizard__main-body {
     @media (max-width: 600px) {
       max-width: 100%;
     }
@@ -34,19 +34,19 @@
   }
 
   .gray-text {
-    color: var(--pf-global--Color--dark-200);
+    color: var(--pf-v5-global--Color--dark-200);
   }
 
   .target-hosts-and-inputs {
-    .pf-c-chip-group.pf-m-category {
+    .pf-v5-c-chip-group.pf-m-category {
       margin-bottom: 10px;
     }
-    .pf-c-select__toggle-typeahead {
+    .pf-v5-c-select__toggle-typeahead {
       border: 0px;
     }
 
     .target-method-select {
-      .pf-c-select__toggle-wrapper {
+      .pf-v5-c-select__toggle-wrapper {
         flex-wrap: nowrap;
       }
     }
@@ -63,8 +63,8 @@
       display: grid;
       grid-template-columns: repeat(7, 1fr);
     }
-    .pf-l-grid {
-      gap: var(--pf-c-form--GridGap);
+    .pf-v5-l-grid {
+      gap: var(--pf-v5-cform--GridGap);
     }
     #repeat-on-hourly {
       max-height: 300px;
@@ -99,14 +99,14 @@
     .clear-datetime-button {
       margin-left: 10px;
       align-self: center;
-      font-size: var(--pf-global--FontSize--md);
+      font-size: var(--pf-v5-global--FontSize--md);
     }
-    .pf-c-form__group-control {
+    .pf-v5-c-form__group-control {
       display: flex;
       flex-wrap: wrap;
     }
   }
-  .pf-c-date-picker {
+  .pf-v5-c-date-picker {
     vertical-align: top;
   }
 
@@ -123,7 +123,7 @@
     min-height: 40px;
     min-width: 100px;
   }
-  .pf-c-modal-box {
+  .pf-v5-c-modal-box {
     width: auto;
   }
 
@@ -132,15 +132,15 @@
       margin-left: 10px;
     }
   }
-  .pf-c-radio__body {
-    font-size: var(--pf-c-radio__label--FontSize);
+  .pf-v5-c-radio__body {
+    font-size: var(--pf-v5-cradio__label--FontSize);
   }
   .reset-default {
     padding-bottom: 0;
   }
 }
 
-.job-wizard-alert.pf-c-alert.pf-m-warning {
+.job-wizard-alert.pf-v5-c-alert.pf-m-warning {
   margin-bottom: 10px;
   margin-top: 10px;
 }

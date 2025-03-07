@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { Icon } from 'patternfly-react';
 import {
-  Title,
   Button,
   EmptyState,
   EmptyStateVariant,
-  EmptyStateBody,
+  EmptyStateBody, EmptyStateHeader, EmptyStateFooter,
 } from '@patternfly/react-core';
 
 const PermissionDenied = ({ missingPermissions, setProceedAnyway }) => {
@@ -37,10 +36,8 @@ const PermissionDenied = ({ missingPermissions, setProceedAnyway }) => {
       <span className="empty-state-icon">
         <Icon name="lock" type="fa" size="2x" />
       </span>
-      <Title ouiaId="empty-state-header" headingLevel="h5" size="4xl">
-        {__('Permission Denied')}
-      </Title>
-      <EmptyStateBody>{description}</EmptyStateBody>
+      <EmptyStateHeader titleText={<>{__('Permission Denied')}</>} headingLevel="h5" />
+      <EmptyStateBody>{description}</EmptyStateBody><EmptyStateFooter>
       <Button
         ouiaId="job-invocation-proceed-anyway-button"
         variant="primary"
@@ -48,7 +45,7 @@ const PermissionDenied = ({ missingPermissions, setProceedAnyway }) => {
       >
         {__('Proceed Anyway')}
       </Button>
-    </EmptyState>
+    </EmptyStateFooter></EmptyState>
   );
 };
 
