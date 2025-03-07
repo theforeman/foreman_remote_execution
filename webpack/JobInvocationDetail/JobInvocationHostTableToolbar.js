@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { Select, SelectOption, SelectList } from '@patternfly/react-core/next'; // remove "/next" after switching to PF5
-import { MenuToggle, ToolbarItem } from '@patternfly/react-core';
+import {
+  MenuToggle,
+  ToolbarItem,
+  Select,
+  SelectOption,
+  SelectList,
+} from '@patternfly/react-core';
 import { STATUS_TITLES } from './JobInvocationConstants';
 
 const JobInvocationHostTableToolbar = ({
@@ -43,7 +48,7 @@ const JobInvocationHostTableToolbar = ({
           {Object.values(STATUS_TITLES).map(result => (
             <SelectOption
               key={result.id}
-              itemId={result.id}
+              value={result.id}
               isSelected={result.id === dropdownFilter}
             >
               {result.title}

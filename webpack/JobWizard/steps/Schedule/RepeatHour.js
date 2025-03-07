@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormGroup,
-  Select,
-  SelectOption,
-  SelectVariant,
   Alert,
   AlertActionCloseButton,
   ValidatedOptions,
 } from '@patternfly/react-core';
+import {
+  Select,
+  SelectOption,
+  SelectVariant,
+} from '@patternfly/react-core/deprecated';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { helpLabel } from '../form/FormHelpers';
 
@@ -43,7 +45,7 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
           setMinuteOpen(false);
         }}
         selections={`${minute}` || ''}
-        onToggle={toggle => {
+        onToggle={(_event, toggle) => {
           setMinuteOpen(toggle);
         }}
         isOpen={minuteOpen}

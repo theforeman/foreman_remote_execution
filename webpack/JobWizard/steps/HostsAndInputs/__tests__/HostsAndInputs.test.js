@@ -43,7 +43,7 @@ describe('Hosts', () => {
     await act(async () => {
       fireEvent.click(
         screen.getByText('host1', {
-          selector: '.pf-c-select__menu-item',
+          selector: '.pf-v5-c-select__menu-item',
         })
       );
       fireEvent.blur(select('hosts'));
@@ -56,7 +56,7 @@ describe('Hosts', () => {
       fireEvent.click(screen.getByText('host2'));
     });
     fireEvent.click(
-      screen.getByText('Hosts', { selector: '.pf-c-select__toggle-text' })
+      screen.getByText('Hosts', { selector: '.pf-v5-c-select__toggle-text' })
     );
     await act(async () => {
       fireEvent.click(screen.getByText('Host groups'));
@@ -71,7 +71,7 @@ describe('Hosts', () => {
     await act(async () => {
       fireEvent.click(
         screen.getByText('Host groups', {
-          selector: '.pf-c-select__toggle-text',
+          selector: '.pf-v5-c-select__toggle-text',
         })
       );
     });
@@ -128,7 +128,7 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('Hosts')).toHaveLength(1);
     await act(async () => {
       fireEvent.click(
-        screen.getByText('Hosts', { selector: '.pf-c-select__toggle-text' })
+        screen.getByText('Hosts', { selector: '.pf-v5-c-select__toggle-text' })
       );
     });
     expect(screen.queryAllByText('Host groups')).toHaveLength(1);
@@ -138,7 +138,7 @@ describe('Hosts', () => {
     await act(async () => {
       fireEvent.click(
         // Close the select
-        screen.getByText('Hosts', { selector: '.pf-c-select__toggle-text' })
+        screen.getByText('Hosts', { selector: '.pf-v5-c-select__toggle-text' })
       );
     });
   });

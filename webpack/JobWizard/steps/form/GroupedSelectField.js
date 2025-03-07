@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FormGroup } from '@patternfly/react-core';
 import {
   SelectOption,
   Select,
   SelectGroup,
   SelectVariant,
-  FormGroup,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 
 export const GroupedSelectField = ({
   label,
@@ -62,7 +62,7 @@ export const GroupedSelectField = ({
         ouiaId={fieldId}
         isGrouped
         variant={SelectVariant.typeahead}
-        onToggle={setIsOpen}
+        onToggle={(_event, val) => setIsOpen(val)}
         onFilter={onFilter}
         isOpen={isOpen}
         onSelect={() => null}

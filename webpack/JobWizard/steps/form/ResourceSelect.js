@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import {
+  Select,
+  SelectOption,
+  SelectVariant,
+} from '@patternfly/react-core/deprecated';
 import Immutable from 'seamless-immutable';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { useForemanSettings } from 'foremanReact/Root/Context/ForemanContext';
@@ -104,9 +108,9 @@ export const ResourceSelect = ({
       selections={selected}
       loadingVariant={isLoading ? 'spinner' : null}
       onSelect={onSelect}
-      onToggle={setIsOpen}
-      onFilter={onFilter}
-      onClear={onClear}
+      onToggle={(_event, val) => setIsOpen(val)}
+      onFilter={(_event, val) => onFilter(val)}
+      onClear={(_event, val) => onClear(val)}
       isOpen={isOpen}
       className="without_select2"
       maxHeight="45vh"

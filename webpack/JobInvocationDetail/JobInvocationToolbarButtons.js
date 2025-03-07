@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, Split, SplitItem } from '@patternfly/react-core';
 import {
-  Button,
   Dropdown,
   DropdownItem,
   DropdownPosition,
   DropdownSeparator,
   DropdownToggle,
-  Split,
-  SplitItem,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import { STATUS as APIStatus } from 'foremanReact/constants';
@@ -242,7 +240,7 @@ const JobInvocationToolbarButtons = ({
                   </Button>,
                 ]}
                 splitButtonVariant="action"
-                onToggle={setIsActionOpen}
+                onToggle={(_event, val) => setIsActionOpen(val)}
               />
             }
             isOpen={isActionOpen}

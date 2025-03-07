@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import { DropdownItem, Tabs, Tab, TabTitleText } from '@patternfly/react-core';
+import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import CardTemplate from 'foremanReact/components/HostDetails/Templates/CardItem/CardTemplate';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
