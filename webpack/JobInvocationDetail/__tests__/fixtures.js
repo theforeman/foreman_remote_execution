@@ -41,6 +41,7 @@ export const jobInvocationData = {
   task: {
     id: '37ad5ead-51de-4798-bc73-a17687c4d5aa',
     state: 'stopped',
+    started_at: '2024-01-01 12:34:56 +0100',
   },
   template_invocations: [
     {

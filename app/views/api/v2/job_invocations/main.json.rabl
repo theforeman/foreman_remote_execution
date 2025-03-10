@@ -31,7 +31,7 @@ child :targeting do
 end
 
 child :task do
-  attributes :id, :state
+  attributes :id, :state, :started_at
 end
 
 child @template_invocations do
