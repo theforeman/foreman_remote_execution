@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import React, { useMemo, useEffect, useState } from 'react';
@@ -6,6 +7,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import { FormattedMessage } from 'react-intl';
 import { Tr, Td, Tbody, ExpandableRowContent } from '@patternfly/react-table';
 import {
+  ToolbarItem,
   Title,
   EmptyState,
   EmptyStateVariant,
@@ -20,15 +22,18 @@ import {
   useBulkSelect,
   useUrlParams,
 } from 'foremanReact/components/PF4/TableIndexPage/Table/TableHooks';
+import { RowSelectTd } from 'foremanReact/components/HostsIndex/RowSelectTd';
 import { getControllerSearchProps } from 'foremanReact/constants';
+import SelectAllCheckbox from 'foremanReact/components/PF4/TableIndexPage/Table/SelectAllCheckbox';
+import { getPageStats } from 'foremanReact/components/PF4/TableIndexPage/Table/helpers';
 import Columns, {
   JOB_INVOCATION_HOSTS,
   STATUS_UPPERCASE,
 } from './JobInvocationConstants';
 import { TemplateInvocation } from './TemplateInvocation';
-import { OpenAlInvocations, PopupAlert } from './OpenAlInvocations';
+import { OpenAllInvocations, PopupAlert } from './OpenAllInvocations';
 import { RowActions } from './TemplateInvocationComponents/TemplateActionButtons';
-import JobInvocationHostTableToolbar from './JobInvocationHostTableToolbar';
+import DropdownFilter from './DropdownFilter';
 
 const JobInvocationHostTable = ({
   id,
@@ -74,18 +79,68 @@ const JobInvocationHostTable = ({
     }
   );
 
+  // getting IDs of all the hosts (maximum is 100)
+  const [allPagesResponse, setAllPagesResponse] = useState([]);
+  const apiAllParams = {
+    page: 1,
+    per_page: Math.min(response?.subtotal || 1, 100),
+    search: constructFilter(selectedFilter, urlSearchQuery),
+  };
+
+  const { response: allResponse, setAPIOptions: setAllAPIOptions } = useAPI(
+    'get',
+    `/api/job_invocations/${id}/hosts`,
+    {
+      params: apiAllParams,
+    }
+  );
+
+  useEffect(() => {
+    if (response?.subtotal) {
+      setAllAPIOptions(prevOptions => ({
+        ...prevOptions,
+        params: apiAllParams,
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response?.subtotal, selectedFilter, urlSearchQuery]);
+
+  useEffect(() => {
+    if (allResponse?.results) {
+      setAllPagesResponse(allResponse.results);
+    }
+  }, [allResponse]);
+
   const { params } = useSetParamsAndApiAndSearch({
     defaultParams,
     apiOptions,
     setAPIOptions,
   });
 
-  const { updateSearchQuery: updateSearchQueryBulk } = useBulkSelect({
+  const {
+    updateSearchQuery: updateSearchQueryBulk,
+    fetchBulkParams,
+    ...selectAllOptions
+  } = useBulkSelect({
+    results: response?.results,
+    metadata: {
+      total: response?.total,
+      page: response?.page,
+      selectable: response?.subtotal,
+    },
     initialSearchQuery: urlSearchQuery,
   });
-  const updateSearchQuery = searchQuery => {
-    updateSearchQueryBulk(searchQuery);
-  };
+
+  const {
+    selectAll,
+    selectPage,
+    selectNone,
+    selectedCount,
+    selectOne,
+    areAllRowsOnPageSelected,
+    areAllRowsSelected,
+    isSelected,
+  } = selectAllOptions;
 
   const controller = 'hosts';
   const memoDefaultSearchProps = useMemo(
@@ -156,6 +211,30 @@ const JobInvocationHostTable = ({
     setAPIOptions: wrapSetAPIOptions,
   };
 
+  const { pageRowCount } = getPageStats({
+    total: response?.total || 0,
+    page: response?.page || urlPage || 1,
+    perPage: response?.perPage || urlPerPage || 0,
+  });
+  const selectionToolbar = (
+    <ToolbarItem key="selectAll">
+      <SelectAllCheckbox
+        {...{
+          selectAll,
+          selectPage,
+          selectNone,
+          selectedCount,
+          pageRowCount,
+        }}
+        totalCount={response?.total}
+        areAllRowsOnPageSelected={areAllRowsOnPageSelected()}
+        areAllRowsSelected={areAllRowsSelected()}
+      />
+    </ToolbarItem>
+  );
+
+  const bulkParams = selectedCount ? fetchBulkParams() : null;
+
   const customEmptyState = (
     <Tr ouiaId="table-empty">
       <Td colSpan={100}>
@@ -211,18 +290,24 @@ const JobInvocationHostTable = ({
         controller="hosts"
         creatable={false}
         replacementResponse={combinedResponse}
-        updateSearchQuery={updateSearchQuery}
+        updateSearchQuery={updateSearchQueryBulk}
         customToolbarItems={[
-          <OpenAlInvocations
-            setShowAlert={setShowAlert}
-            results={results}
-            id={id}
-          />,
-          <JobInvocationHostTableToolbar
+          <DropdownFilter
+            key="dropdown-filter"
             dropdownFilter={selectedFilter}
             setDropdownFilter={wrapSetSelectedFilter}
           />,
+          <OpenAllInvocations
+            bulkParams={bulkParams}
+            allHostsIds={allPagesResponse?.map(item => item.id) || []}
+            isAllSelected={areAllRowsSelected()}
+            key="open-all-invocations"
+            setShowAlert={setShowAlert}
+            currentPageIds={results}
+            id={id}
+          />,
         ]}
+        selectionToolbar={selectionToolbar}
       >
         <Table
           ouiaId="job-invocation-hosts-table"
@@ -237,6 +322,7 @@ const JobInvocationHostTable = ({
           itemCount={response?.subtotal}
           results={response?.results}
           url=""
+          showCheckboxes
           refreshData={() => {}}
           errorMessage={
             status === STATUS_UPPERCASE.ERROR && response?.message
@@ -247,7 +333,7 @@ const JobInvocationHostTable = ({
           isDeleteable={false}
           childrenOutsideTbody
         >
-          {results?.map((result, rowIndex) => (
+          {response?.results?.map((result, rowIndex) => (
             <Tbody key={rowIndex}>
               <Tr ouiaId={`table-row-${rowIndex}`}>
                 <Td
@@ -259,6 +345,12 @@ const JobInvocationHostTable = ({
                     expandId: 'host-expandable',
                   }}
                 />
+                {
+                  <RowSelectTd
+                    rowData={result}
+                    {...{ selectOne, isSelected }}
+                  />
+                }
                 {columnNamesKeys.slice(1).map(k => (
                   <Td key={k}>{columns[k].wrapper(result)}</Td>
                 ))}
@@ -301,7 +393,5 @@ JobInvocationHostTable.propTypes = {
   autoRefresh: PropTypes.bool.isRequired,
   initialFilter: PropTypes.string.isRequired,
 };
-
-JobInvocationHostTable.defaultProps = {};
 
 export default JobInvocationHostTable;
