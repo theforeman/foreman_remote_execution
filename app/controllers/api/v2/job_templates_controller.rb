@@ -23,10 +23,13 @@ module Api
       end
 
       api :POST, '/job_templates/import', N_('Import a job template from ERB')
+      param_group :template_import_options, ::Api::V2::BaseController
       param :template, String, :required => true, :desc => N_('Template ERB')
       param :overwrite, :bool, :required => false, :desc => N_('Overwrite template if it already exists')
       def import
         options = params[:overwrite] ? { :update => true } : { :build_new => true }
+        # the Template superclass expects hash indexed by symbols
+        options = options.merge(params.permit(:options => {}).try(:[], :options).try(:to_h) || {}).with_indifferent_access
 
         @job_template = JobTemplate.import_raw(params[:template], options)
         @job_template ||= JobTemplate.new
