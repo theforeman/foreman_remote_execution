@@ -151,3 +151,23 @@ export const TARGETING_TYPES = {
   [STATIC_TYPE]: __('Static Query'),
   [DYNAMIC_TYPE]: __('Dynamic Query'),
 };
+
+export const getIdsArray = (bulkParams, allHostsIds, isAllSelected) => {
+  if (!bulkParams) {
+    return isAllSelected ? allHostsIds : [];
+  }
+  // bulkParams in format `id ^ (1,2,3)`
+  const includeIdsMatch = bulkParams.match(/id \^ \(([^)]+)\)/);
+  if (includeIdsMatch) {
+    return includeIdsMatch[1].split(',').map(id => id.trim());
+  }
+  // bulkParams in format `id !^ (1,2,3)`
+  const excludeIdsMatch = bulkParams.match(/id !\^ \(([^)]+)\)/);
+  if (excludeIdsMatch) {
+    const excludedIds = excludeIdsMatch[1]
+      .split(',')
+      .map(id => Number(id.trim()));
+    return allHostsIds.filter(id => !excludedIds.includes(id));
+  }
+  return [];
+};

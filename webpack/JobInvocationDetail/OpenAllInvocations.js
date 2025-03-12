@@ -9,7 +9,10 @@ import {
 } from '@patternfly/react-core';
 import { OutlinedWindowRestoreIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { templateInvocationPageUrl } from './JobInvocationConstants';
+import {
+  templateInvocationPageUrl,
+  getIdsArray,
+} from './JobInvocationConstants';
 
 export const PopupAlert = ({ setShowAlert }) => (
   <Alert
@@ -21,7 +24,14 @@ export const PopupAlert = ({ setShowAlert }) => (
     )}
   />
 );
-export const OpenAlInvocations = ({ results, id, setShowAlert }) => {
+export const OpenAllInvocations = ({
+  allHostsIds,
+  bulkParams,
+  isAllSelected,
+  id,
+  setShowAlert,
+}) => {
+  const idsArray = getIdsArray(bulkParams, allHostsIds, isAllSelected);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
@@ -37,13 +47,15 @@ export const OpenAlInvocations = ({ results, id, setShowAlert }) => {
   const OpenAllButton = () => (
     <Button
       variant="link"
+      isDisabled={idsArray.length === 0}
       isInline
       aria-label="open all template invocations in a new tab"
       ouiaId="template-invocation-new-tab-button"
+      className="open-all-button"
       onClick={() => {
-        if (results.length <= 3) {
-          results.forEach(result => {
-            openLink(templateInvocationPageUrl(result.id, id), '_blank');
+        if (idsArray.length <= 3) {
+          idsArray.forEach(result => {
+            openLink(templateInvocationPageUrl(result, id), '_blank');
           });
         } else {
           handleModalToggle();
@@ -56,7 +68,7 @@ export const OpenAlInvocations = ({ results, id, setShowAlert }) => {
   const OpenAllModal = () => (
     <Modal
       ouiaId="template-invocation-new-tab-modal"
-      title={__('Open all invocations in new tabs')}
+      title={__('Open all selected invocations in new tabs')}
       isOpen={isModalOpen}
       onClose={handleModalToggle}
       variant={ModalVariant.small}
@@ -67,13 +79,13 @@ export const OpenAlInvocations = ({ results, id, setShowAlert }) => {
           key="confirm"
           variant="primary"
           onClick={() => {
-            results.forEach(result => {
+            idsArray.forEach(result => {
               openLink(templateInvocationPageUrl(result.id, id), '_blank');
             });
             handleModalToggle();
           }}
         >
-          {__('Open all in new tabs')}
+          {__('Open in new tabs')}
         </Button>,
         <Button
           ouiaId="template-invocation-new-tab-modal-cancel"
@@ -85,11 +97,13 @@ export const OpenAlInvocations = ({ results, id, setShowAlert }) => {
         </Button>,
       ]}
     >
-      {__('Are you sure you want to open all invocations in new tabs?')}
+      {__(
+        'Are you sure you want to open all selected invocations in new tabs?'
+      )}
       <br />
-      {__('This will open a new tab for each invocation.')}
+      {__('This will open a new tab for each invocation. The maximum is 100.')}
       <br />
-      {__('The number of invocations is:')} <b>{results.length}</b>
+      {__('The number of selected invocations is:')} <b>{idsArray.length}</b>
     </Modal>
   );
   return (
@@ -100,10 +114,16 @@ export const OpenAlInvocations = ({ results, id, setShowAlert }) => {
   );
 };
 
-OpenAlInvocations.propTypes = {
-  results: PropTypes.array.isRequired,
+OpenAllInvocations.propTypes = {
+  allHostsIds: PropTypes.array.isRequired,
+  bulkParams: PropTypes.string,
   id: PropTypes.string.isRequired,
+  isAllSelected: PropTypes.bool.isRequired,
   setShowAlert: PropTypes.func.isRequired,
+};
+
+OpenAllInvocations.defaultProps = {
+  bulkParams: undefined,
 };
 
 PopupAlert.propTypes = {

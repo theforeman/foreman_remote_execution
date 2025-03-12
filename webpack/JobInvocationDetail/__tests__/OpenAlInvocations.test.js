@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { OpenAlInvocations, PopupAlert } from '../OpenAlInvocations';
+import { OpenAllInvocations, PopupAlert } from '../OpenAllInvocations';
 import { templateInvocationPageUrl } from '../JobInvocationConstants';
 
 // Mock the templateInvocationPageUrl function
@@ -10,8 +10,8 @@ jest.mock('../JobInvocationConstants', () => ({
   templateInvocationPageUrl: jest.fn((resultId, id) => `url/${resultId}/${id}`),
 }));
 
-describe('OpenAlInvocations', () => {
-  const mockResults = [{ id: 1 }, { id: 2 }, { id: 3 }];
+describe('OpenAllInvocations', () => {
+  const mockResults = [1, 2, 3];
   const mockSetShowAlert = jest.fn();
   let windowSpy;
   const windowOpen = window.open;
@@ -27,9 +27,11 @@ describe('OpenAlInvocations', () => {
 
   test('renders without crashing', () => {
     render(
-      <OpenAlInvocations
-        results={mockResults}
+      <OpenAllInvocations
+        allHostsIds={mockResults}
+        bulkParams="id ^ (1,2,3)"
         id="test-id"
+        isAllSelected={false}
         setShowAlert={mockSetShowAlert}
       />
     );
@@ -37,9 +39,11 @@ describe('OpenAlInvocations', () => {
 
   test('opens links when results length is less than or equal to 3', () => {
     render(
-      <OpenAlInvocations
-        results={mockResults}
+      <OpenAllInvocations
+        allHostsIds={mockResults}
+        bulkParams="id ^ (1,2,3)"
         id="test-id"
+        isAllSelected={false}
         setShowAlert={mockSetShowAlert}
       />
     );
@@ -50,18 +54,20 @@ describe('OpenAlInvocations', () => {
     expect(templateInvocationPageUrl).toHaveBeenCalledTimes(mockResults.length);
     mockResults.forEach(result => {
       expect(templateInvocationPageUrl).toHaveBeenCalledWith(
-        result.id,
+        result.toString(),
         'test-id'
       );
     });
   });
 
   test('shows modal when results length is greater than 3', () => {
-    const largeResults = [...mockResults, { id: 4 }];
+    const largeResults = [...mockResults, 4];
     render(
-      <OpenAlInvocations
-        results={largeResults}
+      <OpenAllInvocations
+        allHostsIds={largeResults}
+        bulkParams="id ^ (1,2,3,4)"
         id="test-id"
+        isAllSelected={false}
         setShowAlert={mockSetShowAlert}
       />
     );
@@ -70,7 +76,7 @@ describe('OpenAlInvocations', () => {
     fireEvent.click(button);
 
     expect(
-      screen.getAllByText(/open all invocations in new tabs/i)
+      screen.getAllByText(/open all selected invocations in new tabs/i)
     ).toHaveLength(2);
   });
 
@@ -78,9 +84,11 @@ describe('OpenAlInvocations', () => {
     window.open = jest.fn().mockReturnValueOnce(null);
 
     render(
-      <OpenAlInvocations
-        results={mockResults}
+      <OpenAllInvocations
+        allHostsIds={mockResults}
+        bulkParams="id ^ (1,2,3)"
         id="test-id"
+        isAllSelected={false}
         setShowAlert={mockSetShowAlert}
       />
     );
