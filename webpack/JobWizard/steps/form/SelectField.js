@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FormGroup, Select, SelectOption } from '@patternfly/react-core';
+import { FormGroup } from '@patternfly/react-core';
+import { Select, SelectOption } from '@patternfly/react-core/deprecated';
 import PropTypes from 'prop-types';
 
 export const SelectField = ({
@@ -40,7 +41,7 @@ export const SelectField = ({
         ouiaId={fieldId}
         selections={value}
         onSelect={onSelect}
-        onToggle={setIsOpen}
+        onToggle={(_event, val) => setIsOpen(val)}
         isOpen={isOpen}
         className="without_select2"
         maxHeight="45vh"

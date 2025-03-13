@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { DropdownItem } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { CodeIcon } from '@patternfly/react-icons';
 import { selectAPIResponse } from 'foremanReact/redux/API/APISelectors';
 import { translate as __ } from 'foremanReact/common/I18n';
