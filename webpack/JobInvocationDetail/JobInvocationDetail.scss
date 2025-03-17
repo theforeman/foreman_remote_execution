@@ -7,6 +7,10 @@
     height: $chart_size;
     width: $chart_size;
     margin-bottom: 10px;
+
+    path {
+      cursor: pointer;
+    }
   }
 
   .chart-legend {
@@ -27,6 +31,10 @@
       .pf-c-description-list__term .pf-c-description-list__text {
         font-weight: normal;
       }
+    }
+
+    text, path {
+      cursor: pointer;
     }
   }
 
