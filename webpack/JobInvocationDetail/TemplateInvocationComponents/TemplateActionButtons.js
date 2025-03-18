@@ -56,7 +56,7 @@ const actions = ({
   },
   abort: {
     name: 'template-invocation-abort-job',
-    text: __('Abort Task'),
+    text: __('Abort task'),
     permission: permissions.cancel_job_invocations,
     onClick: () => {
       dispatch(
