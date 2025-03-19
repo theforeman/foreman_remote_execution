@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 20:06+0100\n"
-"PO-Revision-Date: 2025-02-10 20:06+0100\n"
+"POT-Creation-Date: 2025-03-19 15:46+0100\n"
+"PO-Revision-Date: 2025-03-19 15:46+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -152,7 +152,7 @@ msgid "Schedule the job for a future time"
 msgstr ""
 
 #: ../app/controllers/api/v2/job_invocations_controller.rb:59
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:83
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:85
 msgid ""
 "Indicates that the action should be cancelled if it cannot be started before t"
 "his time."
@@ -246,28 +246,28 @@ msgstr ""
 msgid "Import a job template from ERB"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:26
+#: ../app/controllers/api/v2/job_templates_controller.rb:27
 msgid "Template ERB"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:27
+#: ../app/controllers/api/v2/job_templates_controller.rb:28
 msgid "Overwrite template if it already exists"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:36
+#: ../app/controllers/api/v2/job_templates_controller.rb:39
 msgid "Export a job template to ERB"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:43
+#: ../app/controllers/api/v2/job_templates_controller.rb:46
 msgid "Show job template details"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:50
-#: ../app/controllers/api/v2/job_templates_controller.rb:100
+#: ../app/controllers/api/v2/job_templates_controller.rb:53
+#: ../app/controllers/api/v2/job_templates_controller.rb:103
 msgid "Template name"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:52
+#: ../app/controllers/api/v2/job_templates_controller.rb:55
 #: ../app/views/job_invocations/_form.html.erb:11
 #: ../app/views/job_templates/_custom_tabs.html.erb:5
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:82
@@ -275,57 +275,57 @@ msgstr ""
 msgid "Job category"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:53
+#: ../app/controllers/api/v2/job_templates_controller.rb:56
 msgid ""
 "This template is used to generate the description. Input values can be used us"
 "ing the syntax %{package}. You may also include the job category and template "
 "name using %{job_category} and %{template_name}."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:58
+#: ../app/controllers/api/v2/job_templates_controller.rb:61
 msgid "Provider type"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:61
+#: ../app/controllers/api/v2/job_templates_controller.rb:64
 msgid "Whether or not the template is locked for editing"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:62
+#: ../app/controllers/api/v2/job_templates_controller.rb:65
 msgid "Effective user options"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:63
+#: ../app/controllers/api/v2/job_templates_controller.rb:66
 msgid "What user should be used to run the script (using sudo-like mechanisms)"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:64
+#: ../app/controllers/api/v2/job_templates_controller.rb:67
 msgid ""
 "Whether it should be allowed to override the effective user from the invocatio"
 "n form."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:65
+#: ../app/controllers/api/v2/job_templates_controller.rb:68
 msgid "Whether the current user login should be used as the effective user"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:71
+#: ../app/controllers/api/v2/job_templates_controller.rb:74
 msgid "Create a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:78
+#: ../app/controllers/api/v2/job_templates_controller.rb:81
 #: ../app/controllers/api/v2/remote_execution_features_controller.rb:25
 msgid "Update a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:86
+#: ../app/controllers/api/v2/job_templates_controller.rb:89
 msgid "Template version"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:92
+#: ../app/controllers/api/v2/job_templates_controller.rb:95
 msgid "Delete a job template"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_templates_controller.rb:104
+#: ../app/controllers/api/v2/job_templates_controller.rb:107
 msgid "Clone a provision template"
 msgstr ""
 
@@ -422,8 +422,8 @@ msgstr ""
 #: ../db/seeds.d/50-notification_blueprints.rb:17
 #: ../lib/foreman_remote_execution/engine.rb:230
 #: ../webpack/JobInvocationDetail/TemplateInvocationPage.js:22
-#: ../webpack/JobInvocationDetail/index.js:92
-#: ../webpack/JobWizard/JobWizardPageRerun.js:52
+#: ../webpack/JobInvocationDetail/index.js:93
+#: ../webpack/JobWizard/JobWizardPageRerun.js:53
 #: ../webpack/JobWizard/index.js:20
 msgid "Jobs"
 msgstr ""
@@ -538,7 +538,7 @@ msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:73
 #: ../app/views/template_invocations/show.html.erb:22
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:23
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:24
 msgid "Rerun"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgid "Rerun the job"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:76
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:159
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:157
 msgid "Rerun failed"
 msgstr ""
 
@@ -598,7 +598,7 @@ msgid "Switch to the new job invocation detail UI"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:112
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:30
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:31
 msgid "Task Details"
 msgstr ""
 
@@ -661,7 +661,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:114
+#: ../app/lib/actions/remote_execution/run_host_job.rb:114 action_names.rb:2
 msgid "Remote action:"
 msgstr ""
 
@@ -1042,7 +1042,7 @@ msgstr ""
 #: ../app/views/job_invocations/_description_fields.html.erb:1
 #: ../app/views/job_invocations/index.html.erb:9
 #: ../app/views/remote_execution_features/index.html.erb:8
-#: ../webpack/JobWizard/steps/AdvancedFields/DescriptionField.js:53
+#: ../webpack/JobWizard/steps/AdvancedFields/DescriptionField.js:61
 msgid "Description"
 msgstr ""
 
@@ -1057,7 +1057,7 @@ msgid "Resolves to"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:42
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:244
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:249
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:93
 msgid "hosts"
 msgstr ""
@@ -1185,8 +1185,8 @@ msgstr ""
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:183
 msgid ""
 "Execution ordering determines whether the jobs should be executed on hosts in "
-"alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - execute"
-"s the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomiz"
+"alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Execute"
+"s the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomiz"
 "es the order in which jobs are executed on hosts</li></ul>"
 msgstr ""
 
@@ -1197,10 +1197,11 @@ msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:129
 msgid ""
-"Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static<"
-"/b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evalu"
-"ates just before the execution is started, so if it's planned in future, targe"
-"ted hosts set may change before it</li></ul>"
+"Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b>"
+" - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b"
+"> - Evaluates the list of target hosts just before the job is executed. If you"
+" used a filter to select the target hosts, the list of target hosts might be d"
+"ifferent from the current list.</li></ul>"
 msgstr ""
 
 #: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
@@ -1269,12 +1270,12 @@ msgid "Providers and templates"
 msgstr ""
 
 #: ../app/views/job_invocations/_user_input.html.erb:7
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:22
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:15
 msgid "User input"
 msgstr ""
 
 #: ../app/views/job_invocations/_user_input.html.erb:8
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:23
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:16
 msgid "Value"
 msgstr ""
 
@@ -1373,6 +1374,7 @@ msgstr ""
 
 #: ../app/views/job_templates/edit.html.erb:6
 #: ../app/views/job_templates/index.html.erb:4
+#: ../lib/foreman_remote_execution/engine.rb:219
 msgid "Job Templates"
 msgstr ""
 
@@ -1722,10 +1724,6 @@ msgid ""
 "lies only to pull-mqtt based jobs."
 msgstr ""
 
-#: ../lib/foreman_remote_execution/engine.rb:219
-msgid "Job templates"
-msgstr ""
-
 #: ../lib/foreman_remote_execution/engine.rb:236
 msgid "Job invocations detail"
 msgstr ""
@@ -1842,7 +1840,7 @@ msgid "Could not cancel recurring logic %s: ${response}"
 msgstr ""
 
 #: ../webpack/JobInvocationDetail/JobInvocationConstants.js:46
-#: ../webpack/JobInvocationDetail/JobInvocationHostTableToolbar.js:28
+#: ../webpack/JobInvocationDetail/JobInvocationHostTableToolbar.js:33
 msgid "All statuses"
 msgstr ""
 
@@ -1851,7 +1849,7 @@ msgid "In Progress"
 msgstr ""
 
 #: ../webpack/JobInvocationDetail/JobInvocationConstants.js:71
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:83
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:84
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:29
 msgid "Scheduled"
 msgstr ""
@@ -1881,21 +1879,21 @@ msgstr ""
 msgid "No Results"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:174
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:175
 msgid ""
 "The dynamic query is still being processed. You can {viewTheHosts} targeted by"
 " the query."
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:180
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:181
 msgid "view the hosts"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:186
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:187
 msgid "No hosts found"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:281
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:284
 msgid "A task for this host has not been started"
 msgstr ""
 
@@ -1955,45 +1953,45 @@ msgstr ""
 msgid "Scheduled at:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:124
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:122
 msgid "Disable recurring"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:124
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:122
 msgid "Enable recurring"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:137
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:135
 msgid "Cancel recurring"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:150
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:148
 msgid "Rerun successful"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:168
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:166
 msgid "View task"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:179
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:177
 #: ../webpack/JobInvocationDetail/OpenAlInvocations.js:84
-#: ../webpack/JobWizard/Footer.js:90
+#: ../webpack/JobWizard/Footer.js:88
 msgid "Cancel"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:189
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:187
 msgid "Abort"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:198
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:196
 msgid "Legacy UI"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:220
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:218
 msgid "Create report"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:241
+#: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:239
 msgid "Rerun all"
 msgstr ""
 
@@ -2075,73 +2073,73 @@ msgid "Open in new tab"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:41
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/PreviewTemplate.js:34
 msgid "No user input"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:35
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:36
 msgid "Cancel Task"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:42
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:43
 msgid "Trying to cancel the task for the host"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:50
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:51
 msgid "Task for the host cancelled succesfully"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:58
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:59
 msgid "Abort task"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:65
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:66
 msgid "Trying to abort the task for the host"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:73
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:74
 msgid "task aborted succesfully"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:36
+#: ../webpack/JobWizard/Footer.js:34
 msgid "Submit"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:37
+#: ../webpack/JobWizard/Footer.js:35
 msgid "Next"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:47
+#: ../webpack/JobWizard/Footer.js:45
 msgid "Back"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:53
+#: ../webpack/JobWizard/Footer.js:51
 msgid "Start job"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:54
+#: ../webpack/JobWizard/Footer.js:52
 msgid "Fill all required fields in all the steps"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:65
+#: ../webpack/JobWizard/Footer.js:63
 msgid "Run on selected hosts"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:72
+#: ../webpack/JobWizard/Footer.js:70
 msgid "Skip to review step"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:73
+#: ../webpack/JobWizard/Footer.js:71
 msgid "Fill all required fields in all the steps to start the job"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:86
+#: ../webpack/JobWizard/Footer.js:84
 msgid "Skip to review"
 msgstr ""
 
@@ -2221,56 +2219,56 @@ msgstr ""
 msgid "Search query"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:49
+#: ../webpack/JobWizard/JobWizardPageRerun.js:50
 #: ../webpack/JobWizard/index.js:17
 msgid "Run job"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:72
+#: ../webpack/JobWizard/JobWizardPageRerun.js:69
 msgid "Unable to run job"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:81
+#: ../webpack/JobWizard/JobWizardPageRerun.js:86
 msgid "Create job"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:118
+#: ../webpack/JobWizard/JobWizardPageRerun.js:124
 #: ../webpack/JobWizard/index.js:67
 msgid "Use legacy form"
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:144
+#: ../webpack/JobWizard/JobWizardPageRerun.js:150
 msgid ""
 "Current organization %s is different from job's organization %s. This job may "
 "run on different hosts than before."
 msgstr ""
 
-#: ../webpack/JobWizard/JobWizardPageRerun.js:159
+#: ../webpack/JobWizard/JobWizardPageRerun.js:165
 msgid ""
 "Current location %s is different from job's location %s. This job may run on d"
 "ifferent hosts than before."
 msgstr ""
 
-#: ../webpack/JobWizard/PermissionDenied.js:16
+#: ../webpack/JobWizard/PermissionDenied.js:17
 msgid "You are not authorized to perform this action."
 msgstr ""
 
-#: ../webpack/JobWizard/PermissionDenied.js:18
+#: ../webpack/JobWizard/PermissionDenied.js:19
 msgid ""
 "Please request the required permissions listed below from a Foreman administra"
 "tor:"
 msgstr ""
 
-#: ../webpack/JobWizard/PermissionDenied.js:41
+#: ../webpack/JobWizard/PermissionDenied.js:42
 msgid "Permission Denied"
 msgstr ""
 
-#: ../webpack/JobWizard/PermissionDenied.js:49
+#: ../webpack/JobWizard/PermissionDenied.js:52
 msgid "Proceed Anyway"
 msgstr ""
 
 #: ../webpack/JobWizard/StartsErrorAlert.js:10
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:41
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:43
 msgid "'Starts before' date must be in the future"
 msgstr ""
 
@@ -2288,11 +2286,11 @@ msgid ""
 "\\\" step to fix the error"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/AdvancedFields/DescriptionField.js:66
+#: ../webpack/JobWizard/steps/AdvancedFields/DescriptionField.js:101
 msgid "Edit job description template"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/AdvancedFields/DescriptionField.js:67
+#: ../webpack/JobWizard/steps/AdvancedFields/DescriptionField.js:102
 msgid "Preview job description"
 msgstr ""
 
@@ -2331,12 +2329,12 @@ msgid "Not available"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:106
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:257
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:262
 msgid "Access denied"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/CategoryAndTemplate/CategoryAndTemplate.js:109
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:260
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:265
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr ""
 
@@ -2376,20 +2374,20 @@ msgstr ""
 msgid "There are no available input fields for the selected template."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:134
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:172
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:137
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:171
 msgid "Please select at least one host"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:169
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:168
 msgid "Please enter a search query"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:176
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:175
 msgid "Please select at least one host collection"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:180
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:179
 msgid "Please select at least one host group"
 msgstr ""
 
@@ -2405,12 +2403,12 @@ msgstr ""
 msgid "Filter by host groups"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:236
+#: ../webpack/JobWizard/steps/HostsAndInputs/index.js:241
 msgid "Apply to"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:7
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:180
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:182
 msgid "Never"
 msgstr ""
 
@@ -2459,7 +2457,7 @@ msgid "Recurrence"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:202
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:52
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:54
 msgid "Starts at"
 msgstr ""
 
@@ -2468,12 +2466,12 @@ msgid "Starts Before"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:220
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:88
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:90
 msgid "Starts"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:225
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:104
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:106
 msgid "Now"
 msgstr ""
 
@@ -2483,7 +2481,7 @@ msgid "Repeats"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:239
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:164
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:166
 msgid "Ends"
 msgstr ""
 
@@ -2512,17 +2510,18 @@ msgid "Query type"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/QueryType.js:13
-msgid "Type has impact on when is the query evaluated to hosts."
+msgid "Type determines when the query is evaluated to hosts."
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/QueryType.js:24
-msgid "evaluates just after you submit this form"
+msgid "Executes the job on the current list of target hosts."
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/QueryType.js:35
 msgid ""
-"evaluates just before the execution is started, so if it's planned in future, "
-"targeted hosts set may change before it"
+"Evaluates the list of target hosts just before the job is executed. If you use"
+"d a filter to select the target hosts, the list of target hosts might be diffe"
+"rent from the current list."
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/RepeatCron.js:43
@@ -2564,7 +2563,7 @@ msgid "documentation"
 msgstr ""
 
 #: ../webpack/JobWizard/steps/Schedule/RepeatDaily.js:17
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:125
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:127
 msgid "At"
 msgstr ""
 
@@ -2573,19 +2572,19 @@ msgstr ""
 msgid "Invalid time format"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:32
+#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:34
 msgid "At minute"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:33
+#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:35
 msgid "range: 0-59"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:67
+#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:69
 msgid "Create"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:82
+#: ../webpack/JobWizard/steps/Schedule/RepeatHour.js:84
 msgid "Minute can only be a number between 0-59"
 msgstr ""
 
@@ -2597,42 +2596,42 @@ msgstr ""
 msgid "Days of week"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:27
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:29
 msgid ""
 "For Future execution a 'Starts at' date or 'Starts before' date must be select"
 "ed. Immediate execution can be selected in the previous step."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:38
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:40
 msgid "'Starts before' date must be after 'Starts at' date"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:75
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:77
 #: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:113
 msgid "Clear input"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:80
+#: ../webpack/JobWizard/steps/Schedule/ScheduleFuture.js:82
 msgid "Starts before"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:188
-msgid "End time needs to be after start time"
-msgstr ""
-
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:207
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:202
 msgid "On"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:240
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:224
+msgid "End time needs to be after start time"
+msgstr ""
+
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:247
 msgid "After"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:242
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:262
 msgid "Repeat amount can only be a positive number"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:258
+#: ../webpack/JobWizard/steps/Schedule/ScheduleRecurring.js:268
 msgid "occurences"
 msgstr ""
 
@@ -2660,28 +2659,28 @@ msgstr ""
 msgid "Invalid date"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/FormHelpers.js:13
+#: ../webpack/JobWizard/steps/form/FormHelpers.js:14
 msgid "open-help-tooltip-button"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/FormHelpers.js:37
+#: ../webpack/JobWizard/steps/form/FormHelpers.js:40
 msgid "Reset to default"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/NumberInput.js:13
+#: ../webpack/JobWizard/steps/form/NumberInput.js:36
 msgid "Has to be a positive number"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/ResourceSelect.js:52
-#: ../webpack/JobWizard/steps/form/SearchSelect.js:38
+#: ../webpack/JobWizard/steps/form/ResourceSelect.js:56
+#: ../webpack/JobWizard/steps/form/SearchSelect.js:42
 msgid "Please refine your search."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/ResourceSelect.js:55
+#: ../webpack/JobWizard/steps/form/ResourceSelect.js:59
 msgid "You have more results to display. Showing first %s results"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/SearchSelect.js:41
+#: ../webpack/JobWizard/steps/form/SearchSelect.js:45
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""
 
@@ -2697,31 +2696,31 @@ msgstr ""
 msgid "Schedule a job"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:25
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:26
 msgid "Recent jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:32
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:33
 msgid "View all jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:41
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:42
 msgid "View finished jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:48
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:49
 msgid "View running jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:55
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:56
 msgid "View scheduled jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:69
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:70
 msgid "Finished"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:76
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:77
 msgid "Running"
 msgstr ""
 
@@ -2778,6 +2777,10 @@ msgstr ""
 
 #: ../webpack/react_app/components/TargetingHosts/TargetingHostsLabelsRow.js:20
 msgid "Active Filters:"
+msgstr ""
+
+#: action_names.rb:3
+msgid "Run hosts job:"
 msgstr ""
 
 #: gemspec.rb:2
