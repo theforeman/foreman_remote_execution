@@ -1,3 +1,9 @@
-.jobs-table-action-item:hover {
-    color: var(--pf-v5-c-dropdown__menu-item--Color);
+.jobs-table-action-item a {
+
+    color: inherit;
+    text-decoration: none;
+
+    :hover {
+        color: var(--pf-v5-c-dropdown__menu-item--Color);
+    }
 }
