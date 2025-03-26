@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Popover, Button, Icon } from '@patternfly/react-core';
 import { HelpIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
-import styles from '@patternfly/react-styles/css/components/Form/form';
 
 export const helpLabel = (text, id) => {
   if (!text) return null;
@@ -13,7 +12,7 @@ export const helpLabel = (text, id) => {
         type="button"
         aria-label={__('open-help-tooltip-button')}
         onClick={e => e.preventDefault()}
-        className={styles.formGroupLabelHelp}
+        className="pf-v5-c-form__group-label-help"
       >
         <Icon isInline>
           <HelpIcon />
