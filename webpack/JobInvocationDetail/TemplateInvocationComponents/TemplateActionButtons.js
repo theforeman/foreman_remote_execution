@@ -102,12 +102,10 @@ export const RowActions = ({ hostID, jobID }) => {
     .map(({ text, href, onClick, permission, isDisabled }) =>
       permission
         ? {
-            title: text,
-            component: 'a',
-            className: 'jobs-table-action-item',
-            href,
+            title: <a href={href}>{text}</a>,
             onClick,
             isDisabled,
+            className: 'jobs-table-action-item',
           }
         : null
     )
