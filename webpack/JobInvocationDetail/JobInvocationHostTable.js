@@ -40,7 +40,12 @@ const JobInvocationHostTable = ({
   const columns = Columns();
   const columnNamesKeys = Object.keys(columns);
   const apiOptions = { key: JOB_INVOCATION_HOSTS };
-  const [selectedFilter, setSelectedFilter] = useState(initialFilter || '');
+  const [selectedFilter, setSelectedFilter] = useState(initialFilter);
+
+  useEffect(() => {
+    setSelectedFilter(initialFilter);
+  }, [initialFilter]);
+
   const {
     searchParam: urlSearchQuery = '',
     page: urlPage,
