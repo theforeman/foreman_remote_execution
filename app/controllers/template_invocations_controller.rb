@@ -39,10 +39,12 @@ class TemplateInvocationsController < ApplicationController
     end
 
     smart_proxy = @template_invocation.smart_proxy
-    proxy = {
-      name: smart_proxy.name,
-      href: smart_proxy_path(smart_proxy),
-    }
+    if smart_proxy
+      proxy = {
+        name: smart_proxy.name,
+        href: smart_proxy_path(smart_proxy),
+      }
+    end
 
     auto_refresh = @job_invocation.task.try(:pending?)
     finished = @job_invocation.status_label == 'failed' || @job_invocation.status_label == 'succeeded' || @job_invocation.status_label == 'cancelled'
