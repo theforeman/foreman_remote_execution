@@ -155,8 +155,12 @@ export const TemplateInvocation = ({
           <div>
             {__('Target:')}{' '}
             <a href={`${hostDetailsPageUrl}${hostName}`}>{hostName}</a>{' '}
-            {__('using Smart Proxy')}{' '}
-            <a href={hostProxy.href}>{hostProxy.name}</a>
+            {!!hostProxy && (
+              <>
+                {__('using Smart Proxy')}{' '}
+                <a href={hostProxy.href}>{hostProxy.name}</a>
+              </>
+            )}
           </div>
         </>
       )}
