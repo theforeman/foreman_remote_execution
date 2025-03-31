@@ -169,7 +169,7 @@ const Inputs = ({ data }) => {
   const inputs =
     data?.pattern_template_invocations?.[0]?.template_invocation_input_values;
 
-  if (!inputs) return null;
+  if (!inputs || inputs.length === 0) return null;
   return (
     <ExpandableSection
       toggleText={__('User Inputs')}
