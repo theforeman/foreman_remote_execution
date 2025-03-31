@@ -32,12 +32,16 @@ describe('TemplateInvocation', () => {
           jobID="1"
           isInTableView={false}
           hostName="example-host"
+          hostProxy={{ name: 'example-proxy', href: '#' }}
         />
       </Provider>
     );
 
-    expect(screen.getByText('Target:')).toBeInTheDocument();
     expect(screen.getByText('example-host')).toBeInTheDocument();
+    expect(screen.getByText('example-proxy')).toBeInTheDocument();
+
+    expect(screen.getByText(/using Smart Proxy/)).toBeInTheDocument();
+    expect(screen.getByText(/Target:/)).toBeInTheDocument();
 
     expect(screen.getByText('This is red text')).toBeInTheDocument();
     expect(screen.getByText('This is default text')).toBeInTheDocument();
@@ -50,6 +54,7 @@ describe('TemplateInvocation', () => {
           jobID="1"
           isInTableView={false}
           hostName="example-host"
+          hostProxy={{ name: 'example-proxy', href: '#' }}
         />
       </Provider>
     );
@@ -101,6 +106,7 @@ describe('TemplateInvocation', () => {
         jobID="1"
         isInTableView={false}
         hostName="example-host"
+        hostProxy={{ name: 'example-proxy', href: '#' }}
       />
     );
 

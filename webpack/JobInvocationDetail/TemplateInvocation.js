@@ -53,6 +53,7 @@ export const TemplateInvocation = ({
   jobID,
   isInTableView,
   hostName,
+  hostProxy,
 }) => {
   const templateURL = showTemplateInvocationUrl(hostID, jobID);
   const hostDetailsPageUrl = useForemanHostDetailsPageUrl();
@@ -150,10 +151,14 @@ export const TemplateInvocation = ({
         permissions={permissions}
       />
       {!isInTableView && (
-        <div>
-          {__('Target:')}{' '}
-          <a href={`${hostDetailsPageUrl}${hostName}`}>{hostName}</a>
-        </div>
+        <>
+          <div>
+            {__('Target:')}{' '}
+            <a href={`${hostDetailsPageUrl}${hostName}`}>{hostName}</a>{' '}
+            {__('using Smart Proxy')}{' '}
+            <a href={hostProxy.href}>{hostProxy.name}</a>
+          </div>
+        </>
       )}
       {showTemplatePreview && <PreviewTemplate inputValues={inputValues} />}
       {showCommand && (
@@ -185,6 +190,7 @@ export const TemplateInvocation = ({
 TemplateInvocation.propTypes = {
   hostID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   hostName: PropTypes.string, // only used when isInTableView is false
+  hostProxy: PropTypes.object, // only used when isInTableView is false
   jobID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   isInTableView: PropTypes.bool,
 };
@@ -192,6 +198,7 @@ TemplateInvocation.propTypes = {
 TemplateInvocation.defaultProps = {
   isInTableView: true,
   hostName: '',
+  hostProxy: {},
 };
 
 CopyToClipboard.propTypes = {
