@@ -1,11 +1,11 @@
 export const buildHostQuery = (selected, search) => {
   const { hosts, hostCollections, hostGroups } = selected;
-  const hostsSearch = `id ^ (${hosts.map(({ id }) => id).join(',')})`;
-  const hostCollectionsSearch = `host_collection_id ^ (${hostCollections
-    .map(({ id }) => id)
+  const hostsSearch = `name ^ (${hosts.map(({ name }) => name).join(',')})`;
+  const hostCollectionsSearch = `host_collection ^ (${hostCollections
+    .map(({ name }) => name)
     .join(',')})`;
-  const hostGroupsSearch = `hostgroup_id ^ (${hostGroups
-    .map(({ id }) => id)
+  const hostGroupsSearch = `hostgroup_fullname ^ (${hostGroups
+    .map(({ name }) => name)
     .join(',')})`;
   const queryParts = [
     hosts.length ? hostsSearch : false,
