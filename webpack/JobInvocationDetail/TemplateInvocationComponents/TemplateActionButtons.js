@@ -6,7 +6,7 @@ import { ActionsColumn } from '@patternfly/react-table';
 import { APIActions } from 'foremanReact/redux/API';
 import { addToast } from 'foremanReact/components/ToastsList';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { selectTemplateInvocation } from '../JobInvocationSelectors';
+import { selectTemplateInvocationList } from '../JobInvocationSelectors';
 import './index.scss';
 
 const actions = ({
@@ -81,7 +81,7 @@ const actions = ({
 
 export const RowActions = ({ hostID, jobID }) => {
   const dispatch = useDispatch();
-  const response = useSelector(selectTemplateInvocation);
+  const response = useSelector(selectTemplateInvocationList)?.[hostID];
   if (!response?.permissions) return null;
   const {
     task_id: taskID,
