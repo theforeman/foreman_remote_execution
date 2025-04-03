@@ -3,8 +3,8 @@ class TemplateInvocationsController < ApplicationController
   include RemoteExecutionHelper
   include JobInvocationsHelper
 
-  before_action :find_job_invocation, :only => %w{show_template_invocation_by_host}
-  before_action :find_host, :only => %w{show_template_invocation_by_host}
+  before_action :find_job_invocation, :only => [:show_template_invocation_by_host, :list_template_invocations_task_by_hosts]
+  before_action :find_host, :only => [:show_template_invocation_by_host]
 
   def controller_permission
     'job_invocations'
@@ -21,6 +21,30 @@ class TemplateInvocationsController < ApplicationController
     @line_sets = @template_invocation_task.main_action.live_output
     @line_sets = @line_sets.drop_while { |o| o['timestamp'].to_f <= @since } if @since
     @line_counter = params[:line_counter].to_i
+  end
+
+  def list_template_invocations_task_by_hosts
+    hosts = Host.search_for(params[:host_query])
+    template_invocations_task_by_hosts = {}
+    hosts.each do |host|
+      template_invocation = @job_invocation.template_invocations.find { |template_inv| template_inv.host_id == host.id }
+      next unless template_invocation
+      template_invocation_task = template_invocation.run_host_job_task
+      template_invocations_task_by_hosts[host.id] =
+        {
+          :task_id => template_invocation_task.id,
+          :task_cancellable => template_invocation_task.cancellable?,
+          :permissions => {
+            :view_foreman_tasks => User.current.allowed_to?(:view_foreman_tasks),
+            :cancel_job_invocations => User.current.allowed_to?(:cancel_job_invocations),
+            :execute_jobs => User.current.allowed_to?(:create_job_invocations) && (!host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts)),
+          },
+        }
+    end
+
+    render json: {
+      :template_invocations_task_by_hosts => template_invocations_task_by_hosts,
+    }
   end
 
   def show_template_invocation_by_host
