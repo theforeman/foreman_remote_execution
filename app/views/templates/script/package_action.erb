@@ -105,7 +105,11 @@ handle_zypp_res_codes () {
 
 # Action
 <% if package_manager == 'yum' -%>
-  yum -y <%= input("options") %> <%= action %> <%= input("package") %>
+  <% if @host.respond_to?(:yum_or_yum_transient) -%>
+    <%= @host.yum_or_yum_transient %> -y <%= input("options") %> <%= action %> <%= input("package") %>
+  <% else -%>
+    yum -y <%= input("options") %> <%= action %> <%= input("package") %>
+  <% end -%>
 <% elsif package_manager == 'apt' -%>
   <%-
     action = 'install' if action == 'group install'
