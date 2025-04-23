@@ -53,7 +53,6 @@ const JobInvocationSystemStatusChart = ({
   };
   const chartSize = 105;
   const [legendWidth, setLegendWidth] = useState(270);
-  const [cursor, setCursor] = useState('default');
 
   // Calculates chart legend width based on its content
   useEffect(() => {
@@ -79,7 +78,7 @@ const JobInvocationSystemStatusChart = ({
 
   return (
     <>
-      <FlexItem className="chart-donut" style={{ cursor }}>
+      <FlexItem className="chart-donut">
         <ChartDonut
           allowTooltip
           constrainToVisibleArea
@@ -96,12 +95,6 @@ const JobInvocationSystemStatusChart = ({
               target: 'data',
               eventHandlers: {
                 onClick: onChartClick,
-                onMouseOver: () => {
-                  setCursor('pointer');
-                },
-                onMouseOut: () => {
-                  setCursor('default');
-                },
               },
             },
           ]}
@@ -109,7 +102,12 @@ const JobInvocationSystemStatusChart = ({
             total > 0 ? chartData.map(d => d.color) : [emptyChartDonut.value]
           }
           labelComponent={
-            <ChartTooltip pointerLength={0} renderInPortal={false} />
+            <ChartTooltip
+              pointerLength={0}
+              renderInPortal={false}
+              constrainToVisibleArea
+              center={{ x: 15, y: 0 }}
+            />
           }
           title={chartDonutTitle}
           titleComponent={
@@ -133,7 +131,7 @@ const JobInvocationSystemStatusChart = ({
           height={chartSize}
         />
       </FlexItem>
-      <FlexItem className="chart-legend" style={{ cursor }}>
+      <FlexItem className="chart-legend">
         <Text ouiaId="legend-title" className="legend-title">
           {__('System status')}
         </Text>
@@ -156,24 +154,12 @@ const JobInvocationSystemStatusChart = ({
                 target: 'data',
                 eventHandlers: {
                   onClick: onChartClick,
-                  onMouseOver: () => {
-                    setCursor('pointer');
-                  },
-                  onMouseOut: () => {
-                    setCursor('default');
-                  },
                 },
               },
               {
                 target: 'labels',
                 eventHandlers: {
                   onClick: onChartClick,
-                  onMouseOver: () => {
-                    setCursor('pointer');
-                  },
-                  onMouseOut: () => {
-                    setCursor('default');
-                  },
                 },
               },
             ]}
