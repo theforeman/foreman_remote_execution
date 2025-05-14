@@ -20,6 +20,7 @@ export const currentPermissionsUrl = foremanUrl(
   '/api/v2/permissions/current_permissions'
 );
 export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
+
 export const showTemplateInvocationUrl = (hostID, jobID) =>
   `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;
 
@@ -150,4 +151,23 @@ const DYNAMIC_TYPE = 'dynamic_query';
 export const TARGETING_TYPES = {
   [STATIC_TYPE]: __('Static Query'),
   [DYNAMIC_TYPE]: __('Dynamic Query'),
+};
+
+export const getIdsArray = (bulkParams, allHostsIds, isAllSelected) => {
+  if (!bulkParams) {
+    return isAllSelected ? allHostsIds : [];
+  }
+  const parseIds = str => str.split(',').map(id => id.trim());
+  // bulkParams in format `id ^ (1,2,3)`
+  const includeIdsMatch = bulkParams.match(/id \^ \(([^)]+)\)/);
+  if (includeIdsMatch) {
+    return parseIds(includeIdsMatch[1]);
+  }
+  // bulkParams in format `id !^ (1,2,3)`
+  const excludeIdsMatch = bulkParams.match(/id !\^ \(([^)]+)\)/);
+  if (excludeIdsMatch) {
+    const excludedSet = new Set(parseIds(excludeIdsMatch[1]).map(Number));
+    return allHostsIds.filter(id => !excludedSet.has(Number(id)));
+  }
+  return [];
 };

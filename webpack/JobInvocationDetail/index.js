@@ -38,6 +38,7 @@ const JobInvocationDetailPage = ({
   const items = useSelector(selectItems);
   const {
     description,
+    failed,
     status_label: statusLabel,
     task,
     start_at: startAt,
@@ -151,7 +152,9 @@ const JobInvocationDetailPage = ({
         {items.id !== undefined && (
           <JobInvocationHostTable
             id={id}
+            task={task}
             targeting={targeting}
+            failedCount={failed}
             finished={finished}
             autoRefresh={autoRefresh}
             initialFilter={selectedFilter}
