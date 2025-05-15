@@ -262,7 +262,7 @@ const JobInvocationHostTable = ({
                     expandId: 'host-expandable',
                   }}
                 />
-                {columnNamesKeys.slice(1).map(k => (
+                {columnNamesKeys.map(k => (
                   <Td key={k}>{columns[k].wrapper(result)}</Td>
                 ))}
                 <Td isActionCell>
@@ -275,7 +275,7 @@ const JobInvocationHostTable = ({
               >
                 <Td
                   dataLabel={`${result.id}-expandable-content`}
-                  colSpan={columnNamesKeys.length + 1}
+                  colSpan={columnNamesKeys.length}
                 >
                   <ExpandableRowContent>
                     {result.job_status === 'cancelled' ||
