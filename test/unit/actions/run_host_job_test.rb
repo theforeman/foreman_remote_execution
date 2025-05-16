@@ -10,7 +10,7 @@ module ForemanRemoteExecution
       let(:job_invocation) { FactoryBot.create(:job_invocation, :with_task) }
       let(:host) { job_invocation.template_invocations.first.host }
       let(:provider) do
-        provider = ::SSHExecutionProvider
+        provider = ::ScriptExecutionProvider
         provider.expects(:ssh_password).with(host).returns('sshpass')
         provider.expects(:effective_user_password).with(host).returns('sudopass')
         provider.expects(:ssh_key_passphrase).with(host).returns('keypass')

@@ -47,7 +47,7 @@ module ForemanRemoteExecution
     end
 
     def cockpit_url
-      SSHExecutionProvider.cockpit_url_for_host(self.name)
+      ScriptExecutionProvider.cockpit_url_for_host(self.name)
     end
 
     def execution_status(options = {})
