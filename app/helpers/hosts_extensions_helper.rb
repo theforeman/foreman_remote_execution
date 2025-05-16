@@ -44,7 +44,7 @@ module HostsExtensionsHelper
   def web_console_button(host, *_args)
     return if !authorized_for(permission: 'cockpit_hosts', auth_object: host) || !can_execute_on_infrastructure_host?(host)
 
-    url = SSHExecutionProvider.cockpit_url_for_host(host.name)
+    url = ScriptExecutionProvider.cockpit_url_for_host(host.name)
     url ? link_to(_('Web Console'), url, :class => 'btn btn-default', :id => :'web-console-button', :target => '_new') : nil
   end
 
