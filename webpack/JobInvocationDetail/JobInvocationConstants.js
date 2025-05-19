@@ -83,7 +83,7 @@ const Columns = () => {
 
   return {
     expand: {
-      title: '',
+      title: ' ',
       weight: 0,
       wrapper: () => null,
     },
@@ -136,7 +136,7 @@ const Columns = () => {
       weight: 5,
     },
     actions: {
-      title: '',
+      title: ' ',
       weight: 6,
       wrapper: () => null,
     },
