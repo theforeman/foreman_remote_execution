@@ -1,38 +1,49 @@
+/* eslint-disable max-lines */
 /* eslint-disable camelcase */
-import PropTypes from 'prop-types';
-import React, { useMemo, useEffect, useState } from 'react';
-import { Icon } from 'patternfly-react';
-import { translate as __ } from 'foremanReact/common/I18n';
-import { FormattedMessage } from 'react-intl';
-import { Tr, Td, Tbody, ExpandableRowContent } from '@patternfly/react-table';
+import URI from 'urijs';
+import { useHistory } from 'react-router-dom';
 import {
   EmptyState,
-  EmptyStateVariant,
   EmptyStateBody,
   EmptyStateHeader,
+  EmptyStateVariant,
+  ToolbarItem,
 } from '@patternfly/react-core';
+import { ExpandableRowContent, Tbody, Td, Tr } from '@patternfly/react-table';
+import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
+import { RowSelectTd } from 'foremanReact/components/HostsIndex/RowSelectTd';
+import SelectAllCheckbox from 'foremanReact/components/PF4/TableIndexPage/Table/SelectAllCheckbox';
 import { Table } from 'foremanReact/components/PF4/TableIndexPage/Table/Table';
-import TableIndexPage from 'foremanReact/components/PF4/TableIndexPage/TableIndexPage';
-import { useSetParamsAndApiAndSearch } from 'foremanReact/components/PF4/TableIndexPage/Table/TableIndexHooks';
 import {
   useBulkSelect,
   useUrlParams,
 } from 'foremanReact/components/PF4/TableIndexPage/Table/TableHooks';
+import { useSetParamsAndApiAndSearch } from 'foremanReact/components/PF4/TableIndexPage/Table/TableIndexHooks';
+import { getPageStats } from 'foremanReact/components/PF4/TableIndexPage/Table/helpers';
+import TableIndexPage from 'foremanReact/components/PF4/TableIndexPage/TableIndexPage';
 import { getControllerSearchProps } from 'foremanReact/constants';
+import { Icon } from 'patternfly-react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useMemo, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { CheckboxesActions } from './CheckboxesActions';
+import DropdownFilter from './DropdownFilter';
 import Columns, {
   JOB_INVOCATION_HOSTS,
   STATUS_UPPERCASE,
+  MAX_HOSTS_API_SIZE,
 } from './JobInvocationConstants';
+import { PopupAlert } from './OpenAllInvocationsModal';
 import { TemplateInvocation } from './TemplateInvocation';
-import { OpenAlInvocations, PopupAlert } from './OpenAlInvocations';
 import { RowActions } from './TemplateInvocationComponents/TemplateActionButtons';
-import JobInvocationHostTableToolbar from './JobInvocationHostTableToolbar';
 
 const JobInvocationHostTable = ({
   id,
+  task,
   targeting,
+  failedCount,
   finished,
   autoRefresh,
   initialFilter,
@@ -40,6 +51,7 @@ const JobInvocationHostTable = ({
   const columns = Columns();
   const columnNamesKeys = Object.keys(columns);
   const apiOptions = { key: JOB_INVOCATION_HOSTS };
+  const history = useHistory();
   const [selectedFilter, setSelectedFilter] = useState(initialFilter || '');
   const {
     searchParam: urlSearchQuery = '',
@@ -74,18 +86,91 @@ const JobInvocationHostTable = ({
     }
   );
 
+  // getting IDs of all the hosts (maximum is 100)
+  const [allPagesResponse, setAllPagesResponse] = useState([]);
+  const apiAllParams = {
+    page: 1,
+    per_page: Math.min(response?.subtotal || 1, MAX_HOSTS_API_SIZE),
+    search: constructFilter(selectedFilter, urlSearchQuery),
+  };
+
+  const { response: allResponse, setAPIOptions: setAllAPIOptions } = useAPI(
+    'get',
+    `/api/job_invocations/${id}/hosts`,
+    {
+      params: apiAllParams,
+    }
+  );
+
+  useEffect(() => {
+    if (response?.subtotal) {
+      setAllAPIOptions(prevOptions => ({
+        ...prevOptions,
+        params: apiAllParams,
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response?.subtotal, selectedFilter, urlSearchQuery]);
+
+  useEffect(() => {
+    if (allResponse?.results) {
+      setAllPagesResponse(allResponse.results);
+    }
+  }, [allResponse]);
+
   const { params } = useSetParamsAndApiAndSearch({
     defaultParams,
     apiOptions,
     setAPIOptions,
   });
 
-  const { updateSearchQuery: updateSearchQueryBulk } = useBulkSelect({
+  const {
+    updateSearchQuery: updateSearchQueryBulk,
+    fetchBulkParams,
+    ...selectAllOptions
+  } = useBulkSelect({
+    results: response?.results,
+    metadata: {
+      total: response?.total,
+      page: response?.page,
+      selectable: response?.subtotal,
+    },
     initialSearchQuery: urlSearchQuery,
   });
-  const updateSearchQuery = searchQuery => {
-    updateSearchQueryBulk(searchQuery);
-  };
+
+  const {
+    selectAll,
+    selectPage,
+    selectNone,
+    selectedCount,
+    selectOne,
+    areAllRowsOnPageSelected,
+    areAllRowsSelected,
+    isSelected,
+  } = selectAllOptions;
+
+  const { pageRowCount } = getPageStats({
+    total: response?.total || 0,
+    page: response?.page || urlPage || 1,
+    perPage: response?.per_page || urlPerPage || 0,
+  });
+
+  const selectionToolbar = (
+    <ToolbarItem key="selectAll">
+      <SelectAllCheckbox
+        {...{
+          selectAll,
+          selectPage,
+          selectNone,
+          selectedCount,
+          pageRowCount,
+        }}
+        totalCount={response?.total}
+        areAllRowsOnPageSelected={areAllRowsOnPageSelected()}
+        areAllRowsSelected={areAllRowsSelected()}
+      />
+    </ToolbarItem>
+  );
 
   const controller = 'hosts';
   const memoDefaultSearchProps = useMemo(
@@ -131,14 +216,31 @@ const JobInvocationHostTable = ({
   }, [finished, autoRefresh, setAPIOptions]);
 
   const wrapSetAPIOptions = newAPIOptions => {
-    setAPIOptions(prevOptions => ({
-      ...prevOptions,
-      params: {
-        ...prevOptions.params,
-        ...newAPIOptions.params,
-        search: constructFilter(undefined, newAPIOptions?.params?.search),
-      },
+    const newParams = newAPIOptions?.params ?? newAPIOptions ?? {};
+    const orderParam = newParams.order || newAPIOptions.order;
+    const isSorting = !!orderParam;
+
+    const mergedParams = {
+      ...apiOptions.params,
+      ...newParams,
+      order: orderParam || apiOptions.params?.order,
+      search: constructFilter(
+        undefined,
+        newParams.search ?? apiOptions.params?.search
+      ),
+    };
+
+    setAPIOptions(prev => ({
+      ...prev,
+      params: mergedParams,
     }));
+
+    if (isSorting) {
+      const uri = new URI();
+      const { search: _search, ...urlParams } = mergedParams;
+      uri.setSearch(urlParams);
+      history.push({ search: uri.search() });
+    }
   };
 
   const combinedResponse = {
@@ -193,8 +295,6 @@ const JobInvocationHostTable = ({
     </Tr>
   );
 
-  const { results = [] } = response;
-
   const isHostExpanded = host => expandedHost.includes(host);
   const setHostExpanded = (host, isExpanding = true) =>
     setExpandedHost(prevExpanded => {
@@ -212,20 +312,24 @@ const JobInvocationHostTable = ({
         controller="hosts"
         creatable={false}
         replacementResponse={combinedResponse}
-        updateSearchQuery={updateSearchQuery}
+        updateSearchQuery={updateSearchQueryBulk}
         customToolbarItems={[
-          <OpenAlInvocations
-            setShowAlert={setShowAlert}
-            results={results}
-            id={id}
-            key="OpenAlInvocations"
-          />,
-          <JobInvocationHostTableToolbar
+          <DropdownFilter
+            key="dropdown-filter"
             dropdownFilter={selectedFilter}
             setDropdownFilter={wrapSetSelectedFilter}
-            key="JobInvocationHostTableToolbar"
+          />,
+          <CheckboxesActions
+            allHostsIds={allPagesResponse?.map(item => item.id) || []}
+            areAllRowsSelected={areAllRowsSelected()}
+            bulkParams={selectedCount > 0 ? fetchBulkParams() : null}
+            failedCount={failedCount}
+            isAllSelected={areAllRowsSelected()}
+            jobID={id}
+            key="checkboxes-actions"
           />,
         ]}
+        selectionToolbar={selectionToolbar}
       >
         <Table
           ouiaId="job-invocation-hosts-table"
@@ -240,6 +344,7 @@ const JobInvocationHostTable = ({
           itemCount={response?.subtotal}
           results={response?.results}
           url=""
+          showCheckboxes
           refreshData={() => {}}
           errorMessage={
             status === STATUS_UPPERCASE.ERROR && response?.message
@@ -250,7 +355,7 @@ const JobInvocationHostTable = ({
           isDeleteable={false}
           childrenOutsideTbody
         >
-          {results?.map((result, rowIndex) => (
+          {response?.results?.map((result, rowIndex) => (
             <Tbody key={rowIndex}>
               <Tr ouiaId={`table-row-${rowIndex}`}>
                 <Td
@@ -262,7 +367,13 @@ const JobInvocationHostTable = ({
                     expandId: 'host-expandable',
                   }}
                 />
-                {columnNamesKeys.slice(1).map(k => (
+                {
+                  <RowSelectTd
+                    rowData={result}
+                    {...{ selectOne, isSelected }}
+                  />
+                }
+                {columnNamesKeys.map(k => (
                   <Td key={k}>{columns[k].wrapper(result)}</Td>
                 ))}
                 <Td isActionCell>
@@ -275,7 +386,7 @@ const JobInvocationHostTable = ({
               >
                 <Td
                   dataLabel={`${result.id}-expandable-content`}
-                  colSpan={columnNamesKeys.length + 1}
+                  colSpan={columnNamesKeys.length}
                 >
                   <ExpandableRowContent>
                     {result.job_status === 'cancelled' ||
@@ -299,12 +410,16 @@ const JobInvocationHostTable = ({
 
 JobInvocationHostTable.propTypes = {
   id: PropTypes.string.isRequired,
+  task: PropTypes.object,
   targeting: PropTypes.object.isRequired,
+  failedCount: PropTypes.number.isRequired,
   finished: PropTypes.bool.isRequired,
   autoRefresh: PropTypes.bool.isRequired,
   initialFilter: PropTypes.string.isRequired,
 };
 
-JobInvocationHostTable.defaultProps = {};
+JobInvocationHostTable.defaultProps = {
+  task: undefined,
+};
 
 export default JobInvocationHostTable;
