@@ -128,7 +128,7 @@ Foreman::Plugin.register :foreman_remote_execution do
                                                   :'api/v2/remote_execution_features' => [:index, :show, :available_remote_execution_features]},
       :resource_type => 'RemoteExecutionFeature'
     permission :edit_remote_execution_features, { :remote_execution_features => [:update],
-                                                  :'api/v2/remote_execution_features' => [:update ]}, :resource_type => 'RemoteExecutionFeature'
+                                                  :'api/v2/remote_execution_features' => [:update]}, :resource_type => 'RemoteExecutionFeature'
     permission :destroy_job_templates, { :job_templates => [:destroy],
                                         :'api/v2/job_templates' => [:destroy] }, :resource_type => 'JobTemplate'
     permission :lock_job_templates, { :job_templates => [:lock, :unlock] }, :resource_type => 'JobTemplate'
@@ -142,12 +142,12 @@ Foreman::Plugin.register :foreman_remote_execution do
     permission :execute_jobs_on_infrastructure_hosts, {}, :resource_type => 'JobInvocation'
     permission :cancel_job_invocations, { :job_invocations => [:cancel], 'api/v2/job_invocations' => [:cancel] }, :resource_type => 'JobInvocation'
     # this permissions grants user to get auto completion hints when setting up filters
-    permission :filter_autocompletion_for_template_invocation, { :template_invocations => [ :auto_complete_search, :index ] },
+    permission :filter_autocompletion_for_template_invocation, { :template_invocations => [:auto_complete_search, :index] },
       :resource_type => 'TemplateInvocation'
     permission :cockpit_hosts, { 'cockpit' => [:redirect, :host_ssh_params] }, :resource_type => 'Host'
   end
 
-  USER_PERMISSIONS = [
+  user_permissions = [
     :view_job_templates,
     :view_job_invocations,
     :create_job_invocations,
@@ -156,7 +156,7 @@ Foreman::Plugin.register :foreman_remote_execution do
     :view_smart_proxies,
     :view_remote_execution_features,
   ].freeze
-  MANAGER_PERMISSIONS = USER_PERMISSIONS + [
+  manager_permissions = user_permissions + [
     :cancel_job_invocations,
     :destroy_job_templates,
     :edit_job_templates,
@@ -168,13 +168,13 @@ Foreman::Plugin.register :foreman_remote_execution do
   ]
 
   # Add a new role called 'Remote Execution User ' if it doesn't exist
-  role 'Remote Execution User', USER_PERMISSIONS, 'Role with permissions to run remote execution jobs against hosts'
-  role 'Remote Execution Manager', MANAGER_PERMISSIONS, 'Role with permissions to manage job templates, remote execution features, cancel jobs and view audit logs'
+  role 'Remote Execution User', user_permissions, 'Role with permissions to run remote execution jobs against hosts'
+  role 'Remote Execution Manager', manager_permissions, 'Role with permissions to manage job templates, remote execution features, cancel jobs and view audit logs'
 
   add_all_permissions_to_default_roles(except: [:execute_jobs_on_infrastructure_hosts])
   add_permissions_to_default_roles({
     Role::MANAGER => [:execute_jobs_on_infrastructure_hosts],
-    Role::SITE_MANAGER => USER_PERMISSIONS + [:execute_jobs_on_infrastructure_hosts],
+    Role::SITE_MANAGER => user_permissions + [:execute_jobs_on_infrastructure_hosts],
   })
 
   # add menu entry

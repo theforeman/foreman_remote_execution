@@ -13,7 +13,7 @@ module ForemanRemoteExecution
           f.split(File::SEPARATOR, 4).last
         end
       end
-      assets += %w(foreman_remote_execution/foreman_remote_execution.css)
+      assets << 'foreman_remote_execution/foreman_remote_execution.css'
     end
 
     # Add any db migrations
