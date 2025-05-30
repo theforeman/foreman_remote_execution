@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   match 'experimental/job_invocations_detail/:id', to: 'react#index', :via => [:get], as: 'new_job_invocation_detail'
   match 'job_invocations_detail/:id/host_invocation/:host_id', to: 'react#index', :via => [:get], as: 'new_job_invocation_detail_by_host'
   get 'show_template_invocation_by_host/:host_id/job_invocation/:id', to: 'template_invocations#show_template_invocation_by_host'
+  get 'job_invocations/:id/hosts', to: 'template_invocations#list_jobs_hosts'
 
   resources :job_invocations, :only => [:create, :show, :index] do
     collection do
