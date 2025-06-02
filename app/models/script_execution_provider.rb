@@ -40,7 +40,7 @@ class ScriptExecutionProvider < RemoteExecutionProvider
       proxy = proxy_for_cockpit(host)
       {
         :hostname => find_ip_or_hostname(host),
-        :proxy => proxy.class == Symbol ? proxy : proxy.url,
+        :proxy => proxy.instance_of?(Symbol) ? proxy : proxy.url,
         :ssh_user => ssh_user(host),
         :ssh_port => ssh_port(host),
         :ssh_password => ssh_password(host),
@@ -50,7 +50,7 @@ class ScriptExecutionProvider < RemoteExecutionProvider
     end
 
     def cockpit_url_for_host(host)
-      Setting[:remote_execution_cockpit_url] % { :host => host } if Setting[:remote_execution_cockpit_url].present?
+      format(Setting[:remote_execution_cockpit_url], host: host) if Setting[:remote_execution_cockpit_url].present?
     end
 
     def proxy_feature
@@ -76,5 +76,3 @@ class ScriptExecutionProvider < RemoteExecutionProvider
     end
   end
 end
-
-SSHExecutionProvider = ScriptExecutionProvider

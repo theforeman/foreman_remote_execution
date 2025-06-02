@@ -363,7 +363,6 @@ Style/ClassEqualityComparison:
   Exclude:
     - 'app/helpers/job_invocations_chart_helper.rb'
     - 'app/helpers/remote_execution_helper.rb'
-    - 'app/models/ssh_execution_provider.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -405,7 +404,6 @@ Style/FormatString:
     - 'app/lib/actions/remote_execution/run_hosts_job.rb'
     - 'app/models/job_invocation_composer.rb'
     - 'app/models/remote_execution_provider.rb'
-    - 'app/models/ssh_execution_provider.rb'
     - 'extra/cockpit/foreman-cockpit-session'
 
 # Offense count: 61
