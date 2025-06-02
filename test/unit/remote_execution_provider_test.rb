@@ -5,11 +5,11 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     let(:providers) { RemoteExecutionProvider.providers }
     it { assert_kind_of HashWithIndifferentAccess, providers }
     it 'makes providers accessible using symbol' do
-      assert_equal SSHExecutionProvider, providers[:SSH]
+      assert_equal ScriptExecutionProvider, providers[:SSH]
       assert_equal ScriptExecutionProvider, providers[:script]
     end
     it 'makes providers accessible using string' do
-      assert_equal SSHExecutionProvider, providers['SSH']
+      assert_equal ScriptExecutionProvider, providers['SSH']
       assert_equal ScriptExecutionProvider, providers['script']
     end
   end
@@ -27,11 +27,11 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
   describe '.provider_for' do
     it 'accepts symbols' do
-      assert_equal SSHExecutionProvider, RemoteExecutionProvider.provider_for(:SSH)
+      assert_equal ScriptExecutionProvider, RemoteExecutionProvider.provider_for(:SSH)
     end
 
     it 'accepts strings' do
-      assert_equal SSHExecutionProvider, RemoteExecutionProvider.provider_for('SSH')
+      assert_equal ScriptExecutionProvider, RemoteExecutionProvider.provider_for('SSH')
     end
 
     it 'returns a default one if unknown value is provided' do
@@ -81,7 +81,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
   describe '.provider_proxy_features' do
     it 'returns correct values' do
       RemoteExecutionProvider.stubs(:providers).returns(
-        :SSH => SSHExecutionProvider,
+        :SSH => ScriptExecutionProvider,
         :script => ScriptExecutionProvider
       )
 
@@ -112,15 +112,15 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     end
   end
 
-  describe SSHExecutionProvider do
+  describe ScriptExecutionProvider do
     before { User.current = FactoryBot.build(:user, :admin) }
     after { User.current = nil }
 
     let(:job_invocation) { FactoryBot.create(:job_invocation, :with_template) }
     let(:template_invocation) { job_invocation.pattern_template_invocations.first }
     let(:host) { FactoryBot.create(:host) }
-    let(:proxy_options) { SSHExecutionProvider.proxy_command_options(template_invocation, host) }
-    let(:secrets) { SSHExecutionProvider.secrets(host) }
+    let(:proxy_options) { ScriptExecutionProvider.proxy_command_options(template_invocation, host) }
+    let(:secrets) { ScriptExecutionProvider.secrets(host) }
 
     describe 'effective user' do
       it 'takes the effective user from value from the template invocation' do
@@ -153,11 +153,11 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         assert_equal 'sudo', proxy_options[:effective_user_method]
         method_param.update!(:value => 'su')
         host.clear_host_parameters_cache!
-        proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
+        proxy_options = ScriptExecutionProvider.proxy_command_options(template_invocation, host)
         assert_equal 'su', proxy_options[:effective_user_method]
         method_param.update!(:value => 'dzdo')
         host.clear_host_parameters_cache!
-        proxy_options = SSHExecutionProvider.proxy_command_options(template_invocation, host)
+        proxy_options = ScriptExecutionProvider.proxy_command_options(template_invocation, host)
         assert_equal 'dzdo', proxy_options[:effective_user_method]
       end
     end
@@ -219,7 +219,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
 
       it 'gets fqdn from flagged interfaces if not preferring ips' do
         # falling to primary interface
-        assert_equal 'somehost.somedomain.org', SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal 'somehost.somedomain.org', ScriptExecutionProvider.find_ip_or_hostname(host)
 
         # execution wins if present
         execution_interface = FactoryBot.build(:nic_managed,
@@ -228,13 +228,13 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.primary_interface.update(:execution => false)
         host.interfaces.each(&:save)
         host.reload
-        assert_equal execution_interface.fqdn, SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal execution_interface.fqdn, ScriptExecutionProvider.find_ip_or_hostname(host)
       end
 
       it 'gets ip from flagged interfaces' do
         host.host_params['remote_execution_connect_by_ip'] = true
         # no ip address set on relevant interface - fallback to fqdn
-        assert_equal 'somehost.somedomain.org', SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal 'somehost.somedomain.org', ScriptExecutionProvider.find_ip_or_hostname(host)
 
         # provision interface with ip while primary without
         provision_interface = FactoryBot.build(:nic_managed,
@@ -243,12 +243,12 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.primary_interface.update(:provision => false)
         host.interfaces.each(&:save)
         host.reload
-        assert_equal provision_interface.ip, SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal provision_interface.ip, ScriptExecutionProvider.find_ip_or_hostname(host)
 
         # both primary and provision interface have IPs: the primary wins
         host.primary_interface.update(:ip => '10.0.0.2', :execution => false)
         host.reload
-        assert_equal host.primary_interface.ip, SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal host.primary_interface.ip, ScriptExecutionProvider.find_ip_or_hostname(host)
 
         # there is an execution interface with IP: it wins
         execution_interface = FactoryBot.build(:nic_managed,
@@ -257,7 +257,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.primary_interface.update(:execution => false)
         host.interfaces.each(&:save)
         host.reload
-        assert_equal execution_interface.ip, SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal execution_interface.ip, ScriptExecutionProvider.find_ip_or_hostname(host)
 
         # there is an execution interface with both IPv6 and IPv4: IPv4 is being preferred over IPv6 by default
         execution_interface = FactoryBot.build(:nic_managed,
@@ -265,7 +265,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.interfaces = [execution_interface]
         host.interfaces.each(&:save)
         host.reload
-        assert_equal execution_interface.ip, SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal execution_interface.ip, ScriptExecutionProvider.find_ip_or_hostname(host)
       end
 
       it 'gets ipv6 from flagged interfaces with IPv6 preference' do
@@ -278,7 +278,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.interfaces = [execution_interface]
         host.interfaces.each(&:save)
         host.reload
-        assert_equal execution_interface.ip6, SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal execution_interface.ip6, ScriptExecutionProvider.find_ip_or_hostname(host)
       end
 
       it 'gets ipv6 from flagged interfaces with IPv4 preference but without IPv4 address' do
@@ -291,7 +291,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
         host.interfaces = [execution_interface]
         host.interfaces.each(&:save)
         host.reload
-        assert_equal execution_interface.ip6, SSHExecutionProvider.find_ip_or_hostname(host)
+        assert_equal execution_interface.ip6, ScriptExecutionProvider.find_ip_or_hostname(host)
       end
     end
   end

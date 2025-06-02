@@ -71,10 +71,10 @@ module ForemanRemoteExecution
                 full_name: N_('Effective User')
               setting 'remote_execution_effective_user_method',
                 type: :string,
-                description: N_('What command should be used to switch to the effective user. One of %s') % ::SSHExecutionProvider::EFFECTIVE_USER_METHODS.inspect,
+                description: N_('What command should be used to switch to the effective user. One of %s') % ::ScriptExecutionProvider::EFFECTIVE_USER_METHODS.inspect,
                 default: 'sudo',
                 full_name: N_('Effective User Method'),
-                collection: proc { Hash[::SSHExecutionProvider::EFFECTIVE_USER_METHODS.map { |method| [method, method] }] }
+                collection: proc { Hash[::ScriptExecutionProvider::EFFECTIVE_USER_METHODS.map { |method| [method, method] }] }
               setting 'remote_execution_effective_user_password',
                 type: :string,
                 description: N_('Effective user password'),
@@ -328,7 +328,7 @@ module ForemanRemoteExecution
       require_dependency 'foreman_tasks/task'
       ForemanTasks::Task.include ForemanRemoteExecution::ForemanTasksTaskExtensions
       ForemanTasks::Cleaner.include ForemanRemoteExecution::ForemanTasksCleanerExtensions
-      RemoteExecutionProvider.register(:SSH, ::SSHExecutionProvider)
+      RemoteExecutionProvider.register(:SSH, ::ScriptExecutionProvider)
       RemoteExecutionProvider.register(:script, ::ScriptExecutionProvider)
 
       ForemanRemoteExecution.register_rex_feature

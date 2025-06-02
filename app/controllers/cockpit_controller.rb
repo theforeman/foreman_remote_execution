@@ -2,7 +2,7 @@ class CockpitController < ApplicationController
   before_action :find_resource, :only => [:host_ssh_params]
 
   def host_ssh_params
-    render :json => SSHExecutionProvider.ssh_params(@host)
+    render :json => ScriptExecutionProvider.ssh_params(@host)
   end
 
   def redirect
@@ -10,7 +10,7 @@ class CockpitController < ApplicationController
 
     redir_url = URI.parse(params[:redirect_uri])
 
-    cockpit_url = SSHExecutionProvider.cockpit_url_for_host('')
+    cockpit_url = ScriptExecutionProvider.cockpit_url_for_host('')
     redir_url.query = if redir_url.hostname == URI.join(Setting[:foreman_url], cockpit_url).hostname
                         "access_token=#{request.session_options[:id]}"
                       else
