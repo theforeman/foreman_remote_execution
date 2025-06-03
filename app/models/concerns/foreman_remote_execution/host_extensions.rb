@@ -28,6 +28,8 @@ module ForemanRemoteExecution
           end
         }
 
+        after_build :reset_host_proxy_invocations
+
         def search_by_job_invocation(key, operator, value)
           if key == 'job_invocation.result'
             operator = operator == '=' ? 'IN' : 'NOT IN'
@@ -44,6 +46,10 @@ module ForemanRemoteExecution
           }
         end
       end
+    end
+
+    def reset_host_proxy_invocations
+      HostProxyInvocation.where(host_id: self.id).delete_all
     end
 
     def cockpit_url
