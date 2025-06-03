@@ -1,0 +1,4 @@
+summary: Run uptime command via remote execution
+execute:
+  how: tmt
+  test: rex-uptime
