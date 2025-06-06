@@ -25,6 +25,7 @@ export const currentPermissionsUrl = foremanUrl(
 
 export const showTemplateInvocationUrl = (hostID, jobID) =>
   `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;
+export const LIST_TEMPLATE_INVOCATIONS = 'LIST_TEMPLATE_INVOCATIONS';
 
 export const templateInvocationPageUrl = (hostID, jobID) =>
   `/job_invocations_detail/${jobID}/host_invocation/${hostID}`;

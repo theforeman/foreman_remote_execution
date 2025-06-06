@@ -33,6 +33,7 @@ import Columns, {
   JOB_INVOCATION_HOSTS,
   MAX_HOSTS_API_SIZE,
   STATUS_UPPERCASE,
+  LIST_TEMPLATE_INVOCATIONS,
 } from './JobInvocationConstants';
 import { PopupAlert } from './OpenAllInvocationsModal';
 import { TemplateInvocation } from './TemplateInvocation';
@@ -91,7 +92,12 @@ const JobInvocationHostTable = ({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilter, urlSearchQuery, urlPage, urlPerPage, urlOrder]);
-
+  useAPI('get', `/job_invocations/${id}/hosts`, {
+    params: {
+      search: defaultParams.search,
+    },
+    key: LIST_TEMPLATE_INVOCATIONS,
+  });
   const { response, status, setAPIOptions } = useAPI(
     'get',
     `/api/job_invocations/${id}/hosts`,
@@ -384,7 +390,12 @@ const JobInvocationHostTable = ({
                         {__('A task for this host has not been started')}
                       </div>
                     ) : (
-                      <TemplateInvocation hostID={result.id} jobID={id} />
+                      <TemplateInvocation
+                        hostID={result.id}
+                        jobID={id}
+                        isInTableView
+                        isExpanded={isHostExpanded(result.id)}
+                      />
                     )}
                   </ExpandableRowContent>
                 </Td>
