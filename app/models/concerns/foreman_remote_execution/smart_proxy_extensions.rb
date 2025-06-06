@@ -11,11 +11,25 @@ module ForemanRemoteExecution
       self[:pubkey] || update_pubkey
     end
 
+    def ca_pubkey
+      self[:ca_pubkey] || update_ca_pubkey
+    end
+
     def update_pubkey
       return unless has_feature?(%w(SSH Script))
 
       key = ::ProxyAPI::RemoteExecutionSSH.new(:url => url).pubkey
       self.update_attribute(:pubkey, key) if key
+      key
+    end
+
+    def update_ca_pubkey
+      return unless has_feature?(%w(SSH Script))
+
+      key = ::ProxyAPI::RemoteExecutionSSH.new(:url => url).ca_pubkey
+      # smart proxy is not required to have a CA pubkey, in which case an empty string is returned
+      key = nil if key == ""
+      self.update_attribute(:ca_pubkey, key)
       key
     end
 
@@ -26,6 +40,7 @@ module ForemanRemoteExecution
     def refresh
       errors = super
       update_pubkey
+      update_ca_pubkey
       errors
     end
   end
