@@ -48,7 +48,7 @@ class TemplateInvocationsController < ApplicationController
 
     auto_refresh = @job_invocation.task.try(:pending?)
     finished = @job_invocation.status_label == 'failed' || @job_invocation.status_label == 'succeeded' || @job_invocation.status_label == 'cancelled'
-    render :json => { :output => lines, :preview => template_invocation_preview(@template_invocation, @host), :proxy => proxy, :input_values => transformed_input_values, :job_invocation_description => @job_invocation.description, :task_id => @template_invocation_task.id, :task_cancellable => @template_invocation_task.cancellable?, :host_name => @host.name, :permissions => {
+    render :json => { :output => lines, :preview => template_invocation_preview(@template_invocation, @host), :proxy => proxy, :input_values => transformed_input_values, :job_invocation_description => @job_invocation.description, :task => @template_invocation_task.attributes.merge({cancellable: @template_invocation_task.cancellable? }), :host_name => @host.name, :permissions => {
       :view_foreman_tasks => User.current.allowed_to?(:view_foreman_tasks),
       :cancel_job_invocations => User.current.allowed_to?(:cancel_job_invocations),
       :execute_jobs => User.current.allowed_to?(:create_job_invocations) && (!@host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts)),
