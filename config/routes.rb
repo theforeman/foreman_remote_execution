@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       get 'auto_complete_search'
     end
     member do
+      get 'hosts', to: 'job_invocations#list_jobs_hosts'
       post 'cancel'
     end
   end
