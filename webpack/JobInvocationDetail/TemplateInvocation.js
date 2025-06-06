@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { ClipboardCopyButton, Alert, Skeleton } from '@patternfly/react-core';
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { APIActions } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { useForemanHostDetailsPageUrl } from 'foremanReact/Root/Context/ForemanContext';
 import { STATUS } from 'foremanReact/constants';
@@ -11,6 +12,10 @@ import {
   templateInvocationPageUrl,
   GET_TEMPLATE_INVOCATION,
 } from './JobInvocationConstants';
+import {
+  selectTemplateInvocationStatus,
+  selectTemplateInvocation,
+} from './JobInvocationSelectors';
 import { OutputToggleGroup } from './TemplateInvocationComponents/OutputToggleGroup';
 import { PreviewTemplate } from './TemplateInvocationComponents/PreviewTemplate';
 import { OutputCodeBlock } from './TemplateInvocationComponents/OutputCodeBlock';
@@ -54,28 +59,39 @@ export const TemplateInvocation = ({
   isInTableView,
   hostName,
   hostProxy,
+  isExpanded,
 }) => {
   const intervalRef = useRef(null);
   const templateURL = showTemplateInvocationUrl(hostID, jobID);
   const hostDetailsPageUrl = useForemanHostDetailsPageUrl();
-  const { response, status, setAPIOptions } = useAPI('get', templateURL, {
-    key: GET_TEMPLATE_INVOCATION,
-    headers: { Accept: 'application/json' },
-    handleError: () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    },
-  });
-  const { finished, auto_refresh: autoRefresh } = response;
+
+  const status = useSelector(selectTemplateInvocationStatus(hostID));
+  const response = useSelector(selectTemplateInvocation(hostID));
+  const finished = response.finished ?? true;
+  const autoRefresh = response.auto_refresh || false;
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    const getData = async () => {
+      if (
+        (!isInTableView || (isInTableView && isExpanded)) &&
+        (Object.keys(response).length === 0 || autoRefresh)
+      ) {
+        dispatch(
+          APIActions.get({
+            url: templateURL,
+            key: `${GET_TEMPLATE_INVOCATION}_${hostID}`,
+            handleError: () => {
+              if (intervalRef.current) clearInterval(intervalRef.current);
+            },
+          })
+        );
+      }
+    };
+    getData();
     if (!finished && autoRefresh) {
       intervalRef.current = setInterval(() => {
-        setAPIOptions(prevOptions => ({
-          ...prevOptions,
-        }));
+        getData();
       }, 5000);
     }
 
@@ -85,7 +101,15 @@ export const TemplateInvocation = ({
         intervalRef.current = null;
       }
     };
-  }, [finished, autoRefresh, setAPIOptions]);
+  }, [
+    dispatch,
+    templateURL,
+    isExpanded,
+    isInTableView,
+    finished,
+    autoRefresh,
+    hostID,
+  ]);
 
   const errorMessage =
     response?.response?.data?.error?.message ||
@@ -95,10 +119,10 @@ export const TemplateInvocation = ({
     preview,
     output,
     input_values: inputValues,
-    task_id: taskID,
-    task_cancellable: taskCancellable,
+    task,
     permissions,
   } = response;
+  const { id: taskID, cancellable: taskCancellable } = task || {};
   const [showOutputType, setShowOutputType] = useState({
     stderr: true,
     stdout: true,
@@ -201,12 +225,14 @@ TemplateInvocation.propTypes = {
   hostProxy: PropTypes.object, // only used when isInTableView is false
   jobID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   isInTableView: PropTypes.bool,
+  isExpanded: PropTypes.bool,
 };
 
 TemplateInvocation.defaultProps = {
   isInTableView: true,
   hostName: '',
   hostProxy: {},
+  isExpanded: false,
 };
 
 CopyToClipboard.propTypes = {
