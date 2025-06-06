@@ -12,6 +12,7 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
 
     before do
       SmartProxy.any_instance.stubs(:pubkey).returns(sshkey)
+      SmartProxy.any_instance.stubs(:ca_pubkey).returns(nil)
       Setting[:remote_execution_ssh_user] = 'root'
       Setting[:remote_execution_effective_user_method] = 'sudo'
     end
@@ -58,6 +59,48 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       host.interfaces.first.subnet.remote_execution_proxies.clear
       User.current = nil
       assert_includes host.remote_execution_ssh_keys, sshkey
+    end
+  end
+
+  describe 'has ssh CA key configured' do
+    let(:host) { FactoryBot.create(:host, :with_execution) }
+    let(:sshkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQ foo@example.com' }
+    let(:ca_sshkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAABJE bar@example.com' }
+
+    before do
+      SmartProxy.any_instance.stubs(:pubkey).returns(sshkey)
+      SmartProxy.any_instance.stubs(:ca_pubkey).returns(ca_sshkey)
+      Setting[:remote_execution_ssh_user] = 'root'
+      Setting[:remote_execution_effective_user_method] = 'sudo'
+    end
+
+    it 'has CA ssh keys in the parameters' do
+      assert_includes host.remote_execution_ssh_ca_keys, ca_sshkey
+    end
+
+    it 'excludes ssh keys from proxies that have SSH CA key configured' do
+      assert_empty host.remote_execution_ssh_keys
+    end
+
+    it 'merges ssh CA keys from host parameters and proxies' do
+      key = 'ssh-rsa not-even-a-key something@somewhere.com'
+      host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_ca_keys', :value => [key])
+      assert_includes host.host_param('remote_execution_ssh_ca_keys'), key
+      assert_includes host.host_param('remote_execution_ssh_ca_keys'), ca_sshkey
+    end
+
+    it 'has ssh CA keys in the parameters even when no user specified' do
+      FactoryBot.create(:smart_proxy, :ssh)
+      host.interfaces.first.subnet.remote_execution_proxies.clear
+      User.current = nil
+      assert_includes host.remote_execution_ssh_ca_keys, ca_sshkey
+    end
+
+    it 'merges ssh CA key as a string from host parameters and proxies' do
+      key = 'ssh-rsa not-even-a-key something@somewhere.com'
+      host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_ca_keys', :value => key)
+      assert_includes host.host_param('remote_execution_ssh_ca_keys'), key
+      assert_includes host.host_param('remote_execution_ssh_ca_keys'), ca_sshkey
     end
   end
 

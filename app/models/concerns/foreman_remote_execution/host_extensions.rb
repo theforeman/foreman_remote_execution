@@ -108,7 +108,12 @@ module ForemanRemoteExecution
     end
 
     def remote_execution_ssh_keys
-      remote_execution_proxies(%w(SSH Script), false).values.flatten.uniq.map { |proxy| proxy.pubkey }.compact.uniq
+      # only include public keys from SSH proxies that don't have SSH cert verification configured
+      remote_execution_proxies(%w(SSH Script), false).values.flatten.uniq.map { |proxy| proxy.pubkey if proxy.ca_pubkey.blank? }.compact.uniq
+    end
+
+    def remote_execution_ssh_ca_keys
+      remote_execution_proxies(%w(SSH Script), false).values.flatten.uniq.map { |proxy| proxy.ca_pubkey }.compact.uniq
     end
 
     def drop_execution_interface_cache
@@ -139,10 +144,13 @@ module ForemanRemoteExecution
 
     def extend_host_params_hash(params)
       keys = remote_execution_ssh_keys
+      ca_keys = remote_execution_ssh_ca_keys
       source = 'global'
-      if keys.present?
-        value, safe_value = params.fetch('remote_execution_ssh_keys', {}).values_at(:value, :safe_value).map { |v| [v].flatten.compact }
-        params['remote_execution_ssh_keys'] = {:value => value + keys, :safe_value => safe_value + keys, :source => source}
+      {keys: keys, ca_keys: ca_keys}.each do |key_set_name, key_set|
+        if key_set.present?
+          value, safe_value = params.fetch("remote_execution_ssh_#{key_set_name}", {}).values_at(:value, :safe_value).map { |v| [v].flatten.compact }
+          params["remote_execution_ssh_#{key_set_name}"] = {:value => value + key_set, :safe_value => safe_value + key_set, :source => source}
+        end
       end
       [:remote_execution_ssh_user, :remote_execution_effective_user_method,
        :remote_execution_connect_by_ip].each do |key|
