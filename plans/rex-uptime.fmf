@@ -1,4 +1,12 @@
 summary: Run uptime command via remote execution
+
+discover:
+  how: fmf
+  directory: ./tests
+
 execute:
   how: tmt
-  test: rex-uptime
+
+provision:
+  how: virtual
+  image: centos-stream-9
