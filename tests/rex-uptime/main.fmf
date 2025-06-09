@@ -1,0 +1,3 @@
+summary: Run uptime command via remote execution
+test: ./test.sh
+framework: shell
