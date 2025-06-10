@@ -12,6 +12,7 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
 
     before do
       SmartProxy.any_instance.stubs(:pubkey).returns(sshkey)
+      SmartProxy.any_instance.stubs(:ca_pubkey).returns(nil)
       Setting[:remote_execution_ssh_user] = 'root'
       Setting[:remote_execution_effective_user_method] = 'sudo'
     end

@@ -7,15 +7,27 @@ module ForemanRemoteExecution
       end
     end
 
+    def ca_pubkey
+      self[:ca_pubkey] || update_ca_pubkey
+    end
+
     def pubkey
       self[:pubkey] || update_pubkey
     end
 
+    def update_ca_pubkey
+      update_key(:ca_pubkey)
+    end
+
     def update_pubkey
+      update_key(:pubkey)
+    end
+
+    def update_key(key_type)
       return unless has_feature?(%w(SSH Script))
 
-      key = ::ProxyAPI::RemoteExecutionSSH.new(:url => url).pubkey
-      self.update_attribute(:pubkey, key) if key
+      key = ::ProxyAPI::RemoteExecutionSSH.new(:url => url).send(key_type)
+      self.update_attribute(key_type, key) if key
       key
     end
 
@@ -26,6 +38,7 @@ module ForemanRemoteExecution
     def refresh
       errors = super
       update_pubkey
+      update_ca_pubkey
       errors
     end
   end

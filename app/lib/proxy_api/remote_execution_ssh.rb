@@ -5,6 +5,12 @@ module ::ProxyAPI
       super args
     end
 
+    def ca_pubkey
+      get('ca_pubkey')&.strip
+    rescue
+      Rails.logger.info("Unable to fetch CA public key. Using public key authentication instead.")
+    end
+
     def pubkey
       get('pubkey').strip
     rescue => e
