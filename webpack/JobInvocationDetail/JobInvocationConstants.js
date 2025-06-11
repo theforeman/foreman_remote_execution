@@ -16,10 +16,12 @@ export const CANCEL_RECURRING_LOGIC = 'CANCEL_RECURRING_LOGIC';
 export const GET_REPORT_TEMPLATES = 'GET_REPORT_TEMPLATES';
 export const GET_REPORT_TEMPLATE_INPUTS = 'GET_REPORT_TEMPLATE_INPUTS';
 export const JOB_INVOCATION_HOSTS = 'JOB_INVOCATION_HOSTS';
+export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
+export const MAX_HOSTS_API_SIZE = 'MAX_HOSTS_API_SIZE';
 export const currentPermissionsUrl = foremanUrl(
   '/api/v2/permissions/current_permissions'
 );
-export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
+
 export const showTemplateInvocationUrl = (hostID, jobID) =>
   `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;
 
@@ -131,7 +133,7 @@ const Columns = () => {
       weight: 5,
     },
     actions: {
-      title: '',
+      title: <span className="pf-u-screen-reader">{__('Actions')}</span>,
       weight: 6,
       wrapper: () => null,
     },
@@ -145,4 +147,23 @@ const DYNAMIC_TYPE = 'dynamic_query';
 export const TARGETING_TYPES = {
   [STATIC_TYPE]: __('Static Query'),
   [DYNAMIC_TYPE]: __('Dynamic Query'),
+};
+
+export const getIdsArray = (bulkParams, allHostsIds, isAllSelected) => {
+  if (!bulkParams) {
+    return isAllSelected ? allHostsIds : [];
+  }
+  const parseIds = str => str.split(',').map(id => id.trim());
+  // bulkParams in format `id ^ (1,2,3)`
+  const includeIdsMatch = bulkParams.match(/id \^ \(([^)]+)\)/);
+  if (includeIdsMatch) {
+    return parseIds(includeIdsMatch[1]);
+  }
+  // bulkParams in format `id !^ (1,2,3)`
+  const excludeIdsMatch = bulkParams.match(/id !\^ \(([^)]+)\)/);
+  if (excludeIdsMatch) {
+    const excludedSet = new Set(parseIds(excludeIdsMatch[1]).map(Number));
+    return allHostsIds.filter(id => !excludedSet.has(Number(id)));
+  }
+  return [];
 };
