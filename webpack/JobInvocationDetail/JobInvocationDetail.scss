@@ -7,6 +7,16 @@
     height: $chart_size;
     width: $chart_size;
     margin-bottom: 10px;
+
+    svg {
+      position: relative;
+      overflow: visible;
+      z-index: 999;
+    }
+
+    path {
+      cursor: pointer;
+    }
   }
 
   .chart-legend {
@@ -27,6 +37,10 @@
       .pf-v5-c-description-list__term .pf-v5-c-description-list__text {
         font-weight: normal;
       }
+    }
+
+    text, path {
+      cursor: pointer;
     }
   }
 
