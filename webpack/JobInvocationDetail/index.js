@@ -55,8 +55,8 @@ const JobInvocationDetailPage = ({
   );
   const [selectedFilter, setSelectedFilter] = useState('');
 
-  const handleFilterChange = filter => {
-    setSelectedFilter(filter);
+  const handleFilterChange = newFilter => {
+    setSelectedFilter(newFilter);
   };
 
   let isAlreadyStarted = false;
@@ -119,6 +119,7 @@ const JobInvocationDetailPage = ({
             data={items}
             isAlreadyStarted={isAlreadyStarted}
             formattedStartDate={formattedStartDate}
+            onFilterChange={handleFilterChange}
           />
           <Divider
             orientation={{
@@ -155,6 +156,7 @@ const JobInvocationDetailPage = ({
             finished={finished}
             autoRefresh={autoRefresh}
             initialFilter={selectedFilter}
+            onFilterUpdate={handleFilterChange}
           />
         )}
       </PageSection>

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import React, { useMemo, useEffect, useState } from 'react';
@@ -36,11 +37,20 @@ const JobInvocationHostTable = ({
   finished,
   autoRefresh,
   initialFilter,
+  onFilterUpdate,
 }) => {
   const columns = Columns();
   const columnNamesKeys = Object.keys(columns);
   const apiOptions = { key: JOB_INVOCATION_HOSTS };
-  const [selectedFilter, setSelectedFilter] = useState(initialFilter || '');
+  const [selectedFilter, setSelectedFilter] = useState(initialFilter);
+
+  useEffect(() => {
+    if (initialFilter !== selectedFilter) {
+      wrapSetSelectedFilter(initialFilter);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialFilter]);
+
   const {
     searchParam: urlSearchQuery = '',
     page: urlPage,
@@ -111,6 +121,7 @@ const JobInvocationHostTable = ({
       return prevOptions;
     });
     setSelectedFilter(filter);
+    onFilterUpdate(filter);
   };
 
   useEffect(() => {
@@ -303,8 +314,11 @@ JobInvocationHostTable.propTypes = {
   finished: PropTypes.bool.isRequired,
   autoRefresh: PropTypes.bool.isRequired,
   initialFilter: PropTypes.string.isRequired,
+  onFilterUpdate: PropTypes.func,
 };
 
-JobInvocationHostTable.defaultProps = {};
+JobInvocationHostTable.defaultProps = {
+  onFilterUpdate: () => {},
+};
 
 export default JobInvocationHostTable;
