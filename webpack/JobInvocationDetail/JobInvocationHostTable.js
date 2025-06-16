@@ -25,6 +25,7 @@ import { getControllerSearchProps } from 'foremanReact/constants';
 import Columns, {
   JOB_INVOCATION_HOSTS,
   STATUS_UPPERCASE,
+  LIST_TEMPLATE_INVOCATIONS,
 } from './JobInvocationConstants';
 import { TemplateInvocation } from './TemplateInvocation';
 import { OpenAlInvocations, PopupAlert } from './OpenAlInvocations';
@@ -76,6 +77,12 @@ const JobInvocationHostTable = ({
   if (urlPage) defaultParams.page = Number(urlPage);
   if (urlPerPage) defaultParams.per_page = Number(urlPerPage);
   const [expandedHost, setExpandedHost] = useState([]);
+  useAPI('get', `/job_invocations/${id}/hosts`, {
+    params: {
+      search,
+    },
+    key: LIST_TEMPLATE_INVOCATIONS,
+  });
   const { response, status, setAPIOptions } = useAPI(
     'get',
     `/api/job_invocations/${id}/hosts`,
@@ -295,7 +302,12 @@ const JobInvocationHostTable = ({
                         {__('A task for this host has not been started')}
                       </div>
                     ) : (
-                      <TemplateInvocation hostID={result.id} jobID={id} />
+                      <TemplateInvocation
+                        hostID={result.id}
+                        jobID={id}
+                        isInTableView
+                        isExpanded={isHostExpanded(result.id)}
+                      />
                     )}
                   </ExpandableRowContent>
                 </Td>

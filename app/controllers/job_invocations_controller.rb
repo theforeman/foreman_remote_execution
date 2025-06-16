@@ -149,6 +149,33 @@ class JobInvocationsController < ApplicationController
     render :json => {:job_invocations => job_invocations}
   end
 
+  def list_jobs_hosts
+    @job_invocation = resource_base.find(params[:id])
+    hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+    hosts = hosts.search_for(params[:search])
+    template_invocations_task_by_hosts = {}
+    hosts.each do |host|
+      template_invocation = @job_invocation.template_invocations.find { |template_inv| template_inv.host_id == host.id }
+      next unless template_invocation
+      template_invocation_task = template_invocation.run_host_job_task
+      template_invocations_task_by_hosts[host.id] =
+        {
+          :host_name => host.name,
+          :id => host.id,
+          :task => template_invocation_task.attributes.merge({cancellable: template_invocation_task.cancellable? }),
+          :permissions => {
+            :view_foreman_tasks => authorized_for(:permission => :view_foreman_tasks, :auth_object => template_invocation_task),
+            :cancel_job_invocations => authorized_for(:permission => :cancel_job_invocations, :auth_object => @job_invocation),
+            :execute_jobs => authorized_for(controller: :job_invocations, action: :create) && (!host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts)),
+          },
+        }
+    end
+
+    render json: {
+      :template_invocations_task_by_hosts => template_invocations_task_by_hosts,
+    }
+  end
+
   private
 
   def action_permission
@@ -159,7 +186,7 @@ class JobInvocationsController < ApplicationController
         'create'
       when 'cancel'
         'cancel'
-      when 'chart', 'preview_job_invocations_per_host'
+      when 'chart', 'preview_job_invocations_per_host', 'list_jobs_hosts'
         'view'
       else
         super
