@@ -129,6 +129,17 @@ class JobTemplate < ::Template
     end
   end
 
+  # Deep clone template with proper handling of locked status and taxonomies
+  def deep_clone(new_name)
+    dup.tap do |template|
+      template.name = new_name
+      template.locked = false
+      # Copy taxonomies
+      template.organizations = self.organizations
+      template.locations = self.locations
+    end
+  end
+
   def provider
     RemoteExecutionProvider.provider_for(provider_type)
   end
