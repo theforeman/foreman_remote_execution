@@ -134,6 +134,10 @@ class JobTemplate < ::Template
     dup.tap do |template|
       template.name = new_name
       template.locked = false
+      template.cloned_from = self
+      template.foreign_input_sets = self.foreign_input_sets.map(&:dup)
+      template.effective_user = self.effective_user.dup
+
       # Copy taxonomies
       template.organizations = self.organizations
       template.locations = self.locations
