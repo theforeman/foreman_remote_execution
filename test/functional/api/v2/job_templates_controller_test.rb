@@ -90,6 +90,35 @@ module Api
         assert_response :unprocessable_entity
       end
 
+      test 'should clone locked template' do
+        @template.locked = true
+        @template.save!
+        post :clone, params: { :id => @template.to_param, :job_template => {:name => 'MyClone'} }
+        assert_response :success
+
+        template = ActiveSupport::JSON.decode(@response.body)
+        assert_equal(template['locked'], false)
+      end
+
+      test 'should clone template with associations' do
+        template2 = FactoryBot.create(:job_template)
+        @template.organizations << FactoryBot.create(:organization)
+        @template.locations << FactoryBot.create(:location)
+        @template.foreign_input_sets << FactoryBot.build(:foreign_input_set).tap { |fis| fis.target_template_id = template2.id }
+        @template.effective_user.value = 'toor'
+        @template.save!
+
+        post :clone, params: { :id => @template.to_param, :job_template => {:name => 'MyClone'} }
+        template = ActiveSupport::JSON.decode(@response.body)
+
+        clone = JobTemplate.unscoped.find(template['id'])
+        assert_equal(clone.organizations.sort, @template.organizations.sort)
+        assert_equal(clone.locations.sort, @template.locations.sort)
+        assert_equal(clone.foreign_input_sets.map(&:target_template_id), [template2.id])
+        assert_equal(clone.effective_user.value, 'toor')
+        assert_equal(clone.cloned_from.id, @template.id)
+      end
+
       test 'should export template' do
         get :export, params: { :id => @template.to_param }
         User.current = users(:admin)

@@ -129,15 +129,9 @@ class JobTemplate < ::Template
     end
   end
 
-  # Deep clone template with proper handling of locked status and taxonomies
-  def deep_clone(new_name)
-    dup.tap do |template|
-      template.name = new_name
-      template.locked = false
-      # Copy taxonomies
-      template.organizations = self.organizations
-      template.locations = self.locations
-    end
+  def clone
+    deep_clone(:include => [:effective_user, :foreign_input_sets, :organizations, :locations],
+      :except => [:name, :locked])
   end
 
   def provider

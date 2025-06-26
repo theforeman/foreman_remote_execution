@@ -108,7 +108,10 @@ module Api
       param :id, :identifier, :required => true
       param_group :job_template_clone, :as => :create
       def clone
-        @job_template = @job_template.deep_clone(job_template_params[:name])
+        original = @job_template
+        @job_template = @job_template.clone
+        @job_template.cloned_from = original
+        @job_template.name = job_template_params[:name]
         process_response @job_template.save
       end
 
