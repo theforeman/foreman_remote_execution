@@ -16,7 +16,7 @@ const TemplateInvocationPage = ({
     job_invocation_description: jobDescription,
     host_name: hostName,
     proxy: hostProxy,
-  } = useSelector(selectTemplateInvocation);
+  } = useSelector(selectTemplateInvocation(hostID));
   const description = sprintf(__('Template Invocation for %s'), hostName);
   const breadcrumbOptions = {
     breadcrumbItems: [
