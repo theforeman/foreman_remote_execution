@@ -57,7 +57,7 @@ module ForemanRemoteExecution
       # e.g. having ProvisioningTemplate < Template, adding has_many :template_inputs to Template from concern
       #   Template.reflect_on_association :template_inputs # => <#Association...
       #   ProvisioningTemplate.reflect_on_association :template_inputs # => nil
-      (Template.descendants + [Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateExtensions) }
+      (Template.descendants + [JobTemplate, Template]).each { |klass| klass.send(:include, ForemanRemoteExecution::TemplateExtensions) }
       Template.prepend ForemanRemoteExecution::TemplateOverrides
 
       (Taxonomy.descendants + [Taxonomy]).each { |klass| klass.send(:include, ForemanRemoteExecution::TaxonomyExtensions) }
@@ -79,8 +79,6 @@ module ForemanRemoteExecution
       Subnet.include ForemanRemoteExecution::SubnetExtensions
 
       ::Api::V2::InterfacesController.include Api::V2::InterfacesControllerExtensions
-      # We need to explicitly force to load the Task model due to Rails loader
-      # having issues with resolving it to Rake::Task otherwise
       ForemanTasks::Task.include ForemanRemoteExecution::ForemanTasksTaskExtensions
       ForemanTasks::Cleaner.include ForemanRemoteExecution::ForemanTasksCleanerExtensions
       RemoteExecutionProvider.register(:SSH, ::ScriptExecutionProvider)
