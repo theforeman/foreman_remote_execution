@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { ClipboardCopyButton, Alert, Skeleton } from '@patternfly/react-core';
@@ -47,7 +47,7 @@ const CopyToClipboard = ({ fullOutput }) => {
     </ClipboardCopyButton>
   );
 };
-let intervalId;
+
 export const TemplateInvocation = ({
   hostID,
   jobID,
@@ -55,31 +55,35 @@ export const TemplateInvocation = ({
   hostName,
   hostProxy,
 }) => {
+  const intervalRef = useRef(null);
   const templateURL = showTemplateInvocationUrl(hostID, jobID);
   const hostDetailsPageUrl = useForemanHostDetailsPageUrl();
   const { response, status, setAPIOptions } = useAPI('get', templateURL, {
     key: GET_TEMPLATE_INVOCATION,
     headers: { Accept: 'application/json' },
     handleError: () => {
-      if (intervalId) clearInterval(intervalId);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
     },
   });
   const { finished, auto_refresh: autoRefresh } = response;
 
   useEffect(() => {
-    if (!finished || autoRefresh) {
-      intervalId = setInterval(() => {
-        // Re call api
+    if (!finished && autoRefresh) {
+      intervalRef.current = setInterval(() => {
         setAPIOptions(prevOptions => ({
           ...prevOptions,
         }));
       }, 5000);
     }
-    if (intervalId && finished && !autoRefresh) {
-      clearInterval(intervalId);
-    }
+
     return () => {
-      clearInterval(intervalId);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
     };
   }, [finished, autoRefresh, setAPIOptions]);
 
