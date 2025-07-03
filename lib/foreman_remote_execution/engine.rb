@@ -255,6 +255,7 @@ module ForemanRemoteExecution
           extend_template_helpers ForemanRemoteExecution::RendererMethods
 
           extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/pubkey'
+          extend_rabl_template 'api/v2/smart_proxies/main', 'api/v2/smart_proxies/ca_pubkey'
           extend_rabl_template 'api/v2/interfaces/main', 'api/v2/interfaces/execution_flag'
           extend_rabl_template 'api/v2/subnets/show', 'api/v2/subnets/remote_execution_proxies'
           extend_rabl_template 'api/v2/hosts/main', 'api/v2/host/main'
