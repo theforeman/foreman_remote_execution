@@ -52,13 +52,25 @@
     height: $chart_size;
   }
 }
+
 .job-additional-info {
   padding: 0;
   margin-bottom: -10px;
 }
+
 .job-details-table-section {
   section:nth-child(1) {
     padding: 0;
+  }
+
+  .pf-v5-c-toolbar__group.pf-m-button-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .open-all-button {
+    margin-left: 10px;
+    margin-right: 15px;
   }
 }
 
@@ -121,4 +133,10 @@
   .pf-v5-c-toggle-group {
     margin-bottom: 10px;
   }
+}
+
+.open-all-modal .pf-v5-c-modal-box__title-text {
+    white-space: normal;
+    text-overflow: unset;
+    word-break: break-word;
 }
