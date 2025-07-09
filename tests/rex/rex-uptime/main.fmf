@@ -1,0 +1,3 @@
+summary: Run uptime command check on the provisioned guest
+test: ./test.sh
+framework: shell
