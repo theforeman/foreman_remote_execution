@@ -1,0 +1,49 @@
+name: /plans/rex-uptime
+summary: Test Foreman Remote Execution for uptime command
+
+provision:
+    how: virtual
+    image: centos-stream-9
+
+discover:
+    how: fmf
+    directory: ../../rex-uptime
+
+execute:
+    how: tmt
+    prepare:
+        - how: shell
+          name: trigger-and-verify-remote-execution
+          where: localhost
+          script:
+              - |
+                  #!/bin/bash
+                  set -euo pipefail
+
+                  echo "Foreman Remote Execution Test from TMT Host"
+                  job_template='Run Command - Script Default'
+                  GUEST_IP=$(tmt --root $(tmt _root) guest --id default-0 | grep 'primary address' | awk '{print $NF}')
+                  echo "TMT Guest IP: ${GUEST_IP}"
+
+                  echo "Triggering 'uptime' command on guest IP ${GUEST_IP} via Foreman"
+                  JOB_INFO=$(hammer job-invocation create \
+                      --job-template "${job_template}" \
+                      --inputs 'command=uptime' \
+                      --search-query "facts.ip_address = ${GUEST_IP}" \
+                      --json)
+                  
+                  JOB_ID=$(echo "${JOB_INFO}" | jq -r '.id')
+                  echo "Foreman Job ID: ${JOB_ID}"
+
+                  echo "Waiting for Foreman job ${JOB_ID} to complete"
+                  for i in $(seq 1 120); do
+                      JOB_STATUS=$(hammer job-invocation info --id "${JOB_ID}" --json | jq -r '.state')
+                      echo "Job status: ${JOB_STATUS} (Attempt ${i})"
+                      [[ "$JOB_STATUS" == "finished" ]] && break
+                      [[ "$JOB_STATUS" == "error" || "$JOB_STATUS" == "failed" ]] && exit 1
+                      sleep 5
+                  done
+
+                  echo "Foreman job ${JOB_ID} completed successfully."
+                  hammer job-invocation info --id "$JOB_ID"
+                  echo "Foreman Remote Execution Test PASSED"
