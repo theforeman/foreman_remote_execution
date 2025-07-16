@@ -10,10 +10,7 @@ import {
 } from '@patternfly/react-core';
 import { STATUS_TITLES } from './JobInvocationConstants';
 
-const JobInvocationHostTableToolbar = ({
-  dropdownFilter,
-  setDropdownFilter,
-}) => {
+const DropdownFilter = ({ dropdownFilter, setDropdownFilter }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const onSelect = (_event, itemId) => {
     setDropdownFilter(itemId);
@@ -60,9 +57,9 @@ const JobInvocationHostTableToolbar = ({
   );
 };
 
-JobInvocationHostTableToolbar.propTypes = {
+DropdownFilter.propTypes = {
   dropdownFilter: PropTypes.string.isRequired,
   setDropdownFilter: PropTypes.func.isRequired,
 };
 
-export default JobInvocationHostTableToolbar;
+export default DropdownFilter;

@@ -38,6 +38,7 @@ const JobInvocationDetailPage = ({
   const items = useSelector(selectItems);
   const {
     description,
+    failed,
     status_label: statusLabel,
     task,
     start_at: startAt,
@@ -153,6 +154,7 @@ const JobInvocationDetailPage = ({
           <JobInvocationHostTable
             id={id}
             targeting={targeting}
+            failedCount={failed}
             finished={finished}
             autoRefresh={autoRefresh}
             initialFilter={selectedFilter}

@@ -16,10 +16,13 @@ export const CANCEL_RECURRING_LOGIC = 'CANCEL_RECURRING_LOGIC';
 export const GET_REPORT_TEMPLATES = 'GET_REPORT_TEMPLATES';
 export const GET_REPORT_TEMPLATE_INPUTS = 'GET_REPORT_TEMPLATE_INPUTS';
 export const JOB_INVOCATION_HOSTS = 'JOB_INVOCATION_HOSTS';
+export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
+export const MAX_HOSTS_API_SIZE = 100;
+export const DIRECT_OPEN_HOST_LIMIT = 3;
 export const currentPermissionsUrl = foremanUrl(
   '/api/v2/permissions/current_permissions'
 );
-export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
+
 export const showTemplateInvocationUrl = (hostID, jobID) =>
   `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;
 
@@ -134,11 +137,6 @@ const Columns = () => {
         );
       },
       weight: 5,
-    },
-    actions: {
-      title: ' ',
-      weight: 6,
-      wrapper: () => null,
     },
   };
 };
