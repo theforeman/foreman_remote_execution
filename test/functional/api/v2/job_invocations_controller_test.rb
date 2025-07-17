@@ -91,7 +91,7 @@ module Api
         end
 
         test 'should create with schedule' do
-          @attrs[:scheduling] = { start_at: Time.now.to_s }
+          @attrs[:scheduling] = { start_at: (Time.now + 1.hour).to_s }
           post :create, params: { job_invocation: @attrs }
           invocation = ActiveSupport::JSON.decode(@response.body)
           assert_equal invocation['mode'], 'future'
