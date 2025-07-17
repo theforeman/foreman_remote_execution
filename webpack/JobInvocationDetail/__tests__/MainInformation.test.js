@@ -97,7 +97,7 @@ describe('JobInvocationDetailPage', () => {
 
     expect(screen.getByText('Description')).toBeInTheDocument();
     expect(
-      container.querySelector('.chart-donut .pf-c-chart') // todo: change to pf5 once we update @patternfly/react-charts to v7
+      container.querySelector('.chart-donut .pf-v5-c-chart')
     ).toBeInTheDocument();
     expect(screen.getByText('2/6')).toBeInTheDocument();
     expect(screen.getByText('Systems')).toBeInTheDocument();
