@@ -82,16 +82,15 @@ const JobInvocationHostTable = ({
       .join(' AND ');
   };
 
-  const defaultParams = useMemo(() => {
-    const search = constructFilter(selectedFilter, urlSearchQuery);
-    return {
-      ...(search ? { search } : {}),
+  const defaultParams = useMemo(
+    () => ({
       ...(urlPage ? { page: Number(urlPage) } : {}),
       ...(urlPerPage ? { per_page: Number(urlPerPage) } : {}),
       ...(urlOrder ? { order: urlOrder } : {}),
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedFilter, urlSearchQuery, urlPage, urlPerPage, urlOrder]);
+    }),
+    [urlPage, urlPerPage, urlOrder]
+  );
+
   useAPI('get', `/job_invocations/${id}/hosts`, {
     params: {
       search: defaultParams.search,
@@ -205,11 +204,17 @@ const JobInvocationHostTable = ({
     setSelectedFilter(newFilter);
     onFilterUpdate(newFilter);
 
+    const filterSearch = constructFilter(newFilter, urlSearchQuery);
+
     const newParams = {
       ...defaultParams,
       page: 1,
-      search: constructFilter(newFilter, urlSearchQuery),
     };
+
+    if (filterSearch !== '') {
+      newParams.search = filterSearch;
+    }
+
     setAPIOptions(prev => ({ ...prev, params: newParams }));
 
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -220,14 +225,21 @@ const JobInvocationHostTable = ({
   const wrapSetAPIOptions = newAPIOptions => {
     const newParams = newAPIOptions?.params ?? newAPIOptions ?? {};
 
+    const filterSearch = constructFilter(
+      selectedFilter,
+      newParams.search ?? urlSearchQuery
+    );
+
     const mergedParams = {
       ...defaultParams,
       ...newParams,
-      search: constructFilter(
-        selectedFilter,
-        newParams.search ?? urlSearchQuery
-      ),
     };
+
+    if (filterSearch !== '') {
+      mergedParams.search = filterSearch;
+    } else if ('search' in mergedParams) {
+      delete mergedParams.search;
+    }
 
     setAPIOptions(prev => ({ ...prev, params: mergedParams }));
 
