@@ -47,7 +47,8 @@ const actions = ({
         APIActions.post({
           url: `/foreman_tasks/tasks/${taskID}/cancel`,
           key: 'CANCEL_TASK',
-          errorToast: ({ response }) => response.data.message,
+          errorToast: ({ response }) =>
+            response?.data?.message || __('Could not cancel the task'),
           successToast: () => __('Task for the host cancelled succesfully'),
         })
       );
@@ -70,7 +71,8 @@ const actions = ({
         APIActions.post({
           url: `/foreman_tasks/tasks/${taskID}/abort`,
           key: 'ABORT_TASK',
-          errorToast: ({ response }) => response.data.message,
+          errorToast: ({ response }) =>
+            response?.data?.message || __('Could not abort the task'),
           successToast: () => __('task aborted succesfully'),
         })
       );
