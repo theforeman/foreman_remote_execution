@@ -14,11 +14,10 @@ import {
 } from '@patternfly/react-icons';
 import axios from 'axios';
 import { foremanUrl } from 'foremanReact/common/helpers';
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { addToast } from 'foremanReact/components/ToastsList';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -105,7 +104,7 @@ const ActionsKebab = ({
 
 export const CheckboxesActions = ({
   selectedIds,
-  failedCount,
+  allJobs,
   jobID,
   filter,
   bulkParams,
@@ -130,19 +129,14 @@ export const CheckboxesActions = ({
       : '';
   const combinedQuery = `${bulkParams}${filterQuery}`;
 
-  const { response: failedHostsData } = useAPI(
-    'get',
-    foremanUrl(`/api/job_invocations/${jobID}/hosts`),
-    {
-      params: {
-        per_page: MAX_HOSTS_API_SIZE,
-        search: `job_invocation.result = failed`,
-      },
-      skip: failedCount === 0,
-    }
-  );
+  const [failedHosts, setFailedHosts] = useState([]);
 
-  const failedHosts = failedHostsData?.results || [];
+  useEffect(() => {
+    const failed = allJobs.filter(i => i.job_status === 'error');
+    setFailedHosts(failed);
+  }, [allJobs]);
+
+  const failedCount = failedHosts.length;
 
   const openLink = url => {
     const newWin = window.open(url);
@@ -155,9 +149,9 @@ export const CheckboxesActions = ({
   const handleOpenHosts = async (type = 'all') => {
     if (type === 'failed') {
       if (failedCount <= DIRECT_OPEN_HOST_LIMIT) {
-        failedHosts.forEach(host =>
-          openLink(templateInvocationPageUrl(host.id, jobID))
-        );
+        failedHosts
+          .slice(0, MAX_HOSTS_API_SIZE)
+          .forEach(host => openLink(templateInvocationPageUrl(host.id, jobID)));
         return;
       }
       setIsOpenFailed(true);
@@ -165,8 +159,12 @@ export const CheckboxesActions = ({
       return;
     }
 
+    if (selectedIds.length === 0) selectedIds = allJobs.map(i => i.id);
+
     if (selectedIds.length <= DIRECT_OPEN_HOST_LIMIT) {
-      selectedIds.forEach(id => openLink(templateInvocationPageUrl(id, jobID)));
+      selectedIds
+        .slice(0, MAX_HOSTS_API_SIZE)
+        .forEach(id => openLink(templateInvocationPageUrl(id, jobID)));
       return;
     }
 
@@ -238,13 +236,19 @@ export const CheckboxesActions = ({
     <Button
       aria-label="open all template invocations in new tab"
       className="open-all-button"
-      isDisabled={selectedIds.length === 0}
+      isDisabled={allJobs.length === 0}
       isInline
       onClick={() => handleOpenHosts('all')}
       ouiaId="template-invocation-new-tab-button"
       variant="link"
     >
-      <Tooltip content={__('Open selected in new tab')}>
+      <Tooltip
+        content={
+          selectedIds.length === 0
+            ? __('Open all rows of the table in new tabs')
+            : __('Open selected in new tab')
+        }
+      >
         <OutlinedWindowRestoreIcon />
       </Tooltip>
     </Button>
@@ -287,7 +291,6 @@ export const CheckboxesActions = ({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         failedCount={failedCount}
-        failedHosts={failedHosts}
         jobID={jobID}
         isOpenFailed={isOpenFailed}
         setShowAlert={setShowAlert}
@@ -315,7 +318,7 @@ ActionsKebab.defaultProps = {
 
 CheckboxesActions.propTypes = {
   selectedIds: PropTypes.array.isRequired,
-  failedCount: PropTypes.number.isRequired,
+  allJobs: PropTypes.array.isRequired,
   jobID: PropTypes.string.isRequired,
   bulkParams: PropTypes.string,
   filter: PropTypes.string,
