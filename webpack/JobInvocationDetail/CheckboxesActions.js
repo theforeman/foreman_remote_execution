@@ -237,6 +237,7 @@ export const CheckboxesActions = ({
       href={foremanUrl(
         `/job_invocations/${jobID}/rerun?${searchParams.toString()}`
       )}
+      // eslint-disable-next-line camelcase
       isDisabled={selectedIds.length === 0 || !permissions?.execute_jobs}
       isInline
       ouiaId="template-invocation-rerun-selected-button"
