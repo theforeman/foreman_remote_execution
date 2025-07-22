@@ -1,9 +1,12 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import * as ReactRedux from 'react-redux';
+import { Provider } from 'react-redux';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
+import { addToast } from 'foremanReact/components/ToastsList';
+import configureStore from 'redux-mock-store';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
+import { APIActions } from 'foremanReact/redux/API';
 import { CheckboxesActions } from '../CheckboxesActions';
 import { PopupAlert } from '../OpenAllInvocationsModal';
 
@@ -14,6 +17,15 @@ jest.mock('../JobInvocationConstants', () => ({
     (hostId, jobId) => `url/${hostId}/${jobId}`
   ),
   DIRECT_OPEN_HOST_LIMIT: 3,
+}));
+
+jest.mock('foremanReact/components/ToastsList', () => ({
+  addToast: jest.fn(payload => ({ type: 'ADD_TOAST', payload })),
+}));
+jest.mock('foremanReact/redux/API', () => ({
+  APIActions: {
+    post: jest.fn(payload => ({ type: 'API_POST', payload })),
+  },
 }));
 
 const mockStore = configureStore([]);
@@ -28,6 +40,7 @@ const store = mockStore({
 describe('TableToolbarActions', () => {
   const jobID = '42';
   let openSpy;
+  let mockDispatch;
 
   beforeEach(() => {
     openSpy = jest.spyOn(window, 'open').mockImplementation(jest.fn());
@@ -36,11 +49,16 @@ describe('TableToolbarActions', () => {
       response: null,
       status: 'initial',
     });
+
+    mockDispatch = jest.fn();
+    jest.spyOn(ReactRedux, 'useDispatch').mockReturnValue(mockDispatch);
+    addToast.mockClear();
+    APIActions.post.mockClear();
   });
 
   afterEach(() => {
     openSpy.mockRestore();
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   describe('Opening selected in new tabs', () => {
@@ -190,6 +208,121 @@ describe('TableToolbarActions', () => {
       selectedIds.forEach(id => expectedSearchParams.append('host_ids[]', id));
       const expectedHref = `foreman/job_invocations/${jobID}/rerun?${expectedSearchParams.toString()}`;
       expect(rerunLink).toHaveAttribute('href', expectedHref);
+    });
+  });
+
+  describe('Cancel/Abort selected', () => {
+    const defaultProps = {
+      jobID: '42',
+      selectedIds: [1, 2],
+      failedCount: 0,
+      bulkParams: 'id ^ (1, 2)',
+      filter: '',
+    };
+
+    const mockEnabledState = () => {
+      const useSelectorMock = jest.spyOn(ReactRedux, 'useSelector');
+      useSelectorMock.mockReturnValueOnce(true); // isTaskCancelable
+      useSelectorMock.mockReturnValueOnce({
+        execute_jobs: true,
+        cancel_job_invocations: true,
+      });
+    };
+
+    test('enables cancel and abort buttons when conditions are met', async () => {
+      mockEnabledState();
+      render(<CheckboxesActions {...defaultProps} />);
+      fireEvent.click(screen.getByLabelText(/actions dropdown toggle/i));
+
+      expect(
+        await screen.findByRole('menuitem', { name: 'Cancel selected' })
+      ).toBeEnabled();
+      expect(
+        await screen.findByRole('menuitem', { name: 'Abort selected' })
+      ).toBeEnabled();
+    });
+
+    test('disables buttons when no hosts are selected', async () => {
+      mockEnabledState();
+      render(<CheckboxesActions {...defaultProps} selectedIds={[]} />);
+      fireEvent.click(screen.getByLabelText(/actions dropdown toggle/i));
+
+      expect(
+        await screen.findByRole('menuitem', { name: 'Cancel selected' })
+      ).toBeDisabled();
+    });
+
+    test('disables buttons when user lacks cancel permissions', async () => {
+      const useSelectorMock = jest.spyOn(ReactRedux, 'useSelector');
+      useSelectorMock.mockReturnValueOnce(true); // isTaskCancelable
+      useSelectorMock.mockReturnValueOnce({ cancel_job_invocations: false });
+
+      render(<CheckboxesActions {...defaultProps} />);
+      fireEvent.click(screen.getByLabelText(/actions dropdown toggle/i));
+
+      expect(
+        await screen.findByRole('menuitem', { name: 'Cancel selected' })
+      ).toBeDisabled();
+    });
+
+    test('disables buttons when the job task is not cancellable', async () => {
+      const useSelectorMock = jest.spyOn(ReactRedux, 'useSelector');
+      useSelectorMock.mockReturnValueOnce(false); // isTaskCancelable
+      useSelectorMock.mockReturnValueOnce({ cancel_job_invocations: true });
+
+      render(<CheckboxesActions {...defaultProps} />);
+      fireEvent.click(screen.getByLabelText(/actions dropdown toggle/i));
+
+      expect(
+        await screen.findByRole('menuitem', { name: 'Cancel selected' })
+      ).toBeDisabled();
+    });
+
+    test('dispatches cancel action with correct params on "Cancel selected" click', async () => {
+      mockEnabledState();
+      const props = { ...defaultProps, filter: 'failed' };
+      render(<CheckboxesActions {...props} />);
+
+      fireEvent.click(screen.getByLabelText(/actions dropdown toggle/i));
+      fireEvent.click(
+        await screen.findByRole('menuitem', { name: 'Cancel selected' })
+      );
+
+      expect(addToast).toHaveBeenCalled();
+      expect(APIActions.post).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+
+      const dispatchedApiActionPayload = APIActions.post.mock.calls[0][0];
+      expect(dispatchedApiActionPayload).toMatchObject({
+        url: `/api/v2/job_invocations/42/cancel`,
+        params: {
+          search: `${props.bulkParams} and job_invocation.result = ${props.filter}`,
+          force: false,
+        },
+      });
+    });
+
+    test('dispatches abort action with correct params on "Abort selected" click', async () => {
+      mockEnabledState();
+      render(<CheckboxesActions {...defaultProps} />);
+
+      fireEvent.click(screen.getByLabelText(/actions dropdown toggle/i));
+      fireEvent.click(
+        await screen.findByRole('menuitem', { name: 'Abort selected' })
+      );
+
+      expect(addToast).toHaveBeenCalled();
+      expect(APIActions.post).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+
+      const dispatchedApiActionPayload = APIActions.post.mock.calls[0][0];
+      expect(dispatchedApiActionPayload).toMatchObject({
+        url: `/api/v2/job_invocations/42/cancel`,
+        params: {
+          search: defaultProps.bulkParams,
+          force: true,
+        },
+      });
     });
   });
 });

@@ -1,5 +1,8 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Button,
+  Divider,
   Dropdown,
   DropdownItem,
   DropdownList,
@@ -10,24 +13,110 @@ import {
   EllipsisVIcon,
   OutlinedWindowRestoreIcon,
 } from '@patternfly/react-icons';
-import { sprintf, translate as __ } from 'foremanReact/common/I18n';
+import { useDispatch, useSelector } from 'react-redux';
+import { APIActions } from 'foremanReact/redux/API';
+import { addToast } from 'foremanReact/components/ToastsList';
+import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import {
-  templateInvocationPageUrl,
-  MAX_HOSTS_API_SIZE,
-  DIRECT_OPEN_HOST_LIMIT,
-} from './JobInvocationConstants';
-import { selectTemplateInvocation } from './JobInvocationSelectors';
 import OpenAllInvocationsModal, { PopupAlert } from './OpenAllInvocationsModal';
+import {
+  selectTaskCancelable,
+  selectTemplateInvocation,
+} from './JobInvocationSelectors';
+import {
+  DIRECT_OPEN_HOST_LIMIT,
+  MAX_HOSTS_API_SIZE,
+  templateInvocationPageUrl,
+  hasPermission,
+} from './JobInvocationConstants';
 
-export const CheckboxesActions = ({ selectedIds, failedCount, jobID }) => {
+const ActionsKebab = ({
+  selectedIds,
+  failedCount,
+  isTaskCancelable,
+  permissions,
+  handleTaskAction,
+  handleOpenHosts,
+  isDropdownOpen,
+  setIsDropdownOpen,
+}) => {
+  const dropdownItems = [
+    <DropdownItem
+      ouiaId="cancel-host-dropdown-item"
+      onClick={() => handleTaskAction('cancel')}
+      key="cancel"
+      component="button"
+      isDisabled={
+        selectedIds.length === 0 ||
+        !isTaskCancelable ||
+        !hasPermission(permissions, 'cancel_job_invocations')
+      }
+    >
+      {__('Cancel selected test')}
+    </DropdownItem>,
+    <DropdownItem
+      ouiaId="abort-host-dropdown-item"
+      onClick={() => handleTaskAction('abort')}
+      key="abort"
+      component="button"
+      isDisabled={
+        selectedIds.length === 0 ||
+        !isTaskCancelable ||
+        !hasPermission(permissions, 'cancel_job_invocations')
+      }
+    >
+      {__('Abort selected')}
+    </DropdownItem>,
+    <Divider component="li" key="separator" />,
+    <DropdownItem
+      ouiaId="open-failed-dropdown-item"
+      key="open-failed"
+      onClick={() => handleOpenHosts('failed')}
+      isDisabled={failedCount === 0}
+    >
+      {sprintf(__('Open all failed runs (%s)'), failedCount)}
+    </DropdownItem>,
+  ];
+
+  return (
+    <Dropdown
+      isOpen={isDropdownOpen}
+      onOpenChange={setIsDropdownOpen}
+      onSelect={() => setIsDropdownOpen(false)}
+      ouiaId="actions-kebab"
+      shouldFocusToggleOnSelect
+      toggle={toggleRef => (
+        <MenuToggle
+          aria-label="actions dropdown toggle"
+          id="toggle-kebab"
+          isExpanded={isDropdownOpen}
+          onClick={() => setIsDropdownOpen(prev => !prev)}
+          ref={toggleRef}
+          variant="plain"
+        >
+          <EllipsisVIcon />
+        </MenuToggle>
+      )}
+    >
+      <DropdownList>{dropdownItems}</DropdownList>
+    </Dropdown>
+  );
+};
+
+export const CheckboxesActions = ({
+  selectedIds,
+  failedCount,
+  jobID,
+  filter,
+  bulkParams,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [isOpenFailed, setIsOpenFailed] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const isTaskCancelable = useSelector(selectTaskCancelable);
+  const dispatch = useDispatch();
   const permissions = useSelector(
     state => selectTemplateInvocation(state)?.permissions
   );
@@ -76,42 +165,48 @@ export const CheckboxesActions = ({ selectedIds, failedCount, jobID }) => {
     setIsModalOpen(true);
   };
 
-  const ActionsKebab = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const filterQuery =
+    filter && filter !== 'all_statuses'
+      ? ` and job_invocation.result = ${filter}`
+      : '';
+  const combinedQuery = `${bulkParams}${filterQuery}`;
 
-    const dropdownItems = [
-      <DropdownItem
-        ouiaId="open-failed-dropdown-item"
-        key="open-failed"
-        onClick={() => handleOpenHosts('failed')}
-        isDisabled={failedCount === 0}
-      >
-        {sprintf(__('Open all failed runs (%s)'), failedCount)}
-      </DropdownItem>,
-    ];
+  const handleTaskAction = action => {
+    dispatch(
+      addToast({
+        key: `cancel-job-info`,
+        type: 'info',
+        message: sprintf(__('Trying to %s the task for the host'), action),
+      })
+    );
 
-    return (
-      <Dropdown
-        isOpen={isDropdownOpen}
-        onOpenChange={setIsDropdownOpen}
-        onSelect={() => setIsDropdownOpen(false)}
-        ouiaId="actions-kebab"
-        shouldFocusToggleOnSelect
-        toggle={toggleRef => (
-          <MenuToggle
-            aria-label="actions dropdown toggle"
-            id="toggle-kebab"
-            isExpanded={isDropdownOpen}
-            onClick={() => setIsDropdownOpen(prev => !prev)}
-            ref={toggleRef}
-            variant="plain"
-          >
-            <EllipsisVIcon />
-          </MenuToggle>
-        )}
-      >
-        <DropdownList>{dropdownItems}</DropdownList>
-      </Dropdown>
+    dispatch(
+      APIActions.post({
+        url: `/api/v2/job_invocations/${jobID}/cancel`,
+        key: 'CANCEL_JOB_TASKS_BY_SEARCH',
+        params: {
+          search: combinedQuery,
+          force: action !== 'cancel',
+        },
+        errorToast: ({ response }) => response?.data?.error,
+        successToast: response => {
+          const cancelledTasks = response?.data?.cancelled;
+          const cancelledCount = cancelledTasks?.length;
+          const pastTenseAction =
+            action === 'cancel' ? __('cancelled') : __('aborted');
+          if (cancelledCount > 0) {
+            const idList = cancelledTasks.join(', ');
+
+            return sprintf(
+              __('%s task(s) successfully %s: %s'),
+              cancelledCount,
+              pastTenseAction,
+              idList
+            );
+          }
+          return sprintf(__('Task(s) were not %s'), pastTenseAction);
+        },
+      })
     );
   };
 
@@ -142,7 +237,6 @@ export const CheckboxesActions = ({ selectedIds, failedCount, jobID }) => {
       href={foremanUrl(
         `/job_invocations/${jobID}/rerun?${searchParams.toString()}`
       )}
-      // eslint-disable-next-line camelcase
       isDisabled={selectedIds.length === 0 || !permissions?.execute_jobs}
       isInline
       ouiaId="template-invocation-rerun-selected-button"
@@ -156,7 +250,16 @@ export const CheckboxesActions = ({ selectedIds, failedCount, jobID }) => {
     <>
       <OpenAllButton />
       <RerunSelectedButton />
-      <ActionsKebab />
+      <ActionsKebab
+        selectedIds={selectedIds}
+        failedCount={failedCount}
+        isTaskCancelable={isTaskCancelable}
+        permissions={permissions}
+        handleTaskAction={handleTaskAction}
+        handleOpenHosts={handleOpenHosts}
+        isDropdownOpen={isDropdownOpen}
+        setIsDropdownOpen={setIsDropdownOpen}
+      />
       {showAlert && <PopupAlert setShowAlert={setShowAlert} />}
       <OpenAllInvocationsModal
         isOpen={isModalOpen}
@@ -172,8 +275,31 @@ export const CheckboxesActions = ({ selectedIds, failedCount, jobID }) => {
   );
 };
 
+ActionsKebab.propTypes = {
+  selectedIds: PropTypes.array.isRequired,
+  failedCount: PropTypes.number.isRequired,
+  isTaskCancelable: PropTypes.bool,
+  permissions: PropTypes.object,
+  handleTaskAction: PropTypes.func.isRequired,
+  handleOpenHosts: PropTypes.func.isRequired,
+  isDropdownOpen: PropTypes.bool.isRequired,
+  setIsDropdownOpen: PropTypes.func.isRequired,
+};
+
+ActionsKebab.defaultProps = {
+  isTaskCancelable: false,
+  permissions: {},
+};
+
 CheckboxesActions.propTypes = {
   selectedIds: PropTypes.array.isRequired,
   failedCount: PropTypes.number.isRequired,
   jobID: PropTypes.string.isRequired,
+  bulkParams: PropTypes.string,
+  filter: PropTypes.string,
+};
+
+CheckboxesActions.defaultProps = {
+  bulkParams: '',
+  filter: '',
 };

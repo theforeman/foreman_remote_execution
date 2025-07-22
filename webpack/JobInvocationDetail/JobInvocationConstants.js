@@ -33,6 +33,10 @@ export const templateInvocationPageUrl = (hostID, jobID) =>
 export const jobInvocationDetailsUrl = id =>
   `/experimental/job_invocations_detail/${id}`;
 
+export const hasPermission = (permissions, permissionRequired) => {
+  return !!permissions?.[permissionRequired];
+};
+
 export const STATUS = {
   PENDING: 'pending',
   SUCCEEDED: 'succeeded',
