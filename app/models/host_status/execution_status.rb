@@ -54,7 +54,7 @@ class HostStatus::ExecutionStatus < HostStatus::Status
     return unless job_invocation
     return nil unless User.current.can?(:view_job_invocations, job_invocation)
 
-    Rails.application.routes.url_helpers.job_invocation_path(job_invocation)
+    Rails.application.routes.url_helpers.job_invocation_detail_path(job_invocation)
   end
 
   class ExecutionTaskStatusMapper

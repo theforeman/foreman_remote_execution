@@ -128,7 +128,7 @@ export const submit = ({
       url: '/api/job_invocations',
       params: api,
       handleSuccess: ({ data: { id } }) => {
-        window.location.href = `/job_invocations/${id}`;
+        window.location.href = `/job_invocations_detail/${id}`;
       },
       errorToast: ({ response }) =>
         response?.data?.error?.message ||
