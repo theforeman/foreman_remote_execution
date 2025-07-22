@@ -28,9 +28,9 @@ class JobReportTemplateTest < ActiveSupport::TestCase
     describe 'task reporting' do
       let(:fake_outputs) do
         [
-          { 'output_type' => 'stderr', 'output' => "error" },
-          { 'output_type' => 'stdout', 'output' => "output" },
-          { 'output_type' => 'debug', 'output' => "debug" },
+          { 'output_type' => 'stderr', 'output' => "error\n" },
+          { 'output_type' => 'stdout', 'output' => "output\n" },
+          { 'output_type' => 'debug', 'output' => "debug\n" },
         ]
       end
       let(:fake_task) { FakeTask.new(result: 'success', action_continuous_output: fake_outputs, :ended_at => Time.new(2020, 12, 1, 0, 0, 0).utc) }
@@ -50,9 +50,9 @@ class JobReportTemplateTest < ActiveSupport::TestCase
         row = rows.first
         assert_equal host.name, row['Host']
         assert_equal 'success', row['Result']
-        assert_equal 'error', row['stderr']
-        assert_equal 'output', row['stdout']
-        assert_equal 'debug', row['debug']
+        assert_equal "error\n", row['stderr']
+        assert_equal "output\n", row['stdout']
+        assert_equal "debug\n", row['debug']
         assert_kind_of Time, Time.zone.parse(row['Finished']), 'Parsing of time column failed'
       end
     end
