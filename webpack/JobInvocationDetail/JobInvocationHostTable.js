@@ -8,9 +8,10 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { ExpandableRowContent, Tbody, Td, Tr } from '@patternfly/react-table';
+import { useDispatch } from 'react-redux';
+import { APIActions } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import { RowSelectTd } from 'foremanReact/components/HostsIndex/RowSelectTd';
 import SelectAllCheckbox from 'foremanReact/components/PF4/TableIndexPage/Table/SelectAllCheckbox';
 import { Table } from 'foremanReact/components/PF4/TableIndexPage/Table/Table';
@@ -26,22 +27,20 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
-import URI from 'urijs';
+import { useForemanSettings } from 'foremanReact/Root/Context/ForemanContext';
 import { CheckboxesActions } from './CheckboxesActions';
 import DropdownFilter from './DropdownFilter';
 import Columns, {
   JOB_INVOCATION_HOSTS,
-  MAX_HOSTS_API_SIZE,
-  STATUS_UPPERCASE,
   LIST_TEMPLATE_INVOCATIONS,
+  STATUS_UPPERCASE,
   ALL_JOB_HOSTS,
 } from './JobInvocationConstants';
-import { PopupAlert } from './OpenAllInvocationsModal';
 import { TemplateInvocation } from './TemplateInvocation';
 import { RowActions } from './TemplateInvocationComponents/TemplateActionButtons';
+import { PopupAlert } from './OpenAllInvocationsModal';
 
 const JobInvocationHostTable = ({
-  failedCount,
   id,
   initialFilter,
   onFilterUpdate,
@@ -50,19 +49,29 @@ const JobInvocationHostTable = ({
 }) => {
   const columns = Columns();
   const columnNamesKeys = Object.keys(columns);
-  const apiOptions = { key: JOB_INVOCATION_HOSTS };
+
   const history = useHistory();
-  const [selectedFilter, setSelectedFilter] = useState(initialFilter);
+  const dispatch = useDispatch();
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  const [apiResponse, setApiResponse] = useState([]);
+  const [status, setStatus] = useState(STATUS_UPPERCASE.PENDING);
+  const [allHostsIds, setAllHostsIds] = useState([]);
+
+  // Expansive items
   const [expandedHost, setExpandedHost] = useState([]);
   const prevStatusLabel = useRef(statusLabel);
 
-  useEffect(() => {
-    if (initialFilter !== selectedFilter) {
-      wrapSetSelectedFilter(initialFilter);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialFilter]);
+  const isHostExpanded = host => expandedHost.includes(host);
+  const setHostExpanded = (host, isExpanding = true) =>
+    setExpandedHost(prevExpanded => {
+      const otherExpandedHosts = prevExpanded.filter(h => h !== host);
+      return isExpanding ? [...otherExpandedHosts, host] : otherExpandedHosts;
+    });
 
+  // Page table params
+  // Parse URL
   const {
     searchParam: urlSearchQuery = '',
     page: urlPage,
@@ -70,10 +79,27 @@ const JobInvocationHostTable = ({
     order: urlOrder,
   } = useUrlParams();
 
-  const constructFilter = (
-    filter = selectedFilter,
-    search = urlSearchQuery
-  ) => {
+  const { perPage: foremanPerPage } = useForemanSettings();
+
+  // default
+  const defaultParams = useMemo(
+    () => ({
+      page: urlPage ? Number(urlPage) : 1,
+      per_page: urlPerPage || Number(urlPerPage) || foremanPerPage,
+      order: urlOrder || '',
+    }),
+    [urlPage, urlPerPage, foremanPerPage, urlOrder]
+  );
+
+  // Page row for table
+  const { pageRowCount } = getPageStats({
+    total: apiResponse?.total || 0,
+    page: apiResponse?.page || urlPage || 1,
+    perPage: apiResponse?.per_page || urlPerPage || 0,
+  });
+
+  // Search filter
+  const constructFilter = (filter = initialFilter, search = urlSearchQuery) => {
     const dropdownFilterClause =
       filter && filter !== 'all_statuses'
         ? `job_invocation.result = ${filter}`
@@ -85,68 +111,93 @@ const JobInvocationHostTable = ({
       .join(' AND ');
   };
 
-  const defaultParams = useMemo(
-    () => ({
-      ...(urlPage ? { page: Number(urlPage) } : {}),
-      ...(urlPerPage ? { per_page: Number(urlPerPage) } : {}),
-      ...(urlOrder ? { order: urlOrder } : {}),
-    }),
-    [urlPage, urlPerPage, urlOrder]
-  );
+  const handleResponse = (data, key) => {
+    if (key === JOB_INVOCATION_HOSTS) {
+      const ids = data.data.results.map(i => i.id);
 
-  useAPI('get', `/job_invocations/${id}/hosts`, {
-    params: {
-      search: defaultParams.search,
-    },
-    key: LIST_TEMPLATE_INVOCATIONS,
-  });
-  const { response, status, setAPIOptions } = useAPI(
-    'get',
-    `/api/job_invocations/${id}/hosts`,
-    {
-      params: defaultParams,
+      setApiResponse(data.data);
+      setAllHostsIds(ids);
     }
-  );
 
-  const [allPagesResponse, setAllPagesResponse] = useState([]);
-  const apiAllParams = {
-    page: 1,
-    per_page: Math.min(response?.subtotal || 1, MAX_HOSTS_API_SIZE),
-    search: constructFilter(selectedFilter, urlSearchQuery),
+    setStatus(STATUS_UPPERCASE.RESOLVED);
   };
 
-  const { response: allResponse, setAPIOptions: setAllAPIOptions } = useAPI(
-    'get',
-    `/api/job_invocations/${id}/hosts`,
-    {
-      params: apiAllParams,
-      key: ALL_JOB_HOSTS,
-    }
-  );
+  // Call hosts data with params
+  const makeApiCall = (requestParams, callParams = {}) => {
+    dispatch(
+      APIActions.get({
+        key: callParams.key ?? ALL_JOB_HOSTS,
+        url: callParams.url ?? `/api/job_invocations/${id}/hosts`,
+        params: requestParams,
+        handleSuccess: data => handleResponse(data, callParams.key),
+        handleError: () => setStatus(STATUS_UPPERCASE.ERROR),
+        errorToast: ({ response }) =>
+          response?.data?.error?.full_messages?.[0] || response,
+      })
+    );
+  };
 
-  useEffect(() => {
-    if (response?.subtotal) {
-      setAllAPIOptions(prevOptions => ({
-        ...prevOptions,
-        params: apiAllParams,
-      }));
+  const filterApiCall = newAPIOptions => {
+    const newParams = newAPIOptions?.params ?? newAPIOptions ?? {};
+
+    const filterSearch = constructFilter(
+      initialFilter,
+      newParams.search ?? urlSearchQuery
+    );
+
+    const finalParams = {
+      ...defaultParams,
+      ...newParams,
+    };
+
+    if (filterSearch !== '') {
+      finalParams.search = filterSearch;
     }
+
+    makeApiCall(finalParams, { key: JOB_INVOCATION_HOSTS });
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+
+    ['page', 'per_page', 'order'].forEach(key => {
+      if (finalParams[key]) urlSearchParams.set(key, finalParams[key]);
+    });
+
+    history.push({ search: urlSearchParams.toString() });
+  };
+
+  // Filter change
+  const handleFilterChange = newFilter => {
+    onFilterUpdate(newFilter);
+  };
+
+  // Effects
+  // run after mount
+  useEffect(() => {
+    // Job Invo template load
+    makeApiCall(
+      {},
+      {
+        url: `/job_invocations/${id}/hosts`,
+        key: LIST_TEMPLATE_INVOCATIONS,
+      }
+    );
+
+    if (initialFilter === '') {
+      onFilterUpdate('all_statuses');
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [response?.subtotal, selectedFilter, urlSearchQuery]);
+  }, []);
 
   useEffect(() => {
-    if (allResponse?.results) {
-      setAllPagesResponse(allResponse.results);
-    }
-  }, [allResponse]);
+    if (initialFilter !== '') filterApiCall();
 
-  useEffect(() => {
     if (statusLabel !== prevStatusLabel.current) {
-      setAPIOptions(prevOptions => ({ ...prevOptions }));
       prevStatusLabel.current = statusLabel;
+      filterApiCall();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusLabel]);
+  }, [initialFilter, statusLabel]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
@@ -155,11 +206,11 @@ const JobInvocationHostTable = ({
     exclusionSet,
     ...selectAllOptions
   } = useBulkSelect({
-    results: response?.results,
+    results: apiResponse?.results,
     metadata: {
-      total: response?.total,
-      page: response?.page,
-      selectable: response?.subtotal,
+      total: apiResponse?.total,
+      page: apiResponse?.page,
+      selectable: apiResponse?.subtotal,
     },
     initialSearchQuery: urlSearchQuery,
   });
@@ -175,17 +226,36 @@ const JobInvocationHostTable = ({
     isSelected,
   } = selectAllOptions;
 
-  const allHostIds = allPagesResponse?.map(item => item.id) || [];
   const selectedIds =
     areAllRowsSelected() || exclusionSet.size > 0
-      ? allHostIds.filter(hostId => !exclusionSet.has(hostId))
+      ? allHostsIds.filter(hostId => !exclusionSet.has(hostId))
       : Array.from(inclusionSet);
 
-  const { pageRowCount } = getPageStats({
-    total: response?.total || 0,
-    page: response?.page || urlPage || 1,
-    perPage: response?.per_page || urlPerPage || 0,
-  });
+  const controller = 'hosts';
+  const memoDefaultSearchProps = useMemo(
+    () => getControllerSearchProps(controller),
+    [controller]
+  );
+  memoDefaultSearchProps.autocomplete.url = foremanUrl(
+    `/${controller}/auto_complete_search`
+  );
+
+  const combinedResponse = {
+    response: {
+      search: urlSearchQuery,
+      can_create: false,
+      results: apiResponse?.results || [],
+      total: apiResponse?.total || 0,
+      per_page: defaultParams?.perPage,
+      page: defaultParams?.page,
+      subtotal: apiResponse?.subtotal || 0,
+      message: apiResponse?.message || 'error',
+    },
+    status,
+    setAPIOptions: filterApiCall,
+  };
+
+  const results = apiResponse.results ?? [];
 
   const selectionToolbar = (
     <ToolbarItem key="selectAll">
@@ -197,85 +267,12 @@ const JobInvocationHostTable = ({
           selectedCount,
           pageRowCount,
         }}
-        totalCount={response?.total}
+        totalCount={apiResponse?.total}
         areAllRowsOnPageSelected={areAllRowsOnPageSelected()}
         areAllRowsSelected={areAllRowsSelected()}
       />
     </ToolbarItem>
   );
-
-  const controller = 'hosts';
-  const memoDefaultSearchProps = useMemo(
-    () => getControllerSearchProps(controller),
-    [controller]
-  );
-  memoDefaultSearchProps.autocomplete.url = foremanUrl(
-    `/${controller}/auto_complete_search`
-  );
-
-  const wrapSetSelectedFilter = newFilter => {
-    setSelectedFilter(newFilter);
-    onFilterUpdate(newFilter);
-
-    const filterSearch = constructFilter(newFilter, urlSearchQuery);
-
-    const newParams = {
-      ...defaultParams,
-      page: 1,
-    };
-
-    if (filterSearch !== '') {
-      newParams.search = filterSearch;
-    }
-
-    setAPIOptions(prev => ({ ...prev, params: newParams }));
-
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    urlSearchParams.set('page', '1');
-    history.push({ search: urlSearchParams.toString() });
-  };
-
-  const wrapSetAPIOptions = newAPIOptions => {
-    const newParams = newAPIOptions?.params ?? newAPIOptions ?? {};
-
-    const filterSearch = constructFilter(
-      selectedFilter,
-      newParams.search ?? urlSearchQuery
-    );
-
-    const mergedParams = {
-      ...defaultParams,
-      ...newParams,
-    };
-
-    if (filterSearch !== '') {
-      mergedParams.search = filterSearch;
-    } else if ('search' in mergedParams) {
-      delete mergedParams.search;
-    }
-
-    setAPIOptions(prev => ({ ...prev, params: mergedParams }));
-
-    const { search: _search, ...paramsForUrl } = mergedParams;
-    const uri = new URI();
-    uri.setSearch(paramsForUrl);
-    history.push({ search: uri.search() });
-  };
-
-  const combinedResponse = {
-    response: {
-      search: urlSearchQuery,
-      can_create: false,
-      results: response?.results || [],
-      total: response?.total || 0,
-      per_page: defaultParams?.perPage,
-      page: defaultParams?.page,
-      subtotal: response?.subtotal || 0,
-      message: response?.message || 'error',
-    },
-    status,
-    setAPIOptions: wrapSetAPIOptions,
-  };
 
   const customEmptyState = (
     <Tr ouiaId="table-empty">
@@ -314,22 +311,11 @@ const JobInvocationHostTable = ({
     </Tr>
   );
 
-  const { results = [] } = response;
-
-  const isHostExpanded = host => expandedHost.includes(host);
-  const setHostExpanded = (host, isExpanding = true) =>
-    setExpandedHost(prevExpanded => {
-      const otherExpandedHosts = prevExpanded.filter(h => h !== host);
-      return isExpanding ? [...otherExpandedHosts, host] : otherExpandedHosts;
-    });
-  const [showAlert, setShowAlert] = useState(false);
-
   return (
     <>
       {showAlert && <PopupAlert setShowAlert={setShowAlert} />}
       <TableIndexPage
         apiUrl=""
-        apiOptions={apiOptions}
         customSearchProps={memoDefaultSearchProps}
         controller="hosts"
         creatable={false}
@@ -338,16 +324,17 @@ const JobInvocationHostTable = ({
         customToolbarItems={[
           <DropdownFilter
             key="dropdown-filter"
-            dropdownFilter={selectedFilter}
-            setDropdownFilter={wrapSetSelectedFilter}
+            dropdownFilter={initialFilter}
+            setDropdownFilter={handleFilterChange}
           />,
           <CheckboxesActions
             bulkParams={selectedCount > 0 ? fetchBulkParams() : null}
             selectedIds={selectedIds}
-            failedCount={failedCount}
+            allJobs={results}
             jobID={id}
             key="checkboxes-actions"
-            filter={selectedFilter}
+            filter={initialFilter}
+            setShowAlert={setShowAlert}
           />,
         ]}
         selectionToolbar={selectionToolbar}
@@ -361,21 +348,21 @@ const JobInvocationHostTable = ({
               : null
           }
           params={{
-            page: response?.page || Number(urlPage),
-            per_page: response?.per_page || Number(urlPerPage),
+            page: defaultParams.page || Number(urlPage),
+            per_page: defaultParams.per_page || Number(urlPerPage),
             order: urlOrder,
           }}
-          page={response?.page || Number(urlPage)}
-          perPage={response?.per_page || Number(urlPerPage)}
-          setParams={wrapSetAPIOptions}
-          itemCount={response?.subtotal}
+          page={defaultParams.page || Number(urlPage)}
+          perPage={defaultParams.per_page || Number(urlPerPage)}
+          setParams={filterApiCall}
+          itemCount={apiResponse?.subtotal}
           results={results}
           url=""
           showCheckboxes
           refreshData={() => {}}
           errorMessage={
-            status === STATUS_UPPERCASE.ERROR && response?.message
-              ? response.message
+            status === STATUS_UPPERCASE.ERROR && apiResponse?.message
+              ? apiResponse.message
               : null
           }
           isPending={status === STATUS_UPPERCASE.PENDING}
@@ -439,7 +426,6 @@ const JobInvocationHostTable = ({
 JobInvocationHostTable.propTypes = {
   id: PropTypes.string.isRequired,
   targeting: PropTypes.object.isRequired,
-  failedCount: PropTypes.number.isRequired,
   initialFilter: PropTypes.string.isRequired,
   statusLabel: PropTypes.string,
   onFilterUpdate: PropTypes.func,
