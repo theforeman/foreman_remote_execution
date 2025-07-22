@@ -3,11 +3,13 @@ import {
   Flex,
   PageSection,
   PageSectionVariants,
+  Skeleton,
 } from '@patternfly/react-core';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
+import SkeletonLoader from 'foremanReact/components/common/SkeletonLoader';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +22,7 @@ import {
   DATE_OPTIONS,
   JOB_INVOCATION_KEY,
   STATUS,
+  STATUS_UPPERCASE,
 } from './JobInvocationConstants';
 import JobInvocationHostTable from './JobInvocationHostTable';
 import JobInvocationOverview from './JobInvocationOverview';
@@ -38,18 +41,18 @@ const JobInvocationDetailPage = ({
   const items = useSelector(selectItems);
   const {
     description,
-    failed,
+    failed = 0,
     status_label: statusLabel,
     task,
     start_at: startAt,
-    targeting,
+    targeting = {},
   } = items;
   const finished =
     statusLabel === STATUS.FAILED ||
     statusLabel === STATUS.SUCCEEDED ||
     statusLabel === STATUS.CANCELLED;
   const autoRefresh = task?.state === STATUS.PENDING || false;
-  const { response, status } = useAPI(
+  const { response, status: permissionsApiStatus } = useAPI(
     'get',
     currentPermissionsUrl,
     CURRENT_PERMISSIONS
@@ -89,10 +92,22 @@ const JobInvocationDetailPage = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, task?.id]);
 
+  const pageStatus =
+    items.id === undefined
+      ? STATUS_UPPERCASE.PENDING
+      : STATUS_UPPERCASE.RESOLVED;
+
   const breadcrumbOptions = {
     breadcrumbItems: [
       { caption: __('Jobs'), url: `/job_invocations` },
-      { caption: description },
+      {
+        caption:
+          pageStatus === STATUS_UPPERCASE.PENDING ? (
+            <Skeleton width="350px" />
+          ) : (
+            description
+          ),
+      },
     ],
     isPf4: true,
   };
@@ -107,7 +122,7 @@ const JobInvocationDetailPage = ({
             jobId={id}
             data={items}
             currentPermissions={response.results}
-            permissionsStatus={status}
+            permissionsStatus={permissionsApiStatus}
           />
         }
         searchable={false}
@@ -116,12 +131,20 @@ const JobInvocationDetailPage = ({
           className="job-invocation-detail-flex"
           alignItems={{ default: 'alignItemsFlexStart' }}
         >
-          <JobInvocationSystemStatusChart
-            data={items}
-            isAlreadyStarted={isAlreadyStarted}
-            formattedStartDate={formattedStartDate}
-            onFilterChange={handleFilterChange}
-          />
+          <SkeletonLoader
+            status={pageStatus}
+            skeletonProps={{
+              height: 105,
+              width: 375,
+            }}
+          >
+            <JobInvocationSystemStatusChart
+              data={items}
+              isAlreadyStarted={isAlreadyStarted}
+              formattedStartDate={formattedStartDate}
+              onFilterChange={handleFilterChange}
+            />
+          </SkeletonLoader>
           <Divider
             orientation={{
               default: 'vertical',
@@ -131,26 +154,41 @@ const JobInvocationDetailPage = ({
             className="job-overview"
             alignItems={{ default: 'alignItemsCenter' }}
           >
-            <JobInvocationOverview
-              data={items}
-              isAlreadyStarted={isAlreadyStarted}
-              formattedStartDate={formattedStartDate}
-              onFilterChange={handleFilterChange}
-            />
+            <SkeletonLoader
+              status={pageStatus}
+              skeletonProps={{
+                height: 105,
+                width: 270,
+              }}
+            >
+              <JobInvocationOverview
+                data={items}
+                isAlreadyStarted={isAlreadyStarted}
+                formattedStartDate={formattedStartDate}
+              />
+            </SkeletonLoader>
           </Flex>
         </Flex>
         <PageSection
           variant={PageSectionVariants.light}
           className="job-additional-info"
         >
-          {items.id !== undefined && <JobAdditionInfo data={items} />}
+          <SkeletonLoader
+            status={pageStatus}
+            skeletonProps={{ height: 150, width: '100%' }}
+          >
+            <JobAdditionInfo data={items} />
+          </SkeletonLoader>
         </PageSection>
       </PageLayout>
       <PageSection
         variant={PageSectionVariants.light}
         className="job-details-table-section table-section"
       >
-        {items.id !== undefined && (
+        <SkeletonLoader
+          status={pageStatus}
+          skeletonProps={{ height: 400, width: '100%' }}
+        >
           <JobInvocationHostTable
             id={id}
             targeting={targeting}
@@ -160,7 +198,7 @@ const JobInvocationDetailPage = ({
             initialFilter={selectedFilter}
             onFilterUpdate={handleFilterChange}
           />
-        )}
+        </SkeletonLoader>
       </PageSection>
     </>
   );
