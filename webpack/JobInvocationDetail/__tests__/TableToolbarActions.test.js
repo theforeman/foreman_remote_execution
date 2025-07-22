@@ -5,9 +5,12 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import { CheckboxesActions } from '../CheckboxesActions';
+import * as selectors from '../JobInvocationSelectors';
 import { PopupAlert } from '../OpenAllInvocationsModal';
 
 jest.mock('foremanReact/common/hooks/API/APIHooks');
+
+jest.mock('../JobInvocationSelectors');
 jest.mock('../JobInvocationConstants', () => ({
   ...jest.requireActual('../JobInvocationConstants'),
   templateInvocationPageUrl: jest.fn(
@@ -15,7 +18,10 @@ jest.mock('../JobInvocationConstants', () => ({
   ),
   DIRECT_OPEN_HOST_LIMIT: 3,
 }));
-
+selectors.selectItems.mockImplementation(() => ({
+  targeting: { search_query: 'name~*' },
+}));
+selectors.selectHasPermission.mockImplementation(() => () => () => true);
 const mockStore = configureStore([]);
 const store = mockStore({
   templateInvocation: {
@@ -178,6 +184,7 @@ describe('TableToolbarActions', () => {
       render(
         <Provider store={store}>
           <CheckboxesActions
+            bulkParams="(id ^ (101, 102, 103))"
             selectedIds={selectedIds}
             failedCount={1}
             jobID={jobID}
@@ -188,7 +195,7 @@ describe('TableToolbarActions', () => {
       expect(rerunLink).toBeEnabled();
       const expectedSearchParams = new URLSearchParams();
       selectedIds.forEach(id => expectedSearchParams.append('host_ids[]', id));
-      const expectedHref = `foreman/job_invocations/${jobID}/rerun?${expectedSearchParams.toString()}`;
+      const expectedHref = `foreman/job_invocations/42/rerun?search=(name~*) AND ((id ^ (101, 102, 103)))`;
       expect(rerunLink).toHaveAttribute('href', expectedHref);
     });
   });

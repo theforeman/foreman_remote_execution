@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   Button,
   Dropdown,
@@ -21,16 +22,28 @@ import {
   MAX_HOSTS_API_SIZE,
   DIRECT_OPEN_HOST_LIMIT,
 } from './JobInvocationConstants';
-import { selectTemplateInvocation } from './JobInvocationSelectors';
+import { selectHasPermission, selectItems } from './JobInvocationSelectors';
 import OpenAllInvocationsModal, { PopupAlert } from './OpenAllInvocationsModal';
 
-export const CheckboxesActions = ({ selectedIds, failedCount, jobID }) => {
+export const CheckboxesActions = ({
+  selectedIds,
+  failedCount,
+  jobID,
+  filter,
+  bulkParams,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [isOpenFailed, setIsOpenFailed] = useState(false);
-  const permissions = useSelector(
-    state => selectTemplateInvocation(state)?.permissions
+  const hasPermission = useSelector(
+    selectHasPermission('create_job_invocations')
   );
+  const jobSearchQuery = useSelector(selectItems)?.targeting?.search_query;
+  const filterQuery =
+    filter && filter !== 'all_statuses'
+      ? ` and job_invocation.result = ${filter}`
+      : '';
+  const combinedQuery = `${bulkParams}${filterQuery}`;
 
   const { response: failedHostsData } = useAPI(
     'get',
@@ -131,19 +144,16 @@ export const CheckboxesActions = ({ selectedIds, failedCount, jobID }) => {
     </Button>
   );
 
-  const searchParams = new URLSearchParams();
-  selectedIds.forEach(id => searchParams.append('host_ids[]', id));
-
   const RerunSelectedButton = () => (
     <Button
       aria-label="rerun selected template invocations"
       className="rerun-selected-button"
       component="a"
       href={foremanUrl(
-        `/job_invocations/${jobID}/rerun?${searchParams.toString()}`
+        `/job_invocations/${jobID}/rerun?search=(${jobSearchQuery}) AND (${combinedQuery})`
       )}
       // eslint-disable-next-line camelcase
-      isDisabled={selectedIds.length === 0 || !permissions?.execute_jobs}
+      isDisabled={selectedIds.length === 0 || !hasPermission}
       isInline
       ouiaId="template-invocation-rerun-selected-button"
       variant="secondary"
@@ -176,4 +186,11 @@ CheckboxesActions.propTypes = {
   selectedIds: PropTypes.array.isRequired,
   failedCount: PropTypes.number.isRequired,
   jobID: PropTypes.string.isRequired,
+  bulkParams: PropTypes.string,
+  filter: PropTypes.string,
+};
+
+CheckboxesActions.defaultProps = {
+  bulkParams: '',
+  filter: '',
 };

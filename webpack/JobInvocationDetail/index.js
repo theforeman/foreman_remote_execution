@@ -52,11 +52,9 @@ const JobInvocationDetailPage = ({
     statusLabel === STATUS.SUCCEEDED ||
     statusLabel === STATUS.CANCELLED;
   const autoRefresh = task?.state === STATUS.PENDING || false;
-  const { response, status: permissionsApiStatus } = useAPI(
-    'get',
-    currentPermissionsUrl,
-    CURRENT_PERMISSIONS
-  );
+  useAPI('get', currentPermissionsUrl, {
+    key: CURRENT_PERMISSIONS,
+  });
   const [selectedFilter, setSelectedFilter] = useState('');
 
   const handleFilterChange = newFilter => {
@@ -117,14 +115,7 @@ const JobInvocationDetailPage = ({
       <PageLayout
         header={description}
         breadcrumbOptions={breadcrumbOptions}
-        toolbarButtons={
-          <JobInvocationToolbarButtons
-            jobId={id}
-            data={items}
-            currentPermissions={response.results}
-            permissionsStatus={permissionsApiStatus}
-          />
-        }
+        toolbarButtons={<JobInvocationToolbarButtons jobId={id} data={items} />}
         searchable={false}
       >
         <Flex

@@ -19,6 +19,7 @@ export const JOB_INVOCATION_HOSTS = 'JOB_INVOCATION_HOSTS';
 export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
 export const MAX_HOSTS_API_SIZE = 100;
 export const DIRECT_OPEN_HOST_LIMIT = 3;
+export const ALL_JOB_HOSTS = 'ALL_JOB_HOSTS';
 export const currentPermissionsUrl = foremanUrl(
   '/api/v2/permissions/current_permissions'
 );
