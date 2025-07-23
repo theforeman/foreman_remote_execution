@@ -138,6 +138,7 @@ const JobInvocationHostTable = ({
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
+    fetchBulkParams,
     inclusionSet,
     exclusionSet,
     ...selectAllOptions
@@ -329,10 +330,12 @@ const JobInvocationHostTable = ({
             setDropdownFilter={wrapSetSelectedFilter}
           />,
           <CheckboxesActions
+            bulkParams={selectedCount > 0 ? fetchBulkParams() : null}
             selectedIds={selectedIds}
             failedCount={failedCount}
             jobID={id}
             key="checkboxes-actions"
+            filter={selectedFilter}
           />,
         ]}
         selectionToolbar={selectionToolbar}
