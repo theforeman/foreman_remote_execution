@@ -143,7 +143,9 @@ const JobInvocationHostTable = ({
       ...newParams,
     };
 
-    if (filterSearch !== '') {
+    if (filterSearch === '(job_invocation.result = N/A)') {
+      finalParams.awaiting = 'true';
+    } else if (filterSearch !== '') {
       finalParams.search = filterSearch;
     }
 
