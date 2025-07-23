@@ -119,6 +119,10 @@ module Api
         @total = @job_invocation.targeting.hosts.size
         @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
         @subtotal = @hosts.respond_to?(:total_entries) ? @hosts.total_entries : @hosts.sizes
+        if params[:awaiting]
+          @hosts = @hosts.select { |host| @host_statuses[host.id] == 'N/A' }
+          @subtotal = @hosts.size
+        end
         render :hosts, :layout => 'api/v2/layouts/index_layout'
       end
 

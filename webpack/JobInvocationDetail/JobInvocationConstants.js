@@ -53,6 +53,7 @@ export const STATUS_TITLES = {
   FAILED: { id: 'failed', title: __('Failed') },
   PENDING: { id: 'pending', title: __('In Progress') },
   CANCELLED: { id: 'cancelled', title: __('Cancelled') },
+  NOT_STARTED: { id: 'N/A', title: __('Scheduled') },
 };
 
 export const DATE_OPTIONS = {
