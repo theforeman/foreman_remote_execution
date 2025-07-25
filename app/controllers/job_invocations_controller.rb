@@ -127,7 +127,7 @@ class JobInvocationsController < ApplicationController
                           _('The job cannot be cancelled at the moment.')
                         end
     end
-    redirect_back(:fallback_location => job_invocation_path(@job_invocation))
+    redirect_back(:fallback_location => job_invocation_detail_path(@job_invocation))
   end
 
   def preview_job_invocations_per_host

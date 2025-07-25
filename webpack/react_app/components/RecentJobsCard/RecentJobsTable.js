@@ -58,7 +58,7 @@ const RecentJobsTable = ({ status, hostId }) => {
               }) => (
                 <Tr ouiaId="recent-jobs-table-row" key={id}>
                   <Td modifier="truncate" key={`name-${id}`}>
-                    <a href={foremanUrl(`/job_invocations/${id}`)}>
+                    <a href={foremanUrl(`/job_invocations_detail/${id}`)}>
                       {description}
                     </a>
                   </Td>
