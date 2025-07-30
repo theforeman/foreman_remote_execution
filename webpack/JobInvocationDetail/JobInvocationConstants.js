@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import { foremanUrl } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { foremanUrl } from 'foremanReact/common/helpers';
 import { useForemanHostDetailsPageUrl } from 'foremanReact/Root/Context/ForemanContext';
 import JobStatusIcon from '../react_app/components/RecentJobsCard/JobStatusIcon';
 

@@ -5,32 +5,31 @@ import {
   PageSectionVariants,
   Skeleton,
 } from '@patternfly/react-core';
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
-import { translate as __, documentLocale } from 'foremanReact/common/I18n';
-import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
-import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
-import SkeletonLoader from 'foremanReact/components/common/SkeletonLoader';
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { useDispatch, useSelector } from 'react-redux';
+import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
+import PropTypes from 'prop-types';
+import SkeletonLoader from 'foremanReact/components/common/SkeletonLoader';
+import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
+import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 
 import { JobAdditionInfo } from './JobAdditionInfo';
+import JobInvocationHostTable from './JobInvocationHostTable';
+import JobInvocationOverview from './JobInvocationOverview';
+import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
+import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
 import { getJobInvocation, getTask } from './JobInvocationActions';
+import './JobInvocationDetail.scss';
 import {
   CURRENT_PERMISSIONS,
-  currentPermissionsUrl,
   DATE_OPTIONS,
   JOB_INVOCATION_KEY,
   STATUS,
   STATUS_UPPERCASE,
+  currentPermissionsUrl,
 } from './JobInvocationConstants';
-import JobInvocationHostTable from './JobInvocationHostTable';
-import JobInvocationOverview from './JobInvocationOverview';
 import { selectItems } from './JobInvocationSelectors';
-import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
-import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
-
-import './JobInvocationDetail.scss';
 
 const JobInvocationDetailPage = ({
   match: {
