@@ -134,16 +134,43 @@ module Api
         render :json => host_output(@nested_obj, @host, :raw => true)
       end
 
-      api :POST, '/job_invocations/:id/cancel', N_('Cancel job invocation')
+      api :POST, '/job_invocations/:id/cancel', N_('Cancel job invocation or matching tasks only')
       param :id, :identifier, :required => true
       param :force, :bool
+      param :search, String, :desc => N_('Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.')
       def cancel
-        if @job_invocation.task.cancellable?
-          result = @job_invocation.cancel(params.fetch('force', false))
-          render :json => { :cancelled => result, :id => @job_invocation.id }
+        force = params.fetch('force', false)
+        search = params[:search]
+
+        if search.present?
+          begin
+            hosts_scope = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
+            matching_hosts = hosts_scope.search_for(search)
+            tasks_to_process = @job_invocation.template_invocations
+                                              .where(host_id: matching_hosts.select(:id))
+                                              .includes(:run_host_job_task)
+
+            cancelled, skipped = tasks_to_process.partition { |ti| ti.run_host_job_task&.cancellable? }
+            cancelled.each do |ti|
+              if force
+                ti.run_host_job_task.abort
+              else
+                ti.run_host_job_task.cancel
+              end
+            end
+            render json: {
+              total: tasks_to_process.size,
+              cancelled: cancelled.map(&:run_host_job_task_id),
+              skipped: skipped.map(&:run_host_job_task_id),
+            }
+          rescue StandardError => e
+            render json: { error: { message: "Failed to cancel tasks on hosts: #{e.message}" } }, status: :unprocessable_entity
+          end
+        elsif @job_invocation.task.cancellable?
+          result = @job_invocation.cancel(force)
+          render json: { cancelled: result, id: @job_invocation.id }
         else
-          render :json => { :message => _('The job could not be cancelled.') },
-            :status => :unprocessable_entity
+          render json: { message: _('The job could not be cancelled.') }, status: :unprocessable_entity
         end
       end
 
