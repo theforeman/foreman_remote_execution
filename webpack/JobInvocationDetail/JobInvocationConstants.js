@@ -31,8 +31,7 @@ export const LIST_TEMPLATE_INVOCATIONS = 'LIST_TEMPLATE_INVOCATIONS';
 export const templateInvocationPageUrl = (hostID, jobID) =>
   `/job_invocations_detail/${jobID}/host_invocation/${hostID}`;
 
-export const jobInvocationDetailsUrl = id =>
-  `/experimental/job_invocations_detail/${id}`;
+export const jobInvocationDetailsUrl = id => `/job_invocations/${id}`;
 
 export const STATUS = {
   PENDING: 'pending',
