@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Split, SplitItem } from '@patternfly/react-core';
+import { UndoIcon } from '@patternfly/react-icons';
 import {
   Dropdown,
   DropdownItem,
@@ -190,7 +191,8 @@ const JobInvocationToolbarButtons = ({
     <DropdownSeparator ouiaId="dropdown-separator-2" key="separator-2" />,
     <DropdownItem
       ouiaId="legacy-ui-dropdown-item"
-      href={`/job_invocations/${jobId}`}
+      icon={<UndoIcon />}
+      href={`/legacy/job_invocations/${jobId}`}
       key="legacy-ui"
     >
       {__('Legacy UI')}

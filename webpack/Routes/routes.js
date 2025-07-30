@@ -16,7 +16,7 @@ const ForemanREXRoutes = [
     render: props => <JobWizardPageRerun {...props} />,
   },
   {
-    path: '/experimental/job_invocations_detail/:id',
+    path: '/job_invocations/:id',
     exact: true,
     render: props => <JobInvocationDetailPage {...props} />,
   },

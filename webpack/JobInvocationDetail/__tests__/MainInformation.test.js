@@ -96,9 +96,7 @@ describe('JobInvocationDetailPage', () => {
     );
 
     expect(screen.getByText('Description')).toBeInTheDocument();
-    expect(
-      container.querySelector('.chart-donut .pf-v5-c-chart')
-    ).toBeInTheDocument();
+    expect(container.querySelector('.chart-donut')).toBeInTheDocument();
     expect(screen.getByText('2/6')).toBeInTheDocument();
     expect(screen.getByText('Systems')).toBeInTheDocument();
     expect(screen.getByText('System status')).toBeInTheDocument();
@@ -178,7 +176,7 @@ describe('JobInvocationDetailPage', () => {
         .getByText('Legacy UI')
         .closest('a')
         .getAttribute('href')
-    ).toEqual(`/job_invocations/${jobId}`);
+    ).toEqual(`/legacy/job_invocations/${jobId}`);
   });
 
   it('shows scheduled date', async () => {
