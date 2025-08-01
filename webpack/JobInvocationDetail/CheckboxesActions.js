@@ -28,7 +28,6 @@ import {
 } from './JobInvocationConstants';
 import {
   selectHasPermission,
-  selectItems,
   selectTaskCancelable,
 } from './JobInvocationSelectors';
 import OpenAllInvocationsModal, { PopupAlert } from './OpenAllInvocationsModal';
@@ -123,7 +122,7 @@ export const CheckboxesActions = ({
   const hasCancelPermission = useSelector(
     selectHasPermission('cancel_job_invocations')
   );
-  const jobSearchQuery = useSelector(selectItems)?.targeting?.search_query;
+  const jobSearchQuery = `job_invocation.id = ${jobID}`;
   const filterQuery =
     filter && filter !== 'all_statuses'
       ? ` and job_invocation.result = ${filter}`
