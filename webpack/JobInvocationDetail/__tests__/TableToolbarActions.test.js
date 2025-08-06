@@ -196,7 +196,7 @@ describe('TableToolbarActions', () => {
       const rerunLink = screen.getByRole('link', { name: /rerun/i });
       expect(rerunLink).toBeEnabled();
       const expectedHref = foremanUrl(
-        `/job_invocations/42/rerun?search=(name~*) AND ((id ^ (101, 102, 103)))`
+        `/job_invocations/42/rerun?search=(job_invocation.id = 42) AND ((id ^ (101, 102, 103)))`
       );
       expect(rerunLink).toHaveAttribute('href', expectedHref);
     });
