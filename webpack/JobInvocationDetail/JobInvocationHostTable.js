@@ -23,7 +23,7 @@ import TableIndexPage from 'foremanReact/components/PF4/TableIndexPage/TableInde
 import { getControllerSearchProps } from 'foremanReact/constants';
 import { Icon } from 'patternfly-react';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import URI from 'urijs';
@@ -42,6 +42,7 @@ import { RowActions } from './TemplateInvocationComponents/TemplateActionButtons
 
 const JobInvocationHostTable = ({
   failedCount,
+  finished,
   id,
   initialFilter,
   onFilterUpdate,
@@ -53,6 +54,7 @@ const JobInvocationHostTable = ({
   const history = useHistory();
   const [selectedFilter, setSelectedFilter] = useState(initialFilter);
   const [expandedHost, setExpandedHost] = useState([]);
+  const refreshedOnFinish = useRef(false);
 
   useEffect(() => {
     if (initialFilter !== selectedFilter) {
@@ -137,6 +139,14 @@ const JobInvocationHostTable = ({
       setAllPagesResponse(allResponse.results);
     }
   }, [allResponse]);
+
+  useEffect(() => {
+    if (finished && !refreshedOnFinish.current) {
+      setAPIOptions(prevOptions => ({ ...prevOptions }));
+      refreshedOnFinish.current = true;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finished]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
@@ -408,6 +418,7 @@ const JobInvocationHostTable = ({
                       </div>
                     ) : (
                       <TemplateInvocation
+                        key={`${result.id}-${result.job_status}`}
                         hostID={result.id}
                         jobID={id}
                         isInTableView
@@ -429,6 +440,7 @@ JobInvocationHostTable.propTypes = {
   id: PropTypes.string.isRequired,
   targeting: PropTypes.object.isRequired,
   failedCount: PropTypes.number.isRequired,
+  finished: PropTypes.bool.isRequired,
   initialFilter: PropTypes.string.isRequired,
   onFilterUpdate: PropTypes.func,
 };
