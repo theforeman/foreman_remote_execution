@@ -118,7 +118,12 @@ module Api
         set_statuses_and_smart_proxies
         @total = @job_invocation.targeting.hosts.size
         @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
-        @subtotal = @hosts.respond_to?(:total_entries) ? @hosts.total_entries : @hosts.sizes
+        if params[:awaiting]
+          @hosts = @hosts.select { |host| @host_statuses[host.id] == 'N/A' }
+          @subtotal = @hosts.size
+        else
+          @subtotal = @hosts.respond_to?(:total_entries) ? @hosts.total_entries : @hosts.sizes
+        end
         render :hosts, :layout => 'api/v2/layouts/index_layout'
       end
 
