@@ -76,6 +76,12 @@ const JobInvocationSystemStatusChart = ({
     }
   };
 
+  const onEmptyChartClick = () => {
+    if (onFilterChange) {
+      onFilterChange(STATUS_TITLES.NOT_STARTED.id);
+    }
+  };
+
   return (
     <>
       <FlexItem className="chart-donut">
@@ -94,7 +100,7 @@ const JobInvocationSystemStatusChart = ({
             {
               target: 'data',
               eventHandlers: {
-                onClick: onChartClick,
+                onClick: total > 0 ? onChartClick : onEmptyChartClick,
               },
             },
           ]}
