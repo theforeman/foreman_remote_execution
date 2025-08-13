@@ -23,7 +23,7 @@ import TableIndexPage from 'foremanReact/components/PF4/TableIndexPage/TableInde
 import { getControllerSearchProps } from 'foremanReact/constants';
 import { Icon } from 'patternfly-react';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import URI from 'urijs';
@@ -45,6 +45,7 @@ const JobInvocationHostTable = ({
   id,
   initialFilter,
   onFilterUpdate,
+  statusLabel,
   targeting,
 }) => {
   const columns = Columns();
@@ -53,6 +54,7 @@ const JobInvocationHostTable = ({
   const history = useHistory();
   const [selectedFilter, setSelectedFilter] = useState(initialFilter);
   const [expandedHost, setExpandedHost] = useState([]);
+  const prevStatusLabel = useRef(statusLabel);
 
   useEffect(() => {
     if (initialFilter !== selectedFilter) {
@@ -137,6 +139,14 @@ const JobInvocationHostTable = ({
       setAllPagesResponse(allResponse.results);
     }
   }, [allResponse]);
+
+  useEffect(() => {
+    if (statusLabel !== prevStatusLabel.current) {
+      setAPIOptions(prevOptions => ({ ...prevOptions }));
+      prevStatusLabel.current = statusLabel;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusLabel]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
@@ -408,6 +418,7 @@ const JobInvocationHostTable = ({
                       </div>
                     ) : (
                       <TemplateInvocation
+                        key={`${result.id}-${result.job_status}`}
                         hostID={result.id}
                         jobID={id}
                         isInTableView
@@ -430,11 +441,13 @@ JobInvocationHostTable.propTypes = {
   targeting: PropTypes.object.isRequired,
   failedCount: PropTypes.number.isRequired,
   initialFilter: PropTypes.string.isRequired,
+  statusLabel: PropTypes.string,
   onFilterUpdate: PropTypes.func,
 };
 
 JobInvocationHostTable.defaultProps = {
   onFilterUpdate: () => {},
+  statusLabel: undefined,
 };
 
 export default JobInvocationHostTable;
