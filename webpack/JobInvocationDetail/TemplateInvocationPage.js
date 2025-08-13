@@ -36,6 +36,7 @@ const TemplateInvocationPage = ({
         hostID={hostID}
         jobID={jobID}
         isInTableView={false}
+        isExpanded
         hostName={hostName}
         hostProxy={hostProxy}
       />

@@ -32,6 +32,7 @@ describe('TemplateInvocation', () => {
           hostID="1"
           jobID="1"
           isInTableView={false}
+          isExpanded
           hostName="example-host"
           hostProxy={{ name: 'example-proxy', href: '#' }}
         />
@@ -54,6 +55,7 @@ describe('TemplateInvocation', () => {
           hostID="1"
           jobID="1"
           isInTableView={false}
+          isExpanded
           hostName="example-host"
           hostProxy={{ name: 'example-proxy', href: '#' }}
         />
@@ -108,6 +110,7 @@ describe('TemplateInvocation', () => {
           hostID="1"
           jobID="1"
           isInTableView={false}
+          isExpanded
           hostName="example-host"
           hostProxy={{ name: 'example-proxy', href: '#' }}
         />
@@ -133,6 +136,7 @@ describe('TemplateInvocation', () => {
           hostID="1"
           jobID="1"
           isInTableView={false}
+          isExpanded
           hostName="example-host"
         />
       </Provider>

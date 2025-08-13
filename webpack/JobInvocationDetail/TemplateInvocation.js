@@ -57,9 +57,9 @@ export const TemplateInvocation = ({
   hostID,
   jobID,
   isInTableView,
+  isExpanded,
   hostName,
   hostProxy,
-  isExpanded,
 }) => {
   const intervalRef = useRef(null);
   const templateURL = showTemplateInvocationUrl(hostID, jobID);
@@ -67,72 +67,76 @@ export const TemplateInvocation = ({
 
   const status = useSelector(selectTemplateInvocationStatus(hostID));
   const response = useSelector(selectTemplateInvocation(hostID));
-  const finished = response.finished ?? true;
-  const autoRefresh = response.auto_refresh || false;
   const dispatch = useDispatch();
 
+  const responseRef = useRef(response);
   useEffect(() => {
-    const getData = async () => {
-      if (
-        (!isInTableView || (isInTableView && isExpanded)) &&
-        (Object.keys(response).length === 0 || autoRefresh)
-      ) {
-        dispatch(
-          APIActions.get({
-            url: templateURL,
-            key: `${GET_TEMPLATE_INVOCATION}_${hostID}`,
-            handleError: () => {
-              if (intervalRef.current) clearInterval(intervalRef.current);
-            },
-          })
-        );
-      }
-    };
-    getData();
-    if (!finished && autoRefresh) {
-      intervalRef.current = setInterval(() => {
-        getData();
-      }, 5000);
-    }
+    responseRef.current = response;
+  }, [response]);
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    };
-  }, [
-    dispatch,
-    templateURL,
-    isExpanded,
-    isInTableView,
-    finished,
-    autoRefresh,
-    hostID,
-  ]);
-
-  const errorMessage =
-    response?.response?.data?.error?.message ||
-    response?.response?.data?.error ||
-    JSON.stringify(response);
-  const {
-    preview,
-    output,
-    input_values: inputValues,
-    task,
-    permissions,
-  } = response;
-  const { id: taskID, cancellable: taskCancellable } = task || {};
   const [showOutputType, setShowOutputType] = useState({
     stderr: true,
     stdout: true,
     debug: true,
   });
   const [showTemplatePreview, setShowTemplatePreview] = useState(false);
-  const [showCommand, setCommand] = useState(false);
-  if (status === STATUS.PENDING && isEmpty(response)) {
+  const [showCommand, setShowCommand] = useState(false);
+
+  useEffect(() => {
+    const dispatchFetch = () => {
+      dispatch(
+        APIActions.get({
+          url: templateURL,
+          key: `${GET_TEMPLATE_INVOCATION}_${hostID}`,
+        })
+      );
+    };
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    if (isExpanded) {
+      if (isEmpty(responseRef.current)) {
+        dispatchFetch();
+      }
+
+      intervalRef.current = setInterval(() => {
+        const latestResponse = responseRef.current;
+        const finished = latestResponse?.finished ?? true;
+        // eslint-disable-next-line camelcase
+        const autoRefresh = latestResponse?.auto_refresh || false;
+
+        if (!finished && autoRefresh) {
+          dispatchFetch();
+        } else if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      }, 5000);
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isExpanded, dispatch, templateURL, hostID]);
+
+  if (!isExpanded) {
+    return null;
+  }
+
+  if ((status === STATUS.PENDING && isEmpty(response)) || !response) {
     return <Skeleton />;
-  } else if (status === STATUS.ERROR) {
+  }
+
+  const errorMessage =
+    response?.response?.data?.error?.message ||
+    response?.response?.data?.error ||
+    JSON.stringify(response);
+
+  if (status === STATUS.ERROR) {
     return (
       <Alert
         ouiaId="template-invocation-error-alert"
@@ -145,6 +149,15 @@ export const TemplateInvocation = ({
       </Alert>
     );
   }
+
+  const {
+    preview,
+    output,
+    input_values: inputValues,
+    task,
+    permissions,
+  } = response;
+  const { id: taskID, cancellable: taskCancellable } = task || {};
 
   return (
     <div
@@ -159,7 +172,7 @@ export const TemplateInvocation = ({
         setShowTemplatePreview={setShowTemplatePreview}
         showTemplatePreview={showTemplatePreview}
         showCommand={showCommand}
-        setShowCommand={setCommand}
+        setShowCommand={setShowCommand}
         newTabUrl={templateInvocationPageUrl(hostID, jobID)}
         isInTableView={isInTableView}
         copyToClipboard={
