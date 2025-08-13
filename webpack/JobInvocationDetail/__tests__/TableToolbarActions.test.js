@@ -32,6 +32,29 @@ selectors.selectTaskCancelable.mockImplementation(() => true);
 const mockStore = configureStore([]);
 const store = mockStore({});
 
+const allJobs = [
+  {
+    id: 1,
+    job_status: 'error',
+  },
+  {
+    id: 2,
+    job_status: 'error',
+  },
+  {
+    id: 3,
+    job_status: 'error',
+  },
+  {
+    id: 4,
+    job_status: 'error',
+  },
+  {
+    id: 5,
+    job_status: 'error',
+  },
+];
+
 describe('TableToolbarActions', () => {
   const jobID = '42';
   let openSpy;
@@ -58,8 +81,9 @@ describe('TableToolbarActions', () => {
         <Provider store={store}>
           <CheckboxesActions
             selectedIds={selectedIds}
-            failedCount={0}
             jobID={jobID}
+            allJobs={allJobs}
+            setShowAlert={jest.fn()}
           />
         </Provider>
       );
@@ -76,8 +100,9 @@ describe('TableToolbarActions', () => {
         <Provider store={store}>
           <CheckboxesActions
             selectedIds={selectedIds}
-            failedCount={0}
             jobID={jobID}
+            allJobs={allJobs}
+            setShowAlert={jest.fn()}
           />
         </Provider>
       );
@@ -94,47 +119,52 @@ describe('TableToolbarActions', () => {
     test('shows alert when popups are blocked', async () => {
       openSpy.mockReturnValue(null);
       const selectedIds = [1, 2];
+      const setShowMock = jest.fn();
       render(
         <Provider store={store}>
           <CheckboxesActions
             selectedIds={selectedIds}
-            failedCount={0}
             jobID={jobID}
+            allJobs={allJobs}
+            setShowAlert={setShowMock}
           />
         </Provider>
       );
       fireEvent.click(
         screen.getByLabelText(/open all template invocations in new tab/i)
       );
-      expect(
-        await screen.findByText(/Popups are blocked by your browser/)
-      ).toBeInTheDocument();
+      expect(setShowMock).toHaveBeenCalledWith(true);
     });
   });
 
   describe('Opening failed in new tabs', () => {
     test('opens links when results length is less than or equal to 3', async () => {
-      const failedHosts = [{ id: 301 }, { id: 302 }];
-      useAPI.mockReturnValue({
-        response: { results: failedHosts },
-        status: 'success',
-      });
       render(
         <Provider store={store}>
-          <CheckboxesActions selectedIds={[]} failedCount={2} jobID={jobID} />
+          <CheckboxesActions
+            selectedIds={[]}
+            jobID={jobID}
+            allJobs={allJobs.slice(0, 2)}
+            setShowAlert={jest.fn()}
+          />
         </Provider>
       );
       fireEvent.click(screen.getByLabelText(/actions dropdown toggle/i));
       fireEvent.click(await screen.findByText(/open all failed runs/i));
       await waitFor(() => {
-        expect(openSpy).toHaveBeenCalledTimes(failedHosts.length);
+        expect(openSpy).toHaveBeenCalledTimes(2);
       });
     });
 
     test('shows modal when results length is greater than 3', async () => {
       render(
         <Provider store={store}>
-          <CheckboxesActions selectedIds={[]} failedCount={4} jobID={jobID} />
+          <CheckboxesActions
+            selectedIds={[]}
+            jobID={jobID}
+            allJobs={allJobs}
+            setShowAlert={jest.fn()}
+          />
         </Provider>
       );
       fireEvent.click(screen.getByLabelText(/actions dropdown toggle/i));
@@ -144,21 +174,6 @@ describe('TableToolbarActions', () => {
           name: /open all.*invocations in new tabs \+ failed/i,
         })
       ).toBeInTheDocument();
-    });
-
-    test('calls useApi with skip: true when failedCount is 0', () => {
-      render(
-        <Provider store={store}>
-          <CheckboxesActions selectedIds={[]} failedCount={0} jobID={jobID} />
-        </Provider>
-      );
-      expect(useAPI).toHaveBeenCalledWith(
-        'get',
-        foremanUrl(`/api/job_invocations/${jobID}/hosts`),
-        expect.objectContaining({
-          skip: true,
-        })
-      );
     });
   });
 
@@ -188,8 +203,9 @@ describe('TableToolbarActions', () => {
           <CheckboxesActions
             bulkParams="(id ^ (101, 102, 103))"
             selectedIds={selectedIds}
-            failedCount={1}
             jobID={jobID}
+            allJobs={allJobs}
+            setShowAlert={jest.fn()}
           />
         </Provider>
       );
