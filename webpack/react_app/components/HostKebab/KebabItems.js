@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { DropdownItem } from '@patternfly/react-core';
 import { CodeIcon } from '@patternfly/react-icons';
 import { selectAPIResponse } from 'foremanReact/redux/API/APISelectors';
 import { translate as __ } from 'foremanReact/common/I18n';
@@ -16,9 +16,8 @@ const HostKebabItems = () => {
     <DropdownItem
       ouiaId="web-console-dropdown-item"
       icon={<CodeIcon />}
-      href={consoleUrl}
+      to={consoleUrl}
       target="_blank"
-      rel="noreferrer"
     >
       {__('Web Console')}
     </DropdownItem>
