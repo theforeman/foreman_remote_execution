@@ -2,7 +2,7 @@ object @job_template
 
 extends 'api/v2/job_templates/base'
 
-attributes :description, :description_format, :created_at, :updated_at, :template, :locked
+attributes :description, :description_format, :created_at, :updated_at, :template, :locked, :cloned_from_id
 
 child :template_inputs do
   extends 'api/v2/template_inputs/base'
