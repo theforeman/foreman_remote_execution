@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   match 'job_invocations/:id/rerun', to: 'react#index', :via => [:get], as: 'rerun_job_invocation'
   match 'old/job_invocations/new', to: 'job_invocations#new', via: [:get], as: 'form_new_job_invocation'
   match 'old/job_invocations/:id/rerun', to: 'job_invocations#rerun', via: [:get, :post], as: 'form_rerun_job_invocation'
+  get 'job_invocations/preview_job_invocations_per_host', to: 'job_invocations#preview_job_invocations_per_host', as: 'preview_job_invocations_per_host'
   get 'job_invocations/:id', to: 'react#index', as: 'job_invocation'
   get 'legacy/job_invocations/:id', to: 'job_invocations#show', as: 'legacy_job_invocation'
   match 'job_invocations_detail/:id/host_invocation/:host_id', to: 'react#index', :via => [:get], as: 'new_job_invocation_detail_by_host'
