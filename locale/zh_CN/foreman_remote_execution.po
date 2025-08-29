@@ -6,7 +6,7 @@
 # Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2024
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.1\n"
+"Project-Id-Version: foreman_remote_execution 16.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarde"
@@ -33,6 +33,9 @@ msgstr "%s 任务已被调用"
 
 msgid "%s more"
 msgstr "%s 更多"
+
+msgid "%s task(s) successfully %s: %s"
+msgstr ""
 
 msgid "%{description} on %{host}"
 msgstr "%{host} 中的 %{host}"
@@ -92,6 +95,9 @@ msgstr "终止"
 msgid "Abort Job"
 msgstr "终止作业"
 
+msgid "Abort selected"
+msgstr ""
+
 msgid "Abort task"
 msgstr "中止任务"
 
@@ -131,6 +137,9 @@ msgstr "按字母"
 msgid "An error occurred while fetching the template invocation details."
 msgstr "在获取模板调用详情时出错。"
 
+msgid "An error occurred."
+msgstr ""
+
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "已经将另一个接口设置为执行。您确定要改用这个吗？"
 
@@ -149,8 +158,8 @@ msgstr "任意机构"
 msgid "Apply to"
 msgstr "应用到"
 
-msgid "Are you sure you want to open all invocations in new tabs?"
-msgstr "您确定要在新标签页中打开所有调用吗？"
+msgid "Are you sure you want to open all %s invocations in new tabs?"
+msgstr ""
 
 msgid "At"
 msgstr "位于"
@@ -182,11 +191,14 @@ msgstr "取消作业"
 msgid "Cancel Task"
 msgstr "取消任务"
 
-msgid "Cancel job invocation"
-msgstr "取消作业调用"
+msgid "Cancel job invocation or matching tasks only"
+msgstr ""
 
 msgid "Cancel recurring"
 msgstr "取消重复"
+
+msgid "Cancel selected"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "已取消"
@@ -254,11 +266,17 @@ msgstr "复制到剪贴板"
 msgid "Could not abort the job %s: ${response}"
 msgstr "无法中止作业 %s: ${response}"
 
+msgid "Could not abort the task"
+msgstr ""
+
 msgid "Could not cancel recurring logic %s: ${response}"
 msgstr "无法取消重复逻辑 %s：${response}"
 
 msgid "Could not cancel the job %s: ${response}"
 msgstr "无法取消作业 %s: ${response}"
+
+msgid "Could not cancel the task"
+msgstr ""
 
 msgid "Could not disable recurring logic %s: ${response}"
 msgstr "无法禁用重复逻辑 %s：${response}"
@@ -467,6 +485,9 @@ msgstr "错误："
 msgid "Evaluated at:"
 msgstr "评估于："
 
+msgid "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list."
+msgstr ""
+
 msgid "Every day at %s"
 msgstr "每天的 %s"
 
@@ -491,6 +512,9 @@ msgstr "在一个重复调度中执行作业。"
 msgid "Execute the jobs on hosts in randomized order"
 msgstr "以随机顺序在主机上执行作业"
 
+msgid "Executes the job on the current list of target hosts."
+msgstr ""
+
 msgid "Execution"
 msgstr "执行"
 
@@ -500,8 +524,8 @@ msgstr "执行顺序"
 msgid "Execution ordering"
 msgstr "执行顺序"
 
-msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
-msgstr "执行顺序确定了应按字母顺序还是随机顺序在主机上执行作业。<br><ul><li><b>Ordered</b> - 以字母顺序在主机上执行作业</li><li><b>Randomized</b> - 以随机顺序在主机上执行作业</li></ul>"
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
 
 msgid "Exit status: %s"
 msgstr "退出状态：%s"
@@ -698,26 +722,17 @@ msgstr "作业任务"
 msgid "Job Templates"
 msgstr "作业模板"
 
-msgid "Job cancelled by user"
-msgstr "作业被用户取消"
-
 msgid "Job category"
 msgstr "作业类别"
 
 msgid "Job execution failed"
 msgstr "作业执行失败"
 
-msgid "Job finished with error"
-msgstr "作业完成但带有错误"
-
 msgid "Job invocation"
 msgstr "工作调用"
 
 msgid "Job invocations"
 msgstr "作业调用"
-
-msgid "Job invocations detail"
-msgstr "作业调用详情"
 
 msgid "Job result"
 msgstr "作业结果"
@@ -730,9 +745,6 @@ msgstr "用于功能的作业模板 ID"
 
 msgid "Job template imported successfully."
 msgstr "成功导入作业模版。"
-
-msgid "Job templates"
-msgstr "作业模板"
 
 msgid "Job with id '%{id}' was not found"
 msgstr "未找到 ID 为 '%{id}' 的作业"
@@ -899,14 +911,20 @@ msgstr "上"
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "只能指定一个功能或 job_template_id"
 
-msgid "Open all in new tabs"
-msgstr "在新标签页中打开所有"
+msgid "Open all %s invocations in new tabs"
+msgstr ""
 
-msgid "Open all invocations in new tabs"
-msgstr "在新标签页中打开所有调用"
+msgid "Open all failed runs (%s)"
+msgstr ""
 
 msgid "Open in new tab"
 msgstr "在新标签页中打开"
+
+msgid "Open in new tabs"
+msgstr ""
+
+msgid "Open selected in new tab"
+msgstr ""
 
 msgid "Opening job invocation form"
 msgstr "打开作业调用表单"
@@ -1244,6 +1262,9 @@ msgstr "在分配给主机的代理之外搜索远程执行代理。搜索将会
 msgid "Search query"
 msgstr "搜索查询"
 
+msgid "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled."
+msgstr ""
+
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "在主机上搜索具有远程执行功能的任何代理，当主机没有子网或子网没有执行代理时，此命令很有用"
 
@@ -1424,6 +1445,9 @@ msgstr "任务计数"
 msgid "Task for the host cancelled succesfully"
 msgstr "主机任务已成功取消"
 
+msgid "Task(s) were not %s"
+msgstr ""
+
 msgid "Template ERB"
 msgstr "模版 ERB"
 
@@ -1478,8 +1502,8 @@ msgstr "此作业无法取消。"
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr "要使用的任务模板，除非已指定功能，否则参数是必需的"
 
-msgid "The number of invocations is:"
-msgstr "调用数量为："
+msgid "The number of %s invocations is:"
+msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
@@ -1509,8 +1533,8 @@ msgstr "这个模块用来生成描述。输入值可以使用语法 %{package}�
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr "这个模块用来生成描述。<br/>输入值可以使用语法%%{package}。<br/>您可以使用 <br/> %{job_category}和 %{template_name} 来包括作业类型和模板名称。"
 
-msgid "This will open a new tab for each invocation."
-msgstr "这会为每个调用打开一个新标签页。"
+msgid "This will open a new tab for each invocation. The maximum is 100."
+msgstr ""
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "在远程主机上开始后，以秒计算时间，之后结束作业。"
@@ -1554,6 +1578,9 @@ msgstr "尝试取消作业"
 msgid "Try to cancel the job on a host"
 msgstr "尝试取消主机上的作业"
 
+msgid "Trying to %s the task"
+msgstr ""
+
 msgid "Trying to abort the job"
 msgstr "尝试中止作业"
 
@@ -1575,11 +1602,11 @@ msgstr "尝试取消主机的任务"
 msgid "Type"
 msgstr "类型"
 
-msgid "Type has impact on when is the query evaluated to hosts."
-msgstr "类型会影响到什么时候会评估到主机。"
+msgid "Type determines when the query is evaluated to hosts."
+msgstr ""
 
-msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
-msgstr "类型会对何时评估主机查询产生影响。<br><ul><li><b>静态</b> - 提交此表格后立即评估</li><li><b>动态</b> - 开始执行前进行评估，因此，如果以后计划，则目标主机集可能会在它之前发生变化</li></ul>"
+msgid "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>"
+msgstr ""
 
 msgid "Type of execution"
 msgstr "执行类型"
@@ -1722,6 +1749,9 @@ msgstr "您有 %s 个结果现实。显示前 %s 个结果"
 msgid "You have more results to display. Showing first %s results"
 msgstr "有更多显示的结果。显示第一 %s 结果"
 
+msgid "aborted"
+msgstr ""
+
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "为此模板添加一个输入集，以引用其他模板输入"
 
@@ -1739,12 +1769,6 @@ msgstr "有效用户"
 
 msgid "error during rendering: %s"
 msgstr "呈现时出错：%s"
-
-msgid "evaluates just after you submit this form"
-msgstr "提交此表单后评估"
-
-msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
-msgstr "在执行启动前进行评估，因此如果将来需要它，则目标主机设置可能会在它之前改变"
 
 msgid "failed"
 msgstr "失败"

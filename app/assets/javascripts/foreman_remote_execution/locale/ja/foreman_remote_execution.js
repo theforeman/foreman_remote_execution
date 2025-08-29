@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.1",
+        "Project-Id-Version": "foreman_remote_execution 16.2.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "elobato <elobatocs@gmail.com>, 2017",
@@ -31,6 +31,9 @@
       ],
       "%s more": [
         "さらに %s"
+      ],
+      "%s task(s) successfully %s: %s": [
+        ""
       ],
       "%{description} on %{host}": [
         "%{host} の %{description} "
@@ -89,6 +92,9 @@
       "Abort Job": [
         "ジョブの中断"
       ],
+      "Abort selected": [
+        ""
+      ],
       "Abort task": [
         "タスクの中断"
       ],
@@ -128,6 +134,9 @@
       "An error occurred while fetching the template invocation details.": [
         "テンプレート呼び出しの詳細を取得中にエラーが発生しました。"
       ],
+      "An error occurred.": [
+        ""
+      ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "別のインターフェースがすでに実行として設定されています。代わりにこのインターフェースを使用しもよろしいでしょうか?"
       ],
@@ -146,8 +155,8 @@
       "Apply to": [
         "適用対象"
       ],
-      "Are you sure you want to open all invocations in new tabs?": [
-        "すべての呼び出しを新しいタブで開きますか?"
+      "Are you sure you want to open all %s invocations in new tabs?": [
+        ""
       ],
       "At": [
         "場所"
@@ -179,11 +188,14 @@
       "Cancel Task": [
         "タスクの取り消し"
       ],
-      "Cancel job invocation": [
-        "ジョブ呼び出しをキャンセル"
+      "Cancel job invocation or matching tasks only": [
+        ""
       ],
       "Cancel recurring": [
         "繰り返しのキャンセル"
+      ],
+      "Cancel selected": [
+        ""
       ],
       "Cancelled": [
         "キャンセル済み"
@@ -251,11 +263,17 @@
       "Could not abort the job %s: ${response}": [
         "ジョブ %s を中止できませんでした: ${response}"
       ],
+      "Could not abort the task": [
+        ""
+      ],
       "Could not cancel recurring logic %s: ${response}": [
         "再帰論理 %s をキャンセルできませんでした: ${response}"
       ],
       "Could not cancel the job %s: ${response}": [
         "ジョブ %s をキャンセルできませんでした: ${response}"
+      ],
+      "Could not cancel the task": [
+        ""
       ],
       "Could not disable recurring logic %s: ${response}": [
         "再帰論理 %s を無効にできませんでした: ${response}"
@@ -464,6 +482,9 @@
       "Evaluated at:": [
         "評価済み:"
       ],
+      "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
+        ""
+      ],
       "Every day at %s": [
         "毎日 %s"
       ],
@@ -488,6 +509,9 @@
       "Execute the jobs on hosts in randomized order": [
         "ホスト上でジョブを順不同で実行します"
       ],
+      "Executes the job on the current list of target hosts.": [
+        ""
+      ],
       "Execution": [
         "Execution"
       ],
@@ -497,8 +521,8 @@
       "Execution ordering": [
         "実行順"
       ],
-      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>": [
-        "実行順では、ホスト上でジョブをアルファベット順で実行するか、順不同で実行するかを決定します。<br><ul><li><b>順番</b>: ホスト上でジョブがアルファベット順に実行されます。</li><li><b>無作為</b>: ホスト上でジョブが順不同で実行されます。</li></ul>"
+      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>": [
+        ""
       ],
       "Exit status: %s": [
         "終了ステータス: %s"
@@ -695,26 +719,17 @@
       "Job Templates": [
         "ジョブテンプレート"
       ],
-      "Job cancelled by user": [
-        "ジョブがユーザーによりキャンセルされました"
-      ],
       "Job category": [
         "ジョブカテゴリー"
       ],
       "Job execution failed": [
         "ジョブの実行に失敗しました"
       ],
-      "Job finished with error": [
-        "エラーでジョブが終了しました"
-      ],
       "Job invocation": [
         "ジョブ呼び出し"
       ],
       "Job invocations": [
         "ジョブ呼び出し"
-      ],
-      "Job invocations detail": [
-        "ジョブ呼び出し詳細"
       ],
       "Job result": [
         "ジョブの結果"
@@ -727,9 +742,6 @@
       ],
       "Job template imported successfully.": [
         "ジョブテンプレートが正常にインポートされました"
-      ],
-      "Job templates": [
-        "ジョブテンプレート"
       ],
       "Job with id '%{id}' was not found": [
         "ID が '%{id}' のジョブが見つかりませんでした"
@@ -896,14 +908,20 @@
       "Only one of feature or job_template_id can be specified": [
         "機能または job_template_id の 1 つのみを指定できます"
       ],
-      "Open all in new tabs": [
-        "すべてを新しいタブで開く"
+      "Open all %s invocations in new tabs": [
+        ""
       ],
-      "Open all invocations in new tabs": [
-        "すべての呼び出しを新しいタブで開く"
+      "Open all failed runs (%s)": [
+        ""
       ],
       "Open in new tab": [
         "新規タブで開く"
+      ],
+      "Open in new tabs": [
+        ""
+      ],
+      "Open selected in new tab": [
+        ""
       ],
       "Opening job invocation form": [
         "ジョブ呼び出しフォームを開く"
@@ -1200,7 +1218,7 @@
         "ジョブのスケジュール"
       ],
       "Schedule the job for a future time": [
-        "将来のジョブをスケジュール"
+        "ジョブの開始を今後の日時に設定する"
       ],
       "Schedule the job to start at a later time": [
         "後で開始するジョブをスケジュール"
@@ -1240,6 +1258,9 @@
       ],
       "Search query": [
         "検索クエリー"
+      ],
+      "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.": [
+        ""
       ],
       "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy": [
         "リモート実行があるプロキシーをホストで検索します。ホストにサブネットがない場合、またはサブネットに実行プロキシーがない場合に役に立ちます"
@@ -1421,6 +1442,9 @@
       "Task for the host cancelled succesfully": [
         "ホストのタスクは正常にキャンセルされました"
       ],
+      "Task(s) were not %s": [
+        ""
+      ],
       "Template ERB": [
         "テンプレート ERB"
       ],
@@ -1475,8 +1499,8 @@
       "The job template to use, parameter is required unless feature was specified": [
         "使用するジョブテンプレート。機能が指定されていなければ、パラメーターが必要です"
       ],
-      "The number of invocations is:": [
-        "呼び出し回数: "
+      "The number of %s invocations is:": [
+        ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "適用可能な唯一のプロキシー %{proxy_names} がダウンしています。"
@@ -1505,8 +1529,8 @@
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "このテンプレートは記述の生成に使用します。<br/>入力値は、構文 %{package} を使用して設定できます。%{job_category} と %{template_name} を使用して、<br/> ジョブカテゴリーとテンプレート <br/> 名を追加することもできます。"
       ],
-      "This will open a new tab for each invocation.": [
-        "これにより、呼び出しごとに新しいタブが開きます。"
+      "This will open a new tab for each invocation. The maximum is 100.": [
+        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "リモートホストで開始してからジョブを強制終了するまでの時間 (秒単位)"
@@ -1550,6 +1574,9 @@
       "Try to cancel the job on a host": [
         "ホストでのジョブのキャンセルを試行"
       ],
+      "Trying to %s the task": [
+        ""
+      ],
       "Trying to abort the job": [
         "ジョブを中断しようとしています"
       ],
@@ -1571,11 +1598,11 @@
       "Type": [
         "タイプ"
       ],
-      "Type has impact on when is the query evaluated to hosts.": [
-        "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。"
+      "Type determines when the query is evaluated to hosts.": [
+        ""
       ],
-      "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>": [
-        "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。<br><ul><li><b>静的</b>: このフォームの送信直後に評価します。</li><li><b>動的</b>: 実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストの設定が評価前に変更される可能性があります。</li></ul>"
+      "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>": [
+        ""
       ],
       "Type of execution": [
         "実行のタイプ"
@@ -1718,6 +1745,9 @@
       "You have more results to display. Showing first %s results": [
         "表示する結果があります。最初の %s 件の結果を表示しています"
       ],
+      "aborted": [
+        ""
+      ],
       "add an input set for this template to reference a different template inputs": [
         "異なるテンプレート入力を参照するためにこのテンプレートの入力セットを追加"
       ],
@@ -1735,12 +1765,6 @@
       ],
       "error during rendering: %s": [
         "レンダリング中のエラー: %s"
-      ],
-      "evaluates just after you submit this form": [
-        "このフォームの送信直後に評価します"
-      ],
-      "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it": [
-        "実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストのセットが評価前に変更される可能性があります"
       ],
       "failed": [
         "失敗"

@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.1\n"
+"Project-Id-Version: foreman_remote_execution 16.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -31,6 +31,9 @@ msgid "%s job has been invoked"
 msgstr "%s se ha invocado el trabajo"
 
 msgid "%s more"
+msgstr ""
+
+msgid "%s task(s) successfully %s: %s"
 msgstr ""
 
 msgid "%{description} on %{host}"
@@ -92,6 +95,9 @@ msgstr ""
 msgid "Abort Job"
 msgstr "Abortar trabajo"
 
+msgid "Abort selected"
+msgstr ""
+
 msgid "Abort task"
 msgstr ""
 
@@ -131,6 +137,9 @@ msgstr "Alfabético"
 msgid "An error occurred while fetching the template invocation details."
 msgstr ""
 
+msgid "An error occurred."
+msgstr ""
+
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "Ya hay otra interfaz establecida como ejecución. ¿Está seguro de que desea utilizar esta en cambio?"
 
@@ -149,7 +158,7 @@ msgstr ""
 msgid "Apply to"
 msgstr "Solicitar"
 
-msgid "Are you sure you want to open all invocations in new tabs?"
+msgid "Are you sure you want to open all %s invocations in new tabs?"
 msgstr ""
 
 msgid "At"
@@ -182,10 +191,13 @@ msgstr "Cancelar tarea"
 msgid "Cancel Task"
 msgstr ""
 
-msgid "Cancel job invocation"
-msgstr "Cancelar invocación de trabajo"
+msgid "Cancel job invocation or matching tasks only"
+msgstr ""
 
 msgid "Cancel recurring"
+msgstr ""
+
+msgid "Cancel selected"
 msgstr ""
 
 msgid "Cancelled"
@@ -254,10 +266,16 @@ msgstr ""
 msgid "Could not abort the job %s: ${response}"
 msgstr ""
 
+msgid "Could not abort the task"
+msgstr ""
+
 msgid "Could not cancel recurring logic %s: ${response}"
 msgstr ""
 
 msgid "Could not cancel the job %s: ${response}"
+msgstr ""
+
+msgid "Could not cancel the task"
 msgstr ""
 
 msgid "Could not disable recurring logic %s: ${response}"
@@ -467,6 +485,9 @@ msgstr "Errores:"
 msgid "Evaluated at:"
 msgstr "Evaluado en:"
 
+msgid "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list."
+msgstr ""
+
 msgid "Every day at %s"
 msgstr ""
 
@@ -491,6 +512,9 @@ msgstr ""
 msgid "Execute the jobs on hosts in randomized order"
 msgstr "Ejecutar las tareas en los hosts en orden aleatorio"
 
+msgid "Executes the job on the current list of target hosts."
+msgstr ""
+
 msgid "Execution"
 msgstr "Ejecución"
 
@@ -500,8 +524,8 @@ msgstr "Orden de ejecución"
 msgid "Execution ordering"
 msgstr "Orden de ejecución"
 
-msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
-msgstr "El orden de ejecución determina si las tareas deben ejecutarse en los hosts en orden alfabético o en orden aleatorio.<br><ul><li><b> Ordenado</b>: ejecuta las tareas en los hosts en orden alfabético</li><li><b>Aleatorio</b>: aleatoriza el orden en que las tareas se ejecutan en los hosts</li></ul>"
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
 
 msgid "Exit status: %s"
 msgstr "Estado de salida: %s"
@@ -698,26 +722,17 @@ msgstr "Tarea del trabajo"
 msgid "Job Templates"
 msgstr "Plantillas de trabajo"
 
-msgid "Job cancelled by user"
-msgstr "Trabajo cancelado por el usuario"
-
 msgid "Job category"
 msgstr "Categoría de trabajo"
 
 msgid "Job execution failed"
 msgstr "Ocurrió un error en la ejecución del trabajo"
 
-msgid "Job finished with error"
-msgstr "El trabajo finalizó con error."
-
 msgid "Job invocation"
 msgstr "Invocación de trabajo"
 
 msgid "Job invocations"
 msgstr "Invocaciones de trabajo"
-
-msgid "Job invocations detail"
-msgstr ""
 
 msgid "Job result"
 msgstr "Resultado del trabajo"
@@ -730,9 +745,6 @@ msgstr "ID de la plantilla de trabajo que se debe utilizar para la funcionalidad
 
 msgid "Job template imported successfully."
 msgstr "Se importó correctamente una plantilla de trabajo"
-
-msgid "Job templates"
-msgstr "Plantillas de trabajo"
 
 msgid "Job with id '%{id}' was not found"
 msgstr ""
@@ -899,13 +911,19 @@ msgstr "Activar"
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "Sólo se puede especificar uno de feature o job_template_id"
 
-msgid "Open all in new tabs"
+msgid "Open all %s invocations in new tabs"
 msgstr ""
 
-msgid "Open all invocations in new tabs"
+msgid "Open all failed runs (%s)"
 msgstr ""
 
 msgid "Open in new tab"
+msgstr ""
+
+msgid "Open in new tabs"
+msgstr ""
+
+msgid "Open selected in new tab"
 msgstr ""
 
 msgid "Opening job invocation form"
@@ -1244,6 +1262,9 @@ msgstr "Busque un proxy de ejecución remota fuera de los proxies asignados al h
 msgid "Search query"
 msgstr "Consulta de búsqueda"
 
+msgid "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled."
+msgstr ""
+
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "Busque en el host algún proxy con Ejecución remota, útil cuando el host no tiene subred o cuando la subred no tiene un proxy de ejecución."
 
@@ -1424,6 +1445,9 @@ msgstr "Conteo de tareas"
 msgid "Task for the host cancelled succesfully"
 msgstr ""
 
+msgid "Task(s) were not %s"
+msgstr ""
+
 msgid "Template ERB"
 msgstr "Plantilla ERB"
 
@@ -1478,7 +1502,7 @@ msgstr "No se pudo cancelar el trabajo."
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr "La plantilla de trabajo que se debe utilizar; se requiere el parámetro a menos que se haya especificado la funcionalidad"
 
-msgid "The number of invocations is:"
+msgid "The number of %s invocations is:"
 msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
@@ -1511,7 +1535,7 @@ msgstr "Esta plantilla se utiliza para generar la descripción. Los valores de e
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis <br/>. También puede incluir la categoría de trabajo y el nombre de la plantilla con %%{package} y %<br/>."
 
-msgid "This will open a new tab for each invocation."
+msgid "This will open a new tab for each invocation. The maximum is 100."
 msgstr ""
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
@@ -1556,6 +1580,9 @@ msgstr "Intentar cancelar el trabajo"
 msgid "Try to cancel the job on a host"
 msgstr "Intentar cancelar el trabajo en un host"
 
+msgid "Trying to %s the task"
+msgstr ""
+
 msgid "Trying to abort the job"
 msgstr "Intentando abortar el trabajo"
 
@@ -1577,10 +1604,10 @@ msgstr ""
 msgid "Type"
 msgstr "Tipo"
 
-msgid "Type has impact on when is the query evaluated to hosts."
-msgstr "El tipo influye en el momento en que se evalúa la consulta a los hosts."
+msgid "Type determines when the query is evaluated to hosts."
+msgstr ""
 
-msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
+msgid "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>"
 msgstr ""
 
 msgid "Type of execution"
@@ -1724,6 +1751,9 @@ msgstr "Tienes %s resultados para mostrar. Mostrando primeros resultados %s "
 msgid "You have more results to display. Showing first %s results"
 msgstr ""
 
+msgid "aborted"
+msgstr ""
+
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "agregar un conjunto de entrada para esta plantilla para hacer referencia a entradas de una plantilla diferente"
 
@@ -1741,12 +1771,6 @@ msgstr "usuario efectivo"
 
 msgid "error during rendering: %s"
 msgstr "error durante la reproducción: %s"
-
-msgid "evaluates just after you submit this form"
-msgstr "se evalúa justo después de enviar este formulario"
-
-msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
-msgstr ""
 
 msgid "failed"
 msgstr "fallido"

@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.1",
+        "Project-Id-Version": "foreman_remote_execution 16.2.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2024",
@@ -31,6 +31,9 @@
       ],
       "%s more": [
         "%s 更多"
+      ],
+      "%s task(s) successfully %s: %s": [
+        ""
       ],
       "%{description} on %{host}": [
         "%{host} 中的 %{host}"
@@ -89,6 +92,9 @@
       "Abort Job": [
         "终止作业"
       ],
+      "Abort selected": [
+        ""
+      ],
       "Abort task": [
         "中止任务"
       ],
@@ -128,6 +134,9 @@
       "An error occurred while fetching the template invocation details.": [
         "在获取模板调用详情时出错。"
       ],
+      "An error occurred.": [
+        ""
+      ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "已经将另一个接口设置为执行。您确定要改用这个吗？"
       ],
@@ -146,8 +155,8 @@
       "Apply to": [
         "应用到"
       ],
-      "Are you sure you want to open all invocations in new tabs?": [
-        "您确定要在新标签页中打开所有调用吗？"
+      "Are you sure you want to open all %s invocations in new tabs?": [
+        ""
       ],
       "At": [
         "位于"
@@ -179,11 +188,14 @@
       "Cancel Task": [
         "取消任务"
       ],
-      "Cancel job invocation": [
-        "取消作业调用"
+      "Cancel job invocation or matching tasks only": [
+        ""
       ],
       "Cancel recurring": [
         "取消重复"
+      ],
+      "Cancel selected": [
+        ""
       ],
       "Cancelled": [
         "已取消"
@@ -251,11 +263,17 @@
       "Could not abort the job %s: ${response}": [
         "无法中止作业 %s: ${response}"
       ],
+      "Could not abort the task": [
+        ""
+      ],
       "Could not cancel recurring logic %s: ${response}": [
         "无法取消重复逻辑 %s：${response}"
       ],
       "Could not cancel the job %s: ${response}": [
         "无法取消作业 %s: ${response}"
+      ],
+      "Could not cancel the task": [
+        ""
       ],
       "Could not disable recurring logic %s: ${response}": [
         "无法禁用重复逻辑 %s：${response}"
@@ -464,6 +482,9 @@
       "Evaluated at:": [
         "评估于："
       ],
+      "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
+        ""
+      ],
       "Every day at %s": [
         "每天的 %s"
       ],
@@ -488,6 +509,9 @@
       "Execute the jobs on hosts in randomized order": [
         "以随机顺序在主机上执行作业"
       ],
+      "Executes the job on the current list of target hosts.": [
+        ""
+      ],
       "Execution": [
         "执行"
       ],
@@ -497,8 +521,8 @@
       "Execution ordering": [
         "执行顺序"
       ],
-      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>": [
-        "执行顺序确定了应按字母顺序还是随机顺序在主机上执行作业。<br><ul><li><b>Ordered</b> - 以字母顺序在主机上执行作业</li><li><b>Randomized</b> - 以随机顺序在主机上执行作业</li></ul>"
+      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>": [
+        ""
       ],
       "Exit status: %s": [
         "退出状态：%s"
@@ -695,26 +719,17 @@
       "Job Templates": [
         "作业模板"
       ],
-      "Job cancelled by user": [
-        "作业被用户取消"
-      ],
       "Job category": [
         "作业类别"
       ],
       "Job execution failed": [
         "作业执行失败"
       ],
-      "Job finished with error": [
-        "作业完成但带有错误"
-      ],
       "Job invocation": [
         "工作调用"
       ],
       "Job invocations": [
         "作业调用"
-      ],
-      "Job invocations detail": [
-        "作业调用详情"
       ],
       "Job result": [
         "作业结果"
@@ -727,9 +742,6 @@
       ],
       "Job template imported successfully.": [
         "成功导入作业模版。"
-      ],
-      "Job templates": [
-        "作业模板"
       ],
       "Job with id '%{id}' was not found": [
         "未找到 ID 为 '%{id}' 的作业"
@@ -896,14 +908,20 @@
       "Only one of feature or job_template_id can be specified": [
         "只能指定一个功能或 job_template_id"
       ],
-      "Open all in new tabs": [
-        "在新标签页中打开所有"
+      "Open all %s invocations in new tabs": [
+        ""
       ],
-      "Open all invocations in new tabs": [
-        "在新标签页中打开所有调用"
+      "Open all failed runs (%s)": [
+        ""
       ],
       "Open in new tab": [
         "在新标签页中打开"
+      ],
+      "Open in new tabs": [
+        ""
+      ],
+      "Open selected in new tab": [
+        ""
       ],
       "Opening job invocation form": [
         "打开作业调用表单"
@@ -1241,6 +1259,9 @@
       "Search query": [
         "搜索查询"
       ],
+      "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.": [
+        ""
+      ],
       "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy": [
         "在主机上搜索具有远程执行功能的任何代理，当主机没有子网或子网没有执行代理时，此命令很有用"
       ],
@@ -1421,6 +1442,9 @@
       "Task for the host cancelled succesfully": [
         "主机任务已成功取消"
       ],
+      "Task(s) were not %s": [
+        ""
+      ],
       "Template ERB": [
         "模版 ERB"
       ],
@@ -1475,8 +1499,8 @@
       "The job template to use, parameter is required unless feature was specified": [
         "要使用的任务模板，除非已指定功能，否则参数是必需的"
       ],
-      "The number of invocations is:": [
-        "调用数量为："
+      "The number of %s invocations is:": [
+        ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "唯一可用的代理 %{proxy_names} 已停机"
@@ -1505,8 +1529,8 @@
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "这个模块用来生成描述。<br/>输入值可以使用语法%%{package}。<br/>您可以使用 <br/> %{job_category}和 %{template_name} 来包括作业类型和模板名称。"
       ],
-      "This will open a new tab for each invocation.": [
-        "这会为每个调用打开一个新标签页。"
+      "This will open a new tab for each invocation. The maximum is 100.": [
+        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "在远程主机上开始后，以秒计算时间，之后结束作业。"
@@ -1550,6 +1574,9 @@
       "Try to cancel the job on a host": [
         "尝试取消主机上的作业"
       ],
+      "Trying to %s the task": [
+        ""
+      ],
       "Trying to abort the job": [
         "尝试中止作业"
       ],
@@ -1571,11 +1598,11 @@
       "Type": [
         "类型"
       ],
-      "Type has impact on when is the query evaluated to hosts.": [
-        "类型会影响到什么时候会评估到主机。"
+      "Type determines when the query is evaluated to hosts.": [
+        ""
       ],
-      "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>": [
-        "类型会对何时评估主机查询产生影响。<br><ul><li><b>静态</b> - 提交此表格后立即评估</li><li><b>动态</b> - 开始执行前进行评估，因此，如果以后计划，则目标主机集可能会在它之前发生变化</li></ul>"
+      "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>": [
+        ""
       ],
       "Type of execution": [
         "执行类型"
@@ -1718,6 +1745,9 @@
       "You have more results to display. Showing first %s results": [
         "有更多显示的结果。显示第一 %s 结果"
       ],
+      "aborted": [
+        ""
+      ],
       "add an input set for this template to reference a different template inputs": [
         "为此模板添加一个输入集，以引用其他模板输入"
       ],
@@ -1735,12 +1765,6 @@
       ],
       "error during rendering: %s": [
         "呈现时出错：%s"
-      ],
-      "evaluates just after you submit this form": [
-        "提交此表单后评估"
-      ],
-      "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it": [
-        "在执行启动前进行评估，因此如果将来需要它，则目标主机设置可能会在它之前改变"
       ],
       "failed": [
         "失败"

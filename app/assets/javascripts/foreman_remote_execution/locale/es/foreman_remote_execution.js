@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.1",
+        "Project-Id-Version": "foreman_remote_execution 16.2.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -30,6 +30,9 @@
         "%s se ha invocado el trabajo"
       ],
       "%s more": [
+        ""
+      ],
+      "%s task(s) successfully %s: %s": [
         ""
       ],
       "%{description} on %{host}": [
@@ -90,6 +93,9 @@
       "Abort Job": [
         "Abortar trabajo"
       ],
+      "Abort selected": [
+        ""
+      ],
       "Abort task": [
         ""
       ],
@@ -129,6 +135,9 @@
       "An error occurred while fetching the template invocation details.": [
         ""
       ],
+      "An error occurred.": [
+        ""
+      ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "Ya hay otra interfaz establecida como ejecución. ¿Está seguro de que desea utilizar esta en cambio?"
       ],
@@ -147,7 +156,7 @@
       "Apply to": [
         "Solicitar"
       ],
-      "Are you sure you want to open all invocations in new tabs?": [
+      "Are you sure you want to open all %s invocations in new tabs?": [
         ""
       ],
       "At": [
@@ -180,10 +189,13 @@
       "Cancel Task": [
         ""
       ],
-      "Cancel job invocation": [
-        "Cancelar invocación de trabajo"
+      "Cancel job invocation or matching tasks only": [
+        ""
       ],
       "Cancel recurring": [
+        ""
+      ],
+      "Cancel selected": [
         ""
       ],
       "Cancelled": [
@@ -252,10 +264,16 @@
       "Could not abort the job %s: ${response}": [
         ""
       ],
+      "Could not abort the task": [
+        ""
+      ],
       "Could not cancel recurring logic %s: ${response}": [
         ""
       ],
       "Could not cancel the job %s: ${response}": [
+        ""
+      ],
+      "Could not cancel the task": [
         ""
       ],
       "Could not disable recurring logic %s: ${response}": [
@@ -465,6 +483,9 @@
       "Evaluated at:": [
         "Evaluado en:"
       ],
+      "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
+        ""
+      ],
       "Every day at %s": [
         ""
       ],
@@ -489,6 +510,9 @@
       "Execute the jobs on hosts in randomized order": [
         "Ejecutar las tareas en los hosts en orden aleatorio"
       ],
+      "Executes the job on the current list of target hosts.": [
+        ""
+      ],
       "Execution": [
         "Ejecución"
       ],
@@ -498,8 +522,8 @@
       "Execution ordering": [
         "Orden de ejecución"
       ],
-      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>": [
-        "El orden de ejecución determina si las tareas deben ejecutarse en los hosts en orden alfabético o en orden aleatorio.<br><ul><li><b> Ordenado</b>: ejecuta las tareas en los hosts en orden alfabético</li><li><b>Aleatorio</b>: aleatoriza el orden en que las tareas se ejecutan en los hosts</li></ul>"
+      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>": [
+        ""
       ],
       "Exit status: %s": [
         "Estado de salida: %s"
@@ -696,26 +720,17 @@
       "Job Templates": [
         "Plantillas de trabajo"
       ],
-      "Job cancelled by user": [
-        "Trabajo cancelado por el usuario"
-      ],
       "Job category": [
         "Categoría de trabajo"
       ],
       "Job execution failed": [
         "Ocurrió un error en la ejecución del trabajo"
       ],
-      "Job finished with error": [
-        "El trabajo finalizó con error."
-      ],
       "Job invocation": [
         "Invocación de trabajo"
       ],
       "Job invocations": [
         "Invocaciones de trabajo"
-      ],
-      "Job invocations detail": [
-        ""
       ],
       "Job result": [
         "Resultado del trabajo"
@@ -728,9 +743,6 @@
       ],
       "Job template imported successfully.": [
         "Se importó correctamente una plantilla de trabajo"
-      ],
-      "Job templates": [
-        "Plantillas de trabajo"
       ],
       "Job with id '%{id}' was not found": [
         ""
@@ -897,13 +909,19 @@
       "Only one of feature or job_template_id can be specified": [
         "Sólo se puede especificar uno de feature o job_template_id"
       ],
-      "Open all in new tabs": [
+      "Open all %s invocations in new tabs": [
         ""
       ],
-      "Open all invocations in new tabs": [
+      "Open all failed runs (%s)": [
         ""
       ],
       "Open in new tab": [
+        ""
+      ],
+      "Open in new tabs": [
+        ""
+      ],
+      "Open selected in new tab": [
         ""
       ],
       "Opening job invocation form": [
@@ -1242,6 +1260,9 @@
       "Search query": [
         "Consulta de búsqueda"
       ],
+      "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.": [
+        ""
+      ],
       "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy": [
         "Busque en el host algún proxy con Ejecución remota, útil cuando el host no tiene subred o cuando la subred no tiene un proxy de ejecución."
       ],
@@ -1422,6 +1443,9 @@
       "Task for the host cancelled succesfully": [
         ""
       ],
+      "Task(s) were not %s": [
+        ""
+      ],
       "Template ERB": [
         "Plantilla ERB"
       ],
@@ -1476,7 +1500,7 @@
       "The job template to use, parameter is required unless feature was specified": [
         "La plantilla de trabajo que se debe utilizar; se requiere el parámetro a menos que se haya especificado la funcionalidad"
       ],
-      "The number of invocations is:": [
+      "The number of %s invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1508,7 +1532,7 @@
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis <br/>. También puede incluir la categoría de trabajo y el nombre de la plantilla con %%{package} y %<br/>."
       ],
-      "This will open a new tab for each invocation.": [
+      "This will open a new tab for each invocation. The maximum is 100.": [
         ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
@@ -1553,6 +1577,9 @@
       "Try to cancel the job on a host": [
         "Intentar cancelar el trabajo en un host"
       ],
+      "Trying to %s the task": [
+        ""
+      ],
       "Trying to abort the job": [
         "Intentando abortar el trabajo"
       ],
@@ -1574,10 +1601,10 @@
       "Type": [
         "Tipo"
       ],
-      "Type has impact on when is the query evaluated to hosts.": [
-        "El tipo influye en el momento en que se evalúa la consulta a los hosts."
+      "Type determines when the query is evaluated to hosts.": [
+        ""
       ],
-      "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>": [
+      "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>": [
         ""
       ],
       "Type of execution": [
@@ -1721,6 +1748,9 @@
       "You have more results to display. Showing first %s results": [
         ""
       ],
+      "aborted": [
+        ""
+      ],
       "add an input set for this template to reference a different template inputs": [
         "agregar un conjunto de entrada para esta plantilla para hacer referencia a entradas de una plantilla diferente"
       ],
@@ -1738,12 +1768,6 @@
       ],
       "error during rendering: %s": [
         "error durante la reproducción: %s"
-      ],
-      "evaluates just after you submit this form": [
-        "se evalúa justo después de enviar este formulario"
-      ],
-      "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it": [
-        ""
       ],
       "failed": [
         "fallido"

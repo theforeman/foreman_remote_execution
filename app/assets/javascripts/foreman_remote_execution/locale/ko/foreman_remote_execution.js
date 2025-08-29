@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.1",
+        "Project-Id-Version": "foreman_remote_execution 16.2.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -31,6 +31,9 @@
       ],
       "%s more": [
         "%s개 더"
+      ],
+      "%s task(s) successfully %s: %s": [
+        ""
       ],
       "%{description} on %{host}": [
         "%{host}에 대한 %{description}"
@@ -89,6 +92,9 @@
       "Abort Job": [
         "작업 중단"
       ],
+      "Abort selected": [
+        ""
+      ],
       "Abort task": [
         "작업 중단"
       ],
@@ -128,6 +134,9 @@
       "An error occurred while fetching the template invocation details.": [
         "템플릿 호출 세부 정보를 가져오는 동안 오류가 발생했습니다."
       ],
+      "An error occurred.": [
+        ""
+      ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "이미 다른 인터페이스가 실행 인터페이스로 설정되어 있습니다. 이 인터페이스를 대신 사용하시겠습니까?"
       ],
@@ -146,8 +155,8 @@
       "Apply to": [
         "적용"
       ],
-      "Are you sure you want to open all invocations in new tabs?": [
-        "모든 호출을 새 탭에서 여시겠습니까?"
+      "Are you sure you want to open all %s invocations in new tabs?": [
+        ""
       ],
       "At": [
         "At"
@@ -179,11 +188,14 @@
       "Cancel Task": [
         "작업 취소"
       ],
-      "Cancel job invocation": [
-        "작업 호출 취소"
+      "Cancel job invocation or matching tasks only": [
+        ""
       ],
       "Cancel recurring": [
         "반복 취소"
+      ],
+      "Cancel selected": [
+        ""
       ],
       "Cancelled": [
         "취소함"
@@ -251,11 +263,17 @@
       "Could not abort the job %s: ${response}": [
         "%s 작업을 중단할 수 없습니다: ${response}"
       ],
+      "Could not abort the task": [
+        ""
+      ],
       "Could not cancel recurring logic %s: ${response}": [
         "반복 논리 %s를 취소할 수 없습니다: ${response}"
       ],
       "Could not cancel the job %s: ${response}": [
         "%s 작업을 취소할 수 없습니다: ${response}"
+      ],
+      "Could not cancel the task": [
+        ""
       ],
       "Could not disable recurring logic %s: ${response}": [
         "반복 논리 %s를 비활성화할 수 없습니다: ${response}"
@@ -464,6 +482,9 @@
       "Evaluated at:": [
         "평가 시점:"
       ],
+      "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
+        ""
+      ],
       "Every day at %s": [
         "매일 %s"
       ],
@@ -488,6 +509,9 @@
       "Execute the jobs on hosts in randomized order": [
         "호스트에서 작업을 무작위 순서로 실행합니다."
       ],
+      "Executes the job on the current list of target hosts.": [
+        ""
+      ],
       "Execution": [
         "실행"
       ],
@@ -497,8 +521,8 @@
       "Execution ordering": [
         "실행 순서"
       ],
-      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>": [
-        "실행 순서는 작업을 호스트에서 알파벳순으로 실행해야 할지 아니면 무작위 순서로 실행해야 할지를 결정합니다.<br><ul><li><b> 주문</b> - 호스트의 작업을 알파벳순으로 실행합니다.</li><li><b> 무작위</b> - 호스트에서 작업이 실행되는 순서를 무작위로 지정합니다.</li></ul>"
+      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>": [
+        ""
       ],
       "Exit status: %s": [
         "종료 상태: %s"
@@ -695,26 +719,17 @@
       "Job Templates": [
         "작업 템플릿"
       ],
-      "Job cancelled by user": [
-        "사용자가 작업을 취소했습니다."
-      ],
       "Job category": [
         "작업 카테고리"
       ],
       "Job execution failed": [
         "작업 실행에 실패했습니다"
       ],
-      "Job finished with error": [
-        "작업을 마쳤지만 오류가 발생했습니다."
-      ],
       "Job invocation": [
         "작업 호출"
       ],
       "Job invocations": [
         "작업 호출"
-      ],
-      "Job invocations detail": [
-        "작업 호출 세부 정보"
       ],
       "Job result": [
         "작업 결과"
@@ -727,9 +742,6 @@
       ],
       "Job template imported successfully.": [
         "작업 템플릿을 성공적으로 가져왔습니다."
-      ],
-      "Job templates": [
-        "작업 템플릿"
       ],
       "Job with id '%{id}' was not found": [
         "ID '%{id}'가 있는 작업을 찾을 수 없음"
@@ -896,14 +908,20 @@
       "Only one of feature or job_template_id can be specified": [
         "feature 또는 job_template_id 중 하나만 지정할 수 있습니다."
       ],
-      "Open all in new tabs": [
-        "새 탭에서 모두 열기"
+      "Open all %s invocations in new tabs": [
+        ""
       ],
-      "Open all invocations in new tabs": [
-        "새 탭에서 모든 호출을 엽니다."
+      "Open all failed runs (%s)": [
+        ""
       ],
       "Open in new tab": [
         "새 탭에서 열기"
+      ],
+      "Open in new tabs": [
+        ""
+      ],
+      "Open selected in new tab": [
+        ""
       ],
       "Opening job invocation form": [
         "작업 호출 양식 열기"
@@ -1241,6 +1259,9 @@
       "Search query": [
         "검색 쿼리"
       ],
+      "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.": [
+        ""
+      ],
       "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy": [
         "원격 실행 기능이 있는 모든 프록시의 호스트를 검색합니다. 호스트에 서브넷이 없거나 서브넷에 실행 프록시가 없는 경우 유용합니다."
       ],
@@ -1421,6 +1442,9 @@
       "Task for the host cancelled succesfully": [
         "호스트의 작업이 취소되었습니다"
       ],
+      "Task(s) were not %s": [
+        ""
+      ],
       "Template ERB": [
         "템플릿 ERB"
       ],
@@ -1475,8 +1499,8 @@
       "The job template to use, parameter is required unless feature was specified": [
         "사용할 작업 템플릿, 기능이 지정되지 않은 경우 매개변수가 필요합니다."
       ],
-      "The number of invocations is:": [
-        "호출 횟수는 다음과 같습니다:"
+      "The number of %s invocations is:": [
+        ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "적용 가능한 유일한 프록시인 %{proxy_names}이(가) 작동하지 않습니다."
@@ -1505,8 +1529,8 @@
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "이 템플릿은 설명을 생성하는 데 사용됩니다.<br/> 입력 값은 %{package} 구문을 사용하여 사용할 수 있습니다.<br/> 또한 %{job_category} 및 %{template_name}을 사용하여 작업 범주와 템플릿 <br/> 이름을 포함할 수도 있습니다."
       ],
-      "This will open a new tab for each invocation.": [
-        "그러면 각 호출에 대한 새 탭이 열립니다."
+      "This will open a new tab for each invocation. The maximum is 100.": [
+        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "원격 호스트에서 작업이 시작된 후 종료되어야 하는 시간(초)입니다."
@@ -1550,6 +1574,9 @@
       "Try to cancel the job on a host": [
         "호스트에 대한 작업 취소 시도"
       ],
+      "Trying to %s the task": [
+        ""
+      ],
       "Trying to abort the job": [
         "작업을 중단하려고 합니다"
       ],
@@ -1571,11 +1598,11 @@
       "Type": [
         "유형 "
       ],
-      "Type has impact on when is the query evaluated to hosts.": [
-        "유형은 쿼리가 호스트로 평가되는 시기에 영향을 미칩니다."
+      "Type determines when the query is evaluated to hosts.": [
+        ""
       ],
-      "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>": [
-        "유형은 쿼리가 호스트로 평가되는 시기에 영향을 미칩니다.<br><ul><li><b> 정적</b> - 이 양식을 제출한 직후에 평가됩니다.</li><li><b> 동적</b> - 실행이 시작되기 직전에 평가되므로 나중에 계획된 경우 대상 호스트 세트가 변경될 수 있습니다.</li></ul>"
+      "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>": [
+        ""
       ],
       "Type of execution": [
         "실행 유형"
@@ -1718,6 +1745,9 @@
       "You have more results to display. Showing first %s results": [
         "더 많은 결과가 표시됩니다. 처음 %s개의 결과 표시"
       ],
+      "aborted": [
+        ""
+      ],
       "add an input set for this template to reference a different template inputs": [
         "이 템플릿에서 다른 템플릿 입력을 참조하기 위한 입력 세트를 추가합니다."
       ],
@@ -1735,12 +1765,6 @@
       ],
       "error during rendering: %s": [
         "렌더링 도중 오류가 발생했습니다: %s"
-      ],
-      "evaluates just after you submit this form": [
-        "이 양식을 제출한 직후에 평가됩니다."
-      ],
-      "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it": [
-        "실행이 시작되기 직전에 평가되므로 나중에 계획된 경우 대상 호스트 세트가 변경될 수 있습니다."
       ],
       "failed": [
         "실패함"

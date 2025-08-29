@@ -7,7 +7,7 @@
 # elobato <elobatocs@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 15.0.1\n"
+"Project-Id-Version: foreman_remote_execution 16.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: elobato <elobatocs@gmail.com>, 2017\n"
@@ -33,6 +33,9 @@ msgstr "%s 件のジョブが呼び出されました"
 
 msgid "%s more"
 msgstr "さらに %s"
+
+msgid "%s task(s) successfully %s: %s"
+msgstr ""
 
 msgid "%{description} on %{host}"
 msgstr "%{host} の %{description} "
@@ -92,6 +95,9 @@ msgstr "中断"
 msgid "Abort Job"
 msgstr "ジョブの中断"
 
+msgid "Abort selected"
+msgstr ""
+
 msgid "Abort task"
 msgstr "タスクの中断"
 
@@ -131,6 +137,9 @@ msgstr "アルファベット順"
 msgid "An error occurred while fetching the template invocation details."
 msgstr "テンプレート呼び出しの詳細を取得中にエラーが発生しました。"
 
+msgid "An error occurred."
+msgstr ""
+
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "別のインターフェースがすでに実行として設定されています。代わりにこのインターフェースを使用しもよろしいでしょうか?"
 
@@ -149,8 +158,8 @@ msgstr "任意の組織"
 msgid "Apply to"
 msgstr "適用対象"
 
-msgid "Are you sure you want to open all invocations in new tabs?"
-msgstr "すべての呼び出しを新しいタブで開きますか?"
+msgid "Are you sure you want to open all %s invocations in new tabs?"
+msgstr ""
 
 msgid "At"
 msgstr "場所"
@@ -182,11 +191,14 @@ msgstr "ジョブのキャンセル"
 msgid "Cancel Task"
 msgstr "タスクの取り消し"
 
-msgid "Cancel job invocation"
-msgstr "ジョブ呼び出しをキャンセル"
+msgid "Cancel job invocation or matching tasks only"
+msgstr ""
 
 msgid "Cancel recurring"
 msgstr "繰り返しのキャンセル"
+
+msgid "Cancel selected"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "キャンセル済み"
@@ -254,11 +266,17 @@ msgstr "クリップボードにコピー"
 msgid "Could not abort the job %s: ${response}"
 msgstr "ジョブ %s を中止できませんでした: ${response}"
 
+msgid "Could not abort the task"
+msgstr ""
+
 msgid "Could not cancel recurring logic %s: ${response}"
 msgstr "再帰論理 %s をキャンセルできませんでした: ${response}"
 
 msgid "Could not cancel the job %s: ${response}"
 msgstr "ジョブ %s をキャンセルできませんでした: ${response}"
+
+msgid "Could not cancel the task"
+msgstr ""
 
 msgid "Could not disable recurring logic %s: ${response}"
 msgstr "再帰論理 %s を無効にできませんでした: ${response}"
@@ -467,6 +485,9 @@ msgstr "エラー:"
 msgid "Evaluated at:"
 msgstr "評価済み:"
 
+msgid "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list."
+msgstr ""
+
 msgid "Every day at %s"
 msgstr "毎日 %s"
 
@@ -491,6 +512,9 @@ msgstr "繰り返し実行されるスケジュールでジョブを実行しま
 msgid "Execute the jobs on hosts in randomized order"
 msgstr "ホスト上でジョブを順不同で実行します"
 
+msgid "Executes the job on the current list of target hosts."
+msgstr ""
+
 msgid "Execution"
 msgstr "Execution"
 
@@ -500,8 +524,8 @@ msgstr "実行順"
 msgid "Execution ordering"
 msgstr "実行順"
 
-msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>"
-msgstr "実行順では、ホスト上でジョブをアルファベット順で実行するか、順不同で実行するかを決定します。<br><ul><li><b>順番</b>: ホスト上でジョブがアルファベット順に実行されます。</li><li><b>無作為</b>: ホスト上でジョブが順不同で実行されます。</li></ul>"
+msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>"
+msgstr ""
 
 msgid "Exit status: %s"
 msgstr "終了ステータス: %s"
@@ -698,26 +722,17 @@ msgstr "ジョブタスク"
 msgid "Job Templates"
 msgstr "ジョブテンプレート"
 
-msgid "Job cancelled by user"
-msgstr "ジョブがユーザーによりキャンセルされました"
-
 msgid "Job category"
 msgstr "ジョブカテゴリー"
 
 msgid "Job execution failed"
 msgstr "ジョブの実行に失敗しました"
 
-msgid "Job finished with error"
-msgstr "エラーでジョブが終了しました"
-
 msgid "Job invocation"
 msgstr "ジョブ呼び出し"
 
 msgid "Job invocations"
 msgstr "ジョブ呼び出し"
-
-msgid "Job invocations detail"
-msgstr "ジョブ呼び出し詳細"
 
 msgid "Job result"
 msgstr "ジョブの結果"
@@ -730,9 +745,6 @@ msgstr "機能に使用するジョブテンプレート ID"
 
 msgid "Job template imported successfully."
 msgstr "ジョブテンプレートが正常にインポートされました"
-
-msgid "Job templates"
-msgstr "ジョブテンプレート"
 
 msgid "Job with id '%{id}' was not found"
 msgstr "ID が '%{id}' のジョブが見つかりませんでした"
@@ -899,14 +911,20 @@ msgstr "次の時刻に開始"
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "機能または job_template_id の 1 つのみを指定できます"
 
-msgid "Open all in new tabs"
-msgstr "すべてを新しいタブで開く"
+msgid "Open all %s invocations in new tabs"
+msgstr ""
 
-msgid "Open all invocations in new tabs"
-msgstr "すべての呼び出しを新しいタブで開く"
+msgid "Open all failed runs (%s)"
+msgstr ""
 
 msgid "Open in new tab"
 msgstr "新規タブで開く"
+
+msgid "Open in new tabs"
+msgstr ""
+
+msgid "Open selected in new tab"
+msgstr ""
 
 msgid "Opening job invocation form"
 msgstr "ジョブ呼び出しフォームを開く"
@@ -1203,7 +1221,7 @@ msgid "Schedule a job"
 msgstr "ジョブのスケジュール"
 
 msgid "Schedule the job for a future time"
-msgstr "将来のジョブをスケジュール"
+msgstr "ジョブの開始を今後の日時に設定する"
 
 msgid "Schedule the job to start at a later time"
 msgstr "後で開始するジョブをスケジュール"
@@ -1243,6 +1261,9 @@ msgstr "ホストに割り当てられたプロキシー以外のリモート実
 
 msgid "Search query"
 msgstr "検索クエリー"
+
+msgid "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled."
+msgstr ""
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "リモート実行があるプロキシーをホストで検索します。ホストにサブネットがない場合、またはサブネットに実行プロキシーがない場合に役に立ちます"
@@ -1424,6 +1445,9 @@ msgstr "タスク数"
 msgid "Task for the host cancelled succesfully"
 msgstr "ホストのタスクは正常にキャンセルされました"
 
+msgid "Task(s) were not %s"
+msgstr ""
+
 msgid "Template ERB"
 msgstr "テンプレート ERB"
 
@@ -1478,8 +1502,8 @@ msgstr "ジョブをキャンセルすることができませんでした。"
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr "使用するジョブテンプレート。機能が指定されていなければ、パラメーターが必要です"
 
-msgid "The number of invocations is:"
-msgstr "呼び出し回数: "
+msgid "The number of %s invocations is:"
+msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
@@ -1509,8 +1533,8 @@ msgstr "このテンプレートは、記述の生成に使用します。入力
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr "このテンプレートは記述の生成に使用します。<br/>入力値は、構文 %{package} を使用して設定できます。%{job_category} と %{template_name} を使用して、<br/> ジョブカテゴリーとテンプレート <br/> 名を追加することもできます。"
 
-msgid "This will open a new tab for each invocation."
-msgstr "これにより、呼び出しごとに新しいタブが開きます。"
+msgid "This will open a new tab for each invocation. The maximum is 100."
+msgstr ""
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "リモートホストで開始してからジョブを強制終了するまでの時間 (秒単位)"
@@ -1554,6 +1578,9 @@ msgstr "ジョブのキャンセルを試行"
 msgid "Try to cancel the job on a host"
 msgstr "ホストでのジョブのキャンセルを試行"
 
+msgid "Trying to %s the task"
+msgstr ""
+
 msgid "Trying to abort the job"
 msgstr "ジョブを中断しようとしています"
 
@@ -1575,11 +1602,11 @@ msgstr "ホストのタスクをキャンセルしようとしています"
 msgid "Type"
 msgstr "タイプ"
 
-msgid "Type has impact on when is the query evaluated to hosts."
-msgstr "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。"
+msgid "Type determines when the query is evaluated to hosts."
+msgstr ""
 
-msgid "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>"
-msgstr "タイプは、ホストに対してクエリーを評価するタイミングに影響を与えます。<br><ul><li><b>静的</b>: このフォームの送信直後に評価します。</li><li><b>動的</b>: 実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストの設定が評価前に変更される可能性があります。</li></ul>"
+msgid "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>"
+msgstr ""
 
 msgid "Type of execution"
 msgstr "実行のタイプ"
@@ -1722,6 +1749,9 @@ msgstr "表示する結果が %s 件あります。最初の %s 件の結果を�
 msgid "You have more results to display. Showing first %s results"
 msgstr "表示する結果があります。最初の %s 件の結果を表示しています"
 
+msgid "aborted"
+msgstr ""
+
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "異なるテンプレート入力を参照するためにこのテンプレートの入力セットを追加"
 
@@ -1739,12 +1769,6 @@ msgstr "実効ユーザー"
 
 msgid "error during rendering: %s"
 msgstr "レンダリング中のエラー: %s"
-
-msgid "evaluates just after you submit this form"
-msgstr "このフォームの送信直後に評価します"
-
-msgid "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it"
-msgstr "実行の開始直前に評価します。そのため、後でスケジュールされている場合には、ターゲットホストのセットが評価前に変更される可能性があります"
 
 msgid "failed"
 msgstr "失敗"

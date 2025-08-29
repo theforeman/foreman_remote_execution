@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 15.0.1",
+        "Project-Id-Version": "foreman_remote_execution 16.2.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
@@ -31,6 +31,9 @@
       ],
       "%s more": [
         "%s de plus"
+      ],
+      "%s task(s) successfully %s: %s": [
+        ""
       ],
       "%{description} on %{host}": [
         "%{description} sur %{host}"
@@ -91,6 +94,9 @@
       "Abort Job": [
         "Abandonner le job"
       ],
+      "Abort selected": [
+        ""
+      ],
       "Abort task": [
         "Abandonner la tâche"
       ],
@@ -130,6 +136,9 @@
       "An error occurred while fetching the template invocation details.": [
         "Une erreur s'est produite lors de la récupération des détails d'invocation du modèle."
       ],
+      "An error occurred.": [
+        ""
+      ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "Une autre interface est déjà définie pour l'exécution distante. Êtes-vous sûrs de vouloir utiliser celle-ci à la place ?"
       ],
@@ -148,8 +157,8 @@
       "Apply to": [
         "Appliquer à"
       ],
-      "Are you sure you want to open all invocations in new tabs?": [
-        "Êtes-vous sûr de vouloir ouvrir toutes les invocations dans de nouveaux onglets ?"
+      "Are you sure you want to open all %s invocations in new tabs?": [
+        ""
       ],
       "At": [
         "À"
@@ -181,11 +190,14 @@
       "Cancel Task": [
         "Annuler la tâche"
       ],
-      "Cancel job invocation": [
-        "Annuler le lancement du job"
+      "Cancel job invocation or matching tasks only": [
+        ""
       ],
       "Cancel recurring": [
         "Annuler la logique récurrente"
+      ],
+      "Cancel selected": [
+        ""
       ],
       "Cancelled": [
         "Annulé"
@@ -253,11 +265,17 @@
       "Could not abort the job %s: ${response}": [
         "Impossible d'annuler le job %s :${response}"
       ],
+      "Could not abort the task": [
+        ""
+      ],
       "Could not cancel recurring logic %s: ${response}": [
         "Impossible d'annuler la logique récurrente%s :${response}"
       ],
       "Could not cancel the job %s: ${response}": [
         "Impossible d'annuler le job %s :${response}"
+      ],
+      "Could not cancel the task": [
+        ""
       ],
       "Could not disable recurring logic %s: ${response}": [
         "Impossible de désactiver la logique récurrente%s :${response}"
@@ -466,6 +484,9 @@
       "Evaluated at:": [
         "Évalue le :"
       ],
+      "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
+        ""
+      ],
       "Every day at %s": [
         "Tous les jours à %s"
       ],
@@ -490,6 +511,9 @@
       "Execute the jobs on hosts in randomized order": [
         "Exécuter les jobs sur les hôtes dans un ordre aléatoire"
       ],
+      "Executes the job on the current list of target hosts.": [
+        ""
+      ],
       "Execution": [
         "Exécution"
       ],
@@ -499,8 +523,8 @@
       "Execution ordering": [
         "Ordre d'exécution"
       ],
-      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - randomizes the order in which jobs are executed on hosts</li></ul>": [
-        "L'ordre d'exécution détermine si les jobs doivent être exécutés sur les hôtes par ordre alphabétique ou par ordre aléatoire. <br><ul><li><b>Ordonnancé</b> - exécute les jobs sur les hôtes par ordre alphabétique </li><li><b>Randomisé</b> - randomise l'ordre dans lequel les tâches sont exécutées sur les hôtes</li></ul>"
+      "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>": [
+        ""
       ],
       "Exit status: %s": [
         "Statut de sortie : %s"
@@ -697,26 +721,17 @@
       "Job Templates": [
         "Modèles de job"
       ],
-      "Job cancelled by user": [
-        "Job annulé par l'utilisateur"
-      ],
       "Job category": [
         "Catégorie du job"
       ],
       "Job execution failed": [
         "Échec d'exécution du job"
       ],
-      "Job finished with error": [
-        "Job terminé avec erreur"
-      ],
       "Job invocation": [
         "Invocation de job"
       ],
       "Job invocations": [
         "Lancement de jobs"
-      ],
-      "Job invocations detail": [
-        "Détails des appels de job"
       ],
       "Job result": [
         "Résultat Job"
@@ -729,9 +744,6 @@
       ],
       "Job template imported successfully.": [
         "Import du modèle de job réussi."
-      ],
-      "Job templates": [
-        "Modèles de job"
       ],
       "Job with id '%{id}' was not found": [
         "Job avec l'identifiant '%{id} ' n'a pas été trouvé"
@@ -898,14 +910,20 @@
       "Only one of feature or job_template_id can be specified": [
         "Seule une fonctionnalité ou un job_template_id ne peuvent être spécifiés"
       ],
-      "Open all in new tabs": [
-        "Ouvrir tout dans de nouveaux onglets"
+      "Open all %s invocations in new tabs": [
+        ""
       ],
-      "Open all invocations in new tabs": [
-        "Ouvrir toutes les invocations dans de nouveaux onglets"
+      "Open all failed runs (%s)": [
+        ""
       ],
       "Open in new tab": [
         "Ouvrir dans un nouvel onglet"
+      ],
+      "Open in new tabs": [
+        ""
+      ],
+      "Open selected in new tab": [
+        ""
       ],
       "Opening job invocation form": [
         "Ouverture du formulaire de lancement du job"
@@ -1243,6 +1261,9 @@
       "Search query": [
         "Requête de recherche"
       ],
+      "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.": [
+        ""
+      ],
       "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy": [
         "Recherche d'un proxy avec exécution distante sur l'hôte, utile quand l'hôte n'a pas de sous-réseau ou que le sous-réseau n'a pas de proxy avec exécution distante"
       ],
@@ -1423,6 +1444,9 @@
       "Task for the host cancelled succesfully": [
         "Tâche pour l'hôte annulée avec succès"
       ],
+      "Task(s) were not %s": [
+        ""
+      ],
       "Template ERB": [
         "Modèle ERB"
       ],
@@ -1477,8 +1501,8 @@
       "The job template to use, parameter is required unless feature was specified": [
         "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
       ],
-      "The number of invocations is:": [
-        "Le nombre d'invocations est :"
+      "The number of %s invocations is:": [
+        ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "Le seul proxy applicable %{proxy_names} est indisponible",
@@ -1509,8 +1533,8 @@
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %{job_category} et %{template_name}."
       ],
-      "This will open a new tab for each invocation.": [
-        "Cela ouvrira un nouvel onglet pour chaque invocation."
+      "This will open a new tab for each invocation. The maximum is 100.": [
+        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Durée en secondes depuis le démarrage sur l'hôte distant après laquelle le job doit être supprimé."
@@ -1554,6 +1578,9 @@
       "Try to cancel the job on a host": [
         "Essai d'annulation du job sur un hôte"
       ],
+      "Trying to %s the task": [
+        ""
+      ],
       "Trying to abort the job": [
         "Tentative d'abandon du job"
       ],
@@ -1575,11 +1602,11 @@
       "Type": [
         "Type"
       ],
-      "Type has impact on when is the query evaluated to hosts.": [
-        "Le type a un impact sur le moment où la requête est évaluée par les hôtes."
+      "Type determines when the query is evaluated to hosts.": [
+        ""
       ],
-      "Type has impact on when is the query evaluated to hosts.<br><ul><li><b>Static</b> - evaluates just after you submit this form</li><li><b>Dynamic</b> - evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it</li></ul>": [
-        "Le type est important lors de l'évaluation de la requête sur les hôtes. <br><ul><li><b>Statique</b> - évalue juste après la validation de ce formulaire </li><li><b>Dynamique</b> - évalué juste avant le début de l'exécution, donc si l'action est planifiée ultérieurement, la liste des systèmes cibles peut changer avant l'exécution</li></ul>"
+      "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>": [
+        ""
       ],
       "Type of execution": [
         "Type d'exécution"
@@ -1722,6 +1749,9 @@
       "You have more results to display. Showing first %s results": [
         "Vous avez plus de résultats à afficher. Affichage en premier des résultats %s"
       ],
+      "aborted": [
+        ""
+      ],
       "add an input set for this template to reference a different template inputs": [
         "Ajout d'un jeu d'entrées pour ce modèle pour faire référence à des entrées sur un modèle différent"
       ],
@@ -1739,12 +1769,6 @@
       ],
       "error during rendering: %s": [
         "Erreurs pendant le rendu : %s"
-      ],
-      "evaluates just after you submit this form": [
-        "évalue dès que vous soumettez ce formulaire"
-      ],
-      "evaluates just before the execution is started, so if it's planned in future, targeted hosts set may change before it": [
-        "évalue juste avant que l’exécution ne commence, donc, si c’est prévu dans le futur, le groupe d’hôtes ciblés peut changer avant"
       ],
       "failed": [
         "échec"
