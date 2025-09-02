@@ -50,7 +50,7 @@ const JobInvocationDetailPage = ({
     statusLabel === STATUS.FAILED ||
     statusLabel === STATUS.SUCCEEDED ||
     statusLabel === STATUS.CANCELLED;
-  const autoRefresh = task?.state === STATUS.PENDING || false;
+  const autoRefresh = task?.state === 'running' || false;
   useAPI('get', currentPermissionsUrl, {
     key: CURRENT_PERMISSIONS,
   });
@@ -184,8 +184,13 @@ const JobInvocationDetailPage = ({
             targeting={targeting}
             failedCount={failed}
             autoRefresh={autoRefresh}
-            initialFilter={selectedFilter}
             statusLabel={statusLabel}
+            hostStatus={{
+              succeeded: items.succeeded,
+              failed: items.failed,
+              pending: items.pending,
+            }}
+            initialFilter={selectedFilter}
             onFilterUpdate={handleFilterChange}
           />
         </SkeletonLoader>
