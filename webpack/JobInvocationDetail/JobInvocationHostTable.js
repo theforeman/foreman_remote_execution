@@ -23,7 +23,7 @@ import TableIndexPage from 'foremanReact/components/PF4/TableIndexPage/TableInde
 import { getControllerSearchProps } from 'foremanReact/constants';
 import { Icon } from 'patternfly-react';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState, useRef } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import URI from 'urijs';
@@ -45,8 +45,8 @@ const JobInvocationHostTable = ({
   id,
   initialFilter,
   onFilterUpdate,
-  statusLabel,
   targeting,
+  refreshTrigger,
 }) => {
   const columns = Columns();
   const columnNamesKeys = Object.keys(columns);
@@ -54,7 +54,6 @@ const JobInvocationHostTable = ({
   const history = useHistory();
   const [selectedFilter, setSelectedFilter] = useState(initialFilter);
   const [expandedHost, setExpandedHost] = useState([]);
-  const prevStatusLabel = useRef(statusLabel);
 
   useEffect(() => {
     if (initialFilter !== selectedFilter) {
@@ -141,12 +140,17 @@ const JobInvocationHostTable = ({
   }, [allResponse]);
 
   useEffect(() => {
-    if (statusLabel !== prevStatusLabel.current) {
-      setAPIOptions(prevOptions => ({ ...prevOptions }));
-      prevStatusLabel.current = statusLabel;
+    if (refreshTrigger > 0) {
+      setAPIOptions(prev => ({
+        ...prev,
+        params: { ...prev.params, _refresh: Date.now() },
+      }));
+      setAllAPIOptions(prev => ({
+        ...prev,
+        params: { ...prev.params, _refresh: Date.now() },
+      }));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusLabel]);
+  }, [refreshTrigger, setAPIOptions, setAllAPIOptions]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
@@ -441,13 +445,13 @@ JobInvocationHostTable.propTypes = {
   targeting: PropTypes.object.isRequired,
   failedCount: PropTypes.number.isRequired,
   initialFilter: PropTypes.string.isRequired,
-  statusLabel: PropTypes.string,
   onFilterUpdate: PropTypes.func,
+  refreshTrigger: PropTypes.number,
 };
 
 JobInvocationHostTable.defaultProps = {
   onFilterUpdate: () => {},
-  statusLabel: undefined,
+  refreshTrigger: 0,
 };
 
 export default JobInvocationHostTable;

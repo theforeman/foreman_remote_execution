@@ -55,6 +55,7 @@ const JobInvocationDetailPage = ({
     key: CURRENT_PERMISSIONS,
   });
   const [selectedFilter, setSelectedFilter] = useState('');
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const handleFilterChange = newFilter => {
     setSelectedFilter(newFilter);
@@ -81,6 +82,12 @@ const JobInvocationDetailPage = ({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, id, finished, autoRefresh]);
+
+  useEffect(() => {
+    if (finished && !autoRefresh) {
+      setRefreshTrigger(prev => prev + 1);
+    }
+  }, [finished, autoRefresh]);
 
   useEffect(() => {
     if (task?.id !== undefined) {
@@ -185,8 +192,8 @@ const JobInvocationDetailPage = ({
             failedCount={failed}
             autoRefresh={autoRefresh}
             initialFilter={selectedFilter}
-            statusLabel={statusLabel}
             onFilterUpdate={handleFilterChange}
+            refreshTrigger={refreshTrigger}
           />
         </SkeletonLoader>
       </PageSection>
