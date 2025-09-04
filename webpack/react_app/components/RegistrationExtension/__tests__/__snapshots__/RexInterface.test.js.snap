@@ -5,24 +5,9 @@ exports[`RexInterface renders 1`] = `
   fieldId="reg_rex_interface"
   label="Remote Execution Interface"
   labelIcon={
-    <Popover
-      bodyContent={
-        <div>
-          Identifier of the Host interface for Remote execution
-        </div>
-      }
-    >
-      <button
-        className="pf-v5-cform__group-label-help"
-        onClick={[Function]}
-      >
-        <Icon
-          isInline={true}
-        >
-          <HelpIcon />
-        </Icon>
-      </button>
-    </Popover>
+    <LabelIcon
+      text="Identifier of the Host interface for Remote execution"
+    />
   }
 >
   <TextInput
