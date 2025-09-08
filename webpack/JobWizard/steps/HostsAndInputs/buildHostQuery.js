@@ -18,7 +18,7 @@ export const buildHostQuery = (selected, search) => {
       .join(',')})`;
 
   let hostGroupsSearch;
-  if (hostCollections.length < MAX_NAME_ITEMS)
+  if (hostGroups.length < MAX_NAME_ITEMS)
     hostGroupsSearch = `hostgroup_fullname ^ (${hostGroups
       .map(({ name }) => nameEscape(name))
       .join(',')})`;
