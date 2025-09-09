@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Tooltip, Spinner } from '@patternfly/react-core';
@@ -12,6 +12,8 @@ import { selectIsSubmitting } from './JobWizardSelectors';
 
 export const Footer = ({ canSubmit, onSave }) => {
   const isSubmitting = useSelector(selectIsSubmitting);
+  const tooltipRunOn = useRef(null);
+  const tooltipSkipTo = useRef(null);
   return (
     <WizardFooter>
       <WizardContextConsumer>
@@ -52,6 +54,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                       : __('Fill all required fields in all the steps')}
                   </div>
                 }
+                triggerRef={tooltipRunOn}
               >
                 <Button
                   ouiaId="run-on-selected-hosts-footer"
@@ -59,6 +62,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                   onClick={onSave}
                   isAriaDisabled={!canSubmit}
                   isDisabled={isSubmitting}
+                  ref={tooltipRunOn}
                 >
                   {__('Run on selected hosts')}
                 </Button>
@@ -73,6 +77,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                         )}
                   </div>
                 }
+                triggerRef={tooltipSkipTo}
               >
                 <Button
                   ouiaId="skip-to-review-footer"
@@ -80,6 +85,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                   onClick={() => goToStepByName(WIZARD_TITLES.review)}
                   isAriaDisabled={!canSubmit}
                   isDisabled={isSubmitting}
+                  ref={tooltipSkipTo}
                 >
                   {__('Skip to review')}
                 </Button>
