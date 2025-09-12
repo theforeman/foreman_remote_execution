@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
-import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { DropdownItem, Tabs, Tab, TabTitleText } from '@patternfly/react-core';
 import CardTemplate from 'foremanReact/components/HostDetails/Templates/CardItem/CardTemplate';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
@@ -26,14 +25,14 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
       header={__('Recent jobs')}
       dropdownItems={[
         <DropdownItem
-          href={foremanUrl(`${JOB_BASE_URL}${id}`)}
+          to={foremanUrl(`${JOB_BASE_URL}${id}`)}
           key="link-to-all"
           ouiaId="link-to-all-dropdown-item"
         >
           {__('View all jobs')}
         </DropdownItem>,
         <DropdownItem
-          href={foremanUrl(
+          to={foremanUrl(
             `${JOB_BASE_URL}${id}+and+status+%3D+failed+or+status%3D+succeeded`
           )}
           key="link-to-finished"
@@ -42,14 +41,14 @@ const RecentJobsCard = ({ hostDetails: { name, id } }) => {
           {__('View finished jobs')}
         </DropdownItem>,
         <DropdownItem
-          href={foremanUrl(`${JOB_BASE_URL}${id}+and+status+%3D+running`)}
+          to={foremanUrl(`${JOB_BASE_URL}${id}+and+status+%3D+running`)}
           key="link-to-running"
           ouiaId="link-to-running-dropdown-item"
         >
           {__('View running jobs')}
         </DropdownItem>,
         <DropdownItem
-          href={foremanUrl(`${JOB_BASE_URL}${id}+and+status+%3D+queued`)}
+          to={foremanUrl(`${JOB_BASE_URL}${id}+and+status+%3D+queued`)}
           key="link-to-scheduled"
           ouiaId="link-to-scheduled-dropdown-item"
         >
