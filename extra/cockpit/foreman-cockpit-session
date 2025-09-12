@@ -46,7 +46,7 @@ class AccessDeniedError < CockpitError; end
 class Cockpit
   class << self
     def encode_message(payload)
-      data = JSON.dump(payload)
+      data = JSON.dump(payload).bytes.pack("c*")
       "#{data.length + 1}\n\n#{data}"
     end
 
@@ -259,7 +259,8 @@ class Relay
       Host: #{url.host}:#{url.port}
       Connection: upgrade
       Upgrade: raw
-      Content-Length: #{data.length + 2}
+      Content-Length: #{data.bytes.length + 2}
+      Content-Type: application/json
 
       #{data}
     HTTP
