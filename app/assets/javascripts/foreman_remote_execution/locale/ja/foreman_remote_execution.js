@@ -1178,6 +1178,9 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "1 回に最大 N 個のタスクを実行します。この値が設定されていて、プロキシーバッチのトリガーが有効な場合には、タスクはサイズ 1 の単位で一括して、Smart Proxy でトリガーされます。"
       ],
+      "Run hosts job:": [
+        ""
+      ],
       "Run job": [
         "ジョブを実行"
       ],

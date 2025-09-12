@@ -135,7 +135,7 @@ msgid "An error occurred while fetching the template invocation details."
 msgstr "템플릿 호출 세부 정보를 가져오는 동안 오류가 발생했습니다."
 
 msgid "An error occurred."
-msgstr ""
+msgstr "오류가 발생했습니다."
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "이미 다른 인터페이스가 실행 인터페이스로 설정되어 있습니다. 이 인터페이스를 대신 사용하시겠습니까?"
@@ -1177,6 +1177,9 @@ msgstr "한 번에 최대 N개 태스크 실행"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr "한 번에 최대 N개의 작업을 실행합니다. 이것이 설정되어 있고 프록시 배치 트리거링이 활성화되어 있으면 작업은 스마트 프록시에서 크기 1의 배치로 트리거됩니다."
+
+msgid "Run hosts job:"
+msgstr ""
 
 msgid "Run job"
 msgstr "작업 실행"

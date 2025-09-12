@@ -1180,6 +1180,9 @@ msgstr "ერთდროულად მაქსიმუმ N დავა�
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr ""
 
+msgid "Run hosts job:"
+msgstr ""
+
 msgid "Run job"
 msgstr "დავალების გაშვება"
 

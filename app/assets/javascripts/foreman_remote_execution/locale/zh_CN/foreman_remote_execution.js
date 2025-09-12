@@ -135,7 +135,7 @@
         "在获取模板调用详情时出错。"
       ],
       "An error occurred.": [
-        ""
+        "发生了一个错误。"
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "已经将另一个接口设置为执行。您确定要改用这个吗？"
@@ -1177,6 +1177,9 @@
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "一次最多运行 N 个任务。如果设置了此选项并启用了代理批处理触发，则将在智能代理上以大小为 1 的批处理触发任务。"
+      ],
+      "Run hosts job:": [
+        ""
       ],
       "Run job": [
         "运行作业"

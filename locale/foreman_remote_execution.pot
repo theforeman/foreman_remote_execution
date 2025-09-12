@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-29 12:38+0000\n"
-"PO-Revision-Date: 2025-08-29 12:38+0000\n"
+"POT-Creation-Date: 2025-09-12 13:20+0200\n"
+"PO-Revision-Date: 2025-09-12 13:20+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -669,7 +669,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:114
+#: ../app/lib/actions/remote_execution/run_host_job.rb:114 action_names.rb:2
 msgid "Remote action:"
 msgstr ""
 
@@ -2006,7 +2006,7 @@ msgstr ""
 
 #: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:175
 #: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:81
-#: ../webpack/JobWizard/Footer.js:88
+#: ../webpack/JobWizard/Footer.js:94
 msgid "Cancel"
 msgstr ""
 
@@ -2148,39 +2148,39 @@ msgstr ""
 msgid "task aborted succesfully"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:34
+#: ../webpack/JobWizard/Footer.js:36
 msgid "Submit"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:35
+#: ../webpack/JobWizard/Footer.js:37
 msgid "Next"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:45
+#: ../webpack/JobWizard/Footer.js:47
 msgid "Back"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:51
+#: ../webpack/JobWizard/Footer.js:53
 msgid "Start job"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:52
+#: ../webpack/JobWizard/Footer.js:54
 msgid "Fill all required fields in all the steps"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:63
+#: ../webpack/JobWizard/Footer.js:67
 msgid "Run on selected hosts"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:70
+#: ../webpack/JobWizard/Footer.js:74
 msgid "Skip to review step"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:71
+#: ../webpack/JobWizard/Footer.js:75
 msgid "Fill all required fields in all the steps to start the job"
 msgstr ""
 
-#: ../webpack/JobWizard/Footer.js:84
+#: ../webpack/JobWizard/Footer.js:90
 msgid "Skip to review"
 msgstr ""
 
@@ -2818,6 +2818,10 @@ msgstr ""
 
 #: ../webpack/react_app/components/TargetingHosts/TargetingHostsLabelsRow.js:20
 msgid "Active Filters:"
+msgstr ""
+
+#: action_names.rb:3
+msgid "Run hosts job:"
 msgstr ""
 
 #: gemspec.rb:2
