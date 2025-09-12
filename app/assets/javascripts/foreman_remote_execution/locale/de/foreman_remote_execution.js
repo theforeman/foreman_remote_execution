@@ -1179,6 +1179,9 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "Führen Sie höchstens N Aufgaben gleichzeitig aus. Wenn dies gesetzt und die Proxy-Batch-Triggerung aktiviert ist, werden Aufgaben auf dem Smart Proxy in Batches der Größe 1 ausgelöst."
       ],
+      "Run hosts job:": [
+        ""
+      ],
       "Run job": [
         "Job ausführen"
       ],

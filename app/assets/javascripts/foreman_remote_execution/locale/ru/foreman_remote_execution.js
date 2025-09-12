@@ -136,7 +136,7 @@
         ""
       ],
       "An error occurred.": [
-        ""
+        "Произошла ошибка."
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "Для удаленного выполнения уже выбран другой интерфейс. Вы действительно хотите его заменить?"
@@ -1177,6 +1177,9 @@
         "Максимальное количество параллельно выполняемых задач"
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
+        ""
+      ],
+      "Run hosts job:": [
         ""
       ],
       "Run job": [

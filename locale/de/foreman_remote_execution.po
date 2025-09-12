@@ -1188,6 +1188,9 @@ msgstr "Höchstens n Aufgaben gleichzeitig ausführen"
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr "Führen Sie höchstens N Aufgaben gleichzeitig aus. Wenn dies gesetzt und die Proxy-Batch-Triggerung aktiviert ist, werden Aufgaben auf dem Smart Proxy in Batches der Größe 1 ausgelöst."
 
+msgid "Run hosts job:"
+msgstr ""
+
 msgid "Run job"
 msgstr "Job ausführen"
 

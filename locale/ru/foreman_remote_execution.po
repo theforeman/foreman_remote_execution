@@ -140,7 +140,7 @@ msgid "An error occurred while fetching the template invocation details."
 msgstr ""
 
 msgid "An error occurred."
-msgstr ""
+msgstr "Произошла ошибка."
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "Для удаленного выполнения уже выбран другой интерфейс. Вы действительно хотите его заменить?"
@@ -1181,6 +1181,9 @@ msgid "Run at most N tasks at a time"
 msgstr "Максимальное количество параллельно выполняемых задач"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
+msgstr ""
+
+msgid "Run hosts job:"
 msgstr ""
 
 msgid "Run job"
