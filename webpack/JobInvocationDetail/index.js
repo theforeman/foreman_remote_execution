@@ -185,7 +185,6 @@ const JobInvocationDetailPage = ({
             failedCount={failed}
             autoRefresh={autoRefresh}
             initialFilter={selectedFilter}
-            statusLabel={statusLabel}
             onFilterUpdate={handleFilterChange}
           />
         </SkeletonLoader>

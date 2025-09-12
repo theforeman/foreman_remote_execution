@@ -23,7 +23,7 @@ import TableIndexPage from 'foremanReact/components/PF4/TableIndexPage/TableInde
 import { getControllerSearchProps } from 'foremanReact/constants';
 import { Icon } from 'patternfly-react';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState, useRef } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import URI from 'urijs';
@@ -45,8 +45,8 @@ const JobInvocationHostTable = ({
   id,
   initialFilter,
   onFilterUpdate,
-  statusLabel,
   targeting,
+  autoRefresh,
 }) => {
   const columns = Columns();
   const columnNamesKeys = Object.keys(columns);
@@ -54,7 +54,6 @@ const JobInvocationHostTable = ({
   const history = useHistory();
   const [selectedFilter, setSelectedFilter] = useState(initialFilter);
   const [expandedHost, setExpandedHost] = useState([]);
-  const prevStatusLabel = useRef(statusLabel);
 
   useEffect(() => {
     if (initialFilter !== selectedFilter) {
@@ -141,12 +140,8 @@ const JobInvocationHostTable = ({
   }, [allResponse]);
 
   useEffect(() => {
-    if (statusLabel !== prevStatusLabel.current) {
-      setAPIOptions(prevOptions => ({ ...prevOptions }));
-      prevStatusLabel.current = statusLabel;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusLabel]);
+    setAPIOptions(prevOptions => ({ ...prevOptions }));
+  }, [autoRefresh, setAPIOptions]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
@@ -441,13 +436,13 @@ JobInvocationHostTable.propTypes = {
   targeting: PropTypes.object.isRequired,
   failedCount: PropTypes.number.isRequired,
   initialFilter: PropTypes.string.isRequired,
-  statusLabel: PropTypes.string,
   onFilterUpdate: PropTypes.func,
+  autoRefresh: PropTypes.bool,
 };
 
 JobInvocationHostTable.defaultProps = {
   onFilterUpdate: () => {},
-  statusLabel: undefined,
+  autoRefresh: false,
 };
 
 export default JobInvocationHostTable;
