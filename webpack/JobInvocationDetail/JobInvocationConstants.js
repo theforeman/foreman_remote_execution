@@ -17,9 +17,9 @@ export const GET_REPORT_TEMPLATES = 'GET_REPORT_TEMPLATES';
 export const GET_REPORT_TEMPLATE_INPUTS = 'GET_REPORT_TEMPLATE_INPUTS';
 export const JOB_INVOCATION_HOSTS = 'JOB_INVOCATION_HOSTS';
 export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
-export const MAX_HOSTS_API_SIZE = 100;
 export const DIRECT_OPEN_HOST_LIMIT = 3;
 export const ALL_JOB_HOSTS = 'ALL_JOB_HOSTS';
+export const AWAITING_STATUS_FILTER = '(job_invocation.result = N/A)';
 export const currentPermissionsUrl = foremanUrl(
   '/api/v2/permissions/current_permissions'
 );
@@ -52,6 +52,7 @@ export const STATUS_TITLES = {
   FAILED: { id: 'failed', title: __('Failed') },
   PENDING: { id: 'pending', title: __('In Progress') },
   CANCELLED: { id: 'cancelled', title: __('Cancelled') },
+  NOT_STARTED: { id: 'N/A', title: __('Scheduled') },
 };
 
 export const DATE_OPTIONS = {
