@@ -316,13 +316,36 @@ const JobInvocationHostTable = ({
 
   const { results = [] } = response;
 
-  const isHostExpanded = host => expandedHost.includes(host);
+  const isHostExpanded = host => expandedHost.includes(host.id);
+
   const setHostExpanded = (host, isExpanding = true) =>
     setExpandedHost(prevExpanded => {
-      const otherExpandedHosts = prevExpanded.filter(h => h !== host);
-      return isExpanding ? [...otherExpandedHosts, host] : otherExpandedHosts;
+      const otherExpandedHosts = prevExpanded.filter(h => h !== host.id);
+      return isExpanding
+        ? [...otherExpandedHosts, host.id]
+        : otherExpandedHosts;
     });
   const [showAlert, setShowAlert] = useState(false);
+
+  const pageHostIds = results.map(h => h.id);
+  const areAllPageRowsExpanded =
+    pageHostIds.length > 0 &&
+    pageHostIds.every(hostId => expandedHost.includes(hostId));
+
+  const onExpandAll = () => {
+    const allAreExpanded = areAllPageRowsExpanded;
+
+    setExpandedHost(prevExpanded => {
+      const pageIdsSet = new Set(pageHostIds);
+
+      if (allAreExpanded) {
+        return prevExpanded.filter(hostId => !pageIdsSet.has(hostId));
+      }
+
+      const newExpanded = new Set([...prevExpanded, ...pageHostIds]);
+      return Array.from(newExpanded);
+    });
+  };
 
   return (
     <>
@@ -355,6 +378,8 @@ const JobInvocationHostTable = ({
         <Table
           ouiaId="job-invocation-hosts-table"
           columns={columns}
+          areAllRowsExpanded={!areAllPageRowsExpanded}
+          onExpandAll={onExpandAll}
           customEmptyState={
             status === STATUS_UPPERCASE.RESOLVED && !results.length
               ? customEmptyState
@@ -383,14 +408,14 @@ const JobInvocationHostTable = ({
           childrenOutsideTbody
         >
           {results.map((result, rowIndex) => (
-            <Tbody key={result.id}>
+            <Tbody key={result.id} isExpanded={isHostExpanded(result)}>
               <Tr ouiaId={`table-row-${result.id}`}>
                 <Td
                   expand={{
                     rowIndex,
-                    isExpanded: isHostExpanded(result.id),
+                    isExpanded: isHostExpanded(result),
                     onToggle: () =>
-                      setHostExpanded(result.id, !isHostExpanded(result.id)),
+                      setHostExpanded(result, !isHostExpanded(result)),
                     expandId: 'host-expandable',
                   }}
                 />
@@ -403,7 +428,7 @@ const JobInvocationHostTable = ({
                 </Td>
               </Tr>
               <Tr
-                isExpanded={isHostExpanded(result.id)}
+                isExpanded={isHostExpanded(result)}
                 ouiaId="table-row-expanded-sections"
               >
                 <Td
@@ -422,7 +447,7 @@ const JobInvocationHostTable = ({
                         hostID={result.id}
                         jobID={id}
                         isInTableView
-                        isExpanded={isHostExpanded(result.id)}
+                        isExpanded={isHostExpanded(result)}
                       />
                     )}
                   </ExpandableRowContent>
