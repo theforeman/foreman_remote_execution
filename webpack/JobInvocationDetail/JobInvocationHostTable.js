@@ -44,8 +44,10 @@ const JobInvocationHostTable = ({
   id,
   initialFilter,
   onFilterUpdate,
-  statusLabel,
   targeting,
+  autoRefresh,
+  statusLabel,
+  hostStatus,
 }) => {
   const columns = Columns();
   const columnNamesKeys = Object.keys(columns);
@@ -62,6 +64,8 @@ const JobInvocationHostTable = ({
   // Expansive items
   const [expandedHost, setExpandedHost] = useState([]);
   const prevStatusLabel = useRef(statusLabel);
+  const prevHostStatus = useRef({ succeeded: 0, failed: 0, pending: 0 });
+  const lastHostsRefresh = useRef(0);
 
   const isHostExpanded = host => expandedHost.includes(host);
   const setHostExpanded = (host, isExpanding = true) =>
@@ -198,6 +202,34 @@ const JobInvocationHostTable = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialFilter, statusLabel]);
+
+  const hostSucceeded = hostStatus?.succeeded;
+  const hostFailed = hostStatus?.failed;
+  const hostPending = hostStatus?.pending;
+  const hasResults = !!response?.results;
+
+  useEffect(() => {
+    const statusChanged =
+      prevHostStatus.current.succeeded !== hostSucceeded ||
+      prevHostStatus.current.failed !== hostFailed ||
+      prevHostStatus.current.pending !== hostPending;
+
+    const canRefresh = Date.now() - lastHostsRefresh.current > 3000;
+
+    if (autoRefresh && hasResults && statusChanged && canRefresh) {
+      lastHostsRefresh.current = Date.now();
+      prevHostStatus.current = { hostSucceeded, hostFailed, hostPending };
+      setAPIOptions(prevOptions => ({ ...prevOptions }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    autoRefresh,
+    hostSucceeded,
+    hostFailed,
+    hostPending,
+    hasResults,
+    setAPIOptions,
+  ]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
@@ -427,13 +459,21 @@ JobInvocationHostTable.propTypes = {
   id: PropTypes.string.isRequired,
   targeting: PropTypes.object.isRequired,
   initialFilter: PropTypes.string.isRequired,
-  statusLabel: PropTypes.string,
   onFilterUpdate: PropTypes.func,
+  autoRefresh: PropTypes.bool,
+  statusLabel: PropTypes.string,
+  hostStatus: PropTypes.shape({
+    succeeded: PropTypes.number,
+    failed: PropTypes.number,
+    pending: PropTypes.number,
+  }),
 };
 
 JobInvocationHostTable.defaultProps = {
   onFilterUpdate: () => {},
+  autoRefresh: false,
   statusLabel: undefined,
+  hostStatus: { succeeded: 0, failed: 0, pending: 0 },
 };
 
 export default JobInvocationHostTable;
