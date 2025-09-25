@@ -35,6 +35,7 @@ const JobInvocationDetailPage = ({
   match: {
     params: { id },
   },
+  history,
 }) => {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
@@ -94,6 +95,16 @@ const JobInvocationDetailPage = ({
       : STATUS_UPPERCASE.RESOLVED;
 
   const breadcrumbOptions = {
+    isSwitchable: true,
+    onSwitcherItemClick: (e, href) => {
+      e.preventDefault();
+      history.push(href);
+    },
+    resource: {
+      nameField: 'description',
+      resourceUrl: '/api/v2/job_invocations',
+      switcherItemUrl: '/job_invocations/:id',
+    },
     breadcrumbItems: [
       { caption: __('Jobs'), url: `/job_invocations` },
       {
@@ -199,6 +210,7 @@ JobInvocationDetailPage.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }).isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default JobInvocationDetailPage;
