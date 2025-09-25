@@ -197,7 +197,7 @@ const JobInvocationHostTable = ({
       filterApiCall();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialFilter, statusLabel]);
+  }, [initialFilter, statusLabel, id]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,

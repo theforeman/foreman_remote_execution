@@ -83,6 +83,7 @@ jest.mock('../JobInvocationHostTable.js', () => () => (
 const reportTemplateJobId = mockReportTemplatesResponse.results[0].id;
 
 const mockStore = configureMockStore([thunk]);
+const props = { history: { push: jest.fn() } };
 
 describe('JobInvocationDetailPage', () => {
   it('renders main information', async () => {
@@ -91,7 +92,10 @@ describe('JobInvocationDetailPage', () => {
 
     const { container } = render(
       <Provider store={store}>
-        <JobInvocationDetailPage match={{ params: { id: `${jobId}` } }} />
+        <JobInvocationDetailPage
+          match={{ params: { id: `${jobId}` } }}
+          {...props}
+        />
       </Provider>
     );
 
@@ -185,6 +189,7 @@ describe('JobInvocationDetailPage', () => {
       <Provider store={store}>
         <JobInvocationDetailPage
           match={{ params: { id: `${jobInvocationDataScheduled.id}` } }}
+          {...props}
         />
       </Provider>
     );
@@ -201,7 +206,10 @@ describe('JobInvocationDetailPage', () => {
     const store = mockStore(jobInvocationDataRecurring);
     render(
       <Provider store={store}>
-        <JobInvocationDetailPage match={{ params: { id: `${jobId}` } }} />
+        <JobInvocationDetailPage
+          match={{ params: { id: `${jobId}` } }}
+          {...props}
+        />
       </Provider>
     );
 
