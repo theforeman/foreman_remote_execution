@@ -2,7 +2,7 @@
 <%= javascript 'foreman_remote_execution/template_input' %>
 
 <% title _("Job Templates") %>
-<% title_actions(documentation_button_rex('3.1JobTemplates'),
+<% title_actions(documentation_button('Managing_Hosts', type: 'docs', chapter: 'creating-a-job-template_managing-hosts'),
                  link_to_function(_('Import'), 'show_import_job_template_modal();', :class => 'btn btn-default'),
                  new_link(_("New Job Template"))) %>
 
