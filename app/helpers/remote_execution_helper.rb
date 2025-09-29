@@ -54,7 +54,7 @@ module RemoteExecutionHelper
 
   def job_invocations_buttons
     [
-      documentation_button_rex('3.2ExecutingaJob'),
+      documentation_button('Managing_Hosts', type: 'docs', chapter: 'executing-a-remote-job_managing-hosts'),
       authorized_for(controller: :job_invocations, action: :create) ? link_to(_('Run Job'), hash_for_new_job_invocation_path, {:class => "btn btn-primary"}) : '',
     ]
   end
@@ -205,12 +205,6 @@ module RemoteExecutionHelper
       content_tag :span, (time > Time.now.utc ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
         { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
     end
-  end
-
-  def documentation_button_rex(section = '')
-    url = 'http://theforeman.org/plugins/foreman_remote_execution/' +
-      "#{ForemanRemoteExecution::VERSION.split('.').take(2).join('.')}/index.html#"
-    documentation_button section, :root_url => url
   end
 
   def description_checkbox_f(f, job_template, disabled)
