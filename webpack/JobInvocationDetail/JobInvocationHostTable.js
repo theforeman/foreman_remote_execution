@@ -35,6 +35,7 @@ import Columns, {
   LIST_TEMPLATE_INVOCATIONS,
   STATUS_UPPERCASE,
   ALL_JOB_HOSTS,
+  AWAITING_STATUS_FILTER,
 } from './JobInvocationConstants';
 import { TemplateInvocation } from './TemplateInvocation';
 import { RowActions } from './TemplateInvocationComponents/TemplateActionButtons';
@@ -150,7 +151,9 @@ const JobInvocationHostTable = ({
       ...newParams,
     };
 
-    if (filterSearch !== '') {
+    if (filterSearch === AWAITING_STATUS_FILTER) {
+      finalParams.awaiting = 'true';
+    } else if (filterSearch !== '') {
       finalParams.search = filterSearch;
     }
 
