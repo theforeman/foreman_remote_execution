@@ -54,7 +54,7 @@ module RemoteExecutionHelper
 
   def job_invocations_buttons
     [
-      documentation_button_rex('3.2ExecutingaJob'),
+      documentation_button_rex('executing-a-remote-job_managing-hosts'),
       authorized_for(controller: :job_invocations, action: :create) ? link_to(_('Run Job'), hash_for_new_job_invocation_path, {:class => "btn btn-primary"}) : '',
     ]
   end
@@ -207,10 +207,11 @@ module RemoteExecutionHelper
     end
   end
 
-  def documentation_button_rex(section = '')
-    url = 'http://theforeman.org/plugins/foreman_remote_execution/' +
-      "#{ForemanRemoteExecution::VERSION.split('.').take(2).join('.')}/index.html#"
-    documentation_button section, :root_url => url
+  def documentation_button_rex(chapter = '')
+    documentation_button("Managing_Hosts",
+      type: 'docs',
+      chapter: chapter,
+      flavor: Foreman::Plugin.installed?('katello') ? 'katello' : nil)
   end
 
   def description_checkbox_f(f, job_template, disabled)
