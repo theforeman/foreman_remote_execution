@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.0",
+        "Project-Id-Version": "foreman_remote_execution 16.2.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -912,7 +912,10 @@
       "Open all %s invocations in new tabs": [
         ""
       ],
-      "Open all failed runs (%s)": [
+      "Open all failed runs on this page (%s)": [
+        ""
+      ],
+      "Open all rows of the table in new tabs": [
         ""
       ],
       "Open in new tab": [
@@ -1177,9 +1180,6 @@
         "一次最多執行 N 個任務"
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
-        ""
-      ],
-      "Run hosts job:": [
         ""
       ],
       "Run job": [
@@ -1503,7 +1503,10 @@
       "The job template to use, parameter is required unless feature was specified": [
         ""
       ],
-      "The number of %s invocations is:": [
+      "The number of failed invocations is:": [
+        ""
+      ],
+      "The number of selected invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1532,9 +1535,6 @@
         "這範本是用來產生描述。輸入值可以使用 %{package} 語法。您也可以使用 %{job_category} 與 %{template_name} 來包括工作類別與範本名稱。"
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        ""
-      ],
-      "This will open a new tab for each invocation. The maximum is 100.": [
         ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [

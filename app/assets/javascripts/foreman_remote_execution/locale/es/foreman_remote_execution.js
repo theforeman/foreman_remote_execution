@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.0",
+        "Project-Id-Version": "foreman_remote_execution 16.2.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -136,7 +136,7 @@
         ""
       ],
       "An error occurred.": [
-        ""
+        "Se ha producido un error."
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "Ya hay otra interfaz establecida como ejecución. ¿Está seguro de que desea utilizar esta en cambio?"
@@ -912,7 +912,10 @@
       "Open all %s invocations in new tabs": [
         ""
       ],
-      "Open all failed runs (%s)": [
+      "Open all failed runs on this page (%s)": [
+        ""
+      ],
+      "Open all rows of the table in new tabs": [
         ""
       ],
       "Open in new tab": [
@@ -1178,9 +1181,6 @@
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "Ejecutar como mucho N tareas a la vez. Si esto está configurado y se habilita la activación por lotes del proxy, entonces las tareas se activarán en el proxy inteligente en lotes de tamaño 1."
-      ],
-      "Run hosts job:": [
-        ""
       ],
       "Run job": [
         "Ejecutar trabajo"
@@ -1503,7 +1503,10 @@
       "The job template to use, parameter is required unless feature was specified": [
         "La plantilla de trabajo que se debe utilizar; se requiere el parámetro a menos que se haya especificado la funcionalidad"
       ],
-      "The number of %s invocations is:": [
+      "The number of failed invocations is:": [
+        ""
+      ],
+      "The number of selected invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1534,9 +1537,6 @@
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "Esta plantilla se utiliza para generar la descripción. Los valores de entrada se pueden utilizar con la sintaxis <br/>. También puede incluir la categoría de trabajo y el nombre de la plantilla con %%{package} y %<br/>."
-      ],
-      "This will open a new tab for each invocation. The maximum is 100.": [
-        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Tiempo en segundos desde el comienzo en el host remoto tras lo cual debe eliminarse el trabajo."

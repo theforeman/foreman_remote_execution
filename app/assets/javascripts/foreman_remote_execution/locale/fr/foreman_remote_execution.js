@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.0",
+        "Project-Id-Version": "foreman_remote_execution 16.2.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
@@ -33,7 +33,7 @@
         "%s de plus"
       ],
       "%s task(s) successfully %s: %s": [
-        ""
+        "%s tâche(s) réussie(s)%s : %s"
       ],
       "%{description} on %{host}": [
         "%{description} sur %{host}"
@@ -95,7 +95,7 @@
         "Abandonner le job"
       ],
       "Abort selected": [
-        ""
+        "Abandonner la sélection"
       ],
       "Abort task": [
         "Abandonner la tâche"
@@ -137,7 +137,7 @@
         "Une erreur s'est produite lors de la récupération des détails d'invocation du modèle."
       ],
       "An error occurred.": [
-        ""
+        "Une erreur s'est produite."
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "Une autre interface est déjà définie pour l'exécution distante. Êtes-vous sûrs de vouloir utiliser celle-ci à la place ?"
@@ -158,7 +158,7 @@
         "Appliquer à"
       ],
       "Are you sure you want to open all %s invocations in new tabs?": [
-        ""
+        "Etes-vous sûr de vouloir ouvrir toutes les  invocations %s dans de nouveaux onglets ?"
       ],
       "At": [
         "À"
@@ -191,13 +191,13 @@
         "Annuler la tâche"
       ],
       "Cancel job invocation or matching tasks only": [
-        ""
+        "Annuler l'appel de tâche ou les tâches correspondantes uniquement"
       ],
       "Cancel recurring": [
         "Annuler la logique récurrente"
       ],
       "Cancel selected": [
-        ""
+        "Annuler la sélection"
       ],
       "Cancelled": [
         "Annulé"
@@ -266,7 +266,7 @@
         "Impossible d'annuler le job %s :${response}"
       ],
       "Could not abort the task": [
-        ""
+        "Impossible d'annuler la tâche"
       ],
       "Could not cancel recurring logic %s: ${response}": [
         "Impossible d'annuler la logique récurrente%s :${response}"
@@ -275,7 +275,7 @@
         "Impossible d'annuler le job %s :${response}"
       ],
       "Could not cancel the task": [
-        ""
+        "Impossible d'annuler la tâche"
       ],
       "Could not disable recurring logic %s: ${response}": [
         "Impossible de désactiver la logique récurrente%s :${response}"
@@ -485,7 +485,7 @@
         "Évalue le :"
       ],
       "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
-        ""
+        "Évalue la liste des hôtes cibles juste avant l'exécution de la tâche. Si vous avez utilisé un filtre pour sélectionner les hôtes cibles, la liste peut être différente de la liste actuelle."
       ],
       "Every day at %s": [
         "Tous les jours à %s"
@@ -512,7 +512,7 @@
         "Exécuter les jobs sur les hôtes dans un ordre aléatoire"
       ],
       "Executes the job on the current list of target hosts.": [
-        ""
+        "Exécute le travail sur la liste actuelle des hôtes cibles."
       ],
       "Execution": [
         "Exécution"
@@ -524,7 +524,7 @@
         "Ordre d'exécution"
       ],
       "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>": [
-        ""
+        "L'ordre d'exécution détermine si les jobs doivent être exécutés sur les hôtes par ordre alphabétique ou par ordre aléatoire. <br><ul><li><b>Ordered</b> - exécute les jobs sur les hôtes par ordre alphabétique </li><li><b>Randomized</b> - randomise l'ordre dans lequel les tâches sont exécutées sur les hôtes</li></ul>"
       ],
       "Exit status: %s": [
         "Statut de sortie : %s"
@@ -911,19 +911,22 @@
         "Seule une fonctionnalité ou un job_template_id ne peuvent être spécifiés"
       ],
       "Open all %s invocations in new tabs": [
+        "Ouvrir tout%s invocations dans les nouveaux onglets"
+      ],
+      "Open all failed runs on this page (%s)": [
         ""
       ],
-      "Open all failed runs (%s)": [
+      "Open all rows of the table in new tabs": [
         ""
       ],
       "Open in new tab": [
         "Ouvrir dans un nouvel onglet"
       ],
       "Open in new tabs": [
-        ""
+        "Ouvrir dans un nouvel onglet"
       ],
       "Open selected in new tab": [
-        ""
+        "Ouvrir la sélection dans un nouvel onglet"
       ],
       "Opening job invocation form": [
         "Ouverture du formulaire de lancement du job"
@@ -1180,9 +1183,6 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "Effectuer au maximum N tâches à la fois. Si ce paramètre est défini et que le déclenchement par lot du proxy est activé, les tâches sont alors déclenchées sur le proxy smart par lots de taille 1."
       ],
-      "Run hosts job:": [
-        ""
-      ],
       "Run job": [
         "Lancer le job"
       ],
@@ -1265,7 +1265,7 @@
         "Requête de recherche"
       ],
       "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.": [
-        ""
+        "Requête de recherche pour annuler les tâches uniquement sur les hôtes correspondants. Si non renseignée, l'appel de la tâche sera annulé."
       ],
       "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy": [
         "Recherche d'un proxy avec exécution distante sur l'hôte, utile quand l'hôte n'a pas de sous-réseau ou que le sous-réseau n'a pas de proxy avec exécution distante"
@@ -1448,7 +1448,7 @@
         "Tâche pour l'hôte annulée avec succès"
       ],
       "Task(s) were not %s": [
-        ""
+        "Les tâches n'étaient pas %s"
       ],
       "Template ERB": [
         "Modèle ERB"
@@ -1504,7 +1504,10 @@
       "The job template to use, parameter is required unless feature was specified": [
         "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
       ],
-      "The number of %s invocations is:": [
+      "The number of failed invocations is:": [
+        ""
+      ],
+      "The number of selected invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1535,9 +1538,6 @@
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %{job_category} et %{template_name}."
-      ],
-      "This will open a new tab for each invocation. The maximum is 100.": [
-        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Durée en secondes depuis le démarrage sur l'hôte distant après laquelle le job doit être supprimé."
@@ -1582,7 +1582,7 @@
         "Essai d'annulation du job sur un hôte"
       ],
       "Trying to %s the task": [
-        ""
+        "Essayer de%s la tâche"
       ],
       "Trying to abort the job": [
         "Tentative d'abandon du job"
@@ -1606,10 +1606,10 @@
         "Type"
       ],
       "Type determines when the query is evaluated to hosts.": [
-        ""
+        "Le type détermine quand la requête est évaluée sur les hôtes."
       ],
       "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>": [
-        ""
+        "Le type détermine quand la requête est évaluée sur les hôtes.<br><ul><li><b> Static</b> - Exécute le travail sur la liste actuelle des hôtes cibles.</li><li><b> Dynamic</b> - Évalue la liste des hôtes cibles juste avant l'exécution de la tâche. Si vous avez utilisé un filtre pour sélectionner les hôtes cibles, la liste peut être différente de la liste actuelle.</li></ul>"
       ],
       "Type of execution": [
         "Type d'exécution"
@@ -1753,7 +1753,7 @@
         "Vous avez plus de résultats à afficher. Affichage en premier des résultats %s"
       ],
       "aborted": [
-        ""
+        "avorté"
       ],
       "add an input set for this template to reference a different template inputs": [
         "Ajout d'un jeu d'entrées pour ce modèle pour faire référence à des entrées sur un modèle différent"

@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.0",
+        "Project-Id-Version": "foreman_remote_execution 16.2.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "elobato <elobatocs@gmail.com>, 2017",
@@ -33,10 +33,10 @@
         "さらに %s"
       ],
       "%s task(s) successfully %s: %s": [
-        ""
+        "%s 件のタスクが正常に %s: %s"
       ],
       "%{description} on %{host}": [
-        "%{host} の %{description} "
+        "%{host} の %{description}"
       ],
       "'Starts at' date must be in the future": [
         "'開始日' は未来の日付でなければなりません"
@@ -60,7 +60,7 @@
         "外部テンプレートから含める入力名のコンマ区切り一覧。"
       ],
       "A job '%{job_name}' has %{status} at %{time}": [
-        "%{time} 時点での、ジョブ '%{job_name}' のステータスは %{status} です。"
+        "%{time} 時点でのジョブ '%{job_name}' のステータスは %{status} です"
       ],
       "A job '%{subject}' has failed": [
         "ジョブ '%{subject}' が失敗しました"
@@ -93,7 +93,7 @@
         "ジョブの中断"
       ],
       "Abort selected": [
-        ""
+        "選択項目を中断"
       ],
       "Abort task": [
         "タスクの中断"
@@ -135,7 +135,7 @@
         "テンプレート呼び出しの詳細を取得中にエラーが発生しました。"
       ],
       "An error occurred.": [
-        ""
+        "エラーが発生しました。"
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "別のインターフェースがすでに実行として設定されています。代わりにこのインターフェースを使用しもよろしいでしょうか?"
@@ -156,7 +156,7 @@
         "適用対象"
       ],
       "Are you sure you want to open all %s invocations in new tabs?": [
-        ""
+        "%s の呼び出しをすべて新規タブで開きますか?"
       ],
       "At": [
         "場所"
@@ -189,13 +189,13 @@
         "タスクの取り消し"
       ],
       "Cancel job invocation or matching tasks only": [
-        ""
+        "ジョブ呼び出しまたは一致するタスクのみをキャンセルします"
       ],
       "Cancel recurring": [
         "繰り返しのキャンセル"
       ],
       "Cancel selected": [
-        ""
+        "選択項目をキャンセル"
       ],
       "Cancelled": [
         "キャンセル済み"
@@ -264,7 +264,7 @@
         "ジョブ %s を中止できませんでした: ${response}"
       ],
       "Could not abort the task": [
-        ""
+        "タスクを中断できませんでした"
       ],
       "Could not cancel recurring logic %s: ${response}": [
         "再帰論理 %s をキャンセルできませんでした: ${response}"
@@ -273,7 +273,7 @@
         "ジョブ %s をキャンセルできませんでした: ${response}"
       ],
       "Could not cancel the task": [
-        ""
+        "タスクをキャンセルできませんでした"
       ],
       "Could not disable recurring logic %s: ${response}": [
         "再帰論理 %s を無効にできませんでした: ${response}"
@@ -483,7 +483,7 @@
         "評価済み:"
       ],
       "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
-        ""
+        "ジョブ実行直前にターゲットホストのリストを評価します。フィルターを使用してターゲットホストを選択した場合、ターゲットホストのリストは現在のリストと異なる場合があります。"
       ],
       "Every day at %s": [
         "毎日 %s"
@@ -510,7 +510,7 @@
         "ホスト上でジョブを順不同で実行します"
       ],
       "Executes the job on the current list of target hosts.": [
-        ""
+        "現在のターゲットホストのリストに対してジョブを実行します。"
       ],
       "Execution": [
         "Execution"
@@ -522,7 +522,7 @@
         "実行順"
       ],
       "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>": [
-        ""
+        "実行順は、ホスト上でジョブをアルファベット順で実行するか、順不同で実行するかを決定します。<br><ul><li><b>順番</b> - ホスト上でジョブがアルファベット順に実行されます</li><li><b>順不同</b> - ホスト上でジョブが順不同で実行されます</li></ul>"
       ],
       "Exit status: %s": [
         "終了ステータス: %s"
@@ -909,19 +909,22 @@
         "機能または job_template_id の 1 つのみを指定できます"
       ],
       "Open all %s invocations in new tabs": [
+        "%s の呼び出しをすべて新規タブで開く"
+      ],
+      "Open all failed runs on this page (%s)": [
         ""
       ],
-      "Open all failed runs (%s)": [
+      "Open all rows of the table in new tabs": [
         ""
       ],
       "Open in new tab": [
         "新規タブで開く"
       ],
       "Open in new tabs": [
-        ""
+        "新規タブで開く"
       ],
       "Open selected in new tab": [
-        ""
+        "選択項目を新規タブで開く"
       ],
       "Opening job invocation form": [
         "ジョブ呼び出しフォームを開く"
@@ -1178,9 +1181,6 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "1 回に最大 N 個のタスクを実行します。この値が設定されていて、プロキシーバッチのトリガーが有効な場合には、タスクはサイズ 1 の単位で一括して、Smart Proxy でトリガーされます。"
       ],
-      "Run hosts job:": [
-        ""
-      ],
       "Run job": [
         "ジョブを実行"
       ],
@@ -1263,7 +1263,7 @@
         "検索クエリー"
       ],
       "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.": [
-        ""
+        "一致するホスト上のタスクのみをキャンセルするための検索クエリー。指定しない場合、ジョブ呼び出し全体がキャンセルされます。"
       ],
       "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy": [
         "リモート実行があるプロキシーをホストで検索します。ホストにサブネットがない場合、またはサブネットに実行プロキシーがない場合に役に立ちます"
@@ -1305,7 +1305,7 @@
         "実行ユーザーのパスワードを設定 (sudo と同様のメカニズムを使用)"
       ],
       "Setup remote execution pull mode. If set to `Yes`, pull provider client will be deployed on the registered host. The inherited value is based on the `host_registration_remote_execution_pull` parameter. It can be inherited e.g. from host group, operating system, organization. When overridden, the selected value will be stored on host parameter level.": [
-        "リモート実行のプルモードを設定します。「はい」に設定すると、登録したホストにプルプロパイダークライアントがデプロイされます。継承される値は、「host_registration_remote_execution」パラメーターに基づきます。これは、ホストグループ、オペレーティングシステム、組織などから継承できます。上書きされると、選択した値がホストパラメーターレベルで保存されます。"
+        "リモート実行のプルモードを設定します。`はい` に設定すると、登録したホストにプルプロパイダークライアントがデプロイされます。継承される値は、`host_registration_remote_execution_pull` パラメーターに基づきます。これは、ホストグループ、オペレーティングシステム、組織などから継承できます。オーバーライドされると、選択した値がホストパラメーターレベルで保存されます。"
       ],
       "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting": [
         "ホストインターフェースの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれを上書きすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
@@ -1446,7 +1446,7 @@
         "ホストのタスクは正常にキャンセルされました"
       ],
       "Task(s) were not %s": [
-        ""
+        "タスクは %s されませんでした"
       ],
       "Template ERB": [
         "テンプレート ERB"
@@ -1502,7 +1502,10 @@
       "The job template to use, parameter is required unless feature was specified": [
         "使用するジョブテンプレート。機能が指定されていなければ、パラメーターが必要です"
       ],
-      "The number of %s invocations is:": [
+      "The number of failed invocations is:": [
+        ""
+      ],
+      "The number of selected invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1530,10 +1533,7 @@
         "このテンプレートは、記述の生成に使用します。入力値は、構文 %{package} を使用して設定できます。%{job_category} と %{template_name} を使用してジョブカテゴリーとテンプレート名を追加することもできます。"
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
-        "このテンプレートは記述の生成に使用します。<br/>入力値は、構文 %{package} を使用して設定できます。%{job_category} と %{template_name} を使用して、<br/> ジョブカテゴリーとテンプレート <br/> 名を追加することもできます。"
-      ],
-      "This will open a new tab for each invocation. The maximum is 100.": [
-        ""
+        "このテンプレートは説明を生成するために使用されます。<br/>入力値は構文 %{package} を使用して設定できます。<br/>%{job_category} と %{template_name} を使用して、ジョブカテゴリーとテンプレート<br/>名を含めることもできます。"
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "リモートホストで開始してからジョブを強制終了するまでの時間 (秒単位)"
@@ -1578,7 +1578,7 @@
         "ホストでのジョブのキャンセルを試行"
       ],
       "Trying to %s the task": [
-        ""
+        "タスクを %s しようとしています"
       ],
       "Trying to abort the job": [
         "ジョブを中断しようとしています"
@@ -1602,10 +1602,10 @@
         "タイプ"
       ],
       "Type determines when the query is evaluated to hosts.": [
-        ""
+        "タイプは、クエリーがホストに対して評価されるタイミングを決定します。"
       ],
       "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>": [
-        ""
+        "タイプは、クエリーがホストに対して評価されるタイミングを決定します。<br><ul><li><b>静的</b> - 現在のターゲットホストのリストに対してジョブを実行します。</li><li><b>動的</b>- ジョブ実行直前にターゲットホストのリストを評価します。フィルターを使用してターゲットホストを選択した場合、ターゲットホストのリストは現在のリストと異なる場合があります。</li></ul>"
       ],
       "Type of execution": [
         "実行のタイプ"
@@ -1749,7 +1749,7 @@
         "表示する結果があります。最初の %s 件の結果を表示しています"
       ],
       "aborted": [
-        ""
+        "中断されました"
       ],
       "add an input set for this template to reference a different template inputs": [
         "異なるテンプレート入力を参照するためにこのテンプレートの入力セットを追加"

@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.0",
+        "Project-Id-Version": "foreman_remote_execution 16.2.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022-2023",
@@ -136,7 +136,7 @@
         ""
       ],
       "An error occurred.": [
-        ""
+        "Ein Fehler ist aufgetreten."
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
         "Es ist bereits eine andere Schnittstelle für die Ausführung bestimmt. Sind Sie sicher, dass Sie stattdessen diese Schnittstelle verwenden möchten?"
@@ -912,7 +912,10 @@
       "Open all %s invocations in new tabs": [
         ""
       ],
-      "Open all failed runs (%s)": [
+      "Open all failed runs on this page (%s)": [
+        ""
+      ],
+      "Open all rows of the table in new tabs": [
         ""
       ],
       "Open in new tab": [
@@ -1178,9 +1181,6 @@
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "Führen Sie höchstens N Aufgaben gleichzeitig aus. Wenn dies gesetzt und die Proxy-Batch-Triggerung aktiviert ist, werden Aufgaben auf dem Smart Proxy in Batches der Größe 1 ausgelöst."
-      ],
-      "Run hosts job:": [
-        ""
       ],
       "Run job": [
         "Job ausführen"
@@ -1503,7 +1503,10 @@
       "The job template to use, parameter is required unless feature was specified": [
         "Das Job-Template zum Benutzen, der Parameter wird benötigt ausser das Feature wurde spezifiziert"
       ],
-      "The number of %s invocations is:": [
+      "The number of failed invocations is:": [
+        ""
+      ],
+      "The number of selected invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1533,9 +1536,6 @@
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "Diese Vorlage wird für die Erstellung der Beschreibung verwendet. <br/>Eingabewerte können mittels Syntax %{package} verwendet werden.<br/> Sie können auch Auftragskategorie und Vorlagennamen <br/>über %{job_category} und %{template_name} einschließen."
-      ],
-      "This will open a new tab for each invocation. The maximum is 100.": [
-        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "Zeit in Sekunden ab dem Start auf dem Remote-Host, nach der der Auftrag beendet werden soll."

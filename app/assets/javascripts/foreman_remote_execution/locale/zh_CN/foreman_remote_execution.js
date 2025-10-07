@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.0",
+        "Project-Id-Version": "foreman_remote_execution 16.2.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2024",
@@ -33,7 +33,7 @@
         "%s 更多"
       ],
       "%s task(s) successfully %s: %s": [
-        ""
+        "%s 个任务成功 %s: %s "
       ],
       "%{description} on %{host}": [
         "%{host} 中的 %{host}"
@@ -93,7 +93,7 @@
         "终止作业"
       ],
       "Abort selected": [
-        ""
+        "终止选择"
       ],
       "Abort task": [
         "中止任务"
@@ -156,7 +156,7 @@
         "应用到"
       ],
       "Are you sure you want to open all %s invocations in new tabs?": [
-        ""
+        "您确定要在新标签页中打开所有 %s 调用吗？"
       ],
       "At": [
         "位于"
@@ -189,13 +189,13 @@
         "取消任务"
       ],
       "Cancel job invocation or matching tasks only": [
-        ""
+        "仅取消作业调用或匹配的任务"
       ],
       "Cancel recurring": [
         "取消重复"
       ],
       "Cancel selected": [
-        ""
+        "取消选择"
       ],
       "Cancelled": [
         "已取消"
@@ -264,7 +264,7 @@
         "无法中止作业 %s: ${response}"
       ],
       "Could not abort the task": [
-        ""
+        "无法中止作业"
       ],
       "Could not cancel recurring logic %s: ${response}": [
         "无法取消重复逻辑 %s：${response}"
@@ -273,7 +273,7 @@
         "无法取消作业 %s: ${response}"
       ],
       "Could not cancel the task": [
-        ""
+        "无法取消作业"
       ],
       "Could not disable recurring logic %s: ${response}": [
         "无法禁用重复逻辑 %s：${response}"
@@ -483,7 +483,7 @@
         "评估于："
       ],
       "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
-        ""
+        "在执行作业前评估目标主机列表。如果您使用过滤来选择目标主机，则目标主机列表可能与当前列表不同。"
       ],
       "Every day at %s": [
         "每天的 %s"
@@ -510,7 +510,7 @@
         "以随机顺序在主机上执行作业"
       ],
       "Executes the job on the current list of target hosts.": [
-        ""
+        "在当前目标主机列表中执行作业。"
       ],
       "Execution": [
         "执行"
@@ -522,7 +522,7 @@
         "执行顺序"
       ],
       "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>": [
-        ""
+        "执行顺序确定了应按字母顺序还是随机顺序在主机上执行作业。<br><ul><li><b>Ordered</b> - 以字母顺序在主机上执行作业</li><li><b>Randomized</b> - 以随机顺序在主机上执行作业</li></ul>"
       ],
       "Exit status: %s": [
         "退出状态：%s"
@@ -909,19 +909,22 @@
         "只能指定一个功能或 job_template_id"
       ],
       "Open all %s invocations in new tabs": [
+        "在新标签页中打开所有 %s 调用"
+      ],
+      "Open all failed runs on this page (%s)": [
         ""
       ],
-      "Open all failed runs (%s)": [
+      "Open all rows of the table in new tabs": [
         ""
       ],
       "Open in new tab": [
         "在新标签页中打开"
       ],
       "Open in new tabs": [
-        ""
+        "在新标签页中打开"
       ],
       "Open selected in new tab": [
-        ""
+        "在新标签页中打开选择"
       ],
       "Opening job invocation form": [
         "打开作业调用表单"
@@ -1178,9 +1181,6 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "一次最多运行 N 个任务。如果设置了此选项并启用了代理批处理触发，则将在智能代理上以大小为 1 的批处理触发任务。"
       ],
-      "Run hosts job:": [
-        ""
-      ],
       "Run job": [
         "运行作业"
       ],
@@ -1263,7 +1263,7 @@
         "搜索查询"
       ],
       "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled.": [
-        ""
+        "搜索查询来仅取消匹配主机上的任务。如果没有提供，整个作业调用会被取消。"
       ],
       "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy": [
         "在主机上搜索具有远程执行功能的任何代理，当主机没有子网或子网没有执行代理时，此命令很有用"
@@ -1446,7 +1446,7 @@
         "主机任务已成功取消"
       ],
       "Task(s) were not %s": [
-        ""
+        "任务没有 %s"
       ],
       "Template ERB": [
         "模版 ERB"
@@ -1502,7 +1502,10 @@
       "The job template to use, parameter is required unless feature was specified": [
         "要使用的任务模板，除非已指定功能，否则参数是必需的"
       ],
-      "The number of %s invocations is:": [
+      "The number of failed invocations is:": [
+        ""
+      ],
+      "The number of selected invocations is:": [
         ""
       ],
       "The only applicable proxy %{proxy_names} is down": [
@@ -1531,9 +1534,6 @@
       ],
       "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}.": [
         "这个模块用来生成描述。<br/>输入值可以使用语法%%{package}。<br/>您可以使用 <br/> %{job_category}和 %{template_name} 来包括作业类型和模板名称。"
-      ],
-      "This will open a new tab for each invocation. The maximum is 100.": [
-        ""
       ],
       "Time in seconds from the start on the remote host after which the job should be killed.": [
         "在远程主机上开始后，以秒计算时间，之后结束作业。"
@@ -1578,7 +1578,7 @@
         "尝试取消主机上的作业"
       ],
       "Trying to %s the task": [
-        ""
+        "尝试 %s 任务"
       ],
       "Trying to abort the job": [
         "尝试中止作业"
@@ -1602,10 +1602,10 @@
         "类型"
       ],
       "Type determines when the query is evaluated to hosts.": [
-        ""
+        "类型决定了查询何时对主机进行评估。"
       ],
       "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>": [
-        ""
+        "类型决定了对主机评估查询的时间。<br><ul><li><b>Static</b> - 在当前目标主机上执行作业。</li><li><b>Dynamic</b> - 在执行作业前评估目标主机列表。如果您使用了过滤来选择目标主机，则目标主机列表可能与当前列表不同。</li></ul>"
       ],
       "Type of execution": [
         "执行类型"
@@ -1749,7 +1749,7 @@
         "有更多显示的结果。显示第一 %s 结果"
       ],
       "aborted": [
-        ""
+        "终止"
       ],
       "add an input set for this template to reference a different template inputs": [
         "为此模板添加一个输入集，以引用其他模板输入"
