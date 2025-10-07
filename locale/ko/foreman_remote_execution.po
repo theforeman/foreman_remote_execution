@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.2.0\n"
+"Project-Id-Version: foreman_remote_execution 16.2.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -32,7 +32,7 @@ msgid "%s more"
 msgstr "%s개 더"
 
 msgid "%s task(s) successfully %s: %s"
-msgstr ""
+msgstr "작업 %s개가 성공적으로 %s: %s"
 
 msgid "%{description} on %{host}"
 msgstr "%{host}에 대한 %{description}"
@@ -93,7 +93,7 @@ msgid "Abort Job"
 msgstr "작업 중단"
 
 msgid "Abort selected"
-msgstr ""
+msgstr "선택 항목 중단"
 
 msgid "Abort task"
 msgstr "작업 중단"
@@ -156,7 +156,7 @@ msgid "Apply to"
 msgstr "적용"
 
 msgid "Are you sure you want to open all %s invocations in new tabs?"
-msgstr ""
+msgstr "새 탭에서 모든 %s 호출을 여시겠습니까?"
 
 msgid "At"
 msgstr "At"
@@ -189,13 +189,13 @@ msgid "Cancel Task"
 msgstr "작업 취소"
 
 msgid "Cancel job invocation or matching tasks only"
-msgstr ""
+msgstr "작업 호출 또는 일치하는 작업만 취소"
 
 msgid "Cancel recurring"
 msgstr "반복 취소"
 
 msgid "Cancel selected"
-msgstr ""
+msgstr "선택한 작업 취소"
 
 msgid "Cancelled"
 msgstr "취소함"
@@ -264,7 +264,7 @@ msgid "Could not abort the job %s: ${response}"
 msgstr "%s 작업을 중단할 수 없습니다: ${response}"
 
 msgid "Could not abort the task"
-msgstr ""
+msgstr "작업을 중단할 수 없습니다"
 
 msgid "Could not cancel recurring logic %s: ${response}"
 msgstr "반복 논리 %s를 취소할 수 없습니다: ${response}"
@@ -273,7 +273,7 @@ msgid "Could not cancel the job %s: ${response}"
 msgstr "%s 작업을 취소할 수 없습니다: ${response}"
 
 msgid "Could not cancel the task"
-msgstr ""
+msgstr "작업을 취소할 수 없습니다"
 
 msgid "Could not disable recurring logic %s: ${response}"
 msgstr "반복 논리 %s를 비활성화할 수 없습니다: ${response}"
@@ -483,7 +483,7 @@ msgid "Evaluated at:"
 msgstr "평가 시점:"
 
 msgid "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list."
-msgstr ""
+msgstr "작업 실행 직전에 대상 호스트 목록을 평가합니다. 필터를 사용하여 대상 호스트를 선택한 경우, 대상 호스트 목록이 현재 목록과 다를 수 있습니다."
 
 msgid "Every day at %s"
 msgstr "매일 %s"
@@ -510,7 +510,7 @@ msgid "Execute the jobs on hosts in randomized order"
 msgstr "호스트에서 작업을 무작위 순서로 실행합니다."
 
 msgid "Executes the job on the current list of target hosts."
-msgstr ""
+msgstr "현재 대상 호스트 목록에서 작업을 실행합니다."
 
 msgid "Execution"
 msgstr "실행"
@@ -522,7 +522,7 @@ msgid "Execution ordering"
 msgstr "실행 순서"
 
 msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>"
-msgstr ""
+msgstr "실행 순서는 작업을 호스트에서 알파벳순으로 실행해야 할지 아니면 무작위 순서로 실행해야 할지를 결정합니다.<br><ul><li><b> 주문</b> - 호스트의 작업을 알파벳순으로 실행합니다.</li><li><b> 무작위</b> - 호스트에서 작업이 실행되는 순서를 무작위로 지정합니다.</li></ul>"
 
 msgid "Exit status: %s"
 msgstr "종료 상태: %s"
@@ -909,19 +909,22 @@ msgid "Only one of feature or job_template_id can be specified"
 msgstr "feature 또는 job_template_id 중 하나만 지정할 수 있습니다."
 
 msgid "Open all %s invocations in new tabs"
+msgstr "새 탭에서 모든 %s 호출을 엽니다."
+
+msgid "Open all failed runs on this page (%s)"
 msgstr ""
 
-msgid "Open all failed runs (%s)"
+msgid "Open all rows of the table in new tabs"
 msgstr ""
 
 msgid "Open in new tab"
 msgstr "새 탭에서 열기"
 
 msgid "Open in new tabs"
-msgstr ""
+msgstr "새 탭에서 열기"
 
 msgid "Open selected in new tab"
-msgstr ""
+msgstr "선택한 항목을 새 탭에서 열기"
 
 msgid "Opening job invocation form"
 msgstr "작업 호출 양식 열기"
@@ -1178,9 +1181,6 @@ msgstr "한 번에 최대 N개 태스크 실행"
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr "한 번에 최대 N개의 작업을 실행합니다. 이것이 설정되어 있고 프록시 배치 트리거링이 활성화되어 있으면 작업은 스마트 프록시에서 크기 1의 배치로 트리거됩니다."
 
-msgid "Run hosts job:"
-msgstr ""
-
 msgid "Run job"
 msgstr "작업 실행"
 
@@ -1263,7 +1263,7 @@ msgid "Search query"
 msgstr "검색 쿼리"
 
 msgid "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled."
-msgstr ""
+msgstr "검색 쿼리를 사용하여 일치하는 호스트에서만 작업을 취소합니다. 이 쿼리를 제공하지 않으면 전체 작업 호출이 취소됩니다."
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "원격 실행 기능이 있는 모든 프록시의 호스트를 검색합니다. 호스트에 서브넷이 없거나 서브넷에 실행 프록시가 없는 경우 유용합니다."
@@ -1446,7 +1446,7 @@ msgid "Task for the host cancelled succesfully"
 msgstr "호스트의 작업이 취소되었습니다"
 
 msgid "Task(s) were not %s"
-msgstr ""
+msgstr "작업이 %s되지 않았습니다 "
 
 msgid "Template ERB"
 msgstr "템플릿 ERB"
@@ -1502,7 +1502,10 @@ msgstr "작업을 취소할 수 없습니다."
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr "사용할 작업 템플릿, 기능이 지정되지 않은 경우 매개변수가 필요합니다."
 
-msgid "The number of %s invocations is:"
+msgid "The number of failed invocations is:"
+msgstr ""
+
+msgid "The number of selected invocations is:"
 msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
@@ -1532,9 +1535,6 @@ msgstr "이 템플릿은 설명을 생성하는 데 사용됩니다. %{package} 
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr "이 템플릿은 설명을 생성하는 데 사용됩니다.<br/> 입력 값은 %{package} 구문을 사용하여 사용할 수 있습니다.<br/> 또한 %{job_category} 및 %{template_name}을 사용하여 작업 범주와 템플릿 <br/> 이름을 포함할 수도 있습니다."
-
-msgid "This will open a new tab for each invocation. The maximum is 100."
-msgstr ""
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "원격 호스트에서 작업이 시작된 후 종료되어야 하는 시간(초)입니다."
@@ -1579,7 +1579,7 @@ msgid "Try to cancel the job on a host"
 msgstr "호스트에 대한 작업 취소 시도"
 
 msgid "Trying to %s the task"
-msgstr ""
+msgstr "작업 %s 시도 중"
 
 msgid "Trying to abort the job"
 msgstr "작업을 중단하려고 합니다"
@@ -1603,10 +1603,10 @@ msgid "Type"
 msgstr "유형 "
 
 msgid "Type determines when the query is evaluated to hosts."
-msgstr ""
+msgstr "유형은 쿼리가 호스트에 대해 평가되는 시점을 결정합니다."
 
 msgid "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>"
-msgstr ""
+msgstr "유형은 쿼리가 호스트에 대해 평가되는 시기를 결정합니다.<br><ul><li><b> 정적</b> - 현재 대상 호스트 목록에서 작업을 실행합니다.</li><li><b> 동적</b> - 작업 실행 직전에 대상 호스트 목록을 평가합니다. 필터를 사용하여 대상 호스트를 선택한 경우, 대상 호스트 목록이 현재 목록과 다를 수 있습니다.</li></ul>"
 
 msgid "Type of execution"
 msgstr "실행 유형"
@@ -1750,7 +1750,7 @@ msgid "You have more results to display. Showing first %s results"
 msgstr "더 많은 결과가 표시됩니다. 처음 %s개의 결과 표시"
 
 msgid "aborted"
-msgstr ""
+msgstr "중단됨"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "이 템플릿에서 다른 템플릿 입력을 참조하기 위한 입력 세트를 추가합니다."

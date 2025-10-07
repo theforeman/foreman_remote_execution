@@ -8,7 +8,7 @@
 # Pierre-Emmanuel Dutang <dutangp@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.2.0\n"
+"Project-Id-Version: foreman_remote_execution 16.2.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Claer <transiblu@claer.hammock.fr>, 2016\n"
@@ -36,7 +36,7 @@ msgid "%s more"
 msgstr "%s de plus"
 
 msgid "%s task(s) successfully %s: %s"
-msgstr ""
+msgstr "%s tâche(s) réussie(s)%s : %s"
 
 msgid "%{description} on %{host}"
 msgstr "%{description} sur %{host}"
@@ -99,7 +99,7 @@ msgid "Abort Job"
 msgstr "Abandonner le job"
 
 msgid "Abort selected"
-msgstr ""
+msgstr "Abandonner la sélection"
 
 msgid "Abort task"
 msgstr "Abandonner la tâche"
@@ -141,7 +141,7 @@ msgid "An error occurred while fetching the template invocation details."
 msgstr "Une erreur s'est produite lors de la récupération des détails d'invocation du modèle."
 
 msgid "An error occurred."
-msgstr ""
+msgstr "Une erreur s'est produite."
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
 msgstr "Une autre interface est déjà définie pour l'exécution distante. Êtes-vous sûrs de vouloir utiliser celle-ci à la place ?"
@@ -162,7 +162,7 @@ msgid "Apply to"
 msgstr "Appliquer à"
 
 msgid "Are you sure you want to open all %s invocations in new tabs?"
-msgstr ""
+msgstr "Etes-vous sûr de vouloir ouvrir toutes les  invocations %s dans de nouveaux onglets ?"
 
 msgid "At"
 msgstr "À"
@@ -195,13 +195,13 @@ msgid "Cancel Task"
 msgstr "Annuler la tâche"
 
 msgid "Cancel job invocation or matching tasks only"
-msgstr ""
+msgstr "Annuler l'appel de tâche ou les tâches correspondantes uniquement"
 
 msgid "Cancel recurring"
 msgstr "Annuler la logique récurrente"
 
 msgid "Cancel selected"
-msgstr ""
+msgstr "Annuler la sélection"
 
 msgid "Cancelled"
 msgstr "Annulé"
@@ -270,7 +270,7 @@ msgid "Could not abort the job %s: ${response}"
 msgstr "Impossible d'annuler le job %s :${response}"
 
 msgid "Could not abort the task"
-msgstr ""
+msgstr "Impossible d'annuler la tâche"
 
 msgid "Could not cancel recurring logic %s: ${response}"
 msgstr "Impossible d'annuler la logique récurrente%s :${response}"
@@ -279,7 +279,7 @@ msgid "Could not cancel the job %s: ${response}"
 msgstr "Impossible d'annuler le job %s :${response}"
 
 msgid "Could not cancel the task"
-msgstr ""
+msgstr "Impossible d'annuler la tâche"
 
 msgid "Could not disable recurring logic %s: ${response}"
 msgstr "Impossible de désactiver la logique récurrente%s :${response}"
@@ -489,7 +489,7 @@ msgid "Evaluated at:"
 msgstr "Évalue le :"
 
 msgid "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list."
-msgstr ""
+msgstr "Évalue la liste des hôtes cibles juste avant l'exécution de la tâche. Si vous avez utilisé un filtre pour sélectionner les hôtes cibles, la liste peut être différente de la liste actuelle."
 
 msgid "Every day at %s"
 msgstr "Tous les jours à %s"
@@ -516,7 +516,7 @@ msgid "Execute the jobs on hosts in randomized order"
 msgstr "Exécuter les jobs sur les hôtes dans un ordre aléatoire"
 
 msgid "Executes the job on the current list of target hosts."
-msgstr ""
+msgstr "Exécute le travail sur la liste actuelle des hôtes cibles."
 
 msgid "Execution"
 msgstr "Exécution"
@@ -528,7 +528,7 @@ msgid "Execution ordering"
 msgstr "Ordre d'exécution"
 
 msgid "Execution ordering determines whether the jobs should be executed on hosts in alphabetical order or in randomized order.<br><ul><li><b>Ordered</b> - Executes the jobs on hosts in alphabetical order</li><li><b>Randomized</b> - Randomizes the order in which jobs are executed on hosts</li></ul>"
-msgstr ""
+msgstr "L'ordre d'exécution détermine si les jobs doivent être exécutés sur les hôtes par ordre alphabétique ou par ordre aléatoire. <br><ul><li><b>Ordered</b> - exécute les jobs sur les hôtes par ordre alphabétique </li><li><b>Randomized</b> - randomise l'ordre dans lequel les tâches sont exécutées sur les hôtes</li></ul>"
 
 msgid "Exit status: %s"
 msgstr "Statut de sortie : %s"
@@ -915,19 +915,22 @@ msgid "Only one of feature or job_template_id can be specified"
 msgstr "Seule une fonctionnalité ou un job_template_id ne peuvent être spécifiés"
 
 msgid "Open all %s invocations in new tabs"
+msgstr "Ouvrir tout%s invocations dans les nouveaux onglets"
+
+msgid "Open all failed runs on this page (%s)"
 msgstr ""
 
-msgid "Open all failed runs (%s)"
+msgid "Open all rows of the table in new tabs"
 msgstr ""
 
 msgid "Open in new tab"
 msgstr "Ouvrir dans un nouvel onglet"
 
 msgid "Open in new tabs"
-msgstr ""
+msgstr "Ouvrir dans un nouvel onglet"
 
 msgid "Open selected in new tab"
-msgstr ""
+msgstr "Ouvrir la sélection dans un nouvel onglet"
 
 msgid "Opening job invocation form"
 msgstr "Ouverture du formulaire de lancement du job"
@@ -1184,9 +1187,6 @@ msgstr "Lance un maximum de N tâches simultanément"
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr "Effectuer au maximum N tâches à la fois. Si ce paramètre est défini et que le déclenchement par lot du proxy est activé, les tâches sont alors déclenchées sur le proxy smart par lots de taille 1."
 
-msgid "Run hosts job:"
-msgstr ""
-
 msgid "Run job"
 msgstr "Lancer le job"
 
@@ -1269,7 +1269,7 @@ msgid "Search query"
 msgstr "Requête de recherche"
 
 msgid "Search query to cancel tasks only on matching hosts. If not provided, the whole job invocation will be cancelled."
-msgstr ""
+msgstr "Requête de recherche pour annuler les tâches uniquement sur les hôtes correspondants. Si non renseignée, l'appel de la tâche sera annulé."
 
 msgid "Search the host for any proxy with Remote Execution, useful when the host has no subnet or the subnet does not have an execution proxy"
 msgstr "Recherche d'un proxy avec exécution distante sur l'hôte, utile quand l'hôte n'a pas de sous-réseau ou que le sous-réseau n'a pas de proxy avec exécution distante"
@@ -1452,7 +1452,7 @@ msgid "Task for the host cancelled succesfully"
 msgstr "Tâche pour l'hôte annulée avec succès"
 
 msgid "Task(s) were not %s"
-msgstr ""
+msgstr "Les tâches n'étaient pas %s"
 
 msgid "Template ERB"
 msgstr "Modèle ERB"
@@ -1508,7 +1508,10 @@ msgstr "Le job n'a pas pu être annulé."
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
 
-msgid "The number of %s invocations is:"
+msgid "The number of failed invocations is:"
+msgstr ""
+
+msgid "The number of selected invocations is:"
 msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
@@ -1540,9 +1543,6 @@ msgstr "Ce modèle est utilisé pour générer la description. Les valeurs d'ent
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
 msgstr "Ce modèle est utilisé pour générer la description. <br/>Les valeurs d'entrée peuvent être utilisées avec la syntaxe %{package}.<br/>Vous pouvez aussi inclure la catégorie du job et le nom du modèle <br/> en utilisant %{job_category} et %{template_name}."
-
-msgid "This will open a new tab for each invocation. The maximum is 100."
-msgstr ""
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
 msgstr "Durée en secondes depuis le démarrage sur l'hôte distant après laquelle le job doit être supprimé."
@@ -1587,7 +1587,7 @@ msgid "Try to cancel the job on a host"
 msgstr "Essai d'annulation du job sur un hôte"
 
 msgid "Trying to %s the task"
-msgstr ""
+msgstr "Essayer de%s la tâche"
 
 msgid "Trying to abort the job"
 msgstr "Tentative d'abandon du job"
@@ -1611,10 +1611,10 @@ msgid "Type"
 msgstr "Type"
 
 msgid "Type determines when the query is evaluated to hosts."
-msgstr ""
+msgstr "Le type détermine quand la requête est évaluée sur les hôtes."
 
 msgid "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b> - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b> - Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.</li></ul>"
-msgstr ""
+msgstr "Le type détermine quand la requête est évaluée sur les hôtes.<br><ul><li><b> Static</b> - Exécute le travail sur la liste actuelle des hôtes cibles.</li><li><b> Dynamic</b> - Évalue la liste des hôtes cibles juste avant l'exécution de la tâche. Si vous avez utilisé un filtre pour sélectionner les hôtes cibles, la liste peut être différente de la liste actuelle.</li></ul>"
 
 msgid "Type of execution"
 msgstr "Type d'exécution"
@@ -1758,7 +1758,7 @@ msgid "You have more results to display. Showing first %s results"
 msgstr "Vous avez plus de résultats à afficher. Affichage en premier des résultats %s"
 
 msgid "aborted"
-msgstr ""
+msgstr "avorté"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr "Ajout d'un jeu d'entrées pour ce modèle pour faire référence à des entrées sur un modèle différent"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 13:20+0200\n"
-"PO-Revision-Date: 2025-09-12 13:20+0200\n"
+"POT-Creation-Date: 2025-10-07 14:22+0200\n"
+"PO-Revision-Date: 2025-10-07 14:22+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -358,7 +358,7 @@ msgstr ""
 #:
 #: ../app/controllers/foreman_remote_execution/concerns/api/v2/registration_commands_controller_extensions.rb:11
 #: ../app/controllers/foreman_remote_execution/concerns/api/v2/registration_controller_extensions.rb:8
-#: ../webpack/react_app/components/RegistrationExtension/RexInterface.js:18
+#: ../webpack/react_app/components/RegistrationExtension/RexInterface.js:15
 msgid "Identifier of the Host interface for Remote execution"
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 #: ../db/seeds.d/50-notification_blueprints.rb:17
 #: ../lib/foreman_remote_execution/plugin.rb:194
 #: ../webpack/JobInvocationDetail/TemplateInvocationPage.js:23
-#: ../webpack/JobInvocationDetail/index.js:99
+#: ../webpack/JobInvocationDetail/index.js:109
 #: ../webpack/JobWizard/JobWizardPageRerun.js:53
 #: ../webpack/JobWizard/index.js:20
 msgid "Jobs"
@@ -455,22 +455,22 @@ msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:19
 #: ../app/views/job_invocations/index.html.erb:13
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:52
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:73
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:51
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:72
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:36
 msgid "Failed"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:20
 #: ../app/views/job_invocations/index.html.erb:14
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:77
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:76
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:23
 msgid "Pending"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:21
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:54
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:79
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:53
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:78
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:11
 msgid "Cancelled"
 msgstr ""
@@ -492,7 +492,7 @@ msgid "succeeded"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:41
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:196
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:201
 msgid "cancelled"
 msgstr ""
 
@@ -545,7 +545,7 @@ msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:73
 #: ../app/views/template_invocations/show.html.erb:22
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:266
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:277
 #: ../webpack/JobInvocationDetail/TemplateInvocationComponents/TemplateActionButtons.js:24
 msgid "Rerun"
 msgstr ""
@@ -669,7 +669,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:114 action_names.rb:2
+#: ../app/lib/actions/remote_execution/run_host_job.rb:114
 msgid "Remote action:"
 msgstr ""
 
@@ -863,12 +863,12 @@ msgid "Script"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:150
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:149
 msgid "Static Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:151
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:150
 msgid "Dynamic Query"
 msgstr ""
 
@@ -921,7 +921,7 @@ msgstr ""
 
 #: ../app/views/dashboard/_latest-jobs.html.erb:7
 #: ../app/views/remote_execution_features/index.html.erb:7
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:95
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:94
 msgid "Name"
 msgstr ""
 
@@ -1282,14 +1282,14 @@ msgid "Search Query"
 msgstr ""
 
 #: ../app/views/job_invocations/index.html.erb:11
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:129
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:128
 #: ../webpack/react_app/components/TargetingHosts/TargetingHosts.js:42
 msgid "Status"
 msgstr ""
 
 #: ../app/views/job_invocations/index.html.erb:12
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:51
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:71
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:50
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:70
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:42
 msgid "Succeeded"
 msgstr ""
@@ -1739,44 +1739,48 @@ msgid ""
 "lies only to pull-mqtt based jobs."
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:56
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:54
 msgid "Cancel selected"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:67
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:65
 msgid "Abort selected"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:76
-msgid "Open all failed runs (%s)"
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:74
+msgid "Open all failed runs on this page (%s)"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:181
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:186
 msgid "Trying to %s the task"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:196
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:201
 msgid "aborted"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:205
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:210
 msgid "%s task(s) successfully %s: %s"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:217
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:222
 msgid "Task(s) were not %s"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:226
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:231
 msgid "An error occurred."
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/CheckboxesActions.js:246
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:254
+msgid "Open all rows of the table in new tabs"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/CheckboxesActions.js:255
 msgid "Open selected in new tab"
 msgstr ""
 
 #: ../webpack/JobInvocationDetail/DropdownFilter.js:30
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:50
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:49
 msgid "All statuses"
 msgstr ""
 
@@ -1875,56 +1879,56 @@ msgstr ""
 msgid "Could not cancel recurring logic %s: ${response}"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:53
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:52
 msgid "In Progress"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:75
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:84
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:74
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:83
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:29
 msgid "Scheduled"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:81
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:80
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:17
 msgid "Awaiting start"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:103
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:102
 msgid "Host group"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:111
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:110
 msgid "OS"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:121
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:120
 msgid "Smart proxy"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:136
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:135
 msgid "Unknown"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:288
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:285
 msgid "No Results"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:296
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:293
 msgid ""
 "The dynamic query is still being processed. You can {viewTheHosts} targeted by"
 " the query."
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:302
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:299
 msgid "view the hosts"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:308
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:305
 msgid "No hosts found"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:417
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:404
 msgid "A task for this host has not been started"
 msgstr ""
 
@@ -2005,7 +2009,7 @@ msgid "View task"
 msgstr ""
 
 #: ../webpack/JobInvocationDetail/JobInvocationToolbarButtons.js:175
-#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:81
+#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:82
 #: ../webpack/JobWizard/Footer.js:94
 msgid "Cancel"
 msgstr ""
@@ -2026,30 +2030,30 @@ msgstr ""
 msgid "Rerun all"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:20
+#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:16
 msgid ""
 "Popups are blocked by your browser. Please allow popups for this site to open "
 "all invocations in new tabs."
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:51
+#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:40
+msgid "The number of failed invocations is:"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:47
+msgid "The number of selected invocations is:"
+msgstr ""
+
+#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:61
 msgid "Open all %s invocations in new tabs"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:73
+#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:74
 msgid "Open in new tabs"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:86
+#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:87
 msgid "Are you sure you want to open all %s invocations in new tabs?"
-msgstr ""
-
-#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:90
-msgid "This will open a new tab for each invocation. The maximum is 100."
-msgstr ""
-
-#: ../webpack/JobInvocationDetail/OpenAllInvocationsModal.js:92
-msgid "The number of %s invocations is:"
 msgstr ""
 
 #: ../webpack/JobInvocationDetail/TemplateInvocation.js:50
@@ -2737,31 +2741,31 @@ msgstr ""
 msgid "Schedule a job"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:26
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:25
 msgid "Recent jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:33
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:32
 msgid "View all jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:42
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:41
 msgid "View finished jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:49
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:48
 msgid "View running jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:56
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:55
 msgid "View scheduled jobs"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:70
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:69
 msgid "Finished"
 msgstr ""
 
-#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:77
+#: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:76
 msgid "Running"
 msgstr ""
 
@@ -2769,7 +2773,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: ../webpack/react_app/components/RegistrationExtension/RexInterface.js:12
+#: ../webpack/react_app/components/RegistrationExtension/RexInterface.js:11
 msgid "Remote Execution Interface"
 msgstr ""
 
@@ -2818,10 +2822,6 @@ msgstr ""
 
 #: ../webpack/react_app/components/TargetingHosts/TargetingHostsLabelsRow.js:20
 msgid "Active Filters:"
-msgstr ""
-
-#: action_names.rb:3
-msgid "Run hosts job:"
 msgstr ""
 
 #: gemspec.rb:2

@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.2.0\n"
+"Project-Id-Version: foreman_remote_execution 16.2.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -913,7 +913,10 @@ msgstr ""
 msgid "Open all %s invocations in new tabs"
 msgstr ""
 
-msgid "Open all failed runs (%s)"
+msgid "Open all failed runs on this page (%s)"
+msgstr ""
+
+msgid "Open all rows of the table in new tabs"
 msgstr ""
 
 msgid "Open in new tab"
@@ -1178,9 +1181,6 @@ msgid "Run at most N tasks at a time"
 msgstr "一次最多執行 N 個任務"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
-msgstr ""
-
-msgid "Run hosts job:"
 msgstr ""
 
 msgid "Run job"
@@ -1504,7 +1504,10 @@ msgstr ""
 msgid "The job template to use, parameter is required unless feature was specified"
 msgstr ""
 
-msgid "The number of %s invocations is:"
+msgid "The number of failed invocations is:"
+msgstr ""
+
+msgid "The number of selected invocations is:"
 msgstr ""
 
 msgid "The only applicable proxy %{proxy_names} is down"
@@ -1534,9 +1537,6 @@ msgid "This template is used to generate the description. Input values can be us
 msgstr "這範本是用來產生描述。輸入值可以使用 %{package} 語法。您也可以使用 %{job_category} 與 %{template_name} 來包括工作類別與範本名稱。"
 
 msgid "This template is used to generate the description.<br/>Input values can be used using the syntax %{package}.<br/>You may also include the job category and template<br/>name using %{job_category} and %{template_name}."
-msgstr ""
-
-msgid "This will open a new tab for each invocation. The maximum is 100."
 msgstr ""
 
 msgid "Time in seconds from the start on the remote host after which the job should be killed."
