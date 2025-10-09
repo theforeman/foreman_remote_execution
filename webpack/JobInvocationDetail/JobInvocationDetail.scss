@@ -140,3 +140,7 @@
     text-overflow: unset;
     word-break: break-word;
 }
+
+.pf-v5-c-table__tbody > tr.row-hidden {
+  display: none;
+}

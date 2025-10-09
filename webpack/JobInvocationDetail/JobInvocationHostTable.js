@@ -64,6 +64,26 @@ const JobInvocationHostTable = ({
   const [expandedHost, setExpandedHost] = useState([]);
   const prevStatusLabel = useRef(statusLabel);
 
+  // State for the expandable host rows
+  const [hostInvocationStates, setHostInvocationStates] = useState({});
+
+  const getInvocationState = hostId =>
+    hostInvocationStates[hostId] || {
+      showOutputType: { stderr: true, stdout: true, debug: true },
+      showTemplatePreview: false,
+      showCommand: false,
+    };
+
+  const updateInvocationState = (hostId, newState) => {
+    setHostInvocationStates(prevStates => ({
+      ...prevStates,
+      [hostId]: {
+        ...getInvocationState(hostId),
+        ...newState,
+      },
+    }));
+  };
+
   const isHostExpanded = host => expandedHost.includes(host);
   const setHostExpanded = (host, isExpanding = true) =>
     setExpandedHost(prevExpanded => {
@@ -372,54 +392,81 @@ const JobInvocationHostTable = ({
           isDeleteable={false}
           childrenOutsideTbody
         >
-          {results.map((result, rowIndex) => (
-            <Tbody key={result.id}>
-              <Tr ouiaId={`table-row-${result.id}`}>
-                <Td
-                  expand={{
-                    rowIndex,
-                    isExpanded: isHostExpanded(result.id),
-                    onToggle: () =>
-                      setHostExpanded(result.id, !isHostExpanded(result.id)),
-                    expandId: 'host-expandable',
-                  }}
-                />
-                <RowSelectTd rowData={result} {...{ selectOne, isSelected }} />
-                {columnNamesKeys.map(k => (
-                  <Td key={k}>{columns[k].wrapper(result)}</Td>
-                ))}
-                <Td isActionCell>
-                  <RowActions hostID={result.id} jobID={id} />
-                </Td>
-              </Tr>
-              <Tr
-                isExpanded={isHostExpanded(result.id)}
-                ouiaId="table-row-expanded-sections"
-              >
-                <Td
-                  dataLabel={`${result.id}-expandable-content`}
-                  colSpan={columnNamesKeys.length + 3}
+          {results.map((result, rowIndex) => {
+            const currentInvocationState = getInvocationState(result.id);
+            return (
+              <Tbody key={result.id}>
+                <Tr ouiaId={`table-row-${result.id}`}>
+                  <Td
+                    expand={{
+                      rowIndex,
+                      isExpanded: isHostExpanded(result.id),
+                      onToggle: () =>
+                        setHostExpanded(result.id, !isHostExpanded(result.id)),
+                      expandId: 'host-expandable',
+                    }}
+                  />
+                  <RowSelectTd
+                    rowData={result}
+                    {...{ selectOne, isSelected }}
+                  />
+                  {columnNamesKeys.map(k => (
+                    <Td key={k}>{columns[k].wrapper(result)}</Td>
+                  ))}
+                  <Td isActionCell>
+                    <RowActions hostID={result.id} jobID={id} />
+                  </Td>
+                </Tr>
+                <Tr
+                  isExpanded={isHostExpanded(result.id)}
+                  ouiaId="table-row-expanded-sections"
+                  className={!isHostExpanded(result.id) ? 'row-hidden' : ''}
                 >
-                  <ExpandableRowContent>
-                    {result.job_status === 'cancelled' ||
-                    result.job_status === 'N/A' ? (
-                      <div>
-                        {__('A task for this host has not been started')}
-                      </div>
-                    ) : (
-                      <TemplateInvocation
-                        key={`${result.id}-${result.job_status}`}
-                        hostID={result.id}
-                        jobID={id}
-                        isInTableView
-                        isExpanded={isHostExpanded(result.id)}
-                      />
-                    )}
-                  </ExpandableRowContent>
-                </Td>
-              </Tr>
-            </Tbody>
-          ))}
+                  <Td
+                    dataLabel={`${result.id}-expandable-content`}
+                    colSpan={columnNamesKeys.length + 3}
+                  >
+                    <ExpandableRowContent>
+                      {result.job_status === 'cancelled' ||
+                      result.job_status === 'N/A' ? (
+                        <div>
+                          {__('A task for this host has not been started')}
+                        </div>
+                      ) : (
+                        <TemplateInvocation
+                          key={`${result.id}-${result.job_status}`}
+                          hostID={result.id}
+                          jobID={id}
+                          isInTableView
+                          isExpanded={isHostExpanded(result.id)}
+                          showOutputType={currentInvocationState.showOutputType}
+                          showTemplatePreview={
+                            currentInvocationState.showTemplatePreview
+                          }
+                          showCommand={currentInvocationState.showCommand}
+                          setShowOutputType={value =>
+                            updateInvocationState(result.id, {
+                              showOutputType: value,
+                            })
+                          }
+                          setShowTemplatePreview={value =>
+                            updateInvocationState(result.id, {
+                              showTemplatePreview: value,
+                            })
+                          }
+                          setShowCommand={value =>
+                            updateInvocationState(result.id, {
+                              showCommand: value,
+                            })
+                          }
+                        />
+                      )}
+                    </ExpandableRowContent>
+                  </Td>
+                </Tr>
+              </Tbody>
+            );
+          })}
         </Table>
       </TableIndexPage>
     </>

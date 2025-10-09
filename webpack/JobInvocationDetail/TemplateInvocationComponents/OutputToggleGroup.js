@@ -28,23 +28,22 @@ export const OutputToggleGroup = ({
   permissions,
 }) => {
   const handleSTDERRClick = _isSelected => {
-    setShowOutputType(prevShowOutputType => ({
-      ...prevShowOutputType,
+    setShowOutputType({
+      ...showOutputType,
       stderr: _isSelected,
-    }));
+    });
   };
-
   const handleSTDOUTClick = _isSelected => {
-    setShowOutputType(prevShowOutputType => ({
-      ...prevShowOutputType,
+    setShowOutputType({
+      ...showOutputType,
       stdout: _isSelected,
-    }));
+    });
   };
   const handleDEBUGClick = _isSelected => {
-    setShowOutputType(prevShowOutputType => ({
-      ...prevShowOutputType,
+    setShowOutputType({
+      ...showOutputType,
       debug: _isSelected,
-    }));
+    });
   };
   const handlePreviewTemplateClick = _isSelected => {
     setShowTemplatePreview(_isSelected);

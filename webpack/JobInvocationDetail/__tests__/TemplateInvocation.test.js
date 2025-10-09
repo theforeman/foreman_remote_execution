@@ -1,7 +1,7 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { render, screen, act, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import * as api from 'foremanReact/redux/API';
 import * as selectors from '../JobInvocationSelectors';
@@ -10,12 +10,7 @@ import { mockTemplateInvocationResponse } from './fixtures';
 
 jest.spyOn(api, 'get');
 jest.mock('../JobInvocationSelectors');
-selectors.selectTemplateInvocationStatus.mockImplementation(() => () =>
-  'RESOLVED'
-);
-selectors.selectTemplateInvocation.mockImplementation(() => () =>
-  mockTemplateInvocationResponse
-);
+
 const mockStore = configureMockStore([]);
 const store = mockStore({
   HOSTS_API: {
@@ -24,18 +19,32 @@ const store = mockStore({
     },
   },
 });
+
+const mockProps = {
+  hostID: '1',
+  jobID: '1',
+  isInTableView: false,
+  isExpanded: true,
+  hostName: 'example-host',
+  hostProxy: { name: 'example-proxy', href: '#' },
+  showOutputType: { stderr: true, stdout: true, debug: true },
+  setShowOutputType: jest.fn(),
+  showTemplatePreview: false,
+  setShowTemplatePreview: jest.fn(),
+  showCommand: false,
+  setShowCommand: jest.fn(),
+};
+
 describe('TemplateInvocation', () => {
-  test('render', async () => {
+  beforeEach(() => {
+    selectors.selectTemplateInvocationStatus.mockImplementation(() => () => 'RESOLVED');
+    selectors.selectTemplateInvocation.mockImplementation(() => () => mockTemplateInvocationResponse);
+  });
+
+  test('render', () => {
     render(
       <Provider store={store}>
-        <TemplateInvocation
-          hostID="1"
-          jobID="1"
-          isInTableView={false}
-          isExpanded
-          hostName="example-host"
-          hostProxy={{ name: 'example-proxy', href: '#' }}
-        />
+        <TemplateInvocation {...mockProps} />
       </Provider>
     );
 
@@ -48,100 +57,57 @@ describe('TemplateInvocation', () => {
     expect(screen.getByText('This is red text')).toBeInTheDocument();
     expect(screen.getByText('This is default text')).toBeInTheDocument();
   });
+
   test('filtering toggles', () => {
-    render(
+    const { rerender } = render(
       <Provider store={store}>
-        <TemplateInvocation
-          hostID="1"
-          jobID="1"
-          isInTableView={false}
-          isExpanded
-          hostName="example-host"
-          hostProxy={{ name: 'example-proxy', href: '#' }}
-        />
+        <TemplateInvocation {...mockProps} />
       </Provider>
     );
 
-    act(() => {
-      fireEvent.click(screen.getByText('STDOUT'));
-      fireEvent.click(screen.getByText('DEBUG'));
-      fireEvent.click(screen.getByText('STDERR'));
-    });
-    expect(
-      screen.queryAllByText('No output for the selected filters')
-    ).toHaveLength(1);
-    expect(screen.queryAllByText('Exit status: 1')).toHaveLength(0);
-    expect(
-      screen.queryAllByText('StandardError: Job execution failed')
-    ).toHaveLength(0);
+    expect(screen.queryByText('No output for the selected filters')).not.toBeInTheDocument();
 
-    act(() => {
-      fireEvent.click(screen.getByText('STDOUT'));
-    });
-    expect(
-      screen.queryAllByText('No output for the selected filters')
-    ).toHaveLength(0);
-    expect(screen.queryAllByText('Exit status: 1')).toHaveLength(1);
-    expect(
-      screen.queryAllByText('StandardError: Job execution failed')
-    ).toHaveLength(0);
+    const newProps = {
+      ...mockProps,
+      showOutputType: { stderr: false, stdout: false, debug: false },
+    };
 
-    act(() => {
-      fireEvent.click(screen.getByText('DEBUG'));
-    });
-    expect(
-      screen.queryAllByText('No output for the selected filters')
-    ).toHaveLength(0);
-    expect(screen.queryAllByText('Exit status: 1')).toHaveLength(1);
-    expect(
-      screen.queryAllByText('StandardError: Job execution failed')
-    ).toHaveLength(1);
-  });
-  test('displays an error alert when there is an error', async () => {
-    selectors.selectTemplateInvocationStatus.mockImplementation(() => () =>
-      'ERROR'
+    rerender(
+      <Provider store={store}>
+        <TemplateInvocation {...newProps} />
+      </Provider>
     );
+
+    expect(screen.getByText('No output for the selected filters')).toBeInTheDocument();
+  });
+
+  test('displays an error alert when there is an error', () => {
+    selectors.selectTemplateInvocationStatus.mockImplementation(() => () => 'ERROR');
     selectors.selectTemplateInvocation.mockImplementation(() => () => ({
       response: { data: { error: 'Error message' } },
     }));
     render(
       <Provider store={store}>
-        <TemplateInvocation
-          hostID="1"
-          jobID="1"
-          isInTableView={false}
-          isExpanded
-          hostName="example-host"
-          hostProxy={{ name: 'example-proxy', href: '#' }}
-        />
+        <TemplateInvocation {...mockProps} />
       </Provider>
     );
 
     expect(
-      screen.getByText(
-        'An error occurred while fetching the template invocation details.'
-      )
+      screen.getByText('An error occurred while fetching the template invocation details.')
     ).toBeInTheDocument();
     expect(screen.getByText('Error message')).toBeInTheDocument();
   });
 
-  test('displays a skeleton while loading', async () => {
-    selectors.selectTemplateInvocationStatus.mockImplementation(() => () =>
-      'PENDING'
-    );
-    selectors.selectTemplateInvocation.mockImplementation(() => () => ({}));
+  test('displays a skeleton while loading', () => {
+    selectors.selectTemplateInvocationStatus.mockImplementation(() => () => 'PENDING');
+    selectors.selectTemplateInvocation.mockImplementation(() => () => null);
+
     render(
       <Provider store={store}>
-        <TemplateInvocation
-          hostID="1"
-          jobID="1"
-          isInTableView={false}
-          isExpanded
-          hostName="example-host"
-        />
+        <TemplateInvocation {...mockProps} />
       </Provider>
     );
 
-    expect(document.querySelectorAll('.pf-v5-c-skeleton')).toHaveLength(1);
+    expect(screen.getByTestId('template-invocation-skeleton')).toBeInTheDocument();
   });
 });
