@@ -144,4 +144,76 @@ describe('TemplateInvocation', () => {
 
     expect(document.querySelectorAll('.pf-v5-c-skeleton')).toHaveLength(1);
   });
+
+  test('handles null preview object gracefully', async () => {
+    const mockResponseWithNullPreview = {
+      ...mockTemplateInvocationResponse,
+      preview: null,
+    };
+
+    selectors.selectTemplateInvocationStatus.mockImplementation(() => () =>
+      'RESOLVED'
+    );
+    selectors.selectTemplateInvocation.mockImplementation(() => () =>
+      mockResponseWithNullPreview
+    );
+
+    render(
+      <Provider store={store}>
+        <TemplateInvocation
+          hostID="1"
+          jobID="1"
+          isInTableView={false}
+          isExpanded
+          hostName="example-host"
+          hostProxy={{ name: 'example-proxy', href: '#' }}
+        />
+      </Provider>
+    );
+
+    // Enable showCommand to trigger preview rendering
+    act(() => {
+      fireEvent.click(screen.getByText('Command'));
+    });
+
+    // Should not crash and should not display any preview content
+    expect(screen.queryByText('template-invocation-preview')).not.toBeInTheDocument();
+  });
+
+  test('handles undefined preview.plain gracefully', async () => {
+    const mockResponseWithUndefinedPreview = {
+      ...mockTemplateInvocationResponse,
+      preview: {}, // preview object exists but plain is undefined
+    };
+
+    selectors.selectTemplateInvocationStatus.mockImplementation(() => () =>
+      'RESOLVED'
+    );
+    selectors.selectTemplateInvocation.mockImplementation(() => () =>
+      mockResponseWithUndefinedPreview
+    );
+
+    render(
+      <Provider store={store}>
+        <TemplateInvocation
+          hostID="1"
+          jobID="1"
+          isInTableView={false}
+          isExpanded
+          hostName="example-host"
+          hostProxy={{ name: 'example-proxy', href: '#' }}
+        />
+      </Provider>
+    );
+
+    // Enable showCommand to trigger preview rendering
+    act(() => {
+      fireEvent.click(screen.getByText('Command'));
+    });
+
+    // Should not crash - the optional chaining should handle undefined preview.plain
+    expect(() => {
+      screen.getByText('template-invocation-preview');
+    }).not.toThrow();
+  });
 });
