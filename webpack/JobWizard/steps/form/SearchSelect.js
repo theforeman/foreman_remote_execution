@@ -34,7 +34,7 @@ export const SearchSelect = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let selectOptions = [];
-  if (response.subtotal > maxResults) {
+  if (response?.subtotal > maxResults) {
     selectOptions = [
       <SelectOption
         isDisabled
@@ -60,7 +60,7 @@ export const SearchSelect = ({
 
   const onSelect = (event, selection) => {
     if (variant === SelectVariant.typeahead) {
-      setSelected(response.results.find(r => r.id === selection)); // saving the name and id so we will have access to the name between steps
+      setSelected(response?.results?.find(r => r.id === selection)); // saving the name and id so we will have access to the name between steps
     } else if (variant === SelectVariant.typeaheadMulti) {
       if (selected.map(({ id }) => id).includes(selection)) {
         setSelected(currentSelected =>
@@ -69,7 +69,7 @@ export const SearchSelect = ({
       } else {
         setSelected(currentSelected => [
           ...currentSelected,
-          response.results.find(r => r.id === selection),
+          response?.results?.find(r => r.id === selection),
         ]);
       }
     }
