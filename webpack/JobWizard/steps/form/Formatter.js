@@ -51,7 +51,9 @@ const TemplateSearchField = ({
 };
 
 export const formatter = (input, values, setValue) => {
-  const isSelectType = !!input?.options;
+  if (!input) return null;
+
+  const isSelectType = !!input.options;
   const inputType = input.value_type;
   const isTextType = inputType === 'plain' || !inputType; // null defaults to plain
 
