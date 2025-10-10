@@ -47,7 +47,9 @@ function show_preview_hosts_modal() {
     url: $('#previewHostsModal').attr('data-url')
   }).then(function(result){
     var modal_window = $('#previewHostsModal');
-    modal_window.find('.modal-body').html(result);
+    // Sanitize the result to prevent XSS attacks
+    var sanitizedResult = $('<div>').text(result).html();
+    modal_window.find('.modal-body').html(sanitizedResult);
     modal_window.modal({'show': true});
     modal_window.find('a[rel="popover-modal"]').popover();
   });
