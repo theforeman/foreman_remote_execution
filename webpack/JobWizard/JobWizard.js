@@ -99,8 +99,10 @@ export const JobWizard = ({ rerunData }) => {
       if (inputs) {
         setTemplateValues(prev => {
           inputs.forEach(input => {
-            defaultTemplateValues[input.name] =
-              prev[input.name] || input?.default || '';
+            if (input) {
+              defaultTemplateValues[input.name] =
+                prev[input.name] || input.default || '';
+            }
           });
           return defaultTemplateValues;
         });
@@ -108,8 +110,10 @@ export const JobWizard = ({ rerunData }) => {
       setAdvancedValues(currentAdvancedValues => {
         if (advancedInputs) {
           advancedInputs.forEach(input => {
-            advancedTemplateValues[input.name] =
-              currentAdvancedValues[input.name] || input?.default || '';
+            if (input) {
+              advancedTemplateValues[input.name] =
+                currentAdvancedValues[input.name] || input.default || '';
+            }
           });
         }
         return {
@@ -206,7 +210,7 @@ export const JobWizard = ({ rerunData }) => {
   const [isStartsAtError, setIsStartsAtError] = useState(false);
   useEffect(() => {
     const updateStartsError = () => {
-      if (scheduleValue.scheduleType === SCHEDULE_TYPES.FUTURE) {
+      if (scheduleValue?.scheduleType === SCHEDULE_TYPES.FUTURE) {
         setIsStartsAtError(
           !!scheduleValue?.startsAt?.length &&
             new Date().getTime() >= new Date(scheduleValue.startsAt).getTime()
@@ -216,7 +220,7 @@ export const JobWizard = ({ rerunData }) => {
             new Date().getTime() >=
               new Date(scheduleValue.startsBefore).getTime()
         );
-      } else if (scheduleValue.scheduleType === SCHEDULE_TYPES.RECURRING) {
+      } else if (scheduleValue?.scheduleType === SCHEDULE_TYPES.RECURRING) {
         setIsStartsAtError(
           !!scheduleValue?.startsAt?.length &&
             new Date().getTime() >= new Date(scheduleValue.startsAt).getTime()
