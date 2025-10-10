@@ -258,7 +258,7 @@ const JobInvocationHostTable = ({
     setAPIOptions: filterApiCall,
   };
 
-  const results = apiResponse.results ?? [];
+  const results = apiResponse?.results ?? [];
 
   const selectionToolbar = (
     <ToolbarItem key="selectAll">
