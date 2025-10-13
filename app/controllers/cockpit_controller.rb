@@ -24,7 +24,7 @@ class CockpitController < ApplicationController
     return invalid_request unless redir_url.hostname == expected_hostname
 
     redir_url.query = "access_token=#{request.session_options[:id]}"
-    redirect_to(redir_url.to_s)
+    redirect_to(redir_url.to_s, allow_other_host: true)
   end
 
   private
