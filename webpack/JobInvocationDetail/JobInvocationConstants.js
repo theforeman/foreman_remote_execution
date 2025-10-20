@@ -87,11 +87,6 @@ const Columns = () => {
   const hostDetailsPageUrl = useForemanHostDetailsPageUrl();
 
   return {
-    expand: {
-      title: ' ',
-      weight: 0,
-      wrapper: () => null,
-    },
     name: {
       title: __('Name'),
       wrapper: ({ name }) => (
