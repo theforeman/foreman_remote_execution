@@ -28,6 +28,7 @@ const JobInvocationOverview = ({
 
   return (
     <DescriptionList
+      className="job-overview-description-list"
       columnModifier={{
         default: '2Col',
       }}

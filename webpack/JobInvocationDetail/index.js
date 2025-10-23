@@ -127,10 +127,7 @@ const JobInvocationDetailPage = ({
         toolbarButtons={<JobInvocationToolbarButtons jobId={id} data={items} />}
         searchable={false}
       >
-        <Flex
-          className="job-invocation-detail-flex"
-          alignItems={{ default: 'alignItemsFlexStart' }}
-        >
+        <Flex className="job-invocation-detail-flex">
           <SkeletonLoader
             status={pageStatus}
             skeletonProps={{
@@ -150,24 +147,19 @@ const JobInvocationDetailPage = ({
               default: 'vertical',
             }}
           />
-          <Flex
-            className="job-overview"
-            alignItems={{ default: 'alignItemsCenter' }}
+          <SkeletonLoader
+            status={pageStatus}
+            skeletonProps={{
+              height: 105,
+              width: 270,
+            }}
           >
-            <SkeletonLoader
-              status={pageStatus}
-              skeletonProps={{
-                height: 105,
-                width: 270,
-              }}
-            >
-              <JobInvocationOverview
-                data={items}
-                isAlreadyStarted={isAlreadyStarted}
-                formattedStartDate={formattedStartDate}
-              />
-            </SkeletonLoader>
-          </Flex>
+            <JobInvocationOverview
+              data={items}
+              isAlreadyStarted={isAlreadyStarted}
+              formattedStartDate={formattedStartDate}
+            />
+          </SkeletonLoader>
         </Flex>
         <PageSection
           variant={PageSectionVariants.light}

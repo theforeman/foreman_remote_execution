@@ -2,6 +2,8 @@
   $chart_size: 105px;
   padding-top: 0px;
   padding-left: 10px;
+  display: flex;
+  align-items: center;
 
   .chart-donut {
     height: $chart_size;
@@ -47,13 +49,13 @@
   .pf-v5-c-divider {
     max-height: $chart_size;
   }
-
-  .job-overview {
-    height: $chart_size;
-  }
 }
 
-.job-additional-info {
+.job-invocation-detail-flex .job-overview-description-list {
+  margin: 0;
+}
+
+section.job-additional-info {
   padding: 0;
   margin-bottom: -10px;
 }
