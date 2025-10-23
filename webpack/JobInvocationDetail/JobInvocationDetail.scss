@@ -72,6 +72,10 @@
     margin-left: 10px;
     margin-right: 15px;
   }
+  
+  .pf-v5-c-table__tbody > tr.row-hidden {
+    display: none;
+  }
 }
 
 .template-invocation {
