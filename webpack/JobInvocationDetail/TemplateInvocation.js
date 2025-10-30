@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { ClipboardCopyButton, Alert, Skeleton } from '@patternfly/react-core';
@@ -60,6 +60,12 @@ export const TemplateInvocation = ({
   isExpanded,
   hostName,
   hostProxy,
+  showOutputType,
+  setShowOutputType,
+  showTemplatePreview,
+  setShowTemplatePreview,
+  showCommand,
+  setShowCommand,
 }) => {
   const intervalRef = useRef(null);
   const templateURL = showTemplateInvocationUrl(hostID, jobID);
@@ -73,14 +79,6 @@ export const TemplateInvocation = ({
   useEffect(() => {
     responseRef.current = response;
   }, [response]);
-
-  const [showOutputType, setShowOutputType] = useState({
-    stderr: true,
-    stdout: true,
-    debug: true,
-  });
-  const [showTemplatePreview, setShowTemplatePreview] = useState(false);
-  const [showCommand, setShowCommand] = useState(false);
 
   useEffect(() => {
     const dispatchFetch = () => {
@@ -123,12 +121,8 @@ export const TemplateInvocation = ({
     };
   }, [isExpanded, dispatch, templateURL, hostID]);
 
-  if (!isExpanded) {
-    return null;
-  }
-
-  if ((status === STATUS.PENDING && isEmpty(response)) || !response) {
-    return <Skeleton />;
+  if (!response || (status === STATUS.PENDING && isEmpty(response))) {
+    return <Skeleton data-testid="template-invocation-skeleton" />;
   }
 
   const errorMessage =
@@ -239,6 +233,16 @@ TemplateInvocation.propTypes = {
   jobID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   isInTableView: PropTypes.bool,
   isExpanded: PropTypes.bool,
+  showOutputType: PropTypes.shape({
+    stderr: PropTypes.bool,
+    stdout: PropTypes.bool,
+    debug: PropTypes.bool,
+  }).isRequired,
+  setShowOutputType: PropTypes.func.isRequired,
+  showTemplatePreview: PropTypes.bool.isRequired,
+  setShowTemplatePreview: PropTypes.func.isRequired,
+  showCommand: PropTypes.bool.isRequired,
+  setShowCommand: PropTypes.func.isRequired,
 };
 
 TemplateInvocation.defaultProps = {
