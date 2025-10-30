@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { APIActions } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
-import { RowSelectTd } from 'foremanReact/components/HostsIndex/RowSelectTd';
+import { RowSelectTd } from 'foremanReact/components/PF4/TableIndexPage/RowSelectTd';
 import SelectAllCheckbox from 'foremanReact/components/PF4/TableIndexPage/Table/SelectAllCheckbox';
 import { Table } from 'foremanReact/components/PF4/TableIndexPage/Table/Table';
 import {
