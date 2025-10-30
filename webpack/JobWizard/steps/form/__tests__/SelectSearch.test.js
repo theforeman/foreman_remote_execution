@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { SearchSelect } from '../SearchSelect';
 
-const apiKey = 'HOSTS_KEY';
+const TEST_API_KEY = 'HOSTS_KEY';
 
 describe('SearchSelect', () => {
   it('too many', () => {
@@ -12,7 +12,7 @@ describe('SearchSelect', () => {
       <SearchSelect
         selected={['hosts1,host2']}
         setSelected={jest.fn()}
-        apiKey={apiKey}
+        apiKey={TEST_API_KEY}
         url="/hosts"
         placeholderText="Test hosts"
         useNameSearch={() => [
