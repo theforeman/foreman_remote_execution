@@ -116,13 +116,11 @@ module Api
       def hosts
         set_hosts_and_template_invocations
         set_statuses_and_smart_proxies
-        @total = @job_invocation.targeting.hosts.size
+        @total = @hosts.size
         @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
+        @subtotal = @hosts.total_entries
         if params[:awaiting]
           @hosts = @hosts.select { |host| @host_statuses[host.id] == 'N/A' }
-          @subtotal = @hosts.size
-        else
-          @subtotal = @hosts.respond_to?(:total_entries) ? @hosts.total_entries : @hosts.sizes
         end
         render :hosts, :layout => 'api/v2/layouts/index_layout'
       end
@@ -303,7 +301,7 @@ module Api
         @pattern_template_invocations = @job_invocation.pattern_template_invocations.includes(:input_values)
         @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
 
-        unless params[:search].nil?
+        if params[:search].present?
           @hosts = @hosts.joins(:template_invocations)
                          .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
         end
