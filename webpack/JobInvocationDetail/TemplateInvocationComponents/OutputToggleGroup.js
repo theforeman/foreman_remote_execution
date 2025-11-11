@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   ToggleGroup,
@@ -27,31 +27,49 @@ export const OutputToggleGroup = ({
   taskCancellable,
   permissions,
 }) => {
-  const handleSTDERRClick = _isSelected => {
-    setShowOutputType(prevShowOutputType => ({
-      ...prevShowOutputType,
-      stderr: _isSelected,
-    }));
-  };
+  const handleSTDERRClick = useCallback(
+    _isSelected => {
+      setShowOutputType(prevShowOutputType => ({
+        ...prevShowOutputType,
+        stderr: _isSelected,
+      }));
+    },
+    [setShowOutputType]
+  );
 
-  const handleSTDOUTClick = _isSelected => {
-    setShowOutputType(prevShowOutputType => ({
-      ...prevShowOutputType,
-      stdout: _isSelected,
-    }));
-  };
-  const handleDEBUGClick = _isSelected => {
-    setShowOutputType(prevShowOutputType => ({
-      ...prevShowOutputType,
-      debug: _isSelected,
-    }));
-  };
-  const handlePreviewTemplateClick = _isSelected => {
-    setShowTemplatePreview(_isSelected);
-  };
-  const handleCommandClick = _isSelected => {
-    setShowCommand(_isSelected);
-  };
+  const handleSTDOUTClick = useCallback(
+    _isSelected => {
+      setShowOutputType(prevShowOutputType => ({
+        ...prevShowOutputType,
+        stdout: _isSelected,
+      }));
+    },
+    [setShowOutputType]
+  );
+
+  const handleDEBUGClick = useCallback(
+    _isSelected => {
+      setShowOutputType(prevShowOutputType => ({
+        ...prevShowOutputType,
+        debug: _isSelected,
+      }));
+    },
+    [setShowOutputType]
+  );
+
+  const handlePreviewTemplateClick = useCallback(
+    _isSelected => {
+      setShowTemplatePreview(_isSelected);
+    },
+    [setShowTemplatePreview]
+  );
+
+  const handleCommandClick = useCallback(
+    _isSelected => {
+      setShowCommand(_isSelected);
+    },
+    [setShowCommand]
+  );
 
   const toggleGroupItems = {
     stderr: {
