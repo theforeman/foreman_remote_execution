@@ -95,6 +95,14 @@ export const useAutoFill = ({
         });
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fills]);
+  }, [
+    fills,
+    setFills,
+    setSelectedTargets,
+    setHostsSearchQuery,
+    setJobTemplateID,
+    setTemplateValues,
+    setAdvancedValues,
+    dispatch,
+  ]);
 };

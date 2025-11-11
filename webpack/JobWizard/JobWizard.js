@@ -131,8 +131,7 @@ export const JobWizard = ({ rerunData }) => {
         };
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [category.length]
+    [category, setCategory, setTemplateValues, setAdvancedValues]
   );
   useEffect(() => {
     if (rerunData) {
@@ -153,8 +152,7 @@ export const JobWizard = ({ rerunData }) => {
         },
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rerunData]);
+  }, [rerunData, setDefaults]);
   useEffect(() => {
     if (jobTemplateID) {
       dispatch(
@@ -199,8 +197,14 @@ export const JobWizard = ({ rerunData }) => {
         })
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rerunData, jobTemplateID, dispatch]);
+  }, [
+    rerunData,
+    jobTemplateID,
+    dispatch,
+    setDefaults,
+    setTemplateValues,
+    setAdvancedValues,
+  ]);
 
   const [isStartsBeforeError, setIsStartsBeforeError] = useState(false);
   const [isStartsAtError, setIsStartsAtError] = useState(false);

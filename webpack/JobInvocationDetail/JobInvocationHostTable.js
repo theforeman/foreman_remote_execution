@@ -24,7 +24,13 @@ import TableIndexPage from 'foremanReact/components/PF4/TableIndexPage/TableInde
 import { getControllerSearchProps } from 'foremanReact/constants';
 import { Icon } from 'patternfly-react';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+  useCallback,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import { useForemanSettings } from 'foremanReact/Root/Context/ForemanContext';
@@ -93,19 +99,22 @@ const JobInvocationHostTable = ({
   });
 
   // Search filter
-  const constructFilter = (filter = initialFilter, search = urlSearchQuery) => {
-    const dropdownFilterClause =
-      filter && filter !== 'all_statuses'
-        ? `job_invocation.result = ${filter}`
-        : null;
-    const parts = [dropdownFilterClause, search];
-    return parts
-      .filter(x => x)
-      .map(fragment => `(${fragment})`)
-      .join(' AND ');
-  };
+  const constructFilter = useCallback(
+    (filter = initialFilter, search = urlSearchQuery) => {
+      const dropdownFilterClause =
+        filter && filter !== 'all_statuses'
+          ? `job_invocation.result = ${filter}`
+          : null;
+      const parts = [dropdownFilterClause, search];
+      return parts
+        .filter(x => x)
+        .map(fragment => `(${fragment})`)
+        .join(' AND ');
+    },
+    [initialFilter, urlSearchQuery]
+  );
 
-  const handleResponse = (data, key) => {
+  const handleResponse = useCallback((data, key) => {
     if (key === JOB_INVOCATION_HOSTS) {
       const ids = data.data.results.map(i => i.id);
 
@@ -114,76 +123,94 @@ const JobInvocationHostTable = ({
     }
 
     setStatus(STATUS_UPPERCASE.RESOLVED);
-  };
+  }, []);
 
   // Call hosts data with params
-  const makeApiCall = (requestParams, callParams = {}) => {
-    dispatch(
-      APIActions.get({
-        key: callParams.key ?? ALL_JOB_HOSTS,
-        url: callParams.url ?? `/api/job_invocations/${id}/hosts`,
-        params: requestParams,
-        handleSuccess: data => handleResponse(data, callParams.key),
-        handleError: () => setStatus(STATUS_UPPERCASE.ERROR),
-        errorToast: ({ response }) =>
-          response?.data?.error?.full_messages?.[0] || response,
-      })
-    );
-  };
+  const makeApiCall = useCallback(
+    (requestParams, callParams = {}) => {
+      dispatch(
+        APIActions.get({
+          key: callParams.key ?? ALL_JOB_HOSTS,
+          url: callParams.url ?? `/api/job_invocations/${id}/hosts`,
+          params: requestParams,
+          handleSuccess: data => handleResponse(data, callParams.key),
+          handleError: () => setStatus(STATUS_UPPERCASE.ERROR),
+          errorToast: ({ response }) =>
+            response?.data?.error?.full_messages?.[0] || response,
+        })
+      );
+    },
+    [dispatch, id, handleResponse]
+  );
 
-  const filterApiCall = newAPIOptions => {
-    const newParams = newAPIOptions?.params ?? newAPIOptions ?? {};
+  const filterApiCall = useCallback(
+    newAPIOptions => {
+      const newParams = newAPIOptions?.params ?? newAPIOptions ?? {};
 
-    const filterSearch = constructFilter(
+      const filterSearch = constructFilter(
+        initialFilter,
+        newParams.search ?? urlSearchQuery
+      );
+
+      const finalParams = {
+        ...defaultParams,
+        ...newParams,
+      };
+
+      if (filterSearch === AWAITING_STATUS_FILTER) {
+        finalParams.awaiting = 'true';
+      } else if (filterSearch !== '') {
+        finalParams.search = filterSearch;
+      }
+
+      makeApiCall(finalParams, { key: JOB_INVOCATION_HOSTS });
+
+      const urlSearchParams = new URLSearchParams(window.location.search);
+
+      ['page', 'per_page', 'order'].forEach(key => {
+        if (finalParams[key]) urlSearchParams.set(key, finalParams[key]);
+      });
+
+      history.push({ search: urlSearchParams.toString() });
+    },
+    [
       initialFilter,
-      newParams.search ?? urlSearchQuery
-    );
-
-    const finalParams = {
-      ...defaultParams,
-      ...newParams,
-    };
-
-    if (filterSearch === AWAITING_STATUS_FILTER) {
-      finalParams.awaiting = 'true';
-    } else if (filterSearch !== '') {
-      finalParams.search = filterSearch;
-    }
-
-    makeApiCall(finalParams, { key: JOB_INVOCATION_HOSTS });
-
-    const urlSearchParams = new URLSearchParams(window.location.search);
-
-    ['page', 'per_page', 'order'].forEach(key => {
-      if (finalParams[key]) urlSearchParams.set(key, finalParams[key]);
-    });
-
-    history.push({ search: urlSearchParams.toString() });
-  };
+      urlSearchQuery,
+      defaultParams,
+      makeApiCall,
+      history,
+      constructFilter,
+    ]
+  );
 
   // Filter change
-  const handleFilterChange = newFilter => {
-    onFilterUpdate(newFilter);
-  };
+  const handleFilterChange = useCallback(
+    newFilter => {
+      onFilterUpdate(newFilter);
+    },
+    [onFilterUpdate]
+  );
 
   // Effects
   // run after mount
+  const initializedRef = useRef(false);
   useEffect(() => {
-    // Job Invo template load
-    makeApiCall(
-      {},
-      {
-        url: `/job_invocations/${id}/hosts`,
-        key: LIST_TEMPLATE_INVOCATIONS,
+    if (!initializedRef.current) {
+      // Job Invo template load
+      makeApiCall(
+        {},
+        {
+          url: `/job_invocations/${id}/hosts`,
+          key: LIST_TEMPLATE_INVOCATIONS,
+        }
+      );
+
+      if (initialFilter === '') {
+        onFilterUpdate('all_statuses');
       }
-    );
-
-    if (initialFilter === '') {
-      onFilterUpdate('all_statuses');
+      initializedRef.current = true;
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [makeApiCall, id, initialFilter, onFilterUpdate]);
 
   useEffect(() => {
     if (initialFilter !== '') filterApiCall();
@@ -192,8 +219,7 @@ const JobInvocationHostTable = ({
       prevStatusLabel.current = statusLabel;
       filterApiCall();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialFilter, statusLabel, id]);
+  }, [initialFilter, statusLabel, id, filterApiCall]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
