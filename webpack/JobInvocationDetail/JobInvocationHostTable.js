@@ -61,8 +61,46 @@ const JobInvocationHostTable = ({
   const [allHostsIds, setAllHostsIds] = useState([]);
 
   // Expansive items
-  const [expandedHost, setExpandedHost] = useState([]);
+  const [expandedHost, setExpandedHost] = useState(new Set());
   const prevStatusLabel = useRef(statusLabel);
+
+  const [hostInvocationStates, setHostInvocationStates] = useState({});
+
+  const getInvocationState = hostId =>
+    hostInvocationStates[hostId] || {
+      showOutputType: { stderr: true, stdout: true, debug: true },
+      showTemplatePreview: false,
+      showCommand: false,
+    };
+
+  const updateInvocationState = (hostId, stateKey, value) => {
+    setHostInvocationStates(prevStates => {
+      const currentHostState = getInvocationState(hostId);
+
+      const newValue =
+        typeof value === 'function' ? value(currentHostState[stateKey]) : value;
+
+      return {
+        ...prevStates,
+        [hostId]: {
+          ...currentHostState,
+          [stateKey]: newValue,
+        },
+      };
+    });
+  };
+
+  const isHostExpanded = hostId => expandedHost.has(hostId);
+  const setHostExpanded = (hostId, isExpanding = true) =>
+    setExpandedHost(prevExpandedSet => {
+      const newSet = new Set(prevExpandedSet);
+      if (isExpanding) {
+        newSet.add(hostId);
+      } else {
+        newSet.delete(hostId);
+      }
+      return newSet;
+    });
 
   // Page table params
   // Parse URL
@@ -307,29 +345,18 @@ const JobInvocationHostTable = ({
     </Tr>
   );
 
-  const isHostExpanded = host => expandedHost.includes(host.id);
-
-  const setHostExpanded = (host, isExpanding = true) =>
-    setExpandedHost(prevExpanded => {
-      const otherExpandedHosts = prevExpanded.filter(h => h !== host.id);
-      return isExpanding
-        ? [...otherExpandedHosts, host.id]
-        : otherExpandedHosts;
-    });
-
   const pageHostIds = results.map(h => h.id);
 
   const areAllPageRowsExpanded =
     pageHostIds.length > 0 &&
-    pageHostIds.every(hostId => expandedHost.includes(hostId));
+    pageHostIds.every(hostId => expandedHost.has(hostId));
 
   const onExpandAll = () => {
     setExpandedHost(() => {
       if (areAllPageRowsExpanded) {
-        return [];
+        return new Set();
       }
-
-      return pageHostIds;
+      return new Set(pageHostIds);
     });
   };
 
@@ -393,54 +420,88 @@ const JobInvocationHostTable = ({
           isDeleteable={false}
           childrenOutsideTbody
         >
-          {results.map((result, rowIndex) => (
-            <Tbody key={result.id} isExpanded={isHostExpanded(result)}>
-              <Tr ouiaId={`table-row-${result.id}`}>
-                <Td
-                  expand={{
-                    rowIndex,
-                    isExpanded: isHostExpanded(result),
-                    onToggle: () =>
-                      setHostExpanded(result, !isHostExpanded(result)),
-                    expandId: 'host-expandable',
-                  }}
-                />
-                <RowSelectTd rowData={result} {...{ selectOne, isSelected }} />
-                {columnNamesKeys.map(k => (
-                  <Td key={k}>{columns[k].wrapper(result)}</Td>
-                ))}
-                <Td isActionCell>
-                  <RowActions hostID={result.id} jobID={id} />
-                </Td>
-              </Tr>
-              <Tr
-                isExpanded={isHostExpanded(result)}
-                ouiaId="table-row-expanded-sections"
-              >
-                <Td
-                  dataLabel={`${result.id}-expandable-content`}
-                  colSpan={columnNamesKeys.length + 3}
+          {results.map((result, rowIndex) => {
+            const currentInvocationState = getInvocationState(result.id);
+            return (
+              <Tbody key={result.id}>
+                <Tr ouiaId={`table-row-${result.id}`}>
+                  <Td
+                    expand={{
+                      rowIndex,
+                      isExpanded: isHostExpanded(result.id),
+                      onToggle: () =>
+                        setHostExpanded(result.id, !isHostExpanded(result.id)),
+                      expandId: 'host-expandable',
+                    }}
+                  />
+                  <RowSelectTd
+                    rowData={result}
+                    selectOne={selectOne}
+                    isSelected={isSelected}
+                  />
+                  {columnNamesKeys.map(k => (
+                    <Td key={k}>{columns[k].wrapper(result)}</Td>
+                  ))}
+                  <Td isActionCell>
+                    <RowActions hostID={result.id} jobID={id} />
+                  </Td>
+                </Tr>
+                <Tr
+                  isExpanded={isHostExpanded(result.id)}
+                  ouiaId="table-row-expanded-sections"
+                  className={!isHostExpanded(result.id) ? 'row-hidden' : ''}
                 >
-                  <ExpandableRowContent>
-                    {result.job_status === 'cancelled' ||
-                    result.job_status === 'N/A' ? (
-                      <div>
-                        {__('A task for this host has not been started')}
-                      </div>
-                    ) : (
-                      <TemplateInvocation
-                        key={`${result.id}-${result.job_status}`}
-                        hostID={result.id}
-                        jobID={id}
-                        isInTableView
-                        isExpanded={isHostExpanded(result)}
-                      />
-                    )}
-                  </ExpandableRowContent>
-                </Td>
-              </Tr>
-            </Tbody>
-          ))}
+                  <Td
+                    dataLabel={`${result.id}-expandable-content`}
+                    colSpan={columnNamesKeys.length + 3}
+                  >
+                    <ExpandableRowContent>
+                      {result.job_status === 'cancelled' ||
+                      result.job_status === 'N/A' ? (
+                        <div>
+                          {__('A task for this host has not been started')}
+                        </div>
+                      ) : (
+                        <TemplateInvocation
+                          key={result.id}
+                          hostID={result.id}
+                          jobID={id}
+                          isInTableView
+                          isExpanded={isHostExpanded(result.id)}
+                          showOutputType={currentInvocationState.showOutputType}
+                          showTemplatePreview={
+                            currentInvocationState.showTemplatePreview
+                          }
+                          showCommand={currentInvocationState.showCommand}
+                          setShowOutputType={value =>
+                            updateInvocationState(
+                              result.id,
+                              'showOutputType',
+                              value
+                            )
+                          }
+                          setShowTemplatePreview={value =>
+                            updateInvocationState(
+                              result.id,
+                              'showTemplatePreview',
+                              value
+                            )
+                          }
+                          setShowCommand={value =>
+                            updateInvocationState(
+                              result.id,
+                              'showCommand',
+                              value
+                            )
+                          }
+                        />
+                      )}
+                    </ExpandableRowContent>
+                  </Td>
+                </Tr>
+              </Tbody>
+            );
+          })}
         </Table>
       </TableIndexPage>
     </>

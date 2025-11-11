@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
@@ -26,6 +26,15 @@ const TemplateInvocationPage = ({
     ],
     isPf4: true,
   };
+
+  const [showOutputType, setShowOutputType] = useState({
+    stderr: true,
+    stdout: true,
+    debug: true,
+  });
+  const [showTemplatePreview, setShowTemplatePreview] = useState(false);
+  const [showCommand, setShowCommand] = useState(false);
+
   return (
     <PageLayout
       header={description}
@@ -39,6 +48,12 @@ const TemplateInvocationPage = ({
         isExpanded
         hostName={hostName}
         hostProxy={hostProxy}
+        showOutputType={showOutputType}
+        setShowOutputType={setShowOutputType}
+        showTemplatePreview={showTemplatePreview}
+        setShowTemplatePreview={setShowTemplatePreview}
+        showCommand={showCommand}
+        setShowCommand={setShowCommand}
       />
     </PageLayout>
   );
