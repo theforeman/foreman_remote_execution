@@ -78,21 +78,18 @@ const ConnectedCategoryAndTemplate = ({
               per_page: 'all',
             }),
             handleSuccess: response => {
-              if (!jobTemplate)
-                setJobTemplate(
-                  current =>
-                    current ||
-                    Number(
-                      filterJobTemplates(response?.data?.results)[0]?.id
-                    ) ||
-                    null
-                );
+              setJobTemplate(
+                current =>
+                  current ||
+                  Number(filterJobTemplates(response?.data?.results)[0]?.id) ||
+                  null
+              );
             },
           })
         );
       }
     }
-  }, [category, dispatch, jobTemplatesSearch, jobTemplate, setJobTemplate]);
+  }, [category, dispatch, jobTemplatesSearch, setJobTemplate]);
 
   const jobTemplates = useSelector(selectJobTemplates);
 
