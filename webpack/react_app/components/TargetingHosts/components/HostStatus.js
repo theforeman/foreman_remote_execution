@@ -17,7 +17,13 @@ const HostStatus = ({ status }) => {
           <Icon type="fa" name="question" /> {__('Awaiting start')}
         </div>
       );
-    case 'running' || 'pending':
+    case 'running':
+      return (
+        <div>
+          <Icon type="pf" name="running" /> {__('Pending')}
+        </div>
+      );
+    case 'pending':
       return (
         <div>
           <Icon type="pf" name="running" /> {__('Pending')}

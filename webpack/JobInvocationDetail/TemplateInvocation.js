@@ -206,10 +206,10 @@ export const TemplateInvocation = ({
             <Alert
               variant="danger"
               ouiaId="template-invocation-preview-alert"
-              title={preview.plain}
+              title={preview?.plain}
             />
           ) : (
-            <pre className="template-invocation-preview">{preview.plain}</pre>
+            <pre className="template-invocation-preview">{preview?.plain}</pre>
           )}
         </>
       )}

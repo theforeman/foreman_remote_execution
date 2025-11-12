@@ -24,7 +24,7 @@ export const submit = ({
     startsBefore,
     ends,
     purpose,
-  } = scheduleValue;
+  } = scheduleValue || {};
   const {
     sshUser,
     effectiveUserValue,
