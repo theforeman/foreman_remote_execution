@@ -46,8 +46,6 @@ export const useValidation = ({ advancedValues, templateValues }) => {
         setValid(currValid => ({ ...currValid, advanced: false }));
       }
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [advancedValues, templateValues]);
+  }, [advancedValues, templateValues, templateInputs, advancedTemplateInputs]);
   return [valid, setValid];
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   Select,
@@ -25,14 +25,13 @@ export const SearchSelect = ({
   const [onSearch, response, isLoading] = useNameSearch(apiKey, url);
   const [isOpen, setIsOpen] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
+  const initializedRef = useRef(false);
   useEffect(() => {
-    onSearch(selected.name || '');
-    if (typingTimeout) {
-      return () => clearTimeout(typingTimeout);
+    if (!initializedRef.current) {
+      onSearch(selected.name || '');
+      initializedRef.current = true;
     }
-    return undefined;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [onSearch, selected.name]);
   let selectOptions = [];
   if (response.subtotal > maxResults) {
     selectOptions = [

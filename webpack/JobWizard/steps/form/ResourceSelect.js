@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   Select,
@@ -26,27 +26,29 @@ export const ResourceSelect = ({
   const maxResults = perPage;
   const dispatch = useDispatch();
   const uri = new URI(url);
-  const onSearch = search => {
-    dispatch(
-      get({
-        key: apiKey,
-        url: uri.addSearch(search),
-      })
-    );
-  };
+  const onSearch = useCallback(
+    search => {
+      dispatch(
+        get({
+          key: apiKey,
+          url: uri.addSearch(search),
+        })
+      );
+    },
+    [dispatch, apiKey, uri]
+  );
 
   const response = useSelector(state => selectResponse(state, apiKey));
   const isLoading = useSelector(state => selectIsLoading(state, apiKey));
   const [isOpen, setIsOpen] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
+  const initializedRef = useRef(false);
   useEffect(() => {
-    onSearch(selected ? { id: selected } : {});
-    if (typingTimeout) {
-      return () => clearTimeout(typingTimeout);
+    if (!initializedRef.current) {
+      onSearch(selected ? { id: selected } : {});
+      initializedRef.current = true;
     }
-    return undefined;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [onSearch, selected]);
   let selectOptions = [];
   if (response.subtotal > maxResults) {
     selectOptions = [

@@ -55,8 +55,13 @@ const ConnectedCategoryAndTemplate = ({
         })
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [jobCategoriesStatus]);
+  }, [
+    jobCategoriesStatus,
+    dispatch,
+    isCategoryPreselected,
+    setCategory,
+    setJobTemplate,
+  ]);
 
   const jobCategories = useSelector(selectJobCategories);
   const jobTemplatesSearch = useSelector(selectJobTemplatesSearch);
@@ -73,22 +78,18 @@ const ConnectedCategoryAndTemplate = ({
               per_page: 'all',
             }),
             handleSuccess: response => {
-              if (!jobTemplate)
-                setJobTemplate(
-                  current =>
-                    current ||
-                    Number(
-                      filterJobTemplates(response?.data?.results)[0]?.id
-                    ) ||
-                    null
-                );
+              setJobTemplate(
+                current =>
+                  current ||
+                  Number(filterJobTemplates(response?.data?.results)[0]?.id) ||
+                  null
+              );
             },
           })
         );
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, dispatch]);
+  }, [category, dispatch, jobTemplatesSearch, setJobTemplate]);
 
   const jobTemplates = useSelector(selectJobTemplates);
 
