@@ -173,10 +173,12 @@ const JobWizardPageRerun = ({
             <Divider component="div" />
             <JobWizard
               rerunData={
-                {
-                  ...jobInvocationResponse?.job,
-                  inputs: jobInvocationResponse?.inputs,
-                } || null
+                jobInvocationResponse?.job
+                  ? {
+                      ...jobInvocationResponse.job,
+                      inputs: jobInvocationResponse?.inputs,
+                    }
+                  : null
               }
             />
           </React.Fragment>

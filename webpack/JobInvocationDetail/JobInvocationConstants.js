@@ -74,7 +74,9 @@ const Columns = () => {
         return { title: __('Failed'), status: 1 };
       case 'planned':
         return { title: __('Scheduled'), status: 2 };
-      case 'running' || 'pending':
+      case 'running':
+        return { title: __('Pending'), status: 3 };
+      case 'pending':
         return { title: __('Pending'), status: 3 };
       case 'cancelled':
         return { title: __('Cancelled'), status: 4 };

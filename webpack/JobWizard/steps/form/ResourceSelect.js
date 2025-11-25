@@ -48,7 +48,7 @@ export const ResourceSelect = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let selectOptions = [];
-  if (response.subtotal > maxResults) {
+  if (response?.subtotal > maxResults) {
     selectOptions = [
       <SelectOption
         isDisabled
