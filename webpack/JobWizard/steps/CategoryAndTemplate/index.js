@@ -78,12 +78,23 @@ const ConnectedCategoryAndTemplate = ({
               per_page: 'all',
             }),
             handleSuccess: response => {
-              setJobTemplate(
-                current =>
-                  current ||
-                  Number(filterJobTemplates(response?.data?.results)[0]?.id) ||
-                  null
+              const filteredTemplates = filterJobTemplates(
+                response?.data?.results
               );
+              setJobTemplate(current => {
+                // Check if current template is in the new category's template list.
+                // This preserves the user's selection when changing categories on rerun,
+                // preventing the category from flashing and reverting back (Issue #38899).
+                // We check the state value (current) rather than the prop to avoid race conditions.
+                if (
+                  current &&
+                  filteredTemplates.some(template => template.id === current)
+                ) {
+                  return current;
+                }
+                // Otherwise, select the first template from the new category
+                return Number(filteredTemplates[0]?.id) || null;
+              });
             },
           })
         );

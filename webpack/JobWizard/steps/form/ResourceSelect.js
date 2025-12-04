@@ -25,9 +25,9 @@ export const ResourceSelect = ({
   const { perPage } = useForemanSettings();
   const maxResults = perPage;
   const dispatch = useDispatch();
-  const uri = new URI(url);
   const onSearch = useCallback(
     search => {
+      const uri = new URI(url);
       dispatch(
         get({
           key: apiKey,
@@ -35,7 +35,7 @@ export const ResourceSelect = ({
         })
       );
     },
-    [dispatch, apiKey, uri]
+    [dispatch, apiKey, url]
   );
 
   const response = useSelector(state => selectResponse(state, apiKey));

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { get } from 'foremanReact/redux/API';
@@ -56,17 +56,25 @@ const WrappedTargetingHosts = () => {
     }
   }, [dispatch, intervalExists]);
 
+  // Use ref to avoid infinite loop from handleSearch depending on pagination.per_page
+  const perPageRef = useRef(pagination.per_page);
+
   const handleSearch = useCallback(
     (query, status) => {
-      const defaultPagination = { page: 1, per_page: pagination.per_page };
+      const defaultPagination = { page: 1, per_page: perPageRef.current };
       stopApiInterval();
 
       setApiUrl(getApiUrl(buildSearchQuery(query, status), defaultPagination));
       setSearchQuery(query);
       setPagination(defaultPagination);
     },
-    [pagination.per_page, stopApiInterval]
+    [stopApiInterval]
   );
+
+  // Keep ref in sync with pagination
+  useEffect(() => {
+    perPageRef.current = pagination.per_page;
+  }, [pagination.per_page]);
 
   const handlePagination = useCallback(
     args => {

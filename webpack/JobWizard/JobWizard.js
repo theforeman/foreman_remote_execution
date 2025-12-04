@@ -89,9 +89,6 @@ export const JobWizard = ({ rerunData }) => {
         concurrency_control = {},
       },
     }) => {
-      if (category !== job_category) {
-        setCategory(job_category);
-      }
       const advancedTemplateValues = {};
       const defaultTemplateValues = {};
       const inputs = template_inputs;
@@ -131,7 +128,7 @@ export const JobWizard = ({ rerunData }) => {
         };
       });
     },
-    [category, setCategory, setTemplateValues, setAdvancedValues]
+    [setTemplateValues, setAdvancedValues]
   );
   useEffect(() => {
     if (rerunData) {
@@ -518,7 +515,7 @@ JobWizard.propTypes = {
     }),
     execution_timeout_interval: PropTypes.number,
     time_to_pickup: PropTypes.number,
-    remote_execution_feature_id: PropTypes.string,
+    remote_execution_feature_id: PropTypes.number,
     template_invocations: PropTypes.arrayOf(
       PropTypes.shape({
         template_id: PropTypes.number,
