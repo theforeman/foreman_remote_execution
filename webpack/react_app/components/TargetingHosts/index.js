@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { get } from 'foremanReact/redux/API';
@@ -50,38 +50,55 @@ const WrappedTargetingHosts = () => {
   const [apiUrl, setApiUrl] = useState(getApiUrl(searchQuery, pagination));
   const intervalExists = useSelector(selectIntervalExists);
 
-  const handleSearch = (query, status) => {
-    const defaultPagination = { page: 1, per_page: pagination.per_page };
-    stopApiInterval();
-
-    setApiUrl(getApiUrl(buildSearchQuery(query, status), defaultPagination));
-    setSearchQuery(query);
-    setPagination(defaultPagination);
-  };
-
-  const handlePagination = args => {
-    stopApiInterval();
-    setPagination(args);
-    setApiUrl(getApiUrl(buildSearchQuery(searchQuery, statusFilter), args));
-  };
-
-  const stopApiInterval = () => {
+  const stopApiInterval = useCallback(() => {
     if (intervalExists) {
       dispatch(stopInterval(TARGETING_HOSTS));
     }
-  };
+  }, [dispatch, intervalExists]);
 
-  const getData = url =>
-    withInterval(
-      get({
-        key: TARGETING_HOSTS,
-        url,
-        handleError: () => {
-          dispatch(stopInterval(TARGETING_HOSTS));
-        },
-      }),
-      1000
-    );
+  // Use ref to avoid infinite loop from handleSearch depending on pagination.per_page
+  const perPageRef = useRef(pagination.per_page);
+
+  const handleSearch = useCallback(
+    (query, status) => {
+      const defaultPagination = { page: 1, per_page: perPageRef.current };
+      stopApiInterval();
+
+      setApiUrl(getApiUrl(buildSearchQuery(query, status), defaultPagination));
+      setSearchQuery(query);
+      setPagination(defaultPagination);
+    },
+    [stopApiInterval]
+  );
+
+  // Keep ref in sync with pagination
+  useEffect(() => {
+    perPageRef.current = pagination.per_page;
+  }, [pagination.per_page]);
+
+  const handlePagination = useCallback(
+    args => {
+      stopApiInterval();
+      setPagination(args);
+      setApiUrl(getApiUrl(buildSearchQuery(searchQuery, statusFilter), args));
+    },
+    [searchQuery, statusFilter, stopApiInterval]
+  );
+
+  const getData = useCallback(
+    url =>
+      withInterval(
+        get({
+          key: TARGETING_HOSTS,
+          url,
+          handleError: () => {
+            dispatch(stopInterval(TARGETING_HOSTS));
+          },
+        }),
+        1000
+      ),
+    [dispatch]
+  );
 
   useEffect(() => {
     dispatch(getData(apiUrl));
@@ -93,11 +110,11 @@ const WrappedTargetingHosts = () => {
     return () => {
       dispatch(stopInterval(TARGETING_HOSTS));
     };
-  }, [dispatch, apiUrl, autoRefresh]);
+  }, [dispatch, apiUrl, autoRefresh, getData]);
 
   useEffect(() => {
     handleSearch(searchQuery, statusFilter);
-  }, [statusFilter, searchQuery]);
+  }, [statusFilter, searchQuery, handleSearch]);
 
   return (
     <TargetingHostsPage

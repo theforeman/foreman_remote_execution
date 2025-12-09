@@ -89,9 +89,6 @@ export const JobWizard = ({ rerunData }) => {
         concurrency_control = {},
       },
     }) => {
-      if (category !== job_category) {
-        setCategory(job_category);
-      }
       const advancedTemplateValues = {};
       const defaultTemplateValues = {};
       const inputs = template_inputs;
@@ -131,8 +128,7 @@ export const JobWizard = ({ rerunData }) => {
         };
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [category.length]
+    [setTemplateValues, setAdvancedValues]
   );
   useEffect(() => {
     if (rerunData) {
@@ -153,8 +149,7 @@ export const JobWizard = ({ rerunData }) => {
         },
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rerunData]);
+  }, [rerunData, setDefaults]);
   useEffect(() => {
     if (jobTemplateID) {
       dispatch(
@@ -199,8 +194,14 @@ export const JobWizard = ({ rerunData }) => {
         })
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rerunData, jobTemplateID, dispatch]);
+  }, [
+    rerunData,
+    jobTemplateID,
+    dispatch,
+    setDefaults,
+    setTemplateValues,
+    setAdvancedValues,
+  ]);
 
   const [isStartsBeforeError, setIsStartsBeforeError] = useState(false);
   const [isStartsAtError, setIsStartsAtError] = useState(false);
@@ -514,7 +515,7 @@ JobWizard.propTypes = {
     }),
     execution_timeout_interval: PropTypes.number,
     time_to_pickup: PropTypes.number,
-    remote_execution_feature_id: PropTypes.string,
+    remote_execution_feature_id: PropTypes.number,
     template_invocations: PropTypes.arrayOf(
       PropTypes.shape({
         template_id: PropTypes.number,

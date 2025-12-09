@@ -79,15 +79,14 @@ const JobInvocationDetailPage = ({
     return () => {
       dispatch(stopInterval(JOB_INVOCATION_KEY));
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, id, finished, autoRefresh]);
 
+  const taskId = task?.id;
   useEffect(() => {
-    if (task?.id !== undefined) {
-      dispatch(getTask(`${task?.id}`));
+    if (taskId !== undefined) {
+      dispatch(getTask(`${taskId}`));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, task?.id]);
+  }, [dispatch, taskId]);
 
   const pageStatus =
     items.id === undefined
