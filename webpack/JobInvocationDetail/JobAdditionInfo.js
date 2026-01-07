@@ -11,6 +11,7 @@ import {
   DataListItemRow,
 } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import Slot from 'foremanReact/components/common/Slot';
 import { TARGETING_TYPES } from './JobInvocationConstants';
 
 const ItemsParser = ({ items }) => (
@@ -188,12 +189,14 @@ const Inputs = ({ data }) => {
     </ExpandableSection>
   );
 };
+
 export const JobAdditionInfo = ({ data }) => (
   <>
     <Recurring data={data} />
     <TargetHosts data={data} />
     <Inputs data={data} />
     <Schedule data={data} />
+    <Slot id="job-invocation-additional-info" data={data} />
   </>
 );
 
