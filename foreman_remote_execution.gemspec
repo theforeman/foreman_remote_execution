@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.7', '< 4'
 
   s.add_dependency 'deface'
-  s.add_dependency 'dynflow', '>= 1.0.2', '< 2.0.0'
   s.add_dependency 'foreman-tasks', '>= 8.3.0'
 
   s.add_development_dependency 'factory_bot_rails', '~> 4.8.0'
