@@ -31,6 +31,19 @@ import {
 
 jest.spyOn(api, 'get');
 
+// Mock toLocaleString to always use UTC timezone for consistent test results
+const originalToLocaleString = Date.prototype.toLocaleString;
+beforeAll(() => {
+  // eslint-disable-next-line no-extend-native
+  Date.prototype.toLocaleString = function (locale, options) {
+    return originalToLocaleString.call(this, locale, { ...options, timeZone: 'UTC' });
+  };
+});
+afterAll(() => {
+  // eslint-disable-next-line no-extend-native
+  Date.prototype.toLocaleString = originalToLocaleString;
+});
+
 jest.mock('foremanReact/common/hooks/API/APIHooks', () => ({
   useAPI: jest.fn(() => ({
     response: mockPermissionsData,
@@ -52,12 +65,14 @@ const initialState = {
     response: jobInvocationData,
   },
   GET_REPORT_TEMPLATES: mockReportTemplatesResponse,
+  extendable: {},
 };
 
 const initialStateScheduled = {
   JOB_INVOCATION_KEY: {
     response: jobInvocationDataScheduled,
   },
+  extendable: {},
 };
 
 api.get.mockImplementation(({ handleSuccess, ...action }) => {
