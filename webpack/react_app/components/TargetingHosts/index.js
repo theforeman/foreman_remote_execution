@@ -56,8 +56,9 @@ const WrappedTargetingHosts = () => {
     }
   }, [dispatch, intervalExists]);
 
-  // Use ref to avoid infinite loop from handleSearch depending on pagination.per_page
+  // Use refs to avoid infinite loop from handleSearch depending on pagination.per_page and searchQuery
   const perPageRef = useRef(pagination.per_page);
+  const searchQueryRef = useRef(searchQuery);
 
   const handleSearch = useCallback(
     (query, status) => {
@@ -71,10 +72,14 @@ const WrappedTargetingHosts = () => {
     [stopApiInterval]
   );
 
-  // Keep ref in sync with pagination
+  // Keep refs in sync with state
   useEffect(() => {
     perPageRef.current = pagination.per_page;
   }, [pagination.per_page]);
+
+  useEffect(() => {
+    searchQueryRef.current = searchQuery;
+  }, [searchQuery]);
 
   const handlePagination = useCallback(
     args => {
@@ -112,9 +117,19 @@ const WrappedTargetingHosts = () => {
     };
   }, [dispatch, apiUrl, autoRefresh, getData]);
 
+  // Only respond to external statusFilter changes (from chart clicks)
+  // searchQuery changes are handled directly by handleSearch calls from the UI
   useEffect(() => {
-    handleSearch(searchQuery, statusFilter);
-  }, [statusFilter, searchQuery, handleSearch]);
+    dispatch(stopInterval(TARGETING_HOSTS));
+    const defaultPagination = { page: 1, per_page: perPageRef.current };
+    setApiUrl(
+      getApiUrl(
+        buildSearchQuery(searchQueryRef.current, statusFilter),
+        defaultPagination
+      )
+    );
+    setPagination(defaultPagination);
+  }, [statusFilter, dispatch]);
 
   return (
     <TargetingHostsPage
