@@ -7,7 +7,7 @@
 # elobato <elobatocs@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.2.1\n"
+"Project-Id-Version: foreman_remote_execution 16.5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: elobato <elobatocs@gmail.com>, 2017\n"
@@ -1184,6 +1184,9 @@ msgstr "一度に最大 N タスクを実行"
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr "1 回に最大 N 個のタスクを実行します。この値が設定されていて、プロキシーバッチのトリガーが有効な場合には、タスクはサイズ 1 の単位で一括して、Smart Proxy でトリガーされます。"
 
+msgid "Run hosts job:"
+msgstr ""
+
 msgid "Run job"
 msgstr "ジョブを実行"
 
@@ -1619,6 +1622,12 @@ msgstr "クエリーのタイプ"
 
 msgid "Unable to create mail notification: %s"
 msgstr "メールの通知を作成できません: %s"
+
+msgid "Unable to fetch CA public key"
+msgstr ""
+
+msgid "Unable to fetch CA public key: %{error}"
+msgstr ""
 
 msgid "Unable to fetch public key"
 msgstr "公開鍵を取得できません"

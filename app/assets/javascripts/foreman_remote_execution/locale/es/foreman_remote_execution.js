@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.1",
+        "Project-Id-Version": "foreman_remote_execution 16.5.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -1182,6 +1182,9 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "Ejecutar como mucho N tareas a la vez. Si esto está configurado y se habilita la activación por lotes del proxy, entonces las tareas se activarán en el proxy inteligente en lotes de tamaño 1."
       ],
+      "Run hosts job:": [
+        ""
+      ],
       "Run job": [
         "Ejecutar trabajo"
       ],
@@ -1618,6 +1621,12 @@
       ],
       "Unable to create mail notification: %s": [
         "No se pudo crear la notificación de correo: %s"
+      ],
+      "Unable to fetch CA public key": [
+        ""
+      ],
+      "Unable to fetch CA public key: %{error}": [
+        ""
       ],
       "Unable to fetch public key": [
         "No se pudo extraer la llave pública."

@@ -3,10 +3,10 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.1",
+        "Project-Id-Version": "foreman_remote_execution 16.5.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
-        "Last-Translator": "Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2022-2023",
+        "Last-Translator": "Adam Růžička <aruzicka@redhat.com>, 2026",
         "Language-Team": "German (http://app.transifex.com/foreman/foreman/language/de/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
@@ -82,7 +82,7 @@
         ""
       ],
       "A user to be used for SSH.": [
-        ""
+        "Ein Benutzername für die Verwendung mit SSH."
       ],
       "A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.": [
         "Ein Benutzer, der für die Ausführung des Skripts verwendet werden soll. Wenn dieser sich vom SSH-Benutzer unterscheidet, kann mittels su oder sudo der Account gewechselt werden."
@@ -148,10 +148,10 @@
         "Jede Organisation"
       ],
       "Any location": [
-        ""
+        "Beliebiger Standort"
       ],
       "Any organization": [
-        ""
+        "Beliebige Organisation"
       ],
       "Apply to": [
         ""
@@ -421,7 +421,7 @@
         "Dynamische Anfrage"
       ],
       "Dynamic query": [
-        ""
+        "Dynamische Abfrage"
       ],
       "Edit %s": [
         "%s bearbeiten"
@@ -457,7 +457,7 @@
         "Das gültige Benutzerkennwort gilt nur für den SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. <br> Das Passwort wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
       ],
       "Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        ""
+        "Das effektive Benutzerpasswort ist nur anwendbar für den SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. Das Passwort wird verschlüsselt in der DB gespeichert bis der Auftrag abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird das Passwort nach der letzten Ausführung entfernt."
       ],
       "Effective user:": [
         ""
@@ -484,7 +484,7 @@
         "Evaluiert an:"
       ],
       "Evaluates the list of target hosts just before the job is executed. If you used a filter to select the target hosts, the list of target hosts might be different from the current list.": [
-        ""
+        "Evaluiert die Hostliste direkt vor der Ausführung des Auftrags. Wird ein Filter zur Auswahl der Zeilhosts genutzt, kann die Liste der gewählten Zielhosts von der aktuellen Liste abweichen."
       ],
       "Every day at %s": [
         ""
@@ -499,19 +499,19 @@
         ""
       ],
       "Execute the job later, at a scheduled time.": [
-        ""
+        "Führe den Auftrag zum geplanten Zeitpunkt aus."
       ],
       "Execute the job now.": [
-        ""
+        "Führe den Auftrag jetzt aus."
       ],
       "Execute the job on a repeating schedule.": [
-        ""
+        "Führe den Auftrag wiederkehrend nach einem Zeitplan aus."
       ],
       "Execute the jobs on hosts in randomized order": [
         "Führe die Aufträge auf Hosts in zufälliger Reihenfolge aus"
       ],
       "Executes the job on the current list of target hosts.": [
-        ""
+        "Führt den Auftrag für die aktuell ausgewählte Hostliste aus."
       ],
       "Execution": [
         "Ausführung"
@@ -583,7 +583,7 @@
         "Formularauftragsvorlage"
       ],
       "Future execution": [
-        ""
+        "Zukünftige Ausführung"
       ],
       "Get output for a host": [
         "Ausgabe für einen Host abfragen"
@@ -601,7 +601,7 @@
         "Erweiterte Felder ausblenden"
       ],
       "Hide all advanced fields": [
-        ""
+        "Alle erweiterten Felder ausblenden"
       ],
       "Host": [
         "Rechner"
@@ -643,7 +643,7 @@
         "Identifizierer des Host-interfaces für Remote-Ausführung"
       ],
       "Immediate execution": [
-        ""
+        "Sofortige Ausführung"
       ],
       "Import": [
         "Import"
@@ -763,7 +763,7 @@
         "Key passhprase gilt nur für SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. <br> Die Passphrase wird verschlüsselt in der DB gespeichert, bis der Job abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird sie nach der letzten Ausführung entfernt."
       ],
       "Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.": [
-        ""
+        "Schlüssel-Passwort ist nur anwendbar für den SSH-Anbieter. Andere Anbieter ignorieren dieses Feld. Das Schlüssel-Passwort wird verschlüsselt in der DB gespeichert bis der Auftrag abgeschlossen ist. Bei zukünftigen oder wiederkehrenden Ausführungen wird das Schlüssel-Passwort nach der letzten Ausführung entfernt."
       ],
       "Label": [
         "Kennung"
@@ -787,7 +787,7 @@
         "Mehr dazu in der Dokumentation."
       ],
       "Legacy UI": [
-        ""
+        "Alte Benutzeroberfläche"
       ],
       "List available remote execution features for a host": [
         ""
@@ -850,7 +850,7 @@
         "Neue Auftragsvorlage"
       ],
       "New UI": [
-        ""
+        "Neue Benutzeroberfläche"
       ],
       "Next": [
         "Weiter"
@@ -1066,7 +1066,7 @@
         ""
       ],
       "Recurring execution": [
-        ""
+        "Wiederkehrende Ausführung"
       ],
       "Recurring logic": [
         "Wiederholungslogik"
@@ -1182,11 +1182,14 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "Führen Sie höchstens N Aufgaben gleichzeitig aus. Wenn dies gesetzt und die Proxy-Batch-Triggerung aktiviert ist, werden Aufgaben auf dem Smart Proxy in Batches der Größe 1 ausgelöst."
       ],
+      "Run hosts job:": [
+        ""
+      ],
       "Run job": [
         "Job ausführen"
       ],
       "Run on selected hosts": [
-        ""
+        "Auf ausgewählten Hosts ausführen"
       ],
       "Running": [
         "Läuft"
@@ -1201,7 +1204,7 @@
         "Besondere Optionen des SSH-Anbieters"
       ],
       "SSH user": [
-        ""
+        "SSH-Benutzer"
       ],
       "SSH user:": [
         ""
@@ -1288,19 +1291,19 @@
         "Wählen Sie so viele Proxys für entfernte Ausführung aus, wie es für dieses Subnetz zutreffend ist. Wenn mehrere Proxys mit demselben Provider hinzugefügt werden, dann wird die Auslastung unter diesen ausgeglichen."
       ],
       "Select the type of execution": [
-        ""
+        "Wähle die Art der Ausführung"
       ],
       "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host": [
         ""
       ],
       "Set SSH key passphrase": [
-        ""
+        "SSH-Schlüssel-Passwort setzen"
       ],
       "Set SSH password": [
-        ""
+        "SSH-Passwort setzen"
       ],
       "Set SSH user": [
-        ""
+        "SSH-Benutzer setzen"
       ],
       "Set password for effective user (using sudo-like mechanisms)": [
         ""
@@ -1318,7 +1321,7 @@
         "Zeige Job status des Hosts"
       ],
       "Show all advanced fields": [
-        ""
+        "Alle erweiterten Felder anzeigen"
       ],
       "Show foreign input set details": [
         " Details zu Fremdeingabe-Satz anzeigen"
@@ -1375,7 +1378,7 @@
         "Statische Anfrage"
       ],
       "Static query": [
-        ""
+        "Statische Abfrage"
       ],
       "Status": [
         "Status"
@@ -1610,13 +1613,19 @@
         ""
       ],
       "Type of execution": [
-        ""
+        "Art der Ausführung"
       ],
       "Type of query": [
         "Anfragetyp"
       ],
       "Unable to create mail notification: %s": [
         "Unable to create mail notification: %s"
+      ],
+      "Unable to fetch CA public key": [
+        ""
+      ],
+      "Unable to fetch CA public key: %{error}": [
+        ""
       ],
       "Unable to fetch public key": [
         "Öffentlicher Schlüssel konnte nicht abgerufen werden"

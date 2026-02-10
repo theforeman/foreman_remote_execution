@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.1",
+        "Project-Id-Version": "foreman_remote_execution 16.5.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -1181,6 +1181,9 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "한 번에 최대 N개의 작업을 실행합니다. 이것이 설정되어 있고 프록시 배치 트리거링이 활성화되어 있으면 작업은 스마트 프록시에서 크기 1의 배치로 트리거됩니다."
       ],
+      "Run hosts job:": [
+        ""
+      ],
       "Run job": [
         "작업 실행"
       ],
@@ -1615,6 +1618,12 @@
       ],
       "Unable to create mail notification: %s": [
         "메일 알림을 생성할 수 없습니다: %s"
+      ],
+      "Unable to fetch CA public key": [
+        ""
+      ],
+      "Unable to fetch CA public key: %{error}": [
+        ""
       ],
       "Unable to fetch public key": [
         "공개 키를 가져올 수 없습니다."
