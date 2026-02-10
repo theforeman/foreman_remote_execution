@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.1",
+        "Project-Id-Version": "foreman_remote_execution 16.5.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2024",
@@ -1181,6 +1181,9 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "一次最多运行 N 个任务。如果设置了此选项并启用了代理批处理触发，则将在智能代理上以大小为 1 的批处理触发任务。"
       ],
+      "Run hosts job:": [
+        ""
+      ],
       "Run job": [
         "运行作业"
       ],
@@ -1615,6 +1618,12 @@
       ],
       "Unable to create mail notification: %s": [
         "无法创建邮件通知：%s"
+      ],
+      "Unable to fetch CA public key": [
+        ""
+      ],
+      "Unable to fetch CA public key: %{error}": [
+        ""
       ],
       "Unable to fetch public key": [
         "无法获取公共密钥"

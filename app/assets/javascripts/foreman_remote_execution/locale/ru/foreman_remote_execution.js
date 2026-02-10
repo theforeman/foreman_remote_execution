@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.2.1",
+        "Project-Id-Version": "foreman_remote_execution 16.5.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Yulia <yulia.poyarkova@redhat.com>, 2016",
@@ -1182,6 +1182,9 @@
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         ""
       ],
+      "Run hosts job:": [
+        ""
+      ],
       "Run job": [
         ""
       ],
@@ -1618,6 +1621,12 @@
         "Тип запроса"
       ],
       "Unable to create mail notification: %s": [
+        ""
+      ],
+      "Unable to fetch CA public key": [
+        ""
+      ],
+      "Unable to fetch CA public key: %{error}": [
         ""
       ],
       "Unable to fetch public key": [

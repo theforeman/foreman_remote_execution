@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 14:22+0200\n"
-"PO-Revision-Date: 2025-10-07 14:22+0200\n"
+"POT-Creation-Date: 2026-02-11 16:08+0100\n"
+"PO-Revision-Date: 2026-02-11 16:08+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -196,43 +196,43 @@ msgstr ""
 msgid "List hosts belonging to job invocation"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:125
+#: ../app/controllers/api/v2/job_invocations_controller.rb:128
 msgid "Get raw output for a host"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:137
+#: ../app/controllers/api/v2/job_invocations_controller.rb:140
 msgid "Cancel job invocation or matching tasks only"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:140
+#: ../app/controllers/api/v2/job_invocations_controller.rb:143
 msgid ""
 "Search query to cancel tasks only on matching hosts. If not provided, the whol"
 "e job invocation will be cancelled."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:173
+#: ../app/controllers/api/v2/job_invocations_controller.rb:176
 msgid "The job could not be cancelled."
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:177
+#: ../app/controllers/api/v2/job_invocations_controller.rb:180
 msgid "Rerun job on failed hosts"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:188
+#: ../app/controllers/api/v2/job_invocations_controller.rb:191
 #: ../app/views/job_invocations/_form.html.erb:4
 msgid "Could not rerun job %{id} because its template could not be found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:193
+#: ../app/controllers/api/v2/job_invocations_controller.rb:196
 msgid "Get outputs of hosts in a job"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:242
+#: ../app/controllers/api/v2/job_invocations_controller.rb:245
 #: ../app/controllers/template_invocations_controller.rb:71
 msgid "Host with id '%{id}' was not found"
 msgstr ""
 
-#: ../app/controllers/api/v2/job_invocations_controller.rb:251
+#: ../app/controllers/api/v2/job_invocations_controller.rb:254
 msgid "Only one of feature or job_template_id can be specified"
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 #: ../db/seeds.d/50-notification_blueprints.rb:17
 #: ../lib/foreman_remote_execution/plugin.rb:194
 #: ../webpack/JobInvocationDetail/TemplateInvocationPage.js:23
-#: ../webpack/JobInvocationDetail/index.js:109
+#: ../webpack/JobInvocationDetail/index.js:108
 #: ../webpack/JobWizard/JobWizardPageRerun.js:53
 #: ../webpack/JobWizard/index.js:20
 msgid "Jobs"
@@ -455,22 +455,22 @@ msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:19
 #: ../app/views/job_invocations/index.html.erb:13
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:51
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:72
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:52
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:74
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:36
 msgid "Failed"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:20
 #: ../app/views/job_invocations/index.html.erb:14
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:76
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:78
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:23
 msgid "Pending"
 msgstr ""
 
 #: ../app/helpers/job_invocations_chart_helper.rb:21
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:53
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:78
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:54
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:80
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:11
 msgid "Cancelled"
 msgstr ""
@@ -627,22 +627,22 @@ msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:205
-msgid "in %s"
-msgstr ""
-
-#: ../app/helpers/remote_execution_helper.rb:205
 msgid "%s ago"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:223
+#: ../app/helpers/remote_execution_helper.rb:205
+msgid "in %s"
+msgstr ""
+
+#: ../app/helpers/remote_execution_helper.rb:217
 msgid "Use default description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:228
+#: ../app/helpers/remote_execution_helper.rb:222
 msgid "Description template"
 msgstr ""
 
-#: ../app/helpers/remote_execution_helper.rb:238
+#: ../app/helpers/remote_execution_helper.rb:232
 msgid ""
 "This template is used to generate the description.<br/>Input values can be use"
 "d using the syntax %{package}.<br/>You may also include the job category and t"
@@ -669,7 +669,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:114
+#: ../app/lib/actions/remote_execution/run_host_job.rb:114 action_names.rb:2
 msgid "Remote action:"
 msgstr ""
 
@@ -736,6 +736,14 @@ msgid "Unable to fetch public key"
 msgstr ""
 
 #: ../app/lib/proxy_api/remote_execution_ssh.rb:17
+msgid "Unable to fetch CA public key: %{error}"
+msgstr ""
+
+#: ../app/lib/proxy_api/remote_execution_ssh.rb:20
+msgid "Unable to fetch CA public key"
+msgstr ""
+
+#: ../app/lib/proxy_api/remote_execution_ssh.rb:26
 msgid "Unable to remove host from known hosts"
 msgstr ""
 
@@ -863,24 +871,24 @@ msgid "Script"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:149
-msgid "Static Query"
-msgstr ""
-
-#: ../app/models/targeting.rb:5
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:150
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:147
 msgid "Dynamic Query"
 msgstr ""
 
+#: ../app/models/targeting.rb:5
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:146
+msgid "Static Query"
+msgstr ""
+
 #: ../app/models/targeting.rb:10
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:146
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:147
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:199
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:280
 msgid "Alphabetical"
 msgstr ""
 
 #: ../app/models/targeting.rb:10
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:145
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:146
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:208
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:279
 msgid "Randomized"
@@ -921,12 +929,12 @@ msgstr ""
 
 #: ../app/views/dashboard/_latest-jobs.html.erb:7
 #: ../app/views/remote_execution_features/index.html.erb:7
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:94
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:91
 msgid "Name"
 msgstr ""
 
 #: ../app/views/dashboard/_latest-jobs.html.erb:8
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:103
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:104
 msgid "State"
 msgstr ""
 
@@ -943,46 +951,46 @@ msgid "Results"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:7
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:71
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:72
 #: ../webpack/JobWizard/JobWizardConstants.js:33
 msgid "Schedule"
-msgstr ""
-
-#: ../app/views/job_invocations/_card_schedule.html.erb:14
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:55
-msgid "Concurrency level limited to"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:14
 msgid "tasks at a time"
 msgstr ""
 
-#: ../app/views/job_invocations/_card_schedule.html.erb:17
+#: ../app/views/job_invocations/_card_schedule.html.erb:14
 #: ../webpack/JobInvocationDetail/JobAdditionInfo.js:56
+msgid "Concurrency level limited to"
+msgstr ""
+
+#: ../app/views/job_invocations/_card_schedule.html.erb:17
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:57
 msgid "Scheduled to start before"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:20
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:57
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:58
 msgid "Scheduled to start at"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:23
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:59
-msgid "Timeout to kill after"
+#: ../app/views/job_invocations/_card_schedule.html.erb:26
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:62
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:67
+msgid "seconds"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:23
-#: ../app/views/job_invocations/_card_schedule.html.erb:26
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:61
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:66
-msgid "seconds"
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:60
+msgid "Timeout to kill after"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:26
 #: ../app/views/job_invocations/_form.html.erb:106
 #: ../lib/foreman_remote_execution/plugin.rb:110
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:64
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:65
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:60
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:274
 msgid "Time to pickup"
@@ -994,32 +1002,32 @@ msgid "Target hosts"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:11
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:128
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:129
 msgid "Bookmark"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:13
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:129
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:130
 msgid "Manual selection"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:15
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:157
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:158
 msgid "using "
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:21
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:142
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:143
 msgid "Execution order"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:24
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:132
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:133
 msgid "Organization"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_target_hosts.html.erb:30
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:137
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:138
 msgid "Location"
 msgstr ""
 
@@ -1033,7 +1041,7 @@ msgid "Evaluated at:"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_user_input.html.erb:4
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:175
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:176
 msgid "User Inputs"
 msgstr ""
 
@@ -1102,17 +1110,17 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:94
-#: ../app/views/job_templates/_custom_tabs.html.erb:13
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:36
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:273
-msgid "Timeout to kill"
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:94
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:38
 msgid ""
 "Time in seconds from the start on the remote host after which the job should b"
 "e killed."
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:94
+#: ../app/views/job_templates/_custom_tabs.html.erb:13
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:36
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:273
+msgid "Timeout to kill"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:106
@@ -1122,20 +1130,15 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:110
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:80
-msgid "Password"
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:110
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:82
 msgid ""
 "Password is stored encrypted in DB until the job finishes. For future or recur"
 "ring executions, it is removed after the last execution."
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:111
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:104
-msgid "Private key passphrase"
+#: ../app/views/job_invocations/_form.html.erb:110
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:80
+msgid "Password"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:111
@@ -1143,6 +1146,11 @@ msgid ""
 "Key passhprase is only applicable for SSH provider. Other providers ignore thi"
 "s field. <br> Passphrase is stored encrypted in DB until the job finishes. For"
 " future or recurring executions, it is removed after the last execution."
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:111
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:104
+msgid "Private key passphrase"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:112
@@ -1189,17 +1197,17 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:129
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:260
-msgid "Type of query"
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:129
 msgid ""
 "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b>"
 " - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b"
 "> - Evaluates the list of target hosts just before the job is executed. If you"
 " used a filter to select the target hosts, the list of target hosts might be d"
 "ifferent from the current list.</li></ul>"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:129
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:260
+msgid "Type of query"
 msgstr ""
 
 #: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
@@ -1282,14 +1290,14 @@ msgid "Search Query"
 msgstr ""
 
 #: ../app/views/job_invocations/index.html.erb:11
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:128
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:125
 #: ../webpack/react_app/components/TargetingHosts/TargetingHosts.js:42
 msgid "Status"
 msgstr ""
 
 #: ../app/views/job_invocations/index.html.erb:12
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:50
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:70
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:51
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:72
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:42
 msgid "Succeeded"
 msgstr ""
@@ -1316,7 +1324,7 @@ msgid "Preview templates"
 msgstr ""
 
 #: ../app/views/job_invocations/show.html.erb:23
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:109
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:110
 msgid "Recurring logic"
 msgstr ""
 
@@ -1428,14 +1436,14 @@ msgid "Remote Execution"
 msgstr ""
 
 #: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
-msgid "Proxies"
-msgstr ""
-
-#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
 msgid ""
 "Select as many remote execution proxies as applicable for this subnet.  When m"
 "ultiple proxies with the same provider are added, actions will be load balance"
 "d among them."
+msgstr ""
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid "Proxies"
 msgstr ""
 
 #: ../app/views/remote_execution_features/_form.html.erb:18
@@ -1520,7 +1528,7 @@ msgid "Target: "
 msgstr ""
 
 #: ../app/views/template_invocations/show.html.erb:35
-#: ../webpack/JobInvocationDetail/TemplateInvocation.js:201
+#: ../webpack/JobInvocationDetail/TemplateInvocation.js:195
 msgid "using Smart Proxy"
 msgstr ""
 
@@ -1538,9 +1546,9 @@ msgstr ""
 msgid "Could not display data for job invocation."
 msgstr ""
 
-#: ../app/views/templates/script/check_update.erb:5
-#: ../app/views/templates/script/module_action.erb:5
-#: ../app/views/templates/script/package_action.erb:5
+#: ../app/views/templates/script/check_update.erb:12
+#: ../app/views/templates/script/module_action.erb:37
+#: ../app/views/templates/script/package_action.erb:43
 msgid "Unsupported or no operating system found for this host."
 msgstr ""
 
@@ -1780,62 +1788,62 @@ msgid "Open selected in new tab"
 msgstr ""
 
 #: ../webpack/JobInvocationDetail/DropdownFilter.js:30
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:49
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:50
 msgid "All statuses"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:88
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:89
 msgid "ID"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:96
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:97
 #: ../webpack/JobWizard/steps/ReviewDetails/helpers.js:37
 msgid "Cron line"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:97
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:98
 msgid "Action"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:98
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:99
 msgid "Last occurrence"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:99
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:100
 msgid "Next occurrence"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:100
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:101
 msgid "Current iteration"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:101
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:102
 msgid "Iteration limit"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:102
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:103
 msgid "Repeat until"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:104
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:105
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:252
 #: ../webpack/JobWizard/steps/Schedule/PurposeField.js:9
 msgid "Purpose"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:105
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:106
 msgid "Task count"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:134
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:135
 msgid "Any organization"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:139
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:140
 msgid "Any location"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:151
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:152
 msgid "Target Hosts"
 msgstr ""
 
@@ -1879,76 +1887,77 @@ msgstr ""
 msgid "Could not cancel recurring logic %s: ${response}"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:52
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:53
 msgid "In Progress"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:74
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:55
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:76
 #: ../webpack/react_app/components/RecentJobsCard/RecentJobsCard.js:83
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:29
 msgid "Scheduled"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:80
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:82
 #: ../webpack/react_app/components/TargetingHosts/components/HostStatus.js:17
 msgid "Awaiting start"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:102
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:99
 msgid "Host group"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:110
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:107
 msgid "OS"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:120
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:117
 msgid "Smart proxy"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:135
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:132
 msgid "Unknown"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:285
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:345
 msgid "No Results"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:293
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:353
 msgid ""
 "The dynamic query is still being processed. You can {viewTheHosts} targeted by"
 " the query."
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:299
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:359
 msgid "view the hosts"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:305
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:365
 msgid "No hosts found"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:404
+#: ../webpack/JobInvocationDetail/JobInvocationHostTable.js:488
 msgid "A task for this host has not been started"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:40
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:41
 msgid "Effective user:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:46
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:47
 msgid "Started at:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:48
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:49
 msgid "Not yet"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:52
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:53
 msgid "SSH user:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:58
+#: ../webpack/JobInvocationDetail/JobInvocationOverview.js:59
 msgid "Template:"
 msgstr ""
 
@@ -1968,23 +1977,23 @@ msgstr ""
 msgid "Cancelled:"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:88
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:94
 msgid "${d.title} ${d.count} hosts"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:91
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:97
 msgid "Scheduled: ${totalHosts} hosts"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:117
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:123
 msgid "Systems"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:136
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:142
 msgid "System status"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:170
+#: ../webpack/JobInvocationDetail/JobInvocationSystemStatusChart.js:176
 msgid "Scheduled at:"
 msgstr ""
 
@@ -2064,11 +2073,11 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/TemplateInvocation.js:144
+#: ../webpack/JobInvocationDetail/TemplateInvocation.js:138
 msgid "An error occurred while fetching the template invocation details."
 msgstr ""
 
-#: ../webpack/JobInvocationDetail/TemplateInvocation.js:197
+#: ../webpack/JobInvocationDetail/TemplateInvocation.js:191
 msgid "Target:"
 msgstr ""
 
@@ -2078,32 +2087,32 @@ msgid "No output for the selected filters"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:59
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:77
 msgid "STDERR"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:65
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:83
 msgid "STDOUT"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:71
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:89
 msgid "DEBUG"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:77
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:95
 msgid "Preview Template"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:83
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:101
 msgid "Command"
 msgstr ""
 
 #:
-#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:119
+#: ../webpack/JobInvocationDetail/TemplateInvocationComponents/OutputToggleGroup.js:137
 msgid "Open in new tab"
 msgstr ""
 
@@ -2716,16 +2725,16 @@ msgstr ""
 msgid "Has to be a positive number"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/ResourceSelect.js:56
-#: ../webpack/JobWizard/steps/form/SearchSelect.js:42
+#: ../webpack/JobWizard/steps/form/ResourceSelect.js:58
+#: ../webpack/JobWizard/steps/form/SearchSelect.js:41
 msgid "Please refine your search."
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/ResourceSelect.js:59
+#: ../webpack/JobWizard/steps/form/ResourceSelect.js:61
 msgid "You have more results to display. Showing first %s results"
 msgstr ""
 
-#: ../webpack/JobWizard/steps/form/SearchSelect.js:45
+#: ../webpack/JobWizard/steps/form/SearchSelect.js:44
 msgid "You have %s results to display. Showing first %s results"
 msgstr ""
 
@@ -2822,6 +2831,10 @@ msgstr ""
 
 #: ../webpack/react_app/components/TargetingHosts/TargetingHostsLabelsRow.js:20
 msgid "Active Filters:"
+msgstr ""
+
+#: action_names.rb:3
+msgid "Run hosts job:"
 msgstr ""
 
 #: gemspec.rb:2
