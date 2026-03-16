@@ -912,10 +912,10 @@
         "在新标签页中打开所有 %s 调用"
       ],
       "Open all failed runs on this page (%s)": [
-        ""
+        "在此页中打开所有失败的运行(%s)"
       ],
       "Open all rows of the table in new tabs": [
-        ""
+        "在新标签页中打开表的所有行"
       ],
       "Open in new tab": [
         "在新标签页中打开"
@@ -1180,9 +1180,6 @@
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "一次最多运行 N 个任务。如果设置了此选项并启用了代理批处理触发，则将在智能代理上以大小为 1 的批处理触发任务。"
-      ],
-      "Run hosts job:": [
-        ""
       ],
       "Run job": [
         "运行作业"
@@ -1506,10 +1503,10 @@
         "要使用的任务模板，除非已指定功能，否则参数是必需的"
       ],
       "The number of failed invocations is:": [
-        ""
+        "失败的调用数量为："
       ],
       "The number of selected invocations is:": [
-        ""
+        "选择的调用数量为："
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "唯一可用的代理 %{proxy_names} 已停机"
@@ -1620,10 +1617,10 @@
         "无法创建邮件通知：%s"
       ],
       "Unable to fetch CA public key": [
-        ""
+        "无法获取 CA 公钥"
       ],
       "Unable to fetch CA public key: %{error}": [
-        ""
+        "无法获取 CA 公钥：%{error}"
       ],
       "Unable to fetch public key": [
         "无法获取公共密钥"

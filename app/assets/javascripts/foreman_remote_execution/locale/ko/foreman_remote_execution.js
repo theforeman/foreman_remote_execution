@@ -912,10 +912,10 @@
         "새 탭에서 모든 %s 호출을 엽니다."
       ],
       "Open all failed runs on this page (%s)": [
-        ""
+        "이 페이지에서 실패한 모든 실행 열기(%s)"
       ],
       "Open all rows of the table in new tabs": [
-        ""
+        "표의 모든 행을 새 탭에서 열기"
       ],
       "Open in new tab": [
         "새 탭에서 열기"
@@ -1180,9 +1180,6 @@
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "한 번에 최대 N개의 작업을 실행합니다. 이것이 설정되어 있고 프록시 배치 트리거링이 활성화되어 있으면 작업은 스마트 프록시에서 크기 1의 배치로 트리거됩니다."
-      ],
-      "Run hosts job:": [
-        ""
       ],
       "Run job": [
         "작업 실행"
@@ -1506,10 +1503,10 @@
         "사용할 작업 템플릿, 기능이 지정되지 않은 경우 매개변수가 필요합니다."
       ],
       "The number of failed invocations is:": [
-        ""
+        "실패한 호출 횟수는 다음과 같습니다:"
       ],
       "The number of selected invocations is:": [
-        ""
+        "선택한 호출 횟수는 다음과 같습니다:"
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "적용 가능한 유일한 프록시인 %{proxy_names}이(가) 작동하지 않습니다."
@@ -1620,10 +1617,10 @@
         "메일 알림을 생성할 수 없습니다: %s"
       ],
       "Unable to fetch CA public key": [
-        ""
+        "CA 공개 키를 가져올 수 없습니다."
       ],
       "Unable to fetch CA public key: %{error}": [
-        ""
+        "CA 공개 키를 가져올 수 없습니다: %{error}"
       ],
       "Unable to fetch public key": [
         "공개 키를 가져올 수 없습니다."

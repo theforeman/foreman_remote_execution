@@ -69,7 +69,7 @@ msgid "A job '%{subject}' has failed"
 msgstr "ジョブ '%{subject}' が失敗しました"
 
 msgid "A job '%{subject}' has finished successfully"
-msgstr "ジョブ '%{subject}' が正常に完了しました。"
+msgstr "ジョブ '%{subject}' が正常に完了しました"
 
 msgid "A notification when a job finishes"
 msgstr "ジョブの完了時の通知"
@@ -141,7 +141,7 @@ msgid "An error occurred."
 msgstr "エラーが発生しました。"
 
 msgid "Another interface is already set as execution. Are you sure you want to use this one instead?"
-msgstr "別のインターフェースがすでに実行として設定されています。代わりにこのインターフェースを使用しもよろしいでしょうか?"
+msgstr "別のインターフェイスはすでに実行として設定されています。代わりにこのインターフェイスを使用してもよろしいですか?"
 
 msgid "Any Location"
 msgstr "任意のロケーション"
@@ -288,7 +288,7 @@ msgid "Could not enable recurring logic %s: ${response}"
 msgstr "再帰論理 %s を有効にできませんでした: ${response}"
 
 msgid "Could not find any suitable interface for execution"
-msgstr "実行に適したインターフェースを見つけることができませんでした"
+msgstr "実行に適したインターフェイスを見つけることができませんでした"
 
 msgid "Could not render the preview because no host matches the search query."
 msgstr "検索クエリーに一致するホストがないため、プレビューをレンダリングできませんでした。"
@@ -378,7 +378,7 @@ msgid "Default SSH password"
 msgstr "デフォルトの SSH パスワード"
 
 msgid "Default key passphrase to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_key_passphrase"
-msgstr "SSH に使用するデフォルトの鍵パスフレーズ。remote_execution_ssh_key_passphrase という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
+msgstr "SSH に使用するデフォルトの鍵パスフレーズ。remote_execution_ssh_key_passphrase という名前のパラメーターを設定することにより、ホストごとに上書きできます"
 
 msgid "Default password to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_password"
 msgstr "SSH に使用するデフォルトパスワード。remote_execution_ssh_password という名前のパラメーターを設定することにより、ホストごとに上書きできます"
@@ -678,7 +678,7 @@ msgid "Inputs to use"
 msgstr "使用する入力"
 
 msgid "Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration."
-msgstr "'%s' の識別子を持つインターフェースがリモート実行インターフェースとして指定されましたが、このインターフェースはホスト上で見つかりませんでした。インターフェースが存在する場合は、登録時に Foreman で作成する必要があります。"
+msgstr "'%s' の識別子を持つインターフェイスがリモート実行インターフェイスとして指定されましたが、このインターフェイスはホスト上で見つかりませんでした。インターフェイスが存在する場合は、登録時に Foreman で作成する必要があります。"
 
 msgid "Internal proxy selector can only be used if Katello is enabled"
 msgstr "内部プロキシーセレクターは、Katello が有効になっている場合にのみ使用できます"
@@ -744,7 +744,7 @@ msgid "Job template ID to be used for the feature"
 msgstr "機能に使用するジョブテンプレート ID"
 
 msgid "Job template imported successfully."
-msgstr "ジョブテンプレートが正常にインポートされました"
+msgstr "ジョブテンプレートが正常にインポートされました。"
 
 msgid "Job with id '%{id}' was not found"
 msgstr "ID が '%{id}' のジョブが見つかりませんでした"
@@ -870,7 +870,7 @@ msgid "No Target Hosts"
 msgstr "ターゲットホストがありません"
 
 msgid "No hosts found"
-msgstr "ホストが見つかりません。"
+msgstr "ホストが見つかりません"
 
 msgid "No hosts found."
 msgstr "ホストが見つかりません。"
@@ -906,7 +906,7 @@ msgid "OS"
 msgstr "OS"
 
 msgid "On"
-msgstr "次の時刻に開始"
+msgstr "オン"
 
 msgid "Only one of feature or job_template_id can be specified"
 msgstr "機能または job_template_id の 1 つのみを指定できます"
@@ -915,10 +915,10 @@ msgid "Open all %s invocations in new tabs"
 msgstr "%s の呼び出しをすべて新規タブで開く"
 
 msgid "Open all failed runs on this page (%s)"
-msgstr ""
+msgstr "このページで失敗した実行をすべて開きます (%s)"
 
 msgid "Open all rows of the table in new tabs"
-msgstr ""
+msgstr "新しいタブでテーブルのすべての行を開きます"
 
 msgid "Open in new tab"
 msgstr "新規タブで開く"
@@ -927,7 +927,7 @@ msgid "Open in new tabs"
 msgstr "新規タブで開く"
 
 msgid "Open selected in new tab"
-msgstr "選択項目を新規タブで開く"
+msgstr "選択項目を新規タブで開きます"
 
 msgid "Opening job invocation form"
 msgstr "ジョブ呼び出しフォームを開く"
@@ -1047,13 +1047,13 @@ msgid "Query type"
 msgstr "クエリータイプ"
 
 msgid "REX job has failed - %s"
-msgstr "REX ジョブが失敗しました: %s"
+msgstr "REX ジョブが失敗しました - %s"
 
 msgid "REX job has finished - %s"
-msgstr "REX ジョブが終了しました: %s"
+msgstr "REX ジョブが終了しました - %s"
 
 msgid "REX job has succeeded - %s"
-msgstr "REX ジョブが成功しました: %s"
+msgstr "REX ジョブが成功しました - %s"
 
 msgid "REX pull mode"
 msgstr "REX プルモード"
@@ -1095,7 +1095,7 @@ msgid "Remote Execution Features"
 msgstr "リモート実行機能"
 
 msgid "Remote Execution Interface"
-msgstr "リモート実行インターフェース"
+msgstr "リモート実行インターフェイス"
 
 msgid "Remote action:"
 msgstr "リモートアクション:"
@@ -1183,9 +1183,6 @@ msgstr "一度に最大 N タスクを実行"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr "1 回に最大 N 個のタスクを実行します。この値が設定されていて、プロキシーバッチのトリガーが有効な場合には、タスクはサイズ 1 の単位で一括して、Smart Proxy でトリガーされます。"
-
-msgid "Run hosts job:"
-msgstr ""
 
 msgid "Run job"
 msgstr "ジョブを実行"
@@ -1296,7 +1293,7 @@ msgid "Select the type of execution"
 msgstr "実行の種類の選択"
 
 msgid "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host"
-msgstr "このホストの 'host_registration_remote_execution_pull' パラメーターを設定します。True に設定されている場合には、ぷるプロバイダーのクライアントはホストにデプロイされます。"
+msgstr "このホストの 'host_registration_remote_execution_pull' パラメーターを設定します。True に設定されている場合には、ぷるプロバイダーのクライアントはホストにデプロイされます"
 
 msgid "Set SSH key passphrase"
 msgstr "SSH 鍵パスフレーズを設定"
@@ -1314,10 +1311,10 @@ msgid "Setup remote execution pull mode. If set to `Yes`, pull provider client w
 msgstr "リモート実行のプルモードを設定します。`はい` に設定すると、登録したホストにプルプロパイダークライアントがデプロイされます。継承される値は、`host_registration_remote_execution_pull` パラメーターに基づきます。これは、ホストグループ、オペレーティングシステム、組織などから継承できます。オーバーライドされると、選択した値がホストパラメーターレベルで保存されます。"
 
 msgid "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting"
-msgstr "ホストインターフェースの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれを上書きすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
+msgstr "ホストインターフェイスの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれを上書きすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
 
 msgid "Should this interface be used for remote execution?"
-msgstr "このインターフェースをリモート実行に使用する必要がありますか?"
+msgstr "このインターフェイスをリモート実行に使用する必要がありますか?"
 
 msgid "Show Job status for the hosts"
 msgstr "ホストのジョブステータスを表示"
@@ -1491,7 +1488,7 @@ msgid "The dynamic query is still being processed. You can {viewTheHosts} target
 msgstr "動的クエリーはまだ処理中です。クエリーの対象となる {viewTheHosts} が可能です。"
 
 msgid "The execution interface is used for remote execution"
-msgstr "リモート実行には実行インターフェースが使用されます"
+msgstr "リモート実行には実行インターフェイスが使用されます"
 
 msgid "The final host list may change because the selected query is dynamic.  It will be rerun during execution."
 msgstr "選択されたクエリーが動的であるため、最終ホスト一覧は変更される場合があります。実行中に再実行されます。"
@@ -1509,14 +1506,14 @@ msgid "The job template to use, parameter is required unless feature was specifi
 msgstr "使用するジョブテンプレート。機能が指定されていなければ、パラメーターが必要です"
 
 msgid "The number of failed invocations is:"
-msgstr ""
+msgstr "失敗した呼び出しの数:"
 
 msgid "The number of selected invocations is:"
-msgstr ""
+msgstr "選択した呼び出しの数:"
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
-msgstr[0] "適用可能な唯一のプロキシー %{proxy_names} がダウンしています。"
+msgstr[0] "適用可能な唯一のプロキシー %{proxy_names} がダウンしています"
 
 msgid "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user"
 msgstr "ユーザーは機能 %{template_name} にマッピングされたテンプレート %{feature_name} にアクセスできません"
@@ -1624,10 +1621,10 @@ msgid "Unable to create mail notification: %s"
 msgstr "メールの通知を作成できません: %s"
 
 msgid "Unable to fetch CA public key"
-msgstr ""
+msgstr "CA 公開鍵を取得できません"
 
 msgid "Unable to fetch CA public key: %{error}"
-msgstr ""
+msgstr "CA 公開鍵を取得できません: %{error}"
 
 msgid "Unable to fetch public key"
 msgstr "公開鍵を取得できません"
@@ -1789,7 +1786,7 @@ msgid "here"
 msgstr "こちら"
 
 msgid "host already has an execution interface"
-msgstr "ホストにはすでに実行インターフェースがあります"
+msgstr "ホストにはすでに実行インターフェイスがあります"
 
 msgid "hosts"
 msgstr "ホスト"

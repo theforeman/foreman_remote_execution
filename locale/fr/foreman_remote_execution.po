@@ -5,13 +5,14 @@
 # Translators:
 # Baptiste Agasse <baptiste.agasse@gmail.com>, 2018-2019,2023
 # Claer <transiblu@claer.hammock.fr>, 2016
+# Ondřej Gajdušek, 2026
 # Pierre-Emmanuel Dutang <dutangp@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 16.5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
-"Last-Translator: Claer <transiblu@claer.hammock.fr>, 2016\n"
+"Last-Translator: Ondřej Gajdušek, 2026\n"
 "Language-Team: French (http://app.transifex.com/foreman/foreman/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -918,10 +919,10 @@ msgid "Open all %s invocations in new tabs"
 msgstr "Ouvrir tout%s invocations dans les nouveaux onglets"
 
 msgid "Open all failed runs on this page (%s)"
-msgstr ""
+msgstr "Ouvrir toutes les exécutions ayant échoué sur cette page (%s)"
 
 msgid "Open all rows of the table in new tabs"
-msgstr ""
+msgstr "Ouvrir toutes les lignes du tableau dans de nouveaux onglets"
 
 msgid "Open in new tab"
 msgstr "Ouvrir dans un nouvel onglet"
@@ -1186,9 +1187,6 @@ msgstr "Lance un maximum de N tâches simultanément"
 
 msgid "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1."
 msgstr "Effectuer au maximum N tâches à la fois. Si ce paramètre est défini et que le déclenchement par lot du proxy est activé, les tâches sont alors déclenchées sur le proxy smart par lots de taille 1."
-
-msgid "Run hosts job:"
-msgstr ""
 
 msgid "Run job"
 msgstr "Lancer le job"
@@ -1512,10 +1510,10 @@ msgid "The job template to use, parameter is required unless feature was specifi
 msgstr "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
 
 msgid "The number of failed invocations is:"
-msgstr ""
+msgstr "Le nombre d’invocations échouées est :"
 
 msgid "The number of selected invocations is:"
-msgstr ""
+msgstr "Le nombre des invocations sélectionnées est :"
 
 msgid "The only applicable proxy %{proxy_names} is down"
 msgid_plural "All %{count} applicable proxies are down. Tried %{proxy_names}"
@@ -1629,10 +1627,10 @@ msgid "Unable to create mail notification: %s"
 msgstr "Impossible de créer une notification par e-mail : %s"
 
 msgid "Unable to fetch CA public key"
-msgstr ""
+msgstr "Impossible de récupérer la clef publique CA"
 
 msgid "Unable to fetch CA public key: %{error}"
-msgstr ""
+msgstr "Impossible de récupérer la clef publique CA: %{error}"
 
 msgid "Unable to fetch public key"
 msgstr "Impossible de récupérer la clef publique"

@@ -6,7 +6,7 @@
         "Project-Id-Version": "foreman_remote_execution 16.5.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
-        "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
+        "Last-Translator": "Ondřej Gajdušek, 2026",
         "Language-Team": "French (http://app.transifex.com/foreman/foreman/language/fr/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
@@ -914,10 +914,10 @@
         "Ouvrir tout%s invocations dans les nouveaux onglets"
       ],
       "Open all failed runs on this page (%s)": [
-        ""
+        "Ouvrir toutes les exécutions ayant échoué sur cette page (%s)"
       ],
       "Open all rows of the table in new tabs": [
-        ""
+        "Ouvrir toutes les lignes du tableau dans de nouveaux onglets"
       ],
       "Open in new tab": [
         "Ouvrir dans un nouvel onglet"
@@ -1182,9 +1182,6 @@
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "Effectuer au maximum N tâches à la fois. Si ce paramètre est défini et que le déclenchement par lot du proxy est activé, les tâches sont alors déclenchées sur le proxy smart par lots de taille 1."
-      ],
-      "Run hosts job:": [
-        ""
       ],
       "Run job": [
         "Lancer le job"
@@ -1508,10 +1505,10 @@
         "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
       ],
       "The number of failed invocations is:": [
-        ""
+        "Le nombre d’invocations échouées est :"
       ],
       "The number of selected invocations is:": [
-        ""
+        "Le nombre des invocations sélectionnées est :"
       ],
       "The only applicable proxy %{proxy_names} is down": [
         "Le seul proxy applicable %{proxy_names} est indisponible",
@@ -1624,10 +1621,10 @@
         "Impossible de créer une notification par e-mail : %s"
       ],
       "Unable to fetch CA public key": [
-        ""
+        "Impossible de récupérer la clef publique CA"
       ],
       "Unable to fetch CA public key: %{error}": [
-        ""
+        "Impossible de récupérer la clef publique CA: %{error}"
       ],
       "Unable to fetch public key": [
         "Impossible de récupérer la clef publique"
