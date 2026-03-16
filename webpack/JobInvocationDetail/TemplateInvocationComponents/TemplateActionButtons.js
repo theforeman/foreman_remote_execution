@@ -45,11 +45,29 @@ const actions = ({
       );
       dispatch(
         APIActions.post({
-          url: `/foreman_tasks/tasks/${taskID}/cancel`,
+          url: `/api/v2/job_invocations/${jobID}/cancel`,
           key: 'CANCEL_TASK',
+          params: { search: `id ^ (${hostID})`, force: false },
           errorToast: ({ response }) =>
-            response?.data?.message || __('Could not cancel the task'),
-          successToast: () => __('Task for the host cancelled succesfully'),
+            // eslint-disable-next-line camelcase
+            response?.data?.error?.full_messages ||
+            response?.data?.error?.message ||
+            __('Could not cancel the task'),
+          handleSuccess: ({ data }) => {
+            const cancelled = Array.isArray(data?.cancelled)
+              ? data.cancelled
+              : [];
+            dispatch(
+              addToast({
+                key: 'cancel-job-result',
+                type: cancelled.length > 0 ? 'success' : 'warning',
+                message:
+                  cancelled.length > 0
+                    ? __('Task for the host cancelled successfully')
+                    : __('No task was cancelled for the host'),
+              })
+            );
+          },
         })
       );
     },
@@ -57,7 +75,7 @@ const actions = ({
   },
   abort: {
     name: 'template-invocation-abort-job',
-    text: __('Abort task'),
+    text: __('Abort Task'),
     permission: permissions.cancel_job_invocations,
     onClick: () => {
       dispatch(
@@ -69,11 +87,29 @@ const actions = ({
       );
       dispatch(
         APIActions.post({
-          url: `/foreman_tasks/tasks/${taskID}/abort`,
+          url: `/api/v2/job_invocations/${jobID}/cancel`,
           key: 'ABORT_TASK',
+          params: { search: `id ^ (${hostID})`, force: true },
           errorToast: ({ response }) =>
-            response?.data?.message || __('Could not abort the task'),
-          successToast: () => __('task aborted succesfully'),
+            // eslint-disable-next-line camelcase
+            response?.data?.error?.full_messages ||
+            response?.data?.error?.message ||
+            __('Could not abort the task'),
+          handleSuccess: ({ data }) => {
+            const cancelled = Array.isArray(data?.cancelled)
+              ? data.cancelled
+              : [];
+            dispatch(
+              addToast({
+                key: 'abort-job-result',
+                type: cancelled.length > 0 ? 'success' : 'warning',
+                message:
+                  cancelled.length > 0
+                    ? __('Task for the host aborted successfully')
+                    : __('No task was aborted for the host'),
+              })
+            );
+          },
         })
       );
     },
@@ -191,6 +227,7 @@ export const TemplateActionButtons = ({
     </Flex>
   );
 };
+
 TemplateActionButtons.propTypes = {
   taskID: PropTypes.string,
   jobID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
