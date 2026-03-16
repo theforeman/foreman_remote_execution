@@ -66,7 +66,7 @@
         "ジョブ '%{subject}' が失敗しました"
       ],
       "A job '%{subject}' has finished successfully": [
-        "ジョブ '%{subject}' が正常に完了しました。"
+        "ジョブ '%{subject}' が正常に完了しました"
       ],
       "A notification when a job finishes": [
         "ジョブの完了時の通知"
@@ -138,7 +138,7 @@
         "エラーが発生しました。"
       ],
       "Another interface is already set as execution. Are you sure you want to use this one instead?": [
-        "別のインターフェースがすでに実行として設定されています。代わりにこのインターフェースを使用しもよろしいでしょうか?"
+        "別のインターフェイスはすでに実行として設定されています。代わりにこのインターフェイスを使用してもよろしいですか?"
       ],
       "Any Location": [
         "任意のロケーション"
@@ -285,7 +285,7 @@
         "再帰論理 %s を有効にできませんでした: ${response}"
       ],
       "Could not find any suitable interface for execution": [
-        "実行に適したインターフェースを見つけることができませんでした"
+        "実行に適したインターフェイスを見つけることができませんでした"
       ],
       "Could not render the preview because no host matches the search query.": [
         "検索クエリーに一致するホストがないため、プレビューをレンダリングできませんでした。"
@@ -375,7 +375,7 @@
         "デフォルトの SSH パスワード"
       ],
       "Default key passphrase to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_key_passphrase": [
-        "SSH に使用するデフォルトの鍵パスフレーズ。remote_execution_ssh_key_passphrase という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
+        "SSH に使用するデフォルトの鍵パスフレーズ。remote_execution_ssh_key_passphrase という名前のパラメーターを設定することにより、ホストごとに上書きできます"
       ],
       "Default password to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_password": [
         "SSH に使用するデフォルトパスワード。remote_execution_ssh_password という名前のパラメーターを設定することにより、ホストごとに上書きできます"
@@ -675,7 +675,7 @@
         "使用する入力"
       ],
       "Interface with the '%s' identifier was specified as a remote execution interface, however the interface was not found on the host. If the interface exists, it needs to be created in Foreman during the registration.": [
-        "'%s' の識別子を持つインターフェースがリモート実行インターフェースとして指定されましたが、このインターフェースはホスト上で見つかりませんでした。インターフェースが存在する場合は、登録時に Foreman で作成する必要があります。"
+        "'%s' の識別子を持つインターフェイスがリモート実行インターフェイスとして指定されましたが、このインターフェイスはホスト上で見つかりませんでした。インターフェイスが存在する場合は、登録時に Foreman で作成する必要があります。"
       ],
       "Internal proxy selector can only be used if Katello is enabled": [
         "内部プロキシーセレクターは、Katello が有効になっている場合にのみ使用できます"
@@ -741,7 +741,7 @@
         "機能に使用するジョブテンプレート ID"
       ],
       "Job template imported successfully.": [
-        "ジョブテンプレートが正常にインポートされました"
+        "ジョブテンプレートが正常にインポートされました。"
       ],
       "Job with id '%{id}' was not found": [
         "ID が '%{id}' のジョブが見つかりませんでした"
@@ -867,7 +867,7 @@
         "ターゲットホストがありません"
       ],
       "No hosts found": [
-        "ホストが見つかりません。"
+        "ホストが見つかりません"
       ],
       "No hosts found.": [
         "ホストが見つかりません。"
@@ -903,7 +903,7 @@
         "OS"
       ],
       "On": [
-        "次の時刻に開始"
+        "オン"
       ],
       "Only one of feature or job_template_id can be specified": [
         "機能または job_template_id の 1 つのみを指定できます"
@@ -912,10 +912,10 @@
         "%s の呼び出しをすべて新規タブで開く"
       ],
       "Open all failed runs on this page (%s)": [
-        ""
+        "このページで失敗した実行をすべて開きます (%s)"
       ],
       "Open all rows of the table in new tabs": [
-        ""
+        "新しいタブでテーブルのすべての行を開きます"
       ],
       "Open in new tab": [
         "新規タブで開く"
@@ -924,7 +924,7 @@
         "新規タブで開く"
       ],
       "Open selected in new tab": [
-        "選択項目を新規タブで開く"
+        "選択項目を新規タブで開きます"
       ],
       "Opening job invocation form": [
         "ジョブ呼び出しフォームを開く"
@@ -1044,13 +1044,13 @@
         "クエリータイプ"
       ],
       "REX job has failed - %s": [
-        "REX ジョブが失敗しました: %s"
+        "REX ジョブが失敗しました - %s"
       ],
       "REX job has finished - %s": [
-        "REX ジョブが終了しました: %s"
+        "REX ジョブが終了しました - %s"
       ],
       "REX job has succeeded - %s": [
-        "REX ジョブが成功しました: %s"
+        "REX ジョブが成功しました - %s"
       ],
       "REX pull mode": [
         "REX プルモード"
@@ -1092,7 +1092,7 @@
         "リモート実行機能"
       ],
       "Remote Execution Interface": [
-        "リモート実行インターフェース"
+        "リモート実行インターフェイス"
       ],
       "Remote action:": [
         "リモートアクション:"
@@ -1180,9 +1180,6 @@
       ],
       "Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.": [
         "1 回に最大 N 個のタスクを実行します。この値が設定されていて、プロキシーバッチのトリガーが有効な場合には、タスクはサイズ 1 の単位で一括して、Smart Proxy でトリガーされます。"
-      ],
-      "Run hosts job:": [
-        ""
       ],
       "Run job": [
         "ジョブを実行"
@@ -1293,7 +1290,7 @@
         "実行の種類の選択"
       ],
       "Set 'host_registration_remote_execution_pull' parameter for the host. If it is set to true, pull provider client will be deployed on the host": [
-        "このホストの 'host_registration_remote_execution_pull' パラメーターを設定します。True に設定されている場合には、ぷるプロバイダーのクライアントはホストにデプロイされます。"
+        "このホストの 'host_registration_remote_execution_pull' パラメーターを設定します。True に設定されている場合には、ぷるプロバイダーのクライアントはホストにデプロイされます"
       ],
       "Set SSH key passphrase": [
         "SSH 鍵パスフレーズを設定"
@@ -1311,10 +1308,10 @@
         "リモート実行のプルモードを設定します。`はい` に設定すると、登録したホストにプルプロパイダークライアントがデプロイされます。継承される値は、`host_registration_remote_execution_pull` パラメーターに基づきます。これは、ホストグループ、オペレーティングシステム、組織などから継承できます。オーバーライドされると、選択した値がホストパラメーターレベルで保存されます。"
       ],
       "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting": [
-        "ホストインターフェースの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれを上書きすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
+        "ホストインターフェイスの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれを上書きすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
       ],
       "Should this interface be used for remote execution?": [
-        "このインターフェースをリモート実行に使用する必要がありますか?"
+        "このインターフェイスをリモート実行に使用する必要がありますか?"
       ],
       "Show Job status for the hosts": [
         "ホストのジョブステータスを表示"
@@ -1488,7 +1485,7 @@
         "動的クエリーはまだ処理中です。クエリーの対象となる {viewTheHosts} が可能です。"
       ],
       "The execution interface is used for remote execution": [
-        "リモート実行には実行インターフェースが使用されます"
+        "リモート実行には実行インターフェイスが使用されます"
       ],
       "The final host list may change because the selected query is dynamic.  It will be rerun during execution.": [
         "選択されたクエリーが動的であるため、最終ホスト一覧は変更される場合があります。実行中に再実行されます。"
@@ -1506,13 +1503,13 @@
         "使用するジョブテンプレート。機能が指定されていなければ、パラメーターが必要です"
       ],
       "The number of failed invocations is:": [
-        ""
+        "失敗した呼び出しの数:"
       ],
       "The number of selected invocations is:": [
-        ""
+        "選択した呼び出しの数:"
       ],
       "The only applicable proxy %{proxy_names} is down": [
-        "適用可能な唯一のプロキシー %{proxy_names} がダウンしています。"
+        "適用可能な唯一のプロキシー %{proxy_names} がダウンしています"
       ],
       "The template %{template_name} mapped to feature %{feature_name} is not accessible by the user": [
         "ユーザーは機能 %{template_name} にマッピングされたテンプレート %{feature_name} にアクセスできません"
@@ -1620,10 +1617,10 @@
         "メールの通知を作成できません: %s"
       ],
       "Unable to fetch CA public key": [
-        ""
+        "CA 公開鍵を取得できません"
       ],
       "Unable to fetch CA public key: %{error}": [
-        ""
+        "CA 公開鍵を取得できません: %{error}"
       ],
       "Unable to fetch public key": [
         "公開鍵を取得できません"
@@ -1785,7 +1782,7 @@
         "こちら"
       ],
       "host already has an execution interface": [
-        "ホストにはすでに実行インターフェースがあります"
+        "ホストにはすでに実行インターフェイスがあります"
       ],
       "hosts": [
         "ホスト"

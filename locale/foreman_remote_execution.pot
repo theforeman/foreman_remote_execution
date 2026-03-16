@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_remote_execution 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-11 16:08+0100\n"
-"PO-Revision-Date: 2026-02-11 16:08+0100\n"
+"POT-Creation-Date: 2026-03-16 16:20+0100\n"
+"PO-Revision-Date: 2026-03-16 16:20+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -627,11 +627,11 @@ msgid "Could not render the preview because no host matches the search query."
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:205
-msgid "%s ago"
+msgid "in %s"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:205
-msgid "in %s"
+msgid "%s ago"
 msgstr ""
 
 #: ../app/helpers/remote_execution_helper.rb:217
@@ -669,7 +669,7 @@ msgstr ""
 msgid "%{description} on %{host}"
 msgstr ""
 
-#: ../app/lib/actions/remote_execution/run_host_job.rb:114 action_names.rb:2
+#: ../app/lib/actions/remote_execution/run_host_job.rb:114
 msgid "Remote action:"
 msgstr ""
 
@@ -871,13 +871,13 @@ msgid "Script"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:147
-msgid "Dynamic Query"
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:146
+msgid "Static Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:5
-#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:146
-msgid "Static Query"
+#: ../webpack/JobInvocationDetail/JobInvocationConstants.js:147
+msgid "Dynamic Query"
 msgstr ""
 
 #: ../app/models/targeting.rb:10
@@ -957,12 +957,12 @@ msgid "Schedule"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:14
-msgid "tasks at a time"
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:56
+msgid "Concurrency level limited to"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:14
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:56
-msgid "Concurrency level limited to"
+msgid "tasks at a time"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:17
@@ -976,15 +976,15 @@ msgid "Scheduled to start at"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:23
+#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:60
+msgid "Timeout to kill after"
+msgstr ""
+
+#: ../app/views/job_invocations/_card_schedule.html.erb:23
 #: ../app/views/job_invocations/_card_schedule.html.erb:26
 #: ../webpack/JobInvocationDetail/JobAdditionInfo.js:62
 #: ../webpack/JobInvocationDetail/JobAdditionInfo.js:67
 msgid "seconds"
-msgstr ""
-
-#: ../app/views/job_invocations/_card_schedule.html.erb:23
-#: ../webpack/JobInvocationDetail/JobAdditionInfo.js:60
-msgid "Timeout to kill after"
 msgstr ""
 
 #: ../app/views/job_invocations/_card_schedule.html.erb:26
@@ -1110,17 +1110,17 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:94
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:38
-msgid ""
-"Time in seconds from the start on the remote host after which the job should b"
-"e killed."
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:94
 #: ../app/views/job_templates/_custom_tabs.html.erb:13
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:36
 #: ../webpack/JobWizard/steps/ReviewDetails/index.js:273
 msgid "Timeout to kill"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:94
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:38
+msgid ""
+"Time in seconds from the start on the remote host after which the job should b"
+"e killed."
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:106
@@ -1130,15 +1130,20 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:110
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:80
+msgid "Password"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:110
 #: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:82
 msgid ""
 "Password is stored encrypted in DB until the job finishes. For future or recur"
 "ring executions, it is removed after the last execution."
 msgstr ""
 
-#: ../app/views/job_invocations/_form.html.erb:110
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:80
-msgid "Password"
+#: ../app/views/job_invocations/_form.html.erb:111
+#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:104
+msgid "Private key passphrase"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:111
@@ -1146,11 +1151,6 @@ msgid ""
 "Key passhprase is only applicable for SSH provider. Other providers ignore thi"
 "s field. <br> Passphrase is stored encrypted in DB until the job finishes. For"
 " future or recurring executions, it is removed after the last execution."
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:111
-#: ../webpack/JobWizard/steps/AdvancedFields/Fields.js:104
-msgid "Private key passphrase"
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:112
@@ -1197,17 +1197,17 @@ msgid ""
 msgstr ""
 
 #: ../app/views/job_invocations/_form.html.erb:129
+#: ../webpack/JobWizard/steps/ReviewDetails/index.js:260
+msgid "Type of query"
+msgstr ""
+
+#: ../app/views/job_invocations/_form.html.erb:129
 msgid ""
 "Type determines when the query is evaluated to hosts.<br><ul><li><b>Static</b>"
 " - Executes the job on the current list of target hosts.</li><li><b>Dynamic</b"
 "> - Evaluates the list of target hosts just before the job is executed. If you"
 " used a filter to select the target hosts, the list of target hosts might be d"
 "ifferent from the current list.</li></ul>"
-msgstr ""
-
-#: ../app/views/job_invocations/_form.html.erb:129
-#: ../webpack/JobWizard/steps/ReviewDetails/index.js:260
-msgid "Type of query"
 msgstr ""
 
 #: ../app/views/job_invocations/_preview_hosts_list.html.erb:3
@@ -1436,14 +1436,14 @@ msgid "Remote Execution"
 msgstr ""
 
 #: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
+msgid "Proxies"
+msgstr ""
+
+#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
 msgid ""
 "Select as many remote execution proxies as applicable for this subnet.  When m"
 "ultiple proxies with the same provider are added, actions will be load balance"
 "d among them."
-msgstr ""
-
-#: ../app/views/overrides/subnets/_rex_tab_pane.html.erb:3
-msgid "Proxies"
 msgstr ""
 
 #: ../app/views/remote_execution_features/_form.html.erb:18
@@ -1546,9 +1546,9 @@ msgstr ""
 msgid "Could not display data for job invocation."
 msgstr ""
 
-#: ../app/views/templates/script/check_update.erb:12
-#: ../app/views/templates/script/module_action.erb:37
-#: ../app/views/templates/script/package_action.erb:43
+#: ../app/views/templates/script/check_update.erb:5
+#: ../app/views/templates/script/module_action.erb:5
+#: ../app/views/templates/script/package_action.erb:5
 msgid "Unsupported or no operating system found for this host."
 msgstr ""
 
@@ -2831,10 +2831,6 @@ msgstr ""
 
 #: ../webpack/react_app/components/TargetingHosts/TargetingHostsLabelsRow.js:20
 msgid "Active Filters:"
-msgstr ""
-
-#: action_names.rb:3
-msgid "Run hosts job:"
 msgstr ""
 
 #: gemspec.rb:2
