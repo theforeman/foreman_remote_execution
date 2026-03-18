@@ -11,6 +11,10 @@ import { mockTemplateInvocationResponse } from './fixtures';
 jest.spyOn(api, 'get');
 jest.mock('../JobInvocationSelectors');
 
+jest.mock('foremanReact/components/ToastsList', () => ({
+  addToast: jest.fn(payload => ({ type: 'ADD_TOAST', payload })),
+}));
+
 const mockStore = configureMockStore([]);
 const store = mockStore({
   HOSTS_API: {
@@ -185,5 +189,61 @@ describe('TemplateInvocation', () => {
     expect(
       await screen.findByText('Successfully copied to clipboard!')
     ).toBeInTheDocument();
+  });
+
+  describe('Cancel/Abort task buttons API calls', () => {
+    const responseWithCancellableTask = {
+      ...mockTemplateInvocationResponse,
+      task: { id: 'task-123', cancellable: true },
+      permissions: {
+        view_foreman_tasks: true,
+        cancel_job_invocations: true,
+        execute_jobs: true,
+      },
+    };
+
+    beforeEach(() => {
+      selectors.selectTemplateInvocationStatus.mockImplementation(() => () =>
+        'RESOLVED'
+      );
+      selectors.selectTemplateInvocation.mockImplementation(() => () =>
+        responseWithCancellableTask
+      );
+      jest.spyOn(api.APIActions, 'post').mockReturnValue({ type: 'MOCK_POST' });
+    });
+
+    test('clicking the `Cancel Task` button calls API with cancel param', () => {
+      render(
+        <Provider store={store}>
+          <TemplateInvocation {...mockProps} />
+        </Provider>
+      );
+      fireEvent.click(screen.getByText('Cancel Task'));
+
+      const postCall = api.APIActions.post.mock.calls.find(
+        call => call[0].key === 'CANCEL_TASK'
+      )?.[0];
+      expect(postCall.url).toBe(
+        `/foreman_tasks/tasks/${responseWithCancellableTask.task.id}/cancel`
+      );
+      expect(postCall.key).toBe('CANCEL_TASK');
+    });
+
+    test('clicking the `Abort Task` button calls API with abort param', () => {
+      render(
+        <Provider store={store}>
+          <TemplateInvocation {...mockProps} />
+        </Provider>
+      );
+      fireEvent.click(screen.getByText('Abort task'));
+
+      const postCall = api.APIActions.post.mock.calls.find(
+        call => call[0].key === 'ABORT_TASK'
+      )?.[0];
+      expect(postCall.url).toBe(
+        `/foreman_tasks/tasks/${responseWithCancellableTask.task.id}/abort`
+      );
+      expect(postCall.key).toBe('ABORT_TASK');
+    });
   });
 });
