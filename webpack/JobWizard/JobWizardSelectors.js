@@ -1,5 +1,6 @@
 import URI from 'urijs';
 import { get } from 'lodash';
+import { createSelector } from 'reselect';
 import {
   selectAPIResponse,
   selectAPIStatus,
@@ -17,8 +18,12 @@ import {
   JOB_API_KEY,
 } from './JobWizardConstants';
 
+/** Stable fallbacks so useSelector does not see a new reference every run */
+const EMPTY_ARRAY = [];
+const EMPTY_OBJECT = {};
+
 export const selectRerunJobInvocationResponse = state =>
-  selectAPIResponse(state, JOB_API_KEY) || {};
+  selectAPIResponse(state, JOB_API_KEY) || EMPTY_OBJECT;
 
 export const selectRerunJobInvocationStatus = state =>
   selectAPIStatus(state, JOB_API_KEY);
@@ -27,19 +32,26 @@ export const selectJobTemplatesStatus = state =>
   selectAPIStatus(state, JOB_TEMPLATES);
 
 export const filterJobTemplates = templates =>
-  templates?.filter(template => !template.snippet) || [];
+  templates?.filter(template => !template.snippet) || EMPTY_ARRAY;
 
-export const selectJobTemplates = state =>
-  filterJobTemplates(selectAPIResponse(state, JOB_TEMPLATES)?.results);
+const selectJobTemplatesResults = state =>
+  selectAPIResponse(state, JOB_TEMPLATES)?.results;
+
+export const selectJobTemplates = createSelector(
+  [selectJobTemplatesResults],
+  results => filterJobTemplates(results)
+);
 
 export const selectJobTemplatesSearch = state =>
   selectAPIResponse(state, JOB_TEMPLATES)?.search;
 
 export const selectJobCategoriesResponse = state =>
-  selectAPIResponse(state, JOB_CATEGORIES) || {};
+  selectAPIResponse(state, JOB_CATEGORIES) || EMPTY_OBJECT;
 
-export const selectJobCategories = state =>
-  selectJobCategoriesResponse(state).job_categories || [];
+export const selectJobCategories = state => {
+  const { job_categories: jobCategories } = selectJobCategoriesResponse(state);
+  return jobCategories || EMPTY_ARRAY;
+};
 
 export const selectWithKatello = state =>
   selectJobCategoriesResponse(state).with_katello || false;
@@ -58,7 +70,7 @@ export const selectJobCategoriesMissingPermissions = state => {
       'data',
       'error',
       'missing_permissions',
-    ]) || []
+    ]) || EMPTY_ARRAY
   );
 };
 
@@ -74,30 +86,36 @@ export const selectJobTemplate = state =>
 export const selectEffectiveUser = state =>
   selectAPIResponse(state, JOB_TEMPLATE).effective_user;
 
-export const selectAdvancedTemplateInputs = state =>
-  selectAPIResponse(state, JOB_TEMPLATE).advanced_template_inputs || [];
+export const selectAdvancedTemplateInputs = state => {
+  const response = selectAPIResponse(state, JOB_TEMPLATE) || EMPTY_OBJECT;
+  return response.advanced_template_inputs || EMPTY_ARRAY;
+};
 
-export const selectTemplateInputs = state =>
-  selectAPIResponse(state, JOB_TEMPLATE).template_inputs || [];
+export const selectTemplateInputs = state => {
+  const response = selectAPIResponse(state, JOB_TEMPLATE) || EMPTY_OBJECT;
+  return response.template_inputs || EMPTY_ARRAY;
+};
 
 export const selectHostsResponse = state => selectAPIResponse(state, HOSTS_API);
 
 export const selectHostCount = state =>
   selectHostsResponse(state).subtotal || 0;
 
-export const selectHosts = state => {
-  const hosts = selectHostsResponse(state).results || [];
+const selectHostsResults = state => selectHostsResponse(state).results;
+
+export const selectHosts = createSelector([selectHostsResults], results => {
+  const hosts = results || EMPTY_ARRAY;
   return hosts.map(host => ({
     name: host.name,
     display_name: host.display_name,
   }));
-};
+});
 
 export const selectHostsMissingPermissions = state => {
   const hostsResponse = selectHostsResponse(state);
   return (
     get(hostsResponse, ['response', 'data', 'error', 'missing_permissions']) ||
-    []
+    EMPTY_ARRAY
   );
 };
 
@@ -115,6 +133,6 @@ export const selectIsSubmitting = state =>
   selectAPIStatus(state, JOB_INVOCATION) === STATUS.RESOLVED;
 
 export const selectRouterSearch = state => {
-  const { search } = selectRouterLocation(state);
+  const { search } = selectRouterLocation(state) || {};
   return URI.parseQuery(search);
 };
