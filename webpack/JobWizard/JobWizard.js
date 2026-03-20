@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable camelcase */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Wizard } from '@patternfly/react-core/deprecated';
@@ -51,6 +51,8 @@ export const JobWizard = ({ rerunData }) => {
   const [category, setCategory] = useState(
     rerunData?.job_category || jobCategoriesResponse?.default_category || ''
   );
+  const categoryRef = useRef(category);
+  categoryRef.current = category;
   const [advancedValues, setAdvancedValues] = useState({ templateValues: {} });
   const [templateValues, setTemplateValues] = useState({});
   const [scheduleValue, setScheduleValue] = useState(initialScheduleState);
@@ -89,6 +91,10 @@ export const JobWizard = ({ rerunData }) => {
         concurrency_control = {},
       },
     }) => {
+      if (categoryRef.current !== job_category) {
+        setCategory(job_category);
+      }
+
       const advancedTemplateValues = {};
       const defaultTemplateValues = {};
       const inputs = template_inputs;
