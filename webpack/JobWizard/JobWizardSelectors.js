@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import URI from 'urijs';
 import { get } from 'lodash';
 import { createSelector } from 'reselect';
@@ -86,15 +87,12 @@ export const selectJobTemplate = state =>
 export const selectEffectiveUser = state =>
   selectAPIResponse(state, JOB_TEMPLATE).effective_user;
 
-export const selectAdvancedTemplateInputs = state => {
-  const response = selectAPIResponse(state, JOB_TEMPLATE) || EMPTY_OBJECT;
-  return response.advanced_template_inputs || EMPTY_ARRAY;
-};
+export const selectAdvancedTemplateInputs = state =>
+  selectAPIResponse(state, JOB_TEMPLATE)?.advanced_template_inputs ||
+  EMPTY_ARRAY;
 
-export const selectTemplateInputs = state => {
-  const response = selectAPIResponse(state, JOB_TEMPLATE) || EMPTY_OBJECT;
-  return response.template_inputs || EMPTY_ARRAY;
-};
+export const selectTemplateInputs = state =>
+  selectAPIResponse(state, JOB_TEMPLATE)?.template_inputs || EMPTY_ARRAY;
 
 export const selectHostsResponse = state => selectAPIResponse(state, HOSTS_API);
 
