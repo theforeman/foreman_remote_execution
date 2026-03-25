@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import URI from 'urijs';
@@ -133,4 +133,4 @@ ConnectedCategoryAndTemplate.propTypes = {
 };
 ConnectedCategoryAndTemplate.defaultProps = { jobTemplate: null };
 
-export default ConnectedCategoryAndTemplate;
+export default memo(ConnectedCategoryAndTemplate);

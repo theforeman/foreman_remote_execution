@@ -30,6 +30,12 @@ export const pupptetJobTemplate = {
 
 export const jobTemplates = [jobTemplate];
 
+export const wizardJobTemplatesMockList = [
+  jobTemplate,
+  pupptetJobTemplate,
+  { ...jobTemplate, id: 2, name: 'template2' },
+];
+
 export const jobTemplateResponse = {
   job_template: jobTemplate,
   effective_user: {
@@ -137,11 +143,9 @@ export const testSetup = (selectors, api) => {
     () => jobTemplateResponse.advanced_template_inputs
   );
   selectors.selectJobCategories.mockImplementation(() => jobCategories);
-  selectors.selectJobTemplates.mockImplementation(() => [
-    jobTemplate,
-    pupptetJobTemplate,
-    { ...jobTemplate, id: 2, name: 'template2' },
-  ]);
+  selectors.selectJobTemplates.mockImplementation(
+    () => wizardJobTemplatesMockList
+  );
   selectors.selectJobTemplate.mockImplementation(() => jobTemplateResponse);
 
   selectors.selectEffectiveUser.mockImplementation(
@@ -187,13 +191,25 @@ export const mockApi = api => {
           },
         });
     } else if (action.key === 'JOB_TEMPLATE') {
-      handleSuccess &&
-        handleSuccess({
-          data:
-            action.url === '/ui_job_wizard/template/163'
-              ? { ...jobTemplateResponse, job_template: pupptetJobTemplate }
-              : jobTemplateResponse,
-        });
+      const url = String(action.url);
+      let templatePayload = jobTemplateResponse;
+      if (url.includes('/template/163')) {
+        templatePayload = {
+          ...jobTemplateResponse,
+          job_template: pupptetJobTemplate,
+        };
+      } else if (url.includes('/template/2')) {
+        const jobTemplate2 = { ...jobTemplate, id: 2, name: 'template2' };
+        templatePayload = {
+          ...jobTemplateResponse,
+          job_template: jobTemplate2,
+          effective_user: {
+            ...jobTemplateResponse.effective_user,
+            job_template_id: 2,
+          },
+        };
+      }
+      handleSuccess && handleSuccess({ data: templatePayload });
     } else if (action.key === 'JOB_TEMPLATES') {
       handleSuccess &&
         handleSuccess({
@@ -202,7 +218,7 @@ export const mockApi = api => {
               action.url.search() ===
               '?search=job_category%3D%22Puppet%22&per_page=all'
                 ? [pupptetJobTemplate]
-                : [jobTemplate],
+                : wizardJobTemplatesMockList,
           },
         });
     } else if (action.key === 'HOST_IDS') {
