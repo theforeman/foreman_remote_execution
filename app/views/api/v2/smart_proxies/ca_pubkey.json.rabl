@@ -1,1 +1,1 @@
-attribute :ca_pubkey => :remote_execution_ca_pubkey
+node(:remote_execution_ca_pubkey) { |p| p.ca_pubkey(refresh: false) }

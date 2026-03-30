@@ -7,12 +7,12 @@ module ForemanRemoteExecution
       end
     end
 
-    def pubkey
-      self[:pubkey] || update_pubkey
+    def pubkey(refresh: true)
+      self[:pubkey] || (refresh && update_pubkey || nil)
     end
 
-    def ca_pubkey
-      self[:ca_pubkey] || update_ca_pubkey
+    def ca_pubkey(refresh: true)
+      self[:ca_pubkey] || (refresh && update_ca_pubkey || nil)
     end
 
     def update_pubkey
