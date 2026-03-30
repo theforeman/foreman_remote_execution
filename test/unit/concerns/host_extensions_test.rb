@@ -11,8 +11,9 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     let(:sshkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQ foo@example.com' }
 
     before do
-      SmartProxy.any_instance.stubs(:pubkey).returns(sshkey)
-      SmartProxy.any_instance.stubs(:ca_pubkey).returns(nil)
+      host.subnet.remote_execution_proxies.each do |proxy|
+        proxy.update(pubkey: sshkey, ca_pubkey: nil)
+      end
       Setting[:remote_execution_ssh_user] = 'root'
       Setting[:remote_execution_effective_user_method] = 'sudo'
     end
@@ -60,6 +61,17 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       User.current = nil
       assert_includes host.remote_execution_ssh_keys, sshkey
     end
+
+    it 'triggers no calls to the proxy' do
+      host.subnet.remote_execution_proxies.each do |proxy|
+        proxy.update(pubkey: nil)
+      end
+
+      SmartProxy.any_instance.expects(:update_pubkey).never
+      SmartProxy.any_instance.expects(:update_ca_pubkey).never
+
+      host.host_param('remote_execution_ssh_keys')
+    end
   end
 
   describe 'has ssh CA key configured' do
@@ -68,8 +80,9 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
     let(:ca_sshkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAABJE bar@example.com' }
 
     before do
-      SmartProxy.any_instance.stubs(:pubkey).returns(sshkey)
-      SmartProxy.any_instance.stubs(:ca_pubkey).returns(ca_sshkey)
+      host.subnet.remote_execution_proxies.each do |proxy|
+        proxy.update(pubkey: sshkey, ca_pubkey: ca_sshkey)
+      end
       Setting[:remote_execution_ssh_user] = 'root'
       Setting[:remote_execution_effective_user_method] = 'sudo'
     end
@@ -101,6 +114,17 @@ class ForemanRemoteExecutionHostExtensionsTest < ActiveSupport::TestCase
       host.host_parameters << FactoryBot.create(:host_parameter, :host => host, :name => 'remote_execution_ssh_ca_keys', :value => key)
       assert_includes host.host_param('remote_execution_ssh_ca_keys'), key
       assert_includes host.host_param('remote_execution_ssh_ca_keys'), ca_sshkey
+    end
+
+    it 'triggers no calls to the proxy' do
+      host.subnet.remote_execution_proxies.each do |proxy|
+        proxy.update(ca_pubkey: nil)
+      end
+
+      SmartProxy.any_instance.expects(:update_pubkey).never
+      SmartProxy.any_instance.expects(:update_ca_pubkey).never
+
+      host.host_param('remote_execution_ssh_ca_keys')
     end
   end
 
