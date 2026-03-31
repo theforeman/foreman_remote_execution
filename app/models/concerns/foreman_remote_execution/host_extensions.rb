@@ -109,11 +109,11 @@ module ForemanRemoteExecution
 
     def remote_execution_ssh_keys
       # only include public keys from SSH proxies that don't have SSH cert verification configured
-      remote_execution_proxies(%w(SSH Script), false).values.flatten.uniq.map { |proxy| proxy.pubkey if proxy.ca_pubkey.blank? }.compact.uniq
+      remote_execution_proxies(%w(SSH Script), false).values.flatten.uniq.map { |proxy| proxy.pubkey(refresh: false) if proxy.ca_pubkey(refresh: false).blank? }.compact.uniq
     end
 
     def remote_execution_ssh_ca_keys
-      remote_execution_proxies(%w(SSH Script), false).values.flatten.uniq.map { |proxy| proxy.ca_pubkey }.compact.uniq
+      remote_execution_proxies(%w(SSH Script), false).values.flatten.uniq.map { |proxy| proxy.ca_pubkey(refresh: false) }.compact.uniq
     end
 
     def drop_execution_interface_cache
