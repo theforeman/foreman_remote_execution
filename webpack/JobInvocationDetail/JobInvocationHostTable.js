@@ -1,12 +1,14 @@
 /* eslint-disable max-lines */
 /* eslint-disable camelcase */
 import {
+  Icon,
   EmptyState,
   EmptyStateBody,
   EmptyStateHeader,
   EmptyStateVariant,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { AddCircleOIcon } from '@patternfly/react-icons';
 import { ExpandableRowContent, Tbody, Td, Tr } from '@patternfly/react-table';
 import { useDispatch } from 'react-redux';
 import { APIActions } from 'foremanReact/redux/API';
@@ -22,7 +24,6 @@ import {
 import { getPageStats } from 'foremanReact/components/PF4/TableIndexPage/Table/helpers';
 import TableIndexPage from 'foremanReact/components/PF4/TableIndexPage/TableIndexPage';
 import { getControllerSearchProps } from 'foremanReact/constants';
-import { Icon } from 'patternfly-react';
 import PropTypes from 'prop-types';
 import React, {
   useEffect,
@@ -339,7 +340,9 @@ const JobInvocationHostTable = ({
       <Td colSpan={100}>
         <EmptyState variant={EmptyStateVariant.xl}>
           <span className="empty-state-icon">
-            <Icon name="add-circle-o" type="pf" size="2x" />
+            <Icon size="xl" iconSize="xl">
+              <AddCircleOIcon name="add-circle-o" />
+            </Icon>
           </span>
           <EmptyStateHeader
             titleText={<>{__('No Results')}</>}
@@ -446,6 +449,7 @@ const JobInvocationHostTable = ({
           isDeleteable={false}
           childrenOutsideTbody
         >
+          {customEmptyState}
           {results.map((result, rowIndex) => {
             const currentInvocationState = getInvocationState(result.id);
             return (
