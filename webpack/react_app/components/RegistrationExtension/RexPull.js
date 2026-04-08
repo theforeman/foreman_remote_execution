@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 import LabelIcon from 'foremanReact/components/common/LabelIcon';
-import { Alert } from 'patternfly-react';
-
 import {
+  Alert,
   FormGroup,
   FormSelectOption,
   FormSelect,
@@ -26,11 +25,15 @@ const options = (value = '') => {
 };
 
 const pullWarning = (
-  <Alert type="info" isInline style={{ marginTop: '10px' }}>
-    {__(
+  <Alert
+    ouiaId="overrideAlert"
+    variant="info"
+    isInline
+    title={__(
       'Please make sure that the Smart Proxy is configured correctly for the Pull provider.'
     )}
-  </Alert>
+    style={{ marginTop: '10px' }}
+  />
 );
 
 function showPullWarning(valueFromParam, value) {
