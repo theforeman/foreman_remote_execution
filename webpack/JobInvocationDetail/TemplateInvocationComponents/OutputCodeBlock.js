@@ -11,7 +11,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
 export const OutputCodeBlock = ({ code, showOutputType, scrollElement }) => {
   let lineCounter = 0;
   // eslint-disable-next-line no-control-regex
-  const COLOR_PATTERN = /\x1b\[(\d+)m/g;
+  const COLOR_PATTERN = /\x1b\[[\d;]*m/g;
   const CONSOLE_COLOR = {
     '31': 'red',
     '32': 'lightgreen',
@@ -27,12 +27,15 @@ export const OutputCodeBlock = ({ code, showOutputType, scrollElement }) => {
     '95': 'violet',
     '96': 'turquoise',
     '0': 'default',
+    '39': 'default',
   };
 
   const colorizeLine = line => {
     line = line.replace(COLOR_PATTERN, seq => {
-      const color = seq.match(/(\d+)m/)[1];
-      return `{{{format color:${color}}}}`;
+      const codes = seq.match(/(\d+)/g) || [];
+      const lastColorCode =
+        [...codes].reverse().find(code_ => code_ in CONSOLE_COLOR) || '0';
+      return `{{{format color:${lastColorCode}}}}`;
     });
 
     let currentColor = 'default';

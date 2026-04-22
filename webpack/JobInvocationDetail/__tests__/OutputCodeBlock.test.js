@@ -31,6 +31,7 @@ describe('OutputCodeBlock', () => {
     expect(screen.getByText('This is green text')).toHaveStyle(
       'color: lightgreen'
     );
+    expect(screen.getByText('Compound red text')).toHaveStyle('color: red');
   });
 
   test('displays no output message when filtered', () => {
