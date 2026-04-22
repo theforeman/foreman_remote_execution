@@ -197,6 +197,15 @@ export const jobInvocationOutput = [
   },
 
   {
+    id: 1960,
+    template_invocation_id: templateInvocationID,
+    timestamp: 1733931149.2044532,
+    meta: null,
+    external_id: '0',
+    output_type: 'stdout',
+    output: '\u001b[0;31mCompound red text\u001b[0m\n',
+  },
+  {
     id: 1907,
     template_invocation_id: templateInvocationID,
     timestamp: 1718719863.184878,
