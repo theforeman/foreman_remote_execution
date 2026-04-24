@@ -12,6 +12,7 @@ import {
 } from '@patternfly/react-core/deprecated';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import { get } from 'foremanReact/redux/API';
 import {
   cancelJob,
@@ -23,10 +24,7 @@ import {
   GET_REPORT_TEMPLATES,
   GET_REPORT_TEMPLATE_INPUTS,
 } from './JobInvocationConstants';
-import {
-  selectTaskCancelable,
-  selectHasPermission,
-} from './JobInvocationSelectors';
+import { selectTaskCancelable } from './JobInvocationSelectors';
 
 const JobInvocationToolbarButtons = ({ jobId, data }) => {
   const { succeeded, failed, task, recurrence, permissions } = data;
@@ -38,8 +36,11 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
     ? permissions.edit_recurring_logics
     : false;
   const isTaskCancelable = useSelector(selectTaskCancelable);
-  const useHasPermission = permissionRequired =>
-    useSelector(selectHasPermission(permissionRequired));
+  const canCreateJobInvocations = usePermissions(['create_job_invocations']);
+  const canCancelJobInvocations = usePermissions(['cancel_job_invocations']);
+  const canGenerateReportTemplates = usePermissions([
+    'generate_report_templates',
+  ]);
   const [isActionOpen, setIsActionOpen] = useState(false);
   const [reportTemplateJobId, setReportTemplateJobId] = useState(undefined);
   const [templateInputId, setTemplateInputId] = useState(undefined);
@@ -60,39 +61,55 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
   };
 
   useEffect(() => {
+    let isMounted = true;
     dispatch(
       get({
         key: GET_REPORT_TEMPLATES,
         url: '/api/report_templates',
         handleSuccess: ({ data: { results } }) => {
-          setReportTemplateJobId(
-            results.find(result => result.name === 'Job - Invocation Report')
-              ?.id
-          );
+          if (isMounted) {
+            setReportTemplateJobId(
+              results.find(result => result.name === 'Job - Invocation Report')
+                ?.id
+            );
+          }
         },
         handleError: () => {
-          setReportTemplateJobId(undefined);
+          if (isMounted) {
+            setReportTemplateJobId(undefined);
+          }
         },
       })
     );
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch]);
   useEffect(() => {
+    let isMounted = true;
     if (reportTemplateJobId !== undefined) {
       dispatch(
         get({
           key: GET_REPORT_TEMPLATE_INPUTS,
           url: `/api/templates/${reportTemplateJobId}/template_inputs`,
           handleSuccess: ({ data: { results } }) => {
-            setTemplateInputId(
-              results.find(result => result.name === 'job_id')?.id
-            );
+            if (isMounted) {
+              setTemplateInputId(
+                results.find(result => result.name === 'job_id')?.id
+              );
+            }
           },
           handleError: () => {
-            setTemplateInputId(undefined);
+            if (isMounted) {
+              setTemplateInputId(undefined);
+            }
           },
         })
       );
     }
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, reportTemplateJobId]);
 
   const recurrenceDropdownItems = recurrence
@@ -136,9 +153,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
       ouiaId="rerun-succeeded-dropdown-item"
       href={foremanUrl(`/job_invocations/${jobId}/rerun?succeeded_only=1`)}
       key="rerun-succeeded"
-      isDisabled={
-        !useHasPermission('create_job_invocations') || !(succeeded > 0)
-      }
+      isDisabled={!canCreateJobInvocations || !(succeeded > 0)}
       description="Rerun job on successful hosts"
     >
       {__('Rerun successful')}
@@ -147,7 +162,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
       ouiaId="rerun-failed-dropdown-item"
       href={foremanUrl(`/job_invocations/${jobId}/rerun?failed_only=1`)}
       key="rerun-failed"
-      isDisabled={!useHasPermission('create_job_invocations') || !(failed > 0)}
+      isDisabled={!canCreateJobInvocations || !(failed > 0)}
       description="Rerun job on failed hosts"
     >
       {__('Rerun failed')}
@@ -167,9 +182,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
       onClick={() => dispatch(cancelJob(jobId, false))}
       key="cancel"
       component="button"
-      isDisabled={
-        !useHasPermission('cancel_job_invocations') || !isTaskCancelable
-      }
+      isDisabled={!canCancelJobInvocations || !isTaskCancelable}
       description="Cancel job gracefully"
     >
       {__('Cancel')}
@@ -179,9 +192,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
       onClick={() => dispatch(cancelJob(jobId, true))}
       key="abort"
       component="button"
-      isDisabled={
-        !useHasPermission('cancel_job_invocations') || !isTaskCancelable
-      }
+      isDisabled={!canCancelJobInvocations || !isTaskCancelable}
       description="Cancel job immediately"
     >
       {__('Abort')}
@@ -211,7 +222,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
             )}
             variant="secondary"
             isDisabled={
-              !useHasPermission('generate_report_templates') ||
+              !canGenerateReportTemplates ||
               task?.state === STATUS.PENDING ||
               templateInputId === undefined
             }
@@ -235,7 +246,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
                     key="rerun"
                     href={foremanUrl(`/job_invocations/${jobId}/rerun`)}
                     variant="control"
-                    isDisabled={!useHasPermission('create_job_invocations')}
+                    isDisabled={!canCreateJobInvocations}
                   >
                     {__(`Rerun all`)}
                   </Button>,

@@ -5,9 +5,9 @@
   "scripts": {
     "lint": "tfm-lint --plugin -d /webpack",
     "lint:custom": "eslint ./webpack",
-    "test": "tfm-test --plugin",
-    "test:watch": "tfm-test --plugin --watchAll",
-    "test:current": "tfm-test --plugin --watch",
+    "test": "tfm-test --plugin --config jest.config.js",
+    "test:watch": "tfm-test --plugin --config jest.config.js --watchAll",
+    "test:current": "tfm-test --plugin --config jest.config.js --watch",
     "publish-coverage": "tfm-publish-coverage"
   },
   "repository": {

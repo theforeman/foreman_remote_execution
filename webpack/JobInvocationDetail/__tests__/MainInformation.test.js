@@ -1,9 +1,13 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { fireEvent, render, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { STATUS } from 'foremanReact/constants';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import * as api from 'foremanReact/redux/API';
 import JobInvocationDetailPage from '../index';
@@ -11,7 +15,6 @@ import {
   jobInvocationData,
   jobInvocationDataScheduled,
   jobInvocationDataRecurring,
-  mockPermissionsData,
   mockReportTemplatesResponse,
   mockReportTemplateInputsResponse,
 } from './fixtures';
@@ -26,8 +29,10 @@ import {
   CHANGE_ENABLED_RECURRING_LOGIC,
   GET_REPORT_TEMPLATES,
   GET_REPORT_TEMPLATE_INPUTS,
+  GET_TASK,
   JOB_INVOCATION_KEY,
 } from '../JobInvocationConstants';
+import { createForemanContextWrapper } from './foremanTestHelpers';
 
 jest.spyOn(api, 'get');
 
@@ -35,20 +40,17 @@ jest.spyOn(api, 'get');
 const originalToLocaleString = Date.prototype.toLocaleString;
 beforeAll(() => {
   // eslint-disable-next-line no-extend-native
-  Date.prototype.toLocaleString = function (locale, options) {
-    return originalToLocaleString.call(this, locale, { ...options, timeZone: 'UTC' });
+  Date.prototype.toLocaleString = function toLocaleStringUTC(locale, options) {
+    return originalToLocaleString.call(this, locale, {
+      ...options,
+      timeZone: 'UTC',
+    });
   };
 });
 afterAll(() => {
   // eslint-disable-next-line no-extend-native
   Date.prototype.toLocaleString = originalToLocaleString;
 });
-
-jest.mock('foremanReact/common/hooks/API/APIHooks', () => ({
-  useAPI: jest.fn(() => ({
-    response: mockPermissionsData,
-  })),
-}));
 
 jest.mock('foremanReact/routes/common/PageLayout/PageLayout', () =>
   jest.fn(props => (
@@ -63,6 +65,7 @@ jest.mock('foremanReact/routes/common/PageLayout/PageLayout', () =>
 const initialState = {
   JOB_INVOCATION_KEY: {
     response: jobInvocationData,
+    status: STATUS.RESOLVED,
   },
   GET_REPORT_TEMPLATES: mockReportTemplatesResponse,
   extendable: {},
@@ -71,6 +74,7 @@ const initialState = {
 const initialStateScheduled = {
   JOB_INVOCATION_KEY: {
     response: jobInvocationDataScheduled,
+    status: STATUS.RESOLVED,
   },
   extendable: {},
 };
@@ -90,6 +94,15 @@ api.get.mockImplementation(({ handleSuccess, ...action }) => {
 
   return { type: 'get', ...action };
 });
+
+const initialStateRecurring = {
+  JOB_INVOCATION_KEY: {
+    response: jobInvocationDataRecurring,
+    status: STATUS.RESOLVED,
+  },
+  GET_REPORT_TEMPLATES: mockReportTemplatesResponse,
+  extendable: {},
+};
 
 jest.mock('../JobInvocationHostTable.js', () => () => (
   <div data-testid="mock-table">Mock Table</div>
@@ -217,8 +230,9 @@ describe('JobInvocationDetailPage', () => {
   it('should dispatch global actions', async () => {
     // recurring in the future
     const jobId = jobInvocationDataRecurring.id;
+    const taskId = jobInvocationDataRecurring.task.id;
     const recurrenceId = jobInvocationDataRecurring.recurrence.id;
-    const store = mockStore(jobInvocationDataRecurring);
+    const store = mockStore(initialStateRecurring);
     render(
       <Provider store={store}>
         <JobInvocationDetailPage
@@ -233,6 +247,10 @@ describe('JobInvocationDetailPage', () => {
       {
         key: JOB_INVOCATION_KEY,
         url: `/api/job_invocations/${jobId}`,
+      },
+      {
+        key: GET_TASK,
+        url: `/foreman_tasks/api/tasks/${taskId}`,
       },
       {
         key: GET_REPORT_TEMPLATE_INPUTS,
@@ -280,5 +298,62 @@ describe('JobInvocationDetailPage', () => {
         }
       }
     });
+  });
+
+  it('renders empty state when the job invocation fails to load', () => {
+    const jobId = '99';
+    const errorMessage = 'Record not found';
+    const history = createMemoryHistory();
+    const ForemanContextWrapper = createForemanContextWrapper();
+    const store = mockStore({
+      JOB_INVOCATION_KEY: {
+        status: STATUS.ERROR,
+        response: {
+          message: errorMessage,
+          response: { status: 404 },
+        },
+      },
+      extendable: {},
+    });
+
+    render(
+      <Router history={history}>
+        <ForemanContextWrapper>
+          <Provider store={store}>
+            <JobInvocationDetailPage
+              match={{ params: { id: jobId } }}
+              history={history}
+            />
+          </Provider>
+        </ForemanContextWrapper>
+      </Router>
+    );
+
+    expect(
+      screen.getByRole('heading', {
+        name: 'Unable to load job invocation',
+        level: 5,
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        (_, element) =>
+          element?.tagName === 'P' &&
+          element.textContent?.includes(
+            `The job invocation with id ${jobId} could not be found. It may have been deleted or may not be available in your current organization or location scope.`
+          )
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`Server returned: ${errorMessage}`)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Go to job invocations' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Create a new job invocation' })
+    ).toBeInTheDocument();
+    expect(screen.queryByText('Description')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('mock-table')).not.toBeInTheDocument();
   });
 });

@@ -5,29 +5,33 @@ import {
   PageSectionVariants,
   Skeleton,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { useDispatch, useSelector } from 'react-redux';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import PropTypes from 'prop-types';
 import SkeletonLoader from 'foremanReact/components/common/SkeletonLoader';
 import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
-import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
+import { STATUS as API_STATUS } from 'foremanReact/constants';
+import {
+  selectAPIErrorMessage,
+  selectAPIHttpStatus,
+  selectAPIStatus,
+} from 'foremanReact/redux/API/APISelectors';
 
 import { JobAdditionInfo } from './JobAdditionInfo';
 import JobInvocationHostTable from './JobInvocationHostTable';
 import JobInvocationOverview from './JobInvocationOverview';
 import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
+import JobInvocationEmptyState from './JobInvocationEmptyState';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
 import { getJobInvocation, getTask } from './JobInvocationActions';
 import './JobInvocationDetail.scss';
 import {
-  CURRENT_PERMISSIONS,
   DATE_OPTIONS,
   JOB_INVOCATION_KEY,
   STATUS,
   STATUS_UPPERCASE,
-  currentPermissionsUrl,
 } from './JobInvocationConstants';
 import { selectItems } from './JobInvocationSelectors';
 
@@ -51,9 +55,15 @@ const JobInvocationDetailPage = ({
     statusLabel === STATUS.SUCCEEDED ||
     statusLabel === STATUS.CANCELLED;
   const autoRefresh = task?.state === STATUS.PENDING || false;
-  useAPI('get', currentPermissionsUrl, {
-    key: CURRENT_PERMISSIONS,
-  });
+  const jobInvocationApiStatus = useSelector(state =>
+    selectAPIStatus(state, JOB_INVOCATION_KEY)
+  );
+  const jobInvocationErrorMessage = useSelector(state =>
+    selectAPIErrorMessage(state, JOB_INVOCATION_KEY)
+  );
+  const jobInvocationHttpStatus = useSelector(state =>
+    selectAPIHttpStatus(state, JOB_INVOCATION_KEY)
+  );
   const [selectedFilter, setSelectedFilter] = useState('');
 
   const handleFilterChange = newFilter => {
@@ -87,6 +97,25 @@ const JobInvocationDetailPage = ({
       dispatch(getTask(`${taskId}`));
     }
   }, [dispatch, taskId]);
+
+  const apiFailed = jobInvocationApiStatus === API_STATUS.ERROR;
+
+  const backendErrorMessage = useMemo(() => {
+    if (jobInvocationApiStatus === API_STATUS.ERROR) {
+      return jobInvocationErrorMessage || null;
+    }
+    return null;
+  }, [jobInvocationApiStatus, jobInvocationErrorMessage]);
+
+  if (apiFailed) {
+    return (
+      <JobInvocationEmptyState
+        jobInvocationId={id}
+        httpStatus={jobInvocationHttpStatus}
+        errorMessage={backendErrorMessage}
+      />
+    );
+  }
 
   const pageStatus =
     items.id === undefined
@@ -123,7 +152,11 @@ const JobInvocationDetailPage = ({
       <PageLayout
         header={description}
         breadcrumbOptions={breadcrumbOptions}
-        toolbarButtons={<JobInvocationToolbarButtons jobId={id} data={items} />}
+        toolbarButtons={
+          jobInvocationApiStatus === API_STATUS.RESOLVED && (
+            <JobInvocationToolbarButtons jobId={id} data={items} />
+          )
+        }
         searchable={false}
       >
         <Flex className="job-invocation-detail-flex">

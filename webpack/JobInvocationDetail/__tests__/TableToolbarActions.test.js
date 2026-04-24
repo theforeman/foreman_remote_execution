@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { foremanUrl } from 'foremanReact/common/helpers';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -13,6 +14,7 @@ import { PopupAlert } from '../OpenAllInvocationsModal';
 
 jest.mock('axios');
 jest.mock('foremanReact/common/hooks/API/APIHooks');
+jest.mock('foremanReact/common/hooks/Permissions/permissionHooks');
 jest.mock('../JobInvocationSelectors');
 
 jest.mock('../JobInvocationConstants', () => ({
@@ -26,8 +28,8 @@ jest.mock('../JobInvocationConstants', () => ({
 selectors.selectItems.mockImplementation(() => ({
   targeting: { search_query: 'name~*' },
 }));
-selectors.selectHasPermission.mockImplementation(() => () => true);
 selectors.selectTaskCancelable.mockImplementation(() => true);
+usePermissions.mockReturnValue(true);
 
 const mockStore = configureStore([]);
 const store = mockStore({});

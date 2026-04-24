@@ -14,6 +14,7 @@ import {
 } from '@patternfly/react-icons';
 import axios from 'axios';
 import { foremanUrl } from 'foremanReact/common/helpers';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { addToast } from 'foremanReact/components/ToastsList';
 import PropTypes from 'prop-types';
@@ -24,10 +25,7 @@ import {
   DIRECT_OPEN_HOST_LIMIT,
   templateInvocationPageUrl,
 } from './JobInvocationConstants';
-import {
-  selectHasPermission,
-  selectTaskCancelable,
-} from './JobInvocationSelectors';
+import { selectTaskCancelable } from './JobInvocationSelectors';
 import OpenAllInvocationsModal from './OpenAllInvocationsModal';
 
 /* eslint-disable camelcase */
@@ -115,12 +113,8 @@ export const CheckboxesActions = ({
   const dispatch = useDispatch();
   const [toBeOpened, setToBeOpened] = useState([]);
 
-  const hasCreatePermission = useSelector(
-    selectHasPermission('create_job_invocations')
-  );
-  const hasCancelPermission = useSelector(
-    selectHasPermission('cancel_job_invocations')
-  );
+  const hasCreatePermission = usePermissions(['create_job_invocations']);
+  const hasCancelPermission = usePermissions(['cancel_job_invocations']);
   const jobSearchQuery = `job_invocation.id = ${jobID}`;
   const filterQuery =
     filter && filter !== 'all_statuses'

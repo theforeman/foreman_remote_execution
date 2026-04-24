@@ -6,7 +6,6 @@ import { useForemanHostDetailsPageUrl } from 'foremanReact/Root/Context/ForemanC
 import JobStatusIcon from '../react_app/components/RecentJobsCard/JobStatusIcon';
 
 export const JOB_INVOCATION_KEY = 'JOB_INVOCATION_KEY';
-export const CURRENT_PERMISSIONS = 'CURRENT_PERMISSIONS';
 export const UPDATE_JOB = 'UPDATE_JOB';
 export const CANCEL_JOB = 'CANCEL_JOB';
 export const GET_TASK = 'GET_TASK';
@@ -20,9 +19,6 @@ export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
 export const DIRECT_OPEN_HOST_LIMIT = 3;
 export const ALL_JOB_HOSTS = 'ALL_JOB_HOSTS';
 export const AWAITING_STATUS_FILTER = '(job_invocation.result = N/A)';
-export const currentPermissionsUrl = foremanUrl(
-  '/api/v2/permissions/current_permissions'
-);
 
 export const showTemplateInvocationUrl = (hostID, jobID) =>
   `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;
@@ -32,6 +28,10 @@ export const templateInvocationPageUrl = (hostID, jobID) =>
   `/job_invocations_detail/${jobID}/host_invocation/${hostID}`;
 
 export const jobInvocationDetailsUrl = id => `/job_invocations/${id}`;
+export const jobInvocationsIndexPath = '/job_invocations';
+export const jobInvocationsNewPath = '/job_invocations/new';
+export const jobInvocationsIndexUrl = foremanUrl(jobInvocationsIndexPath);
+export const jobInvocationsNewUrl = foremanUrl(jobInvocationsNewPath);
 
 export const STATUS = {
   PENDING: 'pending',
