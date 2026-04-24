@@ -35,8 +35,11 @@ jest.spyOn(api, 'get');
 const originalToLocaleString = Date.prototype.toLocaleString;
 beforeAll(() => {
   // eslint-disable-next-line no-extend-native
-  Date.prototype.toLocaleString = function (locale, options) {
-    return originalToLocaleString.call(this, locale, { ...options, timeZone: 'UTC' });
+  Date.prototype.toLocaleString = function(locale, options) {
+    return originalToLocaleString.call(this, locale, {
+      ...options,
+      timeZone: 'UTC',
+    });
   };
 });
 afterAll(() => {
