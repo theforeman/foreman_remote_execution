@@ -5,7 +5,7 @@ import {
   PageSectionVariants,
   Skeleton,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { useDispatch, useSelector } from 'react-redux';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
@@ -14,7 +14,10 @@ import SkeletonLoader from 'foremanReact/components/common/SkeletonLoader';
 import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 import { STATUS as API_STATUS } from 'foremanReact/constants';
-import { selectAPIStatus } from 'foremanReact/redux/API/APISelectors';
+import {
+  selectAPIResponse,
+  selectAPIStatus,
+} from 'foremanReact/redux/API/APISelectors';
 
 import { JobAdditionInfo } from './JobAdditionInfo';
 import JobInvocationHostTable from './JobInvocationHostTable';
@@ -32,7 +35,7 @@ import {
   STATUS_UPPERCASE,
   currentPermissionsUrl,
 } from './JobInvocationConstants';
-import { selectItems } from './JobInvocationSelectors';
+import { formatForemanApiError, selectItems } from './JobInvocationSelectors';
 
 const JobInvocationDetailPage = ({
   match: {
@@ -54,15 +57,19 @@ const JobInvocationDetailPage = ({
     statusLabel === STATUS.SUCCEEDED ||
     statusLabel === STATUS.CANCELLED;
   const autoRefresh = task?.state === STATUS.PENDING || false;
-  const { status: permissionsApiStatus } = useAPI(
-    'get',
-    currentPermissionsUrl,
-    {
-      key: CURRENT_PERMISSIONS,
-    }
-  );
+  const {
+    status: permissionsApiStatus,
+    response: permissionsApiResponse,
+  } = useAPI('get', currentPermissionsUrl, {
+    key: CURRENT_PERMISSIONS,
+  });
   const jobInvocationApiStatus = useSelector(state =>
     selectAPIStatus(state, JOB_INVOCATION_KEY)
+  );
+  const jobInvocationApiErrorPayload = useSelector(state =>
+    jobInvocationApiStatus === API_STATUS.ERROR
+      ? selectAPIResponse(state, JOB_INVOCATION_KEY)
+      : null
   );
   const [selectedFilter, setSelectedFilter] = useState('');
 
@@ -102,8 +109,35 @@ const JobInvocationDetailPage = ({
     permissionsApiStatus === API_STATUS.ERROR ||
     jobInvocationApiStatus === API_STATUS.ERROR;
 
+  const backendErrorMessage = useMemo(() => {
+    const parts = [];
+    if (jobInvocationApiStatus === API_STATUS.ERROR) {
+      const msg = formatForemanApiError(jobInvocationApiErrorPayload);
+      if (msg) {
+        parts.push(msg);
+      }
+    }
+    if (permissionsApiStatus === API_STATUS.ERROR) {
+      const msg = formatForemanApiError(permissionsApiResponse);
+      if (msg) {
+        parts.push(msg);
+      }
+    }
+    return parts.length ? parts.join('\n\n') : null;
+  }, [
+    jobInvocationApiStatus,
+    permissionsApiStatus,
+    jobInvocationApiErrorPayload,
+    permissionsApiResponse,
+  ]);
+
   if (apiFailed) {
-    return <JobInvocationEmptyState jobInvocationId={id} />;
+    return (
+      <JobInvocationEmptyState
+        jobInvocationId={id}
+        errorMessage={backendErrorMessage}
+      />
+    );
   }
 
   const pageStatus =

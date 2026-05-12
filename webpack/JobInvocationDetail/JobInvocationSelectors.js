@@ -42,3 +42,38 @@ export const selectHasPermission = permissionRequired => state => {
       )
     : false;
 };
+
+export const formatForemanApiError = apiFailureResponse => {
+  if (!apiFailureResponse) {
+    return null;
+  }
+  const { response, message } = apiFailureResponse;
+  const err = response?.data?.error;
+  if (err) {
+    if (Array.isArray(err.full_messages) && err.full_messages.length) {
+      return err.full_messages.join(' ');
+    }
+    if (typeof err.details === 'string' && err.details.trim()) {
+      return err.details.trim();
+    }
+    if (
+      Array.isArray(err.missing_permissions) &&
+      err.missing_permissions.length
+    ) {
+      return err.missing_permissions.join(', ');
+    }
+    if (typeof err.message === 'string' && err.message) {
+      return err.message;
+    }
+    if (typeof err === 'string') {
+      return err;
+    }
+  }
+  if (typeof response?.data?.message === 'string') {
+    return response.data.message;
+  }
+  if (message) {
+    return message;
+  }
+  return null;
+};
