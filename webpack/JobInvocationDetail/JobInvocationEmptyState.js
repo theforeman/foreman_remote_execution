@@ -1,81 +1,36 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import {
-  Button,
-  EmptyStateVariant,
-  PageSection,
-  PageSectionVariants,
-} from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons';
-import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import { foremanUrl } from 'foremanReact/common/helpers';
-import EmptyStatePattern from 'foremanReact/components/common/EmptyState/EmptyStatePattern';
+import { PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { translate as __ } from 'foremanReact/common/I18n';
+import { foremanUrl, visit } from 'foremanReact/common/helpers';
+import ResourceLoadFailedEmptyState from 'foremanReact/components/common/EmptyState/ResourceLoadFailedEmptyState';
 
 const jobInvocationsIndexPath = '/job_invocations';
 
-const JobInvocationEmptyState = ({ jobInvocationId, errorMessage = null }) => {
-  const history = useHistory();
-
-  const descriptionContent = (
-    <>
-      <p>
-        {sprintf(
-          __(
-            'There is no job invocation with id %s or there are access permissions needed. Opening this page requires the view_job_invocations permission. Please contact your administrator if this issue continues.'
-          ),
-          jobInvocationId
-        )}
-      </p>
-      {errorMessage ? (
-        <p className="pf-v5-u-text-break" style={{ whiteSpace: 'pre-wrap' }}>
-          {sprintf(__('The server returned: %s'), errorMessage)}
-        </p>
-      ) : null}
-    </>
-  );
-
-  return (
-    <PageSection variant={PageSectionVariants.light}>
-      <EmptyStatePattern
-        variant={EmptyStateVariant.lg}
-        icon={<SearchIcon />}
-        header={__('Job invocation not found')}
-        description={descriptionContent}
-        action={
-          <Button
-            ouiaId="job-invocation-empty-state-go-to-job-invocations-button"
-            variant="primary"
-            component="a"
-            href={foremanUrl(jobInvocationsIndexPath)}
-            isInline
-          >
-            {__('Go to job invocations')}
-          </Button>
-        }
-        secondaryActions={
-          <>
-            <Button
-              ouiaId="job-invocation-empty-state-create-new-job-invocation-button"
-              variant="link"
-              component="a"
-              href={foremanUrl('/job_invocations/new')}
-            >
-              {__('Create a new job invocation')}
-            </Button>
-            <Button
-              ouiaId="job-invocation-empty-state-return-to-last-page-button"
-              variant="link"
-              onClick={() => history.goBack()}
-            >
-              {__('Return to the last page')}
-            </Button>
-          </>
-        }
-      />
-    </PageSection>
-  );
-};
+const JobInvocationEmptyState = ({ jobInvocationId, errorMessage }) => (
+  <PageSection variant={PageSectionVariants.light}>
+    <ResourceLoadFailedEmptyState
+      resourceLabel={__('job invocation')}
+      resourceId={jobInvocationId}
+      errorMessage={errorMessage}
+      requiredPermissions={['view_job_invocations']}
+      primaryAction={{
+        label: __('Go to job invocations'),
+        onClick: () => visit(foremanUrl(jobInvocationsIndexPath)),
+        ouiaId: 'job-invocation-empty-state-go-to-job-invocations-button',
+      }}
+      secondaryActions={[
+        {
+          label: __('Create a new job invocation'),
+          onClick: () => visit(foremanUrl('/job_invocations/new')),
+          ouiaId: 'job-invocation-empty-state-create-new-job-invocation-button',
+        },
+      ]}
+      backButtonLabel={__('Return to the last page')}
+      ouiaIdPrefix="job-invocation-empty-state"
+    />
+  </PageSection>
+);
 
 JobInvocationEmptyState.propTypes = {
   jobInvocationId: PropTypes.string.isRequired,
