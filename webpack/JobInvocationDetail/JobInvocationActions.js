@@ -24,6 +24,13 @@ export const getJobInvocation = url => dispatch => {
       handleError: () => {
         dispatch(stopInterval(JOB_INVOCATION_KEY));
       },
+      errorToast: ({ response }) =>
+        // eslint-disable-next-line camelcase
+        response?.data?.error?.full_messages?.[0] ||
+        // eslint-disable-next-line camelcase
+        response?.data?.error?.full_messages ||
+        response?.data?.error?.message ||
+        'Error',
     }),
     1000
   );
