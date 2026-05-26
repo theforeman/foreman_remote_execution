@@ -19,14 +19,10 @@ module Api
 
       api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
-      param :host_status, :bool, required: false, desc: N_('Show Job status for the hosts')
       def show
-        set_hosts_and_template_invocations
+        @pattern_template_invocations = @job_invocation.pattern_template_invocations.includes(:input_values)
         @job_organization = Taxonomy.find_by(id: @job_invocation.task.input[:current_organization_id])
         @job_location = Taxonomy.find_by(id: @job_invocation.task.input[:current_location_id])
-        if params[:host_status] == 'true'
-          set_statuses_and_smart_proxies
-        end
       end
 
       def_param_group :job_invocation do
