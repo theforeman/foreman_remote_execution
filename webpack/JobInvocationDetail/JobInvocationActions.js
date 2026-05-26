@@ -1,5 +1,4 @@
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import { foremanUrl } from 'foremanReact/common/helpers';
 import { addToast } from 'foremanReact/components/ToastsList';
 import { APIActions, get } from 'foremanReact/redux/API';
 import {
@@ -8,7 +7,6 @@ import {
   CHANGE_ENABLED_RECURRING_LOGIC,
   GET_TASK,
   JOB_INVOCATION_KEY,
-  UPDATE_JOB,
 } from './JobInvocationConstants';
 
 let pollTimeoutId = null;
@@ -50,16 +48,6 @@ export const stopJobInvocationPolling = () => {
   }
 };
 
-export const updateJob = jobId => dispatch => {
-  const url = foremanUrl(`/api/job_invocations/${jobId}`);
-  dispatch(
-    APIActions.get({
-      url,
-      key: UPDATE_JOB,
-    })
-  );
-};
-
 export const cancelJob = (jobId, force) => dispatch => {
   const infoToast = () =>
     force
@@ -92,7 +80,6 @@ export const cancelJob = (jobId, force) => dispatch => {
             message: infoToast(),
           })
         );
-        dispatch(updateJob(jobId));
       },
     })
   );
@@ -140,7 +127,6 @@ export const enableRecurringLogic = (
             response?.data?.error?.message ||
             'Unknown error.'
         ),
-      handleSuccess: () => dispatch(updateJob(jobId)),
     })
   );
 };
@@ -166,7 +152,6 @@ export const cancelRecurringLogic = (recurrenceId, jobId) => dispatch => {
             response?.data?.error?.message ||
             'Unknown error.'
         ),
-      handleSuccess: () => dispatch(updateJob(jobId)),
     })
   );
 };
