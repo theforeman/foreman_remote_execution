@@ -67,7 +67,6 @@ export const TemplateInvocation = ({
   showCommand,
   setShowCommand,
 }) => {
-  const intervalRef = useRef(null);
   const templateURL = showTemplateInvocationUrl(hostID, jobID);
   const hostDetailsPageUrl = useForemanHostDetailsPageUrl();
 
@@ -75,48 +74,45 @@ export const TemplateInvocation = ({
   const response = useSelector(selectTemplateInvocation(hostID));
   const dispatch = useDispatch();
 
-  const responseRef = useRef(response);
-  useEffect(() => {
-    responseRef.current = response;
-  }, [response]);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
+    const scheduleNextPoll = () => {
+      timeoutRef.current = setTimeout(() => dispatchFetch(), 5000);
+    };
+
     const dispatchFetch = () => {
       dispatch(
         APIActions.get({
           url: templateURL,
           key: `${GET_TEMPLATE_INVOCATION}_${hostID}`,
+          handleSuccess: ({ data }) => {
+            const finished = data?.finished ?? true;
+            // eslint-disable-next-line camelcase
+            const autoRefresh = data?.auto_refresh || false;
+            if (!finished && autoRefresh) {
+              scheduleNextPoll();
+            }
+          },
+          handleError: () => {
+            timeoutRef.current = null;
+          },
         })
       );
     };
 
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
 
     if (isExpanded) {
-      if (isEmpty(responseRef.current)) {
-        dispatchFetch();
-      }
-
-      intervalRef.current = setInterval(() => {
-        const latestResponse = responseRef.current;
-        const finished = latestResponse?.finished ?? true;
-        // eslint-disable-next-line camelcase
-        const autoRefresh = latestResponse?.auto_refresh || false;
-
-        if (!finished && autoRefresh) {
-          dispatchFetch();
-        } else if (intervalRef.current) {
-          clearInterval(intervalRef.current);
-        }
-      }, 5000);
+      dispatchFetch();
     }
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
     };
   }, [isExpanded, dispatch, templateURL, hostID]);
