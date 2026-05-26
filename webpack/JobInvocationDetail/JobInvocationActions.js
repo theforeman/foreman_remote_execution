@@ -6,9 +6,19 @@ import {
   CANCEL_RECURRING_LOGIC,
   CHANGE_ENABLED_RECURRING_LOGIC,
   JOB_INVOCATION_KEY,
+  STATUS,
 } from './JobInvocationConstants';
 
 let pollTimeoutId = null;
+
+const isJobFinished = ({ status_label: statusLabel, task }) => {
+  const finished =
+    statusLabel === STATUS.FAILED ||
+    statusLabel === STATUS.SUCCEEDED ||
+    statusLabel === STATUS.CANCELLED;
+  const autoRefresh = task?.state === STATUS.PENDING || false;
+  return finished && !autoRefresh;
+};
 
 const scheduleNextPoll = (dispatch, url) => {
   pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 1000);
@@ -20,7 +30,13 @@ const fetchJobInvocation = (dispatch, url, params = {}) => {
       key: JOB_INVOCATION_KEY,
       params,
       url,
-      handleSuccess: () => scheduleNextPoll(dispatch, url),
+      handleSuccess: ({ data }) => {
+        if (!isJobFinished(data)) {
+          scheduleNextPoll(dispatch, url);
+        } else {
+          pollTimeoutId = null;
+        }
+      },
       handleError: () => {
         pollTimeoutId = null;
       },
