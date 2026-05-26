@@ -32,6 +32,7 @@ end
 
 child :task do
   attributes :id, :state, :started_at
+  node(:cancellable) { |task| task.cancellable? }
 end
 
 child @template_invocations do
