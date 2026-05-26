@@ -70,6 +70,7 @@ const JobInvocationHostTable = ({
   // Expansive items
   const [expandedHost, setExpandedHost] = useState(new Set());
   const prevStatusLabel = useRef(statusLabel);
+  const prevFilter = useRef(initialFilter);
 
   const [hostInvocationStates, setHostInvocationStates] = useState({});
 
@@ -159,9 +160,8 @@ const JobInvocationHostTable = ({
 
       setApiResponse(data.data);
       setAllHostsIds(ids);
+      setStatus(STATUS_UPPERCASE.RESOLVED);
     }
-
-    setStatus(STATUS_UPPERCASE.RESOLVED);
   }, []);
 
   // Call hosts data with params
@@ -252,10 +252,13 @@ const JobInvocationHostTable = ({
   }, [makeApiCall, id, initialFilter, onFilterUpdate]);
 
   useEffect(() => {
-    if (initialFilter !== '') filterApiCall();
+    const filterChanged = initialFilter !== prevFilter.current;
+    const statusChanged = statusLabel !== prevStatusLabel.current;
 
-    if (statusLabel !== prevStatusLabel.current) {
-      prevStatusLabel.current = statusLabel;
+    prevFilter.current = initialFilter;
+    prevStatusLabel.current = statusLabel;
+
+    if ((filterChanged || statusChanged) && initialFilter !== '') {
       filterApiCall();
     }
   }, [initialFilter, statusLabel, id, filterApiCall]);
