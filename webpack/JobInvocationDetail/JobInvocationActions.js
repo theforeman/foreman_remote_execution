@@ -3,10 +3,6 @@ import { foremanUrl } from 'foremanReact/common/helpers';
 import { addToast } from 'foremanReact/components/ToastsList';
 import { APIActions, get } from 'foremanReact/redux/API';
 import {
-  stopInterval,
-  withInterval,
-} from 'foremanReact/redux/middlewares/IntervalMiddleware';
-import {
   CANCEL_JOB,
   CANCEL_RECURRING_LOGIC,
   CHANGE_ENABLED_RECURRING_LOGIC,
@@ -15,20 +11,43 @@ import {
   UPDATE_JOB,
 } from './JobInvocationConstants';
 
-export const getJobInvocation = url => dispatch => {
-  const fetchData = withInterval(
+let pollTimeoutId = null;
+
+const scheduleNextPoll = (dispatch, url) => {
+  pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 1000);
+};
+
+const fetchJobInvocation = (dispatch, url) => {
+  dispatch(
     get({
       key: JOB_INVOCATION_KEY,
       params: { include_permissions: true },
       url,
+      handleSuccess: () => scheduleNextPoll(dispatch, url),
       handleError: () => {
-        dispatch(stopInterval(JOB_INVOCATION_KEY));
+        pollTimeoutId = null;
       },
-    }),
-    1000
+      errorToast: ({ response }) =>
+        // eslint-disable-next-line camelcase
+        response?.data?.error?.full_messages?.[0] ||
+        // eslint-disable-next-line camelcase
+        response?.data?.error?.full_messages ||
+        response?.data?.error?.message ||
+        'Error',
+    })
   );
+};
 
-  dispatch(fetchData);
+export const getJobInvocation = url => dispatch => {
+  stopJobInvocationPolling();
+  fetchJobInvocation(dispatch, url);
+};
+
+export const stopJobInvocationPolling = () => {
+  if (pollTimeoutId !== null) {
+    clearTimeout(pollTimeoutId);
+    pollTimeoutId = null;
+  }
 };
 
 export const updateJob = jobId => dispatch => {
