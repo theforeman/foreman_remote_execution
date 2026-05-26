@@ -17,11 +17,11 @@ const scheduleNextPoll = (dispatch, url) => {
   pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 1000);
 };
 
-const fetchJobInvocation = (dispatch, url) => {
+const fetchJobInvocation = (dispatch, url, params = {}) => {
   dispatch(
     get({
       key: JOB_INVOCATION_KEY,
-      params: { include_permissions: true },
+      params,
       url,
       handleSuccess: () => scheduleNextPoll(dispatch, url),
       handleError: () => {
@@ -40,7 +40,7 @@ const fetchJobInvocation = (dispatch, url) => {
 
 export const getJobInvocation = url => dispatch => {
   stopJobInvocationPolling();
-  fetchJobInvocation(dispatch, url);
+  fetchJobInvocation(dispatch, url, { include_permissions: true });
 };
 
 export const stopJobInvocationPolling = () => {
