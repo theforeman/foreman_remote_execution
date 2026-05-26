@@ -26,7 +26,6 @@ import JobInvocationEmptyState from './JobInvocationEmptyState';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
 import {
   getJobInvocation,
-  getTask,
   stopJobInvocationPolling,
 } from './JobInvocationActions';
 import './JobInvocationDetail.scss';
@@ -93,13 +92,6 @@ const JobInvocationDetailPage = ({
       stopJobInvocationPolling();
     };
   }, [dispatch, id, finished, autoRefresh]);
-
-  const taskId = task?.id;
-  useEffect(() => {
-    if (taskId !== undefined) {
-      dispatch(getTask(`${taskId}`));
-    }
-  }, [dispatch, taskId]);
 
   const apiFailed = jobInvocationApiStatus === API_STATUS.ERROR;
 

@@ -5,7 +5,6 @@ import {
   CANCEL_JOB,
   CANCEL_RECURRING_LOGIC,
   CHANGE_ENABLED_RECURRING_LOGIC,
-  GET_TASK,
   JOB_INVOCATION_KEY,
 } from './JobInvocationConstants';
 
@@ -81,15 +80,6 @@ export const cancelJob = (jobId, force) => dispatch => {
           })
         );
       },
-    })
-  );
-};
-
-export const getTask = taskId => dispatch => {
-  dispatch(
-    get({
-      key: GET_TASK,
-      url: `/foreman_tasks/api/tasks/${taskId}`,
     })
   );
 };
