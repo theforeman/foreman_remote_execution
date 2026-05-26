@@ -314,8 +314,9 @@ module Api
         template_invocations = @template_invocations.where(host_id: @hosts.select(:id))
                                                     .includes(:run_host_job_task).to_a
         hosts = @hosts.to_a
+        template_invocations_by_host_id = template_invocations.index_by(&:host_id)
         @host_statuses = hosts.to_h do |host|
-          template_invocation = template_invocations.find { |ti| ti.host_id == host.id }
+          template_invocation = template_invocations_by_host_id[host.id]
           task = template_invocation.try(:run_host_job_task)
           [host.id, template_invocation_status(task, @job_invocation.task)]
         end
