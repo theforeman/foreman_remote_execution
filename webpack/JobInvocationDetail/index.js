@@ -85,13 +85,10 @@ const JobInvocationDetailPage = ({
 
   useEffect(() => {
     dispatch(getJobInvocation(`/api/job_invocations/${id}`));
-    if (finished && !autoRefresh) {
-      stopJobInvocationPolling();
-    }
     return () => {
       stopJobInvocationPolling();
     };
-  }, [dispatch, id, finished, autoRefresh]);
+  }, [dispatch, id]);
 
   const apiFailed = jobInvocationApiStatus === API_STATUS.ERROR;
 
