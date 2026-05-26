@@ -115,10 +115,10 @@ module Api
       param :id, :identifier, :required => true
       def hosts
         set_hosts_and_template_invocations
-        set_statuses_and_smart_proxies
         @total = @hosts.size
         @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
         @subtotal = @hosts.total_entries
+        set_statuses_and_smart_proxies
         if params[:awaiting]
           @hosts = @hosts.select { |host| @host_statuses[host.id] == 'N/A' }
         end
