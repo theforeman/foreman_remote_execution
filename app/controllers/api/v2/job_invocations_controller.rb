@@ -314,13 +314,13 @@ module Api
         template_invocations = @template_invocations.where(host_id: @hosts.select(:id))
                                                     .includes(:run_host_job_task).to_a
         hosts = @hosts.to_a
-        @host_statuses = Hash[hosts.map do |host|
+        @host_statuses = hosts.to_h do |host|
           template_invocation = template_invocations.find { |ti| ti.host_id == host.id }
           task = template_invocation.try(:run_host_job_task)
           [host.id, template_invocation_status(task, @job_invocation.task)]
-        end]
-        @smart_proxy_id = Hash[template_invocations.map { |ti| [ti.host_id, ti.smart_proxy_id] }]
-        @smart_proxy_name = Hash[template_invocations.map { |ti| [ti.host_id, ti.smart_proxy_name] }]
+        end
+        @smart_proxy_id = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_id] }
+        @smart_proxy_name = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_name] }
       end
     end
   end
