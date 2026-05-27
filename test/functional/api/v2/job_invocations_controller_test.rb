@@ -235,6 +235,23 @@ module Api
         end
       end
 
+      describe '#hosts' do
+        test 'should compute job_status for the paginated subset' do
+          invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
+          2.times { invocation.template_invocations << FactoryBot.create(:template_invocation, :with_task, :with_host, :job_invocation => invocation) }
+          invocation.job_category = invocation.pattern_template_invocations.first.template.job_category
+          invocation.targeting.hosts = invocation.template_invocations.map(&:host)
+          invocation.save!
+
+          get :hosts, params: { :id => invocation.id, :page => 2, :per_page => 1 }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal 3, result['total']
+          assert_equal 1, result['results'].size
+          assert_equal(['success'], result['results'].map { |r| r['job_status'] })
+        end
+      end
+
       describe 'raw output' do
         let(:fake_output) do
           (1..5).map do |i|
