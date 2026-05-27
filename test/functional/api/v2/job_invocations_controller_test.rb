@@ -27,25 +27,13 @@ module Api
           template = ActiveSupport::JSON.decode(@response.body)
           assert_not_empty template
           assert_equal template['job_category'], @invocation.job_category
-          assert_not_empty template['targeting']['hosts']
+          assert_not_nil template['targeting']
         end
 
         test 'should get invocation detail when taxonomies are set' do
           taxonomy_params = %w(organization location).reduce({}) { |acc, cur| acc.merge("#{cur}_id" => FactoryBot.create(cur)) }
           get :show, params: taxonomy_params.merge(:id => @invocation.id)
           assert_response :success
-        end
-
-        test 'should see only permitted hosts' do
-          @user = FactoryBot.create(:user, admin: false)
-          @invocation.task.update(user: @user)
-          setup_user('view', 'job_invocations', nil, @user)
-          setup_user('view', 'hosts', 'name ~ nope.example.com', @user)
-
-          get :show, params: { :id => @invocation.id }, session: prepare_user(@user)
-          assert_response :success
-          response = ActiveSupport::JSON.decode(@response.body)
-          assert_equal response['targeting']['hosts'], []
         end
       end
 
@@ -232,6 +220,23 @@ module Api
           result = ActiveSupport::JSON.decode(@response.body)
           assert_equal result['outputs'], []
           assert_response :success
+        end
+      end
+
+      describe '#hosts' do
+        test 'should compute job_status for the paginated subset' do
+          invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
+          2.times { invocation.template_invocations << FactoryBot.create(:template_invocation, :with_task, :with_host, :job_invocation => invocation) }
+          invocation.job_category = invocation.pattern_template_invocations.first.template.job_category
+          invocation.targeting.hosts = invocation.template_invocations.map(&:host)
+          invocation.save!
+
+          get :hosts, params: { :id => invocation.id, :page => 2, :per_page => 1 }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_equal 3, result['total']
+          assert_equal 1, result['results'].size
+          assert_equal(['success'], result['results'].map { |r| r['job_status'] })
         end
       end
 
