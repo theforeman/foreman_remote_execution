@@ -1,44 +1,66 @@
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import { foremanUrl } from 'foremanReact/common/helpers';
 import { addToast } from 'foremanReact/components/ToastsList';
 import { APIActions, get } from 'foremanReact/redux/API';
-import {
-  stopInterval,
-  withInterval,
-} from 'foremanReact/redux/middlewares/IntervalMiddleware';
 import {
   CANCEL_JOB,
   CANCEL_RECURRING_LOGIC,
   CHANGE_ENABLED_RECURRING_LOGIC,
-  GET_TASK,
   JOB_INVOCATION_KEY,
-  UPDATE_JOB,
+  STATUS,
 } from './JobInvocationConstants';
 
-export const getJobInvocation = url => dispatch => {
-  const fetchData = withInterval(
-    get({
-      key: JOB_INVOCATION_KEY,
-      params: { include_permissions: true },
-      url,
-      handleError: () => {
-        dispatch(stopInterval(JOB_INVOCATION_KEY));
-      },
-    }),
-    1000
-  );
+let pollTimeoutId = null;
 
-  dispatch(fetchData);
+const isJobFinished = ({ status_label: statusLabel, task }) => {
+  const finished =
+    statusLabel === STATUS.FAILED ||
+    statusLabel === STATUS.SUCCEEDED ||
+    statusLabel === STATUS.CANCELLED;
+  const autoRefresh = task?.state === STATUS.PENDING || false;
+  return finished && !autoRefresh;
 };
 
-export const updateJob = jobId => dispatch => {
-  const url = foremanUrl(`/api/job_invocations/${jobId}`);
+const scheduleNextPoll = (dispatch, url) => {
+  pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 1000);
+};
+
+const fetchJobInvocation = (dispatch, url, params = {}) => {
   dispatch(
-    APIActions.get({
+    get({
+      key: JOB_INVOCATION_KEY,
+      params,
       url,
-      key: UPDATE_JOB,
+      handleSuccess: ({ data }) => {
+        if (!isJobFinished(data)) {
+          scheduleNextPoll(dispatch, url);
+        } else {
+          pollTimeoutId = null;
+        }
+      },
+      handleError: () => {
+        pollTimeoutId = null;
+      },
+      errorToast: ({ response }) =>
+        // eslint-disable-next-line camelcase
+        response?.data?.error?.full_messages?.[0] ||
+        // eslint-disable-next-line camelcase
+        response?.data?.error?.full_messages ||
+        response?.data?.error?.message ||
+        'Error',
     })
   );
+};
+
+export const getJobInvocation = url => dispatch => {
+  stopJobInvocationPolling();
+  fetchJobInvocation(dispatch, url, { include_permissions: true });
+};
+
+export const stopJobInvocationPolling = () => {
+  if (pollTimeoutId !== null) {
+    clearTimeout(pollTimeoutId);
+    pollTimeoutId = null;
+  }
 };
 
 export const cancelJob = (jobId, force) => dispatch => {
@@ -73,17 +95,7 @@ export const cancelJob = (jobId, force) => dispatch => {
             message: infoToast(),
           })
         );
-        dispatch(updateJob(jobId));
       },
-    })
-  );
-};
-
-export const getTask = taskId => dispatch => {
-  dispatch(
-    get({
-      key: GET_TASK,
-      url: `/foreman_tasks/api/tasks/${taskId}`,
     })
   );
 };
@@ -121,7 +133,6 @@ export const enableRecurringLogic = (
             response?.data?.error?.message ||
             'Unknown error.'
         ),
-      handleSuccess: () => dispatch(updateJob(jobId)),
     })
   );
 };
@@ -147,7 +158,6 @@ export const cancelRecurringLogic = (recurrenceId, jobId) => dispatch => {
             response?.data?.error?.message ||
             'Unknown error.'
         ),
-      handleSuccess: () => dispatch(updateJob(jobId)),
     })
   );
 };

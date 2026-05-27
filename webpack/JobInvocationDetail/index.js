@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import PropTypes from 'prop-types';
 import SkeletonLoader from 'foremanReact/components/common/SkeletonLoader';
-import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
 
 import { JobAdditionInfo } from './JobAdditionInfo';
@@ -19,12 +18,14 @@ import JobInvocationHostTable from './JobInvocationHostTable';
 import JobInvocationOverview from './JobInvocationOverview';
 import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
-import { getJobInvocation, getTask } from './JobInvocationActions';
+import {
+  getJobInvocation,
+  stopJobInvocationPolling,
+} from './JobInvocationActions';
 import './JobInvocationDetail.scss';
 import {
   CURRENT_PERMISSIONS,
   DATE_OPTIONS,
-  JOB_INVOCATION_KEY,
   STATUS,
   STATUS_UPPERCASE,
   currentPermissionsUrl,
@@ -72,21 +73,11 @@ const JobInvocationDetailPage = ({
   }
 
   useEffect(() => {
-    dispatch(getJobInvocation(`/api/job_invocations/${id}?host_status=true`));
-    if (finished && !autoRefresh) {
-      dispatch(stopInterval(JOB_INVOCATION_KEY));
-    }
+    dispatch(getJobInvocation(`/api/job_invocations/${id}`));
     return () => {
-      dispatch(stopInterval(JOB_INVOCATION_KEY));
+      stopJobInvocationPolling();
     };
-  }, [dispatch, id, finished, autoRefresh]);
-
-  const taskId = task?.id;
-  useEffect(() => {
-    if (taskId !== undefined) {
-      dispatch(getTask(`${taskId}`));
-    }
-  }, [dispatch, taskId]);
+  }, [dispatch, id]);
 
   const pageStatus =
     items.id === undefined

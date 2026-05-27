@@ -35,8 +35,11 @@ jest.spyOn(api, 'get');
 const originalToLocaleString = Date.prototype.toLocaleString;
 beforeAll(() => {
   // eslint-disable-next-line no-extend-native
-  Date.prototype.toLocaleString = function (locale, options) {
-    return originalToLocaleString.call(this, locale, { ...options, timeZone: 'UTC' });
+  Date.prototype.toLocaleString = function(locale, options) {
+    return originalToLocaleString.call(this, locale, {
+      ...options,
+      timeZone: 'UTC',
+    });
   };
 });
 afterAll(() => {
@@ -232,7 +235,7 @@ describe('JobInvocationDetailPage', () => {
       { key: GET_REPORT_TEMPLATES, url: '/api/report_templates' },
       {
         key: JOB_INVOCATION_KEY,
-        url: `/api/job_invocations/${jobId}?host_status=true`,
+        url: `/api/job_invocations/${jobId}`,
       },
       {
         key: GET_REPORT_TEMPLATE_INPUTS,

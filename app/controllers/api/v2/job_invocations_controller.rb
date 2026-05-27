@@ -115,10 +115,10 @@ module Api
       param :id, :identifier, :required => true
       def hosts
         set_hosts_and_template_invocations
-        set_statuses_and_smart_proxies
         @total = @hosts.size
         @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
         @subtotal = @hosts.total_entries
+        set_statuses_and_smart_proxies
         if params[:awaiting]
           @hosts = @hosts.select { |host| @host_statuses[host.id] == 'N/A' }
         end
@@ -313,13 +313,14 @@ module Api
       def set_statuses_and_smart_proxies
         template_invocations = @template_invocations.includes(:run_host_job_task).to_a
         hosts = @hosts.to_a
-        @host_statuses = Hash[hosts.map do |host|
-          template_invocation = template_invocations.find { |ti| ti.host_id == host.id }
+        template_invocations_by_host_id = template_invocations.index_by(&:host_id)
+        @host_statuses = hosts.to_h do |host|
+          template_invocation = template_invocations_by_host_id[host.id]
           task = template_invocation.try(:run_host_job_task)
           [host.id, template_invocation_status(task, @job_invocation.task)]
-        end]
-        @smart_proxy_id = Hash[template_invocations.map { |ti| [ti.host_id, ti.smart_proxy_id] }]
-        @smart_proxy_name = Hash[template_invocations.map { |ti| [ti.host_id, ti.smart_proxy_name] }]
+        end
+        @smart_proxy_id = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_id] }
+        @smart_proxy_name = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_name] }
       end
     end
   end
