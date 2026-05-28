@@ -1,7 +1,14 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'foremanReact/redux/API';
-import { HOST_IDS, REX_FEATURE } from './JobWizardConstants';
+import { getBookmarks } from 'foremanReact/components/PF4/Bookmarks/BookmarksActions';
+import {
+  HOST_IDS,
+  REX_FEATURE,
+  hostsController,
+  hostsSearchProps,
+} from './JobWizardConstants';
+import { selectHostBookmarks } from './JobWizardSelectors';
 import './JobWizard.scss';
 
 export const useAutoFill = ({
@@ -9,11 +16,28 @@ export const useAutoFill = ({
   setFills,
   setSelectedTargets,
   setHostsSearchQuery,
+  setSelectedBookmark,
   setJobTemplateID,
   setTemplateValues,
   setAdvancedValues,
 }) => {
   const dispatch = useDispatch();
+  const bookmarks = useSelector(selectHostBookmarks);
+  const [pendingBookmarkId, setPendingBookmarkId] = useState(null);
+
+  useEffect(() => {
+    if (pendingBookmarkId === null || bookmarks.length === 0) return;
+    const bookmark = bookmarks.find(bm => bm.id === pendingBookmarkId);
+    if (bookmark) {
+      setSelectedBookmark({
+        id: bookmark.id,
+        name: bookmark.name,
+        query: bookmark.query,
+      });
+      setHostsSearchQuery(bookmark.query);
+    }
+    setPendingBookmarkId(null);
+  }, [bookmarks, pendingBookmarkId, setSelectedBookmark, setHostsSearchQuery]);
 
   useEffect(() => {
     if (Object.keys(fills).length) {
@@ -22,10 +46,12 @@ export const useAutoFill = ({
         search,
         feature,
         template_id: templateID,
+        bookmark_id: bookmarkId,
         ...rest
       } = { ...fills };
       setFills({});
       if (hostIds) {
+        setSelectedBookmark(null);
         const hostSearch = Array.isArray(hostIds)
           ? `id = ${hostIds.join(' or id = ')}`
           : `id = ${hostIds}`;
@@ -52,9 +78,34 @@ export const useAutoFill = ({
           })
         );
       }
-      if ((search || search === '') && !hostIds?.length) {
+      if (bookmarkId) {
+        setSelectedTargets({
+          hosts: [],
+          hostCollections: [],
+          hostGroups: [],
+        });
+        const numericId = Number(bookmarkId);
+        if (bookmarks.length > 0) {
+          const bookmark = bookmarks.find(bm => bm.id === numericId);
+          if (bookmark) {
+            setSelectedBookmark({
+              id: bookmark.id,
+              name: bookmark.name,
+              query: bookmark.query,
+            });
+            setHostsSearchQuery(bookmark.query);
+          }
+        } else {
+          setPendingBookmarkId(numericId);
+          dispatch(
+            getBookmarks(hostsSearchProps.bookmarks.url, hostsController)
+          );
+        }
+      } else if ((search || search === '') && !hostIds?.length) {
         // replace an empty string search with a dummy search query to match all hosts
         // but only if search query was entered (based on presence of :search parameter)
+
+        setSelectedBookmark(null);
         const hostSearch = search === '' ? "name != ''" : search;
         setHostsSearchQuery(hostSearch);
       }
@@ -100,9 +151,11 @@ export const useAutoFill = ({
     setFills,
     setSelectedTargets,
     setHostsSearchQuery,
+    setSelectedBookmark,
     setJobTemplateID,
     setTemplateValues,
     setAdvancedValues,
     dispatch,
+    bookmarks,
   ]);
 };

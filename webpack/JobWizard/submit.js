@@ -9,6 +9,7 @@ export const submit = ({
   scheduleValue,
   selectedTargets,
   hostsSearchQuery,
+  selectedBookmark,
   location,
   organization,
   feature,
@@ -110,8 +111,10 @@ export const submit = ({
       concurrency_control: {
         concurrency_level: concurrencyLevel,
       },
-      bookmark_id: null,
-      search_query: buildHostQuery(selectedTargets, hostsSearchQuery),
+      bookmark_id: selectedBookmark ? selectedBookmark.id : null,
+      search_query: selectedBookmark
+        ? null
+        : buildHostQuery(selectedTargets, hostsSearchQuery),
       description_format: description,
       execution_timeout_interval: timeoutToKill,
       feature,

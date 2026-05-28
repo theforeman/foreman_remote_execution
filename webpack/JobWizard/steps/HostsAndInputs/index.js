@@ -51,6 +51,7 @@ const HostsAndInputs = ({
   setSelected,
   hostsSearchQuery,
   setHostsSearchQuery,
+  setSelectedBookmark,
 }) => {
   const defaultHostMethod = hostsSearchQuery.length
     ? hostMethods.searchQuery
@@ -132,6 +133,7 @@ const HostsAndInputs = ({
 
   const clearSearch = () => {
     setHostsSearchQuery('');
+    setSelectedBookmark(null);
   };
   const [errorText, setErrorText] = useState(
     __('Please select at least one host')
@@ -156,6 +158,7 @@ const HostsAndInputs = ({
                 className="target-method-select"
                 toggleIcon={<FilterIcon />}
                 fieldId="host_methods"
+                toggleAriaLabel={__('host method')}
                 options={Object.values(hostMethods).filter(method => {
                   if (method === hostMethods.hostCollections && !withKatello) {
                     return false;
@@ -186,6 +189,7 @@ const HostsAndInputs = ({
               <HostSearch
                 setValue={setHostsSearchQuery}
                 value={hostsSearchQuery}
+                onBookmarkMatch={setSelectedBookmark}
               />
             )}
             {hostMethod === hostMethods.hosts && (
@@ -286,6 +290,7 @@ HostsAndInputs.propTypes = {
   setSelected: PropTypes.func.isRequired,
   hostsSearchQuery: PropTypes.string.isRequired,
   setHostsSearchQuery: PropTypes.func.isRequired,
+  setSelectedBookmark: PropTypes.func.isRequired,
 };
 
 export default HostsAndInputs;

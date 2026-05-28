@@ -1,5 +1,6 @@
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
+import { getControllerSearchProps } from 'foremanReact/constants';
 
 export const JOB_TEMPLATES = 'JOB_TEMPLATES';
 export const JOB_CATEGORIES = 'JOB_CATEGORIES';
@@ -61,6 +62,10 @@ export const hostMethods = {
 
 export const hostQuerySearchID = 'mainHostQuery';
 export const hostsController = 'hosts';
+export const hostsSearchProps = getControllerSearchProps(
+  hostsController,
+  hostQuerySearchID
+);
 
 export const dataName = {
   [HOSTS]: 'hosts',
