@@ -116,6 +116,22 @@ export const jobTemplateResponse = {
   ],
 };
 
+export const bookmarksList = [
+  { id: 19, name: 'my hosts', query: 'name ~ myhost', controller: 'hosts' },
+  {
+    id: 23,
+    name: 'active hosts',
+    query: 'last_report > "1 hour ago"',
+    controller: 'hosts',
+  },
+  {
+    id: 31,
+    name: 'dashboard default',
+    query: 'os = centos',
+    controller: 'dashboard',
+  },
+];
+
 export const jobCategories = ['Services', 'Ansible Commands', 'Puppet'];
 
 export const testSetup = (selectors, api) => {
@@ -175,6 +191,14 @@ export const testSetup = (selectors, api) => {
       response: {
         subtotal: 3,
       },
+    },
+    bookmarksPF4: {
+      hosts: {
+        results: bookmarksList,
+      },
+    },
+    API: {
+      BOOKMARKS_HOSTS: { status: 'RESOLVED', results: [] },
     },
   });
   return store;

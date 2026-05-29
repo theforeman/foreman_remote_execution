@@ -55,6 +55,8 @@ const store = mockStore({
       subtotal: 3,
     },
   },
+  bookmarksPF4: {},
+  API: {},
 });
 jest.useFakeTimers();
 

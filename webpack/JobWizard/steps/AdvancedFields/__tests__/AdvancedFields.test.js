@@ -125,7 +125,7 @@ describe('AdvancedFields', () => {
     const resourceSelectField = screen.getByLabelText(
       'adv resource select toggle'
     );
-    const searchField = screen.getByPlaceholderText('Filter...');
+    const searchField = screen.getByPlaceholderText('Search');
     const dateField = screen.getByLabelText('adv date datepicker');
     const timeField = screen.getByLabelText('adv date timepicker');
 
@@ -403,6 +403,11 @@ describe('AdvancedFields', () => {
 
       jest.advanceTimersByTime(10000);
     });
-    expect(newStore.getActions()).toMatchSnapshot('resource search');
+    const actions = newStore.getActions();
+    const resourceSearchAction = actions.filter(
+      action => action.key === 'ForemanTasksTask'
+    );
+    expect(resourceSearchAction).toHaveLength(2);
+    expect(String(resourceSearchAction[1].url)).toContain('name=some+search');
   });
 });

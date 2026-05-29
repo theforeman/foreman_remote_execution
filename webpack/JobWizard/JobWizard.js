@@ -62,10 +62,12 @@ export const JobWizard = ({ rerunData }) => {
     hostGroups: [],
   });
   const [hostsSearchQuery, setHostsSearchQuery] = useState('');
+  const [selectedBookmark, setSelectedBookmark] = useState(null);
   const [fills, setFills] = useState(
     rerunData
       ? {
           search: rerunData?.targeting?.search_query,
+          bookmark_id: rerunData?.targeting?.bookmark_id,
           ...rerunData.inputs,
           ...routerSearch,
         }
@@ -251,6 +253,7 @@ export const JobWizard = ({ rerunData }) => {
     setFills,
     setSelectedTargets,
     setHostsSearchQuery,
+    setSelectedBookmark,
     setJobTemplateID,
     setTemplateValues,
     setAdvancedValues,
@@ -298,6 +301,8 @@ export const JobWizard = ({ rerunData }) => {
           setSelected={setSelectedTargets}
           hostsSearchQuery={hostsSearchQuery}
           setHostsSearchQuery={setHostsSearchQuery}
+          selectedBookmark={selectedBookmark}
+          setSelectedBookmark={setSelectedBookmark}
         />
       ),
       canJumpTo: isTemplate,
@@ -474,6 +479,7 @@ export const JobWizard = ({ rerunData }) => {
       dispatch,
       selectedTargets,
       hostsSearchQuery,
+      selectedBookmark,
       location,
       organization,
       feature,
@@ -507,6 +513,7 @@ JobWizard.propTypes = {
     job_category: PropTypes.string,
     targeting: PropTypes.shape({
       search_query: PropTypes.string,
+      bookmark_id: PropTypes.number,
       targeting_type: PropTypes.string,
       randomized_ordering: PropTypes.bool,
     }),

@@ -3,21 +3,19 @@ import { Provider } from 'react-redux';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 
-import * as APIHooks from 'foremanReact/common/hooks/API/APIHooks';
 import * as api from 'foremanReact/redux/API';
 import JobWizardPageRerun from '../JobWizardPageRerun';
 import * as selectors from '../JobWizardSelectors';
-import { testSetup, mockApi, gqlMock, jobInvocation } from './fixtures';
+import {
+  testSetup,
+  mockApi,
+  gqlMock,
+  jobInvocation,
+  bookmarksList,
+} from './fixtures';
 
 const store = testSetup(selectors, api);
 mockApi(api);
-jest.spyOn(APIHooks, 'useAPI');
-APIHooks.useAPI.mockImplementation((action, url) => {
-  if (url === '/ui_job_wizard/job_invocation?id=57') {
-    return { response: jobInvocation, status: 'RESOLVED' };
-  }
-  return {};
-});
 
 describe('Job wizard fill', () => {
   it('fill defaults into fields', async () => {
@@ -75,5 +73,51 @@ describe('Job wizard fill', () => {
         selector: 'input',
       }).value
     ).toBe('6');
+  });
+
+  it('fills bookmark on rerun when job used a bookmark', async () => {
+    const bookmark = bookmarksList[0];
+    const jobWithBookmark = {
+      ...jobInvocation,
+      job: {
+        ...jobInvocation.job,
+        targeting: {
+          ...jobInvocation.job.targeting,
+          bookmark_id: bookmark.id,
+          search_query: null,
+        },
+      },
+    };
+
+    selectors.selectRerunJobInvocationResponse.mockImplementation(
+      () => jobWithBookmark
+    );
+
+    render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        <Provider store={store}>
+          <JobWizardPageRerun
+            match={{
+              params: { id: '99' },
+            }}
+          />
+        </Provider>
+      </MockedProvider>
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Target hosts and inputs'));
+    });
+
+    const hostMethodSelect = screen.getByRole('button', {
+      name: 'host method',
+    });
+    expect(hostMethodSelect.textContent).toContain('Search query');
+
+    expect(screen.queryAllByText(bookmark.query)).toHaveLength(1);
+
+    selectors.selectRerunJobInvocationResponse.mockImplementation(
+      () => jobInvocation
+    );
   });
 });

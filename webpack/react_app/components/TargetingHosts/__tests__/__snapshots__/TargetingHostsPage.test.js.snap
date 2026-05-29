@@ -14,6 +14,7 @@ exports[`TargetingHostsPage renders 1`] = `
       md={6}
     >
       <SearchBar
+        bookmarksPosition="left"
         data={
           Object {
             "autocomplete": Object {
@@ -31,9 +32,12 @@ exports[`TargetingHostsPage renders 1`] = `
             "controller": "hosts",
           }
         }
+        initialQuery=""
+        name={null}
         onBookmarkClick={[Function]}
-        onChange={[Function]}
         onSearch={[Function]}
+        onSearchChange={[Function]}
+        restrictedSearchQuery={[Function]}
       />
     </Col>
   </Row>

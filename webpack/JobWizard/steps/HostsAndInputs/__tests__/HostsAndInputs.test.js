@@ -6,7 +6,12 @@ import * as api from 'foremanReact/redux/API';
 import * as routerSelectors from 'foremanReact/routes/RouterSelector';
 import { JobWizard } from '../../../JobWizard';
 import * as selectors from '../../../JobWizardSelectors';
-import { testSetup, mockApi, gqlMock } from '../../../__tests__/fixtures';
+import {
+  testSetup,
+  mockApi,
+  gqlMock,
+  bookmarksList,
+} from '../../../__tests__/fixtures';
 
 const store = testSetup(selectors, api);
 mockApi(api);
@@ -181,6 +186,95 @@ describe('Hosts', () => {
       fireEvent.click(screen.getByText('Target hosts and inputs'));
     });
     expect(screen.queryAllByText('os=gnome')).toHaveLength(1);
+  });
+
+  it('submits bookmark_id when search matches a bookmark', async () => {
+    const bookmark = bookmarksList[0];
+    routerSelectors.selectRouterLocation.mockImplementation(() => ({
+      search: '',
+    }));
+    const bookmarkStore = testSetup(selectors, api);
+    mockApi(api);
+
+    render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        <Provider store={bookmarkStore}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Target hosts and inputs'));
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'host method' }));
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByText('Search query'));
+    });
+
+    await act(async () => {
+      fireEvent.click(
+        screen.getByRole('button', { name: 'bookmarks dropdown toggle' })
+      );
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByText(bookmark.name));
+    });
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Review details'));
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByText('Submit'));
+    });
+
+    const submitAction = bookmarkStore
+      .getActions()
+      .find(action => action?.key === 'JOB_INVOCATION');
+    expect(submitAction).toBeDefined();
+    const { job_invocation: invocation } = submitAction.params;
+    expect(invocation.bookmark_id).toBe(bookmark.id);
+    expect(invocation.search_query).toBeNull();
+  });
+
+  it('does not submit bookmark_id when search does not match a bookmark', async () => {
+    const customQuery = 'some custom query';
+    routerSelectors.selectRouterLocation.mockImplementation(() => ({
+      search: `search=${encodeURIComponent(customQuery)}`,
+    }));
+    const customStore = testSetup(selectors, api);
+    mockApi(api);
+
+    render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        <Provider store={customStore}>
+          <JobWizard />
+        </Provider>
+      </MockedProvider>
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Target hosts and inputs'));
+    });
+
+    expect(screen.queryAllByText(customQuery)).toHaveLength(1);
+
+    await act(async () => {
+      fireEvent.click(screen.getByText('Review details'));
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByText('Submit'));
+    });
+
+    const submitAction = customStore
+      .getActions()
+      .find(action => action?.key === 'JOB_INVOCATION');
+    expect(submitAction).toBeDefined();
+    const { job_invocation: invocation } = submitAction.params;
+    expect(invocation.bookmark_id).toBeNull();
+    expect(invocation.search_query).toBe(customQuery);
   });
 
   it('input fill from url', async () => {

@@ -9,6 +9,8 @@ import {
 } from 'foremanReact/redux/API/APISelectors';
 import { STATUS } from 'foremanReact/constants';
 import { selectRouterLocation } from 'foremanReact/routes/RouterSelector';
+import { BOOKMARKS } from 'foremanReact/components/PF4/Bookmarks/BookmarksConstants';
+import { selectBookmarksResults } from 'foremanReact/components/PF4/Bookmarks/BookmarksSelectors';
 
 import {
   JOB_TEMPLATES,
@@ -134,3 +136,9 @@ export const selectRouterSearch = state => {
   const { search } = selectRouterLocation(state) || {};
   return URI.parseQuery(search);
 };
+
+const HOSTS_CONTROLLER = 'hosts';
+const BOOKMARKS_HOSTS_KEY = `${BOOKMARKS}_${HOSTS_CONTROLLER.toUpperCase()}`;
+
+export const selectHostBookmarks = state =>
+  selectBookmarksResults(state, BOOKMARKS_HOSTS_KEY, HOSTS_CONTROLLER);
