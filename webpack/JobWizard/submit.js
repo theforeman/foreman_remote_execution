@@ -2,6 +2,14 @@ import { post } from 'foremanReact/redux/API';
 import { repeatTypes, JOB_INVOCATION } from './JobWizardConstants';
 import { buildHostQuery } from './steps/HostsAndInputs/buildHostQuery';
 
+const hasExplicitTargets = selectedTargets =>
+  selectedTargets.hosts.length > 0 ||
+  selectedTargets.hostCollections.length > 0 ||
+  selectedTargets.hostGroups.length > 0;
+
+const shouldSendBookmark = (selectedBookmark, selectedTargets) =>
+  selectedBookmark && !hasExplicitTargets(selectedTargets);
+
 export const submit = ({
   jobTemplateID,
   templateValues,
@@ -111,8 +119,10 @@ export const submit = ({
       concurrency_control: {
         concurrency_level: concurrencyLevel,
       },
-      bookmark_id: selectedBookmark ? selectedBookmark.id : null,
-      search_query: selectedBookmark
+      bookmark_id: shouldSendBookmark(selectedBookmark, selectedTargets)
+        ? selectedBookmark.id
+        : null,
+      search_query: shouldSendBookmark(selectedBookmark, selectedTargets)
         ? null
         : buildHostQuery(selectedTargets, hostsSearchQuery),
       description_format: description,

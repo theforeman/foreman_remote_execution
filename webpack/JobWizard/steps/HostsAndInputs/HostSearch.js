@@ -10,14 +10,22 @@ export const HostSearch = ({ value, setValue, onBookmarkMatch }) => {
 
   const handleSearchChange = search => {
     setValue(search);
+    onBookmarkMatch(null);
+  };
+
+  const handleBookmarkSearch = query => {
     const matched = bookmarks.find(
-      bookmark => bookmark.query && bookmark.query.trim() === search.trim()
+      bookmark => bookmark.query && bookmark.query.trim() === query.trim()
     );
-    onBookmarkMatch(
-      matched
-        ? { id: matched.id, name: matched.name, query: matched.query }
-        : null
-    );
+    if (matched) {
+      onBookmarkMatch({
+        id: matched.id,
+        name: matched.name,
+        query: matched.query,
+      });
+    } else {
+      onBookmarkMatch(null);
+    }
   };
 
   return (
@@ -31,8 +39,9 @@ export const HostSearch = ({ value, setValue, onBookmarkMatch }) => {
             searchQuery: value,
           },
         }}
-        onSearch={null}
+        onSearch={handleBookmarkSearch}
         onSearchChange={handleSearchChange}
+        bookmarksPosition="right"
       />
     </div>
   );
