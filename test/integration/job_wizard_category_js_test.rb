@@ -92,9 +92,14 @@ class JobWizardCategoryJsTest < IntegrationTestWithJavascript
   test 'job wizard run on selected hosts is enabled on review and posts to job invocations API' do
     posted_to_job_invocations_create = false
     subscriber = ActiveSupport::Notifications.subscribe('start_processing.action_controller') do |_n, _s, _f, _i, payload|
-      if payload[:controller].to_s.end_with?('JobInvocationsController') && payload[:action].to_s == 'create'
-        posted_to_job_invocations_create = true
-      end
+      next unless payload[:controller] == 'Api::V2::JobInvocationsController' && payload[:action].to_s == 'create'
+      root = payload[:params]
+      root = root.to_unsafe_h if root.respond_to?(:to_unsafe_h)
+      job_inv = (root[:job_invocation] || root['job_invocation'])
+      next unless job_inv
+      job_inv = job_inv.to_unsafe_h if job_inv.respond_to?(:to_unsafe_h)
+      next unless job_inv['job_template_id'].to_i == @default_job_template.id
+      posted_to_job_invocations_create = true
     end
 
     begin
@@ -103,7 +108,7 @@ class JobWizardCategoryJsTest < IntegrationTestWithJavascript
 
       assert_selector(:ouia_component_id, 'run-on-selected-hosts-footer', :wait => 30)
       run_on_hosts = find(:ouia_component_id, 'run-on-selected-hosts-footer')
-      assert_includes [nil, 'false'], run_on_hosts[:'aria-disabled']
+      assert_not_equal 'true', run_on_hosts[:'aria-disabled'], 'expected run-on-selected-hosts button to be enabled'
       assert_text 'Run on selected hosts'
       find(:ouia_component_id, 'run-on-selected-hosts-footer').click
       wait_for_ajax
@@ -116,7 +121,7 @@ class JobWizardCategoryJsTest < IntegrationTestWithJavascript
 
   test 'job wizard create API request sends job_template_id and inputs for default template' do
     input_value = 'api_payload_default_template'
-    job_inv_params = capture_api_job_invocation_params_during do
+    job_inv_params = capture_api_job_invocation_params_during(expected_template_id: @default_job_template.id) do
       visit new_job_invocation_path(
         :search => "id = #{@rex_host.id}",
         :inputs => { @wizard_input_name => input_value }
@@ -137,7 +142,7 @@ class JobWizardCategoryJsTest < IntegrationTestWithJavascript
 
   test 'job wizard create API request sends feature label and inputs without job_template_id' do
     input_value = 'api_payload_feature_template'
-    job_inv_params = capture_api_job_invocation_params_during do
+    job_inv_params = capture_api_job_invocation_params_during(expected_feature: @remote_execution_feature.label) do
       visit new_job_invocation_path(
         :feature => @remote_execution_feature.label,
         :search => "id = #{@rex_host.id}",
@@ -158,16 +163,19 @@ class JobWizardCategoryJsTest < IntegrationTestWithJavascript
 
   private
 
-  def capture_api_job_invocation_params_during
+  def capture_api_job_invocation_params_during(expected_template_id: nil, expected_feature: nil)
     captured = nil
     subscriber = ActiveSupport::Notifications.subscribe('start_processing.action_controller') do |_n, _s, _f, _i, payload|
-      next unless payload[:controller].to_s.end_with?('JobInvocationsController') && payload[:action].to_s == 'create'
+      next unless payload[:controller] == 'Api::V2::JobInvocationsController' && payload[:action].to_s == 'create'
       root = payload[:params]
       root = root.to_unsafe_h if root.respond_to?(:to_unsafe_h)
       job_inv_params = root[:job_invocation] || root['job_invocation']
       next unless job_inv_params
       job_inv_params = job_inv_params.to_unsafe_h if job_inv_params.respond_to?(:to_unsafe_h)
-      captured = job_inv_params.with_indifferent_access
+      job_inv_params = job_inv_params.with_indifferent_access
+      next if expected_template_id && job_inv_params[:job_template_id].to_i != expected_template_id
+      next if expected_feature && job_inv_params[:feature] != expected_feature
+      captured = job_inv_params
     end
     begin
       yield
@@ -196,7 +204,9 @@ class JobWizardCategoryJsTest < IntegrationTestWithJavascript
 
   def job_wizard_click_next!
     wait_for_ajax
-    find(:ouia_component_id, 'next-footer').click
+    button = find(:ouia_component_id, 'next-footer')
+    page.execute_script('arguments[0].scrollIntoView({block: "center"})', button.native)
+    button.click
     wait_for_ajax
   end
 
