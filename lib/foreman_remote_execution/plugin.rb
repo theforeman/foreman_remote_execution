@@ -1,5 +1,5 @@
 Foreman::Plugin.register :foreman_remote_execution do
-  requires_foreman '>= 3.17'
+  requires_foreman '>= 5.0'
   register_global_js_file 'global'
   register_gettext
 
