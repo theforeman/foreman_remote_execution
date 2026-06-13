@@ -61,6 +61,11 @@ section.job-additional-info {
 }
 
 .job-details-table-section {
+  &.table-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   section:nth-child(1) {
     padding: 0;
   }
