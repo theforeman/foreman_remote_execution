@@ -311,7 +311,8 @@ module Api
       end
 
       def set_statuses_and_smart_proxies
-        template_invocations = @template_invocations.includes(:run_host_job_task).to_a
+        template_invocations = @template_invocations.where(host_id: @hosts.select(:id))
+                                                    .includes(:run_host_job_task).to_a
         hosts = @hosts.to_a
         @host_statuses = Hash[hosts.map do |host|
           template_invocation = template_invocations.find { |ti| ti.host_id == host.id }
