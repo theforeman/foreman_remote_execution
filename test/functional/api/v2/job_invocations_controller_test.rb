@@ -28,6 +28,7 @@ module Api
           assert_not_empty template
           assert_equal template['job_category'], @invocation.job_category
           assert_not_nil template['targeting']
+          assert_not_empty template['pattern_template_invocations']
         end
 
         test 'should get invocation detail when taxonomies are set' do

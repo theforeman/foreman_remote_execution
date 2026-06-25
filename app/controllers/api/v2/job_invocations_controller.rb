@@ -8,6 +8,7 @@ module Api
       before_action :find_optional_nested_object, :only => %w{output raw_output}
       before_action :find_host, :only => %w{output raw_output}
       before_action :find_resource, :only => %w{show update destroy clone cancel rerun outputs hosts}
+      before_action :find_pattern_template_invocations, :only => %w{show hosts}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -20,7 +21,6 @@ module Api
       api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
       def show
-        @pattern_template_invocations = @job_invocation.pattern_template_invocations.includes(:input_values)
         @job_organization = Taxonomy.find_by(id: @job_invocation.task.input[:current_organization_id])
         @job_location = Taxonomy.find_by(id: @job_invocation.task.input[:current_location_id])
       end
@@ -86,7 +86,6 @@ module Api
         )
         composer.trigger!
         @job_invocation = composer.job_invocation
-        @hosts = @job_invocation.targeting.hosts
         process_response @job_invocation
       rescue JobInvocationComposer::JobTemplateNotFound, JobInvocationComposer::FeatureNotFound => e
         not_found(error: { message: e.message })
@@ -293,8 +292,11 @@ module Api
         resource_class.where(nil)
       end
 
-      def set_hosts_and_template_invocations
+      def find_pattern_template_invocations
         @pattern_template_invocations = @job_invocation.pattern_template_invocations.includes(:input_values)
+      end
+
+      def set_hosts_and_template_invocations
         @hosts = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
 
         if params[:search].present?
