@@ -72,7 +72,7 @@ const JobInvocationDetailPage = ({
   }
 
   useEffect(() => {
-    dispatch(getJobInvocation(`/api/job_invocations/${id}?host_status=true`));
+    dispatch(getJobInvocation(`/api/job_invocations/${id}`));
     if (finished && !autoRefresh) {
       dispatch(stopInterval(JOB_INVOCATION_KEY));
     }
