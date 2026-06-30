@@ -36,6 +36,22 @@ module Api
           get :show, params: taxonomy_params.merge(:id => @invocation.id)
           assert_response :success
         end
+
+        test 'should include hosts by default' do
+          get :show, params: { :id => @invocation.id }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_not_nil result['targeting']['hosts']
+          assert_not_nil result['template_invocations']
+        end
+
+        test 'should exclude hosts when include_hosts=false' do
+          get :show, params: { :id => @invocation.id, :include_hosts => false }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_nil result['targeting']['hosts']
+          assert_nil result['template_invocations']
+        end
       end
 
       context 'creation' do
@@ -52,6 +68,20 @@ module Api
 
           invocation = ActiveSupport::JSON.decode(@response.body)
           assert_equal @attrs[:job_category], invocation['job_category']
+          assert_response :success
+        end
+
+        test 'should include hosts in create response by default' do
+          post :create, params: { job_invocation: @attrs }
+          invocation = ActiveSupport::JSON.decode(@response.body)
+          assert_not_nil invocation['targeting']['hosts']
+          assert_response :success
+        end
+
+        test 'should exclude hosts from create response when include_hosts=false' do
+          post :create, params: { job_invocation: @attrs, include_hosts: false }
+          invocation = ActiveSupport::JSON.decode(@response.body)
+          assert_nil invocation['targeting']['hosts']
           assert_response :success
         end
 
