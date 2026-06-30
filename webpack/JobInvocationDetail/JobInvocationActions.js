@@ -19,7 +19,7 @@ export const getJobInvocation = url => dispatch => {
   const fetchData = withInterval(
     get({
       key: JOB_INVOCATION_KEY,
-      params: { include_permissions: true },
+      params: { include_permissions: true, include_hosts: false },
       url,
       handleError: () => {
         dispatch(stopInterval(JOB_INVOCATION_KEY));
@@ -44,6 +44,7 @@ export const updateJob = jobId => dispatch => {
     APIActions.get({
       url,
       key: UPDATE_JOB,
+      params: { include_hosts: false },
     })
   );
 };
