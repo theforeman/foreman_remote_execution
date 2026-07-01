@@ -26,7 +26,7 @@ module Api
         @job_organization = Taxonomy.find_by(id: @job_invocation.task.input[:current_organization_id])
         @job_location = Taxonomy.find_by(id: @job_invocation.task.input[:current_location_id])
 
-        if params[:include_hosts].nil? || Foreman::Cast.to_bool(params[:include_hosts])
+        if include_hosts?
           set_hosts_and_template_invocations
           set_statuses_and_smart_proxies if Foreman::Cast.to_bool(params[:host_status])
         end
@@ -94,7 +94,7 @@ module Api
         )
         composer.trigger!
         @job_invocation = composer.job_invocation
-        set_hosts_and_template_invocations if params[:include_hosts].nil? || Foreman::Cast.to_bool(params[:include_hosts])
+        set_hosts_and_template_invocations if include_hosts?
         process_response @job_invocation
       rescue JobInvocationComposer::JobTemplateNotFound, JobInvocationComposer::FeatureNotFound => e
         not_found(error: { message: e.message })
@@ -311,6 +311,10 @@ module Api
         @template_invocations = @job_invocation.template_invocations
                                                .where(host: @hosts)
                                                .includes(:input_values)
+      end
+
+      def include_hosts?
+        params[:include_hosts].nil? || Foreman::Cast.to_bool(params[:include_hosts])
       end
 
       def set_statuses_and_smart_proxies

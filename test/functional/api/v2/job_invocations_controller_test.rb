@@ -29,6 +29,8 @@ module Api
           assert_equal template['job_category'], @invocation.job_category
           assert_not_nil template['targeting']
           assert_not_empty template['pattern_template_invocations']
+          assert_not_nil template['targeting']['hosts']
+          assert_not_nil template['template_invocations']
         end
 
         test 'should get invocation detail when taxonomies are set' do
@@ -37,20 +39,47 @@ module Api
           assert_response :success
         end
 
-        test 'should include hosts by default' do
-          get :show, params: { :id => @invocation.id }
-          assert_response :success
-          result = ActiveSupport::JSON.decode(@response.body)
-          assert_not_nil result['targeting']['hosts']
-          assert_not_nil result['template_invocations']
-        end
-
         test 'should exclude hosts when include_hosts=false' do
           get :show, params: { :id => @invocation.id, :include_hosts => false }
           assert_response :success
           result = ActiveSupport::JSON.decode(@response.body)
           assert_nil result['targeting']['hosts']
           assert_nil result['template_invocations']
+        end
+
+        test 'should see only permitted hosts' do
+          @user = FactoryBot.create(:user, :admin => false)
+          @invocation.task.update(:user => @user)
+          setup_user('view', 'job_invocations', nil, @user)
+          setup_user('view', 'hosts', 'name ~ nope.example.com', @user)
+
+          get :show, params: { :id => @invocation.id }, session: prepare_user(@user)
+          assert_response :success
+          response = ActiveSupport::JSON.decode(@response.body)
+          assert_equal response['targeting']['hosts'], []
+        end
+
+        test 'should ignore host_status when include_hosts=false' do
+          get :show, params: { :id => @invocation.id, :include_hosts => false, :host_status => true }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_nil result['targeting']['hosts']
+          assert_nil result['template_invocations']
+        end
+
+        test 'should include job_status per host when host_status=true' do
+          invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
+          invocation.template_invocations << FactoryBot.create(:template_invocation, :with_task, :with_host, :job_invocation => invocation)
+          invocation.job_category = invocation.pattern_template_invocations.first.template.job_category
+          invocation.targeting.hosts = invocation.template_invocations.map(&:host)
+          invocation.save!
+
+          get :show, params: { :id => invocation.id, :include_hosts => true, :host_status => true }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          hosts = result['targeting']['hosts']
+          assert_not_empty hosts
+          assert hosts.all? { |h| h.key?('job_status') }, 'Expected job_status to be present on each host'
         end
       end
 
