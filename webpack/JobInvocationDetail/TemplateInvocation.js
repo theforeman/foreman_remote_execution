@@ -77,10 +77,6 @@ export const TemplateInvocation = ({
   const timeoutRef = useRef(null);
 
   useEffect(() => {
-    const scheduleNextPoll = () => {
-      timeoutRef.current = setTimeout(() => dispatchFetch(), 5000);
-    };
-
     const dispatchFetch = () => {
       dispatch(
         APIActions.get({
@@ -91,7 +87,7 @@ export const TemplateInvocation = ({
             // eslint-disable-next-line camelcase
             const autoRefresh = data?.auto_refresh || false;
             if (!finished && autoRefresh) {
-              scheduleNextPoll();
+              timeoutRef.current = setTimeout(dispatchFetch, 5000);
             }
           },
           handleError: () => {

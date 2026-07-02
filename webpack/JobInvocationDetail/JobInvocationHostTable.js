@@ -255,10 +255,9 @@ const JobInvocationHostTable = ({
     const filterChanged = initialFilter !== prevFilter.current;
     const statusChanged = statusLabel !== prevStatusLabel.current;
 
-    prevFilter.current = initialFilter;
-    prevStatusLabel.current = statusLabel;
-
     if ((filterChanged || statusChanged) && initialFilter !== '') {
+      prevFilter.current = initialFilter;
+      prevStatusLabel.current = statusLabel;
       filterApiCall();
     }
   }, [initialFilter, statusLabel, id, filterApiCall]);
