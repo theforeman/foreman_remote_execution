@@ -24,7 +24,7 @@ const fetchJobInvocation = (dispatch, url, params = {}) => {
   dispatch(
     get({
       key: JOB_INVOCATION_KEY,
-      params: { include_hosts: false },
+      params: { include_hosts: false, ...params },
       url,
       handleSuccess: ({ data }) => {
         if (!isJobFinished(data)) {
