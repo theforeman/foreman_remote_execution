@@ -11,14 +11,10 @@ import {
 
 let pollTimeoutId = null;
 
-const isJobFinished = ({ status_label: statusLabel, task }) => {
-  const finished =
-    statusLabel === STATUS.FAILED ||
-    statusLabel === STATUS.SUCCEEDED ||
-    statusLabel === STATUS.CANCELLED;
-  const autoRefresh = task?.state === STATUS.PENDING || false;
-  return finished && !autoRefresh;
-};
+const isJobFinished = ({ status_label: statusLabel }) =>
+  statusLabel === STATUS.FAILED ||
+  statusLabel === STATUS.SUCCEEDED ||
+  statusLabel === STATUS.CANCELLED;
 
 const scheduleNextPoll = (dispatch, url) => {
   pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 1000);
