@@ -77,12 +77,14 @@ export const TemplateInvocation = ({
   const timeoutRef = useRef(null);
 
   useEffect(() => {
+    let cancelled = false;
     const dispatchFetch = () => {
       dispatch(
         APIActions.get({
           url: templateURL,
           key: `${GET_TEMPLATE_INVOCATION}_${hostID}`,
           handleSuccess: ({ data }) => {
+            if (cancelled) return;
             const finished = data?.finished ?? true;
             // eslint-disable-next-line camelcase
             const autoRefresh = data?.auto_refresh || false;
@@ -91,6 +93,7 @@ export const TemplateInvocation = ({
             }
           },
           handleError: () => {
+            if (cancelled) return;
             timeoutRef.current = null;
           },
         })
@@ -107,9 +110,8 @@ export const TemplateInvocation = ({
     }
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      cancelled = true;
+      clearTimeout(timeoutRef.current);
     };
   }, [isExpanded, dispatch, templateURL, hostID]);
 

@@ -96,11 +96,7 @@ export const cancelJob = (jobId, force) => dispatch => {
   );
 };
 
-export const enableRecurringLogic = (
-  recurrenceId,
-  enabled,
-  jobId
-) => dispatch => {
+export const enableRecurringLogic = (recurrenceId, enabled) => dispatch => {
   const successToast = () =>
     enabled
       ? sprintf(__('Recurring logic %s disabled successfully.'), recurrenceId)
@@ -133,7 +129,7 @@ export const enableRecurringLogic = (
   );
 };
 
-export const cancelRecurringLogic = (recurrenceId, jobId) => dispatch => {
+export const cancelRecurringLogic = recurrenceId => dispatch => {
   const successToast = () =>
     sprintf(__('Recurring logic %s cancelled successfully.'), recurrenceId);
   const errorToast = response =>
