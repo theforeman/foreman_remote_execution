@@ -34,7 +34,7 @@ end
 
 child :task do
   attributes :id, :state, :started_at
-  node(:cancellable) { |task| task.cancellable? }
+  node(:cancellable, &:cancellable?)
 end
 
 if @template_invocations

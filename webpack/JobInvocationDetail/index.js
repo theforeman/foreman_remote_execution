@@ -34,7 +34,6 @@ import {
   CURRENT_PERMISSIONS,
   DATE_OPTIONS,
   JOB_INVOCATION_KEY,
-  STATUS,
   STATUS_UPPERCASE,
   currentPermissionsUrl,
 } from './JobInvocationConstants';
