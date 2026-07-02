@@ -19,7 +19,7 @@ module Api
 
       api :GET, '/job_invocations/:id', N_('Show job invocation')
       param :id, :identifier, :required => true
-      param :include_hosts, :bool, :required => false, :default_value => true, :desc => N_('Include hosts and template invocations in the response. Defaults to true for backwards compatibility, pass false to skip serializing all hosts.')
+      param :include_hosts, :bool, :required => false, :default_value => true, :desc => N_('Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.')
       param :host_status, :bool, :required => false, :default_value => false, :desc => N_('Show job status for each host, only applicable when include_hosts is true')
       def show
         @pattern_template_invocations = @job_invocation.pattern_template_invocations.includes(:input_values)
@@ -87,7 +87,7 @@ module Api
 
       api :POST, '/job_invocations/', N_('Create a job invocation')
       param_group :job_invocation, :as => :create
-      param :include_hosts, :bool, :required => false, :default_value => true, :desc => N_('Include hosts and template invocations in the response. Defaults to true for backwards compatibility, pass false to skip serializing all hosts.')
+      param :include_hosts, :bool, :required => false, :default_value => true, :desc => N_('Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.')
       def create
         composer = JobInvocationComposer.from_api_params(
           job_invocation_params
