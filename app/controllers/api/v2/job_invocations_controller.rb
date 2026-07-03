@@ -333,7 +333,7 @@ module Api
         return unless @include_permissions
         @task_by_host = template_invocations.to_h do |ti|
           task = ti.run_host_job_task
-          [ti.host_id, task&.attributes&.merge(:cancellable => task.cancellable?)]
+          [ti.host_id, task&.attributes&.merge(:cancellable => task.try(:cancellable?))]
         end
         @permissions_by_host = hosts.to_h do |host|
           template_invocation = template_invocations_by_host_id[host.id]
