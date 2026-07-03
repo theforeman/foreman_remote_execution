@@ -15,7 +15,8 @@ node :smart_proxy_name do |host|
 end
 
 node(:task, :if => ->(_) { @task_by_host }) do |host|
-  @task_by_host[host.id]
+  task = @task_by_host[host.id]
+  task && { :id => task.id, :cancellable => task.try(:cancellable?) }
 end
 
 node(:permissions, :if => ->(_) { @permissions_by_host }) do |host|
