@@ -39,10 +39,8 @@ import { CheckboxesActions } from './CheckboxesActions';
 import DropdownFilter from './DropdownFilter';
 import Columns, {
   JOB_INVOCATION_HOSTS,
-  LIST_TEMPLATE_INVOCATIONS,
   STATUS,
   STATUS_UPPERCASE,
-  ALL_JOB_HOSTS,
   AWAITING_STATUS_FILTER,
 } from './JobInvocationConstants';
 import { TemplateInvocation } from './TemplateInvocation';
@@ -195,41 +193,29 @@ const JobInvocationHostTable = ({
           response?.data?.error?.full_messages?.[0] || response,
       })
     );
-    dispatch(
-      APIActions.get({
-        key: LIST_TEMPLATE_INVOCATIONS,
-        url: `/job_invocations/${id}/hosts`,
-        params: currentPollParams.current,
-      })
-    );
   }, [dispatch, id]);
-
-  const handleResponse = useCallback((data, key) => {
-    if (key === JOB_INVOCATION_HOSTS) {
-      const ids = data.data.results.map(i => i.id);
-
-      setApiResponse(data.data);
-      setAllHostsIds(ids);
-      setStatus(STATUS_UPPERCASE.RESOLVED);
-    }
-  }, []);
 
   // Call hosts data with params
   const makeApiCall = useCallback(
-    (requestParams, callParams = {}) => {
+    requestParams => {
       dispatch(
         APIActions.get({
-          key: callParams.key ?? ALL_JOB_HOSTS,
-          url: callParams.url ?? `/api/job_invocations/${id}/hosts`,
+          key: JOB_INVOCATION_HOSTS,
+          url: `/api/job_invocations/${id}/hosts`,
           params: requestParams,
-          handleSuccess: data => handleResponse(data, callParams.key),
+          handleSuccess: data => {
+            const ids = data.data.results.map(i => i.id);
+            setApiResponse(data.data);
+            setAllHostsIds(ids);
+            setStatus(STATUS_UPPERCASE.RESOLVED);
+          },
           handleError: () => setStatus(STATUS_UPPERCASE.ERROR),
           errorToast: ({ response }) =>
             response?.data?.error?.full_messages?.[0] || response,
         })
       );
     },
-    [dispatch, id, handleResponse]
+    [dispatch, id]
   );
 
   const filterApiCall = useCallback(
@@ -258,11 +244,7 @@ const JobInvocationHostTable = ({
         pollTimeoutId.current = null;
       }
 
-      makeApiCall(finalParams, { key: JOB_INVOCATION_HOSTS });
-      makeApiCall(finalParams, {
-        url: `/job_invocations/${id}/hosts`,
-        key: LIST_TEMPLATE_INVOCATIONS,
-      });
+      makeApiCall(finalParams);
 
       const urlSearchParams = new URLSearchParams(window.location.search);
 
@@ -273,7 +255,6 @@ const JobInvocationHostTable = ({
       history.push({ search: urlSearchParams.toString() });
     },
     [
-      id,
       initialFilter,
       urlSearchQuery,
       defaultParams,
@@ -296,21 +277,12 @@ const JobInvocationHostTable = ({
   const initializedRef = useRef(false);
   useEffect(() => {
     if (!initializedRef.current) {
-      // Job Invo template load
-      makeApiCall(
-        {},
-        {
-          url: `/job_invocations/${id}/hosts`,
-          key: LIST_TEMPLATE_INVOCATIONS,
-        }
-      );
-
       if (initialFilter === '') {
         onFilterUpdate('all_statuses');
       }
       initializedRef.current = true;
     }
-  }, [makeApiCall, id, initialFilter, onFilterUpdate]);
+  }, [initialFilter, onFilterUpdate]);
 
   useEffect(() => {
     const filterChanged = initialFilter !== prevFilter.current;

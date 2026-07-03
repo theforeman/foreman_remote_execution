@@ -329,6 +329,19 @@ module Api
         end
         @smart_proxy_id = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_id] }
         @smart_proxy_name = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_name] }
+        @task_by_host = template_invocations.to_h do |ti|
+          task = ti.run_host_job_task
+          [ti.host_id, task&.attributes&.merge(:cancellable => task.cancellable?)]
+        end
+        @permissions_by_host = hosts.to_h do |host|
+          template_invocation = template_invocations_by_host_id[host.id]
+          task = template_invocation.try(:run_host_job_task)
+          [host.id, {
+            :view_foreman_tasks => authorized_for(:permission => :view_foreman_tasks, :auth_object => task),
+            :cancel_job_invocations => authorized_for(:permission => :cancel_job_invocations, :auth_object => @job_invocation),
+            :execute_jobs => authorized_for(controller: :job_invocations, action: :create) && (!host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts)),
+          }]
+        end
       end
     end
   end
