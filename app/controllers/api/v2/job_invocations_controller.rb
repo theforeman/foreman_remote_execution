@@ -118,6 +118,7 @@ module Api
       add_scoped_search_description_for(JobInvocation)
       param :id, :identifier, :required => true
       def hosts
+        @include_permissions = Foreman::Cast.to_bool(params[:include_permissions])
         set_hosts_and_template_invocations
         @total = @hosts.size
         @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
@@ -329,6 +330,7 @@ module Api
         end
         @smart_proxy_id = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_id] }
         @smart_proxy_name = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_name] }
+        return unless @include_permissions
         @task_by_host = template_invocations.to_h do |ti|
           task = ti.run_host_job_task
           [ti.host_id, task&.attributes&.merge(:cancellable => task.cancellable?)]

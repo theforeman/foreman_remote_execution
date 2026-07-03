@@ -173,7 +173,7 @@ const JobInvocationHostTable = ({
       APIActions.get({
         key: JOB_INVOCATION_HOSTS,
         url: `/api/job_invocations/${id}/hosts`,
-        params: currentPollParams.current,
+        params: { include_permissions: true, ...currentPollParams.current },
         handleSuccess: data => {
           const ids = data.data.results.map(i => i.id);
           setApiResponse(data.data);
@@ -202,12 +202,15 @@ const JobInvocationHostTable = ({
         APIActions.get({
           key: JOB_INVOCATION_HOSTS,
           url: `/api/job_invocations/${id}/hosts`,
-          params: requestParams,
+          params: { include_permissions: true, ...requestParams },
           handleSuccess: data => {
             const ids = data.data.results.map(i => i.id);
             setApiResponse(data.data);
             setAllHostsIds(ids);
             setStatus(STATUS_UPPERCASE.RESOLVED);
+            if (!isJobFinished()) {
+              pollTimeoutId.current = setTimeout(pollHostTable, 5000);
+            }
           },
           handleError: () => setStatus(STATUS_UPPERCASE.ERROR),
           errorToast: ({ response }) =>
@@ -215,7 +218,7 @@ const JobInvocationHostTable = ({
         })
       );
     },
-    [dispatch, id]
+    [dispatch, id, pollHostTable]
   );
 
   const filterApiCall = useCallback(
@@ -295,18 +298,15 @@ const JobInvocationHostTable = ({
     }
   }, [initialFilter, statusLabel, id, filterApiCall]);
 
-  useEffect(() => {
-    if (initialFilter !== '' && !isJobFinished()) {
-      pollTimeoutId.current = setTimeout(pollHostTable, 5000);
-    }
-    return () => {
+  useEffect(
+    () => () => {
       if (pollTimeoutId.current !== null) {
         clearTimeout(pollTimeoutId.current);
         pollTimeoutId.current = null;
       }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialFilter, pollHostTable]);
+    },
+    []
+  );
 
   const {
     updateSearchQuery: updateSearchQueryBulk,

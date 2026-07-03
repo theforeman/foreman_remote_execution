@@ -17,7 +17,7 @@ const isJobFinished = ({ status_label: statusLabel }) =>
   statusLabel === STATUS.CANCELLED;
 
 const scheduleNextPoll = (dispatch, url) => {
-  pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 1000);
+  pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 5000);
 };
 
 const fetchJobInvocation = (dispatch, url, params = {}) => {

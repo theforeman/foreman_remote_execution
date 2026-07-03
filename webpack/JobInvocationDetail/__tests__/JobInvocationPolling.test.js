@@ -54,7 +54,7 @@ describe('job invocation polling', () => {
     store.dispatch(getJobInvocation(url));
     expect(api.get).toHaveBeenCalledTimes(1);
 
-    jest.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(5000);
     expect(api.get).toHaveBeenCalledTimes(2);
   });
 
@@ -63,7 +63,7 @@ describe('job invocation polling', () => {
     const store = mockStore({});
 
     store.dispatch(getJobInvocation(url));
-    jest.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(5000);
 
     expect(api.get).toHaveBeenCalledTimes(2);
     expect(api.get.mock.calls[1][0].params).not.toHaveProperty(
@@ -140,7 +140,7 @@ describe('job invocation polling', () => {
 
     // Second call before the timeout fires should cancel the pending poll
     store.dispatch(getJobInvocation(url));
-    jest.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(5000);
 
     // Only one more poll should fire (from the second invocation), not two
     expect(api.get).toHaveBeenCalledTimes(3);
@@ -151,7 +151,7 @@ describe('job invocation polling', () => {
     const store = mockStore({});
 
     store.dispatch(getJobInvocation(url));
-    jest.advanceTimersByTime(3000);
+    jest.advanceTimersByTime(15000);
 
     expect(api.get).toHaveBeenCalledTimes(4);
   });
