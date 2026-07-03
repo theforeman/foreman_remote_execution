@@ -158,7 +158,6 @@ const JobInvocationHostTable = ({
     [initialFilter, urlSearchQuery]
   );
 
-
   const updateHostsState = useCallback(data => {
     const ids = data.data.results.map(i => i.id);
     setApiResponse(data.data);
@@ -265,7 +264,6 @@ const JobInvocationHostTable = ({
       constructFilter,
     ]
   );
-
 
   // Effects
   // run after mount

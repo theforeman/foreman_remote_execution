@@ -24,7 +24,10 @@ const fetchJobInvocation = (dispatch, url, params = {}) => {
       url,
       handleSuccess: ({ data }) => {
         if (!isJobFinished(data.status_label)) {
-          pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 5000);
+          pollTimeoutId = setTimeout(
+            () => fetchJobInvocation(dispatch, url),
+            5000
+          );
         } else {
           pollTimeoutId = null;
         }
