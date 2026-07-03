@@ -49,10 +49,8 @@ export const getJobInvocation = url => dispatch => {
 };
 
 export const stopJobInvocationPolling = () => {
-  if (pollTimeoutId !== null) {
-    clearTimeout(pollTimeoutId);
-    pollTimeoutId = null;
-  }
+  clearTimeout(pollTimeoutId);
+  pollTimeoutId = null;
 };
 
 export const cancelJob = (jobId, force) => dispatch => {

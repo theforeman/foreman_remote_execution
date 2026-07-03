@@ -85,7 +85,7 @@ export const TemplateInvocation = ({
           key: `${GET_TEMPLATE_INVOCATION}_${hostID}`,
           handleSuccess: ({ data }) => {
             if (cancelled) return;
-            const finished = data?.finished ?? true;
+            const finished = data?.finished ?? false;
             // eslint-disable-next-line camelcase
             const autoRefresh = data?.auto_refresh || false;
             if (!finished && autoRefresh) {

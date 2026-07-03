@@ -185,7 +185,9 @@ const JobInvocationHostTable = ({
           setStatus(STATUS_UPPERCASE.ERROR);
         },
         errorToast: ({ response }) =>
-          response?.data?.error?.full_messages?.[0] || response,
+          response?.data?.error?.full_messages?.[0] ||
+          response?.data?.error?.message ||
+          'Error',
       })
     );
   }, [dispatch, id, updateHostsState]);
@@ -202,11 +204,18 @@ const JobInvocationHostTable = ({
             updateHostsState(data);
             if (!jobFinishedRef.current) {
               pollTimeoutId.current = setTimeout(pollHostTable, 5000);
+            } else {
+              pollTimeoutId.current = null;
             }
           },
-          handleError: () => setStatus(STATUS_UPPERCASE.ERROR),
+          handleError: () => {
+            pollTimeoutId.current = null;
+            setStatus(STATUS_UPPERCASE.ERROR);
+          },
           errorToast: ({ response }) =>
-            response?.data?.error?.full_messages?.[0] || response,
+            response?.data?.error?.full_messages?.[0] ||
+            response?.data?.error?.message ||
+            'Error',
         })
       );
     },
@@ -234,10 +243,8 @@ const JobInvocationHostTable = ({
       }
 
       currentPollParams.current = finalParams;
-      if (pollTimeoutId.current !== null) {
-        clearTimeout(pollTimeoutId.current);
-        pollTimeoutId.current = null;
-      }
+      clearTimeout(pollTimeoutId.current);
+      pollTimeoutId.current = null;
 
       makeApiCall(finalParams);
 
@@ -259,13 +266,6 @@ const JobInvocationHostTable = ({
     ]
   );
 
-  // Filter change
-  const handleFilterChange = useCallback(
-    newFilter => {
-      onFilterUpdate(newFilter);
-    },
-    [onFilterUpdate]
-  );
 
   // Effects
   // run after mount
@@ -292,10 +292,7 @@ const JobInvocationHostTable = ({
 
   useEffect(
     () => () => {
-      if (pollTimeoutId.current !== null) {
-        clearTimeout(pollTimeoutId.current);
-        pollTimeoutId.current = null;
-      }
+      clearTimeout(pollTimeoutId.current);
     },
     []
   );
@@ -443,7 +440,7 @@ const JobInvocationHostTable = ({
           <DropdownFilter
             key="dropdown-filter"
             dropdownFilter={initialFilter}
-            setDropdownFilter={handleFilterChange}
+            setDropdownFilter={onFilterUpdate}
           />,
           <CheckboxesActions
             bulkParams={selectedCount > 0 ? fetchBulkParams() : null}
