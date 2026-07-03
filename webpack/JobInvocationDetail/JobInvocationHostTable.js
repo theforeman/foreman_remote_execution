@@ -159,6 +159,13 @@ const JobInvocationHostTable = ({
   );
 
 
+  const updateHostsState = useCallback(data => {
+    const ids = data.data.results.map(i => i.id);
+    setApiResponse(data.data);
+    setAllHostsIds(ids);
+    setStatus(STATUS_UPPERCASE.RESOLVED);
+  }, []);
+
   const pollHostTable = useCallback(() => {
     dispatch(
       APIActions.get({
@@ -166,10 +173,7 @@ const JobInvocationHostTable = ({
         url: `/api/job_invocations/${id}/hosts`,
         params: { include_permissions: true, ...currentPollParams.current },
         handleSuccess: data => {
-          const ids = data.data.results.map(i => i.id);
-          setApiResponse(data.data);
-          setAllHostsIds(ids);
-          setStatus(STATUS_UPPERCASE.RESOLVED);
+          updateHostsState(data);
           if (!jobFinishedRef.current) {
             pollTimeoutId.current = setTimeout(pollHostTable, 5000);
           } else {
@@ -184,7 +188,7 @@ const JobInvocationHostTable = ({
           response?.data?.error?.full_messages?.[0] || response,
       })
     );
-  }, [dispatch, id]);
+  }, [dispatch, id, updateHostsState]);
 
   // Call hosts data with params
   const makeApiCall = useCallback(
@@ -195,10 +199,7 @@ const JobInvocationHostTable = ({
           url: `/api/job_invocations/${id}/hosts`,
           params: { include_permissions: true, ...requestParams },
           handleSuccess: data => {
-            const ids = data.data.results.map(i => i.id);
-            setApiResponse(data.data);
-            setAllHostsIds(ids);
-            setStatus(STATUS_UPPERCASE.RESOLVED);
+            updateHostsState(data);
             if (!jobFinishedRef.current) {
               pollTimeoutId.current = setTimeout(pollHostTable, 5000);
             }
@@ -209,7 +210,7 @@ const JobInvocationHostTable = ({
         })
       );
     },
-    [dispatch, id, pollHostTable]
+    [dispatch, id, pollHostTable, updateHostsState]
   );
 
   const filterApiCall = useCallback(

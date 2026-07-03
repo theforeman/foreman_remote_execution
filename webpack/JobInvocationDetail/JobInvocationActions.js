@@ -16,10 +16,6 @@ export const isJobFinished = statusLabel =>
   statusLabel === STATUS.SUCCEEDED ||
   statusLabel === STATUS.CANCELLED;
 
-const scheduleNextPoll = (dispatch, url) => {
-  pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 5000);
-};
-
 const fetchJobInvocation = (dispatch, url, params = {}) => {
   dispatch(
     get({
@@ -28,7 +24,7 @@ const fetchJobInvocation = (dispatch, url, params = {}) => {
       url,
       handleSuccess: ({ data }) => {
         if (!isJobFinished(data.status_label)) {
-          scheduleNextPoll(dispatch, url);
+          pollTimeoutId = setTimeout(() => fetchJobInvocation(dispatch, url), 5000);
         } else {
           pollTimeoutId = null;
         }
