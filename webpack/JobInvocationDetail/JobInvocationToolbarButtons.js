@@ -58,6 +58,12 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
     );
   }, [jobId, reportTemplateJobId, templateInputId]);
 
+  const isCreateReportDisabled =
+    !canGenerateReportTemplates ||
+    task?.state === STATUS.RUNNING ||
+    task?.state === STATUS.PENDING ||
+    reportHref === undefined;
+
   const onActionFocus = useCallback(() => {
     const element = document.getElementById(
       `toggle-split-button-action-primary-${jobId}`
@@ -280,11 +286,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
             className="button-create-report"
             href={reportHref}
             variant="secondary"
-            isDisabled={
-              !canGenerateReportTemplates ||
-              task?.state === STATUS.PENDING ||
-              reportHref === undefined
-            }
+            isDisabled={isCreateReportDisabled}
           >
             {__(`Create report`)}
           </Button>

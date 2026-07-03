@@ -38,6 +38,7 @@ export const STATUS = {
   SUCCEEDED: 'succeeded',
   FAILED: 'failed',
   CANCELLED: 'cancelled',
+  RUNNING: 'running',
 };
 
 export const STATUS_UPPERCASE = {

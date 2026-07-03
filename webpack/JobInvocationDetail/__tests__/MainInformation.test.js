@@ -234,6 +234,41 @@ describe('JobInvocationDetailPage', () => {
     expect(screen.getByText('Rerun all')).toBeInTheDocument();
   });
 
+  it('disables Create report when the job task state is running', async () => {
+    const jobId = jobInvocationData.id;
+    const store = mockStore({
+      ...initialState,
+      JOB_INVOCATION_KEY: {
+        response: {
+          ...jobInvocationData,
+          task: { ...jobInvocationData.task, state: 'running' },
+        },
+      },
+      CURRENT_PERMISSIONS: {
+        response: {
+          results: [{ name: 'generate_report_templates' }],
+        },
+        status: 'RESOLVED',
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <JobInvocationDetailPage
+          match={{ params: { id: `${jobId}` } }}
+          {...props}
+        />
+      </Provider>
+    );
+
+    const createReportButton = screen.getByRole('link', {
+      name: 'Create report',
+    });
+
+    expect(createReportButton).toHaveAttribute('aria-disabled', 'true');
+    expect(createReportButton).toHaveClass('pf-m-disabled');
+  });
+
   it('shows scheduled date', async () => {
     const store = mockStore(initialStateScheduled);
     render(
