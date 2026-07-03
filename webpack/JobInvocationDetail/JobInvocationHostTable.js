@@ -195,6 +195,13 @@ const JobInvocationHostTable = ({
           response?.data?.error?.full_messages?.[0] || response,
       })
     );
+    dispatch(
+      APIActions.get({
+        key: LIST_TEMPLATE_INVOCATIONS,
+        url: `/job_invocations/${id}/hosts`,
+        params: currentPollParams.current,
+      })
+    );
   }, [dispatch, id]);
 
   const handleResponse = useCallback((data, key) => {
@@ -252,6 +259,10 @@ const JobInvocationHostTable = ({
       }
 
       makeApiCall(finalParams, { key: JOB_INVOCATION_HOSTS });
+      makeApiCall(finalParams, {
+        url: `/job_invocations/${id}/hosts`,
+        key: LIST_TEMPLATE_INVOCATIONS,
+      });
 
       const urlSearchParams = new URLSearchParams(window.location.search);
 
@@ -262,6 +273,7 @@ const JobInvocationHostTable = ({
       history.push({ search: urlSearchParams.toString() });
     },
     [
+      id,
       initialFilter,
       urlSearchQuery,
       defaultParams,
