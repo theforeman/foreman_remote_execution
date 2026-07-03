@@ -40,6 +40,7 @@ import DropdownFilter from './DropdownFilter';
 import Columns, {
   JOB_INVOCATION_HOSTS,
   LIST_TEMPLATE_INVOCATIONS,
+  STATUS,
   STATUS_UPPERCASE,
   ALL_JOB_HOSTS,
   AWAITING_STATUS_FILTER,
@@ -71,6 +72,12 @@ const JobInvocationHostTable = ({
   const [expandedHost, setExpandedHost] = useState(new Set());
   const prevStatusLabel = useRef(statusLabel);
   const prevFilter = useRef(initialFilter);
+  const pollTimeoutId = useRef(null);
+  const currentPollParams = useRef({});
+  const statusLabelRef = useRef(statusLabel);
+  useEffect(() => {
+    statusLabelRef.current = statusLabel;
+  }, [statusLabel]);
 
   const [hostInvocationStates, setHostInvocationStates] = useState({});
 
@@ -154,6 +161,42 @@ const JobInvocationHostTable = ({
     [initialFilter, urlSearchQuery]
   );
 
+  const isJobFinished = () => {
+    const label = statusLabelRef.current;
+    return (
+      label === STATUS.FAILED ||
+      label === STATUS.SUCCEEDED ||
+      label === STATUS.CANCELLED
+    );
+  };
+
+  const pollHostTable = useCallback(() => {
+    dispatch(
+      APIActions.get({
+        key: JOB_INVOCATION_HOSTS,
+        url: `/api/job_invocations/${id}/hosts`,
+        params: currentPollParams.current,
+        handleSuccess: data => {
+          const ids = data.data.results.map(i => i.id);
+          setApiResponse(data.data);
+          setAllHostsIds(ids);
+          setStatus(STATUS_UPPERCASE.RESOLVED);
+          if (!isJobFinished()) {
+            pollTimeoutId.current = setTimeout(pollHostTable, 5000);
+          } else {
+            pollTimeoutId.current = null;
+          }
+        },
+        handleError: () => {
+          pollTimeoutId.current = null;
+          setStatus(STATUS_UPPERCASE.ERROR);
+        },
+        errorToast: ({ response }) =>
+          response?.data?.error?.full_messages?.[0] || response,
+      })
+    );
+  }, [dispatch, id]);
+
   const handleResponse = useCallback((data, key) => {
     if (key === JOB_INVOCATION_HOSTS) {
       const ids = data.data.results.map(i => i.id);
@@ -200,6 +243,12 @@ const JobInvocationHostTable = ({
         finalParams.awaiting = 'true';
       } else if (filterSearch !== '') {
         finalParams.search = filterSearch;
+      }
+
+      currentPollParams.current = finalParams;
+      if (pollTimeoutId.current !== null) {
+        clearTimeout(pollTimeoutId.current);
+        pollTimeoutId.current = null;
       }
 
       makeApiCall(finalParams, { key: JOB_INVOCATION_HOSTS });
@@ -261,6 +310,19 @@ const JobInvocationHostTable = ({
       filterApiCall();
     }
   }, [initialFilter, statusLabel, id, filterApiCall]);
+
+  useEffect(() => {
+    if (initialFilter !== '' && !isJobFinished()) {
+      pollTimeoutId.current = setTimeout(pollHostTable, 5000);
+    }
+    return () => {
+      if (pollTimeoutId.current !== null) {
+        clearTimeout(pollTimeoutId.current);
+        pollTimeoutId.current = null;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialFilter, pollHostTable]);
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
