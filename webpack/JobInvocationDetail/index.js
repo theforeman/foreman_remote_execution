@@ -27,6 +27,7 @@ import JobInvocationEmptyState from './JobInvocationEmptyState';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
 import {
   getJobInvocation,
+  isJobFinished,
   stopJobInvocationPolling,
 } from './JobInvocationActions';
 import './JobInvocationDetail.scss';
@@ -209,7 +210,7 @@ const JobInvocationDetailPage = ({
             id={id}
             targeting={targeting}
             initialFilter={selectedFilter}
-            statusLabel={statusLabel}
+            jobFinished={isJobFinished(statusLabel)}
             onFilterUpdate={handleFilterChange}
           />
         </SkeletonLoader>

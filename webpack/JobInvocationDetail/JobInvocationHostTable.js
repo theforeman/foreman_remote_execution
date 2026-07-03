@@ -39,7 +39,6 @@ import { CheckboxesActions } from './CheckboxesActions';
 import DropdownFilter from './DropdownFilter';
 import Columns, {
   JOB_INVOCATION_HOSTS,
-  STATUS,
   STATUS_UPPERCASE,
   AWAITING_STATUS_FILTER,
 } from './JobInvocationConstants';
@@ -50,8 +49,8 @@ import { PopupAlert } from './OpenAllInvocationsModal';
 const JobInvocationHostTable = ({
   id,
   initialFilter,
+  jobFinished,
   onFilterUpdate,
-  statusLabel,
   targeting,
 }) => {
   const columns = Columns();
@@ -68,14 +67,14 @@ const JobInvocationHostTable = ({
 
   // Expansive items
   const [expandedHost, setExpandedHost] = useState(new Set());
-  const prevStatusLabel = useRef(statusLabel);
+  const prevJobFinished = useRef(jobFinished);
   const prevFilter = useRef(initialFilter);
   const pollTimeoutId = useRef(null);
   const currentPollParams = useRef({});
-  const statusLabelRef = useRef(statusLabel);
+  const jobFinishedRef = useRef(jobFinished);
   useEffect(() => {
-    statusLabelRef.current = statusLabel;
-  }, [statusLabel]);
+    jobFinishedRef.current = jobFinished;
+  }, [jobFinished]);
 
   const [hostInvocationStates, setHostInvocationStates] = useState({});
 
@@ -159,14 +158,6 @@ const JobInvocationHostTable = ({
     [initialFilter, urlSearchQuery]
   );
 
-  const isJobFinished = () => {
-    const label = statusLabelRef.current;
-    return (
-      label === STATUS.FAILED ||
-      label === STATUS.SUCCEEDED ||
-      label === STATUS.CANCELLED
-    );
-  };
 
   const pollHostTable = useCallback(() => {
     dispatch(
@@ -179,7 +170,7 @@ const JobInvocationHostTable = ({
           setApiResponse(data.data);
           setAllHostsIds(ids);
           setStatus(STATUS_UPPERCASE.RESOLVED);
-          if (!isJobFinished()) {
+          if (!jobFinishedRef.current) {
             pollTimeoutId.current = setTimeout(pollHostTable, 5000);
           } else {
             pollTimeoutId.current = null;
@@ -208,7 +199,7 @@ const JobInvocationHostTable = ({
             setApiResponse(data.data);
             setAllHostsIds(ids);
             setStatus(STATUS_UPPERCASE.RESOLVED);
-            if (!isJobFinished()) {
+            if (!jobFinishedRef.current) {
               pollTimeoutId.current = setTimeout(pollHostTable, 5000);
             }
           },
@@ -289,14 +280,14 @@ const JobInvocationHostTable = ({
 
   useEffect(() => {
     const filterChanged = initialFilter !== prevFilter.current;
-    const statusChanged = statusLabel !== prevStatusLabel.current;
+    const statusChanged = jobFinished !== prevJobFinished.current;
 
     if ((filterChanged || statusChanged) && initialFilter !== '') {
       prevFilter.current = initialFilter;
-      prevStatusLabel.current = statusLabel;
+      prevJobFinished.current = jobFinished;
       filterApiCall();
     }
-  }, [initialFilter, statusLabel, id, filterApiCall]);
+  }, [initialFilter, jobFinished, id, filterApiCall]);
 
   useEffect(
     () => () => {
@@ -589,13 +580,13 @@ JobInvocationHostTable.propTypes = {
   id: PropTypes.string.isRequired,
   targeting: PropTypes.object.isRequired,
   initialFilter: PropTypes.string.isRequired,
-  statusLabel: PropTypes.string,
+  jobFinished: PropTypes.bool,
   onFilterUpdate: PropTypes.func,
 };
 
 JobInvocationHostTable.defaultProps = {
   onFilterUpdate: () => {},
-  statusLabel: undefined,
+  jobFinished: false,
 };
 
 export default JobInvocationHostTable;
