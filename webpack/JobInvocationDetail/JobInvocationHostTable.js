@@ -165,32 +165,6 @@ const JobInvocationHostTable = ({
     setStatus(STATUS_UPPERCASE.RESOLVED);
   }, []);
 
-  const pollHostTable = useCallback(() => {
-    dispatch(
-      APIActions.get({
-        key: JOB_INVOCATION_HOSTS,
-        url: `/api/job_invocations/${id}/hosts`,
-        params: { include_permissions: true, ...currentPollParams.current },
-        handleSuccess: data => {
-          updateHostsState(data);
-          if (!jobFinishedRef.current) {
-            pollTimeoutId.current = setTimeout(pollHostTable, 5000);
-          } else {
-            pollTimeoutId.current = null;
-          }
-        },
-        handleError: () => {
-          pollTimeoutId.current = null;
-          setStatus(STATUS_UPPERCASE.ERROR);
-        },
-        errorToast: ({ response }) =>
-          response?.data?.error?.full_messages?.[0] ||
-          response?.data?.error?.message ||
-          'Error',
-      })
-    );
-  }, [dispatch, id, updateHostsState]);
-
   // Call hosts data with params
   const makeApiCall = useCallback(
     requestParams => {
@@ -202,7 +176,10 @@ const JobInvocationHostTable = ({
           handleSuccess: data => {
             updateHostsState(data);
             if (!jobFinishedRef.current) {
-              pollTimeoutId.current = setTimeout(pollHostTable, 5000);
+              pollTimeoutId.current = setTimeout(
+                () => makeApiCall(currentPollParams.current),
+                5000
+              );
             } else {
               pollTimeoutId.current = null;
             }
@@ -218,7 +195,7 @@ const JobInvocationHostTable = ({
         })
       );
     },
-    [dispatch, id, pollHostTable, updateHostsState]
+    [dispatch, id, updateHostsState]
   );
 
   const filterApiCall = useCallback(
