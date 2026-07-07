@@ -11,10 +11,16 @@ import {
 
 let pollTimeoutId = null;
 
+const FINISHED_STATUSES = [STATUS.FAILED, STATUS.SUCCEEDED, STATUS.CANCELLED];
+
 export const isJobFinished = statusLabel =>
-  statusLabel === STATUS.FAILED ||
-  statusLabel === STATUS.SUCCEEDED ||
-  statusLabel === STATUS.CANCELLED;
+  FINISHED_STATUSES.includes(statusLabel);
+
+const extractErrorMessage = response =>
+  // eslint-disable-next-line camelcase
+  response?.data?.error?.full_messages?.[0] ||
+  response?.data?.error?.message ||
+  'Unknown error.';
 
 const fetchJobInvocation = (dispatch, url, params = {}) => {
   dispatch(
@@ -35,13 +41,7 @@ const fetchJobInvocation = (dispatch, url, params = {}) => {
       handleError: () => {
         pollTimeoutId = null;
       },
-      errorToast: ({ response }) =>
-        // eslint-disable-next-line camelcase
-        response?.data?.error?.full_messages?.[0] ||
-        // eslint-disable-next-line camelcase
-        response?.data?.error?.full_messages ||
-        response?.data?.error?.message ||
-        'Error',
+      errorToast: ({ response }) => extractErrorMessage(response),
     })
   );
 };
@@ -73,13 +73,7 @@ export const cancelJob = (jobId, force) => dispatch => {
     APIActions.post({
       url,
       key: CANCEL_JOB,
-      errorToast: ({ response }) =>
-        errorToast(
-          // eslint-disable-next-line camelcase
-          response?.data?.error?.full_messages ||
-            response?.data?.error?.message ||
-            'Unknown error.'
-        ),
+      errorToast: ({ response }) => errorToast(extractErrorMessage(response)),
       handleSuccess: () => {
         dispatch(
           addToast({
@@ -115,13 +109,7 @@ export const enableRecurringLogic = (recurrenceId, enabled) => dispatch => {
       key: CHANGE_ENABLED_RECURRING_LOGIC,
       params: { recurring_logic: { enabled: !enabled } },
       successToast,
-      errorToast: ({ response }) =>
-        errorToast(
-          // eslint-disable-next-line camelcase
-          response?.data?.error?.full_messages ||
-            response?.data?.error?.message ||
-            'Unknown error.'
-        ),
+      errorToast: ({ response }) => errorToast(extractErrorMessage(response)),
     })
   );
 };
@@ -140,13 +128,7 @@ export const cancelRecurringLogic = recurrenceId => dispatch => {
       url,
       key: CANCEL_RECURRING_LOGIC,
       successToast,
-      errorToast: ({ response }) =>
-        errorToast(
-          // eslint-disable-next-line camelcase
-          response?.data?.error?.full_messages ||
-            response?.data?.error?.message ||
-            'Unknown error.'
-        ),
+      errorToast: ({ response }) => errorToast(extractErrorMessage(response)),
     })
   );
 };

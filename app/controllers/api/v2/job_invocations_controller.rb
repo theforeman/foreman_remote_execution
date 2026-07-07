@@ -336,8 +336,7 @@ module Api
           [ti.host_id, task]
         end
         @permissions_by_host = hosts.to_h do |host|
-          template_invocation = template_invocations_by_host_id[host.id]
-          task = template_invocation.try(:run_host_job_task)
+          task = @task_by_host[host.id]
           [host.id, {
             :view_foreman_tasks => authorized_for(:permission => :view_foreman_tasks, :auth_object => task),
             :cancel_job_invocations => authorized_for(:permission => :cancel_job_invocations, :auth_object => @job_invocation),
