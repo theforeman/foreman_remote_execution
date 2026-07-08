@@ -127,7 +127,7 @@ handle_zypp_res_codes () {
     LANG=C apt-get -o APT::Get::Upgrade-Allow-New="true" -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y <%= input("options") %> <%= action %> <%= input("package") %> 2>&1
   }
   export DEBIAN_FRONTEND=noninteractive
-  apt-get -y update
+  apt-get update
   if [ "<%= action %>" = "remove" ]; then
     OUTFILE=$(mktemp)
     trap "rm -f $OUTFILE" EXIT
