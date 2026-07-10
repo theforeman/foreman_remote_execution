@@ -104,6 +104,9 @@ describe('JobInvocationHostTable polling', () => {
 
   beforeEach(() => {
     jest.useFakeTimers({ legacyFakeTimers: true });
+    jest
+      .requireMock('foremanReact/components/PF4/TableIndexPage/TableIndexPage')
+      .mockClear();
     apiGetSpy = jest
       .spyOn(api.APIActions, 'get')
       .mockImplementation(({ handleSuccess, ...action }) => {
@@ -217,6 +220,70 @@ describe('JobInvocationHostTable polling', () => {
     act(() => jest.advanceTimersByTime(5000));
 
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
+  });
+
+  describe('include_permissions behaviour', () => {
+    const hostWithPermissions = {
+      id: 1,
+      permissions: {
+        view_foreman_tasks: true,
+        cancel_job_invocations: true,
+        execute_jobs: true,
+      },
+    };
+
+    it('sends include_permissions on the first (non-poll) call', () => {
+      const store = makeStore();
+      renderAndTriggerFetch(store);
+
+      expect(apiGetSpy.mock.calls[0][0].params).toMatchObject({
+        include_permissions: true,
+      });
+    });
+
+    it('omits include_permissions on poll calls', () => {
+      const store = makeStore();
+      renderAndTriggerFetch(store);
+
+      act(() => jest.advanceTimersByTime(5000));
+
+      expect(apiGetSpy.mock.calls[1][0].params).not.toHaveProperty(
+        'include_permissions'
+      );
+    });
+
+    it('preserves permissions from the initial call in subsequent poll responses', () => {
+      apiGetSpy.mockImplementation(({ handleSuccess, params }) => {
+        handleSuccess &&
+          handleSuccess({
+            data: {
+              results: params.include_permissions ? [hostWithPermissions] : [{ id: 1 }],
+              total: 1,
+              subtotal: 1,
+            },
+          });
+        return { type: 'MOCK_GET' };
+      });
+
+      const store = makeStore();
+      renderAndTriggerFetch(store);
+
+      // Advance to the first poll — this call has no include_permissions,
+      // so the raw result has no permissions field.
+      act(() => jest.advanceTimersByTime(5000));
+
+      const MockTableIndexPage = jest.requireMock(
+        'foremanReact/components/PF4/TableIndexPage/TableIndexPage'
+      );
+      const replacementResponse =
+        MockTableIndexPage.mock.calls[
+          MockTableIndexPage.mock.calls.length - 1
+        ][0].replacementResponse;
+
+      expect(replacementResponse.response.results[0].permissions).toEqual(
+        hostWithPermissions.permissions
+      );
+    });
   });
 
   it('uses the current id in the api url after id prop changes', () => {

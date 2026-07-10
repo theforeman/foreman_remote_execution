@@ -72,6 +72,7 @@ const JobInvocationHostTable = ({
   const prevId = useRef(id);
   const pollTimeoutId = useRef(null);
   const currentPollParams = useRef({});
+  const cachedPermissions = useRef({});
   const jobFinishedRef = useRef(jobFinished);
   useEffect(() => {
     jobFinishedRef.current = jobFinished;
@@ -159,26 +160,42 @@ const JobInvocationHostTable = ({
     [initialFilter, urlSearchQuery]
   );
 
-  const updateHostsState = useCallback(data => {
-    const ids = data.data.results.map(i => i.id);
-    setApiResponse(data.data);
+  const updateHostsState = useCallback((data, isPoll) => {
+    const { results } = data.data;
+
+    if (!isPoll) {
+      cachedPermissions.current = Object.fromEntries(
+        results.map(result => [result.id, result.permissions])
+      );
+    }
+
+    const mergedResults = results.map(result => ({
+      ...result,
+      permissions: cachedPermissions.current[result.id],
+    }));
+
+    const ids = mergedResults.map(i => i.id);
+    setApiResponse({ ...data.data, results: mergedResults });
     setAllHostsIds(ids);
     setStatus(STATUS_UPPERCASE.RESOLVED);
   }, []);
 
   // Call hosts data with params
   const makeApiCall = useCallback(
-    requestParams => {
+    (requestParams, { isPoll = false } = {}) => {
       dispatch(
         APIActions.get({
           key: JOB_INVOCATION_HOSTS,
           url: `/api/job_invocations/${id}/hosts`,
-          params: { include_permissions: true, ...requestParams },
+          params: {
+            ...(!isPoll && { include_permissions: true }),
+            ...requestParams,
+          },
           handleSuccess: data => {
-            updateHostsState(data);
+            updateHostsState(data, isPoll);
             if (!jobFinishedRef.current) {
               pollTimeoutId.current = setTimeout(
-                () => makeApiCall(currentPollParams.current),
+                () => makeApiCall(currentPollParams.current, { isPoll: true }),
                 5000
               );
             } else {
@@ -487,7 +504,11 @@ const JobInvocationHostTable = ({
                     <Td key={k}>{columns[k].wrapper(result)}</Td>
                   ))}
                   <Td isActionCell>
-                    <RowActions hostID={result.id} jobID={id} />
+                    <RowActions
+                      hostID={result.id}
+                      jobID={id}
+                      permissions={result.permissions}
+                    />
                   </Td>
                 </Tr>
                 <Tr

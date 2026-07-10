@@ -81,11 +81,12 @@ const actions = ({
   },
 });
 
-export const RowActions = ({ hostID, jobID }) => {
+export const RowActions = ({ hostID, jobID, permissions: permissionsProp }) => {
   const dispatch = useDispatch();
   const response = useSelector(selectHostFromJobInvocationHosts(hostID));
-  if (!response?.permissions) return null;
-  const { task, permissions } = response;
+  const permissions = permissionsProp ?? response?.permissions;
+  if (!permissions) return null;
+  const { task } = response || {};
   const { id: taskID, cancellable: taskCancellable } = task || {};
   const getActions = actions({
     taskID,
@@ -216,4 +217,13 @@ TemplateActionButtons.defaultProps = {
 RowActions.propTypes = {
   hostID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   jobID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  permissions: PropTypes.shape({
+    view_foreman_tasks: PropTypes.bool,
+    cancel_job_invocations: PropTypes.bool,
+    execute_jobs: PropTypes.bool,
+  }),
+};
+
+RowActions.defaultProps = {
+  permissions: null,
 };
