@@ -211,6 +211,29 @@ describe('JobInvocationDetailPage', () => {
     ).toEqual(`/legacy/job_invocations/${jobId}`);
   });
 
+  it('keeps toolbar buttons mounted while job invocation data is refreshing', async () => {
+    const jobId = jobInvocationData.id;
+    const store = mockStore({
+      ...initialState,
+      JOB_INVOCATION_KEY: {
+        response: jobInvocationData,
+        status: STATUS.PENDING,
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <JobInvocationDetailPage
+          match={{ params: { id: `${jobId}` } }}
+          {...props}
+        />
+      </Provider>
+    );
+
+    expect(screen.getByText('Create report')).toBeInTheDocument();
+    expect(screen.getByText('Rerun all')).toBeInTheDocument();
+  });
+
   it('shows scheduled date', async () => {
     const store = mockStore(initialStateScheduled);
     render(

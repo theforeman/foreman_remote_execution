@@ -153,7 +153,7 @@ const JobInvocationDetailPage = ({
         header={description}
         breadcrumbOptions={breadcrumbOptions}
         toolbarButtons={
-          jobInvocationApiStatus === API_STATUS.RESOLVED && (
+          items.id !== undefined && (
             <JobInvocationToolbarButtons jobId={id} data={items} />
           )
         }
