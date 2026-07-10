@@ -63,8 +63,8 @@ export const cancelJob = (jobId, force) => dispatch => {
       : sprintf(__('Trying to cancel the job %s.'), jobId);
   const errorToast = response =>
     force
-      ? sprintf(__(`Could not abort the job %s: ${response}`), jobId)
-      : sprintf(__(`Could not cancel the job %s: ${response}`), jobId);
+      ? sprintf(__('Could not abort the job %s: %s'), jobId, response)
+      : sprintf(__('Could not cancel the job %s: %s'), jobId, response);
   const url = force
     ? `/job_invocations/${jobId}/cancel?force=true`
     : `/job_invocations/${jobId}/cancel`;
