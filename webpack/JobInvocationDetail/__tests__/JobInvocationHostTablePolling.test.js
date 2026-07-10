@@ -74,7 +74,11 @@ jest.mock('../JobInvocationConstants', () => ({
   default: jest.fn(() => ({})),
   JOB_INVOCATION_HOSTS: 'JOB_INVOCATION_HOSTS',
   AWAITING_STATUS_FILTER: '(job_invocation.result = N/A)',
-  STATUS_UPPERCASE: { RESOLVED: 'RESOLVED', ERROR: 'ERROR', PENDING: 'PENDING' },
+  STATUS_UPPERCASE: {
+    RESOLVED: 'RESOLVED',
+    ERROR: 'ERROR',
+    PENDING: 'PENDING',
+  },
   showTemplateInvocationUrl: jest.fn(() => ''),
   templateInvocationPageUrl: jest.fn(() => ''),
   GET_TEMPLATE_INVOCATION: 'GET_TEMPLATE_INVOCATION',
@@ -127,7 +131,10 @@ describe('JobInvocationHostTable polling', () => {
 
     rerender(
       <Provider store={store}>
-        <JobInvocationHostTable {...defaultProps} initialFilter="all_statuses" />
+        <JobInvocationHostTable
+          {...defaultProps}
+          initialFilter="all_statuses"
+        />
       </Provider>
     );
 
@@ -218,5 +225,26 @@ describe('JobInvocationHostTable polling', () => {
 
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
     expect(apiGetSpy.mock.calls[0][0].url).toContain('/42/');
+  });
+
+  it('re-fetches when id prop changes', () => {
+    const store = makeStore();
+    const { rerender } = renderAndTriggerFetch(store, { id: '42' });
+
+    expect(apiGetSpy).toHaveBeenCalledTimes(1);
+    expect(apiGetSpy.mock.calls[0][0].url).toContain('/42/');
+
+    rerender(
+      <Provider store={store}>
+        <JobInvocationHostTable
+          {...defaultProps}
+          id="99"
+          initialFilter="all_statuses"
+        />
+      </Provider>
+    );
+
+    expect(apiGetSpy).toHaveBeenCalledTimes(2);
+    expect(apiGetSpy.mock.calls[1][0].url).toContain('/99/');
   });
 });

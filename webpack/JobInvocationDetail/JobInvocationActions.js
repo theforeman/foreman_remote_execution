@@ -26,7 +26,7 @@ const fetchJobInvocation = (dispatch, url, params = {}) => {
   dispatch(
     get({
       key: JOB_INVOCATION_KEY,
-      params: { include_hosts: false, ...params },
+      params: { include_hosts: false, include_permissions: true, ...params },
       url,
       handleSuccess: ({ data }) => {
         if (!isJobFinished(data.status_label)) {
@@ -87,7 +87,11 @@ export const cancelJob = (jobId, force) => dispatch => {
   );
 };
 
-export const enableRecurringLogic = (recurrenceId, enabled) => dispatch => {
+export const enableRecurringLogic = (
+  recurrenceId,
+  enabled,
+  jobId
+) => dispatch => {
   const successToast = () =>
     enabled
       ? sprintf(__('Recurring logic %s disabled successfully.'), recurrenceId)
@@ -110,6 +114,9 @@ export const enableRecurringLogic = (recurrenceId, enabled) => dispatch => {
       params: { recurring_logic: { enabled: !enabled } },
       successToast,
       errorToast: ({ response }) => errorToast(extractErrorMessage(response)),
+      handleSuccess: () => {
+        fetchJobInvocation(dispatch, `/api/job_invocations/${jobId}`);
+      },
     })
   );
 };

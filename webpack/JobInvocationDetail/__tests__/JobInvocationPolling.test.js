@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
+import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as api from 'foremanReact/redux/API';
 import {
   getJobInvocation,
   stopJobInvocationPolling,
+  enableRecurringLogic,
 } from '../JobInvocationActions';
 import { JOB_INVOCATION_KEY } from '../JobInvocationConstants';
 
@@ -59,7 +61,7 @@ describe('job invocation polling', () => {
     expect(api.get).toHaveBeenCalledTimes(2);
   });
 
-  it('does not send include_permissions on subsequent poll requests', () => {
+  it('includes include_permissions=true in every poll call', () => {
     setupGetMock(runningData);
     const store = makeStore();
 
@@ -67,11 +69,9 @@ describe('job invocation polling', () => {
     jest.advanceTimersByTime(5000);
 
     expect(api.get).toHaveBeenCalledTimes(2);
-    expect(api.get.mock.calls[1][0].params).not.toHaveProperty(
-      'include_permissions'
-    );
     expect(api.get.mock.calls[1][0].params).toMatchObject({
       include_hosts: false,
+      include_permissions: true,
     });
   });
 
@@ -155,5 +155,30 @@ describe('job invocation polling', () => {
     jest.advanceTimersByTime(15000);
 
     expect(api.get).toHaveBeenCalledTimes(4);
+  });
+});
+
+describe('enableRecurringLogic', () => {
+  const mockStore = configureMockStore([thunk]);
+
+  it('re-fetches job invocation after successful disable/enable', () => {
+    jest
+      .spyOn(api.APIActions, 'put')
+      .mockImplementation(({ handleSuccess, ...action }) => {
+        handleSuccess && handleSuccess();
+        return { type: 'MOCK_PUT', ...action };
+      });
+    api.get.mockImplementation(({ ...action }) => ({ type: 'get', ...action }));
+
+    const store = mockStore({});
+    store.dispatch(enableRecurringLogic(1, true, 42));
+
+    const actions = store.getActions();
+    const getAction = actions.find(a => a.key === JOB_INVOCATION_KEY);
+    expect(getAction).toBeDefined();
+    expect(getAction.url).toBe('/api/job_invocations/42');
+
+    api.APIActions.put.mockRestore();
+    api.get.mockReset();
   });
 });
