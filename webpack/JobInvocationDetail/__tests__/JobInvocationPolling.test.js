@@ -1,4 +1,4 @@
-import configureMockStore from 'redux-mock-store';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import * as api from 'foremanReact/redux/API';
 import {
@@ -10,7 +10,8 @@ import { JOB_INVOCATION_KEY } from '../JobInvocationConstants';
 jest.spyOn(api, 'get');
 jest.useFakeTimers();
 
-const mockStore = configureMockStore([thunk]);
+const reducer = (state = {}) => state;
+const makeStore = () => createStore(reducer, applyMiddleware(thunk));
 
 const runningData = { status_label: 'running' };
 const succeededData = { status_label: 'succeeded' };
@@ -35,7 +36,7 @@ describe('job invocation polling', () => {
 
   it('sends include_permissions and include_hosts on the initial fetch', () => {
     setupGetMock(succeededData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
 
@@ -49,7 +50,7 @@ describe('job invocation polling', () => {
 
   it('schedules the next poll when job is still running', () => {
     setupGetMock(runningData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -60,7 +61,7 @@ describe('job invocation polling', () => {
 
   it('does not send include_permissions on subsequent poll requests', () => {
     setupGetMock(runningData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     jest.advanceTimersByTime(5000);
@@ -76,7 +77,7 @@ describe('job invocation polling', () => {
 
   it('stops polling when job succeeds', () => {
     setupGetMock(succeededData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -87,7 +88,7 @@ describe('job invocation polling', () => {
 
   it('stops polling when job fails', () => {
     setupGetMock(failedData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     jest.advanceTimersByTime(5000);
@@ -97,7 +98,7 @@ describe('job invocation polling', () => {
 
   it('stops polling when job is cancelled', () => {
     setupGetMock(cancelledData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     jest.advanceTimersByTime(5000);
@@ -110,7 +111,7 @@ describe('job invocation polling', () => {
       handleError && handleError();
       return { type: 'get', ...action };
     });
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     jest.advanceTimersByTime(5000);
@@ -120,7 +121,7 @@ describe('job invocation polling', () => {
 
   it('stopJobInvocationPolling cancels a pending timeout', () => {
     setupGetMock(runningData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -133,7 +134,7 @@ describe('job invocation polling', () => {
 
   it('getJobInvocation cancels any existing poll before starting a new one', () => {
     setupGetMock(runningData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -148,7 +149,7 @@ describe('job invocation polling', () => {
 
   it('keeps polling as long as the job is running', () => {
     setupGetMock(runningData);
-    const store = mockStore({});
+    const store = makeStore();
 
     store.dispatch(getJobInvocation(url));
     jest.advanceTimersByTime(15000);
