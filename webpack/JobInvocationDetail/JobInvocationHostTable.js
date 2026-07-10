@@ -69,6 +69,7 @@ const JobInvocationHostTable = ({
   const [expandedHost, setExpandedHost] = useState(new Set());
   const prevJobFinished = useRef(jobFinished);
   const prevFilter = useRef(initialFilter);
+  const prevId = useRef(id);
   const pollTimeoutId = useRef(null);
   const currentPollParams = useRef({});
   const jobFinishedRef = useRef(jobFinished);
@@ -257,10 +258,12 @@ const JobInvocationHostTable = ({
   useEffect(() => {
     const filterChanged = initialFilter !== prevFilter.current;
     const statusChanged = jobFinished !== prevJobFinished.current;
+    const idChanged = id !== prevId.current;
 
-    if ((filterChanged || statusChanged) && initialFilter !== '') {
+    if ((filterChanged || statusChanged || idChanged) && initialFilter !== '') {
       prevFilter.current = initialFilter;
       prevJobFinished.current = jobFinished;
+      prevId.current = id;
       filterApiCall();
     }
   }, [initialFilter, jobFinished, id, filterApiCall]);

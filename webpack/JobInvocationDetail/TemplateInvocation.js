@@ -75,6 +75,8 @@ export const TemplateInvocation = ({
   const dispatch = useDispatch();
 
   const timeoutRef = useRef(null);
+  const responseRef = useRef(response);
+  responseRef.current = response;
 
   useEffect(() => {
     let cancelled = false;
@@ -106,7 +108,9 @@ export const TemplateInvocation = ({
     }
 
     if (isExpanded) {
-      dispatchFetch();
+      if (responseRef.current?.finished !== true) {
+        dispatchFetch();
+      }
     }
 
     return () => {
