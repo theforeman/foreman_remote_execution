@@ -341,7 +341,7 @@ module Api
         @permissions_by_host = hosts.to_h do |host|
           task = @task_by_host[host.id]
           [host.id, {
-            :view_foreman_tasks => authorized_for(:permission => :view_foreman_tasks, :auth_object => task),
+            :view_foreman_tasks => task && authorized_for(:permission => :view_foreman_tasks, :auth_object => task),
             :cancel_job_invocations => can_cancel_job_invocations,
             :execute_jobs => can_create_job_invocations && (!host.infrastructure_host? || can_execute_on_infra_hosts),
           }]

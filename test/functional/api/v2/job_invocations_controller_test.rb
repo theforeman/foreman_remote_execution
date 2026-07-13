@@ -67,6 +67,14 @@ module Api
           assert_nil result['template_invocations']
         end
 
+        test 'should include cancellable field in task node' do
+          get :show, params: { :id => @invocation.id }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert result.key?('task'), 'task node should be present in show response'
+          assert result['task'].key?('cancellable'), 'cancellable field should be present in task node'
+        end
+
         test 'should include job_status per host when host_status=true' do
           invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
           invocation.template_invocations << FactoryBot.create(:template_invocation, :with_task, :with_host, :job_invocation => invocation)
@@ -284,19 +292,67 @@ module Api
       end
 
       describe '#hosts' do
-        test 'should compute job_status for the paginated subset' do
-          invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
-          2.times { invocation.template_invocations << FactoryBot.create(:template_invocation, :with_task, :with_host, :job_invocation => invocation) }
-          invocation.job_category = invocation.pattern_template_invocations.first.template.job_category
-          invocation.targeting.hosts = invocation.template_invocations.map(&:host)
-          invocation.save!
+        setup do
+          @hosts_invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
+          2.times { @hosts_invocation.template_invocations << FactoryBot.create(:template_invocation, :with_task, :with_host, :job_invocation => @hosts_invocation) }
+          @hosts_invocation.job_category = @hosts_invocation.pattern_template_invocations.first.template.job_category
+          @hosts_invocation.targeting.hosts = @hosts_invocation.template_invocations.map(&:host)
+          @hosts_invocation.save!
+        end
 
-          get :hosts, params: { :id => invocation.id, :page => 2, :per_page => 1 }
+        test 'should compute job_status for the paginated subset' do
+          get :hosts, params: { :id => @hosts_invocation.id, :page => 2, :per_page => 1 }
           assert_response :success
           result = ActiveSupport::JSON.decode(@response.body)
           assert_equal 3, result['total']
           assert_equal 1, result['results'].size
           assert_equal(['success'], result['results'].map { |r| r['job_status'] })
+        end
+
+        test 'should not include task or permissions nodes without include_permissions' do
+          get :hosts, params: { :id => @hosts_invocation.id }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_not_empty result['results']
+          result['results'].each do |host|
+            assert_not host.key?('task'), 'task node should be absent when include_permissions is not set'
+            assert_not host.key?('permissions'), 'permissions node should be absent when include_permissions is not set'
+          end
+        end
+
+        test 'should include task and permissions nodes when include_permissions=true' do
+          get :hosts, params: { :id => @hosts_invocation.id, :include_permissions => true }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_not_empty result['results']
+          result['results'].each do |host|
+            assert host.key?('task'), 'task node should be present when include_permissions=true'
+            assert host.key?('permissions'), 'permissions node should be present when include_permissions=true'
+            assert host['task'].key?('id')
+            assert host['task'].key?('cancellable')
+            assert host['permissions'].key?('view_foreman_tasks')
+            assert host['permissions'].key?('cancel_job_invocations')
+            assert host['permissions'].key?('execute_jobs')
+          end
+        end
+
+        test 'should handle nil run_host_job_task with include_permissions=true' do
+          # Create a host without a run_host_job_task (template invocation without :with_task)
+          invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
+          ti = FactoryBot.create(:template_invocation, :with_host, :job_invocation => invocation)
+          invocation.job_category = invocation.pattern_template_invocations.first.template.job_category
+          invocation.targeting.hosts = [ti.host]
+          invocation.save!
+
+          get :hosts, params: { :id => invocation.id, :include_permissions => true }
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_not_empty result['results']
+          host_result = result['results'].first
+          assert host_result.key?('task'), 'task node should be present'
+          assert_nil host_result['task'], 'task should be nil when run_host_job_task is absent'
+          assert host_result.key?('permissions'), 'permissions node should be present'
+          refute host_result['permissions']['view_foreman_tasks']
         end
       end
 
