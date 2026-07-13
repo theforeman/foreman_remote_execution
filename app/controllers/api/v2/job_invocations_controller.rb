@@ -335,12 +335,15 @@ module Api
           task = ti.run_host_job_task
           [ti.host_id, task]
         end
+        can_cancel_job_invocations = authorized_for(:permission => :cancel_job_invocations, :auth_object => @job_invocation)
+        can_create_job_invocations = authorized_for(controller: :job_invocations, action: :create)
+        can_execute_on_infra_hosts = User.current.can?(:execute_jobs_on_infrastructure_hosts)
         @permissions_by_host = hosts.to_h do |host|
           task = @task_by_host[host.id]
           [host.id, {
             :view_foreman_tasks => authorized_for(:permission => :view_foreman_tasks, :auth_object => task),
-            :cancel_job_invocations => authorized_for(:permission => :cancel_job_invocations, :auth_object => @job_invocation),
-            :execute_jobs => authorized_for(controller: :job_invocations, action: :create) && (!host.infrastructure_host? || User.current.can?(:execute_jobs_on_infrastructure_hosts)),
+            :cancel_job_invocations => can_cancel_job_invocations,
+            :execute_jobs => can_create_job_invocations && (!host.infrastructure_host? || can_execute_on_infra_hosts),
           }]
         end
       end
