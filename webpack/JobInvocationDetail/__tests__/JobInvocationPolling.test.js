@@ -14,6 +14,7 @@ jest.useFakeTimers();
 
 const reducer = (state = {}) => state;
 const makeStore = () => createStore(reducer, applyMiddleware(thunk));
+const makeRef = () => ({ current: null });
 
 const runningData = { status_label: 'running' };
 const succeededData = { status_label: 'succeeded' };
@@ -30,9 +31,11 @@ const setupGetMock = responseData => {
 const url = '/api/job_invocations/1';
 
 describe('job invocation polling', () => {
+  let ref;
+
   beforeEach(() => {
+    ref = makeRef();
     api.get.mockReset();
-    stopJobInvocationPolling();
     jest.clearAllTimers();
   });
 
@@ -40,7 +43,7 @@ describe('job invocation polling', () => {
     setupGetMock(succeededData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
 
     expect(api.get).toHaveBeenCalledTimes(1);
     expect(api.get.mock.calls[0][0]).toMatchObject({
@@ -54,7 +57,7 @@ describe('job invocation polling', () => {
     setupGetMock(runningData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     expect(api.get).toHaveBeenCalledTimes(1);
 
     jest.advanceTimersByTime(5000);
@@ -65,7 +68,7 @@ describe('job invocation polling', () => {
     setupGetMock(runningData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     jest.advanceTimersByTime(5000);
 
     expect(api.get).toHaveBeenCalledTimes(2);
@@ -79,7 +82,7 @@ describe('job invocation polling', () => {
     setupGetMock(succeededData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     expect(api.get).toHaveBeenCalledTimes(1);
 
     jest.advanceTimersByTime(5000);
@@ -90,7 +93,7 @@ describe('job invocation polling', () => {
     setupGetMock(failedData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     jest.advanceTimersByTime(5000);
 
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -100,7 +103,7 @@ describe('job invocation polling', () => {
     setupGetMock(cancelledData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     jest.advanceTimersByTime(5000);
 
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -113,7 +116,7 @@ describe('job invocation polling', () => {
     });
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     jest.advanceTimersByTime(5000);
 
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -123,10 +126,10 @@ describe('job invocation polling', () => {
     setupGetMock(runningData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     expect(api.get).toHaveBeenCalledTimes(1);
 
-    stopJobInvocationPolling();
+    stopJobInvocationPolling(ref);
     jest.advanceTimersByTime(5000);
 
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -136,11 +139,11 @@ describe('job invocation polling', () => {
     setupGetMock(runningData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     expect(api.get).toHaveBeenCalledTimes(1);
 
     // Second call before the timeout fires should cancel the pending poll
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     jest.advanceTimersByTime(5000);
 
     // Only one more poll should fire (from the second invocation), not two
@@ -151,7 +154,7 @@ describe('job invocation polling', () => {
     setupGetMock(runningData);
     const store = makeStore();
 
-    store.dispatch(getJobInvocation(url));
+    store.dispatch(getJobInvocation(url, ref));
     jest.advanceTimersByTime(15000);
 
     expect(api.get).toHaveBeenCalledTimes(4);

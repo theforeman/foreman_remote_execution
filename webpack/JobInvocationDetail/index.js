@@ -5,7 +5,7 @@ import {
   PageSectionVariants,
   Skeleton,
 } from '@patternfly/react-core';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { useDispatch, useSelector } from 'react-redux';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
@@ -47,6 +47,7 @@ const JobInvocationDetailPage = ({
   history,
 }) => {
   const dispatch = useDispatch();
+  const pollTimeoutRef = useRef(null);
   const items = useSelector(selectItems);
   const {
     description,
@@ -85,9 +86,9 @@ const JobInvocationDetailPage = ({
   }
 
   useEffect(() => {
-    dispatch(getJobInvocation(`/api/job_invocations/${id}`));
+    dispatch(getJobInvocation(`/api/job_invocations/${id}`, pollTimeoutRef));
     return () => {
-      stopJobInvocationPolling();
+      stopJobInvocationPolling(pollTimeoutRef);
     };
   }, [dispatch, id]);
 

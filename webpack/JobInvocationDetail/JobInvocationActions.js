@@ -9,8 +9,6 @@ import {
   STATUS,
 } from './JobInvocationConstants';
 
-let pollTimeoutId = null;
-
 const FINISHED_STATUSES = [STATUS.FAILED, STATUS.SUCCEEDED, STATUS.CANCELLED];
 
 export const isJobFinished = statusLabel =>
@@ -22,7 +20,7 @@ const extractErrorMessage = response =>
   response?.data?.error?.message ||
   'Unknown error.';
 
-const fetchJobInvocation = (dispatch, url, params = {}) => {
+const fetchJobInvocation = (dispatch, url, params = {}, pollTimeoutRef = { current: null }) => {
   dispatch(
     get({
       key: JOB_INVOCATION_KEY,
@@ -30,30 +28,30 @@ const fetchJobInvocation = (dispatch, url, params = {}) => {
       url,
       handleSuccess: ({ data }) => {
         if (!isJobFinished(data.status_label)) {
-          pollTimeoutId = setTimeout(
-            () => fetchJobInvocation(dispatch, url),
+          pollTimeoutRef.current = setTimeout(
+            () => fetchJobInvocation(dispatch, url, {}, pollTimeoutRef),
             5000
           );
         } else {
-          pollTimeoutId = null;
+          pollTimeoutRef.current = null;
         }
       },
       handleError: () => {
-        pollTimeoutId = null;
+        pollTimeoutRef.current = null;
       },
       errorToast: ({ response }) => extractErrorMessage(response),
     })
   );
 };
 
-export const getJobInvocation = url => dispatch => {
-  stopJobInvocationPolling();
-  fetchJobInvocation(dispatch, url, { include_permissions: true });
+export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
+  stopJobInvocationPolling(pollTimeoutRef);
+  fetchJobInvocation(dispatch, url, { include_permissions: true }, pollTimeoutRef);
 };
 
-export const stopJobInvocationPolling = () => {
-  clearTimeout(pollTimeoutId);
-  pollTimeoutId = null;
+export const stopJobInvocationPolling = pollTimeoutRef => {
+  clearTimeout(pollTimeoutRef.current);
+  pollTimeoutRef.current = null;
 };
 
 export const cancelJob = (jobId, force) => dispatch => {
