@@ -195,11 +195,6 @@ describe('TemplateInvocation', () => {
     const responseWithCancellableTask = {
       ...mockTemplateInvocationResponse,
       task: { id: 'task-123', cancellable: true },
-      permissions: {
-        view_foreman_tasks: true,
-        cancel_job_invocations: true,
-        execute_jobs: true,
-      },
     };
 
     beforeEach(() => {

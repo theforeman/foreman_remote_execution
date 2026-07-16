@@ -132,12 +132,6 @@ export const jobInvocationDataRecurring = {
   targeting,
 };
 
-export const mockPermissionsData = {
-  edit_job_templates: true,
-  view_foreman_tasks: true,
-  edit_recurring_logics: true,
-};
-
 export const mockReportTemplatesResponse = {
   results: [{ id: '12', name: 'Job - Invocation Report' }],
 };

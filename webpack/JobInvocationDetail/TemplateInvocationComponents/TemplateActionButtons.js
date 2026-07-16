@@ -6,6 +6,7 @@ import { ActionsColumn } from '@patternfly/react-table';
 import { APIActions } from 'foremanReact/redux/API';
 import { addToast } from 'foremanReact/components/ToastsList';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import { selectTemplateInvocationList } from '../JobInvocationSelectors';
 import './index.scss';
 
@@ -14,7 +15,9 @@ const actions = ({
   jobID,
   hostID,
   taskCancellable,
-  permissions,
+  canExecuteJobs,
+  canViewForemanTasks,
+  canCancelJobInvocations,
   dispatch,
 }) => ({
   rerun: {
@@ -22,19 +25,19 @@ const actions = ({
     href: `/job_invocations/${jobID}/rerun?host_ids[]=${hostID}`,
     component: 'a',
     text: __('Rerun'),
-    permission: permissions.execute_jobs,
+    permission: canExecuteJobs,
   },
   details: {
     name: 'template-invocation-task-details',
     href: `/foreman_tasks/tasks/${taskID}`,
     component: 'a',
     text: __('Task Details'),
-    permission: permissions.view_foreman_tasks,
+    permission: canViewForemanTasks,
   },
   cancel: {
     name: 'template-invocation-cancel-job',
     text: __('Cancel Task'),
-    permission: permissions.cancel_job_invocations,
+    permission: canCancelJobInvocations,
     onClick: () => {
       dispatch(
         addToast({
@@ -58,7 +61,7 @@ const actions = ({
   abort: {
     name: 'template-invocation-abort-job',
     text: __('Abort task'),
-    permission: permissions.cancel_job_invocations,
+    permission: canCancelJobInvocations,
     onClick: () => {
       dispatch(
         addToast({
@@ -83,16 +86,21 @@ const actions = ({
 
 export const RowActions = ({ hostID, jobID }) => {
   const dispatch = useDispatch();
+  const canExecuteJobs = usePermissions(['execute_jobs']);
+  const canViewForemanTasks = usePermissions(['view_foreman_tasks']);
+  const canCancelJobInvocations = usePermissions(['cancel_job_invocations']);
   const response = useSelector(selectTemplateInvocationList)?.[hostID];
-  if (!response?.permissions) return null;
-  const { task, permissions } = response;
+  if (!response) return null;
+  const { task } = response;
   const { id: taskID, cancellable: taskCancellable } = task || {};
   const getActions = actions({
     taskID,
     jobID,
     hostID,
     taskCancellable,
-    permissions,
+    canExecuteJobs,
+    canViewForemanTasks,
+    canCancelJobInvocations,
     dispatch,
   });
 
@@ -117,15 +125,19 @@ export const TemplateActionButtons = ({
   jobID,
   hostID,
   taskCancellable,
-  permissions,
 }) => {
   const dispatch = useDispatch();
+  const canExecuteJobs = usePermissions(['execute_jobs']);
+  const canViewForemanTasks = usePermissions(['view_foreman_tasks']);
+  const canCancelJobInvocations = usePermissions(['cancel_job_invocations']);
   const { rerun, details, cancel, abort } = actions({
     taskID,
     jobID,
     hostID,
     taskCancellable,
-    permissions,
+    canExecuteJobs,
+    canViewForemanTasks,
+    canCancelJobInvocations,
     dispatch,
   });
   return (
@@ -196,21 +208,11 @@ TemplateActionButtons.propTypes = {
   jobID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   hostID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   taskCancellable: PropTypes.bool,
-  permissions: PropTypes.shape({
-    view_foreman_tasks: PropTypes.bool,
-    cancel_job_invocations: PropTypes.bool,
-    execute_jobs: PropTypes.bool,
-  }),
 };
 
 TemplateActionButtons.defaultProps = {
   taskID: null,
   taskCancellable: false,
-  permissions: {
-    view_foreman_tasks: false,
-    cancel_job_invocations: false,
-    execute_jobs: false,
-  },
 };
 
 RowActions.propTypes = {

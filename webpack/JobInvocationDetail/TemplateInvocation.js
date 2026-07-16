@@ -144,13 +144,7 @@ export const TemplateInvocation = ({
     );
   }
 
-  const {
-    preview,
-    output,
-    input_values: inputValues,
-    task,
-    permissions,
-  } = response;
+  const { preview, output, input_values: inputValues, task } = response;
   const { id: taskID, cancellable: taskCancellable } = task || {};
 
   return (
@@ -183,7 +177,6 @@ export const TemplateInvocation = ({
         jobID={jobID}
         hostID={hostID}
         taskCancellable={taskCancellable}
-        permissions={permissions}
       />
       {!isInTableView && (
         <>

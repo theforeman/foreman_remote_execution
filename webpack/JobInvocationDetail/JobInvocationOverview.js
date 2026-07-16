@@ -8,6 +8,7 @@ import {
   DescriptionListDescription,
 } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import DefaultLoaderEmptyState from 'foremanReact/components/HostDetails/DetailsCard/DefaultLoaderEmptyState';
 
 const JobInvocationOverview = ({
@@ -20,11 +21,8 @@ const JobInvocationOverview = ({
     template_id: templateId,
     template_name: templateName,
     effective_user: effectiveUser,
-    permissions,
   } = data;
-  const canEditJobTemplates = permissions
-    ? permissions.edit_job_templates
-    : false;
+  const canEditJobTemplates = usePermissions(['edit_job_templates']);
 
   return (
     <DescriptionList

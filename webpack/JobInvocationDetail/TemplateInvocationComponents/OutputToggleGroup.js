@@ -25,7 +25,6 @@ export const OutputToggleGroup = ({
   jobID,
   hostID,
   taskCancellable,
-  permissions,
 }) => {
   const handleSTDERRClick = useCallback(
     _isSelected => {
@@ -127,7 +126,6 @@ export const OutputToggleGroup = ({
           jobID={jobID}
           hostID={hostID}
           taskCancellable={taskCancellable}
-          permissions={permissions}
         />
       )}
       <FlexItem>{copyToClipboard}</FlexItem>
