@@ -28,15 +28,11 @@ import {
 import { selectTaskCancelable } from './JobInvocationSelectors';
 
 const JobInvocationToolbarButtons = ({ jobId, data }) => {
-  const { succeeded, failed, task, recurrence, permissions } = data;
+  const { succeeded, failed, task, recurrence } = data;
   const recurringEnabled = recurrence?.state === 'active';
-  const canViewForemanTasks = permissions
-    ? permissions.view_foreman_tasks
-    : false;
-  const canEditRecurringLogic = permissions
-    ? permissions.edit_recurring_logics
-    : false;
   const isTaskCancelable = useSelector(selectTaskCancelable);
+  const canViewForemanTasks = usePermissions(['view_foreman_tasks']);
+  const canEditRecurringLogic = usePermissions(['edit_recurring_logics']);
   const canCreateJobInvocations = usePermissions(['create_job_invocations']);
   const canCancelJobInvocations = usePermissions(['cancel_job_invocations']);
   const canGenerateReportTemplates = usePermissions([
