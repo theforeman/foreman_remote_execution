@@ -23,6 +23,7 @@ import {
 import {
   STATUS,
   GET_REPORT_TEMPLATES,
+  GET_REPORT_TEMPLATE_SETTING,
   GET_REPORT_TEMPLATE_INPUTS,
 } from './JobInvocationConstants';
 import { selectTaskCancelable } from './JobInvocationSelectors';
@@ -80,22 +81,37 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
 
   useEffect(() => {
     let isMounted = true;
+    const fetchReportTemplate = templateName => {
+      dispatch(
+        get({
+          key: GET_REPORT_TEMPLATES,
+          url: '/api/report_templates',
+          params: {
+            search: `name="${templateName}"`,
+            per_page: 1,
+          },
+          handleSuccess: ({ data: { results } }) => {
+            if (isMounted) {
+              setReportTemplateJobId(results[0]?.id);
+            }
+          },
+          handleError: () => {
+            if (isMounted) {
+              setReportTemplateJobId(undefined);
+            }
+          },
+        })
+      );
+    };
     dispatch(
       get({
-        key: GET_REPORT_TEMPLATES,
-        url: '/api/report_templates',
-        handleSuccess: ({ data: { results } }) => {
-          if (isMounted) {
-            setReportTemplateJobId(
-              results.find(result => result.name === 'Job - Invocation Report')
-                ?.id
-            );
-          }
+        key: GET_REPORT_TEMPLATE_SETTING,
+        url: '/api/settings/remote_execution_job_invocation_report_template',
+        handleSuccess: ({ data: { value } }) => {
+          fetchReportTemplate(value);
         },
         handleError: () => {
-          if (isMounted) {
-            setReportTemplateJobId(undefined);
-          }
+          fetchReportTemplate('Job - Invocation Report');
         },
       })
     );
