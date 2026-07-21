@@ -42,6 +42,7 @@ export const jobInvocationData = {
     id: '37ad5ead-51de-4798-bc73-a17687c4d5aa',
     state: 'stopped',
     started_at: '2024-01-01 12:34:56 +0100',
+    cancellable: true,
   },
   template_invocations: [
     {
@@ -113,6 +114,7 @@ export const jobInvocationDataRecurring = {
   task: {
     id: '37ad5ead-51de-4798-bc73-a17687c4d5aa',
     state: 'scheduled',
+    cancellable: true,
   },
   mode: 'recurring',
   recurrence: {

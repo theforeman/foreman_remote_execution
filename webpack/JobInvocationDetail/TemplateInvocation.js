@@ -12,6 +12,8 @@ import {
   templateInvocationPageUrl,
   GET_TEMPLATE_INVOCATION,
 } from './JobInvocationConstants';
+
+const AUTO_REFRESH_INTERVAL_MS = 5000;
 import {
   selectTemplateInvocationStatus,
   selectTemplateInvocation,
@@ -67,7 +69,7 @@ export const TemplateInvocation = ({
   showCommand,
   setShowCommand,
 }) => {
-  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
   const templateURL = showTemplateInvocationUrl(hostID, jobID);
   const hostDetailsPageUrl = useForemanHostDetailsPageUrl();
 
@@ -81,43 +83,46 @@ export const TemplateInvocation = ({
   }, [response]);
 
   useEffect(() => {
-    const dispatchFetch = () => {
+    let cancelled = false;
+
+    const schedulePoll = () => {
       dispatch(
         APIActions.get({
           url: templateURL,
           key: `${GET_TEMPLATE_INVOCATION}_${hostID}`,
+          handleSuccess: ({ data }) => {
+            if (cancelled) return;
+            const isFinished = data?.finished ?? true;
+            // eslint-disable-next-line camelcase
+            const autoRefresh = data?.auto_refresh || false;
+            if (!isFinished && autoRefresh) {
+              timeoutRef.current = setTimeout(
+                schedulePoll,
+                AUTO_REFRESH_INTERVAL_MS
+              );
+            } else {
+              timeoutRef.current = null;
+            }
+          },
+          handleError: () => {
+            timeoutRef.current = null;
+          },
         })
       );
     };
 
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = null;
 
     if (isExpanded) {
-      if (isEmpty(responseRef.current)) {
-        dispatchFetch();
-      }
-
-      intervalRef.current = setInterval(() => {
-        const latestResponse = responseRef.current;
-        const finished = latestResponse?.finished ?? true;
-        // eslint-disable-next-line camelcase
-        const autoRefresh = latestResponse?.auto_refresh || false;
-
-        if (!finished && autoRefresh) {
-          dispatchFetch();
-        } else if (intervalRef.current) {
-          clearInterval(intervalRef.current);
-        }
-      }, 5000);
+      if (responseRef.current?.finished) return undefined;
+      schedulePoll();
     }
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      cancelled = true;
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     };
   }, [isExpanded, dispatch, templateURL, hostID]);
 

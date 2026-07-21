@@ -141,9 +141,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
             <DropdownItem
               ouiaId="change-enabled-recurring-dropdown-item"
               onClick={() =>
-                dispatch(
-                  enableRecurringLogic(recurrence?.id, recurringEnabled, jobId)
-                )
+                dispatch(enableRecurringLogic(recurrence?.id, recurringEnabled))
               }
               key="change-enabled-recurring"
               component="button"
@@ -159,9 +157,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
             </DropdownItem>,
             <DropdownItem
               ouiaId="cancel-recurring-dropdown-item"
-              onClick={() =>
-                dispatch(cancelRecurringLogic(recurrence?.id, jobId))
-              }
+              onClick={() => dispatch(cancelRecurringLogic(recurrence?.id))}
               key="cancel-recurring"
               component="button"
               isDisabled={
@@ -174,7 +170,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
             </DropdownItem>,
           ]
         : [],
-    [recurrence, recurringEnabled, canEditRecurringLogic, dispatch, jobId]
+    [recurrence, recurringEnabled, canEditRecurringLogic, dispatch]
   );
 
   const dropdownItems = useMemo(
