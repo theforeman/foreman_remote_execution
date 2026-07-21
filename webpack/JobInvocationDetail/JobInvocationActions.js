@@ -26,13 +26,20 @@ const createPollState = cancel => ({ timeoutId: null, cancel });
 
 export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
   let cancelled = false;
+  let isFirstCall = true;
 
   const poll = () => {
     if (cancelled) return;
+    const params = { include_hosts: false };
+    if (isFirstCall) {
+      params.include_permissions = true;
+      isFirstCall = false;
+    }
+
     dispatch(
       APIActions.get({
         key: JOB_INVOCATION_KEY,
-        params: { include_permissions: true, include_hosts: false },
+        params,
         url,
         handleSuccess: ({ data }) => {
           if (cancelled) return;

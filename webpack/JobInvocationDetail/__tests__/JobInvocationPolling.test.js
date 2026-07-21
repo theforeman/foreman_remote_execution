@@ -70,7 +70,7 @@ describe('job invocation polling', () => {
     expect(apiGetSpy).toHaveBeenCalledTimes(2);
   });
 
-  it('includes include_permissions=true in every poll call', () => {
+  it('does not include include_permissions on subsequent poll calls', () => {
     setupGetMock(runningData);
     const store = makeStore();
 
@@ -80,8 +80,10 @@ describe('job invocation polling', () => {
     expect(apiGetSpy).toHaveBeenCalledTimes(2);
     expect(apiGetSpy.mock.calls[1][0].params).toMatchObject({
       include_hosts: false,
-      include_permissions: true,
     });
+    expect(apiGetSpy.mock.calls[1][0].params).not.toHaveProperty(
+      'include_permissions'
+    );
   });
 
   it('stops polling when job succeeds', () => {
