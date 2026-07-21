@@ -311,6 +311,39 @@ describe('JobInvocationHostTable polling', () => {
     expect(hostsCalls.length).toBeGreaterThan(callsAfterFilterChange);
   });
 
+  it('sends include_permissions only on the first request', () => {
+    renderTable();
+
+    expect(hostsCalls).toHaveLength(1);
+    expect(hostsCalls[0].params.include_permissions).toBe(true);
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    expect(hostsCalls).toHaveLength(2);
+    expect(hostsCalls[1].params.include_permissions).toBeUndefined();
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    expect(hostsCalls).toHaveLength(3);
+    expect(hostsCalls[2].params.include_permissions).toBeUndefined();
+  });
+
   it('stops polling on API error', () => {
     apiGetSpy.mockRestore();
     setupErrorMock();

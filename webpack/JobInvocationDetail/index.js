@@ -54,6 +54,11 @@ const JobInvocationDetailPage = ({
   } = items;
   const finished = isJobFinished(statusLabel);
   const pollTimeoutRef = useRef({ timeoutId: null, cancel: () => {} });
+  const permissionsRef = useRef(null);
+  if (items.permissions && !permissionsRef.current) {
+    permissionsRef.current = items.permissions;
+  }
+  const permissions = items.permissions || permissionsRef.current;
   const jobInvocationApiStatus = useSelector(state =>
     selectAPIStatus(state, JOB_INVOCATION_KEY)
   );
@@ -86,6 +91,11 @@ const JobInvocationDetailPage = ({
       stopJobInvocationPolling(pollTimeoutRef);
     };
   }, [dispatch, id]);
+
+  const dataWithPermissions = useMemo(() => ({ ...items, permissions }), [
+    items,
+    permissions,
+  ]);
 
   const apiFailed = jobInvocationApiStatus === API_STATUS.ERROR;
 
@@ -143,7 +153,10 @@ const JobInvocationDetailPage = ({
         breadcrumbOptions={breadcrumbOptions}
         toolbarButtons={
           items.id !== undefined && (
-            <JobInvocationToolbarButtons jobId={id} data={items} />
+            <JobInvocationToolbarButtons
+              jobId={id}
+              data={dataWithPermissions}
+            />
           )
         }
         searchable={false}
