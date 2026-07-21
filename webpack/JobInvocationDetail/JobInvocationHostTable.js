@@ -39,7 +39,6 @@ import { CheckboxesActions } from './CheckboxesActions';
 import DropdownFilter from './DropdownFilter';
 import Columns, {
   JOB_INVOCATION_HOSTS,
-  LIST_TEMPLATE_INVOCATIONS,
   STATUS_UPPERCASE,
   AWAITING_STATUS_FILTER,
   AUTO_REFRESH_INTERVAL_MS,
@@ -163,11 +162,24 @@ const JobInvocationHostTable = ({
     [initialFilter, urlSearchQuery]
   );
 
+  const [hostPermissions, setHostPermissions] = useState({});
+
   const updateHostsState = useCallback(data => {
     const ids = data.data.results.map(i => i.id);
     setApiResponse(data.data);
     setAllHostsIds(ids);
     setStatus(STATUS_UPPERCASE.RESOLVED);
+
+    const resultsWithPermissions = data.data.results.filter(r => r.permissions);
+    if (resultsWithPermissions.length > 0) {
+      setHostPermissions(prev => {
+        const updated = { ...prev };
+        resultsWithPermissions.forEach(r => {
+          updated[r.id] = { task: r.task, permissions: r.permissions };
+        });
+        return updated;
+      });
+    }
   }, []);
 
   // Call hosts data with params
@@ -229,7 +241,10 @@ const JobInvocationHostTable = ({
         finalParams.search = filterSearch;
       }
 
-      currentPollParams.current = finalParams;
+      finalParams.include_permissions = true;
+
+      currentPollParams.current = { ...finalParams };
+      delete currentPollParams.current.include_permissions;
       clearTimeout(pollTimeoutId.current);
       pollTimeoutId.current = null;
 
@@ -258,20 +273,12 @@ const JobInvocationHostTable = ({
   const initializedRef = useRef(false);
   useEffect(() => {
     if (!initializedRef.current) {
-      dispatch(
-        APIActions.get({
-          key: LIST_TEMPLATE_INVOCATIONS,
-          url: `/job_invocations/${id}/hosts`,
-          params: {},
-        })
-      );
-
       if (initialFilter === '') {
         onFilterUpdate('all_statuses');
       }
       initializedRef.current = true;
     }
-  }, [dispatch, id, initialFilter, onFilterUpdate]);
+  }, [initialFilter, onFilterUpdate]);
 
   useEffect(() => {
     const filterChanged = initialFilter !== prevFilter.current;
@@ -506,7 +513,12 @@ const JobInvocationHostTable = ({
                     <Td key={k}>{columns[k].wrapper(result)}</Td>
                   ))}
                   <Td isActionCell>
-                    <RowActions hostID={result.id} jobID={id} />
+                    <RowActions
+                      hostID={result.id}
+                      jobID={id}
+                      task={hostPermissions[result.id]?.task}
+                      permissions={hostPermissions[result.id]?.permissions}
+                    />
                   </Td>
                 </Tr>
                 <Tr

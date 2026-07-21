@@ -6,7 +6,6 @@ import {
 import {
   JOB_INVOCATION_KEY,
   GET_TEMPLATE_INVOCATION,
-  LIST_TEMPLATE_INVOCATIONS,
 } from './JobInvocationConstants';
 
 export const selectItems = state =>
@@ -20,7 +19,3 @@ export const selectTemplateInvocation = hostID => state =>
 
 export const selectTemplateInvocationStatus = hostID => state =>
   selectAPIStatus(state, `${GET_TEMPLATE_INVOCATION}_${hostID}`);
-
-export const selectTemplateInvocationList = state =>
-  selectAPIResponse(state, LIST_TEMPLATE_INVOCATIONS)
-    ?.template_invocations_task_by_hosts;

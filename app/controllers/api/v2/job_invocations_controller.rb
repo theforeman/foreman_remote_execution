@@ -117,12 +117,14 @@ module Api
       param_group :search_and_pagination, ::Api::V2::BaseController
       add_scoped_search_description_for(JobInvocation)
       param :id, :identifier, :required => true
+      param :include_permissions, :bool, :required => false, :desc => N_('Include per-host task and permission data in the response')
       def hosts
         set_hosts_and_template_invocations
         @total = @hosts.size
         @hosts = @hosts.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page], :per_page => params[:per_page])
         @subtotal = @hosts.total_entries
         set_statuses_and_smart_proxies
+        set_tasks_and_permissions if Foreman::Cast.to_bool(params[:include_permissions])
         if params[:awaiting]
           @hosts = @hosts.select { |host| @host_statuses[host.id] == 'N/A' }
         end
@@ -321,14 +323,34 @@ module Api
         template_invocations = @template_invocations.where(host_id: @hosts.select(:id))
                                                     .includes(:run_host_job_task).to_a
         hosts = @hosts.to_a
-        template_invocations_by_host_id = template_invocations.index_by(&:host_id)
+        @template_invocations_by_host_id = template_invocations.index_by(&:host_id)
         @host_statuses = hosts.to_h do |host|
-          template_invocation = template_invocations_by_host_id[host.id]
+          template_invocation = @template_invocations_by_host_id[host.id]
           task = template_invocation.try(:run_host_job_task)
           [host.id, template_invocation_status(task, @job_invocation.task)]
         end
         @smart_proxy_id = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_id] }
         @smart_proxy_name = template_invocations.to_h { |ti| [ti.host_id, ti.smart_proxy_name] }
+      end
+
+      def set_tasks_and_permissions
+        can_cancel = authorized_for(:permission => :cancel_job_invocations, :auth_object => @job_invocation)
+        can_create = authorized_for(controller: :job_invocations, action: :create)
+        can_execute_on_infra = User.current.can?(:execute_jobs_on_infrastructure_hosts)
+
+        hosts = @hosts.to_a
+        @task_by_host = hosts.to_h do |host|
+          task = @template_invocations_by_host_id[host.id].try(:run_host_job_task)
+          [host.id, task ? { :id => task.id, :cancellable => task.try(:cancellable?) || false } : nil]
+        end
+        @permissions_by_host = hosts.to_h do |host|
+          task = @template_invocations_by_host_id[host.id].try(:run_host_job_task)
+          [host.id, {
+            :view_foreman_tasks => authorized_for(:permission => :view_foreman_tasks, :auth_object => task),
+            :cancel_job_invocations => can_cancel,
+            :execute_jobs => can_create && (!host.infrastructure_host? || can_execute_on_infra),
+          }]
+        end
       end
     end
   end

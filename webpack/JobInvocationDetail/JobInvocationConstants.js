@@ -15,14 +15,12 @@ export const GET_REPORT_TEMPLATE_INPUTS = 'GET_REPORT_TEMPLATE_INPUTS';
 export const JOB_INVOCATION_HOSTS = 'JOB_INVOCATION_HOSTS';
 export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
 export const DIRECT_OPEN_HOST_LIMIT = 3;
-export const ALL_JOB_HOSTS = 'ALL_JOB_HOSTS';
 export const AWAITING_STATUS_FILTER = '(job_invocation.result = N/A)';
 
 export const AUTO_REFRESH_INTERVAL_MS = 5000;
 
 export const showTemplateInvocationUrl = (hostID, jobID) =>
   `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;
-export const LIST_TEMPLATE_INVOCATIONS = 'LIST_TEMPLATE_INVOCATIONS';
 
 export const templateInvocationPageUrl = (hostID, jobID) =>
   `/job_invocations_detail/${jobID}/host_invocation/${hostID}`;
