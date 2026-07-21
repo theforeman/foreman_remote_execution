@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Flex, FlexItem, Button } from '@patternfly/react-core';
 import { ActionsColumn } from '@patternfly/react-table';
 import { APIActions } from 'foremanReact/redux/API';
 import { addToast } from 'foremanReact/components/ToastsList';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { selectTemplateInvocationList } from '../JobInvocationSelectors';
 import './index.scss';
 
 const actions = ({
@@ -81,11 +80,9 @@ const actions = ({
   },
 });
 
-export const RowActions = ({ hostID, jobID }) => {
+export const RowActions = ({ hostID, jobID, task, permissions }) => {
   const dispatch = useDispatch();
-  const response = useSelector(selectTemplateInvocationList)?.[hostID];
-  if (!response?.permissions) return null;
-  const { task, permissions } = response;
+  if (!permissions) return null;
   const { id: taskID, cancellable: taskCancellable } = task || {};
   const getActions = actions({
     taskID,
@@ -216,4 +213,18 @@ TemplateActionButtons.defaultProps = {
 RowActions.propTypes = {
   hostID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   jobID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  task: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    cancellable: PropTypes.bool,
+  }),
+  permissions: PropTypes.shape({
+    view_foreman_tasks: PropTypes.bool,
+    cancel_job_invocations: PropTypes.bool,
+    execute_jobs: PropTypes.bool,
+  }),
+};
+
+RowActions.defaultProps = {
+  task: null,
+  permissions: null,
 };

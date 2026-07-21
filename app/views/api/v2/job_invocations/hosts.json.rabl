@@ -13,3 +13,11 @@ end
 node :smart_proxy_name do |host|
   @smart_proxy_name[host.id]
 end
+
+node(:task, :if => ->(_host) { @task_by_host }) do |host|
+  @task_by_host[host.id]
+end
+
+node(:permissions, :if => ->(_host) { @permissions_by_host }) do |host|
+  @permissions_by_host[host.id]
+end
