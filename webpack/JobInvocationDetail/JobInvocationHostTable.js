@@ -41,7 +41,6 @@ import Columns, {
   JOB_INVOCATION_HOSTS,
   LIST_TEMPLATE_INVOCATIONS,
   STATUS_UPPERCASE,
-  ALL_JOB_HOSTS,
   AWAITING_STATUS_FILTER,
 } from './JobInvocationConstants';
 import { TemplateInvocation } from './TemplateInvocation';
@@ -51,8 +50,8 @@ import { PopupAlert } from './OpenAllInvocationsModal';
 const JobInvocationHostTable = ({
   id,
   initialFilter,
+  jobFinished,
   onFilterUpdate,
-  statusLabel,
   targeting,
 }) => {
   const columns = Columns();
@@ -69,7 +68,16 @@ const JobInvocationHostTable = ({
 
   // Expansive items
   const [expandedHost, setExpandedHost] = useState(new Set());
-  const prevStatusLabel = useRef(statusLabel);
+  const prevJobFinished = useRef(jobFinished);
+  const prevFilter = useRef('');
+  const prevId = useRef(id);
+  const pollTimeoutId = useRef(null);
+  const currentPollParams = useRef({});
+  const mountedRef = useRef(true);
+  const jobFinishedRef = useRef(jobFinished);
+  useEffect(() => {
+    jobFinishedRef.current = jobFinished;
+  }, [jobFinished]);
 
   const [hostInvocationStates, setHostInvocationStates] = useState({});
 
@@ -153,33 +161,45 @@ const JobInvocationHostTable = ({
     [initialFilter, urlSearchQuery]
   );
 
-  const handleResponse = useCallback((data, key) => {
-    if (key === JOB_INVOCATION_HOSTS) {
-      const ids = data.data.results.map(i => i.id);
-
-      setApiResponse(data.data);
-      setAllHostsIds(ids);
-    }
-
+  const updateHostsState = useCallback(data => {
+    const ids = data.data.results.map(i => i.id);
+    setApiResponse(data.data);
+    setAllHostsIds(ids);
     setStatus(STATUS_UPPERCASE.RESOLVED);
   }, []);
 
   // Call hosts data with params
   const makeApiCall = useCallback(
-    (requestParams, callParams = {}) => {
+    requestParams => {
       dispatch(
         APIActions.get({
-          key: callParams.key ?? ALL_JOB_HOSTS,
-          url: callParams.url ?? `/api/job_invocations/${id}/hosts`,
+          key: JOB_INVOCATION_HOSTS,
+          url: `/api/job_invocations/${id}/hosts`,
           params: requestParams,
-          handleSuccess: data => handleResponse(data, callParams.key),
-          handleError: () => setStatus(STATUS_UPPERCASE.ERROR),
+          handleSuccess: data => {
+            if (!mountedRef.current) return;
+            updateHostsState(data);
+            if (!jobFinishedRef.current) {
+              pollTimeoutId.current = setTimeout(
+                () => makeApiCall(currentPollParams.current),
+                5000
+              );
+            } else {
+              pollTimeoutId.current = null;
+            }
+          },
+          handleError: () => {
+            pollTimeoutId.current = null;
+            setStatus(STATUS_UPPERCASE.ERROR);
+          },
           errorToast: ({ response }) =>
-            response?.data?.error?.full_messages?.[0] || response,
+            response?.data?.error?.full_messages?.[0] ||
+            response?.data?.error?.message ||
+            __('Failed to load host invocation data'),
         })
       );
     },
-    [dispatch, id, handleResponse]
+    [dispatch, id, updateHostsState]
   );
 
   const filterApiCall = useCallback(
@@ -202,7 +222,11 @@ const JobInvocationHostTable = ({
         finalParams.search = filterSearch;
       }
 
-      makeApiCall(finalParams, { key: JOB_INVOCATION_HOSTS });
+      currentPollParams.current = finalParams;
+      clearTimeout(pollTimeoutId.current);
+      pollTimeoutId.current = null;
+
+      makeApiCall(finalParams);
 
       const urlSearchParams = new URLSearchParams(window.location.search);
 
@@ -222,26 +246,17 @@ const JobInvocationHostTable = ({
     ]
   );
 
-  // Filter change
-  const handleFilterChange = useCallback(
-    newFilter => {
-      onFilterUpdate(newFilter);
-    },
-    [onFilterUpdate]
-  );
-
   // Effects
   // run after mount
   const initializedRef = useRef(false);
   useEffect(() => {
     if (!initializedRef.current) {
-      // Job Invo template load
-      makeApiCall(
-        {},
-        {
-          url: `/job_invocations/${id}/hosts`,
+      dispatch(
+        APIActions.get({
           key: LIST_TEMPLATE_INVOCATIONS,
-        }
+          url: `/job_invocations/${id}/hosts`,
+          params: {},
+        })
       );
 
       if (initialFilter === '') {
@@ -249,16 +264,28 @@ const JobInvocationHostTable = ({
       }
       initializedRef.current = true;
     }
-  }, [makeApiCall, id, initialFilter, onFilterUpdate]);
+  }, [dispatch, id, initialFilter, onFilterUpdate]);
 
   useEffect(() => {
-    if (initialFilter !== '') filterApiCall();
+    const filterChanged = initialFilter !== prevFilter.current;
+    const statusChanged = jobFinished !== prevJobFinished.current;
+    const idChanged = id !== prevId.current;
 
-    if (statusLabel !== prevStatusLabel.current) {
-      prevStatusLabel.current = statusLabel;
+    if ((filterChanged || statusChanged || idChanged) && initialFilter !== '') {
+      prevFilter.current = initialFilter;
+      prevJobFinished.current = jobFinished;
+      prevId.current = id;
       filterApiCall();
     }
-  }, [initialFilter, statusLabel, id, filterApiCall]);
+  }, [initialFilter, jobFinished, id, filterApiCall]);
+
+  useEffect(
+    () => () => {
+      mountedRef.current = false;
+      clearTimeout(pollTimeoutId.current);
+    },
+    []
+  );
 
   const {
     updateSearchQuery: updateSearchQueryBulk,
@@ -403,7 +430,7 @@ const JobInvocationHostTable = ({
           <DropdownFilter
             key="dropdown-filter"
             dropdownFilter={initialFilter}
-            setDropdownFilter={handleFilterChange}
+            setDropdownFilter={onFilterUpdate}
           />,
           <CheckboxesActions
             bulkParams={selectedCount > 0 ? fetchBulkParams() : null}
@@ -541,13 +568,13 @@ JobInvocationHostTable.propTypes = {
   id: PropTypes.string.isRequired,
   targeting: PropTypes.object.isRequired,
   initialFilter: PropTypes.string.isRequired,
-  statusLabel: PropTypes.string,
+  jobFinished: PropTypes.bool,
   onFilterUpdate: PropTypes.func,
 };
 
 JobInvocationHostTable.defaultProps = {
   onFilterUpdate: () => {},
-  statusLabel: undefined,
+  jobFinished: false,
 };
 
 export default JobInvocationHostTable;

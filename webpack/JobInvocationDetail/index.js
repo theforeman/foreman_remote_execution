@@ -216,10 +216,8 @@ const JobInvocationDetailPage = ({
           <JobInvocationHostTable
             id={id}
             targeting={targeting}
-            finished={finished}
-            autoRefresh={autoRefresh}
             initialFilter={selectedFilter}
-            statusLabel={statusLabel}
+            jobFinished={finished}
             onFilterUpdate={handleFilterChange}
           />
         </SkeletonLoader>
