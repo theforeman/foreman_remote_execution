@@ -3,6 +3,7 @@ import React from 'react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import { useForemanHostDetailsPageUrl } from 'foremanReact/Root/Context/ForemanContext';
+import { MS_PER_SECOND } from 'foremanReact/constants';
 import JobStatusIcon from '../react_app/components/RecentJobsCard/JobStatusIcon';
 
 export const JOB_INVOCATION_KEY = 'JOB_INVOCATION_KEY';
@@ -18,6 +19,10 @@ export const DIRECT_OPEN_HOST_LIMIT = 3;
 export const AWAITING_STATUS_FILTER = '(job_invocation.result = N/A)';
 
 export const AUTO_REFRESH_INTERVAL_MS = 5000;
+export const POLLING_INTERVAL_MS = MS_PER_SECOND;
+export const DEFAULT_CHART_LEGEND_WIDTH = 270;
+export const CLIPBOARD_COPIED_EXIT_DELAY_MS = 1500;
+export const CLIPBOARD_DEFAULT_EXIT_DELAY_MS = 600;
 
 export const showTemplateInvocationUrl = (hostID, jobID) =>
   `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;

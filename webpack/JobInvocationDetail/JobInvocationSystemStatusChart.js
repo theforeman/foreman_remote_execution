@@ -23,7 +23,10 @@ import {
   global_palette_blue_300 as inProgressColor,
   global_palette_green_500 as successedColor,
 } from '@patternfly/react-tokens';
-import { STATUS_TITLES } from './JobInvocationConstants';
+import {
+  STATUS_TITLES,
+  DEFAULT_CHART_LEGEND_WIDTH,
+} from './JobInvocationConstants';
 import './JobInvocationDetail.scss';
 
 const JobInvocationSystemStatusChart = ({
@@ -52,7 +55,7 @@ const JobInvocationSystemStatusChart = ({
     return '0';
   };
   const chartSize = 105;
-  const [legendWidth, setLegendWidth] = useState(270);
+  const [legendWidth, setLegendWidth] = useState(DEFAULT_CHART_LEGEND_WIDTH);
 
   // Calculates chart legend width based on its content
   useEffect(() => {

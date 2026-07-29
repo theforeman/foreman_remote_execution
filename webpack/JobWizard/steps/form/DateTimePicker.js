@@ -7,13 +7,19 @@ import {
 } from '@patternfly/react-core';
 import { debounce } from 'lodash';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
+import {
+  DATE_PADDING_SLICE,
+  DEBOUNCE_INPUT_MS,
+} from '../../JobWizardConstants';
 
 const formatDateTime = d =>
   `${d.getFullYear()}-${`0${d.getMonth() + 1}`.slice(
-    -2
-  )}-${`0${d.getDate()}`.slice(-2)} ${`0${d.getHours()}`.slice(
-    -2
-  )}:${`0${d.getMinutes()}`.slice(-2)}:${`0${d.getSeconds()}`.slice(-2)}`;
+    DATE_PADDING_SLICE
+  )}-${`0${d.getDate()}`.slice(DATE_PADDING_SLICE)} ${`0${d.getHours()}`.slice(
+    DATE_PADDING_SLICE
+  )}:${`0${d.getMinutes()}`.slice(
+    DATE_PADDING_SLICE
+  )}:${`0${d.getSeconds()}`.slice(DATE_PADDING_SLICE)}`;
 
 export const DateTimePicker = ({
   dateTime,
@@ -103,7 +109,7 @@ export const DateTimePicker = ({
         aria-label={`${ariaLabel} datepicker`}
         value={formattedDate}
         placeholder="yyyy/mm/dd"
-        onChange={debounce(onDateChange, 1000, {
+        onChange={debounce(onDateChange, DEBOUNCE_INPUT_MS, {
           leading: false,
           trailing: true,
         })}
@@ -123,7 +129,7 @@ export const DateTimePicker = ({
         time={dateTime ? dateObject.toString() : ''}
         inputProps={dateTime ? {} : { value: '' }}
         placeholder={includeSeconds ? 'hh:mm:ss' : 'hh:mm'}
-        onChange={debounce(onTimeChange, 1000, {
+        onChange={debounce(onTimeChange, DEBOUNCE_INPUT_MS, {
           leading: false,
           trailing: true,
         })}

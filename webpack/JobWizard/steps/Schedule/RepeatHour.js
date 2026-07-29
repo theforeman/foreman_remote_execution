@@ -12,13 +12,15 @@ import {
   SelectVariant,
 } from '@patternfly/react-core/deprecated';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { MINUTES_PER_HOUR } from 'foremanReact/constants';
 import { helpLabel } from '../form/FormHelpers';
+import { DEFAULT_MINUTE_OPTIONS } from '../../JobWizardConstants';
 
 export const RepeatHour = ({ repeatData, setRepeatData }) => {
   const isValidMinute = newMinute =>
     Number.isInteger(parseInt(newMinute, 10)) &&
     newMinute >= 0 &&
-    newMinute < 60;
+    newMinute < MINUTES_PER_HOUR;
 
   const { minute } = repeatData;
   useEffect(() => {
@@ -27,7 +29,7 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
     }
   }, [minute, setRepeatData]);
   const [minuteOpen, setMinuteOpen] = useState(false);
-  const [options, setOptions] = useState([0, 15, 30, 45]);
+  const [options, setOptions] = useState(DEFAULT_MINUTE_OPTIONS);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   return (
     <FormGroup

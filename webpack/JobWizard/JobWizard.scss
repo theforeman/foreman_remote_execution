@@ -1,5 +1,6 @@
 .job-wizard {
   font-size: var(--pf-v5-global--FontSize--md);
+
   .wizard-title {
     margin-bottom: 25px;
   }
@@ -15,6 +16,7 @@
       var(--pf-v5-cwizard__toggle--ZIndex) + 1
     ); // So the select box can be shown above the wizard footer and navigation toggle
   }
+
   .pf-v5-c-wizard__main-body {
     @media (max-width: 600px) {
       max-width: 100%;
@@ -41,6 +43,7 @@
     .pf-v5-c-chip-group.pf-m-category {
       margin-bottom: 10px;
     }
+
     .pf-v5-c-select__toggle-typeahead {
       border: 0px;
     }
@@ -50,62 +53,76 @@
         flex-wrap: nowrap;
       }
     }
+
     .foreman-search-field {
       width: 100%;
     }
   }
+
   input[type='radio'],
   input[type='checkbox'] {
     margin: 0;
   }
+
   .schedule-tab {
     #repeat-on-weekly {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
     }
+
     .pf-v5-l-grid {
       gap: var(--pf-v5-cform--GridGap);
     }
+
     #repeat-on-hourly {
       max-height: 300px;
       overflow: scroll;
     }
+
     .schedule-radio label {
       width: 100%;
     }
+
     .schedule-radio input {
       align-self: center;
     }
+
     .schedule-radio-repeat-text {
       width: 100px;
       display: inline-block;
       margin-right: 5px;
       align-self: center;
     }
+
     .schedule-radio-title {
       width: 80px;
       display: inline-block;
       align-self: center;
     }
+
     .schedule-radio-occurences {
       display: inline-block;
       align-self: center;
     }
+
     .schedule-radio-wrapper {
       display: flex;
     }
   }
+
   .future-schedule-tab {
     .clear-datetime-button {
       margin-left: 10px;
       align-self: center;
       font-size: var(--pf-v5-global--FontSize--md);
     }
+
     .pf-v5-c-form__group-control {
       display: flex;
       flex-wrap: wrap;
     }
   }
+
   .pf-v5-c-date-picker {
     vertical-align: top;
   }
@@ -119,10 +136,12 @@
     // overwriting bootstrap/_forms.scss margin: 4px 0 0;
     margin: 0;
   }
+
   textarea {
     min-height: 40px;
     min-width: 100px;
   }
+
   .pf-v5-c-modal-box {
     width: auto;
   }
@@ -132,9 +151,11 @@
       margin-left: 10px;
     }
   }
+
   .pf-v5-c-radio__body {
     font-size: var(--pf-v5-cradio__label--FontSize);
   }
+
   .reset-default {
     padding-bottom: 0;
   }

@@ -18,6 +18,7 @@ import {
   WIZARD_TITLES,
   SCHEDULE_TYPES,
   initialScheduleState,
+  STARTS_ERROR_CHECK_INTERVAL_MS,
 } from './JobWizardConstants';
 import {
   selectTemplateError,
@@ -237,7 +238,10 @@ export const JobWizard = ({ rerunData }) => {
       }
     };
     updateStartsError();
-    const interval = setInterval(updateStartsError, 5000);
+    const interval = setInterval(
+      updateStartsError,
+      STARTS_ERROR_CHECK_INTERVAL_MS
+    );
 
     return () => {
       interval && clearInterval(interval);

@@ -5,7 +5,10 @@ import {
   getJobInvocation,
   stopJobInvocationPolling,
 } from '../JobInvocationActions';
-import { JOB_INVOCATION_KEY } from '../JobInvocationConstants';
+import {
+  JOB_INVOCATION_KEY,
+  POLLING_INTERVAL_MS,
+} from '../JobInvocationConstants';
 
 jest.useFakeTimers();
 
@@ -66,7 +69,7 @@ describe('job invocation polling', () => {
     store.dispatch(getJobInvocation(url, ref));
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
 
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS);
     expect(apiGetSpy).toHaveBeenCalledTimes(2);
   });
 
@@ -75,7 +78,7 @@ describe('job invocation polling', () => {
     const store = makeStore();
 
     store.dispatch(getJobInvocation(url, ref));
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS);
 
     expect(apiGetSpy).toHaveBeenCalledTimes(2);
     expect(apiGetSpy.mock.calls[1][0].params).toMatchObject({
@@ -93,7 +96,7 @@ describe('job invocation polling', () => {
     store.dispatch(getJobInvocation(url, ref));
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
 
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS);
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
   });
 
@@ -102,7 +105,7 @@ describe('job invocation polling', () => {
     const store = makeStore();
 
     store.dispatch(getJobInvocation(url, ref));
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS);
 
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
   });
@@ -112,7 +115,7 @@ describe('job invocation polling', () => {
     const store = makeStore();
 
     store.dispatch(getJobInvocation(url, ref));
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS);
 
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
   });
@@ -127,7 +130,7 @@ describe('job invocation polling', () => {
     const store = makeStore();
 
     store.dispatch(getJobInvocation(url, ref));
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS);
 
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
   });
@@ -140,7 +143,7 @@ describe('job invocation polling', () => {
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
 
     stopJobInvocationPolling(ref);
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS);
 
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
   });
@@ -156,7 +159,7 @@ describe('job invocation polling', () => {
     store.dispatch(getJobInvocation(url, ref));
     expect(apiGetSpy).toHaveBeenCalledTimes(2);
 
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS);
 
     // Only the second poll chain fires (first was cancelled)
     expect(apiGetSpy).toHaveBeenCalledTimes(3);
@@ -167,7 +170,7 @@ describe('job invocation polling', () => {
     const store = makeStore();
 
     store.dispatch(getJobInvocation(url, ref));
-    jest.advanceTimersByTime(15000);
+    jest.advanceTimersByTime(POLLING_INTERVAL_MS * 3);
 
     expect(apiGetSpy).toHaveBeenCalledTimes(4);
   });

@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, Checkbox } from '@patternfly/react-core';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
+import { DAYS_PER_WEEK } from 'foremanReact/constants';
 import { RepeatDaily } from './RepeatDaily';
 import { noop } from '../../../helpers';
+import { SUNDAY_BASE_YEAR } from '../../JobWizardConstants';
 
 export const getWeekDays = () => {
   const locale = documentLocale().replace(/-/g, '_');
-  const baseDate = new Date(Date.UTC(2017, 0, 1)); // just a Sunday
+  const baseDate = new Date(Date.UTC(SUNDAY_BASE_YEAR, 0, 1)); // just a Sunday
   const weekDays = [];
   const formatOptions = { weekday: 'short', timeZone: 'UTC' };
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < DAYS_PER_WEEK; i++) {
     try {
       weekDays.push(baseDate.toLocaleDateString(locale, formatOptions));
     } catch {

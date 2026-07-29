@@ -7,6 +7,7 @@ import {
   withInterval,
   stopInterval,
 } from 'foremanReact/redux/middlewares/IntervalMiddleware';
+import { MS_PER_SECOND } from 'foremanReact/constants';
 
 import {
   selectItems,
@@ -100,7 +101,7 @@ const WrappedTargetingHosts = () => {
             dispatch(stopInterval(TARGETING_HOSTS));
           },
         }),
-        1000
+        MS_PER_SECOND
       ),
     [dispatch]
   );

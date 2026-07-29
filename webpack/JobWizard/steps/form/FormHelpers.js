@@ -8,16 +8,17 @@ export const helpLabel = (text, id) => {
   if (!text) return null;
   return (
     <Popover id={`${id}-help`} bodyContent={text} aria-label="help-text">
-      <button
-        type="button"
+      <Button
+        ouiaId={`${id}-help-button`}
+        variant="plain"
         aria-label={__('open-help-tooltip-button')}
         onClick={e => e.preventDefault()}
-        className="pf-v5-c-form__group-label-help"
+        isInline
       >
         <Icon isInline>
           <HelpIcon />
         </Icon>
-      </button>
+      </Button>
     </Popover>
   );
 };

@@ -12,6 +12,8 @@ import {
   templateInvocationPageUrl,
   GET_TEMPLATE_INVOCATION,
   AUTO_REFRESH_INTERVAL_MS,
+  CLIPBOARD_COPIED_EXIT_DELAY_MS,
+  CLIPBOARD_DEFAULT_EXIT_DELAY_MS,
 } from './JobInvocationConstants';
 import {
   selectTemplateInvocationStatus,
@@ -42,7 +44,11 @@ const CopyToClipboard = ({ fullOutput }) => {
       textId="code-content"
       aria-label="Copy to clipboard"
       onClick={e => onClick(e, fullOutput)}
-      exitDelay={copied ? 1500 : 600}
+      exitDelay={
+        copied
+          ? CLIPBOARD_COPIED_EXIT_DELAY_MS
+          : CLIPBOARD_DEFAULT_EXIT_DELAY_MS
+      }
       maxWidth="110px"
       variant="plain"
       onTooltipHidden={() => setCopied(false)}
