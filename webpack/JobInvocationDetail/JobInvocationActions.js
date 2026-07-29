@@ -45,6 +45,7 @@ export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
     );
   };
 
+  stopJobInvocationPolling(pollTimeoutRef);
   poll();
 };
 

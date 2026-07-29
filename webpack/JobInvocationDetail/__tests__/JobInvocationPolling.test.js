@@ -143,21 +143,21 @@ describe('job invocation polling', () => {
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('allows multiple overlapping polls when getJobInvocation is called multiple times', () => {
+  it('cancels pending timeout before starting a new poll when called multiple times', () => {
     setupGetMock(runningData);
     const store = makeStore();
 
     store.dispatch(getJobInvocation(url, ref));
     expect(apiGetSpy).toHaveBeenCalledTimes(1);
 
-    // Second call before the timeout fires creates a second poll chain
+    // Second call before the timeout fires cancels the first timeout and starts fresh
     store.dispatch(getJobInvocation(url, ref));
     expect(apiGetSpy).toHaveBeenCalledTimes(2);
 
     jest.advanceTimersByTime(5000);
 
-    // Both poll chains fire their timeouts
-    expect(apiGetSpy).toHaveBeenCalledTimes(4);
+    // Only the second poll chain fires (first was cancelled)
+    expect(apiGetSpy).toHaveBeenCalledTimes(3);
   });
 
   it('keeps polling as long as the job is running', () => {
