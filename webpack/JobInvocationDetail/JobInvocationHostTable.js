@@ -75,6 +75,7 @@ const JobInvocationHostTable = ({
   const pollTimeoutId = useRef(null);
   const currentPollParams = useRef({});
   const mountedRef = useRef(true);
+  const requestIdRef = useRef(0);
   const jobFinishedRef = useRef(jobFinished);
   useEffect(() => {
     jobFinishedRef.current = jobFinished;
@@ -172,12 +173,15 @@ const JobInvocationHostTable = ({
   // Call hosts data with params
   const makeApiCall = useCallback(
     requestParams => {
+      requestIdRef.current += 1;
+      const thisRequest = requestIdRef.current;
       dispatch(
         APIActions.get({
           key: JOB_INVOCATION_HOSTS,
           url: `/api/job_invocations/${id}/hosts`,
           params: requestParams,
           handleSuccess: data => {
+            if (thisRequest !== requestIdRef.current) return;
             if (!mountedRef.current) return;
             updateHostsState(data);
             if (!jobFinishedRef.current) {
@@ -190,6 +194,8 @@ const JobInvocationHostTable = ({
             }
           },
           handleError: () => {
+            if (thisRequest !== requestIdRef.current) return;
+            if (!mountedRef.current) return;
             pollTimeoutId.current = null;
             setStatus(STATUS_UPPERCASE.ERROR);
           },
