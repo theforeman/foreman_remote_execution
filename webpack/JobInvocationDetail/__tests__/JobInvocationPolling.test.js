@@ -169,5 +169,33 @@ describe('job invocation polling', () => {
 
     expect(apiGetSpy).toHaveBeenCalledTimes(4);
   });
+
+  it('cancels in-flight callback when new poll starts before previous resolves', () => {
+    let firstCallHandleSuccess;
+    let callCount = 0;
+    apiGetSpy = jest
+      .spyOn(APIActions, 'get')
+      .mockImplementation(({ handleSuccess, handleError }) => dispatch => {
+        callCount++;
+        if (callCount === 1) {
+          firstCallHandleSuccess = handleSuccess;
+        }
+        return dispatch({ type: 'MOCK_GET' });
+      });
+
+    const store = makeStore();
+    store.dispatch(getJobInvocation(url, ref));
+    expect(apiGetSpy).toHaveBeenCalledTimes(1);
+
+    // Start a new poll cycle before the first resolves
+    store.dispatch(getJobInvocation(url, ref));
+    expect(apiGetSpy).toHaveBeenCalledTimes(2);
+
+    // Old callback from first call tries to schedule next poll
+    firstCallHandleSuccess({ data: runningData });
+
+    // Timeout should not be set by the stale callback
+    expect(ref.current).toBeNull();
+  });
 });
 

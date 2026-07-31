@@ -11,7 +11,7 @@ import {
 
 const POLL_INTERVAL = 5000;
 
-const isJobFinished = statusLabel =>
+export const isJobFinished = statusLabel =>
   statusLabel === STATUS.FAILED ||
   statusLabel === STATUS.SUCCEEDED ||
   statusLabel === STATUS.CANCELLED;
@@ -20,16 +20,20 @@ const extractErrorMessage = response =>
   // eslint-disable-next-line camelcase
   response?.data?.error?.full_messages?.[0] ||
   response?.data?.error?.message ||
-  'Unknown error.';
+  __('Unknown error.');
 
 export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
+  let cancelled = false;
+
   const poll = () => {
+    if (cancelled) return;
     dispatch(
       APIActions.get({
         key: JOB_INVOCATION_KEY,
         params: { include_permissions: true, include_hosts: false },
         url,
         handleSuccess: ({ data }) => {
+          if (cancelled) return;
           // eslint-disable-next-line camelcase
           if (!isJobFinished(data?.status_label)) {
             pollTimeoutRef.current = setTimeout(poll, POLL_INTERVAL);
@@ -38,6 +42,7 @@ export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
           }
         },
         handleError: () => {
+          if (cancelled) return;
           pollTimeoutRef.current = null;
         },
         errorToast: ({ response }) => extractErrorMessage(response),
@@ -46,6 +51,15 @@ export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
   };
 
   stopJobInvocationPolling(pollTimeoutRef);
+
+  // Cancel previous poll cycle's in-flight requests
+  if (pollTimeoutRef.cancelPreviousCycle) {
+    pollTimeoutRef.cancelPreviousCycle();
+  }
+  pollTimeoutRef.cancelPreviousCycle = () => {
+    cancelled = true;
+  };
+
   poll();
 };
 

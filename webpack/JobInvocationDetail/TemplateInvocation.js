@@ -11,9 +11,8 @@ import {
   showTemplateInvocationUrl,
   templateInvocationPageUrl,
   GET_TEMPLATE_INVOCATION,
+  AUTO_REFRESH_INTERVAL_MS,
 } from './JobInvocationConstants';
-
-const AUTO_REFRESH_INTERVAL_MS = 5000;
 import {
   selectTemplateInvocationStatus,
   selectTemplateInvocation,
@@ -86,6 +85,7 @@ export const TemplateInvocation = ({
     let cancelled = false;
 
     const schedulePoll = () => {
+      if (cancelled) return;
       dispatch(
         APIActions.get({
           url: templateURL,
@@ -105,6 +105,7 @@ export const TemplateInvocation = ({
             }
           },
           handleError: () => {
+            if (cancelled) return;
             timeoutRef.current = null;
           },
         })

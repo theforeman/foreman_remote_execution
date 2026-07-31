@@ -27,12 +27,12 @@ import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
 import {
   getJobInvocation,
   stopJobInvocationPolling,
+  isJobFinished,
 } from './JobInvocationActions';
 import './JobInvocationDetail.scss';
 import {
   DATE_OPTIONS,
   JOB_INVOCATION_KEY,
-  STATUS,
   STATUS_UPPERCASE,
 } from './JobInvocationConstants';
 import { selectItems } from './JobInvocationSelectors';
@@ -52,10 +52,7 @@ const JobInvocationDetailPage = ({
     start_at: startAt,
     targeting = {},
   } = items;
-  const finished =
-    statusLabel === STATUS.FAILED ||
-    statusLabel === STATUS.SUCCEEDED ||
-    statusLabel === STATUS.CANCELLED;
+  const finished = isJobFinished(statusLabel);
   const pollTimeoutRef = useRef(null);
   const jobInvocationApiStatus = useSelector(state =>
     selectAPIStatus(state, JOB_INVOCATION_KEY)
