@@ -198,4 +198,3 @@ describe('job invocation polling', () => {
     expect(ref.current).toBeNull();
   });
 });
-
