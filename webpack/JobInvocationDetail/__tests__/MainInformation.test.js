@@ -30,7 +30,6 @@ import {
   CHANGE_ENABLED_RECURRING_LOGIC,
   GET_REPORT_TEMPLATES,
   GET_REPORT_TEMPLATE_INPUTS,
-  GET_TASK,
   JOB_INVOCATION_KEY,
 } from '../JobInvocationConstants';
 
@@ -47,7 +46,7 @@ jest.mock('../JobInvocationActions', () => {
   return {
     ...actual,
     getJobInvocation: jest.fn(() => () => undefined),
-    getTask: jest.fn(() => () => undefined),
+    stopJobInvocationPolling: jest.fn(),
   };
 });
 
@@ -109,7 +108,6 @@ const createJobInvocationDetailState = ({
   jobInvocation = jobInvocationData,
   jobInvocationStatus = STATUS.RESOLVED,
   jobInvocationError = null,
-  includeTaskState = true,
 } = {}) => {
   const jobInvocationResponse =
     jobInvocationError || JSON.parse(JSON.stringify(jobInvocation));
@@ -125,15 +123,6 @@ const createJobInvocationDetailState = ({
             response: jobInvocationResponse,
             status: jobInvocationStatus,
           },
-      ...(includeTaskState && {
-        [GET_TASK]: {
-          response: {
-            available_actions: { cancellable: true },
-            ...(jobInvocationResponse.task || {}),
-          },
-          status: STATUS.RESOLVED,
-        },
-      }),
     },
   };
 };
@@ -168,11 +157,8 @@ describe('JobInvocationDetailPage', () => {
     setupApiMocks();
     usePermissions.mockReturnValue(true);
 
-    const { getJobInvocation, getTask } = jest.requireMock(
-      '../JobInvocationActions'
-    );
+    const { getJobInvocation } = jest.requireMock('../JobInvocationActions');
     getJobInvocation.mockImplementation(() => () => undefined);
-    getTask.mockImplementation(() => () => undefined);
   });
 
   afterEach(() => {
@@ -189,7 +175,6 @@ describe('JobInvocationDetailPage', () => {
     renderJobInvocationDetailPage(
       createJobInvocationDetailState({
         jobInvocation: scheduledJobInvocation,
-        includeTaskState: false,
       }),
       { jobId: jobInvocationDataScheduled.id }
     );
@@ -324,15 +309,7 @@ describe('JobInvocationDetailPage', () => {
   });
 
   it('should dispatch global actions', async () => {
-    const actualActions = jest.requireActual('../JobInvocationActions');
-    const { getTask } = jest.requireMock('../JobInvocationActions');
-
-    getTask.mockImplementation(taskId => dispatch =>
-      actualActions.getTask(taskId)(dispatch)
-    );
-
     const jobId = jobInvocationDataRecurring.id;
-    const taskId = jobInvocationDataRecurring.task.id;
     const recurrenceId = jobInvocationDataRecurring.recurrence.id;
 
     const { store } = renderJobInvocationDetailPage(
@@ -350,12 +327,6 @@ describe('JobInvocationDetailPage', () => {
     );
     expect(api.get).toHaveBeenCalledWith(
       expect.objectContaining({
-        key: GET_TASK,
-        url: `/foreman_tasks/api/tasks/${taskId}`,
-      })
-    );
-    expect(api.get).toHaveBeenCalledWith(
-      expect.objectContaining({
         key: GET_REPORT_TEMPLATE_INPUTS,
         url: `/api/templates/${reportTemplateJobId}/template_inputs`,
       })
@@ -367,9 +338,9 @@ describe('JobInvocationDetailPage', () => {
 
     store.dispatch(cancelJob(jobId, false));
     store.dispatch(cancelJob(jobId, true));
-    store.dispatch(enableRecurringLogic(recurrenceId, true, jobId));
-    store.dispatch(enableRecurringLogic(recurrenceId, false, jobId));
-    store.dispatch(cancelRecurringLogic(recurrenceId, jobId));
+    store.dispatch(enableRecurringLogic(recurrenceId, true));
+    store.dispatch(enableRecurringLogic(recurrenceId, false));
+    store.dispatch(cancelRecurringLogic(recurrenceId));
 
     expect(APIActions.post).toHaveBeenNthCalledWith(
       1,

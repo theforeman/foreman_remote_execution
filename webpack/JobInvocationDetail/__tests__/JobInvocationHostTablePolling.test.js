@@ -136,13 +136,13 @@ describe('JobInvocationHostTable polling', () => {
   it('schedules a poll after the initial fetch succeeds', () => {
     renderTable();
 
-    expect(hostsCalls.length).toBe(1);
+    expect(hostsCalls).toHaveLength(1);
 
     act(() => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls.length).toBe(1);
+    expect(hostsCalls).toHaveLength(1);
 
     act(() => {
       jest.advanceTimersByTime(5000);
@@ -152,7 +152,7 @@ describe('JobInvocationHostTable polling', () => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls.length).toBe(2);
+    expect(hostsCalls).toHaveLength(2);
 
     act(() => {
       jest.advanceTimersByTime(5000);
@@ -162,13 +162,13 @@ describe('JobInvocationHostTable polling', () => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls.length).toBe(3);
+    expect(hostsCalls).toHaveLength(3);
   });
 
   it('does not schedule a poll when jobFinished is true', () => {
     renderTable({ jobFinished: true });
 
-    expect(hostsCalls.length).toBe(1);
+    expect(hostsCalls).toHaveLength(1);
 
     act(() => {
       flushPendingCallbacks();
@@ -182,7 +182,7 @@ describe('JobInvocationHostTable polling', () => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls.length).toBe(1);
+    expect(hostsCalls).toHaveLength(1);
   });
 
   it('stops polling when jobFinished transitions to true', () => {
@@ -192,7 +192,7 @@ describe('JobInvocationHostTable polling', () => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls.length).toBe(1);
+    expect(hostsCalls).toHaveLength(1);
 
     const store = createStore();
     const history = createMemoryHistory();
@@ -233,7 +233,7 @@ describe('JobInvocationHostTable polling', () => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls.length).toBe(callsAtTransition);
+    expect(hostsCalls).toHaveLength(callsAtTransition);
   });
 
   it('cleans up the poll timer on unmount', () => {
@@ -255,7 +255,7 @@ describe('JobInvocationHostTable polling', () => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls.length).toBe(callsBeforeUnmount);
+    expect(hostsCalls).toHaveLength(callsBeforeUnmount);
   });
 
   it('restarts polling when filter changes', () => {
@@ -317,7 +317,7 @@ describe('JobInvocationHostTable polling', () => {
 
     renderTable();
 
-    expect(hostsCalls.length).toBe(1);
+    expect(hostsCalls).toHaveLength(1);
 
     act(() => {
       flushPendingCallbacks();
@@ -331,6 +331,6 @@ describe('JobInvocationHostTable polling', () => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls.length).toBe(1);
+    expect(hostsCalls).toHaveLength(1);
   });
 });

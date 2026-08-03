@@ -5,13 +5,12 @@ import {
   PageSectionVariants,
   Skeleton,
 } from '@patternfly/react-core';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { useDispatch, useSelector } from 'react-redux';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import PropTypes from 'prop-types';
 import SkeletonLoader from 'foremanReact/components/common/SkeletonLoader';
-import { stopInterval } from 'foremanReact/redux/middlewares/IntervalMiddleware';
 import { STATUS as API_STATUS } from 'foremanReact/constants';
 import {
   selectAPIErrorMessage,
@@ -25,12 +24,15 @@ import JobInvocationOverview from './JobInvocationOverview';
 import JobInvocationSystemStatusChart from './JobInvocationSystemStatusChart';
 import JobInvocationEmptyState from './JobInvocationEmptyState';
 import JobInvocationToolbarButtons from './JobInvocationToolbarButtons';
-import { getJobInvocation, getTask } from './JobInvocationActions';
+import {
+  getJobInvocation,
+  stopJobInvocationPolling,
+  isJobFinished,
+} from './JobInvocationActions';
 import './JobInvocationDetail.scss';
 import {
   DATE_OPTIONS,
   JOB_INVOCATION_KEY,
-  STATUS,
   STATUS_UPPERCASE,
 } from './JobInvocationConstants';
 import { selectItems } from './JobInvocationSelectors';
@@ -50,11 +52,8 @@ const JobInvocationDetailPage = ({
     start_at: startAt,
     targeting = {},
   } = items;
-  const finished =
-    statusLabel === STATUS.FAILED ||
-    statusLabel === STATUS.SUCCEEDED ||
-    statusLabel === STATUS.CANCELLED;
-  const autoRefresh = task?.state === STATUS.PENDING || false;
+  const finished = isJobFinished(statusLabel);
+  const pollTimeoutRef = useRef({ timeoutId: null, cancel: () => {} });
   const jobInvocationApiStatus = useSelector(state =>
     selectAPIStatus(state, JOB_INVOCATION_KEY)
   );
@@ -82,21 +81,11 @@ const JobInvocationDetailPage = ({
   }
 
   useEffect(() => {
-    dispatch(getJobInvocation(`/api/job_invocations/${id}`));
-    if (finished && !autoRefresh) {
-      dispatch(stopInterval(JOB_INVOCATION_KEY));
-    }
+    dispatch(getJobInvocation(`/api/job_invocations/${id}`, pollTimeoutRef));
     return () => {
-      dispatch(stopInterval(JOB_INVOCATION_KEY));
+      stopJobInvocationPolling(pollTimeoutRef);
     };
-  }, [dispatch, id, finished, autoRefresh]);
-
-  const taskId = task?.id;
-  useEffect(() => {
-    if (taskId !== undefined) {
-      dispatch(getTask(`${taskId}`));
-    }
-  }, [dispatch, taskId]);
+  }, [dispatch, id]);
 
   const apiFailed = jobInvocationApiStatus === API_STATUS.ERROR;
 
