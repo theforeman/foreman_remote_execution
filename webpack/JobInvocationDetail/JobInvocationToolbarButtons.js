@@ -1,6 +1,5 @@
-/* eslint-disable max-lines */
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Split, SplitItem } from '@patternfly/react-core';
 import { UndoIcon } from '@patternfly/react-icons';
@@ -14,18 +13,12 @@ import {
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
-import { get } from 'foremanReact/redux/API';
 import {
   cancelJob,
   cancelRecurringLogic,
   enableRecurringLogic,
 } from './JobInvocationActions';
-import {
-  STATUS,
-  GET_REPORT_TEMPLATES,
-  GET_REPORT_TEMPLATE_SETTING,
-  GET_REPORT_TEMPLATE_INPUTS,
-} from './JobInvocationConstants';
+import { STATUS } from './JobInvocationConstants';
 import { selectTaskCancelable } from './JobInvocationSelectors';
 
 const JobInvocationToolbarButtons = ({ jobId, data }) => {
@@ -44,26 +37,13 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
     'generate_report_templates',
   ]);
   const [isActionOpen, setIsActionOpen] = useState(false);
-  const [reportTemplateJobId, setReportTemplateJobId] = useState(undefined);
-  const [templateInputId, setTemplateInputId] = useState(undefined);
   const dispatch = useDispatch();
-  const reportHref = useMemo(() => {
-    if (reportTemplateJobId === undefined || templateInputId === undefined) {
-      return undefined;
-    }
-    const queryParams = new URLSearchParams({
-      [`report_template_report[input_values][${templateInputId}][value]`]: jobId,
-    });
-    return foremanUrl(
-      `/templates/report_templates/${reportTemplateJobId}/generate?${queryParams.toString()}`
-    );
-  }, [jobId, reportTemplateJobId, templateInputId]);
+  const reportHref = foremanUrl(`/api/v2/job_invocations/${jobId}/report`);
 
   const isCreateReportDisabled =
     !canGenerateReportTemplates ||
     task?.state === STATUS.RUNNING ||
-    task?.state === STATUS.PENDING ||
-    reportHref === undefined;
+    task?.state === STATUS.PENDING;
 
   const onActionFocus = useCallback(() => {
     const element = document.getElementById(
@@ -78,73 +58,6 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
     onActionFocus();
   }, [onActionFocus]);
   const onActionToggle = useCallback((_event, val) => setIsActionOpen(val), []);
-
-  useEffect(() => {
-    let isMounted = true;
-    const fetchReportTemplate = templateName => {
-      dispatch(
-        get({
-          key: GET_REPORT_TEMPLATES,
-          url: '/api/report_templates',
-          params: {
-            search: `name="${templateName}"`,
-            per_page: 1,
-          },
-          handleSuccess: ({ data: { results } }) => {
-            if (isMounted) {
-              setReportTemplateJobId(results[0]?.id);
-            }
-          },
-          handleError: () => {
-            if (isMounted) {
-              setReportTemplateJobId(undefined);
-            }
-          },
-        })
-      );
-    };
-    dispatch(
-      get({
-        key: GET_REPORT_TEMPLATE_SETTING,
-        url: '/api/settings/remote_execution_job_invocation_report_template',
-        handleSuccess: ({ data: { value } }) => {
-          fetchReportTemplate(value);
-        },
-        handleError: () => {
-          fetchReportTemplate('Job - Invocation Report');
-        },
-      })
-    );
-    return () => {
-      isMounted = false;
-    };
-  }, [dispatch]);
-  useEffect(() => {
-    let isMounted = true;
-    if (reportTemplateJobId !== undefined) {
-      dispatch(
-        get({
-          key: GET_REPORT_TEMPLATE_INPUTS,
-          url: `/api/templates/${reportTemplateJobId}/template_inputs`,
-          handleSuccess: ({ data: { results } }) => {
-            if (isMounted) {
-              setTemplateInputId(
-                results.find(result => result.name === 'job_id')?.id
-              );
-            }
-          },
-          handleError: () => {
-            if (isMounted) {
-              setTemplateInputId(undefined);
-            }
-          },
-        })
-      );
-    }
-    return () => {
-      isMounted = false;
-    };
-  }, [dispatch, reportTemplateJobId]);
 
   const recurrenceDropdownItems = useMemo(
     () =>

@@ -7,7 +7,7 @@ module Api
 
       before_action :find_optional_nested_object, :only => %w{output raw_output}
       before_action :find_host, :only => %w{output raw_output}
-      before_action :find_resource, :only => %w{show update destroy clone cancel rerun outputs hosts}
+      before_action :find_resource, :only => %w{show update destroy clone cancel rerun outputs hosts report}
 
       wrap_parameters JobInvocation, :include => (JobInvocation.attribute_names + [:ssh])
 
@@ -217,6 +217,21 @@ module Api
         render :json => { :outputs => outputs }
       end
 
+      api :GET, '/job_invocations/:id/report', N_('Redirect to the report generation page for a job invocation')
+      param :id, :identifier, :required => true
+      def report
+        template = job_report_template
+        unless template
+          return not_found(_('Report template not found or not configured properly'))
+        end
+
+        unless ReportTemplate.authorized(:generate_report_templates).find_by(:id => template.id)
+          return deny_access(_('Missing permissions to generate report templates'))
+        end
+
+        redirect_to generate_report_template_path(template, job_report_template_parameters(@job_invocation, template))
+      end
+
       def resource_name(resource = controller_name)
         case resource
         when 'organization', 'location'
@@ -234,7 +249,7 @@ module Api
 
       def action_permission
         case params[:action]
-        when 'output', 'raw_output', 'outputs', 'hosts'
+        when 'output', 'raw_output', 'outputs', 'hosts', 'report'
           :view
         when 'cancel'
           :cancel

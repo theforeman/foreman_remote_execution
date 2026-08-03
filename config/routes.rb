@@ -70,6 +70,7 @@ Rails.application.routes.draw do
           get 'hosts'
           post 'cancel'
           post 'rerun'
+          get 'report'
           get  'template_invocations', :to => 'template_invocations#template_invocations'
           get 'outputs'
           post 'outputs'

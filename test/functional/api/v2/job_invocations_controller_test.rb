@@ -477,6 +477,25 @@ module Api
         assert_equal "name ^ (#{hostnames.join(',')})", targeting.search_query
       end
 
+      describe '#report' do
+        setup do
+          @report_template = FactoryBot.create(:report_template, :name => 'Job - Invocation Report', :template => '<%= "report output" %>')
+          @report_template.template_inputs.create!(:name => 'job_id', :input_type => 'user')
+          Setting['remote_execution_job_invocation_report_template'] = @report_template.name
+        end
+
+        test 'should redirect to report generation page' do
+          get :report, params: { :id => @invocation.id }
+          assert_response :redirect
+        end
+
+        test 'should return 404 when report template is not configured' do
+          Setting['remote_execution_job_invocation_report_template'] = 'Nonexistent Template'
+          get :report, params: { :id => @invocation.id }
+          assert_response :not_found
+        end
+      end
+
       test 'should return 404 if template is not found' do
         @invocation.job_category = 'Missing category'
         @invocation.save!

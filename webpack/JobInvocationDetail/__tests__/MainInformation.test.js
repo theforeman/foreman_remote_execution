@@ -15,8 +15,6 @@ import {
   jobInvocationData,
   jobInvocationDataScheduled,
   jobInvocationDataRecurring,
-  mockReportTemplatesResponse,
-  mockReportTemplateInputsResponse,
 } from './fixtures';
 import {
   cancelJob,
@@ -28,9 +26,6 @@ import {
   CANCEL_JOB,
   CANCEL_RECURRING_LOGIC,
   CHANGE_ENABLED_RECURRING_LOGIC,
-  GET_REPORT_TEMPLATES,
-  GET_REPORT_TEMPLATE_SETTING,
-  GET_REPORT_TEMPLATE_INPUTS,
   JOB_INVOCATION_KEY,
 } from '../JobInvocationConstants';
 
@@ -84,29 +79,9 @@ jest.mock('foremanReact/routes/common/PageLayout/PageLayout', () =>
 );
 
 const setupApiMocks = () => {
-  api.get.mockImplementation(({ handleSuccess, key, ...action }) => {
-    if (key === GET_REPORT_TEMPLATE_SETTING) {
-      if (handleSuccess) {
-        handleSuccess({
-          data: { value: 'Job - Invocation Report' },
-        });
-      }
-    } else if (key === GET_REPORT_TEMPLATES) {
-      if (handleSuccess) {
-        handleSuccess({
-          data: mockReportTemplatesResponse,
-        });
-      }
-    } else if (key === GET_REPORT_TEMPLATE_INPUTS) {
-      if (handleSuccess) {
-        handleSuccess({
-          data: mockReportTemplateInputsResponse,
-        });
-      }
-    }
-
-    return { type: 'get', key, ...action };
-  });
+  api.get.mockImplementation(({ handleSuccess, key, ...action }) =>
+    ({ type: 'get', key, ...action })
+  );
   APIActions.post.mockImplementation(payload => ({ type: 'post', ...payload }));
   APIActions.put.mockImplementation(payload => ({ type: 'put', ...payload }));
 };
@@ -137,8 +112,6 @@ const createJobInvocationDetailState = ({
 jest.mock('../JobInvocationHostTable.js', () => () => (
   <div data-testid="mock-table">Mock Table</div>
 ));
-
-const reportTemplateJobId = mockReportTemplatesResponse.results[0].id;
 
 const defaultHistory = { push: jest.fn() };
 
@@ -242,9 +215,7 @@ describe('JobInvocationDetailPage', () => {
 
     // checks the global actions and if they link to the correct url
     expect(screen.getByText('Create report').getAttribute('href')).toEqual(
-      foremanUrl(
-        `/templates/report_templates/${mockReportTemplatesResponse.results[0].id}/generate?report_template_report%5Binput_values%5D%5B${mockReportTemplateInputsResponse.results[0].id}%5D%5Bvalue%5D=${jobId}`
-      )
+      foremanUrl(`/api/v2/job_invocations/${jobId}/report`)
     );
     expect(screen.getByText('Rerun all').getAttribute('href')).toEqual(
       foremanUrl(`/job_invocations/${jobId}/rerun`)
@@ -315,59 +286,6 @@ describe('JobInvocationDetailPage', () => {
     expect(createReportButton).toHaveClass('pf-m-disabled');
   });
 
-  it('falls back to default template name when settings API fails', async () => {
-    api.get.mockImplementation(
-      ({ handleSuccess, handleError, key, ...action }) => {
-        if (key === GET_REPORT_TEMPLATE_SETTING) {
-          if (handleError) {
-            handleError({ message: 'Not found' });
-          }
-        } else if (key === GET_REPORT_TEMPLATES) {
-          if (handleSuccess) {
-            handleSuccess({
-              data: mockReportTemplatesResponse,
-            });
-          }
-        } else if (key === GET_REPORT_TEMPLATE_INPUTS) {
-          if (handleSuccess) {
-            handleSuccess({
-              data: mockReportTemplateInputsResponse,
-            });
-          }
-        }
-
-        return { type: 'get', key, ...action };
-      }
-    );
-
-    const jobId = jobInvocationData.id;
-
-    renderJobInvocationDetailPage(createJobInvocationDetailState(), {
-      jobId,
-    });
-
-    expect(api.get).toHaveBeenCalledWith(
-      expect.objectContaining({
-        key: GET_REPORT_TEMPLATE_SETTING,
-        url: '/api/settings/remote_execution_job_invocation_report_template',
-      })
-    );
-    expect(api.get).toHaveBeenCalledWith(
-      expect.objectContaining({
-        key: GET_REPORT_TEMPLATES,
-        url: '/api/report_templates',
-        params: expect.objectContaining({
-          search: 'name="Job - Invocation Report"',
-        }),
-      })
-    );
-    expect(screen.getByText('Create report').getAttribute('href')).toEqual(
-      foremanUrl(
-        `/templates/report_templates/${mockReportTemplatesResponse.results[0].id}/generate?report_template_report%5Binput_values%5D%5B${mockReportTemplateInputsResponse.results[0].id}%5D%5Bvalue%5D=${jobId}`
-      )
-    );
-  });
-
   it('should dispatch global actions', async () => {
     const jobId = jobInvocationDataRecurring.id;
     const recurrenceId = jobInvocationDataRecurring.recurrence.id;
@@ -377,25 +295,6 @@ describe('JobInvocationDetailPage', () => {
         jobInvocation: jobInvocationDataRecurring,
       }),
       { jobId }
-    );
-
-    expect(api.get).toHaveBeenCalledWith(
-      expect.objectContaining({
-        key: GET_REPORT_TEMPLATE_SETTING,
-        url: '/api/settings/remote_execution_job_invocation_report_template',
-      })
-    );
-    expect(api.get).toHaveBeenCalledWith(
-      expect.objectContaining({
-        key: GET_REPORT_TEMPLATES,
-        url: '/api/report_templates',
-      })
-    );
-    expect(api.get).toHaveBeenCalledWith(
-      expect.objectContaining({
-        key: GET_REPORT_TEMPLATE_INPUTS,
-        url: `/api/templates/${reportTemplateJobId}/template_inputs`,
-      })
     );
 
     api.get.mockClear();
@@ -472,7 +371,6 @@ describe('JobInvocationDetailPage', () => {
     expect(
       screen.getByRole('heading', {
         name: 'Unable to load job invocation',
-        level: 5,
       })
     ).toBeInTheDocument();
     expect(

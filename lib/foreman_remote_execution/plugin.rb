@@ -135,7 +135,7 @@ Foreman::Plugin.register :foreman_remote_execution do
     permission :create_job_invocations, { :job_invocations => [:new, :create, :legacy_create, :refresh, :rerun, :preview_hosts],
                                           'api/v2/job_invocations' => [:create, :rerun] }, :resource_type => 'JobInvocation'
     permission :view_job_invocations, { :job_invocations => [:index, :chart, :show, :auto_complete_search, :preview_job_invocations_per_host], :template_invocations => [:show, :show_template_invocation_by_host],
-                                        'api/v2/job_invocations' => [:index, :show, :output, :raw_output, :outputs, :hosts] }, :resource_type => 'JobInvocation'
+                                        'api/v2/job_invocations' => [:index, :show, :output, :raw_output, :outputs, :hosts, :report] }, :resource_type => 'JobInvocation'
     permission :view_template_invocations, { :template_invocations => [:show, :template_invocation_preview, :show_template_invocation_by_host],
                                             'api/v2/template_invocations' => [:template_invocations], :ui_job_wizard => [:job_invocation] }, :resource_type => 'TemplateInvocation'
     permission :create_template_invocations, {}, :resource_type => 'TemplateInvocation'
