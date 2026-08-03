@@ -22,6 +22,8 @@ const extractErrorMessage = response =>
   response?.data?.error?.message ||
   __('Unknown error.');
 
+const createPollState = cancel => ({ timeoutId: null, cancel });
+
 export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
   let cancelled = false;
 
@@ -35,15 +37,13 @@ export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
         handleSuccess: ({ data }) => {
           if (cancelled) return;
           // eslint-disable-next-line camelcase
-          if (!isJobFinished(data?.status_label)) {
-            pollTimeoutRef.current = setTimeout(poll, POLL_INTERVAL);
-          } else {
-            pollTimeoutRef.current = null;
-          }
+          pollTimeoutRef.current.timeoutId = isJobFinished(data?.status_label)
+            ? null
+            : setTimeout(poll, POLL_INTERVAL);
         },
         handleError: () => {
           if (cancelled) return;
-          pollTimeoutRef.current = null;
+          pollTimeoutRef.current.timeoutId = null;
         },
         errorToast: ({ response }) => extractErrorMessage(response),
       })
@@ -51,21 +51,17 @@ export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
   };
 
   stopJobInvocationPolling(pollTimeoutRef);
-
-  // Cancel previous poll cycle's in-flight requests
-  if (pollTimeoutRef.cancelPreviousCycle) {
-    pollTimeoutRef.cancelPreviousCycle();
-  }
-  pollTimeoutRef.cancelPreviousCycle = () => {
+  pollTimeoutRef.current = createPollState(() => {
     cancelled = true;
-  };
+  });
 
   poll();
 };
 
 export const stopJobInvocationPolling = pollTimeoutRef => {
-  clearTimeout(pollTimeoutRef.current);
-  pollTimeoutRef.current = null;
+  clearTimeout(pollTimeoutRef.current.timeoutId);
+  pollTimeoutRef.current.cancel();
+  pollTimeoutRef.current = createPollState(() => {});
 };
 
 export const cancelJob = (jobId, force) => dispatch => {

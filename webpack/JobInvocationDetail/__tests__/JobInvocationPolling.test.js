@@ -11,7 +11,7 @@ jest.useFakeTimers();
 
 const reducer = (state = {}) => state;
 const makeStore = () => createStore(reducer, applyMiddleware(thunk));
-const makeRef = () => ({ current: null });
+const makeRef = () => ({ current: { timeoutId: null, cancel: () => {} } });
 
 const runningData = { status_label: 'running' };
 const succeededData = { status_label: 'succeeded' };
@@ -195,6 +195,29 @@ describe('job invocation polling', () => {
     firstCallHandleSuccess({ data: runningData });
 
     // Timeout should not be set by the stale callback
-    expect(ref.current).toBeNull();
+    expect(ref.current.timeoutId).toBeNull();
+  });
+
+  it('ignores a stale response resolving after stopJobInvocationPolling (e.g. unmount)', () => {
+    let capturedHandleSuccess;
+    apiGetSpy = jest
+      .spyOn(APIActions, 'get')
+      .mockImplementation(({ handleSuccess }) => dispatch => {
+        capturedHandleSuccess = handleSuccess;
+        return dispatch({ type: 'MOCK_GET' });
+      });
+
+    const store = makeStore();
+    store.dispatch(getJobInvocation(url, ref));
+    expect(apiGetSpy).toHaveBeenCalledTimes(1);
+
+    // Simulate unmount: stop polling while the request is still in flight.
+    stopJobInvocationPolling(ref);
+
+    // The in-flight request resolves after the "unmount".
+    capturedHandleSuccess({ data: runningData });
+
+    // The stale response must not revive polling.
+    expect(ref.current.timeoutId).toBeNull();
   });
 });

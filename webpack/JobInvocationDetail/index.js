@@ -53,7 +53,7 @@ const JobInvocationDetailPage = ({
     targeting = {},
   } = items;
   const finished = isJobFinished(statusLabel);
-  const pollTimeoutRef = useRef(null);
+  const pollTimeoutRef = useRef({ timeoutId: null, cancel: () => {} });
   const jobInvocationApiStatus = useSelector(state =>
     selectAPIStatus(state, JOB_INVOCATION_KEY)
   );
