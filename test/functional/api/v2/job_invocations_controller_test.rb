@@ -484,15 +484,46 @@ module Api
           Setting['remote_execution_job_invocation_report_template'] = @report_template.name
         end
 
-        test 'should redirect to report generation page' do
+        test 'should return report URL' do
           get :report, params: { :id => @invocation.id }
-          assert_response :redirect
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_includes result['report_url'], "/templates/report_templates/"
+          assert_includes result['report_url'], "/generate"
         end
 
         test 'should return 404 when report template is not configured' do
           Setting['remote_execution_job_invocation_report_template'] = 'Nonexistent Template'
           get :report, params: { :id => @invocation.id }
           assert_response :not_found
+        end
+
+        test 'should deny access when user lacks generate_report_templates permission' do
+          user = FactoryBot.create(:user, :admin => false)
+          @report_template.organizations = user.organizations
+          @report_template.locations = user.locations
+          setup_user('view', 'job_invocations', nil, user)
+          setup_user('view', 'hosts', nil, user)
+          setup_user('view', 'report_templates', nil, user)
+
+          get :report, params: { :id => @invocation.id }, session: set_session_user(user)
+          assert_response :forbidden
+        end
+
+        test 'should return report URL when user has generate_report_templates permission' do
+          user = FactoryBot.create(:user, :admin => false)
+          @report_template.organizations = user.organizations
+          @report_template.locations = user.locations
+          setup_user('view', 'job_invocations', nil, user)
+          setup_user('view', 'hosts', nil, user)
+          setup_user('view', 'report_templates', nil, user)
+          setup_user('generate', 'report_templates', nil, user)
+
+          get :report, params: { :id => @invocation.id }, session: set_session_user(user)
+          assert_response :success
+          result = ActiveSupport::JSON.decode(@response.body)
+          assert_includes result['report_url'], "/templates/report_templates/"
+          assert_includes result['report_url'], "/generate"
         end
       end
 

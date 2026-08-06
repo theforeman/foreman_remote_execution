@@ -217,7 +217,7 @@ module Api
         render :json => { :outputs => outputs }
       end
 
-      api :GET, '/job_invocations/:id/report', N_('Redirect to the report generation page for a job invocation')
+      api :GET, '/job_invocations/:id/report', N_('Get report template URL for a job invocation')
       param :id, :identifier, :required => true
       def report
         template = job_report_template
@@ -229,7 +229,9 @@ module Api
           return deny_access(_('Missing permissions to generate report templates'))
         end
 
-        redirect_to generate_report_template_path(template, job_report_template_parameters(@job_invocation, template))
+        render :json => {
+          :report_url => generate_report_template_path(template, job_report_template_parameters(@job_invocation, template)),
+        }
       end
 
       def resource_name(resource = controller_name)

@@ -17,6 +17,7 @@ import {
   cancelJob,
   cancelRecurringLogic,
   enableRecurringLogic,
+  fetchReport,
 } from './JobInvocationActions';
 import { STATUS } from './JobInvocationConstants';
 import { selectTaskCancelable } from './JobInvocationSelectors';
@@ -38,7 +39,6 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
   ]);
   const [isActionOpen, setIsActionOpen] = useState(false);
   const dispatch = useDispatch();
-  const reportHref = foremanUrl(`/api/v2/job_invocations/${jobId}/report`);
 
   const isCreateReportDisabled =
     !canGenerateReportTemplates ||
@@ -191,7 +191,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
             variant="control"
             isDisabled={!canCreateJobInvocations}
           >
-            {__(`Rerun all`)}
+            {__('Rerun all')}
           </Button>,
         ]}
         splitButtonVariant="action"
@@ -206,14 +206,12 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
       <Split hasGutter>
         <SplitItem>
           <Button
-            component="a"
             ouiaId="button-create-report"
-            className="button-create-report"
-            href={reportHref}
+            onClick={() => dispatch(fetchReport(jobId))}
             variant="secondary"
             isDisabled={isCreateReportDisabled}
           >
-            {__(`Create report`)}
+            {__('Create report')}
           </Button>
         </SplitItem>
         <SplitItem>

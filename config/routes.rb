@@ -71,7 +71,7 @@ Rails.application.routes.draw do
           post 'cancel'
           post 'rerun'
           get 'report'
-          get  'template_invocations', :to => 'template_invocations#template_invocations'
+          get 'template_invocations', :to => 'template_invocations#template_invocations'
           get 'outputs'
           post 'outputs'
         end
