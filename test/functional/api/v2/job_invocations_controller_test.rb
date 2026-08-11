@@ -477,56 +477,6 @@ module Api
         assert_equal "name ^ (#{hostnames.join(',')})", targeting.search_query
       end
 
-      describe '#report' do
-        setup do
-          @report_template = FactoryBot.create(:report_template, :name => 'Job - Invocation Report', :template => '<%= "report output" %>')
-          @report_template.template_inputs.create!(:name => 'job_id', :input_type => 'user')
-          Setting['remote_execution_job_invocation_report_template'] = @report_template.name
-        end
-
-        test 'should return report URL' do
-          get :report, params: { :id => @invocation.id }
-          assert_response :success
-          result = ActiveSupport::JSON.decode(@response.body)
-          assert_includes result['report_url'], "/templates/report_templates/"
-          assert_includes result['report_url'], "/generate"
-        end
-
-        test 'should return 404 when report template is not configured' do
-          Setting['remote_execution_job_invocation_report_template'] = 'Nonexistent Template'
-          get :report, params: { :id => @invocation.id }
-          assert_response :not_found
-        end
-
-        test 'should deny access when user lacks generate_report_templates permission' do
-          user = FactoryBot.create(:user, :admin => false)
-          @report_template.organizations = user.organizations
-          @report_template.locations = user.locations
-          setup_user('view', 'job_invocations', nil, user)
-          setup_user('view', 'hosts', nil, user)
-          setup_user('view', 'report_templates', nil, user)
-
-          get :report, params: { :id => @invocation.id }, session: set_session_user(user)
-          assert_response :forbidden
-        end
-
-        test 'should return report URL when user has generate_report_templates permission' do
-          user = FactoryBot.create(:user, :admin => false)
-          @report_template.organizations = user.organizations
-          @report_template.locations = user.locations
-          setup_user('view', 'job_invocations', nil, user)
-          setup_user('view', 'hosts', nil, user)
-          setup_user('view', 'report_templates', nil, user)
-          setup_user('generate', 'report_templates', nil, user)
-
-          get :report, params: { :id => @invocation.id }, session: set_session_user(user)
-          assert_response :success
-          result = ActiveSupport::JSON.decode(@response.body)
-          assert_includes result['report_url'], "/templates/report_templates/"
-          assert_includes result['report_url'], "/generate"
-        end
-      end
-
       test 'should return 404 if template is not found' do
         @invocation.job_category = 'Missing category'
         @invocation.save!

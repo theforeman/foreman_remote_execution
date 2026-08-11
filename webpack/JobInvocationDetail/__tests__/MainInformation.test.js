@@ -20,14 +20,12 @@ import {
   cancelJob,
   enableRecurringLogic,
   cancelRecurringLogic,
-  fetchReport,
 } from '../JobInvocationActions';
 import { createForemanContextWrapper } from './foremanTestHelpers';
 import {
   CANCEL_JOB,
   CANCEL_RECURRING_LOGIC,
   CHANGE_ENABLED_RECURRING_LOGIC,
-  FETCH_REPORT,
   JOB_INVOCATION_KEY,
 } from '../JobInvocationConstants';
 
@@ -216,7 +214,9 @@ describe('JobInvocationDetailPage', () => {
     });
 
     // checks the global actions and if they link to the correct url
-    expect(screen.getByText('Create report')).toBeInTheDocument();
+    expect(screen.getByText('Create report').getAttribute('href')).toEqual(
+      foremanUrl(`/job_invocations/${jobId}/report`)
+    );
     expect(screen.getByText('Rerun all').getAttribute('href')).toEqual(
       foremanUrl(`/job_invocations/${jobId}/rerun`)
     );
@@ -278,11 +278,12 @@ describe('JobInvocationDetailPage', () => {
       })
     );
 
-    const createReportButton = screen.getByRole('button', {
+    const createReportButton = screen.getByRole('link', {
       name: 'Create report',
     });
 
-    expect(createReportButton).toBeDisabled();
+    expect(createReportButton).toHaveAttribute('aria-disabled', 'true');
+    expect(createReportButton).toHaveClass('pf-m-disabled');
   });
 
   it('should dispatch global actions', async () => {
@@ -297,7 +298,6 @@ describe('JobInvocationDetailPage', () => {
     );
 
     api.get.mockClear();
-    APIActions.get.mockClear();
     APIActions.post.mockClear();
     APIActions.put.mockClear();
 
@@ -306,14 +306,7 @@ describe('JobInvocationDetailPage', () => {
     store.dispatch(enableRecurringLogic(recurrenceId, true));
     store.dispatch(enableRecurringLogic(recurrenceId, false));
     store.dispatch(cancelRecurringLogic(recurrenceId));
-    store.dispatch(fetchReport(jobId));
 
-    expect(APIActions.get).toHaveBeenCalledWith(
-      expect.objectContaining({
-        key: FETCH_REPORT,
-        url: `/api/v2/job_invocations/${jobId}/report`,
-      })
-    );
     expect(APIActions.post).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({
@@ -378,6 +371,7 @@ describe('JobInvocationDetailPage', () => {
     expect(
       screen.getByRole('heading', {
         name: 'Unable to load job invocation',
+        level: 5,
       })
     ).toBeInTheDocument();
     expect(

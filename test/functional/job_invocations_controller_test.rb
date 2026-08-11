@@ -60,6 +60,51 @@ class JobInvocationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  context '#report' do
+    setup do
+      @invocation = FactoryBot.create(:job_invocation, :with_template, :with_task)
+      @report_template = FactoryBot.create(:report_template, :name => 'Job - Invocation Report', :template => '<%= "report output" %>')
+      @report_template.template_inputs.create!(:name => 'job_id', :input_type => 'user')
+      Setting['remote_execution_job_invocation_report_template'] = @report_template.name
+    end
+
+    test 'should redirect to report generation page' do
+      get :report, params: { :id => @invocation.id }, session: set_session_user
+      assert_response :redirect
+    end
+
+    test 'should return 404 when report template is not configured' do
+      Setting['remote_execution_job_invocation_report_template'] = 'Nonexistent Template'
+      get :report, params: { :id => @invocation.id }, session: set_session_user
+      assert_response :not_found
+    end
+
+    test 'should deny access when user lacks generate_report_templates permission' do
+      user = FactoryBot.create(:user, :admin => false)
+      @report_template.organizations = user.organizations
+      @report_template.locations = user.locations
+      setup_user('view', 'job_invocations', nil, user)
+      setup_user('view', 'hosts', nil, user)
+      setup_user('view', 'report_templates', nil, user)
+
+      get :report, params: { :id => @invocation.id }, session: set_session_user(user)
+      assert_response :forbidden
+    end
+
+    test 'should redirect when user has generate_report_templates permission' do
+      user = FactoryBot.create(:user, :admin => false)
+      @report_template.organizations = user.organizations
+      @report_template.locations = user.locations
+      setup_user('view', 'job_invocations', nil, user)
+      setup_user('view', 'hosts', nil, user)
+      setup_user('view', 'report_templates', nil, user)
+      setup_user('generate', 'report_templates', nil, user)
+
+      get :report, params: { :id => @invocation.id }, session: set_session_user(user)
+      assert_response :redirect
+    end
+  end
+
   context 'restricted access' do
     setup do
       @admin = users(:admin)
