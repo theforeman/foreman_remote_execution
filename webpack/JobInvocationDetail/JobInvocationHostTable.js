@@ -42,6 +42,7 @@ import Columns, {
   STATUS_UPPERCASE,
   AWAITING_STATUS_FILTER,
   AUTO_REFRESH_INTERVAL_MS,
+  areAllHostsTerminal,
 } from './JobInvocationConstants';
 import { TemplateInvocation } from './TemplateInvocation';
 import { RowActions } from './TemplateInvocationComponents/TemplateActionButtons';
@@ -196,7 +197,8 @@ const JobInvocationHostTable = ({
             if (thisRequest !== requestIdRef.current) return;
             if (!mountedRef.current) return;
             updateHostsState(data);
-            if (!jobFinishedRef.current) {
+            const pageAllTerminal = areAllHostsTerminal(data.data?.results);
+            if (!jobFinishedRef.current && !pageAllTerminal) {
               pollTimeoutId.current = setTimeout(
                 () => makeApiCall(currentPollParams.current),
                 AUTO_REFRESH_INTERVAL_MS
