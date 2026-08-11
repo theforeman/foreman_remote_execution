@@ -82,9 +82,9 @@ const flushPendingCallbacks = () => {
   batch.forEach(cb => cb());
 };
 
-const renderTable = (props = {}) => {
+const renderTable = (props = {}, historyEntries = ['/']) => {
   const store = createStore();
-  const history = createMemoryHistory();
+  const history = createMemoryHistory({ initialEntries: historyEntries });
   const Wrapper = createForemanContextWrapper();
 
   const defaultProps = {
@@ -353,6 +353,52 @@ describe('JobInvocationHostTable polling', () => {
     setupSuccessMock(mixedHostsResponse);
 
     renderTable();
+
+    expect(hostsCalls).toHaveLength(1);
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    expect(hostsCalls).toHaveLength(2);
+  });
+
+  it('continues polling when all hosts on the page are terminal but a status filter is active', () => {
+    apiGetSpy.mockRestore();
+    setupSuccessMock(terminalHostsResponse);
+
+    renderTable({ initialFilter: 'success' });
+
+    expect(hostsCalls).toHaveLength(1);
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    expect(hostsCalls).toHaveLength(2);
+  });
+
+  it('continues polling when all hosts on the page are terminal but a search query is active', () => {
+    apiGetSpy.mockRestore();
+    setupSuccessMock(terminalHostsResponse);
+
+    renderTable({}, ['/?search=host1']);
 
     expect(hostsCalls).toHaveLength(1);
 
