@@ -12,6 +12,7 @@ import {
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { MS_PER_MINUTE } from 'foremanReact/constants';
 import { RepeatOn } from './RepeatOn';
 import { SCHEDULE_TYPES } from '../../JobWizardConstants';
 import { PurposeField } from './PurposeField';
@@ -114,7 +115,7 @@ export const ScheduleRecurring = ({
                   setScheduleValue(current => ({
                     ...current,
                     startsAt: new Date(
-                      new Date().getTime() + 60000
+                      new Date().getTime() + MS_PER_MINUTE
                     ).toISOString(), // 1 minute in the future
                     isFuture: true,
                   }))

@@ -7,9 +7,8 @@ import {
   CHANGE_ENABLED_RECURRING_LOGIC,
   JOB_INVOCATION_KEY,
   STATUS,
+  AUTO_REFRESH_INTERVAL_MS,
 } from './JobInvocationConstants';
-
-const POLL_INTERVAL = 5000;
 
 export const isJobFinished = statusLabel =>
   statusLabel === STATUS.FAILED ||
@@ -46,7 +45,7 @@ export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
           // eslint-disable-next-line camelcase
           pollTimeoutRef.current.timeoutId = isJobFinished(data?.status_label)
             ? null
-            : setTimeout(poll, POLL_INTERVAL);
+            : setTimeout(poll, AUTO_REFRESH_INTERVAL_MS);
         },
         handleError: () => {
           if (cancelled) return;

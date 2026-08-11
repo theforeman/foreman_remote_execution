@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormGroup, Radio, Divider } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { MS_PER_MINUTE } from 'foremanReact/constants';
 import {
   WIZARD_TITLES,
   SCHEDULE_TYPES,
@@ -49,7 +50,9 @@ export const ScheduleType = ({
           onChange={() => {
             setScheduleValue(current => ({
               ...current,
-              startsAt: new Date(new Date().getTime() + 60000).toISOString(), // 1 minute in the future
+              startsAt: new Date(
+                new Date().getTime() + MS_PER_MINUTE
+              ).toISOString(), // 1 minute in the future
               scheduleType: SCHEDULE_TYPES.FUTURE,
               repeatType: repeatTypes.noRepeat,
             }));

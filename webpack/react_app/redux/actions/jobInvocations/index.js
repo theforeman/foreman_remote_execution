@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import API from 'foremanReact/API';
+import { HTTP_STATUS_CODES, MS_PER_SECOND } from 'foremanReact/constants';
 
 import {
   JOB_INVOCATIONS_GET_JOB_INVOCATIONS,
@@ -7,7 +8,7 @@ import {
   JOB_INVOCATIONS_JOB_FINISHED,
 } from '../../consts';
 
-const defaultJobInvocationsPollingInterval = 1000;
+const defaultJobInvocationsPollingInterval = MS_PER_SECOND;
 const jobInvocationsInterval =
   process.env.JOB_INVOCATIONS_POLLING || defaultJobInvocationsPollingInterval;
 
@@ -32,7 +33,7 @@ const getJobInvocations = url => async (dispatch, getState) => {
   }
 
   function onGetJobInvocationsFailed(error) {
-    if (error.response.status === 401) {
+    if (error.response.status === HTTP_STATUS_CODES.UNAUTHORIZED) {
       window.location.replace('/users/login');
     }
   }

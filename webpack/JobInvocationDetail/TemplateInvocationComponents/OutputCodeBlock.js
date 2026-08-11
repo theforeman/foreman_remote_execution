@@ -7,6 +7,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { Button } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { MS_PER_SECOND } from 'foremanReact/constants';
 
 export const OutputCodeBlock = ({ code, showOutputType, scrollElement }) => {
   let lineCounter = 0;
@@ -122,7 +123,7 @@ export const OutputCodeBlock = ({ code, showOutputType, scrollElement }) => {
         <div key={index} className={`line ${line.output_type}`}>
           <span
             className="counter"
-            title={new Date(line.timestamp * 1000).toISOString()}
+            title={new Date(line.timestamp * MS_PER_SECOND).toISOString()}
           >
             {lineCounter.toString().padStart(4, '\u00A0')}:{' '}
           </span>

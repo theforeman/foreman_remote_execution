@@ -1,5 +1,6 @@
 .job-invocation-detail-flex {
   $chart_size: 105px;
+
   padding-top: 0px;
   padding-left: 10px;
   display: flex;
@@ -92,16 +93,17 @@ section.job-additional-info {
       max-height: 25em;
     }
   }
+
   div.invocation-output {
     display: block;
     padding: 9.5px;
     margin: 0 0 10px;
     font-size: 12px;
     word-break: break-all;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     color: rgba(255, 255, 255, 1);
     background-color: rgba(47, 47, 47, 1);
-    border: 1px solid #000000;
+    border: 1px solid #000;
     border-radius: 0px;
     font-family: Menlo, Monaco, Consolas, monospace;
 
@@ -127,7 +129,7 @@ section.job-additional-info {
     }
 
     a {
-      color: #ffffff;
+      color: #fff;
     }
 
     a.scroll-link{
