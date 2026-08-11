@@ -197,7 +197,12 @@ const JobInvocationHostTable = ({
             if (thisRequest !== requestIdRef.current) return;
             if (!mountedRef.current) return;
             updateHostsState(data);
-            const pageAllTerminal = areAllHostsTerminal(data.data?.results);
+            const hasActiveFilter = !!(
+              currentPollParams.current.search ||
+              currentPollParams.current.awaiting
+            );
+            const pageAllTerminal =
+              !hasActiveFilter && areAllHostsTerminal(data.data?.results);
             if (!jobFinishedRef.current && !pageAllTerminal) {
               pollTimeoutId.current = setTimeout(
                 () => makeApiCall(currentPollParams.current),
