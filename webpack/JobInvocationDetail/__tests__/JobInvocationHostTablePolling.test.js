@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import { render, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -44,10 +45,25 @@ const hostsResponse = {
       operatingsystem_name: 'RHEL 9',
       hostgroup_id: 1,
       hostgroup_name: 'default',
-      job_status: 'success',
+      job_status: 'running',
       smart_proxy_id: 1,
       smart_proxy_name: 'proxy1',
     },
+  ],
+};
+
+const terminalHostsResponse = {
+  ...hostsResponse,
+  results: [{ ...hostsResponse.results[0], job_status: 'success' }],
+};
+
+const mixedHostsResponse = {
+  ...hostsResponse,
+  total: 2,
+  subtotal: 2,
+  results: [
+    { ...hostsResponse.results[0], id: 1, job_status: 'success' },
+    { ...hostsResponse.results[0], id: 2, job_status: 'running' },
   ],
 };
 
@@ -93,16 +109,14 @@ const renderTable = (props = {}) => {
   return { ...result, store, history };
 };
 
-const setupSuccessMock = () => {
+const setupSuccessMock = (response = hostsResponse) => {
   apiGetSpy = jest
     .spyOn(APIActions, 'get')
     .mockImplementation(opts => dispatch => {
       if (opts.key === JOB_INVOCATION_HOSTS) {
         hostsCalls.push(opts);
         if (opts.handleSuccess) {
-          pendingCallbacks.push(() =>
-            opts.handleSuccess({ data: hostsResponse })
-          );
+          pendingCallbacks.push(() => opts.handleSuccess({ data: response }));
         }
       }
     });
@@ -309,6 +323,52 @@ describe('JobInvocationHostTable polling', () => {
     });
 
     expect(hostsCalls.length).toBeGreaterThan(callsAfterFilterChange);
+  });
+
+  it('stops polling when all hosts on the page are terminal', () => {
+    apiGetSpy.mockRestore();
+    setupSuccessMock(terminalHostsResponse);
+
+    renderTable();
+
+    expect(hostsCalls).toHaveLength(1);
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    act(() => {
+      jest.advanceTimersByTime(10000);
+    });
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    expect(hostsCalls).toHaveLength(1);
+  });
+
+  it('continues polling when at least one host on the page is non-terminal', () => {
+    apiGetSpy.mockRestore();
+    setupSuccessMock(mixedHostsResponse);
+
+    renderTable();
+
+    expect(hostsCalls).toHaveLength(1);
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    act(() => {
+      flushPendingCallbacks();
+    });
+
+    expect(hostsCalls).toHaveLength(2);
   });
 
   it('sends include_permissions only on the first request', () => {
