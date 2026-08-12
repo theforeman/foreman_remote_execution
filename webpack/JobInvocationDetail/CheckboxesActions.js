@@ -86,6 +86,7 @@ const ActionsKebab = ({
           id="toggle-kebab"
           isExpanded={isDropdownOpen}
           onClick={() => setIsDropdownOpen(prev => !prev)}
+          ouiaId="actions-kebab-toggle"
           ref={toggleRef}
           variant="plain"
         >
