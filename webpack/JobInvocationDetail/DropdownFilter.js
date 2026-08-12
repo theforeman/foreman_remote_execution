@@ -22,6 +22,7 @@ const DropdownFilter = ({ dropdownFilter, setDropdownFilter }) => {
       ref={toggleRef}
       onClick={() => setIsOpen(!isOpen)}
       isExpanded={isOpen}
+      ouiaId="host-status-select-toggle"
       style={{
         width: '200px',
       }}
