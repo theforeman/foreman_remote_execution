@@ -10,7 +10,6 @@ import {
 import { WizardContextConsumer } from '@patternfly/react-core/deprecated';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { get } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectJobTemplates,
@@ -19,13 +18,9 @@ import {
   selectTemplateInputs,
   selectAdvancedTemplateInputs,
 } from '../../JobWizardSelectors';
-import {
-  HOSTS_API,
-  HOSTS_TO_PREVIEW_AMOUNT,
-  WIZARD_TITLES,
-  SCHEDULE_TYPES,
-} from '../../JobWizardConstants';
+import { WIZARD_TITLES, SCHEDULE_TYPES } from '../../JobWizardConstants';
 import { buildHostQuery } from '../HostsAndInputs/buildHostQuery';
+import { loadHosts } from '../HostsAndInputs/loadHosts';
 import { WizardTitle } from '../form/WizardTitle';
 import { parseEnd, parseRepeat } from './helpers';
 import { HostPreviewModal } from '../HostsAndInputs/HostPreviewModal';
@@ -58,16 +53,7 @@ const ReviewDetails = ({
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(
-      get({
-        key: HOSTS_API,
-        url: '/api/hosts',
-        params: {
-          search: buildHostQuery(selectedTargets, hostsSearchQuery),
-          per_page: HOSTS_TO_PREVIEW_AMOUNT,
-        },
-      })
-    );
+    dispatch(loadHosts(buildHostQuery(selectedTargets, hostsSearchQuery)));
   }, [dispatch, hostsSearchQuery, selectedTargets]);
   const jobTemplates = useSelector(selectJobTemplates);
   const templateInputs = useSelector(selectTemplateInputs);

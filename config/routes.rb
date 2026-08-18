@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   get 'ui_job_wizard/template/:id', to: 'ui_job_wizard#template'
   get 'ui_job_wizard/resources', to: 'ui_job_wizard#resources'
   get 'ui_job_wizard/job_invocation', to: 'ui_job_wizard#job_invocation'
+  post 'ui_job_wizard/hosts', to: 'api/v2/hosts#index', :defaults => {:format => 'json'}
 
   namespace :api, :defaults => {:format => 'json'} do
     scope '(:apiv)', :module => :v2, :defaults => {:apiv => 'v2'}, :apiv => /v1|v2/, :constraints => ApiConstraints.new(:version => 2, :default => true) do
