@@ -3,12 +3,15 @@ import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import API from 'foremanReact/API';
 import * as api from 'foremanReact/redux/API';
 import * as selectors from '../JobInvocationSelectors';
 import { TemplateInvocation } from '../TemplateInvocation';
 import { mockTemplateInvocationResponse } from './fixtures';
 
 jest.spyOn(api, 'get');
+jest.mock('foremanReact/API');
 jest.mock('../JobInvocationSelectors');
 
 jest.mock('foremanReact/components/ToastsList', () => ({
@@ -47,6 +50,7 @@ const mockProps = {
 
 describe('TemplateInvocation', () => {
   beforeEach(() => {
+    API.get.mockImplementation(() => new Promise(() => {}));
     selectors.selectTemplateInvocationStatus.mockImplementation(() => () =>
       'RESOLVED'
     );
