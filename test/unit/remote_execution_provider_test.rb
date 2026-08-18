@@ -202,6 +202,62 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
       end
     end
 
+    describe 'remote working directory' do
+      it 'defaults to the value of the global setting' do
+        assert_equal '/var/tmp', proxy_options[:remote_working_dir]
+      end
+
+      it 'updates the value via settings' do
+        Setting[:remote_execution_remote_working_dir] = '/opt/rex'
+        assert_equal '/opt/rex', proxy_options[:remote_working_dir]
+      end
+
+      it 'takes the value from host parameters over the global setting' do
+        Setting[:remote_execution_remote_working_dir] = '/opt/rex'
+        host.host_parameters << FactoryBot.build(:host_parameter, name: 'remote_execution_remote_working_dir', value: '/opt/host')
+        host.clear_host_parameters_cache!
+        assert_equal '/opt/host', proxy_options[:remote_working_dir]
+      end
+
+      it 'takes the value inherited from the host group over the global setting' do
+        Setting[:remote_execution_remote_working_dir] = '/opt/rex'
+        hostgroup = FactoryBot.create(:hostgroup)
+        hostgroup.group_parameters << FactoryBot.build(:hostgroup_parameter, name: 'remote_execution_remote_working_dir', value: '/opt/hostgroup')
+        host.update!(hostgroup: hostgroup)
+        host.clear_host_parameters_cache!
+        assert_equal '/opt/hostgroup', proxy_options[:remote_working_dir]
+      end
+
+      it 'strips surrounding whitespace' do
+        Setting[:remote_execution_remote_working_dir] = ' /opt/rex '
+        assert_equal '/opt/rex', proxy_options[:remote_working_dir]
+      end
+
+      it 'rejects a setting value that is not an absolute path' do
+        assert_raises(ActiveRecord::RecordInvalid) do
+          Setting[:remote_execution_remote_working_dir] = 'opt/rex'
+        end
+      end
+
+      it 'rejects an empty setting value' do
+        assert_raises(ActiveRecord::RecordInvalid) do
+          Setting[:remote_execution_remote_working_dir] = ''
+        end
+      end
+
+      it 'raises when the host parameter is not an absolute path' do
+        host.host_parameters << FactoryBot.build(:host_parameter, name: 'remote_execution_remote_working_dir', value: 'opt/host')
+        host.clear_host_parameters_cache!
+        assert_raises(::Foreman::Exception) { proxy_options }
+      end
+
+      it 'raises when the host parameter is empty' do
+        host.host_parameters << FactoryBot.build(:host_parameter, name: 'remote_execution_remote_working_dir', value: '')
+        host.clear_host_parameters_cache!
+        assert_raises(::Foreman::Exception) { proxy_options }
+      end
+    end
+
     describe '#find_ip_or_hostname' do
       let(:host) do
         FactoryBot.create(:host) do |host|

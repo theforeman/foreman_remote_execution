@@ -86,6 +86,15 @@ Foreman::Plugin.register :foreman_remote_execution do
         description: N_('When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs.'),
         default: true,
         full_name: N_('Cleanup working directories')
+      setting 'remote_execution_remote_working_dir',
+        type: :string,
+        description: N_('Directory on the host where remote execution jobs in push mode place and run their scripts. '\
+                        'You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.'),
+        default: '/var/tmp',
+        full_name: N_('Remote working directory')
+      validates 'remote_execution_remote_working_dir',
+        ->(value) { Pathname.new(value.to_s.strip).absolute? },
+        message: N_('must be an absolute path')
       setting 'remote_execution_cockpit_url',
         type: :string,
         description: N_('Where to find the Cockpit instance for the Web Console button.  By default, no button is shown.'),
