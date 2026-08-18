@@ -76,6 +76,17 @@ class RemoteExecutionProvider
       [true, 'true', 'True', 'TRUE', '1'].include?(setting)
     end
 
+    def remote_working_dir(host)
+      dir = host_setting(host, :remote_execution_remote_working_dir).to_s.strip
+      unless Pathname.new(dir).absolute?
+        raise ::Foreman::Exception.new(
+          N_('Remote working directory "%{current_value}" is not an absolute path'),
+          current_value: dir
+        )
+      end
+      dir
+    end
+
     def effective_user_password(host)
       host_setting(host, :remote_execution_effective_user_password)
     end

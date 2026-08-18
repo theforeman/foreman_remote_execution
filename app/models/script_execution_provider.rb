@@ -1,11 +1,14 @@
 class ScriptExecutionProvider < RemoteExecutionProvider
   class << self
     def proxy_command_options(template_invocation, host)
-      super.merge(:ssh_user => ssh_user(host, template_invocation.job_invocation),
-        :effective_user => effective_user(template_invocation),
-        :effective_user_method => effective_user_method(host),
-        :cleanup_working_dirs => cleanup_working_dirs?(host),
-        :ssh_port => ssh_port(host))
+      super.merge(
+        ssh_user: ssh_user(host, template_invocation.job_invocation),
+        effective_user: effective_user(template_invocation),
+        effective_user_method: effective_user_method(host),
+        cleanup_working_dirs: cleanup_working_dirs?(host),
+        remote_working_dir: remote_working_dir(host),
+        ssh_port: ssh_port(host)
+      )
     end
 
     def humanized_name
