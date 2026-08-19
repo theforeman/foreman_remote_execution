@@ -70,7 +70,36 @@ class JobInvocationsControllerTest < ActionController::TestCase
 
     test 'should redirect to report generation page' do
       get :report, params: { :id => @invocation.id }, session: set_session_user
-      assert_response :redirect
+      template_input = @report_template.template_inputs.where(name: 'job_id').first
+      expected_params = {
+        report_template_report: {
+          input_values: {
+            "#{template_input.id}": {
+              value: @invocation.id,
+            },
+          },
+        },
+      }
+      assert_redirected_to generate_report_template_path(@report_template, expected_params)
+    end
+
+    test 'should redirect to report generation page with custom template name' do
+      custom_template = FactoryBot.create(:report_template, :name => 'My Custom Job Report', :template => '<%= "custom report" %>')
+      custom_template.template_inputs.create!(:name => 'job_id', :input_type => 'user')
+      Setting['remote_execution_job_invocation_report_template'] = custom_template.name
+
+      get :report, params: { :id => @invocation.id }, session: set_session_user
+      template_input = custom_template.template_inputs.where(name: 'job_id').first
+      expected_params = {
+        report_template_report: {
+          input_values: {
+            "#{template_input.id}": {
+              value: @invocation.id,
+            },
+          },
+        },
+      }
+      assert_redirected_to generate_report_template_path(custom_template, expected_params)
     end
 
     test 'should return 404 when report template is not configured' do
@@ -101,7 +130,17 @@ class JobInvocationsControllerTest < ActionController::TestCase
       setup_user('generate', 'report_templates', nil, user)
 
       get :report, params: { :id => @invocation.id }, session: set_session_user(user)
-      assert_response :redirect
+      template_input = @report_template.template_inputs.where(name: 'job_id').first
+      expected_params = {
+        report_template_report: {
+          input_values: {
+            "#{template_input.id}": {
+              value: @invocation.id,
+            },
+          },
+        },
+      }
+      assert_redirected_to generate_report_template_path(@report_template, expected_params)
     end
   end
 
