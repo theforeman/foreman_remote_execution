@@ -1,0 +1,6 @@
+<%
+# Extends api/v2/layouts/index_layout.json.erb with auto_refresh field
+base_json = JSON.parse(render(template: 'api/v2/layouts/index_layout', layout: false))
+base_json['auto_refresh'] = @auto_refresh
+base_json.to_json.html_safe
+%>

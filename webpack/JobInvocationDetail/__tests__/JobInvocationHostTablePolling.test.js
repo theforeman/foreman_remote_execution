@@ -36,6 +36,7 @@ const hostsResponse = {
   subtotal: 1,
   page: 1,
   per_page: 20,
+  auto_refresh: true,
   results: [
     {
       id: 1,
@@ -49,6 +50,11 @@ const hostsResponse = {
       smart_proxy_name: 'proxy1',
     },
   ],
+};
+
+const finishedHostsResponse = {
+  ...hostsResponse,
+  auto_refresh: false,
 };
 
 let apiGetSpy;
@@ -75,7 +81,6 @@ const renderTable = (props = {}) => {
     id: '42',
     targeting: { targeting_type: 'static_query', search_query: '' },
     initialFilter: 'all_statuses',
-    jobFinished: false,
     onFilterUpdate: jest.fn(),
     ...props,
   };
@@ -93,7 +98,10 @@ const renderTable = (props = {}) => {
   return { ...result, store, history };
 };
 
-const setupSuccessMock = () => {
+let mockResponse;
+
+const setupSuccessMock = (response = hostsResponse) => {
+  mockResponse = response;
   apiGetSpy = jest
     .spyOn(APIActions, 'get')
     .mockImplementation(opts => dispatch => {
@@ -101,7 +109,7 @@ const setupSuccessMock = () => {
         hostsCalls.push(opts);
         if (opts.handleSuccess) {
           pendingCallbacks.push(() =>
-            opts.handleSuccess({ data: hostsResponse })
+            opts.handleSuccess({ data: mockResponse })
           );
         }
       }
@@ -125,6 +133,7 @@ describe('JobInvocationHostTable polling', () => {
   beforeEach(() => {
     hostsCalls = [];
     pendingCallbacks = [];
+    mockResponse = hostsResponse;
     setupSuccessMock();
   });
 
@@ -165,8 +174,9 @@ describe('JobInvocationHostTable polling', () => {
     expect(hostsCalls).toHaveLength(3);
   });
 
-  it('does not schedule a poll when jobFinished is true', () => {
-    renderTable({ jobFinished: true });
+  it('does not schedule a poll when auto_refresh is false', () => {
+    setupSuccessMock(finishedHostsResponse);
+    renderTable();
 
     expect(hostsCalls).toHaveLength(1);
 
@@ -185,8 +195,8 @@ describe('JobInvocationHostTable polling', () => {
     expect(hostsCalls).toHaveLength(1);
   });
 
-  it('stops polling when jobFinished transitions to true', () => {
-    const { rerender } = renderTable();
+  it('stops polling when auto_refresh transitions to false', () => {
+    renderTable();
 
     act(() => {
       flushPendingCallbacks();
@@ -194,36 +204,19 @@ describe('JobInvocationHostTable polling', () => {
 
     expect(hostsCalls).toHaveLength(1);
 
-    const store = createStore();
-    const history = createMemoryHistory();
-    const Wrapper = createForemanContextWrapper();
+    mockResponse = finishedHostsResponse;
 
     act(() => {
-      rerender(
-        <Provider store={store}>
-          <Router history={history}>
-            <Wrapper>
-              <JobInvocationHostTable
-                id="42"
-                targeting={{
-                  targeting_type: 'static_query',
-                  search_query: '',
-                }}
-                initialFilter="all_statuses"
-                jobFinished
-                onFilterUpdate={jest.fn()}
-              />
-            </Wrapper>
-          </Router>
-        </Provider>
-      );
+      jest.advanceTimersByTime(5000);
     });
 
     act(() => {
       flushPendingCallbacks();
     });
 
-    const callsAtTransition = hostsCalls.length;
+    expect(hostsCalls).toHaveLength(2);
+
+    const callsAfterFinished = hostsCalls.length;
 
     act(() => {
       jest.advanceTimersByTime(10000);
@@ -233,7 +226,7 @@ describe('JobInvocationHostTable polling', () => {
       flushPendingCallbacks();
     });
 
-    expect(hostsCalls).toHaveLength(callsAtTransition);
+    expect(hostsCalls).toHaveLength(callsAfterFinished);
   });
 
   it('cleans up the poll timer on unmount', () => {

@@ -75,10 +75,6 @@ const JobInvocationHostTable = ({
   const currentPollParams = useRef({});
   const mountedRef = useRef(true);
   const requestIdRef = useRef(0);
-  const jobFinishedRef = useRef(jobFinished);
-  useEffect(() => {
-    jobFinishedRef.current = jobFinished;
-  }, [jobFinished]);
 
   const [hostInvocationStates, setHostInvocationStates] = useState({});
 
@@ -196,7 +192,7 @@ const JobInvocationHostTable = ({
             if (thisRequest !== requestIdRef.current) return;
             if (!mountedRef.current) return;
             updateHostsState(data);
-            if (!jobFinishedRef.current) {
+            if (data.data.auto_refresh) {
               pollTimeoutId.current = setTimeout(
                 () => makeApiCall(currentPollParams.current),
                 AUTO_REFRESH_INTERVAL_MS

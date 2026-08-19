@@ -118,6 +118,11 @@ module Api
       add_scoped_search_description_for(JobInvocation)
       param :id, :identifier, :required => true
       param :include_permissions, :bool, :required => false, :desc => N_('Include per-host task and permission data in the response')
+      description <<-DOC
+        Returns standard index metadata with an additional auto_refresh field.
+        The auto_refresh field indicates whether the job is still running and
+        the client should continue polling for updates.
+      DOC
       def hosts
         set_hosts_and_template_invocations
         @total = @hosts.size
@@ -128,7 +133,8 @@ module Api
         if params[:awaiting]
           @hosts = @hosts.select { |host| @host_statuses[host.id] == 'N/A' }
         end
-        render :hosts, :layout => 'api/v2/layouts/index_layout'
+        @auto_refresh = @job_invocation.task.try(:pending?) || false
+        render :hosts, :layout => 'api/v2/layouts/index_with_auto_refresh'
       end
 
       api :GET, '/job_invocations/:id/hosts/:host_id/raw', N_('Get raw output for a host')
