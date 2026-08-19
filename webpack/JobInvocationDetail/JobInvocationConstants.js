@@ -57,6 +57,16 @@ export const STATUS_TITLES = {
   NOT_STARTED: { id: 'N/A', title: __('Scheduled') },
 };
 
+export const TERMINAL_HOST_STATUSES = new Set([
+  'success',
+  'error',
+  'cancelled',
+]);
+
+export const areAllHostsTerminal = results =>
+  results?.length > 0 &&
+  results.every(host => TERMINAL_HOST_STATUSES.has(host.job_status));
+
 export const DATE_OPTIONS = {
   day: 'numeric',
   month: 'short',
