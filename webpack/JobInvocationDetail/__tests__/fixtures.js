@@ -140,14 +140,6 @@ export const mockPermissionsData = {
   edit_recurring_logics: true,
 };
 
-export const mockReportTemplatesResponse = {
-  results: [{ id: '12', name: 'Job - Invocation Report' }],
-};
-
-export const mockReportTemplateInputsResponse = {
-  results: [{ id: '34', name: 'job_id' }],
-};
-
 const templateInvocationID = 157;
 
 export const jobInvocationOutput = [
