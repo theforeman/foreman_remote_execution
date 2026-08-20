@@ -15,6 +15,6 @@ Bookmark.without_auditing do
     b = Bookmark.where(:name => input[:name], :controller => input[:controller]).first || Bookmark.new
     b.attributes = attributes
     b.save
-    raise "Unable to create bookmark: #{format_errors b}" if b.errors.any?
+    raise "Unable to create bookmark: #{SeedHelper.format_errors(b)}" if b.errors.any?
   end
 end
