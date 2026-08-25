@@ -2,6 +2,7 @@ class JobInvocationsController < ApplicationController
   include ::Foreman::Controller::AutoCompleteSearch
   include ::ForemanTasks::Concerns::Parameters::Triggering
   include ::JobInvocationsChartHelper
+  include RemoteExecutionHelper
 
   def new
     return @composer = prepare_composer if params[:feature].present?
@@ -110,6 +111,20 @@ class JobInvocationsController < ApplicationController
     render :partial => 'job_invocations/preview_hosts_list'
   end
 
+  def report
+    @job_invocation = resource_base.find(params[:id])
+    template = job_report_template
+    unless template
+      return not_found(_('Report template not found or not configured properly'))
+    end
+
+    unless ReportTemplate.authorized(:generate_report_templates).find_by(:id => template.id)
+      return render_403(_('Missing permissions to generate report templates'))
+    end
+
+    redirect_to generate_report_template_path(template, job_report_template_parameters(@job_invocation, template))
+  end
+
   def cancel
     @job_invocation = resource_base.find(params[:id])
     result = @job_invocation.cancel(params[:force])
@@ -159,7 +174,7 @@ class JobInvocationsController < ApplicationController
         'create'
       when 'cancel'
         'cancel'
-      when 'chart', 'preview_job_invocations_per_host'
+      when 'chart', 'preview_job_invocations_per_host', 'report'
         'view'
       else
         super
