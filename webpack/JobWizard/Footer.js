@@ -22,6 +22,19 @@ export const Footer = ({ canSubmit, onSave }) => {
             activeStep && activeStep.enableNext !== undefined
               ? activeStep.enableNext
               : true;
+          const isReviewStep = activeStep.name === WIZARD_TITLES.review;
+          const canSkipToReview = canSubmit && !isReviewStep;
+          const skipToReviewTooltip = () => {
+            if (canSkipToReview) {
+              return __('Skip to review step');
+            }
+            if (isReviewStep) {
+              return __('Already on the review step');
+            }
+            return __(
+              'Fill all required fields in all the steps to start the job'
+            );
+          };
 
           return (
             <>
@@ -32,9 +45,7 @@ export const Footer = ({ canSubmit, onSave }) => {
                 onClick={onNext}
                 isDisabled={!isValid || isSubmitting}
               >
-                {activeStep.name === WIZARD_TITLES.review
-                  ? __('Submit')
-                  : __('Next')}
+                {isReviewStep ? __('Submit') : __('Next')}
               </Button>
               <Button
                 ouiaId="back-footer"
@@ -68,22 +79,14 @@ export const Footer = ({ canSubmit, onSave }) => {
                 </Button>
               </Tooltip>
               <Tooltip
-                content={
-                  <div>
-                    {canSubmit
-                      ? __('Skip to review step')
-                      : __(
-                          'Fill all required fields in all the steps to start the job'
-                        )}
-                  </div>
-                }
+                content={<div>{skipToReviewTooltip()}</div>}
                 triggerRef={tooltipSkipTo}
               >
                 <Button
                   ouiaId="skip-to-review-footer"
                   variant="tertiary"
                   onClick={() => goToStepByName(WIZARD_TITLES.review)}
-                  isAriaDisabled={!canSubmit}
+                  isAriaDisabled={!canSkipToReview}
                   isDisabled={isSubmitting}
                   ref={tooltipSkipTo}
                 >
