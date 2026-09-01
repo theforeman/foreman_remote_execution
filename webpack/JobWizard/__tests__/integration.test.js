@@ -1,7 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { mount } from '@theforeman/test';
-import { render, fireEvent, screen, act } from '@testing-library/react';
+import { render, screen, within, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../JobWizard';
@@ -17,17 +18,55 @@ import {
 
 const store = testSetup(selectors, api);
 
+const renderJobWizard = ({ withGql = false } = {}) => {
+  const wizard = (
+    <Provider store={store}>
+      <JobWizard />
+    </Provider>
+  );
+
+  if (withGql) {
+    return render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        {wizard}
+      </MockedProvider>
+    );
+  }
+
+  return render(wizard);
+};
+
+const getWizardNavigation = () =>
+  screen.getByRole('navigation', { name: 'Run Job steps' });
+
+const getWizardStep = stepName =>
+  within(getWizardNavigation()).getByRole('button', { name: stepName });
+
+const getDisabledWizardSteps = () =>
+  within(getWizardNavigation())
+    .getAllByRole('button')
+    .filter(button => button.getAttribute('aria-disabled') === 'true');
+
+const expectDispatchedGet = expected => {
+  expect(store.getActions()).toEqual(
+    expect.arrayContaining([expect.objectContaining({ type: 'get', ...expected })])
+  );
+};
+
 describe('Job wizard fill', () => {
   beforeEach(() => {
+    store.clearActions();
     jest.spyOn(selectors, 'selectRouterSearch');
     selectors.selectRouterSearch.mockImplementation(() => ({
       'host_ids[]': ['105', '37'],
     }));
   });
+
   afterEach(() => {
     selectors.selectRouterSearch.mockRestore();
   });
-  it('should select template', async () => {
+
+  it('selects a template and enables wizard steps', async () => {
     api.get.mockImplementation(({ handleSuccess, ...action }) => {
       if (action.key === 'JOB_CATEGORIES') {
         handleSuccess &&
@@ -54,74 +93,80 @@ describe('Job wizard fill', () => {
     selectors.selectJobTemplate.mockRestore();
     jest.spyOn(selectors, 'selectJobTemplate');
     selectors.selectJobTemplate.mockImplementation(() => ({}));
-    const wrapper = mount(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    expect(
-      wrapper.find('.pf-v5-c-wizard__nav-link.pf-m-disabled')
-    ).toHaveLength(5);
+
+    renderJobWizard();
+
+    expect(getDisabledWizardSteps()).toHaveLength(5);
+    expect(getWizardStep(WIZARD_TITLES.categoryAndTemplate)).toBeInTheDocument();
+
+    expectDispatchedGet({
+      key: 'JOB_CATEGORIES',
+      url: '/ui_job_wizard/categories',
+    });
+    expectDispatchedGet({
+      key: 'HOST_IDS',
+      params: { search: 'id = 105 or id = 37' },
+      url: '/api/hosts',
+    });
+    expectDispatchedGet({
+      key: 'JOB_TEMPLATES',
+    });
+
     selectors.selectJobCategoriesStatus.mockImplementation(() => 'RESOLVED');
-    expect(store.getActions()).toMatchSnapshot('initial');
     selectors.selectJobTemplate.mockRestore();
     jest.spyOn(selectors, 'selectJobTemplate');
     selectors.selectJobTemplate.mockImplementation(() => jobTemplate);
-    wrapper
-      .find('.pf-v5-c-button.pf-v5-c-select__toggle-button')
-      .simulate('click');
-    await act(async () => {
-      await wrapper
-        .find('.pf-v5-c-select__menu-item')
-        .first()
-        .simulate('click');
+
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Job template toggle' })
+    );
+    await userEvent.click(screen.getByText(jobTemplate.job_template.name));
+
+    expect(store.getActions().at(-1)).toEqual(
+      expect.objectContaining({
+        key: 'JOB_TEMPLATE',
+        type: 'get',
+        url: '/ui_job_wizard/template/178',
+      })
+    );
+
+    await waitFor(() => {
+      expect(getDisabledWizardSteps()).toHaveLength(0);
     });
-    expect(store.getActions().slice(-1)).toMatchSnapshot('select template');
-    wrapper.update();
-    expect(
-      wrapper.find('.pf-v5-c-wizard__nav-link.pf-m-disabled')
-    ).toHaveLength(0);
   });
 
-  it('have all steps', async () => {
+  it('renders all wizard steps and navigates between them', async () => {
     selectors.selectJobCategoriesStatus.mockImplementation(() => null);
     selectors.selectJobTemplates.mockRestore();
     selectors.selectJobCategories.mockRestore();
     mockApi(api);
 
-    render(
-      <MockedProvider mocks={gqlMock} addTypename={false}>
-        <Provider store={store}>
-          <JobWizard />
-        </Provider>
-      </MockedProvider>
-    );
+    renderJobWizard({ withGql: true });
+
     const steps = [
       WIZARD_TITLES.hostsAndInputs,
       WIZARD_TITLES.categoryAndTemplate,
       WIZARD_TITLES.advanced,
       WIZARD_TITLES.review,
     ];
-    // eslint-disable-next-line no-unused-vars
-    for await (const step of steps) {
-      const stepSelector = screen.getByText(step);
-      const stepTitle = screen.getAllByText(step);
-      expect(stepTitle).toHaveLength(1);
-      await act(async () => {
-        await fireEvent.click(stepSelector);
-      });
-      const stepTitles = screen.getAllByText(step);
-      expect(stepTitles).toHaveLength(3);
+
+    for (const step of steps) {
+      expect(screen.getAllByText(step)).toHaveLength(1);
+
+      await userEvent.click(getWizardStep(step));
+
+      expect(screen.getAllByText(step)).toHaveLength(3);
     }
-    const step = WIZARD_TITLES.typeOfExecution;
-    const stepTitle = screen.getAllByText(step);
-    expect(stepTitle).toHaveLength(1);
-    expect(screen.queryAllByText('Select the type of execution')).toHaveLength(
-      0
-    );
-    await act(async () => {
-      await fireEvent.click(stepTitle[0]);
-    });
-    expect(screen.getAllByText('Select the type of execution')).toHaveLength(1);
+
+    expect(screen.getAllByText(WIZARD_TITLES.typeOfExecution)).toHaveLength(1);
+    expect(
+      screen.queryByText('Select the type of execution')
+    ).not.toBeInTheDocument();
+
+    await userEvent.click(getWizardStep(WIZARD_TITLES.typeOfExecution));
+
+    expect(
+      screen.getByText('Select the type of execution')
+    ).toBeInTheDocument();
   });
 });
