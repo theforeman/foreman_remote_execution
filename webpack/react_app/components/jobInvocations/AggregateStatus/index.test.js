@@ -1,43 +1,76 @@
 import React from 'react';
-import { shallow } from '@theforeman/test';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 import AggregateStatus from './index';
 
-jest.unmock('./index.js');
+const defaultStatuses = {
+  success: 19,
+  failed: 20,
+  pending: 3,
+  cancelled: 31,
+};
+
+const renderAggregateStatus = ({
+  statuses = defaultStatuses,
+  chartFilter = jest.fn(),
+} = {}) => {
+  const view = render(
+    <AggregateStatus statuses={statuses} chartFilter={chartFilter} />
+  );
+
+  return { chartFilter, ...view };
+};
 
 describe('AggregateStatus', () => {
-  describe('has no data', () => {
-    it('renders cards with no data', () => {
-      const chartNumbers = shallow(
-        <AggregateStatus statuses={{}} chartFilter={_x => {}} />
-      );
-      const success = chartNumbers.find('#success_count').text();
-      const failed = chartNumbers.find('#failed_count').text();
-      const pending = chartNumbers.find('#pending_count').text();
-      const cancelled = chartNumbers.find('#cancelled_count').text();
-      expect(success).toBe('');
-      expect(failed).toBe('');
-      expect(cancelled).toBe('');
-      expect(pending).toBe('');
-    });
+  it('renders status notifications without counts when statuses are empty', () => {
+    const { container } = renderAggregateStatus({ statuses: {} });
 
-    it('renders cards with props passed', () => {
-      const statuses = {
-        success: 19,
-        failed: 20,
-        cancelled: 31,
-        pending: 3,
-      };
-      const chartNumbers = shallow(
-        <AggregateStatus statuses={statuses} chartFilter={_x => {}} />
-      );
-      const success = chartNumbers.find('#success_count').text();
-      const failed = chartNumbers.find('#failed_count').text();
-      const pending = chartNumbers.find('#pending_count').text();
-      const cancelled = chartNumbers.find('#cancelled_count').text();
-      expect(success).toBe(statuses.success.toString());
-      expect(failed).toBe(statuses.failed.toString());
-      expect(cancelled).toBe(statuses.cancelled.toString());
-      expect(pending).toBe(statuses.pending.toString());
-    });
+    expect(container.textContent.trim()).toBe('');
+  });
+
+  it('renders status counts from props', () => {
+    renderAggregateStatus();
+
+    expect(screen.getByText('19')).toBeInTheDocument();
+    expect(screen.getByText('20')).toBeInTheDocument();
+    expect(screen.getByText('3')).toBeInTheDocument();
+    expect(screen.getByText('31')).toBeInTheDocument();
+  });
+
+  it('calls chartFilter with success when the success count is clicked', async () => {
+    const { chartFilter } = renderAggregateStatus();
+
+    await userEvent.click(screen.getByText('19'));
+
+    expect(chartFilter).toHaveBeenCalledTimes(1);
+    expect(chartFilter).toHaveBeenCalledWith('success');
+  });
+
+  it('calls chartFilter with failed when the failed count is clicked', async () => {
+    const { chartFilter } = renderAggregateStatus();
+
+    await userEvent.click(screen.getByText('20'));
+
+    expect(chartFilter).toHaveBeenCalledTimes(1);
+    expect(chartFilter).toHaveBeenCalledWith('failed');
+  });
+
+  it('calls chartFilter with pending when the pending count is clicked', async () => {
+    const { chartFilter } = renderAggregateStatus();
+
+    await userEvent.click(screen.getByText('3'));
+
+    expect(chartFilter).toHaveBeenCalledTimes(1);
+    expect(chartFilter).toHaveBeenCalledWith('pending');
+  });
+
+  it('calls chartFilter with cancelled when the cancelled count is clicked', async () => {
+    const { chartFilter } = renderAggregateStatus();
+
+    await userEvent.click(screen.getByText('31'));
+
+    expect(chartFilter).toHaveBeenCalledTimes(1);
+    expect(chartFilter).toHaveBeenCalledWith('cancelled');
   });
 });
