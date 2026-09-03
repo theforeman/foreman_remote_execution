@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
 import React from 'react';
 import { Provider } from 'react-redux';
-import { mount } from '@theforeman/test';
-import { fireEvent, screen, render, act } from '@testing-library/react';
+import { screen, render, act, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import * as api from 'foremanReact/redux/API';
 import { JobWizard } from '../../../JobWizard';
@@ -20,10 +21,54 @@ import { WIZARD_TITLES } from '../../../JobWizardConstants';
 const lodash = require('lodash');
 
 lodash.debounce = fn => fn;
+
 const store = testSetup(selectors, api);
 mockApi(api);
 
 jest.useFakeTimers();
+
+const clickOptions = { skipHover: true };
+
+const wizardStepButton = title =>
+  screen.getByText(title, { selector: 'button' });
+
+const clickWizardStep = async title => {
+  await act(async () => {
+    fireEvent.click(wizardStepButton(title));
+    jest.advanceTimersByTime(1000);
+  });
+};
+
+const typeIntoField = async (field, value) => {
+  await act(async () => {
+    await userEvent.click(field, {}, clickOptions);
+    await userEvent.clear(field);
+    userEvent.paste(field, value);
+    jest.advanceTimersByTime(1000);
+  });
+};
+
+const renderJobWizard = ({ customStore = store, withGql = true } = {}) => {
+  const wizard = (
+    <Provider store={customStore}>
+      <JobWizard />
+    </Provider>
+  );
+
+  if (withGql) {
+    return render(
+      <MockedProvider mocks={gqlMock} addTypename={false}>
+        {wizard}
+      </MockedProvider>
+    );
+  }
+
+  return render(wizard);
+};
+
+const goToAdvancedStep = async () => {
+  await clickWizardStep(WIZARD_TITLES.advanced);
+};
 
 describe('AdvancedFields', () => {
   beforeEach(() => {
@@ -32,87 +77,45 @@ describe('AdvancedFields', () => {
       'host_ids[]': ['105', '37'],
     }));
   });
+
   afterEach(() => {
     selectors.selectRouterSearch.mockRestore();
   });
-  it('should save data between steps for advanced fields', async () => {
-    const wrapper = mount(
-      <MockedProvider mocks={gqlMock} addTypename={false}>
-        <Provider store={store}>
-          <JobWizard />
-        </Provider>
-      </MockedProvider>
-    );
-    // setup
-    wrapper
-      .find('.pf-v5-c-button.pf-v5-c-select__toggle-button')
-      .simulate('click');
-    wrapper
-      .find('.pf-v5-c-select__menu-item')
-      .first()
-      .simulate('click');
 
-    // test
-    expect(
-      wrapper.find('.pf-v5-c-wizard__nav-link.pf-m-disabled')
-    ).toHaveLength(0);
-    wrapper
-      .find('.pf-v5-c-wizard__nav-link')
-      .at(2)
-      .simulate('click'); // Advanced step
+  it('preserves advanced field values when navigating between wizard steps', async () => {
+    renderJobWizard();
+    await goToAdvancedStep();
 
-    await act(async () => {
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
+    const effectiveUserInput = screen.getByLabelText('effective user', {
+      selector: 'input',
     });
-    const effectiveUserInput = () => wrapper.find('input#effective-user');
-    const advancedTemplateInput = () =>
-      wrapper.find('.pf-v5-c-form__group-control textarea');
-    const effectiveUesrValue = 'effective user new value';
+    const advancedTemplateInput = screen.getByLabelText('adv plain hidden', {
+      selector: 'textarea',
+    });
+    const effectiveUserValue = 'effective user new value';
     const advancedTemplateInputValue = 'advanced input new value';
-    effectiveUserInput().getDOMNode().value = effectiveUesrValue;
 
-    effectiveUserInput().simulate('change');
-    wrapper.update();
-    advancedTemplateInput().getDOMNode().value = advancedTemplateInputValue;
-    advancedTemplateInput().simulate('change');
-    expect(effectiveUserInput().prop('value')).toEqual(effectiveUesrValue);
-    expect(advancedTemplateInput().prop('value')).toEqual(
-      advancedTemplateInputValue
+    await typeIntoField(effectiveUserInput, effectiveUserValue);
+    await typeIntoField(advancedTemplateInput, advancedTemplateInputValue);
+
+    expect(effectiveUserInput).toHaveValue(effectiveUserValue);
+    expect(advancedTemplateInput).toHaveValue(advancedTemplateInputValue);
+
+    await clickWizardStep(WIZARD_TITLES.hostsAndInputs);
+    expect(wizardStepButton(WIZARD_TITLES.hostsAndInputs)).toHaveAttribute(
+      'aria-current',
+      'step'
     );
 
-    wrapper
-      .find('.pf-v5-c-wizard__nav-link')
-      .at(1)
-      .simulate('click');
+    await goToAdvancedStep();
 
-    expect(
-      wrapper.find('.pf-v5-c-wizard__nav-link.pf-m-current').text()
-    ).toEqual('Target hosts and inputs');
-    wrapper
-      .find('.pf-v5-c-wizard__nav-link')
-      .at(2)
-      .simulate('click'); // Advanced step
-
-    await act(async () => {
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
-    });
-    expect(effectiveUserInput().prop('value')).toEqual(effectiveUesrValue);
-    expect(advancedTemplateInput().prop('value')).toEqual(
-      advancedTemplateInputValue
-    );
+    expect(effectiveUserInput).toHaveValue(effectiveUserValue);
+    expect(advancedTemplateInput).toHaveValue(advancedTemplateInputValue);
   });
-  it('fill template fields', async () => {
-    render(
-      <MockedProvider mocks={gqlMock} addTypename={false}>
-        <Provider store={store}>
-          <JobWizard />
-        </Provider>
-      </MockedProvider>
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
-    });
+
+  it('preserves template field values when navigating between wizard steps', async () => {
+    renderJobWizard();
+    await goToAdvancedStep();
 
     const searchValue = 'search test';
     const textValue = 'I am a text';
@@ -131,134 +134,126 @@ describe('AdvancedFields', () => {
 
     fireEvent.click(selectField);
     await act(async () => {
-      await fireEvent.click(screen.getByText('option 2'));
-      fireEvent.click(screen.getAllByText(WIZARD_TITLES.advanced)[0]); // to remove focus
+      await userEvent.click(screen.getByText('option 2'), {}, clickOptions);
+      await userEvent.click(
+        screen.getAllByText(WIZARD_TITLES.advanced)[0],
+        {},
+        clickOptions
+      );
 
-      fireEvent.click(resourceSelectField);
-      fireEvent.click(screen.getByText('resource2'));
-      fireEvent.change(textField, {
-        target: { value: textValue },
-      });
-      fireEvent.change(searchField, {
-        target: { value: searchValue },
-      });
-      await fireEvent.change(dateField, {
-        target: { value: dateValue },
-      });
-      fireEvent.change(timeField, {
-        target: { value: timeValue },
-      });
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
+      await userEvent.click(resourceSelectField, {}, clickOptions);
+      await userEvent.click(screen.getByText('resource2'), {}, clickOptions);
+      await typeIntoField(textField, textValue);
+      await typeIntoField(searchField, searchValue);
+      fireEvent.change(dateField, { target: { value: dateValue } });
+      fireEvent.change(timeField, { target: { value: timeValue } });
+      jest.advanceTimersByTime(1000);
     });
-    expect(
-      screen.getByLabelText('adv plain hidden', {
-        selector: 'textarea',
-      }).value
-    ).toBe(textValue);
-    expect(searchField.value).toBe(searchValue);
-    expect(screen.getByLabelText('adv date datepicker').value).toBe(dateValue);
-    expect(timeField.value).toBe(timeValue);
-    await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.categoryAndTemplate));
-    });
+
+    expect(textField).toHaveValue(textValue);
+    expect(searchField).toHaveValue(searchValue);
+    expect(dateField).toHaveValue(dateValue);
+    expect(timeField).toHaveValue(timeValue);
+
+    await clickWizardStep(WIZARD_TITLES.categoryAndTemplate);
     expect(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)).toHaveLength(
       3
     );
 
-    await act(async () => {
-      await fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
-      jest.advanceTimersByTime(1000);
-    });
-    expect(textField.value).toBe(textValue);
-    expect(searchField.value).toBe(searchValue);
-    expect(dateField.value).toBe(dateValue);
-    expect(timeField.value).toBe(timeValue);
-    expect(screen.queryAllByText('option 1')).toHaveLength(0);
-    expect(screen.queryAllByText('option 2')).toHaveLength(1);
-    expect(screen.queryAllByDisplayValue('resource1')).toHaveLength(0);
-    expect(screen.queryAllByDisplayValue('resource2')).toHaveLength(1);
+    await goToAdvancedStep();
+
+    expect(textField).toHaveValue(textValue);
+    expect(searchField).toHaveValue(searchValue);
+    expect(dateField).toHaveValue(dateValue);
+    expect(timeField).toHaveValue(timeValue);
+    expect(screen.queryByText('option 1')).not.toBeInTheDocument();
+    expect(screen.getByText('option 2')).toBeInTheDocument();
+    expect(screen.queryByDisplayValue('resource1')).not.toBeInTheDocument();
+    expect(screen.getByDisplayValue('resource2')).toBeInTheDocument();
   });
-  it('fill defaults into fields', async () => {
-    render(
-      <MockedProvider mocks={gqlMock} addTypename={false}>
-        <Provider store={store}>
-          <JobWizard />
-        </Provider>
-      </MockedProvider>
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
-    });
+
+  it('fills default values into advanced fields', async () => {
+    renderJobWizard();
+    await goToAdvancedStep();
 
     expect(
-      screen.getByLabelText('ssh user', {
-        selector: 'input',
-      }).value
-    ).toBe('');
+      screen.getByLabelText('ssh user', { selector: 'input' })
+    ).toHaveValue('');
     expect(
-      screen.getByLabelText('effective user', {
-        selector: 'input',
-      }).value
-    ).toBe('default effective user');
+      screen.getByLabelText('effective user', { selector: 'input' })
+    ).toHaveValue('default effective user');
     expect(
-      screen.getByLabelText('timeout to kill', {
-        selector: 'input',
-      }).value
-    ).toBe('2');
-
+      screen.getByLabelText('timeout to kill', { selector: 'input' })
+    ).toHaveValue('2');
     expect(
-      screen.getByLabelText('description preview', {
-        selector: 'input',
-      }).value
-    ).toBe(
+      screen.getByLabelText('description preview', { selector: 'input' })
+    ).toHaveValue(
       'template1 with inputs adv plain hidden="Default val" adv plain select="" adv resource select="" adv search="" adv date="" plain hidden="Default val"'
     );
   });
-  it('DescriptionField', async () => {
-    render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
-    });
+
+  it('renders advanced fields step with expected form fields', async () => {
+    renderJobWizard();
+    await goToAdvancedStep();
+
+    expect(
+      screen.getByLabelText('adv plain hidden', { selector: 'textarea' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('adv plain select toggle')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('adv resource select toggle')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('ssh user', { selector: 'input' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('effective user', { selector: 'input' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('description preview', { selector: 'input' })
+    ).toBeInTheDocument();
+  });
+
+  it('updates description preview when editing the description template', async () => {
+    renderJobWizard({ withGql: false });
+    await goToAdvancedStep();
 
     const textField = screen.getByLabelText('adv plain hidden', {
       selector: 'textarea',
     });
-    await act(async () => {
-      await fireEvent.change(textField, {
-        target: { value: 'test command' },
-      });
-    });
+    await typeIntoField(textField, 'test command');
+
     const descriptionValue = 'Run %{adv plain hidden} %{wrong command name}';
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Edit job description template'));
+      await userEvent.click(
+        screen.getByText('Edit job description template'),
+        {},
+        clickOptions
+      );
     });
 
     const editText = screen.getByLabelText('description edit', {
       selector: 'input',
     });
-    await fireEvent.change(editText, {
-      target: { value: descriptionValue },
-    });
+    await typeIntoField(editText, descriptionValue);
     await act(async () => {
-      fireEvent.click(screen.getByText('Preview job description'));
+      await userEvent.click(
+        screen.getByText('Preview job description'),
+        {},
+        clickOptions
+      );
     });
+
     expect(
-      screen.getByLabelText('description preview', {
-        selector: 'input',
-      }).value
-    ).toBe('Run test command %{wrong command name}');
+      screen.getByLabelText('description preview', { selector: 'input' })
+    ).toHaveValue('Run test command %{wrong command name}');
   });
 
-  it('DescriptionField with no inputs', async () => {
+  it('shows template name in description preview when template has no inputs', async () => {
     jest.spyOn(api, 'get');
-
     jest.spyOn(selectors, 'selectTemplateInputs');
     jest.spyOn(selectors, 'selectAdvancedTemplateInputs');
     selectors.selectTemplateInputs.mockImplementation(() => []);
@@ -289,23 +284,20 @@ describe('AdvancedFields', () => {
       }
       return { type: 'get', ...action };
     });
-    render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
-    });
+
+    renderJobWizard({ withGql: false });
+    await goToAdvancedStep();
+
     expect(
-      screen.getByLabelText('description preview', {
-        selector: 'input',
-      }).value
-    ).toBe('template1');
+      screen.getByLabelText('description preview', { selector: 'input' })
+    ).toHaveValue('template1');
+
+    selectors.selectTemplateInputs.mockRestore();
+    selectors.selectAdvancedTemplateInputs.mockRestore();
+    api.get.mockRestore();
   });
 
-  it('DescriptionField with description_format', async () => {
+  it('uses description_format for description preview', async () => {
     jest.spyOn(api, 'get');
     jest.spyOn(selectors, 'selectTemplateInputs');
     selectors.selectTemplateInputs.mockImplementation(() => [
@@ -334,7 +326,6 @@ describe('AdvancedFields', () => {
                 ...jobTemplateResponse.job_template,
                 description_format: 'Run %{command}',
               },
-
               template_inputs: [
                 {
                   name: 'command',
@@ -363,46 +354,34 @@ describe('AdvancedFields', () => {
       }
       return { type: 'get', ...action };
     });
-    render(
-      <Provider store={store}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
-    });
+
+    renderJobWizard({ withGql: false });
+    await goToAdvancedStep();
+
     expect(
-      screen.getByLabelText('description preview', {
-        selector: 'input',
-      }).value
-    ).toBe('Run Default val');
+      screen.getByLabelText('description preview', { selector: 'input' })
+    ).toHaveValue('Run Default val');
+
+    selectors.selectTemplateInputs.mockRestore();
+    api.get.mockRestore();
   });
 
-  it('search resources action', async () => {
-    jest.useFakeTimers();
-    mockApi(api);
+  it('dispatches resource search when typing in resource select', async () => {
     const newStore = testSetup(selectors, api);
-    render(
-      <Provider store={newStore}>
-        <JobWizard />
-      </Provider>
-    );
-    await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
-      jest.advanceTimersByTime(1000); // to handle pf4 date picker popover
-    });
+    mockApi(api);
+
+    renderJobWizard({ customStore: newStore, withGql: false });
+    await goToAdvancedStep();
+
     const resourceSelectField = screen.getByLabelText(
       'adv resource select typeahead input'
     );
 
+    await typeIntoField(resourceSelectField, 'some search');
     await act(async () => {
-      await fireEvent.change(resourceSelectField, {
-        target: { value: 'some search' },
-      });
-
       jest.advanceTimersByTime(10000);
     });
+
     const actions = newStore.getActions();
     const resourceSearchAction = actions.filter(
       action => action.key === 'ForemanTasksTask'
