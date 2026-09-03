@@ -1,17 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { ClipboardCopyButton, Alert, Skeleton } from '@patternfly/react-core';
-import { useDispatch, useSelector } from 'react-redux';
-import { APIActions } from 'foremanReact/redux/API';
+import { useSelector } from 'react-redux';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { useForemanHostDetailsPageUrl } from 'foremanReact/Root/Context/ForemanContext';
 import { STATUS } from 'foremanReact/constants';
 import {
-  showTemplateInvocationUrl,
   templateInvocationPageUrl,
-  GET_TEMPLATE_INVOCATION,
-  AUTO_REFRESH_INTERVAL_MS,
   CLIPBOARD_COPIED_EXIT_DELAY_MS,
   CLIPBOARD_DEFAULT_EXIT_DELAY_MS,
 } from './JobInvocationConstants';
@@ -19,6 +15,7 @@ import {
   selectTemplateInvocationStatus,
   selectTemplateInvocation,
 } from './JobInvocationSelectors';
+import { useTemplateInvocationOutputPolling } from './useTemplateInvocationOutputPolling';
 import { OutputToggleGroup } from './TemplateInvocationComponents/OutputToggleGroup';
 import { PreviewTemplate } from './TemplateInvocationComponents/PreviewTemplate';
 import { OutputCodeBlock } from './TemplateInvocationComponents/OutputCodeBlock';
@@ -74,64 +71,16 @@ export const TemplateInvocation = ({
   showCommand,
   setShowCommand,
 }) => {
-  const timeoutRef = useRef(null);
-  const templateURL = showTemplateInvocationUrl(hostID, jobID);
   const hostDetailsPageUrl = useForemanHostDetailsPageUrl();
 
   const status = useSelector(selectTemplateInvocationStatus(hostID));
   const response = useSelector(selectTemplateInvocation(hostID));
-  const dispatch = useDispatch();
-
-  const responseRef = useRef(response);
-  useEffect(() => {
-    responseRef.current = response;
-  }, [response]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const schedulePoll = () => {
-      if (cancelled) return;
-      dispatch(
-        APIActions.get({
-          url: templateURL,
-          key: `${GET_TEMPLATE_INVOCATION}_${hostID}`,
-          handleSuccess: ({ data }) => {
-            if (cancelled) return;
-            const isFinished = data?.finished ?? true;
-            // eslint-disable-next-line camelcase
-            const autoRefresh = data?.auto_refresh || false;
-            if (!isFinished && autoRefresh) {
-              timeoutRef.current = setTimeout(
-                schedulePoll,
-                AUTO_REFRESH_INTERVAL_MS
-              );
-            } else {
-              timeoutRef.current = null;
-            }
-          },
-          handleError: () => {
-            if (cancelled) return;
-            timeoutRef.current = null;
-          },
-        })
-      );
-    };
-
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = null;
-
-    if (isExpanded) {
-      if (responseRef.current?.finished) return undefined;
-      schedulePoll();
-    }
-
-    return () => {
-      cancelled = true;
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    };
-  }, [isExpanded, dispatch, templateURL, hostID]);
+  const liveOutput = useTemplateInvocationOutputPolling({
+    hostID,
+    jobID,
+    isExpanded,
+    response,
+  });
 
   if (!response || (status === STATUS.PENDING && isEmpty(response))) {
     return <Skeleton data-testid="template-invocation-skeleton" />;
@@ -156,13 +105,7 @@ export const TemplateInvocation = ({
     );
   }
 
-  const {
-    preview,
-    output,
-    input_values: inputValues,
-    task,
-    permissions,
-  } = response;
+  const { preview, input_values: inputValues, task, permissions } = response;
   const { id: taskID, cancellable: taskCancellable } = task || {};
 
   return (
@@ -183,7 +126,7 @@ export const TemplateInvocation = ({
         isInTableView={isInTableView}
         copyToClipboard={
           <CopyToClipboard
-            fullOutput={output
+            fullOutput={liveOutput
               ?.filter(
                 ({ output_type: outputType }) => showOutputType[outputType]
               )
@@ -226,7 +169,7 @@ export const TemplateInvocation = ({
         </>
       )}
       <OutputCodeBlock
-        code={output || []}
+        code={liveOutput}
         showOutputType={showOutputType}
         scrollElement={
           isInTableView
