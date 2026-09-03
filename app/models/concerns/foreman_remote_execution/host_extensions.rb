@@ -32,18 +32,21 @@ module ForemanRemoteExecution
 
         def search_by_job_invocation(key, operator, value)
           if key == 'job_invocation.result'
-            operator = operator == '=' ? 'IN' : 'NOT IN'
-            value = TemplateInvocation::TaskResultMap.status_to_task_result(value)
-          end
+            in_operator = operator == '=' ? 'IN' : 'NOT IN'
+            task_results = TemplateInvocation::TaskResultMap.status_to_task_result(value)
+            subquery = TemplateInvocation.joins(:run_host_job_task)
+                                         .where.not(host_id: nil)
+                                         .where("#{ForemanTasks::Task.table_name}.result IN (?)", task_results)
+                                         .select(:host_id)
 
-          mapping = {
-            'job_invocation.id'     => %(#{TemplateInvocation.table_name}.job_invocation_id #{operator} ?),
-            'job_invocation.result' => %(#{ForemanTasks::Task.table_name}.result #{operator} (?)),
-          }
-          {
-            :conditions => sanitize_sql_for_conditions([mapping[key], value_to_sql(operator, value)]),
-            :joins => { :template_invocations => [:run_host_job_task] },
-          }
+            { :conditions => "#{Host.table_name}.id #{in_operator} (#{subquery.to_sql})" }
+          else
+            subquery = TemplateInvocation.where.not(host_id: nil)
+                                         .where("job_invocation_id #{operator} ?", value_to_sql(operator, value))
+                                         .select(:host_id)
+
+            { :conditions => "#{Host.table_name}.id IN (#{subquery.to_sql})" }
+          end
         end
       end
     end
