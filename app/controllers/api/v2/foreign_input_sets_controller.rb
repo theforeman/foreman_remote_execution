@@ -76,6 +76,10 @@ module Api
       def resource_class
         ForeignInputSet
       end
+
+      def allowed_nested_id
+        %w(template_id)
+      end
     end
   end
 end
