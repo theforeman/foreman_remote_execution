@@ -9,58 +9,87 @@ import { Button } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { MS_PER_SECOND } from 'foremanReact/constants';
 
+// eslint-disable-next-line no-control-regex
+const COLOR_PATTERN = /\x1b\[[\d;]*m/g;
+const CONSOLE_COLOR = {
+  '31': 'red',
+  '32': 'lightgreen',
+  '33': 'orange',
+  '34': 'deepskyblue',
+  '35': 'mediumpurple',
+  '36': 'cyan',
+  '37': 'grey',
+  '91': 'red',
+  '92': 'lightgreen',
+  '93': 'yellow',
+  '94': 'lightblue',
+  '95': 'violet',
+  '96': 'turquoise',
+  '0': 'default',
+  '39': 'default',
+};
+const parsedOutput = new WeakMap();
+
+const colorizeLine = line => {
+  line = line.replace(COLOR_PATTERN, seq => {
+    const codes = seq.match(/(\d+)/g) || [];
+    const lastColorCode =
+      [...codes].reverse().find(code_ => code_ in CONSOLE_COLOR) || '0';
+    return `{{{format color:${lastColorCode}}}}`;
+  });
+
+  let currentColor = 'default';
+  const parts = line.split(/({{{format.*?}}})/).filter(Boolean);
+  if (parts.length === 0) return <span>{'\n'}</span>;
+
+  // eslint-disable-next-line array-callback-return, consistent-return
+  return parts.map((consoleLine, index) => {
+    if (consoleLine.includes('{{{format')) {
+      const colorMatch = consoleLine.match(/color:(\d+)/);
+      if (colorMatch) {
+        const colorIndex = colorMatch[1];
+        currentColor = CONSOLE_COLOR[colorIndex] || 'default';
+      }
+    } else {
+      return (
+        <span key={index} style={{ color: currentColor }}>
+          {consoleLine.length ? consoleLine : '\n'}
+        </span>
+      );
+    }
+  });
+};
+
+const getLineOutputs = lineSet => {
+  if (parsedOutput.has(lineSet)) return parsedOutput.get(lineSet);
+
+  const lineOutputs =
+    lineSet.output === '\n'
+      ? []
+      : lineSet.output
+          .replace(/\r\n/g, '\n')
+          .replace(/\n$/, '')
+          .split('\n');
+  parsedOutput.set(lineSet, lineOutputs);
+  return lineOutputs;
+};
+
+const OutputLineSet = React.memo(({ lineSet, startLine }) =>
+  getLineOutputs(lineSet).map((lineOutput, index) => (
+    <div key={index} className={`line ${lineSet.output_type}`}>
+      <span
+        className="counter"
+        title={new Date(lineSet.timestamp * MS_PER_SECOND).toISOString()}
+      >
+        {(startLine + index).toString().padStart(4, '\u00A0')}:{' '}
+      </span>
+      <div className="content">{colorizeLine(lineOutput)}</div>
+    </div>
+  ))
+);
+
 export const OutputCodeBlock = ({ code, showOutputType, scrollElement }) => {
   let lineCounter = 0;
-  // eslint-disable-next-line no-control-regex
-  const COLOR_PATTERN = /\x1b\[[\d;]*m/g;
-  const CONSOLE_COLOR = {
-    '31': 'red',
-    '32': 'lightgreen',
-    '33': 'orange',
-    '34': 'deepskyblue',
-    '35': 'mediumpurple',
-    '36': 'cyan',
-    '37': 'grey',
-    '91': 'red',
-    '92': 'lightgreen',
-    '93': 'yellow',
-    '94': 'lightblue',
-    '95': 'violet',
-    '96': 'turquoise',
-    '0': 'default',
-    '39': 'default',
-  };
-
-  const colorizeLine = line => {
-    line = line.replace(COLOR_PATTERN, seq => {
-      const codes = seq.match(/(\d+)/g) || [];
-      const lastColorCode =
-        [...codes].reverse().find(code_ => code_ in CONSOLE_COLOR) || '0';
-      return `{{{format color:${lastColorCode}}}}`;
-    });
-
-    let currentColor = 'default';
-    const parts = line.split(/({{{format.*?}}})/).filter(Boolean);
-    if (parts.length === 0) {
-      return <span>{'\n'}</span>;
-    }
-    // eslint-disable-next-line array-callback-return, consistent-return
-    return parts.map((consoleLine, index) => {
-      if (consoleLine.includes('{{{format')) {
-        const colorMatch = consoleLine.match(/color:(\d+)/);
-        if (colorMatch) {
-          const colorIndex = colorMatch[1];
-          currentColor = CONSOLE_COLOR[colorIndex] || 'default';
-        }
-      } else {
-        return (
-          <span key={index} style={{ color: currentColor }}>
-            {consoleLine.length ? consoleLine : '\n'}
-          </span>
-        );
-      }
-    });
-  };
   const filteredCode = code.filter(
     ({ output_type: outputType }) => showOutputType[outputType]
   );
@@ -109,28 +138,16 @@ export const OutputCodeBlock = ({ code, showOutputType, scrollElement }) => {
   if (!filteredCode.length) {
     return <div>{__('No output for the selected filters')}</div>;
   }
-  const codeParse = filteredCode.map(line => {
-    if (line.output === '\n') {
-      return null;
-    }
-    const lineOutputs = line.output
-      .replace(/\r\n/g, '\n')
-      .replace(/\n$/, '')
-      .split('\n');
-    return lineOutputs.map((lineOutput, index) => {
-      lineCounter += 1;
-      return (
-        <div key={index} className={`line ${line.output_type}`}>
-          <span
-            className="counter"
-            title={new Date(line.timestamp * MS_PER_SECOND).toISOString()}
-          >
-            {lineCounter.toString().padStart(4, '\u00A0')}:{' '}
-          </span>
-          <div className="content">{colorizeLine(lineOutput)}</div>
-        </div>
-      );
-    });
+  const codeParse = filteredCode.map((lineSet, index) => {
+    const startLine = lineCounter + 1;
+    lineCounter += getLineOutputs(lineSet).length;
+    return (
+      <OutputLineSet
+        key={lineSet.id || `${lineSet.timestamp}-${index}`}
+        lineSet={lineSet}
+        startLine={startLine}
+      />
+    );
   });
 
   return (
@@ -166,4 +183,9 @@ OutputCodeBlock.propTypes = {
   code: PropTypes.array.isRequired,
   showOutputType: PropTypes.object.isRequired,
   scrollElement: PropTypes.string.isRequired,
+};
+
+OutputLineSet.propTypes = {
+  lineSet: PropTypes.object.isRequired,
+  startLine: PropTypes.number.isRequired,
 };
