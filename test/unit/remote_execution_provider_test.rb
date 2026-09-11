@@ -125,7 +125,7 @@ class RemoteExecutionProviderTest < ActiveSupport::TestCase
     describe 'effective user' do
       it 'takes the effective user from value from the template invocation' do
         template_invocation.effective_user = 'my user'
-        assert_equal 'my user', proxy_options[:effective_user]
+        assert_equal 'my\\ user', proxy_options[:effective_user]
       end
     end
 

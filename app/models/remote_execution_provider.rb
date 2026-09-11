@@ -59,7 +59,7 @@ class RemoteExecutionProvider
     end
 
     def effective_user(template_invocation)
-      template_invocation.effective_user
+      template_invocation.effective_user.shellescape
     end
 
     def effective_user_method(host)
