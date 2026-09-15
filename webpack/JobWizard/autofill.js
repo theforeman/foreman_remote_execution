@@ -11,6 +11,21 @@ import {
 import { selectHostBookmarks } from './JobWizardSelectors';
 import './JobWizard.scss';
 
+export const buildHostSearchFromIds = hostIds => {
+  const ids = Array.isArray(hostIds) ? hostIds : [hostIds];
+  const isNumericId = id => /^\d+$/.test(String(id));
+  const numericIds = ids.filter(isNumericId);
+  const hostnames = ids.filter(id => !isNumericId(id));
+  const parts = [];
+  if (numericIds.length) {
+    parts.push(`id ^ (${numericIds.join(',')})`);
+  }
+  if (hostnames.length) {
+    parts.push(`name ^ (${hostnames.join(', ')})`);
+  }
+  return parts.join(' or ');
+};
+
 export const useAutoFill = ({
   fills,
   setFills,
@@ -52,9 +67,7 @@ export const useAutoFill = ({
       setFills({});
       if (hostIds) {
         setSelectedBookmark(null);
-        const hostSearch = Array.isArray(hostIds)
-          ? `id = ${hostIds.join(' or id = ')}`
-          : `id = ${hostIds}`;
+        const hostSearch = buildHostSearchFromIds(hostIds);
         dispatch(
           get({
             key: HOST_IDS,
@@ -69,8 +82,9 @@ export const useAutoFill = ({
                   // eslint-disable-next-line camelcase
                   ({ id, name, display_name }) => ({
                     id,
+                    name,
                     // eslint-disable-next-line camelcase
-                    name: display_name || name,
+                    display_name: display_name || name,
                   })
                 ),
               }));
