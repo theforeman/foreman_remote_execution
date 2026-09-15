@@ -105,7 +105,7 @@ describe('Job wizard fill', () => {
     });
     expectDispatchedGet({
       key: 'HOST_IDS',
-      params: { search: 'id = 105 or id = 37' },
+      params: { search: 'id ^ (105,37)' },
       url: '/api/hosts',
     });
     expectDispatchedGet({
