@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.5.1\n"
+"Project-Id-Version: foreman_remote_execution 18.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -133,6 +133,9 @@ msgstr ""
 
 msgid "Alphabetical"
 msgstr "Alfabético"
+
+msgid "Already on the review step"
+msgstr ""
 
 msgid "An error occurred while fetching the template invocation details."
 msgstr ""
@@ -263,28 +266,28 @@ msgstr "Controlar nível de simultaneidade e distribuição ao longo do tempo"
 msgid "Copy to clipboard"
 msgstr ""
 
-msgid "Could not abort the job %s: ${response}"
+msgid "Could not abort the job %s: %s"
 msgstr ""
 
 msgid "Could not abort the task"
 msgstr ""
 
-msgid "Could not cancel recurring logic %s: ${response}"
+msgid "Could not cancel recurring logic %s: %s"
 msgstr ""
 
-msgid "Could not cancel the job %s: ${response}"
+msgid "Could not cancel the job %s: %s"
 msgstr ""
 
 msgid "Could not cancel the task"
 msgstr ""
 
-msgid "Could not disable recurring logic %s: ${response}"
+msgid "Could not disable recurring logic %s: %s"
 msgstr ""
 
 msgid "Could not display data for job invocation."
 msgstr "Não foi possível exibir dados para a invocação de empregos."
 
-msgid "Could not enable recurring logic %s: ${response}"
+msgid "Could not enable recurring logic %s: %s"
 msgstr ""
 
 msgid "Could not find any suitable interface for execution"
@@ -316,6 +319,9 @@ msgstr "Criar uma invocação de trabalho "
 
 msgid "Create a job template"
 msgstr "Criar um modelo de trabalho"
+
+msgid "Create a new job invocation"
+msgstr ""
 
 msgid "Create a recurring job"
 msgstr "Criar um trabalho recorrente "
@@ -406,6 +412,9 @@ msgstr "Modelo de descrição"
 
 msgid "Designation of a special purpose"
 msgstr "Designação de um propósito especial"
+
+msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
+msgstr ""
 
 msgid "Disable recurring"
 msgstr ""
@@ -542,6 +551,9 @@ msgstr "Anfitriões fracassados"
 msgid "Failed rendering template: %s"
 msgstr "Falha ao renderizar modelo: %s"
 
+msgid "Failed to load host invocation data"
+msgstr ""
+
 msgid "Failed:"
 msgstr ""
 
@@ -595,6 +607,9 @@ msgstr "Obter resultados dos anfitriões em um trabalho"
 
 msgid "Get raw output for a host"
 msgstr "Obter saída não processada para um host"
+
+msgid "Go to job invocations"
+msgstr ""
 
 msgid "Has to be a positive number"
 msgstr "Tem que ser um número positivo"
@@ -661,6 +676,12 @@ msgstr ""
 
 msgid "Include all inputs from the foreign template"
 msgstr "Incluir todas as entradas do modelo externo "
+
+msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
+msgstr ""
+
+msgid "Include per-host task and permission data in the response"
+msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Indica que a ação deve ser cancelada se não puder ser iniciada antes deste período."
@@ -828,6 +849,9 @@ msgid "Manual selection"
 msgstr "Seleção manual"
 
 msgid "Minute can only be a number between 0-59"
+msgstr ""
+
+msgid "Missing permissions to generate report templates"
 msgstr ""
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
@@ -1109,6 +1133,12 @@ msgstr "O rótulo do recurso de execução remota que deve ser acionado. O templ
 msgid "Remote execution job"
 msgstr "Trabalho de execução remota"
 
+msgid "Remote working directory"
+msgstr ""
+
+msgid "Remote working directory \"%{current_value}\" is not an absolute path"
+msgstr ""
+
 msgid "Repeat a maximum of N times"
 msgstr "Repetir no máximo N vezes "
 
@@ -1120,6 +1150,9 @@ msgstr "Repetir até"
 
 msgid "Repeats"
 msgstr "Repetições "
+
+msgid "Report template not found or not configured properly"
+msgstr ""
 
 msgid "Rerun"
 msgstr "Executar novamente"
@@ -1316,9 +1349,6 @@ msgstr "Os endereços ip nas interfaces do host devem ser preferidos em vez do f
 msgid "Should this interface be used for remote execution?"
 msgstr "Esta interface deve ser usada para execução remota?"
 
-msgid "Show Job status for the hosts"
-msgstr "Mostrar o status do trabalho para os anfitriões"
-
 msgid "Show all advanced fields"
 msgstr "Mostrar todos os campos avançados"
 
@@ -1327,6 +1357,9 @@ msgstr "Exibir detalhes do conjunto de entradas externas"
 
 msgid "Show job invocation"
 msgstr "Exibir invocações de trabalho"
+
+msgid "Show job status for each host, only applicable when include_hosts is true"
+msgstr ""
 
 msgid "Show job template details"
 msgstr "Exibir detalhes do modelo de trabalho"
@@ -1643,6 +1676,9 @@ msgstr "Não foi possível salvar o template. Corrija os erros em destaque "
 msgid "Unknown"
 msgstr "Desconhecido"
 
+msgid "Unknown error."
+msgstr ""
+
 msgid "Unknown execution status"
 msgstr "Status de execução desconhecido"
 
@@ -1790,6 +1826,9 @@ msgstr "aqui"
 msgid "host already has an execution interface"
 msgstr "o host já possui uma interface de execução"
 
+msgid "host method"
+msgstr ""
+
 msgid "hosts"
 msgstr "hosts"
 
@@ -1816,6 +1855,12 @@ msgstr "é o minuto (intervalo: 0-59) "
 
 msgid "is month (range: 1-12)"
 msgstr "é o mês (intervalo: 1-12)"
+
+msgid "job invocation"
+msgstr ""
+
+msgid "must be an absolute path"
+msgstr ""
 
 msgid "no"
 msgstr "não"

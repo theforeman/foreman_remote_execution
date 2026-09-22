@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.5.1",
+        "Project-Id-Version": "foreman_remote_execution 18.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -131,6 +131,9 @@
       ],
       "Alphabetical": [
         "Alfabético"
+      ],
+      "Already on the review step": [
+        ""
       ],
       "An error occurred while fetching the template invocation details.": [
         ""
@@ -261,28 +264,28 @@
       "Copy to clipboard": [
         ""
       ],
-      "Could not abort the job %s: ${response}": [
+      "Could not abort the job %s: %s": [
         ""
       ],
       "Could not abort the task": [
         ""
       ],
-      "Could not cancel recurring logic %s: ${response}": [
+      "Could not cancel recurring logic %s: %s": [
         ""
       ],
-      "Could not cancel the job %s: ${response}": [
+      "Could not cancel the job %s: %s": [
         ""
       ],
       "Could not cancel the task": [
         ""
       ],
-      "Could not disable recurring logic %s: ${response}": [
+      "Could not disable recurring logic %s: %s": [
         ""
       ],
       "Could not display data for job invocation.": [
         "No se han podido mostrar los datos para la invocación del trabajo."
       ],
-      "Could not enable recurring logic %s: ${response}": [
+      "Could not enable recurring logic %s: %s": [
         ""
       ],
       "Could not find any suitable interface for execution": [
@@ -314,6 +317,9 @@
       ],
       "Create a job template": [
         "Crear una plantilla de trabajo"
+      ],
+      "Create a new job invocation": [
+        ""
       ],
       "Create a recurring job": [
         "Crear un trabajo recurrente"
@@ -404,6 +410,9 @@
       ],
       "Designation of a special purpose": [
         "Designación de un objetivo especial"
+      ],
+      "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
+        ""
       ],
       "Disable recurring": [
         ""
@@ -540,6 +549,9 @@
       "Failed rendering template: %s": [
         "Falló la reproducción de la plantilla: %s."
       ],
+      "Failed to load host invocation data": [
+        ""
+      ],
       "Failed:": [
         ""
       ],
@@ -593,6 +605,9 @@
       ],
       "Get raw output for a host": [
         "Obtener salida sin procesar para un host"
+      ],
+      "Go to job invocations": [
+        ""
       ],
       "Has to be a positive number": [
         "Tiene que ser un número positivo"
@@ -659,6 +674,12 @@
       ],
       "Include all inputs from the foreign template": [
         "Incluir todas las entradas de la plantilla externa"
+      ],
+      "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
+        ""
+      ],
+      "Include per-host task and permission data in the response": [
+        ""
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "Indica que la acción se debe cancelar si no se puede iniciar antes de este momento."
@@ -826,6 +847,9 @@
         "Selección manual"
       ],
       "Minute can only be a number between 0-59": [
+        ""
+      ],
+      "Missing permissions to generate report templates": [
         ""
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
@@ -1107,6 +1131,12 @@
       "Remote execution job": [
         "Trabajo de ejecución remota"
       ],
+      "Remote working directory": [
+        ""
+      ],
+      "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
+        ""
+      ],
       "Repeat a maximum of N times": [
         "Repetir un máximo de N veces"
       ],
@@ -1118,6 +1148,9 @@
       ],
       "Repeats": [
         "Se repite"
+      ],
+      "Report template not found or not configured properly": [
+        ""
       ],
       "Rerun": [
         "Volver a ejecutar"
@@ -1314,9 +1347,6 @@
       "Should this interface be used for remote execution?": [
         "¿Debe utilizarse esta interfaz para la ejecución remota?"
       ],
-      "Show Job status for the hosts": [
-        "Mostrar el estado del trabajo de los anfitriones"
-      ],
       "Show all advanced fields": [
         "Mostrar todos los campos avanzados"
       ],
@@ -1325,6 +1355,9 @@
       ],
       "Show job invocation": [
         "Mostrar invocación de trabajo"
+      ],
+      "Show job status for each host, only applicable when include_hosts is true": [
+        ""
       ],
       "Show job template details": [
         "Mostrar detalles de la plantilla de trabajo"
@@ -1640,6 +1673,9 @@
       "Unknown": [
         "Desconocido"
       ],
+      "Unknown error.": [
+        ""
+      ],
       "Unknown execution status": [
         "Estado de ejecución desconocido"
       ],
@@ -1787,6 +1823,9 @@
       "host already has an execution interface": [
         "el host ya tiene una interfaz de ejecución."
       ],
+      "host method": [
+        ""
+      ],
       "hosts": [
         "Hosts"
       ],
@@ -1813,6 +1852,12 @@
       ],
       "is month (range: 1-12)": [
         "es mes (rango: 1-12)"
+      ],
+      "job invocation": [
+        ""
+      ],
+      "must be an absolute path": [
+        ""
       ],
       "no": [
         "no"

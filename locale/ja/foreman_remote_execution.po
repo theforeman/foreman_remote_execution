@@ -7,7 +7,7 @@
 # elobato <elobatocs@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.5.1\n"
+"Project-Id-Version: foreman_remote_execution 18.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: elobato <elobatocs@gmail.com>, 2017\n"
@@ -133,6 +133,9 @@ msgstr "すべてのステータス"
 
 msgid "Alphabetical"
 msgstr "アルファベット順"
+
+msgid "Already on the review step"
+msgstr ""
 
 msgid "An error occurred while fetching the template invocation details."
 msgstr "テンプレート呼び出しの詳細を取得中にエラーが発生しました。"
@@ -263,29 +266,29 @@ msgstr "同時実行レベルと分散を制御"
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
-msgid "Could not abort the job %s: ${response}"
-msgstr "ジョブ %s を中止できませんでした: ${response}"
+msgid "Could not abort the job %s: %s"
+msgstr ""
 
 msgid "Could not abort the task"
 msgstr "タスクを中断できませんでした"
 
-msgid "Could not cancel recurring logic %s: ${response}"
-msgstr "再帰論理 %s をキャンセルできませんでした: ${response}"
+msgid "Could not cancel recurring logic %s: %s"
+msgstr ""
 
-msgid "Could not cancel the job %s: ${response}"
-msgstr "ジョブ %s をキャンセルできませんでした: ${response}"
+msgid "Could not cancel the job %s: %s"
+msgstr ""
 
 msgid "Could not cancel the task"
 msgstr "タスクをキャンセルできませんでした"
 
-msgid "Could not disable recurring logic %s: ${response}"
-msgstr "再帰論理 %s を無効にできませんでした: ${response}"
+msgid "Could not disable recurring logic %s: %s"
+msgstr ""
 
 msgid "Could not display data for job invocation."
 msgstr "ジョブ呼び出しのデータを表示できませんでした。"
 
-msgid "Could not enable recurring logic %s: ${response}"
-msgstr "再帰論理 %s を有効にできませんでした: ${response}"
+msgid "Could not enable recurring logic %s: %s"
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "実行に適したインターフェイスを見つけることができませんでした"
@@ -316,6 +319,9 @@ msgstr "ジョブ呼び出しを作成"
 
 msgid "Create a job template"
 msgstr "ジョブテンプレートの作成"
+
+msgid "Create a new job invocation"
+msgstr ""
 
 msgid "Create a recurring job"
 msgstr "繰り返されるジョブを作成"
@@ -406,6 +412,9 @@ msgstr "説明テンプレート"
 
 msgid "Designation of a special purpose"
 msgstr "特別な目的の指定"
+
+msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
+msgstr ""
 
 msgid "Disable recurring"
 msgstr "繰り返しの無効化"
@@ -542,6 +551,9 @@ msgstr "失敗したホスト"
 msgid "Failed rendering template: %s"
 msgstr "テンプレートのレンダリングに失敗しました: %s"
 
+msgid "Failed to load host invocation data"
+msgstr ""
+
 msgid "Failed:"
 msgstr "失敗:"
 
@@ -595,6 +607,9 @@ msgstr "ジョブ内のホストの出力を取得します"
 
 msgid "Get raw output for a host"
 msgstr "ホストのロー出力を取得"
+
+msgid "Go to job invocations"
+msgstr ""
 
 msgid "Has to be a positive number"
 msgstr "正の数でなければなりません"
@@ -661,6 +676,12 @@ msgstr "処理中:"
 
 msgid "Include all inputs from the foreign template"
 msgstr "外部テンプレートからのすべての入力を含める"
+
+msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
+msgstr ""
+
+msgid "Include per-host task and permission data in the response"
+msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "アクションはこの時刻よりも前に開始できない場合にキャンセルされることを示しています。"
@@ -829,6 +850,9 @@ msgstr "手動選択"
 
 msgid "Minute can only be a number between 0-59"
 msgstr "分は 0-59 の間の数字のみ指定できます。"
+
+msgid "Missing permissions to generate report templates"
+msgstr ""
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr "必須パーミッションがありません: ${missingPermissions.join( ', ' )}"
@@ -1109,6 +1133,12 @@ msgstr "トリガーされるリモート実行機能ラベル。この機能に
 msgid "Remote execution job"
 msgstr "リモート実行ジョブ"
 
+msgid "Remote working directory"
+msgstr ""
+
+msgid "Remote working directory \"%{current_value}\" is not an absolute path"
+msgstr ""
+
 msgid "Repeat a maximum of N times"
 msgstr "最大 N 回繰り返す"
 
@@ -1120,6 +1150,9 @@ msgstr "繰り返し"
 
 msgid "Repeats"
 msgstr "繰り返し"
+
+msgid "Report template not found or not configured properly"
+msgstr ""
 
 msgid "Rerun"
 msgstr "再実行"
@@ -1316,9 +1349,6 @@ msgstr "ホストインターフェイスの ip アドレスは fqdn よりも�
 msgid "Should this interface be used for remote execution?"
 msgstr "このインターフェイスをリモート実行に使用する必要がありますか?"
 
-msgid "Show Job status for the hosts"
-msgstr "ホストのジョブステータスを表示"
-
 msgid "Show all advanced fields"
 msgstr "すべての詳細フィールドを表示"
 
@@ -1327,6 +1357,9 @@ msgstr "外部入力セットの詳細を表示"
 
 msgid "Show job invocation"
 msgstr "ジョブ呼び出しを表示"
+
+msgid "Show job status for each host, only applicable when include_hosts is true"
+msgstr ""
 
 msgid "Show job template details"
 msgstr "ジョブテンプレートの詳細を表示"
@@ -1641,6 +1674,9 @@ msgstr "テンプレートを保存できません。強調表示されたエラ
 msgid "Unknown"
 msgstr "不明"
 
+msgid "Unknown error."
+msgstr ""
+
 msgid "Unknown execution status"
 msgstr "不明な実行ステータス"
 
@@ -1788,6 +1824,9 @@ msgstr "こちら"
 msgid "host already has an execution interface"
 msgstr "ホストにはすでに実行インターフェイスがあります"
 
+msgid "host method"
+msgstr ""
+
 msgid "hosts"
 msgstr "ホスト"
 
@@ -1814,6 +1853,12 @@ msgstr "分 (範囲: 0 - 59)"
 
 msgid "is month (range: 1-12)"
 msgstr "月 (範囲: 1 - 12)"
+
+msgid "job invocation"
+msgstr ""
+
+msgid "must be an absolute path"
+msgstr ""
 
 msgid "no"
 msgstr "no"

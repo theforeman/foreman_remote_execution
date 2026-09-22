@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.5.1",
+        "Project-Id-Version": "foreman_remote_execution 18.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -18,7 +18,7 @@
         "plural_forms": "nplurals=2; plural=(n!=1);"
       },
       "${d.title} ${d.count} hosts": [
-        ""
+        "${d.title} ${d.count} ჰოსტი"
       ],
       "%s": [
         "%s"
@@ -33,7 +33,7 @@
         "კიდევ %s"
       ],
       "%s task(s) successfully %s: %s": [
-        ""
+        "%s ამოცანა წარმატებით %s: %s"
       ],
       "%{description} on %{host}": [
         "%{description} %{host}-ზე"
@@ -88,22 +88,22 @@
         "სკრიპტის გაშვებისას გამოყენებული მომხმარებელი. თუ ის SSH მომხმარებლისგან განსხვავდება, გადასართველად su ან sudo იქნება გამოყენებული."
       ],
       "Abort": [
-        ""
+        "შეწყვეტა"
       ],
       "Abort Job": [
         "დავალების გაუქმება"
       ],
       "Abort selected": [
-        ""
+        "მონიშნულის შეწყვეტა"
       ],
       "Abort task": [
-        ""
+        "ამოცანის შეწყვეტა"
       ],
       "Access denied": [
         "წვდომა აკრძალულია"
       ],
       "Action": [
-        ""
+        "ქმედება"
       ],
       "Actions": [
         "ქმედებები"
@@ -127,10 +127,13 @@
         "საჭიროა ყველა ველის შევსება."
       ],
       "All statuses": [
-        ""
+        "ყველა სტატუსი"
       ],
       "Alphabetical": [
         "ანბანით დალაგებული"
+      ],
+      "Already on the review step": [
+        ""
       ],
       "An error occurred while fetching the template invocation details.": [
         ""
@@ -166,7 +169,7 @@
         "წუთი"
       ],
       "Awaiting start": [
-        ""
+        "გაშვების მოლოდინი"
       ],
       "Back": [
         "უკან"
@@ -187,22 +190,22 @@
         "ამოცანის გაუქმება"
       ],
       "Cancel Task": [
-        ""
+        "ამოცანის გაუქმება"
       ],
       "Cancel job invocation or matching tasks only": [
         ""
       ],
       "Cancel recurring": [
-        ""
+        "გამეორების გაუქმება"
       ],
       "Cancel selected": [
-        ""
+        "მონიშნულის გაუქმება"
       ],
       "Cancelled": [
         "შეწყვეტილია"
       ],
       "Cancelled:": [
-        ""
+        "გაუქმებულია:"
       ],
       "Cannot resolve hosts without a bookmark or search query": [
         "ჰოსტების ამოხსნა შეუძლებელია სანიშნის ან საძებნი სტრიქონის გარეშე"
@@ -244,7 +247,7 @@
         "Cockpit-ის URL"
       ],
       "Command": [
-        ""
+        "ბრძანება"
       ],
       "Concurrency level": [
         "კონკურენტობის დონე"
@@ -261,28 +264,28 @@
       "Copy to clipboard": [
         "ბუფერში კოპირება"
       ],
-      "Could not abort the job %s: ${response}": [
+      "Could not abort the job %s: %s": [
         ""
       ],
       "Could not abort the task": [
+        "ამოცანის შეწყვეტა შეუძლებელია"
+      ],
+      "Could not cancel recurring logic %s: %s": [
         ""
       ],
-      "Could not cancel recurring logic %s: ${response}": [
-        ""
-      ],
-      "Could not cancel the job %s: ${response}": [
+      "Could not cancel the job %s: %s": [
         ""
       ],
       "Could not cancel the task": [
-        ""
+        "ამოცანა ვერ გაუქმდა"
       ],
-      "Could not disable recurring logic %s: ${response}": [
+      "Could not disable recurring logic %s: %s": [
         ""
       ],
       "Could not display data for job invocation.": [
         "ნაჩვენები იქნება თუ არა ამოცანის ჩაწოდების მონაცემები."
       ],
-      "Could not enable recurring logic %s: ${response}": [
+      "Could not enable recurring logic %s: %s": [
         ""
       ],
       "Could not find any suitable interface for execution": [
@@ -315,14 +318,17 @@
       "Create a job template": [
         "დავალების შაბლონის შექმნა"
       ],
+      "Create a new job invocation": [
+        ""
+      ],
       "Create a recurring job": [
         "განეორებადი ლოგიკის დავალების შექმნა"
       ],
       "Create job": [
-        ""
+        "დავალების შექმნა"
       ],
       "Create report": [
-        ""
+        "ანგარიშის შექმნა"
       ],
       "Create report for this job": [
         "ამ დავალების ანგარიშის შექმნა"
@@ -355,13 +361,13 @@
         ""
       ],
       "DEBUG": [
-        ""
+        "გამართვა"
       ],
       "Daily": [
         "დღიურად"
       ],
       "Date must be in the future": [
-        ""
+        "თარიღი მომავალში უნდა იყოს"
       ],
       "Days": [
         "დღე"
@@ -405,8 +411,11 @@
       "Designation of a special purpose": [
         "განსაკუთრებული მიზნის აღნიშვნა"
       ],
-      "Disable recurring": [
+      "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
         ""
+      ],
+      "Disable recurring": [
+        "გამეორების გამორთვა"
       ],
       "Display advanced fields": [
         "დამატებითი ველების ჩვენება"
@@ -466,7 +475,7 @@
         "გლობალური პროქსის ჩართვა"
       ],
       "Enable recurring": [
-        ""
+        "გამეორების ჩართვა"
       ],
       "End time needs to be after start time": [
         "დასრულების დრო დასაწყისის დროის შემდეგ უნდა იყოს"
@@ -540,8 +549,11 @@
       "Failed rendering template: %s": [
         "შაბლონის რენდერის შეცდომა: %s"
       ],
-      "Failed:": [
+      "Failed to load host invocation data": [
         ""
+      ],
+      "Failed:": [
+        "წარუმატებელი:"
       ],
       "Fallback to Any Proxy": [
         "ავარიისას ნებისმიერ პროქსიზე გადართვა"
@@ -594,6 +606,9 @@
       "Get raw output for a host": [
         "ჰოსტის გამოტანის პირდაპირ მიღება"
       ],
+      "Go to job invocations": [
+        ""
+      ],
       "Has to be a positive number": [
         "დადებითი რიცხვი უნდა იყოს"
       ],
@@ -613,7 +628,7 @@
         "ჰოსტის დეტალები"
       ],
       "Host group": [
-        ""
+        "ჰოსტების ჯგუფი"
       ],
       "Host groups": [
         "ჰოსტის ჯგუფები"
@@ -652,13 +667,19 @@
         "დავალების შაბლონის ERB-დან შემოტანა"
       ],
       "In Progress": [
-        ""
+        "მიმდინარეობს"
       ],
       "In Progress:": [
-        ""
+        "მიმდინარეობს:"
       ],
       "Include all inputs from the foreign template": [
         "შეიცავს გარე შაბლონს ყველა შეყვანას"
+      ],
+      "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
+        ""
+      ],
+      "Include per-host task and permission data in the response": [
+        ""
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "მიუთითებს, რომ მოქმედება უნდა გაუქმდეს, თუ მისი დაწყება ამ დრომდე შეუძლებელია."
@@ -828,6 +849,9 @@
       "Minute can only be a number between 0-59": [
         "წუთი უნდა იყოს რიცხვი შუალედში 0-59"
       ],
+      "Missing permissions to generate report templates": [
+        ""
+      ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         ""
       ],
@@ -868,7 +892,7 @@
         "სამიზნე ჰოსტების გარეშე"
       ],
       "No hosts found": [
-        ""
+        "ჰოსტები ნაპოვნი არაა"
       ],
       "No hosts found.": [
         "ჰოსტები ნაპოვნი არაა."
@@ -886,7 +910,7 @@
         ""
       ],
       "No user input": [
-        ""
+        "მომხმარებლის შეყვანის გარეშე"
       ],
       "Not all required inputs have values. Missing inputs: %s": [
         ""
@@ -901,7 +925,7 @@
         "ახლა"
       ],
       "OS": [
-        ""
+        "OS"
       ],
       "On": [
         "ჩართული"
@@ -919,13 +943,13 @@
         ""
       ],
       "Open in new tab": [
-        ""
+        "ახალ ჩანართში გახსნა"
       ],
       "Open in new tabs": [
-        ""
+        "ახალ ჩანართებში გახსნა"
       ],
       "Open selected in new tab": [
-        ""
+        "მონიშნულის გახსნა ახალ ჩანართში"
       ],
       "Opening job invocation form": [
         "დავალების ჩაწოდების ფორმის გახსნა"
@@ -1012,7 +1036,7 @@
         "ჰოსტების გადახედვა"
       ],
       "Preview Template": [
-        ""
+        "შაბლონის გადახედვა"
       ],
       "Preview job description": [
         "დავალების აღწერის გადახედვა"
@@ -1027,7 +1051,7 @@
         ""
       ],
       "Proceed Anyway": [
-        ""
+        "მაინც გაგრძელება"
       ],
       "Provider type": [
         "მომწოდებლის წიპი"
@@ -1107,6 +1131,12 @@
       "Remote execution job": [
         "დაშორებული გაშვების დავალება"
       ],
+      "Remote working directory": [
+        ""
+      ],
+      "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
+        ""
+      ],
       "Repeat a maximum of N times": [
         "მაქსიმუმ N-ჯერ გამეორება"
       ],
@@ -1119,11 +1149,14 @@
       "Repeats": [
         "გამეორება"
       ],
+      "Report template not found or not configured properly": [
+        ""
+      ],
       "Rerun": [
         "თავიდან გაშვება"
       ],
       "Rerun all": [
-        ""
+        "ყველაფრის თავიდან გაშვება"
       ],
       "Rerun failed": [
         "თავიდან გაშვების შეცდომა"
@@ -1138,13 +1171,13 @@
         "ავარიულ ჰოსტებზე თავიდან გაშვება"
       ],
       "Rerun on succeeded hosts": [
-        ""
+        "თავიდან გაშვება წარმატებულ ჰოსტებზე"
       ],
       "Rerun succeeded": [
-        ""
+        "თავიდან გაშვება წარმატებულია"
       ],
       "Rerun successful": [
-        ""
+        "თავიდან გაშვება წარმატებულია"
       ],
       "Rerun the job": [
         "დავალების თავიდან გაშვება"
@@ -1207,10 +1240,10 @@
         "SSH-ის მომხმარებლი:"
       ],
       "STDERR": [
-        ""
+        "STDERR"
       ],
       "STDOUT": [
-        ""
+        "STDOUT"
       ],
       "Schedule": [
         "განრიგი"
@@ -1234,7 +1267,7 @@
         "დაგეგმილია"
       ],
       "Scheduled at:": [
-        ""
+        "დაგეგმილია:"
       ],
       "Scheduled to start at": [
         "დაგეგმილი გაშვების დრო"
@@ -1243,7 +1276,7 @@
         "გაეშვება მითითებულ დრომდე"
       ],
       "Scheduled: ${totalHosts} hosts": [
-        ""
+        "დაგეგმილია: ${totalHosts} ჰოსტი"
       ],
       "Script": [
         "სკრიპტი"
@@ -1314,9 +1347,6 @@
       "Should this interface be used for remote execution?": [
         "გამოვიყენო ეს ინტერფეისი დაშორებული გაშვებისთვის?"
       ],
-      "Show Job status for the hosts": [
-        "ჰოსტების დავალების სტატუსის ჩვენება"
-      ],
       "Show all advanced fields": [
         "დამატებითი ველების ჩვენება"
       ],
@@ -1325,6 +1355,9 @@
       ],
       "Show job invocation": [
         "დავალების ჩაწოდების ჩვენება"
+      ],
+      "Show job status for each host, only applicable when include_hosts is true": [
+        ""
       ],
       "Show job template details": [
         "დავალების შაბლონის დეტალების ჩვენება"
@@ -1396,13 +1429,13 @@
         "წარმატებულია"
       ],
       "Succeeded:": [
-        ""
+        "წარმატებულია:"
       ],
       "Success": [
         "წარმატება"
       ],
       "Successfully copied to clipboard!": [
-        ""
+        "წარმატებით დაკოპირდა ბუფერში!"
       ],
       "Switch to the new job invocation detail UI": [
         ""
@@ -1411,13 +1444,13 @@
         "სინქრონიზაციის დავალების შაბლონები"
       ],
       "System status": [
-        ""
+        "სისტემის სტატუსი"
       ],
       "Systems": [
-        ""
+        "სისტემები"
       ],
       "Target Hosts": [
-        ""
+        "სამიზნე ჰოსტები"
       ],
       "Target hosts": [
         "სამიზნე ჰოსტები"
@@ -1429,7 +1462,7 @@
         "სამიზნე შაბლონის ID"
       ],
       "Target:": [
-        ""
+        "სამიზნე:"
       ],
       "Target: ": [
         "სამიზნე: "
@@ -1447,7 +1480,7 @@
         ""
       ],
       "Task(s) were not %s": [
-        ""
+        "ამოცანები არ %s"
       ],
       "Template ERB": [
         "ERB შაბლონი"
@@ -1459,7 +1492,7 @@
         "შაბლონის შეცდომა:"
       ],
       "Template invocation not found": [
-        ""
+        "ნიმუშის ჩაწოდება აღმოჩენილი არაა"
       ],
       "Template name": [
         "შაბლონის სახელი"
@@ -1580,7 +1613,7 @@
         "ჰოსტზე დავალების გაუქმების ცდა"
       ],
       "Trying to %s the task": [
-        ""
+        "ამოცანის %s-ის მცდელობა"
       ],
       "Trying to abort the job": [
         "დავალების შეწყვეტის მცდელობა"
@@ -1619,7 +1652,7 @@
         "ელფოსტის შეტყობინების შექმნის შეცდომა: %s"
       ],
       "Unable to fetch CA public key": [
-        ""
+        "CA საჯარო გასაღების გამოთხოვა შეუძლებელია"
       ],
       "Unable to fetch CA public key: %{error}": [
         ""
@@ -1631,12 +1664,15 @@
         "ჰოსტის სანდო ჰოსტების სიიდან წაშლის შეცდომა"
       ],
       "Unable to run job": [
-        ""
+        "დავალების გაშვება შეუძლებელია"
       ],
       "Unable to save template. Correct highlighted errors": [
         "შაბლონის შენახვის შეცდომა. შეასწორეთ გამოკვეთილი შეცდომები"
       ],
       "Unknown": [
+        "უცნობი"
+      ],
+      "Unknown error.": [
         ""
       ],
       "Unknown execution status": [
@@ -1700,7 +1736,7 @@
         "დაგეგმილი ამოცანების ნახვა"
       ],
       "View task": [
-        ""
+        "ამოცანის ნახვა"
       ],
       "Web Console": [
         "ვებ კონსოლი"
@@ -1748,7 +1784,7 @@
         ""
       ],
       "You are not authorized to perform this action.": [
-        ""
+        "ამ ქმედებისთვის საჭირო ავტორიზაცია არ გაგაჩნიათ."
       ],
       "You have %s results to display. Showing first %s results": [
         "საჩვენებელია %s შედეგი. ნაჩვენებია პირველი %s შედეგი"
@@ -1757,7 +1793,7 @@
         ""
       ],
       "aborted": [
-        ""
+        "aborted"
       ],
       "add an input set for this template to reference a different template inputs": [
         ""
@@ -1786,6 +1822,9 @@
       "host already has an execution interface": [
         "ჰოსტს დაშორებული გაშვების ინტერფეისი უკვე გააჩნია"
       ],
+      "host method": [
+        ""
+      ],
       "hosts": [
         "ჰოსტი"
       ],
@@ -1812,6 +1851,12 @@
       ],
       "is month (range: 1-12)": [
         "თვე (1-120)"
+      ],
+      "job invocation": [
+        ""
+      ],
+      "must be an absolute path": [
+        ""
       ],
       "no": [
         "არა"
@@ -1844,7 +1889,7 @@
         "წარმატებული"
       ],
       "task aborted succesfully": [
-        ""
+        "ამოცანა წარმატებით შეწყდა"
       ],
       "tasks at a time": [
         "ერთდროული ამოცანები"
@@ -1865,7 +1910,7 @@
         "ჰოსტის სახელების ნახვა"
       ],
       "view the hosts": [
-        ""
+        "ჰოსტების ნახვა"
       ],
       "yes": [
         "დიახ"

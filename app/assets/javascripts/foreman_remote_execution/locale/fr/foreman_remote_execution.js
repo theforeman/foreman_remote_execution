@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.5.1",
+        "Project-Id-Version": "foreman_remote_execution 18.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Ondřej Gajdušek, 2026",
@@ -132,6 +132,9 @@
       ],
       "Alphabetical": [
         "Alphabétique"
+      ],
+      "Already on the review step": [
+        ""
       ],
       "An error occurred while fetching the template invocation details.": [
         "Une erreur s'est produite lors de la récupération des détails d'invocation du modèle."
@@ -262,29 +265,29 @@
       "Copy to clipboard": [
         "Copier dans le presse-papiers"
       ],
-      "Could not abort the job %s: ${response}": [
-        "Impossible d'annuler le job %s :${response}"
+      "Could not abort the job %s: %s": [
+        ""
       ],
       "Could not abort the task": [
         "Impossible d'annuler la tâche"
       ],
-      "Could not cancel recurring logic %s: ${response}": [
-        "Impossible d'annuler la logique récurrente%s :${response}"
+      "Could not cancel recurring logic %s: %s": [
+        ""
       ],
-      "Could not cancel the job %s: ${response}": [
-        "Impossible d'annuler le job %s :${response}"
+      "Could not cancel the job %s: %s": [
+        ""
       ],
       "Could not cancel the task": [
         "Impossible d'annuler la tâche"
       ],
-      "Could not disable recurring logic %s: ${response}": [
-        "Impossible de désactiver la logique récurrente%s :${response}"
+      "Could not disable recurring logic %s: %s": [
+        ""
       ],
       "Could not display data for job invocation.": [
         "Impossible d'afficher les données pour le lancement du job."
       ],
-      "Could not enable recurring logic %s: ${response}": [
-        "Impossible d’activer la logique récurrente%s :${response}"
+      "Could not enable recurring logic %s: %s": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "Impossible de trouver une interface qui convient pour l'exécution"
@@ -315,6 +318,9 @@
       ],
       "Create a job template": [
         "Créer un modèle de job"
+      ],
+      "Create a new job invocation": [
+        ""
       ],
       "Create a recurring job": [
         "Créer un job récurrent"
@@ -405,6 +411,9 @@
       ],
       "Designation of a special purpose": [
         "Désignation d’un objectif spécial"
+      ],
+      "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
+        ""
       ],
       "Disable recurring": [
         "Désactiver les récurrents"
@@ -541,6 +550,9 @@
       "Failed rendering template: %s": [
         "Echec de rendu du modèle : %s"
       ],
+      "Failed to load host invocation data": [
+        ""
+      ],
       "Failed:": [
         "Échec :"
       ],
@@ -594,6 +606,9 @@
       ],
       "Get raw output for a host": [
         "Récupérer la sortie brut d'un hôte"
+      ],
+      "Go to job invocations": [
+        ""
       ],
       "Has to be a positive number": [
         "Doit correspondre à un nombre positif"
@@ -660,6 +675,12 @@
       ],
       "Include all inputs from the foreign template": [
         "Inclut toutes les entrées du modèle étranger"
+      ],
+      "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
+        ""
+      ],
+      "Include per-host task and permission data in the response": [
+        ""
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "Indique si l'action doit être annulée si elle ne peut commencer à ce moment là."
@@ -828,6 +849,9 @@
       ],
       "Minute can only be a number between 0-59": [
         "La minute doit être un nombre compris entre 0 et 59"
+      ],
+      "Missing permissions to generate report templates": [
+        ""
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         "Il manque les autorisations requises : ${missingPermissions.join( ', ' )}"
@@ -1108,6 +1132,12 @@
       "Remote execution job": [
         "Job à exécution distante"
       ],
+      "Remote working directory": [
+        ""
+      ],
+      "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
+        ""
+      ],
       "Repeat a maximum of N times": [
         "Répéter un maximum de N fois"
       ],
@@ -1119,6 +1149,9 @@
       ],
       "Repeats": [
         "Répétitions"
+      ],
+      "Report template not found or not configured properly": [
+        ""
       ],
       "Rerun": [
         "Relancer"
@@ -1315,9 +1348,6 @@
       "Should this interface be used for remote execution?": [
         "L'interface d'exécution est celle utilisée pour l'exécution distante ?"
       ],
-      "Show Job status for the hosts": [
-        "Afficher l'état des jobs pour les hôtes"
-      ],
       "Show all advanced fields": [
         "Afficher tous les champs avancés"
       ],
@@ -1326,6 +1356,9 @@
       ],
       "Show job invocation": [
         "Voir le lancement du job"
+      ],
+      "Show job status for each host, only applicable when include_hosts is true": [
+        ""
       ],
       "Show job template details": [
         "Voir les détails d'un modèle de job"
@@ -1641,6 +1674,9 @@
       "Unknown": [
         "Inconnu"
       ],
+      "Unknown error.": [
+        ""
+      ],
       "Unknown execution status": [
         "État d'exécution inconnu"
       ],
@@ -1788,6 +1824,9 @@
       "host already has an execution interface": [
         "L'hôte possède déjà une interface d'exécution"
       ],
+      "host method": [
+        ""
+      ],
       "hosts": [
         "hôtes"
       ],
@@ -1814,6 +1853,12 @@
       ],
       "is month (range: 1-12)": [
         "est mois (Plage: 1-12)"
+      ],
+      "job invocation": [
+        ""
+      ],
+      "must be an absolute path": [
+        ""
       ],
       "no": [
         "non"

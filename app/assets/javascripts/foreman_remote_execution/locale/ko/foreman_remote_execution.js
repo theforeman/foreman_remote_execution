@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.5.1",
+        "Project-Id-Version": "foreman_remote_execution 18.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -130,6 +130,9 @@
       ],
       "Alphabetical": [
         "알파벳순"
+      ],
+      "Already on the review step": [
+        ""
       ],
       "An error occurred while fetching the template invocation details.": [
         "템플릿 호출 세부 정보를 가져오는 동안 오류가 발생했습니다."
@@ -260,29 +263,29 @@
       "Copy to clipboard": [
         "클립보드에 복사"
       ],
-      "Could not abort the job %s: ${response}": [
-        "%s 작업을 중단할 수 없습니다: ${response}"
+      "Could not abort the job %s: %s": [
+        ""
       ],
       "Could not abort the task": [
         "작업을 중단할 수 없습니다"
       ],
-      "Could not cancel recurring logic %s: ${response}": [
-        "반복 논리 %s를 취소할 수 없습니다: ${response}"
+      "Could not cancel recurring logic %s: %s": [
+        ""
       ],
-      "Could not cancel the job %s: ${response}": [
-        "%s 작업을 취소할 수 없습니다: ${response}"
+      "Could not cancel the job %s: %s": [
+        ""
       ],
       "Could not cancel the task": [
         "작업을 취소할 수 없습니다"
       ],
-      "Could not disable recurring logic %s: ${response}": [
-        "반복 논리 %s를 비활성화할 수 없습니다: ${response}"
+      "Could not disable recurring logic %s: %s": [
+        ""
       ],
       "Could not display data for job invocation.": [
         "작업 호출에 대한 데이터를 표시할 수 없습니다."
       ],
-      "Could not enable recurring logic %s: ${response}": [
-        "반복 논리 %s를 활성화할 수 없습니다: ${response}"
+      "Could not enable recurring logic %s: %s": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "실행에 적합한 인터페이스를 찾을 수 없습니다."
@@ -313,6 +316,9 @@
       ],
       "Create a job template": [
         "작업 템플릿 생성"
+      ],
+      "Create a new job invocation": [
+        ""
       ],
       "Create a recurring job": [
         "반복 작업 생성"
@@ -403,6 +409,9 @@
       ],
       "Designation of a special purpose": [
         "특수 목적의 지정"
+      ],
+      "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
+        ""
       ],
       "Disable recurring": [
         "반복을 비활성화합니다"
@@ -539,6 +548,9 @@
       "Failed rendering template: %s": [
         "템플릿 렌더링 실패: %s"
       ],
+      "Failed to load host invocation data": [
+        ""
+      ],
       "Failed:": [
         "실패함:"
       ],
@@ -592,6 +604,9 @@
       ],
       "Get raw output for a host": [
         "호스트에 대한 원시 출력 가져오기"
+      ],
+      "Go to job invocations": [
+        ""
       ],
       "Has to be a positive number": [
         "양수여야 합니다"
@@ -658,6 +673,12 @@
       ],
       "Include all inputs from the foreign template": [
         "외부 템플릿의 모든 입력 포함"
+      ],
+      "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
+        ""
+      ],
+      "Include per-host task and permission data in the response": [
+        ""
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "이 시간 전에 시작할 수 없는 경우 작업을 취소한다는 것을 나타냅니다."
@@ -826,6 +847,9 @@
       ],
       "Minute can only be a number between 0-59": [
         "분은 0~59 사이의 숫자만 가능합니다."
+      ],
+      "Missing permissions to generate report templates": [
+        ""
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         "필수 권한이 없습니다: ${missingPermissions.join( ', ' )}"
@@ -1106,6 +1130,12 @@
       "Remote execution job": [
         "원격 실행 프록시"
       ],
+      "Remote working directory": [
+        ""
+      ],
+      "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
+        ""
+      ],
       "Repeat a maximum of N times": [
         "최대 N번 반복"
       ],
@@ -1117,6 +1147,9 @@
       ],
       "Repeats": [
         "반복"
+      ],
+      "Report template not found or not configured properly": [
+        ""
       ],
       "Rerun": [
         "재실행"
@@ -1313,9 +1346,6 @@
       "Should this interface be used for remote execution?": [
         "원격 실행에 이 인터페이스를 사용해야 합니까?"
       ],
-      "Show Job status for the hosts": [
-        "호스트의 작업 상태 표시"
-      ],
       "Show all advanced fields": [
         "모든 고급 필드 표시"
       ],
@@ -1324,6 +1354,9 @@
       ],
       "Show job invocation": [
         "작업 호출 표시"
+      ],
+      "Show job status for each host, only applicable when include_hosts is true": [
+        ""
       ],
       "Show job template details": [
         "작업 템플릿 정보 표시"
@@ -1637,6 +1670,9 @@
       "Unknown": [
         "알 수 없음 "
       ],
+      "Unknown error.": [
+        ""
+      ],
       "Unknown execution status": [
         "알 수 없는 실행 상태"
       ],
@@ -1784,6 +1820,9 @@
       "host already has an execution interface": [
         "호스트에 실행 인터페이스가 이미 있습니다."
       ],
+      "host method": [
+        ""
+      ],
       "hosts": [
         "호스트"
       ],
@@ -1810,6 +1849,12 @@
       ],
       "is month (range: 1-12)": [
         "월(범위: 1-12)"
+      ],
+      "job invocation": [
+        ""
+      ],
+      "must be an absolute path": [
+        ""
       ],
       "no": [
         "no"

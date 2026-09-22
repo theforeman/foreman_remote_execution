@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.5.1",
+        "Project-Id-Version": "foreman_remote_execution 18.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -130,6 +130,9 @@
         ""
       ],
       "Alphabetical": [
+        ""
+      ],
+      "Already on the review step": [
         ""
       ],
       "An error occurred while fetching the template invocation details.": [
@@ -261,28 +264,28 @@
       "Copy to clipboard": [
         ""
       ],
-      "Could not abort the job %s: ${response}": [
+      "Could not abort the job %s: %s": [
         ""
       ],
       "Could not abort the task": [
         ""
       ],
-      "Could not cancel recurring logic %s: ${response}": [
+      "Could not cancel recurring logic %s: %s": [
         ""
       ],
-      "Could not cancel the job %s: ${response}": [
+      "Could not cancel the job %s: %s": [
         ""
       ],
       "Could not cancel the task": [
         ""
       ],
-      "Could not disable recurring logic %s: ${response}": [
+      "Could not disable recurring logic %s: %s": [
         ""
       ],
       "Could not display data for job invocation.": [
         ""
       ],
-      "Could not enable recurring logic %s: ${response}": [
+      "Could not enable recurring logic %s: %s": [
         ""
       ],
       "Could not find any suitable interface for execution": [
@@ -314,6 +317,9 @@
       ],
       "Create a job template": [
         "建立工作範本"
+      ],
+      "Create a new job invocation": [
+        ""
       ],
       "Create a recurring job": [
         "建立週期性工作"
@@ -403,6 +409,9 @@
         "描述範本"
       ],
       "Designation of a special purpose": [
+        ""
+      ],
+      "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
         ""
       ],
       "Disable recurring": [
@@ -540,6 +549,9 @@
       "Failed rendering template: %s": [
         "無法生成範本：%s"
       ],
+      "Failed to load host invocation data": [
+        ""
+      ],
       "Failed:": [
         ""
       ],
@@ -592,6 +604,9 @@
         ""
       ],
       "Get raw output for a host": [
+        ""
+      ],
+      "Go to job invocations": [
         ""
       ],
       "Has to be a positive number": [
@@ -658,6 +673,12 @@
         ""
       ],
       "Include all inputs from the foreign template": [
+        ""
+      ],
+      "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
+        ""
+      ],
+      "Include per-host task and permission data in the response": [
         ""
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
@@ -826,6 +847,9 @@
         "手動選擇"
       ],
       "Minute can only be a number between 0-59": [
+        ""
+      ],
+      "Missing permissions to generate report templates": [
         ""
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
@@ -1107,6 +1131,12 @@
       "Remote execution job": [
         ""
       ],
+      "Remote working directory": [
+        ""
+      ],
+      "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
+        ""
+      ],
       "Repeat a maximum of N times": [
         "重複最多 N 次"
       ],
@@ -1118,6 +1148,9 @@
       ],
       "Repeats": [
         "重複"
+      ],
+      "Report template not found or not configured properly": [
+        ""
       ],
       "Rerun": [
         "重新執行"
@@ -1314,9 +1347,6 @@
       "Should this interface be used for remote execution?": [
         ""
       ],
-      "Show Job status for the hosts": [
-        ""
-      ],
       "Show all advanced fields": [
         ""
       ],
@@ -1325,6 +1355,9 @@
       ],
       "Show job invocation": [
         "顯示工作祈願"
+      ],
+      "Show job status for each host, only applicable when include_hosts is true": [
+        ""
       ],
       "Show job template details": [
         "顯示工作範本的詳情"
@@ -1639,6 +1672,9 @@
       "Unknown": [
         "不明"
       ],
+      "Unknown error.": [
+        ""
+      ],
       "Unknown execution status": [
         "未知的執行狀態"
       ],
@@ -1786,6 +1822,9 @@
       "host already has an execution interface": [
         "主機已有執行介面"
       ],
+      "host method": [
+        ""
+      ],
       "hosts": [
         "主機"
       ],
@@ -1812,6 +1851,12 @@
       ],
       "is month (range: 1-12)": [
         "是月份（範圍：1-12）"
+      ],
+      "job invocation": [
+        ""
+      ],
+      "must be an absolute path": [
+        ""
       ],
       "no": [
         "否"

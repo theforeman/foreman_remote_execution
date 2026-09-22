@@ -6,7 +6,7 @@
 # Yulia <yulia.poyarkova@redhat.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.5.1\n"
+"Project-Id-Version: foreman_remote_execution 18.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Yulia <yulia.poyarkova@redhat.com>, 2016\n"
@@ -134,6 +134,9 @@ msgid "All statuses"
 msgstr ""
 
 msgid "Alphabetical"
+msgstr ""
+
+msgid "Already on the review step"
 msgstr ""
 
 msgid "An error occurred while fetching the template invocation details."
@@ -265,28 +268,28 @@ msgstr "Контроль параллельного выполнения и ра
 msgid "Copy to clipboard"
 msgstr ""
 
-msgid "Could not abort the job %s: ${response}"
+msgid "Could not abort the job %s: %s"
 msgstr ""
 
 msgid "Could not abort the task"
 msgstr ""
 
-msgid "Could not cancel recurring logic %s: ${response}"
+msgid "Could not cancel recurring logic %s: %s"
 msgstr ""
 
-msgid "Could not cancel the job %s: ${response}"
+msgid "Could not cancel the job %s: %s"
 msgstr ""
 
 msgid "Could not cancel the task"
 msgstr ""
 
-msgid "Could not disable recurring logic %s: ${response}"
+msgid "Could not disable recurring logic %s: %s"
 msgstr ""
 
 msgid "Could not display data for job invocation."
 msgstr ""
 
-msgid "Could not enable recurring logic %s: ${response}"
+msgid "Could not enable recurring logic %s: %s"
 msgstr ""
 
 msgid "Could not find any suitable interface for execution"
@@ -318,6 +321,9 @@ msgstr "Создать вызов задания"
 
 msgid "Create a job template"
 msgstr "Создать шаблон задания"
+
+msgid "Create a new job invocation"
+msgstr ""
 
 msgid "Create a recurring job"
 msgstr "Периодическое выполнение"
@@ -407,6 +413,9 @@ msgid "Description template"
 msgstr "Шаблон описания"
 
 msgid "Designation of a special purpose"
+msgstr ""
+
+msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
 msgstr ""
 
 msgid "Disable recurring"
@@ -544,6 +553,9 @@ msgstr ""
 msgid "Failed rendering template: %s"
 msgstr "Не удалось обработать шаблон: %s"
 
+msgid "Failed to load host invocation data"
+msgstr ""
+
 msgid "Failed:"
 msgstr ""
 
@@ -596,6 +608,9 @@ msgid "Get outputs of hosts in a job"
 msgstr ""
 
 msgid "Get raw output for a host"
+msgstr ""
+
+msgid "Go to job invocations"
 msgstr ""
 
 msgid "Has to be a positive number"
@@ -663,6 +678,12 @@ msgstr ""
 
 msgid "Include all inputs from the foreign template"
 msgstr "Добавить все входные параметры из внешнего шаблона"
+
+msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
+msgstr ""
+
+msgid "Include per-host task and permission data in the response"
+msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Обозначает, что действие следует отменить, если оно не будет запущено до указанного времени."
@@ -830,6 +851,9 @@ msgid "Manual selection"
 msgstr "Ручной выбор"
 
 msgid "Minute can only be a number between 0-59"
+msgstr ""
+
+msgid "Missing permissions to generate report templates"
 msgstr ""
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
@@ -1111,6 +1135,12 @@ msgstr ""
 msgid "Remote execution job"
 msgstr ""
 
+msgid "Remote working directory"
+msgstr ""
+
+msgid "Remote working directory \"%{current_value}\" is not an absolute path"
+msgstr ""
+
 msgid "Repeat a maximum of N times"
 msgstr "Количество повторений"
 
@@ -1122,6 +1152,9 @@ msgstr "Повторять до"
 
 msgid "Repeats"
 msgstr "Повторяется"
+
+msgid "Report template not found or not configured properly"
+msgstr ""
 
 msgid "Rerun"
 msgstr "Повторить"
@@ -1318,9 +1351,6 @@ msgstr ""
 msgid "Should this interface be used for remote execution?"
 msgstr ""
 
-msgid "Show Job status for the hosts"
-msgstr ""
-
 msgid "Show all advanced fields"
 msgstr ""
 
@@ -1329,6 +1359,9 @@ msgstr "Показать информацию о внешнем наборе в�
 
 msgid "Show job invocation"
 msgstr "Показать вызов задания"
+
+msgid "Show job status for each host, only applicable when include_hosts is true"
+msgstr ""
 
 msgid "Show job template details"
 msgstr "Показать информацию о шаблоне"
@@ -1646,6 +1679,9 @@ msgstr "Не удалось сохранить шаблон. Исправьте 
 msgid "Unknown"
 msgstr "Неизвестно"
 
+msgid "Unknown error."
+msgstr ""
+
 msgid "Unknown execution status"
 msgstr "Статус выполнения неизвестен"
 
@@ -1793,6 +1829,9 @@ msgstr "здесь"
 msgid "host already has an execution interface"
 msgstr "для этого узла уже настроен интерфейс выполнения"
 
+msgid "host method"
+msgstr ""
+
 msgid "hosts"
 msgstr "узлу(ам)"
 
@@ -1819,6 +1858,12 @@ msgstr "— минуты (0–59)"
 
 msgid "is month (range: 1-12)"
 msgstr "— месяц (1–12)"
+
+msgid "job invocation"
+msgstr ""
+
+msgid "must be an absolute path"
+msgstr ""
 
 msgid "no"
 msgstr "нет"

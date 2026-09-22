@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.5.1\n"
+"Project-Id-Version: foreman_remote_execution 18.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 msgid "${d.title} ${d.count} hosts"
-msgstr ""
+msgstr "${d.title} ${d.count} ჰოსტი"
 
 msgid "%s"
 msgstr "%s"
@@ -33,7 +33,7 @@ msgid "%s more"
 msgstr "კიდევ %s"
 
 msgid "%s task(s) successfully %s: %s"
-msgstr ""
+msgstr "%s ამოცანა წარმატებით %s: %s"
 
 msgid "%{description} on %{host}"
 msgstr "%{description} %{host}-ზე"
@@ -89,22 +89,22 @@ msgid "A user to be used for executing the script. If it differs from the SSH us
 msgstr "სკრიპტის გაშვებისას გამოყენებული მომხმარებელი. თუ ის SSH მომხმარებლისგან განსხვავდება, გადასართველად su ან sudo იქნება გამოყენებული."
 
 msgid "Abort"
-msgstr ""
+msgstr "შეწყვეტა"
 
 msgid "Abort Job"
 msgstr "დავალების გაუქმება"
 
 msgid "Abort selected"
-msgstr ""
+msgstr "მონიშნულის შეწყვეტა"
 
 msgid "Abort task"
-msgstr ""
+msgstr "ამოცანის შეწყვეტა"
 
 msgid "Access denied"
 msgstr "წვდომა აკრძალულია"
 
 msgid "Action"
-msgstr ""
+msgstr "ქმედება"
 
 msgid "Actions"
 msgstr "ქმედებები"
@@ -128,10 +128,13 @@ msgid "All fields are required."
 msgstr "საჭიროა ყველა ველის შევსება."
 
 msgid "All statuses"
-msgstr ""
+msgstr "ყველა სტატუსი"
 
 msgid "Alphabetical"
 msgstr "ანბანით დალაგებული"
+
+msgid "Already on the review step"
+msgstr ""
 
 msgid "An error occurred while fetching the template invocation details."
 msgstr ""
@@ -167,7 +170,7 @@ msgid "At minute"
 msgstr "წუთი"
 
 msgid "Awaiting start"
-msgstr ""
+msgstr "გაშვების მოლოდინი"
 
 msgid "Back"
 msgstr "უკან"
@@ -188,22 +191,22 @@ msgid "Cancel Job"
 msgstr "ამოცანის გაუქმება"
 
 msgid "Cancel Task"
-msgstr ""
+msgstr "ამოცანის გაუქმება"
 
 msgid "Cancel job invocation or matching tasks only"
 msgstr ""
 
 msgid "Cancel recurring"
-msgstr ""
+msgstr "გამეორების გაუქმება"
 
 msgid "Cancel selected"
-msgstr ""
+msgstr "მონიშნულის გაუქმება"
 
 msgid "Cancelled"
 msgstr "შეწყვეტილია"
 
 msgid "Cancelled:"
-msgstr ""
+msgstr "გაუქმებულია:"
 
 msgid "Cannot resolve hosts without a bookmark or search query"
 msgstr "ჰოსტების ამოხსნა შეუძლებელია სანიშნის ან საძებნი სტრიქონის გარეშე"
@@ -245,7 +248,7 @@ msgid "Cockpit URL"
 msgstr "Cockpit-ის URL"
 
 msgid "Command"
-msgstr ""
+msgstr "ბრძანება"
 
 msgid "Concurrency level"
 msgstr "კონკურენტობის დონე"
@@ -262,28 +265,28 @@ msgstr "ერთდროულობის დონისა და დრო
 msgid "Copy to clipboard"
 msgstr "ბუფერში კოპირება"
 
-msgid "Could not abort the job %s: ${response}"
+msgid "Could not abort the job %s: %s"
 msgstr ""
 
 msgid "Could not abort the task"
+msgstr "ამოცანის შეწყვეტა შეუძლებელია"
+
+msgid "Could not cancel recurring logic %s: %s"
 msgstr ""
 
-msgid "Could not cancel recurring logic %s: ${response}"
-msgstr ""
-
-msgid "Could not cancel the job %s: ${response}"
+msgid "Could not cancel the job %s: %s"
 msgstr ""
 
 msgid "Could not cancel the task"
-msgstr ""
+msgstr "ამოცანა ვერ გაუქმდა"
 
-msgid "Could not disable recurring logic %s: ${response}"
+msgid "Could not disable recurring logic %s: %s"
 msgstr ""
 
 msgid "Could not display data for job invocation."
 msgstr "ნაჩვენები იქნება თუ არა ამოცანის ჩაწოდების მონაცემები."
 
-msgid "Could not enable recurring logic %s: ${response}"
+msgid "Could not enable recurring logic %s: %s"
 msgstr ""
 
 msgid "Could not find any suitable interface for execution"
@@ -316,14 +319,17 @@ msgstr "დავალების ჩაწოდების შექმნ�
 msgid "Create a job template"
 msgstr "დავალების შაბლონის შექმნა"
 
+msgid "Create a new job invocation"
+msgstr ""
+
 msgid "Create a recurring job"
 msgstr "განეორებადი ლოგიკის დავალების შექმნა"
 
 msgid "Create job"
-msgstr ""
+msgstr "დავალების შექმნა"
 
 msgid "Create report"
-msgstr ""
+msgstr "ანგარიშის შექმნა"
 
 msgid "Create report for this job"
 msgstr "ამ დავალების ანგარიშის შექმნა"
@@ -356,13 +362,13 @@ msgid "Current organization %{org_c} is different from job's organization %{org_
 msgstr ""
 
 msgid "DEBUG"
-msgstr ""
+msgstr "გამართვა"
 
 msgid "Daily"
 msgstr "დღიურად"
 
 msgid "Date must be in the future"
-msgstr ""
+msgstr "თარიღი მომავალში უნდა იყოს"
 
 msgid "Days"
 msgstr "დღე"
@@ -406,8 +412,11 @@ msgstr "აღწერის შაბლონი"
 msgid "Designation of a special purpose"
 msgstr "განსაკუთრებული მიზნის აღნიშვნა"
 
-msgid "Disable recurring"
+msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
 msgstr ""
+
+msgid "Disable recurring"
+msgstr "გამეორების გამორთვა"
 
 msgid "Display advanced fields"
 msgstr "დამატებითი ველების ჩვენება"
@@ -467,7 +476,7 @@ msgid "Enable Global Proxy"
 msgstr "გლობალური პროქსის ჩართვა"
 
 msgid "Enable recurring"
-msgstr ""
+msgstr "გამეორების ჩართვა"
 
 msgid "End time needs to be after start time"
 msgstr "დასრულების დრო დასაწყისის დროის შემდეგ უნდა იყოს"
@@ -541,8 +550,11 @@ msgstr "ავარიული ჰოსტები"
 msgid "Failed rendering template: %s"
 msgstr "შაბლონის რენდერის შეცდომა: %s"
 
-msgid "Failed:"
+msgid "Failed to load host invocation data"
 msgstr ""
+
+msgid "Failed:"
+msgstr "წარუმატებელი:"
 
 msgid "Fallback to Any Proxy"
 msgstr "ავარიისას ნებისმიერ პროქსიზე გადართვა"
@@ -595,6 +607,9 @@ msgstr "დავალებაში ჰოსტების გამოტ�
 msgid "Get raw output for a host"
 msgstr "ჰოსტის გამოტანის პირდაპირ მიღება"
 
+msgid "Go to job invocations"
+msgstr ""
+
 msgid "Has to be a positive number"
 msgstr "დადებითი რიცხვი უნდა იყოს"
 
@@ -614,7 +629,7 @@ msgid "Host detail"
 msgstr "ჰოსტის დეტალები"
 
 msgid "Host group"
-msgstr ""
+msgstr "ჰოსტების ჯგუფი"
 
 msgid "Host groups"
 msgstr "ჰოსტის ჯგუფები"
@@ -653,13 +668,19 @@ msgid "Import a job template from ERB"
 msgstr "დავალების შაბლონის ERB-დან შემოტანა"
 
 msgid "In Progress"
-msgstr ""
+msgstr "მიმდინარეობს"
 
 msgid "In Progress:"
-msgstr ""
+msgstr "მიმდინარეობს:"
 
 msgid "Include all inputs from the foreign template"
 msgstr "შეიცავს გარე შაბლონს ყველა შეყვანას"
+
+msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
+msgstr ""
+
+msgid "Include per-host task and permission data in the response"
+msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "მიუთითებს, რომ მოქმედება უნდა გაუქმდეს, თუ მისი დაწყება ამ დრომდე შეუძლებელია."
@@ -829,6 +850,9 @@ msgstr "ხელით არჩევა"
 msgid "Minute can only be a number between 0-59"
 msgstr "წუთი უნდა იყოს რიცხვი შუალედში 0-59"
 
+msgid "Missing permissions to generate report templates"
+msgstr ""
+
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr ""
 
@@ -869,7 +893,7 @@ msgid "No Target Hosts"
 msgstr "სამიზნე ჰოსტების გარეშე"
 
 msgid "No hosts found"
-msgstr ""
+msgstr "ჰოსტები ნაპოვნი არაა"
 
 msgid "No hosts found."
 msgstr "ჰოსტები ნაპოვნი არაა."
@@ -887,7 +911,7 @@ msgid "No template mapped to feature %{feature_name}"
 msgstr ""
 
 msgid "No user input"
-msgstr ""
+msgstr "მომხმარებლის შეყვანის გარეშე"
 
 msgid "Not all required inputs have values. Missing inputs: %s"
 msgstr ""
@@ -902,7 +926,7 @@ msgid "Now"
 msgstr "ახლა"
 
 msgid "OS"
-msgstr ""
+msgstr "OS"
 
 msgid "On"
 msgstr "ჩართული"
@@ -920,13 +944,13 @@ msgid "Open all rows of the table in new tabs"
 msgstr ""
 
 msgid "Open in new tab"
-msgstr ""
+msgstr "ახალ ჩანართში გახსნა"
 
 msgid "Open in new tabs"
-msgstr ""
+msgstr "ახალ ჩანართებში გახსნა"
 
 msgid "Open selected in new tab"
-msgstr ""
+msgstr "მონიშნულის გახსნა ახალ ჩანართში"
 
 msgid "Opening job invocation form"
 msgstr "დავალების ჩაწოდების ფორმის გახსნა"
@@ -1013,7 +1037,7 @@ msgid "Preview Hosts"
 msgstr "ჰოსტების გადახედვა"
 
 msgid "Preview Template"
-msgstr ""
+msgstr "შაბლონის გადახედვა"
 
 msgid "Preview job description"
 msgstr "დავალების აღწერის გადახედვა"
@@ -1028,7 +1052,7 @@ msgid "Problem with previewing the template: %{error}. Note that you must save t
 msgstr ""
 
 msgid "Proceed Anyway"
-msgstr ""
+msgstr "მაინც გაგრძელება"
 
 msgid "Provider type"
 msgstr "მომწოდებლის წიპი"
@@ -1108,6 +1132,12 @@ msgstr ""
 msgid "Remote execution job"
 msgstr "დაშორებული გაშვების დავალება"
 
+msgid "Remote working directory"
+msgstr ""
+
+msgid "Remote working directory \"%{current_value}\" is not an absolute path"
+msgstr ""
+
 msgid "Repeat a maximum of N times"
 msgstr "მაქსიმუმ N-ჯერ გამეორება"
 
@@ -1120,11 +1150,14 @@ msgstr "გამეორება, სანამ"
 msgid "Repeats"
 msgstr "გამეორება"
 
+msgid "Report template not found or not configured properly"
+msgstr ""
+
 msgid "Rerun"
 msgstr "თავიდან გაშვება"
 
 msgid "Rerun all"
-msgstr ""
+msgstr "ყველაფრის თავიდან გაშვება"
 
 msgid "Rerun failed"
 msgstr "თავიდან გაშვების შეცდომა"
@@ -1139,13 +1172,13 @@ msgid "Rerun on failed hosts"
 msgstr "ავარიულ ჰოსტებზე თავიდან გაშვება"
 
 msgid "Rerun on succeeded hosts"
-msgstr ""
+msgstr "თავიდან გაშვება წარმატებულ ჰოსტებზე"
 
 msgid "Rerun succeeded"
-msgstr ""
+msgstr "თავიდან გაშვება წარმატებულია"
 
 msgid "Rerun successful"
-msgstr ""
+msgstr "თავიდან გაშვება წარმატებულია"
 
 msgid "Rerun the job"
 msgstr "დავალების თავიდან გაშვება"
@@ -1208,10 +1241,10 @@ msgid "SSH user:"
 msgstr "SSH-ის მომხმარებლი:"
 
 msgid "STDERR"
-msgstr ""
+msgstr "STDERR"
 
 msgid "STDOUT"
-msgstr ""
+msgstr "STDOUT"
 
 msgid "Schedule"
 msgstr "განრიგი"
@@ -1235,7 +1268,7 @@ msgid "Scheduled"
 msgstr "დაგეგმილია"
 
 msgid "Scheduled at:"
-msgstr ""
+msgstr "დაგეგმილია:"
 
 msgid "Scheduled to start at"
 msgstr "დაგეგმილი გაშვების დრო"
@@ -1244,7 +1277,7 @@ msgid "Scheduled to start before"
 msgstr "გაეშვება მითითებულ დრომდე"
 
 msgid "Scheduled: ${totalHosts} hosts"
-msgstr ""
+msgstr "დაგეგმილია: ${totalHosts} ჰოსტი"
 
 msgid "Script"
 msgstr "სკრიპტი"
@@ -1315,9 +1348,6 @@ msgstr ""
 msgid "Should this interface be used for remote execution?"
 msgstr "გამოვიყენო ეს ინტერფეისი დაშორებული გაშვებისთვის?"
 
-msgid "Show Job status for the hosts"
-msgstr "ჰოსტების დავალების სტატუსის ჩვენება"
-
 msgid "Show all advanced fields"
 msgstr "დამატებითი ველების ჩვენება"
 
@@ -1326,6 +1356,9 @@ msgstr "შემოტანის უცხო სეტების დეტ
 
 msgid "Show job invocation"
 msgstr "დავალების ჩაწოდების ჩვენება"
+
+msgid "Show job status for each host, only applicable when include_hosts is true"
+msgstr ""
 
 msgid "Show job template details"
 msgstr "დავალების შაბლონის დეტალების ჩვენება"
@@ -1397,13 +1430,13 @@ msgid "Succeeded"
 msgstr "წარმატებულია"
 
 msgid "Succeeded:"
-msgstr ""
+msgstr "წარმატებულია:"
 
 msgid "Success"
 msgstr "წარმატება"
 
 msgid "Successfully copied to clipboard!"
-msgstr ""
+msgstr "წარმატებით დაკოპირდა ბუფერში!"
 
 msgid "Switch to the new job invocation detail UI"
 msgstr ""
@@ -1412,13 +1445,13 @@ msgid "Sync Job Templates"
 msgstr "სინქრონიზაციის დავალების შაბლონები"
 
 msgid "System status"
-msgstr ""
+msgstr "სისტემის სტატუსი"
 
 msgid "Systems"
-msgstr ""
+msgstr "სისტემები"
 
 msgid "Target Hosts"
-msgstr ""
+msgstr "სამიზნე ჰოსტები"
 
 msgid "Target hosts"
 msgstr "სამიზნე ჰოსტები"
@@ -1430,7 +1463,7 @@ msgid "Target template ID"
 msgstr "სამიზნე შაბლონის ID"
 
 msgid "Target:"
-msgstr ""
+msgstr "სამიზნე:"
 
 msgid "Target: "
 msgstr "სამიზნე: "
@@ -1448,7 +1481,7 @@ msgid "Task for the host cancelled succesfully"
 msgstr ""
 
 msgid "Task(s) were not %s"
-msgstr ""
+msgstr "ამოცანები არ %s"
 
 msgid "Template ERB"
 msgstr "ERB შაბლონი"
@@ -1460,7 +1493,7 @@ msgid "Template failed with:"
 msgstr "შაბლონის შეცდომა:"
 
 msgid "Template invocation not found"
-msgstr ""
+msgstr "ნიმუშის ჩაწოდება აღმოჩენილი არაა"
 
 msgid "Template name"
 msgstr "შაბლონის სახელი"
@@ -1582,7 +1615,7 @@ msgid "Try to cancel the job on a host"
 msgstr "ჰოსტზე დავალების გაუქმების ცდა"
 
 msgid "Trying to %s the task"
-msgstr ""
+msgstr "ამოცანის %s-ის მცდელობა"
 
 msgid "Trying to abort the job"
 msgstr "დავალების შეწყვეტის მცდელობა"
@@ -1621,7 +1654,7 @@ msgid "Unable to create mail notification: %s"
 msgstr "ელფოსტის შეტყობინების შექმნის შეცდომა: %s"
 
 msgid "Unable to fetch CA public key"
-msgstr ""
+msgstr "CA საჯარო გასაღების გამოთხოვა შეუძლებელია"
 
 msgid "Unable to fetch CA public key: %{error}"
 msgstr ""
@@ -1633,12 +1666,15 @@ msgid "Unable to remove host from known hosts"
 msgstr "ჰოსტის სანდო ჰოსტების სიიდან წაშლის შეცდომა"
 
 msgid "Unable to run job"
-msgstr ""
+msgstr "დავალების გაშვება შეუძლებელია"
 
 msgid "Unable to save template. Correct highlighted errors"
 msgstr "შაბლონის შენახვის შეცდომა. შეასწორეთ გამოკვეთილი შეცდომები"
 
 msgid "Unknown"
+msgstr "უცნობი"
+
+msgid "Unknown error."
 msgstr ""
 
 msgid "Unknown execution status"
@@ -1702,7 +1738,7 @@ msgid "View scheduled jobs"
 msgstr "დაგეგმილი ამოცანების ნახვა"
 
 msgid "View task"
-msgstr ""
+msgstr "ამოცანის ნახვა"
 
 msgid "Web Console"
 msgstr "ვებ კონსოლი"
@@ -1750,7 +1786,7 @@ msgid "You are not allowed to see the currently assigned template. Saving the fo
 msgstr ""
 
 msgid "You are not authorized to perform this action."
-msgstr ""
+msgstr "ამ ქმედებისთვის საჭირო ავტორიზაცია არ გაგაჩნიათ."
 
 msgid "You have %s results to display. Showing first %s results"
 msgstr "საჩვენებელია %s შედეგი. ნაჩვენებია პირველი %s შედეგი"
@@ -1759,7 +1795,7 @@ msgid "You have more results to display. Showing first %s results"
 msgstr ""
 
 msgid "aborted"
-msgstr ""
+msgstr "aborted"
 
 msgid "add an input set for this template to reference a different template inputs"
 msgstr ""
@@ -1788,6 +1824,9 @@ msgstr "აქ"
 msgid "host already has an execution interface"
 msgstr "ჰოსტს დაშორებული გაშვების ინტერფეისი უკვე გააჩნია"
 
+msgid "host method"
+msgstr ""
+
 msgid "hosts"
 msgstr "ჰოსტი"
 
@@ -1814,6 +1853,12 @@ msgstr "წუთი (0-59)"
 
 msgid "is month (range: 1-12)"
 msgstr "თვე (1-120)"
+
+msgid "job invocation"
+msgstr ""
+
+msgid "must be an absolute path"
+msgstr ""
 
 msgid "no"
 msgstr "არა"
@@ -1846,7 +1891,7 @@ msgid "succeeded"
 msgstr "წარმატებული"
 
 msgid "task aborted succesfully"
-msgstr ""
+msgstr "ამოცანა წარმატებით შეწყდა"
 
 msgid "tasks at a time"
 msgstr "ერთდროული ამოცანები"
@@ -1867,7 +1912,7 @@ msgid "view host names"
 msgstr "ჰოსტის სახელების ნახვა"
 
 msgid "view the hosts"
-msgstr ""
+msgstr "ჰოსტების ნახვა"
 
 msgid "yes"
 msgstr "დიახ"
