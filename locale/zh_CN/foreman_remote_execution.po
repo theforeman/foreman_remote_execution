@@ -6,7 +6,7 @@
 # Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2024
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.5.1\n"
+"Project-Id-Version: foreman_remote_execution 18.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarde"
@@ -133,6 +133,9 @@ msgstr "所有状态"
 
 msgid "Alphabetical"
 msgstr "按字母"
+
+msgid "Already on the review step"
+msgstr ""
 
 msgid "An error occurred while fetching the template invocation details."
 msgstr "在获取模板调用详情时出错。"
@@ -263,29 +266,29 @@ msgstr "控制并发级别和时间分布"
 msgid "Copy to clipboard"
 msgstr "复制到剪贴板"
 
-msgid "Could not abort the job %s: ${response}"
-msgstr "无法中止作业 %s: ${response}"
+msgid "Could not abort the job %s: %s"
+msgstr ""
 
 msgid "Could not abort the task"
 msgstr "无法中止作业"
 
-msgid "Could not cancel recurring logic %s: ${response}"
-msgstr "无法取消重复逻辑 %s：${response}"
+msgid "Could not cancel recurring logic %s: %s"
+msgstr ""
 
-msgid "Could not cancel the job %s: ${response}"
-msgstr "无法取消作业 %s: ${response}"
+msgid "Could not cancel the job %s: %s"
+msgstr ""
 
 msgid "Could not cancel the task"
 msgstr "无法取消作业"
 
-msgid "Could not disable recurring logic %s: ${response}"
-msgstr "无法禁用重复逻辑 %s：${response}"
+msgid "Could not disable recurring logic %s: %s"
+msgstr ""
 
 msgid "Could not display data for job invocation."
 msgstr "无法显示用于作业调用的数据。"
 
-msgid "Could not enable recurring logic %s: ${response}"
-msgstr "无法启用重复逻辑 %s：${response}"
+msgid "Could not enable recurring logic %s: %s"
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "无法找到适合执行的接口"
@@ -316,6 +319,9 @@ msgstr "创建一个作业调用"
 
 msgid "Create a job template"
 msgstr "创建作业模板"
+
+msgid "Create a new job invocation"
+msgstr ""
 
 msgid "Create a recurring job"
 msgstr "创建一个重复运行的作业"
@@ -406,6 +412,9 @@ msgstr "描述模板"
 
 msgid "Designation of a special purpose"
 msgstr "设计特殊目的"
+
+msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
+msgstr ""
 
 msgid "Disable recurring"
 msgstr "禁用重复"
@@ -542,6 +551,9 @@ msgstr "失败的主机"
 msgid "Failed rendering template: %s"
 msgstr "呈现模板失败：%s"
 
+msgid "Failed to load host invocation data"
+msgstr ""
+
 msgid "Failed:"
 msgstr "失败："
 
@@ -595,6 +607,9 @@ msgstr "获取作业中主机的输出"
 
 msgid "Get raw output for a host"
 msgstr "获取主机的原始输出"
+
+msgid "Go to job invocations"
+msgstr ""
 
 msgid "Has to be a positive number"
 msgstr "必须为一个正数"
@@ -661,6 +676,12 @@ msgstr "进行中："
 
 msgid "Include all inputs from the foreign template"
 msgstr "在外部模板中包含所有输入格式"
+
+msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
+msgstr ""
+
+msgid "Include per-host task and permission data in the response"
+msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "这代表，如果操作无法在这个时间前开始则操作应该被取消。"
@@ -829,6 +850,9 @@ msgstr "手动选择"
 
 msgid "Minute can only be a number between 0-59"
 msgstr "分钟只能是一个 0-59 之间的数字"
+
+msgid "Missing permissions to generate report templates"
+msgstr ""
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr "缺少所需的权限：${missingPermissions.join( ', ' )}"
@@ -1109,6 +1133,12 @@ msgstr "应触发的远程执行功能标签，将使用分配给此功能的任
 msgid "Remote execution job"
 msgstr "远程执行作业"
 
+msgid "Remote working directory"
+msgstr ""
+
+msgid "Remote working directory \"%{current_value}\" is not an absolute path"
+msgstr ""
+
 msgid "Repeat a maximum of N times"
 msgstr "最多重复 N 次"
 
@@ -1120,6 +1150,9 @@ msgstr "重复直到"
 
 msgid "Repeats"
 msgstr "重复"
+
+msgid "Report template not found or not configured properly"
+msgstr ""
 
 msgid "Rerun"
 msgstr "重新运行"
@@ -1316,9 +1349,6 @@ msgstr "相比 fqdn，是否应优先使用主机接口上的 ip 地址？当 DN
 msgid "Should this interface be used for remote execution?"
 msgstr "该接口应该用于远程执行吗？"
 
-msgid "Show Job status for the hosts"
-msgstr "显示主机的作业状态"
-
 msgid "Show all advanced fields"
 msgstr "现实所有高级字段"
 
@@ -1327,6 +1357,9 @@ msgstr "显示外部输入集详细信息"
 
 msgid "Show job invocation"
 msgstr "显示作业调用"
+
+msgid "Show job status for each host, only applicable when include_hosts is true"
+msgstr ""
 
 msgid "Show job template details"
 msgstr "显示作业模板详情"
@@ -1641,6 +1674,9 @@ msgstr "无法保存模版。纠正高亮显示的错误"
 msgid "Unknown"
 msgstr "未知"
 
+msgid "Unknown error."
+msgstr ""
+
 msgid "Unknown execution status"
 msgstr "未知的执行状态"
 
@@ -1788,6 +1824,9 @@ msgstr "这里"
 msgid "host already has an execution interface"
 msgstr "主机已有一个执行接口"
 
+msgid "host method"
+msgstr ""
+
 msgid "hosts"
 msgstr "主机"
 
@@ -1814,6 +1853,12 @@ msgstr "分钟（范围：0-59）"
 
 msgid "is month (range: 1-12)"
 msgstr "月份（范围：1-12）"
+
+msgid "job invocation"
+msgstr ""
+
+msgid "must be an absolute path"
+msgstr ""
 
 msgid "no"
 msgstr "否"

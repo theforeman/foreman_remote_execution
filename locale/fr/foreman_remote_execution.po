@@ -9,7 +9,7 @@
 # Pierre-Emmanuel Dutang <dutangp@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.5.1\n"
+"Project-Id-Version: foreman_remote_execution 18.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: Ondřej Gajdušek, 2026\n"
@@ -137,6 +137,9 @@ msgstr "Tous les statuts"
 
 msgid "Alphabetical"
 msgstr "Alphabétique"
+
+msgid "Already on the review step"
+msgstr ""
 
 msgid "An error occurred while fetching the template invocation details."
 msgstr "Une erreur s'est produite lors de la récupération des détails d'invocation du modèle."
@@ -267,29 +270,29 @@ msgstr "Contrôle le niveau de parallélisme et la distribution dans le temps"
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papiers"
 
-msgid "Could not abort the job %s: ${response}"
-msgstr "Impossible d'annuler le job %s :${response}"
+msgid "Could not abort the job %s: %s"
+msgstr ""
 
 msgid "Could not abort the task"
 msgstr "Impossible d'annuler la tâche"
 
-msgid "Could not cancel recurring logic %s: ${response}"
-msgstr "Impossible d'annuler la logique récurrente%s :${response}"
+msgid "Could not cancel recurring logic %s: %s"
+msgstr ""
 
-msgid "Could not cancel the job %s: ${response}"
-msgstr "Impossible d'annuler le job %s :${response}"
+msgid "Could not cancel the job %s: %s"
+msgstr ""
 
 msgid "Could not cancel the task"
 msgstr "Impossible d'annuler la tâche"
 
-msgid "Could not disable recurring logic %s: ${response}"
-msgstr "Impossible de désactiver la logique récurrente%s :${response}"
+msgid "Could not disable recurring logic %s: %s"
+msgstr ""
 
 msgid "Could not display data for job invocation."
 msgstr "Impossible d'afficher les données pour le lancement du job."
 
-msgid "Could not enable recurring logic %s: ${response}"
-msgstr "Impossible d’activer la logique récurrente%s :${response}"
+msgid "Could not enable recurring logic %s: %s"
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "Impossible de trouver une interface qui convient pour l'exécution"
@@ -320,6 +323,9 @@ msgstr "Créer un lancement de job"
 
 msgid "Create a job template"
 msgstr "Créer un modèle de job"
+
+msgid "Create a new job invocation"
+msgstr ""
 
 msgid "Create a recurring job"
 msgstr "Créer un job récurrent"
@@ -410,6 +416,9 @@ msgstr "Modèle de description"
 
 msgid "Designation of a special purpose"
 msgstr "Désignation d’un objectif spécial"
+
+msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
+msgstr ""
 
 msgid "Disable recurring"
 msgstr "Désactiver les récurrents"
@@ -546,6 +555,9 @@ msgstr "Hôtes ayant échoué"
 msgid "Failed rendering template: %s"
 msgstr "Echec de rendu du modèle : %s"
 
+msgid "Failed to load host invocation data"
+msgstr ""
+
 msgid "Failed:"
 msgstr "Échec :"
 
@@ -599,6 +611,9 @@ msgstr "Obtenir les sorties des hôtes dans un job"
 
 msgid "Get raw output for a host"
 msgstr "Récupérer la sortie brut d'un hôte"
+
+msgid "Go to job invocations"
+msgstr ""
 
 msgid "Has to be a positive number"
 msgstr "Doit correspondre à un nombre positif"
@@ -665,6 +680,12 @@ msgstr "En cours :"
 
 msgid "Include all inputs from the foreign template"
 msgstr "Inclut toutes les entrées du modèle étranger"
+
+msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
+msgstr ""
+
+msgid "Include per-host task and permission data in the response"
+msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "Indique si l'action doit être annulée si elle ne peut commencer à ce moment là."
@@ -833,6 +854,9 @@ msgstr "Sélection manuelle"
 
 msgid "Minute can only be a number between 0-59"
 msgstr "La minute doit être un nombre compris entre 0 et 59"
+
+msgid "Missing permissions to generate report templates"
+msgstr ""
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr "Il manque les autorisations requises : ${missingPermissions.join( ', ' )}"
@@ -1113,6 +1137,12 @@ msgstr "Balise de fonctionnalité d'exécution à distance qui doit être décle
 msgid "Remote execution job"
 msgstr "Job à exécution distante"
 
+msgid "Remote working directory"
+msgstr ""
+
+msgid "Remote working directory \"%{current_value}\" is not an absolute path"
+msgstr ""
+
 msgid "Repeat a maximum of N times"
 msgstr "Répéter un maximum de N fois"
 
@@ -1124,6 +1154,9 @@ msgstr "Répéter jusqu'à"
 
 msgid "Repeats"
 msgstr "Répétitions"
+
+msgid "Report template not found or not configured properly"
+msgstr ""
 
 msgid "Rerun"
 msgstr "Relancer"
@@ -1320,9 +1353,6 @@ msgstr "Les adresses IP sur les interfaces hôtes doivent-elles être préféré
 msgid "Should this interface be used for remote execution?"
 msgstr "L'interface d'exécution est celle utilisée pour l'exécution distante ?"
 
-msgid "Show Job status for the hosts"
-msgstr "Afficher l'état des jobs pour les hôtes"
-
 msgid "Show all advanced fields"
 msgstr "Afficher tous les champs avancés"
 
@@ -1331,6 +1361,9 @@ msgstr "Afficher les détails du jeu de données en entrée externe"
 
 msgid "Show job invocation"
 msgstr "Voir le lancement du job"
+
+msgid "Show job status for each host, only applicable when include_hosts is true"
+msgstr ""
 
 msgid "Show job template details"
 msgstr "Voir les détails d'un modèle de job"
@@ -1647,6 +1680,9 @@ msgstr "Impossible de sauver le modèle. Merci de corriger les erreurs en surbri
 msgid "Unknown"
 msgstr "Inconnu"
 
+msgid "Unknown error."
+msgstr ""
+
 msgid "Unknown execution status"
 msgstr "État d'exécution inconnu"
 
@@ -1794,6 +1830,9 @@ msgstr "ici"
 msgid "host already has an execution interface"
 msgstr "L'hôte possède déjà une interface d'exécution"
 
+msgid "host method"
+msgstr ""
+
 msgid "hosts"
 msgstr "hôtes"
 
@@ -1820,6 +1859,12 @@ msgstr "est minute (plage: 0-59)"
 
 msgid "is month (range: 1-12)"
 msgstr "est mois (Plage: 1-12)"
+
+msgid "job invocation"
+msgstr ""
+
+msgid "must be an absolute path"
+msgstr ""
 
 msgid "no"
 msgstr "non"

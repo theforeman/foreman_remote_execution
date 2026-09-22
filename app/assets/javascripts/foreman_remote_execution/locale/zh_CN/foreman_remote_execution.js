@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.5.1",
+        "Project-Id-Version": "foreman_remote_execution 18.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2024",
@@ -130,6 +130,9 @@
       ],
       "Alphabetical": [
         "按字母"
+      ],
+      "Already on the review step": [
+        ""
       ],
       "An error occurred while fetching the template invocation details.": [
         "在获取模板调用详情时出错。"
@@ -260,29 +263,29 @@
       "Copy to clipboard": [
         "复制到剪贴板"
       ],
-      "Could not abort the job %s: ${response}": [
-        "无法中止作业 %s: ${response}"
+      "Could not abort the job %s: %s": [
+        ""
       ],
       "Could not abort the task": [
         "无法中止作业"
       ],
-      "Could not cancel recurring logic %s: ${response}": [
-        "无法取消重复逻辑 %s：${response}"
+      "Could not cancel recurring logic %s: %s": [
+        ""
       ],
-      "Could not cancel the job %s: ${response}": [
-        "无法取消作业 %s: ${response}"
+      "Could not cancel the job %s: %s": [
+        ""
       ],
       "Could not cancel the task": [
         "无法取消作业"
       ],
-      "Could not disable recurring logic %s: ${response}": [
-        "无法禁用重复逻辑 %s：${response}"
+      "Could not disable recurring logic %s: %s": [
+        ""
       ],
       "Could not display data for job invocation.": [
         "无法显示用于作业调用的数据。"
       ],
-      "Could not enable recurring logic %s: ${response}": [
-        "无法启用重复逻辑 %s：${response}"
+      "Could not enable recurring logic %s: %s": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "无法找到适合执行的接口"
@@ -313,6 +316,9 @@
       ],
       "Create a job template": [
         "创建作业模板"
+      ],
+      "Create a new job invocation": [
+        ""
       ],
       "Create a recurring job": [
         "创建一个重复运行的作业"
@@ -403,6 +409,9 @@
       ],
       "Designation of a special purpose": [
         "设计特殊目的"
+      ],
+      "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
+        ""
       ],
       "Disable recurring": [
         "禁用重复"
@@ -539,6 +548,9 @@
       "Failed rendering template: %s": [
         "呈现模板失败：%s"
       ],
+      "Failed to load host invocation data": [
+        ""
+      ],
       "Failed:": [
         "失败："
       ],
@@ -592,6 +604,9 @@
       ],
       "Get raw output for a host": [
         "获取主机的原始输出"
+      ],
+      "Go to job invocations": [
+        ""
       ],
       "Has to be a positive number": [
         "必须为一个正数"
@@ -658,6 +673,12 @@
       ],
       "Include all inputs from the foreign template": [
         "在外部模板中包含所有输入格式"
+      ],
+      "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
+        ""
+      ],
+      "Include per-host task and permission data in the response": [
+        ""
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "这代表，如果操作无法在这个时间前开始则操作应该被取消。"
@@ -826,6 +847,9 @@
       ],
       "Minute can only be a number between 0-59": [
         "分钟只能是一个 0-59 之间的数字"
+      ],
+      "Missing permissions to generate report templates": [
+        ""
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         "缺少所需的权限：${missingPermissions.join( ', ' )}"
@@ -1106,6 +1130,12 @@
       "Remote execution job": [
         "远程执行作业"
       ],
+      "Remote working directory": [
+        ""
+      ],
+      "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
+        ""
+      ],
       "Repeat a maximum of N times": [
         "最多重复 N 次"
       ],
@@ -1117,6 +1147,9 @@
       ],
       "Repeats": [
         "重复"
+      ],
+      "Report template not found or not configured properly": [
+        ""
       ],
       "Rerun": [
         "重新运行"
@@ -1313,9 +1346,6 @@
       "Should this interface be used for remote execution?": [
         "该接口应该用于远程执行吗？"
       ],
-      "Show Job status for the hosts": [
-        "显示主机的作业状态"
-      ],
       "Show all advanced fields": [
         "现实所有高级字段"
       ],
@@ -1324,6 +1354,9 @@
       ],
       "Show job invocation": [
         "显示作业调用"
+      ],
+      "Show job status for each host, only applicable when include_hosts is true": [
+        ""
       ],
       "Show job template details": [
         "显示作业模板详情"
@@ -1637,6 +1670,9 @@
       "Unknown": [
         "未知"
       ],
+      "Unknown error.": [
+        ""
+      ],
       "Unknown execution status": [
         "未知的执行状态"
       ],
@@ -1784,6 +1820,9 @@
       "host already has an execution interface": [
         "主机已有一个执行接口"
       ],
+      "host method": [
+        ""
+      ],
       "hosts": [
         "主机"
       ],
@@ -1810,6 +1849,12 @@
       ],
       "is month (range: 1-12)": [
         "月份（范围：1-12）"
+      ],
+      "job invocation": [
+        ""
+      ],
+      "must be an absolute path": [
+        ""
       ],
       "no": [
         "否"

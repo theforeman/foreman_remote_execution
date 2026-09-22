@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.5.1",
+        "Project-Id-Version": "foreman_remote_execution 18.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "Yulia <yulia.poyarkova@redhat.com>, 2016",
@@ -130,6 +130,9 @@
         ""
       ],
       "Alphabetical": [
+        ""
+      ],
+      "Already on the review step": [
         ""
       ],
       "An error occurred while fetching the template invocation details.": [
@@ -261,28 +264,28 @@
       "Copy to clipboard": [
         ""
       ],
-      "Could not abort the job %s: ${response}": [
+      "Could not abort the job %s: %s": [
         ""
       ],
       "Could not abort the task": [
         ""
       ],
-      "Could not cancel recurring logic %s: ${response}": [
+      "Could not cancel recurring logic %s: %s": [
         ""
       ],
-      "Could not cancel the job %s: ${response}": [
+      "Could not cancel the job %s: %s": [
         ""
       ],
       "Could not cancel the task": [
         ""
       ],
-      "Could not disable recurring logic %s: ${response}": [
+      "Could not disable recurring logic %s: %s": [
         ""
       ],
       "Could not display data for job invocation.": [
         ""
       ],
-      "Could not enable recurring logic %s: ${response}": [
+      "Could not enable recurring logic %s: %s": [
         ""
       ],
       "Could not find any suitable interface for execution": [
@@ -314,6 +317,9 @@
       ],
       "Create a job template": [
         "Создать шаблон задания"
+      ],
+      "Create a new job invocation": [
+        ""
       ],
       "Create a recurring job": [
         "Периодическое выполнение"
@@ -403,6 +409,9 @@
         "Шаблон описания"
       ],
       "Designation of a special purpose": [
+        ""
+      ],
+      "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
         ""
       ],
       "Disable recurring": [
@@ -540,6 +549,9 @@
       "Failed rendering template: %s": [
         "Не удалось обработать шаблон: %s"
       ],
+      "Failed to load host invocation data": [
+        ""
+      ],
       "Failed:": [
         ""
       ],
@@ -592,6 +604,9 @@
         ""
       ],
       "Get raw output for a host": [
+        ""
+      ],
+      "Go to job invocations": [
         ""
       ],
       "Has to be a positive number": [
@@ -659,6 +674,12 @@
       ],
       "Include all inputs from the foreign template": [
         "Добавить все входные параметры из внешнего шаблона"
+      ],
+      "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
+        ""
+      ],
+      "Include per-host task and permission data in the response": [
+        ""
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "Обозначает, что действие следует отменить, если оно не будет запущено до указанного времени."
@@ -826,6 +847,9 @@
         "Ручной выбор"
       ],
       "Minute can only be a number between 0-59": [
+        ""
+      ],
+      "Missing permissions to generate report templates": [
         ""
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
@@ -1107,6 +1131,12 @@
       "Remote execution job": [
         ""
       ],
+      "Remote working directory": [
+        ""
+      ],
+      "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
+        ""
+      ],
       "Repeat a maximum of N times": [
         "Количество повторений"
       ],
@@ -1118,6 +1148,9 @@
       ],
       "Repeats": [
         "Повторяется"
+      ],
+      "Report template not found or not configured properly": [
+        ""
       ],
       "Rerun": [
         "Повторить"
@@ -1314,9 +1347,6 @@
       "Should this interface be used for remote execution?": [
         ""
       ],
-      "Show Job status for the hosts": [
-        ""
-      ],
       "Show all advanced fields": [
         ""
       ],
@@ -1325,6 +1355,9 @@
       ],
       "Show job invocation": [
         "Показать вызов задания"
+      ],
+      "Show job status for each host, only applicable when include_hosts is true": [
+        ""
       ],
       "Show job template details": [
         "Показать информацию о шаблоне"
@@ -1641,6 +1674,9 @@
       "Unknown": [
         "Неизвестно"
       ],
+      "Unknown error.": [
+        ""
+      ],
       "Unknown execution status": [
         "Статус выполнения неизвестен"
       ],
@@ -1788,6 +1824,9 @@
       "host already has an execution interface": [
         "для этого узла уже настроен интерфейс выполнения"
       ],
+      "host method": [
+        ""
+      ],
       "hosts": [
         "узлу(ам)"
       ],
@@ -1814,6 +1853,12 @@
       ],
       "is month (range: 1-12)": [
         "— месяц (1–12)"
+      ],
+      "job invocation": [
+        ""
+      ],
+      "must be an absolute path": [
+        ""
       ],
       "no": [
         "нет"

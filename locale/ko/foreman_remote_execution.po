@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_remote_execution 16.5.1\n"
+"Project-Id-Version: foreman_remote_execution 18.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-15 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -130,6 +130,9 @@ msgstr "모든 상태"
 
 msgid "Alphabetical"
 msgstr "알파벳순"
+
+msgid "Already on the review step"
+msgstr ""
 
 msgid "An error occurred while fetching the template invocation details."
 msgstr "템플릿 호출 세부 정보를 가져오는 동안 오류가 발생했습니다."
@@ -260,29 +263,29 @@ msgstr "동시 실행 레벨 및 기간별 배분 제어"
 msgid "Copy to clipboard"
 msgstr "클립보드에 복사"
 
-msgid "Could not abort the job %s: ${response}"
-msgstr "%s 작업을 중단할 수 없습니다: ${response}"
+msgid "Could not abort the job %s: %s"
+msgstr ""
 
 msgid "Could not abort the task"
 msgstr "작업을 중단할 수 없습니다"
 
-msgid "Could not cancel recurring logic %s: ${response}"
-msgstr "반복 논리 %s를 취소할 수 없습니다: ${response}"
+msgid "Could not cancel recurring logic %s: %s"
+msgstr ""
 
-msgid "Could not cancel the job %s: ${response}"
-msgstr "%s 작업을 취소할 수 없습니다: ${response}"
+msgid "Could not cancel the job %s: %s"
+msgstr ""
 
 msgid "Could not cancel the task"
 msgstr "작업을 취소할 수 없습니다"
 
-msgid "Could not disable recurring logic %s: ${response}"
-msgstr "반복 논리 %s를 비활성화할 수 없습니다: ${response}"
+msgid "Could not disable recurring logic %s: %s"
+msgstr ""
 
 msgid "Could not display data for job invocation."
 msgstr "작업 호출에 대한 데이터를 표시할 수 없습니다."
 
-msgid "Could not enable recurring logic %s: ${response}"
-msgstr "반복 논리 %s를 활성화할 수 없습니다: ${response}"
+msgid "Could not enable recurring logic %s: %s"
+msgstr ""
 
 msgid "Could not find any suitable interface for execution"
 msgstr "실행에 적합한 인터페이스를 찾을 수 없습니다."
@@ -313,6 +316,9 @@ msgstr "작업 호출 생성"
 
 msgid "Create a job template"
 msgstr "작업 템플릿 생성"
+
+msgid "Create a new job invocation"
+msgstr ""
 
 msgid "Create a recurring job"
 msgstr "반복 작업 생성"
@@ -403,6 +409,9 @@ msgstr "설명 템플릿"
 
 msgid "Designation of a special purpose"
 msgstr "특수 목적의 지정"
+
+msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
+msgstr ""
 
 msgid "Disable recurring"
 msgstr "반복을 비활성화합니다"
@@ -539,6 +548,9 @@ msgstr "실패한 호스트"
 msgid "Failed rendering template: %s"
 msgstr "템플릿 렌더링 실패: %s"
 
+msgid "Failed to load host invocation data"
+msgstr ""
+
 msgid "Failed:"
 msgstr "실패함:"
 
@@ -592,6 +604,9 @@ msgstr "작업에서 호스트의 출력 가져오기"
 
 msgid "Get raw output for a host"
 msgstr "호스트에 대한 원시 출력 가져오기"
+
+msgid "Go to job invocations"
+msgstr ""
 
 msgid "Has to be a positive number"
 msgstr "양수여야 합니다"
@@ -658,6 +673,12 @@ msgstr "진행 중:"
 
 msgid "Include all inputs from the foreign template"
 msgstr "외부 템플릿의 모든 입력 포함"
+
+msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
+msgstr ""
+
+msgid "Include per-host task and permission data in the response"
+msgstr ""
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "이 시간 전에 시작할 수 없는 경우 작업을 취소한다는 것을 나타냅니다."
@@ -826,6 +847,9 @@ msgstr "수동 선택"
 
 msgid "Minute can only be a number between 0-59"
 msgstr "분은 0~59 사이의 숫자만 가능합니다."
+
+msgid "Missing permissions to generate report templates"
+msgstr ""
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr "필수 권한이 없습니다: ${missingPermissions.join( ', ' )}"
@@ -1106,6 +1130,12 @@ msgstr "트리거되어야 하는 원격 실행 기능 레이블, 이 기능에 
 msgid "Remote execution job"
 msgstr "원격 실행 프록시"
 
+msgid "Remote working directory"
+msgstr ""
+
+msgid "Remote working directory \"%{current_value}\" is not an absolute path"
+msgstr ""
+
 msgid "Repeat a maximum of N times"
 msgstr "최대 N번 반복"
 
@@ -1117,6 +1147,9 @@ msgstr "반복 기한"
 
 msgid "Repeats"
 msgstr "반복"
+
+msgid "Report template not found or not configured properly"
+msgstr ""
 
 msgid "Rerun"
 msgstr "재실행"
@@ -1313,9 +1346,6 @@ msgstr "호스트 인터페이스의 IP 주소가 fqdn보다 우선되어야 합
 msgid "Should this interface be used for remote execution?"
 msgstr "원격 실행에 이 인터페이스를 사용해야 합니까?"
 
-msgid "Show Job status for the hosts"
-msgstr "호스트의 작업 상태 표시"
-
 msgid "Show all advanced fields"
 msgstr "모든 고급 필드 표시"
 
@@ -1324,6 +1354,9 @@ msgstr "외부 입력 세트 정보 표시"
 
 msgid "Show job invocation"
 msgstr "작업 호출 표시"
+
+msgid "Show job status for each host, only applicable when include_hosts is true"
+msgstr ""
 
 msgid "Show job template details"
 msgstr "작업 템플릿 정보 표시"
@@ -1638,6 +1671,9 @@ msgstr "템플릿을 저장할 수 없습니다. 강조된 오류를 수정합�
 msgid "Unknown"
 msgstr "알 수 없음 "
 
+msgid "Unknown error."
+msgstr ""
+
 msgid "Unknown execution status"
 msgstr "알 수 없는 실행 상태"
 
@@ -1785,6 +1821,9 @@ msgstr "여기"
 msgid "host already has an execution interface"
 msgstr "호스트에 실행 인터페이스가 이미 있습니다."
 
+msgid "host method"
+msgstr ""
+
 msgid "hosts"
 msgstr "호스트"
 
@@ -1811,6 +1850,12 @@ msgstr "분(범위: 0-59)"
 
 msgid "is month (range: 1-12)"
 msgstr "월(범위: 1-12)"
+
+msgid "job invocation"
+msgstr ""
+
+msgid "must be an absolute path"
+msgstr ""
 
 msgid "no"
 msgstr "no"

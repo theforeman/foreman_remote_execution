@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_remote_execution": {
       "": {
-        "Project-Id-Version": "foreman_remote_execution 16.5.1",
+        "Project-Id-Version": "foreman_remote_execution 18.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-15 13:54+0000",
         "Last-Translator": "elobato <elobatocs@gmail.com>, 2017",
@@ -130,6 +130,9 @@
       ],
       "Alphabetical": [
         "アルファベット順"
+      ],
+      "Already on the review step": [
+        ""
       ],
       "An error occurred while fetching the template invocation details.": [
         "テンプレート呼び出しの詳細を取得中にエラーが発生しました。"
@@ -260,29 +263,29 @@
       "Copy to clipboard": [
         "クリップボードにコピー"
       ],
-      "Could not abort the job %s: ${response}": [
-        "ジョブ %s を中止できませんでした: ${response}"
+      "Could not abort the job %s: %s": [
+        ""
       ],
       "Could not abort the task": [
         "タスクを中断できませんでした"
       ],
-      "Could not cancel recurring logic %s: ${response}": [
-        "再帰論理 %s をキャンセルできませんでした: ${response}"
+      "Could not cancel recurring logic %s: %s": [
+        ""
       ],
-      "Could not cancel the job %s: ${response}": [
-        "ジョブ %s をキャンセルできませんでした: ${response}"
+      "Could not cancel the job %s: %s": [
+        ""
       ],
       "Could not cancel the task": [
         "タスクをキャンセルできませんでした"
       ],
-      "Could not disable recurring logic %s: ${response}": [
-        "再帰論理 %s を無効にできませんでした: ${response}"
+      "Could not disable recurring logic %s: %s": [
+        ""
       ],
       "Could not display data for job invocation.": [
         "ジョブ呼び出しのデータを表示できませんでした。"
       ],
-      "Could not enable recurring logic %s: ${response}": [
-        "再帰論理 %s を有効にできませんでした: ${response}"
+      "Could not enable recurring logic %s: %s": [
+        ""
       ],
       "Could not find any suitable interface for execution": [
         "実行に適したインターフェイスを見つけることができませんでした"
@@ -313,6 +316,9 @@
       ],
       "Create a job template": [
         "ジョブテンプレートの作成"
+      ],
+      "Create a new job invocation": [
+        ""
       ],
       "Create a recurring job": [
         "繰り返されるジョブを作成"
@@ -403,6 +409,9 @@
       ],
       "Designation of a special purpose": [
         "特別な目的の指定"
+      ],
+      "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
+        ""
       ],
       "Disable recurring": [
         "繰り返しの無効化"
@@ -539,6 +548,9 @@
       "Failed rendering template: %s": [
         "テンプレートのレンダリングに失敗しました: %s"
       ],
+      "Failed to load host invocation data": [
+        ""
+      ],
       "Failed:": [
         "失敗:"
       ],
@@ -592,6 +604,9 @@
       ],
       "Get raw output for a host": [
         "ホストのロー出力を取得"
+      ],
+      "Go to job invocations": [
+        ""
       ],
       "Has to be a positive number": [
         "正の数でなければなりません"
@@ -658,6 +673,12 @@
       ],
       "Include all inputs from the foreign template": [
         "外部テンプレートからのすべての入力を含める"
+      ],
+      "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
+        ""
+      ],
+      "Include per-host task and permission data in the response": [
+        ""
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "アクションはこの時刻よりも前に開始できない場合にキャンセルされることを示しています。"
@@ -826,6 +847,9 @@
       ],
       "Minute can only be a number between 0-59": [
         "分は 0-59 の間の数字のみ指定できます。"
+      ],
+      "Missing permissions to generate report templates": [
+        ""
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         "必須パーミッションがありません: ${missingPermissions.join( ', ' )}"
@@ -1106,6 +1130,12 @@
       "Remote execution job": [
         "リモート実行ジョブ"
       ],
+      "Remote working directory": [
+        ""
+      ],
+      "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
+        ""
+      ],
       "Repeat a maximum of N times": [
         "最大 N 回繰り返す"
       ],
@@ -1117,6 +1147,9 @@
       ],
       "Repeats": [
         "繰り返し"
+      ],
+      "Report template not found or not configured properly": [
+        ""
       ],
       "Rerun": [
         "再実行"
@@ -1313,9 +1346,6 @@
       "Should this interface be used for remote execution?": [
         "このインターフェイスをリモート実行に使用する必要がありますか?"
       ],
-      "Show Job status for the hosts": [
-        "ホストのジョブステータスを表示"
-      ],
       "Show all advanced fields": [
         "すべての詳細フィールドを表示"
       ],
@@ -1324,6 +1354,9 @@
       ],
       "Show job invocation": [
         "ジョブ呼び出しを表示"
+      ],
+      "Show job status for each host, only applicable when include_hosts is true": [
+        ""
       ],
       "Show job template details": [
         "ジョブテンプレートの詳細を表示"
@@ -1637,6 +1670,9 @@
       "Unknown": [
         "不明"
       ],
+      "Unknown error.": [
+        ""
+      ],
       "Unknown execution status": [
         "不明な実行ステータス"
       ],
@@ -1784,6 +1820,9 @@
       "host already has an execution interface": [
         "ホストにはすでに実行インターフェイスがあります"
       ],
+      "host method": [
+        ""
+      ],
       "hosts": [
         "ホスト"
       ],
@@ -1810,6 +1849,12 @@
       ],
       "is month (range: 1-12)": [
         "月 (範囲: 1 - 12)"
+      ],
+      "job invocation": [
+        ""
+      ],
+      "must be an absolute path": [
+        ""
       ],
       "no": [
         "no"
