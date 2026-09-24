@@ -88,7 +88,7 @@ module Api
       api :GET, '/job_templates/revision'
       param :version, String, :desc => N_('Template version')
       def revision
-        audit = Audit.authorized(:view_audit_logs).find(params[:version])
+        audit = Audit.authorized(:view_audit_logs).where(:auditable_type => 'JobTemplate', :id => params[:version]).first!
         render :json => audit.revision.template
       end
 
