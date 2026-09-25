@@ -12,16 +12,22 @@ export const CHANGE_ENABLED_RECURRING_LOGIC = 'CHANGE_ENABLED_RECURRING_LOGIC';
 export const CANCEL_RECURRING_LOGIC = 'CANCEL_RECURRING_LOGIC';
 export const JOB_INVOCATION_HOSTS = 'JOB_INVOCATION_HOSTS';
 export const GET_TEMPLATE_INVOCATION = 'GET_TEMPLATE_INVOCATION';
+export const GET_TEMPLATE_INVOCATION_OUTPUT = 'GET_TEMPLATE_INVOCATION_OUTPUT';
 export const DIRECT_OPEN_HOST_LIMIT = 3;
 export const AWAITING_STATUS_FILTER = '(job_invocation.result = N/A)';
 
 export const AUTO_REFRESH_INTERVAL_MS = 5000;
+export const OUTPUT_REFRESH_INTERVAL_MS = 1000;
+export const OUTPUT_MAX_REFRESH_INTERVAL_MS = 3000;
 export const DEFAULT_CHART_LEGEND_WIDTH = 270;
 export const CLIPBOARD_COPIED_EXIT_DELAY_MS = 1500;
 export const CLIPBOARD_DEFAULT_EXIT_DELAY_MS = 600;
 
 export const showTemplateInvocationUrl = (hostID, jobID) =>
   `/show_template_invocation_by_host/${hostID}/job_invocation/${jobID}`;
+
+export const templateInvocationOutputUrl = (hostID, jobID) =>
+  `/api/job_invocations/${jobID}/hosts/${hostID}`;
 
 export const templateInvocationPageUrl = (hostID, jobID) =>
   `/job_invocations_detail/${jobID}/host_invocation/${hostID}`;
