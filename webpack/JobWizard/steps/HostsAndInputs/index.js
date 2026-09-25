@@ -15,7 +15,6 @@ import {
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilterIcon } from '@patternfly/react-icons';
-import { get } from 'foremanReact/redux/API';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectTemplateInputs,
@@ -35,14 +34,13 @@ import {
   HOST_COLLECTIONS,
   HOST_GROUPS,
   hostMethods,
-  HOSTS_API,
-  HOSTS_TO_PREVIEW_AMOUNT,
   DEBOUNCE_API,
 } from '../../JobWizardConstants';
 import { WizardTitle } from '../form/WizardTitle';
 import { SelectAPI } from './SelectAPI';
 import { SelectGQL } from './SelectGQL';
 import { buildHostQuery } from './buildHostQuery';
+import { loadHosts } from './loadHosts';
 
 const HostsAndInputs = ({
   templateValues,
@@ -86,16 +84,7 @@ const HostsAndInputs = ({
   ]);
   useEffect(() => {
     debounce(() => {
-      dispatch(
-        get({
-          key: HOSTS_API,
-          url: '/api/hosts',
-          params: {
-            search: buildHostQuery(selected, hostsSearchQuery),
-            per_page: HOSTS_TO_PREVIEW_AMOUNT,
-          },
-        })
-      );
+      dispatch(loadHosts(buildHostQuery(selected, hostsSearchQuery)));
     }, DEBOUNCE_API)();
   }, [
     dispatch,
