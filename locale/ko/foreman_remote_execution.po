@@ -132,7 +132,7 @@ msgid "Alphabetical"
 msgstr "알파벳순"
 
 msgid "Already on the review step"
-msgstr ""
+msgstr "이미 검토 단계에 있습니다."
 
 msgid "An error occurred while fetching the template invocation details."
 msgstr "템플릿 호출 세부 정보를 가져오는 동안 오류가 발생했습니다."
@@ -264,28 +264,28 @@ msgid "Copy to clipboard"
 msgstr "클립보드에 복사"
 
 msgid "Could not abort the job %s: %s"
-msgstr ""
+msgstr "%s 작업을 중단할 수 없습니다: %s"
 
 msgid "Could not abort the task"
 msgstr "작업을 중단할 수 없습니다"
 
 msgid "Could not cancel recurring logic %s: %s"
-msgstr ""
+msgstr "반복 논리 %s를 취소할 수 없습니다: %s"
 
 msgid "Could not cancel the job %s: %s"
-msgstr ""
+msgstr "%s 작업을 취소할 수 없습니다: %s"
 
 msgid "Could not cancel the task"
 msgstr "작업을 취소할 수 없습니다"
 
 msgid "Could not disable recurring logic %s: %s"
-msgstr ""
+msgstr "반복 논리 %s를 비활성화할 수 없습니다: %s"
 
 msgid "Could not display data for job invocation."
 msgstr "작업 호출에 대한 데이터를 표시할 수 없습니다."
 
 msgid "Could not enable recurring logic %s: %s"
-msgstr ""
+msgstr "반복 논리 %s를 활성화할 수 없습니다: %s"
 
 msgid "Could not find any suitable interface for execution"
 msgstr "실행에 적합한 인터페이스를 찾을 수 없습니다."
@@ -318,7 +318,7 @@ msgid "Create a job template"
 msgstr "작업 템플릿 생성"
 
 msgid "Create a new job invocation"
-msgstr ""
+msgstr "새로운 작업 호출 생성"
 
 msgid "Create a recurring job"
 msgstr "반복 작업 생성"
@@ -366,7 +366,7 @@ msgid "Daily"
 msgstr "매일"
 
 msgid "Date must be in the future"
-msgstr "날짜는 미래여야 합니다."
+msgstr "날짜는 미래 시점이어야 합니다."
 
 msgid "Days"
 msgstr "일"
@@ -411,7 +411,7 @@ msgid "Designation of a special purpose"
 msgstr "특수 목적의 지정"
 
 msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
-msgstr ""
+msgstr "푸시 모드에서 원격 실행 작업이 스크립트를 배치하고 실행하는 호스트의 디렉터리입니다. `remote_execution_remote_working_dir` 호스트 매개변수를 사용하여 호스트별로 이 설정을 재정의할 수 있습니다."
 
 msgid "Disable recurring"
 msgstr "반복을 비활성화합니다"
@@ -432,7 +432,7 @@ msgid "Dynamic query"
 msgstr "동적 쿼리"
 
 msgid "Edit %s"
-msgstr "%s 편집 "
+msgstr "%s 편집"
 
 msgid "Edit Job Template"
 msgstr "작업 템플릿 편집"
@@ -549,7 +549,7 @@ msgid "Failed rendering template: %s"
 msgstr "템플릿 렌더링 실패: %s"
 
 msgid "Failed to load host invocation data"
-msgstr ""
+msgstr "호스트 호출 데이터 로드 실패"
 
 msgid "Failed:"
 msgstr "실패함:"
@@ -606,7 +606,7 @@ msgid "Get raw output for a host"
 msgstr "호스트에 대한 원시 출력 가져오기"
 
 msgid "Go to job invocations"
-msgstr ""
+msgstr "작업 호출로 이동"
 
 msgid "Has to be a positive number"
 msgstr "양수여야 합니다"
@@ -675,10 +675,10 @@ msgid "Include all inputs from the foreign template"
 msgstr "외부 템플릿의 모든 입력 포함"
 
 msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
-msgstr ""
+msgstr "응답에 호스트 및 템플릿 호출을 포함합니다. 이전 버전과의 호환성을 위해 기본값은 true입니다. 모든 호스트 직렬화를 건너뛰려면 false를 전달합니다."
 
 msgid "Include per-host task and permission data in the response"
-msgstr ""
+msgstr "응답에 호스트별 작업 및 권한 데이터를 포함합니다."
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "이 시간 전에 시작할 수 없는 경우 작업을 취소한다는 것을 나타냅니다."
@@ -849,7 +849,7 @@ msgid "Minute can only be a number between 0-59"
 msgstr "분은 0~59 사이의 숫자만 가능합니다."
 
 msgid "Missing permissions to generate report templates"
-msgstr ""
+msgstr "보고서 템플릿을 생성하는 데 필요한 권한이 없습니다."
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr "필수 권한이 없습니다: ${missingPermissions.join( ', ' )}"
@@ -861,7 +861,7 @@ msgid "Must select a bookmark or enter a search query"
 msgstr "북마크를 선택하거나 검색 쿼리를 입력해야 합니다."
 
 msgid "N/A"
-msgstr "해당 없음 "
+msgstr "해당 없음"
 
 msgid "Name"
 msgstr "이름 "
@@ -1131,10 +1131,10 @@ msgid "Remote execution job"
 msgstr "원격 실행 프록시"
 
 msgid "Remote working directory"
-msgstr ""
+msgstr "원격 작업 디렉토리"
 
 msgid "Remote working directory \"%{current_value}\" is not an absolute path"
-msgstr ""
+msgstr "원격 작업 디렉토리 \"%{current_value}\"이/가 절대 경로가 아닙니다."
 
 msgid "Repeat a maximum of N times"
 msgstr "최대 N번 반복"
@@ -1149,7 +1149,7 @@ msgid "Repeats"
 msgstr "반복"
 
 msgid "Report template not found or not configured properly"
-msgstr ""
+msgstr "보고서 템플릿을 찾을 수 없거나 올바르게 구성되지 않았습니다."
 
 msgid "Rerun"
 msgstr "재실행"
@@ -1356,7 +1356,7 @@ msgid "Show job invocation"
 msgstr "작업 호출 표시"
 
 msgid "Show job status for each host, only applicable when include_hosts is true"
-msgstr ""
+msgstr "각 호스트의 작업 상태를 표시합니다. 이 기능은 include_hosts가 true인 경우에만 적용됩니다."
 
 msgid "Show job template details"
 msgstr "작업 템플릿 정보 표시"
@@ -1374,7 +1374,7 @@ msgid "Smart proxy"
 msgstr "스마트 프록시"
 
 msgid "Snippet"
-msgstr "조각 모음 "
+msgstr "스니펫"
 
 msgid "Start"
 msgstr "시작"
@@ -1410,7 +1410,7 @@ msgid "Static query"
 msgstr "정적 쿼리"
 
 msgid "Status"
-msgstr "상태 "
+msgstr "상태"
 
 msgid "Submit"
 msgstr "보내기"
@@ -1558,7 +1558,7 @@ msgid "This can happen if the host is removed or moved to another organization o
 msgstr "작업이 시작된 후 호스트가 제거되거나 다른 조직이나 위치로 이동된 경우 이러한 문제가 발생할 수 있습니다."
 
 msgid "This template is locked for editing."
-msgstr "이 템플릿은 편집 용으로 잠금되어 있습니다. "
+msgstr "이 템플릿은 편집이 잠금되어 있습니다. "
 
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "이 템플릿은 잠겨 있습니다. 사용자 정의하려면 이를 새 템플릿에 복제하십시오. "
@@ -1669,10 +1669,10 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr "템플릿을 저장할 수 없습니다. 강조된 오류를 수정합니다."
 
 msgid "Unknown"
-msgstr "알 수 없음 "
+msgstr "알 수 없음"
 
 msgid "Unknown error."
-msgstr ""
+msgstr "알 수 없는 오류입니다."
 
 msgid "Unknown execution status"
 msgstr "알 수 없는 실행 상태"
@@ -1765,7 +1765,7 @@ msgid "Whether it should be allowed to override the effective user from the invo
 msgstr "호출할 유효 사용자를 덮어쓰도록 허용할지 여부입니다."
 
 msgid "Whether or not the template is locked for editing"
-msgstr "편집을 위한 템플릿의 잠금 여부 "
+msgstr "템플릿 편집 잠금 여부"
 
 msgid "Whether the current user login should be used as the effective user"
 msgstr "현재 사용자 로그인을 유효 사용자로 사용할지 여부입니다."
@@ -1822,7 +1822,7 @@ msgid "host already has an execution interface"
 msgstr "호스트에 실행 인터페이스가 이미 있습니다."
 
 msgid "host method"
-msgstr ""
+msgstr "호스트 메서드"
 
 msgid "hosts"
 msgstr "호스트"
@@ -1852,10 +1852,10 @@ msgid "is month (range: 1-12)"
 msgstr "월(범위: 1-12)"
 
 msgid "job invocation"
-msgstr ""
+msgstr "작업 호출"
 
 msgid "must be an absolute path"
-msgstr ""
+msgstr "절대 경로여야 합니다."
 
 msgid "no"
 msgstr "no"
