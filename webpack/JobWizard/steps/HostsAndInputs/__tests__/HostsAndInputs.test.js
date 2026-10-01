@@ -163,7 +163,7 @@ describe('Hosts', () => {
     });
     api.get.mock.calls.forEach(call => {
       if (call[0].key === 'HOST_IDS') {
-        expect(call[0].params).toEqual({ search: 'id = host1 or id = host3' });
+        expect(call[0].params).toEqual({ search: 'name ^ (host1, host3)' });
       }
     });
 
