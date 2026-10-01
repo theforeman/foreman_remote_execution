@@ -26,9 +26,30 @@ module ForemanRemoteExecution
       end
 
       def remote_execution_interface
-        return unless params['remote_execution_interface'].present?
+        identifier = params['remote_execution_interface'].presence
+        return unless identifier
 
-        @host.set_execution_interface(params['remote_execution_interface'])
+        interfaces = @host.interfaces.to_a
+        interface = interfaces.find { |nic| nic.identifier == identifier }
+
+        if interface.nil? && params['uuid'].present?
+          # Host initialization/import may already have built the primary NIC.
+          # Reuse it so its existing network attributes are preserved.
+          interface = interfaces.find { |nic| nic.primary? && nic.identifier.blank? }
+
+          if interface
+            interface.identifier = identifier
+            interface.save!
+          else
+            @host.interfaces.create!(
+              identifier: identifier,
+              type: 'Nic::Managed',
+              managed: false
+            )
+          end
+        end
+
+        @host.set_execution_interface(identifier)
       end
 
       def reset_host_known_keys!
