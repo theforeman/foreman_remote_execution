@@ -24,23 +24,4 @@ class RemoteExecutionHelperTest < ActionView::TestCase
       assert_equal(expected_output, new_line_sets.map { |s| s['output'] })
     end
   end
-
-  describe 'test correct setting' do
-    it 'should found correct template from setting' do
-      template_name = 'Job Invocation Report Template'
-      setting_key = 'remote_execution_job_invocation_report_template'
-      template = FactoryBot.create(:report_template, name: template_name)
-      input = FactoryBot.create(:template_input, name: 'job_id', input_type: 'user')
-      template.template_inputs << input
-      Setting.expects(:[]).with(setting_key).returns(template_name)
-
-      found_template = job_report_template
-
-      assert_equal template.id, found_template.id
-    end
-
-    it 'should not crash if the template cannot be found' do
-      assert_nil job_report_template
-    end
-  end
 end

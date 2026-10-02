@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Split, SplitItem } from '@patternfly/react-core';
-import { UndoIcon } from '@patternfly/react-icons';
 import {
   Dropdown,
   DropdownItem,
@@ -153,15 +152,6 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
         {__('Abort')}
       </DropdownItem>,
       ...recurrenceDropdownItems,
-      <DropdownSeparator ouiaId="dropdown-separator-2" key="separator-2" />,
-      <DropdownItem
-        ouiaId="legacy-ui-dropdown-item"
-        icon={<UndoIcon />}
-        href={`/legacy/job_invocations/${jobId}`}
-        key="legacy-ui"
-      >
-        {__('Legacy UI')}
-      </DropdownItem>,
     ],
     [
       canCancelJobInvocations,

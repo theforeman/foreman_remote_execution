@@ -173,7 +173,6 @@ Lint/UnusedMethodArgument:
     - 'app/models/remote_execution_provider.rb'
     - 'lib/foreman_remote_execution_core/script_runner.rb'
     - 'test/benchmark/run_hosts_job_benchmark.rb'
-    - 'test/support/remote_execution_helper.rb'
 
 # Offense count: 4
 Lint/UselessAssignment:
@@ -466,7 +465,6 @@ Style/RedundantReturn:
     - 'extra/cockpit/foreman-cockpit-session'
     - 'lib/foreman_remote_execution_core/polling_script_runner.rb'
     - 'lib/foreman_remote_execution_core/script_runner.rb'
-    - 'test/support/remote_execution_helper.rb'
 
 # Offense count: 79
 # Cop supports --auto-correct.
