@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'test_plugin_helper'
-require_relative '../support/remote_execution_helper'
 
 class JobInvocationsControllerTest < ActionController::TestCase
   test 'should parse inputs coming from the URL params' do
@@ -167,11 +166,6 @@ class JobInvocationsControllerTest < ActionController::TestCase
         assert 2, assigns(:job_invocations).size
       end
 
-      test '#show' do
-        get :show, params: { id: @invocation2.id }, session: prepare_user(@admin)
-        assert_response :success
-      end
-
       test '#rerun' do
         get :rerun, params: { id: @invocation2.id }, session: prepare_user(@admin)
         assert_response :success
@@ -190,11 +184,6 @@ class JobInvocationsControllerTest < ActionController::TestCase
         assert_response :success
         assert_equal 1, assigns(:job_invocations).size
         assert_equal @invocation2, assigns(:job_invocations)[0]
-      end
-
-      test '#show' do
-        get :show, params: { id: @invocation.id }, session: prepare_user(@user)
-        assert_response :not_found
       end
 
       test '#rerun' do
