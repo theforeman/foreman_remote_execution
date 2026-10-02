@@ -245,12 +245,6 @@ describe('JobInvocationDetailPage', () => {
     expect(screen.getByText('Abort')).toBeInTheDocument();
     expect(screen.queryByText('Enable recurring')).not.toBeInTheDocument();
     expect(screen.queryByText('Cancel recurring')).not.toBeInTheDocument();
-    expect(
-      screen
-        .getByText('Legacy UI')
-        .closest('a')
-        .getAttribute('href')
-    ).toEqual(`/legacy/job_invocations/${jobId}`);
   });
 
   it('keeps toolbar buttons mounted while job invocation data is refreshing', async () => {

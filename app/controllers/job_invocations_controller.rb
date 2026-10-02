@@ -1,7 +1,6 @@
 class JobInvocationsController < ApplicationController
   include ::Foreman::Controller::AutoCompleteSearch
   include ::ForemanTasks::Concerns::Parameters::Triggering
-  include ::JobInvocationsChartHelper
   include RemoteExecutionHelper
 
   def new
@@ -60,22 +59,6 @@ class JobInvocationsController < ApplicationController
     end
   end
 
-  def show
-    @job_invocation = resource_base.includes(:template_invocations => :run_host_job_task).find(params[:id])
-    @job_organization = Taxonomy.find_by(id: @job_invocation.task.input[:current_organization_id])
-    @job_location = Taxonomy.find_by(id: @job_invocation.task.input[:current_location_id])
-    @auto_refresh = @job_invocation.task.try(:pending?)
-
-    respond_to do |format|
-      format.json do
-        targeting_hosts_resources
-      end
-
-      format.html
-      format.js
-    end
-  end
-
   def index
     @job_invocations = resource_base_search_and_page.preload(:task, :targeting).order('job_invocations.id DESC')
   end
@@ -84,20 +67,6 @@ class JobInvocationsController < ApplicationController
   def refresh
     params[:job_invocation].delete :description_format if params[:job_invocation].key?(:description_override)
     @composer = prepare_composer
-  end
-
-  def chart
-    find_resource
-    render :json => {
-      :finished => @job_invocation.finished?,
-      :job_invocations => job_invocation_data(@job_invocation)[:columns],
-      :statuses => {
-        :success => @job_invocation.progress_report[:success],
-        :cancelled => @job_invocation.progress_report[:cancelled],
-        :failed => @job_invocation.progress_report[:error],
-        :pending => @job_invocation.progress_report[:pending],
-      },
-    }
   end
 
   def preview_hosts
@@ -174,7 +143,7 @@ class JobInvocationsController < ApplicationController
         'create'
       when 'cancel'
         'cancel'
-      when 'chart', 'preview_job_invocations_per_host', 'report'
+      when 'preview_job_invocations_per_host', 'report'
         'view'
       else
         super
@@ -199,15 +168,4 @@ class JobInvocationsController < ApplicationController
     end
   end
 
-  def targeting_hosts_resources
-    @auto_refresh = @job_invocation.task.try(:pending?)
-    @resource_base = @job_invocation.targeting.hosts.authorized(:view_hosts, Host)
-
-    unless params[:search].nil?
-      @resource_base = @resource_base.joins(:template_invocations)
-                                     .where(:template_invocations => { :job_invocation_id => @job_invocation.id})
-    end
-    @hosts = resource_base_search_and_page
-    @total_hosts = resource_base_with_search.size
-  end
 end
