@@ -132,7 +132,7 @@
         "按字母"
       ],
       "Already on the review step": [
-        ""
+        "已在审阅步骤中"
       ],
       "An error occurred while fetching the template invocation details.": [
         "在获取模板调用详情时出错。"
@@ -264,28 +264,28 @@
         "复制到剪贴板"
       ],
       "Could not abort the job %s: %s": [
-        ""
+        "无法中止作业 %s: %s"
       ],
       "Could not abort the task": [
         "无法中止作业"
       ],
       "Could not cancel recurring logic %s: %s": [
-        ""
+        "无法取消循环逻辑 %s：%s"
       ],
       "Could not cancel the job %s: %s": [
-        ""
+        "无法取消作业 %s: %s"
       ],
       "Could not cancel the task": [
         "无法取消作业"
       ],
       "Could not disable recurring logic %s: %s": [
-        ""
+        "无法禁用重复逻辑 %s：%s"
       ],
       "Could not display data for job invocation.": [
         "无法显示用于作业调用的数据。"
       ],
       "Could not enable recurring logic %s: %s": [
-        ""
+        "无法启用重复逻辑 %s：%s"
       ],
       "Could not find any suitable interface for execution": [
         "无法找到适合执行的接口"
@@ -318,7 +318,7 @@
         "创建作业模板"
       ],
       "Create a new job invocation": [
-        ""
+        "创建新作业调用"
       ],
       "Create a recurring job": [
         "创建一个重复运行的作业"
@@ -411,7 +411,7 @@
         "设计特殊目的"
       ],
       "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
-        ""
+        "主机上以推送模式运行的远程执行作业存放并运行其脚本的目录。。您可以使用 'remote_execution_remote_working_dir' 主机参数覆盖每个主机的设置。"
       ],
       "Disable recurring": [
         "禁用重复"
@@ -549,7 +549,7 @@
         "呈现模板失败：%s"
       ],
       "Failed to load host invocation data": [
-        ""
+        "加载主机调用数据失败"
       ],
       "Failed:": [
         "失败："
@@ -606,7 +606,7 @@
         "获取主机的原始输出"
       ],
       "Go to job invocations": [
-        ""
+        "返回到作业调用"
       ],
       "Has to be a positive number": [
         "必须为一个正数"
@@ -675,10 +675,10 @@
         "在外部模板中包含所有输入格式"
       ],
       "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
-        ""
+        "在响应中包含主机和模板调用。为了向后兼容，默认为 true。设置为 false 来跳过所有主机的序列化。"
       ],
       "Include per-host task and permission data in the response": [
-        ""
+        "在响应中包含每个主机的任务和权限数据"
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "这代表，如果操作无法在这个时间前开始则操作应该被取消。"
@@ -849,7 +849,7 @@
         "分钟只能是一个 0-59 之间的数字"
       ],
       "Missing permissions to generate report templates": [
-        ""
+        "缺少生成报告模板的权限"
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         "缺少所需的权限：${missingPermissions.join( ', ' )}"
@@ -1095,7 +1095,7 @@
         "重复逻辑"
       ],
       "Recurring logic %s cancelled successfully.": [
-        "成功取消重复逻辑 %s。"
+        "成功取消循环逻辑 %s。"
       ],
       "Recurring logic %s disabled successfully.": [
         "成功禁用重复逻辑 %s。"
@@ -1131,10 +1131,10 @@
         "远程执行作业"
       ],
       "Remote working directory": [
-        ""
+        "远程工作目录"
       ],
       "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
-        ""
+        "远程工作目录 \\\"%{current_value}\\\" 不是绝对路径"
       ],
       "Repeat a maximum of N times": [
         "最多重复 N 次"
@@ -1149,7 +1149,7 @@
         "重复"
       ],
       "Report template not found or not configured properly": [
-        ""
+        "报告模板未找到或未正确配置"
       ],
       "Rerun": [
         "重新运行"
@@ -1356,7 +1356,7 @@
         "显示作业调用"
       ],
       "Show job status for each host, only applicable when include_hosts is true": [
-        ""
+        "显示每个主机的作业状态，仅在 include_hosts 为 true 时才适用"
       ],
       "Show job template details": [
         "显示作业模板详情"
@@ -1671,7 +1671,7 @@
         "未知"
       ],
       "Unknown error.": [
-        ""
+        "未知错误"
       ],
       "Unknown execution status": [
         "未知的执行状态"
@@ -1821,7 +1821,7 @@
         "主机已有一个执行接口"
       ],
       "host method": [
-        ""
+        "主机方法"
       ],
       "hosts": [
         "主机"
@@ -1851,10 +1851,10 @@
         "月份（范围：1-12）"
       ],
       "job invocation": [
-        ""
+        "工作调用"
       ],
       "must be an absolute path": [
-        ""
+        "必须是绝对路径"
       ],
       "no": [
         "否"
