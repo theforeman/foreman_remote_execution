@@ -12,3 +12,4 @@ jobs:
     uses: theforeman/actions/.github/workflows/foreman_plugin_js.yml@v0
     with:
       plugin: foreman_remote_execution
+      foreman_version: 5.0-stable
