@@ -133,6 +133,27 @@ module Api
         assert_response :success
         assert JobTemplate.unscoped.find_by(name: new_name)
       end
+
+      context '#revision' do
+        test 'should return revision for a job template audit' do
+          @template.update!(template: 'updated template content')
+          audit = @template.audits.last
+          get :revision, params: { :version => audit.id }
+          assert_response :success
+          assert_equal 'updated template content', ActiveSupport::JSON.decode(@response.body)
+        end
+
+        test 'should not return revision for a non-job-template audit' do
+          other_audit = Audited::Audit.create!(
+            :auditable_type => 'Host',
+            :auditable_id => 1,
+            :action => 'update',
+            :version => 1
+          )
+          get :revision, params: { :version => other_audit.id }
+          assert_response :not_found
+        end
+      end
     end
 
   end
