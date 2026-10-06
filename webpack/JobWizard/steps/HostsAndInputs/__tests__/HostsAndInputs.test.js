@@ -171,6 +171,54 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('host2')).toHaveLength(0);
     expect(screen.queryAllByText('host3')).toHaveLength(1);
   });
+  
+    it('shows displayName chip when autofill receives short display_name', async () => {
+    routerSelectors.selectRouterLocation.mockImplementation(() => ({
+      search: '?host_ids%5B%5D=2',
+    }));
+
+    const defaultGet = api.get.getMockImplementation();
+    api.get.mockImplementation(({ handleSuccess, ...action }) => {
+      if (action.key === 'HOST_IDS') {
+        handleSuccess &&
+          handleSuccess({
+            data: {
+              results: [
+                {
+                  id: 2,
+                  name: 'centos9-katello-client.example.com',
+                  display_name: 'centos9-katello-client',
+                },
+              ],
+            },
+          });
+        return { type: 'get', ...action };
+      }
+      return defaultGet({ handleSuccess, ...action });
+    });
+
+    try {
+      render(
+        <MockedProvider mocks={gqlMock} addTypename={false}>
+          <Provider store={store}>
+            <JobWizard />
+          </Provider>
+        </MockedProvider>
+      );
+
+      await act(async () => {
+        fireEvent.click(screen.getByText('Target hosts and inputs'));
+      });
+
+      expect(screen.queryAllByText('centos9-katello-client')).toHaveLength(1);
+      expect(
+        screen.queryAllByText('centos9-katello-client.example.com')
+      ).toHaveLength(0);
+    } finally {
+      mockApi(api);
+    }
+  });
+
   it('Host fill search from url', async () => {
     routerSelectors.selectRouterLocation.mockImplementation(() => ({
       search: 'search=os=gnome',

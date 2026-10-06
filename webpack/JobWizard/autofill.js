@@ -84,7 +84,7 @@ export const useAutoFill = ({
                     id,
                     name,
                     // eslint-disable-next-line camelcase
-                    display_name: display_name || name,
+                    displayName: display_name || name,
                   })
                 ),
               }));
