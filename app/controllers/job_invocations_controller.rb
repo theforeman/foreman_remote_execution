@@ -3,53 +3,6 @@ class JobInvocationsController < ApplicationController
   include ::ForemanTasks::Concerns::Parameters::Triggering
   include RemoteExecutionHelper
 
-  def new
-    return @composer = prepare_composer if params[:feature].present?
-
-    ui_params = {
-      :host_ids => params[:host_ids],
-      :targeting => {
-        :targeting_type => Targeting::STATIC_TYPE,
-        :bookmark_id => params[:bookmark_id],
-      },
-    }
-    # replace an empty string search with a dummy search query to match all hosts
-    # but only if search query was entered (based on presence of :search parameter)
-    if params.key?(:search)
-      query = params[:search].empty? ? "name != ''" : params[:search]
-      ui_params[:targeting].update(:search_query => query)
-    end
-
-    if (template = JobTemplate.find_by(id: params[:template_id]))
-      ui_params[:job_invocation] = {
-        :job_category => template.job_category,
-        :providers => {
-          template.provider_type => {:job_template_id => template.id},
-        },
-      }
-    end
-
-    @composer = JobInvocationComposer.from_ui_params(ui_params)
-  end
-
-  def rerun
-    job_invocation = resource_base.find(params[:id])
-    @composer = JobInvocationComposer.from_job_invocation(job_invocation, params)
-    @job_organization = Taxonomy.find_by(id: job_invocation.task.input[:current_organization_id])
-    @job_location = Taxonomy.find_by(id: job_invocation.task.input[:current_location_id])
-    render :action => 'new'
-  end
-
-  def legacy_create
-    @composer = prepare_composer
-    if @composer.trigger
-      redirect_to job_invocation_path(@composer.job_invocation)
-    else
-      @composer.job_invocation.description_format = nil if params.fetch(:job_invocation, {}).key?(:description_override)
-      render :action => 'new'
-    end
-  end
-
   def create
     @composer = prepare_composer
     if @composer.trigger
@@ -61,12 +14,6 @@ class JobInvocationsController < ApplicationController
 
   def index
     @job_invocations = resource_base_search_and_page.preload(:task, :targeting).order('job_invocations.id DESC')
-  end
-
-  # refreshes the form
-  def refresh
-    params[:job_invocation].delete :description_format if params[:job_invocation].key?(:description_override)
-    @composer = prepare_composer
   end
 
   def preview_hosts
@@ -137,8 +84,6 @@ class JobInvocationsController < ApplicationController
 
   def action_permission
     case params[:action]
-      when 'rerun'
-        'create'
       when 'preview_hosts'
         'create'
       when 'cancel'
