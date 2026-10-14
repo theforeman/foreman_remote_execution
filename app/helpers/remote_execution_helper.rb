@@ -141,27 +141,6 @@ module RemoteExecutionHelper
     end
   end
 
-  def description_checkbox_f(f, job_template, disabled)
-    check_box_tag('description_format_override',
-      job_template.generate_description_format,
-      f.object.description_format.nil?,
-      :class => 'description_format_override',
-      :name => f.object_name + '[description_override]',
-      :disabled => disabled,
-      :onchange => 'description_override(this);') + ' ' + _('Use default description template')
-  end
-
-  def description_format_textarea_f(f, job_template, disabled)
-    textarea_f f, 'description_format',
-      :label => _('Description template'),
-      :value => f.object.description_format || job_template.generate_description_format,
-      :rows => 2,
-      :onchange => 'regenerate_description(this);',
-      :class => 'description_format advanced',
-      :disabled => disabled,
-      :label_help => description_format_help
-  end
-
   def description_format_help
     _('This template is used to generate the description.<br/>' +
         'Input values can be used using the syntax %{package}.<br/>' +
