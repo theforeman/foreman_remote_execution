@@ -21,7 +21,11 @@ class Settings
 
   def load!
     settings_path = ENV['FOREMAN_COCKPIT_SETTINGS'] || '/etc/foreman-cockpit/settings.yml'
-    @settings = YAML.safe_load(File.read(settings_path), [Symbol])
+    @settings = if Gem::Version.new(Psych::VERSION) >= Gem::Version.new('3.1.0')
+                  YAML.safe_load(File.read(settings_path), permitted_classes: [Symbol])
+                else
+                  YAML.safe_load(File.read(settings_path), [Symbol])
+                end
     LOG.level = Logger.const_get(@settings.fetch(:log_level, 'INFO'))
     LOG.info("Running foreman-cockpit-session with settings from #{settings_path}:\n#{@settings.inspect}")
   end
