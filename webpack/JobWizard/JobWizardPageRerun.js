@@ -114,16 +114,6 @@ const JobWizardPageRerun = ({
       header={title}
       breadcrumbOptions={breadcrumbOptions}
       searchable={false}
-      toolbarButtons={
-        <Button
-          ouiaId="job-wizard-rerun-old-form-button"
-          variant="link"
-          component="a"
-          href={`/old/job_invocations/${id}/rerun${search}`}
-        >
-          {__('Use legacy form')}
-        </Button>
-      }
     >
       <React.Fragment>
         <React.Fragment>

@@ -173,7 +173,6 @@ Lint/UnusedMethodArgument:
     - 'app/models/remote_execution_provider.rb'
     - 'lib/foreman_remote_execution_core/script_runner.rb'
     - 'test/benchmark/run_hosts_job_benchmark.rb'
-    - 'test/support/remote_execution_helper.rb'
 
 # Offense count: 4
 Lint/UselessAssignment:
@@ -273,7 +272,6 @@ Rails/Date:
 Rails/HelperInstanceVariable:
   Exclude:
     - 'app/helpers/job_invocation_output_helper.rb'
-    - 'app/helpers/job_invocations_chart_helper.rb'
     - 'app/helpers/remote_execution_helper.rb'
 
 # Offense count: 13
@@ -361,7 +359,6 @@ Style/ClassAndModuleChildren:
 # IgnoredMethods: ==, equal?, eql?
 Style/ClassEqualityComparison:
   Exclude:
-    - 'app/helpers/job_invocations_chart_helper.rb'
     - 'app/helpers/remote_execution_helper.rb'
 
 # Offense count: 2
@@ -399,7 +396,7 @@ Style/FormatString:
   Exclude:
     - 'app/controllers/api/v2/job_invocations_controller.rb'
     - 'app/controllers/job_templates_controller.rb'
-    - 'app/helpers/job_invocations_chart_helper.rb'
+    - 'app/helpers/remote_execution_helper.rb'
     - 'app/lib/actions/remote_execution/run_host_job.rb'
     - 'app/lib/actions/remote_execution/run_hosts_job.rb'
     - 'app/models/job_invocation_composer.rb'
@@ -428,7 +425,6 @@ Style/HashEachMethods:
 # AllowedMethods: respond_to_missing?
 Style/OptionalBooleanParameter:
   Exclude:
-    - 'app/helpers/job_invocations_chart_helper.rb'
     - 'app/models/concerns/foreman_remote_execution/host_extensions.rb'
     - 'app/models/input_template_renderer.rb'
     - 'app/models/job_invocation.rb'
@@ -466,7 +462,6 @@ Style/RedundantReturn:
     - 'extra/cockpit/foreman-cockpit-session'
     - 'lib/foreman_remote_execution_core/polling_script_runner.rb'
     - 'lib/foreman_remote_execution_core/script_runner.rb'
-    - 'test/support/remote_execution_helper.rb'
 
 # Offense count: 79
 # Cop supports --auto-correct.

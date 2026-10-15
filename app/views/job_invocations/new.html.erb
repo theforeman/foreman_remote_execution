@@ -1,9 +1,0 @@
-<% javascript 'foreman_remote_execution/template_invocation' %>
-<% stylesheet 'foreman_remote_execution/foreman_remote_execution' %>
-<% title _('Job invocation') %>
-<% if(request.path_parameters[:action] == "rerun") %>
-  <%= authorized_for(controller: :job_invocations, action: :create) ? link_to(_('Use new job wizard'), hash_for_rerun_job_invocation_path({:id => request.path_parameters[:id]}).merge(request.query_parameters)) : nil %>
-<% else %>
-  <%= authorized_for(controller: :job_invocations, action: :create) ? link_to(_('Use new job wizard'), hash_for_new_job_invocation_path().merge(request.query_parameters)) : nil %>
-<%end%>
-<%= render :partial => 'form' %>
