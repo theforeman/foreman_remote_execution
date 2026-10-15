@@ -134,7 +134,7 @@
         "Alphabétique"
       ],
       "Already on the review step": [
-        ""
+        "Déjà à l'étape de révision"
       ],
       "An error occurred while fetching the template invocation details.": [
         "Une erreur s'est produite lors de la récupération des détails d'invocation du modèle."
@@ -266,28 +266,28 @@
         "Copier dans le presse-papiers"
       ],
       "Could not abort the job %s: %s": [
-        ""
+        "Impossible d'annuler le job %s: %s"
       ],
       "Could not abort the task": [
         "Impossible d'annuler la tâche"
       ],
       "Could not cancel recurring logic %s: %s": [
-        ""
+        "Impossible d'annuler la logique récurrente %s :%s"
       ],
       "Could not cancel the job %s: %s": [
-        ""
+        "Impossible d'annuler le job %s: %s"
       ],
       "Could not cancel the task": [
         "Impossible d'annuler la tâche"
       ],
       "Could not disable recurring logic %s: %s": [
-        ""
+        "Impossible de désactiver la logique récurrente %s :%s"
       ],
       "Could not display data for job invocation.": [
         "Impossible d'afficher les données pour le lancement du job."
       ],
       "Could not enable recurring logic %s: %s": [
-        ""
+        "Impossible d’activer la logique récurrente %s :%s"
       ],
       "Could not find any suitable interface for execution": [
         "Impossible de trouver une interface qui convient pour l'exécution"
@@ -320,7 +320,7 @@
         "Créer un modèle de job"
       ],
       "Create a new job invocation": [
-        ""
+        "Créer une nouvelle invocation de tâche"
       ],
       "Create a recurring job": [
         "Créer un job récurrent"
@@ -413,7 +413,7 @@
         "Désignation d’un objectif spécial"
       ],
       "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
-        ""
+        "Répertoire sur l'hôte où les tâches d'exécution à distance en mode push placent et exécutent leurs scripts. Vous pouvez modifier ce paramètre pour chaque hôte à l'aide du paramètre `remote_execution_remote_working_dir`."
       ],
       "Disable recurring": [
         "Désactiver les récurrents"
@@ -551,7 +551,7 @@
         "Echec de rendu du modèle : %s"
       ],
       "Failed to load host invocation data": [
-        ""
+        "Échec du chargement des données d'invocation de l'hôte"
       ],
       "Failed:": [
         "Échec :"
@@ -608,7 +608,7 @@
         "Récupérer la sortie brut d'un hôte"
       ],
       "Go to job invocations": [
-        ""
+        "Aller aux invocations de travail"
       ],
       "Has to be a positive number": [
         "Doit correspondre à un nombre positif"
@@ -677,10 +677,10 @@
         "Inclut toutes les entrées du modèle étranger"
       ],
       "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
-        ""
+        "Inclure les hôtes et les appels de modèles dans la réponse. Par défaut, la valeur est « true » pour assurer la compatibilité avec les versions précédentes. Indiquez « false » pour ne pas sérialiser les hôtes."
       ],
       "Include per-host task and permission data in the response": [
-        ""
+        "Inclure les données de tâche et d'autorisation par hôte dans la réponse"
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "Indique si l'action doit être annulée si elle ne peut commencer à ce moment là."
@@ -851,7 +851,7 @@
         "La minute doit être un nombre compris entre 0 et 59"
       ],
       "Missing permissions to generate report templates": [
-        ""
+        "Autorisations manquantes pour générer des modèles de rapports"
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         "Il manque les autorisations requises : ${missingPermissions.join( ', ' )}"
@@ -905,7 +905,7 @@
         "Aucune sortie pour les filtres sélectionnés"
       ],
       "No results found": [
-        "Aucun résultat"
+        "Aucun résultat trouvé"
       ],
       "No template mapped to feature %{feature_name}": [
         "Aucun modèle n'est en relation avec la fonction %{feature_name}"
@@ -938,7 +938,7 @@
         "Ouvrir tout%s invocations dans les nouveaux onglets"
       ],
       "Open all failed runs on this page (%s)": [
-        "Ouvrir toutes les exécutions ayant échoué sur cette page (%s)"
+        "Ouvrir toutes les exécutions ayant échoué sur cette page (%s )"
       ],
       "Open all rows of the table in new tabs": [
         "Ouvrir toutes les lignes du tableau dans de nouveaux onglets"
@@ -1097,13 +1097,13 @@
         "Logique récurrente"
       ],
       "Recurring logic %s cancelled successfully.": [
-        "Logique récurrente%s activée avec succès."
+        "Logique récurrente %s activée avec succès."
       ],
       "Recurring logic %s disabled successfully.": [
-        "Logique récurrente%s désactivé avec succès."
+        "Logique récurrente %s désactivé avec succès."
       ],
       "Recurring logic %s enabled successfully.": [
-        "Logique récurrente%s activée avec succès."
+        "Logique récurrente %s activée avec succès."
       ],
       "Recursive rendering of templates detected": [
         "Détection de récursion dans le rendu des modèles"
@@ -1133,10 +1133,10 @@
         "Job à exécution distante"
       ],
       "Remote working directory": [
-        ""
+        "Répertoire de travail à distance"
       ],
       "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
-        ""
+        "Répertoire de travail distant \\\"%{current_value} \\\" n'est pas un chemin absolu"
       ],
       "Repeat a maximum of N times": [
         "Répéter un maximum de N fois"
@@ -1151,7 +1151,7 @@
         "Répétitions"
       ],
       "Report template not found or not configured properly": [
-        ""
+        "Modèle de rapport introuvable ou mal configuré"
       ],
       "Rerun": [
         "Relancer"
@@ -1358,7 +1358,7 @@
         "Voir le lancement du job"
       ],
       "Show job status for each host, only applicable when include_hosts is true": [
-        ""
+        "Afficher l'état des tâches pour chaque hôte, applicable uniquement si include_hosts est vrai"
       ],
       "Show job template details": [
         "Voir les détails d'un modèle de job"
@@ -1517,7 +1517,7 @@
         "La requête dynamique '%{query}' n'a pas encore été résolue. La liste des hôtes actuelle avec lesquels ils pourraient être résolus peut être vue ici %{here}."
       ],
       "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
-        "La requête dynamique est toujours en cours de traitement. Vous pouvez{viewTheHosts} ciblé par la requête."
+        "La requête dynamique est toujours en cours de traitement. Vous pouvez {viewTheHosts} ciblé par la requête."
       ],
       "The execution interface is used for remote execution": [
         "L'interface d'exécution est celle utilisée pour l'exécution distante"
@@ -1538,7 +1538,7 @@
         "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
       ],
       "The number of failed invocations is:": [
-        "Le nombre d’invocations échouées est :"
+        "Le nombre des invocations est :"
       ],
       "The number of selected invocations is:": [
         "Le nombre des invocations sélectionnées est :"
@@ -1621,7 +1621,7 @@
         "Tentative d'abandon du job"
       ],
       "Trying to abort the job %s.": [
-        "J’essaie d'abandonner le job %s ."
+        "J’essaie d'abandonner le job %s."
       ],
       "Trying to abort the task for the host": [
         "Tentative d'annulation de la tâche pour l'hôte"
@@ -1630,7 +1630,7 @@
         "Tentative d'annulation du job"
       ],
       "Trying to cancel the job %s.": [
-        "J'essaie d'annuler le travail%s ."
+        "J'essaie d'annuler le travail%s."
       ],
       "Trying to cancel the task for the host": [
         "Tentative d'annulation de la tâche pour l'hôte"
@@ -1675,7 +1675,7 @@
         "Inconnu"
       ],
       "Unknown error.": [
-        ""
+        "Erreur inconnue"
       ],
       "Unknown execution status": [
         "État d'exécution inconnu"
@@ -1825,7 +1825,7 @@
         "L'hôte possède déjà une interface d'exécution"
       ],
       "host method": [
-        ""
+        "méthode hôte"
       ],
       "hosts": [
         "hôtes"
@@ -1855,10 +1855,10 @@
         "est mois (Plage: 1-12)"
       ],
       "job invocation": [
-        ""
+        "Invocation de job"
       ],
       "must be an absolute path": [
-        ""
+        "doit être un chemin absolu"
       ],
       "no": [
         "non"

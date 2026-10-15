@@ -132,7 +132,7 @@
         "알파벳순"
       ],
       "Already on the review step": [
-        ""
+        "이미 검토 단계에 있습니다."
       ],
       "An error occurred while fetching the template invocation details.": [
         "템플릿 호출 세부 정보를 가져오는 동안 오류가 발생했습니다."
@@ -264,28 +264,28 @@
         "클립보드에 복사"
       ],
       "Could not abort the job %s: %s": [
-        ""
+        "%s 작업을 중단할 수 없습니다: %s"
       ],
       "Could not abort the task": [
         "작업을 중단할 수 없습니다"
       ],
       "Could not cancel recurring logic %s: %s": [
-        ""
+        "반복 논리 %s를 취소할 수 없습니다: %s"
       ],
       "Could not cancel the job %s: %s": [
-        ""
+        "%s 작업을 취소할 수 없습니다: %s"
       ],
       "Could not cancel the task": [
         "작업을 취소할 수 없습니다"
       ],
       "Could not disable recurring logic %s: %s": [
-        ""
+        "반복 논리 %s를 비활성화할 수 없습니다: %s"
       ],
       "Could not display data for job invocation.": [
         "작업 호출에 대한 데이터를 표시할 수 없습니다."
       ],
       "Could not enable recurring logic %s: %s": [
-        ""
+        "반복 논리 %s를 활성화할 수 없습니다: %s"
       ],
       "Could not find any suitable interface for execution": [
         "실행에 적합한 인터페이스를 찾을 수 없습니다."
@@ -318,7 +318,7 @@
         "작업 템플릿 생성"
       ],
       "Create a new job invocation": [
-        ""
+        "새로운 작업 호출 생성"
       ],
       "Create a recurring job": [
         "반복 작업 생성"
@@ -366,7 +366,7 @@
         "매일"
       ],
       "Date must be in the future": [
-        "날짜는 미래여야 합니다."
+        "날짜는 미래 시점이어야 합니다."
       ],
       "Days": [
         "일"
@@ -411,7 +411,7 @@
         "특수 목적의 지정"
       ],
       "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter.": [
-        ""
+        "푸시 모드에서 원격 실행 작업이 스크립트를 배치하고 실행하는 호스트의 디렉터리입니다. `remote_execution_remote_working_dir` 호스트 매개변수를 사용하여 호스트별로 이 설정을 재정의할 수 있습니다."
       ],
       "Disable recurring": [
         "반복을 비활성화합니다"
@@ -432,7 +432,7 @@
         "동적 쿼리"
       ],
       "Edit %s": [
-        "%s 편집 "
+        "%s 편집"
       ],
       "Edit Job Template": [
         "작업 템플릿 편집"
@@ -549,7 +549,7 @@
         "템플릿 렌더링 실패: %s"
       ],
       "Failed to load host invocation data": [
-        ""
+        "호스트 호출 데이터 로드 실패"
       ],
       "Failed:": [
         "실패함:"
@@ -606,7 +606,7 @@
         "호스트에 대한 원시 출력 가져오기"
       ],
       "Go to job invocations": [
-        ""
+        "작업 호출로 이동"
       ],
       "Has to be a positive number": [
         "양수여야 합니다"
@@ -675,10 +675,10 @@
         "외부 템플릿의 모든 입력 포함"
       ],
       "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts.": [
-        ""
+        "응답에 호스트 및 템플릿 호출을 포함합니다. 이전 버전과의 호환성을 위해 기본값은 true입니다. 모든 호스트 직렬화를 건너뛰려면 false를 전달합니다."
       ],
       "Include per-host task and permission data in the response": [
-        ""
+        "응답에 호스트별 작업 및 권한 데이터를 포함합니다."
       ],
       "Indicates that the action should be cancelled if it cannot be started before this time.": [
         "이 시간 전에 시작할 수 없는 경우 작업을 취소한다는 것을 나타냅니다."
@@ -849,7 +849,7 @@
         "분은 0~59 사이의 숫자만 가능합니다."
       ],
       "Missing permissions to generate report templates": [
-        ""
+        "보고서 템플릿을 생성하는 데 필요한 권한이 없습니다."
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         "필수 권한이 없습니다: ${missingPermissions.join( ', ' )}"
@@ -861,7 +861,7 @@
         "북마크를 선택하거나 검색 쿼리를 입력해야 합니다."
       ],
       "N/A": [
-        "해당 없음 "
+        "해당 없음"
       ],
       "Name": [
         "이름 "
@@ -1131,10 +1131,10 @@
         "원격 실행 프록시"
       ],
       "Remote working directory": [
-        ""
+        "원격 작업 디렉토리"
       ],
       "Remote working directory \\\"%{current_value}\\\" is not an absolute path": [
-        ""
+        "원격 작업 디렉토리 \\\"%{current_value}\\\"이/가 절대 경로가 아닙니다."
       ],
       "Repeat a maximum of N times": [
         "최대 N번 반복"
@@ -1149,7 +1149,7 @@
         "반복"
       ],
       "Report template not found or not configured properly": [
-        ""
+        "보고서 템플릿을 찾을 수 없거나 올바르게 구성되지 않았습니다."
       ],
       "Rerun": [
         "재실행"
@@ -1356,7 +1356,7 @@
         "작업 호출 표시"
       ],
       "Show job status for each host, only applicable when include_hosts is true": [
-        ""
+        "각 호스트의 작업 상태를 표시합니다. 이 기능은 include_hosts가 true인 경우에만 적용됩니다."
       ],
       "Show job template details": [
         "작업 템플릿 정보 표시"
@@ -1374,7 +1374,7 @@
         "스마트 프록시"
       ],
       "Snippet": [
-        "조각 모음 "
+        "스니펫"
       ],
       "Start": [
         "시작"
@@ -1410,7 +1410,7 @@
         "정적 쿼리"
       ],
       "Status": [
-        "상태 "
+        "상태"
       ],
       "Submit": [
         "보내기"
@@ -1557,7 +1557,7 @@
         "작업이 시작된 후 호스트가 제거되거나 다른 조직이나 위치로 이동된 경우 이러한 문제가 발생할 수 있습니다."
       ],
       "This template is locked for editing.": [
-        "이 템플릿은 편집 용으로 잠금되어 있습니다. "
+        "이 템플릿은 편집이 잠금되어 있습니다. "
       ],
       "This template is locked. Please clone it to a new template to customize.": [
         "이 템플릿은 잠겨 있습니다. 사용자 정의하려면 이를 새 템플릿에 복제하십시오. "
@@ -1668,10 +1668,10 @@
         "템플릿을 저장할 수 없습니다. 강조된 오류를 수정합니다."
       ],
       "Unknown": [
-        "알 수 없음 "
+        "알 수 없음"
       ],
       "Unknown error.": [
-        ""
+        "알 수 없는 오류입니다."
       ],
       "Unknown execution status": [
         "알 수 없는 실행 상태"
@@ -1764,7 +1764,7 @@
         "호출할 유효 사용자를 덮어쓰도록 허용할지 여부입니다."
       ],
       "Whether or not the template is locked for editing": [
-        "편집을 위한 템플릿의 잠금 여부 "
+        "템플릿 편집 잠금 여부"
       ],
       "Whether the current user login should be used as the effective user": [
         "현재 사용자 로그인을 유효 사용자로 사용할지 여부입니다."
@@ -1821,7 +1821,7 @@
         "호스트에 실행 인터페이스가 이미 있습니다."
       ],
       "host method": [
-        ""
+        "호스트 메서드"
       ],
       "hosts": [
         "호스트"
@@ -1851,10 +1851,10 @@
         "월(범위: 1-12)"
       ],
       "job invocation": [
-        ""
+        "작업 호출"
       ],
       "must be an absolute path": [
-        ""
+        "절대 경로여야 합니다."
       ],
       "no": [
         "no"

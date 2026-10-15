@@ -135,7 +135,7 @@ msgid "Alphabetical"
 msgstr "按字母"
 
 msgid "Already on the review step"
-msgstr ""
+msgstr "已在审阅步骤中"
 
 msgid "An error occurred while fetching the template invocation details."
 msgstr "在获取模板调用详情时出错。"
@@ -267,28 +267,28 @@ msgid "Copy to clipboard"
 msgstr "复制到剪贴板"
 
 msgid "Could not abort the job %s: %s"
-msgstr ""
+msgstr "无法中止作业 %s: %s"
 
 msgid "Could not abort the task"
 msgstr "无法中止作业"
 
 msgid "Could not cancel recurring logic %s: %s"
-msgstr ""
+msgstr "无法取消循环逻辑 %s：%s"
 
 msgid "Could not cancel the job %s: %s"
-msgstr ""
+msgstr "无法取消作业 %s: %s"
 
 msgid "Could not cancel the task"
 msgstr "无法取消作业"
 
 msgid "Could not disable recurring logic %s: %s"
-msgstr ""
+msgstr "无法禁用重复逻辑 %s：%s"
 
 msgid "Could not display data for job invocation."
 msgstr "无法显示用于作业调用的数据。"
 
 msgid "Could not enable recurring logic %s: %s"
-msgstr ""
+msgstr "无法启用重复逻辑 %s：%s"
 
 msgid "Could not find any suitable interface for execution"
 msgstr "无法找到适合执行的接口"
@@ -321,7 +321,7 @@ msgid "Create a job template"
 msgstr "创建作业模板"
 
 msgid "Create a new job invocation"
-msgstr ""
+msgstr "创建新作业调用"
 
 msgid "Create a recurring job"
 msgstr "创建一个重复运行的作业"
@@ -414,7 +414,7 @@ msgid "Designation of a special purpose"
 msgstr "设计特殊目的"
 
 msgid "Directory on the host where remote execution jobs in push mode place and run their scripts. You can override this setting per host with the `remote_execution_remote_working_dir` host parameter."
-msgstr ""
+msgstr "主机上以推送模式运行的远程执行作业存放并运行其脚本的目录。。您可以使用 'remote_execution_remote_working_dir' 主机参数覆盖每个主机的设置。"
 
 msgid "Disable recurring"
 msgstr "禁用重复"
@@ -552,7 +552,7 @@ msgid "Failed rendering template: %s"
 msgstr "呈现模板失败：%s"
 
 msgid "Failed to load host invocation data"
-msgstr ""
+msgstr "加载主机调用数据失败"
 
 msgid "Failed:"
 msgstr "失败："
@@ -609,7 +609,7 @@ msgid "Get raw output for a host"
 msgstr "获取主机的原始输出"
 
 msgid "Go to job invocations"
-msgstr ""
+msgstr "返回到作业调用"
 
 msgid "Has to be a positive number"
 msgstr "必须为一个正数"
@@ -678,10 +678,10 @@ msgid "Include all inputs from the foreign template"
 msgstr "在外部模板中包含所有输入格式"
 
 msgid "Include hosts and template invocations in the response. Defaults to true for backwards compatibility. Pass false to skip serializing all hosts."
-msgstr ""
+msgstr "在响应中包含主机和模板调用。为了向后兼容，默认为 true。设置为 false 来跳过所有主机的序列化。"
 
 msgid "Include per-host task and permission data in the response"
-msgstr ""
+msgstr "在响应中包含每个主机的任务和权限数据"
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
 msgstr "这代表，如果操作无法在这个时间前开始则操作应该被取消。"
@@ -852,7 +852,7 @@ msgid "Minute can only be a number between 0-59"
 msgstr "分钟只能是一个 0-59 之间的数字"
 
 msgid "Missing permissions to generate report templates"
-msgstr ""
+msgstr "缺少生成报告模板的权限"
 
 msgid "Missing the required permissions: ${missingPermissions.join( ', ' )}"
 msgstr "缺少所需的权限：${missingPermissions.join( ', ' )}"
@@ -1098,7 +1098,7 @@ msgid "Recurring logic"
 msgstr "重复逻辑"
 
 msgid "Recurring logic %s cancelled successfully."
-msgstr "成功取消重复逻辑 %s。"
+msgstr "成功取消循环逻辑 %s。"
 
 msgid "Recurring logic %s disabled successfully."
 msgstr "成功禁用重复逻辑 %s。"
@@ -1134,10 +1134,10 @@ msgid "Remote execution job"
 msgstr "远程执行作业"
 
 msgid "Remote working directory"
-msgstr ""
+msgstr "远程工作目录"
 
 msgid "Remote working directory \"%{current_value}\" is not an absolute path"
-msgstr ""
+msgstr "远程工作目录 \"%{current_value}\" 不是绝对路径"
 
 msgid "Repeat a maximum of N times"
 msgstr "最多重复 N 次"
@@ -1152,7 +1152,7 @@ msgid "Repeats"
 msgstr "重复"
 
 msgid "Report template not found or not configured properly"
-msgstr ""
+msgstr "报告模板未找到或未正确配置"
 
 msgid "Rerun"
 msgstr "重新运行"
@@ -1359,7 +1359,7 @@ msgid "Show job invocation"
 msgstr "显示作业调用"
 
 msgid "Show job status for each host, only applicable when include_hosts is true"
-msgstr ""
+msgstr "显示每个主机的作业状态，仅在 include_hosts 为 true 时才适用"
 
 msgid "Show job template details"
 msgstr "显示作业模板详情"
@@ -1675,7 +1675,7 @@ msgid "Unknown"
 msgstr "未知"
 
 msgid "Unknown error."
-msgstr ""
+msgstr "未知错误"
 
 msgid "Unknown execution status"
 msgstr "未知的执行状态"
@@ -1825,7 +1825,7 @@ msgid "host already has an execution interface"
 msgstr "主机已有一个执行接口"
 
 msgid "host method"
-msgstr ""
+msgstr "主机方法"
 
 msgid "hosts"
 msgstr "主机"
@@ -1855,10 +1855,10 @@ msgid "is month (range: 1-12)"
 msgstr "月份（范围：1-12）"
 
 msgid "job invocation"
-msgstr ""
+msgstr "工作调用"
 
 msgid "must be an absolute path"
-msgstr ""
+msgstr "必须是绝对路径"
 
 msgid "no"
 msgstr "否"
