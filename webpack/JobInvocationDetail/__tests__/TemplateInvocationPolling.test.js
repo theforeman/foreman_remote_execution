@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { render, act, cleanup, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/components/ToastsList';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { screen, fireEvent, render, act } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import RexInterface from '../RexInterface';
 
 const fixtures = {
