@@ -360,7 +360,7 @@ msgid "Daily"
 msgstr "매일"
 
 msgid "Date must be in the future"
-msgstr "날짜는 미래여야 합니다."
+msgstr "날짜는 미래 시점이어야 합니다."
 
 msgid "Days"
 msgstr "일"
@@ -423,7 +423,7 @@ msgid "Dynamic query"
 msgstr "동적 쿼리"
 
 msgid "Edit %s"
-msgstr "%s 편집 "
+msgstr "%s 편집"
 
 msgid "Edit Job Template"
 msgstr "작업 템플릿 편집"
@@ -837,7 +837,7 @@ msgid "Must select a bookmark or enter a search query"
 msgstr "북마크를 선택하거나 검색 쿼리를 입력해야 합니다."
 
 msgid "N/A"
-msgstr "해당 없음 "
+msgstr "해당 없음"
 
 msgid "Name"
 msgstr "이름 "
@@ -1341,7 +1341,7 @@ msgid "Smart proxy"
 msgstr "스마트 프록시"
 
 msgid "Snippet"
-msgstr "조각 모음 "
+msgstr "스니펫"
 
 msgid "Start"
 msgstr "시작"
@@ -1377,7 +1377,7 @@ msgid "Static query"
 msgstr "정적 쿼리"
 
 msgid "Status"
-msgstr "상태 "
+msgstr "상태"
 
 msgid "Submit"
 msgstr "보내기"
@@ -1525,7 +1525,7 @@ msgid "This can happen if the host is removed or moved to another organization o
 msgstr "작업이 시작된 후 호스트가 제거되거나 다른 조직이나 위치로 이동된 경우 이러한 문제가 발생할 수 있습니다."
 
 msgid "This template is locked for editing."
-msgstr "이 템플릿은 편집 용으로 잠금되어 있습니다. "
+msgstr "이 템플릿은 편집이 잠금되어 있습니다. "
 
 msgid "This template is locked. Please clone it to a new template to customize."
 msgstr "이 템플릿은 잠겨 있습니다. 사용자 정의하려면 이를 새 템플릿에 복제하십시오. "
@@ -1636,7 +1636,7 @@ msgid "Unable to save template. Correct highlighted errors"
 msgstr "템플릿을 저장할 수 없습니다. 강조된 오류를 수정합니다."
 
 msgid "Unknown"
-msgstr "알 수 없음 "
+msgstr "알 수 없음"
 
 msgid "Unknown execution status"
 msgstr "알 수 없는 실행 상태"
@@ -1729,7 +1729,7 @@ msgid "Whether it should be allowed to override the effective user from the invo
 msgstr "호출할 유효 사용자를 덮어쓰도록 허용할지 여부입니다."
 
 msgid "Whether or not the template is locked for editing"
-msgstr "편집을 위한 템플릿의 잠금 여부 "
+msgstr "템플릿 편집 잠금 여부"
 
 msgid "Whether the current user login should be used as the effective user"
 msgstr "현재 사용자 로그인을 유효 사용자로 사용할지 여부입니다."

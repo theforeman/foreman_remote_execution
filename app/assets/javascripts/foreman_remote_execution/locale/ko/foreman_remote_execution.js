@@ -360,7 +360,7 @@
         "매일"
       ],
       "Date must be in the future": [
-        "날짜는 미래여야 합니다."
+        "날짜는 미래 시점이어야 합니다."
       ],
       "Days": [
         "일"
@@ -423,7 +423,7 @@
         "동적 쿼리"
       ],
       "Edit %s": [
-        "%s 편집 "
+        "%s 편집"
       ],
       "Edit Job Template": [
         "작업 템플릿 편집"
@@ -837,7 +837,7 @@
         "북마크를 선택하거나 검색 쿼리를 입력해야 합니다."
       ],
       "N/A": [
-        "해당 없음 "
+        "해당 없음"
       ],
       "Name": [
         "이름 "
@@ -1341,7 +1341,7 @@
         "스마트 프록시"
       ],
       "Snippet": [
-        "조각 모음 "
+        "스니펫"
       ],
       "Start": [
         "시작"
@@ -1377,7 +1377,7 @@
         "정적 쿼리"
       ],
       "Status": [
-        "상태 "
+        "상태"
       ],
       "Submit": [
         "보내기"
@@ -1524,7 +1524,7 @@
         "작업이 시작된 후 호스트가 제거되거나 다른 조직이나 위치로 이동된 경우 이러한 문제가 발생할 수 있습니다."
       ],
       "This template is locked for editing.": [
-        "이 템플릿은 편집 용으로 잠금되어 있습니다. "
+        "이 템플릿은 편집이 잠금되어 있습니다. "
       ],
       "This template is locked. Please clone it to a new template to customize.": [
         "이 템플릿은 잠겨 있습니다. 사용자 정의하려면 이를 새 템플릿에 복제하십시오. "
@@ -1635,7 +1635,7 @@
         "템플릿을 저장할 수 없습니다. 강조된 오류를 수정합니다."
       ],
       "Unknown": [
-        "알 수 없음 "
+        "알 수 없음"
       ],
       "Unknown execution status": [
         "알 수 없는 실행 상태"
@@ -1728,7 +1728,7 @@
         "호출할 유효 사용자를 덮어쓰도록 허용할지 여부입니다."
       ],
       "Whether or not the template is locked for editing": [
-        "편집을 위한 템플릿의 잠금 여부 "
+        "템플릿 편집 잠금 여부"
       ],
       "Whether the current user login should be used as the effective user": [
         "현재 사용자 로그인을 유효 사용자로 사용할지 여부입니다."

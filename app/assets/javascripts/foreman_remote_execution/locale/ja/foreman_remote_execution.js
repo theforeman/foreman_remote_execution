@@ -192,7 +192,7 @@
         "ジョブ呼び出しまたは一致するタスクのみをキャンセルします"
       ],
       "Cancel recurring": [
-        "繰り返しのキャンセル"
+        "繰り返しをキャンセルする"
       ],
       "Cancel selected": [
         "選択項目をキャンセル"
@@ -375,13 +375,13 @@
         "デフォルトの SSH パスワード"
       ],
       "Default key passphrase to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_key_passphrase": [
-        "SSH に使用するデフォルトの鍵パスフレーズ。remote_execution_ssh_key_passphrase という名前のパラメーターを設定することにより、ホストごとに上書きできます"
+        "SSH に使用するデフォルトの鍵パスフレーズ。remote_execution_ssh_key_passphrase という名前のパラメーターを設定することにより、ホストごとにオーバーライドできます"
       ],
       "Default password to use for SSH. You may override per host by setting a parameter called remote_execution_ssh_password": [
-        "SSH に使用するデフォルトパスワード。remote_execution_ssh_password という名前のパラメーターを設定することにより、ホストごとに上書きできます"
+        "SSH に使用するデフォルトパスワード。remote_execution_ssh_password という名前のパラメーターを設定することにより、ホストごとにオーバーライドできます"
       ],
       "Default user to use for SSH.  You may override per host by setting a parameter called remote_execution_ssh_user.": [
-        "SSH に使用するデフォルトユーザー。remote_execution_ssh_user という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
+        "SSH に使用するデフォルトユーザー。remote_execution_ssh_user という名前のパラメーターを設定することにより、ホストごとにオーバーライドできます。"
       ],
       "Default user to use for executing the script. If the user differs from the SSH user, su or sudo is used to switch the user.": [
         "スクリプトを実行するために使用するデフォルトユーザー。ユーザーが SSH ユーザーと異なる場合は、su または sudo を使用してユーザーを切り替えます。"
@@ -405,7 +405,7 @@
         "特別な目的の指定"
       ],
       "Disable recurring": [
-        "繰り返しの無効化"
+        "繰り返しを無効化する"
       ],
       "Display advanced fields": [
         "詳細フィールドを表示"
@@ -465,7 +465,7 @@
         "グローバルプロキシーを有効にする"
       ],
       "Enable recurring": [
-        "繰り返しの有効化"
+        "繰り返しを有効化する"
       ],
       "End time needs to be after start time": [
         "終了時刻は開始時刻の後でなければなりません"
@@ -825,7 +825,7 @@
         "手動選択"
       ],
       "Minute can only be a number between 0-59": [
-        "分は 0-59 の間の数字のみ指定できます。"
+        "分は 0 から 59 までの数値である必要があります"
       ],
       "Missing the required permissions: ${missingPermissions.join( ', ' )}": [
         "必須パーミッションがありません: ${missingPermissions.join( ', ' )}"
@@ -858,10 +858,10 @@
         "次の実行"
       ],
       "No (override)": [
-        "No (上書き)"
+        "No (オーバーライド)"
       ],
       "No Results": [
-        "結果なし"
+        "該当する結果がありません"
       ],
       "No Target Hosts": [
         "ターゲットホストがありません"
@@ -879,7 +879,7 @@
         "選択したフィルターの出力はありません"
       ],
       "No results found": [
-        "結果は見つかりませんでした"
+        "該当する結果が見つかりませんでした"
       ],
       "No template mapped to feature %{feature_name}": [
         "機能 %{feature_name} にマッピングされたテンプレートがありません"
@@ -927,19 +927,19 @@
         "選択項目を新規タブで開きます"
       ],
       "Opening job invocation form": [
-        "ジョブ呼び出しフォームを開く"
+        "ジョブ呼び出しフォームを開いています"
       ],
       "Organization": [
         "組織"
       ],
       "Override the description format from the template for this invocation only": [
-        "この呼び出しに対してのみテンプレートから説明形式を上書き"
+        "この呼び出しに対してのみテンプレートから説明形式をオーバーライド"
       ],
       "Override the global time to pickup interval for this invocation only": [
-        "グローバル時間をこの呼び出しだけの取得間隔に上書きする"
+        "グローバル時間をこの呼び出しだけの取得間隔にオーバーライドする"
       ],
       "Override the timeout interval from the template for this invocation only": [
-        "この呼び出しに対してのみテンプレートからタイムアウト間隔を上書き"
+        "この呼び出しに対してのみテンプレートからタイムアウト間隔をオーバーライド"
       ],
       "Overview": [
         "概要"
@@ -972,7 +972,7 @@
         "検索クエリーを入力してください"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" or \\\\\\\"Recurring execution\\\\\\\" step to fix the error": [
-        "エラーを修正するには、スケジュール - 後で実行または定期的な実行の手順に戻ってください。"
+        "エラーを修正するには、スケジュール - 後で実行または繰り返し実行の手順に戻ってください"
       ],
       "Please go back to \\\\\\\"Schedule\\\\\\\" - \\\\\\\"Future execution\\\\\\\" step to fix the error": [
         "「スケジュール」- 「後で実行」の手順に戻り、エラーを修正してください"
@@ -990,7 +990,7 @@
         "ホストを 1 つ以上選択してください"
       ],
       "Please select at least one host collection": [
-        "ホストコレクションを少なくとも 1 つ選択してください。"
+        "ホストコレクションを少なくとも 1 つ選択してください"
       ],
       "Please select at least one host group": [
         "少なくとも 1 つのホストグループを選択してください"
@@ -999,7 +999,7 @@
         "ブラウザーでポップアップがブロックされています。このサイトのすべての呼び出しを新しいタブで開くには、ポップアップを許可してください。"
       ],
       "Port to use for SSH communication. Default port 22. You may override per host by setting a parameter called remote_execution_ssh_port.": [
-        "SSH 通信に使用するポート。デフォルトのポートは 22 です。remote_execution_ssh_port という名前のパラメーターを設定することにより、ホストごとに上書きできます。"
+        "SSH 通信に使用するポート。デフォルトのポートは 22 です。remote_execution_ssh_port という名前のパラメーターを設定することにより、ホストごとにオーバーライドできます。"
       ],
       "Prefer IPv6 over IPv4": [
         "IPv4 よりも IPv6 を優先する"
@@ -1068,16 +1068,16 @@
         "繰り返し実行"
       ],
       "Recurring logic": [
-        "再帰論理"
+        "繰り返し実行ロジック"
       ],
       "Recurring logic %s cancelled successfully.": [
-        "再帰論理 %s が正常にキャンセルされました。"
+        "繰り返し実行ロジック %s が正常にキャンセルされました。"
       ],
       "Recurring logic %s disabled successfully.": [
-        "再帰論理 %s が正常に無効になりました。"
+        "繰り返し実行ロジック %s が正常に無効化されました。"
       ],
       "Recurring logic %s enabled successfully.": [
-        "再帰論理 %s が正常に有効になりました。"
+        "繰り返し実行ロジック %s が正常に有効化されました。"
       ],
       "Recursive rendering of templates detected": [
         "検出されたテンプレートの再帰的なレンダリング"
@@ -1308,7 +1308,7 @@
         "リモート実行のプルモードを設定します。`はい` に設定すると、登録したホストにプルプロパイダークライアントがデプロイされます。継承される値は、`host_registration_remote_execution_pull` パラメーターに基づきます。これは、ホストグループ、オペレーティングシステム、組織などから継承できます。オーバーライドされると、選択した値がホストパラメーターレベルで保存されます。"
       ],
       "Should the ip addresses on host interfaces be preferred over the fqdn? It is useful when DNS not resolving the fqdns properly. You may override this per host by setting a parameter called remote_execution_connect_by_ip. For dual-stacked hosts you should consider the remote_execution_connect_by_ip_prefer_ipv6 setting": [
-        "ホストインターフェイスの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれを上書きすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
+        "ホストインターフェイスの ip アドレスは fqdn よりも優先されますか? DNS が fqdn を適切に解決しない場合、これは役に立ちます。remote_execution_connect_by_ip というパラメーターを設定し、ホストごとにこれをオーバーライドすることができます。デュアルスタックのホストの場合は、remote_execution_connect_by_ip_prefer_ipv6 設定を検討する必要があります"
       ],
       "Should this interface be used for remote execution?": [
         "このインターフェイスをリモート実行に使用する必要がありますか?"
@@ -1377,7 +1377,7 @@
         "静的クエリー"
       ],
       "Status": [
-        "ステータス"
+        "状態"
       ],
       "Submit": [
         "送信"
@@ -1716,16 +1716,16 @@
         "スクリプトを実行するために使用するユーザー (sudo と同様のメカニズムを使用)。デフォルト値は、テンプレートパラメーターまたはグローバル設定です。"
       ],
       "When connecting using ip address, should the IPv6 addresses be preferred? If no IPv6 address is set, it falls back to IPv4 automatically. You may override this per host by setting a parameter called remote_execution_connect_by_ip_prefer_ipv6. By default and for compatibility, IPv4 will be preferred over IPv6 by default": [
-        "ip address を使用して接続する場合は、IPv6 アドレスを優先する必要がありますか? IPv6 アドレスが設定されていない場合は、IPv4 に自動的にフォールバックします。remote_execution_connect_by_ip_prefer_ipv6 というパラメーターを設定し、ホストごとにこれを上書きすることができます。互換性のために、デフォルトでは IPv4 が IPv6 よりも優先されます"
+        "ip address を使用して接続する場合は、IPv6 アドレスを優先する必要がありますか? IPv6 アドレスが設定されていない場合は、IPv4 に自動的にフォールバックします。remote_execution_connect_by_ip_prefer_ipv6 というパラメーターを設定し、ホストごとにこれをオーバーライドすることができます。互換性のために、デフォルトでは IPv4 が IPv6 よりも優先されます"
       ],
       "When enabled, working directories will be removed after task completion. You may override this per host by setting a parameter called remote_execution_cleanup_working_dirs.": [
-        "有効にすると、作業ディレクトリーはタスクの完了後に削除されます。remote_execution_cleanup_working_dirs と呼ばれるパラメーターを設定して、ホストごとにこれを上書きすることができます。"
+        "有効にすると、作業ディレクトリーはタスクの完了後に削除されます。remote_execution_cleanup_working_dirs と呼ばれるパラメーターを設定して、ホストごとにこれをオーバーライドすることができます。"
       ],
       "Where to find the Cockpit instance for the Web Console button.  By default, no button is shown.": [
         "Web コンソールボタンの Cockpit インスタンスを検索する場所。デフォルトでは、ボタンは表示されません。"
       ],
       "Whether it should be allowed to override the effective user from the invocation form.": [
-        "呼び出し形式から実効ユーザーを上書きするのを許可するかどうか。"
+        "呼び出し形式から実効ユーザーをオーバーライドするのを許可するかどうか。"
       ],
       "Whether or not the template is locked for editing": [
         "テンプレートの編集機能をロックするかどうか"
@@ -1740,7 +1740,7 @@
         "db:seed を実行するときにディスクからテンプレートを同期するかどうか。"
       ],
       "Yes (override)": [
-        "Yes (上書き)"
+        "Yes (オーバーライド)"
       ],
       "You are not allowed to see the currently assigned template. Saving the form now would unassign the template.": [
         "現在割り当てられているテンプレートを参照できません。フォームを保存すると、テンプレートの割り当てが解除されます。"

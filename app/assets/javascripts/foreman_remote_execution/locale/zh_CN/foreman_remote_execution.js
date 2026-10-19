@@ -1071,7 +1071,7 @@
         "重复逻辑"
       ],
       "Recurring logic %s cancelled successfully.": [
-        "成功取消重复逻辑 %s。"
+        "成功取消循环逻辑 %s。"
       ],
       "Recurring logic %s disabled successfully.": [
         "成功禁用重复逻辑 %s。"
