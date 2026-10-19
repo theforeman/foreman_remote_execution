@@ -6,7 +6,6 @@
 # Baptiste Agasse <baptiste.agasse@gmail.com>, 2018-2019,2023
 # Claer <transiblu@claer.hammock.fr>, 2016
 # Ondřej Gajdušek, 2026
-# Ondřej Gajdušek, 2026
 # Pierre-Emmanuel Dutang <dutangp@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
@@ -944,7 +943,7 @@ msgid "Open all %s invocations in new tabs"
 msgstr "Ouvrir tout%s invocations dans les nouveaux onglets"
 
 msgid "Open all failed runs on this page (%s)"
-msgstr "Ouvrir toutes les exécutions ayant échoué sur cette page (%s )"
+msgstr "Ouvrir toutes les exécutions ayant échoué sur cette page (%s)"
 
 msgid "Open all rows of the table in new tabs"
 msgstr "Ouvrir toutes les lignes du tableau dans de nouveaux onglets"
@@ -1544,7 +1543,7 @@ msgid "The job template to use, parameter is required unless feature was specifi
 msgstr "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
 
 msgid "The number of failed invocations is:"
-msgstr "Le nombre des invocations est :"
+msgstr "Le nombre d’invocations échouées est :"
 
 msgid "The number of selected invocations is:"
 msgstr "Le nombre des invocations sélectionnées est :"

@@ -938,7 +938,7 @@
         "Ouvrir tout%s invocations dans les nouveaux onglets"
       ],
       "Open all failed runs on this page (%s)": [
-        "Ouvrir toutes les exécutions ayant échoué sur cette page (%s )"
+        "Ouvrir toutes les exécutions ayant échoué sur cette page (%s)"
       ],
       "Open all rows of the table in new tabs": [
         "Ouvrir toutes les lignes du tableau dans de nouveaux onglets"
@@ -1538,7 +1538,7 @@
         "Le modèle de job à utiliser, paramètre obligatoire sauf si la fonction a été spécifiée"
       ],
       "The number of failed invocations is:": [
-        "Le nombre des invocations est :"
+        "Le nombre d’invocations échouées est :"
       ],
       "The number of selected invocations is:": [
         "Le nombre des invocations sélectionnées est :"
