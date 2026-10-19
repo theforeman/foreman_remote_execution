@@ -881,7 +881,7 @@
         "Aucune sortie pour les filtres sélectionnés"
       ],
       "No results found": [
-        "Aucun résultat"
+        "Aucun résultat trouvé"
       ],
       "No template mapped to feature %{feature_name}": [
         "Aucun modèle n'est en relation avec la fonction %{feature_name}"
@@ -1073,13 +1073,13 @@
         "Logique récurrente"
       ],
       "Recurring logic %s cancelled successfully.": [
-        "Logique récurrente%s activée avec succès."
+        "Logique récurrente %s activée avec succès."
       ],
       "Recurring logic %s disabled successfully.": [
-        "Logique récurrente%s désactivé avec succès."
+        "Logique récurrente %s désactivé avec succès."
       ],
       "Recurring logic %s enabled successfully.": [
-        "Logique récurrente%s activée avec succès."
+        "Logique récurrente %s activée avec succès."
       ],
       "Recursive rendering of templates detected": [
         "Détection de récursion dans le rendu des modèles"
@@ -1484,7 +1484,7 @@
         "La requête dynamique '%{query}' n'a pas encore été résolue. La liste des hôtes actuelle avec lesquels ils pourraient être résolus peut être vue ici %{here}."
       ],
       "The dynamic query is still being processed. You can {viewTheHosts} targeted by the query.": [
-        "La requête dynamique est toujours en cours de traitement. Vous pouvez{viewTheHosts} ciblé par la requête."
+        "La requête dynamique est toujours en cours de traitement. Vous pouvez {viewTheHosts} ciblé par la requête."
       ],
       "The execution interface is used for remote execution": [
         "L'interface d'exécution est celle utilisée pour l'exécution distante"
@@ -1588,7 +1588,7 @@
         "Tentative d'abandon du job"
       ],
       "Trying to abort the job %s.": [
-        "J’essaie d'abandonner le job %s ."
+        "J’essaie d'abandonner le job %s."
       ],
       "Trying to abort the task for the host": [
         "Tentative d'annulation de la tâche pour l'hôte"
@@ -1597,7 +1597,7 @@
         "Tentative d'annulation du job"
       ],
       "Trying to cancel the job %s.": [
-        "J'essaie d'annuler le travail%s ."
+        "J'essaie d'annuler le travail%s."
       ],
       "Trying to cancel the task for the host": [
         "Tentative d'annulation de la tâche pour l'hôte"

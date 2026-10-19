@@ -1074,7 +1074,7 @@ msgid "Recurring logic"
 msgstr "重复逻辑"
 
 msgid "Recurring logic %s cancelled successfully."
-msgstr "成功取消重复逻辑 %s。"
+msgstr "成功取消循环逻辑 %s。"
 
 msgid "Recurring logic %s disabled successfully."
 msgstr "成功禁用重复逻辑 %s。"
