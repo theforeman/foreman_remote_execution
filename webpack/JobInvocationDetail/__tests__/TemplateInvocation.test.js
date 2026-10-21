@@ -2,7 +2,7 @@ import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import API from 'foremanReact/API';
 import * as api from 'foremanReact/redux/API';
