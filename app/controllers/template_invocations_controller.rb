@@ -61,8 +61,8 @@ class TemplateInvocationsController < ApplicationController
 
   def find_job_invocation
     @job_invocation = JobInvocation.authorized(:view_job_invocations)
-      .joins(:template_invocations)
-      .find_by!(id: params[:id], template_invocations: { host_id: params[:host_id] })
+                                   .joins(:template_invocations)
+                                   .find_by!(id: params[:id], template_invocations: { host_id: params[:host_id] })
   rescue ActiveRecord::RecordNotFound
     render :json => { :error => { :message => format(_("Job with id '%{id}' was not found"), :id => params['id']) } }, :status => :not_found
   end
