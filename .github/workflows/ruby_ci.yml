@@ -9,7 +9,7 @@ concurrency:
 jobs:
   rubocop:
     name: Rubocop
-    uses: theforeman/actions/.github/workflows/rubocop.yml@v0
+    uses: theforeman/actions/.github/workflows/rubocop.yml@v1
 
   test:
     name: Ruby
