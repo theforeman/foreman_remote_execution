@@ -57,6 +57,20 @@
     .foreman-search-field {
       width: 100%;
     }
+
+    .job-wizard-typeahead-filter {
+      width: 100%;
+      min-width: 0;
+
+      .pf-v5-c-select {
+        width: 100%;
+      }
+
+      .pf-v5-c-select__toggle-typeahead {
+        //flex: 1 1 auto;
+        min-width: 5rem;
+      }
+    }
   }
 
   input[type='radio'],
