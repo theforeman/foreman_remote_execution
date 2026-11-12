@@ -68,7 +68,7 @@ class TemplateInvocationsController < ApplicationController
   end
 
   def find_host
-    @host = Host.find(params[:host_id])
+    @host = Host.authorized(:view_hosts, Host).find(params[:host_id])
   rescue ActiveRecord::RecordNotFound
     render :json => { :error => { :message => format(_("Host with id '%{id}' was not found"), :id => params['host_id']) } }, :status => :not_found
   end
