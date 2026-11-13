@@ -34,5 +34,6 @@ export const SelectAPI = props => (
     {...props}
     variant={SelectVariant.typeaheadMulti}
     useNameSearch={useNameSearchAPI}
+    warnOnScopedSearchSyntax
   />
 );
