@@ -66,7 +66,7 @@ class JobInvocationsController < ApplicationController
 
     job_invocations = job_invocations.map do |job|
       @job_invocation = job
-      template_invocation = job.template_invocations.find { |template_inv| template_inv.host_id == params[:host_id].to_i }
+      template_invocation = job.template_invocations.find_by(:host_id => params[:host_id].to_i)
       task = template_invocation.try(:run_host_job_task)
       status_mapper = task ? HostStatus::ExecutionStatus::ExecutionTaskStatusMapper.new(task) : job
       {
