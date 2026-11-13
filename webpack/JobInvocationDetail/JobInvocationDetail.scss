@@ -112,9 +112,12 @@ section.job-additional-info {
     }
 
     div.line.stderr,
-    div.line.error,
-    div.line.debug {
+    div.line.error {
       color: red;
+    }
+
+    div.line.debug {
+      color: var(--pf-v5-global--info-color--100)
     }
 
     div.line span.counter {
