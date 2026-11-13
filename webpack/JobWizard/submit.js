@@ -143,10 +143,7 @@ export const submit = ({
       handleSuccess: ({ data: { id } }) => {
         window.location.href = `/job_invocations/${id}`;
       },
-      errorToast: ({ response }) =>
-        response?.data?.error?.message ||
-        response?.message ||
-        response?.statusText,
+      errorToast: true,
     })
   );
 };

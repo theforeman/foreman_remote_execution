@@ -218,10 +218,8 @@ const JobInvocationHostTable = ({
             pollTimeoutId.current = null;
             setStatus(STATUS_UPPERCASE.ERROR);
           },
-          errorToast: ({ response }) =>
-            response?.data?.error?.full_messages?.[0] ||
-            response?.data?.error?.message ||
-            __('Failed to load host invocation data'),
+          errorToast: (_error, parsedMessage) =>
+            parsedMessage || __('Failed to load host invocation data'),
         })
       );
     },
