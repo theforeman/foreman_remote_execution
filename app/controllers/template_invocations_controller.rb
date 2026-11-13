@@ -24,7 +24,7 @@ class TemplateInvocationsController < ApplicationController
   end
 
   def show_template_invocation_by_host
-    @template_invocation = @job_invocation.template_invocations.find { |template_inv| template_inv.host_id == @host.id }
+    @template_invocation = @job_invocation.template_invocations.find_by(host_id: @host.id)
     if @template_invocation.nil?
       render :json => { :error => _('Template invocation not found') }, :status => :not_found
     end
@@ -60,13 +60,15 @@ class TemplateInvocationsController < ApplicationController
   private
 
   def find_job_invocation
-    @job_invocation = JobInvocation.find(params[:id])
+    @job_invocation = JobInvocation.authorized(:view_job_invocations)
+                                   .joins(:template_invocations)
+                                   .find_by!(id: params[:id], template_invocations: { host_id: params[:host_id] })
   rescue ActiveRecord::RecordNotFound
     render :json => { :error => { :message => format(_("Job with id '%{id}' was not found"), :id => params['id']) } }, :status => :not_found
   end
 
   def find_host
-    @host = Host.find(params[:host_id])
+    @host = Host.authorized(:view_hosts, Host).find(params[:host_id])
   rescue ActiveRecord::RecordNotFound
     render :json => { :error => { :message => format(_("Host with id '%{id}' was not found"), :id => params['host_id']) } }, :status => :not_found
   end
