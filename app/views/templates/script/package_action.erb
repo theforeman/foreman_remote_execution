@@ -21,7 +21,7 @@ template_inputs:
   description: 'The package action: install, update, or remove'
   input_type: user
   required: true
-  options: "install\nupdate\nremove\ngroup install\ngroup remove"
+  options: "install\nupdate\nremove"
 - name: options
   description: Additional options for the package manager
   input_type: user
@@ -112,9 +112,7 @@ handle_zypp_res_codes () {
   <% end -%>
 <% elsif package_manager == 'apt' -%>
   <%-
-    action = 'install' if action == 'group install'
-    action = 'remove' if action == 'group remove'
-    if action == 'group update' || action == 'update'
+    if action == 'update'
       if input('package').blank?
         action = 'upgrade'
       else
@@ -144,13 +142,6 @@ handle_zypp_res_codes () {
   setReturnValue() { RETVAL=$1; return $RETVAL; }
   setReturnValue $RETVAL
 <% elsif package_manager == 'zypper' -%>
-  <%-
-    if action == "group install"
-      action = "install -t pattern"
-    elsif action == "group remove"
-      action = "remove -t pattern"
-    end
-  -%>
   zypper refresh
   zypper -n --gpg-auto-import-keys <%= action %> <%= input("options") %> <%= input("package") %>
   handle_zypp_res_codes $? "<%= action %>"
