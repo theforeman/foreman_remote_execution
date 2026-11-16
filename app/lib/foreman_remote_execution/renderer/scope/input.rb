@@ -50,7 +50,7 @@ module ForemanRemoteExecution
           optional :options, Hash, desc: 'Additional options such as :with_foreign_input_set. Set to true if a foreign input set should be considered when rendering the template'
           raises error: StandardError, desc: 'raises an error if there is no template or template input with such name'
           returns String, desc: 'Rendered template'
-          example '<%= render_template("Run Command - Ansible Default", command: "yum -y group install #{input("package")}") %>'
+          example '<%= render_template("Run Command - Ansible Default", command: "yum -y install #{input("package")}") %>'
         end
         # rubocop:enable Lint/InterpolationCheck
         def render_template(template_name, input_values = {}, options = {})
