@@ -1,10 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Select,
-  SelectOption,
-  SelectVariant,
-} from '@patternfly/react-core/deprecated';
 import Immutable from 'seamless-immutable';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { useForemanSettings } from 'foremanReact/Root/Context/ForemanContext';
@@ -13,6 +8,7 @@ import URI from 'urijs';
 import { get } from 'foremanReact/redux/API';
 import { selectResponse, selectIsLoading } from '../../JobWizardSelectors';
 import { DEBOUNCE_API } from '../../JobWizardConstants';
+import { TypeaheadSelect } from './TypeaheadSelect';
 
 export const ResourceSelect = ({
   name,
@@ -40,7 +36,7 @@ export const ResourceSelect = ({
 
   const response = useSelector(state => selectResponse(state, apiKey));
   const isLoading = useSelector(state => selectIsLoading(state, apiKey));
-  const [isOpen, setIsOpen] = useState(false);
+  const [filterValue, setFilterValue] = useState('');
   const [typingTimeout, setTypingTimeout] = useState(null);
   const initializedRef = useRef(false);
   useEffect(() => {
@@ -49,49 +45,41 @@ export const ResourceSelect = ({
       initializedRef.current = true;
     }
   }, [onSearch, selected]);
-  let selectOptions = [];
-  if (response.subtotal > maxResults) {
-    selectOptions = [
-      <SelectOption
-        isDisabled
-        key={0}
-        description={__('Please refine your search.')}
-      >
-        {sprintf(
-          __('You have more results to display. Showing first %s results'),
-          maxResults
-        )}
-      </SelectOption>,
-    ];
-  }
-  selectOptions = [
-    ...selectOptions,
-    ...Immutable.asMutable(response?.results || [])
-      ?.slice(0, maxResults)
-      ?.map((result, index) => (
-        <SelectOption key={index + 1} value={result.id}>
-          {result.name}
-        </SelectOption>
-      )),
-  ];
 
-  const onSelect = (event, selection) => {
-    setSelected(selection);
-    setIsOpen(false);
-  };
-  const onFilter = (_, value) => {
-    if (!value) {
-      return selectOptions;
+  const tooManyOption =
+    response.subtotal > maxResults
+      ? [
+          {
+            key: 'too-many',
+            value: '__too_many__',
+            isDisabled: true,
+            description: __('Please refine your search.'),
+            label: sprintf(
+              __('You have more results to display. Showing first %s results'),
+              maxResults
+            ),
+          },
+        ]
+      : [];
+  const resultOptions = Immutable.asMutable(response?.results || [])
+    .slice(0, maxResults)
+    .map((result, index) => ({
+      key: result.id ?? index,
+      value: result.id,
+      label: result.name,
+    }));
+  const options = [...tooManyOption, ...resultOptions].filter(option => {
+    if (!filterValue || option.isDisabled) {
+      return true;
     }
-    return selectOptions.filter(
-      o =>
-        typeof o.props.children === 'string' &&
-        o.props.children.toLowerCase().indexOf(value.toLowerCase()) > -1
-    );
-  };
-  const onClear = () => {
+    return String(option.label)
+      .toLowerCase()
+      .includes(filterValue.toLowerCase());
+  });
+
+  const clearSelection = () => {
     setSelected(null);
-    setIsOpen(false);
+    setFilterValue('');
     if (typingTimeout) clearTimeout(typingTimeout);
     onSearch({});
   };
@@ -101,33 +89,29 @@ export const ResourceSelect = ({
       setTimeout(() => onSearch({ name: searchTerm }), DEBOUNCE_API)
     );
   };
+
   return (
-    <Select
+    <TypeaheadSelect
       ouiaId={name}
-      toggleAriaLabel={`${name} toggle`}
-      chipGroupComponent={<></>}
-      variant={SelectVariant.typeahead}
-      selections={selected}
-      loadingVariant={isLoading ? 'spinner' : null}
-      onSelect={onSelect}
-      onToggle={(_event, val) => setIsOpen(val)}
-      onFilter={(_event, val) => onFilter(val)}
-      onClear={(_event, val) => onClear(val)}
-      isOpen={isOpen}
       className="without_select2"
-      maxHeight="45vh"
-      onTypeaheadInputChanged={value => {
+      options={options}
+      selected={selected}
+      isLoading={isLoading}
+      onSelect={setSelected}
+      onClear={clearSelection}
+      onInputChange={value => {
+        setFilterValue(value);
         if (value) {
           autoSearch(value);
         } else {
-          onClear();
+          clearSelection();
         }
       }}
-      placeholderText={placeholderText}
+      placeholder={placeholderText}
+      maxMenuHeight="45vh"
+      toggleAriaLabel={`${name} toggle`}
       typeAheadAriaLabel={`${name} typeahead input`}
-    >
-      {selectOptions}
-    </Select>
+    />
   );
 };
 
@@ -142,7 +126,7 @@ ResourceSelect.propTypes = {
 
 ResourceSelect.defaultProps = {
   name: 'typeahead select',
-  selected: {},
+  selected: '',
   placeholderText: '',
   url: '',
 };

@@ -81,7 +81,7 @@ export const ScheduleFuture = ({
         <FormGroup
           label={__('Starts before')}
           fieldId="start-before-date"
-          labelIcon={helpLabel(
+          labelHelp={helpLabel(
             __(
               'Indicates that the action should be cancelled if it cannot be started before this time.'
             ),

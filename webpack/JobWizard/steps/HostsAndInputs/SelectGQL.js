@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { SelectVariant } from '@patternfly/react-core/deprecated';
 import {
   useForemanOrganization,
   useForemanLocation,
@@ -46,9 +45,5 @@ export const useNameSearchGQL = apiKey => {
 };
 
 export const SelectGQL = props => (
-  <SearchSelect
-    {...props}
-    variant={SelectVariant.typeaheadMulti}
-    useNameSearch={useNameSearchGQL}
-  />
+  <SearchSelect {...props} isMulti useNameSearch={useNameSearchGQL} />
 );

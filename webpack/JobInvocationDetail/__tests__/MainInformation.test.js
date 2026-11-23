@@ -79,9 +79,11 @@ jest.mock('foremanReact/routes/common/PageLayout/PageLayout', () =>
 );
 
 const setupApiMocks = () => {
-  api.get.mockImplementation(({ handleSuccess, key, ...action }) =>
-    ({ type: 'get', key, ...action })
-  );
+  api.get.mockImplementation(({ handleSuccess, key, ...action }) => ({
+    type: 'get',
+    key,
+    ...action,
+  }));
   APIActions.post.mockImplementation(payload => ({ type: 'post', ...payload }));
   APIActions.put.mockImplementation(payload => ({ type: 'put', ...payload }));
 };
@@ -190,22 +192,22 @@ describe('JobInvocationDetailPage', () => {
 
     Object.entries(informationToCheck).forEach(([term, expectedText]) => {
       const termContainers = container.querySelectorAll(
-        '.pf-v5-c-description-list__term .pf-v5-c-description-list__text'
+        '.pf-v6-c-description-list__term .pf-v6-c-description-list__text'
       );
       termContainers.forEach(termContainer => {
         if (termContainer.textContent.includes(term)) {
           let descriptionContainer;
           if (term === 'SSH user:') {
             descriptionContainer = termContainer
-              .closest('.pf-v5-c-description-list__group')
+              .closest('.pf-v6-c-description-list__group')
               .querySelector(
-                '.pf-v5-c-description-list__description .pf-v5-c-description-list__text .disabled-text'
+                '.pf-v6-c-description-list__description .pf-v6-c-description-list__text .disabled-text'
               );
           } else {
             descriptionContainer = termContainer
-              .closest('.pf-v5-c-description-list__group')
+              .closest('.pf-v6-c-description-list__group')
               .querySelector(
-                '.pf-v5-c-description-list__description .pf-v5-c-description-list__text'
+                '.pf-v6-c-description-list__description .pf-v6-c-description-list__text'
               );
           }
           expect(descriptionContainer.textContent).toContain(expectedText);

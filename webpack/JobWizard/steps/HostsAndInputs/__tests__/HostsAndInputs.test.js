@@ -47,9 +47,7 @@ describe('Hosts', () => {
     });
     await act(async () => {
       fireEvent.click(
-        screen.getByText('host1', {
-          selector: '.pf-v5-c-select__menu-item',
-        })
+        screen.getByRole('option', { name: 'host1', hidden: true })
       );
       fireEvent.blur(select('hosts'));
     });
@@ -60,9 +58,7 @@ describe('Hosts', () => {
       fireEvent.click(screen.getByText('host1'));
       fireEvent.click(screen.getByText('host2'));
     });
-    fireEvent.click(
-      screen.getByText('Hosts', { selector: '.pf-v5-c-select__toggle-text' })
-    );
+    fireEvent.click(screen.getByRole('button', { name: 'host method' }));
     await act(async () => {
       fireEvent.click(screen.getByText('Host groups'));
     });
@@ -74,11 +70,7 @@ describe('Hosts', () => {
     });
 
     await act(async () => {
-      fireEvent.click(
-        screen.getByText('Host groups', {
-          selector: '.pf-v5-c-select__toggle-text',
-        })
-      );
+      fireEvent.click(screen.getByRole('button', { name: 'host method' }));
     });
     await act(async () => {
       fireEvent.click(screen.getByText('Host collections'));
@@ -91,7 +83,7 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('host1')).toHaveLength(1);
     expect(screen.queryAllByText('host2')).toHaveLength(1);
     expect(screen.queryAllByText('host3')).toHaveLength(0);
-    const chip1 = screen.getByRole('button', { name: 'Remove host1 host1' });
+    const chip1 = screen.getByRole('button', { name: 'Remove host1' });
     await act(async () => {
       fireEvent.click(chip1);
     });
@@ -130,21 +122,24 @@ describe('Hosts', () => {
       fireEvent.click(screen.getByText('Target hosts and inputs'));
     });
 
-    expect(screen.queryAllByText('Hosts')).toHaveLength(1);
+    expect(
+      screen.getByRole('button', { name: 'host method' })
+    ).toHaveTextContent('Hosts');
     await act(async () => {
-      fireEvent.click(
-        screen.getByText('Hosts', { selector: '.pf-v5-c-select__toggle-text' })
-      );
+      fireEvent.click(screen.getByRole('button', { name: 'host method' }));
     });
-    expect(screen.queryAllByText('Host groups')).toHaveLength(1);
-    expect(screen.queryAllByText('Search query')).toHaveLength(1);
-    expect(screen.queryAllByText('Host collections')).toHaveLength(0);
+    expect(
+      screen.getByRole('option', { name: 'Host groups', hidden: true })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('option', { name: 'Search query', hidden: true })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: 'Host collections', hidden: true })
+    ).not.toBeInTheDocument();
 
     await act(async () => {
-      fireEvent.click(
-        // Close the select
-        screen.getByText('Hosts', { selector: '.pf-v5-c-select__toggle-text' })
-      );
+      fireEvent.click(screen.getByRole('button', { name: 'host method' }));
     });
   });
   it('Host fill list from url', async () => {
@@ -171,8 +166,8 @@ describe('Hosts', () => {
     expect(screen.queryAllByText('host2')).toHaveLength(0);
     expect(screen.queryAllByText('host3')).toHaveLength(1);
   });
-  
-    it('shows displayName chip when autofill receives short display_name', async () => {
+
+  it('shows displayName chip when autofill receives short display_name', async () => {
     routerSelectors.selectRouterLocation.mockImplementation(() => ({
       search: '?host_ids%5B%5D=2',
     }));

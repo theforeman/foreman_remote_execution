@@ -45,11 +45,16 @@ const getWizardStep = stepName =>
 const getDisabledWizardSteps = () =>
   within(getWizardNavigation())
     .getAllByRole('button')
-    .filter(button => button.getAttribute('aria-disabled') === 'true');
+    .filter(
+      button =>
+        button.disabled || button.getAttribute('aria-disabled') === 'true'
+    );
 
 const expectDispatchedGet = expected => {
   expect(store.getActions()).toEqual(
-    expect.arrayContaining([expect.objectContaining({ type: 'get', ...expected })])
+    expect.arrayContaining([
+      expect.objectContaining({ type: 'get', ...expected }),
+    ])
   );
 };
 
@@ -97,7 +102,9 @@ describe('Job wizard fill', () => {
     renderJobWizard();
 
     expect(getDisabledWizardSteps()).toHaveLength(5);
-    expect(getWizardStep(WIZARD_TITLES.categoryAndTemplate)).toBeInTheDocument();
+    expect(
+      getWizardStep(WIZARD_TITLES.categoryAndTemplate)
+    ).toBeInTheDocument();
 
     expectDispatchedGet({
       key: 'JOB_CATEGORIES',

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text, Bullseye } from '@patternfly/react-core';
+import { Content, Bullseye } from '@patternfly/react-core';
 import { Table, Tr, Tbody, Td } from '@patternfly/react-table';
 import { STATUS } from 'foremanReact/constants';
 
@@ -30,13 +30,13 @@ const RecentJobsTable = ({ status, hostId }) => {
       status={responseStatus || STATUS.PENDING}
       emptyState={
         <Bullseye>
-          <Text
+          <Content
             ouiaId="no-results-text"
             style={{ marginTop: '20px' }}
             component="p"
           >
             {__('No results found')}
-          </Text>
+          </Content>
         </Bullseye>
       }
     >

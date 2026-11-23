@@ -33,7 +33,9 @@ export const NumberInput = ({ formProps, inputProps }) => {
       {validated === 'error' && (
         <FormHelperText>
           <HelperText>
-            <HelperTextItem>{__('Has to be a positive number')}</HelperTextItem>
+            <HelperTextItem variant="error">
+              {__('Has to be a positive number')}
+            </HelperTextItem>
           </HelperText>
         </FormHelperText>
       )}

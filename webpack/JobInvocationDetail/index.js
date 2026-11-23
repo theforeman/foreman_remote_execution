@@ -1,10 +1,4 @@
-import {
-  Divider,
-  Flex,
-  PageSection,
-  PageSectionVariants,
-  Skeleton,
-} from '@patternfly/react-core';
+import { Divider, Flex, PageSection, Skeleton } from '@patternfly/react-core';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { useDispatch, useSelector } from 'react-redux';
@@ -195,10 +189,7 @@ const JobInvocationDetailPage = ({
             />
           </SkeletonLoader>
         </Flex>
-        <PageSection
-          variant={PageSectionVariants.light}
-          className="job-additional-info"
-        >
+        <PageSection hasBodyWrapper={false} className="job-additional-info">
           <SkeletonLoader
             status={pageStatus}
             skeletonProps={{ height: 150, width: '100%' }}
@@ -208,7 +199,7 @@ const JobInvocationDetailPage = ({
         </PageSection>
       </PageLayout>
       <PageSection
-        variant={PageSectionVariants.light}
+        hasBodyWrapper={false}
         className="job-details-table-section table-section"
       >
         <SkeletonLoader

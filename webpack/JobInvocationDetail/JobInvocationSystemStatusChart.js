@@ -7,21 +7,22 @@ import {
   ChartLabel,
   ChartLegend,
   ChartTooltip,
-} from '@patternfly/react-charts';
+} from '@patternfly/react-charts/victory';
 import {
   DescriptionList,
   DescriptionListDescription,
   DescriptionListGroup,
   DescriptionListTerm,
   FlexItem,
-  Text,
+  Content,
 } from '@patternfly/react-core';
 import {
-  global_palette_black_600 as cancelledColor,
-  global_palette_black_500 as emptyChartDonut,
-  global_palette_red_100 as failedColor,
-  global_palette_blue_300 as inProgressColor,
-  global_palette_green_500 as successedColor,
+  t_chart_color_black_200 as emptyChartDonut,
+  t_chart_color_black_300 as cancelledColor,
+  t_chart_color_blue_300 as inProgressColor,
+  t_chart_color_green_300 as successedColor,
+  t_chart_color_red_orange_300 as failedColor,
+  t_global_text_color_subtle as chartLabelColor,
 } from '@patternfly/react-tokens';
 import {
   STATUS_TITLES,
@@ -127,7 +128,7 @@ const JobInvocationSystemStatusChart = ({
           subTitleComponent={
             // inline style overrides PatternFly default styling
             <ChartLabel
-              style={{ fontSize: '12px', fill: cancelledColor.value }}
+              style={{ fontSize: '12px', fill: chartLabelColor.value }}
             />
           }
           padding={{
@@ -141,9 +142,9 @@ const JobInvocationSystemStatusChart = ({
         />
       </FlexItem>
       <FlexItem className="chart-legend">
-        <Text ouiaId="legend-title" className="legend-title">
+        <Content component="p" ouiaId="legend-title" className="legend-title">
           {__('System status')}
-        </Text>
+        </Content>
         {isAlreadyStarted ? (
           <ChartLegend
             orientation="vertical"

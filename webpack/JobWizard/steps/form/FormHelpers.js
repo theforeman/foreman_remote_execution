@@ -9,16 +9,17 @@ export const helpLabel = (text, id) => {
   return (
     <Popover id={`${id}-help`} bodyContent={text} aria-label="help-text">
       <Button
+        icon={
+          <Icon isInline>
+            <HelpIcon />
+          </Icon>
+        }
         ouiaId={`${id}-help-button`}
         variant="plain"
         aria-label={__('open-help-tooltip-button')}
         onClick={e => e.preventDefault()}
         isInline
-      >
-        <Icon isInline>
-          <HelpIcon />
-        </Icon>
-      </Button>
+      />
     </Popover>
   );
 };

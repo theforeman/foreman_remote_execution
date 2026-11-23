@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import URI from 'urijs';
-import { List, ListItem, Modal, Button } from '@patternfly/react-core';
+import {
+  Button,
+  List,
+  ListItem,
+  Modal,
+  ModalBody,
+  ModalHeader,
+} from '@patternfly/react-core';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import {
   useForemanHostsPageUrl,
@@ -19,46 +26,52 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
   return (
     <Modal
       ouiaId="host-preview-modal"
-      title={__('Preview Hosts')}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       appendTo={() => document.getElementsByClassName('job-wizard')[0]}
+      aria-labelledby="host-preview-modal-title"
     >
-      <List isPlain>
-        {hosts.map(host => (
-          <ListItem key={host.name}>
-            <Button
-              ouiaId={`host-preview-${host}`}
-              component="a"
-              href={`${hostUrl}${host.name}`}
-              variant="link"
-              target="_blank"
-              rel="noreferrer"
-              isInline
-            >
-              {host.display_name}
-            </Button>
-          </ListItem>
-        ))}
-        {hostsCount > HOSTS_TO_PREVIEW_AMOUNT && (
-          <ListItem>
-            <Button
-              ouiaId="host-preview-more"
-              component="a"
-              href={hostsUrl.addSearch({ search: searchQuery })}
-              variant="link"
-              target="_blank"
-              rel="noreferrer"
-              isInline
-            >
-              {sprintf(
-                __('...and %s more'),
-                hostsCount - HOSTS_TO_PREVIEW_AMOUNT
-              )}
-            </Button>
-          </ListItem>
-        )}
-      </List>
+      <ModalHeader
+        title={__('Preview Hosts')}
+        labelId="host-preview-modal-title"
+      />
+      <ModalBody>
+        <List isPlain>
+          {hosts.map(host => (
+            <ListItem key={host.name}>
+              <Button
+                ouiaId={`host-preview-${host}`}
+                component="a"
+                href={`${hostUrl}${host.name}`}
+                variant="link"
+                target="_blank"
+                rel="noreferrer"
+                isInline
+              >
+                {host.display_name}
+              </Button>
+            </ListItem>
+          ))}
+          {hostsCount > HOSTS_TO_PREVIEW_AMOUNT && (
+            <ListItem>
+              <Button
+                ouiaId="host-preview-more"
+                component="a"
+                href={hostsUrl.addSearch({ search: searchQuery })}
+                variant="link"
+                target="_blank"
+                rel="noreferrer"
+                isInline
+              >
+                {sprintf(
+                  __('...and %s more'),
+                  hostsCount - HOSTS_TO_PREVIEW_AMOUNT
+                )}
+              </Button>
+            </ListItem>
+          )}
+        </List>
+      </ModalBody>
     </Modal>
   );
 };
@@ -66,8 +79,8 @@ export const HostPreviewModal = ({ isOpen, setIsOpen, searchQuery }) => {
 HostPreviewModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
-  searchQuery: PropTypes.string.isRequired,
+  searchQuery: PropTypes.string,
 };
-HostPreviewModal.defaultPropTypes = {
+HostPreviewModal.defaultProps = {
   searchQuery: '',
 };

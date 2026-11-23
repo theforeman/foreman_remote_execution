@@ -1,13 +1,7 @@
-#schedule-a-job-dropdown ul.pf-v5-c-dropdown__menu {
-  padding-left: 0;
+#schedule-a-job-dropdown .pf-v6-c-menu__list {
+  padding-inline-start: 0;
 
   li {
     display: unset;
-
-    a {
-      font-size: 16px;
-      color: var(--pf-v5-cdropdown__menu-item--Color);
-      font-weight: 300;
-    }
   }
 }

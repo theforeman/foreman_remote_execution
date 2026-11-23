@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { FormGroup } from '@patternfly/react-core';
-import { Select, SelectOption } from '@patternfly/react-core/deprecated';
 import PropTypes from 'prop-types';
+import {
+  FormGroup,
+  MenuToggle,
+  Select,
+  SelectList,
+  SelectOption,
+} from '@patternfly/react-core';
 
 export const SelectField = ({
   labelInfo,
@@ -10,51 +15,73 @@ export const SelectField = ({
   options,
   value,
   setValue,
-  labelIcon,
+  labelHelp,
   isRequired,
-  ...props
+  className,
+  toggleIcon,
+  toggleAriaLabel,
+  placeholderText,
+  isDisabled,
 }) => {
-  const onSelect = (event, selection) => {
-    setValue(selection);
-    setIsOpen(false);
-  };
   const [isOpen, setIsOpen] = useState(false);
   const selectOptions = [
-    !isRequired && (
-      <SelectOption key={0} value="">
-        <p> </p>
-      </SelectOption>
+    !isRequired && { value: '', label: ' ' },
+    ...options.map(option =>
+      option !== null && typeof option === 'object'
+        ? option
+        : { value: option, label: option }
     ),
-    ...options.map((option, index) => (
-      <SelectOption key={index + 1} value={option} />
-    )),
-  ];
+  ].filter(Boolean);
+  const selectedOption = selectOptions.find(option => option.value === value);
+
   return (
     <FormGroup
       labelInfo={labelInfo}
       label={label}
       fieldId={fieldId}
-      labelIcon={labelIcon}
+      labelHelp={labelHelp}
       isRequired={isRequired}
     >
       <Select
         ouiaId={fieldId}
-        selections={value}
-        onSelect={onSelect}
-        onToggle={(_event, val) => setIsOpen(val)}
         isOpen={isOpen}
-        className="without_select2"
-        maxHeight="45vh"
-        placeholderText=" " // To prevent showing first option as selected
-        aria-labelledby={fieldId}
-        toggleAriaLabel={`${label} toggle`}
-        {...props}
+        selected={value}
+        onSelect={(_event, selection) => {
+          setValue(selection);
+          setIsOpen(false);
+        }}
+        onOpenChange={setIsOpen}
+        toggle={toggleRef => (
+          <MenuToggle
+            ref={toggleRef}
+            ouiaId={`${fieldId}-toggle`}
+            id={fieldId}
+            className={className}
+            isExpanded={isOpen}
+            isDisabled={isDisabled}
+            isFullWidth
+            onClick={() => setIsOpen(prev => !prev)}
+            aria-label={
+              toggleAriaLabel || (label ? `${label} toggle` : undefined)
+            }
+            icon={toggleIcon}
+          >
+            {selectedOption ? selectedOption.label : placeholderText}
+          </MenuToggle>
+        )}
       >
-        {selectOptions.filter(option => option)}
+        <SelectList>
+          {selectOptions.map(option => (
+            <SelectOption key={String(option.value)} value={option.value}>
+              {option.label}
+            </SelectOption>
+          ))}
+        </SelectList>
       </Select>
     </FormGroup>
   );
 };
+
 SelectField.propTypes = {
   label: PropTypes.string,
   labelInfo: PropTypes.node,
@@ -62,15 +89,25 @@ SelectField.propTypes = {
   options: PropTypes.array,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setValue: PropTypes.func.isRequired,
-  labelIcon: PropTypes.node,
+  labelHelp: PropTypes.node,
   isRequired: PropTypes.bool,
+  className: PropTypes.string,
+  toggleIcon: PropTypes.node,
+  toggleAriaLabel: PropTypes.string,
+  placeholderText: PropTypes.string,
+  isDisabled: PropTypes.bool,
 };
 
 SelectField.defaultProps = {
   label: null,
   labelInfo: null,
   options: [],
-  labelIcon: null,
+  labelHelp: null,
   value: null,
   isRequired: false,
+  className: undefined,
+  toggleIcon: undefined,
+  toggleAriaLabel: undefined,
+  placeholderText: ' ',
+  isDisabled: false,
 };
