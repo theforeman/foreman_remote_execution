@@ -10,7 +10,7 @@ const RexInterface = ({ isLoading, onChange }) => (
   <FormGroup
     label={__('Remote Execution Interface')}
     fieldId="reg_rex_interface"
-    labelIcon={
+    labelHelp={
       <LabelIcon
         text={__('Identifier of the Host interface for Remote execution')}
       />

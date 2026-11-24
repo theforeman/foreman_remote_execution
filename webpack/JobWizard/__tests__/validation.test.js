@@ -23,6 +23,8 @@ selectors.selectAdvancedTemplateInputs.mockImplementation(
   () => advancedTemplateInputs
 );
 
+const wizardStep = title => screen.getByRole('button', { name: title });
+
 describe('Job wizard validation', () => {
   afterAll(() => {
     selectors.selectTemplateInputs.mockRestore();
@@ -36,23 +38,25 @@ describe('Job wizard validation', () => {
         </Provider>
       </MockedProvider>
     );
-    expect(screen.getByText(WIZARD_TITLES.advanced)).toBeDisabled();
-    expect(screen.getByText(WIZARD_TITLES.schedule)).toBeDisabled();
-    expect(screen.getByText(WIZARD_TITLES.review)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.advanced)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.schedule)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.review)).toBeDisabled();
     await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.hostsAndInputs));
+      fireEvent.click(wizardStep(WIZARD_TITLES.hostsAndInputs));
       await new Promise(resolve => setTimeout(resolve, 0)); // to resolve gql
     });
     const select = name =>
       screen.getByRole('button', { name: `${name} toggle` });
     fireEvent.click(select('hosts'));
     await act(async () => {
-      fireEvent.click(screen.getByText('host1'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'host1', hidden: true })
+      );
     });
 
-    expect(screen.getByText(WIZARD_TITLES.advanced)).toBeDisabled();
-    expect(screen.getByText(WIZARD_TITLES.schedule)).toBeDisabled();
-    expect(screen.getByText(WIZARD_TITLES.review)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.advanced)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.schedule)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.review)).toBeDisabled();
     const textField = screen.getByLabelText('plain hidden', {
       selector: 'textarea',
     });
@@ -65,12 +69,12 @@ describe('Job wizard validation', () => {
         target: { value: 'text' },
       });
     });
-    expect(screen.getByText(WIZARD_TITLES.advanced)).toBeEnabled();
-    expect(screen.getByText(WIZARD_TITLES.schedule)).toBeDisabled();
-    expect(screen.getByText(WIZARD_TITLES.review)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.advanced)).toBeEnabled();
+    expect(wizardStep(WIZARD_TITLES.schedule)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.review)).toBeDisabled();
 
     await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      fireEvent.click(wizardStep(WIZARD_TITLES.advanced));
     });
     const advTextField = screen.getByLabelText('adv plain hidden', {
       selector: 'textarea',
@@ -81,11 +85,9 @@ describe('Job wizard validation', () => {
       });
     });
 
-    expect(
-      screen.getByText(WIZARD_TITLES.advanced, { selector: 'button' })
-    ).toBeEnabled();
-    expect(screen.getByText(WIZARD_TITLES.schedule)).toBeEnabled();
-    expect(screen.getByText(WIZARD_TITLES.review)).toBeEnabled();
+    expect(wizardStep(WIZARD_TITLES.advanced)).toBeEnabled();
+    expect(wizardStep(WIZARD_TITLES.schedule)).toBeEnabled();
+    expect(wizardStep(WIZARD_TITLES.review)).toBeEnabled();
   });
 
   it('advanced number', async () => {
@@ -99,7 +101,7 @@ describe('Job wizard validation', () => {
 
     // setup
     await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.hostsAndInputs));
+      fireEvent.click(wizardStep(WIZARD_TITLES.hostsAndInputs));
       await new Promise(resolve => setTimeout(resolve, 0)); // to resolve gql
     });
 
@@ -107,7 +109,9 @@ describe('Job wizard validation', () => {
       screen.getByRole('button', { name: `${name} toggle` });
     fireEvent.click(select('hosts'));
     await act(async () => {
-      fireEvent.click(screen.getByText('host1'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'host1', hidden: true })
+      );
     });
     await act(async () => {
       fireEvent.click(
@@ -125,7 +129,7 @@ describe('Job wizard validation', () => {
     });
 
     await act(async () => {
-      fireEvent.click(screen.getByText(WIZARD_TITLES.advanced));
+      fireEvent.click(wizardStep(WIZARD_TITLES.advanced));
     });
     await act(async () => {
       await fireEvent.change(
@@ -137,11 +141,9 @@ describe('Job wizard validation', () => {
         }
       );
     });
-    expect(
-      screen.getByText(WIZARD_TITLES.advanced, { selector: 'button' })
-    ).toBeEnabled();
-    expect(screen.getByText(WIZARD_TITLES.schedule)).toBeEnabled();
-    expect(screen.getByText(WIZARD_TITLES.review)).toBeEnabled();
+    expect(wizardStep(WIZARD_TITLES.advanced)).toBeEnabled();
+    expect(wizardStep(WIZARD_TITLES.schedule)).toBeEnabled();
+    expect(wizardStep(WIZARD_TITLES.review)).toBeEnabled();
 
     // test
     const timeoutField = screen.getByLabelText('timeout to kill', {
@@ -153,12 +155,11 @@ describe('Job wizard validation', () => {
       });
     });
 
-    expect(screen.getByText(WIZARD_TITLES.schedule)).toBeDisabled();
-    expect(screen.getByText('Run on selected hosts')).toHaveAttribute(
-      'aria-disabled',
-      'true'
-    );
-    expect(screen.getByText(WIZARD_TITLES.review)).toBeDisabled();
+    expect(wizardStep(WIZARD_TITLES.schedule)).toBeDisabled();
+    expect(
+      screen.getByRole('button', { name: 'Run on selected hosts' })
+    ).toHaveAttribute('aria-disabled', 'true');
+    expect(wizardStep(WIZARD_TITLES.review)).toBeDisabled();
 
     await act(async () => {
       await fireEvent.change(timeoutField, {
@@ -166,12 +167,13 @@ describe('Job wizard validation', () => {
       });
     });
 
-    expect(screen.getByText('Run on selected hosts')).toBeEnabled();
-    expect(screen.getByText('Run on selected hosts')).toHaveAttribute(
-      'aria-disabled',
-      'false'
-    );
-    expect(screen.getByText(WIZARD_TITLES.schedule)).toBeEnabled();
-    expect(screen.getByText(WIZARD_TITLES.review)).toBeEnabled();
+    expect(
+      screen.getByRole('button', { name: 'Run on selected hosts' })
+    ).toBeEnabled();
+    expect(
+      screen.getByRole('button', { name: 'Run on selected hosts' })
+    ).not.toHaveAttribute('aria-disabled');
+    expect(wizardStep(WIZARD_TITLES.schedule)).toBeEnabled();
+    expect(wizardStep(WIZARD_TITLES.review)).toBeEnabled();
   });
 });

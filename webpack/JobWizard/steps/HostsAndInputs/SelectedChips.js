@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Chip, ChipGroup, Button } from '@patternfly/react-core';
+import { Button, Label, LabelGroup } from '@patternfly/react-core';
+
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { hostMethods } from '../../JobWizardConstants';
 
@@ -13,30 +14,34 @@ const SelectedChip = ({ selected, setSelected, categoryName, setLabel }) => {
   const NUM_CHIPS = 3;
   return (
     <>
-      <ChipGroup
+      <LabelGroup
         ouiaId="hosts-chip-group"
         className="hosts-chip-group"
         categoryName={categoryName}
         isClosable
-        closeBtnAriaLabel="Remove all"
-        collapsedText={sprintf(__('%s more'), selected.length - NUM_CHIPS)}
-        numChips={NUM_CHIPS}
+        closeBtnAriaLabel={__('Remove all')}
+        collapsedText={sprintf(
+          __('%s more'),
+          Math.max(selected.length - NUM_CHIPS, 0)
+        )}
+        numLabels={NUM_CHIPS}
         onClick={() => {
           setSelected(() => []);
         }}
       >
         {selected.map((result, index) => (
-          <Chip
+          <Label
+            variant="outline"
             ouiaId={`${categoryName}-${result.id}`}
             key={index}
             id={`${categoryName}-${result.id}`}
-            onClick={() => deleteItem(result.id)}
-            closeBtnAriaLabel={`Remove ${result.name}`}
+            onClose={() => deleteItem(result.id)}
+            closeBtnAriaLabel={sprintf(__('Remove %s'), result.name)}
           >
             {setLabel(result)}
-          </Chip>
+          </Label>
         ))}
-      </ChipGroup>
+      </LabelGroup>
       {selected.length > 0 && <br />}
     </>
   );

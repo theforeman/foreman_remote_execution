@@ -291,10 +291,12 @@ describe('Schedule', () => {
       jest.advanceTimersByTime(1000); // to handle pf4 date picker popover useTimer
     });
     await act(async () => {
-      fireEvent.click(screen.getByLabelText('Daily', { selector: 'button' }));
+      fireEvent.click(screen.getByRole('button', { name: 'Daily' }));
     });
     await act(async () => {
-      fireEvent.click(screen.getByText('Cronline'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'Cronline', hidden: true })
+      );
     });
     const newCronline = '1 2 3 4 5';
     const cronline = screen.getByLabelText('cronline');
@@ -305,7 +307,9 @@ describe('Schedule', () => {
       });
     });
     expect(cronline.value).toBe(newCronline);
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeEnabled();
 
     await act(async () => {
       fireEvent.click(screen.getByText('Category and template'));
@@ -322,7 +326,9 @@ describe('Schedule', () => {
     expect(cronline.value).toBe(newCronline);
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Review details'));
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Review details' })
+      );
     });
     expect(screen.queryAllByText('Review details')).toHaveLength(3);
     expect(screen.getAllByText('Cron line - 1 2 3 4 5')).toHaveLength(1);
@@ -335,12 +341,16 @@ describe('Schedule', () => {
     });
     expect(screen.queryAllByText('Recurring execution')).toHaveLength(3);
 
-    fireEvent.click(screen.getByText('Cronline'));
+    fireEvent.click(screen.getByRole('button', { name: 'Cronline' }));
     await act(async () => {
-      fireEvent.click(screen.getByText('Monthly'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'Monthly', hidden: true })
+      );
     });
 
-    expect(screen.getByText('Review details').disabled).toBeTruthy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeDisabled();
     const newDays = '1,2,3';
     const days = screen.getByLabelText('days');
     expect(days.value).toBe('');
@@ -351,7 +361,9 @@ describe('Schedule', () => {
     });
     expect(days.value).toBe(newDays);
 
-    expect(screen.getByText('Review details').disabled).toBeTruthy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeDisabled();
     const newAtMonthly = '13:07';
     const at = () => screen.getByLabelText('repeat-at');
     expect(at().value).toBe('');
@@ -362,13 +374,19 @@ describe('Schedule', () => {
     });
     expect(at().value).toBe(newAtMonthly);
 
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
-    fireEvent.click(screen.getByText('Monthly'));
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeEnabled();
+    fireEvent.click(screen.getByRole('button', { name: 'Monthly' }));
     await act(async () => {
-      fireEvent.click(screen.getByText('Weekly'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'Weekly', hidden: true })
+      );
     });
 
-    expect(screen.getByText('Review details').disabled).toBeTruthy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeDisabled();
     const dayTue = screen.getByLabelText('Tue checkbox');
     const daySat = screen.getByLabelText('Sat checkbox');
     expect(dayTue.checked).toBe(false);
@@ -396,19 +414,27 @@ describe('Schedule', () => {
     });
     expect(at().value).toBe(newAtWeekly);
 
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
-    fireEvent.click(screen.getByText('Weekly'));
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeEnabled();
+    fireEvent.click(screen.getByRole('button', { name: 'Weekly' }));
     act(() => {
-      fireEvent.click(screen.getByText('Daily'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'Daily', hidden: true })
+      );
     });
 
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeEnabled();
     act(() => {
       fireEvent.change(at(), {
         target: { value: '' },
       });
     });
-    expect(screen.getByText('Review details').disabled).toBeTruthy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeDisabled();
     const newAtDaily = '17:07';
     expect(at().value).toBe('');
     act(() => {
@@ -417,14 +443,20 @@ describe('Schedule', () => {
       });
     });
     expect(at().value).toBe(newAtDaily);
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeEnabled();
 
-    fireEvent.click(screen.getByText('Daily'));
+    fireEvent.click(screen.getByRole('button', { name: 'Daily' }));
     act(() => {
-      fireEvent.click(screen.getByText('Hourly'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'Hourly', hidden: true })
+      );
     });
 
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeEnabled();
     const newMinutes = '6';
     const atHourly = () => screen.getByLabelText('repeat-at-minute-typeahead');
     expect(atHourly().value).toBe('0');
@@ -434,7 +466,9 @@ describe('Schedule', () => {
       });
     });
     await act(async () => {
-      await fireEvent.click(screen.getByText('Create "62"'));
+      await fireEvent.click(
+        screen.getByRole('option', { name: 'Create "62"', hidden: true })
+      );
     });
     expect(atHourly().value).toBe('0');
     expect(
@@ -447,12 +481,19 @@ describe('Schedule', () => {
       });
     });
     await act(async () => {
-      await fireEvent.click(screen.getByText(`Create "${newMinutes}"`));
+      await fireEvent.click(
+        screen.getByRole('option', {
+          name: `Create "${newMinutes}"`,
+          hidden: true,
+        })
+      );
     });
     expect(
       screen.queryAllByText('Minute can only be a number between 0-59')
     ).toHaveLength(0);
-    expect(screen.getByText('Review details').disabled).toBeFalsy();
+    expect(
+      screen.getByRole('button', { name: 'Review details' })
+    ).toBeEnabled();
     expect(atHourly().value).toBe(newMinutes);
   });
 });

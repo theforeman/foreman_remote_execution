@@ -89,7 +89,7 @@ export const ScheduleRecurring = ({
       <WizardTitle title={SCHEDULE_TYPES.RECURRING} />
       <Form className="schedule-tab">
         <FormGroup label={__('Starts')} fieldId="schedule-starts">
-          <div className="pf-v5-cform">
+          <div>
             <FormGroup fieldId="schedule-starts-now">
               <Radio
                 ouiaId="schedule-start-now"
@@ -165,7 +165,7 @@ export const ScheduleRecurring = ({
         />
         <Divider component="div" />
         <FormGroup label={__('Ends')} fieldId="schedule-ends">
-          <div className="pf-v5-cform">
+          <div>
             <FormGroup fieldId="schedule-ends-never">
               <Radio
                 ouiaId="schedule-never-ends"

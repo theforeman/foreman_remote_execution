@@ -30,7 +30,7 @@ jest.useFakeTimers();
 const clickOptions = { skipHover: true };
 
 const wizardStepButton = title =>
-  screen.getByText(title, { selector: 'button' });
+  screen.getByRole('button', { name: title });
 
 const clickWizardStep = async title => {
   await act(async () => {
@@ -134,7 +134,11 @@ describe('AdvancedFields', () => {
 
     fireEvent.click(selectField);
     await act(async () => {
-      await userEvent.click(screen.getByText('option 2'), {}, clickOptions);
+      await userEvent.click(
+        screen.getByRole('option', { name: 'option 2', hidden: true }),
+        {},
+        clickOptions
+      );
       await userEvent.click(
         screen.getAllByText(WIZARD_TITLES.advanced)[0],
         {},
@@ -142,7 +146,11 @@ describe('AdvancedFields', () => {
       );
 
       await userEvent.click(resourceSelectField, {}, clickOptions);
-      await userEvent.click(screen.getByText('resource2'), {}, clickOptions);
+      await userEvent.click(
+        screen.getByRole('option', { name: 'resource2', hidden: true }),
+        {},
+        clickOptions
+      );
       await typeIntoField(textField, textValue);
       await typeIntoField(searchField, searchValue);
       fireEvent.change(dateField, { target: { value: dateValue } });

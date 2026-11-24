@@ -4,16 +4,11 @@ import {
   FormGroup,
   Alert,
   AlertActionCloseButton,
-  ValidatedOptions,
 } from '@patternfly/react-core';
-import {
-  Select,
-  SelectOption,
-  SelectVariant,
-} from '@patternfly/react-core/deprecated';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { MINUTES_PER_HOUR } from 'foremanReact/constants';
 import { helpLabel } from '../form/FormHelpers';
+import { TypeaheadSelect } from '../form/TypeaheadSelect';
 import { DEFAULT_MINUTE_OPTIONS } from '../../JobWizardConstants';
 
 export const RepeatHour = ({ repeatData, setRepeatData }) => {
@@ -28,36 +23,33 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
       setRepeatData({ minute: 0 });
     }
   }, [minute, setRepeatData]);
-  const [minuteOpen, setMinuteOpen] = useState(false);
   const [options, setOptions] = useState(DEFAULT_MINUTE_OPTIONS);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   return (
     <FormGroup
       label={__('At minute')}
-      labelIcon={helpLabel(<div>{__('range: 0-59')}</div>)}
+      labelHelp={helpLabel(<div>{__('range: 0-59')}</div>)}
       isRequired
     >
-      <Select
+      <TypeaheadSelect
         ouiaId="repeat-on-hourly"
         id="repeat-on-hourly"
-        variant={SelectVariant.typeahead}
         typeAheadAriaLabel="repeat-at-minute-typeahead"
-        onSelect={(event, selection) => {
-          setRepeatData({ minute: parseInt(selection, 10) });
-          setMinuteOpen(false);
-        }}
-        selections={`${minute}` || ''}
-        onToggle={(_event, toggle) => {
-          setMinuteOpen(toggle);
-        }}
-        isOpen={minuteOpen}
-        width={125}
         toggleAriaLabel="select minute toggle"
-        validated={
-          isValidMinute(minute)
-            ? ValidatedOptions.noval
-            : ValidatedOptions.error
-        }
+        width={125}
+        maxMenuHeight="300px"
+        isCreatable
+        createText={__('Create')}
+        selected={`${minute}`}
+        validated={isValidMinute(minute) ? 'default' : 'error'}
+        options={options.map(minuteNumber => ({
+          value: `${minuteNumber}`,
+          label: `${minuteNumber}`,
+        }))}
+        onSelect={selection => {
+          setRepeatData({ minute: parseInt(selection, 10) });
+          setIsAlertOpen(false);
+        }}
         onCreateOption={newValue => {
           if (isValidMinute(newValue)) {
             setOptions(prev => [...prev, parseInt(newValue, 10)].sort());
@@ -67,17 +59,7 @@ export const RepeatHour = ({ repeatData, setRepeatData }) => {
             setIsAlertOpen(true);
           }
         }}
-        isCreatable
-        createText={__('Create')}
-      >
-        {options.map(minuteNumber => (
-          <SelectOption
-            key={minuteNumber}
-            value={`${minuteNumber}`}
-            onClick={() => setIsAlertOpen(false)}
-          />
-        ))}
-      </Select>
+      />
       {isAlertOpen && (
         <Alert
           ouiaId="repeat-on-hourly-alert"

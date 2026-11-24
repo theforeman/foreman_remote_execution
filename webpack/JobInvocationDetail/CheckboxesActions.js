@@ -89,9 +89,8 @@ const ActionsKebab = ({
           ouiaId="actions-kebab-toggle"
           ref={toggleRef}
           variant="plain"
-        >
-          <EllipsisVIcon />
-        </MenuToggle>
+          icon={<EllipsisVIcon />}
+        />
       )}
     >
       <DropdownList>{dropdownItems}</DropdownList>

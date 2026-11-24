@@ -45,11 +45,16 @@ const getWizardStep = stepName =>
 const getDisabledWizardSteps = () =>
   within(getWizardNavigation())
     .getAllByRole('button')
-    .filter(button => button.getAttribute('aria-disabled') === 'true');
+    .filter(
+      button =>
+        button.disabled || button.getAttribute('aria-disabled') === 'true'
+    );
 
 const expectDispatchedGet = expected => {
   expect(store.getActions()).toEqual(
-    expect.arrayContaining([expect.objectContaining({ type: 'get', ...expected })])
+    expect.arrayContaining([
+      expect.objectContaining({ type: 'get', ...expected }),
+    ])
   );
 };
 
@@ -97,7 +102,9 @@ describe('Job wizard fill', () => {
     renderJobWizard();
 
     expect(getDisabledWizardSteps()).toHaveLength(5);
-    expect(getWizardStep(WIZARD_TITLES.categoryAndTemplate)).toBeInTheDocument();
+    expect(
+      getWizardStep(WIZARD_TITLES.categoryAndTemplate)
+    ).toBeInTheDocument();
 
     expectDispatchedGet({
       key: 'JOB_CATEGORIES',
@@ -120,7 +127,12 @@ describe('Job wizard fill', () => {
     await userEvent.click(
       screen.getByRole('button', { name: 'Job template toggle' })
     );
-    await userEvent.click(screen.getByText(jobTemplate.job_template.name));
+    await userEvent.click(
+      screen.getByRole('option', {
+        name: jobTemplate.job_template.name,
+        hidden: true,
+      })
+    );
 
     expect(store.getActions().at(-1)).toEqual(
       expect.objectContaining({

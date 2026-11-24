@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup } from '@patternfly/react-core';
-import {
-  SelectOption,
-  Select,
-  SelectGroup,
-  SelectVariant,
-} from '@patternfly/react-core/deprecated';
+import { TypeaheadSelect } from './TypeaheadSelect';
 
 export const GroupedSelectField = ({
   label,
@@ -14,67 +9,48 @@ export const GroupedSelectField = ({
   groups,
   selected,
   setSelected,
-  ...props
+  isDisabled,
+  placeholderText,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const onSelect = selection => {
-    setIsOpen(false);
-    setSelected(selection);
-  };
-
-  const onClear = () => {
-    onSelect(null);
-  };
-
-  const options = groups.map((group, groupIndex) => (
-    <SelectGroup key={groupIndex} label={group.groupLabel}>
-      {group.options.map((option, optionIndex) => (
-        <SelectOption
-          key={optionIndex}
-          value={option.label}
-          onClick={() => onSelect(option.value)}
-        />
-      ))}
-    </SelectGroup>
-  ));
-
-  const onFilter = evt => {
-    const textInput = evt?.target?.value || '';
-    if (textInput === '') {
-      return options;
-    }
-    return options
-      .map(group => {
-        const filteredGroup = React.cloneElement(group, {
-          children: group.props.children.filter(item =>
-            item.props.value.toLowerCase().includes(textInput.toLowerCase())
-          ),
-        });
-        if (filteredGroup.props.children.length > 0) return filteredGroup;
-        return null;
-      })
-      .filter(newGroup => newGroup);
-  };
+  const [filterValue, setFilterValue] = useState('');
+  const selectedName = Array.isArray(selected) ? '' : selected || '';
+  const allOptions = groups.reduce(
+    (options, group) => options.concat(group.options),
+    []
+  );
+  const selectedId = allOptions.find(option => option.label === selectedName)
+    ?.value;
+  const visibleGroups = groups
+    .map(group => ({
+      label: group.groupLabel,
+      options: group.options.filter(option =>
+        option.label.toLowerCase().includes(filterValue.toLowerCase())
+      ),
+    }))
+    .filter(group => group.options.length);
 
   return (
     <FormGroup label={label} fieldId={fieldId}>
-      <Select
+      <TypeaheadSelect
         ouiaId={fieldId}
-        isGrouped
-        variant={SelectVariant.typeahead}
-        onToggle={(_event, val) => setIsOpen(val)}
-        onFilter={onFilter}
-        isOpen={isOpen}
-        onSelect={() => null}
-        selections={selected}
         className="without_select2"
-        onClear={onClear}
-        aria-labelledby={fieldId}
+        groups={visibleGroups}
+        selected={selectedId}
+        isDisabled={isDisabled}
+        placeholder={placeholderText}
+        maxMenuHeight="45vh"
         toggleAriaLabel={`${label} toggle`}
-        {...props}
-      >
-        {options}
-      </Select>
+        typeAheadAriaLabel={`${label} typeahead input`}
+        onInputChange={setFilterValue}
+        onSelect={selection => {
+          setFilterValue('');
+          setSelected(selection);
+        }}
+        onClear={() => {
+          setFilterValue('');
+          setSelected(null);
+        }}
+      />
     </FormGroup>
   );
 };
@@ -89,9 +65,13 @@ GroupedSelectField.propTypes = {
     PropTypes.array,
   ]),
   setSelected: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool,
+  placeholderText: PropTypes.string,
 };
 
 GroupedSelectField.defaultProps = {
   groups: [],
   selected: null,
+  isDisabled: false,
+  placeholderText: '',
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Text, TextVariants, Form, Alert } from '@patternfly/react-core';
+import { Content, ContentVariants, Form, Alert } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectJobCategoriesMissingPermissions,
@@ -71,12 +71,12 @@ export const CategoryAndTemplate = ({
   return (
     <>
       <WizardTitle title={WIZARD_TITLES.categoryAndTemplate} />
-      <Text
+      <Content
         ouiaId="category-and-template-required-fields"
-        component={TextVariants.p}
+        component={ContentVariants.p}
       >
         {__('All fields are required.')}
-      </Text>
+      </Content>
       <Form>
         <SelectField
           label={__('Job category')}

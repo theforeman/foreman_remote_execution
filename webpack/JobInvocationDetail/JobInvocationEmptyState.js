@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { PageSection } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import ResourceLoadFailedEmptyState from 'foremanReact/components/common/EmptyState/ResourceLoadFailedEmptyState';
 import {
@@ -13,7 +13,7 @@ const JobInvocationEmptyState = ({
   httpStatus,
   errorMessage,
 }) => (
-  <PageSection variant={PageSectionVariants.light}>
+  <PageSection hasBodyWrapper={false}>
     <ResourceLoadFailedEmptyState
       resourceLabel={__('job invocation')}
       resourceId={jobInvocationId}

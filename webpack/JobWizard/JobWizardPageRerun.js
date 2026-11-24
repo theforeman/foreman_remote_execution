@@ -9,13 +9,11 @@ import {
   Button,
   EmptyState,
   EmptyStateVariant,
-  EmptyStateIcon,
   EmptyStateBody,
-  EmptyStateHeader,
   EmptyStateFooter,
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
-import { global_palette_red_200 as exclamationColor } from '@patternfly/react-tokens';
+
 import { get } from 'foremanReact/redux/API';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
@@ -64,17 +62,13 @@ const JobWizardPageRerun = ({
   const currentLocation = useForemanLocation();
 
   const emptyStateLarge = (
-    <EmptyState variant={EmptyStateVariant.lg}>
-      <EmptyStateHeader
-        titleText={<>{__('Unable to run job')}</>}
-        icon={
-          <EmptyStateIcon
-            icon={ExclamationCircleIcon}
-            color={exclamationColor.value}
-          />
-        }
-        headingLevel="h4"
-      />
+    <EmptyState
+      headingLevel="h4"
+      icon={ExclamationCircleIcon}
+      status="danger"
+      titleText={__('Unable to run job')}
+      variant={EmptyStateVariant.lg}
+    >
       <EmptyStateBody>{sprintf(errorMessage)}</EmptyStateBody>
       <EmptyStateFooter>
         <Button

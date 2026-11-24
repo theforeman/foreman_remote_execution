@@ -26,39 +26,34 @@ describe('Category And Template', () => {
 
     expect(screen.queryAllByLabelText('Error')).toHaveLength(0);
     expect(screen.queryAllByLabelText('failed')).toHaveLength(0);
+    const categoryToggle = () =>
+      screen.getByRole('button', { name: 'Job category toggle' });
+    const templateInput = () =>
+      screen.getByRole('combobox', { name: 'Job template typeahead input' });
+
     // Category
-    fireEvent.click(
-      screen.getByLabelText('Ansible Commands', { selector: 'button' })
-    );
+    fireEvent.click(categoryToggle());
     await act(async () => {
-      await fireEvent.click(screen.getByText('Puppet'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'Puppet', hidden: true })
+      );
     });
     fireEvent.click(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)[0]); // to remove focus
-    expect(
-      screen.queryAllByLabelText('Ansible Commands', { selector: 'button' })
-    ).toHaveLength(0);
-    expect(
-      screen.queryAllByLabelText('Puppet', { selector: 'button' })
-    ).toHaveLength(1);
+    expect(categoryToggle()).toHaveTextContent('Puppet');
+    expect(categoryToggle()).not.toHaveTextContent('Ansible Commands');
 
     // Template
-    fireEvent.click(
-      screen.getByDisplayValue('Puppet Agent Disable - Script Default', {
-        selector: 'button',
-      })
+    expect(templateInput()).toHaveValue(
+      'Puppet Agent Disable - Script Default'
     );
+    fireEvent.click(templateInput());
     await act(async () => {
-      await fireEvent.click(screen.getByText('template2'));
+      fireEvent.click(
+        screen.getByRole('option', { name: 'template2', hidden: true })
+      );
     });
     fireEvent.click(screen.getAllByText(WIZARD_TITLES.categoryAndTemplate)[0]); // to remove focus
-    expect(
-      screen.queryAllByDisplayValue('Puppet Agent Disable - Script Default', {
-        selector: 'button',
-      })
-    ).toHaveLength(0);
-    expect(
-      screen.queryAllByDisplayValue('template2', { selector: 'button' })
-    ).toHaveLength(1);
+    expect(templateInput()).toHaveValue('template2');
   });
   it('category error ', async () => {
     selectors.selectCategoryError.mockImplementation(() => 'category error');

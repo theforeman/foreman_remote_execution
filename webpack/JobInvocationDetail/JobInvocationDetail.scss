@@ -28,16 +28,16 @@
 
     .legend-title {
       font-weight: bold;
-      font-size: var(--pf-v5-global--FontSize--sm);
+      font-size: var(--pf-t--global--font--size--sm);
       margin-left: 8px;
       margin-bottom: 0;
     }
 
-    .pf-v5-c-description-list {
+    .pf-v6-c-description-list {
       margin-left: 8px;
       margin-top: 8px;
 
-      .pf-v5-c-description-list__term .pf-v5-c-description-list__text {
+      .pf-v6-c-description-list__term .pf-v6-c-description-list__text {
         font-weight: normal;
       }
     }
@@ -47,7 +47,7 @@
     }
   }
 
-  .pf-v5-c-divider {
+  .pf-v6-c-divider {
     max-height: $chart_size;
   }
 }
@@ -71,7 +71,7 @@ section.job-additional-info {
     padding: 0;
   }
 
-  .pf-v5-c-toolbar__group.pf-m-button-group {
+  .pf-v6-c-toolbar__group.pf-m-action-group {
     display: flex;
     align-items: center;
   }
@@ -81,7 +81,7 @@ section.job-additional-info {
     margin-right: 15px;
   }
   
-  .pf-v5-c-table__tbody > tr.row-hidden {
+  .pf-v6-c-table__tbody > tr.row-hidden {
     display: none;
   }
 }
@@ -143,12 +143,12 @@ section.job-additional-info {
     margin-top: 10px;
   }
 
-  .pf-v5-c-toggle-group {
+  .pf-v6-c-toggle-group {
     margin-bottom: 10px;
   }
 }
 
-.open-all-modal .pf-v5-c-modal-box__title-text {
+.open-all-modal .pf-v6-c-modal-box__title-text {
     white-space: normal;
     text-overflow: unset;
     word-break: break-word;

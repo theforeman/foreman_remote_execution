@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { LockIcon } from '@patternfly/react-icons';
 import {
-  Icon,
   Button,
   EmptyState,
   EmptyStateVariant,
   EmptyStateBody,
-  EmptyStateHeader,
   EmptyStateFooter,
 } from '@patternfly/react-core';
 
@@ -35,16 +33,12 @@ const PermissionDenied = ({ missingPermissions, setProceedAnyway }) => {
   };
 
   return (
-    <EmptyState variant={EmptyStateVariant.xl}>
-      <span className="empty-state-icon">
-        <Icon size="xl" iconSize="xl">
-          <LockIcon name="lock" />
-        </Icon>
-      </span>
-      <EmptyStateHeader
-        titleText={<>{__('Permission Denied')}</>}
-        headingLevel="h5"
-      />
+    <EmptyState
+      headingLevel="h5"
+      icon={LockIcon}
+      titleText={__('Permission Denied')}
+      variant={EmptyStateVariant.xl}
+    >
       <EmptyStateBody>{description}</EmptyStateBody>
       <EmptyStateFooter>
         <Button

@@ -33,32 +33,29 @@ describe('Job wizard footer', () => {
   it('enables Skip to review when required fields are filled', () => {
     renderFooterWizard({ canSubmit: true });
 
-    expect(screen.getByText('Skip to review')).not.toHaveAttribute(
-      'aria-disabled',
-      'true'
-    );
+    expect(
+      screen.getByRole('button', { name: 'Skip to review' })
+    ).toBeEnabled();
   });
 
   it('disables Skip to review when required fields are missing', () => {
     renderFooterWizard({ canSubmit: false });
 
-    expect(screen.getByText('Skip to review')).toHaveAttribute(
-      'aria-disabled',
-      'true'
-    );
+    expect(
+      screen.getByRole('button', { name: 'Skip to review' })
+    ).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('disables Skip to review on the review step', async () => {
     renderFooterWizard({ canSubmit: true });
 
     await act(async () => {
-      fireEvent.click(screen.getByText('Skip to review'));
+      fireEvent.click(screen.getByRole('button', { name: 'Skip to review' }));
     });
 
     expect(screen.getByText('Submit')).toBeInTheDocument();
-    expect(screen.getByText('Skip to review')).toHaveAttribute(
-      'aria-disabled',
-      'true'
-    );
+    expect(
+      screen.getByRole('button', { name: 'Skip to review' })
+    ).toHaveAttribute('aria-disabled', 'true');
   });
 });

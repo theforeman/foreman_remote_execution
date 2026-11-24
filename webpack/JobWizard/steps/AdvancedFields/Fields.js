@@ -9,7 +9,7 @@ import { NumberInput } from '../form/NumberInput';
 export const EffectiveUserField = ({ value, setValue, defaultValue }) => (
   <FormGroup
     label={__('Effective user')}
-    labelIcon={helpLabel(
+    labelHelp={helpLabel(
       __(
         'A user to be used for executing the script. If it differs from the SSH user, su or sudo is used to switch the accounts.'
       ),
@@ -34,7 +34,7 @@ export const TimeoutToKillField = ({ value, setValue, defaultValue }) => (
   <NumberInput
     formProps={{
       label: __('Timeout to kill'),
-      labelIcon: helpLabel(
+      labelHelp: helpLabel(
         __(
           'Time in seconds from the start on the remote host after which the job should be killed.'
         ),
@@ -58,7 +58,7 @@ export const TimeToPickupField = ({ value, setValue }) => (
   <NumberInput
     formProps={{
       label: __('Time to pickup'),
-      labelIcon: helpLabel(
+      labelHelp: helpLabel(
         __(
           'Interval in seconds, if the job is not picked up by a client within this interval it will be cancelled. Applies only to pull-mqtt based jobs'
         ),
@@ -78,7 +78,7 @@ export const TimeToPickupField = ({ value, setValue }) => (
 export const PasswordField = ({ value, setValue }) => (
   <FormGroup
     label={__('Password')}
-    labelIcon={helpLabel(
+    labelHelp={helpLabel(
       __(
         'Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.'
       ),
@@ -102,7 +102,7 @@ export const PasswordField = ({ value, setValue }) => (
 export const KeyPassphraseField = ({ value, setValue }) => (
   <FormGroup
     label={__('Private key passphrase')}
-    labelIcon={helpLabel(
+    labelHelp={helpLabel(
       __(
         'Key passphrase is only applicable for SSH provider. Other providers ignore this field. Passphrase is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.'
       ),
@@ -126,7 +126,7 @@ export const KeyPassphraseField = ({ value, setValue }) => (
 export const EffectiveUserPasswordField = ({ value, setValue }) => (
   <FormGroup
     label={__('Effective user password')}
-    labelIcon={helpLabel(
+    labelHelp={helpLabel(
       __(
         'Effective user password is only applicable for SSH provider. Other providers ignore this field. Password is stored encrypted in DB until the job finishes. For future or recurring executions, it is removed after the last execution.'
       ),
@@ -151,7 +151,7 @@ export const ConcurrencyLevelField = ({ value, setValue, defaultValue }) => (
   <NumberInput
     formProps={{
       label: __('Concurrency level'),
-      labelIcon: helpLabel(
+      labelHelp: helpLabel(
         __(
           'Run at most N tasks at a time. If this is set and proxy batch triggering is enabled, then tasks are triggered on the smart proxy in batches of size 1.'
         ),
@@ -177,7 +177,7 @@ export const ExecutionOrderingField = ({ isRandomizedOrdering, setValue }) => (
   <FormGroup
     label={__('Execution ordering')}
     fieldId="schedule-type"
-    labelIcon={helpLabel(
+    labelHelp={helpLabel(
       <div
         dangerouslySetInnerHTML={{
           __html: __(
@@ -217,7 +217,7 @@ export const TemplateInputsFields = ({ inputs, value, setValue }) => (
 export const SSHUserField = ({ value, setValue, defaultValue }) => (
   <FormGroup
     label={__('SSH user')}
-    labelIcon={helpLabel(__('A user to be used for SSH.'), 'ssh-user')}
+    labelHelp={helpLabel(__('A user to be used for SSH.'), 'ssh-user')}
     fieldId="ssh-user"
     labelInfo={<ResetDefault setValue={setValue} defaultValue={defaultValue} />}
   >

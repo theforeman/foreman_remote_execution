@@ -9,7 +9,7 @@ export const QueryType = ({ isTypeStatic, setIsTypeStatic }) => (
     <FormGroup
       label={__('Query type')}
       fieldId="query-type-static"
-      labelIcon={helpLabel(
+      labelHelp={helpLabel(
         __('Type determines when the query is evaluated to hosts.'),
         'query-type'
       )}

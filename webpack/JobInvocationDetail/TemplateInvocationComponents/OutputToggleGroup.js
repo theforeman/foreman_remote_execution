@@ -134,16 +134,16 @@ export const OutputToggleGroup = ({
       {isInTableView && (
         <FlexItem>
           <Button
+            icon={<OutlinedWindowRestoreIcon />}
             title={__('Open in new tab')}
+            aria-label={__('Open in new tab')}
             variant="link"
             isInline
             ouiaId="template-invocation-new-tab-button"
             component="a"
             href={newTabUrl}
             target="_blank"
-          >
-            <OutlinedWindowRestoreIcon />
-          </Button>
+          />
         </FlexItem>
       )}
     </Flex>

@@ -7,7 +7,7 @@ import { helpLabel } from '../form/FormHelpers';
 export const PurposeField = ({ purpose, setPurpose }) => (
   <FormGroup
     label={__('Purpose')}
-    labelIcon={helpLabel(
+    labelHelp={helpLabel(
       __(
         'A special label for tracking a recurring job. There can be only one active job with a given purpose at a time.'
       )
