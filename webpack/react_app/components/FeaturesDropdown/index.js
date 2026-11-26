@@ -63,7 +63,7 @@ const FeaturesDropdown = ({
     ));
   const newJobPageUrl = hostId
     ? `${NEW_JOB_PAGE}=${hostId}`
-    : `${ALL_HOSTS_NEW_JOB_PAGE}=${hostSearch}`;
+    : `${ALL_HOSTS_NEW_JOB_PAGE}=${encodeURIComponent(hostSearch)}`;
   const scheduleJob = [
     <DropdownToggleAction
       onClick={() => dispatch(push(newJobPageUrl))}
