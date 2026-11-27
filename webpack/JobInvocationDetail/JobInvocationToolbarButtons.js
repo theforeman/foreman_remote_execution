@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Split, SplitItem } from '@patternfly/react-core';
 import {
+  Button,
+  Divider,
   Dropdown,
   DropdownItem,
-  DropdownPosition,
-  DropdownSeparator,
-  DropdownToggle,
-} from '@patternfly/react-core/deprecated';
+  DropdownList,
+  MenuToggle,
+  Split,
+  SplitItem,
+} from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { foremanUrl } from 'foremanReact/common/helpers';
 import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
@@ -56,13 +58,12 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
     setIsActionOpen(false);
     onActionFocus();
   }, [onActionFocus]);
-  const onActionToggle = useCallback((_event, val) => setIsActionOpen(val), []);
-
   const recurrenceDropdownItems = useMemo(
     () =>
       recurrence
         ? [
-            <DropdownSeparator
+            <Divider
+              component="li"
               ouiaId="dropdown-separator-1"
               key="separator-1"
             />,
@@ -105,39 +106,43 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
     () => [
       <DropdownItem
         ouiaId="rerun-succeeded-dropdown-item"
-        href={foremanUrl(`/job_invocations/${jobId}/rerun?succeeded_only=1`)}
+        to={foremanUrl(`/job_invocations/${jobId}/rerun?succeeded_only=1`)}
         key="rerun-succeeded"
         isDisabled={!canCreateJobInvocations || !(succeeded > 0)}
-        description="Rerun job on successful hosts"
+        description={__('Rerun job on successful hosts')}
       >
         {__('Rerun successful')}
       </DropdownItem>,
       <DropdownItem
         ouiaId="rerun-failed-dropdown-item"
-        href={foremanUrl(`/job_invocations/${jobId}/rerun?failed_only=1`)}
+        to={foremanUrl(`/job_invocations/${jobId}/rerun?failed_only=1`)}
         key="rerun-failed"
         isDisabled={!canCreateJobInvocations || !(failed > 0)}
-        description="Rerun job on failed hosts"
+        description={__('Rerun job on failed hosts')}
       >
         {__('Rerun failed')}
       </DropdownItem>,
       <DropdownItem
         ouiaId="view-task-dropdown-item"
-        href={foremanUrl(`/foreman_tasks/tasks/${task?.id}`)}
+        to={foremanUrl(`/foreman_tasks/tasks/${task?.id}`)}
         key="view-task"
         isDisabled={!canViewForemanTasks || task === undefined}
-        description="See details of latest task"
+        description={__('See details of latest task')}
       >
         {__('View task')}
       </DropdownItem>,
-      <DropdownSeparator ouiaId="dropdown-separator-0" key="separator-0" />,
+      <Divider
+        component="li"
+        ouiaId="dropdown-separator-0"
+        key="separator-0"
+      />,
       <DropdownItem
         ouiaId="cancel-dropdown-item"
         onClick={() => dispatch(cancelJob(jobId, false))}
         key="cancel"
         component="button"
         isDisabled={!canCancelJobInvocations || !isTaskCancelable}
-        description="Cancel job gracefully"
+        description={__('Cancel job gracefully')}
       >
         {__('Cancel')}
       </DropdownItem>,
@@ -147,7 +152,7 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
         key="abort"
         component="button"
         isDisabled={!canCancelJobInvocations || !isTaskCancelable}
-        description="Cancel job immediately"
+        description={__('Cancel job immediately')}
       >
         {__('Abort')}
       </DropdownItem>,
@@ -165,30 +170,6 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
       succeeded,
       task,
     ]
-  );
-
-  const dropdownToggle = useMemo(
-    () => (
-      <DropdownToggle
-        ouiaId="toggle-button-action-primary"
-        id={`toggle-split-button-action-primary-${jobId}`}
-        splitButtonItems={[
-          <Button
-            component="a"
-            ouiaId="button-rerun-all"
-            key="rerun"
-            href={foremanUrl(`/job_invocations/${jobId}/rerun`)}
-            variant="control"
-            isDisabled={!canCreateJobInvocations}
-          >
-            {__('Rerun all')}
-          </Button>,
-        ]}
-        splitButtonVariant="action"
-        onToggle={onActionToggle}
-      />
-    ),
-    [canCreateJobInvocations, jobId, onActionToggle]
   );
 
   return (
@@ -209,11 +190,34 @@ const JobInvocationToolbarButtons = ({ jobId, data }) => {
           <Dropdown
             ouiaId="job-invocation-global-actions-dropdown"
             onSelect={onActionSelect}
-            position={DropdownPosition.right}
-            toggle={dropdownToggle}
+            onOpenChange={setIsActionOpen}
             isOpen={isActionOpen}
-            dropdownItems={dropdownItems}
-          />
+            popperProps={{ position: 'right' }}
+            toggle={toggleRef => (
+              <MenuToggle
+                ref={toggleRef}
+                ouiaId="toggle-button-action-primary"
+                id={`toggle-split-button-action-primary-${jobId}`}
+                isExpanded={isActionOpen}
+                onClick={() => setIsActionOpen(prev => !prev)}
+                aria-label={__('Select')}
+                splitButtonItems={[
+                  <Button
+                    component="a"
+                    ouiaId="button-rerun-all"
+                    key="rerun"
+                    href={foremanUrl(`/job_invocations/${jobId}/rerun`)}
+                    variant="control"
+                    isDisabled={!canCreateJobInvocations}
+                  >
+                    {__('Rerun all')}
+                  </Button>,
+                ]}
+              />
+            )}
+          >
+            <DropdownList>{dropdownItems}</DropdownList>
+          </Dropdown>
         </SplitItem>
       </Split>
     </>

@@ -1,23 +1,23 @@
 .job-wizard {
-  font-size: var(--pf-v5-global--FontSize--md);
+  font-size: var(--pf-t--global--font--size--md);
 
   .wizard-title {
     margin-bottom: 25px;
   }
 
-  .pf-v5-c-wizard__nav.pf-m-expanded {
+  .pf-v6-c-wizard__nav.pf-m-expanded {
     z-index: calc(
-      var(--pf-v5-cwizard__toggle--ZIndex) + 2
+      var(--pf-v6-c-wizard__toggle--ZIndex) + 2
     ); // So the small screen navigation can be shown above the select box and wizard body
   }
 
-  .pf-v5-c-wizard__main {
+  .pf-v6-c-wizard__main {
     z-index: calc(
-      var(--pf-v5-cwizard__toggle--ZIndex) + 1
+      var(--pf-v6-c-wizard__toggle--ZIndex) + 1
     ); // So the select box can be shown above the wizard footer and navigation toggle
   }
 
-  .pf-v5-c-wizard__main-body {
+  .pf-v6-c-wizard__main-body {
     @media (max-width: 600px) {
       max-width: 100%;
     }
@@ -36,22 +36,20 @@
   }
 
   .gray-text {
-    color: var(--pf-v5-global--Color--dark-200);
+    color: var(--pf-t--global--text--color--subtle);
   }
 
   .target-hosts-and-inputs {
-    .pf-v5-c-chip-group.pf-m-category {
+    .pf-v6-c-label-group.pf-m-category {
       margin-bottom: 10px;
     }
 
-    .pf-v5-c-select__toggle-typeahead {
-      border: 0px;
+    .pf-v6-c-menu-toggle.pf-m-typeahead {
+      border: 0;
     }
 
     .target-method-select {
-      .pf-v5-c-select__toggle-wrapper {
-        flex-wrap: nowrap;
-      }
+      flex-wrap: nowrap;
     }
 
     .foreman-search-field {
@@ -70,8 +68,8 @@
       grid-template-columns: repeat(7, 1fr);
     }
 
-    .pf-v5-l-grid {
-      gap: var(--pf-v5-cform--GridGap);
+    .pf-v6-l-grid {
+      gap: var(--pf-v6-c-form--GridGap);
     }
 
     #repeat-on-hourly {
@@ -114,16 +112,16 @@
     .clear-datetime-button {
       margin-left: 10px;
       align-self: center;
-      font-size: var(--pf-v5-global--FontSize--md);
+      font-size: var(--pf-t--global--font--size--md);
     }
 
-    .pf-v5-c-form__group-control {
+    .pf-v6-c-form__group-control {
       display: flex;
       flex-wrap: wrap;
     }
   }
 
-  .pf-v5-c-date-picker {
+  .pf-v6-c-date-picker {
     vertical-align: top;
   }
 
@@ -142,7 +140,7 @@
     min-width: 100px;
   }
 
-  .pf-v5-c-modal-box {
+  .pf-v6-c-modal-box {
     width: auto;
   }
 
@@ -152,8 +150,8 @@
     }
   }
 
-  .pf-v5-c-radio__body {
-    font-size: var(--pf-v5-cradio__label--FontSize);
+  .pf-v6-c-radio__body {
+    font-size: var(--pf-v6-c-radio__label--FontSize);
   }
 
   .reset-default {
@@ -161,7 +159,7 @@
   }
 }
 
-.job-wizard-alert.pf-v5-c-alert.pf-m-warning {
+.job-wizard-alert.pf-v6-c-alert.pf-m-warning {
   margin-bottom: 10px;
   margin-top: 10px;
 }

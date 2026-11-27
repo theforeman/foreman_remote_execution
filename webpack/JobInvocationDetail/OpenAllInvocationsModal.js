@@ -3,6 +3,9 @@ import {
   AlertActionCloseButton,
   Button,
   Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
 } from '@patternfly/react-core';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import PropTypes from 'prop-types';
@@ -52,16 +55,31 @@ const OpenAllInvocationsModal = ({
     return <></>;
   };
 
+  const title = sprintf(__('Open all %s invocations in new tabs'), modalText());
+
   return (
     <Modal
       className="open-all-modal"
       isOpen={isOpen}
       onClose={onClose}
       ouiaId="template-invocation-new-tab-modal"
-      title={sprintf(__('Open all %s invocations in new tabs'), modalText())}
-      titleIconVariant="warning"
       width={590}
-      actions={[
+      aria-labelledby="open-all-invocations-title"
+    >
+      <ModalHeader
+        title={title}
+        titleIconVariant="warning"
+        labelId="open-all-invocations-title"
+      />
+      <ModalBody>
+        {sprintf(
+          __('Are you sure you want to open all %s invocations in new tabs?'),
+          modalText()
+        )}
+        <br />
+        {selectedText()}
+      </ModalBody>
+      <ModalFooter>
         <Button
           ouiaId="template-invocation-new-tab-modal-confirm"
           key="confirm"
@@ -72,7 +90,7 @@ const OpenAllInvocationsModal = ({
           }}
         >
           {__('Open in new tabs')}
-        </Button>,
+        </Button>
         <Button
           ouiaId="template-invocation-new-tab-modal-cancel"
           key="cancel"
@@ -80,15 +98,8 @@ const OpenAllInvocationsModal = ({
           onClick={onClose}
         >
           {__('Cancel')}
-        </Button>,
-      ]}
-    >
-      {sprintf(
-        __('Are you sure you want to open all %s invocations in new tabs?'),
-        modalText()
-      )}
-      <br />
-      {selectedText()}
+        </Button>
+      </ModalFooter>
     </Modal>
   );
 };

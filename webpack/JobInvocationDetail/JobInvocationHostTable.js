@@ -1,10 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable camelcase */
 import {
-  Icon,
   EmptyState,
   EmptyStateBody,
-  EmptyStateHeader,
   EmptyStateVariant,
   ToolbarItem,
 } from '@patternfly/react-core';
@@ -386,16 +384,12 @@ const JobInvocationHostTable = ({
   const customEmptyState = (
     <Tr ouiaId="table-empty">
       <Td colSpan={100}>
-        <EmptyState variant={EmptyStateVariant.xl}>
-          <span className="empty-state-icon">
-            <Icon size="xl" iconSize="xl">
-              <AddCircleOIcon name="add-circle-o" />
-            </Icon>
-          </span>
-          <EmptyStateHeader
-            titleText={<>{__('No Results')}</>}
-            headingLevel="h5"
-          />
+        <EmptyState
+          headingLevel="h5"
+          icon={AddCircleOIcon}
+          titleText={__('No Results')}
+          variant={EmptyStateVariant.xl}
+        >
           <EmptyStateBody>
             <div className="empty-state-description">
               {targeting?.targeting_type === 'dynamic_query' ? (

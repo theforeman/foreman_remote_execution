@@ -1,11 +1,11 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { act, render, fireEvent, screen } from '@testing-library/react';
 import { SearchSelect } from '../SearchSelect';
 
 const apiKey = 'HOSTS_KEY';
 
 describe('SearchSelect', () => {
-  it('too many', () => {
+  it('too many', async () => {
     const onSearch = jest.fn();
     const setLabel = jest.fn();
     render(
@@ -23,10 +23,13 @@ describe('SearchSelect', () => {
         setLabel={setLabel}
       />
     );
+    await act(async () => {});
     const openSelectbutton = screen.getByRole('button', {
       name: 'typeahead select toggle',
     });
-    fireEvent.click(openSelectbutton);
+    await act(async () => {
+      fireEvent.click(openSelectbutton);
+    });
     const tooMany = screen.queryAllByText(
       'You have %s results to display. Showing first %s results + 101 + 100'
     );

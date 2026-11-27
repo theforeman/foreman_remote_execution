@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  DropdownItem,
   Dropdown,
-  DropdownToggle,
-  DropdownToggleAction,
-} from '@patternfly/react-core/deprecated';
+  DropdownItem,
+  DropdownList,
+  MenuToggle,
+  MenuToggleAction,
+} from '@patternfly/react-core';
 import { push } from 'connected-react-router';
 
 import { useAPI } from 'foremanReact/common/hooks/API/APIHooks';
@@ -64,37 +65,41 @@ const FeaturesDropdown = ({
   const newJobPageUrl = hostId
     ? `${NEW_JOB_PAGE}=${hostId}`
     : `${ALL_HOSTS_NEW_JOB_PAGE}=${hostSearch}`;
-  const scheduleJob = [
-    <DropdownToggleAction
-      onClick={() => dispatch(push(newJobPageUrl))}
-      key="schedule-job-action"
-    >
-      {__('Schedule a job')}
-    </DropdownToggleAction>,
-  ];
-
-  const disableDropdown = !isSingleHost && selectedCount === 0;
+  const isToggleDisabled =
+    status === STATUS.PENDING || (!isSingleHost && selectedCount === 0);
 
   return (
     <Dropdown
       ouiaId="schedule-a-job-dropdown"
       id="schedule-a-job-dropdown"
-      alignments={{ default: 'right' }}
+      isOpen={isOpen}
+      onOpenChange={setIsOpen}
       onSelect={() => setIsOpen(false)}
-      toggle={
-        <DropdownToggle
+      popperProps={{ position: 'right' }}
+      toggle={toggleRef => (
+        <MenuToggle
+          ref={toggleRef}
           ouiaId="schedule-a-job-dropdown-toggle"
           id="schedule-a-job-dropdown-toggle"
-          splitButtonItems={scheduleJob}
-          toggleVariant="secondary"
-          onToggle={() => setIsOpen(prev => !prev)}
-          isDisabled={status === STATUS.PENDING || disableDropdown}
-          splitButtonVariant="action"
+          variant="secondary"
+          isExpanded={isOpen}
+          isDisabled={isToggleDisabled}
+          onClick={() => setIsOpen(prev => !prev)}
+          aria-label={__('Select')}
+          splitButtonItems={[
+            <MenuToggleAction
+              key="schedule-job-action"
+              isDisabled={isToggleDisabled}
+              onClick={() => dispatch(push(newJobPageUrl))}
+            >
+              {__('Schedule a job')}
+            </MenuToggleAction>,
+          ]}
         />
-      }
-      isOpen={isOpen}
-      dropdownItems={dropdownItems}
-    />
+      )}
+    >
+      <DropdownList>{dropdownItems}</DropdownList>
+    </Dropdown>
   );
 };
 

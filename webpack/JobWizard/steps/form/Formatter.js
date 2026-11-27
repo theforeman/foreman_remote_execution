@@ -23,7 +23,7 @@ const TemplateSearchField = ({
   return (
     <FormGroup
       label={name}
-      labelIcon={helpLabel(labelText, name)}
+      labelHelp={helpLabel(labelText, name)}
       labelInfo={
         <ResetDefault
           defaultValue={defaultValue}
@@ -79,7 +79,7 @@ export const formatter = (input, values, setValue) => {
       <FormGroup
         label={name}
         fieldId={id}
-        labelIcon={helpLabel(labelText, name)}
+        labelHelp={helpLabel(labelText, name)}
         isRequired={required}
         key={id}
         labelInfo={labelInfo}
@@ -104,7 +104,7 @@ export const formatter = (input, values, setValue) => {
         label={name}
         fieldId={id}
         options={options}
-        labelIcon={helpLabel(labelText, name)}
+        labelHelp={helpLabel(labelText, name)}
         value={value}
         setValue={newValue => setValue({ ...values, [name]: newValue })}
       />
@@ -116,7 +116,7 @@ export const formatter = (input, values, setValue) => {
         labelInfo={labelInfo}
         key={name}
         label={name}
-        labelIcon={helpLabel(labelText, name)}
+        labelHelp={helpLabel(labelText, name)}
         fieldId={id}
         isRequired={required}
       >
@@ -140,7 +140,7 @@ export const formatter = (input, values, setValue) => {
         labelInfo={labelInfo}
         key={name}
         label={name}
-        labelIcon={helpLabel(labelText, name)}
+        labelHelp={helpLabel(labelText, name)}
         fieldId={id}
         isRequired={required}
       >

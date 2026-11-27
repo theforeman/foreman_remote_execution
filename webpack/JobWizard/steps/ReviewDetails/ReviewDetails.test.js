@@ -74,11 +74,7 @@ describe('ReviewDetails', () => {
       fireEvent.click(screen.getByText('Review details'));
     });
     expect(screen.getAllByText('Review details')).toHaveLength(3);
-    fireEvent.click(
-      screen.getByText('Job template', {
-        selector: '.pf-v5-c-button',
-      })
-    );
+    fireEvent.click(screen.getByRole('button', { name: 'Job template' }));
     expect(screen.getAllByText('Category and template')).toHaveLength(3);
 
     await act(async () => {
@@ -86,11 +82,7 @@ describe('ReviewDetails', () => {
       jest.advanceTimersByTime(1000);
     });
     act(() => {
-      fireEvent.click(
-        screen.getByText('Target hosts', {
-          selector: '.pf-v5-c-button',
-        })
-      );
+      fireEvent.click(screen.getByRole('button', { name: 'Target hosts' }));
       jest.advanceTimersByTime(1000); // to handle pf4 date picker popover useTimer
     });
     expect(screen.getAllByText('Target hosts and inputs')).toHaveLength(3);
@@ -98,11 +90,7 @@ describe('ReviewDetails', () => {
       fireEvent.click(screen.getByText('Review details'));
     });
     act(() => {
-      fireEvent.click(
-        screen.getByText('Advanced fields', {
-          selector: '.pf-v5-c-button',
-        })
-      );
+      fireEvent.click(screen.getByRole('button', { name: 'Advanced fields' }));
       jest.advanceTimersByTime(1000);
     });
     expect(screen.getAllByText('Advanced fields')).toHaveLength(3);

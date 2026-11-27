@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import URI from 'urijs';
-import { SelectVariant } from '@patternfly/react-core/deprecated';
 import { get } from 'foremanReact/redux/API';
 import { selectResponse, selectIsLoading } from '../../JobWizardSelectors';
 import { SearchSelect } from '../form/SearchSelect';
@@ -30,9 +29,5 @@ export const useNameSearchAPI = (apiKey, url) => {
 };
 
 export const SelectAPI = props => (
-  <SearchSelect
-    {...props}
-    variant={SelectVariant.typeaheadMulti}
-    useNameSearch={useNameSearchAPI}
-  />
+  <SearchSelect {...props} isMulti useNameSearch={useNameSearchAPI} />
 );

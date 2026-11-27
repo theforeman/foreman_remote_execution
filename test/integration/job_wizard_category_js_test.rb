@@ -108,6 +108,7 @@ class JobWizardCategoryJsTest < IntegrationTestWithJavascript
 
       assert_selector(:ouia_component_id, 'run-on-selected-hosts-footer', :wait => 30)
       run_on_hosts = find(:ouia_component_id, 'run-on-selected-hosts-footer')
+      assert_not run_on_hosts.disabled?, 'expected run-on-selected-hosts button to be enabled'
       assert_not_equal 'true', run_on_hosts[:'aria-disabled'], 'expected run-on-selected-hosts button to be enabled'
       assert_text 'Run on selected hosts'
       find(:ouia_component_id, 'run-on-selected-hosts-footer').click

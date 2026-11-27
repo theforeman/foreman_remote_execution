@@ -41,7 +41,7 @@ export const RepeatCron = ({ repeatData, setRepeatData, setValid }) => {
   return (
     <FormGroup
       label={__('Cron line (extended)')}
-      labelIcon={helpLabel(
+      labelHelp={helpLabel(
         <div>
           {__("Cron line format '1 2 3 4 5', where:")}
           <br />

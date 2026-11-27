@@ -61,8 +61,12 @@ describe('OutputCodeBlock', () => {
       </div>
     );
 
-    const scrollToTopButton = screen.getByText('Scroll to top');
-    const scrollToBottomButton = screen.getByText('Scroll to bottom');
+    const scrollToTopButton = screen.getByRole('link', {
+      name: 'Scroll to top',
+    });
+    const scrollToBottomButton = screen.getByRole('link', {
+      name: 'Scroll to bottom',
+    });
 
     fireEvent.click(scrollToTopButton);
     fireEvent.click(scrollToBottomButton);

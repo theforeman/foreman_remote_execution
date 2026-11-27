@@ -6,7 +6,7 @@ import {
   Form,
   FormGroup,
   InputGroup,
-  Text,
+  Content,
   Spinner,
   InputGroupItem,
   FormHelperText,
@@ -241,7 +241,7 @@ const HostsAndInputs = ({
           clearSearch={clearSearch}
           setLabel={setLabel}
         />
-        <Text ouiaId="host-preview-label">
+        <Content component="p" ouiaId="host-preview-label">
           {__('Apply to')}{' '}
           <Button
             ouiaId="host-preview-open-button"
@@ -253,7 +253,7 @@ const HostsAndInputs = ({
             {hostCount} {__('hosts')}
           </Button>{' '}
           {isLoading && <Spinner size="sm" />}
-        </Text>
+        </Content>
         <TemplateInputs
           inputs={templateInputs}
           value={templateValues}
