@@ -50,5 +50,6 @@ export const SelectGQL = props => (
     {...props}
     variant={SelectVariant.typeaheadMulti}
     useNameSearch={useNameSearchGQL}
+    warnOnScopedSearchSyntax
   />
 );

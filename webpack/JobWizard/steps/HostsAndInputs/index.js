@@ -186,42 +186,50 @@ const HostsAndInputs = ({
               />
             </InputGroupItem>
             {hostMethod === hostMethods.searchQuery && (
-              <HostSearch
-                setValue={setHostsSearchQuery}
-                value={hostsSearchQuery}
-                onBookmarkMatch={setSelectedBookmark}
-              />
+              <InputGroupItem isFill>
+                <HostSearch
+                  setValue={setHostsSearchQuery}
+                  value={hostsSearchQuery}
+                  onBookmarkMatch={setSelectedBookmark}
+                />
+              </InputGroupItem>
             )}
             {hostMethod === hostMethods.hosts && (
-              <SelectGQL
-                selected={selectedHosts}
-                setSelected={setSelectedHosts}
-                apiKey={HOSTS}
-                name="hosts"
-                placeholderText={__('Filter by hosts')}
-                setLabel={setLabel}
-              />
+              <InputGroupItem isFill>
+                <SelectGQL
+                  selected={selectedHosts}
+                  setSelected={setSelectedHosts}
+                  apiKey={HOSTS}
+                  name="hosts"
+                  placeholderText={__('Filter by hosts')}
+                  setLabel={setLabel}
+                />
+              </InputGroupItem>
             )}
             {hostMethod === hostMethods.hostCollections && (
-              <SelectAPI
-                selected={selectedHostCollections}
-                setSelected={setSelectedHostCollections}
-                apiKey={HOST_COLLECTIONS}
-                name="host collections"
-                url="/katello/api/host_collections?per_page=100"
-                placeholderText={__('Filter by host collections')}
-                setLabel={setLabel}
-              />
+              <InputGroupItem isFill>
+                <SelectAPI
+                  selected={selectedHostCollections}
+                  setSelected={setSelectedHostCollections}
+                  apiKey={HOST_COLLECTIONS}
+                  name="host collections"
+                  url="/katello/api/host_collections?per_page=100"
+                  placeholderText={__('Filter by host collections')}
+                  setLabel={setLabel}
+                />
+              </InputGroupItem>
             )}
             {hostMethod === hostMethods.hostGroups && (
-              <SelectGQL
-                selected={selectedHostGroups}
-                setSelected={setSelectedHostGroups}
-                apiKey={HOST_GROUPS}
-                name="host groups"
-                placeholderText={__('Filter by host groups')}
-                setLabel={setLabel}
-              />
+              <InputGroupItem isFill>
+                <SelectGQL
+                  selected={selectedHostGroups}
+                  setSelected={setSelectedHostGroups}
+                  apiKey={HOST_GROUPS}
+                  name="host groups"
+                  placeholderText={__('Filter by host groups')}
+                  setLabel={setLabel}
+                />
+              </InputGroupItem>
             )}
           </InputGroup>
           {isError && (
