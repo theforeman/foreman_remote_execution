@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { useForemanHostDetailsPageUrl } from 'foremanReact/Root/Context/ForemanContext';
 import { STATUS } from 'foremanReact/constants';
+import { getAPIErrorMessage } from 'foremanReact/redux/API/APIHelpers';
 import {
   templateInvocationPageUrl,
   CLIPBOARD_COPIED_EXIT_DELAY_MS,
@@ -86,10 +87,7 @@ export const TemplateInvocation = ({
     return <Skeleton data-testid="template-invocation-skeleton" />;
   }
 
-  const errorMessage =
-    response?.response?.data?.error?.message ||
-    response?.response?.data?.error ||
-    JSON.stringify(response);
+  const errorMessage = getAPIErrorMessage(response) || JSON.stringify(response);
 
   if (status === STATUS.ERROR) {
     return (

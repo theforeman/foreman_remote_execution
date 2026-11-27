@@ -16,13 +16,12 @@ export const runFeature = (hostId, feature, label, hostSearch) => dispatch => {
     }
     return sprintf(__('%s job has been invoked'), label);
   };
-  const errorToast = ({ message }) => message;
   dispatch(
     post({
       key: feature.toUpperCase(),
       url,
       successToast,
-      errorToast,
+      errorToast: true,
       handleSuccess: ({ request }) => {
         if (request.responseURL.includes(redirectUrl)) {
           // checking if user should be redicted to finish setting up the job

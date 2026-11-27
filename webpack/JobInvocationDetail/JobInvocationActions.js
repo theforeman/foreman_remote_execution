@@ -15,12 +15,6 @@ export const isJobFinished = statusLabel =>
   statusLabel === STATUS.SUCCEEDED ||
   statusLabel === STATUS.CANCELLED;
 
-const extractErrorMessage = response =>
-  // eslint-disable-next-line camelcase
-  response?.data?.error?.full_messages?.[0] ||
-  response?.data?.error?.message ||
-  __('Unknown error.');
-
 const createPollState = cancel => ({ timeoutId: null, cancel });
 
 export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
@@ -51,7 +45,8 @@ export const getJobInvocation = (url, pollTimeoutRef) => dispatch => {
           if (cancelled) return;
           pollTimeoutRef.current.timeoutId = null;
         },
-        errorToast: ({ response }) => extractErrorMessage(response),
+        errorToast: (_error, parsedMessage) =>
+          parsedMessage || __('Unknown error.'),
       })
     );
   };
@@ -83,17 +78,17 @@ export const cancelJob = (jobId, force) => dispatch => {
     APIActions.post({
       url,
       key: CANCEL_JOB,
-      errorToast: ({ response }) =>
+      errorToast: (_error, parsedMessage) =>
         force
           ? sprintf(
               __('Could not abort the job %s: %s'),
               jobId,
-              extractErrorMessage(response)
+              parsedMessage || __('Unknown error.')
             )
           : sprintf(
               __('Could not cancel the job %s: %s'),
               jobId,
-              extractErrorMessage(response)
+              parsedMessage || __('Unknown error.')
             ),
       handleSuccess: () => {
         dispatch(
@@ -120,17 +115,17 @@ export const enableRecurringLogic = (recurrenceId, enabled) => dispatch => {
       key: CHANGE_ENABLED_RECURRING_LOGIC,
       params: { recurring_logic: { enabled: !enabled } },
       successToast,
-      errorToast: ({ response }) =>
+      errorToast: (_error, parsedMessage) =>
         enabled
           ? sprintf(
               __('Could not disable recurring logic %s: %s'),
               recurrenceId,
-              extractErrorMessage(response)
+              parsedMessage || __('Unknown error.')
             )
           : sprintf(
               __('Could not enable recurring logic %s: %s'),
               recurrenceId,
-              extractErrorMessage(response)
+              parsedMessage || __('Unknown error.')
             ),
     })
   );
@@ -145,11 +140,11 @@ export const cancelRecurringLogic = recurrenceId => dispatch => {
       url,
       key: CANCEL_RECURRING_LOGIC,
       successToast,
-      errorToast: ({ response }) =>
+      errorToast: (_error, parsedMessage) =>
         sprintf(
           __('Could not cancel recurring logic %s: %s'),
           recurrenceId,
-          extractErrorMessage(response)
+          parsedMessage || __('Unknown error.')
         ),
     })
   );

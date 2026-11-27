@@ -17,6 +17,7 @@ import { foremanUrl } from 'foremanReact/common/helpers';
 import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { addToast } from 'foremanReact/components/ToastsList';
+import { getAPIErrorMessage } from 'foremanReact/redux/API/APIHelpers';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -223,7 +224,7 @@ export const CheckboxesActions = ({
         addToast({
           key: `error-cancelling-tasks`,
           type: 'danger',
-          message: error.response?.data?.error || __('An error occurred.'),
+          message: getAPIErrorMessage(error) || __('An error occurred.'),
         })
       );
     }

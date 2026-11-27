@@ -17,6 +17,7 @@ import {
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { global_palette_red_200 as exclamationColor } from '@patternfly/react-tokens';
 import { get } from 'foremanReact/redux/API';
+import { getAPIErrorMessage } from 'foremanReact/redux/API/APIHelpers';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { STATUS } from 'foremanReact/constants';
@@ -96,9 +97,9 @@ const JobWizardPageRerun = ({
         get({
           key: JOB_API_KEY,
           url: `/ui_job_wizard/job_invocation?id=${id}${queryParams}`,
-          handleError: ({ response }) => {
+          handleError: error => {
             if (isMounted) {
-              setErrorMessage(response?.data?.error?.message);
+              setErrorMessage(getAPIErrorMessage(error));
             }
           },
         })
